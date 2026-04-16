@@ -79,7 +79,7 @@ export const getServiceDistrict = unstable_cache(
         ],
       },
       limit: 1,
-      depth: 2,
+      depth: 3,
     })
     return sd.docs[0] ?? null
   },

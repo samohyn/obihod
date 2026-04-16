@@ -272,8 +272,9 @@ export async function POST(req: NextRequest) {
       },
       limit: 1,
     })
-    if (existingSD.docs.length === 0) {
-      await payload.create({
+    let sdRecord = existingSD.docs[0]
+    if (!sdRecord) {
+      sdRecord = await payload.create({
         collection: 'service-districts',
         data: {
           service: (arboService as any).id,
@@ -309,6 +310,83 @@ export async function POST(req: NextRequest) {
       log.push('✓ ServiceDistrict «Арбо × Раменское»: создан (draft)')
     } else {
       log.push('• ServiceDistrict «Арбо × Раменское»: уже есть')
+    }
+
+    // ───────── 6. Mock Case с placeholder фото ─────────
+    let mockCase = await findOneBySlug(payload, 'cases', 'snyali-pen-gostitsa-2026')
+    if (!mockCase) {
+      // Загружаем placeholder JPEG (сгенерены python PIL в /tmp)
+      const beforeMedia = await payload.create({
+        collection: 'media',
+        data: {
+          alt: 'Спил аварийного пня в КП Гостица, Раменское — фото до начала работ',
+          caption: 'До: пень с разросшейся корневой системой',
+        },
+        filePath: '/tmp/obikhod-seed-photos/before.jpg',
+      })
+      const afterMedia = await payload.create({
+        collection: 'media',
+        data: {
+          alt: 'Расчищенная площадка после удаления пня в КП Гостица, Раменское',
+          caption: 'После: фрезеровка и вывоз остатков',
+        },
+        filePath: '/tmp/obikhod-seed-photos/after.jpg',
+      })
+
+      mockCase = await payload.create({
+        collection: 'cases',
+        data: {
+          slug: 'snyali-pen-gostitsa-2026',
+          title: 'Сняли аварийный пень в КП Гостица',
+          h1: 'Удаление аварийного пня в КП Гостица, Раменское',
+          service: (arboService as any).id,
+          district: (ramenskoye as any).id,
+          dateCompleted: '2026-03-15T00:00:00.000Z',
+          brigade: [(aleksey as any).id],
+          photosBefore: [
+            {
+              image: (beforeMedia as any).id,
+              caption: 'Старый пень с разросшейся корневой системой, диаметр Ø 55 см',
+            },
+          ],
+          photosAfter: [
+            {
+              image: (afterMedia as any).id,
+              caption: 'Площадка после фрезеровки, корни удалены, остатки вывезены',
+            },
+          ],
+          description: lexicalParagraph(
+            'Март 2026, КП в Гостице (Раменское). Аварийный пень дуба Ø 55 см, корни приподняли асфальтированную дорожку. Команда: бригадир Алексей Семёнов + 1 помощник, цепная пила Stihl MS 462, пневматическая фреза для пня. 6 часов работы. Цена за объект — 38 000 ₽, включая порубочный билет от администрации Раменского ГО (оформили за 4 рабочих дня).',
+          ),
+          durationHours: 6,
+          finalPrice: 38000,
+          metaTitle: 'Кейс: пень Ø 55 см в КП Гостица, Раменское — Обиход',
+          metaDescription:
+            'Реальный кейс Обихода: фрезеровка пня дуба Ø 55 см с разросшимися корнями в КП Гостица, Раменское. 6 часов работы, 38 000 ₽ за объект.',
+          ogImage: (beforeMedia as any).id,
+        } as any,
+      })
+      log.push('✓ Mock Case «Сняли пень в Гостице»: создан с 2 фото')
+    } else {
+      log.push('• Mock Case: уже есть')
+    }
+
+    // ───────── 7. Привязка mini-case к ServiceDistrict + publish ─────────
+    const sdHasCase = (sdRecord as any).miniCase
+    const sdPublished = (sdRecord as any).publishStatus === 'published'
+    if (!sdHasCase || !sdPublished) {
+      await payload.update({
+        collection: 'service-districts',
+        id: (sdRecord as any).id,
+        data: {
+          miniCase: (mockCase as any).id,
+          publishStatus: 'published',
+          noindexUntilCase: false,
+        } as any,
+      })
+      log.push('✓ ServiceDistrict «Арбо × Раменское»: published + miniCase привязан')
+    } else {
+      log.push('• ServiceDistrict уже published')
     }
 
     return NextResponse.json({ ok: true, log }, { status: 200 })

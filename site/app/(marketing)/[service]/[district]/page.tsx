@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
@@ -149,19 +150,7 @@ export default async function ProgrammaticPage({
       )}
 
       {sd?.miniCase ? (
-        <section className="mx-auto mt-12 max-w-5xl px-6">
-          <h2 className="text-2xl font-semibold text-stone-900">
-            Кейс {district.namePrepositional}
-          </h2>
-          <p className="mt-2 text-stone-700">
-            <Link
-              href={`/kejsy/${(sd.miniCase as any).slug}/`}
-              className="text-orange-700 hover:underline"
-            >
-              {(sd.miniCase as any).title} →
-            </Link>
-          </p>
-        </section>
+        <MiniCaseSection miniCase={sd.miniCase} district={district} />
       ) : (
         <section className="mx-auto mt-12 max-w-5xl px-6 text-sm text-stone-500">
           Кейс из района будет добавлен после первого выезда.
@@ -240,6 +229,78 @@ export default async function ProgrammaticPage({
         ]}
       />
     </article>
+  )
+}
+
+function MiniCaseSection({ miniCase, district }: { miniCase: any; district: any }) {
+  const before = miniCase.photosBefore?.[0]
+  const after = miniCase.photosAfter?.[0]
+  const photoUrl = (m: any) =>
+    typeof m === 'object' && m?.url ? m.url : null
+
+  return (
+    <section className="mx-auto mt-12 max-w-5xl px-6">
+      <h2 className="text-2xl font-semibold text-stone-900">
+        Кейс {district.namePrepositional}
+      </h2>
+      <Link
+        href={`/kejsy/${miniCase.slug}/`}
+        className="mt-1 inline-block text-sm text-orange-700 hover:underline"
+      >
+        {miniCase.title} →
+      </Link>
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        {before && photoUrl(before.image) && (
+          <figure className="overflow-hidden rounded-lg border border-stone-200 bg-white">
+            <div className="relative aspect-[3/2]">
+              <Image
+                src={photoUrl(before.image)!}
+                alt={(before.image as any).alt ?? 'До'}
+                fill
+                sizes="(max-width: 640px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+            <figcaption className="px-3 py-2 text-xs text-stone-600">
+              До: {before.caption ?? ''}
+            </figcaption>
+          </figure>
+        )}
+        {after && photoUrl(after.image) && (
+          <figure className="overflow-hidden rounded-lg border border-stone-200 bg-white">
+            <div className="relative aspect-[3/2]">
+              <Image
+                src={photoUrl(after.image)!}
+                alt={(after.image as any).alt ?? 'После'}
+                fill
+                sizes="(max-width: 640px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+            <figcaption className="px-3 py-2 text-xs text-stone-600">
+              После: {after.caption ?? ''}
+            </figcaption>
+          </figure>
+        )}
+      </div>
+      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-stone-600">
+        {miniCase.dateCompleted && (
+          <span>
+            🗓{' '}
+            {new Date(miniCase.dateCompleted).toLocaleDateString('ru-RU', {
+              year: 'numeric',
+              month: 'long',
+            })}
+          </span>
+        )}
+        {miniCase.durationHours && <span>⏱ {miniCase.durationHours} ч</span>}
+        {miniCase.finalPrice && (
+          <span className="font-medium text-stone-800">
+            💰 {miniCase.finalPrice.toLocaleString('ru-RU')} ₽ за объект
+          </span>
+        )}
+      </div>
+    </section>
   )
 }
 
