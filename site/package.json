@@ -1,0 +1,41 @@
+{
+  "name": "site",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "payload": "payload",
+    "generate:types": "payload generate:types",
+    "generate:importmap": "payload generate:importmap",
+    "seed": "tsx --env-file=.env.local scripts/seed.ts",
+    "db:up": "docker compose up -d postgres",
+    "db:down": "docker compose down",
+    "db:logs": "docker compose logs -f postgres"
+  },
+  "dependencies": {
+    "@payloadcms/db-postgres": "^3.83.0",
+    "@payloadcms/next": "^3.83.0",
+    "@payloadcms/richtext-lexical": "^3.83.0",
+    "@payloadcms/ui": "^3.83.0",
+    "graphql": "^16.13.2",
+    "next": "16.2.4",
+    "payload": "^3.83.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4",
+    "tsx": "^4.21.0",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

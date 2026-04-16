@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+
+# Local env (each subproject имеет свой .gitignore)
+.env.local
