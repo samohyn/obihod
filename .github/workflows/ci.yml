@@ -93,7 +93,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('site/pnpm-lock.yaml') }}
+          key: playwright-${{ runner.os }}-${{ hashFiles('site/pnpm-lock.yaml') }}-chromium
 
       - name: Install Playwright browsers
         if: steps.pw-cache.outputs.cache-hit != 'true'
@@ -102,6 +102,15 @@ jobs:
       - name: Install Playwright system deps
         if: steps.pw-cache.outputs.cache-hit == 'true'
         run: pnpm exec playwright install-deps chromium
+
+      - name: Cache Next.js build (.next/cache)
+        uses: actions/cache@v4
+        with:
+          path: site/.next/cache
+          key: next-cache-${{ runner.os }}-${{ hashFiles('site/pnpm-lock.yaml') }}-${{ hashFiles('site/**/*.ts', 'site/**/*.tsx', 'site/next.config.ts') }}
+          restore-keys: |
+            next-cache-${{ runner.os }}-${{ hashFiles('site/pnpm-lock.yaml') }}-
+            next-cache-${{ runner.os }}-
 
       - name: Wait for Postgres
         run: |
@@ -149,11 +158,11 @@ jobs:
           cat server.log
           exit 1
 
-      - name: Run Playwright
+      - name: Run Playwright (desktop + mobile chromium)
         env:
           PLAYWRIGHT_BASE_URL: http://localhost:3000
           PLAYWRIGHT_EXTERNAL_SERVER: "1"
-        run: pnpm exec playwright test --project=chromium
+        run: pnpm exec playwright test --project=chromium --project=mobile-chrome
 
       - name: Stop Next.js
         if: always()

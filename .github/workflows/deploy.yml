@@ -197,11 +197,26 @@ jobs:
 
       - name: Smoke check
         run: |
-          sleep 5
           URL=${{ secrets.NEXT_PUBLIC_SITE_URL || format('http://{0}', secrets.BEGET_SSH_HOST) }}
-          code=$(curl -s -o /dev/null -w "%{http_code}" "$URL/")
-          if [ "$code" != "200" ] && [ "$code" != "301" ] && [ "$code" != "302" ]; then
-            echo "::error::Smoke check failed: $URL returned $code"
+          echo "Waiting for $URL/api/health..."
+          for i in $(seq 1 30); do
+            body=$(curl -sL -m 5 "$URL/api/health" || echo "")
+            if echo "$body" | grep -q '"status":"ok"'; then
+              echo "healthy after ${i}s: $body"
+              break
+            fi
+            sleep 2
+          done
+          # deep-check — дёргает БД
+          deep=$(curl -sL -m 10 -o /dev/null -w "%{http_code}" "$URL/api/health?deep=1")
+          if [ "$deep" != "200" ]; then
+            echo "::error::deep health check failed: HTTP $deep"
+            curl -sL "$URL/api/health?deep=1"
             exit 1
           fi
-          echo "Deploy OK: $URL → $code"
+          home=$(curl -sL -m 10 -o /dev/null -w "%{http_code}" "$URL/")
+          if [ "$home" != "200" ]; then
+            echo "::error::home page failed: HTTP $home"
+            exit 1
+          fi
+          echo "Deploy OK: home=$home, deep health=$deep"
