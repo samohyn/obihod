@@ -6,10 +6,7 @@ import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { buildDistrictHubMetadata } from '@/lib/seo/metadata'
-import {
-  breadcrumbListSchema,
-  localBusinessSchema,
-} from '@/lib/seo/jsonld'
+import { breadcrumbListSchema, localBusinessSchema } from '@/lib/seo/jsonld'
 import { getAllDistricts, getDistrictBySlug } from '@/lib/seo/queries'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
@@ -40,11 +37,7 @@ export async function generateMetadata({
   return buildDistrictHubMetadata(d as any)
 }
 
-export default async function DistrictHub({
-  params,
-}: {
-  params: Promise<{ district: string }>
-}) {
+export default async function DistrictHub({ params }: { params: Promise<{ district: string }> }) {
   const { district: districtSlug } = await params
   const district = await getDistrictBySlug(districtSlug)
   if (!district) notFound()
@@ -62,9 +55,8 @@ export default async function DistrictHub({
         Обиход {district.namePrepositional}
       </h1>
       <p className="mt-4 max-w-2xl text-lg text-stone-700">
-        Спил, снег, мусор, демонтаж {district.namePrepositional} и Раменском ГО.
-        Расстояние от МКАД — {district.distanceFromMkad} км. Покрытие — радиус{' '}
-        {district.coverageRadius} км.
+        Спил, снег, мусор, демонтаж {district.namePrepositional} и Раменском ГО. Расстояние от МКАД
+        — {district.distanceFromMkad} км. Покрытие — радиус {district.coverageRadius} км.
       </p>
 
       <CtaMessengers className="mt-8 max-w-2xl" />
@@ -89,16 +81,12 @@ export default async function DistrictHub({
 
       {(district as any).landmarks && (district as any).landmarks.length > 0 && (
         <>
-          <h2 className="mt-12 text-2xl font-semibold text-stone-900">
-            Где именно работаем
-          </h2>
+          <h2 className="mt-12 text-2xl font-semibold text-stone-900">Где именно работаем</h2>
           <ul className="mt-3 grid gap-2 sm:grid-cols-2">
             {(district as any).landmarks.map((l: any, i: number) => (
               <li key={i} className="text-stone-700">
                 · {l.name}{' '}
-                <span className="text-xs text-stone-500">
-                  ({labelLandmarkType(l.type)})
-                </span>
+                <span className="text-xs text-stone-500">({labelLandmarkType(l.type)})</span>
               </li>
             ))}
           </ul>
@@ -107,9 +95,7 @@ export default async function DistrictHub({
 
       {(district as any).neighborDistricts && (district as any).neighborDistricts.length > 0 && (
         <>
-          <h2 className="mt-12 text-2xl font-semibold text-stone-900">
-            Соседние районы
-          </h2>
+          <h2 className="mt-12 text-2xl font-semibold text-stone-900">Соседние районы</h2>
           <div className="mt-3 flex flex-wrap gap-2">
             {(district as any).neighborDistricts.map((n: any) => {
               const slug = typeof n === 'object' ? n.slug : n

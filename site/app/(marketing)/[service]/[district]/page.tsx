@@ -97,8 +97,7 @@ export default async function ProgrammaticPage({
         <Breadcrumbs items={breadcrumbs} />
         {isReviewOrDraft && (
           <div className="mb-4 rounded border border-amber-300 bg-amber-50 px-4 py-2 text-sm text-amber-900">
-            ⚠ Страница в статусе{' '}
-            <code>{sd?.publishStatus ?? 'не создана'}</code>. Для индексации
+            ⚠ Страница в статусе <code>{sd?.publishStatus ?? 'не создана'}</code>. Для индексации
             нужны mini-case + минимум 2 локальных FAQ.
           </div>
         )}
@@ -112,25 +111,21 @@ export default async function ProgrammaticPage({
           />
         ) : (
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-stone-700">
-            {service.h1} {district.namePrepositional} — фикс-цена за объект,
-            смета по фото за 10 минут в Telegram, MAX или WhatsApp.
+            {service.h1} {district.namePrepositional} — фикс-цена за объект, смета по фото за 10
+            минут в Telegram, MAX или WhatsApp.
           </p>
         )}
         <CtaMessengers className="mt-8 max-w-2xl" />
       </section>
 
       <section className="mx-auto mt-12 max-w-5xl px-6">
-        <h2 className="text-2xl font-semibold text-stone-900">
-          Цены {district.namePrepositional}
-        </h2>
+        <h2 className="text-2xl font-semibold text-stone-900">Цены {district.namePrepositional}</h2>
         <p className="mt-2 text-stone-700">
           От {adjustedPriceFrom.toLocaleString('ru-RU')} ₽ до{' '}
           {adjustedPriceTo.toLocaleString('ru-RU')} ₽ за объект.
         </p>
         {sd?.localPriceNote && (
-          <p className="mt-2 rounded bg-stone-50 p-3 text-sm text-stone-700">
-            {sd.localPriceNote}
-          </p>
+          <p className="mt-2 rounded bg-stone-50 p-3 text-sm text-stone-700">{sd.localPriceNote}</p>
         )}
       </section>
 
@@ -168,10 +163,7 @@ export default async function ProgrammaticPage({
           </h2>
           <div className="mt-4 space-y-4">
             {(sd as any).localFaq.map((qa: any, i: number) => (
-              <details
-                key={i}
-                className="rounded-lg border border-stone-200 bg-white p-4"
-              >
+              <details key={i} className="rounded-lg border border-stone-200 bg-white p-4">
                 <summary className="cursor-pointer font-medium text-stone-900">
                   {qa.question}
                 </summary>
@@ -186,9 +178,7 @@ export default async function ProgrammaticPage({
       )}
 
       <section className="mx-auto mt-12 mb-16 max-w-5xl px-6">
-        <h2 className="text-2xl font-semibold text-stone-900">
-          Ещё {district.namePrepositional}
-        </h2>
+        <h2 className="text-2xl font-semibold text-stone-900">Ещё {district.namePrepositional}</h2>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           <Link
             href={`/raiony/${district.slug}/`}
@@ -235,14 +225,11 @@ export default async function ProgrammaticPage({
 function MiniCaseSection({ miniCase, district }: { miniCase: any; district: any }) {
   const before = miniCase.photosBefore?.[0]
   const after = miniCase.photosAfter?.[0]
-  const photoUrl = (m: any) =>
-    typeof m === 'object' && m?.url ? m.url : null
+  const photoUrl = (m: any) => (typeof m === 'object' && m?.url ? m.url : null)
 
   return (
     <section className="mx-auto mt-12 max-w-5xl px-6">
-      <h2 className="text-2xl font-semibold text-stone-900">
-        Кейс {district.namePrepositional}
-      </h2>
+      <h2 className="text-2xl font-semibold text-stone-900">Кейс {district.namePrepositional}</h2>
       <Link
         href={`/kejsy/${miniCase.slug}/`}
         className="mt-1 inline-block text-sm text-orange-700 hover:underline"

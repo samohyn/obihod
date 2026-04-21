@@ -13,12 +13,14 @@ export function Hero() {
           <div>
             <span className="eyebrow">Хозяйственные работы · Московская область</span>
             <h1 className="hero-slogan">
-              Участок<br />в&nbsp;порядке
+              Участок
+              <br />
+              в&nbsp;порядке
               <span className="dot">.</span>
             </h1>
             <p className="hero-sub">
-              Один подрядчик на весь год: спил, снег, демонтаж и вывоз мусора.
-              Одна бригада, один менеджер, фиксированная цена — без сюрпризов.
+              Один подрядчик на весь год: спил, снег, демонтаж и вывоз мусора. Одна бригада, один
+              менеджер, фиксированная цена — без сюрпризов.
             </p>
             <div className="hero-cta-row">
               <a href="#calc" className="btn btn-primary btn-lg">

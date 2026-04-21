@@ -47,12 +47,15 @@ export function Team() {
           <div>
             <span className="eyebrow">§&nbsp;07 · Команда</span>
             <h2 className="h-xl">
-              Люди, которые<br />приедут к&nbsp;вам.
+              Люди, которые
+              <br />
+              приедут к&nbsp;вам.
             </h2>
           </div>
           <p className="section-sub">
             У&nbsp;нас нет «безымянных исполнителей». Имя, лицо, стаж, сертификация — публично.
-            Вы&nbsp;знаете, кто зайдёт на&nbsp;ваш участок, ещё до&nbsp;того, как он&nbsp;позвонит в&nbsp;калитку.
+            Вы&nbsp;знаете, кто зайдёт на&nbsp;ваш участок, ещё до&nbsp;того, как он&nbsp;позвонит
+            в&nbsp;калитку.
           </p>
         </div>
         <div className="team-grid">

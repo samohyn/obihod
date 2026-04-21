@@ -3,11 +3,7 @@ import { Golos_Text, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
 import { JsonLd } from '@/components/seo/JsonLd'
-import {
-  localBusinessSchema,
-  organizationSchema,
-  websiteSchema,
-} from '@/lib/seo/jsonld'
+import { localBusinessSchema, organizationSchema, websiteSchema } from '@/lib/seo/jsonld'
 
 const golosText = Golos_Text({
   variable: '--font-golos-text',
@@ -24,12 +20,9 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru',
-  ),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'),
   title: {
-    default:
-      'Обиход — порядок под ключ. Арбо, снег, мусор, демонтаж по Москве и МО',
+    default: 'Обиход — порядок под ключ. Арбо, снег, мусор, демонтаж по Москве и МО',
     template: '%s | Обиход',
   },
   description:
@@ -65,10 +58,8 @@ export default function RootLayout({
       lang="ru"
       className={`${golosText.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <JsonLd
-          schema={[organizationSchema(), websiteSchema(), localBusinessSchema()]}
-        />
+      <body className="flex min-h-full flex-col">
+        <JsonLd schema={[organizationSchema(), websiteSchema(), localBusinessSchema()]} />
         {children}
       </body>
     </html>

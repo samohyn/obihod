@@ -39,7 +39,13 @@ export function LogoMark({ size = 36, animated = false }: Props) {
         <line x1="16" y1="34.5" x2="16" y2="40" />
       </g>
       {/* SE — контейнер/стрелка */}
-      <g stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none">
+      <g
+        stroke="currentColor"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      >
         <path d="M29 30 L29 40 L41 40 L41 30" />
         <path d="M27 30 L43 30" />
         <path d="M33 33 L33 37 M37 33 L37 37" />

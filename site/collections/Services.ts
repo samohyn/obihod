@@ -81,9 +81,7 @@ export const Services: CollectionConfig = {
       name: 'gallery',
       type: 'array',
       maxRows: 12,
-      fields: [
-        { name: 'image', type: 'upload', relationTo: 'media', required: true },
-      ],
+      fields: [{ name: 'image', type: 'upload', relationTo: 'media', required: true }],
     },
     { name: 'ogImage', type: 'upload', relationTo: 'media' },
     { name: 'schemaJsonLdOverride', type: 'json' },

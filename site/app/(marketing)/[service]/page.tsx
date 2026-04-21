@@ -8,11 +8,7 @@ import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { LicenseBadge } from '@/components/marketing/LicenseBadge'
 import { RichTextRenderer } from '@/components/marketing/RichTextRenderer'
 import { buildPillarMetadata } from '@/lib/seo/metadata'
-import {
-  breadcrumbListSchema,
-  faqPageSchema,
-  serviceSchema,
-} from '@/lib/seo/jsonld'
+import { breadcrumbListSchema, faqPageSchema, serviceSchema } from '@/lib/seo/jsonld'
 import { getAllServiceSlugs, getServiceBySlug } from '@/lib/seo/queries'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
@@ -36,11 +32,7 @@ export async function generateMetadata({
   return buildPillarMetadata(s as any, s.metaTitle, s.metaDescription)
 }
 
-export default async function PillarPage({
-  params,
-}: {
-  params: Promise<{ service: string }>
-}) {
+export default async function PillarPage({ params }: { params: Promise<{ service: string }> }) {
   const { service: serviceSlug } = await params
   const service = await getServiceBySlug(serviceSlug)
   if (!service) notFound()
@@ -107,15 +99,10 @@ export default async function PillarPage({
 
       {service.faqGlobal && service.faqGlobal.length > 0 && (
         <section className="mx-auto mt-12 max-w-5xl px-6">
-          <h2 className="text-2xl font-semibold text-stone-900">
-            Частые вопросы
-          </h2>
+          <h2 className="text-2xl font-semibold text-stone-900">Частые вопросы</h2>
           <div className="mt-4 space-y-4">
             {service.faqGlobal.map((qa: any, i: number) => (
-              <details
-                key={i}
-                className="rounded-lg border border-stone-200 bg-white p-4"
-              >
+              <details key={i} className="rounded-lg border border-stone-200 bg-white p-4">
                 <summary className="cursor-pointer font-medium text-stone-900">
                   {qa.question}
                 </summary>
@@ -130,12 +117,8 @@ export default async function PillarPage({
       )}
 
       <section className="mx-auto mt-12 mb-16 max-w-5xl px-6">
-        <h2 className="text-2xl font-semibold text-stone-900">
-          {service.h1} по районам
-        </h2>
-        <p className="mt-2 text-stone-700">
-          Работаем во всех районах Москвы и Московской области.
-        </p>
+        <h2 className="text-2xl font-semibold text-stone-900">{service.h1} по районам</h2>
+        <p className="mt-2 text-stone-700">Работаем во всех районах Москвы и Московской области.</p>
         <div className="mt-4">
           <Link
             href="/raiony/"

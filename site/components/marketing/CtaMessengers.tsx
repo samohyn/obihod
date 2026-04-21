@@ -4,17 +4,10 @@
  */
 export function CtaMessengers({ className }: { className?: string }) {
   return (
-    <div
-      className={
-        'rounded-lg border border-orange-200 bg-orange-50 p-5 ' + (className ?? '')
-      }
-    >
-      <div className="font-semibold text-stone-900">
-        Смета по 3 фото за 10 минут
-      </div>
+    <div className={'rounded-lg border border-orange-200 bg-orange-50 p-5 ' + (className ?? '')}>
+      <div className="font-semibold text-stone-900">Смета по 3 фото за 10 минут</div>
       <p className="mt-1 text-sm text-stone-700">
-        Пришлите 2–3 фото объекта в любой удобный мессенджер — рассчитаем
-        фиксированную цену.
+        Пришлите 2–3 фото объекта в любой удобный мессенджер — рассчитаем фиксированную цену.
       </p>
       <div className="mt-3 flex flex-wrap gap-2 text-sm">
         <a

@@ -9,15 +9,21 @@ import { Icon } from '../_shared/Icon'
  */
 export function LeadForm() {
   return (
-    <form
-      className="cta-form"
-      aria-label="Заявка на замер"
-      onSubmit={(e) => e.preventDefault()}
-    >
+    <form className="cta-form" aria-label="Заявка на замер" onSubmit={(e) => e.preventDefault()}>
       <div className="cta-form-title">Заявка на замер</div>
-      <label htmlFor="cta-name" style={{ display: 'none' }}>Имя</label>
-      <input id="cta-name" name="name" className="cta-input" placeholder="Ваше имя" autoComplete="name" />
-      <label htmlFor="cta-phone" style={{ display: 'none' }}>Телефон</label>
+      <label htmlFor="cta-name" style={{ display: 'none' }}>
+        Имя
+      </label>
+      <input
+        id="cta-name"
+        name="name"
+        className="cta-input"
+        placeholder="Ваше имя"
+        autoComplete="name"
+      />
+      <label htmlFor="cta-phone" style={{ display: 'none' }}>
+        Телефон
+      </label>
       <input
         id="cta-phone"
         name="phone"
@@ -26,9 +32,13 @@ export function LeadForm() {
         placeholder="+7 (___) ___-__-__"
         autoComplete="tel"
       />
-      <label htmlFor="cta-addr" style={{ display: 'none' }}>Адрес</label>
+      <label htmlFor="cta-addr" style={{ display: 'none' }}>
+        Адрес
+      </label>
       <input id="cta-addr" name="address" className="cta-input" placeholder="Адрес или район" />
-      <label htmlFor="cta-svc" style={{ display: 'none' }}>Тип работы</label>
+      <label htmlFor="cta-svc" style={{ display: 'none' }}>
+        Тип работы
+      </label>
       <select id="cta-svc" name="service" className="cta-input" defaultValue="">
         <option value="" disabled>
           Тип работы

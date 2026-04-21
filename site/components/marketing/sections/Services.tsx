@@ -57,7 +57,9 @@ export function Services() {
           <div>
             <span className="eyebrow">§&nbsp;01 · Что мы делаем</span>
             <h2 className="h-xl">
-              Четыре задачи.<br />Одна бригада.
+              Четыре задачи.
+              <br />
+              Одна бригада.
             </h2>
           </div>
           <p className="section-sub">
@@ -123,20 +125,103 @@ export function Services() {
 function BigSeasonsCircle({ active }: { active: number }) {
   const sw = (idx: number, on: string, off: string) => (active === idx ? on : off)
   return (
-    <svg viewBox="0 0 520 520" width="100%" style={{ color: 'var(--c-primary)' }} aria-hidden="true">
+    <svg
+      viewBox="0 0 520 520"
+      width="100%"
+      style={{ color: 'var(--c-primary)' }}
+      aria-hidden="true"
+    >
       <circle cx="260" cy="260" r="255" fill="none" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="260" cy="260" r="200" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.35" />
-      <circle cx="260" cy="260" r="140" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.2" />
-      <line x1="260" y1="5" x2="260" y2="515" stroke="currentColor" strokeWidth="1.2" opacity="0.4" />
-      <line x1="5" y1="260" x2="515" y2="260" stroke="currentColor" strokeWidth="1.2" opacity="0.4" />
+      <circle
+        cx="260"
+        cy="260"
+        r="200"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1"
+        opacity="0.35"
+      />
+      <circle
+        cx="260"
+        cy="260"
+        r="140"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1"
+        opacity="0.2"
+      />
+      <line
+        x1="260"
+        y1="5"
+        x2="260"
+        y2="515"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        opacity="0.4"
+      />
+      <line
+        x1="5"
+        y1="260"
+        x2="515"
+        y2="260"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        opacity="0.4"
+      />
 
-      <text x="130" y="44" fontSize="11" letterSpacing="2" fill="currentColor" opacity="0.6" style={{ fontFamily: 'var(--font-mono)' }}>ВЕСНА — ОСЕНЬ</text>
-      <text x="320" y="44" fontSize="11" letterSpacing="2" fill="currentColor" opacity="0.6" style={{ fontFamily: 'var(--font-mono)' }}>ЗИМА</text>
-      <text x="110" y="500" fontSize="11" letterSpacing="2" fill="currentColor" opacity="0.6" style={{ fontFamily: 'var(--font-mono)' }}>КРУГЛЫЙ ГОД</text>
-      <text x="310" y="500" fontSize="11" letterSpacing="2" fill="currentColor" opacity="0.6" style={{ fontFamily: 'var(--font-mono)' }}>КРУГЛЫЙ ГОД</text>
+      <text
+        x="130"
+        y="44"
+        fontSize="11"
+        letterSpacing="2"
+        fill="currentColor"
+        opacity="0.6"
+        style={{ fontFamily: 'var(--font-mono)' }}
+      >
+        ВЕСНА — ОСЕНЬ
+      </text>
+      <text
+        x="320"
+        y="44"
+        fontSize="11"
+        letterSpacing="2"
+        fill="currentColor"
+        opacity="0.6"
+        style={{ fontFamily: 'var(--font-mono)' }}
+      >
+        ЗИМА
+      </text>
+      <text
+        x="110"
+        y="500"
+        fontSize="11"
+        letterSpacing="2"
+        fill="currentColor"
+        opacity="0.6"
+        style={{ fontFamily: 'var(--font-mono)' }}
+      >
+        КРУГЛЫЙ ГОД
+      </text>
+      <text
+        x="310"
+        y="500"
+        fontSize="11"
+        letterSpacing="2"
+        fill="currentColor"
+        opacity="0.6"
+        style={{ fontFamily: 'var(--font-mono)' }}
+      >
+        КРУГЛЫЙ ГОД
+      </text>
 
       {/* NW — хвоя */}
-      <g stroke="currentColor" strokeWidth={sw(0, '3.5', '2.2')} strokeLinecap="round" fill="none" opacity={active === 0 ? 1 : 0.85}>
+      <g
+        stroke="currentColor"
+        strokeWidth={sw(0, '3.5', '2.2')}
+        strokeLinecap="round"
+        fill="none"
+        opacity={active === 0 ? 1 : 0.85}
+      >
         <line x1="135" y1="90" x2="135" y2="230" />
         <line x1="135" y1="110" x2="95" y2="130" />
         <line x1="135" y1="110" x2="175" y2="130" />
@@ -149,7 +234,13 @@ function BigSeasonsCircle({ active }: { active: number }) {
       </g>
 
       {/* NE — снежинка */}
-      <g stroke="currentColor" strokeWidth={sw(1, '3', '2')} strokeLinecap="round" fill="none" opacity={active === 1 ? 1 : 0.85}>
+      <g
+        stroke="currentColor"
+        strokeWidth={sw(1, '3', '2')}
+        strokeLinecap="round"
+        fill="none"
+        opacity={active === 1 ? 1 : 0.85}
+      >
         <line x1="385" y1="90" x2="385" y2="230" />
         <line x1="315" y1="160" x2="455" y2="160" />
         <line x1="335" y1="110" x2="435" y2="210" />
@@ -162,7 +253,12 @@ function BigSeasonsCircle({ active }: { active: number }) {
       </g>
 
       {/* SW — кирпич */}
-      <g stroke="currentColor" strokeWidth={sw(2, '3', '2')} fill="none" opacity={active === 2 ? 1 : 0.85}>
+      <g
+        stroke="currentColor"
+        strokeWidth={sw(2, '3', '2')}
+        fill="none"
+        opacity={active === 2 ? 1 : 0.85}
+      >
         <rect x="75" y="305" width="130" height="130" rx="1" />
         <line x1="75" y1="370" x2="205" y2="370" />
         <line x1="140" y1="305" x2="140" y2="370" />
@@ -171,15 +267,43 @@ function BigSeasonsCircle({ active }: { active: number }) {
       </g>
 
       {/* SE — контейнер/стрелка */}
-      <g stroke="currentColor" strokeWidth={sw(3, '3', '2')} strokeLinecap="round" strokeLinejoin="round" fill="none" opacity={active === 3 ? 1 : 0.85}>
+      <g
+        stroke="currentColor"
+        strokeWidth={sw(3, '3', '2')}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+        opacity={active === 3 ? 1 : 0.85}
+      >
         <path d="M320 325 L320 430 L450 430 L450 325" />
         <path d="M305 325 L465 325" />
         <path d="M350 355 L350 405 M385 355 L385 405 M420 355 L420 405" />
         <path d="M385 345 L400 355 M385 345 L370 355" />
       </g>
 
-      <text x="260" y="250" textAnchor="middle" fontWeight="700" fontSize="20" fill="currentColor" style={{ fontFamily: 'var(--font-display)' }}>ОБИХОД</text>
-      <text x="260" y="275" textAnchor="middle" fontSize="10" letterSpacing="2" fill="currentColor" opacity="0.55" style={{ fontFamily: 'var(--font-mono)' }}>КРУГ СЕЗОНОВ</text>
+      <text
+        x="260"
+        y="250"
+        textAnchor="middle"
+        fontWeight="700"
+        fontSize="20"
+        fill="currentColor"
+        style={{ fontFamily: 'var(--font-display)' }}
+      >
+        ОБИХОД
+      </text>
+      <text
+        x="260"
+        y="275"
+        textAnchor="middle"
+        fontSize="10"
+        letterSpacing="2"
+        fill="currentColor"
+        opacity="0.55"
+        style={{ fontFamily: 'var(--font-mono)' }}
+      >
+        КРУГ СЕЗОНОВ
+      </text>
     </svg>
   )
 }

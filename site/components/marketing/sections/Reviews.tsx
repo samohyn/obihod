@@ -62,7 +62,9 @@ export function Reviews() {
           <div>
             <span className="eyebrow">§&nbsp;06 · Отзывы</span>
             <h2 className="h-xl">
-              Что говорят<br />клиенты.
+              Что говорят
+              <br />
+              клиенты.
             </h2>
           </div>
           <p className="section-sub">

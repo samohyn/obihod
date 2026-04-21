@@ -39,7 +39,11 @@ const lexicalParagraph = (text: string) => ({
   },
 })
 
-async function findOneBySlug(payload: Awaited<ReturnType<typeof getPayload>>, collection: any, slug: string) {
+async function findOneBySlug(
+  payload: Awaited<ReturnType<typeof getPayload>>,
+  collection: any,
+  slug: string,
+) {
   const r = await payload.find({
     collection,
     where: { slug: { equals: slug } },
@@ -129,8 +133,18 @@ async function main() {
         ],
         subServices: [
           { slug: 'spil-dereviev', title: 'Спил деревьев', h1: 'Спил деревьев', priceFrom: 700 },
-          { slug: 'kronirovanie', title: 'Кронирование', h1: 'Кронирование деревьев', priceFrom: 3500 },
-          { slug: 'udalenie-pnya', title: 'Удаление пня', h1: 'Удаление пня фрезой', priceFrom: 1500 },
+          {
+            slug: 'kronirovanie',
+            title: 'Кронирование',
+            h1: 'Кронирование деревьев',
+            priceFrom: 3500,
+          },
+          {
+            slug: 'udalenie-pnya',
+            title: 'Удаление пня',
+            h1: 'Удаление пня фрезой',
+            priceFrom: 1500,
+          },
           {
             slug: 'avariynyy-spil',
             title: 'Аварийный спил',
@@ -282,15 +296,13 @@ async function main() {
         ),
         localFaq: [
           {
-            question:
-              'Сколько стоит спил аварийной берёзы в Раменском с автовышкой?',
+            question: 'Сколько стоит спил аварийной берёзы в Раменском с автовышкой?',
             answer: lexicalParagraph(
               'Аварийный спил Ø 30–50 см над постройкой с автовышкой 24 м — 28 000–48 000 ₽ за объект. Цена включает оценку, спил частями, погрузку и вывоз порубочных остатков. Минимальный заказ в Раменском — 8 000 ₽ (плечо 35 км от МКАД).',
             ),
           },
           {
-            question:
-              'Нужен ли порубочный билет для садового участка в СНТ Раменского ГО?',
+            question: 'Нужен ли порубочный билет для садового участка в СНТ Раменского ГО?',
             answer: lexicalParagraph(
               'Для частных участков ИЖС в большинстве случаев согласование санитарной обрезки не требуется. Для СНТ и территорий общего пользования билет обязателен — оформляем через администрацию Раменского ГО (Комсомольская площадь, 2) за 4–7 рабочих дней. Входит в стоимость.',
             ),

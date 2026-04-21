@@ -78,8 +78,7 @@ export function organizationSchema() {
     hasCredential: [
       {
         '@type': 'EducationalOccupationalCredential',
-        credentialCategory:
-          'Лицензия Росприроднадзора на транспортирование отходов IV класса',
+        credentialCategory: 'Лицензия Росприроднадзора на транспортирование отходов IV класса',
       },
       {
         '@type': 'EducationalOccupationalCredential',

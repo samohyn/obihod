@@ -14,7 +14,11 @@ export const SeoSettings: GlobalConfig = {
       type: 'group',
       label: 'Реквизиты Organization (для JSON-LD)',
       fields: [
-        { name: 'legalName', type: 'text', defaultValue: 'Общество с ограниченной ответственностью «Обиход»' },
+        {
+          name: 'legalName',
+          type: 'text',
+          defaultValue: 'Общество с ограниченной ответственностью «Обиход»',
+        },
         { name: 'name', type: 'text', defaultValue: 'Обиход' },
         {
           name: 'taxId',

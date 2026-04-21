@@ -55,11 +55,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function CasePage({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
+export default async function CasePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const c = await getCaseBySlug(slug)
   if (!c) notFound()
@@ -72,8 +68,7 @@ export default async function CasePage({
     { name: c.title, href: `/kejsy/${c.slug}/` },
   ]
 
-  const photoUrl = (m: any) =>
-    typeof m === 'object' && m?.url ? m.url : null
+  const photoUrl = (m: any) => (typeof m === 'object' && m?.url ? m.url : null)
   const before = (c as any).photosBefore?.[0]
   const after = (c as any).photosAfter?.[0]
 
@@ -87,18 +82,12 @@ export default async function CasePage({
 
       <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-stone-600">
         {district && (
-          <Link
-            href={`/raiony/${district.slug}/`}
-            className="hover:underline"
-          >
+          <Link href={`/raiony/${district.slug}/`} className="hover:underline">
             📍 {district.nameNominative}
           </Link>
         )}
         {service && (
-          <Link
-            href={`/${service.slug}/`}
-            className="hover:underline"
-          >
+          <Link href={`/${service.slug}/`} className="hover:underline">
             🪓 {service.title}
           </Link>
         )}
@@ -111,9 +100,7 @@ export default async function CasePage({
             })}
           </span>
         )}
-        {(c as any).durationHours && (
-          <span>⏱ {(c as any).durationHours} ч</span>
-        )}
+        {(c as any).durationHours && <span>⏱ {(c as any).durationHours} ч</span>}
         {(c as any).finalPrice && (
           <span className="font-medium text-stone-800">
             💰 {(c as any).finalPrice.toLocaleString('ru-RU')} ₽ за объект

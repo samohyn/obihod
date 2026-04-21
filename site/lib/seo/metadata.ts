@@ -4,7 +4,7 @@
  */
 import type { Metadata } from 'next'
 
-import type { District, Service, ServiceDistrict } from './jsonld'
+import type { District, Service } from './jsonld'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -14,8 +14,7 @@ export function buildHomeMetadata(): Metadata {
   return {
     metadataBase,
     title: {
-      default:
-        'Обиход — порядок под ключ. Арбо, снег, мусор, демонтаж по Москве и МО',
+      default: 'Обиход — порядок под ключ. Арбо, снег, мусор, демонтаж по Москве и МО',
       template: '%s | Обиход',
     },
     description:
@@ -37,7 +36,11 @@ export function buildHomeMetadata(): Metadata {
   }
 }
 
-export function buildPillarMetadata(s: Service, metaTitle: string, metaDescription: string): Metadata {
+export function buildPillarMetadata(
+  s: Service,
+  metaTitle: string,
+  metaDescription: string,
+): Metadata {
   return {
     metadataBase,
     title: { absolute: metaTitle },
@@ -79,10 +82,7 @@ export function buildProgrammaticMetadata(args: {
 }): Metadata {
   const { service: s, district: d, localPriceAdjustment = 0, localPriceNote } = args
   const adjustedPriceFrom = Math.round(s.priceFrom * (1 + localPriceAdjustment / 100))
-  const indexable =
-    args.publishStatus === 'published' &&
-    args.hasMiniCase &&
-    !args.noindexUntilCase
+  const indexable = args.publishStatus === 'published' && args.hasMiniCase && !args.noindexUntilCase
 
   const title = `${s.h1} ${d.namePrepositional} — цена от ${adjustedPriceFrom.toLocaleString('ru-RU')} ₽ | Обиход`
   const description = localPriceNote
@@ -107,9 +107,7 @@ export function buildProgrammaticMetadata(args: {
       title,
       description,
     },
-    robots: indexable
-      ? { index: true, follow: true }
-      : { index: false, follow: true },
+    robots: indexable ? { index: true, follow: true } : { index: false, follow: true },
   }
 }
 

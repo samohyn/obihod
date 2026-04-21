@@ -56,8 +56,8 @@ export function How() {
             <h2 className="h-xl">Как это работает.</h2>
           </div>
           <p className="section-sub">
-            Пять простых шагов от&nbsp;первого звонка до&nbsp;гарантийной поддержки.
-            На&nbsp;каждом — понятный SLA: мы&nbsp;называем срок и&nbsp;держим его.
+            Пять простых шагов от&nbsp;первого звонка до&nbsp;гарантийной поддержки. На&nbsp;каждом
+            — понятный SLA: мы&nbsp;называем срок и&nbsp;держим его.
           </p>
         </div>
         <div className="how-grid">
@@ -65,7 +65,9 @@ export function How() {
             const IconCmp = Icon[s.icon]
             return (
               <div key={s.n} className="how-step">
-                <span className="step-ghost" aria-hidden="true">{s.n.replace('0', '')}</span>
+                <span className="step-ghost" aria-hidden="true">
+                  {s.n.replace('0', '')}
+                </span>
                 <span className="how-num">{s.n} / 05</span>
                 <div className="how-icon">
                   <IconCmp size={36} />

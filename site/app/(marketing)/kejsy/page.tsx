@@ -40,19 +40,16 @@ export default async function CasesIndex() {
           { name: 'Кейсы', href: '/kejsy/' },
         ]}
       />
-      <h1 className="text-4xl font-semibold tracking-tight text-stone-900">
-        Кейсы Обихода
-      </h1>
+      <h1 className="text-4xl font-semibold tracking-tight text-stone-900">Кейсы Обихода</h1>
       <p className="mt-4 max-w-2xl text-lg text-stone-700">
-        Реальные объекты по Москве и Московской области. Каждый кейс — фото
-        до/после, бригадир, цена за объект.
+        Реальные объекты по Москве и Московской области. Каждый кейс — фото до/после, бригадир, цена
+        за объект.
       </p>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2">
         {cases.map((c: any) => {
           const before = c.photosBefore?.[0]
-          const url =
-            typeof before?.image === 'object' ? before.image.url : null
+          const url = typeof before?.image === 'object' ? before.image.url : null
           return (
             <Link
               key={c.id}
@@ -73,9 +70,7 @@ export default async function CasesIndex() {
               <div className="p-4">
                 <h2 className="font-semibold text-stone-900">{c.title}</h2>
                 <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-stone-600">
-                  {c.district?.nameNominative && (
-                    <span>📍 {c.district.nameNominative}</span>
-                  )}
+                  {c.district?.nameNominative && <span>📍 {c.district.nameNominative}</span>}
                   {c.dateCompleted && (
                     <span>
                       🗓{' '}

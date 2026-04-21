@@ -1,0 +1,49 @@
+version: 2
+
+updates:
+  # npm dependencies для сайта
+  - package-ecosystem: npm
+    directory: /site
+    schedule:
+      interval: weekly
+      day: monday
+      time: "04:00"
+      timezone: Europe/Moscow
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+    groups:
+      # Next.js + Payload апдейтим одной пачкой — у них связанные версии
+      next-payload:
+        patterns:
+          - "next"
+          - "@payloadcms/*"
+          - "payload"
+      # Линтеры/форматтеры — одна группа, чтобы не дробить PR
+      tooling:
+        patterns:
+          - "eslint"
+          - "eslint-config-*"
+          - "eslint-plugin-*"
+          - "prettier"
+          - "prettier-plugin-*"
+          - "typescript"
+          - "@types/*"
+      # Тестовая инфра
+      testing:
+        patterns:
+          - "@playwright/*"
+          - "tsx"
+
+  # GitHub Actions в workflows
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "04:00"
+      timezone: Europe/Moscow
+    open-pull-requests-limit: 3
+    labels:
+      - ci
+      - dependencies

@@ -1,0 +1,15 @@
+.next/
+out/
+build/
+node_modules/
+coverage/
+playwright-report/
+test-results/
+media/
+public/
+pnpm-lock.yaml
+payload-types.ts
+next-env.d.ts
+*.log
+.env*
+!.env.example

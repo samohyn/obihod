@@ -31,8 +31,26 @@ const SERVICES_CALC: Record<string, CalcService> = {
     icon: 'Tree',
     base: 4500,
     sliders: [
-      { key: 'count', label: 'Количество деревьев', min: 1, max: 10, step: 1, unit: 'шт', default: 2, per: 4500 },
-      { key: 'height', label: 'Средняя высота', min: 5, max: 25, step: 1, unit: 'м', default: 12, factor: 320 },
+      {
+        key: 'count',
+        label: 'Количество деревьев',
+        min: 1,
+        max: 10,
+        step: 1,
+        unit: 'шт',
+        default: 2,
+        per: 4500,
+      },
+      {
+        key: 'height',
+        label: 'Средняя высота',
+        min: 5,
+        max: 25,
+        step: 1,
+        unit: 'м',
+        default: 12,
+        factor: 320,
+      },
     ],
     options: [
       { key: 'narrow', label: 'Стеснённые условия', price: 3000 },
@@ -46,8 +64,26 @@ const SERVICES_CALC: Record<string, CalcService> = {
     icon: 'Snow',
     base: 3800,
     sliders: [
-      { key: 'area', label: 'Площадь участка', min: 100, max: 2500, step: 50, unit: 'м²', default: 800, factor: 3.8 },
-      { key: 'visits', label: 'Выездов за сезон', min: 1, max: 15, step: 1, unit: 'раз', default: 6, factor: 820 },
+      {
+        key: 'area',
+        label: 'Площадь участка',
+        min: 100,
+        max: 2500,
+        step: 50,
+        unit: 'м²',
+        default: 800,
+        factor: 3.8,
+      },
+      {
+        key: 'visits',
+        label: 'Выездов за сезон',
+        min: 1,
+        max: 15,
+        step: 1,
+        unit: 'раз',
+        default: 6,
+        factor: 820,
+      },
     ],
     options: [
       { key: 'roof', label: 'Чистка кровли', price: 6500 },
@@ -61,8 +97,26 @@ const SERVICES_CALC: Record<string, CalcService> = {
     icon: 'Brick',
     base: 45000,
     sliders: [
-      { key: 'area', label: 'Площадь строения', min: 10, max: 250, step: 5, unit: 'м²', default: 60, factor: 1350 },
-      { key: 'floors', label: 'Этажность', min: 1, max: 3, step: 1, unit: 'эт', default: 1, factor: 15000 },
+      {
+        key: 'area',
+        label: 'Площадь строения',
+        min: 10,
+        max: 250,
+        step: 5,
+        unit: 'м²',
+        default: 60,
+        factor: 1350,
+      },
+      {
+        key: 'floors',
+        label: 'Этажность',
+        min: 1,
+        max: 3,
+        step: 1,
+        unit: 'эт',
+        default: 1,
+        factor: 15000,
+      },
     ],
     options: [
       { key: 'found', label: 'Демонтаж фундамента', price: 18000 },
@@ -76,8 +130,26 @@ const SERVICES_CALC: Record<string, CalcService> = {
     icon: 'Container',
     base: 6900,
     sliders: [
-      { key: 'volume', label: 'Объём контейнера', min: 8, max: 27, step: 1, unit: 'м³', default: 20, factor: 340 },
-      { key: 'days', label: 'Срок аренды', min: 1, max: 14, step: 1, unit: 'дн', default: 2, factor: 380 },
+      {
+        key: 'volume',
+        label: 'Объём контейнера',
+        min: 8,
+        max: 27,
+        step: 1,
+        unit: 'м³',
+        default: 20,
+        factor: 340,
+      },
+      {
+        key: 'days',
+        label: 'Срок аренды',
+        min: 1,
+        max: 14,
+        step: 1,
+        unit: 'дн',
+        default: 2,
+        factor: 380,
+      },
     ],
     options: [
       { key: 'kgm', label: 'КГМ (крупногабарит)', price: 2500 },
@@ -164,7 +236,9 @@ export function Calculator() {
           <div>
             <span className="eyebrow">§&nbsp;02 · Калькулятор</span>
             <h2 className="h-xl">
-              Цена до&nbsp;замера.<br />Без&nbsp;сюрпризов.
+              Цена до&nbsp;замера.
+              <br />
+              Без&nbsp;сюрпризов.
             </h2>
           </div>
           <p className="section-sub">

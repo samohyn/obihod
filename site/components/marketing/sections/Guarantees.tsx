@@ -65,7 +65,9 @@ export function Guarantees() {
           <div>
             <span className="eyebrow">§&nbsp;04 · Гарантии и SLA</span>
             <h2 className="h-xl">
-              Мы продаём не&nbsp;услугу,<br />а&nbsp;спокойствие.
+              Мы продаём не&nbsp;услугу,
+              <br />
+              а&nbsp;спокойствие.
             </h2>
           </div>
           <p className="section-sub">

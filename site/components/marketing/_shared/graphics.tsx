@@ -83,11 +83,7 @@ export function AmberSeal({
   const pathId = `seal-path-${size}-${label.length}`
 
   return (
-    <div
-      className="amber-seal"
-      style={{ width: size, height: size }}
-      aria-hidden="true"
-    >
+    <div className="amber-seal" style={{ width: size, height: size }} aria-hidden="true">
       <svg viewBox={`0 0 ${size} ${size}`} width={size} height={size} style={{ display: 'block' }}>
         <defs>
           <path
@@ -115,7 +111,12 @@ export function AmberSeal({
           strokeWidth="1"
           opacity="0.35"
         />
-        <text fill="currentColor" fontSize="9" letterSpacing="2.2" style={{ fontFamily: 'var(--font-mono)' }}>
+        <text
+          fill="currentColor"
+          fontSize="9"
+          letterSpacing="2.2"
+          style={{ fontFamily: 'var(--font-mono)' }}
+        >
           <textPath href={`#${pathId}`} startOffset="0">
             {label.repeat(3)}
           </textPath>
@@ -155,8 +156,18 @@ export function AmberSeal({
 
 const MONTHS = ['Я', 'Ф', 'М', 'А', 'М', 'И', 'И', 'А', 'С', 'О', 'Н', 'Д']
 const MONTH_FULL = [
-  'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
-  'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь',
+  'Январь',
+  'Февраль',
+  'Март',
+  'Апрель',
+  'Май',
+  'Июнь',
+  'Июль',
+  'Август',
+  'Сентябрь',
+  'Октябрь',
+  'Ноябрь',
+  'Декабрь',
 ]
 const LEVELS = ['не сезон', 'средний', 'пик']
 
@@ -174,9 +185,15 @@ export function SeasonCalendar() {
       <div className="season-cal-head">
         <div className="season-cal-title">Когда какая услуга</div>
         <div className="season-cal-legend">
-          <span><em style={{ background: 'var(--c-primary)' }} /> пик сезона</span>
-          <span><em style={{ background: 'var(--c-primary)', opacity: 0.45 }} /> средний спрос</span>
-          <span><em style={{ background: 'var(--c-line)' }} /> не сезон</span>
+          <span>
+            <em style={{ background: 'var(--c-primary)' }} /> пик сезона
+          </span>
+          <span>
+            <em style={{ background: 'var(--c-primary)', opacity: 0.45 }} /> средний спрос
+          </span>
+          <span>
+            <em style={{ background: 'var(--c-line)' }} /> не сезон
+          </span>
         </div>
       </div>
       <div className="season-cal-grid">

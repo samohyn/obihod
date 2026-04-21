@@ -37,12 +37,18 @@ export default defineConfig({
     // Safari/Firefox добавим, когда понадобится — см. qa-engineer.md §7
   ],
 
-  webServer: {
-    command: 'pnpm dev',
-    url: 'http://localhost:3000',
-    reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
-    stdout: 'ignore',
-    stderr: 'pipe',
-  },
+  // В CI поднимаем `pnpm run start` в отдельном шаге workflow (после build),
+  // передаём PLAYWRIGHT_EXTERNAL_SERVER=1 чтобы Playwright не запускал свой.
+  // Локально — webServer с `pnpm dev` и reuse существующего, если уже запущен.
+  webServer:
+    process.env.PLAYWRIGHT_EXTERNAL_SERVER === '1'
+      ? undefined
+      : {
+          command: 'pnpm dev',
+          url: 'http://localhost:3000',
+          reuseExistingServer: !process.env.CI,
+          timeout: 120_000,
+          stdout: 'ignore',
+          stderr: 'pipe',
+        },
 })

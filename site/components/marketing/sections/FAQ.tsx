@@ -49,12 +49,14 @@ export function FAQ() {
           <div>
             <span className="eyebrow">§&nbsp;10 · Частые вопросы</span>
             <h2 className="h-xl">
-              Что обычно<br />спрашивают.
+              Что обычно
+              <br />
+              спрашивают.
             </h2>
           </div>
           <p className="section-sub">
-            Если ответа нет — напишите в&nbsp;Telegram @obihod_bot или позвоните.
-            Диспетчер отвечает в&nbsp;течение 15&nbsp;минут.
+            Если ответа нет — напишите в&nbsp;Telegram @obihod_bot или позвоните. Диспетчер отвечает
+            в&nbsp;течение 15&nbsp;минут.
           </p>
         </div>
         <div className="faq-list">

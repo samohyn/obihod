@@ -12,11 +12,7 @@ type Props = {
  * Drag-slider «до/после». Пока placeholder-stripes вместо реальных фото —
  * подменим на <Image> из коллекции Cases, когда в Payload будут before/after.
  */
-export function BeforeAfter({
-  beforeLabel = 'ДО',
-  afterLabel = 'ПОСЛЕ',
-  caption,
-}: Props) {
+export function BeforeAfter({ beforeLabel = 'ДО', afterLabel = 'ПОСЛЕ', caption }: Props) {
   const [pos, setPos] = useState(52)
   const wrapRef = useRef<HTMLDivElement | null>(null)
   const dragRef = useRef(false)
@@ -93,10 +89,7 @@ export function BeforeAfter({
         <span className="ba-mono">{caption?.after || 'ПОСЛЕ · УЧАСТОК ЧИСТЫЙ'}</span>
         <span className="ba-tag ba-tag-right">{afterLabel}</span>
       </div>
-      <div
-        className="ba-slider-pane ba-before"
-        style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
-      >
+      <div className="ba-slider-pane ba-before" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
         <div className="ba-stripes ba-stripes-before" />
         <span className="ba-mono">{caption?.before || 'ДО · АВАРИЙНЫЕ ДЕРЕВЬЯ'}</span>
         <span className="ba-tag ba-tag-left">{beforeLabel}</span>

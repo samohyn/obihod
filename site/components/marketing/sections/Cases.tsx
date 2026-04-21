@@ -74,7 +74,9 @@ export function Cases() {
         <div className="cases-grid">
           {CASES.map((c, i) => (
             <div key={i} className="case-card">
-              <span className="case-ghost" aria-hidden="true">{c.n}</span>
+              <span className="case-ghost" aria-hidden="true">
+                {c.n}
+              </span>
               <div className="case-shot">
                 <BeforeAfter caption={{ before: c.before, after: c.after }} />
               </div>

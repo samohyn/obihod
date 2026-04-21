@@ -1,0 +1,51 @@
+# graphify ignore — паттерны как в .gitignore
+# Эти пути graphify не обрабатывает — экономим API-токены.
+
+# --- Раздутое, не несёт содержания для графа ---
+node_modules/
+.pnpm-store/
+.next/
+.turbo/
+dist/
+build/
+out/
+coverage/
+.nyc_output/
+.cache/
+
+# --- Генерируется graphify, иначе рекурсия ---
+graphify-out/
+raw/.cache/
+
+# --- Тесты и артефакты e2e ---
+test-results/
+playwright-report/
+playwright/.cache/
+
+# --- Локальные/технические ---
+.DS_Store
+*.log
+*.swp
+.vscode/
+.idea/
+.env*
+*.key
+*.pem
+credentials*.json
+secrets/
+
+# --- Git и meta ---
+.git/
+.github/workflows/_archive/
+
+# --- Сгенерированные типы ---
+*.d.ts
+*.generated.*
+*.schema.json
+
+# --- Большие бинарники медиа (если раздуют сверх потребности) ---
+# Осторожно: graphify хорошо работает с изображениями/видео — включай их,
+# когда контент стабилизируется. Пока — отключаем чтобы не жечь API.
+# Раскомментируй когда будешь готов обрабатывать медиа:
+# assets/
+# site/public/

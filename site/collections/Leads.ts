@@ -10,7 +10,8 @@ export const Leads: CollectionConfig = {
   },
   access: {
     read: ({ req }) =>
-      Boolean(req.user) && ['admin', 'manager'].includes((req.user as { role?: string })?.role ?? ''),
+      Boolean(req.user) &&
+      ['admin', 'manager'].includes((req.user as { role?: string })?.role ?? ''),
   },
   fields: [
     { name: 'phone', type: 'text', required: true, index: true },

@@ -1,0 +1,161 @@
+name: Deploy to Beget
+
+# Запускается ТОЛЬКО вручную, пока не подгружены secrets Beget.
+# После подачи доступов (см. deploy/README.md):
+#   1. Заполнить Settings → Secrets and variables → Actions:
+#      BEGET_SSH_HOST, BEGET_SSH_PORT, BEGET_SSH_USER, BEGET_SSH_KEY,
+#      BEGET_DEPLOY_PATH, BEGET_APP_NAME (для pm2)
+#      + env: DATABASE_URI, PAYLOAD_SECRET, NEXT_PUBLIC_SITE_URL,
+#        REVALIDATE_SECRET, INDEXNOW_KEY
+#   2. Добавить в on: push: branches: [main] — когда готовы к auto-deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Напиши "deploy" чтобы подтвердить выкатку'
+        required: true
+
+concurrency:
+  group: deploy-beget
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    name: Preflight — проверка secrets
+    runs-on: ubuntu-latest
+    outputs:
+      ready: ${{ steps.check.outputs.ready }}
+    steps:
+      - id: check
+        env:
+          HOST: ${{ secrets.BEGET_SSH_HOST }}
+          USER: ${{ secrets.BEGET_SSH_USER }}
+          KEY: ${{ secrets.BEGET_SSH_KEY }}
+          PATH_: ${{ secrets.BEGET_DEPLOY_PATH }}
+        run: |
+          if [ -z "$HOST" ] || [ -z "$USER" ] || [ -z "$KEY" ] || [ -z "$PATH_" ]; then
+            echo "::error::Secrets Beget отсутствуют. См. deploy/README.md"
+            echo "ready=false" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+          if [ "${{ inputs.confirm }}" != "deploy" ]; then
+            echo "::error::Нужно явно подтвердить выкатку словом 'deploy' в input."
+            exit 1
+          fi
+          echo "ready=true" >> $GITHUB_OUTPUT
+
+  build:
+    name: Build production bundle
+    needs: preflight
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          cache-dependency-path: site/pnpm-lock.yaml
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build
+        env:
+          DATABASE_URI: ${{ secrets.DATABASE_URI }}
+          PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+          REVALIDATE_SECRET: ${{ secrets.REVALIDATE_SECRET }}
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+        run: pnpm run build
+
+      - name: Pack artifact
+        run: |
+          tar czf ../deploy.tar.gz \
+            .next \
+            public \
+            package.json \
+            pnpm-lock.yaml \
+            pnpm-workspace.yaml \
+            next.config.ts \
+            payload.config.ts \
+            proxy.ts
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deploy-bundle
+          path: deploy.tar.gz
+          retention-days: 3
+
+  deploy:
+    name: Rsync to Beget + reload PM2
+    needs: [preflight, build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: deploy-bundle
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.BEGET_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p ${{ secrets.BEGET_SSH_PORT || '22' }} -H ${{ secrets.BEGET_SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Prepare release dir on Beget
+        env:
+          REL: ${{ github.sha }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
+            "mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/releases/${REL} && \
+             mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/shared"
+
+      - name: Upload release bundle
+        env:
+          REL: ${{ github.sha }}
+        run: |
+          scp -i ~/.ssh/deploy_key -P ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            deploy.tar.gz \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/releases/${REL}/deploy.tar.gz
+
+      - name: Install deps + link current + reload PM2
+        env:
+          REL: ${{ github.sha }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
+            "set -e
+             cd ${{ secrets.BEGET_DEPLOY_PATH }}/releases/${REL}
+             tar xzf deploy.tar.gz && rm deploy.tar.gz
+             ln -sfn ${{ secrets.BEGET_DEPLOY_PATH }}/shared/.env .env
+             corepack enable && corepack prepare pnpm@10.33.0 --activate
+             pnpm install --prod --frozen-lockfile
+             cd ${{ secrets.BEGET_DEPLOY_PATH }}
+             ln -sfn releases/${REL} current
+             cd current
+             pm2 reload ${{ secrets.BEGET_APP_NAME || 'obikhod' }} --update-env || \
+               pm2 start 'pnpm start' --name ${{ secrets.BEGET_APP_NAME || 'obikhod' }} --update-env
+             pm2 save
+             # Держим только 5 последних релизов
+             cd ${{ secrets.BEGET_DEPLOY_PATH }}/releases
+             ls -1t | tail -n +6 | xargs -r rm -rf"
+
+      - name: Smoke check
+        run: |
+          sleep 5
+          URL=${{ secrets.NEXT_PUBLIC_SITE_URL || format('http://{0}', secrets.BEGET_SSH_HOST) }}
+          code=$(curl -s -o /dev/null -w "%{http_code}" "$URL/")
+          if [ "$code" != "200" ] && [ "$code" != "301" ] && [ "$code" != "302" ]; then
+            echo "::error::Smoke check failed: $URL returned $code"
+            exit 1
+          fi
+          echo "Deploy OK: $URL → $code"

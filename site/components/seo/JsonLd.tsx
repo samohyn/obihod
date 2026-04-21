@@ -12,10 +12,5 @@ export function JsonLd({ schema }: Props) {
       ? { '@context': 'https://schema.org', '@graph': schema }
       : { '@context': 'https://schema.org', ...schema },
   )
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: json }}
-    />
-  )
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: json }} />
 }

@@ -47,33 +47,42 @@ obikhod/
 **Правила файлов:**
 - Новые стратегические артефакты → в `contex/` с номером `05_…`, `06_…` по порядку
 - Не переименовываем `contex/` → `context/` пока оператор явно не попросит
-- Не трогаем `agents/*.md` без явного запроса — это зафиксированные адаптированные роли
-- Новых агентов добавляем в `agents/` по шаблону существующих
-  (Role / Model Tier / Capabilities / Prompt Template / Integration)
+- Команда проекта собирается заново; ранее существовавшие `agents/*.md`
+  намеренно удалены 2026-04-21. Новые роли добавлять в `agents/` по мере
+  появления потребности, не копировать набор из чужих проектов
+
+## Память и хуки Claude Code
+
+`.claude/` содержит проектную память и хуки-принуждение — см.
+[.claude/README.md](.claude/README.md).
+
+| Файл | Назначение |
+|---|---|
+| [.claude/memory/handoff.md](.claude/memory/handoff.md) | где сейчас / в работе / следующее · **обновлять в конце сессии** |
+| [.claude/memory/learnings.md](.claude/memory/learnings.md) | уроки из корректировок оператора · строка в формате `- YYYY-MM-DD · тема · правило · **Why:** причина` |
+| [.claude/settings.json](.claude/settings.json) | конфиг хуков (commit-able) |
+| [.claude/hooks/](.claude/hooks/) | shell-скрипты принуждения |
+
+**Хуки (работают всегда, не полагайся только на этот CLAUDE.md):**
+- `protect-secrets.sh` — блок записи/чтения `.env`, `*.key`, `credentials.json`, `secrets/`
+- `block-dangerous-bash.sh` — блок `rm -rf /`, force push на main, `git reset --hard`, `DROP TABLE`, `--no-verify`
+- `protect-immutable.sh` — блок запрещённых CMS (Тильда/Bitrix/WordPress) и анти-TOV слов
+  внутри `site/`, `content/`, `assets/`. Escape hatch для цитат: `obikhod:ok` в контенте
+- `session-bootstrap.sh` — на старте сессии печатает git-статус + handoff + последние уроки
+
+**Правило сессии:** в конце работы перезапиши `handoff.md` короткой сводкой, добавь
+новые уроки в `learnings.md`.
 
 ## Агенты проекта
 
-### Существующие (25 в `agents/`, адаптированы под домен Обихода)
+Команда собирается заново под домен Обихода. В `agents/` сейчас пусто; роли
+появятся по мере реальной необходимости, а не заранее «на всякий случай».
 
-| Категория | Агенты |
-|---|---|
-| Стратегия / продукт | [cpo.md](agents/cpo.md), [product-strategist.md](agents/product-strategist.md), [product-analyst.md](agents/product-analyst.md), [pricing-strategist.md](agents/pricing-strategist.md), [ba.md](agents/ba.md) |
-| Рост / маркетинг / контент | [growth-marketing-strategist.md](agents/growth-marketing-strategist.md), [seo-expert.md](agents/seo-expert.md), [landing-page-specialist.md](agents/landing-page-specialist.md), [copywriter.md](agents/copywriter.md) |
-| Дизайн / UX | [ux.md](agents/ux.md), [designer.md](agents/designer.md) |
-| Аналитика / ресёрч / данные | [data-analyst.md](agents/data-analyst.md), [analytics-engineer.md](agents/analytics-engineer.md), [research-analyst.md](agents/research-analyst.md), [poisk dannih.md](agents/poisk%20dannih.md) |
-| Tech / архитектура / разработка | [cto.md](agents/cto.md), [frontend-developer.md](agents/frontend-developer.md), [backend-developer.md](agents/backend-developer.md), [tech-seo.md](agents/tech-seo.md), [devops.md](agents/devops.md) |
-| Качество / оппоненты / право | [qa-engineer.md](agents/qa-engineer.md), [quality-partner.md](agents/quality-partner.md), [devils-advocate.md](agents/devils-advocate.md), [legal-advisor.md](agents/legal-advisor.md) |
-| Delivery | [project-manager.md](agents/project-manager.md) |
-
-Все 25 — Model Tier **Opus**. В каждом в Prompt Template прописана обязательная сверка
-с этим CLAUDE.md и актуальными `contex/*.md`.
-
-### Возможны в будущем (за скоупом текущего CLAUDE.md)
-
-При расширении проекта в операционку: `content-manager`, `smm-manager`,
-`integration-specialist` (если backend-developer перегружен), `brand-designer`
-(если `designer` не тянет CIP), `sales-sdr`, `operations-manager`, `hr-recruiter`,
-`finance-manager` (пересоздать на сервисной модели, без финтех-наследия).
+Когда добавляем нового агента — шаблон в файле: `Role / Model Tier / Capabilities
+/ Prompt Template / Integration`. В Prompt Template обязательна сверка с этим
+CLAUDE.md и актуальными `contex/*.md`. Никаких финтех-следов в содержании
+(банк/брокер/ЦБ РФ/KYC/AML) — это домен Обихода (арбористика, крыши, мусор,
+демонтаж, Москва и МО).
 
 ## Technology Stack (утверждено)
 
@@ -119,9 +128,22 @@ AI-pipeline: Claude API (Sonnet 4.6) — черновик сметы по фот
              → amoCRM комментарий → бригадир подтверждает → клиенту
              Prompt caching обязательно (skill `claude-api`)
 
-CI/CD:       GitHub Actions → деплой на Beget
-             Preview deploys для PR
+CI/CD:       GitHub Actions:
+               • ci.yml         — PR + push main: type-check + lint + format +
+                                  build + Playwright E2E с Postgres service
+               • deploy.yml     — workflow_dispatch на Beget (SSH + rsync + PM2
+                                  reload, 5 последних релизов на сервере)
+             Dependabot: weekly npm + github-actions
+             Preview deploys для PR — после стабилизации prod-деплоя
 ```
+
+**Качество кода:**
+- `pnpm run type-check` (tsc --noEmit)
+- `pnpm run lint` (eslint flat config, Next.js 16 core-web-vitals + TS rules)
+- `pnpm run format:check` (prettier + prettier-plugin-tailwindcss)
+- `pnpm run test:e2e --project=chromium` (Playwright, CI-parity через `PLAYWRIGHT_EXTERNAL_SERVER=1`)
+- Baseline: `@typescript-eslint/no-explicit-any` временно на `warn`, убираем
+  поэтапно и возвращаем на `error`. Детали деплоя — в [deploy/README.md](deploy/README.md)
 
 **Почему Beget, а не Vercel/YC на старте:** цена ×5-10 ниже YC, РФ-юрисдикция без
 вопросов, Node.js + Postgres + S3 + CDN в одной панели. Vercel — проблемы с оплатой
@@ -203,3 +225,17 @@ embed в Next-приложение.
 - [ ] Юрлицо / СРО / лицензия Росприроднадзора — чеклист в
       [01_competitor_research.md](contex/01_competitor_research.md) раздел 5
 - [ ] amoCRM / Wazzup24 / Calltouch — завести аккаунты при старте разработки
+
+## graphify
+
+This project has a graphify knowledge graph at graphify-out/.
+
+Rules:
+- Before answering architecture or codebase questions, read graphify-out/GRAPH_REPORT.md for god nodes and community structure
+- If graphify-out/wiki/index.md exists, navigate it instead of reading raw files
+- After modifying code files in this session, run `graphify update .` to keep the graph current (AST-only, no API cost)
+
+## Context Navigation
+1. ВСЕГДА сначала читай graphify-out/GRAPH_REPORT.md
+2. Сырые файлы открывай только если я попрошу прямо
+3. Используй graph.json для точечных запросов

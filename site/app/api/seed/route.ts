@@ -141,10 +141,30 @@ export async function POST(req: NextRequest) {
           ],
           subServices: [
             { slug: 'spil-dereviev', title: 'Спил деревьев', h1: 'Спил деревьев', priceFrom: 700 },
-            { slug: 'kronirovanie', title: 'Кронирование', h1: 'Кронирование деревьев', priceFrom: 3500 },
-            { slug: 'udalenie-pnya', title: 'Удаление пня', h1: 'Удаление пня фрезой', priceFrom: 1500 },
-            { slug: 'avariynyy-spil', title: 'Аварийный спил', h1: 'Аварийный спил 24/7', priceFrom: 8000 },
-            { slug: 'sanitarnaya-obrezka', title: 'Санитарная обрезка', h1: 'Санитарная обрезка плодовых', priceFrom: 2500 },
+            {
+              slug: 'kronirovanie',
+              title: 'Кронирование',
+              h1: 'Кронирование деревьев',
+              priceFrom: 3500,
+            },
+            {
+              slug: 'udalenie-pnya',
+              title: 'Удаление пня',
+              h1: 'Удаление пня фрезой',
+              priceFrom: 1500,
+            },
+            {
+              slug: 'avariynyy-spil',
+              title: 'Аварийный спил',
+              h1: 'Аварийный спил 24/7',
+              priceFrom: 8000,
+            },
+            {
+              slug: 'sanitarnaya-obrezka',
+              title: 'Санитарная обрезка',
+              h1: 'Санитарная обрезка плодовых',
+              priceFrom: 2500,
+            },
           ],
         } as any,
       })

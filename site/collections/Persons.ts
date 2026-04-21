@@ -18,8 +18,7 @@ export const Persons: CollectionConfig = {
       type: 'text',
       required: true,
       admin: {
-        description:
-          'Например: Главный арборист / Бригадир арбо / Бригадир промальп',
+        description: 'Например: Главный арборист / Бригадир арбо / Бригадир промальп',
       },
     },
     { name: 'photo', type: 'upload', relationTo: 'media' },
