@@ -110,6 +110,9 @@ jobs:
             sleep 1
           done
 
+      - name: Push Payload schema (empty DB → create tables)
+        run: pnpm run db:init
+
       - name: Build
         run: pnpm run build
 

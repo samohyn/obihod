@@ -52,6 +52,29 @@ jobs:
     defaults:
       run:
         working-directory: site
+    services:
+      # Временная БД на runner'е — нужна только для generateStaticParams
+      # во время next build. Реальная обработка данных — в runtime на Beget.
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: obikhod
+          POSTGRES_PASSWORD: obikhod_dev
+          POSTGRES_DB: obikhod
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      # Ephemeral DATABASE_URI для build (на сервере будет переопределён из shared/.env)
+      DATABASE_URI: postgres://obikhod:obikhod_dev@localhost:5432/obikhod
+      PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+      NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+      REVALIDATE_SECRET: ${{ secrets.REVALIDATE_SECRET }}
+      INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
     steps:
       - uses: actions/checkout@v4
 
@@ -68,13 +91,17 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      - name: Wait for Postgres
+        run: |
+          for i in {1..30}; do
+            pg_isready -h localhost -p 5432 -U obikhod && break
+            sleep 1
+          done
+
+      - name: Push Payload schema (empty DB)
+        run: pnpm run db:init
+
       - name: Build
-        env:
-          DATABASE_URI: ${{ secrets.DATABASE_URI }}
-          PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
-          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
-          REVALIDATE_SECRET: ${{ secrets.REVALIDATE_SECRET }}
-          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
         run: pnpm run build
 
       - name: Pack artifact
