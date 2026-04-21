@@ -129,7 +129,9 @@ jobs:
 
       - name: Pack artifact (с node_modules — сервер не зовёт pnpm)
         run: |
-          tar czf ../deploy.tar.gz \
+          # Убираем dev-мусор после warmup, чтобы tar не ругался на исчезающие файлы
+          rm -rf .next/dev .next/cache
+          tar --warning=no-file-changed -czf ../deploy.tar.gz \
             .next \
             public \
             node_modules \
@@ -138,7 +140,6 @@ jobs:
             pnpm-workspace.yaml \
             next.config.ts \
             payload.config.ts \
-            payload-types.ts \
             proxy.ts \
             app \
             collections \
