@@ -22,7 +22,9 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    revalidateTag(tag)
+    // Next 16: второй аргумент обязателен. 'max' = stale-while-revalidate,
+    // рекомендуемое значение для контентных инвалидаций из Payload hooks.
+    revalidateTag(tag, 'max')
     return NextResponse.json({ ok: true, tag, revalidatedAt: new Date().toISOString() })
   } catch (e) {
     const message = e instanceof Error ? e.message : 'unknown'

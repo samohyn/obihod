@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Golos_Text, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
 import { JsonLd } from '@/components/seo/JsonLd'
@@ -9,15 +9,17 @@ import {
   websiteSchema,
 } from '@/lib/seo/jsonld'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const golosText = Golos_Text({
+  variable: '--font-golos-text',
   subsets: ['cyrillic', 'cyrillic-ext', 'latin'],
+  weight: ['400', '500', '600', '700', '900'],
   display: 'swap',
 })
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['cyrillic', 'cyrillic-ext', 'latin'],
+const jetbrainsMono = JetBrains_Mono({
+  variable: '--font-jetbrains-mono',
+  subsets: ['cyrillic', 'latin'],
+  weight: ['400', '500'],
   display: 'swap',
 })
 
@@ -61,9 +63,9 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${golosText.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-stone-50 text-stone-900">
+      <body className="min-h-full flex flex-col">
         <JsonLd
           schema={[organizationSchema(), websiteSchema(), localBusinessSchema()]}
         />

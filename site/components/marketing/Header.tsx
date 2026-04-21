@@ -1,42 +1,37 @@
 import Link from 'next/link'
+import { LogoMark } from './_shared/LogoMark'
 
 export function Header() {
   return (
-    <header className="border-b border-stone-200 bg-white">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl font-bold text-orange-700">ОБИХОД</span>
-          <span className="hidden text-sm text-stone-500 sm:inline">
-            · порядок под ключ
+    <nav className="nav">
+      <div className="nav-inner">
+        <Link href="/" className="nav-logo" style={{ color: 'var(--c-primary)' }}>
+          <LogoMark size={36} animated />
+          <span className="nav-logo-word" style={{ color: 'var(--c-ink)' }}>
+            Обиход<sup className="nav-reg">®</sup>
           </span>
         </Link>
-        <nav className="hidden items-center gap-6 text-sm text-stone-700 md:flex">
-          <Link href="/arboristika/" className="hover:text-stone-900">
-            Арбо
-          </Link>
-          <Link href="/ochistka-krysh/" className="hover:text-stone-900">
-            Снег
-          </Link>
-          <Link href="/vyvoz-musora/" className="hover:text-stone-900">
-            Мусор
-          </Link>
-          <Link href="/demontazh/" className="hover:text-stone-900">
-            Демонтаж
-          </Link>
-          <Link href="/raiony/" className="hover:text-stone-900">
-            Районы
-          </Link>
-          <Link href="/b2b/" className="hover:text-stone-900">
-            УК и B2B
-          </Link>
-        </nav>
-        <a
-          href="tel:+74950000000"
-          className="rounded-full bg-orange-700 px-4 py-2 text-sm font-medium text-white hover:bg-orange-800"
-        >
-          +7 495 000-00-00
-        </a>
+        <div className="nav-links">
+          <a href="#services">Услуги</a>
+          <a href="#calc">Калькулятор</a>
+          <a href="#how">Как это работает</a>
+          <a href="#cases">Кейсы</a>
+          <a href="#subscription">Абонемент</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div className="nav-right">
+          <a href="tel:+74951234567" className="nav-phone">
+            +7 (495) 123-45-67
+          </a>
+          <a
+            href="#calc"
+            className="btn btn-primary"
+            style={{ padding: '12px 18px', fontSize: '14px' }}
+          >
+            Замер бесплатно
+          </a>
+        </div>
       </div>
-    </header>
+    </nav>
   )
 }
