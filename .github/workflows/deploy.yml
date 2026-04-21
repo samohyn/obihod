@@ -10,11 +10,14 @@ name: Deploy to Beget
 #   2. Добавить в on: push: branches: [main] — когда готовы к auto-deploy
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       confirm:
         description: 'Напиши "deploy" чтобы подтвердить выкатку'
-        required: true
+        required: false
+        default: 'deploy'
 
 concurrency:
   group: deploy-beget
@@ -39,7 +42,8 @@ jobs:
             echo "ready=false" >> $GITHUB_OUTPUT
             exit 1
           fi
-          if [ "${{ inputs.confirm }}" != "deploy" ]; then
+          # На push main — без подтверждения; на workflow_dispatch — confirm обязателен
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.confirm }}" != "deploy" ]; then
             echo "::error::Нужно явно подтвердить выкатку словом 'deploy' в input."
             exit 1
           fi
