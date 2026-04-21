@@ -209,9 +209,9 @@ jobs:
              cd \$BP
              ln -sfn releases/\$REL current
 
-             echo '>> pm2 reload (or start)'
-             cd current
-             pm2 reload \$APP --update-env || pm2 start 'pnpm start' --name \$APP --update-env
+             echo '>> pm2 delete + start с явным cwd (reload не меняет cwd → запускается из старого релиза)'
+             pm2 delete \$APP 2>/dev/null || true
+             pm2 start 'pnpm start' --name \$APP --cwd \$BP/current --update-env
              pm2 save
 
              echo '>> keep 5 newest releases, delete older'
