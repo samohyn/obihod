@@ -18,7 +18,7 @@
       "source_file": "/Users/a36/obikhod/site/postcss.config.mjs",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_postcss_config_mjs",
-      "community": 28,
+      "community": 27,
       "norm_label": "postcss.config.mjs"
     },
     {
@@ -27,7 +27,7 @@
       "source_file": "/Users/a36/obikhod/site/proxy.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_proxy_ts",
-      "community": 2,
+      "community": 1,
       "norm_label": "proxy.ts"
     },
     {
@@ -36,7 +36,7 @@
       "source_file": "/Users/a36/obikhod/site/proxy.ts",
       "source_location": "L12",
       "id": "proxy_proxy",
-      "community": 2,
+      "community": 1,
       "norm_label": "proxy()"
     },
     {
@@ -45,7 +45,7 @@
       "source_file": "/Users/a36/obikhod/site/playwright.config.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_playwright_config_ts",
-      "community": 29,
+      "community": 28,
       "norm_label": "playwright.config.ts"
     },
     {
@@ -54,7 +54,7 @@
       "source_file": "/Users/a36/obikhod/site/eslint.config.mjs",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_eslint_config_mjs",
-      "community": 30,
+      "community": 29,
       "norm_label": "eslint.config.mjs"
     },
     {
@@ -63,7 +63,7 @@
       "source_file": "/Users/a36/obikhod/site/next.config.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_next_config_ts",
-      "community": 31,
+      "community": 30,
       "norm_label": "next.config.ts"
     },
     {
@@ -72,7 +72,7 @@
       "source_file": "/Users/a36/obikhod/site/globals/SeoSettings.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_globals_seosettings_ts",
-      "community": 32,
+      "community": 31,
       "norm_label": "seosettings.ts"
     },
     {
@@ -117,7 +117,7 @@
       "source_file": "/Users/a36/obikhod/site/app/layout.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_layout_tsx",
-      "community": 1,
+      "community": 2,
       "norm_label": "layout.tsx"
     },
     {
@@ -126,7 +126,7 @@
       "source_file": "/Users/a36/obikhod/site/app/layout.tsx",
       "source_location": "L51",
       "id": "layout_rootlayout",
-      "community": 1,
+      "community": 2,
       "norm_label": "rootlayout()"
     },
     {
@@ -153,7 +153,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_page_tsx",
-      "community": 33,
+      "community": 32,
       "norm_label": "page.tsx"
     },
     {
@@ -162,7 +162,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/raiony/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_raiony_page_tsx",
-      "community": 34,
+      "community": 33,
       "norm_label": "page.tsx"
     },
     {
@@ -198,7 +198,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/kejsy/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_kejsy_page_tsx",
-      "community": 35,
+      "community": 34,
       "norm_label": "page.tsx"
     },
     {
@@ -243,7 +243,7 @@
       "source_file": "/Users/a36/obikhod/site/app/api/seed/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_api_seed_route_ts",
-      "community": 2,
+      "community": 1,
       "norm_label": "route.ts"
     },
     {
@@ -252,7 +252,7 @@
       "source_file": "/Users/a36/obikhod/site/app/api/seed/route.ts",
       "source_location": "L16",
       "id": "route_lexicalparagraph",
-      "community": 2,
+      "community": 1,
       "norm_label": "lexicalparagraph()"
     },
     {
@@ -261,7 +261,7 @@
       "source_file": "/Users/a36/obikhod/site/app/api/seed/route.ts",
       "source_location": "L47",
       "id": "route_findonebyslug",
-      "community": 2,
+      "community": 1,
       "norm_label": "findonebyslug()"
     },
     {
@@ -270,16 +270,16 @@
       "source_file": "/Users/a36/obikhod/site/app/api/seed/route.ts",
       "source_location": "L56",
       "id": "route_post",
-      "community": 2,
+      "community": 1,
       "norm_label": "post()"
     },
     {
       "label": "route.ts",
       "file_type": "code",
-      "source_file": "/Users/a36/obikhod/site/app/api/revalidate/route.ts",
+      "source_file": "/Users/a36/obikhod/site/app/api/health/route.ts",
       "source_location": "L1",
-      "id": "users_a36_obikhod_site_app_api_revalidate_route_ts",
-      "community": 2,
+      "id": "users_a36_obikhod_site_app_api_health_route_ts",
+      "community": 1,
       "norm_label": "route.ts"
     },
     {
@@ -288,8 +288,17 @@
       "source_file": "/Users/a36/obikhod/site/app/api/revalidate/route.ts",
       "source_location": "L13",
       "id": "route_get",
-      "community": 2,
+      "community": 1,
       "norm_label": "get()"
+    },
+    {
+      "label": "route.ts",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/app/api/revalidate/route.ts",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_app_api_revalidate_route_ts",
+      "community": 1,
+      "norm_label": "route.ts"
     },
     {
       "label": "layout.tsx",
@@ -315,7 +324,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/admin/importMap.js",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_admin_importmap_js",
-      "community": 36,
+      "community": 35,
       "norm_label": "importmap.js"
     },
     {
@@ -369,7 +378,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/api/graphql-playground/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_api_graphql_playground_route_ts",
-      "community": 37,
+      "community": 36,
       "norm_label": "route.ts"
     },
     {
@@ -378,7 +387,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/api/[...slug]/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_api_slug_route_ts",
-      "community": 38,
+      "community": 37,
       "norm_label": "route.ts"
     },
     {
@@ -387,7 +396,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/api/graphql/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_api_graphql_route_ts",
-      "community": 39,
+      "community": 38,
       "norm_label": "route.ts"
     },
     {
@@ -396,7 +405,7 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/landing.spec.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_tests_e2e_landing_spec_ts",
-      "community": 40,
+      "community": 39,
       "norm_label": "landing.spec.ts"
     },
     {
@@ -441,7 +450,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/Footer.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_footer_tsx",
-      "community": 41,
+      "community": 40,
       "norm_label": "footer.tsx"
     },
     {
@@ -486,7 +495,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Hero.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_hero_tsx",
-      "community": 42,
+      "community": 41,
       "norm_label": "hero.tsx"
     },
     {
@@ -513,7 +522,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Subscription.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_subscription_tsx",
-      "community": 43,
+      "community": 42,
       "norm_label": "subscription.tsx"
     },
     {
@@ -540,7 +549,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/CtaFooter.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_ctafooter_tsx",
-      "community": 44,
+      "community": 43,
       "norm_label": "ctafooter.tsx"
     },
     {
@@ -639,7 +648,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Cases.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_cases_tsx",
-      "community": 45,
+      "community": 44,
       "norm_label": "cases.tsx"
     },
     {
@@ -648,7 +657,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/FAQ.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_faq_tsx",
-      "community": 46,
+      "community": 45,
       "norm_label": "faq.tsx"
     },
     {
@@ -657,7 +666,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Reviews.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_reviews_tsx",
-      "community": 47,
+      "community": 46,
       "norm_label": "reviews.tsx"
     },
     {
@@ -801,7 +810,7 @@
       "source_file": "/Users/a36/obikhod/site/components/seo/Breadcrumbs.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_seo_breadcrumbs_tsx",
-      "community": 48,
+      "community": 47,
       "norm_label": "breadcrumbs.tsx"
     },
     {
@@ -846,7 +855,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/payload.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_payload_ts",
-      "community": 26,
+      "community": 1,
       "norm_label": "payload.ts"
     },
     {
@@ -855,7 +864,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/payload.ts",
       "source_location": "L10",
       "id": "payload_payloadclient",
-      "community": 26,
+      "community": 1,
       "norm_label": "payloadclient()"
     },
     {
@@ -864,7 +873,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/queries.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_seo_queries_ts",
-      "community": 49,
+      "community": 48,
       "norm_label": "queries.ts"
     },
     {
@@ -873,7 +882,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/jsonld.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_seo_jsonld_ts",
-      "community": 1,
+      "community": 2,
       "norm_label": "jsonld.ts"
     },
     {
@@ -882,7 +891,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/jsonld.ts",
       "source_location": "L58",
       "id": "jsonld_organizationschema",
-      "community": 1,
+      "community": 2,
       "norm_label": "organizationschema()"
     },
     {
@@ -891,7 +900,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/jsonld.ts",
       "source_location": "L95",
       "id": "jsonld_websiteschema",
-      "community": 1,
+      "community": 2,
       "norm_label": "websiteschema()"
     },
     {
@@ -900,7 +909,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/jsonld.ts",
       "source_location": "L111",
       "id": "jsonld_localbusinessschema",
-      "community": 1,
+      "community": 2,
       "norm_label": "localbusinessschema()"
     },
     {
@@ -909,7 +918,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/jsonld.ts",
       "source_location": "L159",
       "id": "jsonld_serviceschema",
-      "community": 1,
+      "community": 2,
       "norm_label": "serviceschema()"
     },
     {
@@ -918,7 +927,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/jsonld.ts",
       "source_location": "L201",
       "id": "jsonld_faqpageschema",
-      "community": 1,
+      "community": 2,
       "norm_label": "faqpageschema()"
     },
     {
@@ -927,7 +936,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/jsonld.ts",
       "source_location": "L212",
       "id": "jsonld_breadcrumblistschema",
-      "community": 1,
+      "community": 2,
       "norm_label": "breadcrumblistschema()"
     },
     {
@@ -936,7 +945,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/jsonld.ts",
       "source_location": "L224",
       "id": "jsonld_articleschema",
-      "community": 1,
+      "community": 2,
       "norm_label": "articleschema()"
     },
     {
@@ -990,7 +999,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/B2BPages.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_b2bpages_ts",
-      "community": 50,
+      "community": 49,
       "norm_label": "b2bpages.ts"
     },
     {
@@ -999,7 +1008,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Blog.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_blog_ts",
-      "community": 51,
+      "community": 50,
       "norm_label": "blog.ts"
     },
     {
@@ -1008,7 +1017,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Districts.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_districts_ts",
-      "community": 52,
+      "community": 51,
       "norm_label": "districts.ts"
     },
     {
@@ -1017,7 +1026,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/ServiceDistricts.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_servicedistricts_ts",
-      "community": 27,
+      "community": 26,
       "norm_label": "servicedistricts.ts"
     },
     {
@@ -1026,7 +1035,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/ServiceDistricts.ts",
       "source_location": "L3",
       "id": "servicedistricts_requiregatesforpublish",
-      "community": 27,
+      "community": 26,
       "norm_label": "requiregatesforpublish()"
     },
     {
@@ -1035,7 +1044,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Leads.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_leads_ts",
-      "community": 53,
+      "community": 52,
       "norm_label": "leads.ts"
     },
     {
@@ -1044,7 +1053,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Redirects.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_redirects_ts",
-      "community": 54,
+      "community": 53,
       "norm_label": "redirects.ts"
     },
     {
@@ -1053,7 +1062,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Cases.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_cases_ts",
-      "community": 55,
+      "community": 54,
       "norm_label": "cases.ts"
     },
     {
@@ -1062,7 +1071,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Persons.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_persons_ts",
-      "community": 56,
+      "community": 55,
       "norm_label": "persons.ts"
     },
     {
@@ -1071,7 +1080,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Users.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_users_ts",
-      "community": 57,
+      "community": 56,
       "norm_label": "users.ts"
     },
     {
@@ -1080,7 +1089,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Media.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_media_ts",
-      "community": 58,
+      "community": 57,
       "norm_label": "media.ts"
     },
     {
@@ -1089,7 +1098,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Services.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_services_ts",
-      "community": 59,
+      "community": 58,
       "norm_label": "services.ts"
     }
   ],
@@ -1409,14 +1418,38 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/app/api/health/route.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_app_api_health_route_ts",
+      "_tgt": "route_get",
+      "source": "users_a36_obikhod_site_app_api_health_route_ts",
+      "target": "route_get",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "/Users/a36/obikhod/site/app/api/revalidate/route.ts",
       "source_location": "L13",
       "weight": 1.0,
       "_src": "users_a36_obikhod_site_app_api_revalidate_route_ts",
       "_tgt": "route_get",
-      "source": "users_a36_obikhod_site_app_api_revalidate_route_ts",
-      "target": "route_get",
+      "source": "route_get",
+      "target": "users_a36_obikhod_site_app_api_revalidate_route_ts",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/Users/a36/obikhod/site/app/api/health/route.ts",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_src": "route_get",
+      "_tgt": "payload_payloadclient",
+      "source": "route_get",
+      "target": "payload_payloadclient"
     },
     {
       "relation": "contains",
