@@ -120,8 +120,9 @@ jobs:
           done
           # Дёргаем эндпоинты-представители каждой коллекции, чтобы Payload
           # гарантированно push'нул все связанные таблицы.
-          for path in /sitemap.xml /raiony /kejsy /arboristika /arboristika/ramenskoye /raiony/ramenskoye; do
-            code=$(curl -s -o /dev/null -w "%{http_code}" "http://localhost:3000${path}" || echo 000)
+          # trailingSlash: true → нужно -L чтобы проследовать по 308 и дёрнуть реальные страницы
+          for path in /sitemap.xml /raiony/ /kejsy/ /arboristika/ /arboristika/ramenskoye/ /raiony/ramenskoye/; do
+            code=$(curl -sL -o /dev/null -w "%{http_code}" "http://localhost:3000${path}" || echo 000)
             echo "  warmup $path → $code"
           done
           kill $DEV 2>/dev/null || true
