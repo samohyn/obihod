@@ -131,22 +131,41 @@ jobs:
         run: |
           # Убираем dev-мусор после warmup, чтобы tar не ругался на исчезающие файлы
           rm -rf .next/dev .next/cache
-          tar --warning=no-file-changed -czf ../deploy.tar.gz \
-            .next \
-            public \
-            node_modules \
-            package.json \
-            pnpm-lock.yaml \
-            pnpm-workspace.yaml \
-            next.config.ts \
-            payload.config.ts \
-            proxy.ts \
-            app \
-            collections \
-            components \
-            lib \
-            globals
+          # Список всего что нужно на сервере
+          cat > /tmp/deploy-filelist <<'EOF'
+          .next
+          public
+          node_modules
+          package.json
+          pnpm-lock.yaml
+          pnpm-workspace.yaml
+          next.config.ts
+          payload.config.ts
+          proxy.ts
+          app
+          collections
+          components
+          lib
+          globals
+          EOF
+          # tar exit 1 = "файл изменился" (предупреждение), 2 = фатально.
+          # Принимаем 0 и 1, но не 2.
+          set +e
+          tar --warning=no-file-changed --ignore-failed-read -czf ../deploy.tar.gz -T /tmp/deploy-filelist
+          rc=$?
+          set -e
+          if [ $rc -gt 1 ]; then
+            echo "::error::tar failed with code $rc"
+            exit $rc
+          fi
+          [ $rc -eq 1 ] && echo "tar: non-fatal warnings (rc=1)"
           ls -lh ../deploy.tar.gz
+          # Sanity: tarball должен содержать .next/server/app/api/health/route.js
+          if ! tar tzf ../deploy.tar.gz | grep -q 'api/health/route.js'; then
+            echo "::error::health route отсутствует в tarball"
+            exit 1
+          fi
+          echo "health route присутствует в tarball ✓"
 
       - uses: actions/upload-artifact@v4
         with:
