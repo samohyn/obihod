@@ -1,11 +1,11 @@
 # Graph Report - /Users/a36/obikhod  (2026-04-21)
 
 ## Corpus Check
-- 70 files · ~28,341 words
+- 69 files · ~28,273 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 122 nodes · 70 edges · 60 communities detected
+- 121 nodes · 69 edges · 60 communities detected
 - Extraction: 91% EXTRACTED · 9% INFERRED · 0% AMBIGUOUS · INFERRED: 6 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
@@ -110,7 +110,7 @@ Cohesion: 0.32
 Nodes (5): proxy(), findOneBySlug(), GET(), lexicalParagraph(), POST()
 
 ### Community 3 - "Community 3"
-Cohesion: 0.47
+Cohesion: 0.6
 Nodes (3): findOneBySlug(), lexicalParagraph(), main()
 
 ### Community 4 - "Community 4"
