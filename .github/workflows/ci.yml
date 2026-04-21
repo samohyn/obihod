@@ -110,8 +110,23 @@ jobs:
             sleep 1
           done
 
-      - name: Push Payload schema (empty DB → create tables)
-        run: pnpm run db:init
+      - name: "Warmup DB (dev server — Payload push:true создаёт схему)"
+        run: |
+          pnpm dev > /tmp/dev.log 2>&1 &
+          DEV=$!
+          for i in $(seq 1 60); do
+            if curl -fsS http://localhost:3000/ -o /dev/null 2>/dev/null; then
+              echo "dev ready after ${i}s"
+              # вторая запрос — чтобы Payload точно прошёл init (Services коллекция)
+              curl -fsS http://localhost:3000/sitemap.xml -o /dev/null || true
+              break
+            fi
+            sleep 2
+          done
+          kill $DEV 2>/dev/null || true
+          wait $DEV 2>/dev/null || true
+          echo "--- dev log tail ---"
+          tail -20 /tmp/dev.log || true
 
       - name: Build
         run: pnpm run build
