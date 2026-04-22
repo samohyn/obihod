@@ -1,0 +1,112 @@
+name: Lighthouse
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  DATABASE_URI: postgres://obikhod:obikhod_dev@localhost:5432/obikhod
+  PAYLOAD_SECRET: ci-secret-do-not-use-in-production-32bytes
+  SITE_URL: http://localhost:3000
+  NEXT_PUBLIC_SITE_URL: http://localhost:3000
+  REVALIDATE_SECRET: ci-revalidate-secret
+  INDEXNOW_KEY: 00000000000000000000000000000000
+
+jobs:
+  lighthouse:
+    name: Lighthouse CI · home
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: obikhod
+          POSTGRES_PASSWORD: obikhod_dev
+          POSTGRES_DB: obikhod
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: site/package.json
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          cache-dependency-path: site/pnpm-lock.yaml
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Warmup Payload schema
+        run: |
+          pnpm dev > /tmp/dev.log 2>&1 &
+          DEV=$!
+          for i in $(seq 1 60); do
+            curl -fsS http://localhost:3000/ -o /dev/null 2>/dev/null && { echo "dev ready after ${i}s"; break; }
+            sleep 2
+          done
+          kill $DEV 2>/dev/null || true
+          wait $DEV 2>/dev/null || true
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Start server
+        run: |
+          pnpm run start > server.log 2>&1 &
+          echo "SERVER_PID=$!" >> $GITHUB_ENV
+          for i in {1..60}; do
+            if curl -fsS http://localhost:3000/ -o /dev/null; then
+              echo "Server up after $i attempts"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "Server failed to start in 60s"
+          cat server.log
+          exit 1
+
+      - name: Run Lighthouse CI
+        run: |
+          pnpm dlx @lhci/cli@0.14.x autorun \
+            --collect.url=http://localhost:3000/ \
+            --collect.numberOfRuns=2 \
+            --collect.settings.preset=desktop \
+            --assert.assertions.categories:performance=warn \
+            --assert.assertions.categories:accessibility=warn \
+            --assert.assertions.categories:best-practices=warn \
+            --assert.assertions.categories:seo=error \
+            --upload.target=temporary-public-storage \
+            || true
+
+      - name: Stop server
+        if: always()
+        run: kill $SERVER_PID 2>/dev/null || true
+
+      - name: Upload LHCI report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: site/.lighthouseci/
+          retention-days: 14
