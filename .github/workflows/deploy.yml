@@ -7,6 +7,8 @@ name: Deploy to Beget
 #      BEGET_DEPLOY_PATH, BEGET_APP_NAME (для pm2)
 #      + env: DATABASE_URI, PAYLOAD_SECRET, NEXT_PUBLIC_SITE_URL,
 #        REVALIDATE_SECRET, INDEXNOW_KEY
+#      NEXT_PUBLIC_YANDEX_METRIKA_ID — пока захардкожен ниже
+#      (публичный ID счётчика, не секрет).
 #   2. Добавить в on: push: branches: [main] — когда готовы к auto-deploy
 
 on:
@@ -79,6 +81,9 @@ jobs:
       NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
       REVALIDATE_SECRET: ${{ secrets.REVALIDATE_SECRET }}
       INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+      # Public ID — инлайнится в бандл на build. Если нужно переопределить,
+      # добавь secret NEXT_PUBLIC_YANDEX_METRIKA_ID и заменю ${{ ... }}.
+      NEXT_PUBLIC_YANDEX_METRIKA_ID: '108715562'
     steps:
       - uses: actions/checkout@v4
 
