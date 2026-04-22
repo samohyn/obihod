@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Golos_Text, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
+import { YandexMetrika } from '@/components/analytics/YandexMetrika'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { localBusinessSchema, organizationSchema, websiteSchema } from '@/lib/seo/jsonld'
 
@@ -60,6 +61,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col">
         <JsonLd schema={[organizationSchema(), websiteSchema(), localBusinessSchema()]} />
+        <YandexMetrika />
         {children}
       </body>
     </html>
