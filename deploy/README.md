@@ -54,7 +54,52 @@
 - `pnpm run lint` → 0 errors, 118 warnings (baseline `no-explicit-any`, убираем постепенно)
 - `pnpm run format:check` → clean
 - `pnpm run build` → ✓ 16 страниц сгенерированы
-- `pnpm run start` + Playwright E2E → 8/8 зелёных
+- `pnpm run start` + Playwright E2E → 8/8 зелёных (chromium + mobile-chrome в CI)
+
+## Что работает на prod (https://obikhod.ru)
+
+- HTTPS валидный (Let's Encrypt до 2026-07-20, auto-renew)
+- `/` → 200 · `/admin/` → 200 · `/api/health` → 200 · `/api/health?deep=1` → 200 (БД онлайн)
+- 62 таблицы Payload в БД (services, districts, service_districts, cases, blog, leads, media, users, и версионные копии)
+- PM2 autostart на ребуте (systemd unit `pm2-deploy`)
+- PM2 log rotation: 10 MB × 7 файлов, compress, ежедневно 02:00 MSK
+- Daily backup: `/var/backups/obikhod/{daily,weekly}/` — cron 03:00 MSK, retention 7/4
+- UFW: 22/80/443 + fail2ban
+- Swap 2 GB · vm.swappiness=10
+
+## Операционные команды на сервере
+
+```bash
+# pm2
+sudo -u deploy pm2 list
+sudo -u deploy pm2 logs obikhod --lines 50
+sudo -u deploy pm2 restart obikhod --update-env
+sudo -u deploy pm2 monit
+
+# БД
+sudo -u postgres psql obikhod
+sudo -u postgres psql obikhod -c '\dt'
+
+# бэкапы
+ls -lh /var/backups/obikhod/daily/
+/usr/local/bin/obikhod-backup.sh  # вручную прогнать
+tail /var/log/obikhod-backup.log
+
+# восстановление
+sudo -u postgres pg_restore -d obikhod --clean --if-exists /var/backups/obikhod/daily/obikhod-<TS>.dump
+```
+
+## Rollback
+
+```bash
+ssh deploy@45.153.190.107
+cd /home/deploy/obikhod
+ls -1t releases/ | head  # текущий и предыдущие
+ln -sfn releases/<previous-sha> current
+pm2 delete obikhod
+pm2 start 'pnpm start' --name obikhod --cwd /home/deploy/obikhod/current --update-env
+pm2 save
+```
 
 ## Ручной деплой — как запускать (пока нет auto-deploy на push main)
 
