@@ -111,3 +111,21 @@ export const getSeoSettings = unstable_cache(
   ['seo-settings'],
   { revalidate: 86400, tags: ['seo-settings'] },
 )
+
+export const getAllCaseSlugs = unstable_cache(
+  async () => {
+    const payload = await payloadClient()
+    const r = await payload.find({
+      collection: 'cases',
+      limit: 1000,
+      pagination: false,
+      select: { slug: true, updatedAt: true },
+    })
+    return r.docs.map((d: any) => ({
+      slug: d.slug as string,
+      updatedAt: d.updatedAt as string | undefined,
+    }))
+  },
+  ['all-case-slugs'],
+  { revalidate: 3600, tags: ['cases', 'sitemap'] },
+)
