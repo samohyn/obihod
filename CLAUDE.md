@@ -36,9 +36,19 @@ B2B (УК, ТСЖ, FM-операторы, застройщики, госзака
 
 ```
 obikhod/
-├── agents/          # 25 ролевых AI-агентов-промптов (Opus, русский)
+├── devteam/         # 28 ролевых AI-агентов + WORKFLOW + PROJECT_CONTEXT
+│   ├── PROJECT_CONTEXT.md   # единый контекст для всех агентов
+│   ├── WORKFLOW.md          # пайплайн задачи intake → release
+│   ├── README — legend.md   # легенда команды (от оператора)
+│   ├── <code>.md            # 28 агентов: in, ba, po, sa, tamd, art, ux, ui,
+│   │                        #   fe1, fe2, be1, be2, be3, be4, cr, qa1, qa2,
+│   │                        #   cw, seo1, seo2, lp, aemd, da, pa, do, re,
+│   │                        #   dba, out
+│   ├── specs/US-<N>-<slug>/ # intake.md, ba.md, sa.md, qa.md, cr.md, out.md
+│   ├── adr/ADR-<N>-<slug>.md
+│   └── release-notes/US-<N>-<slug>.md
 ├── contex/          # Стратегические артефакты (нумерация 01_, 02_, …)
-├── site/            # Код сайта (Next.js 16)        — TODO, пока нет
+├── site/            # Код сайта (Next.js 16 + Payload 3) — живой prod
 ├── content/         # Копия/тексты для лендингов (MDX/JSON) — TODO
 ├── assets/          # Медиа: фото объектов, видео-кейсы, логотипы — TODO
 └── CLAUDE.md        # Этот файл
@@ -47,9 +57,13 @@ obikhod/
 **Правила файлов:**
 - Новые стратегические артефакты → в `contex/` с номером `05_…`, `06_…` по порядку
 - Не переименовываем `contex/` → `context/` пока оператор явно не попросит
-- Команда проекта собирается заново; ранее существовавшие `agents/*.md`
-  намеренно удалены 2026-04-21. Новые роли добавлять в `agents/` по мере
-  появления потребности, не копировать набор из чужих проектов
+- Команда проекта живёт в [devteam/](devteam/) — 28 ролей, адаптированных под
+  домен Обихода. Единый контекст для агентов — в
+  [devteam/PROJECT_CONTEXT.md](devteam/PROJECT_CONTEXT.md). Пайплайн — в
+  [devteam/WORKFLOW.md](devteam/WORKFLOW.md). Исходная легенда от оператора —
+  в [devteam/README — legend.md](devteam/README%20%E2%80%94%20legend.md).
+- Устаревшее правило «agents/ удалён, не восстанавливать» снято 2026-04-22 после
+  адаптации команды под Обиход из легенды
 
 ## Память и хуки Claude Code
 
@@ -75,14 +89,23 @@ obikhod/
 
 ## Агенты проекта
 
-Команда собирается заново под домен Обихода. В `agents/` сейчас пусто; роли
-появятся по мере реальной необходимости, а не заранее «на всякий случай».
+Команда — 28 ролей в [devteam/](devteam/), все на `opus-4-6` с
+`reasoning_effort: max`. Hand-off, RACI, Linear-интеграция (workspace `samohyn`,
+team key **OBI**) — в [devteam/WORKFLOW.md](devteam/WORKFLOW.md). Единый контекст
+проекта — в [devteam/PROJECT_CONTEXT.md](devteam/PROJECT_CONTEXT.md) (все агенты
+ссылаются на него вместо дублирования).
 
-Когда добавляем нового агента — шаблон в файле: `Role / Model Tier / Capabilities
-/ Prompt Template / Integration`. В Prompt Template обязательна сверка с этим
-CLAUDE.md и актуальными `contex/*.md`. Никаких финтех-следов в содержании
-(банк/брокер/ЦБ РФ/KYC/AML) — это домен Обихода (арбористика, крыши, мусор,
-демонтаж, Москва и МО).
+**Вход для оператора — всегда `in`.** Оператор не пишет напрямую `ba`/`po`/`fe`.
+
+**Параллель по коду:** 2 фронта (fe1, fe2), 2 бэка TypeScript (be3, be4), 2 Go-бэка
+в резерве (be1, be2 — активируются по ADR от `tamd`), 2 QA (qa1, qa2). `po`
+распределяет, параллель по одной задаче явно согласовывает с оператором.
+
+**Assignee в Linear — всегда оператор.** Роль маркируется label `role:<code>`,
+фаза — label `phase:<name>`.
+
+Никаких финтех-следов в агентах (банк / брокер / ЦБ РФ / KYC / AML) — это домен
+Обихода (арбористика, крыши, мусор, демонтаж, Москва и МО).
 
 ## Technology Stack (утверждено)
 
