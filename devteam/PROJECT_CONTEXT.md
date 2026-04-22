@@ -58,8 +58,28 @@ Frontend:    Next.js 16 (App Router, RSC, Turbopack)
              TypeScript strict, Tailwind, shadcn/ui
              react-hook-form + Zod, собственный photo-uploader
 
-CMS:         Payload CMS 3 (self-hosted, embed в Next.js)
-             Коллекции: Services, Districts, LandingPages, Cases, Blog, Prices, FAQ, Leads
+CMS:         Payload CMS 3 (self-hosted, embed в Next.js), admin на /admin
+             Коллекции (факт в site/collections/):
+               - Контент: Services, Districts, ServiceDistricts,
+                          Cases, Blog, Persons (авторы-эксперты, E-E-A-T),
+                          B2BPages
+               - CRM:     Leads (access admin/manager)
+               - Служебные: Redirects, Media, Users
+             Globals:   SeoSettings
+             Rich-text: Lexical (@payloadcms/richtext-lexical)
+             Фичи:      drafts+autosave(2s) на Services;
+                        versions drafts на ServiceDistricts;
+                        гейт beforeValidate на ServiceDistricts —
+                        publish только при наличии miniCase (Case из района)
+                        и ≥ 2 localFaq (защита от Scaled Content Abuse)
+             FAQ и Prices — встроены в Services (faqGlobal[], priceFrom/
+                        priceTo/priceUnit/subServices[]) + localFaq[] в
+                        ServiceDistricts; отдельных FAQ/Prices коллекций НЕТ
+             Header/Footer: **не в админке**, захардкожены в компонентах
+                        components/marketing/Header.tsx и Footer.tsx.
+                        Требуется завести global Navigation или пары
+                        globals Header+Footer — иначе оператор не
+                        редактирует меню, телефон, слоган через CMS
 
 БД:          PostgreSQL 16
 
