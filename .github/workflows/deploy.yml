@@ -124,6 +124,14 @@ jobs:
           echo "--- dev log tail ---"
           tail -30 /tmp/dev.log || true
 
+      - name: Regenerate Payload admin importMap
+        # importMap.js коммитится в репо, но устаревает при добавлении
+        # collections / globals / custom components. Без regen — Payload
+        # admin SPA не знает про новые элементы (site-chrome, BrandLogo,
+        # BrandIcon) и отдаёт "Not Found" на роутах. Запускаем до build,
+        # чтобы next build собрал бандл с правильным importMap.
+        run: pnpm run generate:importmap
+
       - name: Build
         run: pnpm run build
 
