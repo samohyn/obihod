@@ -1,8 +1,15 @@
+import { getSiteChrome, DEFAULT_SITE_CHROME } from '@/lib/chrome'
+
 import { Icon } from '../_shared/Icon'
 import { Placeholder } from '../_shared/Placeholder'
 import { AmberSeal, RingsPattern } from '../_shared/graphics'
 
-export function Hero() {
+export async function Hero() {
+  const chrome = await getSiteChrome()
+  const phoneE164 = chrome?.contacts?.phoneE164 ?? DEFAULT_SITE_CHROME.contacts?.phoneE164 ?? ''
+  const phoneDisplay =
+    chrome?.contacts?.phoneDisplay ?? DEFAULT_SITE_CHROME.contacts?.phoneDisplay ?? ''
+
   return (
     <section className="hero">
       <div className="rings-bg">
@@ -27,10 +34,12 @@ export function Hero() {
                 Рассчитать стоимость
                 <Icon.ArrowRight size={20} />
               </a>
-              <a href="tel:+74951234567" className="btn btn-ghost btn-lg">
-                <Icon.Phone size={18} />
-                +7 (495) 123-45-67
-              </a>
+              {phoneE164 ? (
+                <a href={`tel:${phoneE164}`} className="btn btn-ghost btn-lg">
+                  <Icon.Phone size={18} />
+                  {phoneDisplay}
+                </a>
+              ) : null}
             </div>
 
             <div className="hero-meta">
