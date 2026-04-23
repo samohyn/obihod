@@ -1,0 +1,95 @@
+name: Prod backup (pg_dump)
+
+# Снимает дамп prod БД Postgres перед рискованными миграциями (schema change,
+# seed prod, включение migrations). Запускается вручную через UI.
+#
+# Куда кладётся:
+#   - На VPS: /var/backups/obikhod/manual-YYYY-MM-DD-HHMM.sql.gz (там же, где daily)
+#   - В GH Actions artifact (retention 30 дней) — скачивается кнопкой из UI
+#
+# Использует уже залитые secrets BEGET_SSH_*.
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Причина бэкапа (попадёт в имя файла, без пробелов)'
+        required: true
+        default: 'pre-us2-schema-change'
+
+concurrency:
+  group: prod-backup
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    name: pg_dump prod → VPS + artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.BEGET_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p ${{ secrets.BEGET_SSH_PORT || '22' }} -H ${{ secrets.BEGET_SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Run pg_dump on VPS
+        env:
+          REASON: ${{ inputs.reason }}
+        run: |
+          SAFE_REASON=$(echo "$REASON" | tr -c 'A-Za-z0-9-' '-' | sed 's/--*/-/g' | sed 's/^-//;s/-$//')
+          STAMP=$(date -u +%Y%m%d-%H%M%S)
+          REMOTE_FILE="/var/backups/obikhod/manual-${SAFE_REASON}-${STAMP}.sql.gz"
+          echo "remote=$REMOTE_FILE" >> $GITHUB_ENV
+          echo "local=$(basename $REMOTE_FILE)" >> $GITHUB_ENV
+
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o ServerAliveInterval=15 \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
+            "set -eu
+             BP='${{ secrets.BEGET_DEPLOY_PATH }}'
+
+             # Читаем DATABASE_URI из shared/.env прод-сервера
+             set -a; . \$BP/shared/.env; set +a
+             if [ -z \"\${DATABASE_URI:-}\" ]; then
+               echo '::error::DATABASE_URI пуст в \$BP/shared/.env'
+               exit 1
+             fi
+
+             sudo mkdir -p /var/backups/obikhod
+             sudo chmod 0750 /var/backups/obikhod
+
+             echo '>> current_database check'
+             psql \"\$DATABASE_URI\" -tAc 'SELECT current_database();'
+
+             echo '>> running pg_dump -Fc (custom format, сжатый)'
+             pg_dump -Fc \"\$DATABASE_URI\" | gzip -c | sudo tee '$REMOTE_FILE' > /dev/null
+
+             echo '>> dump info'
+             sudo ls -lh '$REMOTE_FILE'
+             echo '>> disk usage /var/backups/obikhod'
+             sudo du -sh /var/backups/obikhod || true"
+
+      - name: Fetch dump to runner for artifact
+        run: |
+          scp -i ~/.ssh/deploy_key -P ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:"${{ env.remote }}" \
+            "${{ env.local }}"
+          ls -lh "${{ env.local }}"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prod-backup-${{ inputs.reason }}-${{ github.run_id }}
+          path: ${{ env.local }}
+          retention-days: 30
+
+      - name: Summary
+        run: |
+          {
+            echo "### Prod backup готов"
+            echo ""
+            echo "- **Reason:** ${{ inputs.reason }}"
+            echo "- **Файл на VPS:** \`${{ env.remote }}\`"
+            echo "- **Artifact в GH:** \`prod-backup-${{ inputs.reason }}-${{ github.run_id }}\`"
+            echo ""
+            echo "Для rollback: \`scp ...:${{ env.remote }} ./\` → \`gunzip\` → \`pg_restore -d obikhod\`"
+          } >> $GITHUB_STEP_SUMMARY
