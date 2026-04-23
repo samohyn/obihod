@@ -1,0 +1,86 @@
+name: Seed prod DB (fallback)
+
+# Fallback-механизм по ADR-0001 (devteam/adr/ADR-0001-seed-prod-runner.md).
+#
+# Основной способ запуска seed — ручной SSH на VPS + `pnpm seed:prod` (ADR §«Основное»).
+# Этот workflow — fallback, если прямой SSH-прогон невоспроизводим (например, сетевая
+# проблема у оператора или Node 22 на VPS начинает ломать tsx-loader).
+#
+# НЕ ЗАПУСКАТЬ по умолчанию. Использовать только при явной договорённости оператора,
+# po и do: см. триггеры fallback в ADR-0001 §«Fallback».
+#
+# Требуемые GitHub Secrets (уже настроены для deploy.yml):
+#   BEGET_SSH_HOST, BEGET_SSH_PORT, BEGET_SSH_USER, BEGET_SSH_KEY, BEGET_DEPLOY_PATH
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Введи "seed" для подтверждения прогона seed на prod'
+        required: true
+        default: ''
+
+concurrency:
+  group: seed-prod
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    name: Preflight — confirm + secrets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate confirm input
+        run: |
+          if [ "${{ inputs.confirm }}" != "seed" ]; then
+            echo "::error::Нужно явно подтвердить прогон словом 'seed' в input."
+            exit 1
+          fi
+      - name: Validate SSH secrets
+        env:
+          HOST: ${{ secrets.BEGET_SSH_HOST }}
+          USER: ${{ secrets.BEGET_SSH_USER }}
+          KEY: ${{ secrets.BEGET_SSH_KEY }}
+          PATH_: ${{ secrets.BEGET_DEPLOY_PATH }}
+        run: |
+          if [ -z "$HOST" ] || [ -z "$USER" ] || [ -z "$KEY" ] || [ -z "$PATH_" ]; then
+            echo "::error::Secrets Beget отсутствуют (BEGET_SSH_*). См. deploy/README.md"
+            exit 1
+          fi
+
+  seed:
+    name: SSH + pnpm seed:prod
+    needs: preflight
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.BEGET_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p ${{ secrets.BEGET_SSH_PORT || '22' }} -H ${{ secrets.BEGET_SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Run seed via SSH
+        run: |
+          LOG_DIR=seed-logs
+          mkdir -p "$LOG_DIR"
+          LOG_FILE="$LOG_DIR/seed-$(date -u +%Y%m%dT%H%M%SZ).log"
+
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            -o ServerAliveInterval=15 \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
+            "set -eux
+             cd ${{ secrets.BEGET_DEPLOY_PATH }}/current
+             set -a
+             . ./.env
+             set +a
+             OBIKHOD_SEED_CONFIRM=yes OBIKHOD_ENV=production pnpm seed:prod" \
+            2>&1 | tee "$LOG_FILE"
+          echo "SEED_LOG=$LOG_FILE" >> $GITHUB_ENV
+
+      - name: Upload seed log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seed-log
+          path: seed-logs/
+          retention-days: 30

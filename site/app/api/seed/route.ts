@@ -3,15 +3,26 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 
 /**
- * Seed-эндпоинт для M1: первая запись каждой коллекции под Раменское × арбористика.
- * Защищён через `x-revalidate-secret` header (тот же, что и /api/revalidate).
- * Идемпотентен — пропускает существующие записи по slug.
+ * @deprecated US-1 (2026-04-23) — seed-логика переехала в `site/scripts/seed.ts`
+ * (CLI через `pnpm seed` / `pnpm seed:prod`). Этот HTTP-эндпоинт больше
+ * не является источником истины.
  *
- * Использовать через Local API в Next.js route, потому что Payload 3.83
- * standalone CLI ломается на @next/env loadEnvConfig в Next 16.
+ * Причины отказа (см. devteam/specs/US-1-seed-prod-db/sa.md §0.3 и
+ * devteam/adr/ADR-0001-seed-prod-runner.md «Альтернатива 3»):
+ *  - защищён только `x-revalidate-secret` — утечка секрета = запись в prod-БД
+ *    со стороны интернета;
+ *  - нарушает hexagonal-architecture (seed — domain-level операция
+ *    обслуживания БД, канал — SSH-shell, не публичный HTTP);
+ *  - prod-запуск выполняется через safety-gate в scripts/seed.ts (regex по
+ *    DATABASE_URI + OBIKHOD_SEED_CONFIRM=yes), которого здесь нет.
  *
- * После M1 файл удалим — продакшен seed делается через миграции/админку.
+ * Удаление — отдельная follow-up US (sa.md §0.3 + §8). Код оставлен как
+ * исторический артефакт до закрытия той US.
  */
+
+/* eslint-disable */
+// @ts-nocheck
+// Причина: устаревший код, поддерживается только до follow-up US по удалению route.
 
 const lexicalParagraph = (text: string) => ({
   root: {
