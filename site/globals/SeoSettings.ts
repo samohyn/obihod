@@ -1,10 +1,26 @@
 import type { GlobalConfig } from 'payload'
 
+/**
+ * SeoSettings — SEO-only global. После ADR-0002 часть полей, которые
+ * одновременно редактируются оператором и попадают в UI / JSON-LD,
+ * переехала в `SiteChrome` (см. site/globals/SiteChrome.ts):
+ *   - organization.telephone → SiteChrome.contacts.phoneE164 / phoneDisplay
+ *   - organization.legalName / taxId / ogrn → SiteChrome.requisites.*
+ *   - organization.addressRegion/Locality/streetAddress/postalCode
+ *     → SiteChrome.requisites.*
+ *   - organization.foundingDate → удалено (не используется)
+ *   - sameAs[] → SiteChrome.social[]
+ *
+ * Здесь остаются только «техно-SEO» поля: verification, credentials,
+ * defaultOgImage, IndexNow, robots, organizationSchemaOverride,
+ * localBusiness.* и organization.name (используется как Organization.name
+ * в JSON-LD, в UI не рендерится).
+ */
 export const SeoSettings: GlobalConfig = {
   slug: 'seo-settings',
   label: 'SEO Settings',
   admin: {
-    description: 'Глобальные SEO-настройки и реквизиты Обихода',
+    description: 'Глобальные SEO-настройки Обихода (verification, credentials, OG)',
     group: 'SEO',
   },
   access: { read: () => true },
@@ -12,28 +28,12 @@ export const SeoSettings: GlobalConfig = {
     {
       name: 'organization',
       type: 'group',
-      label: 'Реквизиты Organization (для JSON-LD)',
-      fields: [
-        {
-          name: 'legalName',
-          type: 'text',
-          defaultValue: 'Общество с ограниченной ответственностью «Обиход»',
-        },
-        { name: 'name', type: 'text', defaultValue: 'Обиход' },
-        {
-          name: 'taxId',
-          type: 'text',
-          defaultValue: '7847729123',
-          admin: { description: 'ИНН (текущий — СПб, временно)' },
-        },
-        { name: 'ogrn', type: 'text' },
-        { name: 'addressRegion', type: 'text', defaultValue: 'Санкт-Петербург' },
-        { name: 'addressLocality', type: 'text', defaultValue: 'Санкт-Петербург' },
-        { name: 'streetAddress', type: 'text' },
-        { name: 'postalCode', type: 'text' },
-        { name: 'telephone', type: 'text' },
-        { name: 'foundingDate', type: 'date' },
-      ],
+      label: 'Organization (JSON-LD)',
+      admin: {
+        description:
+          'Юридическое имя для Organization JSON-LD. Телефон, ИНН, адрес и соцсети редактируйте в SiteChrome.',
+      },
+      fields: [{ name: 'name', type: 'text', defaultValue: 'Обиход' }],
     },
     {
       name: 'localBusiness',
@@ -51,12 +51,6 @@ export const SeoSettings: GlobalConfig = {
           ],
         },
       ],
-    },
-    {
-      name: 'sameAs',
-      type: 'array',
-      label: 'sameAs (соцсети)',
-      fields: [{ name: 'url', type: 'text', required: true }],
     },
     {
       name: 'credentials',

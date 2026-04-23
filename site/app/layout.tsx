@@ -4,7 +4,9 @@ import './globals.css'
 
 import { YandexMetrika } from '@/components/analytics/YandexMetrika'
 import { JsonLd } from '@/components/seo/JsonLd'
+import { getSiteChrome } from '@/lib/chrome'
 import { localBusinessSchema, organizationSchema, websiteSchema } from '@/lib/seo/jsonld'
+import { getSeoSettings } from '@/lib/seo/queries'
 
 const golosText = Golos_Text({
   variable: '--font-golos-text',
@@ -49,18 +51,28 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  // Server-side: собираем оба global параллельно для Organization / LocalBusiness
+  // JSON-LD (ADR-0002 §Контракт с seo2). При ошибке/пустом global — мягкая
+  // деградация: фетчеры возвращают null, jsonld.ts пропускает опциональные поля.
+  const [chrome, seo] = await Promise.all([getSiteChrome(), getSeoSettings()])
   return (
     <html
       lang="ru"
       className={`${golosText.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <JsonLd schema={[organizationSchema(), websiteSchema(), localBusinessSchema()]} />
+        <JsonLd
+          schema={[
+            organizationSchema(chrome, seo),
+            websiteSchema(),
+            localBusinessSchema(chrome, seo),
+          ]}
+        />
         <YandexMetrika />
         {children}
       </body>

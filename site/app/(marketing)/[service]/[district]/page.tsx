@@ -8,6 +8,7 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { LicenseBadge } from '@/components/marketing/LicenseBadge'
 import { RichTextRenderer } from '@/components/marketing/RichTextRenderer'
+import { getSiteChrome } from '@/lib/chrome'
 import { buildProgrammaticMetadata } from '@/lib/seo/metadata'
 import {
   breadcrumbListSchema,
@@ -18,6 +19,7 @@ import {
 import {
   getDistrictBySlug,
   getPublishedServiceDistricts,
+  getSeoSettings,
   getServiceBySlug,
   getServiceDistrict,
 } from '@/lib/seo/queries'
@@ -64,10 +66,12 @@ export default async function ProgrammaticPage({
   params: Promise<{ service: string; district: string }>
 }) {
   const { service: serviceSlug, district: districtSlug } = await params
-  const [service, district, sd] = await Promise.all([
+  const [service, district, sd, chrome, seo] = await Promise.all([
     getServiceBySlug(serviceSlug),
     getDistrictBySlug(districtSlug),
     getServiceDistrict(serviceSlug, districtSlug),
+    getSiteChrome(),
+    getSeoSettings(),
   ])
   if (!service || !district) notFound()
 
@@ -211,7 +215,7 @@ export default async function ProgrammaticPage({
       <JsonLd
         schema={[
           serviceSchema(service as any, district as any),
-          localBusinessSchema(district as any),
+          localBusinessSchema(chrome, seo, district as any),
           breadcrumbListSchema(
             breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
           ),

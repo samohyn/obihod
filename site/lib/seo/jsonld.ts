@@ -1,7 +1,40 @@
 /**
  * JSON-LD generators для Обихода.
  * Соответствует contex/05_site_structure.md, Часть 2 §2.4.
+ *
+ * Контракт с SiteChrome (ADR-0002 §Контракт с seo2):
+ *   - Organization.telephone  ← SiteChrome.contacts.phoneE164
+ *   - Organization.sameAs     ← SiteChrome.social[].url (фильтр пустых)
+ *   - Organization.legalName / taxID / vatID / address.*  ← SiteChrome.requisites.*
+ *   - Organization.name       ← SeoSettings.organization.name (fallback "Обиход")
+ *   - Organization.hasCredential ← SeoSettings.credentials[]
+ *   - LocalBusiness.telephone / address ← SiteChrome.contacts / requisites
+ *
+ * Функции остаются pure: Payload-чтение делает caller (layout / generateMetadata
+ * / page.tsx server component), сюда передаются уже собранные `chrome` и `seo`.
  */
+
+import type { SiteChrome } from '@/lib/chrome'
+
+// ---------- SEO settings subset (зеркалит site/globals/SeoSettings.ts) ----------
+// TODO(be3): заменить на `import type { SeoSettings } from '@/payload-types'`,
+// когда `pnpm generate:types` начнёт собираться (см. lib/chrome.ts TODO).
+export type SeoSettingsCredential = {
+  name: string
+  issuer?: string | null
+  documentUrl?: string | null
+}
+
+export type SeoSettingsLike = {
+  organization?: { name?: string | null } | null
+  localBusiness?: {
+    priceRange?: string | null
+    geoRadiusKm?: number | null
+    openingHours?: { opens?: string | null; closes?: string | null } | null
+  } | null
+  credentials?: SeoSettingsCredential[] | null
+  organizationSchemaOverride?: Record<string, unknown> | null
+}
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 const ORG_ID = `${SITE_URL}/#org`
@@ -10,6 +43,32 @@ const LB_ID = `${SITE_URL}/#lb`
 
 const MOSCOW_LAT = 55.7558
 const MOSCOW_LON = 37.6173
+
+/** Рекурсивно удаляет undefined-значения (но сохраняет пустые строки только если явно переданы). */
+function stripUndefined<T>(value: T): T {
+  if (Array.isArray(value)) {
+    return value
+      .map((v) => stripUndefined(v))
+      .filter((v) => v !== undefined) as unknown as T
+  }
+  if (value && typeof value === 'object') {
+    const out: Record<string, unknown> = {}
+    for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
+      const cleaned = stripUndefined(v)
+      if (cleaned === undefined) continue
+      if (Array.isArray(cleaned) && cleaned.length === 0) continue
+      out[k] = cleaned
+    }
+    return out as T
+  }
+  return value
+}
+
+function nonEmpty(s: string | null | undefined): string | undefined {
+  if (typeof s !== 'string') return undefined
+  const trimmed = s.trim()
+  return trimmed.length > 0 ? trimmed : undefined
+}
 
 export type District = {
   slug: string
@@ -55,41 +114,81 @@ const PRICE_UNIT_LABELS: Record<string, string> = {
   m2: 'за м²',
 }
 
-export function organizationSchema() {
-  return {
+/**
+ * Organization schema. Pure function: Payload-чтение делает caller.
+ * При `chrome === null` (пустой global на первом prod-запуске до seed)
+ * опциональные поля просто не выводятся — это лучше, чем фейковые
+ * заглушки вида `+7 (000) 000-00-00` для Яндекса.
+ */
+export function organizationSchema(
+  chrome: SiteChrome | null,
+  seo: SeoSettingsLike | null = null,
+): Record<string, unknown> {
+  const req = chrome?.requisites ?? null
+  const contacts = chrome?.contacts ?? null
+  const social = chrome?.social ?? []
+
+  const addressRegion = nonEmpty(req?.addressRegion)
+  const addressLocality = nonEmpty(req?.addressLocality)
+  const streetAddress = nonEmpty(req?.streetAddress)
+  const postalCode = nonEmpty(req?.postalCode)
+  const hasAnyAddress =
+    addressRegion || addressLocality || streetAddress || postalCode
+
+  const sameAs = social
+    .map((s) => nonEmpty(s?.url))
+    .filter((u): u is string => Boolean(u))
+
+  const credentials: Record<string, unknown>[] = []
+  for (const c of seo?.credentials ?? []) {
+    const credName = nonEmpty(c?.name)
+    if (!credName) continue
+    const issuer = nonEmpty(c?.issuer)
+    credentials.push(
+      stripUndefined({
+        '@type': 'EducationalOccupationalCredential',
+        name: credName,
+        recognizedBy: issuer
+          ? { '@type': 'Organization', name: issuer }
+          : undefined,
+      }) as Record<string, unknown>,
+    )
+  }
+
+  const base: Record<string, unknown> = {
     '@type': 'Organization',
     '@id': ORG_ID,
-    name: 'ООО «Обиход»',
-    legalName: 'Общество с ограниченной ответственностью «Обиход»',
-    taxID: '7847729123',
+    name: nonEmpty(seo?.organization?.name) ?? 'Обиход',
+    legalName: nonEmpty(req?.legalName),
+    telephone: nonEmpty(contacts?.phoneE164),
+    taxID: nonEmpty(req?.taxId),
+    vatID: nonEmpty(req?.ogrn),
     url: SITE_URL,
     logo: `${SITE_URL}/logo.png`,
-    address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'RU',
-      addressRegion: 'Санкт-Петербург',
-      addressLocality: 'Санкт-Петербург',
-    },
+    address: hasAnyAddress
+      ? {
+          '@type': 'PostalAddress',
+          addressCountry: 'RU',
+          addressRegion,
+          addressLocality,
+          streetAddress,
+          postalCode,
+        }
+      : undefined,
     areaServed: [
       { '@type': 'AdministrativeArea', name: 'Москва' },
       { '@type': 'AdministrativeArea', name: 'Московская область' },
     ],
-    sameAs: [],
-    hasCredential: [
-      {
-        '@type': 'EducationalOccupationalCredential',
-        credentialCategory: 'Лицензия Росприроднадзора на транспортирование отходов IV класса',
-      },
-      {
-        '@type': 'EducationalOccupationalCredential',
-        credentialCategory: 'СРО строителей',
-      },
-      {
-        '@type': 'EducationalOccupationalCredential',
-        credentialCategory: 'Допуски Минтруда №782н',
-      },
-    ],
+    sameAs,
+    hasCredential: credentials,
   }
+
+  // organizationSchemaOverride из SeoSettings поверх — для редких SEO-кейсов.
+  const override = seo?.organizationSchemaOverride
+  if (override && typeof override === 'object' && !Array.isArray(override)) {
+    return stripUndefined({ ...base, ...(override as Record<string, unknown>) })
+  }
+  return stripUndefined(base)
 }
 
 export function websiteSchema() {
@@ -108,9 +207,28 @@ export function websiteSchema() {
   }
 }
 
-export function localBusinessSchema(district?: District) {
+/**
+ * LocalBusiness schema. Читает `telephone` из SiteChrome.contacts.phoneE164,
+ * `priceRange` / `openingHours` — из SeoSettings.localBusiness.*
+ * (с дефолтами `₽₽` / 08:00 / 21:00, если global не заполнен).
+ *
+ * `district` опциональный: при его наличии строится районный вариант
+ * (`/raiony/<slug>/#lb`) с geo-координатами и radius из Districts.
+ */
+export function localBusinessSchema(
+  chrome: SiteChrome | null,
+  seo: SeoSettingsLike | null = null,
+  district?: District,
+): Record<string, unknown> {
   const id = district ? `${SITE_URL}/raiony/${district.slug}/#lb` : LB_ID
   const name = district ? `Обиход — ${district.nameNominative}` : 'Обиход'
+
+  const contacts = chrome?.contacts ?? null
+  const lb = seo?.localBusiness ?? null
+  const geoRadiusKm = lb?.geoRadiusKm ?? 150
+  const opens = nonEmpty(lb?.openingHours?.opens) ?? '08:00'
+  const closes = nonEmpty(lb?.openingHours?.closes) ?? '21:00'
+  const priceRange = nonEmpty(lb?.priceRange) ?? '₽₽'
 
   const areaServed = district
     ? {
@@ -125,23 +243,23 @@ export function localBusinessSchema(district?: District) {
           latitude: MOSCOW_LAT,
           longitude: MOSCOW_LON,
         },
-        geoRadius: '150000',
+        geoRadius: `${geoRadiusKm * 1000}`,
       }
 
-  return {
+  return stripUndefined({
     '@type': 'HomeAndConstructionBusiness',
     '@id': id,
     name,
     parentOrganization: { '@id': ORG_ID },
     image: `${SITE_URL}/og.jpg`,
-    telephone: '+7 (000) 000-00-00',
-    priceRange: '₽₽',
+    telephone: nonEmpty(contacts?.phoneE164),
+    priceRange,
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-        opens: '08:00',
-        closes: '21:00',
+        opens,
+        closes,
       },
     ],
     areaServed,
@@ -153,7 +271,7 @@ export function localBusinessSchema(district?: District) {
             longitude: district.centerGeo[0],
           }
         : undefined,
-  }
+  })
 }
 
 export function serviceSchema(service: Service, district?: District) {

@@ -5,9 +5,10 @@ import type { Metadata } from 'next'
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
+import { getSiteChrome } from '@/lib/chrome'
 import { buildDistrictHubMetadata } from '@/lib/seo/metadata'
 import { breadcrumbListSchema, localBusinessSchema } from '@/lib/seo/jsonld'
-import { getAllDistricts, getDistrictBySlug } from '@/lib/seo/queries'
+import { getAllDistricts, getDistrictBySlug, getSeoSettings } from '@/lib/seo/queries'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -39,7 +40,11 @@ export async function generateMetadata({
 
 export default async function DistrictHub({ params }: { params: Promise<{ district: string }> }) {
   const { district: districtSlug } = await params
-  const district = await getDistrictBySlug(districtSlug)
+  const [district, chrome, seo] = await Promise.all([
+    getDistrictBySlug(districtSlug),
+    getSiteChrome(),
+    getSeoSettings(),
+  ])
   if (!district) notFound()
 
   const breadcrumbs = [
@@ -116,7 +121,7 @@ export default async function DistrictHub({ params }: { params: Promise<{ distri
 
       <JsonLd
         schema={[
-          localBusinessSchema(district as any),
+          localBusinessSchema(chrome, seo, district as any),
           breadcrumbListSchema(
             breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
           ),

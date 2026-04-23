@@ -17,6 +17,7 @@ import { B2BPages } from './collections/B2BPages'
 import { Leads } from './collections/Leads'
 import { Redirects } from './collections/Redirects'
 import { SeoSettings } from './globals/SeoSettings'
+import { SiteChrome } from './globals/SiteChrome'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -43,7 +44,7 @@ export default buildConfig({
     Leads,
     Redirects,
   ],
-  globals: [SeoSettings],
+  globals: [SeoSettings, SiteChrome],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
