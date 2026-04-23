@@ -2,132 +2,95 @@
 
 _Обновляется в конце сессии. Короткий срез: что сделано, что в работе, что следующее. Цель — дать следующей сессии контекст за 30 секунд._
 
-## Где мы сейчас
+## Где мы сейчас (2026-04-23 вечер)
 
-- Лендинг перенесён из прототипа в Next.js 16 (коммит `e9bb594`), живёт в [site/](../../site)
-- Playwright + smoke-тесты лендинга (`dcd3b88`)
-- MCP Playwright подключён на уровне проекта (`9480e19`)
-- Mock-кейс с фото + страница кейса, before/after на programmatic (`c2f5072`)
-- Стратегические артефакты лежат в [contex/](../../contex/) (6 файлов, 01-06) —
-  удаление в `eb25c74` отменено ревертом `41d93e9` 2026-04-23, прототип `_/` остался удалённым
-- **2026-04-21**: внедрена проектная память и хуки-принуждение (`.claude/hooks/` + `.claude/memory/`)
-- **2026-04-21**: установлен graphify (pipx), зарегистрированы git-хуки и PreToolUse подсказка.
-  Первый `/graphify .` build — за оператором (стоит API-токенов)
-- **2026-04-21**: `agents/*.md` удалены из worktree намеренно — команда собирается заново под домен.
-  CLAUDE.md обновлён, ссылок на конкретные роли больше нет. Восстанавливать из HEAD не нужно
-- **2026-04-22**: коммиты `ec843e8` (devteam 28 ролей, +6543 строк) и `ad9b269` (graphify
-  rebuild) в local main. **Не запушены на remote** — автодеплой в prod подхватит push,
-  а изменений кода сайта нет, только docs. Решение по push — за оператором
-- **2026-04-22**: команда собрана в [devteam/](../../devteam/) — **28 ролей** по легенде оператора
-  (`devteam/README — legend.md`). Все адаптированы под Обиход (арбористика/крыши/мусор/демонтаж),
-  0 рудиментов «Хром Маркет». Все на `opus-4-6` с `reasoning_effort: max`.
-  - Новые файлы: [devteam/PROJECT_CONTEXT.md](../../devteam/PROJECT_CONTEXT.md) (единый контекст для
-    всех агентов — бренд/TOV/стек/услуги/гео), [devteam/WORKFLOW.md](../../devteam/WORKFLOW.md)
-    (пайплайн 11 фаз, Linear OBI, assignee=оператор всегда, hand-off через `role:<code>` labels)
-  - Новые агенты: [dba.md](../../devteam/dba.md) (владелец БД, миграции, бэкапы),
-    [be3.md](../../devteam/be3.md) + [be4.md](../../devteam/be4.md) (TS+Next.js API routes+Payload 3,
-    **активные**)
-  - be1/be2 — Go-инженеры **в резерве** (активируются только по ADR от `tamd` — кандидаты:
-    очередь фото→смета, биллинг B2B, интеграция с 1С)
-  - Каркас: [devteam/specs/](../../devteam/specs/), [devteam/adr/](../../devteam/adr/),
-    [devteam/release-notes/](../../devteam/release-notes/) с README
-  - Demo-US: [US-1-seed-prod-db/intake.md](../../devteam/specs/US-1-seed-prod-db/intake.md) —
-    заведён на живой блокер (пустая prod БД) для валидации контура workflow
-  - [CLAUDE.md](../../CLAUDE.md) обновлён: снято устаревшее «agents/ удалён», добавлена структура
-    devteam/, 28 ролей, Linear OBI, правило assignee=оператор
-- **2026-04-21**: Фаза 1 CI готова. `.github/workflows/ci.yml` (type-check + lint + format + build + Playwright).
-  ESLint 9 + Prettier + Tailwind plugin настроены. 8/8 e2e зелёных локально в CI-parity режиме.
-  118 `no-explicit-any` как warn-baseline
-- **2026-04-21**: Фаза 2 deploy подготовлена. `.github/workflows/deploy.yml` на `workflow_dispatch` +
-  preflight guard по secrets. Ждёт доступы Beget — перечислены в [deploy/README.md](../../deploy/README.md)
-- **2026-04-21**: CI/CD **полностью рабочий**. GitHub repo `samohyn/obihod` (приватный),
-  11 secrets залиты, VPS 45.153.190.107 настроен (swap/Node22/pnpm10.33/PM2/Postgres16/nginx/Let's Encrypt),
-  сайт **живой на https://obikhod.ru** (PM2 obikhod online). Deploy переведён на auto — `push: branches: [main]`
-- **2026-04-22**: SEO/analytics-слой (5 local коммитов, **не запушены**):
-  - `bf0b4ce` Метрика 108715562 — [site/components/analytics/YandexMetrika.tsx](../../site/components/analytics/YandexMetrika.tsx) + layout
-  - `3477af5` IndexNow — `/indexnow/<KEY>.txt` route + `pushToIndexNow()` + `/api/revalidate?url=` пушит URL
-  - `7da6500` sitemap — тянет Services/Districts/programmatic/Cases из Payload (safe-fallback при пустой БД)
-  - `3adf580` Lighthouse CI — отдельный `.github/workflows/lighthouse.yml`, SEO=error, остальные=warn
-  - `57affde` deploy.yml — пробросил `NEXT_PUBLIC_YANDEX_METRIKA_ID=108715562` в build-env (публичный, hardcoded)
-  - Вебмастер подтверждён TXT-записью `yandex-verification:7c3f938f82d985fc` на корне obikhod.ru
-  - Push не сделан — решение за оператором. После push auto-deploy выкатит всё разом.
-- **2026-04-21**: БД на сервере пустая — схема создаётся автоматически при push но seed ещё не прогонялся.
-  `/arboristika/` и другие programmatic-роуты возвращают 404. Нужен seed перед публичным запуском
-- **2026-04-21**: hardening CI/CD pass 2.
-  - Server: pm2 autostart (systemd), pm2-logrotate 10M×7 + compress, /usr/local/bin/obikhod-backup.sh +
-    cron 03:00 MSK (daily 7 + weekly 4, /var/backups/obikhod/)
-  - Code: `/api/health` + `/api/health?deep=1` (Payload db ping), `export dynamic='force-dynamic'`
-  - CI: `.next/cache` + Playwright browsers кешируются, Playwright теперь chromium + mobile-chrome
-  - Deploy: пакуем `node_modules` + все рантайм-файлы на runner'е (2GB сервера мало для pnpm install),
-    `pm2 delete + pm2 start --cwd current` (reload не обновляет cwd), smoke check на `/api/health?deep=1`
-  - Security: `.github/workflows/security-audit.yml` (Mon 08:00 MSK pnpm audit → issue на high/critical)
-  - **Schema на prod был залит одноразово** через `pg_dump --schema-only` из локальной dev БД → scp → psql.
-    **TODO переход на Payload migrations** (создать site/collections/Users.ts + `payload migrate:create` +
-    шаг `payload migrate` в deploy.yml перед pm2 start) — пока хак
-  - Branch protection откладывается: private repo на GitHub Free не поддерживает. Варианты:
-    сделать repo публичным (бесплатно) либо GitHub Pro $4/мес
-- **2026-04-23**: Бренд-система — восстановлен `contex/` и собран единый HTML-гайд:
-  - `41d93e9` revert удаления `contex/` из `eb25c74` — восстановлены все 6 артефактов
-    (01_competitor_research, 02_growth_gtm_plan, 03_brand_naming, 04_competitor_tech_stacks,
-    05_site_structure, 06_deploy_plan). Устаревшее правило «contex/ удалён» снято
-  - `539ce8d` [contex/07_brand_system.html](../../contex/07_brand_system.html) v0.1 —
-    единая точка входа бренд-вопросов (~640 строк, self-contained, открывается без сервера):
-    палитра + WCAG-таблица, типографика Golos Text, компоненты, паблик→Payload маппинг,
-    TOV с Do/Don't и 4 диалогами, 9 анти-паттернов, 9 open items
-  - `41d93e9` на remote, `539ce8d` — локально (ahead 2 вместе с `1b533dc`).
-    Push — за оператором
-  - Параллельно — `2b016a4` `feat(admin): брендовая визуализация Payload admin` на remote
-    (работа `art`/`aemd` — палитра, логотип, группировка)
-  - Параллельно — `1b533dc` `fix(cms): Hero + CtaMessengers читают телефон из SiteChrome`
-    (локально, не запушен; инцидент после US-2 — два телефона в HTML, починено)
+### Prod — живой, частично обновлён
+- https://obikhod.ru, VPS 45.153.190.107 (deploy@), Node 22, PM2 `obikhod`, auto-deploy на push `main`
+- **Repo публичный** (`samohyn/obihod`) — GH Actions безлимитно на linux, branch protection теперь доступен бесплатно
+- Живое на prod после US-2:
+  - Главная, Hero CTA и Header = `+7 (985) 170-51-11` из `chrome.contacts.phoneE164` ✅
+  - JSON-LD Organization читает SiteChrome ✅
+  - Dashboard админки: кремовый фон + группы `01·Заявки / 02·Контент / 03·Медиа / 04·SEO / 05·Рамка сайта / 09·Система`; tile `Site Chrome (Header / Footer)` виден ✅
+- **НЕ применилось на prod** (ждёт починки):
+  - `/admin/globals/site-chrome/` → "Nothing found" — устаревший `importMap.js` в бандле
+  - Дефолтный Payload-логотип вместо «ОБИХОД» (тот же importMap)
+  - `/arboristika/ramenskoye/` → 404 — **seed-prod workflow ни разу не запускался**
 
-## В работе
+### Workflows (все в репо, работают)
+- `deploy.yml` — auto-deploy на push main. **Последний push `d2cac65` УПАЛ** на шаге «Regenerate Payload admin importMap»
+- `ci.yml` — тоже упал на `d2cac65` (вероятно новый `site-chrome.spec.ts` без живой БД)
+- `prod-backup.yml` — ручной pg_dump, работает. Pre-US2 backup сделан ✅
+- `seed-prod.yml` — fallback seed runner по ADR-0001, НЕ запускался
+- `admin-rebuild.yml` — `generate:importmap + pm2 restart` на VPS. Сам отрабатывает, но бесполезен пока Next.js бандл собран с устаревшим importMap
 
-- Ничего явного в in-progress. Проверить `git status` при старте.
-- `devteam/` готов к использованию — следующий запрос оператора уже можно прогонять
-  через контур `in → ba → po → sa → …` как реальный US.
+### Последний коммит и 11 предыдущих (все на origin/main, repo public)
+- `d2cac65` fix(deploy): regen Payload importMap перед build — **deploy failure, нужен лог**
+- `5dd76c6` chore(memory): handoff + learnings
+- `1b533dc` fix(cms): Hero + CtaMessengers из SiteChrome + e2e `site-chrome.spec.ts`
+- `539ce8d` docs(contex): 07_brand_system.html
+- `2b016a4` feat(admin): брендирование (палитра art, BrandLogo, BrandIcon, префиксы групп)
+- `2806c14` feat(ops): admin-rebuild workflow
+- `41d93e9` docs(contex): revert eb25c74 (`contex/` восстановлен)
+- `aea00bc` chore(release): US-1 seed release artifacts
+- `bb0f6f8` feat(cms): US-2 SiteChrome global + dedup SeoSettings + seed 28 LP
+- `fdf86ea` fix(backup): без sudo
+- `d3eb3df` feat(tooling): fal.ai integration + prod-backup workflow
 
-## Следующий шаг
+### US pipeline — CONDITIONAL APPROVE по обоим
+- **US-1 seed prod db**: ba→sa→dba→be3→qa1→cr→out · 28 LP (4 кластера × 7 пилотных районов) · ADR-0001 safety-gate + fallback workflow · placeholder-медиа через fal:gen (41+45 KB)
+- **US-2 SiteChrome globals**: ba→sa→dba→be4+fe1+seo2→qa2→cr→out · 1 global `site-chrome` · drop 9 полей + `sameAs[]` SeoSettings по ADR-0002
 
-- **Запуск SEO/analytics на prod — сделано 2026-04-23:**
-  - ✅ `git push origin main` + auto-deploy (`ee34ebb` retrigger после зависшего rsync)
-  - ✅ Smoke: `mc.yandex.ru/watch/108715562` + `tag.js?id=108715562` + `ym(108715562,'init',{ssr,webvisor,clickmap,ecommerce})` в бандле prod
-  - ✅ Sitemap.xml 200 (3 URL fallback — Payload пустой), robots.txt 200, /api/health 308→200
-  - ✅ Вебмастер: sitemap добавлен + счётчик Метрики 108715562 связан
-  - ⏸ Проверка хитов в Метрике — пропустили по решению оператора (не горит)
-  - 📦 **Backlog (не горит):** цели в Метрике — `lead_sent`, `photo_upload`, `phone_click`, `tg_click`, `max_click`, `wa_click`, `calc_submit`. Привяжет к UI позже [fe1]/[fe2]/[aemd]
-  - 📦 Backlog: Google Search Console (`verification.google` по запросу)
-- **Pre-launch blocker pack (2 US) — ВЕСЬ ПАЙПЛАЙН ПРОЙДЕН 2026-04-23:**
-  - **US-1 seed prod db:** ba→sa→dba→be3→qa1→cr→out **CONDITIONAL APPROVE** ·
-    28 LP (4×7), safety-gate ADR-0001, fallback workflow `seed-prod.yml`,
-    placeholder-медиа для mock-Case сгенерены через fal:gen (before/after, 41+45 KB)
-  - **US-2 SiteChrome globals:** ba→sa→dba→be4+fe1+seo2→qa2→cr→out
-    **CONDITIONAL APPROVE** · 1 global `site-chrome` + dedup SeoSettings по
-    ADR-0002 (drop 9 полей + sameAs[]), Header/Footer RSC с fallback,
-    JSON-LD Organization из SiteChrome. Блокер B-1 (access не-admin)
-    закрыт правкой `SiteChrome.ts:130` в ходе цикла
-  - **Готово к мержу, НЕ закоммичено.** Merge — прерогатива оператора
-  - **Порядок релиза** (рекомендация out US-2): сначала US-2 (schema change
-    `push:true` drop 9 колонок + drop sameAs + create site_chrome), после
-    smoke — US-1 seed. Оба схема/seed идемпотентны
-- **CI/CD backlog** (отложено, см. project memory `project_cicd_backlog.md`):
-  1. Branch protection — решить платформенный вопрос (public/Pro/без)
-  2. Payload migrations — до первого schema change в Payload (зона `dba`+`be3/be4`)
-  3. Uptime monitor — оператор заводит account (зона `do`)
-  4. Seed данных — US-1 готов, ждёт старта (блокер публичного запуска)
-- **Продукт** (определяется оператором):
-  - 4 калькулятора (арбористика, крыши, мусор, демонтаж)
-  - Форма «фото → смета» + Telegram/MAX/WhatsApp боты
-  - Programmatic SEO: Раменское + Жуковский (M1 pilot)
-- **Первый build graphify**: `/graphify .` в Claude Code или `graphify update .` (AST-only, без LLM)
-- **Создать Linear-labels** в OBI (оператор): 28 × `role:<code>`, `phase:*`, типы, приоритеты —
-  каталог в [devteam/WORKFLOW.md §7.5.3](../../devteam/WORKFLOW.md)
+### fal.ai интеграция — работает локально
+- `site/lib/fal/` + `site/app/api/fal/` + `pnpm fal:gen <hero|og|case-viz|blog-cover> --json '...'`
+- `FAL_KEY` — в `site/.env.local`. На prod НЕ проброшен (offline batch достаточно)
+- **TODO:** провернуть FAL_KEY в dashboard — был в чате, не ротирован
+
+## В работе / блокер на завтра
+
+**P0: deploy.yml шаг «Regenerate Payload admin importMap» упал.**
+
+Нужно от оператора при старте:
+- GH Actions → Deploy to Beget #22 (sha `d2cac65`) → job «Build production bundle» → step «Regenerate Payload admin importMap» → **полный вывод 10-20 строк**. Без лога не починить точечно.
+
+Fallback-гипотезы:
+- `@next/env loadEnvConfig` bug → обёртка через `tsx --env-file` как в `seed.ts`
+- «Cannot find module …/Users» (ESM strict resolver) → `.js` расширения в `payload.config.ts`
+- `DATABASE_URI` не доступен скрипту → проверить env на шаге
+
+## Следующий шаг (при старте завтра)
+
+1. **Лог от оператора → починить шаг → push → проверить auto-deploy до зелёного**
+2. После успеха повторить `admin-rebuild` (на всякий, если importMap на VPS старее бандла) и проверить через MCP Playwright:
+   - `/admin/globals/site-chrome/` — форма с 5 секциями
+   - `/admin/login` (из incognito) — логотип «ОБИХОД» + «порядок под ключ · admin»
+   - Navbar — иконка «О» на зелёном квадрате
+3. **Запустить seed-prod**: GH Actions → Seed prod DB (fallback) → confirm=`seed`. После — smoke:
+   - `/arboristika/ramenskoye/` = 200
+   - `/sitemap.xml` содержит programmatic-URL
+   - `Organization.telephone` в JSON-LD = `+79851705111`
+4. **Оператор в /admin/globals/site-chrome:** заполнить `social[]` — Telegram/MAX/WhatsApp реальными URL (инвариант CLAUDE.md, seed кладёт `[]`)
+5. **Backlog к закрытию после релиза:**
+   - Ротация FAL_KEY
+   - Branch protection на `main` (public + Free позволяет)
+   - Цели Метрики: lead_sent, photo_upload, phone_click, tg_click, max_click, wa_click, calc_submit
+   - ADR по Payload migrations (текущая схема на prod через `push:true` — тех.долг)
+   - Реальные фото Cases (не placeholder от fal:gen)
+   - cw: реальные тексты для кластеров крыши/мусор/демонтаж
+
+## Подсказки для следующей сессии
+
+- `git push origin main` у меня BLOCK rule — каждый push через оператора
+- Prod health: `curl -fsSL 'https://obikhod.ru/api/health?deep=1'` (URL в кавычках для zsh)
+- GH Actions статус без токена: `curl 'https://api.github.com/repos/samohyn/obihod/actions/runs?per_page=5&branch=main'` — работает на public. Логи упавших шагов через API дают 403; просить у оператора из UI
+- Uptime растёт ≠ последний push ещё не применился (deploy failure или ISR кеш)
+- Playwright MCP скрины: относительный путь `screen/foo.png` рабочий, `screen/` в `.gitignore`
+- prod-backup лежит в `$BEGET_DEPLOY_PATH/backups/manual-<reason>-<UTC>.sql.gz` + GH Actions artifact (30 дней)
 
 ## Открытые вопросы (из CLAUDE.md)
 
-- [ ] `contex/05_tech_stack_decision.md` — зафиксировать TCO и альтернативы
+- [ ] `contex/05_tech_stack_decision.md` — TCO и альтернативы
 - [ ] Переименование `contex/` → `context/` (косметика)
 - [ ] ТМ «ОБИХОД» у патентного поверенного
-- [ ] Домен (`obihod.ru`, `obixod.ru`, `obihod-servis.ru`)
-- [ ] Юрлицо / СРО / лицензия Росприроднадзора
+- [ ] Домен backup: `obixod.ru`, `obihod-servis.ru`
+- [ ] Юрлицо / СРО / лицензия Росприроднадзора (после регистрации — заполнить `/admin/site-chrome/requisites`)
 - [ ] Аккаунты: amoCRM / Wazzup24 / Calltouch
