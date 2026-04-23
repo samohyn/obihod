@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Дизайн-система ОБИХОД · contex/07</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  /* ───────── ТОКЕНЫ (точная копия site/app/globals.css) ───────── */
+  :root {
+    --c-primary: #2d5a3d;
+    --c-primary-ink: #1f3f2b;
+    --c-accent: #e6a23c;
+    --c-accent-ink: #c18724;
+    --c-ink: #1c1c1c;
+    --c-ink-soft: #2b2b2b;
+    --c-muted: #8c8377;
+    --c-line: #e6e1d6;
+    --c-bg: #f7f5f0;
+    --c-bg-alt: #efebe0;
+    --c-card: #ffffff;
+    --c-success: #4a7c59;
+    --c-error: #b54828;
+    --c-on-primary: #f7f5f0;
+    --radius-sm: 6px;
+    --radius: 10px;
+    --radius-lg: 16px;
+    --maxw: 1180px;
+    --pad: 28px;
+    --font-sans: 'Golos Text', 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--c-bg);
+    color: var(--c-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--c-primary); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code { font-family: var(--font-mono); font-size: 0.88em; background: var(--c-bg-alt); padding: 2px 6px; border-radius: var(--radius-sm); }
+
+  /* ───────── ЛЭЙАУТ ───────── */
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); }
+
+  header.site {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(247,245,240,0.92);
+    backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--c-line);
+  }
+  header.site .inner { display: flex; align-items: center; gap: 24px; height: 60px; }
+  header.site .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -0.01em; }
+  header.site nav { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: var(--c-ink-soft); }
+  header.site nav a { color: var(--c-ink-soft); }
+  header.site nav a:hover { color: var(--c-primary); text-decoration: none; }
+
+  section { padding: 72px 0; border-bottom: 1px solid var(--c-line); }
+  section:last-of-type { border-bottom: 0; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+    margin-bottom: 14px;
+  }
+  h1.display {
+    font-weight: 700;
+    font-size: clamp(56px, 9vw, 112px);
+    line-height: 0.94;
+    letter-spacing: -0.04em;
+    margin: 0 0 20px;
+  }
+  h2 {
+    font-weight: 700;
+    font-size: clamp(28px, 3.4vw, 40px);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    margin: 0 0 10px;
+  }
+  h3 {
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 1.3;
+    margin: 28px 0 10px;
+  }
+  p.lead { font-size: clamp(17px, 1.6vw, 20px); line-height: 1.45; color: var(--c-ink-soft); max-width: 70ch; margin: 0 0 20px; }
+  p { margin: 0 0 12px; max-width: 75ch; }
+  .muted { color: var(--c-muted); }
+
+  /* ───────── HERO ───────── */
+  .hero { padding: 120px 0 96px; }
+  .hero .meta {
+    display: flex; flex-wrap: wrap; gap: 18px 28px;
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em;
+    color: var(--c-muted); margin-bottom: 28px;
+  }
+  .hero .meta span strong { color: var(--c-ink); font-weight: 500; }
+  .hero .tagline {
+    display: inline-block; margin-top: 12px; padding: 10px 18px;
+    background: var(--c-primary); color: var(--c-on-primary);
+    border-radius: var(--radius); font-weight: 600; letter-spacing: -0.01em;
+  }
+
+  /* ───────── СЕТКИ ───────── */
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  @media (max-width: 860px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  }
+
+  /* ───────── СВОТЧИ ───────── */
+  .swatch {
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--c-card);
+  }
+  .swatch .bar { height: 84px; }
+  .swatch .body { padding: 12px 14px; font-family: var(--font-mono); font-size: 12px; line-height: 1.5; }
+  .swatch .body b { font-family: var(--font-sans); font-size: 14px; font-weight: 600; display: block; color: var(--c-ink); margin-bottom: 4px; }
+  .swatch .body code { padding: 0; background: transparent; color: var(--c-ink-soft); }
+  .swatch .body .hex { display: block; color: var(--c-muted); }
+
+  /* ───────── ТАБЛИЦЫ ───────── */
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--c-line); vertical-align: top; }
+  th { font-weight: 600; color: var(--c-ink); background: var(--c-bg-alt); font-size: 13px; letter-spacing: -0.005em; }
+  td code { white-space: nowrap; }
+  .wcag-pass { color: var(--c-success); font-weight: 600; }
+  .wcag-fail { color: var(--c-error); font-weight: 600; }
+  .wcag-large { color: var(--c-accent-ink); font-weight: 600; }
+
+  /* ───────── КАРТОЧКИ ───────── */
+  .card {
+    background: var(--c-card); border: 1px solid var(--c-line);
+    border-radius: var(--radius); padding: 22px;
+  }
+  .card h3 { margin-top: 0; }
+
+  /* ───────── КНОПКИ (копия site/app/globals.css .btn*) ───────── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 22px; border-radius: var(--radius);
+    font-family: inherit; font-weight: 600; font-size: 15px;
+    letter-spacing: -0.005em; border: 1px solid transparent;
+    cursor: pointer; transition: background-color .15s ease, border-color .15s ease, transform .15s ease;
+    min-height: 44px;
+  }
+  .btn:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
+  .btn-primary { background: var(--c-primary); color: var(--c-on-primary); }
+  .btn-primary:hover { background: var(--c-primary-ink); }
+  .btn-secondary { background: transparent; color: var(--c-ink); border-color: var(--c-line); }
+  .btn-secondary:hover { background: var(--c-bg-alt); }
+  .btn-ghost { background: transparent; color: var(--c-primary); }
+  .btn-ghost:hover { background: var(--c-bg-alt); }
+  .btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+
+  /* ───────── BADGE / INPUT ───────── */
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; font-size: 12px; font-weight: 600;
+    border-radius: 999px; letter-spacing: 0.02em;
+  }
+  .badge-draft { background: rgba(230,162,60,0.16); color: var(--c-accent-ink); }
+  .badge-live  { background: rgba(45,90,61,0.12); color: var(--c-primary); }
+  .badge-error { background: rgba(181,72,40,0.12); color: var(--c-error); }
+
+  .input {
+    width: 100%; padding: 12px 14px; font-family: inherit; font-size: 15px;
+    background: var(--c-card); border: 1px solid var(--c-line);
+    border-radius: var(--radius); color: var(--c-ink);
+  }
+  .input:focus { outline: 2px solid var(--c-primary); outline-offset: -1px; border-color: var(--c-primary); }
+
+  /* ───────── СПЕЙСИНГ ШКАЛА ───────── */
+  .spacing-row { display: flex; align-items: flex-end; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+  .spacing-row .tick { background: var(--c-primary); border-radius: var(--radius-sm); }
+  .spacing-row figure { margin: 0; text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--c-muted); }
+
+  /* ───────── РАДИУСЫ ───────── */
+  .radius-demo { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 16px; }
+  .radius-demo .sq {
+    width: 96px; height: 96px; background: var(--c-primary); color: var(--c-on-primary);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em;
+  }
+
+  /* ───────── TOV — примеры мессенджера ───────── */
+  .chat { max-width: 520px; background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius-lg); padding: 18px; }
+  .chat .msg {
+    display: inline-block; padding: 10px 14px; border-radius: var(--radius-lg);
+    background: var(--c-bg-alt); color: var(--c-ink); font-size: 15px; line-height: 1.45;
+    max-width: 90%; margin-bottom: 8px; white-space: pre-line;
+  }
+  .chat .msg.out { background: var(--c-primary); color: var(--c-on-primary); }
+  .chat .who { font-family: var(--font-mono); font-size: 11px; color: var(--c-muted); letter-spacing: 0.06em; margin-bottom: 6px; }
+
+  /* ───────── DO / DONT ───────── */
+  .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .do-dont .col { border: 1px solid var(--c-line); border-radius: var(--radius); padding: 18px; background: var(--c-card); }
+  .do-dont .col.do    { border-left: 4px solid var(--c-primary); }
+  .do-dont .col.dont  { border-left: 4px solid var(--c-error); }
+  .do-dont h4 { margin: 0 0 10px; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; font-family: var(--font-mono); }
+  .do-dont ul { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.6; }
+  @media (max-width: 720px) { .do-dont { grid-template-columns: 1fr; } }
+
+  /* ───────── АНТИ-ПАТТЕРНЫ ───────── */
+  .dont-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
+  .dont-grid .item {
+    padding: 18px; border: 1px solid var(--c-line); border-radius: var(--radius);
+    background: var(--c-card); position: relative;
+  }
+  .dont-grid .item::before {
+    content: '×'; position: absolute; top: 10px; right: 14px;
+    color: var(--c-error); font-weight: 700; font-size: 22px; line-height: 1;
+  }
+  .dont-grid .item b { display: block; margin-bottom: 4px; }
+  .dont-grid .item p { font-size: 13px; color: var(--c-muted); margin: 0; }
+  @media (max-width: 720px) { .dont-grid { grid-template-columns: 1fr; } }
+
+  /* ───────── TODO ───────── */
+  .todo li { margin-bottom: 8px; }
+  .todo li::marker { color: var(--c-accent); }
+
+  footer.site { padding: 36px 0 60px; color: var(--c-muted); font-family: var(--font-mono); font-size: 12px; }
+  footer.site a { color: var(--c-ink-soft); }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap inner">
+    <div class="brand">
+      <svg width="24" height="24" viewBox="0 0 28 28" aria-hidden="true">
+        <rect width="28" height="28" rx="6" fill="var(--c-primary)" />
+        <text x="14" y="20" text-anchor="middle" font-family="Golos Text, Inter, sans-serif" font-size="18" font-weight="700" fill="var(--c-on-primary)" letter-spacing="-0.02em">О</text>
+      </svg>
+      <span>ОБИХОД · дизайн-система</span>
+    </div>
+    <nav>
+      <a href="#identity">Identity</a>
+      <a href="#logo">Лого</a>
+      <a href="#color">Цвет</a>
+      <a href="#contrast">Контраст</a>
+      <a href="#type">Типографика</a>
+      <a href="#shape">Форма</a>
+      <a href="#components">Компоненты</a>
+      <a href="#payload">Паблик → Payload</a>
+      <a href="#tov">Tone of Voice</a>
+      <a href="#dont">Анти-паттерны</a>
+      <a href="#todo">TODO</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ═════════ HERO ═════════ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="meta">
+      <span><strong>contex/07_brand_system.html</strong></span>
+      <span>v0.1 · живой артефакт</span>
+      <span>основа — <a href="03_brand_naming.md">03_brand_naming.md</a></span>
+      <span>код — <a href="../site/app/globals.css">site/app/globals.css</a></span>
+    </div>
+    <div class="eyebrow">Порядок под ключ</div>
+    <h1 class="display">ОБИХОД</h1>
+    <p class="lead">Комплексный подрядчик 4-в-1 для Москвы и МО: арбористика, чистка крыш, вывоз мусора, демонтаж. Архетип Caregiver + Ruler. Этот документ — единая точка входа для дизайнера, копирайтера, фронтендера и любого нового агента команды.</p>
+    <span class="tagline">Хозяйство в надёжных руках</span>
+  </div>
+</section>
+
+<!-- ═════════ IDENTITY ═════════ -->
+<section id="identity">
+  <div class="wrap">
+    <div class="eyebrow">01 · Identity</div>
+    <h2>Кто мы и чего не говорим</h2>
+    <p class="lead">Выжимка из бренд-стратегии. Детали, scorecard финалистов и обоснование выбора — в <a href="03_brand_naming.md"><code>03_brand_naming.md</code></a>.</p>
+
+    <div class="grid-2" style="margin-top: 28px;">
+      <div class="card">
+        <h3>Позиционирование</h3>
+        <p><strong>Для</strong> владельцев загородных домов и управляющих компаний в Москве и Подмосковье, <strong>которые</strong> устали от фрагментированного поиска подрядчиков и смет «от X ₽», <strong>Обиход</strong> — комплексный сервис 4-в-1 по фиксированной цене за объект, <strong>со сметой за 10 минут в мессенджере</strong> и юридической ответственностью за штрафы ГЖИ/ОАТИ.</p>
+      </div>
+      <div class="card">
+        <h3>Архетип</h3>
+        <p><strong>Caregiver (70%)</strong> — забота о хозяйстве, защита от проблем, «мы присмотрим».<br>
+        <strong>Ruler (30%)</strong> — порядок, контроль, компетентность.<br>
+        <br>
+        <span class="muted">Отвергнуто: Outlaw (Дровосек/Лесорубы), Jester (Грузовичкоф), Explorer (Liwood).</span></p>
+      </div>
+      <div class="card">
+        <h3>Essence</h3>
+        <p><strong>Порядок под ключ</strong> — операционное кредо.<br>
+        <strong>Хозяйство в надёжных руках</strong> — эмоциональное обещание.</p>
+      </div>
+      <div class="card">
+        <h3>Оффер (immutable)</h3>
+        <p>Фикс-цена за объект · смета за 10 минут по фото · абонемент «зима-лето» · штрафы ГЖИ/ОАТИ на подрядчике.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ LOGO ═════════ -->
+<section id="logo">
+  <div class="wrap">
+    <div class="eyebrow">02 · Логотип</div>
+    <h2>Wordmark и монограмма</h2>
+    <p class="lead">Временное решение до утверждения TM-знака (см. <a href="../site/components/admin/BrandLogo.tsx"><code>BrandLogo.tsx</code></a>, <a href="../site/components/admin/BrandIcon.tsx"><code>BrandIcon.tsx</code></a>). Любой декоративный символ = самодеятельность; кириллическое «ОБИХОД» плотным sans-serif работает как штамп само по себе.</p>
+
+    <div class="grid-2" style="margin-top: 28px;">
+      <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px; gap: 6px;">
+        <span style="font-size: 48px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; color: var(--c-ink);">ОБИХОД</span>
+        <span style="font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-primary);">порядок под ключ</span>
+        <p class="muted" style="margin-top: 24px; font-size: 12px; text-align: center;">wordmark · основной</p>
+      </div>
+      <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px;">
+        <svg width="96" height="96" viewBox="0 0 28 28" aria-hidden="true">
+          <rect width="28" height="28" rx="6" fill="var(--c-primary)" />
+          <text x="14" y="20" text-anchor="middle" font-family="Golos Text, Inter, sans-serif" font-size="18" font-weight="700" fill="var(--c-on-primary)" letter-spacing="-0.02em">О</text>
+        </svg>
+        <p class="muted" style="margin-top: 24px; font-size: 12px; text-align: center;">монограмма · 28 × 28, rx 6<br>favicon / admin-navbar</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 40px;">Правила применения</h3>
+    <table>
+      <thead><tr><th>Правило</th><th>Значение</th><th>Почему</th></tr></thead>
+      <tbody>
+        <tr><td>Начертание</td><td>только <code>font-weight: 700</code>, <code>letter-spacing: -0.02em</code></td><td>Плотный штамп — читаем за 0.5 с</td></tr>
+        <tr><td>Фон wordmark</td><td>кремовый <code>#f7f5f0</code> или белый <code>#ffffff</code></td><td>Контраст 15:1+ с ink</td></tr>
+        <tr><td>Фон монограммы</td><td>квадрат <code>#2d5a3d</code>, буква <code>#f7f5f0</code></td><td>Контраст ~8.9:1 (AAA)</td></tr>
+        <tr><td>Минимальный размер</td><td>wordmark 120 px ширина, монограмма 20 × 20 px</td><td>Меньше — теряется буква «Х»</td></tr>
+        <tr><td>Нельзя</td><td>градиенты, тени, деформация, поворот, обводка, «листок» рядом</td><td>Антипаттерн эко-категории</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═════════ COLOR ═════════ -->
+<section id="color">
+  <div class="wrap">
+    <div class="eyebrow">03 · Цвет</div>
+    <h2>Палитра «Природный тёплый»</h2>
+    <p class="lead">Токены живут в <a href="../site/app/globals.css"><code>site/app/globals.css</code></a> и пробрасываются в Tailwind v4 через <code>@theme inline</code> — доступны как utility <code>bg-primary</code>, <code>text-ink-soft</code>, <code>border-line</code>.</p>
+
+    <h3>Brand-defining</h3>
+    <div class="grid-3" style="margin-top: 12px;">
+      <div class="swatch"><div class="bar" style="background: var(--c-primary);"></div><div class="body"><b>primary</b><code>--c-primary · bg-primary</code><span class="hex">#2d5a3d</span></div></div>
+      <div class="swatch"><div class="bar" style="background: var(--c-primary-ink);"></div><div class="body"><b>primary-ink</b><code>--c-primary-ink</code><span class="hex">#1f3f2b · hover on primary</span></div></div>
+      <div class="swatch"><div class="bar" style="background: var(--c-accent);"></div><div class="body"><b>accent</b><code>--c-accent · bg-accent</code><span class="hex">#e6a23c · бейджи, акцент</span></div></div>
+      <div class="swatch"><div class="bar" style="background: var(--c-accent-ink);"></div><div class="body"><b>accent-ink</b><code>--c-accent-ink</code><span class="hex">#c18724 · текст на bg</span></div></div>
+    </div>
+
+    <h3 style="margin-top: 32px;">Текст</h3>
+    <div class="grid-3">
+      <div class="swatch"><div class="bar" style="background: var(--c-ink);"></div><div class="body"><b>ink</b><code>--c-ink · text-ink</code><span class="hex">#1c1c1c · заголовки</span></div></div>
+      <div class="swatch"><div class="bar" style="background: var(--c-ink-soft);"></div><div class="body"><b>ink-soft</b><code>--c-ink-soft</code><span class="hex">#2b2b2b · body</span></div></div>
+      <div class="swatch"><div class="bar" style="background: var(--c-muted);"></div><div class="body"><b>muted</b><code>--c-muted</code><span class="hex">#8c8377 · caption, placeholder</span></div></div>
+    </div>
+
+    <h3 style="margin-top: 32px;">Поверхности</h3>
+    <div class="grid-4">
+      <div class="swatch"><div class="bar" style="background: var(--c-bg); border: 1px solid var(--c-line);"></div><div class="body"><b>bg</b><code>--c-bg</code><span class="hex">#f7f5f0 · основной фон</span></div></div>
+      <div class="swatch"><div class="bar" style="background: var(--c-bg-alt);"></div><div class="body"><b>bg-alt</b><code>--c-bg-alt</code><span class="hex">#efebe0 · чередование</span></div></div>
+      <div class="swatch"><div class="bar" style="background: var(--c-card); border: 1px solid var(--c-line);"></div><div class="body"><b>card</b><code>--c-card</code><span class="hex">#ffffff</span></div></div>
+      <div class="swatch"><div class="bar" style="background: var(--c-line);"></div><div class="body"><b>line</b><code>--c-line</code><span class="hex">#e6e1d6 · границы</span></div></div>
+    </div>
+
+    <h3 style="margin-top: 32px;">Семантика</h3>
+    <div class="grid-3">
+      <div class="swatch"><div class="bar" style="background: var(--c-success);"></div><div class="body"><b>success</b><code>--c-success</code><span class="hex">#4a7c59</span></div></div>
+      <div class="swatch"><div class="bar" style="background: var(--c-error);"></div><div class="body"><b>error</b><code>--c-error</code><span class="hex">#b54828</span></div></div>
+      <div class="swatch"><div class="bar" style="background: var(--c-on-primary);"></div><div class="body"><b>on-primary</b><code>--c-on-primary</code><span class="hex">#f7f5f0 · текст поверх primary</span></div></div>
+    </div>
+
+    <h3 style="margin-top: 40px;">Расхождение с бренд-брифом</h3>
+    <div class="card" style="border-left: 4px solid var(--c-accent); background: rgba(230,162,60,0.06);">
+      <p>Визуальный бриф в <code>03_brand_naming.md</code> описывает палитру как «<em>тёмный графит + тёплый песок + приглушённый терракот / густая охра</em>». Фактическая палитра в <code>globals.css</code> — <strong>зелёный + янтарный + кремовый</strong>. Это решение имплементации; бриф остаётся как исторический контекст. <strong>Источник истины — код.</strong> При ребрендинге пересматриваются оба артефакта синхронно.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ CONTRAST ═════════ -->
+<section id="contrast">
+  <div class="wrap">
+    <div class="eyebrow">04 · Контраст</div>
+    <h2>WCAG 2.2 — что на что кладём</h2>
+    <p class="lead">Приёмка цветовых пар по WCAG 2.1/2.2: <strong>AA normal text</strong> = 4.5:1, <strong>AA large text</strong> (18px+ bold / 24px+) = 3:1, <strong>AAA normal</strong> = 7:1.</p>
+
+    <table style="margin-top: 20px;">
+      <thead><tr><th>Пара</th><th>Пример</th><th>Ratio</th><th>Normal</th><th>Large</th><th>Где применяется</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><code>ink</code> на <code>bg</code></td>
+          <td style="background: var(--c-bg); color: var(--c-ink); font-weight: 600;">Обиход</td>
+          <td>15.1 : 1</td><td class="wcag-pass">AAA</td><td class="wcag-pass">AAA</td>
+          <td>Весь body-текст, заголовки</td>
+        </tr>
+        <tr>
+          <td><code>on-primary</code> на <code>primary</code></td>
+          <td style="background: var(--c-primary); color: var(--c-on-primary); font-weight: 600;">Позвонить</td>
+          <td>8.9 : 1</td><td class="wcag-pass">AAA</td><td class="wcag-pass">AAA</td>
+          <td>Primary-кнопки, бейджи</td>
+        </tr>
+        <tr>
+          <td><code>primary</code> на <code>bg</code></td>
+          <td style="background: var(--c-bg); color: var(--c-primary); font-weight: 600;">Обиход</td>
+          <td>7.1 : 1</td><td class="wcag-pass">AAA</td><td class="wcag-pass">AAA</td>
+          <td>Ссылки, иконки, eyebrow</td>
+        </tr>
+        <tr>
+          <td><code>ink-soft</code> на <code>bg-alt</code></td>
+          <td style="background: var(--c-bg-alt); color: var(--c-ink-soft);">строка таблицы</td>
+          <td>13.8 : 1</td><td class="wcag-pass">AAA</td><td class="wcag-pass">AAA</td>
+          <td>Чередование таблиц</td>
+        </tr>
+        <tr>
+          <td><code>muted</code> на <code>bg</code></td>
+          <td style="background: var(--c-bg); color: var(--c-muted);">подпись</td>
+          <td>4.1 : 1</td><td class="wcag-fail">AA✕</td><td class="wcag-pass">AA</td>
+          <td>Только large / caption; избегать body</td>
+        </tr>
+        <tr>
+          <td><code>accent-ink</code> на <code>bg</code></td>
+          <td style="background: var(--c-bg); color: var(--c-accent-ink); font-weight: 600;">Черновик</td>
+          <td>4.7 : 1</td><td class="wcag-pass">AA</td><td class="wcag-pass">AAA</td>
+          <td>Статусы, warning-бейджи</td>
+        </tr>
+        <tr>
+          <td><code>accent</code> на <code>bg</code></td>
+          <td style="background: var(--c-bg); color: var(--c-accent); font-weight: 600;">не для текста</td>
+          <td>2.3 : 1</td><td class="wcag-fail">AA✕</td><td class="wcag-fail">AA✕</td>
+          <td>Только фоновые акценты, иконки 24+</td>
+        </tr>
+        <tr>
+          <td><code>error</code> на <code>bg</code></td>
+          <td style="background: var(--c-bg); color: var(--c-error); font-weight: 600;">Ошибка</td>
+          <td>5.4 : 1</td><td class="wcag-pass">AA</td><td class="wcag-pass">AAA</td>
+          <td>Сообщения валидации, delete</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="muted" style="margin-top: 18px; font-size: 13px;">Фокус-outline — всегда <code>accent</code> 2px с offset 2px (см. <code>.btn:focus-visible</code> в <code>globals.css</code>). Этот приём безопасен, потому что outline идёт по большой площади кнопки, а не является текстом.</p>
+  </div>
+</section>
+
+<!-- ═════════ TYPE ═════════ -->
+<section id="type">
+  <div class="wrap">
+    <div class="eyebrow">05 · Типографика</div>
+    <h2>Golos Text + JetBrains Mono</h2>
+    <p class="lead">Display и body — <strong>Golos Text</strong> (создан специально для кириллицы, открытая лицензия SIL OFL). Mono — <strong>JetBrains Mono</strong> для цен (<code>tabular-nums</code>), таймеров, eyebrow. Подключены через <code>next/font</code> с <code>display: swap</code>.</p>
+
+    <h3>Шкала паблика</h3>
+    <p class="muted" style="font-size: 13px;">Реальные классы из <code>site/app/globals.css</code>. Все размеры адаптивные через <code>clamp()</code>.</p>
+
+    <div class="card" style="margin-top: 12px;">
+      <div style="font-weight: 700; font-size: clamp(48px, 8vw, 96px); line-height: 0.96; letter-spacing: -0.035em;">Обиход — порядок под ключ</div>
+      <p class="muted" style="margin-top: 6px;"><code>.h-display</code> · 48/96 px · 700 · ls -0.035em</p>
+    </div>
+    <div class="card" style="margin-top: 12px;">
+      <div style="font-weight: 700; font-size: clamp(36px, 6vw, 64px); line-height: 1.02; letter-spacing: -0.03em;">Спилим дерево у дачи в Истре</div>
+      <p class="muted" style="margin-top: 6px;"><code>.h-xl</code> · 36/64 px · 700 · ls -0.03em</p>
+    </div>
+    <div class="card" style="margin-top: 12px;">
+      <div style="font-weight: 600; font-size: clamp(28px, 4vw, 44px); line-height: 1.08; letter-spacing: -0.025em;">Снимаем штрафы ГЖИ и ОАТИ по договору</div>
+      <p class="muted" style="margin-top: 6px;"><code>.h-l</code> · 28/44 px · 600</p>
+    </div>
+    <div class="card" style="margin-top: 12px;">
+      <div style="font-weight: 600; font-size: clamp(22px, 2.5vw, 28px); line-height: 1.2; letter-spacing: -0.015em;">Пример заголовка секции на лендинге</div>
+      <p class="muted" style="margin-top: 6px;"><code>.h-m</code> · 22/28 px · 600</p>
+    </div>
+    <div class="card" style="margin-top: 12px;">
+      <div style="font-weight: 600; font-size: 20px; line-height: 1.25; letter-spacing: -0.01em;">Заголовок карточки / прайса</div>
+      <p class="muted" style="margin-top: 6px;"><code>.h-s</code> · 20 px · 600</p>
+    </div>
+    <div class="card" style="margin-top: 12px;">
+      <div style="font-size: clamp(17px, 1.8vw, 22px); line-height: 1.45; color: var(--c-ink-soft);">Lead-абзац на посадочной. Главный смысловой блок первого экрана. Не шире 70ch — иначе теряется якорность.</div>
+      <p class="muted" style="margin-top: 6px;"><code>.lead</code> · 17/22 px · 400 · ink-soft</p>
+    </div>
+    <div class="card" style="margin-top: 12px;">
+      <div style="font-size: 16px; line-height: 1.55;">Основной абзац. Не шире 75ch. По CWV для body используем 16-17 px — меньше бьёт по читаемости для ЦА 35-60, больше ломает вертикальный ритм.</div>
+      <p class="muted" style="margin-top: 6px;"><code>body</code> · 16-17 px · 400 · line-height 1.55</p>
+    </div>
+    <div class="card" style="margin-top: 12px;">
+      <div class="eyebrow" style="margin-bottom: 0;">Арбористика · Москва и МО</div>
+      <p class="muted" style="margin-top: 12px;"><code>.eyebrow</code> · 11-12 px mono · ls 0.14em · uppercase · muted</p>
+    </div>
+    <div class="card" style="margin-top: 12px;">
+      <div style="font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 32px; font-weight: 500;">12 800 ₽ / объект</div>
+      <p class="muted" style="margin-top: 6px;"><code>.mono.tnum</code> · цена — JetBrains Mono 500 с tabular-nums</p>
+    </div>
+
+    <h3 style="margin-top: 40px;">Шкала админки (Payload)</h3>
+    <p class="muted" style="font-size: 13px;">Плотная — админка инструмент, не витрина. Подробности и обоснование — в <a href="../devteam/specs/admin-visual/art-concept.md"><code>devteam/specs/admin-visual/art-concept.md</code></a>.</p>
+    <table style="margin-top: 12px;">
+      <thead><tr><th>Элемент</th><th>Размер</th><th>Вес</th><th>Комментарий</th></tr></thead>
+      <tbody>
+        <tr><td>Collection-view heading</td><td>22 px</td><td>600</td><td>Без letter-spacing</td></tr>
+        <tr><td>Field label</td><td>13 px</td><td>500</td><td><code>letter-spacing: 0.02em</code></td></tr>
+        <tr><td>Field value</td><td>14 px</td><td>400</td><td></td></tr>
+        <tr><td>Table row</td><td>13 px</td><td>400</td><td>line-height 1.35</td></tr>
+        <tr><td>Button</td><td>13 px</td><td>600</td><td>min-height 32 px</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═════════ SHAPE ═════════ -->
+<section id="shape">
+  <div class="wrap">
+    <div class="eyebrow">06 · Форма</div>
+    <h2>Радиусы и spacing</h2>
+
+    <h3>Радиусы</h3>
+    <div class="radius-demo">
+      <div class="sq" style="border-radius: var(--radius-sm);">--radius-sm<br>6 px</div>
+      <div class="sq" style="border-radius: var(--radius);">--radius<br>10 px</div>
+      <div class="sq" style="border-radius: var(--radius-lg);">--radius-lg<br>16 px</div>
+      <div class="sq" style="border-radius: 999px;">pill<br>999 px</div>
+    </div>
+    <p class="muted" style="margin-top: 14px; font-size: 13px;"><code>radius-sm</code> — инпуты, бейджи, code. <code>radius</code> — кнопки, карточки, модалки. <code>radius-lg</code> — hero-блоки, большие карточки кейсов. Pill — только для status-badge и chat-bubble.</p>
+
+    <h3 style="margin-top: 36px;">Spacing scale (4 px base)</h3>
+    <div class="spacing-row">
+      <figure><div class="tick" style="width: 4px;  height: 4px;"></div>4</figure>
+      <figure><div class="tick" style="width: 8px;  height: 8px;"></div>8</figure>
+      <figure><div class="tick" style="width: 12px; height: 12px;"></div>12</figure>
+      <figure><div class="tick" style="width: 16px; height: 16px;"></div>16</figure>
+      <figure><div class="tick" style="width: 20px; height: 20px;"></div>20</figure>
+      <figure><div class="tick" style="width: 24px; height: 24px;"></div>24</figure>
+      <figure><div class="tick" style="width: 32px; height: 32px;"></div>32</figure>
+      <figure><div class="tick" style="width: 48px; height: 48px;"></div>48</figure>
+      <figure><div class="tick" style="width: 64px; height: 64px;"></div>64</figure>
+      <figure><div class="tick" style="width: 96px; height: 96px;"></div>96</figure>
+    </div>
+
+    <h3 style="margin-top: 36px;">Контейнер</h3>
+    <table>
+      <thead><tr><th>Токен</th><th>Значение</th><th>Применение</th></tr></thead>
+      <tbody>
+        <tr><td><code>--maxw</code></td><td>1280 px</td><td>Максимальная ширина <code>.wrap</code></td></tr>
+        <tr><td><code>--pad</code> (&lt; 768)</td><td>20 px</td><td>Мобильные отступы</td></tr>
+        <tr><td><code>--pad</code> (&gt; 768)</td><td>40 px</td><td>Планшет</td></tr>
+        <tr><td><code>--pad</code> (&gt; 1200)</td><td>80 px</td><td>Десктоп</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═════════ COMPONENTS ═════════ -->
+<section id="components">
+  <div class="wrap">
+    <div class="eyebrow">07 · Компоненты</div>
+    <h2>Базовые элементы в деле</h2>
+
+    <h3>Кнопки</h3>
+    <div class="card">
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+        <button class="btn btn-primary">Рассчитать смету →</button>
+        <button class="btn btn-secondary">Узнать подробнее</button>
+        <button class="btn btn-ghost">Вернуться</button>
+        <button class="btn btn-primary" disabled>Отправлено</button>
+      </div>
+      <p class="muted" style="margin-top: 16px; font-size: 13px;">min-height 44 px (WCAG 2.5.5 touch target) · focus-outline 2 px accent · hover на primary → primary-ink.</p>
+    </div>
+
+    <h3 style="margin-top: 32px;">Бейджи и статусы</h3>
+    <div class="card">
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <span class="badge badge-live">● Опубликовано</span>
+        <span class="badge badge-draft">Черновик</span>
+        <span class="badge badge-error">Ошибка валидации</span>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 32px;">Форма</h3>
+    <div class="card" style="max-width: 520px;">
+      <label style="display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600;">Телефон для связи</label>
+      <input class="input" type="tel" placeholder="+7 (___) ___-__-__" />
+      <p class="muted" style="margin-top: 8px; font-size: 12px;">Позвоним в течение 10 минут в рабочее время (8:00–22:00 МСК).</p>
+      <button class="btn btn-primary" style="margin-top: 16px;">Получить смету</button>
+    </div>
+
+    <h3 style="margin-top: 32px;">Карточка услуги</h3>
+    <div class="card" style="max-width: 520px; background: var(--c-card);">
+      <div class="eyebrow" style="margin-bottom: 10px;">Арбористика · Истра</div>
+      <div style="font-weight: 600; font-size: 22px; letter-spacing: -0.015em; margin-bottom: 8px;">Спил дерева с автовышки</div>
+      <p style="margin-bottom: 16px; color: var(--c-ink-soft);">Тополь / берёза / сосна до 25 м. Смета за 10 минут по фото. Порубочный билет — наша зона.</p>
+      <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px;">
+        <span class="mono" style="font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 28px; font-weight: 500;">12 800 ₽</span>
+        <span class="muted" style="font-size: 13px;">за объект</span>
+      </div>
+      <button class="btn btn-primary" style="width: 100%; justify-content: center;">Рассчитать</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ PAYLOAD MAP ═════════ -->
+<section id="payload">
+  <div class="wrap">
+    <div class="eyebrow">08 · Паблик → Payload</div>
+    <h2>Один бренд, две задачи</h2>
+    <p class="lead">Паблик и админка Payload живут на одних токенах — это сняли в <a href="../devteam/specs/admin-visual/art-concept.md"><code>admin-visual/art-concept.md</code></a>. В админке поднимаем плотность UI, палитра та же.</p>
+
+    <table style="margin-top: 20px;">
+      <thead><tr><th>Роль в админке</th><th>Payload token</th><th>HEX</th><th>Сайт-эквивалент</th></tr></thead>
+      <tbody>
+        <tr><td>background</td><td><code>--theme-bg</code></td><td>#f7f5f0</td><td><code>--c-bg</code></td></tr>
+        <tr><td>surface</td><td><code>--theme-elevation-0/50</code></td><td>#ffffff</td><td><code>--c-card</code></td></tr>
+        <tr><td>surface-alt</td><td><code>--theme-elevation-100</code></td><td>#efebe0</td><td><code>--c-bg-alt</code></td></tr>
+        <tr><td>text</td><td><code>--theme-text</code></td><td>#1c1c1c</td><td><code>--c-ink</code></td></tr>
+        <tr><td>text-soft</td><td><code>--theme-elevation-800</code></td><td>#2b2b2b</td><td><code>--c-ink-soft</code></td></tr>
+        <tr><td>text-muted</td><td><code>--theme-elevation-500</code></td><td>#6b6256</td><td>уточнение <code>--c-muted</code> (WCAG-поднят с #8c8377 → 4.5:1)</td></tr>
+        <tr><td>accent (primary)</td><td><code>--theme-success-500</code></td><td>#2d5a3d</td><td><code>--c-primary</code></td></tr>
+        <tr><td>accent-hover</td><td><code>--theme-success-600</code></td><td>#1f3f2b</td><td><code>--c-primary-ink</code></td></tr>
+        <tr><td>highlight</td><td>—</td><td>#e6a23c</td><td><code>--c-accent</code></td></tr>
+        <tr><td>border</td><td><code>--theme-elevation-200</code></td><td>#e6e1d6</td><td><code>--c-line</code></td></tr>
+        <tr><td>warning</td><td><code>--theme-warning-500</code></td><td>#c18724</td><td><code>--c-accent-ink</code></td></tr>
+        <tr><td>danger</td><td><code>--theme-error-500</code></td><td>#b54828</td><td><code>--c-error</code></td></tr>
+      </tbody>
+    </table>
+
+    <p class="muted" style="font-size: 13px; margin-top: 14px;">Override живёт в <code>site/app/(payload)/custom.scss</code> на <code>:root[data-theme='light']</code>. Тёмная тема — клон light до MVP-запуска.</p>
+  </div>
+</section>
+
+<!-- ═════════ TOV ═════════ -->
+<section id="tov">
+  <div class="wrap">
+    <div class="eyebrow">09 · Tone of Voice</div>
+    <h2>Как звучит Обиход</h2>
+    <p class="lead">Анти-TOV слова блокируются хуком <code>.claude/hooks/protect-immutable.sh</code> — если попытаться закоммитить «в кратчайшие сроки» в <code>site/</code>, хук упадёт.</p>
+
+    <h3>Шкалы (Nielsen Norman)</h3>
+    <table>
+      <tbody>
+        <tr><td>Funny</td><td class="muted">◄────────────●─────►</td><td>Serious</td><td><strong>Серьёзный, но не казённый</strong></td></tr>
+        <tr><td>Formal</td><td class="muted">◄──────●───────────►</td><td>Casual</td><td><strong>Деловой с тёплыми вкраплениями</strong></td></tr>
+        <tr><td>Respectful</td><td class="muted">◄●──────────────────►</td><td>Irreverent</td><td><strong>Максимальное уважение</strong></td></tr>
+        <tr><td>Enthusiastic</td><td class="muted">◄────────────●──────►</td><td>Matter-of-fact</td><td><strong>Делом, без восклицаний</strong></td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 32px;">Пять принципов</h3>
+    <ol>
+      <li><strong>Слово держим, дело делаем.</strong> Не обещаем того, что не сможем. Сказали «смета за 10 минут» — значит 10.</li>
+      <li><strong>Цифры и срок — всегда конкретные.</strong> Не «от 1 000 ₽», а «12 800 ₽ за объект». Не «в течение недели», а «послезавтра до 12:00».</li>
+      <li><strong>Техникой не пугаем.</strong> СРО, класс отходов, ПОР — переводим на «что это значит для вас».</li>
+      <li><strong>Не обесцениваем и не задираем.</strong> Мы не «дешевле всех» и не «премиум». Точно по делу, по рынку, с гарантией.</li>
+      <li><strong>Ответственность — это наша работа.</strong> Штрафы ГЖИ и ОАТИ берём не как бонус, а как норму.</li>
+    </ol>
+
+    <h3 style="margin-top: 32px;">Словарь</h3>
+    <div class="do-dont">
+      <div class="col do">
+        <h4>Да</h4>
+        <ul>
+          <li>«обиход», «хозяйство», «объект», «порядок»</li>
+          <li>«сделаем», «приедем», «закроем вопрос»</li>
+          <li>«12 800 ₽ за объект»</li>
+          <li>«послезавтра до 12:00»</li>
+          <li>«берём штрафы на себя», «отвечаем по договору»</li>
+          <li>«снег / дерево / мусор / снос»</li>
+          <li>«СРО 1 млрд, страховка 10 млн, ГЛОНАСС»</li>
+        </ul>
+      </div>
+      <div class="col dont">
+        <h4>Нет</h4>
+        <ul>
+          <li>«услуги населению», «клиент» (в B2C)</li>
+          <li>«имеем честь предложить», «осуществляем деятельность»</li>
+          <li>«от 1 000 ₽»</li>
+          <li>«в кратчайшие сроки»</li>
+          <li>«гарантируем качество» (пустое), «индивидуальный подход»</li>
+          <li>«твёрдые коммунальные отходы», «древесно-кустарниковая растительность» (в B2C)</li>
+          <li>«мы дорожим репутацией»</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 40px;">Примеры голоса в 4 контекстах</h3>
+
+    <div class="grid-2" style="margin-top: 16px;">
+      <div class="chat">
+        <div class="who">B2C · WhatsApp · первое касание</div>
+        <div class="msg out">Здравствуйте! Это Обиход.
+Получили фото двух тополей у бани.
+Смета будет через 10 минут.
+Если надо обсудить детали — позвоню, подскажите удобное время.</div>
+      </div>
+      <div class="chat">
+        <div class="who">B2C · SMS · бригада выехала</div>
+        <div class="msg">Обиход: бригада выехала в Истру, м. Красногорская. Будем на объекте к 09:40. Бригадир Алексей, +7 (495) ХХХ-ХХ-ХХ.</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 16px;">
+      <div class="chat" style="max-width: none;">
+        <div class="who">B2B · E-mail · коммерческое предложение (первый абзац)</div>
+        <div class="msg" style="max-width: 100%;">Уважаемая УК «Ромашка»,
+
+Обиход закрывает четыре направления одним договором: снег с кровли зимой, санитарная обрезка летом, вывоз КГМ/ТКО круглый год и аварийная бригада 24/7 по SLA 2 часа.
+
+По договору берём на себя штрафы ГЖИ и ОАТИ в пределах ответственности подрядчика. Страховка ГО 10 млн ₽, СРО, лицензия Росприроднадзора.
+
+В приложении — проект договора и пример отчёта по объекту за месяц. Готовы к тестовому объекту со скидкой 15% на первые 3 месяца.</div>
+      </div>
+      <div class="chat">
+        <div class="who">B2C · онбординг · извинение</div>
+        <div class="msg out">Обиход: по объекту ул. Ленина, 12 не успели по графику до 10:00 — застряла техника на МКАД. Будем в 11:30, это подтверждено бригадиром. За опоздание — скидка 10% на текущую смету.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ DONT ═════════ -->
+<section id="dont">
+  <div class="wrap">
+    <div class="eyebrow">10 · Анти-паттерны</div>
+    <h2>Чего делать нельзя</h2>
+    <p class="lead">Из визуального брифа <a href="03_brand_naming.md"><code>03_brand_naming.md §Визуальная подача</code></a> + реалии админки из <a href="../devteam/specs/admin-visual/art-concept.md"><code>art-concept.md</code></a>.</p>
+
+    <h3>Визуал</h3>
+    <div class="dont-grid">
+      <div class="item"><b>Эко-зелёный + листочек</b><p>Generic-категория эко-подрядчиков. Наш primary — тёмный хвойный, не свежий salad.</p></div>
+      <div class="item"><b>Дерево с топором / бензопила</b><p>Фолк-архаика, территория «Дровосека» и «Лесорубов». Обиход — не про мачо, про порядок.</p></div>
+      <div class="item"><b>Рыцарь / щит / герб</b><p>Ruler-архетип мимо Caregiver-половины. Читается как ЧОП или застройщик премиум-сегмента.</p></div>
+      <div class="item"><b>Рукопожатия</b><p>B2B-штамп 2010-х, обесценивает обещание «ответственность по договору».</p></div>
+      <div class="item"><b>Твёрдый знак ДВОРЪ-style</b><p>Хипстерская ассоциация, ломает корпоративную приёмку в УК/ТСЖ.</p></div>
+      <div class="item"><b>Стоковые фото с рукавицами</b><p>Фотостиль — документальный, реальные бригады на реальных объектах. Никаких catalog-shot на белом.</p></div>
+      <div class="item"><b>Матрёшки и берёзки</b><p>Лубочная «русскость». Кириллица и Golos Text уже несут код, декор — перебор.</p></div>
+      <div class="item"><b>Градиенты в primary-кнопке</b><p>Payload-по-умолчанию-фиолетовый-градиент. Плоский #2d5a3d — бренд-штамп.</p></div>
+      <div class="item"><b>Неоновые ховеры</b><p>Hover → primary-ink #1f3f2b (−8% яркости). Не свечение, не скейл.</p></div>
+    </div>
+
+    <h3 style="margin-top: 40px;">Техно-стек</h3>
+    <p>Tilda / WordPress / Bitrix / MODX / Yii — <strong>не обсуждаются</strong>. Обоснование — <a href="04_competitor_tech_stacks.md"><code>04_competitor_tech_stacks.md</code></a>: 54% топ-13 конкурентов на WP/Bitrix с PHP 5.6-7.4 и jQuery 1.10 — это шаг назад, а не к ним.</p>
+  </div>
+</section>
+
+<!-- ═════════ TODO ═════════ -->
+<section id="todo">
+  <div class="wrap">
+    <div class="eyebrow">11 · Open items</div>
+    <h2>Чего в гайде ещё нет</h2>
+    <p class="lead">Этот документ — агрегатор того, что уже зафиксировано в коде и артефактах. Ниже — дыры, которые нужно закрывать явным заказом у <code>art</code> / внешнего дизайнера.</p>
+
+    <ol class="todo">
+      <li><strong>Финальный TM-знак</strong> — wordmark пока plain sans; нужен SVG с safe area, вариантами «знак/текст/композит», monochrome, inversion. Срок — после утверждения Роспатентом (см. roadmap в <a href="03_brand_naming.md"><code>03_brand_naming.md §Implementation Roadmap</code></a>).</li>
+      <li><strong>Favicon / OG / apple-touch-icon</strong> — размеры 16/32/48/180/512, темная/светлая тема, Android maskable.</li>
+      <li><strong>Гайд по фото-кейсам</strong> — как снимать before/after: ракурс, свет, что в кадре, что нельзя (лица клиентов, номера машин, мусор за кадром). Обязательное требование Caregiver-TOV — «реальные бригады, не сток».</li>
+      <li><strong>Иконография сервисов</strong> — линейные, один штрих, 24×24 / 32×32. Нужен комплект на 30+ услуг из <a href="../devteam/PROJECT_CONTEXT.md"><code>PROJECT_CONTEXT.md §4</code></a>.</li>
+      <li><strong>Motion-токены</strong> — durations (fast 120 / base 180 / slow 320 ms) и easings. Пока в коде только <code>transition: 0.15s ease</code>, нет системы.</li>
+      <li><strong>B2B pitch-deck template</strong> — презентация для УК/ТСЖ/FM на бренд-системе (PDF/Keynote). Отдельный артефакт `devteam/specs/b2b-pitch-deck/`.</li>
+      <li><strong>Dark theme</strong> — в админке пока клон light (см. <code>art-concept.md §2</code>). Полноценный dark — после MVP.</li>
+      <li><strong>Печатные материалы</strong> — визитки, наклейка на технику, бэйдж бригадира. Специфика: плотные CMYK-пары (primary на CMYK читается иначе).</li>
+      <li><strong>Ассеты в <code>assets/</code></strong> — папка заявлена в <a href="../CLAUDE.md"><code>CLAUDE.md §Структура проекта</code></a>, физически отсутствует. Завести при первой загрузке фото-кейсов.</li>
+    </ol>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <p>contex/07_brand_system.html · v0.1 · обновлён 2026-04-23 · единый вход в дизайн-систему Обихода</p>
+    <p>источники: <a href="03_brand_naming.md">03_brand_naming.md</a> · <a href="../site/app/globals.css">globals.css</a> · <a href="../devteam/specs/admin-visual/art-concept.md">art-concept.md</a> · <a href="../devteam/art.md">devteam/art.md</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
