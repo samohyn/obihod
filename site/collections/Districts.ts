@@ -6,7 +6,8 @@ export const Districts: CollectionConfig = {
   admin: {
     useAsTitle: 'nameNominative',
     defaultColumns: ['nameNominative', 'priority', 'distanceFromMkad'],
-    group: 'Контент',
+    group: '02 · Контент',
+    description: 'Районы Москвы и МО. Падежи заполняем для programmatic-страниц.',
   },
   versions: { drafts: true },
   access: { read: () => true },

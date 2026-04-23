@@ -6,7 +6,8 @@ export const Cases: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'service', 'district', 'dateCompleted'],
-    group: 'Контент',
+    group: '02 · Контент',
+    description: 'Реальные объекты Обихода: фото до/после, бригада, район.',
   },
   versions: { drafts: true },
   access: { read: () => true },

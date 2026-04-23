@@ -3,7 +3,11 @@ import type { CollectionConfig } from 'payload'
 export const Redirects: CollectionConfig = {
   slug: 'redirects',
   labels: { singular: 'Редирект', plural: 'Редиректы' },
-  admin: { useAsTitle: 'from', group: 'SEO' },
+  admin: {
+    useAsTitle: 'from',
+    group: '04 · SEO',
+    description: 'Редиректы 301/302/410 — переезды URL, устаревшие посадочные.',
+  },
   access: { read: () => true },
   fields: [
     {

@@ -6,7 +6,8 @@ export const Leads: CollectionConfig = {
   admin: {
     useAsTitle: 'phone',
     defaultColumns: ['phone', 'name', 'service', 'district', 'status', 'createdAt'],
-    group: 'CRM',
+    group: '01 · Заявки',
+    description: 'Входящие лиды с сайта — телефон, канал связи, черновик сметы.',
   },
   access: {
     read: ({ req }) =>

@@ -1,1 +1,106 @@
-/* Custom admin styles for Payload — пока пусто, заполним под бренд позже */
+/*
+ * Обиход — кастомизация Payload admin.
+ *
+ * Палитра — по art-концепту devteam/specs/admin-visual/art-concept.md (WCAG AA).
+ * Источник — site/app/globals.css: один бренд у паблика и админки.
+ * Стратегия: переопределяем цветовые токены Payload, layout/typography-scale
+ * не трогаем. Тёмная тема — клон светлой до первой продовой потребности.
+ */
+
+:root {
+  /* ---------- Brand palette ---------- */
+  --brand-obihod-ink: #1c1c1c; /* основной текст, заголовки */
+  --brand-obihod-ink-soft: #2b2b2b; /* вторичный текст ячеек */
+  --brand-obihod-muted: #6b6256; /* admin.description, placeholder (подтянут с #8c8377 ради 4.5:1) */
+  --brand-obihod-paper: #f7f5f0; /* кремовый фон, основной */
+  --brand-obihod-paper-warm: #efebe0; /* чередование строк, sticky-хедер */
+  --brand-obihod-surface: #ffffff; /* белая карточка поля */
+  --brand-obihod-border: #e6e1d6;
+  --brand-obihod-primary: #2d5a3d; /* тёмно-зелёный штамп бренда */
+  --brand-obihod-primary-ink: #1f3f2b;
+  --brand-obihod-accent: #e6a23c; /* янтарный — статусы, badges */
+  --brand-obihod-warning: #c18724;
+  --brand-obihod-danger: #b54828;
+  --brand-obihod-on-primary: #f7f5f0; /* текст на зелёном фоне */
+
+  /* ---------- Payload base (light theme) ---------- */
+  /* Переопределяем --color-base-*, от них наследуются --theme-elevation-*. */
+  --color-base-0: #f7f5f0; /* paper */
+  --color-base-50: #efebe0;
+  --color-base-100: #e6e1d6;
+  --color-base-150: #d6d0bf;
+  --color-base-200: #c4bca7;
+  --color-base-250: #b0a68e;
+  --color-base-300: #9a9079;
+  --color-base-350: #857b66;
+  --color-base-400: #716856;
+  --color-base-450: #6b6256;
+  --color-base-500: #57503f;
+  --color-base-550: #4a4437;
+  --color-base-600: #3d382f;
+  --color-base-650: #332f27;
+  --color-base-700: #2b2b2b;
+  --color-base-750: #26241d;
+  --color-base-800: #1c1c1c;
+  --color-base-850: #15140f;
+  --color-base-900: #111111;
+  --color-base-950: #080808;
+  --color-base-1000: #000000;
+
+  /* ---------- Success = бренд-зелёный ---------- */
+  --color-success-400: #3d7550;
+  --color-success-450: #336644;
+  --color-success-500: #2d5a3d;
+  --color-success-550: #264d34;
+  --color-success-600: #1f3f2b;
+
+  /* ---------- Warning = янтарный ---------- */
+  --color-warning-400: #f0b558;
+  --color-warning-450: #eaac48;
+  --color-warning-500: #e6a23c;
+  --color-warning-550: #d29232;
+  --color-warning-600: #c18724;
+
+  /* Error оставляем Payload-дефолт — ошибка должна быть узнаваемо «красной». */
+
+  /* ---------- Typography ---------- */
+  /* Inter для кириллицы + системный fallback. External-шрифты не грузим. */
+  --font-body:
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  --font-mono:
+    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ---------- Aliases для прямых обращений в компонентах ---------- */
+  --theme-success-500: var(--brand-obihod-primary);
+  --theme-warning-500: var(--brand-obihod-accent);
+}
+
+/* Dark — клон light до первой продовой потребности.
+ * Инвертируем paper/ink, accent и primary оставляем. */
+html[data-theme='dark'] {
+  --brand-obihod-ink: #f7f5f0;
+  --brand-obihod-ink-soft: #e6e1d6;
+  --brand-obihod-paper: #15140f;
+  --brand-obihod-paper-warm: #1c1c1c;
+  --brand-obihod-surface: #1c1c1c;
+  --brand-obihod-border: #2b2b2b;
+  --brand-obihod-muted: #a69c7e;
+
+  --color-base-0: #15140f;
+  --color-base-50: #1c1c1c;
+  --color-base-100: #26241d;
+  --color-base-150: #2b2b2b;
+  --color-base-200: #3d382f;
+  --color-base-900: #efebe0;
+  --color-base-1000: #f7f5f0;
+}
+
+/* Tabular nums для всех чисел в admin — ID заявок, цены, счётчики.
+ * Паттерн зеркальный с globals.css паблик-сайта. */
+.payload__app,
+.payload__app input,
+.payload__app table,
+.payload__app code {
+  font-variant-numeric: tabular-nums;
+}

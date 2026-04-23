@@ -53,9 +53,7 @@ const validateSocialUrl: Validate = (value, { siblingData }) => {
 }
 
 const validateE164: Validate = (v) =>
-  typeof v === 'string' && E164_RE.test(v)
-    ? true
-    : 'Формат E.164: +7XXXXXXXXXX (11 цифр)'
+  typeof v === 'string' && E164_RE.test(v) ? true : 'Формат E.164: +7XXXXXXXXXX (11 цифр)'
 
 const validateInn: Validate = (v) =>
   typeof v === 'string' && INN_RE.test(v) ? true : 'ИНН — 10 или 12 цифр'
@@ -121,9 +119,8 @@ export const SiteChrome: GlobalConfig = {
   slug: 'site-chrome',
   label: 'Site Chrome (Header / Footer)',
   admin: {
-    description:
-      'Всё, что про «рамку сайта»: шапка, футер, контакты, реквизиты, соцсети.',
-    group: 'Контент',
+    description: 'Всё, что про «рамку сайта»: шапка, футер, контакты, реквизиты, соцсети.',
+    group: '05 · Рамка сайта',
   },
   access: {
     read: () => true,
@@ -139,13 +136,9 @@ export const SiteChrome: GlobalConfig = {
           const { revalidateTag, revalidatePath } = await import('next/cache')
           revalidateTag('site-chrome', 'max')
           revalidatePath('/', 'layout')
-          req.payload.logger.info(
-            `[site-chrome] revalidated at ${new Date().toISOString()}`,
-          )
+          req.payload.logger.info(`[site-chrome] revalidated at ${new Date().toISOString()}`)
         } catch (e) {
-          req.payload.logger.error(
-            `[site-chrome] revalidate failed: ${(e as Error).message}`,
-          )
+          req.payload.logger.error(`[site-chrome] revalidate failed: ${(e as Error).message}`)
         }
       },
     ],
@@ -190,8 +183,7 @@ export const SiteChrome: GlobalConfig = {
                       maxLength: 40,
                       defaultValue: 'calc',
                       admin: {
-                        condition: (_d, s) =>
-                          (s as MenuItemShape | undefined)?.kind === 'anchor',
+                        condition: (_d, s) => (s as MenuItemShape | undefined)?.kind === 'anchor',
                       },
                       validate: validateMenuItem,
                     },
@@ -200,8 +192,7 @@ export const SiteChrome: GlobalConfig = {
                       type: 'text',
                       maxLength: 120,
                       admin: {
-                        condition: (_d, s) =>
-                          (s as MenuItemShape | undefined)?.kind === 'route',
+                        condition: (_d, s) => (s as MenuItemShape | undefined)?.kind === 'route',
                       },
                       validate: validateMenuItem,
                     },
@@ -210,8 +201,7 @@ export const SiteChrome: GlobalConfig = {
                       type: 'text',
                       maxLength: 500,
                       admin: {
-                        condition: (_d, s) =>
-                          (s as MenuItemShape | undefined)?.kind === 'external',
+                        condition: (_d, s) => (s as MenuItemShape | undefined)?.kind === 'external',
                       },
                       validate: validateMenuItem,
                     },
@@ -258,8 +248,7 @@ export const SiteChrome: GlobalConfig = {
                   defaultValue: '© Обиход,',
                   maxLength: 60,
                   admin: {
-                    description:
-                      'Префикс копирайтной строки. Год добавляется автоматически.',
+                    description: 'Префикс копирайтной строки. Год добавляется автоматически.',
                   },
                 },
               ],
@@ -300,8 +289,7 @@ export const SiteChrome: GlobalConfig = {
                   name: 'email',
                   type: 'email',
                   admin: {
-                    description:
-                      'Опционально. Если заполнен — рендерится в футере',
+                    description: 'Опционально. Если заполнен — рендерится в футере',
                   },
                 },
               ],
@@ -322,8 +310,7 @@ export const SiteChrome: GlobalConfig = {
                   type: 'text',
                   maxLength: 120,
                   admin: {
-                    description:
-                      'Например «ООО «Обиход-МО»» — заполнить после регистрации',
+                    description: 'Например «ООО «Обиход-МО»» — заполнить после регистрации',
                   },
                 },
                 {
@@ -333,8 +320,7 @@ export const SiteChrome: GlobalConfig = {
                   maxLength: 12,
                   defaultValue: '7847729123',
                   admin: {
-                    description:
-                      'временный ИНН, подлежит замене при регистрации юрлица Обиход',
+                    description: 'временный ИНН, подлежит замене при регистрации юрлица Обиход',
                   },
                   validate: validateInn,
                 },

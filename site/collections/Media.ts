@@ -2,6 +2,11 @@ import type { CollectionConfig } from 'payload'
 
 export const Media: CollectionConfig = {
   slug: 'media',
+  labels: { singular: 'Медиа', plural: 'Медиа' },
+  admin: {
+    group: '03 · Медиа',
+    description: 'Фото объектов, OG-картинки, сканы документов.',
+  },
   access: { read: () => true },
   upload: {
     staticDir: 'media',

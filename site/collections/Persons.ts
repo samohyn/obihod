@@ -6,7 +6,8 @@ export const Persons: CollectionConfig = {
   admin: {
     useAsTitle: 'lastName',
     defaultColumns: ['lastName', 'firstName', 'jobTitle'],
-    group: 'Контент',
+    group: '02 · Контент',
+    description: 'Команда: арбористы, бригадиры, промальпинисты. E-E-A-T для SEO.',
   },
   access: { read: () => true },
   fields: [

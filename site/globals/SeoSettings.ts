@@ -21,7 +21,7 @@ export const SeoSettings: GlobalConfig = {
   label: 'SEO Settings',
   admin: {
     description: 'Глобальные SEO-настройки Обихода (verification, credentials, OG)',
-    group: 'SEO',
+    group: '04 · SEO',
   },
   access: { read: () => true },
   fields: [

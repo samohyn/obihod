@@ -21,7 +21,8 @@ export const ServiceDistricts: CollectionConfig = {
   admin: {
     useAsTitle: 'computedTitle',
     defaultColumns: ['computedTitle', 'publishStatus', 'uniquenessScore'],
-    group: 'Programmatic SEO',
+    group: '02 · Контент',
+    description: 'Programmatic-посадочные услуга × район. Без кейса — noindex.',
   },
   versions: { drafts: true },
   indexes: [{ fields: ['service', 'district'], unique: true }],

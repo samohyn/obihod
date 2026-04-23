@@ -6,7 +6,8 @@ export const Services: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'priceFrom', 'priceTo'],
-    group: 'Контент',
+    group: '02 · Контент',
+    description: 'Четыре направления Обихода: арбористика, крыши, мусор, демонтаж.',
   },
   versions: { drafts: { autosave: { interval: 2000 } } },
   access: { read: () => true },

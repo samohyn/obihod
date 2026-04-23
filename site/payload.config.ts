@@ -30,6 +30,12 @@ export default buildConfig({
       titleSuffix: '— Обиход admin',
       icons: [{ rel: 'icon', type: 'image/png', url: '/favicon.ico' }],
     },
+    components: {
+      graphics: {
+        Logo: '@/components/admin/BrandLogo',
+        Icon: '@/components/admin/BrandIcon',
+      },
+    },
   },
   collections: [
     Users,

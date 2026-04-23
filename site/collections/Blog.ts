@@ -6,7 +6,8 @@ export const Blog: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'category', 'publishedAt', 'modifiedAt'],
-    group: 'Контент',
+    group: '02 · Контент',
+    description: 'Статьи и гайды по четырём направлениям + B2B/регуляторика.',
   },
   versions: { drafts: { autosave: true } },
   access: { read: () => true },

@@ -6,7 +6,8 @@ export const B2BPages: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'audience'],
-    group: 'Контент',
+    group: '02 · Контент',
+    description: 'Посадочные для УК, ТСЖ, FM, застройщиков и госзаказа.',
   },
   versions: { drafts: true },
   access: { read: () => true },
