@@ -1,0 +1,76 @@
+name: Admin rebuild (importmap + PM2 restart)
+
+# Пересобирает Payload admin importMap на VPS и перезапускает PM2, чтобы
+# новые globals / collections появились в navigation админки.
+#
+# Когда запускать: после мержа PR, добавляющего global или collection,
+# если в /admin слева меню не подхватило новый раздел (или соответствующая
+# страница белая). Это компенсация отсутствующего шага
+# `pnpm generate:importmap` в deploy.yml.
+#
+# Follow-up: включить generate:importmap в deploy build — тогда workflow
+# станет не нужен.
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Напиши "rebuild" чтобы подтвердить'
+        required: true
+        default: 'rebuild'
+
+concurrency:
+  group: admin-rebuild
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    name: generate:importmap + pm2 restart
+    runs-on: ubuntu-latest
+    steps:
+      - name: Guard
+        run: |
+          if [ "${{ inputs.confirm }}" != "rebuild" ]; then
+            echo "::error::confirm != rebuild"
+            exit 1
+          fi
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.BEGET_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p ${{ secrets.BEGET_SSH_PORT || '22' }} -H ${{ secrets.BEGET_SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Run generate:importmap + pm2 restart
+        env:
+          BP: ${{ secrets.BEGET_DEPLOY_PATH }}
+          APP: ${{ secrets.BEGET_APP_NAME || 'obikhod' }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o ServerAliveInterval=15 \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
+            "set -eu
+             cd ${BP}/current
+             set -a; . ./.env; set +a
+             echo '>> generate:importmap'
+             pnpm run generate:importmap 2>&1 | tail -20
+             echo '>> pm2 restart ${APP}'
+             pm2 restart ${APP} --update-env
+             pm2 save
+             echo '>> pm2 status'
+             pm2 list" | tee rebuild.log
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: admin-rebuild-${{ github.run_id }}
+          path: rebuild.log
+          retention-days: 7
+
+      - name: Smoke check /admin
+        run: |
+          URL="${{ secrets.NEXT_PUBLIC_SITE_URL || format('https://{0}', secrets.BEGET_SSH_HOST) }}"
+          for i in $(seq 1 20); do
+            code=$(curl -sLo /dev/null -w "%{http_code}" -m 5 "$URL/admin/" || echo 000)
+            [ "$code" = "200" ] && { echo "admin ok after ${i}×3s"; break; }
+            sleep 3
+          done
