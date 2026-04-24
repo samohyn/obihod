@@ -25,6 +25,12 @@ concurrency:
   group: deploy-beget
   cancel-in-progress: false
 
+# contents: write — нужен для gh release create/delete (transport через GH Release).
+# actions: read — для чтения artifact-метаданных, если понадобится.
+permissions:
+  contents: write
+  actions: read
+
 jobs:
   preflight:
     name: Preflight — проверка secrets
@@ -187,15 +193,44 @@ jobs:
           path: deploy.tar.gz
           retention-days: 3
 
+      - name: Upload bundle to GitHub Release (temporary CDN transport)
+        # Инцидент 2026-04-24: 3 deploy подряд упали на upload через
+        # scp/rsync (Azure US runner → Beget VPS Москва):
+        #   #24899732696 — scp висел час, cancel
+        #   #24902797606 — rsync на 36%, cancel
+        #   #24904084197 — rsync на 77%, TCP reset, scp-fallback сломан
+        # Bottleneck — прямое TCP-соединение, ~50 KB/s и нестабильно.
+        # Решение: tar.gz → GitHub Release asset (внутри Azure infra,
+        # 50+ MB/s) → VPS curl'ит через GitHub CDN (Fastly edge ноды
+        # в РФ/Европе, обычно 5-20 MB/s в Москве).
+        # Release временный — удаляется в cleanup step deploy job.
+        # working-directory переопределяется на root, потому что tar
+        # пишет в ../deploy.tar.gz относительно site/ (т.е. в workspace root).
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REL: ${{ github.sha }}
+        working-directory: ${{ github.workspace }}
+        run: |
+          set -eu
+          TAG="deploy-${REL}"
+          ls -lh deploy.tar.gz
+          SIZE=$(stat -c%s deploy.tar.gz)
+          echo ">> bundle size: $SIZE bytes ($((SIZE / 1024 / 1024)) MB)"
+          echo ">> creating release $TAG with asset"
+          time gh release create "$TAG" \
+            --repo "${{ github.repository }}" \
+            --target "${{ github.sha }}" \
+            --prerelease \
+            --title "Temp deploy bundle $REL" \
+            --notes "Temporary transport bundle for deploy ${REL}. Auto-deleted after successful deploy. If you see this — deploy job либо в процессе, либо упал между upload и cleanup." \
+            deploy.tar.gz
+          echo ">> release created OK"
+
   deploy:
-    name: Rsync to Beget + reload PM2
+    name: Deploy via GitHub Release CDN + reload PM2
     needs: [preflight, build]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: deploy-bundle
-
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
@@ -237,75 +272,83 @@ jobs:
                echo 'PAYLOAD_PREVIEW_SECRET добавлен в shared/.env'
              fi"
 
-      - name: Upload release bundle
-        # Инцидент 2026-04-24 (run 24899732696): scp висел час без прогресса
-        # на transfer 173 MB (GH Azure runner → Beget VPS РФ). Root cause —
-        # NAT state timeout / SSH idle drop без keepalive + отсутствие
-        # application-level timeout. Фикс: rsync (resumable + прогресс) поверх
-        # ssh с ServerAliveInterval, обёрнутый в timeout + 3 retry. Fallback
-        # на scp --verbose при полном провале — для диагностики.
+      - name: Resolve GitHub Release asset URL
+        # Используем apiUrl ассета (https://api.github.com/.../assets/<id>):
+        # с Accept: application/octet-stream + Authorization: Bearer <token>
+        # GitHub редиректит на CDN URL (Fastly, edge ноды в Москве/СПб).
+        # Token обязателен — без него на api.github.com asset endpoint 404.
+        # browserDownloadUrl тоже работает (public редирект на CDN), но через
+        # apiUrl плюс token надёжнее с rate limit (5000/h vs 60/h).
+        id: asset
         env:
+          GH_TOKEN: ${{ github.token }}
           REL: ${{ github.sha }}
-          SSH_USER: ${{ secrets.BEGET_SSH_USER }}
-          SSH_HOST: ${{ secrets.BEGET_SSH_HOST }}
-          SSH_PORT: ${{ secrets.BEGET_SSH_PORT || '22' }}
-          DEPLOY_PATH: ${{ secrets.BEGET_DEPLOY_PATH }}
         run: |
           set -eu
-          ls -lh deploy.tar.gz
-          SIZE=$(stat -c%s deploy.tar.gz)
-          echo ">> bundle size: $SIZE bytes ($((SIZE / 1024 / 1024)) MB)"
-
-          SSH_OPTS="-i ~/.ssh/deploy_key -p $SSH_PORT \
-            -o ServerAliveInterval=20 \
-            -o ServerAliveCountMax=6 \
-            -o ConnectTimeout=30 \
-            -o TCPKeepAlive=yes \
-            -o IPQoS=throughput"
-
-          DEST="$SSH_USER@$SSH_HOST:$DEPLOY_PATH/releases/$REL/deploy.tar.gz"
-
-          upload_rsync() {
-            # rsync --partial — возобновляет прерванный transfer;
-            # --timeout=120 — вываливается если нет I/O 2 минуты (а не час);
-            # --info=progress2 — одна линия с прогрессом в CI log.
-            timeout 900 rsync -av --partial --inplace \
-              --timeout=120 --info=progress2 \
-              -e "ssh $SSH_OPTS" \
-              deploy.tar.gz \
-              "$DEST"
-          }
-
-          upload_scp_verbose() {
-            # Fallback: даже если не сработает — -v покажет ГДЕ именно висит.
-            timeout 900 scp $SSH_OPTS -v \
-              deploy.tar.gz \
-              "$DEST"
-          }
-
-          ok=0
-          for attempt in 1 2 3; do
-            echo ">> upload attempt $attempt/3 via rsync"
-            if upload_rsync; then
-              ok=1
+          TAG="deploy-${REL}"
+          # Ждём до 30 секунд пока asset проиндексируется в GH API
+          for i in $(seq 1 15); do
+            URL=$(gh release view "$TAG" --repo "${{ github.repository }}" \
+                    --json assets --jq '.assets[] | select(.name == "deploy.tar.gz") | .apiUrl' 2>/dev/null || true)
+            if [ -n "$URL" ]; then
               break
             fi
-            echo "::warning::rsync attempt $attempt failed (exit $?), sleeping 20s before retry"
-            sleep 20
+            echo ">> asset not ready yet (attempt $i/15), sleeping 2s"
+            sleep 2
           done
-
-          if [ "$ok" != "1" ]; then
-            echo "::warning::rsync provided 3 failures — fallback to verbose scp for diagnostics"
-            if upload_scp_verbose; then
-              ok=1
-            fi
-          fi
-
-          if [ "$ok" != "1" ]; then
-            echo "::error::bundle upload failed after retries — see verbose log above"
+          if [ -z "$URL" ]; then
+            echo "::error::could not resolve asset URL for release $TAG"
+            gh release view "$TAG" --repo "${{ github.repository }}" || true
             exit 1
           fi
-          echo ">> upload ok"
+          echo "asset_url=$URL" >> "$GITHUB_OUTPUT"
+          echo ">> asset url: $URL"
+
+      - name: Download release bundle to VPS via GitHub CDN
+        # Транспорт: VPS → GitHub Release asset через api.github.com
+        # с redirect на Fastly CDN. Edge ноды Fastly есть в Москве/СПб —
+        # ожидаем 5-20 MB/s вместо 50 KB/s с Azure US runner напрямую.
+        # Token нужен для access к private/internal asset URL (даже на public
+        # репо api.github.com asset endpoint требует auth) + для увеличения
+        # rate limit с 60/h до 5000/h. Передаём токен через stdin в bash -s,
+        # не через cmdline, чтобы не светить в `ps aux` на VPS.
+        env:
+          REL: ${{ github.sha }}
+          ASSET_URL: ${{ steps.asset.outputs.asset_url }}
+          GH_PAT: ${{ github.token }}
+          BP: ${{ secrets.BEGET_DEPLOY_PATH }}
+        run: |
+          set -eu
+          echo ">> asset url: $ASSET_URL"
+          # Heredoc БЕЗ кавычек ('REMOTE' vs REMOTE) → runner подставляет
+          # $GH_PAT/$ASSET_URL/$REL/$BP в текст, отдаёт ssh stdin'ом.
+          # Внутри bash -s они уже как литералы (export GH_TOKEN=...).
+          # Так токен не попадает в argv процесса на VPS.
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
+              -o ServerAliveInterval=30 -o ConnectTimeout=30 -o TCPKeepAlive=yes \
+              ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
+              'bash -s' <<REMOTE
+          set -eu
+          export GH_TOKEN='${GH_PAT}'
+          ASSET_URL='${ASSET_URL}'
+          REL='${REL}'
+          BP='${BP}'
+          cd "\$BP/releases/\$REL"
+          echo '>> download from GitHub Release CDN'
+          time curl -fsSL --retry 3 --retry-delay 5 --max-time 1200 \\
+              -H "Authorization: Bearer \$GH_TOKEN" \\
+              -H "Accept: application/octet-stream" \\
+              -o deploy.tar.gz \\
+              "\$ASSET_URL"
+          ls -lh deploy.tar.gz
+          # Sanity: бандл ожидается > 50 MB (текущие ~173 MB).
+          SIZE=\$(stat -c%s deploy.tar.gz)
+          if [ "\$SIZE" -lt 50000000 ]; then
+            echo "::error::downloaded bundle suspiciously small: \$SIZE bytes"
+            exit 1
+          fi
+          echo ">> download OK: \$SIZE bytes (\$((SIZE / 1024 / 1024)) MB)"
+          REMOTE
 
       - name: Unpack release + link shared .env
         env:
@@ -416,3 +459,21 @@ jobs:
             exit 1
           fi
           echo "Deploy OK: home=$home, deep health=$deep"
+
+      - name: Cleanup temp GitHub Release (delete asset + tag)
+        # Release был только транспортным контейнером, постоянное место —
+        # код в git + relevant tag в repo (если будет). Чистим всегда:
+        # if: always() — даже при failed deploy чтобы не копились orphan tags.
+        # Best-effort: не фейлим job если cleanup упал (release может уже
+        # быть удалён вручную, например).
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REL: ${{ github.sha }}
+        run: |
+          TAG="deploy-${REL}"
+          echo ">> cleaning up release $TAG"
+          gh release delete "$TAG" \
+              --repo "${{ github.repository }}" \
+              --yes --cleanup-tag 2>&1 \
+            || echo "::warning::cleanup of $TAG failed (already gone or rate-limited) — skipping"
