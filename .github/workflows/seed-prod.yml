@@ -52,12 +52,29 @@ jobs:
     needs: preflight
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo (для scripts/seed.ts — его нет в prod-артефакте)
+        uses: actions/checkout@v4
+
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.BEGET_SSH_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -p ${{ secrets.BEGET_SSH_PORT || '22' }} -H ${{ secrets.BEGET_SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Upload scripts/seed.ts to VPS
+        run: |
+          set -eo pipefail
+          # deploy.yml filelist не включает scripts/ (ADR-backlog: расширить filelist
+          # вместе с миграциями tsx → node-compat). На время fallback докидываем
+          # seed.ts точечно через scp — payload.config.ts уже на VPS из deploy.
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
+            "mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/current/scripts"
+          scp -i ~/.ssh/deploy_key -P ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            -o StrictHostKeyChecking=no \
+            site/scripts/seed.ts \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/scripts/seed.ts
 
       - name: Run seed via SSH
         run: |
@@ -72,6 +89,7 @@ jobs:
             -o ServerAliveInterval=15 \
             ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
             "set -eux
+             mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/current/scripts
              cd ${{ secrets.BEGET_DEPLOY_PATH }}/current
              set -a
              . ./.env
