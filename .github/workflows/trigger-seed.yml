@@ -64,10 +64,13 @@ jobs:
           mkdir -p seed-logs
           LOG_FILE="seed-logs/api-seed-$(date -u +%Y%m%dT%H%M%SZ).json"
 
-          echo ">> POST $SITE_URL/api/seed"
+          # Next.js trailingSlash=true: без / на конце получаем 308 redirect,
+          # POST через redirect теряет body. Явный trailing slash + -L --post301
+          # --post302 --post303 чтобы re-POST на любой redirect chain.
+          echo ">> POST $SITE_URL/api/seed/"
           # --max-time 600 — seed может занимать минуты (28 SD + 4 services + 7 districts).
-          # -w "\n%{http_code}" — добавляет HTTP code в конец ответа.
-          HTTP_CODE=$(curl -sS -X POST "$SITE_URL/api/seed" \
+          HTTP_CODE=$(curl -sSL -X POST "$SITE_URL/api/seed/" \
+            --post301 --post302 --post303 \
             -H "x-revalidate-secret: $SECRET" \
             -H "Content-Type: application/json" \
             --max-time 600 \
