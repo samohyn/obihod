@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200">
+  <title>Обиход — знак (mark без текста)</title>
+  <desc>Круг сезонов без wordmark и подписей квадрантов. Для marketing header, avatar Telegram/MAX/Wazzup, social OG-мета. Для favicon 16-32px — использовать mark-simple.svg (детализация теряется).</desc>
+
+  <defs>
+    <style>
+      .stroke-main { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+      .stroke-soft { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; opacity: 0.75; }
+      .stroke-thick { fill: none; stroke: currentColor; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+      .fill-ink { fill: currentColor; }
+    </style>
+  </defs>
+
+  <g color="#2d5a3d">
+    <!-- Outer ring -->
+    <circle cx="600" cy="600" r="560" class="stroke-thick"/>
+    <!-- Inner ring -->
+    <circle cx="600" cy="600" r="435" class="stroke-soft"/>
+    <!-- Cross axes -->
+    <line x1="40" y1="600" x2="1160" y2="600" class="stroke-soft"/>
+    <line x1="600" y1="40" x2="600" y2="1160" class="stroke-soft"/>
+
+    <!-- NW · Весна — Осень · ёлочка -->
+    <g transform="translate(300 330)">
+      <line x1="0" y1="-150" x2="0" y2="150" class="stroke-main"/>
+      <g class="stroke-main">
+        <line x1="0" y1="-20" x2="-60" y2="12"/>
+        <line x1="0" y1="-20" x2="60"  y2="12"/>
+        <line x1="0" y1="30"  x2="-72" y2="64"/>
+        <line x1="0" y1="30"  x2="72"  y2="64"/>
+        <line x1="0" y1="78"  x2="-72" y2="112"/>
+        <line x1="0" y1="78"  x2="72"  y2="112"/>
+        <line x1="0" y1="122" x2="-52" y2="150"/>
+        <line x1="0" y1="122" x2="52"  y2="150"/>
+      </g>
+    </g>
+
+    <!-- NE · Зима · снежинка (роза ветров) -->
+    <g transform="translate(900 330)">
+      <g class="stroke-main">
+        <line x1="0" y1="-130" x2="0" y2="130"/>
+        <line x1="-130" y1="0" x2="130" y2="0"/>
+        <line x1="-92" y1="-92" x2="92" y2="92"/>
+        <line x1="92"  y1="-92" x2="-92" y2="92"/>
+        <polyline points="-10,-118 0,-130 10,-118"/>
+        <polyline points="-10,118  0,130  10,118"/>
+        <polyline points="-118,-10 -130,0 -118,10"/>
+        <polyline points="118,-10  130,0  118,10"/>
+      </g>
+      <circle cx="0" cy="0" r="9" class="stroke-main"/>
+      <circle cx="0" cy="0" r="2.6" class="fill-ink"/>
+    </g>
+
+    <!-- SW · Круглый год · план двора -->
+    <g transform="translate(300 900)">
+      <rect x="-115" y="-70" width="230" height="140" class="stroke-main"/>
+      <line x1="-115" y1="-4" x2="115" y2="-4" class="stroke-main"/>
+      <line x1="18" y1="-70" x2="18" y2="-4" class="stroke-main"/>
+      <line x1="-42" y1="-4" x2="-42" y2="70" class="stroke-main"/>
+    </g>
+
+    <!-- SE · Круглый год · навес с вывозом -->
+    <g transform="translate(900 900)">
+      <polyline points="-100,60 -100,-60 100,-60 100,60" class="stroke-main"/>
+      <line x1="-118" y1="-60" x2="118" y2="-60" class="stroke-main"/>
+      <g class="stroke-main">
+        <line x1="-48" y1="50" x2="-48" y2="-20"/>
+        <line x1="0" y1="50" x2="0" y2="-36"/>
+        <polyline points="-14,-20 0,-36 14,-20"/>
+        <line x1="48" y1="50" x2="48" y2="-20"/>
+      </g>
+    </g>
+  </g>
+</svg>

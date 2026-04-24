@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2d5a3d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <!-- CtaBanner-блок: баннер-плашка со стрелкой вправо — призыв к действию. -->
+  <rect x="3" y="7" width="18" height="10" rx="2" />
+  <path d="M8 12h7" />
+  <path d="M13 9l3 3-3 3" />
+</svg>

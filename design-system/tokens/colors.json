@@ -1,0 +1,46 @@
+{
+  "$schema": "https://tokens.studio/schema.json",
+  "$source": "site/app/globals.css",
+  "$note": "Зеркало CSS-переменных из site/app/globals.css. При правке — менять в обоих местах или добавить генератор. Tailwind v4 пробрасывает эти же токены в utility-классы через @theme inline.",
+  "color": {
+    "primary": { "value": "#2d5a3d", "description": "Бренд-зелёный. Кнопки, активные состояния, логотип, ссылки." },
+    "primary-ink": { "value": "#1f3f2b", "description": "Hover на primary." },
+    "on-primary": { "value": "#f7f5f0", "description": "Текст и графика поверх primary." },
+    "accent": { "value": "#e6a23c", "description": "Янтарный. Бейджи, штамп-акценты. НЕ в логотипе." },
+    "accent-ink": { "value": "#c18724", "description": "Текст на accent." },
+    "ink": { "value": "#1c1c1c", "description": "Основной текст, заголовки." },
+    "ink-soft": { "value": "#2b2b2b", "description": "Вторичный текст." },
+    "muted": { "value": "#8c8377", "description": "Описания, captions, placeholder. Контраст ~3.3:1 — только на large text." },
+    "line": { "value": "#e6e1d6", "description": "Границы, разделители." },
+    "bg": { "value": "#f7f5f0", "description": "Основной фон страницы." },
+    "bg-alt": { "value": "#efebe0", "description": "Альтернативный фон (чередование секций, sticky-header таблицы)." },
+    "card": { "value": "#ffffff", "description": "Карточка / элевация." },
+    "success": { "value": "#4a7c59", "description": "Feedback success." },
+    "error": { "value": "#b54828", "description": "Validation error, danger action." }
+  },
+  "logo": {
+    "$note": "Цвет-контексты применения логотипа. Для выбора варианта — см. design-system/components/logo/logo.spec.md.",
+    "default": { "value": "{color.primary}" },
+    "inverse-bg": { "value": "{color.primary}", "description": "Фон для inverse варианта логотипа." },
+    "inverse-fg": { "value": "{color.on-primary}", "description": "Штрихи/текст на inverse фоне." },
+    "mono": { "value": "{color.ink}", "description": "Ч/б вариант для печати." },
+    "crem-bg": { "value": "#f0ead8", "description": "Фон master lockup (бумажный кремовый, чуть теплее основного bg)." }
+  },
+  "color-dark": {
+    "$note": "Зарезервированные токены dark-темы. Не активны в prod (MVP = light only per art-concept.md §2). Активация: `[data-theme='dark']` в custom.scss + layout.tsx. Контрасты посчитаны, но финальное одобрение — при запуске dark mode.",
+    "$status": "reserved, not active",
+    "primary": { "value": "#5a9174", "description": "Бренд-зелёный осветлён (+16% L) чтобы работать на тёмном фоне. Контраст 4.7:1 на bg-dark = AA body, AAA large." },
+    "primary-ink": { "value": "#4a7d64", "description": "Hover primary в dark — ещё темнее." },
+    "on-primary": { "value": "#f0ead8", "description": "Тот же кремовый — остаётся на бренд-зелёном." },
+    "accent": { "value": "#f3b961", "description": "Янтарный осветлён для dark контекста (4.7:1 на bg-dark)." },
+    "ink": { "value": "#f0ead8", "description": "Инвертированный — кремовый как основной текст." },
+    "ink-soft": { "value": "#c8c3b6", "description": "Вторичный текст в dark." },
+    "muted": { "value": "#8a8479", "description": "Description / placeholder. Контраст 4.5:1 на bg-dark." },
+    "line": { "value": "#2f2d27", "description": "Границы, разделители в dark." },
+    "bg": { "value": "#1a1916", "description": "Основной фон dark-темы — не чёрный, а тёплый графит (Обиход = природа, не cyberpunk)." },
+    "bg-alt": { "value": "#25231e", "description": "Альт-фон (секции, sticky-header таблицы)." },
+    "card": { "value": "#2a2822", "description": "Карточка / элевация." },
+    "success": { "value": "#6ba57f", "description": "Feedback success в dark." },
+    "error": { "value": "#d46a47", "description": "Error / danger в dark." }
+  }
+}

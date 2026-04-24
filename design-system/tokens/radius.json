@@ -1,0 +1,13 @@
+{
+  "$schema": "https://tokens.studio/schema.json",
+  "$source": "site/app/globals.css",
+  "$note": "Углы закруглений. Обиход — inженерный чертёж, но не острый и не техничный: 6-16 px радиусы дают «сервисное» ощущение без CMS-игрушечности. Острые углы 0 — только для разделителей и рамок-линеек.",
+  "radius": {
+    "none": { "value": "0", "description": "Разделители, линейные рамки, административные блоки" },
+    "sm": { "value": "6px", "description": "Маленькие элементы — BrandIcon tile, chips, тэги" },
+    "md": { "value": "10px", "description": "Базовый — кнопки, инпуты, карточки. = --radius" },
+    "lg": { "value": "12px", "description": "btn-lg, диалоги" },
+    "xl": { "value": "16px", "description": "Большие карточки, hero-блоки. = --radius-lg" },
+    "full": { "value": "9999px", "description": "Только для bullet/dot/status-indicator" }
+  }
+}
