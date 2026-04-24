@@ -1,0 +1,127 @@
+name: Trigger seed via /api/seed (HTTP fallback)
+
+# Альтернативный workflow для запуска seed на prod через HTTP-эндпоинт
+# `POST /api/seed` (см. site/app/api/seed/route.ts).
+#
+# Контекст:
+#   - Основной seed-runner — `pnpm seed:prod` через SSH (ADR-0001).
+#   - Fallback через scripts/seed.ts — workflow `seed-prod.yml` (тоже SSH).
+#   - Этот workflow — самый быстрый канал для re-seed: дёргает HTTP endpoint
+#     с REVALIDATE_SECRET. Endpoint идемпотентен — пропускает существующие
+#     записи. Безопасно повторно запускать.
+#
+# Когда использовать:
+#   - Нужно быстро досеять недостающие коллекции (например, 27 SD после
+#     частичного seed).
+#   - SSH-варианты блокируются (Node 22 ломает tsx-loader, сетевая ошибка).
+#
+# Требуемые secrets: REVALIDATE_SECRET, NEXT_PUBLIC_SITE_URL.
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Введи "seed" для подтверждения прогона seed на prod'
+        required: true
+        default: ''
+
+concurrency:
+  group: seed-prod
+  cancel-in-progress: false
+
+jobs:
+  trigger:
+    name: POST /api/seed
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Validate confirm input
+        run: |
+          if [ "${{ inputs.confirm }}" != "seed" ]; then
+            echo "::error::Нужно явно подтвердить прогон словом 'seed' в input."
+            exit 1
+          fi
+
+      - name: Validate secrets
+        env:
+          SECRET: ${{ secrets.REVALIDATE_SECRET }}
+          SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+        run: |
+          if [ -z "$SECRET" ]; then
+            echo "::error::REVALIDATE_SECRET не задан в GitHub Secrets."
+            exit 1
+          fi
+          if [ -z "$SITE_URL" ]; then
+            echo "::warning::NEXT_PUBLIC_SITE_URL не задан, использую https://obikhod.ru"
+          fi
+
+      - name: POST /api/seed
+        env:
+          SECRET: ${{ secrets.REVALIDATE_SECRET }}
+          SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru' }}
+        run: |
+          set -eo pipefail
+          mkdir -p seed-logs
+          LOG_FILE="seed-logs/api-seed-$(date -u +%Y%m%dT%H%M%SZ).json"
+
+          echo ">> POST $SITE_URL/api/seed"
+          # --max-time 600 — seed может занимать минуты (28 SD + 4 services + 7 districts).
+          # -w "\n%{http_code}" — добавляет HTTP code в конец ответа.
+          HTTP_CODE=$(curl -sS -X POST "$SITE_URL/api/seed" \
+            -H "x-revalidate-secret: $SECRET" \
+            -H "Content-Type: application/json" \
+            --max-time 600 \
+            -o "$LOG_FILE" \
+            -w "%{http_code}")
+
+          echo ">> HTTP $HTTP_CODE"
+          echo ">> Response saved to $LOG_FILE"
+          # JSON pretty-print если jq доступен
+          if command -v jq >/dev/null 2>&1; then
+            jq '.' "$LOG_FILE" || cat "$LOG_FILE"
+          else
+            cat "$LOG_FILE"
+          fi
+
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "::error::Seed endpoint вернул HTTP $HTTP_CODE"
+            exit 1
+          fi
+
+          # Проверяем ok=true в ответе (если jq доступен)
+          if command -v jq >/dev/null 2>&1; then
+            OK=$(jq -r '.ok' "$LOG_FILE")
+            if [ "$OK" != "true" ]; then
+              echo "::error::Seed endpoint вернул ok=$OK"
+              exit 1
+            fi
+            CREATED=$(jq -r '.totals.created' "$LOG_FILE")
+            SKIPPED=$(jq -r '.totals.skipped' "$LOG_FILE")
+            UPDATED=$(jq -r '.totals.updated' "$LOG_FILE")
+            ERRORS=$(jq -r '.totals.errors' "$LOG_FILE")
+            echo "::notice::Seed итог — создано: $CREATED, пропущено: $SKIPPED, обновлено: $UPDATED, ошибок: $ERRORS"
+          fi
+
+      - name: Smoke check 28 SD routes
+        if: always()
+        env:
+          SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru' }}
+        run: |
+          set +e
+          echo "service × district → http_code"
+          echo "================================"
+          for dist in odincovo krasnogorsk mytishchi khimki istra pushkino ramenskoye; do
+            for svc in arboristika ochistka-krysh vyvoz-musora demontazh; do
+              code=$(curl -s -o /dev/null -w "%{http_code}" "$SITE_URL/$svc/$dist/" --max-time 30)
+              echo "$svc × $dist → $code"
+            done
+          done
+          echo "================================"
+
+      - name: Upload seed log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-seed-log
+          path: seed-logs/
+          retention-days: 30
