@@ -470,9 +470,7 @@ async function main() {
   const seoStats = ensureStats(cs, 'globals/seo-settings')
   try {
     const seo = await payload.findGlobal({ slug: 'seo-settings' })
-    const hasCredentials = Array.isArray(
-      (seo as { credentials?: unknown[] } | null)?.credentials,
-    )
+    const hasCredentials = Array.isArray((seo as { credentials?: unknown[] } | null)?.credentials)
       ? ((seo as { credentials?: unknown[] }).credentials?.length ?? 0) > 0
       : false
     if (!hasCredentials) {
@@ -518,9 +516,9 @@ async function main() {
   // через /admin, не затираем).
   const chromeStats = ensureStats(cs, 'globals/site-chrome')
   try {
-    const chrome = (await payload.findGlobal({ slug: 'site-chrome' })) as
-      | { contacts?: { phoneE164?: string } }
-      | null
+    const chrome = (await payload.findGlobal({ slug: 'site-chrome' })) as {
+      contacts?: { phoneE164?: string }
+    } | null
     if (!chrome?.contacts?.phoneE164) {
       await payload.updateGlobal({
         slug: 'site-chrome',

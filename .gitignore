@@ -19,3 +19,11 @@
 # graphify — кэш не коммитим, сам граф (graph.json, GRAPH_REPORT.md, graph.html) коммитим
 graphify-out/cache/
 graphify-out/transcripts/
+
+# Playwright скриншоты — локально, не коммитить
+screen/
+
+# Heavy media assets — не коммитим исходники, только мета и README
+assets/photos/
+assets/videos/
+assets/temp/

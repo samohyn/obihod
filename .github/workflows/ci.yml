@@ -119,7 +119,12 @@ jobs:
             sleep 1
           done
 
-      - name: "Warmup DB (dev server — Payload push:true создаёт схему по всем коллекциям)"
+      - name: "Warmup DB (dev server — push:true в dev/ci создаёт схему по всем коллекциям)"
+        # В dev/ci payload.config.ts использует push:true (см. условный expr).
+        # Это создаёт ephemeral schema с нуля по текущей Payload config.
+        # Миграция US-3 (diff к prod-state) не применяется в CI — и не должна,
+        # потому что push уже создаёт финальную схему.
+        # На проде — push:false (через NODE_ENV=production) + миграция через psql в deploy.yml.
         run: |
           pnpm dev > /tmp/dev.log 2>&1 &
           DEV=$!

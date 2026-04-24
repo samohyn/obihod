@@ -61,7 +61,9 @@ export function ogPrompt(o: OgPromptOpts): string {
       : mood === 'premium'
         ? 'clean minimalist composition, soft neutral palette, premium editorial feel'
         : 'balanced composition, muted palette, trustworthy, calm'
-  const scene = o.cluster ? SERVICE_SCENES[o.cluster] : 'suburban private house with a tidy yard, Russia'
+  const scene = o.cluster
+    ? SERVICE_SCENES[o.cluster]
+    : 'suburban private house with a tidy yard, Russia'
   return [
     'editorial open-graph cover image, cinematic 16:9',
     scene,
@@ -88,8 +90,7 @@ export function caseVizPrompt(o: CaseVizPromptOpts): string {
       'a metal pitched roof of a suburban cottage covered with heavy compacted snow and icicles hanging over the edge',
     musor:
       'a private lot littered with construction debris, broken bricks, plastic bags, messy piles',
-    demontazh:
-      'a dilapidated wooden shed with rotten boards, sagging roof, tools scattered around',
+    demontazh: 'a dilapidated wooden shed with rotten boards, sagging roof, tools scattered around',
   }
   const afterScene: Record<ServiceCluster, string> = {
     arboristika:

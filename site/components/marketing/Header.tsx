@@ -27,12 +27,9 @@ export async function Header() {
   const contacts = chrome.contacts ?? DEFAULT_SITE_CHROME.contacts
 
   const menu: MenuItem[] =
-    header?.menu && header.menu.length > 0
-      ? header.menu
-      : (DEFAULT_SITE_CHROME.header?.menu ?? [])
+    header?.menu && header.menu.length > 0 ? header.menu : (DEFAULT_SITE_CHROME.header?.menu ?? [])
 
-  const cta: HeaderCta | null | undefined =
-    header?.cta ?? DEFAULT_SITE_CHROME.header?.cta
+  const cta: HeaderCta | null | undefined = header?.cta ?? DEFAULT_SITE_CHROME.header?.cta
 
   const phoneDisplay = contacts?.phoneDisplay ?? ''
   const phoneE164 = contacts?.phoneE164 ?? ''
@@ -57,9 +54,7 @@ export async function Header() {
               {phoneDisplay}
             </a>
           ) : null}
-          {cta?.label ? (
-            <CtaLink cta={cta} />
-          ) : null}
+          {cta?.label ? <CtaLink cta={cta} /> : null}
         </div>
       </div>
     </nav>
@@ -96,13 +91,7 @@ function CtaLink({ cta }: { cta: HeaderCta }) {
   }
   if (cta.kind === 'external') {
     return (
-      <a
-        href={href}
-        className={className}
-        style={style}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a href={href} className={className} style={style} target="_blank" rel="noopener noreferrer">
         {label}
       </a>
     )

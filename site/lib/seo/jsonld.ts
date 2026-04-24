@@ -47,9 +47,7 @@ const MOSCOW_LON = 37.6173
 /** Рекурсивно удаляет undefined-значения (но сохраняет пустые строки только если явно переданы). */
 function stripUndefined<T>(value: T): T {
   if (Array.isArray(value)) {
-    return value
-      .map((v) => stripUndefined(v))
-      .filter((v) => v !== undefined) as unknown as T
+    return value.map((v) => stripUndefined(v)).filter((v) => v !== undefined) as unknown as T
   }
   if (value && typeof value === 'object') {
     const out: Record<string, unknown> = {}
@@ -132,12 +130,9 @@ export function organizationSchema(
   const addressLocality = nonEmpty(req?.addressLocality)
   const streetAddress = nonEmpty(req?.streetAddress)
   const postalCode = nonEmpty(req?.postalCode)
-  const hasAnyAddress =
-    addressRegion || addressLocality || streetAddress || postalCode
+  const hasAnyAddress = addressRegion || addressLocality || streetAddress || postalCode
 
-  const sameAs = social
-    .map((s) => nonEmpty(s?.url))
-    .filter((u): u is string => Boolean(u))
+  const sameAs = social.map((s) => nonEmpty(s?.url)).filter((u): u is string => Boolean(u))
 
   const credentials: Record<string, unknown>[] = []
   for (const c of seo?.credentials ?? []) {
@@ -148,9 +143,7 @@ export function organizationSchema(
       stripUndefined({
         '@type': 'EducationalOccupationalCredential',
         name: credName,
-        recognizedBy: issuer
-          ? { '@type': 'Organization', name: issuer }
-          : undefined,
+        recognizedBy: issuer ? { '@type': 'Organization', name: issuer } : undefined,
       }) as Record<string, unknown>,
     )
   }

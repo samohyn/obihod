@@ -89,6 +89,53 @@ tail /var/log/obikhod-backup.log
 sudo -u postgres pg_restore -d obikhod --clean --if-exists /var/backups/obikhod/daily/obikhod-<TS>.dump
 ```
 
+## Миграции Payload
+
+С US-3 Payload работает на proper migrations (`push: false` в `site/payload.config.ts`).
+Источник истины — `site/migrations/*.ts` (+ `.up.sql` / `.down.sql` пары).
+
+### Автоматическое применение через deploy.yml
+
+На каждый prod-деплой pipeline делает:
+
+1. **Build job:** `pnpm payload migrate` на ephemeral Postgres runner (создаёт схему
+   для `generateStaticParams` во время `next build` и для dev-warmup).
+2. **Deploy job:** после unpack и linking `shared/.env`, но **до** flip symlink и pm2 restart —
+   `pnpm payload migrate` на prod DB через SSH. Порядок критичен: миграция
+   применяется на **новом** релизе, но pm2 стартует **после**, чтобы
+   рантайм не читал схему без таблиц.
+
+Идемпотентность — через `payload_migrations` tracker-таблицу. Повторный прогон
+уже применённой миграции — no-op.
+
+### Создание новой миграции (локально)
+
+```bash
+cd site
+pnpm payload migrate:create my_change_slug
+# будет создан site/migrations/<TS>_my_change_slug.ts
+# добавь в него SQL через db.execute(sql.raw(...)) или напиши отдельные .up.sql/.down.sql
+pnpm payload migrate          # apply локально
+pnpm payload migrate:status   # проверка статуса
+```
+
+### Rollback миграции (emergency)
+
+```bash
+ssh deploy@$BEGET_SSH_HOST
+cd $BEGET_DEPLOY_PATH/current/site
+set -a; . ../../shared/.env; set +a
+
+# Вариант A — через Payload CLI (откатывает последнюю применённую):
+pnpm payload migrate:down
+
+# Вариант B — напрямую через SQL (если .down.sql существует):
+psql $DATABASE_URI -f migrations/<TS>_<slug>.down.sql
+psql $DATABASE_URI -c "DELETE FROM payload_migrations WHERE name='<TS>_<slug>'"
+
+# После rollback схемы — переключить symlink на предыдущий релиз (см. раздел Rollback ниже).
+```
+
 ## Rollback
 
 ```bash
