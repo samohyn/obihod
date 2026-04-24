@@ -89,6 +89,31 @@ tail /var/log/obikhod-backup.log
 sudo -u postgres pg_restore -d obikhod --clean --if-exists /var/backups/obikhod/daily/obikhod-<TS>.dump
 ```
 
+## Upload release bundle — SSH keepalive + rsync
+
+**Инцидент 2026-04-24 (run 24899732696):** простой `scp` шаг `Upload release bundle`
+висел ровно час без прогресса на transfer 173 MB (GH Azure runner → Beget VPS РФ),
+пока не был отменён вручную. Другие SSH-шаги (remote exec) работали — проблема
+только на долгом idle transfer.
+
+**Root cause:** NAT state timeout / SSH idle connection drop на пути GH → РФ VPS
+без keepalive, плюс отсутствие application-level timeout (scp без `-o` и без
+wrapper `timeout` ждёт бесконечно).
+
+**Фикс в `deploy.yml` → step `Upload release bundle`:**
+
+- `rsync -av --partial --inplace --timeout=120 --info=progress2` вместо `scp`:
+  - `--partial` — возобновляет прерванный transfer (не качает с нуля)
+  - `--timeout=120` — вываливается через 2 минуты без I/O (не час)
+  - `--info=progress2` — одна строка прогресса в CI log
+- SSH опции: `ServerAliveInterval=20`, `ServerAliveCountMax=6`,
+  `ConnectTimeout=30`, `TCPKeepAlive=yes`, `IPQoS=throughput`
+- Обёртка `timeout 900` — жёсткий потолок 15 минут
+- 3 retry attempt + fallback на `scp -v` при полном провале (для диагностики)
+
+Тот же keepalive + timeout добавлен в `prod-backup.yml` → `Fetch dump` (scp
+download).
+
 ## Миграции Payload
 
 С US-3 Payload работает на proper migrations (`push: false` в `site/payload.config.ts`).

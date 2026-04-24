@@ -238,12 +238,74 @@ jobs:
              fi"
 
       - name: Upload release bundle
+        # Инцидент 2026-04-24 (run 24899732696): scp висел час без прогресса
+        # на transfer 173 MB (GH Azure runner → Beget VPS РФ). Root cause —
+        # NAT state timeout / SSH idle drop без keepalive + отсутствие
+        # application-level timeout. Фикс: rsync (resumable + прогресс) поверх
+        # ssh с ServerAliveInterval, обёрнутый в timeout + 3 retry. Fallback
+        # на scp --verbose при полном провале — для диагностики.
         env:
           REL: ${{ github.sha }}
+          SSH_USER: ${{ secrets.BEGET_SSH_USER }}
+          SSH_HOST: ${{ secrets.BEGET_SSH_HOST }}
+          SSH_PORT: ${{ secrets.BEGET_SSH_PORT || '22' }}
+          DEPLOY_PATH: ${{ secrets.BEGET_DEPLOY_PATH }}
         run: |
-          scp -i ~/.ssh/deploy_key -P ${{ secrets.BEGET_SSH_PORT || '22' }} \
-            deploy.tar.gz \
-            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/releases/${REL}/deploy.tar.gz
+          set -eu
+          ls -lh deploy.tar.gz
+          SIZE=$(stat -c%s deploy.tar.gz)
+          echo ">> bundle size: $SIZE bytes ($((SIZE / 1024 / 1024)) MB)"
+
+          SSH_OPTS="-i ~/.ssh/deploy_key -p $SSH_PORT \
+            -o ServerAliveInterval=20 \
+            -o ServerAliveCountMax=6 \
+            -o ConnectTimeout=30 \
+            -o TCPKeepAlive=yes \
+            -o IPQoS=throughput"
+
+          DEST="$SSH_USER@$SSH_HOST:$DEPLOY_PATH/releases/$REL/deploy.tar.gz"
+
+          upload_rsync() {
+            # rsync --partial — возобновляет прерванный transfer;
+            # --timeout=120 — вываливается если нет I/O 2 минуты (а не час);
+            # --info=progress2 — одна линия с прогрессом в CI log.
+            timeout 900 rsync -av --partial --inplace \
+              --timeout=120 --info=progress2 \
+              -e "ssh $SSH_OPTS" \
+              deploy.tar.gz \
+              "$DEST"
+          }
+
+          upload_scp_verbose() {
+            # Fallback: даже если не сработает — -v покажет ГДЕ именно висит.
+            timeout 900 scp $SSH_OPTS -v \
+              deploy.tar.gz \
+              "$DEST"
+          }
+
+          ok=0
+          for attempt in 1 2 3; do
+            echo ">> upload attempt $attempt/3 via rsync"
+            if upload_rsync; then
+              ok=1
+              break
+            fi
+            echo "::warning::rsync attempt $attempt failed (exit $?), sleeping 20s before retry"
+            sleep 20
+          done
+
+          if [ "$ok" != "1" ]; then
+            echo "::warning::rsync provided 3 failures — fallback to verbose scp for diagnostics"
+            if upload_scp_verbose; then
+              ok=1
+            fi
+          fi
+
+          if [ "$ok" != "1" ]; then
+            echo "::error::bundle upload failed after retries — see verbose log above"
+            exit 1
+          fi
+          echo ">> upload ok"
 
       - name: Unpack release + link shared .env
         env:

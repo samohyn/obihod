@@ -72,8 +72,12 @@ jobs:
              du -sh ${BP}/backups || true"
 
       - name: Fetch dump to runner for artifact
+        # Keepalive + timeout на случай NAT state drop / idle timeout —
+        # тот же класс проблемы что починен в deploy.yml (run 24899732696).
         run: |
-          scp -i ~/.ssh/deploy_key -P ${{ secrets.BEGET_SSH_PORT || '22' }} \
+          timeout 900 scp -i ~/.ssh/deploy_key -P ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            -o ServerAliveInterval=20 -o ServerAliveCountMax=6 \
+            -o ConnectTimeout=30 -o TCPKeepAlive=yes \
             ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:"${{ env.remote }}" \
             "${{ env.local }}"
           ls -lh "${{ env.local }}"
