@@ -48,13 +48,13 @@ export async function Footer() {
   // Реквизиты: блок рендерится, только если есть хотя бы одно заполненное поле.
   const hasAnyRequisite = Boolean(
     requisites.legalName ||
-      requisites.taxId ||
-      requisites.kpp ||
-      requisites.ogrn ||
-      requisites.addressRegion ||
-      requisites.addressLocality ||
-      requisites.streetAddress ||
-      requisites.postalCode,
+    requisites.taxId ||
+    requisites.kpp ||
+    requisites.ogrn ||
+    requisites.addressRegion ||
+    requisites.addressLocality ||
+    requisites.streetAddress ||
+    requisites.postalCode,
   )
   const addressLine = [
     requisites.postalCode,
@@ -127,7 +127,10 @@ export async function Footer() {
         </div>
 
         {hasAnyRequisite ? (
-          <div className="foot-bottom" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '6px' }}>
+          <div
+            className="foot-bottom"
+            style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '6px' }}
+          >
             <div>
               {[
                 requisites.legalName,

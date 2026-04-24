@@ -119,10 +119,26 @@ jobs:
             sleep 1
           done
 
-      - name: Apply migrations to ephemeral Postgres
-        # С US-3 push:false → схему создаёт только payload migrate.
-        # Запускаем перед warmup, иначе dev-сервер упадёт на отсутствующих таблицах.
-        run: pnpm payload migrate
+      - name: Apply US-3 schema to ephemeral Postgres (raw SQL)
+        # С US-3 push:false → схему создаёт миграция.
+        # Payload CLI обходим через чистый psql (см. deploy.yml root cause d2cac65).
+        # Запускаем ДО dev-warmup, иначе dev-сервер упадёт на отсутствующих таблицах.
+        run: |
+          export PGPASSWORD=obikhod_dev
+          psql -h localhost -U obikhod -d obikhod <<'SQL'
+          CREATE TABLE IF NOT EXISTS "payload_migrations" (
+            "id" serial PRIMARY KEY,
+            "name" varchar,
+            "batch" numeric,
+            "updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+            "created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+          );
+          SQL
+          psql -h localhost -U obikhod -d obikhod -v ON_ERROR_STOP=1 \
+            -f migrations/20260424_133242_us_3_blocks_and_seo.up.sql
+          psql -h localhost -U obikhod -d obikhod \
+            -c "INSERT INTO payload_migrations (name, batch) VALUES ('20260424_133242_us_3_blocks_and_seo', 1) ON CONFLICT DO NOTHING"
+          echo "Schema applied."
 
       - name: "Warmup DB (dev server — схема уже через migrate выше)"
         run: |

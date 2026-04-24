@@ -35,14 +35,7 @@ export interface FooterColumn {
   items?: MenuItem[] | null
 }
 
-export type SocialType =
-  | 'telegram'
-  | 'max'
-  | 'whatsapp'
-  | 'vk'
-  | 'youtube'
-  | 'yandex-zen'
-  | 'other'
+export type SocialType = 'telegram' | 'max' | 'whatsapp' | 'vk' | 'youtube' | 'yandex-zen' | 'other'
 
 export interface SocialLink {
   type: SocialType
