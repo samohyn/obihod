@@ -167,6 +167,8 @@ jobs:
           components
           lib
           globals
+          blocks
+          migrations
           EOF
           # tar exit 1 = "файл изменился" (предупреждение), 2 = фатально.
           # Принимаем 0 и 1, но не 2.
