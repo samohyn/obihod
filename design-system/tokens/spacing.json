@@ -1,0 +1,32 @@
+{
+  "$schema": "https://tokens.studio/schema.json",
+  "$source": "site/app/globals.css + Tailwind default + observed usage",
+  "$note": "Scale 4/8 px. Base unit = 4px. Используем именованные токены spacing.1..12 плюс семантические aliases (component-gap, section-pad и т.д.). В Tailwind v4 доступны как utility: px-4, gap-3, py-8.",
+  "spacing": {
+    "0": { "value": "0" },
+    "1": { "value": "4px", "description": "Tight alignment inside small elements" },
+    "2": { "value": "8px", "description": "Icon+label gap, inside badge" },
+    "3": { "value": "12px", "description": "Tight block spacing, chip padding" },
+    "4": { "value": "16px", "description": "Default component padding (button, input)" },
+    "5": { "value": "20px", "description": "Default mobile page padding — = --pad mobile" },
+    "6": { "value": "24px", "description": "Comfortable block spacing, card inner padding" },
+    "8": { "value": "32px", "description": "Section inner spacing, form row gap" },
+    "10": { "value": "40px", "description": "Default tablet page padding — = --pad tablet" },
+    "12": { "value": "48px", "description": "Large spacing between hero elements" },
+    "16": { "value": "64px", "description": "Between sections on mobile" },
+    "20": { "value": "80px", "description": "Default desktop page padding — = --pad desktop" },
+    "24": { "value": "96px", "description": "Between sections on desktop" },
+    "32": { "value": "128px", "description": "Hero vertical padding desktop, large hero gaps" }
+  },
+  "semantic": {
+    "page-pad-mobile": { "value": "{spacing.5}", "description": "Horizontal padding страницы на mobile, = CSS --pad на < 768" },
+    "page-pad-tablet": { "value": "{spacing.10}", "description": "Horizontal padding на 768-1199" },
+    "page-pad-desktop": { "value": "{spacing.20}", "description": "Horizontal padding на ≥ 1200" },
+    "section-gap-mobile": { "value": "{spacing.16}" },
+    "section-gap-desktop": { "value": "{spacing.24}" },
+    "card-pad": { "value": "{spacing.6}", "description": "Внутренний отступ карточки" },
+    "form-row-gap": { "value": "{spacing.4}", "description": "Между label и input" },
+    "form-field-gap": { "value": "{spacing.6}", "description": "Между полями формы" },
+    "icon-label-gap": { "value": "{spacing.2}", "description": "Между иконкой и текстом" }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://tokens.studio/schema.json",
+  "$source": "site/app/globals.css · site/app/layout.tsx (next/font)",
+  "font-family": {
+    "display": { "value": "var(--font-golos-text), 'Inter', system-ui, sans-serif", "description": "Заголовки, wordmark, marketing." },
+    "sans": { "value": "var(--font-golos-text), 'Inter', system-ui, sans-serif", "description": "Body — marketing и admin." },
+    "mono": { "value": "var(--font-jetbrains-mono), ui-monospace, monospace", "description": "Цены, ID, технические строки. tabular-nums обязательно." }
+  },
+  "wordmark": {
+    "$note": "Параметры текстового блока «ОБИХОД» в логотипе.",
+    "font-family": { "value": "'Inter','Helvetica Neue',Arial,sans-serif", "description": "Нативный Inter для wordmark — не зависит от next/font загрузки, работает в SVG-мастерах." },
+    "font-weight": { "value": "800" },
+    "letter-spacing": { "value": "-0.03em" },
+    "text-transform": { "value": "uppercase" }
+  },
+  "tag": {
+    "$note": "«КРУГ СЕЗОНОВ» / «порядок под ключ · admin» — подпись под wordmark.",
+    "font-family": { "value": "'Inter','Helvetica Neue',Arial,sans-serif" },
+    "font-weight": { "value": "500" },
+    "letter-spacing": { "value": "0.18em" },
+    "text-transform": { "value": "uppercase" }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://tokens.studio/schema.json",
+  "$note": "Motion — утилитарный, не декоративный. Обиход = matter-of-fact, значит анимации короткие, без bounce, без overshoot. Все transitions обязательно уважают prefers-reduced-motion.",
+  "duration": {
+    "instant": { "value": "0ms", "description": "Для reduced-motion = все анимации заменяются на instant" },
+    "fast": { "value": "120ms", "description": "Hover, focus, active — inline feedback" },
+    "base": { "value": "200ms", "description": "Color/background/opacity transition" },
+    "slow": { "value": "320ms", "description": "Появление карточки, раскрытие accordion" },
+    "slower": { "value": "480ms", "description": "Появление модалки, page transition" }
+  },
+  "ease": {
+    "linear": { "value": "linear" },
+    "standard": {
+      "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "description": "Material standard — базовый для всех UI-transitions"
+    },
+    "decelerate": {
+      "value": "cubic-bezier(0.0, 0, 0.2, 1)",
+      "description": "Элемент появляется / входит в кадр"
+    },
+    "accelerate": {
+      "value": "cubic-bezier(0.4, 0, 1, 1)",
+      "description": "Элемент уходит / исчезает"
+    }
+  },
+  "presets": {
+    "hover": { "value": "background-color {duration.fast} {ease.standard}, color {duration.fast} {ease.standard}" },
+    "appear": { "value": "opacity {duration.slow} {ease.decelerate}, transform {duration.slow} {ease.decelerate}" },
+    "disappear": { "value": "opacity {duration.base} {ease.accelerate}" }
+  },
+  "guardrails": {
+    "prefers-reduced-motion": "В globals.css обязательно `@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }`.",
+    "no-bounce": "Не используем spring/bounce easing — это ощущается как игрушка. Обиход — надёжный сервис, не весёлый.",
+    "no-parallax": "Никаких scroll-parallax-эффектов. Мобильный пользователь на 4G + Android mid-range страдает от этого больше, чем выигрывает впечатлением."
+  }
+}

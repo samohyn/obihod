@@ -1,0 +1,22 @@
+{
+  "$schema": "https://tokens.studio/schema.json",
+  "$source": "site/app/globals.css (фактические @media) + devteam/ui.md §2 (заявленные)",
+  "$note": "ВАЖНО: сейчас есть расхождение между кодом и ui.md. Код использует 768/1024/1200. ui.md заявляет 360/390/414/430/768/834/1024/1280/1440/1920/2560. Источник истины — этот файл. При расхождении правим globals.css или ui.md, не добавляем новые.",
+  "breakpoint": {
+    "mobile-sm": { "value": "360px", "description": "Android legacy minimum. Контент должен работать, не проваливая горизонт-скролл" },
+    "mobile-md": { "value": "390px", "description": "iPhone 13/14/15 standard" },
+    "mobile-lg": { "value": "414px", "description": "iPhone Plus / Pro Max" },
+    "tablet": { "value": "768px", "description": "Портретный iPad, breakpoint перестройки grid" },
+    "tablet-lg": { "value": "1024px", "description": "Landscape iPad, вход desktop-layout" },
+    "desktop": { "value": "1200px", "description": "Увеличение page-pad до 80px, контейнер выходит на max-width" },
+    "desktop-lg": { "value": "1440px", "description": "Рабочий desktop" },
+    "desktop-xl": { "value": "1920px", "description": "Full HD — максимум для content" },
+    "wide": { "value": "2560px", "description": "2K/4K — контент остаётся в 1280 maxw, surplus = фоновое пространство" }
+  },
+  "usage": {
+    "mobile-first": "Всё пишется mobile-first. @media (min-width: ...) расширяет, не сужает.",
+    "design-targets": ["mobile-md (390)", "tablet (768)", "tablet-lg (1024)", "desktop (1200)", "desktop-lg (1440)"],
+    "test-targets": ["mobile-sm (360) — worst-case Android", "mobile-md (390)", "tablet (768)", "tablet-lg (1024)", "desktop-lg (1440)"],
+    "container-max": "1280px (site/app/globals.css --maxw) — не меняется по breakpoint"
+  }
+}
