@@ -21,19 +21,23 @@ BEGIN;
 
 DROP TABLE IF EXISTS public.seo_settings_same_as CASCADE;
 
--- seo_settings organization_* columns dropped per ADR-0002 (SEO×SiteChrome dedup).
--- All values now live in persons (Organization schema) and site_chrome.requisites_*.
+-- seo_settings organization_* columns по ADR-0002 уже не используются Payload.
+-- НЕ дропаем их здесь: на prod таблица принадлежит postgres superuser (первый
+-- db.push из-под другого роля), migration user `obikhod` не owner и не может
+-- ALTER OWNER. Unused колонки остаются висеть до следующего maintenance-window
+-- (отдельный SQL под superuser: `ALTER TABLE seo_settings DROP COLUMN ...`).
+-- Сам Payload их игнорирует — schema drift harmless.
 
-ALTER TABLE public.seo_settings
-    DROP COLUMN IF EXISTS organization_legal_name,
-    DROP COLUMN IF EXISTS organization_tax_id,
-    DROP COLUMN IF EXISTS organization_ogrn,
-    DROP COLUMN IF EXISTS organization_address_region,
-    DROP COLUMN IF EXISTS organization_address_locality,
-    DROP COLUMN IF EXISTS organization_street_address,
-    DROP COLUMN IF EXISTS organization_postal_code,
-    DROP COLUMN IF EXISTS organization_telephone,
-    DROP COLUMN IF EXISTS organization_founding_date;
+-- ALTER TABLE public.seo_settings
+--     DROP COLUMN IF EXISTS organization_legal_name,
+--     DROP COLUMN IF EXISTS organization_tax_id,
+--     DROP COLUMN IF EXISTS organization_ogrn,
+--     DROP COLUMN IF EXISTS organization_address_region,
+--     DROP COLUMN IF EXISTS organization_address_locality,
+--     DROP COLUMN IF EXISTS organization_street_address,
+--     DROP COLUMN IF EXISTS organization_postal_code,
+--     DROP COLUMN IF EXISTS organization_telephone,
+--     DROP COLUMN IF EXISTS organization_founding_date;
 
 -- ───────────────────────────── 2. New ENUM types ─────────────────────────────
 
