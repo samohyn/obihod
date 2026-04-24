@@ -169,6 +169,7 @@ jobs:
           globals
           blocks
           migrations
+          scripts
           EOF
           # tar exit 1 = "файл изменился" (предупреждение), 2 = фатально.
           # Принимаем 0 и 1, но не 2.
@@ -249,15 +250,24 @@ jobs:
             "mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/releases/${REL} && \
              mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/shared"
 
-      - name: Ensure PAYLOAD_PREVIEW_SECRET in shared/.env
+      - name: Ensure PAYLOAD_PREVIEW_SECRET + upsert REVALIDATE_SECRET in shared/.env
         # preview-sign (/api/preview-sign) — API route, читает process.env в рантайме.
         # Источник истины — shared/.env на VPS (его симлинкает релиз в .env).
-        # Идемпотентно: если ключ уже есть — не трогаем; если нет — дописываем.
+        #
+        # PAYLOAD_PREVIEW_SECRET — ensure (idempotent): если есть — не трогаем.
+        # REVALIDATE_SECRET — upsert: всегда заменяем значение в shared/.env на
+        #   актуальное из GitHub Actions secret. Нужно для ротаций (если старый
+        #   секрет утёк — ротация в GH подхватится на ближайшем deploy).
         env:
           PPS: ${{ secrets.PAYLOAD_PREVIEW_SECRET }}
+          RVS: ${{ secrets.REVALIDATE_SECRET }}
         run: |
           if [ -z "$PPS" ]; then
             echo "::error::secret PAYLOAD_PREVIEW_SECRET пуст в GitHub"
+            exit 1
+          fi
+          if [ -z "$RVS" ]; then
+            echo "::error::secret REVALIDATE_SECRET пуст в GitHub"
             exit 1
           fi
           ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
@@ -267,12 +277,17 @@ jobs:
              ENV_FILE=\"\$BP/shared/.env\"
              touch \"\$ENV_FILE\"
              chmod 600 \"\$ENV_FILE\"
+             # PAYLOAD_PREVIEW_SECRET — ensure-only (если есть — не трогаем)
              if grep -q '^PAYLOAD_PREVIEW_SECRET=' \"\$ENV_FILE\"; then
                echo 'PAYLOAD_PREVIEW_SECRET уже есть в shared/.env — не трогаем'
              else
                echo \"PAYLOAD_PREVIEW_SECRET=$PPS\" >> \"\$ENV_FILE\"
                echo 'PAYLOAD_PREVIEW_SECRET добавлен в shared/.env'
-             fi"
+             fi
+             # REVALIDATE_SECRET — upsert (drop старый, append актуальный)
+             sed -i '/^REVALIDATE_SECRET=/d' \"\$ENV_FILE\"
+             echo \"REVALIDATE_SECRET=$RVS\" >> \"\$ENV_FILE\"
+             echo 'REVALIDATE_SECRET upsert выполнен в shared/.env'"
 
       - name: Resolve GitHub Release asset URL
         # Используем apiUrl ассета (https://api.github.com/.../assets/<id>):
