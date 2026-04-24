@@ -61,10 +61,13 @@ jobs:
 
       - name: Run seed via SSH
         run: |
+          set -eo pipefail
           LOG_DIR=seed-logs
           mkdir -p "$LOG_DIR"
           LOG_FILE="$LOG_DIR/seed-$(date -u +%Y%m%dT%H%M%SZ).log"
 
+          # tsx в devDependencies; prod-артефакт содержит только --prod node_modules.
+          # Используем `pnpm dlx tsx` — tsx подтянется во временную папку на лету.
           ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
             -o ServerAliveInterval=15 \
             ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
@@ -73,7 +76,7 @@ jobs:
              set -a
              . ./.env
              set +a
-             OBIKHOD_SEED_CONFIRM=yes OBIKHOD_ENV=production pnpm seed:prod" \
+             OBIKHOD_SEED_CONFIRM=yes OBIKHOD_ENV=production pnpm dlx tsx scripts/seed.ts" \
             2>&1 | tee "$LOG_FILE"
           echo "SEED_LOG=$LOG_FILE" >> $GITHUB_ENV
 
