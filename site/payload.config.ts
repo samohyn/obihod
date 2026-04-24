@@ -56,10 +56,12 @@ export default buildConfig({
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
   db: postgresAdapter({
     pool: { connectionString: process.env.DATABASE_URI || '' },
-    // US-3: переход с db.push (интерактивный, опасный) на proper migrations.
-    // Источник истины — site/migrations/*.ts (+ .up.sql / .down.sql).
-    // Применение: `pnpm payload migrate` (локально + в deploy.yml + ci.yml warmup).
-    push: false,
+    // US-3: переход с db.push (интерактивный, опасный) на proper migrations на проде.
+    // В dev/ci оставляем push:true для ephemeral schema bootstrap (иначе миграции,
+    // написанные как diff к prod-state, не применятся на пустой БД).
+    // На проде (NODE_ENV=production) миграции применяются отдельным step в deploy.yml
+    // через psql (Payload CLI сломан на extensionless ESM — root cause d2cac65).
+    push: process.env.NODE_ENV !== 'production',
     migrationDir: path.resolve(dirname, 'migrations'),
   }),
   sharp,

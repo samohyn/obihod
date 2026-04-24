@@ -108,37 +108,10 @@ jobs:
             sleep 1
           done
 
-      - name: Apply US-3 schema to ephemeral Postgres (raw SQL)
-        # С US-3 push:false → схему создаёт миграция.
-        # Payload CLI (`pnpm payload migrate`) не работает в этом проекте:
-        # tsx не умеет extensionless ESM imports при moduleResolution=bundler
-        # (root cause d2cac65 — ERR_MODULE_NOT_FOUND на ./collections/Users).
-        # Next.js и сам рантайм Payload (через Next bundler) умеют,
-        # поэтому обходим CLI через чистый psql на .up.sql.
-        # Track через payload_migrations tracker — чтобы рантайм не
-        # считал миграцию не применённой.
-        # Запускаем ДО dev-warmup, иначе dev-сервер упадёт на отсутствующих таблицах.
-        run: |
-          export PGPASSWORD=obikhod_dev
-          # Payload сам создаёт payload_migrations при первом запуске;
-          # создадим её вручную чтобы трекер работал корректно.
-          psql -h localhost -U obikhod -d obikhod <<'SQL'
-          CREATE TABLE IF NOT EXISTS "payload_migrations" (
-            "id" serial PRIMARY KEY,
-            "name" varchar,
-            "batch" numeric,
-            "updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
-            "created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
-          );
-          SQL
-          psql -h localhost -U obikhod -d obikhod -v ON_ERROR_STOP=1 \
-            -f migrations/20260424_133242_us_3_blocks_and_seo.up.sql
-          psql -h localhost -U obikhod -d obikhod \
-            -c "INSERT INTO payload_migrations (name, batch) VALUES ('20260424_133242_us_3_blocks_and_seo', 1) ON CONFLICT DO NOTHING"
-          echo "Schema applied. Tables:"
-          psql -h localhost -U obikhod -d obikhod -c "\\dt" | head -20
-
-      - name: "Warmup DB (dev server — схема уже через migrate выше)"
+      - name: "Warmup DB (dev server — push:true в dev/ci создаёт схему)"
+        # В dev/ci payload.config.ts использует push:true (условный expr по NODE_ENV).
+        # Ephemeral Postgres ← pnpm dev → create all tables по текущей конфигурации.
+        # На prod VPS — push:false (NODE_ENV=production) + миграция через psql в deploy-job.
         run: |
           pnpm dev > /tmp/dev.log 2>&1 &
           DEV=$!
