@@ -35,6 +35,7 @@ export default buildConfig({
         Logo: '@/components/admin/BrandLogo',
         Icon: '@/components/admin/BrandIcon',
       },
+      beforeDashboard: ['@/components/admin/BeforeDashboardStartHere'],
     },
   },
   collections: [
