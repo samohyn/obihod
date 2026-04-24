@@ -22,6 +22,9 @@ import { UnderlineFeatureClient as UnderlineFeatureClient_e70f5e05f09f93e00b997e
 import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
+import BrandLogo_us3 from '@/components/admin/BrandLogo'
+import BrandIcon_us3 from '@/components/admin/BrandIcon'
+import BeforeDashboardStartHere_us3 from '@/components/admin/BeforeDashboardStartHere'
 
 /** @type import('payload').ImportMap */
 export const importMap = {
@@ -72,4 +75,10 @@ export const importMap = {
   '@payloadcms/richtext-lexical/client#ItalicFeatureClient':
     ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   '@payloadcms/next/rsc#CollectionCards': CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1,
+  '@/components/admin/BrandLogo': BrandLogo_us3,
+  '@/components/admin/BrandLogo#default': BrandLogo_us3,
+  '@/components/admin/BrandIcon': BrandIcon_us3,
+  '@/components/admin/BrandIcon#default': BrandIcon_us3,
+  '@/components/admin/BeforeDashboardStartHere': BeforeDashboardStartHere_us3,
+  '@/components/admin/BeforeDashboardStartHere#default': BeforeDashboardStartHere_us3,
 }
