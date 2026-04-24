@@ -383,7 +383,10 @@ jobs:
              BP='${{ secrets.BEGET_DEPLOY_PATH }}'
              REL='${REL}'
              set -a; . \$BP/shared/.env; set +a
-             cd \$BP/releases/\$REL/site
+             # tar распаковывается прямо в releases/\$REL (без /site prefix),
+             # т.к. build job делает tar с cwd=site. Файлы миграций лежат в
+             # \$BP/releases/\$REL/migrations/
+             cd \$BP/releases/\$REL
 
              MIGRATION_NAME='20260424_133242_us_3_blocks_and_seo'
 
