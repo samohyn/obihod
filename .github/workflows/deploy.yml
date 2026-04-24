@@ -369,13 +369,15 @@ jobs:
              echo '>> link shared .env'
              ln -sfn \$BP/shared/.env .env"
 
-      - name: Apply Payload migration to prod DB (raw SQL)
-        # Критически важный порядок: миграция применяется ДО flip symlink и
+      - name: Apply Payload migrations to prod DB (raw SQL)
+        # Критически важный порядок: миграции применяются ДО flip symlink и
         # ДО pm2 restart. Иначе рантайм нового релиза прочитает старую схему
         # и упадёт на отсутствующих таблицах / колонках.
         # Идемпотентность — через payload_migrations tracker:
         # проверяем наличие записи по имени миграции → пропускаем если есть.
         # Payload CLI обойдён через чистый psql — см. build job выше.
+        # Применяем ВСЕ *.up.sql в лексикографическом порядке (timestamp-префикс
+        # в имени файла гарантирует правильную последовательность).
         env:
           REL: ${{ github.sha }}
         run: |
@@ -390,8 +392,6 @@ jobs:
              # \$BP/releases/\$REL/migrations/
              cd \$BP/releases/\$REL
 
-             MIGRATION_NAME='20260424_133242_us_3_blocks_and_seo'
-
              # Ensure tracker table exists
              psql \"\$DATABASE_URI\" -v ON_ERROR_STOP=1 <<'SQL'
           CREATE TABLE IF NOT EXISTS \"payload_migrations\" (
@@ -403,16 +403,19 @@ jobs:
           );
           SQL
 
-             # Idempotency check
-             ALREADY=\$(psql \"\$DATABASE_URI\" -tA -c \"SELECT count(*) FROM payload_migrations WHERE name='\$MIGRATION_NAME'\")
-             if [ \"\$ALREADY\" = \"1\" ]; then
-               echo '>> migration \$MIGRATION_NAME already applied — skipping'
-             else
-               echo '>> applying migration \$MIGRATION_NAME to prod DB'
-               psql \"\$DATABASE_URI\" -v ON_ERROR_STOP=1 -f migrations/\${MIGRATION_NAME}.up.sql
-               psql \"\$DATABASE_URI\" -c \"INSERT INTO payload_migrations (name, batch) VALUES ('\$MIGRATION_NAME', 1)\"
-               echo '>> migration applied successfully'
-             fi"
+             # Apply each *.up.sql in lexicographic order, skip if already tracked
+             for UP_FILE in \$(ls migrations/*.up.sql | sort); do
+               MIGRATION_NAME=\$(basename \"\$UP_FILE\" .up.sql)
+               ALREADY=\$(psql \"\$DATABASE_URI\" -tA -c \"SELECT count(*) FROM payload_migrations WHERE name='\$MIGRATION_NAME'\")
+               if [ \"\$ALREADY\" = \"1\" ]; then
+                 echo \">> migration \$MIGRATION_NAME already applied — skipping\"
+               else
+                 echo \">> applying migration \$MIGRATION_NAME to prod DB\"
+                 psql \"\$DATABASE_URI\" -v ON_ERROR_STOP=1 -f \"\$UP_FILE\"
+                 psql \"\$DATABASE_URI\" -c \"INSERT INTO payload_migrations (name, batch) VALUES ('\$MIGRATION_NAME', 1)\"
+                 echo \">> migration \$MIGRATION_NAME applied successfully\"
+               fi
+             done"
 
       - name: Flip symlink + reload PM2
         env:
