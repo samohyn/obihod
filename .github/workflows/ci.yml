@@ -119,7 +119,12 @@ jobs:
             sleep 1
           done
 
-      - name: "Warmup DB (dev server — Payload push:true создаёт схему по всем коллекциям)"
+      - name: Apply migrations to ephemeral Postgres
+        # С US-3 push:false → схему создаёт только payload migrate.
+        # Запускаем перед warmup, иначе dev-сервер упадёт на отсутствующих таблицах.
+        run: pnpm payload migrate
+
+      - name: "Warmup DB (dev server — схема уже через migrate выше)"
         run: |
           pnpm dev > /tmp/dev.log 2>&1 &
           DEV=$!

@@ -56,7 +56,11 @@ export default buildConfig({
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
   db: postgresAdapter({
     pool: { connectionString: process.env.DATABASE_URI || '' },
-    push: true,
+    // US-3: переход с db.push (интерактивный, опасный) на proper migrations.
+    // Источник истины — site/migrations/*.ts (+ .up.sql / .down.sql).
+    // Применение: `pnpm payload migrate` (локально + в deploy.yml + ci.yml warmup).
+    push: false,
+    migrationDir: path.resolve(dirname, 'migrations'),
   }),
   sharp,
 })

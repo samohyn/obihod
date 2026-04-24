@@ -78,6 +78,7 @@ jobs:
       # Ephemeral DATABASE_URI для build (на сервере будет переопределён из shared/.env)
       DATABASE_URI: postgres://obikhod:obikhod_dev@localhost:5432/obikhod
       PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+      PAYLOAD_PREVIEW_SECRET: ${{ secrets.PAYLOAD_PREVIEW_SECRET }}
       NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
       REVALIDATE_SECRET: ${{ secrets.REVALIDATE_SECRET }}
       INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
@@ -107,7 +108,12 @@ jobs:
             sleep 1
           done
 
-      - name: "Warmup DB (dev server — Payload push:true создаёт схему)"
+      - name: Apply migrations to ephemeral Postgres
+        # С US-3 push:false → схему создаёт только payload migrate.
+        # Запускаем перед warmup, иначе dev-сервер упадёт на отсутствующих таблицах.
+        run: pnpm payload migrate
+
+      - name: "Warmup DB (dev server — схема уже через migrate выше)"
         run: |
           pnpm dev > /tmp/dev.log 2>&1 &
           DEV=$!
@@ -124,15 +130,12 @@ jobs:
           echo "--- dev log tail ---"
           tail -30 /tmp/dev.log || true
 
-      - name: Regenerate Payload admin importMap
-        # importMap.js коммитится в репо, но устаревает при добавлении
-        # collections / globals / custom components. Без regen — Payload
-        # admin SPA не знает про новые элементы (site-chrome, BrandLogo,
-        # BrandIcon) и отдаёт "Not Found" на роутах. Запускаем до build,
-        # чтобы next build собрал бандл с правильным importMap.
-        run: pnpm run generate:importmap
-
       - name: Build
+        # importMap.js поддерживается вручную — root cause d2cac65:
+        # `payload generate:importmap` падает на Node 22 с ERR_MODULE_NOT_FOUND
+        # из-за extensionless ESM imports в payload.config.ts
+        # (tsconfig moduleResolution: bundler без allowImportingTsExtensions).
+        # Safety-net — E2E тесты /admin в волне 2. См. learnings.md 2026-04-23.
         run: pnpm run build
 
       - name: Install production deps (to be shipped вместо install на сервере)
@@ -211,6 +214,31 @@ jobs:
             "mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/releases/${REL} && \
              mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/shared"
 
+      - name: Ensure PAYLOAD_PREVIEW_SECRET in shared/.env
+        # preview-sign (/api/preview-sign) — API route, читает process.env в рантайме.
+        # Источник истины — shared/.env на VPS (его симлинкает релиз в .env).
+        # Идемпотентно: если ключ уже есть — не трогаем; если нет — дописываем.
+        env:
+          PPS: ${{ secrets.PAYLOAD_PREVIEW_SECRET }}
+        run: |
+          if [ -z "$PPS" ]; then
+            echo "::error::secret PAYLOAD_PREVIEW_SECRET пуст в GitHub"
+            exit 1
+          fi
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
+            "set -eu
+             BP='${{ secrets.BEGET_DEPLOY_PATH }}'
+             ENV_FILE=\"\$BP/shared/.env\"
+             touch \"\$ENV_FILE\"
+             chmod 600 \"\$ENV_FILE\"
+             if grep -q '^PAYLOAD_PREVIEW_SECRET=' \"\$ENV_FILE\"; then
+               echo 'PAYLOAD_PREVIEW_SECRET уже есть в shared/.env — не трогаем'
+             else
+               echo \"PAYLOAD_PREVIEW_SECRET=$PPS\" >> \"\$ENV_FILE\"
+               echo 'PAYLOAD_PREVIEW_SECRET добавлен в shared/.env'
+             fi"
+
       - name: Upload release bundle
         env:
           REL: ${{ github.sha }}
@@ -219,7 +247,43 @@ jobs:
             deploy.tar.gz \
             ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/releases/${REL}/deploy.tar.gz
 
-      - name: Unpack release + flip symlink + reload PM2
+      - name: Unpack release + link shared .env
+        env:
+          REL: ${{ github.sha }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o ServerAliveInterval=15 \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
+            "set -eux
+             BP='${{ secrets.BEGET_DEPLOY_PATH }}'
+             REL='${REL}'
+
+             cd \$BP/releases/\$REL
+             echo '>> extracting tarball'
+             tar xzf deploy.tar.gz && rm deploy.tar.gz
+
+             echo '>> link shared .env'
+             ln -sfn \$BP/shared/.env .env"
+
+      - name: Run Payload migrations on VPS prod DB
+        # Критически важный порядок: миграция применяется ДО flip symlink и
+        # ДО pm2 restart. Иначе рантайм нового релиза прочитает старую схему
+        # и упадёт на отсутствующих таблицах / колонках.
+        # Миграция идемпотентна (payload_migrations tracker), повторный прогон
+        # на уже применённой миграции — no-op.
+        env:
+          REL: ${{ github.sha }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o ServerAliveInterval=15 \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
+            "set -eu
+             BP='${{ secrets.BEGET_DEPLOY_PATH }}'
+             REL='${REL}'
+             set -a; . \$BP/shared/.env; set +a
+             cd \$BP/releases/\$REL
+             echo '>> applying Payload migrations to prod DB'
+             pnpm payload migrate 2>&1 | tail -80"
+
+      - name: Flip symlink + reload PM2
         env:
           REL: ${{ github.sha }}
         run: |
@@ -229,13 +293,6 @@ jobs:
              BP='${{ secrets.BEGET_DEPLOY_PATH }}'
              APP='${{ secrets.BEGET_APP_NAME || 'obikhod' }}'
              REL='${REL}'
-
-             cd \$BP/releases/\$REL
-             echo '>> extracting tarball'
-             tar xzf deploy.tar.gz && rm deploy.tar.gz
-
-             echo '>> link shared .env'
-             ln -sfn \$BP/shared/.env .env
 
              echo '>> flip current symlink'
              cd \$BP

@@ -22,3 +22,8 @@ graphify-out/transcripts/
 
 # Playwright скриншоты — локально, не коммитить
 screen/
+
+# Heavy media assets — не коммитим исходники, только мета и README
+assets/photos/
+assets/videos/
+assets/temp/

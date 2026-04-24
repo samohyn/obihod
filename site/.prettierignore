@@ -10,6 +10,7 @@ public/
 pnpm-lock.yaml
 payload-types.ts
 next-env.d.ts
+app/(payload)/admin/importMap.js
 *.log
 .env*
 !.env.example
