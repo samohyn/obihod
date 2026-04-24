@@ -89,30 +89,35 @@ tail /var/log/obikhod-backup.log
 sudo -u postgres pg_restore -d obikhod --clean --if-exists /var/backups/obikhod/daily/obikhod-<TS>.dump
 ```
 
-## Upload release bundle — SSH keepalive + rsync
+## Upload release bundle — GitHub Releases CDN transport
 
-**Инцидент 2026-04-24 (run 24899732696):** простой `scp` шаг `Upload release bundle`
-висел ровно час без прогресса на transfer 173 MB (GH Azure runner → Beget VPS РФ),
-пока не был отменён вручную. Другие SSH-шаги (remote exec) работали — проблема
-только на долгом idle transfer.
+**Эволюция (2026-04-24):**
 
-**Root cause:** NAT state timeout / SSH idle connection drop на пути GH → РФ VPS
-без keepalive, плюс отсутствие application-level timeout (scp без `-o` и без
-wrapper `timeout` ждёт бесконечно).
+1. `scp` без keepalive → висел час, cancel (#24899732696)
+2. `rsync` + keepalive + timeout → дропал на 36% и 77% с TCP reset
+   (#24902797606, #24904084197). Канал GH Azure US → Beget Москва
+   нестабилен, прямое TCP-соединение даёт ~50 KB/s и регулярные RST.
+3. **Текущий:** GitHub Releases как промежуточный bucket.
 
-**Фикс в `deploy.yml` → step `Upload release bundle`:**
+**Решение:**
 
-- `rsync -av --partial --inplace --timeout=120 --info=progress2` вместо `scp`:
-  - `--partial` — возобновляет прерванный transfer (не качает с нуля)
-  - `--timeout=120` — вываливается через 2 минуты без I/O (не час)
-  - `--info=progress2` — одна строка прогресса в CI log
-- SSH опции: `ServerAliveInterval=20`, `ServerAliveCountMax=6`,
-  `ConnectTimeout=30`, `TCPKeepAlive=yes`, `IPQoS=throughput`
-- Обёртка `timeout 900` — жёсткий потолок 15 минут
-- 3 retry attempt + fallback на `scp -v` при полном провале (для диагностики)
+- **Build job:** после `pnpm build` + tar пакуем `deploy.tar.gz` →
+  загружаем как asset к prerelease GitHub Release с tag `deploy-<sha>`.
+  Upload runner → GitHub asset storage внутри Azure infra (50+ MB/s).
+- **Deploy job:** VPS curl'ит этот asset с api.github.com (`Accept:
+  application/octet-stream`) — GitHub редиректит на CDN (Fastly).
+  Edge ноды Fastly есть в Москве/СПб, скорость 5-20 MB/s.
+- **Cleanup:** в конце deploy job (`if: always()`) — `gh release delete
+  --cleanup-tag`. Release был чисто транспортным.
 
-Тот же keepalive + timeout добавлен в `prod-backup.yml` → `Fetch dump` (scp
-download).
+**Permissions:** `contents: write` в workflow root (для `gh release
+create/delete`).
+
+**Sanity check:** размер скачанного файла >= 50 MB (текущие ~173 MB).
+Меньше — `::error::` и job вылетает.
+
+**Прежний keepalive + timeout** оставлен в `prod-backup.yml` →
+`Fetch dump` (scp download dump). Объём dump'а небольшой и стабильнее.
 
 ## Миграции Payload
 
