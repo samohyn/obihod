@@ -42,9 +42,11 @@ test.describe('Главная страница', () => {
   })
 
   test('шапка содержит навигационные ссылки и CTA', async ({ page }) => {
-    const nav = page.locator('nav.nav')
-    await expect(nav).toBeVisible()
-    await expect(nav.getByRole('link', { name: /Замер бесплатно/ })).toBeVisible()
+    // Новый header (feat/marketing-header-with-dropdowns): <header><nav aria-label="Основное меню">…
+    // CTA рендерится в slot 'right' внутри <header>, не внутри <nav>.
+    const header = page.getByRole('banner')
+    await expect(header).toBeVisible()
+    await expect(header.getByRole('link', { name: /Замер бесплатно/ })).toBeVisible()
   })
 
   test('форма заявки в контакт-секции содержит обязательные поля', async ({ page }) => {
