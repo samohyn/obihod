@@ -625,8 +625,12 @@
         <p class="muted" style="font-size: 12px; text-align: center;">master lockup · <a href="../agents/brand/logo/master.svg"><code>master.svg</code></a> 1200×1200</p>
       </div>
       <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px; gap: 12px;">
-        <img src="../agents/brand/logo/horizontal.png" alt="ОБИХОД — horizontal lockup" style="width: 100%; max-width: 360px; height: auto;" />
-        <p class="muted" style="font-size: 12px; text-align: center;">horizontal · <a href="../agents/brand/logo/horizontal.svg"><code>horizontal.svg</code></a> 1600×480</p>
+        <img src="../agents/brand/logo/horizontal.png" alt="ОБИХОД — horizontal lockup full с tagline" style="width: 100%; max-width: 360px; height: auto;" />
+        <p class="muted" style="font-size: 12px; text-align: center;">horizontal full · <a href="../agents/brand/logo/horizontal.svg"><code>horizontal.svg</code></a> 1600×480 · marketing-hero, визитки, email-подписи (≥ 80 px по высоте)</p>
+      </div>
+      <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px; gap: 12px;">
+        <img src="../agents/brand/logo/horizontal-compact.svg" alt="ОБИХОД — horizontal-compact lockup без tagline" style="width: 100%; max-width: 360px; height: auto;" />
+        <p class="muted" style="font-size: 12px; text-align: center;">horizontal compact · <a href="../agents/brand/logo/horizontal-compact.svg"><code>horizontal-compact.svg</code></a> 1280×480 · <strong>website header</strong>, footer, embed (32–60 px по высоте)</p>
       </div>
       <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px; gap: 12px; background: #f0ead8;">
         <img src="../agents/brand/logo/mark.png" alt="ОБИХОД — знак без текста" style="width: 100%; max-width: 220px; height: auto;" />
@@ -651,6 +655,7 @@
     <table>
       <thead><tr><th>Правило</th><th>Значение</th><th>Почему</th></tr></thead>
       <tbody>
+        <tr><td>Horizontal lockup — какой когда</td><td><code>horizontal.svg</code> с tagline «КРУГ СЕЗОНОВ» — только при высоте <strong>≥ 80 px</strong> (marketing-hero, визитки, email-подпись, OG). Везде ниже — <code>horizontal-compact.svg</code> (без tagline)</td><td>На 32–60 px tagline становится 3–6 px и превращается в нечитаемые точки — визуальный мусор. Compact = mark + wordmark, без tagline, читается на 32 px</td></tr>
         <tr><td>Минимальный размер полного знака</td><td><code>mark.svg</code> — 64 px; <code>LogoMark</code> компонент — 36 px</td><td>Ниже 36 px 4 глифа сливаются; ниже 64 px без упрощения уже каша</td></tr>
         <tr><td>Минимальный размер favicon</td><td><code>mark-simple.svg</code> — 16 px (app/icon.png 32×32)</td><td>Монограмма «О» читается до favicon-размера</td></tr>
         <tr><td>Фон master / mark</td><td>кремовый <code>#f0ead8</code> или белый <code>#ffffff</code></td><td>Бренд-зелёный на кремовом — аутентичный контраст «бумага-чернила»</td></tr>
@@ -1015,15 +1020,21 @@
         border-radius: var(--radius-lg) var(--radius-lg) 0 0;
       }
       .mm-demo .mm-brand {
-        font-family: var(--font-display);
-        font-weight: 800;
-        font-size: 20px;
-        letter-spacing: -0.03em;
-        color: var(--c-ink);
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+        flex: 0 0 auto;
       }
-      .mm-demo .mm-nav { display: flex; gap: 4px; align-items: center; }
+      .mm-demo .mm-brand img {
+        display: block;
+        height: 44px;
+        width: auto;
+      }
+      .mm-demo .mm-nav { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
       .mm-demo .mm-trigger {
         position: relative;
+        display: inline-flex;
+        align-items: center;
         padding: 10px 14px;
         font-family: var(--font-display);
         font-weight: 500;
@@ -1033,8 +1044,11 @@
         border: none;
         cursor: pointer;
         border-radius: var(--radius-sm);
+        text-decoration: none;
+        line-height: 1;
         transition: color 0.12s ease, background 0.12s ease;
       }
+      .mm-demo a.mm-trigger:hover { text-decoration: none; }
       .mm-demo .mm-trigger:hover,
       .mm-demo .mm-has-drop:hover .mm-trigger { color: var(--c-primary); background: var(--c-bg-alt); }
       .mm-demo .mm-chevron {
@@ -1215,7 +1229,9 @@
 
     <div class="mm-demo" aria-label="Живой пример mega-menu">
       <div class="mm-header">
-        <span class="mm-brand">ОБИХОД</span>
+        <a class="mm-brand" href="#top" aria-label="Обиход — на главную">
+          <img src="../agents/brand/logo/horizontal-compact.svg" alt="Обиход" />
+        </a>
         <div class="mm-nav">
           <div class="mm-has-drop">
             <button class="mm-trigger" type="button" aria-haspopup="true">Услуги <span class="mm-chevron">▼</span></button>
@@ -1269,12 +1285,96 @@
 
           <div class="mm-has-drop">
             <button class="mm-trigger" type="button" aria-haspopup="true">Районы <span class="mm-chevron">▼</span></button>
+            <div class="mm-panel" role="menu">
+              <div class="mm-panel-cols">
+
+                <div class="mm-col">
+                  <h4>Запад МО</h4>
+                  <ul>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4 L20 20"/><path d="M20 4 L4 20"/><circle cx="12" cy="12" r="2.4" fill="currentColor"/></svg>Одинцово<span class="mm-arrow">→</span></a></li>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18 L9 12 L13 15 L21 18"/><path d="M9 12 L9 8 L11 7 L11 9"/><path d="M9 8 L11 8"/></svg>Красногорск<span class="mm-arrow">→</span></a></li>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 C 7 10, 12 16, 17 12 C 19 11, 21 12, 22 13"/><path d="M9 8 C 9 5, 15 5, 15 8"/><path d="M9 8 L15 8"/><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="11" y1="3.5" x2="13" y2="3.5"/><path d="M9 8 L9 18 L15 18 L15 8"/></svg>Истра<span class="mm-arrow">→</span></a></li>
+                  </ul>
+                  <a href="#" class="mm-all">Все районы запада →</a>
+                </div>
+
+                <div class="mm-col">
+                  <h4>Север МО</h4>
+                  <ul>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12 L8 11 L11 4 L13 4 L12 11 L20 10 L21 12 L20 14 L12 13 L13 20 L15 22 L9 22 L11 20 L12 13 L8 13 L2 12 Z"/></svg>Химки<span class="mm-arrow">→</span></a></li>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6 L18 6"/><path d="M8 6 L8 9 L16 9 L16 6"/><path d="M9 9 L9 20 L15 20 L15 9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="11" y1="20" x2="11" y2="22"/><line x1="13" y1="20" x2="13" y2="22"/></svg>Мытищи<span class="mm-arrow">→</span></a></li>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L8 9 L10 9 L7 14 L9 14 L7 18 L17 18 L15 14 L17 14 L14 9 L16 9 Z"/><line x1="3" y1="20" x2="21" y2="20"/><line x1="6" y1="19" x2="6" y2="21"/><line x1="12" y1="19" x2="12" y2="21"/><line x1="18" y1="19" x2="18" y2="21"/></svg>Пушкино<span class="mm-arrow">→</span></a></li>
+                  </ul>
+                  <a href="#" class="mm-all">Все районы севера →</a>
+                </div>
+
+                <div class="mm-col">
+                  <h4>Юго-Восток МО</h4>
+                  <ul>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 C 8 7, 16 7, 21 13"/><line x1="3" y1="13" x2="21" y2="13"/><line x1="6" y1="13" x2="6" y2="18"/><line x1="18" y1="13" x2="18" y2="18"/><path d="M3 18 L21 18" stroke-dasharray="2 1.5"/><path d="M3 21 L21 21" stroke-dasharray="2 1.5"/></svg>Раменское<span class="mm-arrow">→</span></a></li>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L13 11 L21 13 L21 14 L13 13 L13 19 L15 21 L15 22 L9 22 L9 21 L11 19 L11 13 L3 14 L3 13 L11 11 Z"/></svg>Жуковский<span class="mm-arrow">→</span></a></li>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3 L12 21"/><path d="M3 12 L21 12"/><circle cx="12" cy="12" r="2.4" fill="currentColor"/></svg>Москва — все округа<span class="mm-arrow">→</span></a></li>
+                  </ul>
+                  <a href="#" class="mm-all">Карта всех 28 районов →</a>
+                </div>
+              </div>
+
+              <div class="mm-featured">
+                <strong>Не нашли свой район?</strong>
+                <span class="muted" style="font-size: 13px;">Возим технику и бригаду до 80 км от МКАД · фикс-цена за объект</span>
+                <a href="#" class="mm-btn">Запросить выезд</a>
+              </div>
+            </div>
           </div>
 
-          <button class="mm-trigger" type="button">Кейсы</button>
-          <button class="mm-trigger" type="button">Цены</button>
-          <button class="mm-trigger" type="button">Блог</button>
-          <button class="mm-trigger" type="button">Контакты</button>
+          <div class="mm-has-drop">
+            <button class="mm-trigger" type="button" aria-haspopup="true">Кейсы <span class="mm-chevron">▼</span></button>
+            <div class="mm-panel" role="menu">
+              <div class="mm-panel-cols">
+
+                <div class="mm-col">
+                  <h4>Аварийные</h4>
+                  <ul>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3 L9 12 L13 12 L8 21"/><path d="M3 8 C 7 6, 11 6, 15 4" stroke-dasharray="2 1.5"/><path d="M2 12 C 5 11, 8 11, 11 10" stroke-dasharray="2 1.5"/></svg>Спил после бури<span class="mm-arrow">→</span></a></li>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L12 11"/><path d="M9 6 L12 3 L15 6"/><path d="M8 9 L12 6 L16 9"/><path d="M12 11 L19 19"/><path d="M16 19 L19 19 L19 16"/><path d="M3 21 L21 21"/></svg>Аварийное удаление<span class="mm-arrow">→</span></a></li>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14 L12 6 L21 14"/><path d="M5 14 L5 20 L19 20 L19 14"/><path d="M5 14 C 8 12, 14 12, 19 14"/><path d="M8 16 L8 20 M14 16 L14 20" stroke-dasharray="1.5 1.5"/></svg>Срочная чистка крыши<span class="mm-arrow">→</span></a></li>
+                  </ul>
+                  <a href="#" class="mm-all">Все аварийные кейсы →</a>
+                </div>
+
+                <div class="mm-col">
+                  <h4>Сезонные</h4>
+                  <ul>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="2.2"/><circle cx="6" cy="13" r="2.2"/><line x1="8" y1="9" x2="20" y2="6"/><line x1="8" y1="11" x2="14" y2="11"/><path d="M14 11 L20 11"/><path d="M16 8 L19 5"/></svg>Санобрезка сада<span class="mm-arrow">→</span></a></li>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L8 8 L10 8 L7 13 L9 13 L7 17 L17 17 L15 13 L17 13 L14 8 L16 8 Z"/><path d="M3 20 L21 20"/><path d="M5 17 L5 20 M19 17 L19 20"/></svg>Подготовка к зиме<span class="mm-arrow">→</span></a></li>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 L12 5 L20 11"/><path d="M6 11 L6 20 L18 20 L18 11"/><path d="M3 4 L7 8" stroke-width="2"/><path d="M5 2 L9 6" stroke-width="2"/><path d="M6 7 L2 11 L5 14 L9 10"/></svg>Демонтаж после ремонта<span class="mm-arrow">→</span></a></li>
+                  </ul>
+                  <a href="#" class="mm-all">Все сезонные кейсы →</a>
+                </div>
+
+                <div class="mm-col">
+                  <h4>Под ключ для УК и ТСЖ</h4>
+                  <ul>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21 L4 6 L13 6 L13 21"/><path d="M13 21 L13 10 L20 10 L20 21"/><path d="M3 21 L21 21"/><line x1="6.5" y1="9" x2="6.5" y2="11"/><line x1="10" y1="9" x2="10" y2="11"/><line x1="6.5" y1="13" x2="6.5" y2="15"/><line x1="10" y1="13" x2="10" y2="15"/><line x1="6.5" y1="17" x2="6.5" y2="19"/><line x1="10" y1="17" x2="10" y2="19"/><line x1="15.5" y1="13" x2="15.5" y2="15"/><line x1="17.5" y1="13" x2="17.5" y2="15"/><line x1="15.5" y1="17" x2="15.5" y2="19"/><line x1="17.5" y1="17" x2="17.5" y2="19"/></svg>Контракт УК<span class="mm-arrow">→</span></a></li>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20 L3 12 L7 8 L11 12 L11 20 Z"/><path d="M13 20 L13 12 L17 8 L21 12 L21 20 Z"/><line x1="2" y1="20" x2="22" y2="20"/><line x1="6" y1="15" x2="8" y2="15"/><line x1="16" y1="15" x2="18" y2="15"/></svg>Коттеджный посёлок<span class="mm-arrow">→</span></a></li>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21 L5 4 L19 4 L19 21"/><path d="M3 21 L21 21"/><line x1="8" y1="7" x2="10" y2="7"/><line x1="14" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="10" y2="11"/><line x1="14" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="10" y2="15"/><line x1="14" y1="15" x2="16" y2="15"/><path d="M10 21 L10 17 L14 17 L14 21"/></svg>FM-контракт<span class="mm-arrow">→</span></a></li>
+                  </ul>
+                  <a href="#" class="mm-all">Все B2B-кейсы →</a>
+                </div>
+              </div>
+
+              <div class="mm-featured">
+                <strong>Свежий кейс</strong>
+                <span class="muted" style="font-size: 13px;">УК «Жилищник», 12 объектов · сезон 2025–2026 · <span class="mm-price">−18%</span> к смете прошлого подрядчика</span>
+                <a href="#" class="mm-btn">Открыть кейс</a>
+              </div>
+            </div>
+          </div>
+
+          <a class="mm-trigger" href="#">Магазин</a>
+          <a class="mm-trigger" href="#">Цены</a>
+          <a class="mm-trigger" href="#">Блог</a>
+          <a class="mm-trigger" href="#">Контакты</a>
         </div>
         <a href="#" class="mm-cta">Получить смету</a>
       </div>
@@ -1304,6 +1404,33 @@
         <div class="mm-mobile-items">
           <a href="#">Вывоз мусора</a>
           <a href="#">Демонтаж сараев</a>
+        </div>
+      </details>
+      <details>
+        <summary>Районы</summary>
+        <div class="mm-mobile-items">
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4 L20 20"/><path d="M20 4 L4 20"/><circle cx="12" cy="12" r="2.4" fill="currentColor"/></svg>Одинцово</a>
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18 L9 12 L13 15 L21 18"/><path d="M9 12 L9 8 L11 7 L11 9"/></svg>Красногорск</a>
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 C 7 10, 12 16, 17 12 C 19 11, 21 12, 22 13"/><path d="M9 8 C 9 5, 15 5, 15 8"/><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="11" y1="3.5" x2="13" y2="3.5"/><path d="M9 8 L9 18 L15 18 L15 8"/></svg>Истра</a>
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12 L8 11 L11 4 L13 4 L12 11 L20 10 L21 12 L20 14 L12 13 L13 20 L15 22 L9 22 L11 20 L12 13 L8 13 L2 12 Z"/></svg>Химки</a>
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6 L18 6"/><path d="M9 9 L9 20 L15 20 L15 9"/><path d="M8 6 L8 9 L16 9 L16 6"/></svg>Мытищи</a>
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L8 9 L10 9 L7 14 L9 14 L7 18 L17 18 L15 14 L17 14 L14 9 L16 9 Z"/><line x1="3" y1="20" x2="21" y2="20"/></svg>Пушкино</a>
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 C 8 7, 16 7, 21 13"/><line x1="3" y1="13" x2="21" y2="13"/><path d="M3 18 L21 18" stroke-dasharray="2 1.5"/></svg>Раменское</a>
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L13 11 L21 13 L21 14 L13 13 L13 19 L15 21 L15 22 L9 22 L9 21 L11 19 L11 13 L3 14 L3 13 L11 11 Z"/></svg>Жуковский</a>
+        </div>
+      </details>
+      <details>
+        <summary>Кейсы</summary>
+        <div class="mm-mobile-items">
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3 L9 12 L13 12 L8 21"/></svg>Спил после бури</a>
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="2.2"/><circle cx="6" cy="13" r="2.2"/><line x1="8" y1="9" x2="20" y2="6"/><line x1="8" y1="11" x2="14" y2="11"/></svg>Санобрезка сада</a>
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21 L4 6 L13 6 L13 21"/><path d="M13 21 L13 10 L20 10 L20 21"/><path d="M3 21 L21 21"/></svg>Контракт УК</a>
+        </div>
+      </details>
+      <details>
+        <summary>Магазин</summary>
+        <div class="mm-mobile-items">
+          <a href="#" class="muted">Скоро — товары для сада и растения</a>
         </div>
       </details>
     </div>
@@ -1861,8 +1988,13 @@
     <h2>Чего в гайде ещё нет</h2>
     <p class="lead">Этот документ — агрегатор того, что уже зафиксировано в коде и артефактах. Ниже — дыры, которые нужно закрывать явным заказом у <code>art</code> / внешнего дизайнера.</p>
 
-    <h3 style="margin-top: 28px;">Закрыто за 2026-04-24</h3>
+    <h3 style="margin-top: 28px;">Закрыто за апрель 2026</h3>
     <ol class="todo" style="margin-top: 8px;">
+      <li style="opacity: 0.6;"><s><strong>Horizontal-compact lockup для website header</strong></s> — <span class="badge badge-live">✓ 2026-04-25</span> <a href="../agents/brand/logo/horizontal-compact.svg"><code>horizontal-compact.svg</code></a> 1280×480 (mark + wordmark, без tagline). Tagline «КРУГ СЕЗОНОВ» из <code>horizontal.svg</code> при высоте 32–60 px превращался в нечитаемые точки 3–6 px — теперь full-вариант только для marketing-применений ≥ 80 px по высоте.</li>
+      <li style="opacity: 0.6;"><s><strong>Mega-menu Районы — dropdown с иконками-landmark</strong></s> — <span class="badge badge-live">✓ 2026-04-25</span> 3 кластера (Запад / Север / Юго-Восток МО), 8 районов + Москва, line-icon 24×24 stroke 1.5 на каждый: узел шоссе (Одинцово), холм с домом (Красногорск), купол монастыря (Истра), самолёт (Химки), водонапорная башня (Мытищи), ёлка с рельсами (Пушкино), мост через воду (Раменское), силуэт самолёта (Жуковский), компас (Москва). Featured: «Возим до 80 км от МКАД, фикс-цена за объект».</li>
+      <li style="opacity: 0.6;"><s><strong>Mega-menu Кейсы — dropdown по тематикам</strong></s> — <span class="badge badge-live">✓ 2026-04-25</span> 3 темы: Аварийные / Сезонные / Под ключ для УК и ТСЖ. 9 кейсов с тематическими иконками (молния, ножницы, кувалда, здание, посёлок, FM-портфолио). Featured: «Свежий кейс УК Жилищник, −18% к смете».</li>
+      <li style="opacity: 0.6;"><s><strong>Магазин в навигации</strong></s> — <span class="badge badge-live">✓ 2026-04-25</span> flat link между Кейсы и Цены — товары для сада и растения. Dropdown добавим позже, когда определимся с категориями каталога. Mobile accordion — заглушка «Скоро».</li>
+      <li style="opacity: 0.6;"><s><strong>Header / MegaMenu prod-реализация</strong></s> — <span class="badge badge-live">✓ 2026-04-24</span> commits #23 sticky + dropdown nav, #24 меню под эталон brand-guide (плоские ссылки + CTA), #25 mega-menu 1:1 design-system spec — на prod через auto-deploy. Refresh продолжается параллельно (см. <code>site/components/marketing/Header.tsx</code>).</li>
       <li style="opacity: 0.6;"><s><strong>Favicon / OG / apple-touch-icon</strong></s> — <span class="badge badge-live">✓ готово</span> <code>site/app/icon.png</code> 32 + <code>apple-icon.png</code> 180 (Next.js 16 convention) + <code>agents/brand/logo/</code> icon-192/512/og-mark для PWA и OG.</li>
       <li style="opacity: 0.6;"><s><strong>Иконография сервисов</strong></s> — <span class="badge badge-live">✓ v0.9</span> 16 иконок в <a href="icons/services/README.md"><code>design-system/icons/services/</code></a>. Покрытие всех 4 кластеров + 3 УТП-бейджа.</li>
       <li style="opacity: 0.6;"><s><strong>Улучшения service-иконок</strong></s> — <span class="badge badge-live">✓ готово</span> <code>prune</code>, <code>boomlift</code>, <code>demolition</code> перерисованы (Caregiver-tone, читаемая техника, штриховые срезы/трещины вместо молота).</li>
@@ -1874,7 +2006,7 @@
       <li style="opacity: 0.6;"><s><strong>DistrictCard spec</strong></s> — <span class="badge badge-live">✓ v0.9</span> <a href="components/district-card/district-card.spec.md"><code>district-card.spec.md</code></a> для programmatic SEO LP 28 районов.</li>
       <li style="opacity: 0.6;"><s><strong>FileUploader spec</strong></s> — <span class="badge badge-live">✓ v0.9</span> <a href="components/file-uploader/file-uploader.spec.md"><code>file-uploader.spec.md</code></a> для PhotoQuoteForm (drag-n-drop / HEIC конверсия / S3 upload / security).</li>
       <li style="opacity: 0.6;"><s><strong>Ассеты в <code>assets/</code></strong></s> — <span class="badge badge-live">✓ готово</span> папка создана с <code>photos/ brand/ icons-raw/ videos/ temp/</code> + README + <code>.gitignore</code> для тяжёлых медиа.</li>
-      <li style="opacity: 0.6;"><s><strong>Mega-menu · живой интерактивный пример</strong></s> — <span class="badge badge-live">✓ в этом гайде</span> см. раздел «09 · Навигация» выше — работающий hover-dropdown + mobile accordion.</li>
+      <li style="opacity: 0.6;"><s><strong>Mega-menu · живой интерактивный пример</strong></s> — <span class="badge badge-live">✓ в этом гайде</span> см. раздел «09 · Навигация» выше — 3 работающих hover-dropdown'а (Услуги · Районы · Кейсы) + flat-ссылки (Магазин · Цены · Блог · Контакты) + mobile accordion с 7 секциями.</li>
       <li style="opacity: 0.6;"><s><strong>Pattern programmatic-landing</strong></s> — <span class="badge badge-live">✓ v1.0</span> <a href="patterns/programmatic-landing.md"><code>patterns/programmatic-landing.md</code></a>: секции, heading hierarchy, JSON-LD (Service + LocalBusiness + BreadcrumbList + FAQPage), canonical / noindex, CWV targets, interlinking. Закрывает главный блокер fe2 для 28 LP.</li>
       <li style="opacity: 0.6;"><s><strong>OG-image pattern</strong></s> — <span class="badge badge-live">✓ v1.0</span> <a href="patterns/og-image.md"><code>patterns/og-image.md</code></a>: edge-endpoint <code>/api/og</code>, 5 variants (default / service-district / service-index / blog / case), fonts handling, fallback static.</li>
       <li style="opacity: 0.6;"><s><strong>Breadcrumbs spec + JSON-LD</strong></s> — <span class="badge badge-live">✓ v1.0</span> <a href="components/breadcrumbs/breadcrumbs.spec.md"><code>breadcrumbs.spec.md</code></a> с полной BreadcrumbList-схемой, mobile truncate, TOV для названий.</li>
@@ -1893,7 +2025,6 @@
       <li><strong>Реализация <code>site/lib/forms/</code></strong> — US fe1+be3 по <a href="components/form-schemas/form-schemas.spec.md"><code>form-schemas.spec.md</code></a>. Разблокирует PhotoQuoteForm / LeadForm / B2B-enquiry.</li>
       <li><strong>PhotoQuoteForm — реализация</strong> — главный конверсионный компонент. Spec готов, ждёт US после <code>site/lib/forms/</code>.</li>
       <li><strong>LP-шаблон <code>/uslugi/[cluster]/[district]/</code></strong> — US fe2 по <a href="patterns/programmatic-landing.md"><code>programmatic-landing.md</code></a>. Первый LP — Раменское × Арбористика, потом раскатка на 28 seed.</li>
-      <li><strong>Header / Footer refresh + MegaMenu реализация</strong> — US ui+fe по <a href="components/header/header.spec.md"><code>header.spec.md</code></a> + <a href="components/navigation/mega-menu.spec.md"><code>mega-menu.spec.md</code></a>.</li>
       <li><strong>OG-image endpoint <code>/api/og</code></strong> — US fe2 по <a href="patterns/og-image.md"><code>og-image.md</code></a>.</li>
       <li><strong>React-обёртки компонентов</strong> — <code>&lt;Button&gt;</code>, <code>&lt;Input&gt;</code>, <code>&lt;Toast&gt;</code>, <code>&lt;Skeleton&gt;</code>, <code>&lt;Pagination&gt;</code>, <code>&lt;Breadcrumbs&gt;</code>, <code>&lt;FileUploader&gt;</code>, <code>&lt;DistrictCard&gt;</code>, <code>&lt;Calculator&gt;</code>. CSS-классы и spec'и есть.</li>
     </ol>
@@ -1912,7 +2043,7 @@
 
 <footer class="site">
   <div class="wrap">
-    <p>design-system/brand-guide.html · v1.5 · обновлён 2026-04-24 · единый вход в дизайн-систему Обихода · логотип «Круг сезонов» v1.0 · 22 service-иконки v0.9 · header-refresh (группы + dropdown + hamburger) · mega-menu / pagination / notifications live demo · foundations: icons / a11y / microcopy / photography / print-materials · patterns: programmatic-landing / og-image / b2b-pitch-deck · 15 component-spec'ов</p>
+    <p>design-system/brand-guide.html · v1.6 · обновлён 2026-04-25 · единый вход в дизайн-систему Обихода · логотип «Круг сезонов» v1.0 (full + horizontal-compact) · 22 service-иконки v0.9 · 8 district landmark-иконок · 9 case topic-иконок · header-refresh (группы + dropdown + hamburger) · mega-menu live demo: Услуги + Районы + Кейсы dropdowns + Магазин · pagination / notifications live demo · foundations: icons / a11y / microcopy / photography / print-materials · patterns: programmatic-landing / og-image / b2b-pitch-deck · 15 component-spec'ов</p>
     <p>источники: <a href="../contex/03_brand_naming.md">contex/03_brand_naming.md</a> · <a href="../site/app/globals.css">site/app/globals.css</a> · <a href="README.md">design-system/README.md</a> · <a href="../devteam/art.md">devteam/art.md</a> · <a href="../devteam/specs/admin-visual/art-concept.md">admin-visual/art-concept.md</a></p>
   </div>
 </footer>
