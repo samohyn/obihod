@@ -1,0 +1,36 @@
+name: Sync design ← main
+
+on:
+  schedule:
+    - cron: '0 7 * * 1'   # Mon 10:00 MSK
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout design
+        uses: actions/checkout@v4
+        with:
+          ref: design
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Merge main into design
+        run: |
+          git fetch origin main
+          if git merge-base --is-ancestor origin/main HEAD; then
+            echo "design already includes main — nothing to do"
+            exit 0
+          fi
+          git merge --no-edit --no-ff origin/main -m "chore(sync): merge main into design"
+
+      - name: Push
+        run: git push origin design

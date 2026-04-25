@@ -1,0 +1,20 @@
+# Code ownership map — Обиход
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+#
+# Right-most matching pattern wins. Owners listed will be auto-requested
+# as reviewers when a PR touches matched paths.
+
+# ── Design system / brand assets ────────────────────────────────────────
+design-system/                     @samohyn
+agents/brand/                      @samohyn
+contex/03_brand_naming.md          @samohyn
+contex/07_brand_system.html        @samohyn
+
+# ── Marketing surface (design + fe) ─────────────────────────────────────
+site/components/marketing/         @samohyn
+site/app/globals.css               @samohyn
+
+# ── Ops / CI / Deploy ───────────────────────────────────────────────────
+.github/workflows/                 @samohyn
+deploy/                            @samohyn
+.github/CODEOWNERS                 @samohyn
