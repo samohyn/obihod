@@ -1,18 +1,16 @@
 /*
- * Header sticky + dropdown nav.
+ * Header sticky + mega-menu nav.
  *
- * Адаптация эталона из design-system/brand-guide.html (header.site +
- * .gh-* классы, rev v1.5) для публичного сайта Обихода. Работает поверх
- * токенов из site/app/globals.css (--c-primary, --c-bg, --c-line и т.д.).
+ * Эталон 1:1 — design-system/brand-guide.html:
+ *  - .gh-brand / .gh-mark / .gh-wordmark (~строки 60-100) → .brand / .mark / .wordmark
+ *  - .gh-nav / .gh-group / .gh-panel (~строки 100-200) → .nav / .group / .panel
+ *  - Mega-menu live demo (~строки 1216+) → .megaPanel / .megaCols / .column
+ *    / .columnHeader / .columnLink / .columnIcon / .columnAll / .featured
  *
- * Главные отличия от эталона:
- *  - Здесь это CSS-модуль, не глобальные стили — namespace через scopify.
- *  - Burger-checkbox + label оставлены — sibling-селектор работает в пределах
- *    одного <header>, поэтому переносится 1:1.
- *  - Hover-open dropdown работает только @media (hover: hover) — touch
- *    использует click через native <details>.
+ * Токены — из site/app/globals.css (--c-primary, --c-bg, --c-line, --radius*).
  *
  * Mobile breakpoint — 860px (как в эталоне).
+ * Mega-menu fallback на 2 колонки 1024-1279, 1 колонка-аккордеон ≤1023.
  */
 
 .site {
@@ -37,14 +35,15 @@
 }
 
 /* ───────── BRAND ─────────
- * Чистый wordmark «ОБИХОД» — без LogoMark и без ®, по эталону
- * design-system/brand-guide.html → секция «Живой пример».
+ * О-mark (зелёный круг #2d5a3d) + wordmark «ОБИХОД» по эталону
+ * design-system/brand-guide.html → .gh-brand / .gh-mark / .gh-wordmark.
  */
 .brand {
   display: inline-flex;
   align-items: center;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  gap: 10px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--c-ink);
   text-decoration: none;
   flex: 0 0 auto;
@@ -53,12 +52,29 @@
   text-decoration: none;
   color: var(--c-ink);
 }
-.brandWord {
+.mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--c-primary);
+  color: var(--c-on-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  font-family: var(--font-sans);
+  flex: 0 0 32px;
+}
+.wordmark {
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1;
   white-space: nowrap;
   color: var(--c-ink);
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 /* sr-only — visually-hidden, но читается screen-reader'ами. */
@@ -98,6 +114,11 @@
 .nav > li {
   list-style: none;
   position: relative;
+}
+/* Для mega-group отключаем position:relative на li, чтобы panel
+   позиционировался относительно ближайшего absolute-родителя — .inner. */
+.nav > li:has(.groupMega) {
+  position: static;
 }
 .panel ul {
   list-style: none;
@@ -139,6 +160,15 @@
   outline-offset: 2px;
 }
 
+/* group container — relative по умолчанию для panel + hover-bridge */
+.group {
+  position: relative;
+}
+.groupMega {
+  /* mega-group использует .inner как опору позиционирования */
+  position: static;
+}
+
 /* chevron для группы */
 .group > summary {
   list-style: none;
@@ -164,7 +194,7 @@
   opacity: 1;
 }
 
-/* hover-open на desktop: раскрывает panel без клика */
+/* ──── HOVER-OPEN на desktop (≥ 1024 px) ──── */
 @media (hover: hover) and (min-width: 1024px) {
   .group:hover > .panel,
   .group:focus-within > .panel {
@@ -173,7 +203,15 @@
     transform: translate(-50%, 0);
     pointer-events: auto;
   }
-  /* невидимый hover-мост, чтобы курсор не «проваливался» между summary и panel */
+  /* для mega-menu — отдельная transform (без -50%, занимает почти всю ширину) */
+  .groupMega:hover > .megaPanel,
+  .groupMega:focus-within > .megaPanel {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0, 0);
+    pointer-events: auto;
+  }
+  /* hover-мост, чтобы курсор не «проваливался» между summary и panel */
   .group::after {
     content: '';
     position: absolute;
@@ -188,7 +226,7 @@
   }
 }
 
-/* dropdown panel */
+/* ───────── DROPDOWN PANEL (общий, для Районы) ───────── */
 .panel {
   position: absolute;
   top: calc(100% + 10px);
@@ -206,24 +244,200 @@
   visibility: hidden;
   pointer-events: none;
   transition:
-    opacity 0.18s ease,
-    visibility 0.18s ease,
-    transform 0.18s ease;
+    opacity 0.32s ease,
+    visibility 0.32s ease,
+    transform 0.32s ease;
   z-index: 30;
 }
-/* click-open (native <details> behaviour) — для touch и клавиатуры */
 .group[open] > .panel {
   opacity: 1;
   visibility: visible;
   transform: translate(-50%, 0);
   pointer-events: auto;
 }
-.panel ul {
+
+/* ───────── MEGA PANEL (3 колонки + featured row) ───────── */
+.megaPanel {
+  position: absolute;
+  top: calc(100% + 10px);
+  /* центрируем относительно header inner — фиксированная ширина */
+  left: 50%;
+  transform: translate(-50%, -8px);
+  width: min(1120px, calc(100vw - 32px));
+  max-width: 1120px;
+  background: var(--c-bg);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-lg);
+  padding: 32px 40px;
+  box-shadow: 0 12px 32px -4px rgba(28, 28, 28, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.32s ease,
+    visibility 0.32s ease,
+    transform 0.32s ease;
+  z-index: 30;
+  min-width: 0;
+}
+.groupMega[open] > .megaPanel {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+.megaCols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+.column {
+  min-width: 0;
+}
+.columnHeader {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+  margin: 0 0 12px;
+}
+.columnList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.columnList li {
+  margin: 0;
+}
+.columnLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  margin-left: -10px;
+  border-radius: var(--radius-sm);
+  color: var(--c-ink);
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1.3;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  transition:
+    color 0.12s ease,
+    background-color 0.12s ease;
+}
+.columnLink:hover {
+  color: var(--c-primary);
+  background: var(--c-bg-alt);
+  text-decoration: none;
+}
+.columnLink:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+.columnIcon {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-primary);
+  opacity: 0.85;
+}
+.columnIcon svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+.columnLabel {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.columnArrow {
+  margin-left: auto;
+  font-size: 12px;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity 0.12s ease,
+    transform 0.12s ease;
+  color: var(--c-primary);
+}
+.columnLink:hover .columnArrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+.columnAll {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--c-primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.columnAll:hover {
+  color: var(--c-primary-ink);
+}
+
+/* Featured row внизу mega-panel */
+.featured {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--c-line);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.featuredTitle {
+  color: var(--c-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+}
+.featuredCopy {
+  color: var(--c-muted);
+  font-size: 13px;
+}
+.featuredPrice {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--c-primary);
+  font-weight: 600;
+}
+.featuredBtn {
+  margin-left: auto;
+  padding: 8px 16px;
+  background: var(--c-accent);
+  color: var(--c-ink);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+.featuredBtn:hover {
+  background: var(--c-accent-ink);
+  color: var(--c-on-primary);
+  text-decoration: none;
+}
+
+/* ───────── Районы dropdown body ───────── */
+.districtsList {
   display: flex;
   flex-direction: column;
   gap: 1px;
+  margin: 0;
+  padding: 0;
 }
-.panel a {
+.districtLink {
   display: block;
   padding: 9px 12px;
   border-radius: 6px;
@@ -235,22 +449,29 @@
     background-color 0.12s ease,
     color 0.12s ease;
 }
-.panel a:hover {
+.districtLink:hover {
   background: var(--c-bg-alt);
   color: var(--c-primary);
   text-decoration: none;
 }
-.panel a:focus-visible {
+.districtLink:focus-visible {
   outline: 2px solid var(--c-accent);
   outline-offset: 2px;
 }
-.panelNum {
-  display: inline-block;
-  width: 22px;
-  color: var(--c-muted);
+.districtsAll {
+  display: block;
+  margin-top: 6px;
+  padding: 9px 12px;
+  border-top: 1px solid var(--c-line);
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.04em;
+  font-size: 12px;
+  color: var(--c-primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.districtsAll:hover {
+  color: var(--c-primary-ink);
+  text-decoration: underline;
 }
 
 /* ───────── RIGHT SLOT (телефон + CTA) ───────── */
@@ -372,7 +593,7 @@
   transform: rotate(-45deg);
 }
 
-/* ── tablet: уменьшаем gap ── */
+/* ── tablet 1100-1280: компактнее ── */
 @media (max-width: 1100px) {
   .link,
   .group > summary {
@@ -390,6 +611,18 @@
   }
 }
 
+/* ── tablet/small-desktop ≤1023: 2 колонки ── */
+@media (max-width: 1279px) and (min-width: 861px) {
+  .megaCols {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+  .megaPanel {
+    width: min(720px, calc(100vw - 32px));
+    padding: 24px 28px;
+  }
+}
+
 /* ── mobile: burger-drawer ── */
 @media (max-width: 860px) {
   .inner {
@@ -401,6 +634,9 @@
   .cta {
     padding: 8px 12px;
     font-size: 13px;
+  }
+  .wordmark {
+    font-size: 15px;
   }
 
   .navWrap {
@@ -446,7 +682,8 @@
     border-bottom: 0;
   }
 
-  .panel {
+  .panel,
+  .megaPanel {
     position: static;
     transform: none;
     opacity: 1;
@@ -456,15 +693,37 @@
     border: 0;
     padding: 4px 0 8px 10px;
     min-width: 0;
+    width: 100%;
+    max-width: 100%;
     background: transparent;
     display: none;
   }
-  .group[open] > .panel {
+  .group[open] > .panel,
+  .groupMega[open] > .megaPanel {
     display: block;
     transform: none;
   }
 
-  .panel a {
+  /* mega-menu на mobile → 1 колонка-аккордеон */
+  .megaCols {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .columnHeader {
+    margin-top: 6px;
+  }
+  .featured {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 14px;
+  }
+  .featuredBtn {
+    margin-left: 0;
+  }
+
+  .districtLink {
     padding: 10px 10px;
     font-size: 14.5px;
   }
@@ -475,8 +734,10 @@
   .link,
   .group > summary,
   .panel,
+  .megaPanel,
   .chev,
   .nav,
+  .columnArrow,
   .burgerIcon::before,
   .burgerIcon > span,
   .burgerIcon::after {

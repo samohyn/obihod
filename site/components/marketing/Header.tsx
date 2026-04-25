@@ -1,73 +1,148 @@
+import type { ComponentType, SVGProps } from 'react'
 import Link from 'next/link'
 
 import { DEFAULT_SITE_CHROME, getSiteChrome, menuHref, type HeaderCta } from '@/lib/chrome'
-import { payloadClient } from '@/lib/payload'
-import { unstable_cache } from 'next/cache'
 
 import { CloseDetailsOnClickOutside } from './_shared/CloseDetailsOnClickOutside'
 import styles from './Header.module.css'
+import {
+  AlpinizmIcon,
+  AvtovyshkaIcon,
+  ChistkaVodostokovIcon,
+  DemontazhPeregorodokIcon,
+  DemontazhSaraevIcon,
+  KablingIcon,
+  KonteynerIcon,
+  KorchevaniyeIcon,
+  KronirovaniyeIcon,
+  PokosTravyIcon,
+  RaschistkaIcon,
+  SanitarnayaIcon,
+  SpilIcon,
+  UborkaSnegaIcon,
+  UdalenieCelikomIcon,
+  UdalenieChastiamiIcon,
+  ValkaIcon,
+  VyvozBytovogoIcon,
+  VyvozSnegaIcon,
+  VyvozStroitelnogoIcon,
+} from '@/components/icons/services'
 
 /**
  * Header — server component.
  *
- * Архитектура:
- *  - Sticky-header с backdrop blur.
- *  - 2 native <details>-dropdown'а: Услуги (4 pillar) / Районы (priority A).
- *  - 4 плоских ссылки: Кейсы / Цены / Блог / Контакты.
- *  - CTA «Получить смету» → #calc на главной.
- *  - Slot 1 — wordmark «ОБИХОД» (без LogoMark, без ®, как в эталоне),
- *    slot 2 — nav, slot 3 — телефон + CTA, slot 4 — burger (mobile <860px).
- *  - Источник данных: SiteChrome global (контракт сохранён) + прямые
- *    payload.find для актуальных slugs Services/Districts.
- *  - Visual: scoped CSS module (Header.module.css), копия паттернов
- *    из design-system/brand-guide.html секция «Живой пример».
- *  - JS-«залипание» решает CloseDetailsOnClickOutside (минимальный
- *    'use client' — единственный hydration-island на header'е).
+ * Эталон 1:1 — design-system/brand-guide.html секция «Mega-menu каталога услуг»
+ * (live demo, ~строка 1216+) + components/navigation/mega-menu.spec.md.
  *
- * Fallback-стратегия (AC-4.1/4.2): если Payload пуст или упал —
- * подставляем константы для районов/сервисов, чтобы dropdown'ы не были
- * пустыми на первом запуске prod без seed.
+ *  - Brand: О-mark (зелёный круг #2d5a3d) + wordmark «ОБИХОД».
+ *  - Услуги ▾ → mega-menu 3 колонки (Арбористика 8, Крыши 6, Мусор 6) +
+ *    sub-icons 20×20 stroke-only currentColor + featured row внизу.
+ *  - Районы ▾ → 7 пилотных районов + «Все районы МО» footer.
+ *  - 4 плоские: Кейсы / Цены / Блог / Контакты.
+ *  - CTA «Получить смету» → #calc.
+ *  - Mega-menu контент — hardcoded (по spec, не Payload). SiteChrome.header.menu
+ *    не используется для содержимого dropdown'ов (контракт сохраняется,
+ *    просто игнорируется для mega-menu — оператор может расширять
+ *    отдельными итерациями).
  *
- * Источник эталона: design-system/brand-guide.html → раздел
- * «Живой пример — наведите курсор на «Услуги»» (~строка 996+).
+ * Visual: scoped CSS module Header.module.css, классы маппятся 1:1 на
+ * gh-* паттерны эталона (.brand .mark .wordmark .nav .group .panel
+ * .megaMenu .column .columnHeader .columnLink .featured).
  */
 
 const BURGER_ID = 'site-header-burger'
 
-interface NavService {
-  slug: string
+type ServiceIcon = ComponentType<SVGProps<SVGSVGElement> & { size?: number }>
+
+interface ServiceItem {
+  href: string
+  label: string
+  icon: ServiceIcon
+}
+
+interface MegaColumn {
   title: string
+  items: ServiceItem[]
+  allHref: string
+  allLabel: string
 }
 
-interface NavDistrict {
-  slug: string
-  nameNominative: string
-}
-
-const FALLBACK_SERVICES: NavService[] = [
-  { slug: 'arboristika', title: 'Арбористика' },
-  { slug: 'ochistka-krysh', title: 'Чистка крыш' },
-  { slug: 'vyvoz-musora', title: 'Вывоз мусора' },
-  { slug: 'demontazh', title: 'Демонтаж' },
+const MEGA_COLUMNS: MegaColumn[] = [
+  {
+    title: 'Арбористика',
+    items: [
+      { href: '/arboristika/spil/', label: 'Спил деревьев', icon: SpilIcon },
+      { href: '/arboristika/valka/', label: 'Валка', icon: ValkaIcon },
+      {
+        href: '/arboristika/udalenie-celikom/',
+        label: 'Удаление целиком',
+        icon: UdalenieCelikomIcon,
+      },
+      {
+        href: '/arboristika/udalenie-chastiami/',
+        label: 'Удаление частями',
+        icon: UdalenieChastiamiIcon,
+      },
+      { href: '/arboristika/korchevanie/', label: 'Корчевание', icon: KorchevaniyeIcon },
+      { href: '/arboristika/kronirovanie/', label: 'Кронирование', icon: KronirovaniyeIcon },
+      {
+        href: '/arboristika/sanitarnaya-obrezka/',
+        label: 'Санитарная обрезка',
+        icon: SanitarnayaIcon,
+      },
+      { href: '/arboristika/kabling/', label: 'Каблинг', icon: KablingIcon },
+    ],
+    allHref: '/arboristika/',
+    allLabel: 'Все услуги арбористики',
+  },
+  {
+    title: 'Крыши и территория',
+    items: [
+      { href: '/krysha/uborka-snega/', label: 'Уборка снега', icon: UborkaSnegaIcon },
+      { href: '/krysha/vyvoz-snega/', label: 'Вывоз снега', icon: VyvozSnegaIcon },
+      {
+        href: '/krysha/chistka-vodostokov/',
+        label: 'Чистка водостоков',
+        icon: ChistkaVodostokovIcon,
+      },
+      { href: '/krysha/alpinizm/', label: 'Промышленный альпинизм', icon: AlpinizmIcon },
+      { href: '/krysha/avtovyshka/', label: 'Автовышка', icon: AvtovyshkaIcon },
+      { href: '/krysha/pokos-travy/', label: 'Покос травы', icon: PokosTravyIcon },
+    ],
+    allHref: '/krysha/',
+    allLabel: 'Все услуги',
+  },
+  {
+    title: 'Мусор и демонтаж',
+    items: [
+      { href: '/musor/bytovoy/', label: 'Бытовой мусор', icon: VyvozBytovogoIcon },
+      { href: '/musor/stroitelnyy/', label: 'Строительный мусор', icon: VyvozStroitelnogoIcon },
+      { href: '/musor/konteyner/', label: 'Контейнеры 7–30 м³', icon: KonteynerIcon },
+      { href: '/demontazh/saraev/', label: 'Демонтаж сараев', icon: DemontazhSaraevIcon },
+      {
+        href: '/demontazh/peregorodok/',
+        label: 'Демонтаж перегородок',
+        icon: DemontazhPeregorodokIcon,
+      },
+      { href: '/demontazh/raschistka/', label: 'Расчистка участка', icon: RaschistkaIcon },
+    ],
+    allHref: '/musor/',
+    allLabel: 'Все услуги',
+  },
 ]
 
-const FALLBACK_DISTRICTS: NavDistrict[] = [
-  { slug: 'odintsovo', nameNominative: 'Одинцово' },
-  { slug: 'krasnogorsk', nameNominative: 'Красногорск' },
-  { slug: 'mytishchi', nameNominative: 'Мытищи' },
-  { slug: 'khimki', nameNominative: 'Химки' },
-  { slug: 'istra', nameNominative: 'Истра' },
-  { slug: 'pushkino', nameNominative: 'Пушкино' },
-  { slug: 'ramenskoye', nameNominative: 'Раменское' },
+const PILOT_DISTRICTS: { slug: string; name: string }[] = [
+  { slug: 'odintsovo', name: 'Одинцово' },
+  { slug: 'krasnogorsk', name: 'Красногорск' },
+  { slug: 'mytishchi', name: 'Мытищи' },
+  { slug: 'khimki', name: 'Химки' },
+  { slug: 'istra', name: 'Истра' },
+  { slug: 'pushkino', name: 'Пушкино' },
+  { slug: 'ramenskoye', name: 'Раменское' },
 ]
 
 /**
  * Плоские ссылки header'а — соответствуют эталону brand-guide.
- * - Кейсы → /kejsy/ (страница есть)
- * - Цены → #subscription (анкер на главной — секция тарифов; отдельной
- *   страницы /ceny/ пока нет)
- * - Блог → /blog/ (route-страница; будет создана отдельным US)
- * - Контакты → #contact (анкер CtaFooter на главной)
  */
 const FLAT_LINKS: { href: string; label: string }[] = [
   { href: '/kejsy/', label: 'Кейсы' },
@@ -77,79 +152,7 @@ const FLAT_LINKS: { href: string; label: string }[] = [
 ]
 
 /**
- * Сервисы для nav-меню. Только slug + title, без тяжёлых полей.
- * Кешируется тегом `services` — синхронно с Services.afterChange revalidate.
- */
-const getNavServices = unstable_cache(
-  async (): Promise<NavService[]> => {
-    try {
-      const payload = await payloadClient()
-      const r = await payload.find({
-        collection: 'services',
-        limit: 10,
-        pagination: false,
-        depth: 0,
-        select: { slug: true, title: true },
-      })
-      const docs: NavService[] = r.docs
-        .map((d) => {
-          const slug = (d as { slug?: unknown }).slug
-          const title = (d as { title?: unknown }).title
-          if (typeof slug === 'string' && typeof title === 'string') {
-            return { slug, title }
-          }
-          return null
-        })
-        .filter((x): x is NavService => x !== null)
-      return docs.length > 0 ? docs : FALLBACK_SERVICES
-    } catch {
-      return FALLBACK_SERVICES
-    }
-  },
-  ['nav-services'],
-  { revalidate: 3600, tags: ['services'] },
-)
-
-/**
- * Районы priority=A (пилотные). Только slug + nameNominative.
- */
-const getNavDistricts = unstable_cache(
-  async (): Promise<NavDistrict[]> => {
-    try {
-      const payload = await payloadClient()
-      const r = await payload.find({
-        collection: 'districts',
-        where: { priority: { equals: 'A' } },
-        limit: 10,
-        pagination: false,
-        depth: 0,
-        sort: 'nameNominative',
-        select: { slug: true, nameNominative: true },
-      })
-      const docs: NavDistrict[] = r.docs
-        .map((d) => {
-          const slug = (d as { slug?: unknown }).slug
-          const nameNominative = (d as { nameNominative?: unknown }).nameNominative
-          if (typeof slug === 'string' && typeof nameNominative === 'string') {
-            return { slug, nameNominative }
-          }
-          return null
-        })
-        .filter((x): x is NavDistrict => x !== null)
-      return docs.length > 0 ? docs : FALLBACK_DISTRICTS
-    } catch {
-      return FALLBACK_DISTRICTS
-    }
-  },
-  ['nav-districts-a'],
-  { revalidate: 3600, tags: ['districts'] },
-)
-
-/**
- * Header CTA по эталону brand-guide: текст всегда «Получить смету»
- * (фиксированный copy из дизайн-системы — admin не меняет, чтобы
- * брендовая кнопка не съехала). href берём из SiteChrome (если там
- * настроен анкер/route/external), иначе fallback — anchor #calc.
+ * Header CTA по эталону brand-guide: текст всегда «Получить смету».
  */
 const FIXED_CTA_LABEL = 'Получить смету'
 const FALLBACK_CTA_TARGET: HeaderCta = {
@@ -158,17 +161,11 @@ const FALLBACK_CTA_TARGET: HeaderCta = {
 }
 
 export async function Header() {
-  const [chrome, services, districts] = await Promise.all([
-    getSiteChrome(),
-    getNavServices(),
-    getNavDistricts(),
-  ])
+  const chrome = await getSiteChrome()
   const safeChrome = chrome ?? DEFAULT_SITE_CHROME
   const header = safeChrome.header ?? DEFAULT_SITE_CHROME.header
   const contacts = safeChrome.contacts ?? DEFAULT_SITE_CHROME.contacts
 
-  // Label фиксирован дизайн-системой; target (kind/anchor/route/url) —
-  // из admin при наличии, иначе fallback на #calc.
   const ctaTarget = header?.cta && header.cta.kind ? header.cta : FALLBACK_CTA_TARGET
   const cta: HeaderCta = { ...ctaTarget, label: FIXED_CTA_LABEL }
 
@@ -177,8 +174,7 @@ export async function Header() {
 
   return (
     <header className={styles.site}>
-      {/* sibling-checkbox для burger — должен идти ДО .inner, чтобы
-          селектор `.burger:checked ~ .inner ...` работал. */}
+      {/* sibling-checkbox для burger — должен идти ДО .inner. */}
       <input
         type="checkbox"
         id={BURGER_ID}
@@ -189,33 +185,71 @@ export async function Header() {
       />
       <div className={styles.inner}>
         <Link href="/" className={styles.brand} aria-label="Обиход — на главную" data-header-link>
-          <span className={styles.brandWord}>ОБИХОД</span>
+          <span className={styles.mark} aria-hidden="true">
+            О
+          </span>
+          <span className={styles.wordmark}>ОБИХОД</span>
         </Link>
 
         <nav className={styles.navWrap} aria-label="Основное меню">
           <ul className={styles.nav}>
+            {/* ─── Услуги · MEGA MENU 3 колонки ─── */}
             <li>
-              <details className={styles.group} data-header-group>
+              <details className={`${styles.group} ${styles.groupMega}`} data-header-group>
                 <summary aria-haspopup="menu">
                   Услуги
                   <Chev />
                 </summary>
-                <div className={styles.panel} role="menu">
-                  <ul>
-                    {services.map((s, idx) => (
-                      <li key={s.slug}>
-                        <Link role="menuitem" href={`/${s.slug}/`} data-header-link>
-                          <span className={styles.panelNum}>
-                            {String(idx + 1).padStart(2, '0')}
-                          </span>
-                          {s.title}
+                <div className={`${styles.panel} ${styles.megaPanel}`} role="menu">
+                  <div className={styles.megaCols}>
+                    {MEGA_COLUMNS.map((col) => (
+                      <div key={col.title} className={styles.column}>
+                        <h4 className={styles.columnHeader}>{col.title}</h4>
+                        <ul className={styles.columnList}>
+                          {col.items.map((item) => {
+                            const Icon = item.icon
+                            return (
+                              <li key={item.href}>
+                                <Link
+                                  href={item.href}
+                                  role="menuitem"
+                                  className={styles.columnLink}
+                                  data-header-link
+                                >
+                                  <span className={styles.columnIcon} aria-hidden="true">
+                                    <Icon />
+                                  </span>
+                                  <span className={styles.columnLabel}>{item.label}</span>
+                                  <span className={styles.columnArrow} aria-hidden="true">
+                                    →
+                                  </span>
+                                </Link>
+                              </li>
+                            )
+                          })}
+                        </ul>
+                        <Link href={col.allHref} className={styles.columnAll} data-header-link>
+                          {col.allLabel} →
                         </Link>
-                      </li>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
+
+                  <div className={styles.featured}>
+                    <strong className={styles.featuredTitle}>Раменское · зима 2026</strong>
+                    <span className={styles.featuredCopy}>
+                      фикс <span className={styles.featuredPrice}>12 800 ₽</span> за объект · смета
+                      за 10 минут
+                    </span>
+                    <a href="#calc" className={styles.featuredBtn} data-header-link>
+                      Оставить заявку
+                    </a>
+                  </div>
                 </div>
               </details>
             </li>
+
+            {/* ─── Районы dropdown ─── */}
             <li>
               <details className={styles.group} data-header-group>
                 <summary aria-haspopup="menu">
@@ -223,21 +257,27 @@ export async function Header() {
                   <Chev />
                 </summary>
                 <div className={styles.panel} role="menu">
-                  <ul>
-                    {districts.map((d, idx) => (
+                  <ul className={styles.districtsList}>
+                    {PILOT_DISTRICTS.map((d) => (
                       <li key={d.slug}>
-                        <Link role="menuitem" href={`/raiony/${d.slug}/`} data-header-link>
-                          <span className={styles.panelNum}>
-                            {String(idx + 1).padStart(2, '0')}
-                          </span>
-                          {d.nameNominative}
+                        <Link
+                          role="menuitem"
+                          href={`/raiony/${d.slug}/`}
+                          className={styles.districtLink}
+                          data-header-link
+                        >
+                          {d.name}
                         </Link>
                       </li>
                     ))}
                   </ul>
+                  <Link href="/raiony/" className={styles.districtsAll} data-header-link>
+                    Все районы МО →
+                  </Link>
                 </div>
               </details>
             </li>
+
             {FLAT_LINKS.map((l) => (
               <li key={l.href}>
                 <Link href={l.href} className={styles.link} data-header-link>
