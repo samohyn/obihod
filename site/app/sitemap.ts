@@ -53,6 +53,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     }))
 
+  // Programmatic /<service>/<district>/ URL'ы.
+  // Фильтр: publishStatus=published (через getPublishedServiceDistricts)
+  //         + noindexUntilCase !== true (защита от Scaled Content Abuse).
+  // miniCase НЕ обязателен для попадания в sitemap — индексацию контролирует
+  // отдельный флаг noindexUntilCase, который ставится в Payload админкой.
+  // См. OBI-12: страница без mini-case всё ещё может быть проиндексирована,
+  // если редактор явно снял noindexUntilCase=false.
   const programmaticEntries: Entry[] = (serviceDistricts as unknown as SDDoc[]).flatMap(
     (sd): Entry[] => {
       const serviceSlug =
@@ -60,13 +67,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const districtSlug =
         typeof sd.district === 'object' && sd.district !== null ? sd.district.slug : undefined
       if (!serviceSlug || !districtSlug) return []
-      if (!sd.miniCase) return []
       if (sd.noindexUntilCase) return []
       return [
         {
           url: `${SITE_URL}/${serviceSlug}/${districtSlug}/`,
           lastModified: sd.updatedAt ? new Date(sd.updatedAt) : undefined,
-          changeFrequency: 'monthly',
+          changeFrequency: 'weekly',
           priority: 0.7,
         },
       ]
