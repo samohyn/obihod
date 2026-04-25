@@ -14,11 +14,24 @@ import { getAllServiceSlugs, getServiceBySlug } from '@/lib/seo/queries'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 export const revalidate = 86400
-export const dynamicParams = false
+// dynamicParams = true: разрешаем рендер любых service-slug на runtime.
+// Если в БД появилась новая услуга после build — она доступна через ISR.
+// Если slug несуществующий — getServiceBySlug вернёт null → notFound().
+// До OBI-16 здесь было `false` + generateStaticParams, обёрнутый в
+// unstable_cache, который на prod build возвращал [] → все 4 pillar-страницы
+// 404. См. PR #27 (sitemap fix) и CLAUDE.md.
+export const dynamicParams = true
+
+// Канонические pillar-слаги. Используем как fallback, если БД во время
+// build недоступна (типичный prod-build на Beget без сети до Postgres).
+// Сами роуты валидируются по getServiceBySlug в default Page → 404 если slug
+// действительно не существует в БД.
+const PILLAR_SLUGS = ['arboristika', 'ochistka-krysh', 'vyvoz-musora', 'demontazh']
 
 export async function generateStaticParams() {
   const slugs = await getAllServiceSlugs()
-  return slugs.map((service) => ({ service }))
+  const safeSlugs = slugs.length > 0 ? slugs : PILLAR_SLUGS
+  return safeSlugs.map((service) => ({ service }))
 }
 
 export async function generateMetadata({

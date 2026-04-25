@@ -1,4 +1,4 @@
-import { unstable_cache } from 'next/cache'
+import { cache } from 'react'
 
 import { payloadClient } from './payload'
 
@@ -126,31 +126,35 @@ export const DEFAULT_SITE_CHROME: SiteChrome = {
 }
 
 /**
- * Server-component fetcher. Читает global `site-chrome` из Payload,
- * кеширует в Next RSC cache по тегу `site-chrome` — `afterChange` hook
- * в `SiteChrome.ts` делает `revalidateTag('site-chrome', 'max')`,
- * что возвращает этой функции cache miss при следующем RSC-рендере.
+ * Server-component fetcher. Читает global `site-chrome` из Payload.
+ *
+ * Стратегия (после OBI-16):
+ *  - `react.cache` для per-request memoization — Header + Footer вызывают
+ *    эту функцию из одного RSC-рендера, должна быть один SQL-запрос.
+ *  - Cross-request кеш и ISR — через `export const revalidate` на роутах
+ *    (layout.tsx обычно `revalidate = 3600`), плюс `revalidatePath('/', 'layout')`
+ *    в `globals/SiteChrome.ts` afterChange.
+ *  - Раньше использовался `unstable_cache(..., { tags: ['site-chrome'] })`,
+ *    но в Next 16 он deprecated и в build-time возвращал null/[] для
+ *    пирамидальных вызовов payloadClient → ломал pillar-страницы (OBI-16).
  *
  * Контракт: sa.md §AC-15.1 — 1 запрос в БД на цикл рендера несмотря
- * на два независимых вызова из Header + Footer.
+ * на два независимых вызова из Header + Footer. `react.cache` это
+ * гарантирует.
  */
-export const getSiteChrome = unstable_cache(
-  async (): Promise<SiteChrome | null> => {
-    try {
-      const payload = await payloadClient()
-      const chrome = (await payload.findGlobal({
-        slug: 'site-chrome',
-      })) as unknown as SiteChrome | null
-      return chrome
-    } catch {
-      // Мягкая деградация: не роняем страницу, возвращаем null — рендерер
-      // подставит DEFAULT_SITE_CHROME.
-      return null
-    }
-  },
-  ['site-chrome'],
-  { tags: ['site-chrome'], revalidate: 3600 },
-)
+export const getSiteChrome = cache(async (): Promise<SiteChrome | null> => {
+  try {
+    const payload = await payloadClient()
+    const chrome = (await payload.findGlobal({
+      slug: 'site-chrome',
+    })) as unknown as SiteChrome | null
+    return chrome
+  } catch {
+    // Мягкая деградация: не роняем страницу, возвращаем null — рендерер
+    // подставит DEFAULT_SITE_CHROME.
+    return null
+  }
+})
 
 // ---------- URL helpers ----------
 
