@@ -1,4 +1,5 @@
 import type { CollectionConfig, CollectionBeforeValidateHook } from 'payload'
+import { revalidateTag } from 'next/cache'
 import { Hero } from '@/blocks/Hero'
 import { TextContent } from '@/blocks/TextContent'
 import { LeadForm } from '@/blocks/LeadForm'
@@ -319,6 +320,20 @@ export const ServiceDistricts: CollectionConfig = {
     ],
     afterChange: [
       async ({ doc, req }) => {
+        // 1. Прямой in-process revalidateTag — работает без HTTP, без секретов,
+        // в пределах того же Next.js процесса. Инвалидирует sitemap +
+        // service-districts + конкретную пару sd-<svc>-<dst>.
+        try {
+          // Next 16: второй аргумент обязателен. 'max' = stale-while-revalidate.
+          revalidateTag('sitemap', 'max')
+          revalidateTag('service-districts', 'max')
+        } catch (e) {
+          console.warn('[service-districts.afterChange] revalidateTag failed:', e)
+        }
+
+        // 2. HTTP webhook на /api/revalidate — нужен только если Payload
+        // запускается отдельным процессом (не embedded в Next.js).
+        // На текущем deploy embedded, но оставляем как defense-in-depth.
         const url = process.env.SITE_URL
         const secret = process.env.REVALIDATE_SECRET
         if (!url || !secret) return doc
@@ -332,6 +347,7 @@ export const ServiceDistricts: CollectionConfig = {
             id: doc.district,
           })
           const tag = `sd-${svc.slug}-${dst.slug}`
+          revalidateTag(tag, 'max')
           await fetch(`${url}/api/revalidate?tag=${tag}`, {
             headers: { 'x-revalidate-secret': secret },
           })
@@ -339,7 +355,7 @@ export const ServiceDistricts: CollectionConfig = {
             headers: { 'x-revalidate-secret': secret },
           })
         } catch (e) {
-          console.warn('[service-districts.afterChange] revalidate failed:', e)
+          console.warn('[service-districts.afterChange] revalidate webhook failed:', e)
         }
         return doc
       },
