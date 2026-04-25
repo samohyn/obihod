@@ -4,7 +4,6 @@ import { DEFAULT_SITE_CHROME, getSiteChrome, menuHref, type HeaderCta } from '@/
 import { payloadClient } from '@/lib/payload'
 import { unstable_cache } from 'next/cache'
 
-import { LogoMark } from './_shared/LogoMark'
 import { CloseDetailsOnClickOutside } from './_shared/CloseDetailsOnClickOutside'
 import styles from './Header.module.css'
 
@@ -13,20 +12,24 @@ import styles from './Header.module.css'
  *
  * Архитектура:
  *  - Sticky-header с backdrop blur.
- *  - 3 native <details>-dropdown'а: Услуги (4 pillar) / Районы (приоритет A)
- *    / Компания (статика).
- *  - Slot 1 — лого, slot 2 — nav, slot 3 — телефон + CTA, slot 4 — burger
- *    (только на mobile <860px).
+ *  - 2 native <details>-dropdown'а: Услуги (4 pillar) / Районы (priority A).
+ *  - 4 плоских ссылки: Кейсы / Цены / Блог / Контакты.
+ *  - CTA «Получить смету» → #calc на главной.
+ *  - Slot 1 — wordmark «ОБИХОД» (без LogoMark, без ®, как в эталоне),
+ *    slot 2 — nav, slot 3 — телефон + CTA, slot 4 — burger (mobile <860px).
  *  - Источник данных: SiteChrome global (контракт сохранён) + прямые
  *    payload.find для актуальных slugs Services/Districts.
  *  - Visual: scoped CSS module (Header.module.css), копия паттернов
- *    из design-system/brand-guide.html (.gh-* → camelCase).
+ *    из design-system/brand-guide.html секция «Живой пример».
  *  - JS-«залипание» решает CloseDetailsOnClickOutside (минимальный
  *    'use client' — единственный hydration-island на header'е).
  *
  * Fallback-стратегия (AC-4.1/4.2): если Payload пуст или упал —
  * подставляем константы для районов/сервисов, чтобы dropdown'ы не были
  * пустыми на первом запуске prod без seed.
+ *
+ * Источник эталона: design-system/brand-guide.html → раздел
+ * «Живой пример — наведите курсор на «Услуги»» (~строка 996+).
  */
 
 const BURGER_ID = 'site-header-burger'
@@ -58,11 +61,19 @@ const FALLBACK_DISTRICTS: NavDistrict[] = [
   { slug: 'ramenskoye', nameNominative: 'Раменское' },
 ]
 
-const COMPANY_LINKS = [
+/**
+ * Плоские ссылки header'а — соответствуют эталону brand-guide.
+ * - Кейсы → /kejsy/ (страница есть)
+ * - Цены → #subscription (анкер на главной — секция тарифов; отдельной
+ *   страницы /ceny/ пока нет)
+ * - Блог → /blog/ (route-страница; будет создана отдельным US)
+ * - Контакты → #contact (анкер CtaFooter на главной)
+ */
+const FLAT_LINKS: { href: string; label: string }[] = [
   { href: '/kejsy/', label: 'Кейсы' },
-  { href: '/komanda/', label: 'Команда' },
-  { href: '/litsenzii/', label: 'Лицензии' },
+  { href: '/#subscription', label: 'Цены' },
   { href: '/blog/', label: 'Блог' },
+  { href: '/#contact', label: 'Контакты' },
 ]
 
 /**
@@ -134,6 +145,18 @@ const getNavDistricts = unstable_cache(
   { revalidate: 3600, tags: ['districts'] },
 )
 
+/**
+ * Header CTA по эталону brand-guide: текст всегда «Получить смету»
+ * (фиксированный copy из дизайн-системы — admin не меняет, чтобы
+ * брендовая кнопка не съехала). href берём из SiteChrome (если там
+ * настроен анкер/route/external), иначе fallback — anchor #calc.
+ */
+const FIXED_CTA_LABEL = 'Получить смету'
+const FALLBACK_CTA_TARGET: HeaderCta = {
+  kind: 'anchor',
+  anchor: 'calc',
+}
+
 export async function Header() {
   const [chrome, services, districts] = await Promise.all([
     getSiteChrome(),
@@ -144,7 +167,10 @@ export async function Header() {
   const header = safeChrome.header ?? DEFAULT_SITE_CHROME.header
   const contacts = safeChrome.contacts ?? DEFAULT_SITE_CHROME.contacts
 
-  const cta: HeaderCta | null | undefined = header?.cta ?? DEFAULT_SITE_CHROME.header?.cta
+  // Label фиксирован дизайн-системой; target (kind/anchor/route/url) —
+  // из admin при наличии, иначе fallback на #calc.
+  const ctaTarget = header?.cta && header.cta.kind ? header.cta : FALLBACK_CTA_TARGET
+  const cta: HeaderCta = { ...ctaTarget, label: FIXED_CTA_LABEL }
 
   const phoneDisplay = contacts?.phoneDisplay ?? ''
   const phoneE164 = contacts?.phoneE164 ?? ''
@@ -163,12 +189,7 @@ export async function Header() {
       />
       <div className={styles.inner}>
         <Link href="/" className={styles.brand} aria-label="Обиход — на главную" data-header-link>
-          <span className={styles.brandMark} aria-hidden="true">
-            <LogoMark size={36} animated />
-          </span>
-          <span className={styles.brandWord}>
-            Обиход<sup className={styles.brandReg}>®</sup>
-          </span>
+          <span className={styles.brandWord}>ОБИХОД</span>
         </Link>
 
         <nav className={styles.navWrap} aria-label="Основное меню">
@@ -217,28 +238,13 @@ export async function Header() {
                 </div>
               </details>
             </li>
-            <li>
-              <details className={styles.group} data-header-group>
-                <summary aria-haspopup="menu">
-                  Компания
-                  <Chev />
-                </summary>
-                <div className={styles.panel} role="menu">
-                  <ul>
-                    {COMPANY_LINKS.map((c, idx) => (
-                      <li key={c.href}>
-                        <Link role="menuitem" href={c.href} data-header-link>
-                          <span className={styles.panelNum}>
-                            {String(idx + 1).padStart(2, '0')}
-                          </span>
-                          {c.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </details>
-            </li>
+            {FLAT_LINKS.map((l) => (
+              <li key={l.href}>
+                <Link href={l.href} className={styles.link} data-header-link>
+                  {l.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
 
@@ -248,7 +254,7 @@ export async function Header() {
               {phoneDisplay}
             </a>
           ) : null}
-          {cta?.label ? <CtaLink cta={cta} /> : null}
+          {cta.label ? <CtaLink cta={cta} /> : null}
         </div>
 
         <label
@@ -258,9 +264,10 @@ export async function Header() {
           role="button"
           tabIndex={0}
         >
-          <span className={styles.burgerIcon}>
+          <span className={styles.burgerIcon} aria-hidden="true">
             <span />
           </span>
+          <span className={styles.srOnly}>Открыть меню</span>
         </label>
       </div>
 

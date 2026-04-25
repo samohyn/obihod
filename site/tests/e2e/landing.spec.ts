@@ -46,7 +46,7 @@ test.describe('Главная страница', () => {
     // CTA рендерится в slot 'right' внутри <header>, не внутри <nav>.
     const header = page.getByRole('banner')
     await expect(header).toBeVisible()
-    await expect(header.getByRole('link', { name: /Замер бесплатно/ })).toBeVisible()
+    await expect(header.getByRole('link', { name: /Получить смету/ })).toBeVisible()
   })
 
   test('форма заявки в контакт-секции содержит обязательные поля', async ({ page }) => {
