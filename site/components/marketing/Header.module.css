@@ -1,0 +1,486 @@
+/*
+ * Header sticky + dropdown nav.
+ *
+ * Адаптация эталона из design-system/brand-guide.html (header.site +
+ * .gh-* классы, rev v1.5) для публичного сайта Обихода. Работает поверх
+ * токенов из site/app/globals.css (--c-primary, --c-bg, --c-line и т.д.).
+ *
+ * Главные отличия от эталона:
+ *  - Здесь это CSS-модуль, не глобальные стили — namespace через scopify.
+ *  - Burger-checkbox + label оставлены — sibling-селектор работает в пределах
+ *    одного <header>, поэтому переносится 1:1.
+ *  - Hover-open dropdown работает только @media (hover: hover) — touch
+ *    использует click через native <details>.
+ *
+ * Mobile breakpoint — 860px (как в эталоне).
+ */
+
+.site {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(247, 245, 240, 0.92);
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--c-line);
+}
+
+.inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 64px;
+  position: relative;
+}
+
+/* ───────── BRAND ───────── */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--c-ink);
+  text-decoration: none;
+  flex: 0 0 auto;
+}
+.brand:hover {
+  text-decoration: none;
+  color: var(--c-ink);
+}
+.brandMark {
+  width: 36px;
+  height: 36px;
+  color: var(--c-primary);
+  flex: 0 0 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.brandWord {
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--c-ink);
+}
+.brandReg {
+  font-size: 10px;
+  color: var(--c-muted);
+  margin-left: 2px;
+  vertical-align: super;
+  font-weight: 400;
+}
+
+/* ───────── NAV ───────── */
+.navWrap {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  list-style: none;
+}
+.nav > li {
+  list-style: none;
+  position: relative;
+}
+.panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link,
+.group > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: var(--c-ink-soft);
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: inherit;
+}
+.link:hover,
+.group > summary:hover,
+.group[open] > summary {
+  background: var(--c-bg-alt);
+  color: var(--c-primary);
+  text-decoration: none;
+}
+.link:focus-visible,
+.group > summary:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+/* chevron для группы */
+.group > summary {
+  list-style: none;
+}
+.group > summary::-webkit-details-marker {
+  display: none;
+}
+.group > summary::marker {
+  content: '';
+}
+.chev {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 10px;
+  opacity: 0.55;
+  transition:
+    transform 0.18s ease,
+    opacity 0.18s ease;
+}
+.group[open] > summary .chev,
+.group:hover > summary .chev {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+/* hover-open на desktop: раскрывает panel без клика */
+@media (hover: hover) and (min-width: 1024px) {
+  .group:hover > .panel,
+  .group:focus-within > .panel {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+    pointer-events: auto;
+  }
+  /* невидимый hover-мост, чтобы курсор не «проваливался» между summary и panel */
+  .group::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: 10px;
+    pointer-events: none;
+  }
+  .group:hover::after {
+    pointer-events: auto;
+  }
+}
+
+/* dropdown panel */
+.panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translate(-50%, -4px);
+  min-width: 240px;
+  background: var(--c-card);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  padding: 8px;
+  box-shadow:
+    0 8px 24px -12px rgba(28, 28, 28, 0.15),
+    0 2px 6px -2px rgba(28, 28, 28, 0.06);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.18s ease,
+    visibility 0.18s ease,
+    transform 0.18s ease;
+  z-index: 30;
+}
+/* click-open (native <details> behaviour) — для touch и клавиатуры */
+.group[open] > .panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+.panel ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.panel a {
+  display: block;
+  padding: 9px 12px;
+  border-radius: 6px;
+  color: var(--c-ink-soft);
+  font-size: 14px;
+  line-height: 1.3;
+  text-decoration: none;
+  transition:
+    background-color 0.12s ease,
+    color 0.12s ease;
+}
+.panel a:hover {
+  background: var(--c-bg-alt);
+  color: var(--c-primary);
+  text-decoration: none;
+}
+.panel a:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+.panelNum {
+  display: inline-block;
+  width: 22px;
+  color: var(--c-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+/* ───────── RIGHT SLOT (телефон + CTA) ───────── */
+.right {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+.phone {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--c-ink);
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background-color 0.15s ease;
+}
+.phone:hover {
+  background: var(--c-bg-alt);
+  color: var(--c-primary);
+  text-decoration: none;
+}
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  background: var(--c-primary);
+  color: var(--c-on-primary);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: -0.005em;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease;
+  white-space: nowrap;
+}
+.cta:hover {
+  background: var(--c-primary-ink);
+  color: var(--c-on-primary);
+  text-decoration: none;
+}
+.cta:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+/* ───────── BURGER ───────── */
+.burger {
+  display: none;
+}
+.burgerLabel {
+  display: none;
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--c-ink-soft);
+  border: 1px solid var(--c-line);
+  background: var(--c-card);
+}
+.burgerLabel:hover {
+  background: var(--c-bg-alt);
+  color: var(--c-primary);
+}
+.burgerLabel:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+.burgerIcon {
+  display: block;
+  width: 18px;
+  height: 12px;
+  position: relative;
+}
+.burgerIcon::before,
+.burgerIcon::after,
+.burgerIcon > span {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    top 0.2s ease;
+}
+.burgerIcon::before {
+  top: 0;
+}
+.burgerIcon > span {
+  top: 5px;
+}
+.burgerIcon::after {
+  top: 10px;
+}
+.burger:checked ~ .inner .burgerLabel .burgerIcon::before {
+  top: 5px;
+  transform: rotate(45deg);
+}
+.burger:checked ~ .inner .burgerLabel .burgerIcon > span {
+  opacity: 0;
+}
+.burger:checked ~ .inner .burgerLabel .burgerIcon::after {
+  top: 5px;
+  transform: rotate(-45deg);
+}
+
+/* ── tablet: уменьшаем gap ── */
+@media (max-width: 1100px) {
+  .link,
+  .group > summary {
+    padding: 8px 10px;
+    font-size: 13.5px;
+  }
+  .nav {
+    gap: 0;
+  }
+  .inner {
+    gap: 14px;
+  }
+  .phone {
+    display: none;
+  }
+}
+
+/* ── mobile: burger-drawer ── */
+@media (max-width: 860px) {
+  .inner {
+    gap: 10px;
+  }
+  .burgerLabel {
+    display: inline-flex;
+  }
+  .cta {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .navWrap {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex: 0 0 auto;
+    background: var(--c-card);
+    border-bottom: 1px solid var(--c-line);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.28s ease;
+    box-shadow: 0 12px 20px -14px rgba(28, 28, 28, 0.18);
+  }
+  .nav {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    width: 100%;
+    padding: 8px 12px 16px;
+  }
+  .burger:checked ~ .inner .navWrap {
+    max-height: calc(100vh - 64px);
+    overflow-y: auto;
+  }
+
+  .nav > li {
+    width: 100%;
+  }
+  .link,
+  .group > summary {
+    width: 100%;
+    padding: 12px 10px;
+    font-size: 15px;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--c-line);
+    border-radius: 0;
+  }
+  .nav > li:last-child .link,
+  .nav > li:last-child .group > summary {
+    border-bottom: 0;
+  }
+
+  .panel {
+    position: static;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    box-shadow: none;
+    border: 0;
+    padding: 4px 0 8px 10px;
+    min-width: 0;
+    background: transparent;
+    display: none;
+  }
+  .group[open] > .panel {
+    display: block;
+    transform: none;
+  }
+
+  .panel a {
+    padding: 10px 10px;
+    font-size: 14.5px;
+  }
+}
+
+/* reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .link,
+  .group > summary,
+  .panel,
+  .chev,
+  .nav,
+  .burgerIcon::before,
+  .burgerIcon > span,
+  .burgerIcon::after {
+    transition: none !important;
+  }
+}
