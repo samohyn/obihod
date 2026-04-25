@@ -1,0 +1,42 @@
+{
+  "tools-and-docs": {
+    "clusters": 28,
+    "keywords": 136,
+    "total_freq_msk_mo": 10786
+  },
+  "arboristika": {
+    "clusters": 38,
+    "keywords": 534,
+    "total_freq_msk_mo": 27589
+  },
+  "b2b": {
+    "clusters": 26,
+    "keywords": 105,
+    "total_freq_msk_mo": 235
+  },
+  "_orphan": {
+    "clusters": 26,
+    "keywords": 28,
+    "total_freq_msk_mo": 33
+  },
+  "neuro-info": {
+    "clusters": 22,
+    "keywords": 76,
+    "total_freq_msk_mo": 7947
+  },
+  "vyvoz-musora": {
+    "clusters": 97,
+    "keywords": 384,
+    "total_freq_msk_mo": 161781
+  },
+  "chistka-krysh": {
+    "clusters": 8,
+    "keywords": 197,
+    "total_freq_msk_mo": 888
+  },
+  "demontazh": {
+    "clusters": 7,
+    "keywords": 141,
+    "total_freq_msk_mo": 225
+  }
+}
