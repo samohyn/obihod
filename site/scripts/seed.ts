@@ -203,7 +203,7 @@ const DISTRICTS: DistrictSeed[] = [
 // ───────── Кластеры услуг (sa.md §5.4) ─────────
 
 type ServiceSeed = {
-  slug: 'arboristika' | 'ochistka-krysh' | 'vyvoz-musora' | 'demontazh'
+  slug: 'arboristika' | 'chistka-krysh' | 'vyvoz-musora' | 'demontazh'
   title: string
   h1: string
   metaTitle: string
@@ -278,7 +278,7 @@ const SERVICES: ServiceSeed[] = [
       `Обиход спиливает деревья ${prep} с фиксированной ценой за объект — от 700 ₽ за дерево Ø до 20 см до 45 000 ₽ за аварийный спил Ø 60+ см над постройкой. Смета по 3 фото за 10 минут в Telegram, MAX или WhatsApp. Порубочный билет оформляем за наш счёт, бригада выезжает 24/7 на аварийные ситуации.`,
   },
   {
-    slug: 'ochistka-krysh',
+    slug: 'chistka-krysh',
     title: 'Чистка крыш от снега и наледи',
     h1: 'Чистка крыш от снега',
     metaTitle: 'Чистка крыш от снега в Москве и МО — Обиход',

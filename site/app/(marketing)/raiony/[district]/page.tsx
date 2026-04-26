@@ -14,7 +14,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 const ALL_SERVICES = [
   { slug: 'arboristika', title: 'Спил деревьев' },
-  { slug: 'ochistka-krysh', title: 'Очистка крыш' },
+  { slug: 'chistka-krysh', title: 'Чистка крыш' },
   { slug: 'vyvoz-musora', title: 'Вывоз мусора' },
   { slug: 'demontazh', title: 'Демонтаж' },
 ]

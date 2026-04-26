@@ -130,7 +130,7 @@ export const Districts: CollectionConfig = {
         const tags = [
           'sitemap',
           `district-${doc.slug}`,
-          ...['arboristika', 'ochistka-krysh', 'vyvoz-musora', 'demontazh'].map(
+          ...['arboristika', 'chistka-krysh', 'vyvoz-musora', 'demontazh'].map(
             (s) => `sd-${s}-${doc.slug}`,
           ),
         ]
