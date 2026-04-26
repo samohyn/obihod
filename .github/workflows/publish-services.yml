@@ -1,0 +1,134 @@
+name: Publish draft services (one-shot fix)
+
+# OBI-16: разовая публикация всех services в _status: 'draft' через VPS
+# Payload Local API. После merge OBI-17 (cms-agent + bot user) этот workflow
+# становится не нужен — `cms` запускает локально через PAYLOAD_API_KEY.
+#
+# Идемпотентен: уже опубликованные services пропускаются (логика в скрипте).
+#
+# Триггер: workflow_dispatch с confirm.
+# Использует те же BEGET_SSH_* секреты что seed-prod.yml.
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Введи "publish" для подтверждения'
+        required: true
+        default: ''
+      revalidate:
+        description: 'Сделать ли revalidate ISR после publish (yes/no)'
+        required: false
+        default: 'yes'
+
+concurrency:
+  group: publish-services
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    name: Preflight — confirm + secrets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate confirm
+        run: |
+          if [ "${{ inputs.confirm }}" != "publish" ]; then
+            echo "::error::confirm != publish"
+            exit 1
+          fi
+      - name: Validate SSH secrets
+        env:
+          HOST: ${{ secrets.BEGET_SSH_HOST }}
+          USER: ${{ secrets.BEGET_SSH_USER }}
+          KEY: ${{ secrets.BEGET_SSH_KEY }}
+          PATH_: ${{ secrets.BEGET_DEPLOY_PATH }}
+        run: |
+          if [ -z "$HOST" ] || [ -z "$USER" ] || [ -z "$KEY" ] || [ -z "$PATH_" ]; then
+            echo "::error::BEGET_SSH_* secrets отсутствуют"
+            exit 1
+          fi
+
+  publish:
+    name: SSH + pnpm publish-services:prod
+    needs: preflight
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.BEGET_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p ${{ secrets.BEGET_SSH_PORT || '22' }} -H ${{ secrets.BEGET_SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Upload publish-services.ts to VPS
+        run: |
+          set -eo pipefail
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
+            "mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/current/scripts"
+          scp -i ~/.ssh/deploy_key -P ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            -o StrictHostKeyChecking=no \
+            site/scripts/publish-services.ts \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/scripts/publish-services.ts
+
+      - name: Run publish via SSH
+        run: |
+          set -eo pipefail
+          LOG_DIR=publish-logs
+          mkdir -p "$LOG_DIR"
+          LOG_FILE="$LOG_DIR/publish-$(date -u +%Y%m%dT%H%M%SZ).log"
+
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            -o ServerAliveInterval=15 \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
+            "set -eux
+             cd ${{ secrets.BEGET_DEPLOY_PATH }}/current
+             set -a; . ./.env; set +a
+             pnpm dlx tsx scripts/publish-services.ts" \
+            2>&1 | tee "$LOG_FILE"
+
+      - name: Revalidate ISR
+        if: ${{ inputs.revalidate == 'yes' }}
+        env:
+          RVS: ${{ secrets.REVALIDATE_SECRET }}
+        run: |
+          if [ -z "$RVS" ]; then
+            echo "::warning::REVALIDATE_SECRET пуст — пропускаю revalidate"
+            exit 0
+          fi
+          for path in /vyvoz-musora/ /arboristika/ /demontazh/; do
+            URL="https://obikhod.ru/api/revalidate?tag=services&url=$(printf '%s' "$path" | python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read()))')"
+            RESP=$(curl -sS -w "\nHTTP_CODE:%{http_code}\n" -H "x-revalidate-secret: $RVS" "$URL")
+            echo "revalidate $path:"
+            echo "$RESP"
+          done
+
+      - name: Smoke check pillar pages
+        if: ${{ inputs.revalidate == 'yes' }}
+        run: |
+          # Даём ISR несколько секунд на пересборку
+          sleep 5
+          for path in /vyvoz-musora/ /arboristika/ /demontazh/; do
+            URL="https://obikhod.ru${path}"
+            for i in 1 2 3; do
+              code=$(curl -sLo /dev/null -w "%{http_code}" -m 10 "$URL")
+              if [ "$code" = "200" ]; then
+                echo "✓ $URL → 200 (try $i)"
+                break
+              fi
+              [ $i -eq 3 ] && echo "::warning::$URL → $code after 3 tries"
+              sleep 5
+            done
+          done
+          # /chistka-krysh/ — пока 404 (ждёт миграции slug в US-5 REQ-5.3)
+
+      - name: Upload publish log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: publish-services-log
+          path: publish-logs/
+          retention-days: 30
