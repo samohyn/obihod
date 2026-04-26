@@ -37,7 +37,9 @@ jobs:
       - name: Build query
         id: q
         run: |
-          BASE="https://obikhod.ru/api/revalidate?tag=${{ inputs.tag }}"
+          # Trailing slash в /api/revalidate/ обязателен — Next.js trailingSlash:true
+          # делает 308 redirect с /api/revalidate, и без -L curl падает (run #1).
+          BASE="https://obikhod.ru/api/revalidate/?tag=${{ inputs.tag }}"
           PATHS="${{ inputs.paths }}"
           if [ -n "$PATHS" ]; then
             IFS=',' read -ra ARR <<< "$PATHS"
@@ -57,7 +59,8 @@ jobs:
             exit 1
           fi
           echo ">> ${{ steps.q.outputs.url }}"
-          RESP=$(curl -sS -w "\nHTTP_CODE:%{http_code}\n" \
+          # -L follow redirects (defence in depth на случай если URL без слеша)
+          RESP=$(curl -sS -L -w "\nHTTP_CODE:%{http_code}\n" \
             -H "x-revalidate-secret: $RVS" \
             "${{ steps.q.outputs.url }}")
           echo "$RESP"
