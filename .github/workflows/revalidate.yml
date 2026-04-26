@@ -1,0 +1,84 @@
+name: Revalidate ISR (on-demand)
+
+# Force-revalidate prerendered страниц после ручных изменений в Payload admin
+# (publish/unpublish, редактирование контента) — без ожидания s-maxage=3600.
+#
+# Когда запускать:
+#   - после publish/unpublish любой коллекции через /admin/
+#   - после правки SiteChrome (header/footer/контакты)
+#   - после bulk-update данных через скрипты (когда появятся)
+#
+# Что делает:
+#   1. revalidateTag(<tag>) — сбрасывает unstable_cache по тегу
+#   2. опционально пушит URLs в IndexNow (Яндекс) для ускоренной переиндексации
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Cache tag (services|service-districts|site-chrome|seo-settings|all)'
+        required: true
+        default: 'services'
+      paths:
+        description: 'Comma-separated URL paths для IndexNow (опц.). Пример: /vyvoz-musora/,/arboristika/'
+        required: false
+        default: ''
+
+concurrency:
+  group: revalidate-${{ inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  revalidate:
+    name: Revalidate ${{ inputs.tag }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Build query
+        id: q
+        run: |
+          BASE="https://obikhod.ru/api/revalidate?tag=${{ inputs.tag }}"
+          PATHS="${{ inputs.paths }}"
+          if [ -n "$PATHS" ]; then
+            IFS=',' read -ra ARR <<< "$PATHS"
+            for p in "${ARR[@]}"; do
+              p="$(echo "$p" | xargs)"   # trim
+              [ -n "$p" ] && BASE="${BASE}&url=$(printf '%s' "$p" | python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read()))')"
+            done
+          fi
+          echo "url=$BASE" >> "$GITHUB_OUTPUT"
+
+      - name: Hit /api/revalidate
+        env:
+          RVS: ${{ secrets.REVALIDATE_SECRET }}
+        run: |
+          if [ -z "$RVS" ]; then
+            echo "::error::REVALIDATE_SECRET пуст в GitHub Secrets"
+            exit 1
+          fi
+          echo ">> ${{ steps.q.outputs.url }}"
+          RESP=$(curl -sS -w "\nHTTP_CODE:%{http_code}\n" \
+            -H "x-revalidate-secret: $RVS" \
+            "${{ steps.q.outputs.url }}")
+          echo "$RESP"
+          CODE=$(echo "$RESP" | grep '^HTTP_CODE:' | cut -d: -f2)
+          if [ "$CODE" != "200" ]; then
+            echo "::error::revalidate returned $CODE"
+            exit 1
+          fi
+
+      - name: Smoke check (optional paths)
+        if: ${{ inputs.paths != '' }}
+        run: |
+          IFS=',' read -ra ARR <<< "${{ inputs.paths }}"
+          for p in "${ARR[@]}"; do
+            p="$(echo "$p" | xargs)"
+            [ -z "$p" ] && continue
+            URL="https://obikhod.ru${p}"
+            for i in 1 2 3; do
+              code=$(curl -sLo /dev/null -w "%{http_code}" -m 10 "$URL")
+              [ "$code" = "200" ] && { echo "$URL → 200 (try $i)"; break; }
+              [ $i -eq 3 ] && echo "::warning::$URL → $code after 3 tries"
+              sleep 5
+            done
+          done
