@@ -100,8 +100,9 @@ jobs:
             exit 0
           fi
           for path in /vyvoz-musora/ /arboristika/ /demontazh/; do
-            URL="https://obikhod.ru/api/revalidate?tag=services&url=$(printf '%s' "$path" | python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read()))')"
-            RESP=$(curl -sS -w "\nHTTP_CODE:%{http_code}\n" -H "x-revalidate-secret: $RVS" "$URL")
+            URL="https://obikhod.ru/api/revalidate/?tag=services&url=$(printf '%s' "$path" | python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read()))')"
+            # -L: follow 308 при trailingSlash redirect
+            RESP=$(curl -sS -L -w "\nHTTP_CODE:%{http_code}\n" -H "x-revalidate-secret: $RVS" "$URL")
             echo "revalidate $path:"
             echo "$RESP"
           done
