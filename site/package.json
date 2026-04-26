@@ -12,6 +12,8 @@
     "generate:importmap": "payload generate:importmap",
     "seed": "tsx --env-file=.env.local scripts/seed.ts",
     "seed:prod": "tsx scripts/seed.ts",
+    "publish-services": "tsx --env-file=.env.local scripts/publish-services.ts",
+    "publish-services:prod": "tsx scripts/publish-services.ts",
     "fal:gen": "tsx --env-file=.env.local scripts/fal-generate.ts",
     "db:up": "docker compose up -d postgres",
     "db:down": "docker compose down",
