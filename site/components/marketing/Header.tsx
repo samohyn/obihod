@@ -35,8 +35,9 @@ import {
  * (live demo, ~строка 1216+) + components/navigation/mega-menu.spec.md.
  *
  *  - Brand: О-mark (зелёный круг #2d5a3d) + wordmark «ОБИХОД».
- *  - Услуги ▾ → mega-menu 3 колонки (Арбористика 8, Крыши 6, Мусор 6) +
- *    sub-icons 20×20 stroke-only currentColor + featured row внизу.
+ *  - Услуги ▾ → mega-menu 4 колонки в порядке Q-14 (Мусор 3, Арбо 8,
+ *    Крыши 6, Демонтаж 3) + sub-icons 20×20 stroke-only currentColor +
+ *    featured row внизу. Порядок — под wsfreq Wave 2 US-4 (ADR-uМ-14).
  *  - Районы ▾ → 7 пилотных районов + «Все районы МО» footer.
  *  - 4 плоские: Кейсы / Цены / Блог / Контакты.
  *  - CTA «Получить смету» → #calc.
@@ -67,7 +68,25 @@ interface MegaColumn {
   allLabel: string
 }
 
+// Порядок колонок в mega-menu = immutable из CLAUDE.md (Q-14, ADR-uМ-14):
+// Мусор → Арбо → Крыши → Демонтаж — под wsfreq Wave 2 US-4 (vyvoz-musora 161К,
+// arboristika 27К, chistka-krysh 888, demontazh 225).
+//
+// `allHref` указывает на canonical pillar-slug из site/app/api/seed/route.ts
+// и seosite/04-url-map/sitemap-tree.md v0.4. Sub-service `href` пока legacy
+// (из brand-guide.html spec) — переписать на canonical в US-6 при производстве
+// контента (TODO передан `cw` + `fe1`).
 const MEGA_COLUMNS: MegaColumn[] = [
+  {
+    title: 'Вывоз мусора',
+    items: [
+      { href: '/musor/bytovoy/', label: 'Бытовой мусор', icon: VyvozBytovogoIcon },
+      { href: '/musor/stroitelnyy/', label: 'Строительный мусор', icon: VyvozStroitelnogoIcon },
+      { href: '/musor/konteyner/', label: 'Контейнеры 7–30 м³', icon: KonteynerIcon },
+    ],
+    allHref: '/vyvoz-musora/',
+    allLabel: 'Все услуги вывоза',
+  },
   {
     title: 'Арбористика',
     items: [
@@ -96,7 +115,7 @@ const MEGA_COLUMNS: MegaColumn[] = [
     allLabel: 'Все услуги арбористики',
   },
   {
-    title: 'Крыши и территория',
+    title: 'Чистка крыш',
     items: [
       { href: '/krysha/uborka-snega/', label: 'Уборка снега', icon: UborkaSnegaIcon },
       { href: '/krysha/vyvoz-snega/', label: 'Вывоз снега', icon: VyvozSnegaIcon },
@@ -109,15 +128,15 @@ const MEGA_COLUMNS: MegaColumn[] = [
       { href: '/krysha/avtovyshka/', label: 'Автовышка', icon: AvtovyshkaIcon },
       { href: '/krysha/pokos-travy/', label: 'Покос травы', icon: PokosTravyIcon },
     ],
-    allHref: '/krysha/',
-    allLabel: 'Все услуги',
+    // Slug `chistka-krysh` — canonical по ADR-uМ-13 (888 wsfreq vs 0 для
+    // `ochistka-krysh`). Сейчас в БД ещё `ochistka-krysh` — миграция slug в
+    // US-5 REQ-5.3. До миграции эта ссылка будет 404.
+    allHref: '/chistka-krysh/',
+    allLabel: 'Все услуги по крышам',
   },
   {
-    title: 'Мусор и демонтаж',
+    title: 'Демонтаж',
     items: [
-      { href: '/musor/bytovoy/', label: 'Бытовой мусор', icon: VyvozBytovogoIcon },
-      { href: '/musor/stroitelnyy/', label: 'Строительный мусор', icon: VyvozStroitelnogoIcon },
-      { href: '/musor/konteyner/', label: 'Контейнеры 7–30 м³', icon: KonteynerIcon },
       { href: '/demontazh/saraev/', label: 'Демонтаж сараев', icon: DemontazhSaraevIcon },
       {
         href: '/demontazh/peregorodok/',
@@ -126,8 +145,8 @@ const MEGA_COLUMNS: MegaColumn[] = [
       },
       { href: '/demontazh/raschistka/', label: 'Расчистка участка', icon: RaschistkaIcon },
     ],
-    allHref: '/musor/',
-    allLabel: 'Все услуги',
+    allHref: '/demontazh/',
+    allLabel: 'Все услуги демонтажа',
   },
 ]
 
