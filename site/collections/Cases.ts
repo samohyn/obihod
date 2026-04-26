@@ -70,5 +70,54 @@ export const Cases: CollectionConfig = {
     { name: 'metaTitle', type: 'text', maxLength: 60 },
     { name: 'metaDescription', type: 'textarea', maxLength: 160 },
     { name: 'ogImage', type: 'upload', relationTo: 'media' },
+    // ─── SEO override + E-E-A-T поля (US-5 REQ-5.7) ───
+    {
+      name: 'canonicalOverride',
+      type: 'text',
+      admin: {
+        position: 'sidebar',
+        description: 'URL canonical override. Редко — для cross-canonical случаев.',
+      },
+    },
+    {
+      name: 'robotsDirectives',
+      type: 'select',
+      hasMany: true,
+      defaultValue: ['index', 'follow'],
+      options: [
+        { label: 'index', value: 'index' },
+        { label: 'noindex', value: 'noindex' },
+        { label: 'follow', value: 'follow' },
+        { label: 'nofollow', value: 'nofollow' },
+        { label: 'noarchive', value: 'noarchive' },
+        { label: 'nosnippet', value: 'nosnippet' },
+      ],
+      admin: { position: 'sidebar' },
+    },
+    {
+      name: 'breadcrumbLabel',
+      type: 'text',
+      maxLength: 40,
+      admin: { position: 'sidebar', description: 'Короткий label для breadcrumbs.' },
+    },
+    // ─── E-E-A-T для Cases (Article schema) ───
+    {
+      name: 'lastReviewedAt',
+      type: 'date',
+      admin: {
+        position: 'sidebar',
+        description: 'Дата последней проверки фактов. Сигнал «свежесть» для Я.Вебмастер.',
+        date: { pickerAppearance: 'dayOnly' },
+      },
+    },
+    {
+      name: 'reviewedBy',
+      type: 'relationship',
+      relationTo: 'persons',
+      admin: {
+        position: 'sidebar',
+        description: 'Кто проверил факты — для E-E-A-T.',
+      },
+    },
   ],
 }

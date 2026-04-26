@@ -1,11 +1,51 @@
-# ADR-0003: Блочная модель публичных страниц в Payload 3 — предварительный выбор паттерна
+# ADR-0003: Блочная модель публичных страниц в Payload 3
 
-- **Статус:** **Preliminary / draft** (предварительная рекомендация, финал — после PoC; см. §5)
-- **Дата:** 2026-04-24
+- **Статус:** ✅ **Accepted** (ratified в US-5 PR `feat/us-5-full-sitemap-ia`, 2026-04-26)
+- **Дата preliminary:** 2026-04-24
+- **Дата ratification:** 2026-04-26
 - **Автор:** tamd
-- **Связь:** US-3 (REQ-6.1–6.5, блокер BLOCK-2), US-5 (архитектура библиотеки блоков — главный потребитель), далее US-4, US-6, US-7, US-8
+- **Связь:** US-3 (REQ-6.1–6.5, BLOCK-2 закрыт wave 1), **US-5 REQ-5.8** (этот ADR), далее US-6, US-7, US-8
 - **Адресовано:** po, sa, be4, fe1 (consulting), cw (для `admin.description` уровня блока)
 - **Супернаследует:** — (первое ADR по блочной модели)
+
+---
+
+## Ratification (2026-04-26)
+
+**Решение:** Variant A — Payload 3 native `blocks` field — **Accepted** для всех публичных коллекций.
+
+**Эмпирическое подтверждение:** US-3 волна 1 (merged 2026-04-25) уже добавила 5 типов блоков (Hero, TextContent, LeadForm, CtaBanner, Faq) на коллекции ServiceDistricts. Production эксплуатация подтвердила:
+
+- ✅ Drag-drop, add, duplicate, delete работают «из коробки» (REQ-6.1–6.3)
+- ✅ `admin.description` на уровне блока и поля (REQ-6.4 закрыт через native UI)
+- ✅ Drafts + autosave 2s совместимы с blocks
+- ✅ TypeScript-типы автогенерируются (`payload-types.ts`)
+- ✅ Explicit миграции применимы (`20260424_133242_us_3_blocks_and_seo` — образец)
+- ⚠️ `importMap.js` устаревает при добавлении custom-компонентов уровня блока → шаг `pnpm generate:importmap` в deploy.yml уже встроен
+
+**Отвергнуто:**
+- **Variant B (Lexical custom-blocks)** — дорого по custom React + миграция richText → не использовать
+- **Variant C (гибрид)** — переусложнение для текущего scope
+
+**Применение к коллекциям:**
+
+| Коллекция | Blocks | Когда |
+|---|---|---|
+| ServiceDistricts | ✅ применена (US-3 w1) | Done |
+| Services | 🟡 subServices array, не blocks | US-6 |
+| Cases | ❌ plain fields | US-6 |
+| Blog | ❌ Lexical richText | OK как есть (статьи линейные) — не переводим |
+| B2BPages | ❌ | US-6 |
+| Pages (новая если нужно) | по умолчанию A | US-5/US-6 |
+
+**Default для новых content-коллекций:** Variant A.
+
+**Followup tasks (P2-P3, не блокеры):**
+- [OBI-10](https://linear.app/samohyn/issue/OBI-10) — расширение до 15 блоков (10 оставшихся) в US-3 wave 2 / US-6
+- [OBI-15](https://linear.app/samohyn/issue/OBI-15) — карточная сетка AddBlockPalette
+- [OBI-9](https://linear.app/samohyn/issue/OBI-9) — обратный поиск блоков
+
+---
 
 ---
 
