@@ -94,7 +94,8 @@ export const Services: CollectionConfig = {
       type: 'text',
       admin: {
         position: 'sidebar',
-        description: 'URL canonical (override автогенерируемого). Редко — для cross-canonical или /lp/* страниц.',
+        description:
+          'URL canonical (override автогенерируемого). Редко — для cross-canonical или /lp/* страниц.',
       },
     },
     {
@@ -112,7 +113,8 @@ export const Services: CollectionConfig = {
       ],
       admin: {
         position: 'sidebar',
-        description: 'Robots директивы. Default: index,follow. Снять index перед публикацией черновика — noindex.',
+        description:
+          'Robots директивы. Default: index,follow. Снять index перед публикацией черновика — noindex.',
       },
     },
     {
