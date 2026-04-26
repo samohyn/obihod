@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
@@ -93,9 +94,9 @@ export default async function AboutPage() {
         Договор на сезон или годовое обслуживание.{' '}
         <strong>Штрафы ГЖИ и ОАТИ берём на себя по договору.</strong> FM-операторам, застройщикам,
         госзаказу — отдельные условия. Подробнее на странице{' '}
-        <a href="/b2b/" className="text-orange-700 hover:underline">
+        <Link href="/b2b/" className="text-orange-700 hover:underline">
           для бизнеса
-        </a>
+        </Link>
         .
       </p>
 
