@@ -12,6 +12,7 @@ import { Districts } from './collections/Districts'
 import { ServiceDistricts } from './collections/ServiceDistricts'
 import { Cases } from './collections/Cases'
 import { Persons } from './collections/Persons'
+import { Authors } from './collections/Authors'
 import { Blog } from './collections/Blog'
 import { B2BPages } from './collections/B2BPages'
 import { Leads } from './collections/Leads'
@@ -46,6 +47,7 @@ export default buildConfig({
     ServiceDistricts,
     Cases,
     Persons,
+    Authors,
     Blog,
     B2BPages,
     Leads,

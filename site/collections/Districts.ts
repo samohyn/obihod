@@ -120,6 +120,31 @@ export const Districts: CollectionConfig = {
     { name: 'heroImage', type: 'upload', relationTo: 'media' },
     { name: 'metaTitle', type: 'text', maxLength: 60 },
     { name: 'metaDescription', type: 'textarea', maxLength: 160 },
+    // ─── SEO override (US-5 REQ-5.7 follow-up) ───
+    {
+      name: 'canonicalOverride',
+      type: 'text',
+      admin: { position: 'sidebar' },
+    },
+    {
+      name: 'robotsDirectives',
+      type: 'select',
+      hasMany: true,
+      defaultValue: ['index', 'follow'],
+      options: [
+        { label: 'index', value: 'index' },
+        { label: 'noindex', value: 'noindex' },
+        { label: 'follow', value: 'follow' },
+        { label: 'nofollow', value: 'nofollow' },
+      ],
+      admin: { position: 'sidebar' },
+    },
+    {
+      name: 'breadcrumbLabel',
+      type: 'text',
+      maxLength: 40,
+      admin: { position: 'sidebar' },
+    },
   ],
   hooks: {
     afterChange: [
