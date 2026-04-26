@@ -9,6 +9,30 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 64, 96, 128, 256],
     minimumCacheTTL: 31536000,
   },
+  /**
+   * 301-редиректы для миграции canonical slug.
+   *
+   * - /ochistka-krysh/* → /chistka-krysh/* (US-5 REQ-5.3, ADR-uМ-13).
+   *   Wsfreq 888 для «чистка» vs 0 для «очистка» (Wave 2 US-4).
+   *
+   * Дальнейшая стратегия (US-5 REQ-5.3): когда количество таких миграций
+   * вырастет — переехать на middleware.ts, читающий коллекцию `Redirects`
+   * из Payload (она существует, но сейчас не подключена к runtime).
+   */
+  async redirects() {
+    return [
+      {
+        source: '/ochistka-krysh/',
+        destination: '/chistka-krysh/',
+        permanent: true,
+      },
+      {
+        source: '/ochistka-krysh/:path*',
+        destination: '/chistka-krysh/:path*',
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     const isProd = process.env.NODE_ENV === 'production'
     const securityHeaders = [
