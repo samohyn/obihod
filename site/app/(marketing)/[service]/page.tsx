@@ -17,21 +17,27 @@ export const revalidate = 86400
 // dynamicParams = true: разрешаем рендер любых service-slug на runtime.
 // Если в БД появилась новая услуга после build — она доступна через ISR.
 // Если slug несуществующий — getServiceBySlug вернёт null → notFound().
-// До OBI-16 здесь было `false` + generateStaticParams, обёрнутый в
-// unstable_cache, который на prod build возвращал [] → все 4 pillar-страницы
-// 404. См. PR #27 (sitemap fix) и CLAUDE.md.
+//
+// Контекст OBI-16:
+//   До PR #28: unstable_cache внутри getAllServiceSlugs возвращал [] на build →
+//     все 4 pillar 404. Поправили cache-layer.
+//   После PR #28 + публикации services: PILLAR_SLUGS fallback пред-rendered 4
+//     страницы как 404, потому что Postgres на VPS недоступен с GH runner →
+//     getServiceBySlug() в catch возвращал null → notFound() → 404 prerender.
+//     revalidatePath не помогает: при regenerate тот же runner-side payload
+//     init без БД → опять null → опять 404 в кэше.
+//   Текущий фикс: возвращаем [] если БД недоступна. Все service-страницы
+//     рендерятся on-demand на VPS (где БД доступна), кэшируются на 24ч,
+//     revalidate работает штатно.
 export const dynamicParams = true
-
-// Канонические pillar-слаги. Используем как fallback, если БД во время
-// build недоступна (типичный prod-build на Beget без сети до Postgres).
-// Сами роуты валидируются по getServiceBySlug в default Page → 404 если slug
-// действительно не существует в БД.
-const PILLAR_SLUGS = ['arboristika', 'ochistka-krysh', 'vyvoz-musora', 'demontazh']
 
 export async function generateStaticParams() {
   const slugs = await getAllServiceSlugs()
-  const safeSlugs = slugs.length > 0 ? slugs : PILLAR_SLUGS
-  return safeSlugs.map((service) => ({ service }))
+  // Если БД недоступна на build (типичный case на GH runner без VPN) —
+  // возвращаем пусто, dynamicParams=true генерирует страницы on-demand.
+  // Никогда не делаем fallback на захардкоженный список slugs — это
+  // приводит к prerender 404 (см. историю выше).
+  return slugs.map((service) => ({ service }))
 }
 
 export async function generateMetadata({
