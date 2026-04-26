@@ -79,5 +79,50 @@ export const Blog: CollectionConfig = {
         { name: 'text', type: 'richText', required: true },
       ],
     },
+    // ─── SEO override + E-E-A-T поля (US-5 REQ-5.7 follow-up) ───
+    {
+      name: 'canonicalOverride',
+      type: 'text',
+      admin: { position: 'sidebar', description: 'Canonical URL override.' },
+    },
+    {
+      name: 'robotsDirectives',
+      type: 'select',
+      hasMany: true,
+      defaultValue: ['index', 'follow'],
+      options: [
+        { label: 'index', value: 'index' },
+        { label: 'noindex', value: 'noindex' },
+        { label: 'follow', value: 'follow' },
+        { label: 'nofollow', value: 'nofollow' },
+        { label: 'noarchive', value: 'noarchive' },
+        { label: 'nosnippet', value: 'nosnippet' },
+      ],
+      admin: { position: 'sidebar' },
+    },
+    {
+      name: 'breadcrumbLabel',
+      type: 'text',
+      maxLength: 40,
+      admin: { position: 'sidebar', description: 'Короткий label для breadcrumbs.' },
+    },
+    {
+      name: 'lastReviewedAt',
+      type: 'date',
+      admin: {
+        position: 'sidebar',
+        description: 'Последняя проверка фактов — E-E-A-T сигнал «свежесть».',
+        date: { pickerAppearance: 'dayOnly' },
+      },
+    },
+    {
+      name: 'reviewedBy',
+      type: 'relationship',
+      relationTo: 'persons',
+      admin: {
+        position: 'sidebar',
+        description: 'Эксперт, проверивший статью (E-E-A-T).',
+      },
+    },
   ],
 }

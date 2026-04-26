@@ -72,17 +72,23 @@ interface MegaColumn {
 // Мусор → Арбо → Крыши → Демонтаж — под wsfreq Wave 2 US-4 (vyvoz-musora 161К,
 // arboristika 27К, chistka-krysh 888, demontazh 225).
 //
-// `allHref` указывает на canonical pillar-slug из site/app/api/seed/route.ts
-// и seosite/04-url-map/sitemap-tree.md v0.4. Sub-service `href` пока legacy
-// (из brand-guide.html spec) — переписать на canonical в US-6 при производстве
-// контента (TODO передан `cw` + `fe1`).
+// Все href — canonical из site/app/api/seed/route.ts +
+// seosite/04-url-map/sitemap-tree.md v0.4 (US-5 REQ-5.6 follow-up, 2026-04-26).
+// Раньше использовали legacy slug (`/musor/`, `/krysha/`, `/arboristika/spil/`)
+// из brand-guide.html spec — переписаны на canonical, чтобы Header не вёл на
+// 404. Sub-service страницы для большинства slug ещё не существуют (US-6),
+// но pillar-страницы и programmatic district SD уже работают.
 const MEGA_COLUMNS: MegaColumn[] = [
   {
     title: 'Вывоз мусора',
     items: [
-      { href: '/musor/bytovoy/', label: 'Бытовой мусор', icon: VyvozBytovogoIcon },
-      { href: '/musor/stroitelnyy/', label: 'Строительный мусор', icon: VyvozStroitelnogoIcon },
-      { href: '/musor/konteyner/', label: 'Контейнеры 7–30 м³', icon: KonteynerIcon },
+      { href: '/vyvoz-musora/staraya-mebel/', label: 'Старая мебель', icon: VyvozBytovogoIcon },
+      {
+        href: '/vyvoz-musora/vyvoz-stroymusora/',
+        label: 'Строительный мусор',
+        icon: VyvozStroitelnogoIcon,
+      },
+      { href: '/vyvoz-musora/kontejner/', label: 'Контейнеры 7–30 м³', icon: KonteynerIcon },
     ],
     allHref: '/vyvoz-musora/',
     allLabel: 'Все услуги вывоза',
@@ -90,19 +96,19 @@ const MEGA_COLUMNS: MegaColumn[] = [
   {
     title: 'Арбористика',
     items: [
-      { href: '/arboristika/spil/', label: 'Спил деревьев', icon: SpilIcon },
-      { href: '/arboristika/valka/', label: 'Валка', icon: ValkaIcon },
+      { href: '/arboristika/spil-derevev/', label: 'Спил деревьев', icon: SpilIcon },
+      { href: '/arboristika/valka-derevev/', label: 'Валка частями', icon: ValkaIcon },
       {
-        href: '/arboristika/udalenie-celikom/',
-        label: 'Удаление целиком',
+        href: '/arboristika/avariynyy-spil/',
+        label: 'Аварийный спил',
         icon: UdalenieCelikomIcon,
       },
       {
-        href: '/arboristika/udalenie-chastiami/',
-        label: 'Удаление частями',
+        href: '/arboristika/spil-alpinistami/',
+        label: 'Спил альпинистами',
         icon: UdalenieChastiamiIcon,
       },
-      { href: '/arboristika/korchevanie/', label: 'Корчевание', icon: KorchevaniyeIcon },
+      { href: '/arboristika/udalenie-pnya/', label: 'Удаление пней', icon: KorchevaniyeIcon },
       { href: '/arboristika/kronirovanie/', label: 'Кронирование', icon: KronirovaniyeIcon },
       {
         href: '/arboristika/sanitarnaya-obrezka/',
@@ -117,33 +123,38 @@ const MEGA_COLUMNS: MegaColumn[] = [
   {
     title: 'Чистка крыш',
     items: [
-      { href: '/krysha/uborka-snega/', label: 'Уборка снега', icon: UborkaSnegaIcon },
-      { href: '/krysha/vyvoz-snega/', label: 'Вывоз снега', icon: VyvozSnegaIcon },
+      { href: '/chistka-krysh/ot-snega/', label: 'От снега', icon: UborkaSnegaIcon },
       {
-        href: '/krysha/chistka-vodostokov/',
-        label: 'Чистка водостоков',
+        href: '/chistka-krysh/sbivanie-sosulek/',
+        label: 'Сбивание сосулек',
+        icon: VyvozSnegaIcon,
+      },
+      {
+        href: '/chistka-krysh/chastnyy-dom/',
+        label: 'Частный дом',
         icon: ChistkaVodostokovIcon,
       },
-      { href: '/krysha/alpinizm/', label: 'Промышленный альпинизм', icon: AlpinizmIcon },
-      { href: '/krysha/avtovyshka/', label: 'Автовышка', icon: AvtovyshkaIcon },
-      { href: '/krysha/pokos-travy/', label: 'Покос травы', icon: PokosTravyIcon },
+      { href: '/promyshlennyj-alpinizm/', label: 'Промальп', icon: AlpinizmIcon },
+      { href: '/arenda-tehniki/avtovyshka/', label: 'Автовышка', icon: AvtovyshkaIcon },
+      { href: '/arboristika/pokos-travy/', label: 'Покос травы', icon: PokosTravyIcon },
     ],
-    // Slug `chistka-krysh` — canonical по ADR-uМ-13 (888 wsfreq vs 0 для
-    // `ochistka-krysh`). Сейчас в БД ещё `ochistka-krysh` — миграция slug в
-    // US-5 REQ-5.3. До миграции эта ссылка будет 404.
     allHref: '/chistka-krysh/',
     allLabel: 'Все услуги по крышам',
   },
   {
     title: 'Демонтаж',
     items: [
-      { href: '/demontazh/saraev/', label: 'Демонтаж сараев', icon: DemontazhSaraevIcon },
+      { href: '/demontazh/demontazh-saraya/', label: 'Демонтаж сарая', icon: DemontazhSaraevIcon },
       {
-        href: '/demontazh/peregorodok/',
-        label: 'Демонтаж перегородок',
+        href: '/demontazh/demontazh-bani/',
+        label: 'Демонтаж бани',
         icon: DemontazhPeregorodokIcon,
       },
-      { href: '/demontazh/raschistka/', label: 'Расчистка участка', icon: RaschistkaIcon },
+      {
+        href: '/demontazh/raschistka-uchastka/',
+        label: 'Расчистка участка',
+        icon: RaschistkaIcon,
+      },
     ],
     allHref: '/demontazh/',
     allLabel: 'Все услуги демонтажа',

@@ -44,5 +44,31 @@ export const B2BPages: CollectionConfig = {
       defaultValue: true,
       admin: { description: '«Штрафы ГЖИ берём на себя по договору»' },
     },
+    // ─── SEO override (US-5 REQ-5.7 follow-up) ───
+    {
+      name: 'canonicalOverride',
+      type: 'text',
+      admin: { position: 'sidebar' },
+    },
+    {
+      name: 'robotsDirectives',
+      type: 'select',
+      hasMany: true,
+      defaultValue: ['index', 'follow'],
+      options: [
+        { label: 'index', value: 'index' },
+        { label: 'noindex', value: 'noindex' },
+        { label: 'follow', value: 'follow' },
+        { label: 'nofollow', value: 'nofollow' },
+        { label: 'noarchive', value: 'noarchive' },
+      ],
+      admin: { position: 'sidebar' },
+    },
+    {
+      name: 'breadcrumbLabel',
+      type: 'text',
+      maxLength: 40,
+      admin: { position: 'sidebar' },
+    },
   ],
 }
