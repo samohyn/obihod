@@ -86,6 +86,46 @@ export const Services: CollectionConfig = {
     },
     { name: 'ogImage', type: 'upload', relationTo: 'media' },
     { name: 'schemaJsonLdOverride', type: 'json' },
+    // ─── SEO override поля (US-5 REQ-5.7) ───
+    // Используются точечно когда автогенерируемые metaTitle/metaDescription
+    // или canonical нуждаются в корректировке без изменения main-полей.
+    {
+      name: 'canonicalOverride',
+      type: 'text',
+      admin: {
+        position: 'sidebar',
+        description:
+          'URL canonical (override автогенерируемого). Редко — для cross-canonical или /lp/* страниц.',
+      },
+    },
+    {
+      name: 'robotsDirectives',
+      type: 'select',
+      hasMany: true,
+      defaultValue: ['index', 'follow'],
+      options: [
+        { label: 'index', value: 'index' },
+        { label: 'noindex', value: 'noindex' },
+        { label: 'follow', value: 'follow' },
+        { label: 'nofollow', value: 'nofollow' },
+        { label: 'noarchive', value: 'noarchive' },
+        { label: 'nosnippet', value: 'nosnippet' },
+      ],
+      admin: {
+        position: 'sidebar',
+        description:
+          'Robots директивы. Default: index,follow. Снять index перед публикацией черновика — noindex.',
+      },
+    },
+    {
+      name: 'breadcrumbLabel',
+      type: 'text',
+      maxLength: 40,
+      admin: {
+        position: 'sidebar',
+        description: 'Короткий label для breadcrumbs если H1 длинный. Опционально.',
+      },
+    },
   ],
   hooks: {
     afterChange: [

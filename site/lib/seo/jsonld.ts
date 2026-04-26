@@ -332,6 +332,41 @@ export function breadcrumbListSchema(items: { name: string; url: string }[]) {
   }
 }
 
+export type Author = {
+  slug: string
+  firstName: string
+  lastName: string
+  jobTitle?: string | null
+  bio?: string | null
+  imageUrl?: string | null
+  sameAs?: string[] | null
+  knowsAbout?: string[] | null
+}
+
+/**
+ * Person schema для `/avtory/<slug>/` (US-5 REQ-5.5, ADR-uМ-10).
+ *
+ * E-E-A-T-сигнал — отдельный URL автора с jobTitle, knowsAbout, sameAs.
+ * Используется на странице автора (если/когда коллекция Authors будет
+ * добавлена в Payload — сейчас не существует, заготовка под US-6).
+ */
+export function personSchema(author: Author): Record<string, unknown> {
+  return stripUndefined({
+    '@type': 'Person',
+    '@id': `${SITE_URL}/avtory/${author.slug}/#person`,
+    name: `${author.firstName} ${author.lastName}`,
+    givenName: author.firstName,
+    familyName: author.lastName,
+    jobTitle: nonEmpty(author.jobTitle ?? undefined),
+    description: nonEmpty(author.bio ?? undefined),
+    image: author.imageUrl ?? undefined,
+    url: `${SITE_URL}/avtory/${author.slug}/`,
+    worksFor: { '@id': ORG_ID },
+    sameAs: (author.sameAs ?? []).filter((s): s is string => Boolean(s && s.trim())),
+    knowsAbout: (author.knowsAbout ?? []).filter((s): s is string => Boolean(s && s.trim())),
+  })
+}
+
 export function articleSchema(post: BlogPost) {
   return {
     '@type': 'BlogPosting',

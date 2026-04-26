@@ -12,6 +12,32 @@ export const dynamic = 'force-dynamic'
 
 type Entry = MetadataRoute.Sitemap[number]
 
+/**
+ * Priority pillar-страниц по wsfreq Wave 2 US-4 (sitemap-tree v0.4 ADR-uМ-14).
+ * Чем выше wsfreq → тем выше priority в sitemap → тем приоритетнее crawl.
+ *
+ * Источник: seosite/03-clusters/_summary.json
+ *   vyvoz-musora 161 781 → 1.0   (главный денежный, 74% всего wsfreq)
+ *   arboristika   27 589 → 0.9
+ *   chistka-krysh    888 → 0.7
+ *   demontazh        225 → 0.6
+ *
+ * Pillar-страницы вне 4 услуг (USP, conversion):
+ *   foto-smeta, raschet-stoimosti → 0.8 (low-volume но high-intent)
+ */
+const PILLAR_PRIORITY: Record<string, number> = {
+  'vyvoz-musora': 1.0,
+  arboristika: 0.9,
+  'chistka-krysh': 0.7,
+  // ochistka-krysh — legacy slug, в БД уже мигрирован на chistka-krysh
+  // (US-5 REQ-5.3, ADR-uМ-13). Оставлен для безопасности на случай rollback.
+  'ochistka-krysh': 0.7,
+  demontazh: 0.6,
+  'foto-smeta': 0.8,
+  'raschet-stoimosti': 0.8,
+}
+const DEFAULT_SERVICE_PRIORITY = 0.7
+
 type SlugDoc = { slug?: string; updatedAt?: string | Date }
 type SDDoc = {
   service?: { slug?: string } | string | null
@@ -49,7 +75,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${SITE_URL}/${slug}/`,
     lastModified: now,
     changeFrequency: 'weekly',
-    priority: 0.9,
+    priority: PILLAR_PRIORITY[slug] ?? DEFAULT_SERVICE_PRIORITY,
   }))
 
   const districtEntries: Entry[] = districts
@@ -106,6 +132,9 @@ async function fetchServices(): Promise<string[]> {
     const payload = await payloadClient()
     const r = await payload.find({
       collection: 'services',
+      // Только published — sitemap не должен включать draft слаги
+      // (по запросу OBI-16 root cause #2 + nice-to-fix OBI-16).
+      where: { _status: { equals: 'published' } },
       limit: 100,
       pagination: false,
       select: { slug: true },
