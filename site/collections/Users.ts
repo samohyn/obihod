@@ -2,17 +2,10 @@ import type { CollectionConfig } from 'payload'
 
 export const Users: CollectionConfig = {
   slug: 'users',
-  // useAPIKey: true — позволяет генерировать API ключи на странице юзера
-  // в /admin/collections/users/<id>. Authorization: users API-Key <key>.
-  // Используется командой (cms ops без участия оператора) до полноценного
-  // bot-user в OBI-17. Audit-trail в Payload versions фиксирует actor по
-  // email юзера-владельца ключа.
-  auth: {
-    useAPIKey: true,
-  },
+  auth: true,
   admin: {
     useAsTitle: 'email',
-    defaultColumns: ['email', 'name', 'role', 'enableAPIKey'],
+    defaultColumns: ['email', 'name', 'role'],
     group: '09 · Система',
   },
   fields: [
