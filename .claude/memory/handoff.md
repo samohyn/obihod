@@ -2,95 +2,66 @@
 
 _Обновляется в конце сессии. Короткий срез: что сделано, что в работе, что следующее. Цель — дать следующей сессии контекст за 30 секунд._
 
-## Где мы сейчас (2026-04-23 вечер)
+## Где мы сейчас (2026-04-26)
 
-### Prod — живой, частично обновлён
+### Prod
 - https://obikhod.ru, VPS 45.153.190.107 (deploy@), Node 22, PM2 `obikhod`, auto-deploy на push `main`
-- **Repo публичный** (`samohyn/obihod`) — GH Actions безлимитно на linux, branch protection теперь доступен бесплатно
-- Живое на prod после US-2:
-  - Главная, Hero CTA и Header = `+7 (985) 170-51-11` из `chrome.contacts.phoneE164` ✅
-  - JSON-LD Organization читает SiteChrome ✅
-  - Dashboard админки: кремовый фон + группы `01·Заявки / 02·Контент / 03·Медиа / 04·SEO / 05·Рамка сайта / 09·Система`; tile `Site Chrome (Header / Footer)` виден ✅
-- **НЕ применилось на prod** (ждёт починки):
-  - `/admin/globals/site-chrome/` → "Nothing found" — устаревший `importMap.js` в бандле
-  - Дефолтный Payload-логотип вместо «ОБИХОД» (тот же importMap)
-  - `/arboristika/ramenskoye/` → 404 — **seed-prod workflow ни разу не запускался**
+- main = `442b129` — feat(seo): US-4 semantic-core + US-5 hand-off (PR #33 merged 2026-04-25 вечер)
+- US-1 + US-2 + US-3 (волна 1) + OBI-12 sitemap fix + OBI-16 unstable_cache hot-fix + US-4 semantic-core + US-5 hand-off — закрыты
 
-### Workflows (все в репо, работают)
-- `deploy.yml` — auto-deploy на push main. **Последний push `d2cac65` УПАЛ** на шаге «Regenerate Payload admin importMap»
-- `ci.yml` — тоже упал на `d2cac65` (вероятно новый `site-chrome.spec.ts` без живой БД)
-- `prod-backup.yml` — ручной pg_dump, работает. Pre-US2 backup сделан ✅
-- `seed-prod.yml` — fallback seed runner по ADR-0001, НЕ запускался
-- `admin-rebuild.yml` — `generate:importmap + pm2 restart` на VPS. Сам отрабатывает, но бесполезен пока Next.js бандл собран с устаревшим importMap
+### US-4 + US-5 — закрытые большие задачи (в репо)
 
-### Последний коммит и 11 предыдущих (все на origin/main, repo public)
-- `d2cac65` fix(deploy): regen Payload importMap перед build — **deploy failure, нужен лог**
-- `5dd76c6` chore(memory): handoff + learnings
-- `1b533dc` fix(cms): Hero + CtaMessengers из SiteChrome + e2e `site-chrome.spec.ts`
-- `539ce8d` docs(contex): 07_brand_system.html
-- `2b016a4` feat(admin): брендирование (палитра art, BrandLogo, BrandIcon, префиксы групп)
-- `2806c14` feat(ops): admin-rebuild workflow
-- `41d93e9` docs(contex): revert eb25c74 (`contex/` восстановлен)
-- `aea00bc` chore(release): US-1 seed release artifacts
-- `bb0f6f8` feat(cms): US-2 SiteChrome global + dedup SeoSettings + seed 28 LP
-- `fdf86ea` fix(backup): без sudo
-- `d3eb3df` feat(tooling): fal.ai integration + prod-backup workflow
+**US-4 (OBI-7) Done:**
+- 1601 ключ, 252 кластера, 209 484 wsfreq Москва+МО
+- vyvoz-musora 161К (74%), arboristika 27К (13%), tools-and-docs 10К, neuro-info 7.9К, chistka-krysh 888, b2b 235, demontazh 225
+- 14 deep-конкурентов
+- Артефакты: `seosite/` + `devteam/specs/US-4-semantic-core/out.md`
 
-### US pipeline — CONDITIONAL APPROVE по обоим
-- **US-1 seed prod db**: ba→sa→dba→be3→qa1→cr→out · 28 LP (4 кластера × 7 пилотных районов) · ADR-0001 safety-gate + fallback workflow · placeholder-медиа через fal:gen (41+45 KB)
-- **US-2 SiteChrome globals**: ba→sa→dba→be4+fe1+seo2→qa2→cr→out · 1 global `site-chrome` · drop 9 полей + `sameAs[]` SeoSettings по ADR-0002
+**US-5 (OBI-2) разблокирован:**
+- sitemap-tree v0.4 APPROVED (~330 URL вол.1, ~2350 полное покрытие)
+- 18 ADR закрыты
+- [sa.md](../../devteam/specs/US-5-full-sitemap-ia/sa.md) написан: 12 REQ + 9 AC + 6 рисков
 
-### fal.ai интеграция — работает локально
-- `site/lib/fal/` + `site/app/api/fal/` + `pnpm fal:gen <hero|og|case-viz|blog-cover> --json '...'`
-- `FAL_KEY` — в `site/.env.local`. На prod НЕ проброшен (offline batch достаточно)
-- **TODO:** провернуть FAL_KEY в dashboard — был в чате, не ротирован
+### Q-14 порядок pillar — синхронизирован во всём репо
 
-## В работе / блокер на завтра
+`CLAUDE.md` immutable + `seosite/04-url-map/decisions.md` (ADR-uМ-14) + `seosite/04-url-map/sitemap-tree.md` v0.4 — все три источника говорят одно: **Вывоз мусора → Арбо → Крыши → Демонтаж**. APPROVED оператором 2026-04-25 (вечер).
 
-**P0: deploy.yml шаг «Regenerate Payload admin importMap» упал.**
+### Linear состояние
 
-Нужно от оператора при старте:
-- GH Actions → Deploy to Beget #22 (sha `d2cac65`) → job «Build production bundle» → step «Regenerate Payload admin importMap» → **полный вывод 10-20 строк**. Без лога не починить точечно.
+| Issue | Статус | Что дальше |
+|---|---|---|
+| OBI-7 (US-4) | **Done** | закрыт 2026-04-25 |
+| OBI-2 (US-5) | **Todo** | старт после merge claude-md-fix — `seo2` ведущий |
+| OBI-1 (US-3) | Done | закрыт 2026-04-25 |
+| OBI-16 P0 Urgent | Backlog (но фактически closed PR #28) | перевести в Done |
+| OBI-12 (sitemap) | Backlog | мерджи #26/#27/#29/#31 на main — проверить факт |
+| OBI-10/13/14/15/9 | Backlog (US-3 follow-ups) | берём после US-10 или параллельно |
+| OBI-11 (CLI seed-prod) | Backlog P2 | тех.долг, отложен |
 
-Fallback-гипотезы:
-- `@next/env loadEnvConfig` bug → обёртка через `tsx --env-file` как в `seed.ts`
-- «Cannot find module …/Users» (ESM strict resolver) → `.js` расширения в `payload.config.ts`
-- `DATABASE_URI` не доступен скрипту → проверить env на шаге
+## Следующий шаг (при старте следующей сессии)
 
-## Следующий шаг (при старте завтра)
+1. **Запустить US-5** (`seo2` ведущий по [sa.md](../../devteam/specs/US-5-full-sitemap-ia/sa.md)):
+   - REQ-5.8 ADR-0003 на блочную модель (tamd, критичный блокер для US-6)
+   - REQ-5.3 миграция slug `ochistka-krysh` → `chistka-krysh` (be3 + dba)
+   - REQ-5.1 sitemap.xml priority по wsfreq
+2. **Header navigation** в `site/components/layout/Header.tsx` — поменять порядок под новый immutable (передать в US-5 / fe1 как часть REQ-5.6)
+3. **Закрыть OBI-16** в Linear (PR #28 уже merged + deployed, статус не соответствует)
 
-1. **Лог от оператора → починить шаг → push → проверить auto-deploy до зелёного**
-2. После успеха повторить `admin-rebuild` (на всякий, если importMap на VPS старее бандла) и проверить через MCP Playwright:
-   - `/admin/globals/site-chrome/` — форма с 5 секциями
-   - `/admin/login` (из incognito) — логотип «ОБИХОД» + «порядок под ключ · admin»
-   - Navbar — иконка «О» на зелёном квадрате
-3. **Запустить seed-prod**: GH Actions → Seed prod DB (fallback) → confirm=`seed`. После — smoke:
-   - `/arboristika/ramenskoye/` = 200
-   - `/sitemap.xml` содержит programmatic-URL
-   - `Organization.telephone` в JSON-LD = `+79851705111`
-4. **Оператор в /admin/globals/site-chrome:** заполнить `social[]` — Telegram/MAX/WhatsApp реальными URL (инвариант CLAUDE.md, seed кладёт `[]`)
-5. **Backlog к закрытию после релиза:**
-   - Ротация FAL_KEY
-   - Branch protection на `main` (public + Free позволяет)
-   - Цели Метрики: lead_sent, photo_upload, phone_click, tg_click, max_click, wa_click, calc_submit
-   - ADR по Payload migrations (текущая схема на prod через `push:true` — тех.долг)
-   - Реальные фото Cases (не placeholder от fal:gen)
-   - cw: реальные тексты для кластеров крыши/мусор/демонтаж
+## Wave 2.5 / M3 backlog (не блокирует)
+
+- Дозабор wsfreq для ~1400 ключей с freq=0 — `seosite/scripts/jm_wsfreq_micro.py` готов, ждёт восстановления Just-Magic API
+- Полная JM-кластеризация через `jm_cluster_batched.py` (заменит локальный fallback)
+- Topvisor подключение для US-7/US-10 мониторинга (operator-action: регистрация + API-ключ)
+- Решение оператора по Q-4 калькуляторов (универсальный vs 4 отдельных)
+- Решение оператора по Q-5 trust-страниц (`/o-kompanii/` агрегирующая или 4 отдельных)
+- Решение оператора по Q-6 личного кабинета B2C
 
 ## Подсказки для следующей сессии
 
-- `git push origin main` у меня BLOCK rule — каждый push через оператора
-- Prod health: `curl -fsSL 'https://obikhod.ru/api/health?deep=1'` (URL в кавычках для zsh)
-- GH Actions статус без токена: `curl 'https://api.github.com/repos/samohyn/obihod/actions/runs?per_page=5&branch=main'` — работает на public. Логи упавших шагов через API дают 403; просить у оператора из UI
-- Uptime растёт ≠ последний push ещё не применился (deploy failure или ISR кеш)
-- Playwright MCP скрины: относительный путь `screen/foo.png` рабочий, `screen/` в `.gitignore`
-- prod-backup лежит в `$BEGET_DEPLOY_PATH/backups/manual-<reason>-<UTC>.sql.gz` + GH Actions artifact (30 дней)
-
-## Открытые вопросы (из CLAUDE.md)
-
-- [ ] `contex/05_tech_stack_decision.md` — TCO и альтернативы
-- [ ] Переименование `contex/` → `context/` (косметика)
-- [ ] ТМ «ОБИХОД» у патентного поверенного
-- [ ] Домен backup: `obixod.ru`, `obihod-servis.ru`
-- [ ] Юрлицо / СРО / лицензия Росприроднадзора (после регистрации — заполнить `/admin/site-chrome/requisites`)
-- [ ] Аккаунты: amoCRM / Wazzup24 / Calltouch
+- `git push origin main` BLOCK rule — оператор пушит и мерджит сам через PR
+- `gh` CLI не установлен — PR через UI по URL из push output
+- Перед `git reset --hard` проверять `.claude/memory/handoff.md` и `learnings.md` — они tracked, потеряются. Закоммитить ИЛИ включать в feature-PR
+- `seosite/` живёт отдельно от `site/`, в публичный repo коммитится; секреты только в `.env.local`
+- Для повторного запуска SEO-скриптов нужны env-переменные `KEYSO_API_KEY` и `JUSTMAGIC_API_KEY` в `.env.local`
+- Wsfreq baseline: `seosite/03-clusters/_summary.json`
+- Sitemap-tree v0.4 — единый source-of-truth по URL до окончания M3
