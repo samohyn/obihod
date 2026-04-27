@@ -50,7 +50,8 @@ export const DashboardTile: FC<DashboardTileProps> = ({
           : 'var(--brand-obihod-ink, #1c1c1c)',
     textDecoration: 'none',
     fontFamily: 'var(--font-body)',
-    transition: 'transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease',
+    transition:
+      'transform var(--brand-obihod-duration-fast, 120ms) var(--brand-obihod-ease-standard, cubic-bezier(0.4,0,0.2,1)), box-shadow var(--brand-obihod-duration-fast, 120ms) var(--brand-obihod-ease-standard, cubic-bezier(0.4,0,0.2,1)), border-color var(--brand-obihod-duration-fast, 120ms) var(--brand-obihod-ease-standard, cubic-bezier(0.4,0,0.2,1))',
     cursor: 'pointer',
   }
 
