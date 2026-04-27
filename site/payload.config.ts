@@ -39,6 +39,7 @@ export default buildConfig({
       beforeDashboard: ['@/components/admin/BeforeDashboardStartHere'],
       afterDashboard: ['@/components/admin/PageCatalog'],
       beforeLogin: ['@/components/admin/BeforeLoginLockup'],
+      afterLogin: ['@/components/admin/AfterLoginFooter'],
     },
   },
   collections: [
