@@ -932,8 +932,8 @@
 <section id="icons">
   <div class="wrap">
     <div class="eyebrow">08 · Иконография</div>
-    <h2>Service Icons · 16 иконок v0.9</h2>
-    <p class="lead">Domain-специфичные иконки услуг Обихода в эстетике Круга сезонов. Реестр и правила — <a href="icons/services/README.md"><code>design-system/icons/services/README.md</code></a>. Компонент — <a href="icons/services/ServiceIcons.tsx"><code>ServiceIcons.tsx</code></a>.</p>
+    <h2>Иконография · 49 line-art glyph'ов</h2>
+    <p class="lead">Domain-специфичные иконки Обихода в эстетике Круга сезонов. Все четыре линейки делят одну спеку (<code>viewBox 0 0 24 24</code>, <code>stroke 1.5</code>, <code>currentColor</code>, <code>round</code> caps/joins, <code>fill: none</code> кроме мелких акцентов): <strong>Service · 22 v0.9</strong> (4 кластера услуг + УТП), <strong>Shop · 9 v0.1</strong> (категории каталога Магазина, 2026-04-27), <strong>District · 9 v0.9</strong> (8 районов МО + Москва, landmark-метафоры), <strong>Case · 9 v0.9</strong> (тематики кейсов). Реестр service-иконок — <a href="icons/services/README.md"><code>icons/services/README.md</code></a> и <a href="icons/services/ServiceIcons.tsx"><code>ServiceIcons.tsx</code></a>. Shop / District / Case — задокументированы ниже на этой странице, экспорт в <code>site/components/icons/{shop,districts,cases}/</code> — задача <code>ui</code>+<code>fe1</code> по <a href="../devteam/specs/US-11-ia-extension/art-brief-ui.md"><code>art-brief-ui.md</code></a>.</p>
 
     <div class="card" style="padding: 24px; background: var(--c-card); margin-top: 24px;">
       <img src="icons/services/_sheet.png" alt="Визуальный реестр 16 service-иконок Обихода — спил, валка, корчевание, обрезка, каблинг, опрыскивание, снег с крыши, водостоки, альпинизм, автовышка, вывоз мусора, демонтаж, измельчение, фикс-цена, отклик 10 минут, штрафы на нас" style="width: 100%; height: auto; display: block; border-radius: var(--radius); border: 1px solid var(--c-line);" />
@@ -961,6 +961,216 @@
     </div>
 
     <p class="muted" style="margin-top: 24px; font-size: 13px;">Приоритет использования: brand-glyphs из Круга сезонов → service-иконки (этот раздел) → <code>lucide-react</code> для общих UI (phone, message, chevron) → custom только по согласованию с art. Полный foundation — <a href="foundations/icons.md"><code>design-system/foundations/icons.md</code></a>.</p>
+
+    <h3 style="margin-top: 48px;">Shop Icons · 9 иконок v0.1 <span class="badge badge-live" style="font-weight: 500;">preliminary 2026-04-27</span></h3>
+    <p class="lead">Иконки категорий каталога Магазина (саженцы и товары для сада). Расширение IA по запросу оператора 2026-04-27 — 6-е направление. Стиль идентичен service-иконкам: <code>viewBox 0 0 24 24</code>, <code>stroke 1.5</code>, <code>currentColor</code>, <code>round</code> caps/joins, <code>fill: none</code> кроме мелких акцентов (плоды, ягоды, шишки) — заливка <code>currentColor</code>. Рендерятся в mega-menu Магазина как <code>mm-icon</code> 20×20.</p>
+
+    <div class="grid-3" style="margin-top: 24px; gap: 16px;">
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M12 15 L12 21"/><path d="M9 21 L15 21"/><circle cx="9.5" cy="8" r="1.1" fill="currentColor"/><circle cx="14" cy="10" r="1.1" fill="currentColor"/><circle cx="11" cy="12" r="1.1" fill="currentColor"/></svg>
+        </span>
+        <div><b>Плодовые деревья</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>fruit-tree</code> · крона + плоды</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 C 8.5 3, 8.5 16, 12 16 C 15.5 16, 15.5 3, 12 3 Z"/><path d="M12 16 L12 21"/><path d="M9.5 21 L14.5 21"/><circle cx="11" cy="9" r="0.9" fill="currentColor"/><circle cx="13" cy="12" r="0.9" fill="currentColor"/></svg>
+        </span>
+        <div><b>Колоновидные деревья</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>columnar-tree</code> · узкая высокая крона</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18 C 3 13, 7 12, 8 14 C 8.5 11.5, 15.5 11.5, 16 14 C 17 12, 21 13, 21 18"/><path d="M2 21 L22 21"/><circle cx="7" cy="15" r="1" fill="currentColor"/><circle cx="12" cy="14" r="1" fill="currentColor"/><circle cx="17" cy="15" r="1" fill="currentColor"/></svg>
+        </span>
+        <div><b>Плодовые кустарники</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>fruit-bush</code> · 3 кустика + ягоды</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="6"/><path d="M6 11 C 9 9, 15 9, 18 11" stroke-dasharray="2 1.5"/><path d="M6 13 C 9 15, 15 15, 18 13" stroke-dasharray="2 1.5"/><path d="M12 17 L12 21"/><path d="M9.5 21 L14.5 21"/></svg>
+        </span>
+        <div><b>Декоративные кустарники</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>decor-bush</code> · топиари-сфера</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="1.6"/><circle cx="15.5" cy="8.5" r="1.6"/><circle cx="14" cy="11.5" r="1.6"/><circle cx="10" cy="11.5" r="1.6"/><circle cx="8.5" cy="8.5" r="1.6"/><circle cx="12" cy="9" r="0.9" fill="currentColor"/><path d="M12 13 L12 21"/><path d="M9 21 L15 21"/><path d="M12 17 C 10 16.5, 8.5 17.5, 9 19"/></svg>
+        </span>
+        <div><b>Цветы</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>flowers</code> · ромашка 5 лепестков</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M12 4 C 14 5, 14 9, 12 10"/><path d="M9.5 7 C 10.5 6.5, 13 7, 13.5 8.5"/><path d="M12 11 L12 21"/><path d="M9.5 21 L14.5 21"/><path d="M12 14 C 14 13, 16 14, 15 16"/><path d="M12 17 L10.5 16.5"/><path d="M12 19 L13.5 18.5"/></svg>
+        </span>
+        <div><b>Розы</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>roses</code> · бутон спираль + шипы</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 C 3 4, 9 2, 12 2 C 15 2, 21 4, 21 11"/><path d="M5 14 C 5 9, 12 8, 19 14"/><path d="M12 11 L12 21"/><path d="M9 21 L15 21"/><path d="M3 21 L3 5"/><path d="M2 6 L3 5 L4 6"/><path d="M2 20 L3 21 L4 20"/></svg>
+        </span>
+        <div><b>Крупномеры</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>large-trees</code> · взрослое дерево + размер</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="9" r="3"/><circle cx="12" cy="6.5" r="3.2"/><circle cx="17" cy="9" r="3"/><path d="M12 12 L12 21"/><path d="M9 21 L15 21"/></svg>
+        </span>
+        <div><b>Лиственные деревья</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>deciduous-tree</code> · 3 облака-крона</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L8 9 L10 9 L7 13 L9 13 L6 17 L18 17 L15 13 L17 13 L14 9 L16 9 Z"/><path d="M12 17 L12 21"/><path d="M10 21 L14 21"/><circle cx="9" cy="14" r="0.6" fill="currentColor"/><circle cx="14" cy="11" r="0.6" fill="currentColor"/></svg>
+        </span>
+        <div><b>Хвойные деревья</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>coniferous-tree</code> · ёлка + шишки</div></div>
+      </div>
+    </div>
+
+    <p class="muted" style="margin-top: 16px; font-size: 13px;">Каталог категорий — preliminary, утверждается с <code>ba</code>+<code>po</code> отдельным US (артикулы и SKU придут в Payload коллекцию <code>Products</code>). Иконки экспортируются в <code>site/components/icons/shop/</code> аналогично <code>services/</code> по <code>art-brief</code> для <code>ui</code>+<code>fe1</code>.</p>
+
+    <h3 style="margin-top: 48px;">District Icons · 9 иконок v0.9 <span class="badge badge-live" style="font-weight: 500;">2026-04-25 · landmark-метафоры</span></h3>
+    <p class="lead">Иконки 8 пилотных районов МО + Москвы. Каждая — географическая landmark-метафора (узел шоссе, холм, монастырь, самолёт, башня, ёлка с рельсами, мост, самолёт-памятник, компас). Используются в mega-menu «Районы», mobile accordion, DistrictCard на programmatic SEO LP. Та же спека что service- и shop-иконок: <code>viewBox 0 0 24 24</code>, <code>stroke 1.5</code>, <code>currentColor</code>, <code>round</code> caps/joins. <strong>Техдолг v1.6:</strong> сейчас живут только как inline SVG в этом файле и в <code>Header.tsx</code> — вынос в <code>site/components/icons/districts/</code> поручён <code>ui</code>+<code>fe1</code> через <a href="../devteam/specs/US-11-ia-extension/art-brief-ui.md"><code>art-brief-ui.md</code></a> (US-11, задача 3).</p>
+
+    <div class="grid-3" style="margin-top: 24px; gap: 16px;">
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4 L20 20"/><path d="M20 4 L4 20"/><circle cx="12" cy="12" r="2.4" fill="currentColor"/></svg>
+        </span>
+        <div><b>Одинцово</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>odintsovo</code> · узел трасс М-1 / М-9</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18 L9 12 L13 15 L21 18"/><path d="M9 12 L9 8 L11 7 L11 9"/><path d="M9 8 L11 8"/></svg>
+        </span>
+        <div><b>Красногорск</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>krasnogorsk</code> · холм + дом</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 C 7 10, 12 16, 17 12 C 19 11, 21 12, 22 13"/><path d="M9 8 C 9 5, 15 5, 15 8"/><path d="M9 8 L15 8"/><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="11" y1="3.5" x2="13" y2="3.5"/><path d="M9 8 L9 18 L15 18 L15 8"/></svg>
+        </span>
+        <div><b>Истра</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>istra</code> · купол монастыря с крестом</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12 L8 11 L11 4 L13 4 L12 11 L20 10 L21 12 L20 14 L12 13 L13 20 L15 22 L9 22 L11 20 L12 13 L8 13 L2 12 Z"/></svg>
+        </span>
+        <div><b>Химки</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>khimki</code> · самолёт (Шереметьево)</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6 L18 6"/><path d="M8 6 L8 9 L16 9 L16 6"/><path d="M9 9 L9 20 L15 20 L15 9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="11" y1="20" x2="11" y2="22"/><line x1="13" y1="20" x2="13" y2="22"/></svg>
+        </span>
+        <div><b>Мытищи</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>mytishchi</code> · водонапорная башня</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L8 9 L10 9 L7 14 L9 14 L7 18 L17 18 L15 14 L17 14 L14 9 L16 9 Z"/><line x1="3" y1="20" x2="21" y2="20"/><line x1="6" y1="19" x2="6" y2="21"/><line x1="12" y1="19" x2="12" y2="21"/><line x1="18" y1="19" x2="18" y2="21"/></svg>
+        </span>
+        <div><b>Пушкино</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>pushkino</code> · ёлка + ж/д шпалы</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 C 8 7, 16 7, 21 13"/><line x1="3" y1="13" x2="21" y2="13"/><line x1="6" y1="13" x2="6" y2="18"/><line x1="18" y1="13" x2="18" y2="18"/><path d="M3 18 L21 18" stroke-dasharray="2 1.5"/><path d="M3 21 L21 21" stroke-dasharray="2 1.5"/></svg>
+        </span>
+        <div><b>Раменское</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>ramenskoe</code> · мост над водой</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L13 11 L21 13 L21 14 L13 13 L13 19 L15 21 L15 22 L9 22 L9 21 L11 19 L11 13 L3 14 L3 13 L11 11 Z"/></svg>
+        </span>
+        <div><b>Жуковский</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>zhukovsky</code> · силуэт самолёта (МАКС)</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3 L12 21"/><path d="M3 12 L21 12"/><circle cx="12" cy="12" r="2.4" fill="currentColor"/></svg>
+        </span>
+        <div><b>Москва</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>moskva</code> · компас (все округа)</div></div>
+      </div>
+    </div>
+
+    <p class="muted" style="margin-top: 16px; font-size: 13px;">Расширяем линейку до <strong>28 районов</strong> МО по wsfreq US-4 — каждой добавке пишется собственная landmark-метафора, чтобы programmatic SEO LP визуально не сливались. Кандидаты на следующую волну: Балашиха (купол ВДВ-памятника), Электросталь (молот / стрелка трамвая), Серпухов (кремлёвская стена), Подольск (купол собора), Видное (ясли горизонта). Решение по конкретному набору — оператор + <code>seo1</code> по wsfreq.</p>
+
+    <h3 style="margin-top: 48px;">Case Topic Icons · 9 иконок v0.9 <span class="badge badge-live" style="font-weight: 500;">2026-04-25</span></h3>
+    <p class="lead">Иконки тем кейсов в mega-menu «Кейсы» — 3 кластера × 3 темы. Используются на CaseCard и в индексе кейсов. Та же спека line-art 24×24 stroke 1.5 currentColor.</p>
+
+    <div class="grid-3" style="margin-top: 24px; gap: 16px;">
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3 L9 12 L13 12 L8 21"/><path d="M3 8 C 7 6, 11 6, 15 4" stroke-dasharray="2 1.5"/><path d="M2 12 C 5 11, 8 11, 11 10" stroke-dasharray="2 1.5"/></svg>
+        </span>
+        <div><b>Спил после бури</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>storm-cleanup</code> · молния + штриховой ветер</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L12 11"/><path d="M9 6 L12 3 L15 6"/><path d="M8 9 L12 6 L16 9"/><path d="M12 11 L19 19"/><path d="M16 19 L19 19 L19 16"/><path d="M3 21 L21 21"/></svg>
+        </span>
+        <div><b>Аварийное удаление</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>emergency-removal</code> · падающее дерево</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14 L12 6 L21 14"/><path d="M5 14 L5 20 L19 20 L19 14"/><path d="M5 14 C 8 12, 14 12, 19 14"/><path d="M8 16 L8 20 M14 16 L14 20" stroke-dasharray="1.5 1.5"/></svg>
+        </span>
+        <div><b>Срочная чистка крыши</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>urgent-roof</code> · крыша + сосульки</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="2.2"/><circle cx="6" cy="13" r="2.2"/><line x1="8" y1="9" x2="20" y2="6"/><line x1="8" y1="11" x2="14" y2="11"/><path d="M14 11 L20 11"/><path d="M16 8 L19 5"/></svg>
+        </span>
+        <div><b>Санобрезка сада</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>pruning-season</code> · садовые ножницы</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L8 8 L10 8 L7 13 L9 13 L7 17 L17 17 L15 13 L17 13 L14 8 L16 8 Z"/><path d="M3 20 L21 20"/><path d="M5 17 L5 20 M19 17 L19 20"/></svg>
+        </span>
+        <div><b>Подготовка к зиме</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>winter-prep</code> · ёлка + ограждение</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 L12 5 L20 11"/><path d="M6 11 L6 20 L18 20 L18 11"/><path d="M3 4 L7 8" stroke-width="2"/><path d="M5 2 L9 6" stroke-width="2"/><path d="M6 7 L2 11 L5 14 L9 10"/></svg>
+        </span>
+        <div><b>Демонтаж после ремонта</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>post-renovation</code> · кувалда + дом</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21 L4 6 L13 6 L13 21"/><path d="M13 21 L13 10 L20 10 L20 21"/><path d="M3 21 L21 21"/><line x1="6.5" y1="9" x2="6.5" y2="11"/><line x1="10" y1="9" x2="10" y2="11"/><line x1="6.5" y1="13" x2="6.5" y2="15"/><line x1="10" y1="13" x2="10" y2="15"/><line x1="6.5" y1="17" x2="6.5" y2="19"/><line x1="10" y1="17" x2="10" y2="19"/><line x1="15.5" y1="13" x2="15.5" y2="15"/><line x1="17.5" y1="13" x2="17.5" y2="15"/><line x1="15.5" y1="17" x2="15.5" y2="19"/><line x1="17.5" y1="17" x2="17.5" y2="19"/></svg>
+        </span>
+        <div><b>Контракт УК</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>uk-contract</code> · многоэтажка с окнами</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20 L3 12 L7 8 L11 12 L11 20 Z"/><path d="M13 20 L13 12 L17 8 L21 12 L21 20 Z"/><line x1="2" y1="20" x2="22" y2="20"/><line x1="6" y1="15" x2="8" y2="15"/><line x1="16" y1="15" x2="18" y2="15"/></svg>
+        </span>
+        <div><b>Коттеджный посёлок</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>cottage-village</code> · 2 коттеджа</div></div>
+      </div>
+
+      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
+        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21 L5 4 L19 4 L19 21"/><path d="M3 21 L21 21"/><line x1="8" y1="7" x2="10" y2="7"/><line x1="14" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="10" y2="11"/><line x1="14" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="10" y2="15"/><line x1="14" y1="15" x2="16" y2="15"/><path d="M10 21 L10 17 L14 17 L14 21"/></svg>
+        </span>
+        <div><b>FM-контракт</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>fm-contract</code> · бизнес-центр</div></div>
+      </div>
+    </div>
+
+    <p class="muted" style="margin-top: 16px; font-size: 13px;">Полный комплект иконографики Обихода теперь виден здесь одним местом: <strong>22 service · 9 shop · 9 district · 9 case · 5 error illustrations</strong> = 54 line-art glyph'a в едином стиле. Все из них — domain-специфичные, ни одной stock-иконки. Это и есть «окно возможностей» из <a href="../contex/04_competitor_tech_stacks.md"><code>04_competitor_tech_stacks.md</code></a> — у конкурентов на WP/Bitrix дефолтные FontAwesome или эмодзи.</p>
   </div>
 </section>
 
@@ -1371,7 +1581,51 @@
             </div>
           </div>
 
-          <a class="mm-trigger" href="#">Магазин</a>
+          <div class="mm-has-drop">
+            <button class="mm-trigger" type="button" aria-haspopup="true">Магазин <span class="mm-chevron">▼</span></button>
+            <div class="mm-panel" role="menu">
+              <div class="mm-panel-cols">
+
+                <div class="mm-col">
+                  <h4>Деревья</h4>
+                  <ul>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M12 15 L12 21"/><path d="M9 21 L15 21"/><circle cx="9.5" cy="8" r="1.1" fill="currentColor"/><circle cx="14" cy="10" r="1.1" fill="currentColor"/><circle cx="11" cy="12" r="1.1" fill="currentColor"/></svg>Плодовые деревья<span class="mm-arrow">→</span></a></li>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 C 8.5 3, 8.5 16, 12 16 C 15.5 16, 15.5 3, 12 3 Z"/><path d="M12 16 L12 21"/><path d="M9.5 21 L14.5 21"/><circle cx="11" cy="9" r="0.9" fill="currentColor"/><circle cx="13" cy="12" r="0.9" fill="currentColor"/></svg>Колоновидные<span class="mm-arrow">→</span></a></li>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="9" r="3"/><circle cx="12" cy="6.5" r="3.2"/><circle cx="17" cy="9" r="3"/><path d="M12 12 L12 21"/><path d="M9 21 L15 21"/></svg>Лиственные<span class="mm-arrow">→</span></a></li>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L8 9 L10 9 L7 13 L9 13 L6 17 L18 17 L15 13 L17 13 L14 9 L16 9 Z"/><path d="M12 17 L12 21"/><path d="M10 21 L14 21"/><circle cx="9" cy="14" r="0.6" fill="currentColor"/><circle cx="14" cy="11" r="0.6" fill="currentColor"/></svg>Хвойные<span class="mm-arrow">→</span></a></li>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 C 3 4, 9 2, 12 2 C 15 2, 21 4, 21 11"/><path d="M5 14 C 5 9, 12 8, 19 14"/><path d="M12 11 L12 21"/><path d="M9 21 L15 21"/><path d="M3 21 L3 5"/><path d="M2 6 L3 5 L4 6"/><path d="M2 20 L3 21 L4 20"/></svg>Крупномеры<span class="mm-arrow">→</span></a></li>
+                  </ul>
+                  <a href="#" class="mm-all">Все деревья →</a>
+                </div>
+
+                <div class="mm-col">
+                  <h4>Кустарники</h4>
+                  <ul>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18 C 3 13, 7 12, 8 14 C 8.5 11.5, 15.5 11.5, 16 14 C 17 12, 21 13, 21 18"/><path d="M2 21 L22 21"/><circle cx="7" cy="15" r="1" fill="currentColor"/><circle cx="12" cy="14" r="1" fill="currentColor"/><circle cx="17" cy="15" r="1" fill="currentColor"/></svg>Плодовые кустарники<span class="mm-arrow">→</span></a></li>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="6"/><path d="M6 11 C 9 9, 15 9, 18 11" stroke-dasharray="2 1.5"/><path d="M6 13 C 9 15, 15 15, 18 13" stroke-dasharray="2 1.5"/><path d="M12 17 L12 21"/><path d="M9.5 21 L14.5 21"/></svg>Декоративные кустарники<span class="mm-arrow">→</span></a></li>
+                  </ul>
+                  <a href="#" class="mm-all">Все кустарники →</a>
+                </div>
+
+                <div class="mm-col">
+                  <h4>Цветы</h4>
+                  <ul>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="1.6"/><circle cx="15.5" cy="8.5" r="1.6"/><circle cx="14" cy="11.5" r="1.6"/><circle cx="10" cy="11.5" r="1.6"/><circle cx="8.5" cy="8.5" r="1.6"/><circle cx="12" cy="9" r="0.9" fill="currentColor"/><path d="M12 13 L12 21"/><path d="M9 21 L15 21"/><path d="M12 17 C 10 16.5, 8.5 17.5, 9 19"/></svg>Цветы<span class="mm-arrow">→</span></a></li>
+                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M12 4 C 14 5, 14 9, 12 10"/><path d="M9.5 7 C 10.5 6.5, 13 7, 13.5 8.5"/><path d="M12 11 L12 21"/><path d="M9.5 21 L14.5 21"/><path d="M12 14 C 14 13, 16 14, 15 16"/><path d="M12 17 L10.5 16.5"/><path d="M12 19 L13.5 18.5"/></svg>Розы<span class="mm-arrow">→</span></a></li>
+                  </ul>
+                  <a href="#" class="mm-all">Весь каталог цветов →</a>
+                </div>
+              </div>
+
+              <div class="mm-featured">
+                <strong>Сезон посадки 2026</strong>
+                <span class="muted" style="font-size: 13px;">доставка по МО · посадка с гарантией приживаемости <span class="mm-price">1 год</span> · смета за день</span>
+                <a href="#" class="mm-btn">В каталог</a>
+              </div>
+            </div>
+          </div>
+
+          <a class="mm-trigger" href="#">Дизайн ландшафта</a>
           <a class="mm-trigger" href="#">Цены</a>
           <a class="mm-trigger" href="#">Блог</a>
           <a class="mm-trigger" href="#">Контакты</a>
@@ -1430,7 +1684,21 @@
       <details>
         <summary>Магазин</summary>
         <div class="mm-mobile-items">
-          <a href="#" class="muted">Скоро — товары для сада и растения</a>
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M12 15 L12 21"/><path d="M9 21 L15 21"/><circle cx="9.5" cy="8" r="1.1" fill="currentColor"/><circle cx="14" cy="10" r="1.1" fill="currentColor"/><circle cx="11" cy="12" r="1.1" fill="currentColor"/></svg>Плодовые деревья</a>
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 C 8.5 3, 8.5 16, 12 16 C 15.5 16, 15.5 3, 12 3 Z"/><path d="M12 16 L12 21"/><path d="M9.5 21 L14.5 21"/><circle cx="11" cy="9" r="0.9" fill="currentColor"/><circle cx="13" cy="12" r="0.9" fill="currentColor"/></svg>Колоновидные деревья</a>
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="9" r="3"/><circle cx="12" cy="6.5" r="3.2"/><circle cx="17" cy="9" r="3"/><path d="M12 12 L12 21"/><path d="M9 21 L15 21"/></svg>Лиственные деревья</a>
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L8 9 L10 9 L7 13 L9 13 L6 17 L18 17 L15 13 L17 13 L14 9 L16 9 Z"/><path d="M12 17 L12 21"/><path d="M10 21 L14 21"/><circle cx="9" cy="14" r="0.6" fill="currentColor"/><circle cx="14" cy="11" r="0.6" fill="currentColor"/></svg>Хвойные деревья</a>
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 C 3 4, 9 2, 12 2 C 15 2, 21 4, 21 11"/><path d="M5 14 C 5 9, 12 8, 19 14"/><path d="M12 11 L12 21"/><path d="M9 21 L15 21"/><path d="M3 21 L3 5"/><path d="M2 6 L3 5 L4 6"/><path d="M2 20 L3 21 L4 20"/></svg>Крупномеры</a>
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18 C 3 13, 7 12, 8 14 C 8.5 11.5, 15.5 11.5, 16 14 C 17 12, 21 13, 21 18"/><path d="M2 21 L22 21"/><circle cx="7" cy="15" r="1" fill="currentColor"/><circle cx="12" cy="14" r="1" fill="currentColor"/><circle cx="17" cy="15" r="1" fill="currentColor"/></svg>Плодовые кустарники</a>
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="6"/><path d="M6 11 C 9 9, 15 9, 18 11" stroke-dasharray="2 1.5"/><path d="M6 13 C 9 15, 15 15, 18 13" stroke-dasharray="2 1.5"/><path d="M12 17 L12 21"/><path d="M9.5 21 L14.5 21"/></svg>Декоративные кустарники</a>
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="1.6"/><circle cx="15.5" cy="8.5" r="1.6"/><circle cx="14" cy="11.5" r="1.6"/><circle cx="10" cy="11.5" r="1.6"/><circle cx="8.5" cy="8.5" r="1.6"/><circle cx="12" cy="9" r="0.9" fill="currentColor"/><path d="M12 13 L12 21"/><path d="M9 21 L15 21"/><path d="M12 17 C 10 16.5, 8.5 17.5, 9 19"/></svg>Цветы</a>
+          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M12 4 C 14 5, 14 9, 12 10"/><path d="M9.5 7 C 10.5 6.5, 13 7, 13.5 8.5"/><path d="M12 11 L12 21"/><path d="M9.5 21 L14.5 21"/><path d="M12 14 C 14 13, 16 14, 15 16"/><path d="M12 17 L10.5 16.5"/><path d="M12 19 L13.5 18.5"/></svg>Розы</a>
+        </div>
+      </details>
+      <details>
+        <summary>Дизайн ландшафта</summary>
+        <div class="mm-mobile-items">
+          <a href="#" class="muted">Проект участка · посадка · смета — единая страница (flat-link, без подменю)</a>
         </div>
       </details>
     </div>
@@ -1838,6 +2106,230 @@
   </div>
 </section>
 
+<!-- ═════════ ERROR PAGES ═════════ -->
+<section id="errors">
+  <div class="wrap">
+    <div class="eyebrow">11.5 · Страницы ошибок</div>
+    <h2>Когда что-то пошло не так</h2>
+    <p class="lead">Error pages — это микро-доверие. У конкурентов на WP/Bitrix чаще всего «Apache 503 Service Unavailable» во весь экран на дефолтном шрифте — это «у них всё развалилось». У Обихода — <strong>matter-of-fact страница</strong> с понятным кодом, человеческим объяснением, путём наружу и контактом, который точно работает (телефон / Telegram). Архетип Caregiver: «упало — поднимем, вы пока сюда».</p>
+
+    <h3 style="margin-top: 28px;">Карта состояний</h3>
+    <table>
+      <thead><tr><th>Код</th><th>Когда</th><th>Файл (Next.js 16)</th><th>Уровень</th></tr></thead>
+      <tbody>
+        <tr><td><code>404</code></td><td>Страница / SD / sub-service не найдены — самый частый сценарий, заслуживает дизайна (а не дефолта)</td><td><code>app/not-found.tsx</code></td><td>route segment</td></tr>
+        <tr><td><code>500</code></td><td>Internal Server Error — server component crash, Payload backend down, неожиданный throw</td><td><code>app/error.tsx</code> (uncaught) + <code>app/global-error.tsx</code> (root)</td><td>app boundary</td></tr>
+        <tr><td><code>502 / 504</code></td><td>Bad Gateway / Gateway Timeout — Beget reverse-proxy не дождался Node, обычно после деплоя</td><td>статика nginx <code>/var/www/errors/502.html</code></td><td>edge / nginx</td></tr>
+        <tr><td><code>503</code></td><td>Service Unavailable — плановый maintenance или защита от перегрузки</td><td>статика nginx + <code>Retry-After</code> header</td><td>edge / nginx</td></tr>
+        <tr><td>offline</td><td>Network error на клиенте (PWA / fetch failure) — даже без 5xx можно показать дружелюбный fallback</td><td><code>app/error.tsx</code> с network detection</td><td>client</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 32px;">Анатомия страницы</h3>
+    <p class="muted" style="font-size: 13px;">Все 5 страниц используют один шаблон <code>&lt;ErrorState&gt;</code>: <strong>иллюстрация 96×96 → код → заголовок → 1-2 строки объяснения → 1-2 CTA → fallback контакт</strong>. Без юмора в стиле «Упс!» (анти-TOV из 11 · Notifications). Бэкграунд кремовый (<code>--c-bg</code>), иллюстрация через <code>--c-primary</code>, текст ink. <strong>Иллюстрации — line-art в стиле service-иконок</strong> (stroke 2, currentColor), не AI-photorealistic.</p>
+
+    <style>
+      .err-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; margin-top: 20px; }
+      .err-card {
+        border: 1px solid var(--c-line);
+        border-radius: var(--radius-lg);
+        background: var(--c-bg);
+        padding: 32px 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        position: relative;
+      }
+      .err-card .err-illu {
+        width: 96px;
+        height: 96px;
+        color: var(--c-primary);
+        opacity: 0.85;
+      }
+      .err-card .err-code {
+        font-family: var(--font-mono);
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        color: var(--c-muted);
+      }
+      .err-card .err-title {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 1.15;
+        color: var(--c-ink);
+        margin: 0;
+      }
+      .err-card .err-text {
+        color: var(--c-ink-soft);
+        font-size: 14px;
+        line-height: 1.5;
+        margin: 0;
+      }
+      .err-card .err-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+      .err-card .err-actions a {
+        padding: 9px 16px;
+        border-radius: var(--radius-sm);
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        line-height: 1;
+      }
+      .err-card .err-actions a.primary { background: var(--c-accent); color: var(--c-ink); }
+      .err-card .err-actions a.secondary { background: transparent; color: var(--c-primary); border: 1px solid var(--c-line); }
+      .err-card .err-fallback {
+        margin-top: auto;
+        padding-top: 14px;
+        border-top: 1px dashed var(--c-line);
+        font-size: 12px;
+        color: var(--c-muted);
+        align-self: stretch;
+      }
+      .err-card .err-fallback code { font-family: var(--font-mono); color: var(--c-ink-soft); }
+    </style>
+
+    <div class="err-grid">
+
+      <div class="err-card">
+        <svg class="err-illu" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Иллюстрация: компас с разбитой стрелкой">
+          <circle cx="48" cy="48" r="34"/>
+          <circle cx="48" cy="48" r="28" stroke-dasharray="2 4"/>
+          <path d="M48 18 L48 22"/>
+          <path d="M48 74 L48 78"/>
+          <path d="M18 48 L22 48"/>
+          <path d="M74 48 L78 48"/>
+          <path d="M48 48 L36 28"/>
+          <path d="M44 36 L40 40"/>
+          <path d="M48 48 L56 60"/>
+          <circle cx="48" cy="48" r="3" fill="currentColor"/>
+        </svg>
+        <span class="err-code">HTTP 404 · NOT FOUND</span>
+        <h3 class="err-title">Страница свернула не туда</h3>
+        <p class="err-text">Адрес неверный или страницу убрали. Откройте карту услуг или сразу опишите задачу — мы поймём, что нужно, и пришлём смету за 10 минут.</p>
+        <div class="err-actions">
+          <a href="#" class="primary">На главную</a>
+          <a href="#" class="secondary">Все услуги</a>
+        </div>
+        <p class="err-fallback">Если адрес из закладок — напишите нам в Telegram, поправим. <code>app/not-found.tsx</code></p>
+      </div>
+
+      <div class="err-card">
+        <svg class="err-illu" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Иллюстрация: бензопила с заклинившей цепью">
+          <rect x="14" y="40" width="22" height="22" rx="3"/>
+          <path d="M14 40 L8 34"/>
+          <path d="M14 50 L36 50"/>
+          <path d="M36 46 L72 46"/>
+          <path d="M36 56 L72 56"/>
+          <path d="M72 46 C 78 46, 78 56, 72 56"/>
+          <path d="M40 46 L42 42 L44 46"/>
+          <path d="M48 46 L50 42 L52 46"/>
+          <path d="M56 46 L58 42 L60 46"/>
+          <path d="M64 46 L66 42 L68 46"/>
+          <path d="M40 56 L42 60 L44 56"/>
+          <path d="M48 56 L50 60 L52 56"/>
+          <path d="M58 56 L60 62 L62 56" stroke-dasharray="2 2"/>
+          <path d="M30 32 L26 22"/>
+          <path d="M34 32 L34 18"/>
+          <path d="M38 32 L42 22"/>
+          <circle cx="34" cy="14" r="2"/>
+        </svg>
+        <span class="err-code">HTTP 500 · INTERNAL ERROR</span>
+        <h3 class="err-title">У нас механика чихает</h3>
+        <p class="err-text">Сбой на нашей стороне. Уже разбираемся — обычно лечится за минуту. Можно обновить страницу или оставить заявку: примем телефоном.</p>
+        <div class="err-actions">
+          <a href="#" class="primary">Обновить</a>
+          <a href="#" class="secondary">Оставить заявку</a>
+        </div>
+        <p class="err-fallback">Sentry уже получил отчёт. <code>app/error.tsx</code> + <code>app/global-error.tsx</code></p>
+      </div>
+
+      <div class="err-card">
+        <svg class="err-illu" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Иллюстрация: разорванное звено цепи каблинга">
+          <ellipse cx="30" cy="48" rx="14" ry="9"/>
+          <ellipse cx="66" cy="48" rx="14" ry="9"/>
+          <path d="M40 42 L52 42"/>
+          <path d="M40 54 L52 54"/>
+          <path d="M44 42 L42 38"/>
+          <path d="M48 54 L50 58"/>
+          <path d="M14 30 L24 38" stroke-dasharray="2 2"/>
+          <path d="M82 30 L72 38" stroke-dasharray="2 2"/>
+          <path d="M14 66 L24 58" stroke-dasharray="2 2"/>
+          <path d="M82 66 L72 58" stroke-dasharray="2 2"/>
+        </svg>
+        <span class="err-code">HTTP 502 / 504 · BAD GATEWAY</span>
+        <h3 class="err-title">Сервер не отозвался</h3>
+        <p class="err-text">Между нами и сайтом потерялась связь. Бывает после деплоя — возвращается за минуту. Просто обновите страницу через 30 секунд.</p>
+        <div class="err-actions">
+          <a href="#" class="primary">Попробовать снова</a>
+          <a href="#" class="secondary">На главную</a>
+        </div>
+        <p class="err-fallback">Beget reverse-proxy + PM2 graceful reload. <code>nginx /errors/502.html</code></p>
+      </div>
+
+      <div class="err-card">
+        <svg class="err-illu" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Иллюстрация: табличка «технический перерыв» на дереве">
+          <path d="M48 12 L48 50"/>
+          <path d="M44 26 C 38 22, 32 26, 32 32"/>
+          <path d="M52 30 C 60 26, 66 32, 64 38"/>
+          <path d="M44 38 C 38 36, 34 40, 36 44"/>
+          <path d="M52 42 C 58 40, 62 44, 60 48"/>
+          <rect x="22" y="56" width="52" height="26" rx="3"/>
+          <path d="M48 50 L48 56"/>
+          <path d="M30 64 L66 64"/>
+          <path d="M30 72 L60 72"/>
+          <path d="M14 84 L82 84"/>
+        </svg>
+        <span class="err-code">HTTP 503 · MAINTENANCE</span>
+        <h3 class="err-title">Технический перерыв</h3>
+        <p class="err-text">Обновляем сайт. Зайдите через 10–15 минут — или оставьте заявку прямо сейчас в Telegram, мы на связи.</p>
+        <div class="err-actions">
+          <a href="#" class="primary">Telegram</a>
+          <a href="#" class="secondary">Позвонить</a>
+        </div>
+        <p class="err-fallback">Header <code>Retry-After: 600</code> + список свежих кейсов вместо контента. <code>nginx /errors/503.html</code></p>
+      </div>
+
+      <div class="err-card">
+        <svg class="err-illu" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Иллюстрация: антенна без сигнала">
+          <path d="M48 60 L48 80"/>
+          <path d="M30 80 L66 80"/>
+          <path d="M48 60 L34 24"/>
+          <path d="M48 60 L62 24"/>
+          <path d="M40 42 L56 42"/>
+          <circle cx="48" cy="60" r="3" fill="currentColor"/>
+          <path d="M22 30 L30 22" stroke-dasharray="2 3"/>
+          <path d="M14 38 L22 30" stroke-dasharray="2 3"/>
+          <path d="M74 22 L66 30" stroke-dasharray="2 3"/>
+          <path d="M82 30 L74 22" stroke-dasharray="2 3"/>
+          <path d="M20 14 L30 24"/>
+          <path d="M30 14 L20 24"/>
+        </svg>
+        <span class="err-code">CLIENT · NETWORK</span>
+        <h3 class="err-title">Нет связи</h3>
+        <p class="err-text">Похоже, пропал интернет. Когда вернётся — страница откроется сама. Можно открыть из меню в офлайн-режиме базовые разделы.</p>
+        <div class="err-actions">
+          <a href="#" class="primary">Попробовать снова</a>
+        </div>
+        <p class="err-fallback">Service worker fallback + <code>navigator.onLine</code> listener. Иллюстрация ↔ <code>app/error.tsx</code></p>
+      </div>
+
+    </div>
+
+    <h3 style="margin-top: 36px;">Принципы копирайта (TOV-черновик от <code>art</code>, финал — <code>cw</code>)</h3>
+    <div class="grid-3" style="margin-top: 12px;">
+      <div class="card"><b>Никогда «Упс!» / «Ой!»</b><p class="muted" style="font-size: 13px; margin-top: 6px;">Инфантильно. У Обихода ошибки звучат как «бригадир спокойно описывает проблему»: «Сервер не отозвался», «Технический перерыв».</p></div>
+      <div class="card"><b>Всегда CTA-выход</b><p class="muted" style="font-size: 13px; margin-top: 6px;">Минимум одна кнопка-действие. Запасной канал (Telegram / телефон) — как fallback под ней.</p></div>
+      <div class="card"><b>Объяснить, не извиниться</b><p class="muted" style="font-size: 13px; margin-top: 6px;">Caregiver = «вижу проблему, делаю». «Бывает после деплоя — возвращается за минуту» = доверие. «Простите, у нас сложности» = слабость.</p></div>
+      <div class="card"><b>Код виден, но не доминирует</b><p class="muted" style="font-size: 13px; margin-top: 6px;">«HTTP 502 · BAD GATEWAY» — eyebrow-стиль uppercase mono 13px, не h1. Технику оставляем для тех кто читает, у остальных — заголовок-человек.</p></div>
+      <div class="card"><b>Иллюстрация = метафора, не картинка</b><p class="muted" style="font-size: 13px; margin-top: 6px;">Компас (404), пила-чихалка (500), оборванная цепь (502), табличка-перерыв (503), антенна без сигнала (offline). Всё в lin-art currentColor 96×96. Никаких photorealistic AI / стоковых.</p></div>
+      <div class="card"><b>Sentry / log — обязательно</b><p class="muted" style="font-size: 13px; margin-top: 6px;">500 / 502 / 503 шлют событие в Sentry с контекстом (URL, user-agent, request-id). На странице — невидимо, но в коде <code>app/error.tsx</code> вызов <code>captureException</code>.</p></div>
+    </div>
+
+    <p class="muted" style="margin-top: 24px; font-size: 13px;">Spec для реализации — в <a href="components/error-state/error-state.spec.md"><code>components/error-state/error-state.spec.md</code></a> (создаётся <code>ui</code> по <code>art-brief</code>). Тексты — финализирует <code>cw</code> под TOV. Развёртывание 502/503 на nginx — задача <code>do</code> (Beget reverse-proxy конфиг).</p>
+  </div>
+</section>
+
 <!-- ═════════ PAYLOAD MAP ═════════ -->
 <section id="payload">
   <div class="wrap">
@@ -1993,7 +2485,11 @@
       <li style="opacity: 0.6;"><s><strong>Horizontal-compact lockup для website header</strong></s> — <span class="badge badge-live">✓ 2026-04-25</span> <a href="../agents/brand/logo/horizontal-compact.svg"><code>horizontal-compact.svg</code></a> 1280×480 (mark + wordmark, без tagline). Tagline «КРУГ СЕЗОНОВ» из <code>horizontal.svg</code> при высоте 32–60 px превращался в нечитаемые точки 3–6 px — теперь full-вариант только для marketing-применений ≥ 80 px по высоте.</li>
       <li style="opacity: 0.6;"><s><strong>Mega-menu Районы — dropdown с иконками-landmark</strong></s> — <span class="badge badge-live">✓ 2026-04-25</span> 3 кластера (Запад / Север / Юго-Восток МО), 8 районов + Москва, line-icon 24×24 stroke 1.5 на каждый: узел шоссе (Одинцово), холм с домом (Красногорск), купол монастыря (Истра), самолёт (Химки), водонапорная башня (Мытищи), ёлка с рельсами (Пушкино), мост через воду (Раменское), силуэт самолёта (Жуковский), компас (Москва). Featured: «Возим до 80 км от МКАД, фикс-цена за объект».</li>
       <li style="opacity: 0.6;"><s><strong>Mega-menu Кейсы — dropdown по тематикам</strong></s> — <span class="badge badge-live">✓ 2026-04-25</span> 3 темы: Аварийные / Сезонные / Под ключ для УК и ТСЖ. 9 кейсов с тематическими иконками (молния, ножницы, кувалда, здание, посёлок, FM-портфолио). Featured: «Свежий кейс УК Жилищник, −18% к смете».</li>
-      <li style="opacity: 0.6;"><s><strong>Магазин в навигации</strong></s> — <span class="badge badge-live">✓ 2026-04-25</span> flat link между Кейсы и Цены — товары для сада и растения. Dropdown добавим позже, когда определимся с категориями каталога. Mobile accordion — заглушка «Скоро».</li>
+      <li style="opacity: 0.6;"><s><strong>Магазин в навигации · flat-link v1</strong></s> — <span class="badge badge-live">✓ 2026-04-25</span> flat link между Кейсы и Цены — товары для сада и растения. Dropdown добавим позже, когда определимся с категориями каталога. Mobile accordion — заглушка «Скоро».</li>
+      <li style="opacity: 0.6;"><s><strong>Магазин — mega-menu 3 колонки + 9 shop-иконок</strong></s> — <span class="badge badge-live">✓ 2026-04-27</span> по запросу оператора расширили IA из 4 в 6 направлений. Mega-menu Магазина: <strong>Деревья</strong> (Плодовые / Колоновидные / Лиственные / Хвойные / Крупномеры) · <strong>Кустарники</strong> (Плодовые / Декоративные) · <strong>Цветы</strong> (Цветы / Розы). Featured: «Сезон 2026 — посадка с гарантией приживаемости 1 год». 9 line-icon 24×24 stroke 1.5 currentColor в стиле service-иконок: <code>fruit-tree</code>, <code>columnar-tree</code>, <code>fruit-bush</code>, <code>decor-bush</code>, <code>flowers</code>, <code>roses</code>, <code>large-trees</code>, <code>deciduous-tree</code>, <code>coniferous-tree</code>. Mobile accordion раскрыт под 9 категорий. CLAUDE.md immutable обновлён.</li>
+      <li style="opacity: 0.6;"><s><strong>«Дизайн ландшафта» — 5-е направление, flat-link</strong></s> — <span class="badge badge-live">✓ 2026-04-27</span> по запросу оператора. Один flat-link в навигации (после Магазина), отдельная страница «проект участка → посадка → смета». Подменю не нужно — направление монолитное. Иконки нет (flat-link без glyph). Mobile accordion — отдельная секция под 9 shop-категориями.</li>
+      <li style="opacity: 0.6;"><s><strong>Error pages · 5 состояний (404/500/502/503/offline)</strong></s> — <span class="badge badge-live">✓ 2026-04-27</span> новая секция «11.5 · Страницы ошибок». 5 карточек с уникальной line-art иллюстрацией 96×96 (компас / пила-чихалка / разорванная цепь / табличка-перерыв / антенна без сигнала), eyebrow с HTTP-кодом, заголовок-человек, объяснение в TOV «бригадира», 1-2 CTA + fallback-канал. Карта файлов Next.js: <code>app/not-found.tsx</code> (404), <code>app/error.tsx</code> + <code>app/global-error.tsx</code> (500), nginx <code>/errors/502.html</code> + <code>503.html</code>. Принципы копирайта зафиксированы — финал тестов через <code>cw</code>, реализация — <code>ui</code>+<code>fe1</code>+<code>do</code> по art-brief.</li>
+      <li style="opacity: 0.6;"><s><strong>Иконография — единый реестр всех 4 линеек</strong></s> — <span class="badge badge-live">✓ 2026-04-27</span> закрыли пробел: до этого только Service Icons имели визуальный каталог в section #icons, а District (9 landmark-иконок) и Case (9 topic-иконок) жили только в mega-menu Районы / Кейсы как inline SVG — формально иконки были, но без витрины-реестра. Теперь в section «08 · Иконография» все 4 линейки одной плиткой: 22 service + 9 shop + 9 district (Одинцово / Красногорск / Истра / Химки / Мытищи / Пушкино / Раменское / Жуковский / Москва) + 9 case (storm-cleanup / emergency-removal / urgent-roof / pruning-season / winter-prep / post-renovation / uk-contract / cottage-village / fm-contract) = 49 glyph'ов в едином формате. Заголовок секции переписан с «Service Icons» на «Иконография · 49 line-art glyph'ов». Это закрывает учение «расхождение brand-guide ↔ Header.tsx» (см. learnings.md) — теперь дизайн-система и есть полный source of truth.</li>
       <li style="opacity: 0.6;"><s><strong>Header / MegaMenu prod-реализация</strong></s> — <span class="badge badge-live">✓ 2026-04-24</span> commits #23 sticky + dropdown nav, #24 меню под эталон brand-guide (плоские ссылки + CTA), #25 mega-menu 1:1 design-system spec — на prod через auto-deploy. Refresh продолжается параллельно (см. <code>site/components/marketing/Header.tsx</code>).</li>
       <li style="opacity: 0.6;"><s><strong>Favicon / OG / apple-touch-icon</strong></s> — <span class="badge badge-live">✓ готово</span> <code>site/app/icon.png</code> 32 + <code>apple-icon.png</code> 180 (Next.js 16 convention) + <code>agents/brand/logo/</code> icon-192/512/og-mark для PWA и OG.</li>
       <li style="opacity: 0.6;"><s><strong>Иконография сервисов</strong></s> — <span class="badge badge-live">✓ v0.9</span> 16 иконок в <a href="icons/services/README.md"><code>design-system/icons/services/</code></a>. Покрытие всех 4 кластеров + 3 УТП-бейджа.</li>
@@ -2043,7 +2539,7 @@
 
 <footer class="site">
   <div class="wrap">
-    <p>design-system/brand-guide.html · v1.6 · обновлён 2026-04-25 · единый вход в дизайн-систему Обихода · логотип «Круг сезонов» v1.0 (full + horizontal-compact) · 22 service-иконки v0.9 · 8 district landmark-иконок · 9 case topic-иконок · header-refresh (группы + dropdown + hamburger) · mega-menu live demo: Услуги + Районы + Кейсы dropdowns + Магазин · pagination / notifications live demo · foundations: icons / a11y / microcopy / photography / print-materials · patterns: programmatic-landing / og-image / b2b-pitch-deck · 15 component-spec'ов</p>
+    <p>design-system/brand-guide.html · v1.7 · обновлён 2026-04-27 · единый вход в дизайн-систему Обихода · логотип «Круг сезонов» v1.0 · <strong>49 line-art иконок в едином реестре</strong>: 22 service v0.9 + 9 shop v0.1 + 9 district v0.9 + 9 case v0.9 + 5 error-state иллюстраций v0.1 · header-refresh (группы + dropdown + hamburger) · mega-menu live demo: Услуги + Районы + Кейсы + <strong>Магазин</strong> dropdowns + flat-link <strong>Дизайн ландшафта</strong> · pagination / notifications / <strong>error pages 404·500·502·503·offline</strong> live demo · foundations: icons / a11y / microcopy / photography / print-materials · patterns: programmatic-landing / og-image / b2b-pitch-deck · 15 component-spec'ов · IA расширена с 4 до <strong>6 направлений</strong> (CLAUDE.md immutable 2026-04-27)</p>
     <p>источники: <a href="../contex/03_brand_naming.md">contex/03_brand_naming.md</a> · <a href="../site/app/globals.css">site/app/globals.css</a> · <a href="README.md">design-system/README.md</a> · <a href="../devteam/art.md">devteam/art.md</a> · <a href="../devteam/specs/admin-visual/art-concept.md">admin-visual/art-concept.md</a></p>
   </div>
 </footer>

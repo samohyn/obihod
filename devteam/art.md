@@ -2,7 +2,7 @@
 code: art
 role: Design Director
 project: Обиход
-model: opus-4-6
+model: opus-4-7
 reasoning_effort: max
 reports_to: po
 handoffs_from: [po]
