@@ -34,7 +34,7 @@ export const DashboardTile: FC<DashboardTileProps> = ({
     gap: 16,
     minHeight: 156,
     padding: '20px 24px',
-    borderRadius: 12,
+    borderRadius: 'var(--brand-obihod-radius, 10px)',
     border: '1px solid var(--brand-obihod-line, #e6e1d6)',
     background:
       variant === 'primary'
@@ -49,7 +49,7 @@ export const DashboardTile: FC<DashboardTileProps> = ({
           ? 'var(--brand-obihod-ink, #1c1c1c)'
           : 'var(--brand-obihod-ink, #1c1c1c)',
     textDecoration: 'none',
-    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+    fontFamily: 'var(--font-body)',
     transition: 'transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease',
     cursor: 'pointer',
   }
@@ -57,7 +57,7 @@ export const DashboardTile: FC<DashboardTileProps> = ({
   const iconBoxStyle: CSSProperties = {
     width: 48,
     height: 48,
-    borderRadius: 8,
+    borderRadius: 'var(--brand-obihod-radius-sm, 6px)',
     background:
       variant === 'primary'
         ? 'rgba(255,255,255,0.12)'

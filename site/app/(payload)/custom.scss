@@ -1,27 +1,42 @@
 /*
  * Обиход — кастомизация Payload admin.
  *
- * Палитра — по art-концепту devteam/specs/admin-visual/art-concept.md (WCAG AA).
- * Источник — site/app/globals.css: один бренд у паблика и админки.
- * Стратегия: переопределяем цветовые токены Payload, layout/typography-scale
- * не трогаем. Тёмная тема — клон светлой до первой продовой потребности.
+ * Источник истины бренда — contex/07_brand_system.html (palette, typography,
+ * radii, buttons). Параллель с публичным слоем — site/app/globals.css.
+ * Стратегия: переопределяем цветовые токены Payload + базовый шрифт + радиусы,
+ * layout/typography-scale Payload не трогаем. Тёмная тема — клон светлой
+ * до первой продовой потребности.
  */
 
+/* Golos Text — основной brand-шрифт (как на публичной части).
+ * В Payload admin layout авто-генерируется и недоступен для next/font, поэтому
+ * грузим через Google Fonts CSS. Admin — внутренний инструмент, FOUC приемлем. */
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
 :root {
-  /* ---------- Brand palette ---------- */
+  /* ---------- Brand palette (контракт с globals.css) ---------- */
   --brand-obihod-ink: #1c1c1c; /* основной текст, заголовки */
   --brand-obihod-ink-soft: #2b2b2b; /* вторичный текст ячеек */
   --brand-obihod-muted: #6b6256; /* admin.description, placeholder (подтянут с #8c8377 ради 4.5:1) */
   --brand-obihod-paper: #f7f5f0; /* кремовый фон, основной */
   --brand-obihod-paper-warm: #efebe0; /* чередование строк, sticky-хедер */
-  --brand-obihod-surface: #ffffff; /* белая карточка поля */
+  --brand-obihod-bg-alt: #efebe0; /* alias для inline-стилей dashboard */
+  --brand-obihod-card: #ffffff; /* белая карточка поля */
+  --brand-obihod-surface: #ffffff;
+  --brand-obihod-line: #e6e1d6;
   --brand-obihod-border: #e6e1d6;
   --brand-obihod-primary: #2d5a3d; /* тёмно-зелёный штамп бренда */
   --brand-obihod-primary-ink: #1f3f2b;
   --brand-obihod-accent: #e6a23c; /* янтарный — статусы, badges */
+  --brand-obihod-accent-ink: #c18724;
   --brand-obihod-warning: #c18724;
   --brand-obihod-danger: #b54828;
   --brand-obihod-on-primary: #f7f5f0; /* текст на зелёном фоне */
+
+  /* ---------- Brand radii (контракт с globals.css) ---------- */
+  --brand-obihod-radius-sm: 6px;
+  --brand-obihod-radius: 10px;
+  --brand-obihod-radius-lg: 16px;
 
   /* ---------- Payload base (light theme) ---------- */
   /* Переопределяем --color-base-*, от них наследуются --theme-elevation-*. */
@@ -64,15 +79,22 @@
   /* Error оставляем Payload-дефолт — ошибка должна быть узнаваемо «красной». */
 
   /* ---------- Typography ---------- */
-  /* Inter для кириллицы + системный fallback. External-шрифты не грузим. */
+  /* Golos Text — display и body (как на публичной части). Inter — fallback
+   * пока font не подгрузился. */
   --font-body:
-    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-    sans-serif;
+    'Golos Text', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   /* ---------- Aliases для прямых обращений в компонентах ---------- */
   --theme-success-500: var(--brand-obihod-primary);
   --theme-warning-500: var(--brand-obihod-accent);
+
+  /* ---------- Style radius (Payload v3 token) ---------- */
+  /* Payload использует --style-radius-* для borders на input/button/card. */
+  --style-radius-s: var(--brand-obihod-radius-sm);
+  --style-radius-m: var(--brand-obihod-radius);
+  --style-radius-l: var(--brand-obihod-radius-lg);
 }
 
 /* Dark — клон light до первой продовой потребности.
@@ -82,7 +104,10 @@ html[data-theme='dark'] {
   --brand-obihod-ink-soft: #e6e1d6;
   --brand-obihod-paper: #15140f;
   --brand-obihod-paper-warm: #1c1c1c;
+  --brand-obihod-bg-alt: #1c1c1c;
+  --brand-obihod-card: #1c1c1c;
   --brand-obihod-surface: #1c1c1c;
+  --brand-obihod-line: #2b2b2b;
   --brand-obihod-border: #2b2b2b;
   --brand-obihod-muted: #a69c7e;
 
@@ -102,4 +127,51 @@ html[data-theme='dark'] {
 .payload__app table,
 .payload__app code {
   font-variant-numeric: tabular-nums;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+ *  Payload primary button — brand green (контракт с brand-guide §«Кнопки»)
+ *  Селектор покрывает Payload v3 разные исполнения primary CTA.
+ * ───────────────────────────────────────────────────────────────────── */
+.payload__app .btn--style-primary,
+.payload__app .btn--style-primary:not([disabled]) {
+  background-color: var(--brand-obihod-primary);
+  border-color: var(--brand-obihod-primary);
+  color: var(--brand-obihod-on-primary);
+}
+.payload__app .btn--style-primary:hover:not([disabled]) {
+  background-color: var(--brand-obihod-primary-ink);
+  border-color: var(--brand-obihod-primary-ink);
+}
+.payload__app .btn--style-primary:focus-visible {
+  outline: 2px solid var(--brand-obihod-accent);
+  outline-offset: 2px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+ *  Inputs / textarea / select — focus accent на бренд-зелёный
+ * ───────────────────────────────────────────────────────────────────── */
+.payload__app input:focus-visible,
+.payload__app textarea:focus-visible,
+.payload__app select:focus-visible,
+.payload__app .field-type input:focus-visible,
+.payload__app .field-type textarea:focus-visible {
+  outline: 2px solid var(--brand-obihod-primary);
+  outline-offset: -1px;
+  border-color: var(--brand-obihod-primary);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+ *  Status pills (published / draft) — brand colors
+ *  Payload v3 рендерит публикационный статус как .pill с модификаторами.
+ * ───────────────────────────────────────────────────────────────────── */
+.payload__app .pill--style-success {
+  background-color: color-mix(in oklab, var(--brand-obihod-primary) 12%, var(--brand-obihod-card));
+  color: var(--brand-obihod-primary);
+  border-color: color-mix(in oklab, var(--brand-obihod-primary) 24%, transparent);
+}
+.payload__app .pill--style-warning {
+  background-color: color-mix(in oklab, var(--brand-obihod-accent) 16%, var(--brand-obihod-card));
+  color: var(--brand-obihod-accent-ink);
+  border-color: color-mix(in oklab, var(--brand-obihod-accent) 28%, transparent);
 }
