@@ -66,6 +66,8 @@ test.describe('OBI-19 — Admin design compliance (Wave 1)', () => {
     expect(radii.lg).toBe('16px')
 
     // 3. Motion — design-system/tokens/motion.json (duration.fast = 120ms).
+    // Chrome нормализует "120ms" в ".12s" при чтении computed-style — сравниваем
+    // как числа в ms, не как строки.
     const motion = await page.evaluate(() => {
       const cs = getComputedStyle(document.documentElement)
       return {
@@ -74,11 +76,20 @@ test.describe('OBI-19 — Admin design compliance (Wave 1)', () => {
         ease: cs.getPropertyValue('--brand-obihod-ease-standard').trim(),
       }
     })
-    expect(motion.fast).toBe('120ms')
-    expect(motion.base).toBe('200ms')
-    expect(motion.ease).toBe('cubic-bezier(0.4, 0, 0.2, 1)')
+    const toMs = (v: string): number => {
+      const m = v.match(/^([\d.]+)\s*(ms|s)?$/i)
+      if (!m) return NaN
+      const n = parseFloat(m[1])
+      return m[2]?.toLowerCase() === 's' ? n * 1000 : n
+    }
+    expect(toMs(motion.fast)).toBe(120)
+    expect(toMs(motion.base)).toBe(200)
+    // cubic-bezier — игнорируем пробелы между аргументами для устойчивости.
+    expect(motion.ease.replace(/\s+/g, '')).toBe('cubic-bezier(0.4,0,0.2,1)')
 
     // 4. Shadow focus rings — design-system/tokens/shadow.json.
+    // Chrome может нормализовать `rgba(...)` (пробелы, точность). Сравниваем
+    // через нормализованные пробелы и допускаем оба формата.
     const shadow = await page.evaluate(() => {
       const cs = getComputedStyle(document.documentElement)
       return {
@@ -86,8 +97,9 @@ test.describe('OBI-19 — Admin design compliance (Wave 1)', () => {
         focusError: cs.getPropertyValue('--brand-obihod-shadow-focus-error').trim(),
       }
     })
-    expect(shadow.focusPrimary).toContain('rgba(45, 90, 61, 0.15)')
-    expect(shadow.focusError).toContain('rgba(181, 72, 40, 0.12)')
+    const norm = (v: string) => v.replace(/\s+/g, '').toLowerCase()
+    expect(norm(shadow.focusPrimary)).toContain('rgba(45,90,61,0.15)')
+    expect(norm(shadow.focusError)).toContain('rgba(181,72,40,0.12)')
 
     // 5. Шрифт — Golos Text (design-system/tokens/typography.json).
     const fontBody = await page.evaluate(() =>
