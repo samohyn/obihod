@@ -59,17 +59,39 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/`, lastModified: now, changeFrequency: 'daily', priority: 1.0 },
     { url: `${SITE_URL}/raiony/`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${SITE_URL}/kejsy/`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
+    // US-6 wave 2A: разблокированные list-страницы трёх коллекций.
+    { url: `${SITE_URL}/blog/`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${SITE_URL}/b2b/`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${SITE_URL}/avtory/`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
+    // Trust-страницы wave 1.
+    {
+      url: `${SITE_URL}/o-kompanii/`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    { url: `${SITE_URL}/garantii/`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    {
+      url: `${SITE_URL}/kak-my-rabotaem/`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
   ]
 
   // Прямой Payload-вызов (без unstable_cache wrapper) — чтобы избежать
   // проблем с serialization payloadClient внутри cached scope.
   // Кеширование sitemap делает сам Next 16 через revalidate=3600.
-  const [services, districts, serviceDistricts, cases] = await Promise.all([
-    fetchServices(),
-    fetchDistricts(),
-    fetchPublishedServiceDistricts(),
-    fetchCases(),
-  ])
+  const [services, districts, serviceDistricts, cases, blogPosts, b2bPages, authors] =
+    await Promise.all([
+      fetchServices(),
+      fetchDistricts(),
+      fetchPublishedServiceDistricts(),
+      fetchCases(),
+      fetchPublishedBlog(),
+      fetchPublishedB2B(),
+      fetchPublishedAuthors(),
+    ])
 
   const serviceEntries: Entry[] = services.map((slug) => ({
     url: `${SITE_URL}/${slug}/`,
@@ -118,12 +140,42 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
     }))
 
+  const blogEntries: Entry[] = blogPosts
+    .filter((p): p is SlugDoc & { slug: string } => typeof p.slug === 'string')
+    .map((p) => ({
+      url: `${SITE_URL}/blog/${p.slug}/`,
+      lastModified: p.updatedAt ? new Date(p.updatedAt) : undefined,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    }))
+
+  const b2bEntries: Entry[] = b2bPages
+    .filter((p): p is SlugDoc & { slug: string } => typeof p.slug === 'string')
+    .map((p) => ({
+      url: `${SITE_URL}/b2b/${p.slug}/`,
+      lastModified: p.updatedAt ? new Date(p.updatedAt) : undefined,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    }))
+
+  const authorEntries: Entry[] = authors
+    .filter((a): a is SlugDoc & { slug: string } => typeof a.slug === 'string')
+    .map((a) => ({
+      url: `${SITE_URL}/avtory/${a.slug}/`,
+      lastModified: a.updatedAt ? new Date(a.updatedAt) : undefined,
+      changeFrequency: 'monthly',
+      priority: 0.4,
+    }))
+
   return [
     ...staticEntries,
     ...serviceEntries,
     ...districtEntries,
     ...programmaticEntries,
     ...caseEntries,
+    ...blogEntries,
+    ...b2bEntries,
+    ...authorEntries,
   ]
 }
 
@@ -191,6 +243,57 @@ async function fetchCases(): Promise<SlugDoc[]> {
     return r.docs as unknown as SlugDoc[]
   } catch (e) {
     console.error('[sitemap] fetchCases failed:', e)
+    return []
+  }
+}
+
+async function fetchPublishedBlog(): Promise<SlugDoc[]> {
+  try {
+    const payload = await payloadClient()
+    const r = await payload.find({
+      collection: 'blog',
+      where: { _status: { equals: 'published' } },
+      limit: 1000,
+      pagination: false,
+      select: { slug: true, updatedAt: true },
+    })
+    return r.docs as unknown as SlugDoc[]
+  } catch (e) {
+    console.error('[sitemap] fetchPublishedBlog failed:', e)
+    return []
+  }
+}
+
+async function fetchPublishedB2B(): Promise<SlugDoc[]> {
+  try {
+    const payload = await payloadClient()
+    const r = await payload.find({
+      collection: 'b2b-pages',
+      where: { _status: { equals: 'published' } },
+      limit: 100,
+      pagination: false,
+      select: { slug: true, updatedAt: true },
+    })
+    return r.docs as unknown as SlugDoc[]
+  } catch (e) {
+    console.error('[sitemap] fetchPublishedB2B failed:', e)
+    return []
+  }
+}
+
+async function fetchPublishedAuthors(): Promise<SlugDoc[]> {
+  try {
+    const payload = await payloadClient()
+    const r = await payload.find({
+      collection: 'authors',
+      where: { _status: { equals: 'published' } },
+      limit: 100,
+      pagination: false,
+      select: { slug: true, updatedAt: true },
+    })
+    return r.docs as unknown as SlugDoc[]
+  } catch (e) {
+    console.error('[sitemap] fetchPublishedAuthors failed:', e)
     return []
   }
 }
