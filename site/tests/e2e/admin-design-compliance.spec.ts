@@ -115,4 +115,16 @@ test.describe('OBI-19 — Admin design compliance (Wave 1)', () => {
     expect(fontBody.toLowerCase()).toContain('golos text')
     expect(fontBody.toLowerCase()).toContain('inter') // fallback chain
   })
+
+  test('Wave 2 (OBI-28): BeforeLoginLockup виден над формой', async ({ page }) => {
+    const resp = await page.goto(ADMIN_PATH, { waitUntil: 'domcontentloaded' })
+    if (!resp || resp.status() >= 500) {
+      test.skip(true, `Admin не отвечает (status=${resp?.status()}) — пропуск`)
+    }
+
+    // BeforeLoginLockup рендерит eyebrow «obikhod.ru · admin» + h1 «Порядок под ключ»
+    // через admin.components.beforeLogin slot — над native Payload login form.
+    await expect(page.getByText('obikhod.ru · admin', { exact: true })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Порядок под ключ' })).toBeVisible()
+  })
 })

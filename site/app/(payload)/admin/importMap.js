@@ -25,6 +25,7 @@ import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } f
 import BrandLogo_us3 from '@/components/admin/BrandLogo'
 import BrandIcon_us3 from '@/components/admin/BrandIcon'
 import BeforeDashboardStartHere_us3 from '@/components/admin/BeforeDashboardStartHere'
+import BeforeLoginLockup_us3 from '@/components/admin/BeforeLoginLockup'
 
 /** @type import('payload').ImportMap */
 export const importMap = {
@@ -81,4 +82,6 @@ export const importMap = {
   '@/components/admin/BrandIcon#default': BrandIcon_us3,
   '@/components/admin/BeforeDashboardStartHere': BeforeDashboardStartHere_us3,
   '@/components/admin/BeforeDashboardStartHere#default': BeforeDashboardStartHere_us3,
+  '@/components/admin/BeforeLoginLockup': BeforeLoginLockup_us3,
+  '@/components/admin/BeforeLoginLockup#default': BeforeLoginLockup_us3,
 }
