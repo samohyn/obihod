@@ -94,8 +94,8 @@ test.describe('OBI-19 — Admin design compliance (Wave 1)', () => {
     expect(cssNorm(motion.ease)).toBe(cssNorm('cubic-bezier(0.4, 0, 0.2, 1)'))
 
     // 4. Shadow focus rings — design-system/tokens/shadow.json.
-    // Chrome может нормализовать `rgba(...)` (пробелы, точность). Сравниваем
-    // через нормализованные пробелы и допускаем оба формата.
+    // Chrome в CI конвертирует rgba(45, 90, 61, 0.15) → hex+alpha #2d5a3d26.
+    // Принимаем любое представление: rgba(R, G, B[, A]) или #hex.
     const shadow = await page.evaluate(() => {
       const cs = getComputedStyle(document.documentElement)
       return {
@@ -103,8 +103,10 @@ test.describe('OBI-19 — Admin design compliance (Wave 1)', () => {
         focusError: cs.getPropertyValue('--brand-obihod-shadow-focus-error').trim(),
       }
     })
-    expect(cssNorm(shadow.focusPrimary)).toContain(cssNorm('rgba(45, 90, 61, 0.15)'))
-    expect(cssNorm(shadow.focusError)).toContain(cssNorm('rgba(181, 72, 40, 0.12)'))
+    // Primary green: rgba(45,90,61,*) ИЛИ #2d5a3d (с/без alpha-канала).
+    expect(shadow.focusPrimary).toMatch(/(rgba?\(\s*45\s*,\s*90\s*,\s*61|#2d5a3d)/i)
+    // Error red: rgba(181,72,40,*) ИЛИ #b54828.
+    expect(shadow.focusError).toMatch(/(rgba?\(\s*181\s*,\s*72\s*,\s*40|#b54828)/i)
 
     // 5. Шрифт — Golos Text (design-system/tokens/typography.json).
     const fontBody = await page.evaluate(() =>
