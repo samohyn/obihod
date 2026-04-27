@@ -33,7 +33,9 @@ export default buildConfig({
     },
     components: {
       graphics: {
-        Logo: '@/components/admin/BrandLogo',
+        // Logo убран: на login дублировался с beforeLogin lockup. Sidebar получает
+        // default Payload, что приемлемо. Если sidebar нужен brand — отдельный PR
+        // с детект login-route.
         Icon: '@/components/admin/BrandIcon',
       },
       beforeDashboard: ['@/components/admin/BeforeDashboardStartHere'],
