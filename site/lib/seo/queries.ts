@@ -161,3 +161,177 @@ export const getAllCaseSlugs = cache(
     }
   },
 )
+
+// ───────── Authors (US-6 wave 2A — /avtory/) ─────────
+
+export const getPublishedAuthors = cache(async () => {
+  try {
+    const payload = await payloadClient()
+    const r = await payload.find({
+      collection: 'authors',
+      where: { _status: { equals: 'published' } },
+      limit: 100,
+      pagination: false,
+      depth: 1,
+      sort: 'lastName',
+    })
+    return r.docs
+  } catch (e) {
+    console.error('[queries.getPublishedAuthors] failed:', e)
+    return []
+  }
+})
+
+export const getAuthorBySlug = cache(async (slug: string) => {
+  try {
+    const payload = await payloadClient()
+    const r = await payload.find({
+      collection: 'authors',
+      where: { and: [{ slug: { equals: slug } }, { _status: { equals: 'published' } }] },
+      limit: 1,
+      depth: 1,
+    })
+    return r.docs[0] ?? null
+  } catch (e) {
+    console.error('[queries.getAuthorBySlug] failed:', e)
+    return null
+  }
+})
+
+export const getAllAuthorSlugs = cache(
+  async (): Promise<Array<{ slug: string; updatedAt?: string }>> => {
+    try {
+      const payload = await payloadClient()
+      const r = await payload.find({
+        collection: 'authors',
+        where: { _status: { equals: 'published' } },
+        limit: 1000,
+        pagination: false,
+        select: { slug: true, updatedAt: true },
+      })
+      return r.docs.map((d) => ({
+        slug: (d as { slug: string }).slug,
+        updatedAt: (d as { updatedAt?: string }).updatedAt,
+      }))
+    } catch (e) {
+      console.error('[queries.getAllAuthorSlugs] failed:', e)
+      return []
+    }
+  },
+)
+
+// ───────── Blog (US-6 wave 2A — /blog/) ─────────
+
+export const getPublishedBlogPosts = cache(async () => {
+  try {
+    const payload = await payloadClient()
+    const r = await payload.find({
+      collection: 'blog',
+      where: { _status: { equals: 'published' } },
+      limit: 200,
+      pagination: false,
+      depth: 2,
+      sort: '-publishedAt',
+    })
+    return r.docs
+  } catch (e) {
+    console.error('[queries.getPublishedBlogPosts] failed:', e)
+    return []
+  }
+})
+
+export const getBlogPostBySlug = cache(async (slug: string) => {
+  try {
+    const payload = await payloadClient()
+    const r = await payload.find({
+      collection: 'blog',
+      where: { and: [{ slug: { equals: slug } }, { _status: { equals: 'published' } }] },
+      limit: 1,
+      depth: 2,
+    })
+    return r.docs[0] ?? null
+  } catch (e) {
+    console.error('[queries.getBlogPostBySlug] failed:', e)
+    return null
+  }
+})
+
+export const getAllBlogSlugs = cache(
+  async (): Promise<Array<{ slug: string; updatedAt?: string }>> => {
+    try {
+      const payload = await payloadClient()
+      const r = await payload.find({
+        collection: 'blog',
+        where: { _status: { equals: 'published' } },
+        limit: 1000,
+        pagination: false,
+        select: { slug: true, updatedAt: true },
+      })
+      return r.docs.map((d) => ({
+        slug: (d as { slug: string }).slug,
+        updatedAt: (d as { updatedAt?: string }).updatedAt,
+      }))
+    } catch (e) {
+      console.error('[queries.getAllBlogSlugs] failed:', e)
+      return []
+    }
+  },
+)
+
+// ───────── B2B pages (US-6 wave 2A — /b2b/) ─────────
+
+export const getPublishedB2BPages = cache(async () => {
+  try {
+    const payload = await payloadClient()
+    const r = await payload.find({
+      collection: 'b2b-pages',
+      where: { _status: { equals: 'published' } },
+      limit: 50,
+      pagination: false,
+      depth: 1,
+      sort: 'slug',
+    })
+    return r.docs
+  } catch (e) {
+    console.error('[queries.getPublishedB2BPages] failed:', e)
+    return []
+  }
+})
+
+export const getB2BPageBySlug = cache(async (slug: string) => {
+  try {
+    const payload = await payloadClient()
+    const r = await payload.find({
+      collection: 'b2b-pages',
+      where: { and: [{ slug: { equals: slug } }, { _status: { equals: 'published' } }] },
+      limit: 1,
+      depth: 2,
+    })
+    return r.docs[0] ?? null
+  } catch (e) {
+    console.error('[queries.getB2BPageBySlug] failed:', e)
+    return null
+  }
+})
+
+export const getAllB2BSlugs = cache(
+  async (): Promise<Array<{ slug: string; updatedAt?: string }>> => {
+    try {
+      const payload = await payloadClient()
+      const r = await payload.find({
+        collection: 'b2b-pages',
+        where: { _status: { equals: 'published' } },
+        limit: 1000,
+        pagination: false,
+        select: { slug: true, updatedAt: true },
+      })
+      return r.docs.map((d) => ({
+        slug: (d as { slug: string }).slug,
+        updatedAt: (d as { updatedAt?: string }).updatedAt,
+      }))
+    } catch (e) {
+      console.error('[queries.getAllB2BSlugs] failed:', e)
+      return []
+    }
+  },
+)

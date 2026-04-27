@@ -7,14 +7,21 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 type Item = { name: string; href: string }
 
-export function Breadcrumbs({ items }: { items: Item[] }) {
+type BreadcrumbsProps = {
+  items: Item[]
+  variant?: 'default' | 'onPrimary'
+}
+
+export function Breadcrumbs({ items, variant = 'default' }: BreadcrumbsProps) {
   const schema = breadcrumbListSchema(
     items.map((it) => ({ name: it.name, url: `${SITE_URL}${it.href}` })),
   )
 
+  const navColor = variant === 'onPrimary' ? 'text-on-primary/80' : 'text-stone-600'
+
   return (
     <>
-      <nav aria-label="Хлебные крошки" className="mb-4 text-sm text-stone-600">
+      <nav aria-label="Хлебные крошки" className={`mb-4 text-sm ${navColor}`}>
         <ol className="flex flex-wrap gap-x-2">
           {items.map((it, i) => {
             const isLast = i === items.length - 1
