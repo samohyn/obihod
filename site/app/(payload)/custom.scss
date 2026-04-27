@@ -305,6 +305,64 @@ html[data-theme='dark'] {
 }
 
 /* ────────────────────────────────────────────────────────────────────
+ *  LOGIN SCREEN — карточка-форма 320px по brand-guide §12.1
+ *  - 320px max-width, white bg, padding 32px, radius 10, shadow sm
+ *  - submit button янтарный (Payload native uses .form-submit без --style-primary)
+ *  - autofill bg → paper
+ * ──────────────────────────────────────────────────────────────────── */
+.template-default.template-default--login,
+.payload__app .template-default--login,
+.login {
+  background-color: var(--brand-obihod-paper) !important;
+}
+
+.login__brand,
+.login__form,
+.payload__app .login form,
+.payload__app form.login__form {
+  max-width: 320px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.payload__app form.login__form,
+.payload__app .login form {
+  background-color: var(--brand-obihod-card);
+  border: 1px solid var(--brand-obihod-line);
+  border-radius: var(--brand-obihod-radius);
+  padding: 32px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* Submit button on login (Payload uses .form-submit btn class) */
+.payload__app form.login__form button[type='submit'],
+.payload__app .login form button[type='submit'],
+.payload__app .login__form .form-submit {
+  background-color: var(--brand-obihod-accent) !important;
+  border-color: var(--brand-obihod-accent) !important;
+  color: var(--brand-obihod-ink) !important;
+}
+.payload__app form.login__form button[type='submit']:hover:not([disabled]),
+.payload__app .login form button[type='submit']:hover:not([disabled]) {
+  background-color: var(--brand-obihod-accent-hover) !important;
+  border-color: var(--brand-obihod-accent-hover) !important;
+}
+
+/* Inputs autofill bg → paper (browser autofill blue → brand) */
+.payload__app input:-webkit-autofill,
+.payload__app input:-webkit-autofill:hover,
+.payload__app input:-webkit-autofill:focus,
+.payload__app input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--brand-obihod-paper) inset !important;
+  -webkit-text-fill-color: var(--brand-obihod-ink) !important;
+}
+
+.payload__app form.login__form input,
+.payload__app .login form input {
+  background-color: var(--brand-obihod-paper) !important;
+}
+
+/* ────────────────────────────────────────────────────────────────────
  *  REDUCED MOTION — отключаем transform-translate (motion.json guardrails)
  * ──────────────────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
