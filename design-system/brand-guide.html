@@ -2356,6 +2356,484 @@
     </table>
 
     <p class="muted" style="font-size: 13px; margin-top: 14px;">Override живёт в <code>site/app/(payload)/custom.scss</code> на <code>:root[data-theme='light']</code>. Тёмная тема — клон light до MVP-запуска.</p>
+
+    <h3 style="margin-top: 48px;">Admin v2 — финальные mockups <span class="badge badge-live" style="font-weight: 500;">2026-04-27 · US-12</span></h3>
+    <p class="lead">v1 (<a href="../devteam/specs/admin-visual/art-concept.md"><code>art-concept.md</code></a>) закрыл токены и группировку, но дефолтный Payload UI поверх остался. v2 (<a href="../devteam/specs/US-12-admin-redesign/art-concept-v2.md"><code>art-concept-v2.md</code></a>) добавляет 8 экранов: <strong>Login · Sidebar · Dashboard + Page Catalog · List · Edit (tabs) · Empty / Error / 403</strong>. Mood «Хозяйственная книга бригадира» из v1 сохраняется. Реализация — <code>fe1</code>+<code>be4</code> отдельным US после approval.</p>
+
+    <style>
+      .ad-mock {
+        border: 1px solid var(--c-line);
+        border-radius: var(--radius-lg);
+        background: #f7f5f0;
+        margin-top: 24px;
+        overflow: hidden;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+      .ad-mock-caption {
+        padding: 12px 20px;
+        background: var(--c-card);
+        border-bottom: 1px solid var(--c-line);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--c-muted);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .ad-mock-body { padding: 24px; min-height: 280px; }
+
+      /* Login mockup */
+      .ad-login { display: flex; flex-direction: column; align-items: center; padding: 60px 20px; gap: 32px; }
+      .ad-login-lockup { display: flex; flex-direction: column; gap: 8px; align-items: center; color: #1c1c1c; }
+      .ad-login-lockup .ad-logo-svg { display: block; height: 56px; width: auto; }
+      .ad-login-lockup .ad-tagline { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #2d5a3d; font-family: 'Inter', system-ui, sans-serif; }
+      .ad-login-card { background: #ffffff; border: 1px solid #e6e1d6; border-radius: 10px; padding: 32px; width: 320px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+      .ad-login-card label { display: block; font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #1c1c1c; margin-bottom: 6px; }
+      .ad-login-card input { width: 100%; padding: 9px 12px; font-size: 14px; font-family: 'Inter', sans-serif; color: #1c1c1c; background: #f7f5f0; border: 1px solid #e6e1d6; border-radius: 6px; box-sizing: border-box; }
+      .ad-login-card input:focus { outline: 2px solid #2d5a3d; outline-offset: -2px; }
+      .ad-login-card .ad-field { margin-bottom: 16px; }
+      .ad-login-card .ad-btn { display: block; width: 100%; padding: 11px; background: #e6a23c; color: #1c1c1c; border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; }
+      .ad-login-card .ad-link { display: block; margin-top: 16px; font-size: 13px; color: #2d5a3d; text-decoration: none; text-align: center; }
+      .ad-login-copy { font-size: 12px; color: #6b6256; }
+
+      /* Layout mockup */
+      .ad-layout { display: grid; grid-template-columns: 220px 1fr; min-height: 360px; background: #f7f5f0; }
+      .ad-sidebar { background: #efebe0; border-right: 1px solid #e6e1d6; padding: 16px 0; font-size: 13px; }
+      .ad-sidebar-brand { display: flex; align-items: center; gap: 8px; padding: 0 16px 16px; border-bottom: 1px solid #e6e1d6; margin-bottom: 12px; }
+      .ad-sidebar-brand-mark { width: 24px; height: 24px; border-radius: 5px; background: #2d5a3d; color: #f7f5f0; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+      .ad-sidebar-brand-text { font-weight: 600; color: #1c1c1c; letter-spacing: -0.01em; font-size: 14px; }
+      .ad-sidebar-group { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #6b6256; padding: 12px 16px 6px; }
+      .ad-sidebar-link { display: flex; align-items: center; justify-content: space-between; padding: 7px 16px; color: #2b2b2b; cursor: pointer; gap: 8px; }
+      .ad-sidebar-link:hover { background: #ffffff; }
+      .ad-sidebar-link.active { background: #2d5a3d; color: #f7f5f0; border-left: 3px solid #e6a23c; padding-left: 13px; }
+      .ad-sidebar-link .ad-link-text { display: inline-flex; align-items: center; gap: 9px; min-width: 0; }
+      .ad-sidebar-link .ad-link-icon { flex: 0 0 14px; width: 14px; height: 14px; opacity: 0.65; }
+      .ad-sidebar-link:hover .ad-link-icon { opacity: 0.9; color: #2d5a3d; }
+      .ad-sidebar-link.active .ad-link-icon { opacity: 1; color: #f7f5f0; }
+      .ad-sidebar-link .ad-counter { background: #f7f5f0; color: #1c1c1c; font-family: var(--font-mono); font-size: 11px; font-variant-numeric: tabular-nums; padding: 1px 7px; border-radius: 9px; flex: 0 0 auto; }
+      .ad-sidebar-link.active .ad-counter { background: rgba(247,245,240,0.2); color: #f7f5f0; }
+      .ad-canvas { padding: 0; display: flex; flex-direction: column; }
+      .ad-topbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; border-bottom: 1px solid #e6e1d6; background: #ffffff; }
+      .ad-breadcrumbs { font-size: 13px; color: #6b6256; }
+      .ad-breadcrumbs strong { color: #1c1c1c; font-weight: 500; }
+      .ad-search { width: 240px; padding: 7px 12px; font-size: 13px; background: #f7f5f0; border: 1px solid transparent; border-radius: 6px; color: #1c1c1c; }
+      .ad-profile { width: 28px; height: 28px; border-radius: 50%; background: #2d5a3d; color: #f7f5f0; display: inline-flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; }
+      .ad-main { padding: 28px 24px; flex: 1; }
+      .ad-h1 { font-size: 22px; font-weight: 600; color: #1c1c1c; margin: 0 0 24px; }
+
+      /* Dashboard mockup */
+      .ad-greeting { font-size: 18px; font-weight: 500; color: #1c1c1c; margin: 0 0 20px; }
+      .ad-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+      .ad-stat-card { background: #ffffff; border: 1px solid #e6e1d6; border-radius: 8px; padding: 14px 16px; }
+      .ad-stat-num { font-size: 26px; font-weight: 700; color: #2d5a3d; font-variant-numeric: tabular-nums; line-height: 1; }
+      .ad-stat-num.warn { color: #c18724; }
+      .ad-stat-label { font-size: 11px; color: #6b6256; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 6px; }
+      .ad-section-h { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #6b6256; margin: 24px 0 12px; display: flex; justify-content: space-between; align-items: baseline; }
+      .ad-section-h .ad-counter-text { color: #1c1c1c; font-weight: 500; }
+      .ad-tile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+      .ad-tile { background: #ffffff; border: 1px solid #e6e1d6; border-radius: 8px; padding: 14px; font-size: 13px; color: #1c1c1c; cursor: pointer; }
+      .ad-tile:hover { border-color: #2d5a3d; }
+      .ad-tile-title { font-weight: 600; margin-bottom: 4px; }
+      .ad-tile-desc { font-size: 12px; color: #6b6256; }
+
+      /* Page Catalog widget */
+      .ad-catalog { background: #ffffff; border: 1px solid #e6e1d6; border-radius: 8px; overflow: hidden; }
+      .ad-catalog-head { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #e6e1d6; background: #efebe0; }
+      .ad-catalog-head-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #1c1c1c; font-weight: 600; }
+      .ad-catalog-head-actions { display: flex; gap: 8px; }
+      .ad-mini-btn { padding: 4px 10px; font-size: 12px; background: #ffffff; border: 1px solid #e6e1d6; border-radius: 4px; color: #2b2b2b; cursor: pointer; }
+      .ad-cat-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+      .ad-cat-table th { text-align: left; padding: 10px 16px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #6b6256; font-weight: 500; background: #f7f5f0; border-bottom: 1px solid #e6e1d6; }
+      .ad-cat-table td { padding: 10px 16px; border-bottom: 1px solid #efebe0; vertical-align: middle; }
+      .ad-cat-table tr:last-child td { border-bottom: none; }
+      .ad-cat-table tr:hover td { background: #f7f5f0; }
+      .ad-cat-section { font-weight: 600; color: #1c1c1c; }
+      .ad-cat-url { font-family: var(--font-mono); font-size: 12px; color: #2b2b2b; font-variant-numeric: tabular-nums; }
+      .ad-cat-date { font-family: var(--font-mono); font-size: 12px; color: #6b6256; font-variant-numeric: tabular-nums; }
+      .ad-cat-status-live { color: #2d5a3d; font-weight: 600; }
+
+      /* Tabs pattern */
+      .ad-tabs { display: flex; gap: 4px; border-bottom: 1px solid #e6e1d6; margin-bottom: 20px; padding-bottom: 0; }
+      .ad-tab { padding: 8px 14px; font-size: 13px; color: #6b6256; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; position: relative; transition: color 0.12s ease, background 0.12s ease, border-color 0.12s ease; }
+      .ad-tab:hover, .ad-tab.is-hover { color: #2d5a3d; background: #f7f5f0; }
+      .ad-tab.active, .ad-tab.is-active { color: #1c1c1c; background: #ffffff; border-bottom-color: #2d5a3d; font-weight: 500; }
+      .ad-tab.is-focus { outline: 2px solid #2d5a3d; outline-offset: 2px; color: #1c1c1c; }
+      .ad-tab.is-pressed { color: #1c1c1c; background: #efebe0; border-bottom-color: #1f3f2b; font-weight: 500; }
+      .ad-tab.is-disabled { color: #b8b0a4; cursor: not-allowed; opacity: 0.6; pointer-events: none; }
+      .ad-tab.has-error::after { content: ''; position: absolute; right: 6px; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: #b54828; }
+      .ad-form-row { margin-bottom: 16px; }
+      .ad-form-label { display: block; font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #1c1c1c; margin-bottom: 4px; }
+      .ad-form-input { width: 100%; max-width: 360px; padding: 8px 12px; font-size: 14px; background: #ffffff; border: 1px solid #e6e1d6; border-radius: 6px; color: #1c1c1c; box-sizing: border-box; transition: border-color 0.12s ease, box-shadow 0.12s ease; }
+      .ad-form-input:hover, .ad-form-input.is-hover { border-color: #c4bdaf; }
+      .ad-form-input:focus, .ad-form-input.is-focus { outline: none; border-color: #2d5a3d; box-shadow: 0 0 0 3px rgba(45,90,61,0.15); }
+      .ad-form-input.is-disabled { background: #efebe0; color: #6b6256; cursor: not-allowed; border-color: #e6e1d6; }
+      .ad-form-input.is-error { border-color: #b54828; box-shadow: 0 0 0 3px rgba(181,72,40,0.12); }
+      .ad-form-help { font-size: 12px; color: #6b6256; margin-top: 4px; }
+      .ad-form-help.is-error { color: #b54828; }
+
+      /* Interaction-state palette grid */
+      .ad-states { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 14px; }
+      .ad-state-cell { background: #ffffff; border: 1px solid #e6e1d6; border-radius: 8px; padding: 18px 14px 14px; display: flex; flex-direction: column; gap: 10px; min-height: 88px; }
+      .ad-state-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #6b6256; }
+      .ad-state-cell.dark { background: #efebe0; }
+
+      /* Buttons (primary янтарный + secondary) — все состояния */
+      .ad-btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: 9px 18px; background: #e6a23c; color: #1c1c1c; border: 1px solid #e6a23c; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.12s ease, border-color 0.12s ease, transform 0.08s ease, box-shadow 0.12s ease; line-height: 1; }
+      .ad-btn-primary:hover, .ad-btn-primary.is-hover { background: #d99528; border-color: #d99528; }
+      .ad-btn-primary.is-pressed { background: #c18724; border-color: #c18724; transform: translateY(1px); }
+      .ad-btn-primary.is-focus { outline: none; box-shadow: 0 0 0 3px rgba(45,90,61,0.35); }
+      .ad-btn-primary.is-loading { background: #d99528; border-color: #d99528; cursor: progress; pointer-events: none; padding-left: 32px; position: relative; }
+      .ad-btn-primary.is-loading::before { content: ''; position: absolute; left: 14px; top: 50%; width: 12px; height: 12px; margin-top: -6px; border: 2px solid rgba(28,28,28,0.25); border-top-color: #1c1c1c; border-radius: 50%; animation: ad-spin 0.7s linear infinite; }
+      .ad-btn-primary.is-disabled { background: #efebe0; color: #b8b0a4; border-color: #e6e1d6; cursor: not-allowed; }
+      @keyframes ad-spin { to { transform: rotate(360deg); } }
+
+      .ad-btn-secondary { display: inline-flex; align-items: center; justify-content: center; padding: 9px 18px; background: transparent; color: #2d5a3d; border: 1px solid #e6e1d6; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease, box-shadow 0.12s ease; line-height: 1; }
+      .ad-btn-secondary:hover, .ad-btn-secondary.is-hover { background: #f7f5f0; border-color: #c4bdaf; color: #1f3f2b; }
+      .ad-btn-secondary.is-pressed { background: #efebe0; border-color: #c4bdaf; color: #1f3f2b; }
+      .ad-btn-secondary.is-focus { outline: none; box-shadow: 0 0 0 3px rgba(45,90,61,0.18); border-color: #2d5a3d; }
+      .ad-btn-secondary.is-disabled { color: #b8b0a4; border-color: #e6e1d6; cursor: not-allowed; }
+
+      /* Sidebar-link state demo */
+      .ad-state-sidebar-link { display: flex; align-items: center; justify-content: space-between; padding: 7px 12px; font-size: 13px; color: #2b2b2b; background: #efebe0; border-radius: 4px; gap: 8px; }
+      .ad-state-sidebar-link.is-hover { background: #ffffff; color: #1c1c1c; }
+      .ad-state-sidebar-link.is-active { background: #2d5a3d; color: #f7f5f0; border-left: 3px solid #e6a23c; padding-left: 9px; }
+      .ad-state-sidebar-link.is-focus { background: #efebe0; outline: 2px solid #2d5a3d; outline-offset: -2px; }
+      .ad-state-sidebar-link .mini-icon { width: 12px; height: 12px; flex: 0 0 12px; }
+      .ad-state-sidebar-link .mini-counter { background: #f7f5f0; color: #1c1c1c; font-family: var(--font-mono); font-size: 10px; padding: 1px 6px; border-radius: 8px; }
+      .ad-state-sidebar-link.is-active .mini-counter { background: rgba(247,245,240,0.2); color: #f7f5f0; }
+
+      /* Status badges */
+      .ad-badge { display: inline-block; padding: 3px 9px; border-radius: 10px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+      .ad-badge.publ { background: #2d5a3d; color: #f7f5f0; }
+      .ad-badge.draft { background: #e6a23c; color: #1c1c1c; }
+      .ad-badge.archive { background: #e6e1d6; color: #6b6256; }
+      .ad-badge.lead-new { background: #c18724; color: #f7f5f0; }
+
+      /* Empty / Error states */
+      .ad-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 24px; text-align: center; }
+      .ad-state-icon { width: 56px; height: 56px; color: #6b6256; opacity: 0.6; margin-bottom: 16px; }
+      .ad-state-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #6b6256; margin-bottom: 8px; }
+      .ad-state-title { font-size: 20px; font-weight: 600; color: #1c1c1c; margin: 0 0 8px; }
+      .ad-state-text { font-size: 13px; color: #2b2b2b; line-height: 1.5; max-width: 320px; margin: 0 0 20px; }
+      .ad-state-actions { display: flex; gap: 8px; }
+      .ad-state-actions .ad-btn { padding: 8px 14px; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid; text-decoration: none; }
+      .ad-state-actions .ad-btn.primary { background: #e6a23c; border-color: #e6a23c; color: #1c1c1c; }
+      .ad-state-actions .ad-btn.secondary { background: transparent; border-color: #e6e1d6; color: #2d5a3d; }
+
+      /* Bulk action bar */
+      .ad-bulk { background: #1c1c1c; color: #f7f5f0; padding: 10px 20px; border-radius: 6px; display: flex; gap: 12px; align-items: center; margin-top: 16px; }
+      .ad-bulk-count { font-family: var(--font-mono); font-size: 12px; padding: 3px 8px; background: rgba(255,255,255,0.12); border-radius: 4px; font-variant-numeric: tabular-nums; }
+      .ad-bulk-action { color: #f7f5f0; font-size: 13px; cursor: pointer; padding: 5px 10px; border-radius: 4px; }
+      .ad-bulk-action:hover { background: rgba(255,255,255,0.1); }
+      .ad-bulk-action.danger { color: #e6a23c; }
+      .ad-bulk-close { margin-left: auto; opacity: 0.5; cursor: pointer; }
+    </style>
+
+    <h3 style="margin-top: 36px;">12.1 · Login screen</h3>
+    <p class="muted" style="font-size: 13px;">Без картинок и градиентов: <strong>brand-lockup</strong> (<code>horizontal-compact.svg</code> — знак «Круг сезонов» + wordmark, без бренд-tagline «круг сезонов» — она не уместна в admin) + admin-tagline «порядок под ключ · admin» отдельной строкой + карточка-форма 320 px по центру. Кремовый фон <code>#f7f5f0</code>, белая карточка, primary-кнопка янтарная. Состояния (default / loading / error / success) — описаны в <a href="../devteam/specs/US-12-admin-redesign/art-concept-v2.md#1-login-screen-новое"><code>art-concept-v2 §1</code></a>.</p>
+
+    <div class="ad-mock">
+      <div class="ad-mock-caption"><span>obikhod.ru/admin/login</span><span>desktop · default</span></div>
+      <div class="ad-mock-body ad-login">
+        <div class="ad-login-lockup">
+          <img class="ad-logo-svg" src="../agents/brand/logo/horizontal-compact.svg" alt="Обиход" />
+          <span class="ad-tagline">порядок под ключ · admin</span>
+        </div>
+        <div class="ad-login-card">
+          <div class="ad-field">
+            <label>Email</label>
+            <input type="email" value="grigorij@obikhod.ru" readonly />
+          </div>
+          <div class="ad-field">
+            <label>Пароль</label>
+            <input type="password" value="••••••••" readonly />
+          </div>
+          <button class="ad-btn">Войти</button>
+          <a href="#" class="ad-link">Забыли пароль? →</a>
+        </div>
+        <div class="ad-login-copy">© 2026 · Обиход</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 36px;">12.2 · Layout — sidebar + top bar + canvas</h3>
+    <p class="muted" style="font-size: 13px;">Sidebar 220 px (collapsed 64 px), top bar 48 px, canvas — рабочая область. Active-link бренд-зелёный с янтарной полоской слева. Counter рядом с активной коллекцией. <strong>Каждый пункт меню получает ассоциативную иконку</strong> 14×14 line-art currentColor (унификация с brand-guide #icons): inbox (Заявки) · 4-square (Услуги, 4-в-1) · pin (Районы) · pin+grid (SD = район×услуга) · folder (Кейсы) · page (Блог) · person (Авторы) · 2-buildings (B2B) · image (Файлы) · globe+search (SEO) · arrows (Redirects) · frame (SiteChrome) · group (Users). Opacity 0.65 default → 1.0 active.</p>
+
+    <div class="ad-mock">
+      <div class="ad-mock-caption"><span>/admin · layout базовый</span><span>desktop · sidebar expanded</span></div>
+      <div class="ad-mock-body" style="padding: 0;">
+        <div class="ad-layout">
+          <div class="ad-sidebar">
+            <div class="ad-sidebar-brand">
+              <span class="ad-sidebar-brand-mark">О</span>
+              <span class="ad-sidebar-brand-text">Обиход</span>
+            </div>
+            <div class="ad-sidebar-group">01 · Заявки</div>
+            <div class="ad-sidebar-link"><span class="ad-link-text"><svg class="ad-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 L3 19 L21 19 L21 13 L16 13 L15 15 L9 15 L8 13 Z"/><path d="M12 3 L12 11"/><path d="M9 8 L12 11 L15 8"/></svg>Lead'ы</span><span class="ad-counter">12</span></div>
+            <div class="ad-sidebar-group">02 · Контент</div>
+            <div class="ad-sidebar-link active"><span class="ad-link-text"><svg class="ad-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1.2"/><rect x="13" y="3" width="8" height="8" rx="1.2"/><rect x="3" y="13" width="8" height="8" rx="1.2"/><rect x="13" y="13" width="8" height="8" rx="1.2"/></svg>Услуги</span><span class="ad-counter">4</span></div>
+            <div class="ad-sidebar-link"><span class="ad-link-text"><svg class="ad-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21 C 6 14, 6 9, 12 4 C 18 9, 18 14, 12 21 Z"/><circle cx="12" cy="11" r="2.6"/></svg>Районы</span><span class="ad-counter">8</span></div>
+            <div class="ad-sidebar-link"><span class="ad-link-text"><svg class="ad-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21 C 7 16, 7 11, 12 6 C 17 11, 17 16, 12 21 Z"/><path d="M9 12 L15 12"/><path d="M12 9 L12 15"/></svg>SD</span><span class="ad-counter">28</span></div>
+            <div class="ad-sidebar-link"><span class="ad-link-text"><svg class="ad-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7 L3 19 L21 19 L21 9 L13 9 L11 7 Z"/><path d="M3 11 L21 11"/><path d="M7 15 L17 15"/></svg>Кейсы</span><span class="ad-counter">4</span></div>
+            <div class="ad-sidebar-link"><span class="ad-link-text"><svg class="ad-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3 L19 3 L19 21 L5 21 Z"/><path d="M8 7 L16 7"/><path d="M8 11 L16 11"/><path d="M8 15 L13 15"/></svg>Блог</span><span class="ad-counter">5</span></div>
+            <div class="ad-sidebar-link"><span class="ad-link-text"><svg class="ad-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M4 21 C 4 15, 20 15, 20 21"/></svg>Авторы</span><span class="ad-counter">3</span></div>
+            <div class="ad-sidebar-link"><span class="ad-link-text"><svg class="ad-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21 L4 6 L12 6 L12 21"/><path d="M12 21 L12 10 L20 10 L20 21"/><path d="M3 21 L21 21"/><path d="M7 9 L9 9"/><path d="M7 13 L9 13"/><path d="M15 13 L17 13"/><path d="M15 17 L17 17"/></svg>B2B-страницы</span><span class="ad-counter">3</span></div>
+            <div class="ad-sidebar-group">03 · Медиа</div>
+            <div class="ad-sidebar-link"><span class="ad-link-text"><svg class="ad-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1.2"/><circle cx="8" cy="10" r="1.5" fill="currentColor"/><path d="M3 17 L9 12 L14 16 L18 13 L21 16"/></svg>Файлы</span><span class="ad-counter">87</span></div>
+            <div class="ad-sidebar-group">04 · SEO</div>
+            <div class="ad-sidebar-link"><span class="ad-link-text"><svg class="ad-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="M5 11 L17 11"/><path d="M11 5 C 8 8, 8 14, 11 17"/><path d="M11 5 C 14 8, 14 14, 11 17"/><path d="M15.5 15.5 L20 20"/></svg>SeoSettings</span></div>
+            <div class="ad-sidebar-link"><span class="ad-link-text"><svg class="ad-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8 L16 8"/><path d="M13 5 L16 8 L13 11"/><path d="M20 16 L8 16"/><path d="M11 13 L8 16 L11 19"/></svg>Redirects</span><span class="ad-counter">12</span></div>
+            <div class="ad-sidebar-group">05 · Рамка сайта</div>
+            <div class="ad-sidebar-link"><span class="ad-link-text"><svg class="ad-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.2"/><path d="M3 8 L21 8"/><circle cx="6" cy="6" r="0.6" fill="currentColor"/><circle cx="8" cy="6" r="0.6" fill="currentColor"/><path d="M6 12 L18 12" stroke-dasharray="2 1.5"/><path d="M6 16 L14 16" stroke-dasharray="2 1.5"/></svg>SiteChrome</span></div>
+            <div class="ad-sidebar-group">09 · Система</div>
+            <div class="ad-sidebar-link"><span class="ad-link-text"><svg class="ad-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3"/><path d="M3 19 C 3 14, 15 14, 15 19"/><circle cx="17" cy="10" r="2.4"/><path d="M14 19 C 14 16, 22 16, 22 19"/></svg>Users</span><span class="ad-counter">2</span></div>
+          </div>
+          <div class="ad-canvas">
+            <div class="ad-topbar">
+              <div class="ad-breadcrumbs">02 · Контент / <strong>Услуги</strong></div>
+              <input class="ad-search" placeholder="Найти услугу, район, кейс…" />
+              <div class="ad-profile">Г</div>
+            </div>
+            <div class="ad-main">
+              <h1 class="ad-h1">Услуги</h1>
+              <p style="color: #6b6256; font-size: 13px; margin: 0;">4 коллекции pillar — основа всего сайта.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 36px;">12.3 · Dashboard + Page Catalog widget <span class="badge badge-live" style="font-weight: 500;">запрос оператора</span></h3>
+    <p class="muted" style="font-size: 13px;">Greeting v1 (BeforeDashboard) + 4 stat-cards + 6 action-tiles + <strong>Page Catalog</strong> — таблица всех опубликованных страниц по разделам. Источник: REST aggregation 7 коллекций → server component <code>&lt;PageCatalog&gt;</code>. Кэш 60 с.</p>
+
+    <div class="ad-mock">
+      <div class="ad-mock-caption"><span>/admin (dashboard)</span><span>desktop · оператор Г.С.</span></div>
+      <div class="ad-mock-body" style="padding: 28px;">
+        <p class="ad-greeting">Здравствуйте, Георгий. Сегодня в обиходе:</p>
+
+        <div class="ad-stats">
+          <div class="ad-stat-card"><div class="ad-stat-num warn">3</div><div class="ad-stat-label">Новые заявки</div></div>
+          <div class="ad-stat-card"><div class="ad-stat-num">+1.2k</div><div class="ad-stat-label">Уник. за 7д</div></div>
+          <div class="ad-stat-card"><div class="ad-stat-num">53</div><div class="ad-stat-label">Публ. страниц</div></div>
+          <div class="ad-stat-card"><div class="ad-stat-num">0</div><div class="ad-stat-label">Ошибок CI</div></div>
+        </div>
+
+        <div class="ad-section-h"><span>Что делаем сегодня</span></div>
+        <div class="ad-tile-grid">
+          <div class="ad-tile"><div class="ad-tile-title">Принять заявку</div><div class="ad-tile-desc">3 новых ждут</div></div>
+          <div class="ad-tile"><div class="ad-tile-title">Обновить цену</div><div class="ad-tile-desc">в Услугах или SD</div></div>
+          <div class="ad-tile"><div class="ad-tile-title">Опубликовать кейс</div><div class="ad-tile-desc">в коллекции Cases</div></div>
+        </div>
+
+        <div class="ad-section-h"><span>Каталог опубликованных страниц <span class="ad-counter-text">53 шт.</span></span><span style="display: flex; gap: 6px;"><span class="ad-mini-btn">фильтр ▾</span><span class="ad-mini-btn">⇩ CSV</span></span></div>
+
+        <div class="ad-catalog">
+          <table class="ad-cat-table">
+            <thead><tr><th>Раздел</th><th>URL</th><th>Обновлено</th><th>Статус</th></tr></thead>
+            <tbody>
+              <tr><td class="ad-cat-section">Услуги <span style="color:#6b6256;font-weight:400;">(4)</span></td><td class="ad-cat-url">/vyvoz-musora/</td><td class="ad-cat-date">04-26</td><td><span class="ad-cat-status-live">✓ live</span></td></tr>
+              <tr><td></td><td class="ad-cat-url">/arboristika/</td><td class="ad-cat-date">04-25</td><td><span class="ad-cat-status-live">✓ live</span></td></tr>
+              <tr><td></td><td class="ad-cat-url">/chistka-krysh/</td><td class="ad-cat-date">04-25</td><td><span class="ad-cat-status-live">✓ live</span></td></tr>
+              <tr><td></td><td class="ad-cat-url">/demontazh/</td><td class="ad-cat-date">04-25</td><td><span class="ad-cat-status-live">✓ live</span></td></tr>
+              <tr><td class="ad-cat-section">Sub-services <span style="color:#6b6256;font-weight:400;">(7)</span></td><td class="ad-cat-url">/arboristika/spil-derevev/</td><td class="ad-cat-date">04-25</td><td><span class="ad-cat-status-live">✓ live</span></td></tr>
+              <tr><td class="ad-cat-section">Programmatic SD <span style="color:#6b6256;font-weight:400;">(28)</span></td><td class="ad-cat-url">/arboristika/odintsovo/</td><td class="ad-cat-date">04-27</td><td><span class="ad-cat-status-live">✓ live</span></td></tr>
+              <tr><td class="ad-cat-section">Кейсы <span style="color:#6b6256;font-weight:400;">(4)</span></td><td class="ad-cat-url">/kejsy/burja-2025-zhukovsky/</td><td class="ad-cat-date">04-27</td><td><span class="ad-cat-status-live">✓ live</span></td></tr>
+              <tr><td class="ad-cat-section">Блог <span style="color:#6b6256;font-weight:400;">(5)</span></td><td class="ad-cat-url">/blog/kogda-spilivat-derevya/</td><td class="ad-cat-date">04-25</td><td><span class="ad-cat-status-live">✓ live</span></td></tr>
+              <tr><td class="ad-cat-section">B2B <span style="color:#6b6256;font-weight:400;">(3)</span></td><td class="ad-cat-url">/b2b/uk-tszh/</td><td class="ad-cat-date">04-25</td><td><span class="ad-cat-status-live">✓ live</span></td></tr>
+              <tr><td class="ad-cat-section">Авторы <span style="color:#6b6256;font-weight:400;">(3)</span></td><td class="ad-cat-url">/avtory/grigorij-samohin/</td><td class="ad-cat-date">04-25</td><td><span class="ad-cat-status-live">✓ live</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 36px;">12.4 · Edit view с tabs (длинные формы)</h3>
+    <p class="muted" style="font-size: 13px;">SiteChrome 405 строк, Services 30 полей — не помещается в один скролл. Native Payload <code>Tabs field</code> + наш CSS = понятная анатомия. Ошибки валидации показывают красную точку справа от label tab.</p>
+
+    <div class="ad-mock">
+      <div class="ad-mock-caption"><span>/admin/collections/services/vyvoz-musora</span><span>edit · default</span></div>
+      <div class="ad-mock-body" style="padding: 24px;">
+        <div class="ad-breadcrumbs" style="margin-bottom: 16px;">02 · Контент / Услуги / <strong>Вывоз мусора</strong></div>
+
+        <div class="ad-tabs">
+          <div class="ad-tab active">Основные</div>
+          <div class="ad-tab">Контент</div>
+          <div class="ad-tab has-error">SEO</div>
+          <div class="ad-tab">Sub-services</div>
+          <div class="ad-tab">FAQ</div>
+          <div class="ad-tab">Превью</div>
+        </div>
+
+        <div class="ad-form-row">
+          <label class="ad-form-label">Slug</label>
+          <input class="ad-form-input" value="vyvoz-musora" />
+          <div class="ad-form-help">Latin, дефисы, без пробелов</div>
+        </div>
+        <div class="ad-form-row">
+          <label class="ad-form-label">Title (h1)</label>
+          <input class="ad-form-input" value="Вывоз мусора" />
+        </div>
+        <div class="ad-form-row">
+          <label class="ad-form-label">Цена за объект (₽)</label>
+          <input class="ad-form-input" value="12 800" style="font-family: var(--font-mono); font-variant-numeric: tabular-nums; max-width: 180px; display: inline-block;" />
+          <span style="color: #6b6256; font-size: 13px; margin-left: 8px;">за объект</span>
+        </div>
+        <div class="ad-form-row" style="display: flex; align-items: center; gap: 16px; padding-top: 16px; border-top: 1px solid #e6e1d6; margin-top: 24px;">
+          <span style="font-size: 13px; color: #6b6256;">Статус:</span>
+          <span class="ad-badge publ">Опубликован</span>
+          <button class="ad-btn primary" style="margin-left: auto; padding: 8px 16px; background: #e6a23c; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; color: #1c1c1c; cursor: pointer;">Сохранить</button>
+        </div>
+      </div>
+    </div>
+
+    <h4 style="margin-top: 28px;">12.4.1 · Interaction states palette</h4>
+    <p class="muted" style="font-size: 13px;">Все состояния интерактивных элементов admin — для <code>ui</code> spec и <code>fe1</code> реализации. Каждое состояние имеет фиксированный токен (bg / text / border / shadow). Транзишены 120 ms ease на color/bg/border, 80 ms на transform (pressed). <code>:focus-visible</code> обязателен для keyboard, <code>:focus</code> без visible — outline none (mouse).</p>
+
+    <h5 style="margin-top: 18px; font-size: 13px; font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: #6b6256;">Tabs · 6 состояний</h5>
+    <div class="ad-states">
+      <div class="ad-state-cell"><div class="ad-state-label">Default</div><div class="ad-tabs" style="margin: 0;"><div class="ad-tab">Основные</div></div></div>
+      <div class="ad-state-cell"><div class="ad-state-label">Hover</div><div class="ad-tabs" style="margin: 0;"><div class="ad-tab is-hover">Основные</div></div></div>
+      <div class="ad-state-cell"><div class="ad-state-label">Active (selected)</div><div class="ad-tabs" style="margin: 0;"><div class="ad-tab is-active">Основные</div></div></div>
+      <div class="ad-state-cell"><div class="ad-state-label">Pressed (mousedown)</div><div class="ad-tabs" style="margin: 0;"><div class="ad-tab is-pressed">Основные</div></div></div>
+      <div class="ad-state-cell"><div class="ad-state-label">Focus-visible</div><div class="ad-tabs" style="margin: 0;"><div class="ad-tab is-active is-focus">Основные</div></div></div>
+      <div class="ad-state-cell"><div class="ad-state-label">Has-error · disabled</div><div class="ad-tabs" style="margin: 0;"><div class="ad-tab has-error">SEO</div><div class="ad-tab is-disabled" style="margin-left: 4px;">Архив</div></div></div>
+    </div>
+    <p class="muted" style="font-size: 12px; margin-top: 10px;">Token map · default: <code>color #6b6256</code> · hover: <code>color #2d5a3d, bg #f7f5f0</code> · active: <code>color #1c1c1c, bg #ffffff, border-bottom 2px #2d5a3d, weight 500</code> · pressed: <code>bg #efebe0, border #1f3f2b</code> · focus-visible: <code>outline 2px #2d5a3d, offset 2px</code> · disabled: <code>color #b8b0a4, opacity 0.6, pointer-events none</code> · has-error: <code>::after dot 6×6 #b54828 справа от label</code>.</p>
+
+    <h5 style="margin-top: 24px; font-size: 13px; font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: #6b6256;">Inputs · 6 состояний</h5>
+    <div class="ad-states">
+      <div class="ad-state-cell"><div class="ad-state-label">Default (empty)</div><input class="ad-form-input" placeholder="vyvoz-musora" /></div>
+      <div class="ad-state-cell"><div class="ad-state-label">Hover</div><input class="ad-form-input is-hover" value="vyvoz-musora" /></div>
+      <div class="ad-state-cell"><div class="ad-state-label">Focus</div><input class="ad-form-input is-focus" value="vyvoz-musora" /></div>
+      <div class="ad-state-cell"><div class="ad-state-label">Filled (default + value)</div><input class="ad-form-input" value="vyvoz-musora" /></div>
+      <div class="ad-state-cell"><div class="ad-state-label">Disabled</div><input class="ad-form-input is-disabled" value="vyvoz-musora" disabled /></div>
+      <div class="ad-state-cell"><div class="ad-state-label">Error + message</div><input class="ad-form-input is-error" value="Vyvoz Musora!" /><div class="ad-form-help is-error">Только латиница, дефисы, без пробелов и заглавных</div></div>
+    </div>
+    <p class="muted" style="font-size: 12px; margin-top: 10px;">Token map · default: <code>bg #ffffff, border #e6e1d6</code> · hover: <code>border #c4bdaf</code> · focus: <code>border #2d5a3d, shadow 0 0 0 3px rgba(45,90,61,0.15)</code> · disabled: <code>bg #efebe0, color #6b6256, cursor not-allowed</code> · error: <code>border #b54828, shadow rgba(181,72,40,0.12), help-text #b54828</code>.</p>
+
+    <h5 style="margin-top: 24px; font-size: 13px; font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: #6b6256;">Buttons primary (янтарный) · 6 состояний</h5>
+    <div class="ad-states">
+      <div class="ad-state-cell"><div class="ad-state-label">Default</div><button class="ad-btn-primary">Сохранить</button></div>
+      <div class="ad-state-cell"><div class="ad-state-label">Hover</div><button class="ad-btn-primary is-hover">Сохранить</button></div>
+      <div class="ad-state-cell"><div class="ad-state-label">Pressed (mousedown)</div><button class="ad-btn-primary is-pressed">Сохранить</button></div>
+      <div class="ad-state-cell"><div class="ad-state-label">Focus-visible</div><button class="ad-btn-primary is-focus">Сохранить</button></div>
+      <div class="ad-state-cell"><div class="ad-state-label">Loading</div><button class="ad-btn-primary is-loading">Сохраняем</button></div>
+      <div class="ad-state-cell"><div class="ad-state-label">Disabled</div><button class="ad-btn-primary is-disabled" disabled>Сохранить</button></div>
+    </div>
+    <p class="muted" style="font-size: 12px; margin-top: 10px;">Token map · default: <code>bg #e6a23c, text #1c1c1c</code> · hover: <code>bg #d99528</code> (−5% L) · pressed: <code>bg #c18724, transform translateY(1px)</code> · focus: <code>shadow 0 0 0 3px rgba(45,90,61,0.35)</code> (зелёное кольцо вокруг янтарного) · loading: <code>bg hover-state + spinner 12×12 слева</code> · disabled: <code>bg #efebe0, text #b8b0a4</code>.</p>
+
+    <h5 style="margin-top: 24px; font-size: 13px; font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: #6b6256;">Buttons secondary (ghost) · 5 состояний</h5>
+    <div class="ad-states">
+      <div class="ad-state-cell"><div class="ad-state-label">Default</div><button class="ad-btn-secondary">Отмена</button></div>
+      <div class="ad-state-cell"><div class="ad-state-label">Hover</div><button class="ad-btn-secondary is-hover">Отмена</button></div>
+      <div class="ad-state-cell"><div class="ad-state-label">Pressed</div><button class="ad-btn-secondary is-pressed">Отмена</button></div>
+      <div class="ad-state-cell"><div class="ad-state-label">Focus-visible</div><button class="ad-btn-secondary is-focus">Отмена</button></div>
+      <div class="ad-state-cell"><div class="ad-state-label">Disabled</div><button class="ad-btn-secondary is-disabled" disabled>Отмена</button></div>
+    </div>
+
+    <h5 style="margin-top: 24px; font-size: 13px; font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: #6b6256;">Sidebar links · 4 состояния</h5>
+    <div class="ad-states">
+      <div class="ad-state-cell dark"><div class="ad-state-label">Default</div><div class="ad-state-sidebar-link"><span style="display:inline-flex;align-items:center;gap:8px;"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1.2"/><rect x="13" y="3" width="8" height="8" rx="1.2"/><rect x="3" y="13" width="8" height="8" rx="1.2"/><rect x="13" y="13" width="8" height="8" rx="1.2"/></svg>Услуги</span><span class="mini-counter">4</span></div></div>
+      <div class="ad-state-cell dark"><div class="ad-state-label">Hover</div><div class="ad-state-sidebar-link is-hover"><span style="display:inline-flex;align-items:center;gap:8px;"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1.2"/><rect x="13" y="3" width="8" height="8" rx="1.2"/><rect x="3" y="13" width="8" height="8" rx="1.2"/><rect x="13" y="13" width="8" height="8" rx="1.2"/></svg>Услуги</span><span class="mini-counter">4</span></div></div>
+      <div class="ad-state-cell dark"><div class="ad-state-label">Active (current)</div><div class="ad-state-sidebar-link is-active"><span style="display:inline-flex;align-items:center;gap:8px;"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1.2"/><rect x="13" y="3" width="8" height="8" rx="1.2"/><rect x="3" y="13" width="8" height="8" rx="1.2"/><rect x="13" y="13" width="8" height="8" rx="1.2"/></svg>Услуги</span><span class="mini-counter">4</span></div></div>
+      <div class="ad-state-cell dark"><div class="ad-state-label">Focus-visible</div><div class="ad-state-sidebar-link is-focus"><span style="display:inline-flex;align-items:center;gap:8px;"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1.2"/><rect x="13" y="3" width="8" height="8" rx="1.2"/><rect x="3" y="13" width="8" height="8" rx="1.2"/><rect x="13" y="13" width="8" height="8" rx="1.2"/></svg>Услуги</span><span class="mini-counter">4</span></div></div>
+    </div>
+    <p class="muted" style="font-size: 12px; margin-top: 10px;">Sidebar token map · default: <code>bg #efebe0, color #2b2b2b, icon opacity 0.65</code> · hover: <code>bg #ffffff, color #1c1c1c, icon opacity 0.9 #2d5a3d</code> · active: <code>bg #2d5a3d, color #f7f5f0, icon opacity 1.0, left-border 3px #e6a23c</code> · focus-visible: <code>outline 2px #2d5a3d offset -2px (внутри bg)</code>.</p>
+
+    <p class="muted" style="font-size: 12px; margin-top: 18px;"><strong>Чек-лист для <code>ui</code>+<code>fe1</code>:</strong> каждое состояние выше → отдельная строка в <code>component.spec.md §States</code> с token-set (bg / text / border / shadow / opacity / cursor) + указанием <code>:hover</code>, <code>:focus-visible</code>, <code>:active</code>, <code>[disabled]</code>, <code>[aria-busy]</code> или класса. Для <code>:focus-visible</code> — обязательно отдельный селектор (не <code>:focus</code>), чтобы mouse-юзер не видел outline после клика. Reduced-motion (<code>prefers-reduced-motion</code>) — отключаем transform-translate, оставляем opacity/color.</p>
+
+    <h3 style="margin-top: 36px;">12.5 · Status badges + Bulk action bar</h3>
+    <div style="display: flex; gap: 14px; align-items: center; margin: 16px 0; flex-wrap: wrap;">
+      <span class="ad-badge publ">Опубликован</span>
+      <span class="ad-badge draft">Черновик</span>
+      <span class="ad-badge archive">В архиве</span>
+      <span class="ad-badge lead-new">Новая заявка</span>
+    </div>
+
+    <div class="ad-mock">
+      <div class="ad-mock-caption"><span>list view · 3 строки выделены</span><span>bulk action bar — sticky bottom</span></div>
+      <div class="ad-mock-body" style="padding: 16px;">
+        <div class="ad-bulk">
+          <span class="ad-bulk-count">3 выбраны</span>
+          <span class="ad-bulk-action">Опубликовать</span>
+          <span class="ad-bulk-action">В архив</span>
+          <span class="ad-bulk-action danger">Удалить</span>
+          <span class="ad-bulk-close">×</span>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 36px;">12.6 · Empty / Error / 403 states</h3>
+    <p class="muted" style="font-size: 13px;">Те же принципы что в публичных error-pages из секции «11.5» — eyebrow с кодом + заголовок-человек + 1-2 CTA. Без «Упс! / Что-то пошло не так».</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 16px;">
+      <div class="ad-mock">
+        <div class="ad-mock-caption"><span>/admin/collections/cases</span><span>empty</span></div>
+        <div class="ad-mock-body ad-state">
+          <svg class="ad-state-icon" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 16 L8 48 L48 48 L48 22 L36 22 L32 16 Z"/>
+            <line x1="14" y1="32" x2="42" y2="32"/>
+          </svg>
+          <h3 class="ad-state-title">Кейсов пока нет</h3>
+          <p class="ad-state-text">Добавьте первый — он попадёт в каталог сайта и в виджет dashboard.</p>
+          <div class="ad-state-actions">
+            <a href="#" class="ad-btn primary">+ Добавить кейс</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-mock">
+        <div class="ad-mock-caption"><span>/admin/collections/services</span><span>500 server error</span></div>
+        <div class="ad-mock-body ad-state">
+          <svg class="ad-state-icon" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="8" y="22" width="14" height="14" rx="2"/>
+            <path d="M8 28 L22 28"/>
+            <path d="M22 27 L40 27"/>
+            <path d="M22 31 L40 31"/>
+            <path d="M40 27 C 46 27, 46 31, 40 31"/>
+            <path d="M30 35 L33 39 L36 35" stroke-dasharray="2 2"/>
+          </svg>
+          <span class="ad-state-eyebrow">SERVER ERROR · 500</span>
+          <h3 class="ad-state-title">Не удалось загрузить</h3>
+          <p class="ad-state-text">Скорее всего — временная проблема. Попробуйте обновить страницу через минуту.</p>
+          <div class="ad-state-actions">
+            <a href="#" class="ad-btn primary">Обновить</a>
+            <a href="#" class="ad-btn secondary">На дашборд</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-mock">
+        <div class="ad-mock-caption"><span>/admin/collections/users</span><span>403 access</span></div>
+        <div class="ad-mock-body ad-state">
+          <svg class="ad-state-icon" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="14" y="24" width="28" height="22" rx="2"/>
+            <path d="M20 24 L20 18 C 20 14, 24 10, 28 10 C 32 10, 36 14, 36 18 L36 24"/>
+            <circle cx="28" cy="34" r="2"/>
+            <path d="M28 36 L28 40"/>
+          </svg>
+          <span class="ad-state-eyebrow">ACCESS · 403</span>
+          <h3 class="ad-state-title">Нет доступа к коллекции</h3>
+          <p class="ad-state-text">Спросите у администратора — выдадут.</p>
+          <div class="ad-state-actions">
+            <a href="#" class="ad-btn secondary">На дашборд</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 36px;">Anti-patterns admin</h3>
+    <div class="dont-grid">
+      <div class="item"><b>Дефолтный фиолетовый Payload</b><p>Кремовый фон + зелёный primary убирают «CMS из коробки». Не оставляем `#9a5cf6`.</p></div>
+      <div class="item"><b>«Упс!» в server error</b><p>«SERVER ERROR · 500» eyebrow + заголовок-факт. Caregiver, не Apologist.</p></div>
+      <div class="item"><b>Длинный скролл формы &gt;15 полей</b><p>Tabs обязательны для SiteChrome (405 строк) и Services (30 полей). Не «всё на одном экране».</p></div>
+      <div class="item"><b>Spinner в загрузке</b><p>Skeleton-плейсхолдеры из «11 · Уведомления». Spinner = «работает на вас» вместо контекста.</p></div>
+      <div class="item"><b>Иконки Material/lucide на login</b><p>Login = lockup + форма. Никаких декоративных иконок «замок», «человечек», «облако».</p></div>
+      <div class="item"><b>Toast «Успешно сохранено!»</b><p>«Услуга „Вывоз мусора" сохранена» — matter-of-fact, конкретный объект. См. «11 · Уведомления» dont.</p></div>
+    </div>
+
+    <p class="muted" style="margin-top: 24px; font-size: 13px;">Spec для реализации — <a href="../devteam/specs/US-12-admin-redesign/art-concept-v2.md"><code>art-concept-v2.md</code></a> (10 разделов с anatomy + token-map). Реализация — <code>fe1</code>+<code>be4</code> через <a href="../devteam/specs/US-12-admin-redesign/art-brief-ui.md"><code>art-brief-ui.md</code></a> и <a href="../devteam/specs/US-12-admin-redesign/art-brief-cw.md"><code>art-brief-cw.md</code></a> (~10 человеко-дней). Live на <code>obikhod.ru/admin</code> после approval оператора.</p>
   </div>
 </section>
 
@@ -2490,6 +2968,8 @@
       <li style="opacity: 0.6;"><s><strong>«Дизайн ландшафта» — 5-е направление, flat-link</strong></s> — <span class="badge badge-live">✓ 2026-04-27</span> по запросу оператора. Один flat-link в навигации (после Магазина), отдельная страница «проект участка → посадка → смета». Подменю не нужно — направление монолитное. Иконки нет (flat-link без glyph). Mobile accordion — отдельная секция под 9 shop-категориями.</li>
       <li style="opacity: 0.6;"><s><strong>Error pages · 5 состояний (404/500/502/503/offline)</strong></s> — <span class="badge badge-live">✓ 2026-04-27</span> новая секция «11.5 · Страницы ошибок». 5 карточек с уникальной line-art иллюстрацией 96×96 (компас / пила-чихалка / разорванная цепь / табличка-перерыв / антенна без сигнала), eyebrow с HTTP-кодом, заголовок-человек, объяснение в TOV «бригадира», 1-2 CTA + fallback-канал. Карта файлов Next.js: <code>app/not-found.tsx</code> (404), <code>app/error.tsx</code> + <code>app/global-error.tsx</code> (500), nginx <code>/errors/502.html</code> + <code>503.html</code>. Принципы копирайта зафиксированы — финал тестов через <code>cw</code>, реализация — <code>ui</code>+<code>fe1</code>+<code>do</code> по art-brief.</li>
       <li style="opacity: 0.6;"><s><strong>Иконография — единый реестр всех 4 линеек</strong></s> — <span class="badge badge-live">✓ 2026-04-27</span> закрыли пробел: до этого только Service Icons имели визуальный каталог в section #icons, а District (9 landmark-иконок) и Case (9 topic-иконок) жили только в mega-menu Районы / Кейсы как inline SVG — формально иконки были, но без витрины-реестра. Теперь в section «08 · Иконография» все 4 линейки одной плиткой: 22 service + 9 shop + 9 district (Одинцово / Красногорск / Истра / Химки / Мытищи / Пушкино / Раменское / Жуковский / Москва) + 9 case (storm-cleanup / emergency-removal / urgent-roof / pruning-season / winter-prep / post-renovation / uk-contract / cottage-village / fm-contract) = 49 glyph'ов в едином формате. Заголовок секции переписан с «Service Icons» на «Иконография · 49 line-art glyph'ов». Это закрывает учение «расхождение brand-guide ↔ Header.tsx» (см. learnings.md) — теперь дизайн-система и есть полный source of truth.</li>
+      <li style="opacity: 0.6;"><s><strong>Admin Panel v2 — финальные mockups (US-12)</strong></s> — <span class="badge badge-live">✓ 2026-04-27 (вечер)</span> расширили секцию «12 · Паблик → Payload» 6 живыми mockups: <strong>Login screen</strong> (lockup + карточка-форма, без декоров), <strong>Layout</strong> (sidebar 220 px с группами 01·Заявки / 02·Контент / 03·Медиа / 04·SEO / 05·Рамка / 09·Система + top-bar с breadcrumbs + search + profile), <strong>Dashboard</strong> (greeting + 4 stat-cards + 6 action-tiles + <strong>Page Catalog widget</strong> — таблица 53 опубликованных страниц по разделам, запрос оператора), <strong>Edit view с Tabs</strong> (длинные формы SiteChrome 405 строк / Services 30 полей разбиваются на 4-6 tabs), <strong>Status badges</strong> (Опубликован / Черновик / В архиве / Новая заявка), <strong>Bulk action bar</strong>, <strong>Empty / 500 / 403 states</strong> в стиле error-pages 11.5. v1 art-concept (палитра+токены+группы) сохранён, v2 надстраивает финальный visual layer — реализация <code>fe1</code>+<code>be4</code> ~10 чд по 6 brief'ам в <code>devteam/specs/US-12-admin-redesign/</code>.</li>
+      <li style="opacity: 0.6;"><s><strong>Admin v1.8.1 — login lockup (SVG) + sidebar icons + interaction states palette</strong></s> — <span class="badge badge-live">✓ 2026-04-27 (поздний вечер)</span> 3 уточнения по запросу оператора: (1) <strong>Login screen</strong> — сырой текст «ОБИХОД» заменён на реальный SVG <code>horizontal-compact.svg</code> (знак «Круг сезонов» + wordmark) высотой 56 px, admin-tagline сохранена отдельной строкой; (2) <strong>Sidebar 14 пунктов</strong> получили ассоциативные line-icon 14×14 stroke 1.5 currentColor: inbox (Lead'ы) · 4-square (Услуги, метафора 4-в-1) · pin (Районы) · pin+crosshair (SD) · folder (Кейсы) · page (Блог) · person (Авторы) · 2-buildings (B2B) · image (Файлы) · globe+search (SEO) · arrows (Redirects) · frame (SiteChrome) · group (Users); opacity 0.65→0.9→1.0 по states; (3) новая подсекция <strong>«12.4.1 Interaction states palette»</strong> — все 5 групп интерактивных элементов admin (Tabs · Inputs · Buttons primary · Buttons secondary · Sidebar links) с визуальной демонстрацией каждого состояния (default / hover / active / pressed / focus-visible / loading / disabled / error) + token-map для каждого. Это закрывает пробел из первой версии где видны были только default+active+has-error. art-brief-ui.md и art-brief-ux.md обновлены — каждое spec теперь обязано содержать §States с матрицей токенов, ux усилен chek-листом state-walkthrough на каждый экран.</li>
       <li style="opacity: 0.6;"><s><strong>Header / MegaMenu prod-реализация</strong></s> — <span class="badge badge-live">✓ 2026-04-24</span> commits #23 sticky + dropdown nav, #24 меню под эталон brand-guide (плоские ссылки + CTA), #25 mega-menu 1:1 design-system spec — на prod через auto-deploy. Refresh продолжается параллельно (см. <code>site/components/marketing/Header.tsx</code>).</li>
       <li style="opacity: 0.6;"><s><strong>Favicon / OG / apple-touch-icon</strong></s> — <span class="badge badge-live">✓ готово</span> <code>site/app/icon.png</code> 32 + <code>apple-icon.png</code> 180 (Next.js 16 convention) + <code>agents/brand/logo/</code> icon-192/512/og-mark для PWA и OG.</li>
       <li style="opacity: 0.6;"><s><strong>Иконография сервисов</strong></s> — <span class="badge badge-live">✓ v0.9</span> 16 иконок в <a href="icons/services/README.md"><code>design-system/icons/services/</code></a>. Покрытие всех 4 кластеров + 3 УТП-бейджа.</li>
@@ -2539,7 +3019,7 @@
 
 <footer class="site">
   <div class="wrap">
-    <p>design-system/brand-guide.html · v1.7 · обновлён 2026-04-27 · единый вход в дизайн-систему Обихода · логотип «Круг сезонов» v1.0 · <strong>49 line-art иконок в едином реестре</strong>: 22 service v0.9 + 9 shop v0.1 + 9 district v0.9 + 9 case v0.9 + 5 error-state иллюстраций v0.1 · header-refresh (группы + dropdown + hamburger) · mega-menu live demo: Услуги + Районы + Кейсы + <strong>Магазин</strong> dropdowns + flat-link <strong>Дизайн ландшафта</strong> · pagination / notifications / <strong>error pages 404·500·502·503·offline</strong> live demo · foundations: icons / a11y / microcopy / photography / print-materials · patterns: programmatic-landing / og-image / b2b-pitch-deck · 15 component-spec'ов · IA расширена с 4 до <strong>6 направлений</strong> (CLAUDE.md immutable 2026-04-27)</p>
+    <p>design-system/brand-guide.html · <strong>v1.8.1</strong> · обновлён 2026-04-27 (поздний вечер) · единый вход в дизайн-систему Обихода · логотип «Круг сезонов» v1.0 · <strong>49 line-art иконок в едином реестре</strong>: 22 service v0.9 + 9 shop v0.1 + 9 district v0.9 + 9 case v0.9 + 5 error-state иллюстраций v0.1 + 13 admin-sidebar иконок · header-refresh (группы + dropdown + hamburger) · mega-menu live demo: Услуги + Районы + Кейсы + <strong>Магазин</strong> dropdowns + flat-link <strong>Дизайн ландшафта</strong> · pagination / notifications / <strong>error pages 404·500·502·503·offline</strong> live demo · foundations: icons / a11y / microcopy / photography / print-materials · patterns: programmatic-landing / og-image / b2b-pitch-deck · 15 component-spec'ов · IA расширена с 4 до <strong>6 направлений</strong> (CLAUDE.md immutable 2026-04-27) · <strong>Admin Panel v2 mockups</strong>: Login (с реальным SVG-lockup) + Layout (sidebar с иконками) + Dashboard с Page Catalog + Edit-tabs + <strong>Interaction states palette (5 групп × 4-7 состояний)</strong> + Status + Bulk + Empty/500/403 states (US-12)</p>
     <p>источники: <a href="../contex/03_brand_naming.md">contex/03_brand_naming.md</a> · <a href="../site/app/globals.css">site/app/globals.css</a> · <a href="README.md">design-system/README.md</a> · <a href="../devteam/art.md">devteam/art.md</a> · <a href="../devteam/specs/admin-visual/art-concept.md">admin-visual/art-concept.md</a></p>
   </div>
 </footer>
