@@ -84,8 +84,14 @@ test.describe('OBI-19 — Admin design compliance (Wave 1)', () => {
     }
     expect(toMs(motion.fast)).toBe(120)
     expect(toMs(motion.base)).toBe(200)
-    // cubic-bezier — игнорируем пробелы между аргументами для устойчивости.
-    expect(motion.ease.replace(/\s+/g, '')).toBe('cubic-bezier(0.4,0,0.2,1)')
+    // cubic-bezier — Chrome нормализует пробелы и стрипает leading zeros
+    // ("0.4" → ".4"). Сравниваем нормализованные строки на обеих сторонах.
+    const cssNorm = (v: string) =>
+      v
+        .replace(/\s+/g, '')
+        .replace(/(^|[^\d.])0\.(\d)/g, '$1.$2')
+        .toLowerCase()
+    expect(cssNorm(motion.ease)).toBe(cssNorm('cubic-bezier(0.4, 0, 0.2, 1)'))
 
     // 4. Shadow focus rings — design-system/tokens/shadow.json.
     // Chrome может нормализовать `rgba(...)` (пробелы, точность). Сравниваем
@@ -97,9 +103,8 @@ test.describe('OBI-19 — Admin design compliance (Wave 1)', () => {
         focusError: cs.getPropertyValue('--brand-obihod-shadow-focus-error').trim(),
       }
     })
-    const norm = (v: string) => v.replace(/\s+/g, '').toLowerCase()
-    expect(norm(shadow.focusPrimary)).toContain('rgba(45,90,61,0.15)')
-    expect(norm(shadow.focusError)).toContain('rgba(181,72,40,0.12)')
+    expect(cssNorm(shadow.focusPrimary)).toContain(cssNorm('rgba(45, 90, 61, 0.15)'))
+    expect(cssNorm(shadow.focusError)).toContain(cssNorm('rgba(181, 72, 40, 0.12)'))
 
     // 5. Шрифт — Golos Text (design-system/tokens/typography.json).
     const fontBody = await page.evaluate(() =>
