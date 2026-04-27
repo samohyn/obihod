@@ -1,5 +1,14 @@
+import type { Metadata } from 'next'
+
 import { SeasonCalendar } from '@/components/marketing/_shared/graphics'
 import { B2B } from '@/components/marketing/sections/B2B'
+import { canonicalFor } from '@/lib/seo/canonical'
+
+// US-7 audit fix: главная без canonical — добавляем self-canonical
+// чтобы избежать дубликатов при utm_*/?ref= параметрах.
+export const metadata: Metadata = {
+  alternates: { canonical: canonicalFor('/') },
+}
 import { Calculator } from '@/components/marketing/sections/Calculator'
 import { Cases } from '@/components/marketing/sections/Cases'
 import { CtaFooter } from '@/components/marketing/sections/CtaFooter'
