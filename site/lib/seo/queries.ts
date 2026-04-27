@@ -162,6 +162,65 @@ export const getAllCaseSlugs = cache(
   },
 )
 
+// ───────── Sub-services (US-6 wave 2B — /<service>/<sub>/) ─────────
+
+export type SubServiceParam = { service: string; sub: string }
+
+/**
+ * Все опубликованные sub-services из всех Services. Используется для
+ * generateStaticParams `[service]/[district]/page.tsx` и для расширения
+ * sitemap.ts. Возвращает только subs с заполненным intro/body — пустые
+ * заглушки не индексируются.
+ */
+export const getAllSubServiceParams = cache(async (): Promise<SubServiceParam[]> => {
+  try {
+    const payload = await payloadClient()
+    const r = await payload.find({
+      collection: 'services',
+      where: { _status: { equals: 'published' } },
+      limit: 100,
+      pagination: false,
+      depth: 0,
+    })
+    const out: SubServiceParam[] = []
+    for (const svc of r.docs as unknown as Array<{
+      slug?: string
+      subServices?: Array<{ slug?: string; intro?: string | null; body?: unknown }>
+    }>) {
+      const serviceSlug = svc.slug
+      if (!serviceSlug) continue
+      for (const sub of svc.subServices ?? []) {
+        if (!sub.slug) continue
+        // Только sub с реальным контентом — пустые-заглушки не публикуем
+        if (!sub.intro && !sub.body) continue
+        out.push({ service: serviceSlug, sub: sub.slug })
+      }
+    }
+    return out
+  } catch (e) {
+    console.error('[queries.getAllSubServiceParams] failed:', e)
+    return []
+  }
+})
+
+/**
+ * Получить sub-service внутри service по slug.
+ * Возвращает null если service не найден или sub нет.
+ */
+export const getSubServiceBySlug = cache(async (serviceSlug: string, subSlug: string) => {
+  try {
+    const service = await getServiceBySlug(serviceSlug)
+    if (!service) return null
+    const subs = (service as { subServices?: Array<{ slug?: string }> }).subServices ?? []
+    const sub = subs.find((s) => s.slug === subSlug)
+    if (!sub) return null
+    return { service, sub }
+  } catch (e) {
+    console.error('[queries.getSubServiceBySlug] failed:', e)
+    return null
+  }
+})
+
 // ───────── Authors (US-6 wave 2A — /avtory/) ─────────
 
 export const getPublishedAuthors = cache(async () => {

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 
 import { payloadClient } from '@/lib/payload'
+import { getAllSubServiceParams } from '@/lib/seo/queries'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -82,7 +83,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Прямой Payload-вызов (без unstable_cache wrapper) — чтобы избежать
   // проблем с serialization payloadClient внутри cached scope.
   // Кеширование sitemap делает сам Next 16 через revalidate=3600.
-  const [services, districts, serviceDistricts, cases, blogPosts, b2bPages, authors] =
+  const [services, districts, serviceDistricts, cases, blogPosts, b2bPages, authors, subServices] =
     await Promise.all([
       fetchServices(),
       fetchDistricts(),
@@ -91,6 +92,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       fetchPublishedBlog(),
       fetchPublishedB2B(),
       fetchPublishedAuthors(),
+      // US-6 wave 2B: sub-services с заполненным контентом (intro/body)
+      getAllSubServiceParams().catch(() => [] as Array<{ service: string; sub: string }>),
     ])
 
   const serviceEntries: Entry[] = services.map((slug) => ({
@@ -167,6 +170,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.4,
     }))
 
+  // US-6 wave 2B: sub-service URLs `/<service>/<sub>/`. priority 0.85 —
+  // выше programmatic district (0.7), ниже pillar (0.9-1.0). Это
+  // высокочастотный длинный хвост без географического риска
+  // duplicate-content.
+  const subServiceEntries: Entry[] = subServices.map((s) => ({
+    url: `${SITE_URL}/${s.service}/${s.sub}/`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.85,
+  }))
+
   return [
     ...staticEntries,
     ...serviceEntries,
@@ -176,6 +190,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...blogEntries,
     ...b2bEntries,
     ...authorEntries,
+    ...subServiceEntries,
   ]
 }
 

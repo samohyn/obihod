@@ -63,11 +63,36 @@ export const Services: CollectionConfig = {
       name: 'subServices',
       type: 'array',
       labels: { singular: 'Sub-услуга', plural: 'Sub-услуги' },
+      admin: {
+        description:
+          'Sub-услуги pillar-page. Каждая получает публичный URL /<service>/<slug>/. ' +
+          'Контент-поля (intro/body/meta) заполняются через CMS или REST API в Wave 2B/2C.',
+      },
       fields: [
         { name: 'slug', type: 'text', required: true },
         { name: 'title', type: 'text', required: true },
         { name: 'h1', type: 'text', required: true },
         { name: 'priceFrom', type: 'number' },
+        // ─── US-6 wave 2B: контент для отдельной страницы /<service>/<sub>/ ───
+        {
+          name: 'intro',
+          type: 'textarea',
+          maxLength: 280,
+          admin: {
+            description:
+              'Answer-first 2-3 предложения для GEO-выдачи. Появляется как lead-параграф на странице sub.',
+          },
+        },
+        {
+          name: 'body',
+          type: 'richText',
+          admin: {
+            description:
+              'Полный контент sub-услуги ~600-800 слов: что включает, цены, документы, для кого, кейсы.',
+          },
+        },
+        { name: 'metaTitle', type: 'text', maxLength: 60 },
+        { name: 'metaDescription', type: 'textarea', maxLength: 160 },
       ],
     },
     {

@@ -17,24 +17,44 @@ import {
   serviceSchema,
 } from '@/lib/seo/jsonld'
 import {
+  getAllSubServiceParams,
   getDistrictBySlug,
   getPublishedServiceDistricts,
   getSeoSettings,
   getServiceBySlug,
   getServiceDistrict,
+  getSubServiceBySlug,
 } from '@/lib/seo/queries'
+import { canonicalFor } from '@/lib/seo/canonical'
+import { SubServiceView } from './SubServiceView'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 export const revalidate = 43200
 export const dynamicParams = true
 
+/**
+ * Этот route обслуживает ДВА типа URL под одним dynamic-segment:
+ *  - `/<service>/<district>/` — programmatic service × district (existing)
+ *  - `/<service>/<sub>/` — sub-service внутри pillar (US-6 wave 2B)
+ *
+ * Detection runtime: сначала проверяем sub-service в Service.subServices,
+ * если найден и имеет контент (intro/body) → render SubServiceView.
+ * Иначе fall-through на programmatic district логику.
+ *
+ * Конфликт имён нечего бояться: slug-spaces разные (sub-services транслит
+ * "spil-derevev" vs districts "ramenskoye"). Если случится коллизия — sub
+ * winner потому что у него явный intent (явно опубликован контент).
+ */
 export async function generateStaticParams() {
-  const sds = await getPublishedServiceDistricts()
-  return sds.map((sd: any) => ({
+  const [sds, subs] = await Promise.all([getPublishedServiceDistricts(), getAllSubServiceParams()])
+  const districtParams = sds.map((sd: any) => ({
     service: sd.service?.slug ?? '',
     district: sd.district?.slug ?? '',
   }))
+  // sub-services как тот же `district` параметр (имя сегмента)
+  const subParams = subs.map((s) => ({ service: s.service, district: s.sub }))
+  return [...districtParams, ...subParams]
 }
 
 export async function generateMetadata({
@@ -42,7 +62,42 @@ export async function generateMetadata({
 }: {
   params: Promise<{ service: string; district: string }>
 }): Promise<Metadata> {
-  const { service: serviceSlug, district: districtSlug } = await params
+  const { service: serviceSlug, district: secondarySlug } = await params
+
+  // 1) Sub-service detection
+  const subResult = await getSubServiceBySlug(serviceSlug, secondarySlug)
+  if (subResult) {
+    const { service, sub } = subResult as unknown as {
+      service: { slug: string; metaDescription?: string }
+      sub: {
+        slug: string
+        title: string
+        h1: string
+        intro?: string | null
+        body?: unknown
+        metaTitle?: string | null
+        metaDescription?: string | null
+      }
+    }
+    if (sub.intro || sub.body) {
+      return {
+        title: { absolute: sub.metaTitle ?? sub.h1 },
+        description: sub.metaDescription ?? sub.intro ?? service.metaDescription,
+        alternates: { canonical: canonicalFor(`/${service.slug}/${sub.slug}/`) },
+        openGraph: {
+          type: 'article',
+          locale: 'ru_RU',
+          url: `/${service.slug}/${sub.slug}/`,
+          title: sub.h1,
+          description: sub.intro ?? sub.metaDescription ?? undefined,
+        },
+        robots: { index: true, follow: true },
+      }
+    }
+  }
+
+  // 2) Programmatic district fallback (existing logic)
+  const districtSlug = secondarySlug
   const [service, district, sd] = await Promise.all([
     getServiceBySlug(serviceSlug),
     getDistrictBySlug(districtSlug),
@@ -65,7 +120,22 @@ export default async function ProgrammaticPage({
 }: {
   params: Promise<{ service: string; district: string }>
 }) {
-  const { service: serviceSlug, district: districtSlug } = await params
+  const { service: serviceSlug, district: secondarySlug } = await params
+
+  // 1) Sub-service detection — приоритет над district
+  const subResult = await getSubServiceBySlug(serviceSlug, secondarySlug)
+  if (subResult) {
+    const { service, sub } = subResult as {
+      service: any
+      sub: any
+    }
+    if (sub.intro || sub.body) {
+      return <SubServiceView service={service} sub={sub} />
+    }
+  }
+
+  // 2) Programmatic district (existing path)
+  const districtSlug = secondarySlug
   const [service, district, sd, chrome, seo] = await Promise.all([
     getServiceBySlug(serviceSlug),
     getDistrictBySlug(districtSlug),
