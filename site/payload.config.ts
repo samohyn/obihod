@@ -37,6 +37,7 @@ export default buildConfig({
         Icon: '@/components/admin/BrandIcon',
       },
       beforeDashboard: ['@/components/admin/BeforeDashboardStartHere'],
+      afterDashboard: ['@/components/admin/PageCatalog'],
       beforeLogin: ['@/components/admin/BeforeLoginLockup'],
     },
   },
