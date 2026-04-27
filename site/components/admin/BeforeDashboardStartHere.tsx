@@ -100,18 +100,18 @@ function formatRelative(iso: string): string {
 
 const wrapStyle: CSSProperties = {
   padding: '24px 32px',
-  fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+  fontFamily: 'var(--font-body)',
   color: 'var(--brand-obihod-ink, #1c1c1c)',
   display: 'flex',
   flexDirection: 'column',
   gap: 32,
-  background: 'var(--brand-obihod-bg, #f7f5f0)',
+  background: 'var(--brand-obihod-paper, #f7f5f0)',
 }
 
 const greetingStyle: CSSProperties = {
   background: 'var(--brand-obihod-card, #ffffff)',
   border: '1px solid var(--brand-obihod-line, #e6e1d6)',
-  borderRadius: 12,
+  borderRadius: 'var(--brand-obihod-radius, 10px)',
   padding: '24px 32px',
   display: 'flex',
   flexDirection: 'column',
@@ -153,7 +153,7 @@ const tileGridStyle: CSSProperties = {
 const widgetStyle: CSSProperties = {
   background: 'var(--brand-obihod-card, #ffffff)',
   border: '1px solid var(--brand-obihod-line, #e6e1d6)',
-  borderRadius: 12,
+  borderRadius: 'var(--brand-obihod-radius, 10px)',
   padding: 20,
   display: 'flex',
   flexDirection: 'column',
@@ -170,7 +170,7 @@ const rowStyle: CSSProperties = {
   alignItems: 'center',
   textDecoration: 'none',
   color: 'inherit',
-  borderRadius: 6,
+  borderRadius: 'var(--brand-obihod-radius-sm, 6px)',
 }
 
 export const BeforeDashboardStartHere: FC = async () => {
@@ -260,7 +260,7 @@ export const BeforeDashboardStartHere: FC = async () => {
                   letterSpacing: '0.08em',
                   textTransform: 'uppercase',
                   color: 'var(--brand-obihod-primary, #2d5a3d)',
-                  fontFamily: "'JetBrains Mono', ui-monospace, SFMono-Regular, monospace",
+                  fontFamily: 'var(--font-mono)',
                 }}
               >
                 {r.collectionLabel}
@@ -270,7 +270,7 @@ export const BeforeDashboardStartHere: FC = async () => {
                 style={{
                   fontSize: 12,
                   color: 'var(--brand-obihod-muted, #6b6256)',
-                  fontFamily: "'JetBrains Mono', ui-monospace, SFMono-Regular, monospace",
+                  fontFamily: 'var(--font-mono)',
                 }}
               >
                 {formatRelative(r.updatedAt)}
