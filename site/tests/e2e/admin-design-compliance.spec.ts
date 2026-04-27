@@ -122,6 +122,16 @@ test.describe('OBI-19 — Admin design compliance (Wave 1)', () => {
       test.skip(true, `Admin не отвечает (status=${resp?.status()}) — пропуск`)
     }
 
+    // Payload без users (ephemeral CI postgres) → redirect на /admin/create-first-user.
+    // beforeLogin рендерится только на /admin/login. Пропускаем тест если не на login.
+    const url = page.url()
+    if (!url.includes('/admin/login')) {
+      test.skip(
+        true,
+        `Admin redirected to ${url} (likely create-first-user) — beforeLogin slot не виден`,
+      )
+    }
+
     // BeforeLoginLockup рендерит eyebrow «obikhod.ru · admin» + h1 «Порядок под ключ»
     // через admin.components.beforeLogin slot — над native Payload login form.
     await expect(page.getByText('obikhod.ru · admin', { exact: true })).toBeVisible()
