@@ -1,6 +1,7 @@
 import type { CSSProperties, FC } from 'react'
 
 import { payloadClient } from '@/lib/payload'
+import { EmptyState } from './EmptyErrorStates'
 
 /**
  * PageCatalog — каталог опубликованных страниц на dashboard /admin.
@@ -32,6 +33,7 @@ interface CatalogGroup {
   label: string
   count: number
   items: CatalogItem[]
+  collectionSlug: string
 }
 
 const wrapStyle: CSSProperties = {
@@ -197,7 +199,7 @@ async function loadCatalog(): Promise<{ groups: CatalogGroup[]; total: number }>
         }
 
         if (items.length > 0) {
-          groups.push({ label: q.label, count: items.length, items })
+          groups.push({ label: q.label, count: items.length, items, collectionSlug: q.slug })
           total += items.length
         }
       } catch {
@@ -228,38 +230,65 @@ export const PageCatalog: FC = async () => {
             <th style={thStyle}>URL</th>
             <th style={thStyle}>Обновлено</th>
             <th style={thStyle}>Статус</th>
+            <th style={thStyle} aria-hidden="true">
+              {' '}
+            </th>
           </tr>
         </thead>
         <tbody>
           {groups.length === 0 ? (
             <tr>
-              <td colSpan={4} style={emptyStyle}>
-                Пока нет опубликованных страниц. Откройте коллекцию и опубликуйте первую запись.
+              <td colSpan={5} style={emptyStyle}>
+                <EmptyState
+                  title="Пока нет опубликованных страниц"
+                  text="Откройте коллекцию и опубликуйте первую запись — она появится здесь и в каталоге сайта."
+                  actionLabel="Открыть Услуги"
+                  actionHref="/admin/collections/services"
+                />
               </td>
             </tr>
           ) : (
             groups.flatMap((group) =>
-              group.items.map((item, idx) => (
-                <tr key={`${group.label}-${item.id}`}>
-                  <td style={tdStyle}>
-                    {idx === 0 ? (
-                      <span style={sectionLabelStyle}>
-                        {group.label}{' '}
-                        <span
-                          style={{ color: 'var(--brand-obihod-muted, #6b6256)', fontWeight: 400 }}
-                        >
-                          ({group.count})
+              group.items.map((item, idx) => {
+                const editHref = `/admin/collections/${group.collectionSlug}/${item.id}`
+                return (
+                  <tr key={`${group.label}-${item.id}`}>
+                    <td style={tdStyle}>
+                      {idx === 0 ? (
+                        <span style={sectionLabelStyle}>
+                          {group.label}{' '}
+                          <span
+                            style={{
+                              color: 'var(--brand-obihod-muted, #6b6256)',
+                              fontWeight: 400,
+                            }}
+                          >
+                            ({group.count})
+                          </span>
                         </span>
-                      </span>
-                    ) : null}
-                  </td>
-                  <td style={{ ...tdStyle, ...urlStyle }}>{item.url}</td>
-                  <td style={{ ...tdStyle, ...dateStyle }}>{formatDate(item.updatedAt)}</td>
-                  <td style={tdStyle}>
-                    <span style={statusLiveStyle}>✓ live</span>
-                  </td>
-                </tr>
-              )),
+                      ) : null}
+                    </td>
+                    <td style={{ ...tdStyle, ...urlStyle }}>{item.url}</td>
+                    <td style={{ ...tdStyle, ...dateStyle }}>{formatDate(item.updatedAt)}</td>
+                    <td style={tdStyle}>
+                      <span style={statusLiveStyle}>✓ live</span>
+                    </td>
+                    <td style={{ ...tdStyle, textAlign: 'right' }}>
+                      <a
+                        href={editHref}
+                        style={{
+                          color: 'var(--brand-obihod-primary, #2d5a3d)',
+                          textDecoration: 'none',
+                          fontWeight: 600,
+                        }}
+                        aria-label={`Открыть «${item.title}» в редакторе`}
+                      >
+                        →
+                      </a>
+                    </td>
+                  </tr>
+                )
+              }),
             )
           )}
         </tbody>

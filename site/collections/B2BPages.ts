@@ -11,40 +11,64 @@ export const B2BPages: CollectionConfig = {
   },
   versions: { drafts: true },
   access: { read: () => true },
+  // OBI-24 admin §12.4 — UI tabs grouping.
   fields: [
-    { name: 'slug', type: 'text', required: true, unique: true, index: true },
-    { name: 'title', type: 'text', required: true },
-    { name: 'h1', type: 'text', required: true },
-    { name: 'metaTitle', type: 'text', maxLength: 60 },
-    { name: 'metaDescription', type: 'textarea', maxLength: 160 },
     {
-      name: 'audience',
-      type: 'select',
-      required: true,
-      options: [
-        { label: 'Управляющие компании', value: 'uk' },
-        { label: 'ТСЖ', value: 'tszh' },
-        { label: 'Facility Management', value: 'fm' },
-        { label: 'Застройщики', value: 'zastroyshchik' },
-        { label: 'Госзакупки 44/223-ФЗ', value: 'gostorgi' },
+      type: 'tabs',
+      tabs: [
+        {
+          label: 'Основные',
+          description: 'Slug, заголовок, целевая аудитория.',
+          fields: [
+            { name: 'slug', type: 'text', required: true, unique: true, index: true },
+            { name: 'title', type: 'text', required: true },
+            { name: 'h1', type: 'text', required: true },
+            {
+              name: 'audience',
+              type: 'select',
+              required: true,
+              options: [
+                { label: 'Управляющие компании', value: 'uk' },
+                { label: 'ТСЖ', value: 'tszh' },
+                { label: 'Facility Management', value: 'fm' },
+                { label: 'Застройщики', value: 'zastroyshchik' },
+                { label: 'Госзакупки 44/223-ФЗ', value: 'gostorgi' },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Контент',
+          description: 'Тело страницы, кейсы, форма, договорные оферты.',
+          fields: [
+            { name: 'body', type: 'richText', required: true },
+            {
+              name: 'casesShowcase',
+              type: 'relationship',
+              relationTo: 'cases',
+              hasMany: true,
+            },
+            { name: 'formConfig', type: 'json' },
+            { name: 'contractTemplateUrl', type: 'text' },
+            {
+              name: 'krishaShtraf',
+              type: 'checkbox',
+              defaultValue: true,
+              admin: { description: '«Штрафы ГЖИ берём на себя по договору»' },
+            },
+          ],
+        },
+        {
+          label: 'SEO',
+          description: 'Meta-теги для поисковиков.',
+          fields: [
+            { name: 'metaTitle', type: 'text', maxLength: 60 },
+            { name: 'metaDescription', type: 'textarea', maxLength: 160 },
+          ],
+        },
       ],
     },
-    { name: 'body', type: 'richText', required: true },
-    {
-      name: 'casesShowcase',
-      type: 'relationship',
-      relationTo: 'cases',
-      hasMany: true,
-    },
-    { name: 'formConfig', type: 'json' },
-    { name: 'contractTemplateUrl', type: 'text' },
-    {
-      name: 'krishaShtraf',
-      type: 'checkbox',
-      defaultValue: true,
-      admin: { description: '«Штрафы ГЖИ берём на себя по договору»' },
-    },
-    // ─── SEO override (US-5 REQ-5.7 follow-up) ───
+    // ─── SEO override (sidebar, вне tabs) ───
     {
       name: 'canonicalOverride',
       type: 'text',

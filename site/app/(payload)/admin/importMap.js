@@ -27,6 +27,7 @@ import BrandIcon_us3 from '@/components/admin/BrandIcon'
 import BeforeDashboardStartHere_us3 from '@/components/admin/BeforeDashboardStartHere'
 import BeforeLoginLockup_us3 from '@/components/admin/BeforeLoginLockup'
 import PageCatalog_us3 from '@/components/admin/PageCatalog'
+import AfterLoginFooter_us3 from '@/components/admin/AfterLoginFooter'
 
 /** @type import('payload').ImportMap */
 export const importMap = {
@@ -87,4 +88,6 @@ export const importMap = {
   '@/components/admin/BeforeLoginLockup#default': BeforeLoginLockup_us3,
   '@/components/admin/PageCatalog': PageCatalog_us3,
   '@/components/admin/PageCatalog#default': PageCatalog_us3,
+  '@/components/admin/AfterLoginFooter': AfterLoginFooter_us3,
+  '@/components/admin/AfterLoginFooter#default': AfterLoginFooter_us3,
 }
