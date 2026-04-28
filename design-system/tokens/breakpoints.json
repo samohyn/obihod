@@ -1,6 +1,6 @@
 {
   "$schema": "https://tokens.studio/schema.json",
-  "$source": "site/app/globals.css (фактические @media) + devteam/ui.md §2 (заявленные)",
+  "$source": "site/app/globals.css (фактические @media) + team/ui.md §2 (заявленные)",
   "$note": "ВАЖНО: сейчас есть расхождение между кодом и ui.md. Код использует 768/1024/1200. ui.md заявляет 360/390/414/430/768/834/1024/1280/1440/1920/2560. Источник истины — этот файл. При расхождении правим globals.css или ui.md, не добавляем новые.",
   "breakpoint": {
     "mobile-sm": { "value": "360px", "description": "Android legacy minimum. Контент должен работать, не проваливая горизонт-скролл" },

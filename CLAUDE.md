@@ -53,14 +53,18 @@
 
 ```
 obikhod/
-├── devteam/         # 28 ролевых AI-агентов + WORKFLOW + PROJECT_CONTEXT
+├── team/         # 29 ролевых AI-агентов в 5 функциональных группах + WORKFLOW + PROJECT_CONTEXT
 │   ├── PROJECT_CONTEXT.md   # единый контекст для всех агентов
 │   ├── WORKFLOW.md          # пайплайн задачи intake → release
 │   ├── README — legend.md   # легенда команды (от оператора)
-│   ├── <code>.md            # 28 агентов: in, ba, po, sa, tamd, art, ux, ui,
-│   │                        #   fe1, fe2, be1, be2, be3, be4, cr, qa1, qa2,
-│   │                        #   cw, seo1, seo2, lp, aemd, da, pa, do, re,
-│   │                        #   dba, out
+│   ├── business/   # in, ba, po, re — intake, BA, product owner, research
+│   ├── product/    # sa, aemd, fe1, fe2, be1, be2, be3, be4, cr, qa1, qa2,
+│   │               #   da, pa, lp — разработка и QA
+│   ├── design/     # art, ui, ux
+│   ├── seo/        # seo1, seo2, cw, cms — SEO, копирайт, CMS-оператор
+│   ├── common/     # tamd, dba, do, out — архитектура, БД, DevOps, outreach
+│   ├── shop/       # отдельная команда apps/shop (пока пусто)
+│   ├── panel/      # пусто (зарезервировано)
 │   ├── specs/US-<N>-<slug>/ # intake.md, ba.md, sa.md, qa.md, cr.md, out.md
 │   ├── adr/ADR-<N>-<slug>.md
 │   └── release-notes/US-<N>-<slug>.md
@@ -74,11 +78,12 @@ obikhod/
 **Правила файлов:**
 - Новые стратегические артефакты → в `contex/` с номером `05_…`, `06_…` по порядку
 - Не переименовываем `contex/` → `context/` пока оператор явно не попросит
-- Команда проекта живёт в [devteam/](devteam/) — 28 ролей, адаптированных под
+- Команда проекта живёт в [team/](team/) — 29 ролей в 5 функциональных
+  группах (business / product / design / seo / common), адаптированных под
   домен Обихода. Единый контекст для агентов — в
-  [devteam/PROJECT_CONTEXT.md](devteam/PROJECT_CONTEXT.md). Пайплайн — в
-  [devteam/WORKFLOW.md](devteam/WORKFLOW.md). Исходная легенда от оператора —
-  в [devteam/README — legend.md](devteam/README%20%E2%80%94%20legend.md).
+  [team/PROJECT_CONTEXT.md](team/PROJECT_CONTEXT.md). Пайплайн — в
+  [team/WORKFLOW.md](team/WORKFLOW.md). Исходная легенда от оператора —
+  в [team/README — legend.md](team/README%20%E2%80%94%20legend.md).
 - Устаревшее правило «agents/ удалён, не восстанавливать» снято 2026-04-22 после
   адаптации команды под Обиход из легенды
 
@@ -106,17 +111,22 @@ obikhod/
 
 ## Агенты проекта
 
-Команда — 28 ролей в [devteam/](devteam/), все на `opus-4-6` с
-`reasoning_effort: max`. Hand-off, RACI, Linear-интеграция (workspace `samohyn`,
-team key **OBI**) — в [devteam/WORKFLOW.md](devteam/WORKFLOW.md). Единый контекст
-проекта — в [devteam/PROJECT_CONTEXT.md](devteam/PROJECT_CONTEXT.md) (все агенты
-ссылаются на него вместо дублирования).
+Команда — 29 ролей в [team/](team/), сгруппированных по 5 функциональным
+областям (`business/`, `product/`, `design/`, `seo/`, `common/`). Все на
+`opus-4-6` с `reasoning_effort: max`. Hand-off, RACI, Linear-интеграция
+(workspace `samohyn`, team key **OBI**) — в [team/WORKFLOW.md](team/WORKFLOW.md).
+Единый контекст проекта — в [team/PROJECT_CONTEXT.md](team/PROJECT_CONTEXT.md)
+(все агенты ссылаются на него вместо дублирования).
 
 **Вход для оператора — всегда `in`.** Оператор не пишет напрямую `ba`/`po`/`fe`.
 
 **Параллель по коду:** 2 фронта (fe1, fe2), 2 бэка TypeScript (be3, be4), 2 Go-бэка
 в резерве (be1, be2 — активируются по ADR от `tamd`), 2 QA (qa1, qa2). `po`
 распределяет, параллель по одной задаче явно согласовывает с оператором.
+
+**Контент в админке** ведёт `cms` (seo/) — операционные publish/update/bulk через
+CLI скрипты `site/scripts/admin/`, аудит — в `team/ops/cms-changes/`. Тексты пишет
+`cw`, SEO-стратегию определяют `seo1`/`seo2`, `cms` только применяет ТЗ.
 
 **Assignee в Linear — всегда оператор.** Роль маркируется label `role:<code>`,
 фаза — label `phase:<name>`.

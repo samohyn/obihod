@@ -4,7 +4,7 @@ import type { CSSProperties, FC, ReactNode } from 'react'
  * EmptyState · ErrorState · ForbiddenState — standalone компоненты для
  * пустых / ошибочных / запрещённых состояний admin.
  *
- * OBI-31 / Wave 5 из OBI-19 admin redesign. Anatomy — devteam/specs/
+ * OBI-31 / Wave 5 из OBI-19 admin redesign. Anatomy — team/specs/
  * US-12-admin-redesign/art-concept-v2.md §7 + brand-guide.html §12.6.
  *
  * Принцип: eyebrow с кодом (для ошибок) + заголовок-факт + текст + 1-2 CTA.

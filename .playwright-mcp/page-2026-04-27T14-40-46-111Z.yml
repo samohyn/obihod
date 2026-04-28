@@ -1,0 +1,2904 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Обиход — дизайн-система, к началу" [ref=e4] [cursor=pointer]:
+        - /url: "#top"
+        - generic [ref=e5]: О
+        - generic [ref=e6]: ОБИХОД·дизайн-система
+      - navigation "Навигация по гайду" [ref=e7]:
+        - list [ref=e8]:
+          - listitem [ref=e9]:
+            - group [ref=e10]:
+              - generic "Бренд" [ref=e11] [cursor=pointer]:
+                - text: Бренд
+                - img [ref=e12]
+          - listitem [ref=e14]:
+            - group [ref=e15]:
+              - generic "Компоненты" [ref=e16] [cursor=pointer]:
+                - text: Компоненты
+                - img [ref=e17]
+          - listitem [ref=e19]:
+            - group [ref=e20]:
+              - generic "Ресурсы" [ref=e21] [cursor=pointer]:
+                - text: Ресурсы
+                - img [ref=e22]
+          - listitem [ref=e24]:
+            - link "TODO" [ref=e25] [cursor=pointer]:
+              - /url: "#todo"
+      - link "v1.5" [ref=e26] [cursor=pointer]:
+        - /url: "#todo"
+  - generic [ref=e28]:
+    - generic [ref=e29]:
+      - strong [ref=e31]: design-system/brand-guide.html
+      - generic [ref=e32]: v1.5 · обновлён 2026-04-24
+      - generic [ref=e33]:
+        - text: основа —
+        - link "03_brand_naming.md" [ref=e34] [cursor=pointer]:
+          - /url: ../contex/03_brand_naming.md
+      - generic [ref=e35]:
+        - text: токены —
+        - link "site/app/globals.css" [ref=e36] [cursor=pointer]:
+          - /url: ../site/app/globals.css
+      - generic [ref=e37]:
+        - text: система —
+        - link "design-system/README.md" [ref=e38] [cursor=pointer]:
+          - /url: README.md
+    - generic [ref=e39]: Порядок под ключ
+    - heading "ОБИХОД" [level=1] [ref=e40]
+    - paragraph [ref=e41]: "Комплексный подрядчик 4-в-1 для Москвы и МО: арбористика, чистка крыш, вывоз мусора, демонтаж. Архетип Caregiver + Ruler. Этот документ — единая точка входа для дизайнера, копирайтера, фронтендера и любого нового агента команды."
+    - generic [ref=e42]: Хозяйство в надёжных руках
+  - generic [ref=e44]:
+    - generic [ref=e45]: 01 · Identity
+    - heading "Кто мы и чего не говорим" [level=2] [ref=e46]
+    - paragraph [ref=e47]:
+      - text: Выжимка из бренд-стратегии. Детали, scorecard финалистов и обоснование выбора — в
+      - link "03_brand_naming.md" [ref=e48] [cursor=pointer]:
+        - /url: ../contex/03_brand_naming.md
+        - code [ref=e49]: 03_brand_naming.md
+      - text: .
+    - generic [ref=e50]:
+      - generic [ref=e51]:
+        - heading "Позиционирование" [level=3] [ref=e52]
+        - paragraph [ref=e53]:
+          - strong [ref=e54]: Для
+          - text: владельцев загородных домов и управляющих компаний в Москве и Подмосковье,
+          - strong [ref=e55]: которые
+          - text: устали от фрагментированного поиска подрядчиков и смет «от X ₽»,
+          - strong [ref=e56]: Обиход
+          - text: — комплексный сервис 4-в-1 по фиксированной цене за объект,
+          - strong [ref=e57]: со сметой за 10 минут в мессенджере
+          - text: и юридической ответственностью за штрафы ГЖИ/ОАТИ.
+      - generic [ref=e58]:
+        - heading "Архетип" [level=3] [ref=e59]
+        - paragraph [ref=e60]:
+          - strong [ref=e61]: Caregiver (70%)
+          - text: — забота о хозяйстве, защита от проблем, «мы присмотрим».
+          - strong [ref=e62]: Ruler (30%)
+          - text: — порядок, контроль, компетентность.
+          - text: "Отвергнуто: Outlaw (Дровосек/Лесорубы), Jester (Грузовичкоф), Explorer (Liwood)."
+      - generic [ref=e63]:
+        - heading "Essence" [level=3] [ref=e64]
+        - paragraph [ref=e65]:
+          - strong [ref=e66]: Порядок под ключ
+          - text: — операционное кредо.
+          - strong [ref=e67]: Хозяйство в надёжных руках
+          - text: — эмоциональное обещание.
+      - generic [ref=e68]:
+        - heading "Оффер (immutable)" [level=3] [ref=e69]
+        - paragraph [ref=e70]: Фикс-цена за объект · смета за 10 минут по фото · абонемент «зима-лето» · штрафы ГЖИ/ОАТИ на подрядчике.
+  - generic [ref=e72]:
+    - generic [ref=e73]: 02 · Логотип
+    - heading "Круг сезонов" [level=2] [ref=e74]
+    - paragraph [ref=e75]:
+      - text: Финальный знак утверждён 2026-04-24. Мастер —
+      - link "agents/brand/logo/master.svg" [ref=e76] [cursor=pointer]:
+        - /url: ../agents/brand/logo/master.svg
+        - code [ref=e77]: agents/brand/logo/master.svg
+      - text: . Полный пакет (mark, horizontal, mono, inverse, mark-simple для favicon) + guide — в
+      - link "agents/brand/logo/usage.md" [ref=e78] [cursor=pointer]:
+        - /url: ../agents/brand/logo/usage.md
+        - code [ref=e79]: agents/brand/logo/usage.md
+      - text: ". Инженерный чертёж-циркуляр: внешний круг, крест делит на 4 квадранта сезонного цикла — весна-осень (ёлочка), зима (снежинка-роза ветров), круглый год (план двора), круглый год (навес с вывозом). Archetype Ruler через схему, Caregiver через «круглый год»."
+    - generic [ref=e80]:
+      - generic [ref=e81]:
+        - img "ОБИХОД — Круг сезонов, master lockup" [ref=e82]
+        - paragraph [ref=e83]:
+          - text: master lockup ·
+          - link "master.svg" [ref=e84] [cursor=pointer]:
+            - /url: ../agents/brand/logo/master.svg
+            - code [ref=e85]: master.svg
+          - text: 1200×1200
+      - generic [ref=e86]:
+        - img "ОБИХОД — horizontal lockup full с tagline" [ref=e87]
+        - paragraph [ref=e88]:
+          - text: horizontal full ·
+          - link "horizontal.svg" [ref=e89] [cursor=pointer]:
+            - /url: ../agents/brand/logo/horizontal.svg
+            - code [ref=e90]: horizontal.svg
+          - text: 1600×480 · marketing-hero, визитки, email-подписи (≥ 80 px по высоте)
+      - generic [ref=e91]:
+        - img "ОБИХОД — horizontal-compact lockup без tagline" [ref=e92]
+        - paragraph [ref=e93]:
+          - text: horizontal compact ·
+          - link "horizontal-compact.svg" [ref=e94] [cursor=pointer]:
+            - /url: ../agents/brand/logo/horizontal-compact.svg
+            - code [ref=e95]: horizontal-compact.svg
+          - text: 1280×480 ·
+          - strong [ref=e96]: website header
+          - text: ", footer, embed (32–60 px по высоте)"
+      - generic [ref=e97]:
+        - img "ОБИХОД — знак без текста" [ref=e98]
+        - paragraph [ref=e99]:
+          - text: mark (без текста) ·
+          - link "mark.svg" [ref=e100] [cursor=pointer]:
+            - /url: ../agents/brand/logo/mark.svg
+            - code [ref=e101]: mark.svg
+          - text: · OG, avatar ≥ 128 px
+      - generic [ref=e102]:
+        - img "ОБИХОД — inverse для тёмного фона" [ref=e103]
+        - paragraph [ref=e104]:
+          - text: inverse ·
+          - link "inverse.svg" [ref=e105] [cursor=pointer]:
+            - /url: ../agents/brand/logo/inverse.svg
+            - code [ref=e106]: inverse.svg
+          - text: · тёмный фон, стикеры на технике
+      - generic [ref=e107]:
+        - img "ОБИХОД — mono для печати" [ref=e108]
+        - paragraph [ref=e109]:
+          - text: mono (ч/б) ·
+          - link "mono.svg" [ref=e110] [cursor=pointer]:
+            - /url: ../agents/brand/logo/mono.svg
+            - code [ref=e111]: mono.svg
+          - text: · печать, документы
+      - generic [ref=e112]:
+        - img "ОБИХОД — mark-simple для favicon" [ref=e113]
+        - paragraph [ref=e114]:
+          - text: mark-simple ·
+          - link "mark-simple.svg" [ref=e115] [cursor=pointer]:
+            - /url: ../agents/brand/logo/mark-simple.svg
+            - code [ref=e116]: mark-simple.svg
+          - text: favicon / apple-touch / Telegram / admin sidebar
+    - heading "Правила применения" [level=3] [ref=e117]
+    - paragraph [ref=e118]:
+      - text: Полный usage-guide с matrix min-размеров, clear-space, запрещённого — в
+      - link "agents/brand/logo/usage.md" [ref=e119] [cursor=pointer]:
+        - /url: ../agents/brand/logo/usage.md
+        - code [ref=e120]: agents/brand/logo/usage.md
+      - text: .
+    - table [ref=e121]:
+      - rowgroup [ref=e122]:
+        - row "Правило Значение Почему" [ref=e123]:
+          - columnheader "Правило" [ref=e124]
+          - columnheader "Значение" [ref=e125]
+          - columnheader "Почему" [ref=e126]
+      - rowgroup [ref=e127]:
+        - row "Horizontal lockup — какой когда horizontal.svg с tagline «КРУГ СЕЗОНОВ» — только при высоте ≥ 80 px (marketing-hero, визитки, email-подпись, OG). Везде ниже — horizontal-compact.svg (без tagline) На 32–60 px tagline становится 3–6 px и превращается в нечитаемые точки — визуальный мусор. Compact = mark + wordmark, без tagline, читается на 32 px" [ref=e128]:
+          - cell "Horizontal lockup — какой когда" [ref=e129]
+          - cell "horizontal.svg с tagline «КРУГ СЕЗОНОВ» — только при высоте ≥ 80 px (marketing-hero, визитки, email-подпись, OG). Везде ниже — horizontal-compact.svg (без tagline)" [ref=e130]:
+            - code [ref=e131]: horizontal.svg
+            - text: с tagline «КРУГ СЕЗОНОВ» — только при высоте
+            - strong [ref=e132]: ≥ 80 px
+            - text: (marketing-hero, визитки, email-подпись, OG). Везде ниже —
+            - code [ref=e133]: horizontal-compact.svg
+            - text: (без tagline)
+          - cell "На 32–60 px tagline становится 3–6 px и превращается в нечитаемые точки — визуальный мусор. Compact = mark + wordmark, без tagline, читается на 32 px" [ref=e134]
+        - row "Минимальный размер полного знака mark.svg — 64 px; LogoMark компонент — 36 px Ниже 36 px 4 глифа сливаются; ниже 64 px без упрощения уже каша" [ref=e135]:
+          - cell "Минимальный размер полного знака" [ref=e136]
+          - cell "mark.svg — 64 px; LogoMark компонент — 36 px" [ref=e137]:
+            - code [ref=e138]: mark.svg
+            - text: — 64 px;
+            - code [ref=e139]: LogoMark
+            - text: компонент — 36 px
+          - cell "Ниже 36 px 4 глифа сливаются; ниже 64 px без упрощения уже каша" [ref=e140]
+        - row "Минимальный размер favicon mark-simple.svg — 16 px (app/icon.png 32×32) Монограмма «О» читается до favicon-размера" [ref=e141]:
+          - cell "Минимальный размер favicon" [ref=e142]
+          - cell "mark-simple.svg — 16 px (app/icon.png 32×32)" [ref=e143]:
+            - code [ref=e144]: mark-simple.svg
+            - text: — 16 px (app/icon.png 32×32)
+          - cell "Монограмма «О» читается до favicon-размера" [ref=e145]
+        - 'row "Фон master / mark кремовый #f0ead8 или белый #ffffff Бренд-зелёный на кремовом — аутентичный контраст «бумага-чернила»" [ref=e146]':
+          - cell "Фон master / mark" [ref=e147]
+          - 'cell "кремовый #f0ead8 или белый #ffffff" [ref=e148]':
+            - text: кремовый
+            - code [ref=e149]: "#f0ead8"
+            - text: или белый
+            - code [ref=e150]: "#ffffff"
+          - cell "Бренд-зелёный на кремовом — аутентичный контраст «бумага-чернила»" [ref=e151]
+        - 'row "Фон inverse тёмно-зелёный #2d5a3d (primary), линии кремовые Для тёмной темы и стикеров на тёмной технике" [ref=e152]':
+          - cell "Фон inverse" [ref=e153]
+          - 'cell "тёмно-зелёный #2d5a3d (primary), линии кремовые" [ref=e154]':
+            - text: тёмно-зелёный
+            - code [ref=e155]: "#2d5a3d"
+            - text: (primary), линии кремовые
+          - cell "Для тёмной темы и стикеров на тёмной технике" [ref=e156]
+        - row "Clear-space ≥ высоте «О» в wordmark; ≥ 1/8 диаметра круга вокруг знака Знак — штамп, требует воздуха чтобы читаться" [ref=e157]:
+          - cell "Clear-space" [ref=e158]
+          - cell "≥ высоте «О» в wordmark; ≥ 1/8 диаметра круга вокруг знака" [ref=e159]
+          - cell "Знак — штамп, требует воздуха чтобы читаться" [ref=e160]
+        - row "Нельзя растягивать, перекрашивать вне палитры, outline, shadow, glow, gradient, копировать отдельные элементы круга Знак работает только целиком; декор ломает чертёжную эстетику" [ref=e161]:
+          - cell "Нельзя" [ref=e162]
+          - cell "растягивать, перекрашивать вне палитры, outline, shadow, glow, gradient, копировать отдельные элементы круга" [ref=e163]
+          - cell "Знак работает только целиком; декор ломает чертёжную эстетику" [ref=e164]
+  - generic [ref=e166]:
+    - generic [ref=e167]: 03 · Цвет
+    - heading "Палитра «Природный тёплый»" [level=2] [ref=e168]
+    - paragraph [ref=e169]:
+      - text: Токены живут в
+      - link "site/app/globals.css" [ref=e170] [cursor=pointer]:
+        - /url: ../site/app/globals.css
+        - code [ref=e171]: site/app/globals.css
+      - text: и пробрасываются в Tailwind v4 через
+      - code [ref=e172]: "@theme inline"
+      - text: — доступны как utility
+      - code [ref=e173]: bg-primary
+      - text: ","
+      - code [ref=e174]: text-ink-soft
+      - text: ","
+      - code [ref=e175]: border-line
+      - text: .
+    - heading "Brand-defining" [level=3] [ref=e176]
+    - generic [ref=e177]:
+      - generic [ref=e180]:
+        - generic [ref=e181]: primary
+        - code [ref=e182]: "--c-primary · bg-primary"
+        - generic [ref=e183]: "#2d5a3d"
+      - generic [ref=e186]:
+        - generic [ref=e187]: primary-ink
+        - code [ref=e188]: "--c-primary-ink"
+        - generic [ref=e189]: "#1f3f2b · hover on primary"
+      - generic [ref=e192]:
+        - generic [ref=e193]: accent
+        - code [ref=e194]: "--c-accent · bg-accent"
+        - generic [ref=e195]: "#e6a23c · бейджи, акцент"
+      - generic [ref=e198]:
+        - generic [ref=e199]: accent-ink
+        - code [ref=e200]: "--c-accent-ink"
+        - generic [ref=e201]: "#c18724 · текст на bg"
+    - heading "Текст" [level=3] [ref=e202]
+    - generic [ref=e203]:
+      - generic [ref=e206]:
+        - generic [ref=e207]: ink
+        - code [ref=e208]: "--c-ink · text-ink"
+        - generic [ref=e209]: "#1c1c1c · заголовки"
+      - generic [ref=e212]:
+        - generic [ref=e213]: ink-soft
+        - code [ref=e214]: "--c-ink-soft"
+        - generic [ref=e215]: "#2b2b2b · body"
+      - generic [ref=e218]:
+        - generic [ref=e219]: muted
+        - code [ref=e220]: "--c-muted"
+        - generic [ref=e221]: "#8c8377 · caption, placeholder"
+    - heading "Поверхности" [level=3] [ref=e222]
+    - generic [ref=e223]:
+      - generic [ref=e226]:
+        - generic [ref=e227]: bg
+        - code [ref=e228]: "--c-bg"
+        - generic [ref=e229]: "#f7f5f0 · основной фон"
+      - generic [ref=e232]:
+        - generic [ref=e233]: bg-alt
+        - code [ref=e234]: "--c-bg-alt"
+        - generic [ref=e235]: "#efebe0 · чередование"
+      - generic [ref=e238]:
+        - generic [ref=e239]: card
+        - code [ref=e240]: "--c-card"
+        - generic [ref=e241]: "#ffffff"
+      - generic [ref=e244]:
+        - generic [ref=e245]: line
+        - code [ref=e246]: "--c-line"
+        - generic [ref=e247]: "#e6e1d6 · границы"
+    - heading "Семантика" [level=3] [ref=e248]
+    - generic [ref=e249]:
+      - generic [ref=e252]:
+        - generic [ref=e253]: success
+        - code [ref=e254]: "--c-success"
+        - generic [ref=e255]: "#4a7c59"
+      - generic [ref=e258]:
+        - generic [ref=e259]: error
+        - code [ref=e260]: "--c-error"
+        - generic [ref=e261]: "#b54828"
+      - generic [ref=e264]:
+        - generic [ref=e265]: on-primary
+        - code [ref=e266]: "--c-on-primary"
+        - generic [ref=e267]: "#f7f5f0 · текст поверх primary"
+    - heading "Расхождение с бренд-брифом" [level=3] [ref=e268]
+    - paragraph [ref=e270]:
+      - text: Визуальный бриф в
+      - code [ref=e271]: 03_brand_naming.md
+      - text: описывает палитру как «
+      - emphasis [ref=e272]: тёмный графит + тёплый песок + приглушённый терракот / густая охра
+      - text: ». Фактическая палитра в
+      - code [ref=e273]: globals.css
+      - text: —
+      - strong [ref=e274]: зелёный + янтарный + кремовый
+      - text: . Это решение имплементации; бриф остаётся как исторический контекст.
+      - strong [ref=e275]: Источник истины — код.
+      - text: При ребрендинге пересматриваются оба артефакта синхронно.
+  - generic [ref=e277]:
+    - generic [ref=e278]: 04 · Контраст
+    - heading "WCAG 2.2 — что на что кладём" [level=2] [ref=e279]
+    - paragraph [ref=e280]:
+      - text: "Приёмка цветовых пар по WCAG 2.1/2.2:"
+      - strong [ref=e281]: AA normal text
+      - text: = 4.5:1,
+      - strong [ref=e282]: AA large text
+      - text: (18px+ bold / 24px+) = 3:1,
+      - strong [ref=e283]: AAA normal
+      - text: = 7:1.
+    - table [ref=e284]:
+      - rowgroup [ref=e285]:
+        - row "Пара Пример Ratio Normal Large Где применяется" [ref=e286]:
+          - columnheader "Пара" [ref=e287]
+          - columnheader "Пример" [ref=e288]
+          - columnheader "Ratio" [ref=e289]
+          - columnheader "Normal" [ref=e290]
+          - columnheader "Large" [ref=e291]
+          - columnheader "Где применяется" [ref=e292]
+      - rowgroup [ref=e293]:
+        - 'row "ink на bg Обиход 15.1 : 1 AAA AAA Весь body-текст, заголовки" [ref=e294]':
+          - cell "ink на bg" [ref=e295]:
+            - code [ref=e296]: ink
+            - text: на
+            - code [ref=e297]: bg
+          - cell "Обиход" [ref=e298]
+          - 'cell "15.1 : 1" [ref=e299]'
+          - cell "AAA" [ref=e300]
+          - cell "AAA" [ref=e301]
+          - cell "Весь body-текст, заголовки" [ref=e302]
+        - 'row "on-primary на primary Позвонить 8.9 : 1 AAA AAA Primary-кнопки, бейджи" [ref=e303]':
+          - cell "on-primary на primary" [ref=e304]:
+            - code [ref=e305]: on-primary
+            - text: на
+            - code [ref=e306]: primary
+          - cell "Позвонить" [ref=e307]
+          - 'cell "8.9 : 1" [ref=e308]'
+          - cell "AAA" [ref=e309]
+          - cell "AAA" [ref=e310]
+          - cell "Primary-кнопки, бейджи" [ref=e311]
+        - 'row "primary на bg Обиход 7.1 : 1 AAA AAA Ссылки, иконки, eyebrow" [ref=e312]':
+          - cell "primary на bg" [ref=e313]:
+            - code [ref=e314]: primary
+            - text: на
+            - code [ref=e315]: bg
+          - cell "Обиход" [ref=e316]
+          - 'cell "7.1 : 1" [ref=e317]'
+          - cell "AAA" [ref=e318]
+          - cell "AAA" [ref=e319]
+          - cell "Ссылки, иконки, eyebrow" [ref=e320]
+        - 'row "ink-soft на bg-alt строка таблицы 13.8 : 1 AAA AAA Чередование таблиц" [ref=e321]':
+          - cell "ink-soft на bg-alt" [ref=e322]:
+            - code [ref=e323]: ink-soft
+            - text: на
+            - code [ref=e324]: bg-alt
+          - cell "строка таблицы" [ref=e325]
+          - 'cell "13.8 : 1" [ref=e326]'
+          - cell "AAA" [ref=e327]
+          - cell "AAA" [ref=e328]
+          - cell "Чередование таблиц" [ref=e329]
+        - 'row "muted на bg подпись 4.1 : 1 AA✕ AA Только large / caption; избегать body" [ref=e330]':
+          - cell "muted на bg" [ref=e331]:
+            - code [ref=e332]: muted
+            - text: на
+            - code [ref=e333]: bg
+          - cell "подпись" [ref=e334]
+          - 'cell "4.1 : 1" [ref=e335]'
+          - cell "AA✕" [ref=e336]
+          - cell "AA" [ref=e337]
+          - cell "Только large / caption; избегать body" [ref=e338]
+        - 'row "accent-ink на bg Черновик 4.7 : 1 AA AAA Статусы, warning-бейджи" [ref=e339]':
+          - cell "accent-ink на bg" [ref=e340]:
+            - code [ref=e341]: accent-ink
+            - text: на
+            - code [ref=e342]: bg
+          - cell "Черновик" [ref=e343]
+          - 'cell "4.7 : 1" [ref=e344]'
+          - cell "AA" [ref=e345]
+          - cell "AAA" [ref=e346]
+          - cell "Статусы, warning-бейджи" [ref=e347]
+        - 'row "accent на bg не для текста 2.3 : 1 AA✕ AA✕ Только фоновые акценты, иконки 24+" [ref=e348]':
+          - cell "accent на bg" [ref=e349]:
+            - code [ref=e350]: accent
+            - text: на
+            - code [ref=e351]: bg
+          - cell "не для текста" [ref=e352]
+          - 'cell "2.3 : 1" [ref=e353]'
+          - cell "AA✕" [ref=e354]
+          - cell "AA✕" [ref=e355]
+          - cell "Только фоновые акценты, иконки 24+" [ref=e356]
+        - 'row "error на bg Ошибка 5.4 : 1 AA AAA Сообщения валидации, delete" [ref=e357]':
+          - cell "error на bg" [ref=e358]:
+            - code [ref=e359]: error
+            - text: на
+            - code [ref=e360]: bg
+          - cell "Ошибка" [ref=e361]
+          - 'cell "5.4 : 1" [ref=e362]'
+          - cell "AA" [ref=e363]
+          - cell "AAA" [ref=e364]
+          - cell "Сообщения валидации, delete" [ref=e365]
+    - paragraph [ref=e366]:
+      - text: Фокус-outline — всегда
+      - code [ref=e367]: accent
+      - text: 2px с offset 2px (см.
+      - code [ref=e368]: .btn:focus-visible
+      - text: в
+      - code [ref=e369]: globals.css
+      - text: ). Этот приём безопасен, потому что outline идёт по большой площади кнопки, а не является текстом.
+  - generic [ref=e371]:
+    - generic [ref=e372]: 05 · Типографика
+    - heading "Golos Text + JetBrains Mono" [level=2] [ref=e373]
+    - paragraph [ref=e374]:
+      - text: Display и body —
+      - strong [ref=e375]: Golos Text
+      - text: (создан специально для кириллицы, открытая лицензия SIL OFL). Mono —
+      - strong [ref=e376]: JetBrains Mono
+      - text: для цен (
+      - code [ref=e377]: tabular-nums
+      - text: ), таймеров, eyebrow. Подключены через
+      - code [ref=e378]: next/font
+      - text: с
+      - code [ref=e379]: "display: swap"
+      - text: .
+    - heading "Шкала паблика" [level=3] [ref=e380]
+    - paragraph [ref=e381]:
+      - text: Реальные классы из
+      - code [ref=e382]: site/app/globals.css
+      - text: . Все размеры адаптивные через
+      - code [ref=e383]: clamp()
+      - text: .
+    - generic [ref=e384]:
+      - generic [ref=e385]: Обиход — порядок под ключ
+      - paragraph [ref=e386]:
+        - code [ref=e387]: .h-display
+        - text: · 48/96 px · 700 · ls -0.035em
+    - generic [ref=e388]:
+      - generic [ref=e389]: Спилим дерево у дачи в Истре
+      - paragraph [ref=e390]:
+        - code [ref=e391]: .h-xl
+        - text: · 36/64 px · 700 · ls -0.03em
+    - generic [ref=e392]:
+      - generic [ref=e393]: Снимаем штрафы ГЖИ и ОАТИ по договору
+      - paragraph [ref=e394]:
+        - code [ref=e395]: .h-l
+        - text: · 28/44 px · 600
+    - generic [ref=e396]:
+      - generic [ref=e397]: Пример заголовка секции на лендинге
+      - paragraph [ref=e398]:
+        - code [ref=e399]: .h-m
+        - text: · 22/28 px · 600
+    - generic [ref=e400]:
+      - generic [ref=e401]: Заголовок карточки / прайса
+      - paragraph [ref=e402]:
+        - code [ref=e403]: .h-s
+        - text: · 20 px · 600
+    - generic [ref=e404]:
+      - generic [ref=e405]: Lead-абзац на посадочной. Главный смысловой блок первого экрана. Не шире 70ch — иначе теряется якорность.
+      - paragraph [ref=e406]:
+        - code [ref=e407]: .lead
+        - text: · 17/22 px · 400 · ink-soft
+    - generic [ref=e408]:
+      - generic [ref=e409]: Основной абзац. Не шире 75ch. По CWV для body используем 16-17 px — меньше бьёт по читаемости для ЦА 35-60, больше ломает вертикальный ритм.
+      - paragraph [ref=e410]:
+        - code [ref=e411]: body
+        - text: · 16-17 px · 400 · line-height 1.55
+    - generic [ref=e412]:
+      - generic [ref=e413]: Арбористика · Москва и МО
+      - paragraph [ref=e414]:
+        - code [ref=e415]: .eyebrow
+        - text: · 11-12 px mono · ls 0.14em · uppercase · muted
+    - generic [ref=e416]:
+      - generic [ref=e417]: 12 800 ₽ / объект
+      - paragraph [ref=e418]:
+        - code [ref=e419]: .mono.tnum
+        - text: · цена — JetBrains Mono 500 с tabular-nums
+    - heading "Шкала админки (Payload)" [level=3] [ref=e420]
+    - paragraph [ref=e421]:
+      - text: Плотная — админка инструмент, не витрина. Подробности и обоснование — в
+      - link "devteam/specs/admin-visual/art-concept.md" [ref=e422] [cursor=pointer]:
+        - /url: ../devteam/specs/admin-visual/art-concept.md
+        - code [ref=e423]: devteam/specs/admin-visual/art-concept.md
+      - text: .
+    - table [ref=e424]:
+      - rowgroup [ref=e425]:
+        - row "Элемент Размер Вес Комментарий" [ref=e426]:
+          - columnheader "Элемент" [ref=e427]
+          - columnheader "Размер" [ref=e428]
+          - columnheader "Вес" [ref=e429]
+          - columnheader "Комментарий" [ref=e430]
+      - rowgroup [ref=e431]:
+        - row "Collection-view heading 22 px 600 Без letter-spacing" [ref=e432]:
+          - cell "Collection-view heading" [ref=e433]
+          - cell "22 px" [ref=e434]
+          - cell "600" [ref=e435]
+          - cell "Без letter-spacing" [ref=e436]
+        - 'row "Field label 13 px 500 letter-spacing: 0.02em" [ref=e437]':
+          - cell "Field label" [ref=e438]
+          - cell "13 px" [ref=e439]
+          - cell "500" [ref=e440]
+          - 'cell "letter-spacing: 0.02em" [ref=e441]':
+            - code [ref=e442]: "letter-spacing: 0.02em"
+        - row "Field value 14 px 400" [ref=e443]:
+          - cell "Field value" [ref=e444]
+          - cell "14 px" [ref=e445]
+          - cell "400" [ref=e446]
+          - cell [ref=e447]
+        - row "Table row 13 px 400 line-height 1.35" [ref=e448]:
+          - cell "Table row" [ref=e449]
+          - cell "13 px" [ref=e450]
+          - cell "400" [ref=e451]
+          - cell "line-height 1.35" [ref=e452]
+        - row "Button 13 px 600 min-height 32 px" [ref=e453]:
+          - cell "Button" [ref=e454]
+          - cell "13 px" [ref=e455]
+          - cell "600" [ref=e456]
+          - cell "min-height 32 px" [ref=e457]
+  - generic [ref=e459]:
+    - generic [ref=e460]: 06 · Форма
+    - heading "Радиусы и spacing" [level=2] [ref=e461]
+    - heading "Радиусы" [level=3] [ref=e462]
+    - generic [ref=e463]:
+      - generic [ref=e464]:
+        - text: "--radius-sm"
+        - text: 6 px
+      - generic [ref=e465]:
+        - text: "--radius"
+        - text: 10 px
+      - generic [ref=e466]:
+        - text: "--radius-lg"
+        - text: 16 px
+      - generic [ref=e467]:
+        - text: pill
+        - text: 999 px
+    - paragraph [ref=e468]:
+      - code [ref=e469]: radius-sm
+      - text: — инпуты, бейджи, code.
+      - code [ref=e470]: radius
+      - text: — кнопки, карточки, модалки.
+      - code [ref=e471]: radius-lg
+      - text: — hero-блоки, большие карточки кейсов. Pill — только для status-badge и chat-bubble.
+    - heading "Spacing scale (4 px base)" [level=3] [ref=e472]
+    - generic [ref=e473]:
+      - figure [ref=e474]: "4"
+      - figure [ref=e476]: "8"
+      - figure [ref=e478]: "12"
+      - figure [ref=e480]: "16"
+      - figure [ref=e482]: "20"
+      - figure [ref=e484]: "24"
+      - figure [ref=e486]: "32"
+      - figure [ref=e488]: "48"
+      - figure [ref=e490]: "64"
+      - figure [ref=e492]: "96"
+    - heading "Контейнер" [level=3] [ref=e494]
+    - table [ref=e495]:
+      - rowgroup [ref=e496]:
+        - row "Токен Значение Применение" [ref=e497]:
+          - columnheader "Токен" [ref=e498]
+          - columnheader "Значение" [ref=e499]
+          - columnheader "Применение" [ref=e500]
+      - rowgroup [ref=e501]:
+        - row "--maxw 1280 px Максимальная ширина .wrap" [ref=e502]:
+          - cell "--maxw" [ref=e503]:
+            - code [ref=e504]: "--maxw"
+          - cell "1280 px" [ref=e505]
+          - cell "Максимальная ширина .wrap" [ref=e506]:
+            - text: Максимальная ширина
+            - code [ref=e507]: .wrap
+        - row "--pad (< 768) 20 px Мобильные отступы" [ref=e508]:
+          - cell "--pad (< 768)" [ref=e509]:
+            - code [ref=e510]: "--pad"
+            - text: (< 768)
+          - cell "20 px" [ref=e511]
+          - cell "Мобильные отступы" [ref=e512]
+        - row "--pad (> 768) 40 px Планшет" [ref=e513]:
+          - cell "--pad (> 768)" [ref=e514]:
+            - code [ref=e515]: "--pad"
+            - text: (> 768)
+          - cell "40 px" [ref=e516]
+          - cell "Планшет" [ref=e517]
+        - row "--pad (> 1200) 80 px Десктоп" [ref=e518]:
+          - cell "--pad (> 1200)" [ref=e519]:
+            - code [ref=e520]: "--pad"
+            - text: (> 1200)
+          - cell "80 px" [ref=e521]
+          - cell "Десктоп" [ref=e522]
+  - generic [ref=e524]:
+    - generic [ref=e525]: 07 · Компоненты
+    - heading "Базовые элементы в деле" [level=2] [ref=e526]
+    - heading "Кнопки" [level=3] [ref=e527]
+    - generic [ref=e528]:
+      - generic [ref=e529]:
+        - button "Рассчитать смету →" [ref=e530] [cursor=pointer]
+        - button "Узнать подробнее" [ref=e531] [cursor=pointer]
+        - button "Вернуться" [ref=e532] [cursor=pointer]
+        - button "Отправлено" [disabled] [ref=e533]
+      - paragraph [ref=e534]: min-height 44 px (WCAG 2.5.5 touch target) · focus-outline 2 px accent · hover на primary → primary-ink.
+    - heading "Бейджи и статусы" [level=3] [ref=e535]
+    - generic [ref=e537]:
+      - generic [ref=e538]: ● Опубликовано
+      - generic [ref=e539]: Черновик
+      - generic [ref=e540]: Ошибка валидации
+    - heading "Форма" [level=3] [ref=e541]
+    - generic [ref=e542]:
+      - generic [ref=e543]: Телефон для связи
+      - textbox "+7 (___) ___-__-__" [ref=e544]
+      - paragraph [ref=e545]: Позвоним в течение 10 минут в рабочее время (8:00–22:00 МСК).
+      - button "Получить смету" [ref=e546] [cursor=pointer]
+    - heading "Карточка услуги" [level=3] [ref=e547]
+    - generic [ref=e548]:
+      - generic [ref=e549]: Арбористика · Истра
+      - generic [ref=e550]: Спил дерева с автовышки
+      - paragraph [ref=e551]: Тополь / берёза / сосна до 25 м. Смета за 10 минут по фото. Порубочный билет — наша зона.
+      - generic [ref=e552]:
+        - generic [ref=e553]: 12 800 ₽
+        - generic [ref=e554]: за объект
+      - button "Рассчитать" [ref=e555] [cursor=pointer]
+  - generic [ref=e557]:
+    - generic [ref=e558]: 08 · Иконография
+    - heading "Иконография · 49 line-art glyph'ов" [level=2] [ref=e559]
+    - paragraph [ref=e560]:
+      - text: Domain-специфичные иконки Обихода в эстетике Круга сезонов. Все четыре линейки делят одну спеку (
+      - code [ref=e561]: viewBox 0 0 24 24
+      - text: ","
+      - code [ref=e562]: stroke 1.5
+      - text: ","
+      - code [ref=e563]: currentColor
+      - text: ","
+      - code [ref=e564]: round
+      - text: caps/joins,
+      - code [ref=e565]: "fill: none"
+      - text: "кроме мелких акцентов):"
+      - strong [ref=e566]: Service · 22 v0.9
+      - text: (4 кластера услуг + УТП),
+      - strong [ref=e567]: Shop · 9 v0.1
+      - text: (категории каталога Магазина, 2026-04-27),
+      - strong [ref=e568]: District · 9 v0.9
+      - text: (8 районов МО + Москва, landmark-метафоры),
+      - strong [ref=e569]: Case · 9 v0.9
+      - text: (тематики кейсов). Реестр service-иконок —
+      - link "icons/services/README.md" [ref=e570] [cursor=pointer]:
+        - /url: icons/services/README.md
+        - code [ref=e571]: icons/services/README.md
+      - text: и
+      - link "ServiceIcons.tsx" [ref=e572] [cursor=pointer]:
+        - /url: icons/services/ServiceIcons.tsx
+        - code [ref=e573]: ServiceIcons.tsx
+      - text: . Shop / District / Case — задокументированы ниже на этой странице, экспорт в
+      - code [ref=e574]: "site/components/icons/{shop,districts,cases}/"
+      - text: — задача
+      - code [ref=e575]: ui
+      - text: +
+      - code [ref=e576]: fe1
+      - text: по
+      - link "art-brief-ui.md" [ref=e577] [cursor=pointer]:
+        - /url: ../devteam/specs/US-11-ia-extension/art-brief-ui.md
+        - code [ref=e578]: art-brief-ui.md
+      - text: .
+    - img "Визуальный реестр 16 service-иконок Обихода — спил, валка, корчевание, обрезка, каблинг, опрыскивание, снег с крыши, водостоки, альпинизм, автовышка, вывоз мусора, демонтаж, измельчение, фикс-цена, отклик 10 минут, штрафы на нас" [ref=e580]
+    - heading "Правила стиля" [level=3] [ref=e581]
+    - table [ref=e582]:
+      - rowgroup [ref=e583]:
+        - row "Параметр Значение Почему" [ref=e584]:
+          - columnheader "Параметр" [ref=e585]
+          - columnheader "Значение" [ref=e586]
+          - columnheader "Почему" [ref=e587]
+      - rowgroup [ref=e588]:
+        - row "viewBox 0 0 24 24 Единый base-размер, масштабируется через width/height" [ref=e589]:
+          - cell "viewBox" [ref=e590]
+          - cell "0 0 24 24" [ref=e591]:
+            - code [ref=e592]: 0 0 24 24
+          - cell "Единый base-размер, масштабируется через width/height" [ref=e593]
+        - row "stroke-width 1.5 (default), 1.2 на 16 px, 2 на 48+ Балансирует читабельность и аккуратность" [ref=e594]:
+          - cell "stroke-width" [ref=e595]
+          - cell "1.5 (default), 1.2 на 16 px, 2 на 48+" [ref=e596]
+          - cell "Балансирует читабельность и аккуратность" [ref=e597]
+        - row "stroke-linecap / linejoin round Мягкие концы = Caregiver, без техничной резкости" [ref=e598]:
+          - cell "stroke-linecap / linejoin" [ref=e599]
+          - cell "round" [ref=e600]:
+            - code [ref=e601]: round
+          - cell "Мягкие концы = Caregiver, без техничной резкости" [ref=e602]
+        - row "fill none (stroke-only) Чертёжная эстетика Круга сезонов" [ref=e603]:
+          - cell "fill" [ref=e604]
+          - cell "none (stroke-only)" [ref=e605]:
+            - code [ref=e606]: none
+            - text: (stroke-only)
+          - cell "Чертёжная эстетика Круга сезонов" [ref=e607]
+        - 'row "color currentColor Наследуется от родителя через color: var(--c-primary)" [ref=e608]':
+          - cell "color" [ref=e609]
+          - cell "currentColor" [ref=e610]:
+            - code [ref=e611]: currentColor
+          - 'cell "Наследуется от родителя через color: var(--c-primary)" [ref=e612]':
+            - text: Наследуется от родителя через
+            - code [ref=e613]: "color: var(--c-primary)"
+        - row "dasharray для «динамики» (трос каблинга, течение воды) Разграничение статики и процесса" [ref=e614]:
+          - cell "dasharray" [ref=e615]
+          - cell "для «динамики» (трос каблинга, течение воды)" [ref=e616]
+          - cell "Разграничение статики и процесса" [ref=e617]
+    - heading "Каталог" [level=3] [ref=e618]
+    - generic [ref=e619]:
+      - generic [ref=e620]:
+        - text: Арбористика (7)
+        - paragraph [ref=e621]:
+          - code [ref=e622]: spil
+          - text: ","
+          - code [ref=e623]: valka
+          - text: ","
+          - code [ref=e624]: stump
+          - text: ","
+          - code [ref=e625]: prune
+          - text: ","
+          - code [ref=e626]: kabling
+          - text: ","
+          - code [ref=e627]: spray
+          - text: ","
+          - code [ref=e628]: chipper
+      - generic [ref=e629]:
+        - text: Крыши / территория (4)
+        - paragraph [ref=e630]:
+          - code [ref=e631]: roof-snow
+          - text: ","
+          - code [ref=e632]: gutter
+          - text: ","
+          - code [ref=e633]: climber
+          - text: ","
+          - code [ref=e634]: boomlift
+      - generic [ref=e635]:
+        - text: Мусор / демонтаж (2)
+        - paragraph [ref=e636]:
+          - code [ref=e637]: dumpster
+          - text: ","
+          - code [ref=e638]: demolition
+      - generic [ref=e639]:
+        - text: Общие УТП (3)
+        - paragraph [ref=e640]:
+          - code [ref=e641]: fixed-price
+          - text: ","
+          - code [ref=e642]: fast-response
+          - text: ","
+          - code [ref=e643]: legal-shield
+    - paragraph [ref=e644]:
+      - text: "Приоритет использования: brand-glyphs из Круга сезонов → service-иконки (этот раздел) →"
+      - code [ref=e645]: lucide-react
+      - text: для общих UI (phone, message, chevron) → custom только по согласованию с art. Полный foundation —
+      - link "design-system/foundations/icons.md" [ref=e646] [cursor=pointer]:
+        - /url: foundations/icons.md
+        - code [ref=e647]: design-system/foundations/icons.md
+      - text: .
+    - heading "Shop Icons · 9 иконок v0.1 preliminary 2026-04-27" [level=3] [ref=e648]:
+      - text: Shop Icons · 9 иконок v0.1
+      - generic [ref=e649]: preliminary 2026-04-27
+    - paragraph [ref=e650]:
+      - text: "Иконки категорий каталога Магазина (саженцы и товары для сада). Расширение IA по запросу оператора 2026-04-27 — 6-е направление. Стиль идентичен service-иконкам:"
+      - code [ref=e651]: viewBox 0 0 24 24
+      - text: ","
+      - code [ref=e652]: stroke 1.5
+      - text: ","
+      - code [ref=e653]: currentColor
+      - text: ","
+      - code [ref=e654]: round
+      - text: caps/joins,
+      - code [ref=e655]: "fill: none"
+      - text: кроме мелких акцентов (плоды, ягоды, шишки) — заливка
+      - code [ref=e656]: currentColor
+      - text: . Рендерятся в mega-menu Магазина как
+      - code [ref=e657]: mm-icon
+      - text: 20×20.
+    - generic [ref=e658]:
+      - generic [ref=e659]:
+        - img [ref=e661]
+        - generic [ref=e666]:
+          - text: Плодовые деревья
+          - generic [ref=e667]:
+            - code [ref=e668]: fruit-tree
+            - text: · крона + плоды
+      - generic [ref=e669]:
+        - img [ref=e671]
+        - generic [ref=e675]:
+          - text: Колоновидные деревья
+          - generic [ref=e676]:
+            - code [ref=e677]: columnar-tree
+            - text: · узкая высокая крона
+      - generic [ref=e678]:
+        - img [ref=e680]
+        - generic [ref=e685]:
+          - text: Плодовые кустарники
+          - generic [ref=e686]:
+            - code [ref=e687]: fruit-bush
+            - text: · 3 кустика + ягоды
+      - generic [ref=e688]:
+        - img [ref=e690]
+        - generic [ref=e694]:
+          - text: Декоративные кустарники
+          - generic [ref=e695]:
+            - code [ref=e696]: decor-bush
+            - text: · топиари-сфера
+      - generic [ref=e697]:
+        - img [ref=e699]
+        - generic [ref=e707]:
+          - text: Цветы
+          - generic [ref=e708]:
+            - code [ref=e709]: flowers
+            - text: · ромашка 5 лепестков
+      - generic [ref=e710]:
+        - img [ref=e712]
+        - generic [ref=e719]:
+          - text: Розы
+          - generic [ref=e720]:
+            - code [ref=e721]: roses
+            - text: · бутон спираль + шипы
+      - generic [ref=e722]:
+        - img [ref=e724]
+        - generic [ref=e729]:
+          - text: Крупномеры
+          - generic [ref=e730]:
+            - code [ref=e731]: large-trees
+            - text: · взрослое дерево + размер
+      - generic [ref=e732]:
+        - img [ref=e734]
+        - generic [ref=e738]:
+          - text: Лиственные деревья
+          - generic [ref=e739]:
+            - code [ref=e740]: deciduous-tree
+            - text: · 3 облака-крона
+      - generic [ref=e741]:
+        - img [ref=e743]
+        - generic [ref=e747]:
+          - text: Хвойные деревья
+          - generic [ref=e748]:
+            - code [ref=e749]: coniferous-tree
+            - text: · ёлка + шишки
+    - paragraph [ref=e750]:
+      - text: Каталог категорий — preliminary, утверждается с
+      - code [ref=e751]: ba
+      - text: +
+      - code [ref=e752]: po
+      - text: отдельным US (артикулы и SKU придут в Payload коллекцию
+      - code [ref=e753]: Products
+      - text: ). Иконки экспортируются в
+      - code [ref=e754]: site/components/icons/shop/
+      - text: аналогично
+      - code [ref=e755]: services/
+      - text: по
+      - code [ref=e756]: art-brief
+      - text: для
+      - code [ref=e757]: ui
+      - text: +
+      - code [ref=e758]: fe1
+      - text: .
+    - heading "District Icons · 9 иконок v0.9 2026-04-25 · landmark-метафоры" [level=3] [ref=e759]:
+      - text: District Icons · 9 иконок v0.9
+      - generic [ref=e760]: 2026-04-25 · landmark-метафоры
+    - paragraph [ref=e761]:
+      - text: "Иконки 8 пилотных районов МО + Москвы. Каждая — географическая landmark-метафора (узел шоссе, холм, монастырь, самолёт, башня, ёлка с рельсами, мост, самолёт-памятник, компас). Используются в mega-menu «Районы», mobile accordion, DistrictCard на programmatic SEO LP. Та же спека что service- и shop-иконок:"
+      - code [ref=e762]: viewBox 0 0 24 24
+      - text: ","
+      - code [ref=e763]: stroke 1.5
+      - text: ","
+      - code [ref=e764]: currentColor
+      - text: ","
+      - code [ref=e765]: round
+      - text: caps/joins.
+      - strong [ref=e766]: "Техдолг v1.6:"
+      - text: сейчас живут только как inline SVG в этом файле и в
+      - code [ref=e767]: Header.tsx
+      - text: — вынос в
+      - code [ref=e768]: site/components/icons/districts/
+      - text: поручён
+      - code [ref=e769]: ui
+      - text: +
+      - code [ref=e770]: fe1
+      - text: через
+      - link "art-brief-ui.md" [ref=e771] [cursor=pointer]:
+        - /url: ../devteam/specs/US-11-ia-extension/art-brief-ui.md
+        - code [ref=e772]: art-brief-ui.md
+      - text: (US-11, задача 3).
+    - generic [ref=e773]:
+      - generic [ref=e774]:
+        - img [ref=e776]
+        - generic [ref=e780]:
+          - text: Одинцово
+          - generic [ref=e781]:
+            - code [ref=e782]: odintsovo
+            - text: · узел трасс М-1 / М-9
+      - generic [ref=e783]:
+        - img [ref=e785]
+        - generic [ref=e788]:
+          - text: Красногорск
+          - generic [ref=e789]:
+            - code [ref=e790]: krasnogorsk
+            - text: · холм + дом
+      - generic [ref=e791]:
+        - img [ref=e793]
+        - generic [ref=e797]:
+          - text: Истра
+          - generic [ref=e798]:
+            - code [ref=e799]: istra
+            - text: · купол монастыря с крестом
+      - generic [ref=e800]:
+        - img [ref=e802]
+        - generic [ref=e804]:
+          - text: Химки
+          - generic [ref=e805]:
+            - code [ref=e806]: khimki
+            - text: · самолёт (Шереметьево)
+      - generic [ref=e807]:
+        - img [ref=e809]
+        - generic [ref=e812]:
+          - text: Мытищи
+          - generic [ref=e813]:
+            - code [ref=e814]: mytishchi
+            - text: · водонапорная башня
+      - generic [ref=e815]:
+        - img [ref=e817]
+        - generic [ref=e819]:
+          - text: Пушкино
+          - generic [ref=e820]:
+            - code [ref=e821]: pushkino
+            - text: · ёлка + ж/д шпалы
+      - generic [ref=e822]:
+        - img [ref=e824]
+        - generic [ref=e826]:
+          - text: Раменское
+          - generic [ref=e827]:
+            - code [ref=e828]: ramenskoe
+            - text: · мост над водой
+      - generic [ref=e829]:
+        - img [ref=e831]
+        - generic [ref=e833]:
+          - text: Жуковский
+          - generic [ref=e834]:
+            - code [ref=e835]: zhukovsky
+            - text: · силуэт самолёта (МАКС)
+      - generic [ref=e836]:
+        - img [ref=e838]
+        - generic [ref=e841]:
+          - text: Москва
+          - generic [ref=e842]:
+            - code [ref=e843]: moskva
+            - text: · компас (все округа)
+    - paragraph [ref=e844]:
+      - text: Расширяем линейку до
+      - strong [ref=e845]: 28 районов
+      - text: "МО по wsfreq US-4 — каждой добавке пишется собственная landmark-метафора, чтобы programmatic SEO LP визуально не сливались. Кандидаты на следующую волну: Балашиха (купол ВДВ-памятника), Электросталь (молот / стрелка трамвая), Серпухов (кремлёвская стена), Подольск (купол собора), Видное (ясли горизонта). Решение по конкретному набору — оператор +"
+      - code [ref=e846]: seo1
+      - text: по wsfreq.
+    - heading "Case Topic Icons · 9 иконок v0.9 2026-04-25" [level=3] [ref=e847]:
+      - text: Case Topic Icons · 9 иконок v0.9
+      - generic [ref=e848]: 2026-04-25
+    - paragraph [ref=e849]: Иконки тем кейсов в mega-menu «Кейсы» — 3 кластера × 3 темы. Используются на CaseCard и в индексе кейсов. Та же спека line-art 24×24 stroke 1.5 currentColor.
+    - generic [ref=e850]:
+      - generic [ref=e851]:
+        - img [ref=e853]
+        - generic [ref=e857]:
+          - text: Спил после бури
+          - generic [ref=e858]:
+            - code [ref=e859]: storm-cleanup
+            - text: · молния + штриховой ветер
+      - generic [ref=e860]:
+        - img [ref=e862]
+        - generic [ref=e867]:
+          - text: Аварийное удаление
+          - generic [ref=e868]:
+            - code [ref=e869]: emergency-removal
+            - text: · падающее дерево
+      - generic [ref=e870]:
+        - img [ref=e872]
+        - generic [ref=e877]:
+          - text: Срочная чистка крыши
+          - generic [ref=e878]:
+            - code [ref=e879]: urgent-roof
+            - text: · крыша + сосульки
+      - generic [ref=e880]:
+        - img [ref=e882]
+        - generic [ref=e887]:
+          - text: Санобрезка сада
+          - generic [ref=e888]:
+            - code [ref=e889]: pruning-season
+            - text: · садовые ножницы
+      - generic [ref=e890]:
+        - img [ref=e892]
+        - generic [ref=e895]:
+          - text: Подготовка к зиме
+          - generic [ref=e896]:
+            - code [ref=e897]: winter-prep
+            - text: · ёлка + ограждение
+      - generic [ref=e898]:
+        - img [ref=e900]
+        - generic [ref=e906]:
+          - text: Демонтаж после ремонта
+          - generic [ref=e907]:
+            - code [ref=e908]: post-renovation
+            - text: · кувалда + дом
+      - generic [ref=e909]:
+        - img [ref=e911]
+        - generic [ref=e914]:
+          - text: Контракт УК
+          - generic [ref=e915]:
+            - code [ref=e916]: uk-contract
+            - text: · многоэтажка с окнами
+      - generic [ref=e917]:
+        - img [ref=e919]
+        - generic [ref=e922]:
+          - text: Коттеджный посёлок
+          - generic [ref=e923]:
+            - code [ref=e924]: cottage-village
+            - text: · 2 коттеджа
+      - generic [ref=e925]:
+        - img [ref=e927]
+        - generic [ref=e930]:
+          - text: FM-контракт
+          - generic [ref=e931]:
+            - code [ref=e932]: fm-contract
+            - text: · бизнес-центр
+    - paragraph [ref=e933]:
+      - text: "Полный комплект иконографики Обихода теперь виден здесь одним местом:"
+      - strong [ref=e934]: 22 service · 9 shop · 9 district · 9 case · 5 error illustrations
+      - text: = 54 line-art glyph'a в едином стиле. Все из них — domain-специфичные, ни одной stock-иконки. Это и есть «окно возможностей» из
+      - link "04_competitor_tech_stacks.md" [ref=e935] [cursor=pointer]:
+        - /url: ../contex/04_competitor_tech_stacks.md
+        - code [ref=e936]: 04_competitor_tech_stacks.md
+      - text: — у конкурентов на WP/Bitrix дефолтные FontAwesome или эмодзи.
+  - generic [ref=e938]:
+    - generic [ref=e939]: 09 · Навигация
+    - heading "Mega-menu каталога услуг" [level=2] [ref=e940]
+    - paragraph [ref=e941]:
+      - text: Реальный каталог Обихода покрывает 40+ подуслуг в 4 кластерах — линейный header не масштабируется. Паттерн mega-menu взят у сильных конкурентов,
+      - strong [ref=e942]: эстетика — наша
+      - text: ": кремовый фон, без зелёной плашки-header, без hover-заливок всей строки, без emoji-декораторов. Spec —"
+      - link "design-system/components/navigation/mega-menu.spec.md" [ref=e943] [cursor=pointer]:
+        - /url: components/navigation/mega-menu.spec.md
+        - code [ref=e944]: design-system/components/navigation/mega-menu.spec.md
+      - text: .
+    - heading "Структура" [level=3] [ref=e945]
+    - generic [ref=e946]:
+      - generic [ref=e947]:
+        - text: Арбористика
+        - paragraph [ref=e948]: Спил · Валка · Удаление целиком / частями · Корчевание · Кронирование · Санитарная обрезка · Каблинг / брейсинг · Опрыскивание · Измельчение веток
+      - generic [ref=e949]:
+        - text: Крыши / территория
+        - paragraph [ref=e950]: Уборка снега · Вывоз снега · Чистка водостоков · Промышленный альпинизм · Автовышка · Покос травы · Стрижка газона
+      - generic [ref=e951]:
+        - text: Мусор / демонтаж
+        - paragraph [ref=e952]: Вывоз бытового · Вывоз строительного · Контейнеры 7–30 м³ · Демонтаж сараев · Демонтаж перегородок · Расчистка участка
+    - heading "Поведение" [level=3] [ref=e953]
+    - table [ref=e954]:
+      - rowgroup [ref=e955]:
+        - row "Контекст Поведение" [ref=e956]:
+          - columnheader "Контекст" [ref=e957]
+          - columnheader "Поведение" [ref=e958]
+      - rowgroup [ref=e959]:
+        - row "Desktop (≥ 1024 px) Hover + 120 ms delay, overlay-dropdown 3 колонки, grace period 300 ms при выходе курсора" [ref=e960]:
+          - cell "Desktop (≥ 1024 px)" [ref=e961]
+          - cell "Hover + 120 ms delay, overlay-dropdown 3 колонки, grace period 300 ms при выходе курсора" [ref=e962]
+        - row "Tablet / mobile Click-to-open, full-width accordion drawer, chevron rotation 180°" [ref=e963]:
+          - cell "Tablet / mobile" [ref=e964]
+          - cell "Click-to-open, full-width accordion drawer, chevron rotation 180°" [ref=e965]
+        - row "Клавиатура Tab → triggers · Enter/Space/↓ → open · ↑↓ → items · ←→ → между колонками · Esc → close + return focus" [ref=e966]:
+          - cell "Клавиатура" [ref=e967]
+          - cell "Tab → triggers · Enter/Space/↓ → open · ↑↓ → items · ←→ → между колонками · Esc → close + return focus" [ref=e968]:
+            - code [ref=e969]: Tab
+            - text: → triggers ·
+            - code [ref=e970]: Enter/Space/↓
+            - text: → open ·
+            - code [ref=e971]: ↑↓
+            - text: → items ·
+            - code [ref=e972]: ←→
+            - text: → между колонками ·
+            - code [ref=e973]: Esc
+            - text: → close + return focus
+        - row "prefers-reduced-motion Без translateY, только opacity-fade" [ref=e974]:
+          - cell "prefers-reduced-motion" [ref=e975]
+          - cell "Без translateY, только opacity-fade" [ref=e976]:
+            - text: Без
+            - code [ref=e977]: translateY
+            - text: ", только opacity-fade"
+    - heading "Живой пример — наведите курсор на «Услуги»" [level=3] [ref=e978]
+    - paragraph [ref=e979]:
+      - text: Работающий hover-dropdown. На mobile / touch — клик по триггеру. Реализация для production — через
+      - link "mega-menu.spec.md" [ref=e980] [cursor=pointer]:
+        - /url: components/navigation/mega-menu.spec.md
+        - code [ref=e981]: mega-menu.spec.md
+      - text: .
+    - generic "Живой пример mega-menu" [ref=e982]:
+      - generic [ref=e983]:
+        - link "Обиход — на главную" [ref=e984] [cursor=pointer]:
+          - /url: "#top"
+          - img "Обиход" [ref=e985]
+        - generic [ref=e986]:
+          - button "Услуги ▼" [ref=e988] [cursor=pointer]:
+            - text: Услуги
+            - generic [ref=e989]: ▼
+          - button "Районы ▼" [ref=e991] [cursor=pointer]:
+            - text: Районы
+            - generic [ref=e992]: ▼
+          - button "Кейсы ▼" [ref=e994] [cursor=pointer]:
+            - text: Кейсы
+            - generic [ref=e995]: ▼
+          - button "Магазин ▼" [ref=e997] [cursor=pointer]:
+            - text: Магазин
+            - generic [ref=e998]: ▼
+          - link "Дизайн ландшафта" [ref=e999] [cursor=pointer]:
+            - /url: "#"
+          - link "Цены" [ref=e1000] [cursor=pointer]:
+            - /url: "#"
+          - link "Блог" [ref=e1001] [cursor=pointer]:
+            - /url: "#"
+          - link "Контакты" [ref=e1002] [cursor=pointer]:
+            - /url: "#"
+        - link "Получить смету" [ref=e1003] [cursor=pointer]:
+          - /url: "#"
+    - heading "Mobile accordion вариант" [level=3] [ref=e1004]
+    - paragraph [ref=e1005]: На viewport < 1024 px hover заменяется на click. Клик раскрывает аккордеон-секцию в drawer'е, a не overlay-панель.
+    - generic [ref=e1006]:
+      - group [ref=e1007]:
+        - generic "Арбористика ▾" [ref=e1008] [cursor=pointer]
+        - generic [ref=e1009]:
+          - link "Спил деревьев" [ref=e1010] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e1011]
+            - text: Спил деревьев
+          - link "Обрезка, кронирование" [ref=e1015] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e1016]
+            - text: Обрезка, кронирование
+          - link "Каблинг, брейсинг" [ref=e1020] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e1021]
+            - text: Каблинг, брейсинг
+      - group [ref=e1025]:
+        - generic "Крыши и территория ▾" [ref=e1026] [cursor=pointer]
+      - group [ref=e1027]:
+        - generic "Мусор и демонтаж ▾" [ref=e1028] [cursor=pointer]
+      - group [ref=e1029]:
+        - generic "Районы ▾" [ref=e1030] [cursor=pointer]
+      - group [ref=e1031]:
+        - generic "Кейсы ▾" [ref=e1032] [cursor=pointer]
+      - group [ref=e1033]:
+        - generic "Магазин ▾" [ref=e1034] [cursor=pointer]
+      - group [ref=e1035]:
+        - generic "Дизайн ландшафта ▾" [ref=e1036] [cursor=pointer]
+    - heading "Anti-patterns Обихода" [level=3] [ref=e1037]
+    - generic [ref=e1038]:
+      - generic [ref=e1039]:
+        - text: ×
+        - generic [ref=e1040]: Зелёная плашка-header
+        - paragraph [ref=e1041]: С белым текстом (референс конкурента) — ломает чертёжную эстетику. Фон кремовый, зелёный только на ink/accent.
+      - generic [ref=e1042]:
+        - text: ×
+        - generic [ref=e1043]: Hover-заливка всей строки
+        - paragraph [ref=e1044]: Подсветка только ink-цвета и иконки. Всплошь-зелёный row = мобильный список, не меню.
+      - generic [ref=e1045]:
+        - text: ×
+        - generic [ref=e1046]: Эмодзи-декораторы
+        - paragraph [ref=e1047]: «🌳 Арбористика» — анти-TOV. Иконки только из ServiceIcons.
+      - generic [ref=e1048]:
+        - text: ×
+        - generic [ref=e1049]: Многоуровневые dropdowns > 2
+        - paragraph [ref=e1050]: Слишком много кликов. Обиход = matter-of-fact, максимум 2 уровня меню.
+  - generic [ref=e1052]:
+    - generic [ref=e1053]: 10 · Пагинация
+    - heading "Numbered pagination — блог, кейсы, индекс районов" [level=2] [ref=e1054]
+    - paragraph [ref=e1055]:
+      - text: Дефолтный тип для Обихода. Infinite scroll / «Показать ещё» на SEO-страницах запрещены — теряем индексацию. Полный spec —
+      - link "pagination.spec.md" [ref=e1056] [cursor=pointer]:
+        - /url: components/pagination/pagination.spec.md
+        - code [ref=e1057]: pagination.spec.md
+      - text: .
+    - heading "Default — desktop" [level=3] [ref=e1058]
+    - generic [ref=e1059]:
+      - navigation "Pagination" [ref=e1060]:
+        - link "Перейти на страницу 2" [ref=e1061] [cursor=pointer]:
+          - /url: "#"
+          - text: ← Назад
+        - link "Страница 1" [ref=e1062] [cursor=pointer]:
+          - /url: "#"
+          - text: "1"
+        - link "Страница 2" [ref=e1063] [cursor=pointer]:
+          - /url: "#"
+          - text: "2"
+        - generic "Текущая страница 3" [ref=e1064]: "3"
+        - link "Страница 4" [ref=e1065] [cursor=pointer]:
+          - /url: "#"
+          - text: "4"
+        - link "Страница 5" [ref=e1066] [cursor=pointer]:
+          - /url: "#"
+          - text: "5"
+        - generic [ref=e1067]: …
+        - link "Страница 24" [ref=e1068] [cursor=pointer]:
+          - /url: "#"
+          - text: "24"
+        - link "Перейти на страницу 4" [ref=e1069] [cursor=pointer]:
+          - /url: "#"
+          - text: Вперёд →
+      - paragraph [ref=e1070]: 24 кейса · страница 3
+    - heading "Граничные состояния" [level=3] [ref=e1071]
+    - generic [ref=e1072]:
+      - generic [ref=e1073]:
+        - paragraph [ref=e1074]: "На первой странице — Prev disabled:"
+        - navigation "Pagination начало" [ref=e1075]:
+          - generic [ref=e1076]: ← Назад
+          - generic [ref=e1077]: "1"
+          - link "2" [ref=e1078] [cursor=pointer]:
+            - /url: "#"
+          - link "3" [ref=e1079] [cursor=pointer]:
+            - /url: "#"
+          - generic [ref=e1080]: …
+          - link "24" [ref=e1081] [cursor=pointer]:
+            - /url: "#"
+          - link "Вперёд →" [ref=e1082] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=e1083]:
+        - paragraph [ref=e1084]: "На последней — Next disabled:"
+        - navigation "Pagination конец" [ref=e1085]:
+          - link "← Назад" [ref=e1086] [cursor=pointer]:
+            - /url: "#"
+          - link "1" [ref=e1087] [cursor=pointer]:
+            - /url: "#"
+          - generic [ref=e1088]: …
+          - link "22" [ref=e1089] [cursor=pointer]:
+            - /url: "#"
+          - link "23" [ref=e1090] [cursor=pointer]:
+            - /url: "#"
+          - generic [ref=e1091]: "24"
+          - generic [ref=e1092]: Вперёд →
+    - heading "Compact — mobile ≤ 640 px" [level=3] [ref=e1093]
+    - navigation "Pagination mobile" [ref=e1095]:
+      - link "←" [ref=e1096] [cursor=pointer]:
+        - /url: "#"
+      - generic [ref=e1097]:
+        - text: Страница
+        - strong [ref=e1098]: "3"
+        - text: из 24
+      - link "→" [ref=e1099] [cursor=pointer]:
+        - /url: "#"
+    - heading "SEO-разметка в <head>" [level=3] [ref=e1100]:
+      - text: SEO-разметка в
+      - code [ref=e1101]: <head>
+    - generic [ref=e1102]: <!-- /blog/page/3 --> <link rel="canonical" href="https://obikhod.ru/blog/page/3/" /> <link rel="prev" href="https://obikhod.ru/blog/page/2/" /> <link rel="next" href="https://obikhod.ru/blog/page/4/" />
+    - paragraph [ref=e1103]:
+      - text: Страница 1 → canonical без
+      - code [ref=e1104]: /page/1/
+      - text: . Страницы 2+ → self-canonical с полным URL. Google с 2019 не использует
+      - code [ref=e1105]: rel=next/prev
+      - text: ", Яндекс — читает. Для ruen-first проекта обязательно."
+    - heading "Anti-patterns" [level=3] [ref=e1106]
+    - generic [ref=e1107]:
+      - generic [ref=e1108]:
+        - text: ×
+        - generic [ref=e1109]: Infinite scroll
+        - paragraph [ref=e1110]: Ломает SEO (страницы не индексируются), back-кнопку, a11y. На Обиходе запрещён.
+      - generic [ref=e1111]:
+        - text: ×
+        - generic [ref=e1112]: «Показать ещё»
+        - paragraph [ref=e1113]: Так же плохо для SEO. Допустим только на FAQ / отзывах — не на контенте для поисковиков.
+      - generic [ref=e1114]:
+        - text: ×
+        - generic [ref=e1115]: Кнопки вместо ссылок
+        - paragraph [ref=e1116]:
+          - code [ref=e1117]: <button>
+          - text: ломает right-click «Открыть в новой вкладке» и SEO. Только
+          - code [ref=e1118]: <a href>
+          - text: .
+      - generic [ref=e1119]:
+        - text: ×
+        - generic [ref=e1120]: Без многоточий
+        - paragraph [ref=e1121]:
+          - text: «1 2 3 4 … 98 99 100» всё в ряд — нечитаемо. Обязательно
+          - code [ref=e1122]: …
+          - text: в пропусках.
+  - generic [ref=e1124]:
+    - generic [ref=e1125]: 11 · Уведомления
+    - heading "Что видит пользователь после действия" [level=2] [ref=e1126]
+    - paragraph [ref=e1127]:
+      - text: Формы сбора заявок — главный конверсионный механизм. После отправки пользователь должен
+      - strong [ref=e1128]: точно знать
+      - text: что заявка ушла, куда ждать ответ и что делать если что-то не так. Полный spec —
+      - link "feedback-states.spec.md" [ref=e1129] [cursor=pointer]:
+        - /url: components/feedback-states/feedback-states.spec.md
+        - code [ref=e1130]: feedback-states.spec.md
+      - text: ", копи —"
+      - link "microcopy.md" [ref=e1131] [cursor=pointer]:
+        - /url: foundations/microcopy.md
+        - code [ref=e1132]: microcopy.md
+      - text: .
+    - heading "Primary flow — success после заявки «фото → смета»" [level=3] [ref=e1133]
+    - paragraph [ref=e1134]:
+      - text: Главный сценарий. Форма
+      - strong [ref=e1135]: целиком заменяется
+      - text: на success-card, не просто toast сверху. Пользователь получает ID заявки крупно (скопирует в мессенджер), понимает что дальше и может сразу перейти в Telegram или позвонить.
+    - generic [ref=e1136]:
+      - generic [ref=e1137]: ✓
+      - paragraph [ref=e1138]: Заявка принята
+      - paragraph [ref=e1139]: ОБИ-2026-00042
+      - paragraph [ref=e1140]:
+        - text: Напишем в Telegram на
+        - strong [ref=e1141]: +7 985 170 51 11
+        - text: за 10 минут.
+      - paragraph [ref=e1142]: Средний отклик сегодня — 7 минут.
+      - generic [ref=e1143]:
+        - link "Открыть Telegram" [ref=e1144] [cursor=pointer]:
+          - /url: "#"
+        - link "Позвонить сейчас" [ref=e1145] [cursor=pointer]:
+          - /url: "#"
+    - heading "Toast-уведомления — вторичные события" [level=3] [ref=e1146]
+    - paragraph [ref=e1147]: "Для действий где блокирующий success-card избыточен: сохранили черновик, добавили фото, ошибка валидации на одном поле. Позиция: top-right (desktop) / top-center full-width (mobile). Auto-dismiss для polite, постоянный для assertive (ошибки)."
+    - generic [ref=e1148]:
+      - generic [ref=e1149]:
+        - heading "✓ Success (polite · auto 3s)" [level=4] [ref=e1150]
+        - status [ref=e1151]:
+          - img [ref=e1152]
+          - paragraph [ref=e1156]: Черновик сохранён
+          - button "Закрыть" [ref=e1157] [cursor=pointer]: ×
+        - paragraph [ref=e1158]: "Примеры: «Фото добавлено (3 из 6)», «Телефон сохранён в профиле»."
+      - generic [ref=e1159]:
+        - heading "⚠ Error (assertive · ручное закрытие)" [level=4] [ref=e1160]
+        - alert [ref=e1161]:
+          - img [ref=e1162]
+          - generic [ref=e1165]:
+            - paragraph [ref=e1166]: Заявка не ушла — проверьте интернет
+            - link "Написать в Telegram" [ref=e1167] [cursor=pointer]:
+              - /url: "#"
+          - button "Закрыть" [ref=e1168] [cursor=pointer]: ×
+        - paragraph [ref=e1169]:
+          - text: "Формула:"
+          - emphasis [ref=e1170]: что не так + что сделать
+          - text: . Без «упс» и «извините».
+      - generic [ref=e1171]:
+        - heading "⚡ Warning (янтарный)" [level=4] [ref=e1172]
+        - status [ref=e1173]:
+          - img [ref=e1174]
+          - paragraph [ref=e1178]: large.heic больше 20 МБ — сожмите или пришлите в мессенджер
+          - button "Закрыть" [ref=e1179] [cursor=pointer]: ×
+        - paragraph [ref=e1180]: Не критично, но требует действия. На границе между success и error.
+      - generic [ref=e1181]:
+        - heading "ℹ Info (polite · auto 4s)" [level=4] [ref=e1182]
+        - status [ref=e1183]:
+          - img [ref=e1184]
+          - paragraph [ref=e1188]: Средний отклик сегодня — 7 минут
+          - button "Закрыть" [ref=e1189] [cursor=pointer]: ×
+        - paragraph [ref=e1190]: Социальное доказательство / статус. Не блокирует, но полезно знать.
+    - heading "Empty state · Loading skeleton" [level=3] [ref=e1191]
+    - generic [ref=e1192]:
+      - generic [ref=e1193]:
+        - heading "Empty state — нет данных" [level=4] [ref=e1194]
+        - generic [ref=e1195]:
+          - img [ref=e1197]
+          - heading "Кейсов в Раменском пока нет" [level=5] [ref=e1201]
+          - paragraph [ref=e1202]:
+            - text: Добавим после ближайшего выезда. Пока — посмотрите
+            - link "кейсы в соседних районах" [ref=e1203] [cursor=pointer]:
+              - /url: "#"
+            - text: .
+        - paragraph [ref=e1204]:
+          - text: "Формула:"
+          - emphasis [ref=e1205]: что здесь должно быть + что сделать
+          - text: . Не просто «Пусто» или «No data».
+      - generic [ref=e1206]:
+        - heading "Loading skeleton — карточка кейса" [level=4] [ref=e1207]
+        - generic "Загружаем кейсы" [ref=e1208]
+        - paragraph [ref=e1213]:
+          - text: Skeleton повторяет final layout — нет layout shift (CLS). На
+          - code [ref=e1214]: prefers-reduced-motion
+          - text: shimmer отключён.
+    - heading "Полный 5-стейтовый flow отправки заявки" [level=3] [ref=e1215]
+    - list [ref=e1217]:
+      - listitem [ref=e1218]:
+        - strong [ref=e1219]: Idle
+        - text: — форма в дефолте, submit disabled (нет телефона/фото)
+      - listitem [ref=e1220]:
+        - strong [ref=e1221]: Filled
+        - text: — все поля валидны, submit активирован
+      - listitem [ref=e1222]:
+        - strong [ref=e1223]: Submitting
+        - text: — submit button «Отправляем…» со spinner, форма
+        - code [ref=e1224]: "pointer-events: none"
+        - text: ", никаких модалок"
+      - listitem [ref=e1225]:
+        - strong [ref=e1226]: Success
+        - text: — форма
+        - strong [ref=e1227]: целиком заменяется
+        - text: на success-card с ID заявки (см. выше)
+      - listitem [ref=e1228]:
+        - strong [ref=e1229]: Error
+        - text: — форма НЕ сбрасывается, error toast сверху, submit снова активен, retry
+    - heading "Anti-patterns" [level=3] [ref=e1230]
+    - generic [ref=e1231]:
+      - generic [ref=e1232]:
+        - text: ×
+        - generic [ref=e1233]: «Спасибо!» без контекста
+        - paragraph [ref=e1234]: Что произошло? Что дальше? Пользователь не должен гадать.
+      - generic [ref=e1235]:
+        - text: ×
+        - generic [ref=e1236]: Модалка на весь экран после submit
+        - paragraph [ref=e1237]: Блокирует UX без причины. Inline success-card на месте формы.
+      - generic [ref=e1238]:
+        - text: ×
+        - generic [ref=e1239]: «Упс!» «Ой!»
+        - paragraph [ref=e1240]: Инфантилизация. Обиход = matter-of-fact.
+      - generic [ref=e1241]:
+        - text: ×
+        - generic [ref=e1242]: Toast без action
+        - paragraph [ref=e1243]: Ошибка без «что сделать» = frustration. Всегда либо link-action, либо retry.
+      - generic [ref=e1244]:
+        - text: ×
+        - generic [ref=e1245]: Error только цветом
+        - paragraph [ref=e1246]: WCAG 1.4.1. Иконка + текст + цвет — все три одновременно.
+      - generic [ref=e1247]:
+        - text: ×
+        - generic [ref=e1248]: Автодисмисс для ошибок
+        - paragraph [ref=e1249]: Success можно dismiss через 3с, error — только ручным закрытием пользователем.
+  - generic [ref=e1251]:
+    - generic [ref=e1252]: 11.5 · Страницы ошибок
+    - heading "Когда что-то пошло не так" [level=2] [ref=e1253]
+    - paragraph [ref=e1254]:
+      - text: Error pages — это микро-доверие. У конкурентов на WP/Bitrix чаще всего «Apache 503 Service Unavailable» во весь экран на дефолтном шрифте — это «у них всё развалилось». У Обихода —
+      - strong [ref=e1255]: matter-of-fact страница
+      - text: "с понятным кодом, человеческим объяснением, путём наружу и контактом, который точно работает (телефон / Telegram). Архетип Caregiver: «упало — поднимем, вы пока сюда»."
+    - heading "Карта состояний" [level=3] [ref=e1256]
+    - table [ref=e1257]:
+      - rowgroup [ref=e1258]:
+        - row "Код Когда Файл (Next.js 16) Уровень" [ref=e1259]:
+          - columnheader "Код" [ref=e1260]
+          - columnheader "Когда" [ref=e1261]
+          - columnheader "Файл (Next.js 16)" [ref=e1262]
+          - columnheader "Уровень" [ref=e1263]
+      - rowgroup [ref=e1264]:
+        - row "404 Страница / SD / sub-service не найдены — самый частый сценарий, заслуживает дизайна (а не дефолта) app/not-found.tsx route segment" [ref=e1265]:
+          - cell "404" [ref=e1266]:
+            - code [ref=e1267]: "404"
+          - cell "Страница / SD / sub-service не найдены — самый частый сценарий, заслуживает дизайна (а не дефолта)" [ref=e1268]
+          - cell "app/not-found.tsx" [ref=e1269]:
+            - code [ref=e1270]: app/not-found.tsx
+          - cell "route segment" [ref=e1271]
+        - row "500 Internal Server Error — server component crash, Payload backend down, неожиданный throw app/error.tsx (uncaught) + app/global-error.tsx (root) app boundary" [ref=e1272]:
+          - cell "500" [ref=e1273]:
+            - code [ref=e1274]: "500"
+          - cell "Internal Server Error — server component crash, Payload backend down, неожиданный throw" [ref=e1275]
+          - cell "app/error.tsx (uncaught) + app/global-error.tsx (root)" [ref=e1276]:
+            - code [ref=e1277]: app/error.tsx
+            - text: (uncaught) +
+            - code [ref=e1278]: app/global-error.tsx
+            - text: (root)
+          - cell "app boundary" [ref=e1279]
+        - row "502 / 504 Bad Gateway / Gateway Timeout — Beget reverse-proxy не дождался Node, обычно после деплоя статика nginx /var/www/errors/502.html edge / nginx" [ref=e1280]:
+          - cell "502 / 504" [ref=e1281]:
+            - code [ref=e1282]: 502 / 504
+          - cell "Bad Gateway / Gateway Timeout — Beget reverse-proxy не дождался Node, обычно после деплоя" [ref=e1283]
+          - cell "статика nginx /var/www/errors/502.html" [ref=e1284]:
+            - text: статика nginx
+            - code [ref=e1285]: /var/www/errors/502.html
+          - cell "edge / nginx" [ref=e1286]
+        - row "503 Service Unavailable — плановый maintenance или защита от перегрузки статика nginx + Retry-After header edge / nginx" [ref=e1287]:
+          - cell "503" [ref=e1288]:
+            - code [ref=e1289]: "503"
+          - cell "Service Unavailable — плановый maintenance или защита от перегрузки" [ref=e1290]
+          - cell "статика nginx + Retry-After header" [ref=e1291]:
+            - text: статика nginx +
+            - code [ref=e1292]: Retry-After
+            - text: header
+          - cell "edge / nginx" [ref=e1293]
+        - row "offline Network error на клиенте (PWA / fetch failure) — даже без 5xx можно показать дружелюбный fallback app/error.tsx с network detection client" [ref=e1294]:
+          - cell "offline" [ref=e1295]
+          - cell "Network error на клиенте (PWA / fetch failure) — даже без 5xx можно показать дружелюбный fallback" [ref=e1296]
+          - cell "app/error.tsx с network detection" [ref=e1297]:
+            - code [ref=e1298]: app/error.tsx
+            - text: с network detection
+          - cell "client" [ref=e1299]
+    - heading "Анатомия страницы" [level=3] [ref=e1300]
+    - paragraph [ref=e1301]:
+      - text: Все 5 страниц используют один шаблон
+      - code [ref=e1302]: <ErrorState>
+      - text: ":"
+      - strong [ref=e1303]: иллюстрация 96×96 → код → заголовок → 1-2 строки объяснения → 1-2 CTA → fallback контакт
+      - text: . Без юмора в стиле «Упс!» (анти-TOV из 11 · Notifications). Бэкграунд кремовый (
+      - code [ref=e1304]: "--c-bg"
+      - text: ), иллюстрация через
+      - code [ref=e1305]: "--c-primary"
+      - text: ", текст ink."
+      - strong [ref=e1306]: Иллюстрации — line-art в стиле service-иконок
+      - text: (stroke 2, currentColor), не AI-photorealistic.
+    - generic [ref=e1307]:
+      - generic [ref=e1308]:
+        - 'img "Иллюстрация: компас с разбитой стрелкой" [ref=e1309]'
+        - generic [ref=e1316]: HTTP 404 · NOT FOUND
+        - heading "Страница свернула не туда" [level=3] [ref=e1317]
+        - paragraph [ref=e1318]: Адрес неверный или страницу убрали. Откройте карту услуг или сразу опишите задачу — мы поймём, что нужно, и пришлём смету за 10 минут.
+        - generic [ref=e1319]:
+          - link "На главную" [ref=e1320] [cursor=pointer]:
+            - /url: "#"
+          - link "Все услуги" [ref=e1321] [cursor=pointer]:
+            - /url: "#"
+        - paragraph [ref=e1322]:
+          - text: Если адрес из закладок — напишите нам в Telegram, поправим.
+          - code [ref=e1323]: app/not-found.tsx
+      - generic [ref=e1324]:
+        - 'img "Иллюстрация: бензопила с заклинившей цепью" [ref=e1325]'
+        - generic [ref=e1339]: HTTP 500 · INTERNAL ERROR
+        - heading "У нас механика чихает" [level=3] [ref=e1340]
+        - paragraph [ref=e1341]: "Сбой на нашей стороне. Уже разбираемся — обычно лечится за минуту. Можно обновить страницу или оставить заявку: примем телефоном."
+        - generic [ref=e1342]:
+          - link "Обновить" [ref=e1343] [cursor=pointer]:
+            - /url: "#"
+          - link "Оставить заявку" [ref=e1344] [cursor=pointer]:
+            - /url: "#"
+        - paragraph [ref=e1345]:
+          - text: Sentry уже получил отчёт.
+          - code [ref=e1346]: app/error.tsx
+          - text: +
+          - code [ref=e1347]: app/global-error.tsx
+      - generic [ref=e1348]:
+        - 'img "Иллюстрация: разорванное звено цепи каблинга" [ref=e1349]'
+        - generic [ref=e1358]: HTTP 502 / 504 · BAD GATEWAY
+        - heading "Сервер не отозвался" [level=3] [ref=e1359]
+        - paragraph [ref=e1360]: Между нами и сайтом потерялась связь. Бывает после деплоя — возвращается за минуту. Просто обновите страницу через 30 секунд.
+        - generic [ref=e1361]:
+          - link "Попробовать снова" [ref=e1362] [cursor=pointer]:
+            - /url: "#"
+          - link "На главную" [ref=e1363] [cursor=pointer]:
+            - /url: "#"
+        - paragraph [ref=e1364]:
+          - text: Beget reverse-proxy + PM2 graceful reload.
+          - code [ref=e1365]: nginx /errors/502.html
+      - generic [ref=e1366]:
+        - 'img "Иллюстрация: табличка «технический перерыв» на дереве" [ref=e1367]'
+        - generic [ref=e1373]: HTTP 503 · MAINTENANCE
+        - heading "Технический перерыв" [level=3] [ref=e1374]
+        - paragraph [ref=e1375]: Обновляем сайт. Зайдите через 10–15 минут — или оставьте заявку прямо сейчас в Telegram, мы на связи.
+        - generic [ref=e1376]:
+          - link "Telegram" [ref=e1377] [cursor=pointer]:
+            - /url: "#"
+          - link "Позвонить" [ref=e1378] [cursor=pointer]:
+            - /url: "#"
+        - paragraph [ref=e1379]:
+          - text: Header
+          - code [ref=e1380]: "Retry-After: 600"
+          - text: + список свежих кейсов вместо контента.
+          - code [ref=e1381]: nginx /errors/503.html
+      - generic [ref=e1382]:
+        - 'img "Иллюстрация: антенна без сигнала" [ref=e1383]'
+        - generic [ref=e1393]: CLIENT · NETWORK
+        - heading "Нет связи" [level=3] [ref=e1394]
+        - paragraph [ref=e1395]: Похоже, пропал интернет. Когда вернётся — страница откроется сама. Можно открыть из меню в офлайн-режиме базовые разделы.
+        - link "Попробовать снова" [ref=e1397] [cursor=pointer]:
+          - /url: "#"
+        - paragraph [ref=e1398]:
+          - text: Service worker fallback +
+          - code [ref=e1399]: navigator.onLine
+          - text: listener. Иллюстрация ↔
+          - code [ref=e1400]: app/error.tsx
+    - heading "Принципы копирайта (TOV-черновик от art, финал — cw)" [level=3] [ref=e1401]:
+      - text: Принципы копирайта (TOV-черновик от
+      - code [ref=e1402]: art
+      - text: ", финал —"
+      - code [ref=e1403]: cw
+      - text: )
+    - generic [ref=e1404]:
+      - generic [ref=e1405]:
+        - text: Никогда «Упс!» / «Ой!»
+        - paragraph [ref=e1406]: "Инфантильно. У Обихода ошибки звучат как «бригадир спокойно описывает проблему»: «Сервер не отозвался», «Технический перерыв»."
+      - generic [ref=e1407]:
+        - text: Всегда CTA-выход
+        - paragraph [ref=e1408]: Минимум одна кнопка-действие. Запасной канал (Telegram / телефон) — как fallback под ней.
+      - generic [ref=e1409]:
+        - text: Объяснить, не извиниться
+        - paragraph [ref=e1410]: Caregiver = «вижу проблему, делаю». «Бывает после деплоя — возвращается за минуту» = доверие. «Простите, у нас сложности» = слабость.
+      - generic [ref=e1411]:
+        - text: Код виден, но не доминирует
+        - paragraph [ref=e1412]: «HTTP 502 · BAD GATEWAY» — eyebrow-стиль uppercase mono 13px, не h1. Технику оставляем для тех кто читает, у остальных — заголовок-человек.
+      - generic [ref=e1413]:
+        - text: Иллюстрация = метафора, не картинка
+        - paragraph [ref=e1414]: Компас (404), пила-чихалка (500), оборванная цепь (502), табличка-перерыв (503), антенна без сигнала (offline). Всё в lin-art currentColor 96×96. Никаких photorealistic AI / стоковых.
+      - generic [ref=e1415]:
+        - text: Sentry / log — обязательно
+        - paragraph [ref=e1416]:
+          - text: 500 / 502 / 503 шлют событие в Sentry с контекстом (URL, user-agent, request-id). На странице — невидимо, но в коде
+          - code [ref=e1417]: app/error.tsx
+          - text: вызов
+          - code [ref=e1418]: captureException
+          - text: .
+    - paragraph [ref=e1419]:
+      - text: Spec для реализации — в
+      - link "components/error-state/error-state.spec.md" [ref=e1420] [cursor=pointer]:
+        - /url: components/error-state/error-state.spec.md
+        - code [ref=e1421]: components/error-state/error-state.spec.md
+      - text: (создаётся
+      - code [ref=e1422]: ui
+      - text: по
+      - code [ref=e1423]: art-brief
+      - text: ). Тексты — финализирует
+      - code [ref=e1424]: cw
+      - text: под TOV. Развёртывание 502/503 на nginx — задача
+      - code [ref=e1425]: do
+      - text: (Beget reverse-proxy конфиг).
+  - generic [ref=e1427]:
+    - generic [ref=e1428]: 12 · Паблик → Payload
+    - heading "Один бренд, две задачи" [level=2] [ref=e1429]
+    - paragraph [ref=e1430]:
+      - text: Паблик и админка Payload живут на одних токенах — это сняли в
+      - link "admin-visual/art-concept.md" [ref=e1431] [cursor=pointer]:
+        - /url: ../devteam/specs/admin-visual/art-concept.md
+        - code [ref=e1432]: admin-visual/art-concept.md
+      - text: . В админке поднимаем плотность UI, палитра та же.
+    - table [ref=e1433]:
+      - rowgroup [ref=e1434]:
+        - row "Роль в админке Payload token HEX Сайт-эквивалент" [ref=e1435]:
+          - columnheader "Роль в админке" [ref=e1436]
+          - columnheader "Payload token" [ref=e1437]
+          - columnheader "HEX" [ref=e1438]
+          - columnheader "Сайт-эквивалент" [ref=e1439]
+      - rowgroup [ref=e1440]:
+        - 'row "background --theme-bg #f7f5f0 --c-bg" [ref=e1441]':
+          - cell "background" [ref=e1442]
+          - cell "--theme-bg" [ref=e1443]:
+            - code [ref=e1444]: "--theme-bg"
+          - cell "#f7f5f0" [ref=e1445]
+          - cell "--c-bg" [ref=e1446]:
+            - code [ref=e1447]: "--c-bg"
+        - 'row "surface --theme-elevation-0/50 #ffffff --c-card" [ref=e1448]':
+          - cell "surface" [ref=e1449]
+          - cell "--theme-elevation-0/50" [ref=e1450]:
+            - code [ref=e1451]: "--theme-elevation-0/50"
+          - cell "#ffffff" [ref=e1452]
+          - cell "--c-card" [ref=e1453]:
+            - code [ref=e1454]: "--c-card"
+        - 'row "surface-alt --theme-elevation-100 #efebe0 --c-bg-alt" [ref=e1455]':
+          - cell "surface-alt" [ref=e1456]
+          - cell "--theme-elevation-100" [ref=e1457]:
+            - code [ref=e1458]: "--theme-elevation-100"
+          - cell "#efebe0" [ref=e1459]
+          - cell "--c-bg-alt" [ref=e1460]:
+            - code [ref=e1461]: "--c-bg-alt"
+        - 'row "text --theme-text #1c1c1c --c-ink" [ref=e1462]':
+          - cell "text" [ref=e1463]
+          - cell "--theme-text" [ref=e1464]:
+            - code [ref=e1465]: "--theme-text"
+          - cell "#1c1c1c" [ref=e1466]
+          - cell "--c-ink" [ref=e1467]:
+            - code [ref=e1468]: "--c-ink"
+        - 'row "text-soft --theme-elevation-800 #2b2b2b --c-ink-soft" [ref=e1469]':
+          - cell "text-soft" [ref=e1470]
+          - cell "--theme-elevation-800" [ref=e1471]:
+            - code [ref=e1472]: "--theme-elevation-800"
+          - cell "#2b2b2b" [ref=e1473]
+          - cell "--c-ink-soft" [ref=e1474]:
+            - code [ref=e1475]: "--c-ink-soft"
+        - 'row "text-muted --theme-elevation-500 #6b6256 уточнение --c-muted (WCAG-поднят с #8c8377 → 4.5:1)" [ref=e1476]':
+          - cell "text-muted" [ref=e1477]
+          - cell "--theme-elevation-500" [ref=e1478]:
+            - code [ref=e1479]: "--theme-elevation-500"
+          - cell "#6b6256" [ref=e1480]
+          - 'cell "уточнение --c-muted (WCAG-поднят с #8c8377 → 4.5:1)" [ref=e1481]':
+            - text: уточнение
+            - code [ref=e1482]: "--c-muted"
+            - text: "(WCAG-поднят с #8c8377 → 4.5:1)"
+        - 'row "accent (primary) --theme-success-500 #2d5a3d --c-primary" [ref=e1483]':
+          - cell "accent (primary)" [ref=e1484]
+          - cell "--theme-success-500" [ref=e1485]:
+            - code [ref=e1486]: "--theme-success-500"
+          - cell "#2d5a3d" [ref=e1487]
+          - cell "--c-primary" [ref=e1488]:
+            - code [ref=e1489]: "--c-primary"
+        - 'row "accent-hover --theme-success-600 #1f3f2b --c-primary-ink" [ref=e1490]':
+          - cell "accent-hover" [ref=e1491]
+          - cell "--theme-success-600" [ref=e1492]:
+            - code [ref=e1493]: "--theme-success-600"
+          - cell "#1f3f2b" [ref=e1494]
+          - cell "--c-primary-ink" [ref=e1495]:
+            - code [ref=e1496]: "--c-primary-ink"
+        - 'row "highlight — #e6a23c --c-accent" [ref=e1497]':
+          - cell "highlight" [ref=e1498]
+          - cell "—" [ref=e1499]
+          - cell "#e6a23c" [ref=e1500]
+          - cell "--c-accent" [ref=e1501]:
+            - code [ref=e1502]: "--c-accent"
+        - 'row "border --theme-elevation-200 #e6e1d6 --c-line" [ref=e1503]':
+          - cell "border" [ref=e1504]
+          - cell "--theme-elevation-200" [ref=e1505]:
+            - code [ref=e1506]: "--theme-elevation-200"
+          - cell "#e6e1d6" [ref=e1507]
+          - cell "--c-line" [ref=e1508]:
+            - code [ref=e1509]: "--c-line"
+        - 'row "warning --theme-warning-500 #c18724 --c-accent-ink" [ref=e1510]':
+          - cell "warning" [ref=e1511]
+          - cell "--theme-warning-500" [ref=e1512]:
+            - code [ref=e1513]: "--theme-warning-500"
+          - cell "#c18724" [ref=e1514]
+          - cell "--c-accent-ink" [ref=e1515]:
+            - code [ref=e1516]: "--c-accent-ink"
+        - 'row "danger --theme-error-500 #b54828 --c-error" [ref=e1517]':
+          - cell "danger" [ref=e1518]
+          - cell "--theme-error-500" [ref=e1519]:
+            - code [ref=e1520]: "--theme-error-500"
+          - cell "#b54828" [ref=e1521]
+          - cell "--c-error" [ref=e1522]:
+            - code [ref=e1523]: "--c-error"
+    - paragraph [ref=e1524]:
+      - text: Override живёт в
+      - code [ref=e1525]: site/app/(payload)/custom.scss
+      - text: на
+      - code [ref=e1526]: :root[data-theme='light']
+      - text: . Тёмная тема — клон light до MVP-запуска.
+    - heading "Admin v2 — финальные mockups 2026-04-27 · US-12" [level=3] [ref=e1527]:
+      - text: Admin v2 — финальные mockups
+      - generic [ref=e1528]: 2026-04-27 · US-12
+    - paragraph [ref=e1529]:
+      - text: v1 (
+      - link "art-concept.md" [ref=e1530] [cursor=pointer]:
+        - /url: ../devteam/specs/admin-visual/art-concept.md
+        - code [ref=e1531]: art-concept.md
+      - text: ) закрыл токены и группировку, но дефолтный Payload UI поверх остался. v2 (
+      - link "art-concept-v2.md" [ref=e1532] [cursor=pointer]:
+        - /url: ../devteam/specs/US-12-admin-redesign/art-concept-v2.md
+        - code [ref=e1533]: art-concept-v2.md
+      - text: ") добавляет 8 экранов:"
+      - strong [ref=e1534]: Login · Sidebar · Dashboard + Page Catalog · List · Edit (tabs) · Empty / Error / 403
+      - text: . Mood «Хозяйственная книга бригадира» из v1 сохраняется. Реализация —
+      - code [ref=e1535]: fe1
+      - text: +
+      - code [ref=e1536]: be4
+      - text: отдельным US после approval.
+    - heading "12.1 · Login screen" [level=3] [ref=e1537]
+    - paragraph [ref=e1538]:
+      - text: "Без картинок и градиентов:"
+      - strong [ref=e1539]: brand-lockup
+      - text: (
+      - code [ref=e1540]: horizontal-compact.svg
+      - text: — знак «Круг сезонов» + wordmark, без бренд-tagline «круг сезонов» — она не уместна в admin) + admin-tagline «порядок под ключ · admin» отдельной строкой + карточка-форма 320 px по центру. Кремовый фон
+      - code [ref=e1541]: "#f7f5f0"
+      - text: ", белая карточка, primary-кнопка янтарная. Состояния (default / loading / error / success) — описаны в"
+      - link "art-concept-v2 §1" [ref=e1542] [cursor=pointer]:
+        - /url: ../devteam/specs/US-12-admin-redesign/art-concept-v2.md#1-login-screen-новое
+        - code [ref=e1543]: art-concept-v2 §1
+      - text: .
+    - generic [ref=e1544]:
+      - generic [ref=e1545]:
+        - generic [ref=e1546]: obikhod.ru/admin/login
+        - generic [ref=e1547]: desktop · default
+      - generic [ref=e1548]:
+        - generic [ref=e1549]:
+          - img "Обиход" [ref=e1550]
+          - generic [ref=e1551]: порядок под ключ · admin
+        - generic [ref=e1552]:
+          - generic [ref=e1553]:
+            - generic [ref=e1554]: Email
+            - textbox [ref=e1555]: grigorij@obikhod.ru
+          - generic [ref=e1556]:
+            - generic [ref=e1557]: Пароль
+            - textbox [ref=e1558]: ••••••••
+          - button "Войти" [ref=e1559] [cursor=pointer]
+          - link "Забыли пароль? →" [ref=e1560] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=e1561]: © 2026 · Обиход
+    - heading "12.2 · Layout — sidebar + top bar + canvas" [level=3] [ref=e1562]
+    - paragraph [ref=e1563]:
+      - text: Sidebar 220 px (collapsed 64 px), top bar 48 px, canvas — рабочая область. Active-link бренд-зелёный с янтарной полоской слева. Counter рядом с активной коллекцией.
+      - strong [ref=e1564]: Каждый пункт меню получает ассоциативную иконку
+      - text: "14×14 line-art currentColor (унификация с brand-guide #icons): inbox (Заявки) · 4-square (Услуги, 4-в-1) · pin (Районы) · pin+grid (SD = район×услуга) · folder (Кейсы) · page (Блог) · person (Авторы) · 2-buildings (B2B) · image (Файлы) · globe+search (SEO) · arrows (Redirects) · frame (SiteChrome) · group (Users). Opacity 0.65 default → 1.0 active."
+    - generic [ref=e1565]:
+      - generic [ref=e1566]:
+        - generic [ref=e1567]: /admin · layout базовый
+        - generic [ref=e1568]: desktop · sidebar expanded
+      - generic [ref=e1570]:
+        - generic [ref=e1571]:
+          - generic [ref=e1572]:
+            - generic [ref=e1573]: О
+            - generic [ref=e1574]: Обиход
+          - generic [ref=e1575]: 01 · Заявки
+          - generic [ref=e1576] [cursor=pointer]:
+            - generic [ref=e1577]:
+              - img [ref=e1578]
+              - text: Lead'ы
+            - generic [ref=e1581]: "12"
+          - generic [ref=e1582]: 02 · Контент
+          - generic [ref=e1583] [cursor=pointer]:
+            - generic [ref=e1584]:
+              - img [ref=e1585]
+              - text: Услуги
+            - generic [ref=e1590]: "4"
+          - generic [ref=e1591] [cursor=pointer]:
+            - generic [ref=e1592]:
+              - img [ref=e1593]
+              - text: Районы
+            - generic [ref=e1596]: "8"
+          - generic [ref=e1597] [cursor=pointer]:
+            - generic [ref=e1598]:
+              - img [ref=e1599]
+              - text: SD
+            - generic [ref=e1601]: "28"
+          - generic [ref=e1602] [cursor=pointer]:
+            - generic [ref=e1603]:
+              - img [ref=e1604]
+              - text: Кейсы
+            - generic [ref=e1606]: "4"
+          - generic [ref=e1607] [cursor=pointer]:
+            - generic [ref=e1608]:
+              - img [ref=e1609]
+              - text: Блог
+            - generic [ref=e1611]: "5"
+          - generic [ref=e1612] [cursor=pointer]:
+            - generic [ref=e1613]:
+              - img [ref=e1614]
+              - text: Авторы
+            - generic [ref=e1617]: "3"
+          - generic [ref=e1618] [cursor=pointer]:
+            - generic [ref=e1619]:
+              - img [ref=e1620]
+              - text: B2B-страницы
+            - generic [ref=e1623]: "3"
+          - generic [ref=e1624]: 03 · Медиа
+          - generic [ref=e1625] [cursor=pointer]:
+            - generic [ref=e1626]:
+              - img [ref=e1627]
+              - text: Файлы
+            - generic [ref=e1631]: "87"
+          - generic [ref=e1632]: 04 · SEO
+          - generic [ref=e1634] [cursor=pointer]:
+            - img [ref=e1635]
+            - text: SeoSettings
+          - generic [ref=e1640] [cursor=pointer]:
+            - generic [ref=e1641]:
+              - img [ref=e1642]
+              - text: Redirects
+            - generic [ref=e1645]: "12"
+          - generic [ref=e1646]: 05 · Рамка сайта
+          - generic [ref=e1648] [cursor=pointer]:
+            - img [ref=e1649]
+            - text: SiteChrome
+          - generic [ref=e1653]: 09 · Система
+          - generic [ref=e1654] [cursor=pointer]:
+            - generic [ref=e1655]:
+              - img [ref=e1656]
+              - text: Users
+            - generic [ref=e1661]: "2"
+        - generic [ref=e1662]:
+          - generic [ref=e1663]:
+            - generic [ref=e1664]:
+              - text: 02 · Контент /
+              - strong [ref=e1665]: Услуги
+            - textbox "Найти услугу, район, кейс…" [ref=e1666]
+            - generic [ref=e1667]: Г
+          - generic [ref=e1668]:
+            - heading "Услуги" [level=1] [ref=e1669]
+            - paragraph [ref=e1670]: 4 коллекции pillar — основа всего сайта.
+    - heading "12.3 · Dashboard + Page Catalog widget запрос оператора" [level=3] [ref=e1671]:
+      - text: 12.3 · Dashboard + Page Catalog widget
+      - generic [ref=e1672]: запрос оператора
+    - paragraph [ref=e1673]:
+      - text: Greeting v1 (BeforeDashboard) + 4 stat-cards + 6 action-tiles +
+      - strong [ref=e1674]: Page Catalog
+      - text: "— таблица всех опубликованных страниц по разделам. Источник: REST aggregation 7 коллекций → server component"
+      - code [ref=e1675]: <PageCatalog>
+      - text: . Кэш 60 с.
+    - generic [ref=e1676]:
+      - generic [ref=e1677]:
+        - generic [ref=e1678]: /admin (dashboard)
+        - generic [ref=e1679]: desktop · оператор Г.С.
+      - generic [ref=e1680]:
+        - paragraph [ref=e1681]: "Здравствуйте, Георгий. Сегодня в обиходе:"
+        - generic [ref=e1682]:
+          - generic [ref=e1683]:
+            - generic [ref=e1684]: "3"
+            - generic [ref=e1685]: Новые заявки
+          - generic [ref=e1686]:
+            - generic [ref=e1687]: +1.2k
+            - generic [ref=e1688]: Уник. за 7д
+          - generic [ref=e1689]:
+            - generic [ref=e1690]: "53"
+            - generic [ref=e1691]: Публ. страниц
+          - generic [ref=e1692]:
+            - generic [ref=e1693]: "0"
+            - generic [ref=e1694]: Ошибок CI
+        - generic [ref=e1696]: Что делаем сегодня
+        - generic [ref=e1697]:
+          - generic [ref=e1698] [cursor=pointer]:
+            - generic [ref=e1699]: Принять заявку
+            - generic [ref=e1700]: 3 новых ждут
+          - generic [ref=e1701] [cursor=pointer]:
+            - generic [ref=e1702]: Обновить цену
+            - generic [ref=e1703]: в Услугах или SD
+          - generic [ref=e1704] [cursor=pointer]:
+            - generic [ref=e1705]: Опубликовать кейс
+            - generic [ref=e1706]: в коллекции Cases
+        - generic [ref=e1707]:
+          - generic [ref=e1708]: Каталог опубликованных страниц 53 шт.
+          - generic [ref=e1709]:
+            - generic [ref=e1710] [cursor=pointer]: фильтр ▾
+            - generic [ref=e1711] [cursor=pointer]: ⇩ CSV
+        - table [ref=e1713]:
+          - rowgroup [ref=e1714]:
+            - row "Раздел URL Обновлено Статус" [ref=e1715]:
+              - columnheader "Раздел" [ref=e1716]
+              - columnheader "URL" [ref=e1717]
+              - columnheader "Обновлено" [ref=e1718]
+              - columnheader "Статус" [ref=e1719]
+          - rowgroup [ref=e1720]:
+            - row "Услуги (4) /vyvoz-musora/ 04-26 ✓ live" [ref=e1721]:
+              - cell "Услуги (4)" [ref=e1722]
+              - cell /vyvoz-musora/ [ref=e1723]
+              - cell "04-26" [ref=e1724]
+              - cell "✓ live" [ref=e1725]
+            - row "/arboristika/ 04-25 ✓ live" [ref=e1726]:
+              - cell [ref=e1727]
+              - cell /arboristika/ [ref=e1728]
+              - cell "04-25" [ref=e1729]
+              - cell "✓ live" [ref=e1730]
+            - row "/chistka-krysh/ 04-25 ✓ live" [ref=e1731]:
+              - cell [ref=e1732]
+              - cell /chistka-krysh/ [ref=e1733]
+              - cell "04-25" [ref=e1734]
+              - cell "✓ live" [ref=e1735]
+            - row "/demontazh/ 04-25 ✓ live" [ref=e1736]:
+              - cell [ref=e1737]
+              - cell /demontazh/ [ref=e1738]
+              - cell "04-25" [ref=e1739]
+              - cell "✓ live" [ref=e1740]
+            - row "Sub-services (7) /arboristika/spil-derevev/ 04-25 ✓ live" [ref=e1741]:
+              - cell "Sub-services (7)" [ref=e1742]
+              - cell /arboristika/spil-derevev/ [ref=e1743]
+              - cell "04-25" [ref=e1744]
+              - cell "✓ live" [ref=e1745]
+            - row "Programmatic SD (28) /arboristika/odintsovo/ 04-27 ✓ live" [ref=e1746]:
+              - cell "Programmatic SD (28)" [ref=e1747]
+              - cell /arboristika/odintsovo/ [ref=e1748]
+              - cell "04-27" [ref=e1749]
+              - cell "✓ live" [ref=e1750]
+            - row "Кейсы (4) /kejsy/burja-2025-zhukovsky/ 04-27 ✓ live" [ref=e1751]:
+              - cell "Кейсы (4)" [ref=e1752]
+              - cell /kejsy/burja-2025-zhukovsky/ [ref=e1753]
+              - cell "04-27" [ref=e1754]
+              - cell "✓ live" [ref=e1755]
+            - row "Блог (5) /blog/kogda-spilivat-derevya/ 04-25 ✓ live" [ref=e1756]:
+              - cell "Блог (5)" [ref=e1757]
+              - cell /blog/kogda-spilivat-derevya/ [ref=e1758]
+              - cell "04-25" [ref=e1759]
+              - cell "✓ live" [ref=e1760]
+            - row "B2B (3) /b2b/uk-tszh/ 04-25 ✓ live" [ref=e1761]:
+              - cell "B2B (3)" [ref=e1762]
+              - cell /b2b/uk-tszh/ [ref=e1763]
+              - cell "04-25" [ref=e1764]
+              - cell "✓ live" [ref=e1765]
+            - row "Авторы (3) /avtory/grigorij-samohin/ 04-25 ✓ live" [ref=e1766]:
+              - cell "Авторы (3)" [ref=e1767]
+              - cell /avtory/grigorij-samohin/ [ref=e1768]
+              - cell "04-25" [ref=e1769]
+              - cell "✓ live" [ref=e1770]
+    - heading "12.4 · Edit view с tabs (длинные формы)" [level=3] [ref=e1771]
+    - paragraph [ref=e1772]:
+      - text: SiteChrome 405 строк, Services 30 полей — не помещается в один скролл. Native Payload
+      - code [ref=e1773]: Tabs field
+      - text: + наш CSS = понятная анатомия. Ошибки валидации показывают красную точку справа от label tab.
+    - generic [ref=e1774]:
+      - generic [ref=e1775]:
+        - generic [ref=e1776]: /admin/collections/services/vyvoz-musora
+        - generic [ref=e1777]: edit · default
+      - generic [ref=e1778]:
+        - generic [ref=e1779]:
+          - text: 02 · Контент / Услуги /
+          - strong [ref=e1780]: Вывоз мусора
+        - generic [ref=e1781]:
+          - generic [ref=e1782] [cursor=pointer]: Основные
+          - generic [ref=e1783] [cursor=pointer]: Контент
+          - generic [ref=e1784] [cursor=pointer]: SEO
+          - generic [ref=e1785] [cursor=pointer]: Sub-services
+          - generic [ref=e1786] [cursor=pointer]: FAQ
+          - generic [ref=e1787] [cursor=pointer]: Превью
+        - generic [ref=e1788]:
+          - generic [ref=e1789]: Slug
+          - textbox [ref=e1790]: vyvoz-musora
+          - generic [ref=e1791]: Latin, дефисы, без пробелов
+        - generic [ref=e1792]:
+          - generic [ref=e1793]: Title (h1)
+          - textbox [ref=e1794]: Вывоз мусора
+        - generic [ref=e1795]:
+          - generic [ref=e1796]: Цена за объект (₽)
+          - textbox [ref=e1797]: 12 800
+          - text: за объект
+        - generic [ref=e1798]:
+          - generic [ref=e1799]: "Статус:"
+          - generic [ref=e1800]: Опубликован
+          - button "Сохранить" [ref=e1801] [cursor=pointer]
+    - heading "12.4.1 · Interaction states palette" [level=4] [ref=e1802]
+    - paragraph [ref=e1803]:
+      - text: Все состояния интерактивных элементов admin — для
+      - code [ref=e1804]: ui
+      - text: spec и
+      - code [ref=e1805]: fe1
+      - text: реализации. Каждое состояние имеет фиксированный токен (bg / text / border / shadow). Транзишены 120 ms ease на color/bg/border, 80 ms на transform (pressed).
+      - code [ref=e1806]: :focus-visible
+      - text: обязателен для keyboard,
+      - code [ref=e1807]: :focus
+      - text: без visible — outline none (mouse).
+    - heading "Tabs · 6 состояний" [level=5] [ref=e1808]
+    - generic [ref=e1809]:
+      - generic [ref=e1810]:
+        - generic [ref=e1811]: Default
+        - generic [ref=e1813] [cursor=pointer]: Основные
+      - generic [ref=e1814]:
+        - generic [ref=e1815]: Hover
+        - generic [ref=e1817] [cursor=pointer]: Основные
+      - generic [ref=e1818]:
+        - generic [ref=e1819]: Active (selected)
+        - generic [ref=e1821] [cursor=pointer]: Основные
+      - generic [ref=e1822]:
+        - generic [ref=e1823]: Pressed (mousedown)
+        - generic [ref=e1825] [cursor=pointer]: Основные
+      - generic [ref=e1826]:
+        - generic [ref=e1827]: Focus-visible
+        - generic [ref=e1829] [cursor=pointer]: Основные
+      - generic [ref=e1830]:
+        - generic [ref=e1831]: Has-error · disabled
+        - generic [ref=e1832]:
+          - generic [ref=e1833] [cursor=pointer]: SEO
+          - generic: Архив
+    - paragraph [ref=e1834]:
+      - text: "Token map · default:"
+      - code [ref=e1835]: "color #6b6256"
+      - text: "· hover:"
+      - code [ref=e1836]: "color #2d5a3d, bg #f7f5f0"
+      - text: "· active:"
+      - code [ref=e1837]: "color #1c1c1c, bg #ffffff, border-bottom 2px #2d5a3d, weight 500"
+      - text: "· pressed:"
+      - code [ref=e1838]: "bg #efebe0, border #1f3f2b"
+      - text: "· focus-visible:"
+      - code [ref=e1839]: "outline 2px #2d5a3d, offset 2px"
+      - text: "· disabled:"
+      - code [ref=e1840]: "color #b8b0a4, opacity 0.6, pointer-events none"
+      - text: "· has-error:"
+      - code [ref=e1841]: "::after dot 6×6 #b54828 справа от label"
+      - text: .
+    - heading "Inputs · 6 состояний" [level=5] [ref=e1842]
+    - generic [ref=e1843]:
+      - generic [ref=e1844]:
+        - generic [ref=e1845]: Default (empty)
+        - textbox "vyvoz-musora" [ref=e1846]
+      - generic [ref=e1847]:
+        - generic [ref=e1848]: Hover
+        - textbox [ref=e1849]: vyvoz-musora
+      - generic [ref=e1850]:
+        - generic [ref=e1851]: Focus
+        - textbox [ref=e1852]: vyvoz-musora
+      - generic [ref=e1853]:
+        - generic [ref=e1854]: Filled (default + value)
+        - textbox [ref=e1855]: vyvoz-musora
+      - generic [ref=e1856]:
+        - generic [ref=e1857]: Disabled
+        - textbox [disabled] [ref=e1858]: vyvoz-musora
+      - generic [ref=e1859]:
+        - generic [ref=e1860]: Error + message
+        - textbox [ref=e1861]: Vyvoz Musora!
+        - generic [ref=e1862]: Только латиница, дефисы, без пробелов и заглавных
+    - paragraph [ref=e1863]:
+      - text: "Token map · default:"
+      - code [ref=e1864]: "bg #ffffff, border #e6e1d6"
+      - text: "· hover:"
+      - code [ref=e1865]: "border #c4bdaf"
+      - text: "· focus:"
+      - code [ref=e1866]: "border #2d5a3d, shadow 0 0 0 3px rgba(45,90,61,0.15)"
+      - text: "· disabled:"
+      - code [ref=e1867]: "bg #efebe0, color #6b6256, cursor not-allowed"
+      - text: "· error:"
+      - code [ref=e1868]: "border #b54828, shadow rgba(181,72,40,0.12), help-text #b54828"
+      - text: .
+    - heading "Buttons primary (янтарный) · 6 состояний" [level=5] [ref=e1869]
+    - generic [ref=e1870]:
+      - generic [ref=e1871]:
+        - generic [ref=e1872]: Default
+        - button "Сохранить" [ref=e1873] [cursor=pointer]
+      - generic [ref=e1874]:
+        - generic [ref=e1875]: Hover
+        - button "Сохранить" [ref=e1876] [cursor=pointer]
+      - generic [ref=e1877]:
+        - generic [ref=e1878]: Pressed (mousedown)
+        - button "Сохранить" [ref=e1879] [cursor=pointer]
+      - generic [ref=e1880]:
+        - generic [ref=e1881]: Focus-visible
+        - button "Сохранить" [ref=e1882] [cursor=pointer]
+      - generic [ref=e1883]:
+        - generic [ref=e1884]: Loading
+        - button "Сохраняем"
+      - generic [ref=e1885]:
+        - generic [ref=e1886]: Disabled
+        - button "Сохранить" [disabled] [ref=e1887]
+    - paragraph [ref=e1888]:
+      - text: "Token map · default:"
+      - code [ref=e1889]: "bg #e6a23c, text #1c1c1c"
+      - text: "· hover:"
+      - code [ref=e1890]: "bg #d99528"
+      - text: "(−5% L) · pressed:"
+      - code [ref=e1891]: "bg #c18724, transform translateY(1px)"
+      - text: "· focus:"
+      - code [ref=e1892]: shadow 0 0 0 3px rgba(45,90,61,0.35)
+      - text: "(зелёное кольцо вокруг янтарного) · loading:"
+      - code [ref=e1893]: bg hover-state + spinner 12×12 слева
+      - text: "· disabled:"
+      - code [ref=e1894]: "bg #efebe0, text #b8b0a4"
+      - text: .
+    - heading "Buttons secondary (ghost) · 5 состояний" [level=5] [ref=e1895]
+    - generic [ref=e1896]:
+      - generic [ref=e1897]:
+        - generic [ref=e1898]: Default
+        - button "Отмена" [ref=e1899] [cursor=pointer]
+      - generic [ref=e1900]:
+        - generic [ref=e1901]: Hover
+        - button "Отмена" [ref=e1902] [cursor=pointer]
+      - generic [ref=e1903]:
+        - generic [ref=e1904]: Pressed
+        - button "Отмена" [ref=e1905] [cursor=pointer]
+      - generic [ref=e1906]:
+        - generic [ref=e1907]: Focus-visible
+        - button "Отмена" [ref=e1908] [cursor=pointer]
+      - generic [ref=e1909]:
+        - generic [ref=e1910]: Disabled
+        - button "Отмена" [disabled] [ref=e1911]
+    - heading "Sidebar links · 4 состояния" [level=5] [ref=e1912]
+    - generic [ref=e1913]:
+      - generic [ref=e1914]:
+        - generic [ref=e1915]: Default
+        - generic [ref=e1916]:
+          - generic [ref=e1917]:
+            - img [ref=e1918]
+            - text: Услуги
+          - generic [ref=e1923]: "4"
+      - generic [ref=e1924]:
+        - generic [ref=e1925]: Hover
+        - generic [ref=e1926]:
+          - generic [ref=e1927]:
+            - img [ref=e1928]
+            - text: Услуги
+          - generic [ref=e1933]: "4"
+      - generic [ref=e1934]:
+        - generic [ref=e1935]: Active (current)
+        - generic [ref=e1936]:
+          - generic [ref=e1937]:
+            - img [ref=e1938]
+            - text: Услуги
+          - generic [ref=e1943]: "4"
+      - generic [ref=e1944]:
+        - generic [ref=e1945]: Focus-visible
+        - generic [ref=e1946]:
+          - generic [ref=e1947]:
+            - img [ref=e1948]
+            - text: Услуги
+          - generic [ref=e1953]: "4"
+    - paragraph [ref=e1954]:
+      - text: "Sidebar token map · default:"
+      - code [ref=e1955]: "bg #efebe0, color #2b2b2b, icon opacity 0.65"
+      - text: "· hover:"
+      - code [ref=e1956]: "bg #ffffff, color #1c1c1c, icon opacity 0.9 #2d5a3d"
+      - text: "· active:"
+      - code [ref=e1957]: "bg #2d5a3d, color #f7f5f0, icon opacity 1.0, left-border 3px #e6a23c"
+      - text: "· focus-visible:"
+      - code [ref=e1958]: "outline 2px #2d5a3d offset -2px (внутри bg)"
+      - text: .
+    - paragraph [ref=e1959]:
+      - strong [ref=e1960]:
+        - text: Чек-лист для
+        - code [ref=e1961]: ui
+        - text: +
+        - code [ref=e1962]: fe1
+        - text: ":"
+      - text: каждое состояние выше → отдельная строка в
+      - code [ref=e1963]: component.spec.md §States
+      - text: с token-set (bg / text / border / shadow / opacity / cursor) + указанием
+      - code [ref=e1964]: :hover
+      - text: ","
+      - code [ref=e1965]: :focus-visible
+      - text: ","
+      - code [ref=e1966]: :active
+      - text: ","
+      - code [ref=e1967]: "[disabled]"
+      - text: ","
+      - code [ref=e1968]: "[aria-busy]"
+      - text: или класса. Для
+      - code [ref=e1969]: :focus-visible
+      - text: — обязательно отдельный селектор (не
+      - code [ref=e1970]: :focus
+      - text: ), чтобы mouse-юзер не видел outline после клика. Reduced-motion (
+      - code [ref=e1971]: prefers-reduced-motion
+      - text: ) — отключаем transform-translate, оставляем opacity/color.
+    - heading "12.5 · Status badges + Bulk action bar" [level=3] [ref=e1972]
+    - generic [ref=e1973]:
+      - generic [ref=e1974]: Опубликован
+      - generic [ref=e1975]: Черновик
+      - generic [ref=e1976]: В архиве
+      - generic [ref=e1977]: Новая заявка
+    - generic [ref=e1978]:
+      - generic [ref=e1979]:
+        - generic [ref=e1980]: list view · 3 строки выделены
+        - generic [ref=e1981]: bulk action bar — sticky bottom
+      - generic [ref=e1983]:
+        - generic [ref=e1984]: 3 выбраны
+        - generic [ref=e1985] [cursor=pointer]: Опубликовать
+        - generic [ref=e1986] [cursor=pointer]: В архив
+        - generic [ref=e1987] [cursor=pointer]: Удалить
+        - generic [ref=e1988] [cursor=pointer]: ×
+    - heading "12.6 · Empty / Error / 403 states" [level=3] [ref=e1989]
+    - paragraph [ref=e1990]: Те же принципы что в публичных error-pages из секции «11.5» — eyebrow с кодом + заголовок-человек + 1-2 CTA. Без «Упс! / Что-то пошло не так».
+    - generic [ref=e1991]:
+      - generic [ref=e1992]:
+        - generic [ref=e1993]:
+          - generic [ref=e1994]: /admin/collections/cases
+          - generic [ref=e1995]: empty
+        - generic [ref=e1996]:
+          - img [ref=e1997]
+          - heading "Кейсов пока нет" [level=3] [ref=e1999]
+          - paragraph [ref=e2000]: Добавьте первый — он попадёт в каталог сайта и в виджет dashboard.
+          - link "+ Добавить кейс" [ref=e2002] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=e2003]:
+        - generic [ref=e2004]:
+          - generic [ref=e2005]: /admin/collections/services
+          - generic [ref=e2006]: 500 server error
+        - generic [ref=e2007]:
+          - img [ref=e2008]
+          - generic [ref=e2012]: SERVER ERROR · 500
+          - heading "Не удалось загрузить" [level=3] [ref=e2013]
+          - paragraph [ref=e2014]: Скорее всего — временная проблема. Попробуйте обновить страницу через минуту.
+          - generic [ref=e2015]:
+            - link "Обновить" [ref=e2016] [cursor=pointer]:
+              - /url: "#"
+            - link "На дашборд" [ref=e2017] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=e2018]:
+        - generic [ref=e2019]:
+          - generic [ref=e2020]: /admin/collections/users
+          - generic [ref=e2021]: 403 access
+        - generic [ref=e2022]:
+          - img [ref=e2023]
+          - generic [ref=e2027]: ACCESS · 403
+          - heading "Нет доступа к коллекции" [level=3] [ref=e2028]
+          - paragraph [ref=e2029]: Спросите у администратора — выдадут.
+          - link "На дашборд" [ref=e2031] [cursor=pointer]:
+            - /url: "#"
+    - heading "Anti-patterns admin" [level=3] [ref=e2032]
+    - generic [ref=e2033]:
+      - generic [ref=e2034]:
+        - text: ×
+        - generic [ref=e2035]: Дефолтный фиолетовый Payload
+        - paragraph [ref=e2036]: "Кремовый фон + зелёный primary убирают «CMS из коробки». Не оставляем `#9a5cf6`."
+      - generic [ref=e2037]:
+        - text: ×
+        - generic [ref=e2038]: «Упс!» в server error
+        - paragraph [ref=e2039]: «SERVER ERROR · 500» eyebrow + заголовок-факт. Caregiver, не Apologist.
+      - generic [ref=e2040]:
+        - text: ×
+        - generic [ref=e2041]: Длинный скролл формы >15 полей
+        - paragraph [ref=e2042]: Tabs обязательны для SiteChrome (405 строк) и Services (30 полей). Не «всё на одном экране».
+      - generic [ref=e2043]:
+        - text: ×
+        - generic [ref=e2044]: Spinner в загрузке
+        - paragraph [ref=e2045]: Skeleton-плейсхолдеры из «11 · Уведомления». Spinner = «работает на вас» вместо контекста.
+      - generic [ref=e2046]:
+        - text: ×
+        - generic [ref=e2047]: Иконки Material/lucide на login
+        - paragraph [ref=e2048]: Login = lockup + форма. Никаких декоративных иконок «замок», «человечек», «облако».
+      - generic [ref=e2049]:
+        - text: ×
+        - generic [ref=e2050]: Toast «Успешно сохранено!»
+        - paragraph [ref=e2051]: «Услуга „Вывоз мусора" сохранена» — matter-of-fact, конкретный объект. См. «11 · Уведомления» dont.
+    - paragraph [ref=e2052]:
+      - text: Spec для реализации —
+      - link "art-concept-v2.md" [ref=e2053] [cursor=pointer]:
+        - /url: ../devteam/specs/US-12-admin-redesign/art-concept-v2.md
+        - code [ref=e2054]: art-concept-v2.md
+      - text: (10 разделов с anatomy + token-map). Реализация —
+      - code [ref=e2055]: fe1
+      - text: +
+      - code [ref=e2056]: be4
+      - text: через
+      - link "art-brief-ui.md" [ref=e2057] [cursor=pointer]:
+        - /url: ../devteam/specs/US-12-admin-redesign/art-brief-ui.md
+        - code [ref=e2058]: art-brief-ui.md
+      - text: и
+      - link "art-brief-cw.md" [ref=e2059] [cursor=pointer]:
+        - /url: ../devteam/specs/US-12-admin-redesign/art-brief-cw.md
+        - code [ref=e2060]: art-brief-cw.md
+      - text: (~10 человеко-дней). Live на
+      - code [ref=e2061]: obikhod.ru/admin
+      - text: после approval оператора.
+  - generic [ref=e2063]:
+    - generic [ref=e2064]: 13 · Tone of Voice
+    - heading "Как звучит Обиход" [level=2] [ref=e2065]
+    - paragraph [ref=e2066]:
+      - text: Анти-TOV слова блокируются хуком
+      - code [ref=e2067]: .claude/hooks/protect-immutable.sh
+      - text: — если попытаться закоммитить «в кратчайшие сроки» в
+      - code [ref=e2068]: site/
+      - text: ", хук упадёт."
+    - heading "Шкалы (Nielsen Norman)" [level=3] [ref=e2069]
+    - table [ref=e2070]:
+      - rowgroup [ref=e2071]:
+        - row "Funny ◄────────────●─────► Serious Серьёзный, но не казённый" [ref=e2072]:
+          - cell "Funny" [ref=e2073]
+          - cell "◄────────────●─────►" [ref=e2074]
+          - cell "Serious" [ref=e2075]
+          - cell "Серьёзный, но не казённый" [ref=e2076]:
+            - strong [ref=e2077]: Серьёзный, но не казённый
+        - row "Formal ◄──────●───────────► Casual Деловой с тёплыми вкраплениями" [ref=e2078]:
+          - cell "Formal" [ref=e2079]
+          - cell "◄──────●───────────►" [ref=e2080]
+          - cell "Casual" [ref=e2081]
+          - cell "Деловой с тёплыми вкраплениями" [ref=e2082]:
+            - strong [ref=e2083]: Деловой с тёплыми вкраплениями
+        - row "Respectful ◄●──────────────────► Irreverent Максимальное уважение" [ref=e2084]:
+          - cell "Respectful" [ref=e2085]
+          - cell "◄●──────────────────►" [ref=e2086]
+          - cell "Irreverent" [ref=e2087]
+          - cell "Максимальное уважение" [ref=e2088]:
+            - strong [ref=e2089]: Максимальное уважение
+        - row "Enthusiastic ◄────────────●──────► Matter-of-fact Делом, без восклицаний" [ref=e2090]:
+          - cell "Enthusiastic" [ref=e2091]
+          - cell "◄────────────●──────►" [ref=e2092]
+          - cell "Matter-of-fact" [ref=e2093]
+          - cell "Делом, без восклицаний" [ref=e2094]:
+            - strong [ref=e2095]: Делом, без восклицаний
+    - heading "Пять принципов" [level=3] [ref=e2096]
+    - list [ref=e2097]:
+      - listitem [ref=e2098]:
+        - strong [ref=e2099]: Слово держим, дело делаем.
+        - text: Не обещаем того, что не сможем. Сказали «смета за 10 минут» — значит 10.
+      - listitem [ref=e2100]:
+        - strong [ref=e2101]: Цифры и срок — всегда конкретные.
+        - text: Не «от 1 000 ₽», а «12 800 ₽ за объект». Не «в течение недели», а «послезавтра до 12:00».
+      - listitem [ref=e2102]:
+        - strong [ref=e2103]: Техникой не пугаем.
+        - text: СРО, класс отходов, ПОР — переводим на «что это значит для вас».
+      - listitem [ref=e2104]:
+        - strong [ref=e2105]: Не обесцениваем и не задираем.
+        - text: Мы не «дешевле всех» и не «премиум». Точно по делу, по рынку, с гарантией.
+      - listitem [ref=e2106]:
+        - strong [ref=e2107]: Ответственность — это наша работа.
+        - text: Штрафы ГЖИ и ОАТИ берём не как бонус, а как норму.
+    - heading "Словарь" [level=3] [ref=e2108]
+    - generic [ref=e2109]:
+      - generic [ref=e2110]:
+        - heading "Да" [level=4] [ref=e2111]
+        - list [ref=e2112]:
+          - listitem [ref=e2113]: «обиход», «хозяйство», «объект», «порядок»
+          - listitem [ref=e2114]: «сделаем», «приедем», «закроем вопрос»
+          - listitem [ref=e2115]: «12 800 ₽ за объект»
+          - listitem [ref=e2116]: «послезавтра до 12:00»
+          - listitem [ref=e2117]: «берём штрафы на себя», «отвечаем по договору»
+          - listitem [ref=e2118]: «снег / дерево / мусор / снос»
+          - listitem [ref=e2119]: «СРО 1 млрд, страховка 10 млн, ГЛОНАСС»
+      - generic [ref=e2120]:
+        - heading "Нет" [level=4] [ref=e2121]
+        - list [ref=e2122]:
+          - listitem [ref=e2123]: «услуги населению», «клиент» (в B2C)
+          - listitem [ref=e2124]: «имеем честь предложить», «осуществляем деятельность»
+          - listitem [ref=e2125]: «от 1 000 ₽»
+          - listitem [ref=e2126]: «в кратчайшие сроки»
+          - listitem [ref=e2127]: «гарантируем качество» (пустое), «индивидуальный подход»
+          - listitem [ref=e2128]: «твёрдые коммунальные отходы», «древесно-кустарниковая растительность» (в B2C)
+          - listitem [ref=e2129]: «мы дорожим репутацией»
+    - heading "Примеры голоса в 4 контекстах" [level=3] [ref=e2130]
+    - generic [ref=e2131]:
+      - generic [ref=e2132]:
+        - generic [ref=e2133]: B2C · WhatsApp · первое касание
+        - generic [ref=e2134]: Здравствуйте! Это Обиход. Получили фото двух тополей у бани. Смета будет через 10 минут. Если надо обсудить детали — позвоню, подскажите удобное время.
+      - generic [ref=e2135]:
+        - generic [ref=e2136]: B2C · SMS · бригада выехала
+        - generic [ref=e2137]: "Обиход: бригада выехала в Истру, м. Красногорская. Будем на объекте к 09:40. Бригадир Алексей, +7 (495) ХХХ-ХХ-ХХ."
+    - generic [ref=e2138]:
+      - generic [ref=e2139]:
+        - generic [ref=e2140]: B2B · E-mail · коммерческое предложение (первый абзац)
+        - generic [ref=e2141]: "Уважаемая УК «Ромашка», Обиход закрывает четыре направления одним договором: снег с кровли зимой, санитарная обрезка летом, вывоз КГМ/ТКО круглый год и аварийная бригада 24/7 по SLA 2 часа. По договору берём на себя штрафы ГЖИ и ОАТИ в пределах ответственности подрядчика. Страховка ГО 10 млн ₽, СРО, лицензия Росприроднадзора. В приложении — проект договора и пример отчёта по объекту за месяц. Готовы к тестовому объекту со скидкой 15% на первые 3 месяца."
+      - generic [ref=e2142]:
+        - generic [ref=e2143]: B2C · онбординг · извинение
+        - generic [ref=e2144]: "Обиход: по объекту ул. Ленина, 12 не успели по графику до 10:00 — застряла техника на МКАД. Будем в 11:30, это подтверждено бригадиром. За опоздание — скидка 10% на текущую смету."
+  - generic [ref=e2146]:
+    - generic [ref=e2147]: 14 · Анти-паттерны
+    - heading "Чего делать нельзя" [level=2] [ref=e2148]
+    - paragraph [ref=e2149]:
+      - text: Из визуального брифа
+      - link "03_brand_naming.md §Визуальная подача" [ref=e2150] [cursor=pointer]:
+        - /url: ../contex/03_brand_naming.md
+        - code [ref=e2151]: 03_brand_naming.md §Визуальная подача
+      - text: + реалии админки из
+      - link "art-concept.md" [ref=e2152] [cursor=pointer]:
+        - /url: ../devteam/specs/admin-visual/art-concept.md
+        - code [ref=e2153]: art-concept.md
+      - text: .
+    - heading "Визуал" [level=3] [ref=e2154]
+    - generic [ref=e2155]:
+      - generic [ref=e2156]:
+        - text: ×
+        - generic [ref=e2157]: Эко-зелёный + листочек
+        - paragraph [ref=e2158]: Generic-категория эко-подрядчиков. Наш primary — тёмный хвойный, не свежий salad.
+      - generic [ref=e2159]:
+        - text: ×
+        - generic [ref=e2160]: Дерево с топором / бензопила
+        - paragraph [ref=e2161]: Фолк-архаика, территория «Дровосека» и «Лесорубов». Обиход — не про мачо, про порядок.
+      - generic [ref=e2162]:
+        - text: ×
+        - generic [ref=e2163]: Рыцарь / щит / герб
+        - paragraph [ref=e2164]: Ruler-архетип мимо Caregiver-половины. Читается как ЧОП или застройщик премиум-сегмента.
+      - generic [ref=e2165]:
+        - text: ×
+        - generic [ref=e2166]: Рукопожатия
+        - paragraph [ref=e2167]: B2B-штамп 2010-х, обесценивает обещание «ответственность по договору».
+      - generic [ref=e2168]:
+        - text: ×
+        - generic [ref=e2169]: Твёрдый знак ДВОРЪ-style
+        - paragraph [ref=e2170]: Хипстерская ассоциация, ломает корпоративную приёмку в УК/ТСЖ.
+      - generic [ref=e2171]:
+        - text: ×
+        - generic [ref=e2172]: Стоковые фото с рукавицами
+        - paragraph [ref=e2173]: Фотостиль — документальный, реальные бригады на реальных объектах. Никаких catalog-shot на белом.
+      - generic [ref=e2174]:
+        - text: ×
+        - generic [ref=e2175]: Матрёшки и берёзки
+        - paragraph [ref=e2176]: Лубочная «русскость». Кириллица и Golos Text уже несут код, декор — перебор.
+      - generic [ref=e2177]:
+        - text: ×
+        - generic [ref=e2178]: Градиенты в primary-кнопке
+        - paragraph [ref=e2179]: "Payload-по-умолчанию-фиолетовый-градиент. Плоский #2d5a3d — бренд-штамп."
+      - generic [ref=e2180]:
+        - text: ×
+        - generic [ref=e2181]: Неоновые ховеры
+        - paragraph [ref=e2182]: "Hover → primary-ink #1f3f2b (−8% яркости). Не свечение, не скейл."
+    - heading "Техно-стек" [level=3] [ref=e2183]
+    - paragraph [ref=e2184]:
+      - text: Tilda / WordPress / Bitrix / MODX / Yii —
+      - strong [ref=e2185]: не обсуждаются
+      - text: . Обоснование —
+      - link "04_competitor_tech_stacks.md" [ref=e2186] [cursor=pointer]:
+        - /url: ../contex/04_competitor_tech_stacks.md
+        - code [ref=e2187]: 04_competitor_tech_stacks.md
+      - text: ": 54% топ-13 конкурентов на WP/Bitrix с PHP 5.6-7.4 и jQuery 1.10 — это шаг назад, а не к ним."
+  - generic [ref=e2189]:
+    - generic [ref=e2190]: 15 · Open items
+    - heading "Чего в гайде ещё нет" [level=2] [ref=e2191]
+    - paragraph [ref=e2192]:
+      - text: Этот документ — агрегатор того, что уже зафиксировано в коде и артефактах. Ниже — дыры, которые нужно закрывать явным заказом у
+      - code [ref=e2193]: art
+      - text: / внешнего дизайнера.
+    - heading "Закрыто за апрель 2026" [level=3] [ref=e2194]
+    - list [ref=e2195]:
+      - listitem [ref=e2196]:
+        - strong [ref=e2198]: Horizontal-compact lockup для website header
+        - text: —
+        - generic [ref=e2199]: ✓ 2026-04-25
+        - link "horizontal-compact.svg" [ref=e2200] [cursor=pointer]:
+          - /url: ../agents/brand/logo/horizontal-compact.svg
+          - code [ref=e2201]: horizontal-compact.svg
+        - text: 1280×480 (mark + wordmark, без tagline). Tagline «КРУГ СЕЗОНОВ» из
+        - code [ref=e2202]: horizontal.svg
+        - text: при высоте 32–60 px превращался в нечитаемые точки 3–6 px — теперь full-вариант только для marketing-применений ≥ 80 px по высоте.
+      - listitem [ref=e2203]:
+        - strong [ref=e2205]: Mega-menu Районы — dropdown с иконками-landmark
+        - text: —
+        - generic [ref=e2206]: ✓ 2026-04-25
+        - text: "3 кластера (Запад / Север / Юго-Восток МО), 8 районов + Москва, line-icon 24×24 stroke 1.5 на каждый: узел шоссе (Одинцово), холм с домом (Красногорск), купол монастыря (Истра), самолёт (Химки), водонапорная башня (Мытищи), ёлка с рельсами (Пушкино), мост через воду (Раменское), силуэт самолёта (Жуковский), компас (Москва). Featured: «Возим до 80 км от МКАД, фикс-цена за объект»."
+      - listitem [ref=e2207]:
+        - strong [ref=e2209]: Mega-menu Кейсы — dropdown по тематикам
+        - text: —
+        - generic [ref=e2210]: ✓ 2026-04-25
+        - text: "3 темы: Аварийные / Сезонные / Под ключ для УК и ТСЖ. 9 кейсов с тематическими иконками (молния, ножницы, кувалда, здание, посёлок, FM-портфолио). Featured: «Свежий кейс УК Жилищник, −18% к смете»."
+      - listitem [ref=e2211]:
+        - strong [ref=e2213]: Магазин в навигации · flat-link v1
+        - text: —
+        - generic [ref=e2214]: ✓ 2026-04-25
+        - text: flat link между Кейсы и Цены — товары для сада и растения. Dropdown добавим позже, когда определимся с категориями каталога. Mobile accordion — заглушка «Скоро».
+      - listitem [ref=e2215]:
+        - strong [ref=e2217]: Магазин — mega-menu 3 колонки + 9 shop-иконок
+        - text: —
+        - generic [ref=e2218]: ✓ 2026-04-27
+        - text: "по запросу оператора расширили IA из 4 в 6 направлений. Mega-menu Магазина:"
+        - strong [ref=e2219]: Деревья
+        - text: (Плодовые / Колоновидные / Лиственные / Хвойные / Крупномеры) ·
+        - strong [ref=e2220]: Кустарники
+        - text: (Плодовые / Декоративные) ·
+        - strong [ref=e2221]: Цветы
+        - text: "(Цветы / Розы). Featured: «Сезон 2026 — посадка с гарантией приживаемости 1 год». 9 line-icon 24×24 stroke 1.5 currentColor в стиле service-иконок:"
+        - code [ref=e2222]: fruit-tree
+        - text: ","
+        - code [ref=e2223]: columnar-tree
+        - text: ","
+        - code [ref=e2224]: fruit-bush
+        - text: ","
+        - code [ref=e2225]: decor-bush
+        - text: ","
+        - code [ref=e2226]: flowers
+        - text: ","
+        - code [ref=e2227]: roses
+        - text: ","
+        - code [ref=e2228]: large-trees
+        - text: ","
+        - code [ref=e2229]: deciduous-tree
+        - text: ","
+        - code [ref=e2230]: coniferous-tree
+        - text: . Mobile accordion раскрыт под 9 категорий. CLAUDE.md immutable обновлён.
+      - listitem [ref=e2231]:
+        - strong [ref=e2233]: «Дизайн ландшафта» — 5-е направление, flat-link
+        - text: —
+        - generic [ref=e2234]: ✓ 2026-04-27
+        - text: по запросу оператора. Один flat-link в навигации (после Магазина), отдельная страница «проект участка → посадка → смета». Подменю не нужно — направление монолитное. Иконки нет (flat-link без glyph). Mobile accordion — отдельная секция под 9 shop-категориями.
+      - listitem [ref=e2235]:
+        - strong [ref=e2237]: Error pages · 5 состояний (404/500/502/503/offline)
+        - text: —
+        - generic [ref=e2238]: ✓ 2026-04-27
+        - text: "новая секция «11.5 · Страницы ошибок». 5 карточек с уникальной line-art иллюстрацией 96×96 (компас / пила-чихалка / разорванная цепь / табличка-перерыв / антенна без сигнала), eyebrow с HTTP-кодом, заголовок-человек, объяснение в TOV «бригадира», 1-2 CTA + fallback-канал. Карта файлов Next.js:"
+        - code [ref=e2239]: app/not-found.tsx
+        - text: (404),
+        - code [ref=e2240]: app/error.tsx
+        - text: +
+        - code [ref=e2241]: app/global-error.tsx
+        - text: (500), nginx
+        - code [ref=e2242]: /errors/502.html
+        - text: +
+        - code [ref=e2243]: 503.html
+        - text: . Принципы копирайта зафиксированы — финал тестов через
+        - code [ref=e2244]: cw
+        - text: ", реализация —"
+        - code [ref=e2245]: ui
+        - text: +
+        - code [ref=e2246]: fe1
+        - text: +
+        - code [ref=e2247]: do
+        - text: по art-brief.
+      - listitem [ref=e2248]:
+        - strong [ref=e2250]: Иконография — единый реестр всех 4 линеек
+        - text: —
+        - generic [ref=e2251]: ✓ 2026-04-27
+        - text: "закрыли пробел: до этого только Service Icons имели визуальный каталог в section #icons, а District (9 landmark-иконок) и Case (9 topic-иконок) жили только в mega-menu Районы / Кейсы как inline SVG — формально иконки были, но без витрины-реестра. Теперь в section «08 · Иконография» все 4 линейки одной плиткой: 22 service + 9 shop + 9 district (Одинцово / Красногорск / Истра / Химки / Мытищи / Пушкино / Раменское / Жуковский / Москва) + 9 case (storm-cleanup / emergency-removal / urgent-roof / pruning-season / winter-prep / post-renovation / uk-contract / cottage-village / fm-contract) = 49 glyph'ов в едином формате. Заголовок секции переписан с «Service Icons» на «Иконография · 49 line-art glyph'ов». Это закрывает учение «расхождение brand-guide ↔ Header.tsx» (см. learnings.md) — теперь дизайн-система и есть полный source of truth."
+      - listitem [ref=e2252]:
+        - strong [ref=e2254]: Admin Panel v2 — финальные mockups (US-12)
+        - text: —
+        - generic [ref=e2255]: ✓ 2026-04-27 (вечер)
+        - text: "расширили секцию «12 · Паблик → Payload» 6 живыми mockups:"
+        - strong [ref=e2256]: Login screen
+        - text: (lockup + карточка-форма, без декоров),
+        - strong [ref=e2257]: Layout
+        - text: (sidebar 220 px с группами 01·Заявки / 02·Контент / 03·Медиа / 04·SEO / 05·Рамка / 09·Система + top-bar с breadcrumbs + search + profile),
+        - strong [ref=e2258]: Dashboard
+        - text: (greeting + 4 stat-cards + 6 action-tiles +
+        - strong [ref=e2259]: Page Catalog widget
+        - text: — таблица 53 опубликованных страниц по разделам, запрос оператора),
+        - strong [ref=e2260]: Edit view с Tabs
+        - text: (длинные формы SiteChrome 405 строк / Services 30 полей разбиваются на 4-6 tabs),
+        - strong [ref=e2261]: Status badges
+        - text: (Опубликован / Черновик / В архиве / Новая заявка),
+        - strong [ref=e2262]: Bulk action bar
+        - text: ","
+        - strong [ref=e2263]: Empty / 500 / 403 states
+        - text: в стиле error-pages 11.5. v1 art-concept (палитра+токены+группы) сохранён, v2 надстраивает финальный visual layer — реализация
+        - code [ref=e2264]: fe1
+        - text: +
+        - code [ref=e2265]: be4
+        - text: ~10 чд по 6 brief'ам в
+        - code [ref=e2266]: devteam/specs/US-12-admin-redesign/
+        - text: .
+      - listitem [ref=e2267]:
+        - strong [ref=e2269]: Admin v1.8.1 — login lockup (SVG) + sidebar icons + interaction states palette
+        - text: —
+        - generic [ref=e2270]: ✓ 2026-04-27 (поздний вечер)
+        - text: "3 уточнения по запросу оператора: (1)"
+        - strong [ref=e2271]: Login screen
+        - text: — сырой текст «ОБИХОД» заменён на реальный SVG
+        - code [ref=e2272]: horizontal-compact.svg
+        - text: (знак «Круг сезонов» + wordmark) высотой 56 px, admin-tagline сохранена отдельной строкой; (2)
+        - strong [ref=e2273]: Sidebar 14 пунктов
+        - text: "получили ассоциативные line-icon 14×14 stroke 1.5 currentColor: inbox (Lead'ы) · 4-square (Услуги, метафора 4-в-1) · pin (Районы) · pin+crosshair (SD) · folder (Кейсы) · page (Блог) · person (Авторы) · 2-buildings (B2B) · image (Файлы) · globe+search (SEO) · arrows (Redirects) · frame (SiteChrome) · group (Users); opacity 0.65→0.9→1.0 по states; (3) новая подсекция"
+        - strong [ref=e2274]: «12.4.1 Interaction states palette»
+        - text: — все 5 групп интерактивных элементов admin (Tabs · Inputs · Buttons primary · Buttons secondary · Sidebar links) с визуальной демонстрацией каждого состояния (default / hover / active / pressed / focus-visible / loading / disabled / error) + token-map для каждого. Это закрывает пробел из первой версии где видны были только default+active+has-error. art-brief-ui.md и art-brief-ux.md обновлены — каждое spec теперь обязано содержать §States с матрицей токенов, ux усилен chek-листом state-walkthrough на каждый экран.
+      - listitem [ref=e2275]:
+        - strong [ref=e2277]: Header / MegaMenu prod-реализация
+        - text: —
+        - generic [ref=e2278]: ✓ 2026-04-24
+        - text: "commits #23 sticky + dropdown nav, #24 меню под эталон brand-guide (плоские ссылки + CTA), #25 mega-menu 1:1 design-system spec — на prod через auto-deploy. Refresh продолжается параллельно (см."
+        - code [ref=e2279]: site/components/marketing/Header.tsx
+        - text: ).
+      - listitem [ref=e2280]:
+        - strong [ref=e2282]: Favicon / OG / apple-touch-icon
+        - text: —
+        - generic [ref=e2283]: ✓ готово
+        - code [ref=e2284]: site/app/icon.png
+        - text: 32 +
+        - code [ref=e2285]: apple-icon.png
+        - text: 180 (Next.js 16 convention) +
+        - code [ref=e2286]: agents/brand/logo/
+        - text: icon-192/512/og-mark для PWA и OG.
+      - listitem [ref=e2287]:
+        - strong [ref=e2289]: Иконография сервисов
+        - text: —
+        - generic [ref=e2290]: ✓ v0.9
+        - text: 16 иконок в
+        - link "design-system/icons/services/" [ref=e2291] [cursor=pointer]:
+          - /url: icons/services/README.md
+          - code [ref=e2292]: design-system/icons/services/
+        - text: . Покрытие всех 4 кластеров + 3 УТП-бейджа.
+      - listitem [ref=e2293]:
+        - strong [ref=e2295]: Улучшения service-иконок
+        - text: —
+        - generic [ref=e2296]: ✓ готово
+        - code [ref=e2297]: prune
+        - text: ","
+        - code [ref=e2298]: boomlift
+        - text: ","
+        - code [ref=e2299]: demolition
+        - text: перерисованы (Caregiver-tone, читаемая техника, штриховые срезы/трещины вместо молота).
+      - listitem [ref=e2300]:
+        - strong [ref=e2302]: Motion-токены
+        - text: —
+        - generic [ref=e2303]: ✓ готово
+        - link "motion.json" [ref=e2304] [cursor=pointer]:
+          - /url: tokens/motion.json
+          - code [ref=e2305]: motion.json
+        - text: (durations/eases/presets + guardrails).
+      - listitem [ref=e2306]:
+        - strong [ref=e2308]: Dark theme · токены зарезервированы
+        - text: —
+        - generic [ref=e2309]: ✓ готово
+        - text: ветка
+        - code [ref=e2310]: color-dark
+        - text: в
+        - link "colors.json" [ref=e2311] [cursor=pointer]:
+          - /url: tokens/colors.json
+          - code [ref=e2312]: colors.json
+        - text: . Контрасты посчитаны, активация через
+        - code [ref=e2313]: "[data-theme='dark']"
+        - text: . Не включена в prod (MVP = light only).
+      - listitem [ref=e2314]:
+        - strong [ref=e2316]: Гайд по фото-кейсам
+        - text: —
+        - generic [ref=e2317]: ✓ v1.0
+        - link "foundations/photography.md" [ref=e2318] [cursor=pointer]:
+          - /url: foundations/photography.md
+          - code [ref=e2319]: foundations/photography.md
+        - text: ": типы кадров, свет, кадрирование, forbidden-список (лица / номера / документы), спецификa 4 услуг."
+      - listitem [ref=e2320]:
+        - strong [ref=e2322]: Печатные материалы (CMYK)
+        - text: —
+        - generic [ref=e2323]: ✓ v0.9
+        - link "foundations/print-materials.md" [ref=e2324] [cursor=pointer]:
+          - /url: foundations/print-materials.md
+          - code [ref=e2325]: foundations/print-materials.md
+        - text: ": CMYK/Pantone-таблица, визитки / наклейки / бейджи / бланки, экспорт PDF/X. Калибровка под типографию — после первого заказа."
+      - listitem [ref=e2326]:
+        - strong [ref=e2328]: B2B pitch-deck template
+        - text: —
+        - generic [ref=e2329]: ✓ skeleton
+        - link "patterns/b2b-pitch-deck.md" [ref=e2330] [cursor=pointer]:
+          - /url: patterns/b2b-pitch-deck.md
+          - code [ref=e2331]: patterns/b2b-pitch-deck.md
+        - text: ": структура 12 слайдов, дизайн-правила, экспорт. Первый PDF — отдельный US с данными оператора."
+      - listitem [ref=e2332]:
+        - strong [ref=e2334]: DistrictCard spec
+        - text: —
+        - generic [ref=e2335]: ✓ v0.9
+        - link "district-card.spec.md" [ref=e2336] [cursor=pointer]:
+          - /url: components/district-card/district-card.spec.md
+          - code [ref=e2337]: district-card.spec.md
+        - text: для programmatic SEO LP 28 районов.
+      - listitem [ref=e2338]:
+        - strong [ref=e2340]: FileUploader spec
+        - text: —
+        - generic [ref=e2341]: ✓ v0.9
+        - link "file-uploader.spec.md" [ref=e2342] [cursor=pointer]:
+          - /url: components/file-uploader/file-uploader.spec.md
+          - code [ref=e2343]: file-uploader.spec.md
+        - text: для PhotoQuoteForm (drag-n-drop / HEIC конверсия / S3 upload / security).
+      - listitem [ref=e2344]:
+        - strong [ref=e2346]:
+          - text: Ассеты в
+          - code [ref=e2347]: assets/
+        - text: —
+        - generic [ref=e2348]: ✓ готово
+        - text: папка создана с
+        - code [ref=e2349]: photos/ brand/ icons-raw/ videos/ temp/
+        - text: + README +
+        - code [ref=e2350]: .gitignore
+        - text: для тяжёлых медиа.
+      - listitem [ref=e2351]:
+        - strong [ref=e2353]: Mega-menu · живой интерактивный пример
+        - text: —
+        - generic [ref=e2354]: ✓ в этом гайде
+        - text: см. раздел «09 · Навигация» выше — 3 работающих hover-dropdown'а (Услуги · Районы · Кейсы) + flat-ссылки (Магазин · Цены · Блог · Контакты) + mobile accordion с 7 секциями.
+      - listitem [ref=e2355]:
+        - strong [ref=e2357]: Pattern programmatic-landing
+        - text: —
+        - generic [ref=e2358]: ✓ v1.0
+        - link "patterns/programmatic-landing.md" [ref=e2359] [cursor=pointer]:
+          - /url: patterns/programmatic-landing.md
+          - code [ref=e2360]: patterns/programmatic-landing.md
+        - text: ": секции, heading hierarchy, JSON-LD (Service + LocalBusiness + BreadcrumbList + FAQPage), canonical / noindex, CWV targets, interlinking. Закрывает главный блокер fe2 для 28 LP."
+      - listitem [ref=e2361]:
+        - strong [ref=e2363]: OG-image pattern
+        - text: —
+        - generic [ref=e2364]: ✓ v1.0
+        - link "patterns/og-image.md" [ref=e2365] [cursor=pointer]:
+          - /url: patterns/og-image.md
+          - code [ref=e2366]: patterns/og-image.md
+        - text: ": edge-endpoint"
+        - code [ref=e2367]: /api/og
+        - text: ", 5 variants (default / service-district / service-index / blog / case), fonts handling, fallback static."
+      - listitem [ref=e2368]:
+        - strong [ref=e2370]: Breadcrumbs spec + JSON-LD
+        - text: —
+        - generic [ref=e2371]: ✓ v1.0
+        - link "breadcrumbs.spec.md" [ref=e2372] [cursor=pointer]:
+          - /url: components/breadcrumbs/breadcrumbs.spec.md
+          - code [ref=e2373]: breadcrumbs.spec.md
+        - text: с полной BreadcrumbList-схемой, mobile truncate, TOV для названий.
+      - listitem [ref=e2374]:
+        - strong [ref=e2376]: Header + Footer spec
+        - text: —
+        - generic [ref=e2377]: ✓ v1.0
+        - link "header.spec.md" [ref=e2378] [cursor=pointer]:
+          - /url: components/header/header.spec.md
+          - code [ref=e2379]: header.spec.md
+        - text: ": sticky behavior, mobile drawer, skip-link, phone из SiteChrome, 4-колоночный footer с legal."
+      - listitem [ref=e2380]:
+        - strong [ref=e2382]: Pagination spec + SEO
+        - text: —
+        - generic [ref=e2383]: ✓ v1.0
+        - link "pagination.spec.md" [ref=e2384] [cursor=pointer]:
+          - /url: components/pagination/pagination.spec.md
+          - code [ref=e2385]: pagination.spec.md
+        - text: ": numbered (default), rel=next/prev, canonical правила для страниц 2+."
+      - listitem [ref=e2386]:
+        - strong [ref=e2388]: Form schemas shared (Zod)
+        - text: —
+        - generic [ref=e2389]: ✓ v1.0
+        - link "form-schemas.spec.md" [ref=e2390] [cursor=pointer]:
+          - /url: components/form-schemas/form-schemas.spec.md
+          - code [ref=e2391]: form-schemas.spec.md
+        - text: ": phoneRU / consent / files / messenger + композиты (leadForm, photoQuoteForm, b2bEnquiry). Разблокирует fe1 от дубликата валидации в каждой форме."
+      - listitem [ref=e2392]:
+        - strong [ref=e2394]: Pagination live demo
+        - text: —
+        - generic [ref=e2395]: ✓ в этом гайде
+        - text: см. раздел «10 · Пагинация» — default + disabled-states + compact mobile + SEO-разметка
+        - code [ref=e2396]: rel=next/prev
+        - text: .
+      - listitem [ref=e2397]:
+        - strong [ref=e2399]: Уведомления · live demo
+        - text: —
+        - generic [ref=e2400]: ✓ в этом гайде
+        - text: см. раздел «11 · Уведомления» — success-card после заявки, 4 toast-типа (success/error/warning/info), empty state, loading skeleton, 5-стейтовый flow отправки.
+      - listitem [ref=e2401]:
+        - strong [ref=e2403]: +7 service-иконок
+        - text: —
+        - generic [ref=e2404]: ✓ v0.9 · 22 иконок
+        - code [ref=e2405]: snow-truck
+        - text: ","
+        - code [ref=e2406]: lawn-mower
+        - text: ","
+        - code [ref=e2407]: excavator
+        - text: ","
+        - code [ref=e2408]: brush
+        - text: ","
+        - code [ref=e2409]: winter-decor
+        - text: ","
+        - code [ref=e2410]: facade-clean
+        - text: . Полный набор теперь покрывает 22 услуги из каталога.
+      - listitem [ref=e2411]:
+        - strong [ref=e2413]: Calculator spec
+        - text: —
+        - generic [ref=e2414]: ✓ v0.9
+        - link "calculator.spec.md" [ref=e2415] [cursor=pointer]:
+          - /url: components/calculator/calculator.spec.md
+          - code [ref=e2416]: calculator.spec.md
+        - text: ": единая anatomy для 4 калькуляторов (арбористика/крыши/мусор/демонтаж), формулы, states, analytics-события, A/B-план."
+    - heading "Осталось — зоны fe / be (не art)" [level=3] [ref=e2417]
+    - paragraph [ref=e2418]:
+      - text: Дизайн-система закрыла свою часть — spec'и и визуальные примеры готовы. Ниже — работа, которую запускает
+      - code [ref=e2419]: po
+      - text: как US для fe/be, подключает оператор.
+    - list [ref=e2420]:
+      - listitem [ref=e2421]:
+        - strong [ref=e2422]:
+          - text: Реализация
+          - code [ref=e2423]: site/lib/forms/
+        - text: — US fe1+be3 по
+        - link "form-schemas.spec.md" [ref=e2424] [cursor=pointer]:
+          - /url: components/form-schemas/form-schemas.spec.md
+          - code [ref=e2425]: form-schemas.spec.md
+        - text: . Разблокирует PhotoQuoteForm / LeadForm / B2B-enquiry.
+      - listitem [ref=e2426]:
+        - strong [ref=e2427]: PhotoQuoteForm — реализация
+        - text: — главный конверсионный компонент. Spec готов, ждёт US после
+        - code [ref=e2428]: site/lib/forms/
+        - text: .
+      - listitem [ref=e2429]:
+        - strong [ref=e2430]:
+          - text: LP-шаблон
+          - code [ref=e2431]: /uslugi/[cluster]/[district]/
+        - text: — US fe2 по
+        - link "programmatic-landing.md" [ref=e2432] [cursor=pointer]:
+          - /url: patterns/programmatic-landing.md
+          - code [ref=e2433]: programmatic-landing.md
+        - text: . Первый LP — Раменское × Арбористика, потом раскатка на 28 seed.
+      - listitem [ref=e2434]:
+        - strong [ref=e2435]:
+          - text: OG-image endpoint
+          - code [ref=e2436]: /api/og
+        - text: — US fe2 по
+        - link "og-image.md" [ref=e2437] [cursor=pointer]:
+          - /url: patterns/og-image.md
+          - code [ref=e2438]: og-image.md
+        - text: .
+      - listitem [ref=e2439]:
+        - strong [ref=e2440]: React-обёртки компонентов
+        - text: —
+        - code [ref=e2441]: <Button>
+        - text: ","
+        - code [ref=e2442]: <Input>
+        - text: ","
+        - code [ref=e2443]: <Toast>
+        - text: ","
+        - code [ref=e2444]: <Skeleton>
+        - text: ","
+        - code [ref=e2445]: <Pagination>
+        - text: ","
+        - code [ref=e2446]: <Breadcrumbs>
+        - text: ","
+        - code [ref=e2447]: <FileUploader>
+        - text: ","
+        - code [ref=e2448]: <DistrictCard>
+        - text: ","
+        - code [ref=e2449]: <Calculator>
+        - text: . CSS-классы и spec'и есть.
+    - heading "Ждёт оператора" [level=3] [ref=e2450]
+    - list [ref=e2451]:
+      - listitem [ref=e2452]:
+        - strong [ref=e2453]:
+          - text: Payload
+          - code [ref=e2454]: /admin
+          - text: на prod · логотип
+        - text: — оператор делает
+        - code [ref=e2455]: pnpm generate:importmap
+        - text: и push → auto-deploy.
+      - listitem [ref=e2456]:
+        - strong [ref=e2457]: ТМ-регистрация «ОБИХОД»
+        - text: — external, патентный поверенный через оператора.
+      - listitem [ref=e2458]:
+        - strong [ref=e2459]: Данные для B2B pitch-deck PDF
+        - text: — реквизиты юрлица, кейсы УК с разрешением на публикацию, цифры штрафов ГЖИ. После — первый PDF по skeleton'у.
+      - listitem [ref=e2460]:
+        - strong [ref=e2461]: Визитки / наклейки в типографию
+        - text: — калибровка Pantone/CMYK под конкретную типографию при первом заказе.
+      - listitem [ref=e2462]:
+        - strong [ref=e2463]: Первая фото-библиотека
+        - text: — минимум 20 before/after кейсов из реальных выездов бригад по
+        - link "photography.md" [ref=e2464] [cursor=pointer]:
+          - /url: foundations/photography.md
+          - code [ref=e2465]: photography.md
+        - text: .
+      - listitem [ref=e2466]:
+        - strong [ref=e2467]: Активация dark theme
+        - text: — токены зарезервированы, включаем после первой жалобы от пользователя или когда появится реальная потребность.
+  - contentinfo [ref=e2468]:
+    - generic [ref=e2469]:
+      - paragraph [ref=e2470]:
+        - text: design-system/brand-guide.html ·
+        - strong [ref=e2471]: v1.8.1
+        - text: · обновлён 2026-04-27 (поздний вечер) · единый вход в дизайн-систему Обихода · логотип «Круг сезонов» v1.0 ·
+        - strong [ref=e2472]: 49 line-art иконок в едином реестре
+        - text: ": 22 service v0.9 + 9 shop v0.1 + 9 district v0.9 + 9 case v0.9 + 5 error-state иллюстраций v0.1 + 13 admin-sidebar иконок · header-refresh (группы + dropdown + hamburger) · mega-menu live demo: Услуги + Районы + Кейсы +"
+        - strong [ref=e2473]: Магазин
+        - text: dropdowns + flat-link
+        - strong [ref=e2474]: Дизайн ландшафта
+        - text: · pagination / notifications /
+        - strong [ref=e2475]: error pages 404·500·502·503·offline
+        - text: "live demo · foundations: icons / a11y / microcopy / photography / print-materials · patterns: programmatic-landing / og-image / b2b-pitch-deck · 15 component-spec'ов · IA расширена с 4 до"
+        - strong [ref=e2476]: 6 направлений
+        - text: (CLAUDE.md immutable 2026-04-27) ·
+        - strong [ref=e2477]: Admin Panel v2 mockups
+        - text: ": Login (с реальным SVG-lockup) + Layout (sidebar с иконками) + Dashboard с Page Catalog + Edit-tabs +"
+        - strong [ref=e2478]: Interaction states palette (5 групп × 4-7 состояний)
+        - text: + Status + Bulk + Empty/500/403 states (US-12)
+      - paragraph [ref=e2479]:
+        - text: "источники:"
+        - link "contex/03_brand_naming.md" [ref=e2480] [cursor=pointer]:
+          - /url: ../contex/03_brand_naming.md
+        - text: ·
+        - link "site/app/globals.css" [ref=e2481] [cursor=pointer]:
+          - /url: ../site/app/globals.css
+        - text: ·
+        - link "design-system/README.md" [ref=e2482] [cursor=pointer]:
+          - /url: README.md
+        - text: ·
+        - link "devteam/art.md" [ref=e2483] [cursor=pointer]:
+          - /url: ../devteam/art.md
+        - text: ·
+        - link "admin-visual/art-concept.md" [ref=e2484] [cursor=pointer]:
+          - /url: ../devteam/specs/admin-visual/art-concept.md

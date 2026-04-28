@@ -124,7 +124,7 @@ async function main() {
     '',
     `_Generated: ${new Date().toISOString()} · model: ${MODEL} · 1024×1024 PNG_`,
     '',
-    'Шаг 2 процесса [devteam/art.md §2.1](../../../../devteam/art.md). Черновики для обсуждения — **не финал**.',
+    'Шаг 2 процесса [team/art.md §2.1](../../../../team/art.md). Черновики для обсуждения — **не финал**.',
     '',
     '| File | Direction | Label |',
     '|---|---|---|',

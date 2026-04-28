@@ -200,7 +200,7 @@ sub-service tree.
 
 ## Pillar 2: Арбористика (`/arboristika/`)
 
-База — кластер из [PROJECT_CONTEXT.md §4](../../devteam/PROJECT_CONTEXT.md).
+База — кластер из [PROJECT_CONTEXT.md §4](../../team/PROJECT_CONTEXT.md).
 Slug услуги в БД: `arboristika`. **27 589 wsfreq.**
 
 | URL | Тип | В БД? | wsfreq head |
@@ -706,7 +706,7 @@ Sitemap-tree v0.4 разблокирует US-5 (`seo2` — full-sitemap-IA + te
   (Wave 1 от `re`, 15 доменов)
 - [seosite/01-competitors/shortlist.md](../01-competitors/shortlist.md)
   (матрица 14 живых конкурентов)
-- [devteam/PROJECT_CONTEXT.md](../../devteam/PROJECT_CONTEXT.md) §4
+- [team/PROJECT_CONTEXT.md](../../team/PROJECT_CONTEXT.md) §4
   (каталог услуг), §5 (география)
 - [CLAUDE.md](../../CLAUDE.md) (immutable, roadmap)
 - `site/app/api/seed/route.ts` (canonical slug — миграция `chistka-krysh`)

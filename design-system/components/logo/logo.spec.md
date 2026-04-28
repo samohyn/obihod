@@ -142,4 +142,4 @@ Next.js 16 convention:
 ## Changelog
 
 - **2026-04-24 · v1.0** — утверждён «Круг сезонов». Заменены `LogoMark`, `BrandLogo.tsx` (тэглайн `порядок под ключ · admin` → `круг сезонов · admin`, weight 700 → 800). Удалён дефолтный `favicon.ico`, добавлены `icon.png` + `apple-icon.png`.
-- **2026-04-23 · v0.1 draft** — временное решение «wordmark без символа + монограмма О» в admin (см. [devteam/specs/admin-visual/art-concept.md](../../../devteam/specs/admin-visual/art-concept.md)). Оставалось до утверждения финального знака.
+- **2026-04-23 · v0.1 draft** — временное решение «wordmark без символа + монограмма О» в admin (см. [team/specs/admin-visual/art-concept.md](../../../team/specs/admin-visual/art-concept.md)). Оставалось до утверждения финального знака.
