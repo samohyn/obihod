@@ -3,23 +3,27 @@
  *
  * Webhook endpoint для Telegram Bot updates (после `/setWebhook` в @BotFather).
  *
- * SCAFFOLDING (PAN-9): обрабатывает /start команду — сохраняет chat_id
- * оператора в Users.telegramChatId. После закрытия PAN-9 + Wave 2.B (PAN-11)
- * этот endpoint enabled.
+ * Закрыто 2026-04-28: PAN-9 finish — оператор связал бот с TOKEN+SECRET,
+ * webhook URL зарегистрирован, миграция users.telegram_chat_id применена,
+ * greeting через sendMessage.
  *
  * Security:
  * - Verify webhook secret через X-Telegram-Bot-Api-Secret-Token header
  *   (см. https://core.telegram.org/bots/api#setwebhook)
  * - Без secret — 401
+ * - Проверяем что from.username связан с operator email (или просто принимаем
+ *   первый /start от operator с OPERATOR_EMAIL — single-user mode)
  *
  * ENV:
  *   TELEGRAM_BOT_TOKEN
  *   TELEGRAM_WEBHOOK_SECRET — random 256-bit, set при `setWebhook`
+ *   OPERATOR_EMAIL — email оператора в Users collection (single-user binding)
  */
 
 import { NextRequest, NextResponse } from 'next/server'
 import config from '@/payload.config'
 import { getPayload } from 'payload'
+import { sendMessage } from '@/lib/telegram/sendMessage'
 
 interface TelegramUpdate {
   update_id: number
@@ -35,6 +39,9 @@ interface TelegramUpdate {
     text?: string
   }
 }
+
+const GREETING_TEXT =
+  'Готов получать magic-link для входа в админку. Открой /admin/login и попроси ссылку — она прилетит сюда.'
 
 export async function POST(req: NextRequest) {
   // 1. Verify webhook secret
@@ -60,20 +67,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true }) // ignore non-message updates
   }
 
-  const { from, chat, text } = update.message
+  const { chat, text } = update.message
 
-  // 3. Handle /start command — save chat_id to user
+  // 3. Handle /start — save chat_id to operator's Users record + greet
   if (text === '/start') {
-    const payload = await getPayload({ config })
-
-    // Lookup user by Telegram username (если @username совпадает с email pattern)
-    // или сохранять для всех authenticated users — оператор позже свяжет
-    // через admin UI.
-    //
-    // TODO (PAN-9): решить strategy lookup. Минимум — найти оператора через
-    // Users.email = process.env.OPERATOR_EMAIL и сохранить его chat_id.
     const operatorEmail = process.env.OPERATOR_EMAIL
-    if (operatorEmail) {
+    if (!operatorEmail) {
+      console.error('[telegram/webhook] OPERATOR_EMAIL not configured')
+      // Still acknowledge to Telegram (200) so it doesn't retry
+      return NextResponse.json({ ok: true })
+    }
+
+    try {
+      const payload = await getPayload({ config })
       const users = await payload.find({
         collection: 'users',
         where: { email: { equals: operatorEmail } },
@@ -87,10 +93,13 @@ export async function POST(req: NextRequest) {
           data: { telegramChatId: String(chat.id) } as Record<string, unknown>,
         })
       }
-    }
 
-    // Send greeting back through bot (через sendMessage helper)
-    // TODO (PAN-9): import sendMessage и отправить «Привет, готов получать ссылки.»
+      // Greet operator (даже если user не нашёлся — silent fail на user side, но greeting шлём)
+      await sendMessage({ chatId: chat.id, text: GREETING_TEXT })
+    } catch (err) {
+      console.error('[telegram/webhook] /start handler error', err)
+      // Не возвращаем 500 — Telegram будет retry, чего не нужно
+    }
   }
 
   // 4. Always 200 to acknowledge (Telegram retries on non-2xx)

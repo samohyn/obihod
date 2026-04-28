@@ -35,5 +35,17 @@ export const Users: CollectionConfig = {
         { label: 'Content Editor', value: 'content' },
       ],
     },
+    // PAN-9 finish: chat_id Telegram бота для magic-link login (Wave 2.B/PAN-11).
+    // Заполняется автоматически webhook handler'ом при `/start` команде.
+    // Schema-migration: 20260428_140000_users_telegram_chat_id.ts.
+    {
+      name: 'telegramChatId',
+      type: 'text',
+      admin: {
+        description:
+          'Chat ID Telegram-бота для magic-link login. Заполняется автоматически после /start боту.',
+        readOnly: true,
+      },
+    },
   ],
 }
