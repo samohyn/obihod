@@ -44,6 +44,69 @@ const COLLECTIONS_TO_SHOW: Array<{
   { slug: 'districts', label: 'Район', titleField: 'nameNominative' },
 ]
 
+interface DashboardStats {
+  newLeads: number | string
+  uniqsWeek: number | string
+  publishedPages: number | string
+  ciErrors: number | string
+}
+
+async function loadStats(): Promise<DashboardStats> {
+  // brand-guide §12.3: 4 stat-cards. Реальные значения берём из БД где можем,
+  // остальные — placeholder «—» (нет интеграций Я.Метрика / Sentry / GH API).
+  let newLeads: number | string = '—'
+  let publishedPages: number | string = '—'
+  try {
+    const payload = await payloadClient()
+    // Новые заявки — leads без обработки. Если коллекция пустая или нет
+    // status-фильтра — total leads count.
+    try {
+      const leadsRes = await payload.find({
+        collection: 'leads',
+        limit: 0,
+        pagination: false,
+      })
+      newLeads = leadsRes.totalDocs ?? 0
+    } catch {
+      newLeads = 0
+    }
+
+    // Опубликованные страницы — суммарный счёт по 7 коллекциям с _status=published.
+    const pageCollections = [
+      'services',
+      'service-districts',
+      'cases',
+      'blog',
+      'b2b-pages',
+      'authors',
+      'districts',
+    ] as const
+    let total = 0
+    for (const slug of pageCollections) {
+      try {
+        const r = await payload.find({
+          collection: slug,
+          where: { _status: { equals: 'published' } },
+          limit: 0,
+          pagination: false,
+        })
+        total += r.totalDocs ?? 0
+      } catch {
+        // skip
+      }
+    }
+    publishedPages = total
+  } catch {
+    // payloadClient init failed — все «—».
+  }
+  return {
+    newLeads,
+    uniqsWeek: '—', // TODO: Я.Метрика API integration
+    publishedPages,
+    ciErrors: '—', // TODO: Sentry / GH Actions API integration
+  }
+}
+
 async function loadRecentEdits(limit = 5): Promise<RecentEdit[]> {
   try {
     const payload = await payloadClient()
@@ -143,6 +206,41 @@ const eyebrowStyle: CSSProperties = {
   margin: 0,
 }
 
+const statsGridStyle: CSSProperties = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+  gap: 12,
+  maxWidth: 1080,
+}
+
+const statCardStyle: CSSProperties = {
+  background: 'var(--brand-obihod-card, #ffffff)',
+  border: '1px solid var(--brand-obihod-line, #e6e1d6)',
+  borderRadius: 'var(--brand-obihod-radius-sm, 6px)',
+  padding: '14px 16px',
+}
+
+const statNumStyle: CSSProperties = {
+  fontSize: 26,
+  fontWeight: 700,
+  color: 'var(--brand-obihod-primary, #2d5a3d)',
+  fontVariantNumeric: 'tabular-nums',
+  lineHeight: 1,
+}
+
+const statNumWarnStyle: CSSProperties = {
+  ...statNumStyle,
+  color: 'var(--brand-obihod-accent-ink, #c18724)',
+}
+
+const statLabelStyle: CSSProperties = {
+  fontSize: 11,
+  color: 'var(--brand-obihod-muted, #6b6256)',
+  textTransform: 'uppercase' as const,
+  letterSpacing: '0.06em',
+  marginTop: 6,
+}
+
 const tileGridStyle: CSSProperties = {
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
@@ -174,7 +272,9 @@ const rowStyle: CSSProperties = {
 }
 
 export const BeforeDashboardStartHere: FC = async () => {
-  const recent = await loadRecentEdits(5)
+  const [recent, stats] = await Promise.all([loadRecentEdits(5), loadStats()])
+  const newLeadsNum = typeof stats.newLeads === 'number' ? stats.newLeads : 0
+  const newLeadsHasValue = typeof stats.newLeads === 'number' && newLeadsNum > 0
 
   return (
     <div style={wrapStyle}>
@@ -192,6 +292,31 @@ export const BeforeDashboardStartHere: FC = async () => {
           Шесть сценариев ниже — самые частые задачи. Не знаете, с чего начать — откройте
           инструкции.
         </p>
+      </section>
+
+      {/* §12.3 4 stat-cards: новые заявки / уник 7д / публ страниц / ошибки CI */}
+      <section style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <p style={eyebrowStyle}>Сегодня в обиходе</p>
+        <div style={statsGridStyle}>
+          <div style={statCardStyle}>
+            <div style={newLeadsHasValue ? statNumWarnStyle : statNumStyle}>
+              {String(stats.newLeads)}
+            </div>
+            <div style={statLabelStyle}>Новые заявки</div>
+          </div>
+          <div style={statCardStyle}>
+            <div style={statNumStyle}>{String(stats.uniqsWeek)}</div>
+            <div style={statLabelStyle}>Уник. за 7д</div>
+          </div>
+          <div style={statCardStyle}>
+            <div style={statNumStyle}>{String(stats.publishedPages)}</div>
+            <div style={statLabelStyle}>Публ. страниц</div>
+          </div>
+          <div style={statCardStyle}>
+            <div style={statNumStyle}>{String(stats.ciErrors)}</div>
+            <div style={statLabelStyle}>Ошибок CI</div>
+          </div>
+        </div>
       </section>
 
       <section style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
