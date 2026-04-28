@@ -1,6 +1,8 @@
 import { buildConfig } from 'payload'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { ru } from '@payloadcms/translations/languages/ru'
+import { en } from '@payloadcms/translations/languages/en'
 import sharp from 'sharp'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -43,6 +45,14 @@ export default buildConfig({
       beforeLogin: ['@/components/admin/BeforeLoginLockup'],
       afterLogin: ['@/components/admin/AfterLoginFooter'],
     },
+  },
+  // Локализация admin на русский (brand-guide §12 mockup на ru). Pакет
+  // @payloadcms/translations поставляется как transitive dep payload core,
+  // direct install не требуется. fallbackLanguage='ru' покрывает «Войти»,
+  // «Пароль», «Забыли пароль?» и сотни других admin-меток.
+  i18n: {
+    fallbackLanguage: 'ru',
+    supportedLanguages: { ru, en },
   },
   collections: [
     Users,
