@@ -2,9 +2,59 @@
 
 _Обновляется в конце сессии. Короткий срез: что сделано, что в работе, что следующее. Цель — дать следующей сессии контекст за 30 секунд._
 
-## Где мы сейчас (2026-04-27, ночь)
+## Где мы сейчас (2026-04-28)
 
-### Свежайшее: OBI-24 admin full mockup pass deployed (2026-04-27 ночь)
+### Свежайшее: пересборка команды 30 → 42 ролей в 7 командах (2026-04-28)
+
+**Ветка:** `chore/team-restructure-v2` от чекпоинта `03dc2dd` (на `fix/admin-stat-cards-12-3`).
+
+**Что сделано (5 фаз из 6):**
+
+| Фаза | Статус | Что |
+|---|---|---|
+| 0 | ✅ | Checkpoint commit (147 файлов) + ветка `chore/team-restructure-v2` |
+| 1 | ✅ | 22 файла rename `git mv "<role> <suffix>.md"` → `<role>-<suffix>.md` (kebab); `out.md` → `release.md`; опечатка `shop/ux panel.md` → `shop/ux-shop.md` |
+| 2 | ✅ | Split `business/po.md` (24KB) → `business/cpo.md` + `product/podev.md`; rewrite `common/release.md` под gate; создание `common/leadqa.md`, `seo/poseo.md`; адаптация `panel/popanel.md` + `shop/poshop.md`; bulk-replace `opus-4-6` → `opus-4-7` (34 файла); 42 файла получили блок «⚙️ Железное правило: skill-check» |
+| 3 | ✅ | `team/WORKFLOW.md` переписан под 7 команд + двухступенчатый релиз-цикл + sticky sessions §5.4 + branch strategy §6 + 6 Linear team keys; `team/PROJECT_CONTEXT.md` переписан (5 секций); `CLAUDE.md` обновлён |
+| 4 | ⏸ | Linear bulk-rename labels — отложено до апрува оператора, чтобы не сломать active filters |
+| 5 | ✅ | 4 memory файла (sticky_agent_sessions, skill_check_iron_rule, release_cycle_v2, team_v2_42_roles) + MEMORY.md index; hooks audit чист |
+| 6 | ✅ | ADR-0004-team-restructure-v2.md в `team/adr/`; verification-suite пройден |
+
+**Структура team/ (42 файла):**
+
+- **business/** (6): cpo, ba, in, re, aemd, da — оркестрация продукта
+- **common/** (5): tamd, dba, do, release, leadqa — shared
+- **design/** (3): art (lead), ux, ui — изолированная ветка `design/integration`
+- **product/** (8): podev (lead), sa-site, be-site, fe-site, lp-site, pa-site, cr-site, qa-site — сайт услуг, ветка `product/integration`
+- **seo/** (6): poseo (lead), sa-seo, seo-content, seo-tech, cw, cms
+- **shop/** (7): poshop (lead), sa-shop, be-shop, fe-shop, ux-shop, cr-shop, qa-shop — e-commerce, ветка `shop/integration`, monorepo `apps/shop/`
+- **panel/** (7): popanel (lead), sa-panel, be-panel, fe-panel, ux-panel, cr-panel, qa-panel — Payload admin, ветка `panel/integration`, источник истины — `design-system/brand-guide.html §12`
+
+**Релиз-цикл (новый):**
+```
+[команда] PR → [release] gate → [leadqa] verify → [operator] approve → [do] deploy → [cpo] retro
+```
+
+**Подчинение:** оператор → cpo → {podev, poseo, popanel, poshop, art} → команды.
+
+**Owner Payload-коллекций:** panel (`be-panel` + `dba`).
+
+**Sticky agent sessions:** `@<code>` или «<code>, ...» переключает Claude в роль до явного `/claude`.
+
+**Skill-check железное правило:** перед задачей — Skill tool активация релевантного skill, фиксация в commit/PR/артефакте.
+
+**Что осталось (Фаза 4 — после апрува):**
+- Linear bulk-rename labels (`role:po` → `role:cpo`+`role:podev`, `role:out` → `role:release`, `role:fe1/2` → `role:fe-site`, и т.д.)
+- Создать в Linear teams `SHOP` и `PANEL`
+- Обновить active `team/specs/US-*/` ссылки на новые codes (closed specs не трогать)
+
+**Что НЕ сделано в этой сессии (по дизайну):**
+- Содержимое подкомандных ролей (be-site, fe-shop, qa-panel, sa-shop, и т.д.) — frontmatter обновлён, но текстовая часть частично от копий старых файлов. Каждая роль дополнит свою спеку при первой задаче.
+- Новые Linear teams и переименование labels — требует операционного апрува оператора, не делал автоматически.
+
+**Pending PR:** ветка `chore/team-restructure-v2` готова к коммиту изменений Фазы 1–6 (только содержимое, не пушил). Команды миграции к main — после апрува.
+
+### Раньше: OBI-24 admin full mockup pass deployed (2026-04-27 ночь)
 
 PR [#75](https://github.com/samohyn/obihod/pull/75) merged как `afaa991` → main → auto-deploy success.
 
