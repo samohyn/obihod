@@ -275,6 +275,8 @@ Postgres 16 + Beget), пересмотр стека — только по явн
 
 ### Фаза 7. Implementation
 
+> **⚙️ Iron rule (spec-before-code):** Implementation стартует ТОЛЬКО после Фазы 4 (System Analysis): `sa-<team>.md` approved PO команды + при необходимости Фаза 5 (Architecture) с ADR от `tamd`. Без одобренной спеки `fe-*`/`be-*`/`lp-*`/`cr-*`/`qa-*` не берут задачу. PO команды держит gate.
+
 В каждой команде — **по одному инженеру на роль**: `fe-<team>` (фронт),
 `be-<team>` (бэк), `seo-tech` (SEO-слой), `aemd` (разметка событий, кросс-команда),
 `do` (инфраструктура, shared). Коммуникация — через PO команды; напрямую между
@@ -342,7 +344,7 @@ Consulted (консультирует), I — Informed (информирован
 | 4. SA                     | sa-`<team>`                        | PO команды | ba, tamd, ux/ui, dba, be-panel       | fe/be/qa/cr/do          |
 | 5. Architecture           | tamd (+dba+be-panel при данных)    | cpo        | be-`<team>`, do, seo-tech            | fe-`<team>`, sa-`<team>` |
 | 6. Design                 | art → ux, ui (или ux-shop/-panel)  | art / cpo  | ba, ux, cw, seo-content, lp-site     | fe-`<team>`             |
-| 7. Implementation         | fe-`<team>`, be-`<team>`           | PO команды | sa-`<team>`, ui, ux, seo-tech, aemd, do, dba | qa-`<team>`, cr-`<team>` |
+| 7. Implementation         | fe-`<team>`, be-`<team>`           | PO команды (gate `sa-<team>.md` approved) | sa-`<team>`, ui, ux, seo-tech, aemd, do, dba | qa-`<team>`, cr-`<team>` |
 | 8. QA (team)              | qa-`<team>`                        | PO команды | sa-`<team>`, fe/be                   | cr-`<team>`             |
 | 9. Code Review (team)     | cr-`<team>`                        | PO команды | fe/be, sa-`<team>`, dba              | release                 |
 | 10. Release gate          | release                            | cpo        | PO команды, cr-`<team>`, qa-`<team>` | leadqa                  |

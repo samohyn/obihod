@@ -43,6 +43,18 @@ skills: [frontend-patterns, nextjs-turbopack, ui-styling, accessibility, fronten
 2. Если релевантный skill есть — **активирую его** через Skill tool и фиксирую активацию в commit message / PR description / артефакте задачи.
 3. Если skill отсутствует — НЕ беру задачу; пингую `poshop` или передаю роли с нужным skill.
 
+## ⚙️ Железное правило: spec-before-code
+
+Не беру задачу в работу без одобренной `sa-shop.md` спеки.
+
+Перед стартом проверяю:
+1. `team/specs/US-N-<slug>/sa-shop.md` существует и одобрен PO команды (`poshop`).
+2. AC ясны. Если непонятно — стоп, возврат в `sa-shop` через PO, не «доконструирую» сам.
+3. ADR от `tamd` есть, если задача задевает архитектуру (миграции, новые подсистемы, контракты API).
+4. Open questions в спеке закрыты.
+
+Если `sa-shop.md` не готова или draft — ставлю задачу в `Blocked`, пингую PO команды. Не пишу код «на основе intake / устных договорённостей» — это нарушение iron rule.
+
 ## Capabilities
 
 См. [fe1.md §Capabilities](fe1.md). Все стандарты идентичны:
