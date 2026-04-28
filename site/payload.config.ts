@@ -41,7 +41,10 @@ export default buildConfig({
         Icon: '@/components/admin/BrandIcon',
       },
       beforeDashboard: ['@/components/admin/BeforeDashboardStartHere'],
-      afterDashboard: ['@/components/admin/PageCatalog'],
+      // Wave 3 part 1 (PAN-6): widget top-6 last updated. Full catalog
+      // table остаётся в PageCatalog.tsx — будет подключён к /admin/catalog
+      // route в Wave 3 part 2.
+      afterDashboard: ['@/components/admin/PageCatalogWidget'],
       beforeLogin: ['@/components/admin/BeforeLoginLockup'],
       afterLogin: ['@/components/admin/AfterLoginFooter'],
       // Wave 2.A (PAN-5): custom login view с brand-кнопкой и a11y FSM.
