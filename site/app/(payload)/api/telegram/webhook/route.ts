@@ -21,8 +21,8 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server'
-import config from '@/payload.config'
-import { getPayload } from 'payload'
+import { timingSafeEqual } from 'node:crypto'
+import { payloadClient } from '@/lib/payload'
 import { sendMessage } from '@/lib/telegram/sendMessage'
 
 interface TelegramUpdate {
@@ -53,8 +53,13 @@ export async function POST(req: NextRequest) {
       { status: 500 },
     )
   }
-  const providedSecret = req.headers.get('x-telegram-bot-api-secret-token')
-  if (providedSecret !== expectedSecret) {
+  const providedSecret = req.headers.get('x-telegram-bot-api-secret-token') ?? ''
+  // timing-safe compare — без такой защиты атакующий может побайтово угадать secret
+  // через side-channel замеры времени string-compare с early exit.
+  const provided = Buffer.from(providedSecret)
+  const expected = Buffer.from(expectedSecret)
+  const secretValid = provided.length === expected.length && timingSafeEqual(provided, expected)
+  if (!secretValid) {
     return NextResponse.json(
       { error: { code: 'unauthorized', message: 'Invalid webhook secret' } },
       { status: 401 },
@@ -79,7 +84,7 @@ export async function POST(req: NextRequest) {
     }
 
     try {
-      const payload = await getPayload({ config })
+      const payload = await payloadClient()
       const users = await payload.find({
         collection: 'users',
         where: { email: { equals: operatorEmail } },
@@ -97,7 +102,11 @@ export async function POST(req: NextRequest) {
       // Greet operator (даже если user не нашёлся — silent fail на user side, но greeting шлём)
       await sendMessage({ chatId: chat.id, text: GREETING_TEXT })
     } catch (err) {
-      console.error('[telegram/webhook] /start handler error', err)
+      // Логируем только name + message — не raw err object: stack может содержать
+      // chat_id оператора, фрагменты токена payload или email из validation error.
+      const message = err instanceof Error ? err.message : String(err)
+      const name = err instanceof Error ? err.name : 'unknown'
+      console.error('[telegram/webhook] /start handler error', { name, message })
       // Не возвращаем 500 — Telegram будет retry, чего не нужно
     }
   }

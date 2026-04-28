@@ -44,11 +44,12 @@ interface CsvRow {
 }
 
 function escapeCsvField(field: string): string {
-  // RFC 4180: оборачиваем в кавычки если есть запятая, кавычка или newline
-  if (/[",\n\r]/.test(field)) {
-    return `"${field.replace(/"/g, '""')}"`
-  }
-  return `"${field}"`
+  // CSV formula injection guard: префикс `'` если поле начинается с =/+/-/@/Tab/CR.
+  // Без этого Excel/Numbers исполняют `=HYPERLINK("evil.com","click")` как формулу.
+  // См. OWASP CSV Injection.
+  const safeField = /^[=+\-@\t\r]/.test(field) ? `'${field}` : field
+  // RFC 4180: всегда оборачиваем в кавычки + удваиваем internal quotes.
+  return `"${safeField.replace(/"/g, '""')}"`
 }
 
 function rowToCsv(row: CsvRow): string {
@@ -74,62 +75,68 @@ export async function GET() {
       { status: 401 },
     )
   }
+  // Role-check: 403 если role отсутствует (legacy user / новый user до миграции)
+  // ИЛИ не входит в admin/manager. Без `!role` — empty role bypass.
   const role = (auth.user as { role?: string }).role
-  if (role && !['admin', 'manager'].includes(role)) {
+  if (!role || !['admin', 'manager'].includes(role)) {
     return NextResponse.json(
       { error: { code: 'forbidden', message: 'Нет прав на экспорт.' } },
       { status: 403 },
     )
   }
 
-  // Aggregate 7 collections
-  const rows: CsvRow[] = []
-  for (const q of COLLECTIONS) {
-    try {
-      const res = await payload.find({
-        collection: q.slug,
-        where: { _status: { equals: 'published' } },
-        limit: 1000,
-        sort: '-updatedAt',
-        depth: q.slug === 'service-districts' ? 1 : 0,
-      })
-
-      for (const doc of res.docs) {
-        const d = doc as Record<string, unknown>
-        const slug = typeof d.slug === 'string' ? d.slug : String(d.id)
-        const title =
-          (typeof d.title === 'string' && d.title) ||
-          (typeof d.computedTitle === 'string' && d.computedTitle) ||
-          (typeof d.nameNominative === 'string' && d.nameNominative) ||
-          slug
-
-        let url = `${q.urlPrefix}${slug}/`
-        if (q.slug === 'service-districts') {
-          const service = d.service as { slug?: string } | null
-          const district = d.district as { slug?: string } | null
-          if (service?.slug && district?.slug) {
-            url = `/${service.slug}/${district.slug}/`
-          } else {
-            continue
-          }
-        }
-
-        const updatedAt =
-          typeof d.updatedAt === 'string'
-            ? d.updatedAt.split('T')[0]
-            : new Date().toISOString().split('T')[0]
-
-        rows.push({
-          section: q.label,
-          title,
-          url,
-          updatedAt,
-          status: 'live',
-          editUrl: `https://obikhod.ru/admin/collections/${q.slug}/${d.id}`,
+  // Aggregate 7 collections в параллель — sequential await был узким местом
+  // (E2 cr-panel review): 7 round-trip к Postgres последовательно.
+  const perCollectionResults = await Promise.all(
+    COLLECTIONS.map((q) =>
+      payload
+        .find({
+          collection: q.slug,
+          where: { _status: { equals: 'published' } },
+          limit: 1000,
+          sort: '-updatedAt',
+          depth: q.slug === 'service-districts' ? 1 : 0,
         })
+        .then((res) => ({ q, docs: res.docs }))
+        .catch(() => ({ q, docs: [] as Record<string, unknown>[] })),
+    ),
+  )
+
+  const rows: CsvRow[] = []
+  for (const { q, docs } of perCollectionResults) {
+    for (const doc of docs) {
+      const d = doc as Record<string, unknown>
+      const slug = typeof d.slug === 'string' ? d.slug : String(d.id)
+      const title =
+        (typeof d.title === 'string' && d.title) ||
+        (typeof d.computedTitle === 'string' && d.computedTitle) ||
+        (typeof d.nameNominative === 'string' && d.nameNominative) ||
+        slug
+
+      let url = `${q.urlPrefix}${slug}/`
+      if (q.slug === 'service-districts') {
+        const service = d.service as { slug?: string } | null
+        const district = d.district as { slug?: string } | null
+        if (service?.slug && district?.slug) {
+          url = `/${service.slug}/${district.slug}/`
+        } else {
+          continue
+        }
       }
-    } catch {
-      // коллекция может быть недоступна — пропускаем
+
+      const updatedAt =
+        typeof d.updatedAt === 'string'
+          ? d.updatedAt.split('T')[0]
+          : new Date().toISOString().split('T')[0]
+
+      rows.push({
+        section: q.label,
+        title,
+        url,
+        updatedAt,
+        status: 'live',
+        editUrl: `https://obikhod.ru/admin/collections/${q.slug}/${d.id}`,
+      })
     }
   }
 

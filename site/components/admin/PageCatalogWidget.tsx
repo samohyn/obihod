@@ -180,51 +180,64 @@ const TOP_N = 6
 async function loadTopN(): Promise<{ items: CatalogItem[]; total: number }> {
   try {
     const payload = await payloadClient()
+
+    // Parallelize 7 queries — без Promise.all каждый dashboard-render = 7 sequential
+    // round-trip в Postgres (E1 cr-panel review).
+    const perCollection = await Promise.all(
+      COLLECTIONS.map((q) =>
+        payload
+          .find({
+            collection: q.slug,
+            where: { _status: { equals: 'published' } },
+            limit: TOP_N,
+            sort: '-updatedAt',
+            depth: q.slug === 'service-districts' ? 1 : 0,
+          })
+          .then((res) => ({
+            q,
+            docs: res.docs,
+            count: res.totalDocs ?? res.docs.length,
+          }))
+          .catch(() => ({
+            q,
+            docs: [] as Record<string, unknown>[],
+            count: 0,
+          })),
+      ),
+    )
+
     const items: CatalogItem[] = []
     let total = 0
+    for (const { q, docs, count } of perCollection) {
+      total += count
+      for (const doc of docs) {
+        const d = doc as Record<string, unknown>
+        const slug = typeof d.slug === 'string' ? d.slug : String(d.id)
+        const title =
+          (typeof d.title === 'string' && d.title) ||
+          (typeof d.computedTitle === 'string' && d.computedTitle) ||
+          (typeof d.nameNominative === 'string' && d.nameNominative) ||
+          slug
 
-    for (const q of COLLECTIONS) {
-      try {
-        const res = await payload.find({
-          collection: q.slug,
-          where: { _status: { equals: 'published' } },
-          limit: TOP_N,
-          sort: '-updatedAt',
-          depth: q.slug === 'service-districts' ? 1 : 0,
-        })
-        total += res.totalDocs ?? res.docs.length
-
-        for (const doc of res.docs) {
-          const d = doc as Record<string, unknown>
-          const slug = typeof d.slug === 'string' ? d.slug : String(d.id)
-          const title =
-            (typeof d.title === 'string' && d.title) ||
-            (typeof d.computedTitle === 'string' && d.computedTitle) ||
-            (typeof d.nameNominative === 'string' && d.nameNominative) ||
-            slug
-
-          let url = `${q.urlPrefix}${slug}/`
-          if (q.slug === 'service-districts') {
-            const service = d.service as { slug?: string } | null
-            const district = d.district as { slug?: string } | null
-            if (service?.slug && district?.slug) {
-              url = `/${service.slug}/${district.slug}/`
-            } else {
-              continue
-            }
+        let url = `${q.urlPrefix}${slug}/`
+        if (q.slug === 'service-districts') {
+          const service = d.service as { slug?: string } | null
+          const district = d.district as { slug?: string } | null
+          if (service?.slug && district?.slug) {
+            url = `/${service.slug}/${district.slug}/`
+          } else {
+            continue
           }
-
-          items.push({
-            id: String(d.id),
-            title,
-            url,
-            updatedAt: typeof d.updatedAt === 'string' ? d.updatedAt : new Date().toISOString(),
-            collectionLabel: q.label,
-            collectionSlug: q.slug,
-          })
         }
-      } catch {
-        // коллекция может быть недоступна (миграция, БД пустая) — пропускаем
+
+        items.push({
+          id: String(d.id),
+          title,
+          url,
+          updatedAt: typeof d.updatedAt === 'string' ? d.updatedAt : new Date().toISOString(),
+          collectionLabel: q.label,
+          collectionSlug: q.slug,
+        })
       }
     }
 

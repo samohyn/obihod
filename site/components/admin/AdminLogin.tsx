@@ -4,7 +4,7 @@ import type { CSSProperties, FC, FormEvent } from 'react'
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useAuth } from '@payloadcms/ui'
+import { useAuth, type UserWithToken } from '@payloadcms/ui'
 
 /**
  * AdminLogin — custom login view (Wave 2.A · PAN-5 · US-12).
@@ -133,20 +133,13 @@ const AdminLogin: FC = () => {
         setErrorCode('unknown')
         return
       }
-      const data = (await res.json()) as { user?: unknown; token?: string; exp?: number }
+      const data = (await res.json()) as Partial<UserWithToken>
       if (!data.user || typeof data.exp !== 'number') {
         setState('error')
         setErrorCode('unknown')
         return
       }
-      // setUser сигнатура: { user, token, exp } — обновляет AuthContext + token timer
-      setUser({
-        user: data.user as Parameters<typeof setUser>[0] extends null | { user: infer U }
-          ? U
-          : never,
-        token: data.token,
-        exp: data.exp,
-      } as Parameters<typeof setUser>[0])
+      setUser({ user: data.user, token: data.token, exp: data.exp })
       router.push('/admin')
     } catch (err) {
       setState('error')
