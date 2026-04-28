@@ -1,8 +1,9 @@
 # PROJECT_CONTEXT.md — Обиход
 
-Единый источник контекста для всех 28 ролей команды. Агенты ссылаются на этот файл
-вместо дублирования описания проекта в каждом `<code>.md`. При конфликте приоритет —
-у [CLAUDE.md](../CLAUDE.md) (корневой) и артефактов в [contex/](../contex/).
+Единый источник контекста для всех **42 ролей в 7 командах**. Агенты ссылаются
+на этот файл вместо дублирования описания проекта в каждом `<code>.md`. При
+конфликте приоритет — у [CLAUDE.md](../CLAUDE.md) (корневой) и артефактов в
+[contex/](../contex/). Структура команды и релиз-цикл — в [WORKFLOW.md](WORKFLOW.md).
 
 ---
 
@@ -19,6 +20,12 @@
 госзаказ).
 
 **Сайт:** https://obikhod.ru (живой prod).
+
+**Расширения 2026-04-27 (вторая волна):**
+- **Дизайн ландшафта** — flat-link в навигации (5-е направление, проект участка,
+  планировка, посадка с гарантией приживаемости).
+- **Магазин саженцев и товаров для сада** — mega-menu в навигации (6-е
+  направление, выделяется в `apps/shop/` отдельной командой).
 
 **Главная цель сайта:** квалифицированные заявки → amoCRM → бригадир. Воронка: форма
 + 4 калькулятора + «фото → смета за 10 минут».
@@ -103,10 +110,16 @@ CI/CD:       GitHub Actions (ci.yml + deploy.yml), PM2 + nginx на VPS
              Автодеплой: push main → build → rsync → PM2 reload
 ```
 
-**Резерв (не активировать без ADR от `tamd`):** отдельные Go-микросервисы
-(`be1/be2`) на случай выделения очередей (фото→смета), биллинга B2B, интеграции с
-1С. Пока весь backend живёт внутри Next.js API routes + Payload (`be3/be4` —
-TypeScript-инженеры).
+**Резерв (не активировать без ADR от `tamd`):** отдельные Go-микросервисы на
+случай выделения очередей (фото→смета), биллинга B2B, интеграции с 1С. Пока
+весь backend живёт внутри Next.js API routes + Payload (`be-site` для сайта
+услуг, `be-shop` для магазина, `be-panel` для admin/коллекций — все TypeScript).
+
+**Ownership Payload-коллекций:** **team `panel/`** — единственный owner. Схему
+коллекций (`site/payload.config.ts`) и миграции ведут `be-panel` + `dba` (из
+`common/`). Команды `product/` (сайт услуг) и `shop/` (магазин) читают данные
+через **Payload Local API** и НЕ правят схему. Любое изменение коллекций — через
+`popanel` + ADR `tamd`.
 
 **Запрещено предлагать:** Tilda, WordPress, Bitrix, MODX, Yii (см.
 [contex/04_competitor_tech_stacks.md](../contex/04_competitor_tech_stacks.md) —
@@ -192,7 +205,8 @@ TypeScript-инженеры).
 Шаховская, Шатура, Щёлково, Электросталь, Яхрома.
 
 **Правило расширения:** пилот (7) → второй эшелон (5) → полное покрытие. Порядок
-определяет `seo1` по спросу и конкуренции. `po` согласовывает с оператором.
+определяет `seo-content` по спросу и конкуренции. `poseo` согласовывает с
+оператором (через `cpo`).
 
 ---
 
@@ -249,16 +263,57 @@ TypeScript-инженеры).
 
 ## 8. Управление проектом
 
-- **Linear:** workspace `samohyn`, team/project key **`OBI`**. Каждая фича — отдельная
-  user story. Детали интеграции — в [WORKFLOW.md](WORKFLOW.md) §7.5.
+- **Linear workspace:** `samohyn`. **6 team keys** (по командам):
+  - `OBI` — business/ + product/ (стратегия + сайт услуг),
+  - `SEO` — seo/ (SEO-программа, программные посадочные),
+  - `DES` — design/ (design-system, brand-guide),
+  - `DEV` — common/ (инфра, ADR, RC, deploy),
+  - `SHOP` — shop/ (магазин саженцев `apps/shop`),
+  - `PANEL` — panel/ (admin Payload, коллекции, RBAC).
+- Каждая фича — отдельная user story в нужной команде. Детали интеграции — в
+  [WORKFLOW.md](WORKFLOW.md) §7.5.
 - **Assignee в Linear:** всегда оператор (фаундер). Роль, ведущая задачу,
-  маркируется label `role:<code>` (например, `role:sa`, `role:fe3`).
-- **Фазы:** отдельный label `phase:<name>` — меняется при hand-off.
-- **Входная точка:** `in` → всегда. Оператор не пишет напрямую `ba`/`po`/`fe`.
-- **Модель:** все 28 ролей работают на `opus-4-6` с `reasoning_effort: max`.
-- **Параллельная работа:** 2 FE (fe1, fe2), 2 BE Go в резерве (be1, be2), 2 BE TS
-  активные (be3, be4), 2 QA (qa1, qa2) — `po` распределяет, оператор согласовывает
-  параллель по коду.
+  маркируется label `role/<code>` (например, `role/sa-site`, `role/fe-shop`,
+  `role/leadqa`).
+- **Фазы:** label `phase/<name>` — меняется при hand-off. Релиз-цикл:
+  `intake → spec → design → dev → qa → review → gate (release) → verify
+  (leadqa) → release`.
+- **Gate перед оператором:** двухступенчатый — `release` (RC + checklist) →
+  `leadqa` (verify локально). `do` НЕ деплоит без апрува оператора.
+- **Входная точка:** `in` → всегда. Оператор не пишет напрямую исполнителям.
+  Sticky agent sessions: `@<code>` / `/<code>` / «`<code>`, …» — деталь в
+  [WORKFLOW.md](WORKFLOW.md) §5.4.
+- **Модель:** все 42 роли работают на `opus-4-6` с `reasoning_effort: max`.
+- **Параллельная работа:** в каждой команде разработки **по одному инженеру**
+  на роль (`fe-site`, `be-site`, `qa-site`, `cr-site` и т. п.). PO команды
+  координирует свою команду; `cpo` — кросс-команда. Если задача требует
+  ускорения — `cpo` через PO команды подключает shared-инженера из `common/`
+  или временно из соседней команды (фиксируется в Linear через `role/` label).
+
+---
+
+## 8.5. Ветки и merge train
+
+```
+main (prod)
+ ├── design/integration   (lead: art)      design-system/, токены
+ ├── shop/integration     (lead: poshop)   apps/shop/**
+ ├── panel/integration    (lead: popanel)  site/payload.config.ts,
+ │                                         app/(payload)/admin/**
+ └── product/integration  (lead: podev)    фича-ветки сайта услуг
+```
+
+Команды `business/`, `common/`, `seo/` работают напрямую с `main` через короткие
+фича-ветки + PR. **Owner merge train — `do`** (common/). Daily cron
+`git fetch --all` + `git merge-tree` детектит конфликты на hot-paths
+(`payload.config.ts`, `apps/shop/**`, `app/(payload)/admin/**`,
+`design-system/**`, `package.json`, `pnpm-lock.yaml`) и заводит Linear-issue
+`merge-conflict` с пингом двух соответствующих PO команд.
+
+**Merge order на main:** `design → panel → shop → product`. Дизайн-токены первыми
+(база для всех), затем схема Payload (база для shop/product), затем магазин,
+затем сайт услуг. Этот порядок обязан соблюдать `release` при подготовке RC из
+нескольких integration-веток одновременно.
 
 ---
 
