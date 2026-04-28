@@ -15,7 +15,7 @@
  * Идемпотентен — пропускает существующие записи по slug / composite (service, district).
  * Ручные правки `cw` через admin не затираются (AC-1.3.2).
  *
- * Источник контракта: devteam/specs/US-1-seed-prod-db/sa.md (approved 2026-04-23)
+ * Источник контракта: team/specs/US-1-seed-prod-db/sa.md (approved 2026-04-23)
  */
 import { getPayload } from 'payload'
 import type { Payload } from 'payload'

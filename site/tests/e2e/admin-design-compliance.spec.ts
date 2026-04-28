@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 
 /**
  * OBI-19 Wave 1 — Admin design compliance с design-system/brand-guide.html §12
- * + devteam/specs/US-12-admin-redesign/art-concept-v2.md.
+ * + team/specs/US-12-admin-redesign/art-concept-v2.md.
  *
  * Проверяем что Payload admin визуально соответствует утверждённой
  * design-system. Ассертим computed CSS-переменные и стили на /admin/login

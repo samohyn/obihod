@@ -19,24 +19,42 @@ export const Media: CollectionConfig = {
     ],
     mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/avif'],
   },
+  // Wave 4 (PAN-3) — UI tabs grouping (art-concept-v2 §5, brand-guide §12.4).
   fields: [
-    { name: 'alt', type: 'text', required: true },
-    { name: 'caption', type: 'text' },
     {
-      name: 'geoLocation',
-      type: 'json',
-      admin: {
-        description: 'EXIF GPS как [lon, lat] — для ImageObject contentLocation',
-      },
-    },
-    {
-      name: 'license',
-      type: 'select',
-      defaultValue: 'proprietary',
-      options: [
-        { label: 'Собственное', value: 'proprietary' },
-        { label: 'CC-BY', value: 'cc-by' },
-        { label: 'Public Domain', value: 'public-domain' },
+      type: 'tabs',
+      tabs: [
+        {
+          label: 'Основные',
+          description: 'Подпись для SEO и человека.',
+          fields: [
+            { name: 'alt', type: 'text', required: true },
+            { name: 'caption', type: 'text' },
+          ],
+        },
+        {
+          label: 'Метаданные',
+          description: 'Геолокация (EXIF GPS) и лицензия использования.',
+          fields: [
+            {
+              name: 'geoLocation',
+              type: 'json',
+              admin: {
+                description: 'EXIF GPS как [lon, lat] — для ImageObject contentLocation',
+              },
+            },
+            {
+              name: 'license',
+              type: 'select',
+              defaultValue: 'proprietary',
+              options: [
+                { label: 'Собственное', value: 'proprietary' },
+                { label: 'CC-BY', value: 'cc-by' },
+                { label: 'Public Domain', value: 'public-domain' },
+              ],
+            },
+          ],
+        },
       ],
     },
   ],

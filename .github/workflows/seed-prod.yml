@@ -1,6 +1,6 @@
 name: Seed prod DB (fallback)
 
-# Fallback-механизм по ADR-0001 (devteam/adr/ADR-0001-seed-prod-runner.md).
+# Fallback-механизм по ADR-0001 (team/adr/ADR-0001-seed-prod-runner.md).
 #
 # Основной способ запуска seed — ручной SSH на VPS + `pnpm seed:prod` (ADR §«Основное»).
 # Этот workflow — fallback, если прямой SSH-прогон невоспроизводим (например, сетевая

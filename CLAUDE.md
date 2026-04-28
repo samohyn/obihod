@@ -19,7 +19,7 @@
 > — **«Магазин»** — mega-menu в навигации (6-е направление: саженцы и товары для сада,
 >   preliminary 9 категорий — плодовые / колоновидные / плодовые-куст / декор-куст /
 >   цветы / розы / крупномеры / лиственные / хвойные).
-> Категории и URL — preliminary, фиксируются `ba` + `po` отдельным US.
+> Категории и URL — preliminary, фиксируются `ba` + `poshop` отдельным US.
 
 **Главная цель сайта:** приносить квалифицированные заявки — форма + калькуляторы +
 «фото → смета за 10 минут» → amoCRM → бригадир. Метрики успеха — в
@@ -53,17 +53,23 @@
 
 ```
 obikhod/
-├── devteam/         # 28 ролевых AI-агентов + WORKFLOW + PROJECT_CONTEXT
+├── team/         # 42 ролевых AI-агента в 7 функциональных командах + WORKFLOW + PROJECT_CONTEXT
 │   ├── PROJECT_CONTEXT.md   # единый контекст для всех агентов
-│   ├── WORKFLOW.md          # пайплайн задачи intake → release
+│   ├── WORKFLOW.md          # пайплайн задачи intake → release → leadqa → operator → do
 │   ├── README — legend.md   # легенда команды (от оператора)
-│   ├── <code>.md            # 28 агентов: in, ba, po, sa, tamd, art, ux, ui,
-│   │                        #   fe1, fe2, be1, be2, be3, be4, cr, qa1, qa2,
-│   │                        #   cw, seo1, seo2, lp, aemd, da, pa, do, re,
-│   │                        #   dba, out
-│   ├── specs/US-<N>-<slug>/ # intake.md, ba.md, sa.md, qa.md, cr.md, out.md
+│   ├── business/   # cpo, ba, in, re, aemd, da — оркестрация продукта
+│   ├── common/     # tamd, dba, do, release, leadqa — shared, подключаются по запросу
+│   ├── design/     # art (lead), ux, ui — изолированная ветка design/integration
+│   ├── product/    # podev, sa-site, be-site, fe-site, lp-site, pa-site,
+│   │               #   cr-site, qa-site — сайт услуг (4 pillar + ландшафт)
+│   ├── seo/        # poseo, sa-seo, seo-content, seo-tech, cw, cms — SEO + контент
+│   ├── shop/       # poshop, sa-shop, be-shop, fe-shop, ux-shop, cr-shop,
+│   │               #   qa-shop — e-commerce саженцев (apps/shop, отдельная ветка)
+│   ├── panel/      # popanel, sa-panel, be-panel, fe-panel, ux-panel, cr-panel,
+│   │               #   qa-panel — Payload admin (источник истины: brand-guide §12)
+│   ├── specs/US-<N>-<slug>/ # intake, ba, sa-*, qa-*, cr-*, release-blockers, leadqa
 │   ├── adr/ADR-<N>-<slug>.md
-│   └── release-notes/US-<N>-<slug>.md
+│   └── release-notes/{RC-N,leadqa-N,US-N}.md
 ├── contex/          # Стратегические артефакты (нумерация 01_, 02_, …)
 ├── site/            # Код сайта (Next.js 16 + Payload 3) — живой prod
 ├── content/         # Копия/тексты для лендингов (MDX/JSON) — TODO
@@ -74,11 +80,12 @@ obikhod/
 **Правила файлов:**
 - Новые стратегические артефакты → в `contex/` с номером `05_…`, `06_…` по порядку
 - Не переименовываем `contex/` → `context/` пока оператор явно не попросит
-- Команда проекта живёт в [devteam/](devteam/) — 28 ролей, адаптированных под
-  домен Обихода. Единый контекст для агентов — в
-  [devteam/PROJECT_CONTEXT.md](devteam/PROJECT_CONTEXT.md). Пайплайн — в
-  [devteam/WORKFLOW.md](devteam/WORKFLOW.md). Исходная легенда от оператора —
-  в [devteam/README — legend.md](devteam/README%20%E2%80%94%20legend.md).
+- Команда проекта живёт в [team/](team/) — 42 роли в 7 функциональных
+  командах (business / common / design / product / seo / shop / panel),
+  адаптированных под домен Обихода. Единый контекст для агентов — в
+  [team/PROJECT_CONTEXT.md](team/PROJECT_CONTEXT.md). Пайплайн — в
+  [team/WORKFLOW.md](team/WORKFLOW.md). Исходная легенда от оператора —
+  в [team/README — legend.md](team/README%20%E2%80%94%20legend.md).
 - Устаревшее правило «agents/ удалён, не восстанавливать» снято 2026-04-22 после
   адаптации команды под Обиход из легенды
 
@@ -106,17 +113,42 @@ obikhod/
 
 ## Агенты проекта
 
-Команда — 28 ролей в [devteam/](devteam/), все на `opus-4-6` с
-`reasoning_effort: max`. Hand-off, RACI, Linear-интеграция (workspace `samohyn`,
-team key **OBI**) — в [devteam/WORKFLOW.md](devteam/WORKFLOW.md). Единый контекст
-проекта — в [devteam/PROJECT_CONTEXT.md](devteam/PROJECT_CONTEXT.md) (все агенты
-ссылаются на него вместо дублирования).
+Команда — 42 роли в [team/](team/), сгруппированных по 7 функциональным
+командам. Все на `opus-4-7` (`claude-opus-4-7`, 1M context) с
+`reasoning_effort: max`. Hand-off, RACI, Linear-интеграция (workspace
+`samohyn`, team keys **OBI** / **SEO** / **DES** / **DEV** / **SHOP** /
+**PANEL**) — в [team/WORKFLOW.md](team/WORKFLOW.md). Единый контекст
+проекта — в [team/PROJECT_CONTEXT.md](team/PROJECT_CONTEXT.md).
 
-**Вход для оператора — всегда `in`.** Оператор не пишет напрямую `ba`/`po`/`fe`.
+**Структура команд (7):**
+- **business/** — оркестрация продукта: `cpo` (Chief PO над всеми), `ba`, `in`, `re`, `aemd`, `da`.
+- **common/** — shared roles: `tamd`, `dba`, `do`, `release` (gate), `leadqa` (verify).
+- **design/** — `art` (lead), `ux`, `ui`. Изолированная ветка `design/integration`.
+- **product/** — сайт услуг: `podev` (PO), `sa-site`, `be-site`, `fe-site`, `lp-site`, `pa-site`, `cr-site`, `qa-site`. Ветка `product/integration`.
+- **seo/** — `poseo` (PO), `sa-seo`, `seo-content`, `seo-tech`, `cw`, `cms`.
+- **shop/** — e-commerce: `poshop` (PO), `sa-shop`, `be-shop`, `fe-shop`, `ux-shop`, `cr-shop`, `qa-shop`. Ветка `shop/integration`, monorepo `apps/shop/`.
+- **panel/** — Payload admin: `popanel` (PO), `sa-panel`, `be-panel`, `fe-panel`, `ux-panel`, `cr-panel`, `qa-panel`. Ветка `panel/integration`. Источник истины UI — [design-system/brand-guide.html](design-system/brand-guide.html) §12.
 
-**Параллель по коду:** 2 фронта (fe1, fe2), 2 бэка TypeScript (be3, be4), 2 Go-бэка
-в резерве (be1, be2 — активируются по ADR от `tamd`), 2 QA (qa1, qa2). `po`
-распределяет, параллель по одной задаче явно согласовывает с оператором.
+**Вход для оператора — всегда `in`** для новой задачи. **Прямой путь к PO команды разрешён** — оператор может обращаться к любому `cpo`/`podev`/`poseo`/`popanel`/`poshop`/`art` напрямую; `cpo` всегда в курсе.
+
+**Sticky agent sessions:** когда оператор обращается к роли (`@cpo`, «cpo, ...»), Claude переключается в эту роль и **остаётся в ней до явного переключения**. Каждый ответ в роли префиксируется `[code]` для ясности. Возврат к Claude: `/claude`, «Claude, переключись», новая сессия. Переключение между ролями (`@podev` после `@cpo`) — это смена роли, не возврат к Claude.
+
+**Skill-check железное правило (для каждой роли):** перед тем как взять задачу, агент сверяет требования с `skills` из своего frontmatter и **активирует** релевантный skill через Skill tool, фиксируя в commit/PR/артефакте. Если skill отсутствует — задача не его, передаёт PO команды или роли с нужным skill.
+
+**Релиз-цикл (новый, с 2026-04-28):**
+
+```
+[команда] PR → [release] gate (доки) → [leadqa] verify (локально)
+       → [operator] approve → [do] deploy → [cpo] post-release retro
+```
+
+`do` НЕ деплоит без апрува оператора. Оператор апрувит ТОЛЬКО после `leadqa` отчёта. `release` выпускает `RC-N.md`, `leadqa` пишет `leadqa-N.md`. Артефакты — в `team/release-notes/`.
+
+**Параллель по коду:** в каждой команде разработки (`product`, `shop`, `panel`) — по одному `be-*`/`fe-*`/`qa-*`/`cr-*` (без зеркал fe1/fe2). PO команды распределяет, оператор согласовывает приоритеты в спринт-планинге.
+
+**Контент в админке** ведёт `cms` (seo/) — операционные publish/update/bulk через CLI скрипты `site/scripts/admin/`, аудит — в `team/ops/cms-changes/`. Тексты пишет `cw`, SEO-стратегию определяют `seo-content` / `seo-tech`, `cms` только применяет ТЗ.
+
+**Owner Payload-коллекций — команда panel** (`be-panel` + `dba`). Команды product/shop читают через Payload Local API, не правят схему. Cross-team запросы на изменение схем — через `cpo` к `popanel`.
 
 **Assignee в Linear — всегда оператор.** Роль маркируется label `role:<code>`,
 фаза — label `phase:<name>`.
