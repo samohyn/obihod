@@ -44,6 +44,13 @@ export default buildConfig({
       afterDashboard: ['@/components/admin/PageCatalog'],
       beforeLogin: ['@/components/admin/BeforeLoginLockup'],
       afterLogin: ['@/components/admin/AfterLoginFooter'],
+      // Wave 2.A (PAN-5): custom login view с brand-кнопкой и a11y FSM.
+      // Auth-flow остаётся native (useAuth().login). Magic link — Wave 2.B (PAN-11).
+      views: {
+        login: {
+          Component: '@/components/admin/AdminLogin',
+        },
+      },
     },
   },
   // Локализация admin на русский (brand-guide §12 mockup на ru). Pакет
