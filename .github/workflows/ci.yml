@@ -139,6 +139,22 @@ jobs:
             code=$(curl -sL -o /dev/null -w "%{http_code}" "http://localhost:3000${path}" || echo 000)
             echo "  warmup $path → $code"
           done
+          # Создаём admin user, иначе /admin/login редиректит на /admin/create-first-user
+          # и Playwright admin-login.spec.ts не находит form.login__form. Idempotent:
+          # при повторном вызове Payload вернёт 403 (already initialised) — это OK.
+          # КРИТИЧНО: trailing slash + -L. trailingSlash:true в next.config.ts
+          # редиректит /api/users/first-register → /api/users/first-register/ (308),
+          # без -L curl остановится на редиректе и тело не дойдёт до handler.
+          echo "  seeding admin user via /api/users/first-register/..."
+          seed_resp=$(curl -sSL -X POST http://localhost:3000/api/users/first-register/ \
+            -H "Content-Type: application/json" \
+            -d '{"email":"ci@obikhod.test","password":"ci-test-password-12345","name":"CI Admin","role":"admin"}' \
+            -w "\nHTTP_CODE:%{http_code}" || echo "CURL_FAILED")
+          echo "  first-register response: $seed_resp"
+          # Verify admin создан — /api/users/me на свежем cookie должен 200
+          # (но без login сессии тут просто проверим что users count > 0)
+          users_count=$(curl -sSL http://localhost:3000/api/users?limit=1 | grep -o '"totalDocs":[0-9]*' | head -1)
+          echo "  users in DB: $users_count"
           kill $DEV 2>/dev/null || true
           wait $DEV 2>/dev/null || true
           echo "--- dev log tail ---"
