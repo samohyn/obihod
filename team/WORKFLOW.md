@@ -902,7 +902,7 @@ shop → product.
   [`design-system/brand-guide.html`](../design-system/brand-guide.html) перед
   любой задачей с visual / UX / копирайт / TOV-следом. Команда `team/design/`
   (`art` → `ui` / `ux`) — авторы и сопровождающие brand-guide. **TOV split:**
-  `brand-guide.html` (общий, для всех) · `brand-guide-shop.html` (магазин,
+  `brand-guide.html` (общий, для всех) · `brand-guide.html (§15-§29)` (магазин,
   дополнительно к общему, ведёт `team/shop/`) · `brand-guide-landshaft.html`
   (услуга «Дизайн ландшафта», follow-up — пока спрашивать `art` через `cpo`).
   Анти-паттерн — использовать `contex/07_brand_system.html` или старые

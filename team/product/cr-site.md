@@ -67,9 +67,9 @@ skills: [coding-standards, simplify, plankton-code-quality, security-review]
    [`design-system/brand-guide-landshaft.html`](../../design-system/brand-guide-landshaft.html)
    (когда появится; до тех пор — **спросить `art` через `cpo`**, не использовать общий TOV).
 5. Если задача задевает магазин (`apps/shop/`, категории саженцев,
-   корзина, чекаут) — **дополнительно** консультирую
-   [`design-system/brand-guide-shop.html`](../../design-system/brand-guide-shop.html)
-   (специализация поверх общего brand-guide).
+   корзина, чекаут) — читаю секции **§15-§29** в
+   [`design-system/brand-guide.html`](../../design-system/brand-guide.html#shop-identity)
+   (Identity / TOV / Lexicon / Витрина / Карточка / Корзина / Чекаут / Аккаунт shop / States).
 
 ### Особые правила по моей команде
 
@@ -78,10 +78,10 @@ skills: [coding-standards, simplify, plankton-code-quality, security-review]
   ветку `design/integration`), синхронизирую `design-system/tokens/*.json`,
   пингую `cpo` если изменения cross-team. Не «дорисовываю» приватно —
   любое изменение публичное.
-- **`team/shop/`:** мой основной source — `brand-guide-shop.html` (TOV +
-  shop-компоненты), но базовые токены / типографика / иконки берутся из
-  общего `brand-guide.html`. При конфликте между двумя гайдами — пингую
-  `art` + `poshop`, не выбираю молча.
+- **`team/shop/`:** мой основной source — секции `§15-§29` в
+  `brand-guide.html` (TOV shop §16, лексика §17, компоненты §20-§27).
+  Базовые токены / типографика / иконки — `§1-§14` того же файла.
+  Один файл — одна правда; вопросов «какой гайд первичен» больше нет.
 - **Все остальные команды (`business/`, `common/`, `product/`, `seo/`,
   `panel/`):** brand-guide.html — единственный TOV для моих задач,
   кроме landshaft-исключения (см. п. 4 выше).
@@ -126,7 +126,7 @@ iron rule, возврат на доработку.
 - SEO-контент / programmatic LP → §13 TOV + §14 Don't (фильтр анти-TOV в текстах).
 
 **TOV для специализированных зон:**
-- **Магазин (`apps/shop/`)** → [`design-system/brand-guide-shop.html`](../../design-system/brand-guide-shop.html) **дополнительно** к brand-guide. Основной source — shop-guide; общий brand-guide — для базовых токенов и иконок.
+- **Магазин (`apps/shop/`)** → секции `§15-§29` в [`design-system/brand-guide.html`](../../design-system/brand-guide.html#shop-identity). Один файл, с anchor на shop-блок (TOV / лексика / компоненты).
 - **Услуга «Дизайн ландшафта»** → `design-system/brand-guide-landshaft.html` (создаётся, см. follow-up). До его появления — спросить `art` через `cpo`.
 
 **Связанные источники:**

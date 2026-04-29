@@ -89,9 +89,9 @@ Operator закрепил 2026-04-29: любая задача проверяет
    [`design-system/brand-guide-landshaft.html`](../../design-system/brand-guide-landshaft.html)
    (когда появится; до тех пор — **спросить `art` через `cpo`**, не использовать общий TOV).
 5. Если задача задевает магазин (`apps/shop/`, категории саженцев,
-   корзина, чекаут) — **дополнительно** консультирую
-   [`design-system/brand-guide-shop.html`](../../design-system/brand-guide-shop.html)
-   (специализация поверх общего brand-guide).
+   корзина, чекаут) — читаю секции **§15-§29** в
+   [`design-system/brand-guide.html`](../../design-system/brand-guide.html#shop-identity)
+   (Identity / TOV / Lexicon / Витрина / Карточка / Корзина / Чекаут / Аккаунт shop / States).
 
 ### Особые правила по моей команде
 
@@ -100,10 +100,10 @@ Operator закрепил 2026-04-29: любая задача проверяет
   ветку `design/integration`), синхронизирую `design-system/tokens/*.json`,
   пингую `cpo` если изменения cross-team. Не «дорисовываю» приватно —
   любое изменение публичное.
-- **`team/shop/`:** мой основной source — `brand-guide-shop.html` (TOV +
-  shop-компоненты), но базовые токены / типографика / иконки берутся из
-  общего `brand-guide.html`. При конфликте между двумя гайдами — пингую
-  `art` + `poshop`, не выбираю молча.
+- **`team/shop/`:** мой основной source — секции `§15-§29` в
+  `brand-guide.html` (TOV shop §16, лексика §17, компоненты §20-§27).
+  Базовые токены / типографика / иконки — `§1-§14` того же файла.
+  Один файл — одна правда; вопросов «какой гайд первичен» больше нет.
 - **Все остальные команды (`business/`, `common/`, `product/`, `seo/`,
   `panel/`):** brand-guide.html — единственный TOV для моих задач,
   кроме landshaft-исключения (см. п. 4 выше).
@@ -148,7 +148,7 @@ iron rule, возврат на доработку.
 - SEO-контент / programmatic LP → §13 TOV + §14 Don't (фильтр анти-TOV в текстах).
 
 **TOV для специализированных зон:**
-- **Магазин (`apps/shop/`)** → [`design-system/brand-guide-shop.html`](../../design-system/brand-guide-shop.html) **дополнительно** к brand-guide. Основной source — shop-guide; общий brand-guide — для базовых токенов и иконок.
+- **Магазин (`apps/shop/`)** → секции `§15-§29` в [`design-system/brand-guide.html`](../../design-system/brand-guide.html#shop-identity). Один файл, с anchor на shop-блок (TOV / лексика / компоненты).
 - **Услуга «Дизайн ландшафта»** → `design-system/brand-guide-landshaft.html` (создаётся, см. follow-up). До его появления — спросить `art` через `cpo`.
 
 **Связанные источники:**
@@ -279,6 +279,6 @@ RICE + MoSCoW, с ecommerce-метриками:
 - Mobile-first (60%+ трафика mobile в e-commerce саженцев).
 - Сезонность учитываю в roadmap'е.
 - Изолированная ветка `shop/integration`. Конфликты с main — через `do`.
-- **Source of truth для команды shop — [design-system/brand-guide-shop.html](../../design-system/brand-guide-shop.html).** Включает TOV-shop (Caregiver+Sage, профи-аудитория, B2B как UI-опция), доменную лексику, spec-каркас компонентов магазина, photography mood. Канонический markdown-источник TOV — [design-system/tov/shop.md](../../design-system/tov/shop.md). Visual базовый язык наследуется из основного [brand-guide.html](../../design-system/brand-guide.html). Стратегический voice profile — [contex/03_brand_naming.md](../../contex/03_brand_naming.md).
-- Все ТЗ для `cw` / `cms` / `fe-shop` / `ux-shop` опираются на `brand-guide-shop.html`. Если фича в shop требует визуал-решения, отсутствующего там — поднимаем брифом в `art` для расширения guide, а не правим локально в команде.
-- Специфика садоводства (домен, ботанические термины, агротехника) — лексика зафиксирована в `brand-guide-shop.html §Лексика`, расширяет её только `cw` через ревью `art`.
+- **Source of truth для команды shop — §15-§29 в [design-system/brand-guide.html](../../design-system/brand-guide.html#shop-identity).** Включает TOV-shop (Caregiver+Sage, профи-аудитория, B2B как UI-опция), доменную лексику, spec-каркас компонентов магазина, photography mood. Канонический markdown-источник TOV — [design-system/tov/shop.md](../../design-system/tov/shop.md). Visual базовый язык наследуется из основного [brand-guide.html](../../design-system/brand-guide.html). Стратегический voice profile — [contex/03_brand_naming.md](../../contex/03_brand_naming.md).
+- Все ТЗ для `cw` / `cms` / `fe-shop` / `ux-shop` опираются на `brand-guide.html (§15-§29)`. Если фича в shop требует визуал-решения, отсутствующего там — поднимаем брифом в `art` для расширения guide, а не правим локально в команде.
+- Специфика садоводства (домен, ботанические термины, агротехника) — лексика зафиксирована в `brand-guide.html (§15-§29) §Лексика`, расширяет её только `cw` через ревью `art`.

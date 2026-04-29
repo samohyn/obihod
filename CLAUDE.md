@@ -16,8 +16,7 @@
 |---|---|---|
 | Бренд | **ОБИХОД** (кириллица) | [03_brand_naming.md](contex/03_brand_naming.md) |
 | Позиционирование | «Порядок под ключ», архетип Caregiver + Ruler | там же |
-| TOV (shop) | Отдельный, [design-system/brand-guide-shop.html](design-system/brand-guide-shop.html) v1.0 | оператор 2026-04-28 |
-| Source of truth UI/UX | [design-system/brand-guide.html](design-system/brand-guide.html) — для всех 42 ролей | iron rule 2026-04-29 |
+| Source of truth UI/UX + TOV (services + shop) | [design-system/brand-guide.html](design-system/brand-guide.html) v2.2 — **единственный** файл для всех 42 ролей. §1-14 services (Caregiver+Ruler), §15-29 shop (Caregiver+Sage, полная e-commerce: Identity / TOV / Lexicon / Anti-words / Voice / Витрина / Поиск / Карточка / Корзина / Чекаут B2C+B2B / Формы / Аккаунт / States / Photography / Heritage), §30-32 account & auth, §33 site-chrome canonical. brand-guide-shop.html удалён 2026-04-29 после merge. | оператор 2026-04-29 |
 | Хостинг | **Beget (VPS/Cloud)** на старте; YC/Selectel при росте B2B-SLA | [04_competitor_tech_stacks.md](contex/04_competitor_tech_stacks.md) |
 | Task tracker | Только [specs/](specs/) + `team/backlog.md`. Linear отключён 2026-04-29 | оператор |
 
@@ -31,9 +30,9 @@
 2. **Spec-before-code** — в `panel`/`product`/`shop` dev НЕ стартует без одобренной
    `sa-<team>.md`. PO держит это в DoD.
 3. **Design-system awareness** — перед UI/UX/контентной/TOV-задачей сверка с
-   [design-system/brand-guide.html](design-system/brand-guide.html). Для shop —
-   дополнительно [brand-guide-shop.html](design-system/brand-guide-shop.html).
-   Никаких «дизайнерских импровизаций» вне токенов.
+   [design-system/brand-guide.html](design-system/brand-guide.html) v2.0
+   (один файл для всех — §1-14 services, §15-29 shop). Никаких «дизайнерских
+   импровизаций» вне токенов.
 4. **PO local-verify перед merge** — PO команды обязан развернуть PR локально и
    проверить acceptance до апрува merge. Браузер-smoke обязателен для UI.
 5. **do owns green CI before merge** — `do` локально гоняет
@@ -56,7 +55,7 @@ obikhod/
 │   ├── adr/                     # ADR-<N>-<slug>.md
 │   └── release-notes/           # RC-N.md, leadqa-N.md, US-N.md
 ├── contex/          # Стратегические артефакты (01_, 02_, … — нумерация по порядку)
-├── design-system/   # brand-guide.html (services) + brand-guide-shop.html — single source of truth
+├── design-system/   # brand-guide.html — единый source of truth (§1-14 services, §15-29 shop, §30-32 account, §33 chrome)
 ├── site/            # Next.js 16 + Payload 3 (prod-код)
 ├── seosite/         # SEO-артефакты: keyword research, URL-map, decisions
 ├── apps/shop/       # E-commerce саженцев (отдельная команда, своя Postgres)
