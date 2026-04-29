@@ -401,6 +401,15 @@ jobs:
             "set -eu
              BP='${{ secrets.BEGET_DEPLOY_PATH }}'
              REL='${REL}'
+             # PAN-17: syntax check shared/.env ДО source. reason: incident
+             # 2026-04-28 deploy.yml exit 127 от unquoted SMTP_FROM_NAME=Обиход admin
+             # (без кавычек bash при `set -a; .` парсит как assignment + execute
+             # 'admin' command). bash -n ловит quoting issues заранее.
+             # См. team/ops/incidents/2026-04-28-deploy-env-quoting.md
+             if ! bash -n \"\$BP/shared/.env\" 2>&1; then
+               echo \"::error::shared/.env syntax error (вероятно unquoted value с пробелом или кириллицей). См. site/.env.example для reference.\"
+               exit 1
+             fi
              set -a; . \$BP/shared/.env; set +a
              # tar распаковывается прямо в releases/\$REL (без /site prefix),
              # т.к. build job делает tar с cwd=site. Файлы миграций лежат в
