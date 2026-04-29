@@ -45,8 +45,8 @@ update_protocol: каждый PO команды держит свою секци
 |---|---|---|---|---|---|---|
 | **US-12 W2.A v2** | CSS-only Login UI (Approach E через `custom.scss` + native slots, brand-guide §12.1) | fe-panel + qa-panel + cr-panel | 0.7 чд | 5×4×1.0 / 0.7 = 28.6 | M | **in-dev, hand-off 2026-04-30** popanel → fe-panel. sa-panel-wave2a-v2.md approved, ADR-0007 Accepted. Ветка: `feature/us-12-w2a-login-css` от main. be-panel НЕ нужен (CSS-only). |
 | **US-12 W3** | PageCatalog page `/admin/catalog` + dashboard widget + CSV + Leads badge | be-panel + fe-panel | 1.5 чд | 5×5×0.9 / 1.5 = 15 | M | **in-dev, hand-off 2026-04-30** popanel → be-panel + fe-panel. sa-panel-wave3.md approved, ADR-0005 Accepted. Ветка: `feature/us-12-w3-page-catalog` от main. fe-panel подключается после своего W2.A merge (split scope). |
-| US-12 W4 | Tabs field в 10 коллекциях (Services, Districts, Cases, Blog, B2BPages, Authors, ServiceDistricts, SiteChrome, FAQ, Prices) | be-panel + cw | 1.5 чд | 5×4×0.8 / 1.5 = 10.7 | M | sa-panel approved, pending cw labels + be-panel schema audit, parallel |
-| US-12 W5 | Empty/Error/Skeleton финал (Payload providers + per-collection EmptyState + SkeletonTable + 500/403 boundaries) | fe-panel + cw | 1 чд | 4×3×0.9 / 1 = 10.8 | M | sa-panel approved, pending cw empty texts, parallel |
+| **US-12 W4** | Tabs field в 10 коллекциях + has-error indicator | structurally done | 0.1 чд | 5×4×0.8 / 0.1 = 160 | M | **structurally done в main** (Services 6 tabs, Cases 4, Blog 5, Districts/B2BPages/Authors/ServiceDistricts/Leads/Media/SiteChrome — все имеют tabs). Этот PR закрывает CSS has-error indicator. Pending follow-up: cw `admin.description` audit для всех fields. |
+| **US-12 W5 part 2** | Per-collection EmptyState/Loading registration через Payload `views.list.*` API | tamd research + fe-panel | 0.5 чд | 4×3×0.7 / 0.5 = 16.8 | S | blocked by tamd research Payload 3.84 `views.list.Empty/Loading` API (та же категория риска как `views.login` в W2.A v1). W5 part 1 [PR #101](https://github.com/samohyn/obihod/pull/101) дал готовые компоненты (EmptyCollection + 4 wrappers + Skeletons). |
 
 ### Next (US-12 closure)
 
@@ -77,6 +77,8 @@ update_protocol: каждый PO команды держит свою секци
 | US-12 W1 | custom.scss 375 строк — admin design refresh (OBI-19) | 2026-04-27 |
 | **US-12 W0** | ADR-0005 Admin Customization Strategy (3-уровневая стратегия + защитный контракт) | 2026-04-28 (Accepted; partially superseded by ADR-0007 для Login UI) |
 | **PANEL-DEV-SEED-ADMIN** | Seed admin user для local dev + Playwright fixtures + ADR-0009 CJS shim | 2026-04-29 (PR #99 MERGED) |
+| **US-12 W2.A v2** | CSS-only Login UI (Approach E через `custom.scss` + native slots, brand-guide §12.1) | 2026-04-29 (commits PAN-15 + PAN-18 в main) |
+| **US-12 W4 structural** | Tabs field в 10 коллекциях + SiteChrome global (unnamed tabs, no migrations) | 2026-04-29 (OBI-30, в main) |
 
 ### Dropped
 

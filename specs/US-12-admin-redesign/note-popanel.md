@@ -237,3 +237,28 @@ specs/US-12-admin-redesign/
 - Ветка `feature/us-12-w3-page-catalog` физически не создана — это работа be-panel/fe-panel в их сессии (создаётся от main через `git checkout -b feature/us-12-w3-page-catalog main`).
 - Никакого кода не написано (popanel — координирует, gate, и DoD; реализация — be-panel + fe-panel).
 - Hand-off log в backlog'е — фиксация, не runtime-уведомление; оператор переключит роль через `@be-panel` или `@fe-panel` для старта.
+
+---
+
+## Decision log 2026-04-30 (auto-mode сессия продолжение)
+
+### D-2026-04-30-03 · Прогресс через 3 PR + W4 фактически done
+
+**Контекст:** оператор «делай дальше» в auto mode. popanel импersonates fe-panel + be-panel для execution.
+
+**3 открытия за разведку:**
+1. **W2.A v2 уже в main** (commits PAN-15 + PAN-18 от 2026-04-29). Backlog был устаревшим.
+2. **W4 структурно done в main** — все 10 коллекций (Services 6 tabs, Cases 4, Blog 5, Districts/B2BPages/Authors/ServiceDistricts/Leads/Media/SiteChrome) имеют `type: 'tabs'`. Реальный остаток W4 = CSS has-error indicator (1 правило) + cw `admin.description` audit.
+3. **W5 регистрация через `views.list.Empty`** API не verified (та же категория риска как `views.login` v1). W5 part 1 = инфраструктура; part 2 blocked by tamd.
+
+**3 PR в очереди:**
+- [#100](https://github.com/samohyn/obihod/pull/100) — W3 finish (catalog page + leads/count + LeadsBadge)
+- [#101](https://github.com/samohyn/obihod/pull/101) — W5 part 1 (EmptyCollection + Skeletons + pulse)
+- (W4 closure) — has-error indicator + backlog/note-popanel update
+
+**Статус US-12 после merge всех трёх PR:**
+- ✅ W1 / W2.A v2 / W3 / W4 (structural + CSS) / W5 part 1 — DONE
+- 🔵 W5 part 2 (Payload `views.list.*` registration) — blocked by tamd research
+- 📋 W6 Mobile / W7 Polish/a11y — спеки не написаны
+
+**Crit-path до US-12 release:** ≈3 ЧД (W5 part 2 + W6 + W7 + опц. cw audit).
