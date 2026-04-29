@@ -203,21 +203,32 @@ interface EmptyStateProps {
   text?: string
   actionLabel?: string
   actionHref?: string
+  actions?: ActionLink[]
+  hideIcon?: boolean
 }
 
 export const EmptyState: FC<EmptyStateProps> = ({
   title = 'Пока пусто',
   text = 'Добавьте первую запись — она появится в каталоге сайта и в виджете dashboard.',
-  actionLabel = '+ Добавить',
-  actionHref = '#',
-}) => (
-  <StatePanel
-    icon={<FolderIcon />}
-    title={title}
-    text={text}
-    actions={[{ label: actionLabel, href: actionHref, variant: 'primary' }]}
-  />
-)
+  actionLabel,
+  actionHref,
+  actions,
+  hideIcon = false,
+}) => {
+  const resolvedActions: ActionLink[] | undefined = actions
+    ? actions
+    : actionLabel && actionHref
+      ? [{ label: actionLabel, href: actionHref, variant: 'primary' }]
+      : undefined
+  return (
+    <StatePanel
+      icon={hideIcon ? undefined : <FolderIcon />}
+      title={title}
+      text={text}
+      actions={resolvedActions}
+    />
+  )
+}
 
 interface ErrorStateProps {
   code?: string
