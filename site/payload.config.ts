@@ -47,13 +47,12 @@ export default buildConfig({
       afterDashboard: ['@/components/admin/PageCatalogWidget'],
       beforeLogin: ['@/components/admin/BeforeLoginLockup'],
       afterLogin: ['@/components/admin/AfterLoginFooter'],
-      // Wave 2.A (PAN-5): custom login view с brand-кнопкой и a11y FSM.
-      // Auth-flow остаётся native (useAuth().login). Magic link — Wave 2.B (PAN-11).
-      views: {
-        login: {
-          Component: '@/components/admin/AdminLogin',
-        },
-      },
+      // Wave 2.A (PAN-5) revert 2026-04-29: views.login НЕ в Payload 3.84 API
+      // (см. node_modules/payload/dist/config/types.d.ts:746-756 — views принимает
+      // только account / dashboard / [key:string] custom views, login обрабатывается
+      // через admin.routes.login path и собственный wrapper). AdminLogin.tsx остаётся
+      // в репо для будущего proper override mechanism (research issue TBD).
+      // Native Payload login + brand-lockup через beforeLogin slot — рабочий fallback.
     },
   },
   // Локализация admin на русский (brand-guide §12 mockup на ru). Pакет
