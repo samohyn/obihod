@@ -156,6 +156,92 @@ html[data-theme='dark'] {
 }
 ```
 
+### V2.6 · Lockup — real `horizontal-compact.svg` (operator pixel-perfect mandate 2026-04-29)
+
+Existing `BeforeLoginLockup.tsx` использует inline self-drawn `SeasonsCircleMark` + отдельный text-wordmark. Mockup §12.1 требует **реальный** asset `agents/brand/logo/horizontal-compact.svg` (детальный знак с 4 проработанными квадрантами: ёлочка / снежинка-роза-ветров / план двора / контейнер) + wordmark «ОБИХОД» **внутри того же SVG**.
+
+**Action:** заменить body `<BeforeLoginLockup>` на inline SVG из `agents/brand/logo/horizontal-compact.svg` (full content, viewBox `0 0 1280 480`, currentColor `#2d5a3d`), wrap в контейнер с `height: 56px; width: auto`. Tagline остаётся отдельной строкой ниже.
+
+Reason inline: предотвратить static-asset pipeline issues + CORS (см. existing comment в файле). Размер SVG ~2KB — не критично для bundle.
+
+### V2.7 · Login labels styling
+
+```scss
+.login__form label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--brand-obihod-ink);
+  margin-bottom: 6px;
+}
+```
+
+### V2.8 · Login inputs — full style override (не только bg)
+
+```scss
+.login__form input {
+  padding: 9px 12px;
+  font-size: 14px;
+  font-family: var(--font-body);
+  color: var(--brand-obihod-ink);
+  background-color: var(--brand-obihod-paper);
+  border: 1px solid var(--brand-obihod-line);
+  border-radius: var(--brand-obihod-radius-sm);
+  width: 100%;
+  box-sizing: border-box;
+}
+.login__form input:focus-visible {
+  outline: 2px solid var(--brand-obihod-primary);
+  outline-offset: -2px;
+}
+.login__form input:hover:not([disabled]):not(:focus) {
+  border-color: var(--brand-obihod-line-hover);
+}
+```
+
+### V2.9 · Submit button — width + padding + font (расширение V2.2)
+
+```scss
+.login__form .form-submit,
+.login__form button[type='submit'] {
+  width: 100%;
+  padding: 11px;
+  font-size: 14px;
+  font-family: var(--font-body);
+  /* background/color/etc. уже в V2.2 */
+}
+```
+
+### V2.10 · Link «Забыли пароль?» styling
+
+```scss
+.login__form a {
+  display: block;
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--brand-obihod-primary);
+  text-decoration: none;
+  text-align: center;
+}
+.login__form a:hover {
+  color: var(--brand-obihod-primary-ink);
+  text-decoration: underline;
+}
+```
+
+### V2.11 · Field spacing inside form
+
+```scss
+.login__form .field-type,
+.login__form > div > div {
+  margin-bottom: 16px;
+}
+.login__form .field-type:last-of-type {
+  margin-bottom: 0;
+}
+```
+
 ### V2.5 · `payload.config.ts` cleanup
 
 Confirm что `views.login` блок **отсутствует** (revert PR #83 уже сделал):
@@ -226,6 +312,17 @@ admin: {
 - [ ] AC-24: type-check + lint + format ✓ (do CI)
 - [ ] AC-25: cr-panel review approved (a11y + ADR-0007 compliance — нет `views.login` block)
 - [ ] AC-26: leadqa real browser smoke на проде после deploy — DOM matches AC + visual diff vs §12.1 mockup screenshot
+
+### E. Pixel-perfect §12.1 (operator mandate 2026-04-29 «1 в 1»)
+
+- [ ] AC-27: `BeforeLoginLockup` рендерит **real horizontal-compact.svg** (детальный знак, не самописный SeasonsCircleMark) — DOM содержит SVG `<text>ОБИХОД</text>` внутри
+- [ ] AC-28: Labels computed font-size `13px` / font-weight `500` / color `rgb(28, 28, 28)`
+- [ ] AC-29: Inputs computed padding `9px 12px` / font-size `14px` / bg `rgb(247, 245, 240)` / border `1px solid rgb(230, 225, 214)` / border-radius `6px`
+- [ ] AC-30: Input focus computed `outline: 2px solid rgb(45, 90, 61)` (на focus state)
+- [ ] AC-31: Submit button computed width `100%` (либо `320px - 64px padding = 256px` exact)
+- [ ] AC-32: Link «Забыли пароль?» (если рендерится Payload) computed color `rgb(45, 90, 61)` / text-decoration `none`
+- [ ] AC-33: Field margin-bottom `16px`
+- [ ] AC-34: leadqa visual diff: side-by-side скриншот localhost:3000/admin/login vs brand-guide.html §12.1 mockup — pixel-perfect match (lockup, card, button, spacing)
 
 ---
 

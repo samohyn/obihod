@@ -3,41 +3,29 @@ import type { CSSProperties, FC } from 'react'
 /**
  * BeforeLoginLockup — master brand lockup над native Payload login form.
  *
- * OBI-28 / Wave 2 из OBI-19 admin redesign. Anatomy: design-system/
- * brand-guide.html §12.1 «Login screen» — точное соответствие mockup:
- * SVG-знак «Круг сезонов» + wordmark «ОБИХОД» крупно + admin-tagline
- * «порядок под ключ · admin» mono uppercase. Через
- * admin.components.beforeLogin slot — без переопределения auth-flow.
+ * Source: agents/brand/logo/horizontal-compact.svg (детальный 4-квадрант знак
+ * «Круг сезонов» + wordmark «ОБИХОД» внутри одного SVG). PAN-18 / Wave 2.A v2
+ * pixel-perfect §12.1.
  *
- * Inline SVG (а не <img>) — гарантия отрисовки в admin без зависимости
- * от static-assets pipeline и без CORS-сюрпризов.
+ * Inline JSX (а не <img src="..."/>) — гарантия отрисовки без зависимости от
+ * static-asset pipeline и без CORS-сюрпризов; bundle ~2KB.
  *
- * RSC — Payload подхватывает через importMap.
+ * Через admin.components.beforeLogin slot — без переопределения auth-flow.
  */
 
 const wrapStyle: CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: 12,
-  padding: '56px 16px 32px',
+  gap: 8,
+  padding: '60px 16px 32px',
   fontFamily: 'var(--font-body)',
-  color: 'var(--brand-obihod-ink, #1c1c1c)',
 }
 
-const lockupStyle: CSSProperties = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: 16,
-}
-
-const wordmarkStyle: CSSProperties = {
-  fontFamily: 'var(--font-body)',
-  fontWeight: 700,
-  fontSize: 36,
-  letterSpacing: '-0.025em',
-  color: 'var(--brand-obihod-primary, #2d5a3d)',
-  lineHeight: 1,
+const lockupSvgStyle: CSSProperties = {
+  height: 56,
+  width: 'auto',
+  display: 'block',
 }
 
 const taglineStyle: CSSProperties = {
@@ -46,50 +34,145 @@ const taglineStyle: CSSProperties = {
   fontWeight: 500,
   letterSpacing: '0.16em',
   textTransform: 'uppercase',
-  color: 'var(--brand-obihod-primary, #2d5a3d)',
+  color: '#2d5a3d',
   margin: 0,
-  marginTop: 4,
 }
-
-/**
- * SeasonsCircleMark — упрощённый «Круг сезонов» (master mark).
- * Внешний круг + крест + 4 квадранта (хвоя · снежинка · план двора · контейнер).
- * 56×56 px, currentColor — наследуется от parent.
- */
-const SeasonsCircleMark: FC = () => (
-  <svg
-    width="56"
-    height="56"
-    viewBox="0 0 64 64"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <circle cx="32" cy="32" r="28" />
-    <line x1="32" y1="4" x2="32" y2="60" />
-    <line x1="4" y1="32" x2="60" y2="32" />
-    {/* Top-left: ёлочка (весна-осень) */}
-    <path d="M18 12 L18 24 M14 18 L18 14 L22 18 M15 22 L18 19 L21 22" />
-    {/* Top-right: снежинка (зима) */}
-    <path d="M46 12 L46 24 M40 18 L52 18 M42 14 L50 22 M50 14 L42 22" />
-    {/* Bottom-left: план двора (круглый год) */}
-    <path d="M12 42 L24 42 L24 54 L12 54 Z M12 48 L24 48 M18 42 L18 54" />
-    {/* Bottom-right: контейнер вывоза */}
-    <path d="M40 44 L52 44 L50 56 L42 56 Z M40 44 L40 42 L52 42 L52 44" />
-  </svg>
-)
 
 const BeforeLoginLockup: FC = () => (
   <div style={wrapStyle}>
-    <div style={lockupStyle}>
-      <span style={{ color: 'var(--brand-obihod-primary, #2d5a3d)' }}>
-        <SeasonsCircleMark />
-      </span>
-      <span style={wordmarkStyle}>ОБИХОД</span>
-    </div>
+    <svg viewBox="0 0 1280 480" style={lockupSvgStyle} role="img" aria-label="Обиход">
+      <title>Обиход</title>
+      <g color="#2d5a3d">
+        <g transform="translate(240 240) scale(0.36)">
+          <circle
+            cx="0"
+            cy="0"
+            r="560"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="7.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <circle
+            cx="0"
+            cy="0"
+            r="435"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            opacity="0.75"
+          />
+          <line
+            x1="-560"
+            y1="0"
+            x2="560"
+            y2="0"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            opacity="0.75"
+          />
+          <line
+            x1="0"
+            y1="-560"
+            x2="0"
+            y2="560"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            opacity="0.75"
+          />
+
+          <g
+            transform="translate(-300 -270)"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="5.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="0" y1="-150" x2="0" y2="150" />
+            <line x1="0" y1="-20" x2="-60" y2="12" />
+            <line x1="0" y1="-20" x2="60" y2="12" />
+            <line x1="0" y1="30" x2="-72" y2="64" />
+            <line x1="0" y1="30" x2="72" y2="64" />
+            <line x1="0" y1="78" x2="-72" y2="112" />
+            <line x1="0" y1="78" x2="72" y2="112" />
+            <line x1="0" y1="122" x2="-52" y2="150" />
+            <line x1="0" y1="122" x2="52" y2="150" />
+          </g>
+
+          <g
+            transform="translate(300 -270)"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="5.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="0" y1="-130" x2="0" y2="130" />
+            <line x1="-130" y1="0" x2="130" y2="0" />
+            <line x1="-92" y1="-92" x2="92" y2="92" />
+            <line x1="92" y1="-92" x2="-92" y2="92" />
+            <polyline points="-10,-118 0,-130 10,-118" />
+            <polyline points="-10,118 0,130 10,118" />
+            <polyline points="-118,-10 -130,0 -118,10" />
+            <polyline points="118,-10 130,0 118,10" />
+            <circle cx="0" cy="0" r="9" />
+            <circle cx="0" cy="0" r="2.6" fill="currentColor" stroke="none" />
+          </g>
+
+          <g
+            transform="translate(-300 300)"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="5.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <rect x="-115" y="-70" width="230" height="140" />
+            <line x1="-115" y1="-4" x2="115" y2="-4" />
+            <line x1="18" y1="-70" x2="18" y2="-4" />
+            <line x1="-42" y1="-4" x2="-42" y2="70" />
+          </g>
+
+          <g
+            transform="translate(300 300)"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="5.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="-100,60 -100,-60 100,-60 100,60" />
+            <line x1="-118" y1="-60" x2="118" y2="-60" />
+            <line x1="-48" y1="50" x2="-48" y2="-20" />
+            <line x1="0" y1="50" x2="0" y2="-36" />
+            <polyline points="-14,-20 0,-36 14,-20" />
+            <line x1="48" y1="50" x2="48" y2="-20" />
+          </g>
+        </g>
+
+        <text
+          x="520"
+          y="295"
+          fontFamily="Inter, 'Helvetica Neue', Arial, sans-serif"
+          fontSize="160"
+          fontWeight="800"
+          letterSpacing="-4"
+          fill="currentColor"
+        >
+          ОБИХОД
+        </text>
+      </g>
+    </svg>
     <p style={taglineStyle}>порядок под ключ · admin</p>
   </div>
 )
