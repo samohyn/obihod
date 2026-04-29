@@ -115,26 +115,28 @@
   --style-radius-l: var(--brand-obihod-radius-lg);
 }
 
-/* Dark — клон light до первой продовой потребности (как и v1). */
+/* Force light theme even when Payload sets data-theme='dark' (PAN-15 v2,
+ * ADR-0007). brand-guide §12 admin = single light mode. Dark toggle out of
+ * scope. Если оператор запросит dark — отдельный US с переключателем. */
 html[data-theme='dark'] {
-  --brand-obihod-ink: #f7f5f0;
-  --brand-obihod-ink-soft: #e6e1d6;
-  --brand-obihod-paper: #15140f;
-  --brand-obihod-paper-warm: #1c1c1c;
-  --brand-obihod-bg-alt: #1c1c1c;
-  --brand-obihod-card: #1c1c1c;
-  --brand-obihod-surface: #1c1c1c;
-  --brand-obihod-line: #2b2b2b;
-  --brand-obihod-border: #2b2b2b;
-  --brand-obihod-muted: #a69c7e;
+  --brand-obihod-ink: #1c1c1c;
+  --brand-obihod-ink-soft: #2b2b2b;
+  --brand-obihod-paper: #f7f5f0;
+  --brand-obihod-paper-warm: #efebe0;
+  --brand-obihod-bg-alt: #efebe0;
+  --brand-obihod-card: #ffffff;
+  --brand-obihod-surface: #ffffff;
+  --brand-obihod-line: #e6e1d6;
+  --brand-obihod-border: #e6e1d6;
+  --brand-obihod-muted: #6b6256;
 
-  --color-base-0: #15140f;
-  --color-base-50: #1c1c1c;
-  --color-base-100: #26241d;
-  --color-base-150: #2b2b2b;
-  --color-base-200: #3d382f;
-  --color-base-900: #efebe0;
-  --color-base-1000: #f7f5f0;
+  --color-base-0: #f7f5f0;
+  --color-base-50: #efebe0;
+  --color-base-100: #e6e1d6;
+  --color-base-150: #d6d0bf;
+  --color-base-200: #c4bca7;
+  --color-base-900: #111111;
+  --color-base-1000: #000000;
 }
 
 /* Tabular nums для всех чисел в admin (зеркально с globals.css). */
@@ -306,27 +308,23 @@ html[data-theme='dark'] {
 
 /* ────────────────────────────────────────────────────────────────────
  *  LOGIN SCREEN — карточка-форма 320px по brand-guide §12.1
- *  - 320px max-width, white bg, padding 32px, radius 10, shadow sm
- *  - submit button янтарный (Payload native uses .form-submit без --style-primary)
- *  - autofill bg → paper
+ *
+ *  CRITICAL: на login screen НЕТ ancestor `.payload__app` (в отличие от
+ *  authed admin shell). Wave 1 SCSS использовал `.payload__app .login__form...`
+ *  префикс — все правила были dead code, не применялись (root cause
+ *  incident leadqa-RC-1 2026-04-28). Verified через Playwright DOM 2026-04-29
+ *  (PAN-13 ADR-0007 + PAN-15 fe-panel). Селекторы теперь без `.payload__app`.
+ *
+ *  Specs: ADR-0007, sa-panel-wave2a-v2.md.
  * ──────────────────────────────────────────────────────────────────── */
-.template-default.template-default--login,
-.payload__app .template-default--login,
 .login {
   background-color: var(--brand-obihod-paper) !important;
 }
 
-.login__brand,
-.login__form,
-.payload__app .login form,
-.payload__app form.login__form {
+.login__form {
   max-width: 320px !important;
   margin-left: auto !important;
   margin-right: auto !important;
-}
-
-.payload__app form.login__form,
-.payload__app .login form {
   background-color: var(--brand-obihod-card);
   border: 1px solid var(--brand-obihod-line);
   border-radius: var(--brand-obihod-radius);
@@ -334,31 +332,50 @@ html[data-theme='dark'] {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
-/* Submit button on login (Payload uses .form-submit btn class) */
-.payload__app form.login__form button[type='submit'],
-.payload__app .login form button[type='submit'],
-.payload__app .login__form .form-submit {
+/* Submit button on login. Native Payload submit имеет class только
+ * `form-submit` (НЕ btn--style-primary). reason: Wave 1 SCSS использовал
+ * .btn--style-primary — это другой button type в admin (icon buttons на
+ * dashboard). На login form-submit без btn class. */
+.login__form .form-submit,
+.login__form button[type='submit'] {
   background-color: var(--brand-obihod-accent) !important;
   border-color: var(--brand-obihod-accent) !important;
   color: var(--brand-obihod-ink) !important;
+  border-radius: var(--brand-obihod-radius-sm);
+  font-weight: 600;
+  transition:
+    background-color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard),
+    border-color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard),
+    transform 80ms var(--brand-obihod-ease-standard),
+    box-shadow var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard);
 }
-.payload__app form.login__form button[type='submit']:hover:not([disabled]),
-.payload__app .login form button[type='submit']:hover:not([disabled]) {
+.login__form .form-submit:hover:not([disabled]),
+.login__form button[type='submit']:hover:not([disabled]) {
   background-color: var(--brand-obihod-accent-hover) !important;
   border-color: var(--brand-obihod-accent-hover) !important;
 }
+.login__form .form-submit:active:not([disabled]),
+.login__form button[type='submit']:active:not([disabled]) {
+  background-color: var(--brand-obihod-accent-ink) !important;
+  border-color: var(--brand-obihod-accent-ink) !important;
+  transform: translateY(1px);
+}
+.login__form .form-submit:focus-visible,
+.login__form button[type='submit']:focus-visible {
+  outline: none;
+  box-shadow: var(--brand-obihod-shadow-focus-accent);
+}
 
 /* Inputs autofill bg → paper (browser autofill blue → brand) */
-.payload__app input:-webkit-autofill,
-.payload__app input:-webkit-autofill:hover,
-.payload__app input:-webkit-autofill:focus,
-.payload__app input:-webkit-autofill:active {
+.login__form input:-webkit-autofill,
+.login__form input:-webkit-autofill:hover,
+.login__form input:-webkit-autofill:focus,
+.login__form input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px var(--brand-obihod-paper) inset !important;
   -webkit-text-fill-color: var(--brand-obihod-ink) !important;
 }
 
-.payload__app form.login__form input,
-.payload__app .login form input {
+.login__form input {
   background-color: var(--brand-obihod-paper) !important;
 }
 
@@ -366,10 +383,13 @@ html[data-theme='dark'] {
  *  REDUCED MOTION — отключаем transform-translate (motion.json guardrails)
  * ──────────────────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .payload__app .btn--style-primary:active {
+  .payload__app .btn--style-primary:active,
+  .login__form .form-submit:active,
+  .login__form button[type='submit']:active {
     transform: none;
   }
-  .payload__app * {
+  .payload__app *,
+  .login__form * {
     transition-duration: 0.01ms !important;
   }
 }
