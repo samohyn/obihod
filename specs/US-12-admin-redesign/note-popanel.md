@@ -171,3 +171,69 @@ specs/US-12-admin-redesign/
 | 7 | Polish + a11y + Playwright | спека не написана | qa-panel + cr-panel | 1 чд |
 
 **Итого после drop:** 8 человеко-дней (было 9), снято 2 блокера (PAN-9, PAN-10).
+
+---
+
+## Decision log 2026-04-30
+
+### D-2026-04-30-01 · W3 PageCatalog hand-off в dev (popanel iron-rule «следуем твоим рекомендациям»)
+
+**Контекст:** оператор задал «можем ли дальше по panel?» после merge PR #99 (seed-admin + ADR-0009 shim). popanel предложил W0 ADR-0005 (tamd) + W3 PageCatalog (be-panel + fe-panel) параллельно. Оператор: «следуем твоим рекомендациям».
+
+**Открытие при разведке:** `team/adr/ADR-0005-admin-customization-strategy.md` уже **Accepted 2026-04-28** (partially superseded by ADR-0007 для Login UI mechanism — это касается только W2.A, не W3). Backlog показывал устаревший статус «в работе у tamd». То есть W0 фактически закрыт.
+
+**Что сделано в этой сессии (popanel coordination only, не code):**
+
+1. **`team/backlog.md` обновлён:**
+   - W0 ADR-0005 → перенесён в Done (2026-04-28 Accepted, partially superseded by ADR-0007).
+   - W3 → status `now`, hand-off `popanel → be-panel + fe-panel`, ветка `feature/us-12-w3-page-catalog` от main.
+   - W2.A → status `unblocked` (был blocked by W0 + seed-admin, оба сняты), ждёт go от оператора.
+   - PANEL-DEV-SEED-ADMIN → перенесён в Done (PR #99 MERGED 2026-04-29).
+   - Branch convention в шапке: «feature-ветки от main по pattern PR #99» (вместо мифической `panel/integration` — её физически нет в origin, проверено `git branch -a`).
+
+2. **`sa-panel-wave3.md` Hand-off log дополнен:**
+   - 2026-04-30 entry popanel → be-panel + fe-panel с iron-rules + DoD + skill-check (`frontend-patterns` + `nextjs-turbopack` для fe-panel; `backend-patterns` + `api-design` для be-panel) + указанием ADR-0005 уровней + branch + PR target main.
+
+3. **W3 spec уже approved popanel 2026-04-28 (Q1-Q4 закрыты)** — gate spec-before-code пройден, dev может стартовать.
+
+**Открытый вопрос для оператора (отдан в чат):** добавлять ли W2.A Login UI параллельно с W3 (теперь, когда W2.A разблокирован), или сначала закрыть W3 → потом W2.A → потом W4/W5? Trade-off: параллель экономит ~1 день календарно, но be-panel + fe-panel будут разрываться между двумя ветками.
+
+### D-2026-04-30-02 · Вариант B принят, W2.A v2 launched
+
+**Решение оператора:** «давай B». Параллельно W2.A + W3 в две feature-ветки.
+
+**Уточнение скоупа W2.A:** в моём предложении B было «be-panel + fe-panel разделяются между двумя ветками», но canonical spec — **`sa-panel-wave2a-v2.md`** (CSS-only Approach E через ADR-0007) — это **только fe-panel** + qa-panel (Playwright spec) + cr-panel. be-panel в W2.A не участвует. В итоге реальный split:
+- **be-panel** — целиком на W3 backend (CSV endpoint + leads/count + integration tests). Никаких разрываний.
+- **fe-panel** — последовательно: сначала W2.A v2 (~0.7 ЧД, маленький scope CSS) → merge → подхватывает W3 frontend (~1 ЧД).
+- **qa-panel** — параллельно: Playwright admin-login spec (для W2.A) + Playwright catalog smoke (для W3).
+- **cr-panel** — review при готовности каждого PR.
+
+**Calendar impact (vs вариант A «sequential W3 → W2.A»):**
+- A: W3 (1.5 ЧД) → W2.A (0.7 ЧД) = ~2.2 ЧД линейно.
+- B: be-panel и fe-panel параллельно. Crit path = max(be-panel W3 backend, fe-panel W2.A + W3 frontend) ≈ max(0.5, 0.7+1.0) = 1.7 ЧД. **Экономия ~0.5 ЧД календарно.**
+
+**Что обновлено в этой сессии (B вариант):**
+
+1. `sa-panel-wave2a-v2.md` — Hand-off log с записью popanel → fe-panel + iron-rules (skill-check `frontend-patterns` + `ui-styling`, ADR-0007 Approach E, local-verify ДО push, brand-guide §12.1, a11y WCAG 2.2 AA).
+2. `team/backlog.md` Now table — добавлен W2.A в первой строке (RICE 28.6, выше чем W3=15) + W3 во второй; команды per-Wave чётко: W2.A=fe-panel only, W3=be-panel+fe-panel.
+
+**Ответ на вопрос оператора «в какой задаче будет понятно что редизайн случится»:**
+
+| Wave | Чеовек видит после merge | «Ощущение редизайна» |
+|---|---|---|
+| W1 ✅ DONE 2026-04-27 | Палитра янтарный + brand-зелёный, sidebar 3px accent, status pills | **Foundation** — «цветá наши, не Payload-фиолетовые». Уже видно в проде. |
+| **W2.A v2** | Login screen: lockup + tagline + brand carд + cream bg | **Первый wow** — оператор открывает /admin/login и видит «свою» компанию. Touchpoint №1. |
+| **W3** | Dashboard widget «Свежие изменения» + новая страница /admin/catalog + Leads badge counter | **Wow №2 — функциональный.** «У меня появились инструменты которых не было». Productivity gain, not just visual. |
+| W4 | Tabs во всех 10 коллекциях вместо длинного скролла | **Wow №3 — ergonomic.** Каждое редактирование становится приятнее. |
+| W5 | EmptyState/ErrorState/SkeletonTable | Polish. Закрывает «фиолетовые остатки» в граничных состояниях. |
+| W6 | Mobile responsive | Если оператор использует с телефона — wow. Иначе invisible. |
+| W7 | a11y + Playwright admin-design-compliance.spec | Невидимо для оператора, но это release-gate. |
+
+**Milestone «полностью новая админка» (как ощущение)** — после merge **W2.A + W3 + W4 в main**. Это ≈4 ЧД от старта параллельно, ≈4 календарных дня. На этом этапе оператор откроет admin и не вспомнит как старая выглядела.
+
+**Полное закрытие US-12** — + W5/W6/W7 (≈3.5 ЧД, +3 дня). Это release.
+
+**Что НЕ сделано в этой сессии (coordination scope, не dev):**
+- Ветка `feature/us-12-w3-page-catalog` физически не создана — это работа be-panel/fe-panel в их сессии (создаётся от main через `git checkout -b feature/us-12-w3-page-catalog main`).
+- Никакого кода не написано (popanel — координирует, gate, и DoD; реализация — be-panel + fe-panel).
+- Hand-off log в backlog'е — фиксация, не runtime-уведомление; оператор переключит роль через `@be-panel` или `@fe-panel` для старта.

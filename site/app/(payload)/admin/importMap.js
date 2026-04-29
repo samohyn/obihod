@@ -26,6 +26,7 @@ import { default as default_a3457937f7e47ac09ffe2b1355b88586 } from '@/component
 import { default as default_f9dc2b7ceddb6da73471b0df4f7f7ab3 } from '@/components/admin/AfterLoginFooter'
 import { default as default_2a1d81a7d65f9955a05645b23ded3574 } from '@/components/admin/BeforeDashboardStartHere'
 import { default as default_32028fb024cb14273af0f6878c5e5f16 } from '@/components/admin/BeforeLoginLockup'
+import { default as default_34a40cc685c7df316e31d445e114f485 } from '@/components/admin/LeadsBadgeProvider'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -58,5 +59,6 @@ export const importMap = {
   "@/components/admin/AfterLoginFooter#default": default_f9dc2b7ceddb6da73471b0df4f7f7ab3,
   "@/components/admin/BeforeDashboardStartHere#default": default_2a1d81a7d65f9955a05645b23ded3574,
   "@/components/admin/BeforeLoginLockup#default": default_32028fb024cb14273af0f6878c5e5f16,
+  "@/components/admin/LeadsBadgeProvider#default": default_34a40cc685c7df316e31d445e114f485,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

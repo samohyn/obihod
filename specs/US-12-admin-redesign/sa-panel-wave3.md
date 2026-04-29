@@ -387,3 +387,13 @@ sequenceDiagram
 
 - `popanel` — Q1/Q2/Q3 approve
 - `tamd` — review Plan A/B/C decision tree, особенно ADR-0005 high-risk badge counter
+
+---
+
+## Hand-off log
+
+| Timestamp | From | To | Что |
+|---|---|---|---|
+| 2026-04-28 | sa-panel | popanel | Спека готова, Q1-Q4 ждут решения |
+| 2026-04-28 | popanel | sa-panel | Q1-Q4 approved, status → approved |
+| 2026-04-30 | popanel | be-panel + fe-panel | **W3 в dev**. ADR-0005 Accepted (W0 closed), seed-admin merged (PR #99) — оба блокера сняты. Ветка: `feature/us-12-w3-page-catalog` от `main`. Состав: be-panel (CSV endpoint + leads/count endpoint + integration tests) + fe-panel (PageCatalogTable refactor + Widget + Page + filter UI + LeadsBadgeOverlay). Iron rules: (1) skill-check перед стартом — `frontend-patterns` + `nextjs-turbopack` для fe-panel, `backend-patterns` + `api-design` для be-panel; (2) brand-guide §12.3 = single source UI; (3) a11y WCAG 2.2 AA + reduced-motion; (4) ADR-0005 уровни кастомизации (см. spec §"ADR-0005 уровень кастомизации"); (5) ADR-0007 учитывать только если задеваете Login (W3 не задевает). DoD: все AC из §"Acceptance Criteria" + local-verify (browser smoke `/admin/catalog` + CSV download + leads/count + Plan A/B/C для badge) + do-checks (type-check + lint + format:check) ДО PR. После dev → cr-panel review → qa-panel test → PR в main. |
