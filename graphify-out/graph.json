@@ -9,7 +9,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_sugpar.py",
       "source_location": "L1",
       "id": "users_a36_obikhod_seosite_scripts_jm_sugpar_py",
-      "community": 1,
+      "community": 15,
       "norm_label": "jm_sugpar.py"
     },
     {
@@ -18,7 +18,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_sugpar.py",
       "source_location": "L27",
       "id": "jm_sugpar_load_env",
-      "community": 1,
+      "community": 15,
       "norm_label": "load_env()"
     },
     {
@@ -27,7 +27,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_sugpar.py",
       "source_location": "L38",
       "id": "jm_sugpar_load_seeds",
-      "community": 1,
+      "community": 15,
       "norm_label": "load_seeds()"
     },
     {
@@ -36,7 +36,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_sugpar.py",
       "source_location": "L46",
       "id": "jm_sugpar_post",
-      "community": 1,
+      "community": 15,
       "norm_label": "post()"
     },
     {
@@ -45,7 +45,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_sugpar.py",
       "source_location": "L52",
       "id": "jm_sugpar_main",
-      "community": 1,
+      "community": 15,
       "norm_label": "main()"
     },
     {
@@ -54,7 +54,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/keysso_export.py",
       "source_location": "L1",
       "id": "users_a36_obikhod_seosite_scripts_keysso_export_py",
-      "community": 18,
+      "community": 1,
       "norm_label": "keysso_export.py"
     },
     {
@@ -63,7 +63,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/keysso_export.py",
       "source_location": "L30",
       "id": "keysso_export_load_env",
-      "community": 18,
+      "community": 1,
       "norm_label": "load_env()"
     },
     {
@@ -72,7 +72,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/keysso_export.py",
       "source_location": "L41",
       "id": "keysso_export_fetch_domain",
-      "community": 18,
+      "community": 1,
       "norm_label": "fetch_domain()"
     },
     {
@@ -81,7 +81,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/keysso_export.py",
       "source_location": "L87",
       "id": "keysso_export_main",
-      "community": 18,
+      "community": 1,
       "norm_label": "main()"
     },
     {
@@ -90,7 +90,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster_batched.py",
       "source_location": "L1",
       "id": "users_a36_obikhod_seosite_scripts_jm_cluster_batched_py",
-      "community": 8,
+      "community": 6,
       "norm_label": "jm_cluster_batched.py"
     },
     {
@@ -99,7 +99,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster_batched.py",
       "source_location": "L33",
       "id": "jm_cluster_batched_load_env",
-      "community": 8,
+      "community": 6,
       "norm_label": "load_env()"
     },
     {
@@ -108,7 +108,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster_batched.py",
       "source_location": "L44",
       "id": "jm_cluster_batched_ping_until_alive",
-      "community": 8,
+      "community": 6,
       "norm_label": "ping_until_alive()"
     },
     {
@@ -117,7 +117,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster_batched.py",
       "source_location": "L65",
       "id": "jm_cluster_batched_post_with_retry",
-      "community": 8,
+      "community": 6,
       "norm_label": "post_with_retry()"
     },
     {
@@ -126,7 +126,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster_batched.py",
       "source_location": "L90",
       "id": "jm_cluster_batched_submit_grpomn",
-      "community": 8,
+      "community": 6,
       "norm_label": "submit_grpomn()"
     },
     {
@@ -135,7 +135,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster_batched.py",
       "source_location": "L115",
       "id": "jm_cluster_batched_wait_until_fin",
-      "community": 8,
+      "community": 6,
       "norm_label": "wait_until_fin()"
     },
     {
@@ -144,7 +144,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster_batched.py",
       "source_location": "L149",
       "id": "jm_cluster_batched_fetch_csv",
-      "community": 8,
+      "community": 6,
       "norm_label": "fetch_csv()"
     },
     {
@@ -153,7 +153,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster_batched.py",
       "source_location": "L158",
       "id": "jm_cluster_batched_main",
-      "community": 8,
+      "community": 6,
       "norm_label": "main()"
     },
     {
@@ -161,7 +161,7 @@
       "file_type": "rationale",
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster_batched.py",
       "source_location": "L45",
-      "community": 8,
+      "community": 6,
       "norm_label": "\u0436\u0434\u0435\u043c \u043f\u043e\u043a\u0430 jm \u043d\u0435 \u043f\u0435\u0440\u0435\u0441\u0442\u0430\u043d\u0435\u0442 \u043e\u0442\u0434\u0430\u0432\u0430\u0442\u044c 503/connection errors.",
       "id": "jm_cluster_batched_rationale_45"
     },
@@ -171,7 +171,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/merge_wsfreq.py",
       "source_location": "L1",
       "id": "users_a36_obikhod_seosite_scripts_merge_wsfreq_py",
-      "community": 1,
+      "community": 19,
       "norm_label": "merge_wsfreq.py"
     },
     {
@@ -180,7 +180,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/merge_wsfreq.py",
       "source_location": "L30",
       "id": "merge_wsfreq_normalize",
-      "community": 1,
+      "community": 19,
       "norm_label": "normalize()"
     },
     {
@@ -189,7 +189,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/merge_wsfreq.py",
       "source_location": "L34",
       "id": "merge_wsfreq_read_wsfreq",
-      "community": 1,
+      "community": 19,
       "norm_label": "read_wsfreq()"
     },
     {
@@ -198,7 +198,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/merge_wsfreq.py",
       "source_location": "L62",
       "id": "merge_wsfreq_main",
-      "community": 1,
+      "community": 19,
       "norm_label": "main()"
     },
     {
@@ -333,7 +333,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/local_cluster.py",
       "source_location": "L1",
       "id": "users_a36_obikhod_seosite_scripts_local_cluster_py",
-      "community": 14,
+      "community": 1,
       "norm_label": "local_cluster.py"
     },
     {
@@ -342,7 +342,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/local_cluster.py",
       "source_location": "L127",
       "id": "local_cluster_detect_root",
-      "community": 14,
+      "community": 1,
       "norm_label": "detect_root()"
     },
     {
@@ -351,7 +351,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/local_cluster.py",
       "source_location": "L149",
       "id": "local_cluster_load_test_freqs",
-      "community": 14,
+      "community": 1,
       "norm_label": "load_test_freqs()"
     },
     {
@@ -360,7 +360,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/local_cluster.py",
       "source_location": "L176",
       "id": "local_cluster_main",
-      "community": 14,
+      "community": 1,
       "norm_label": "main()"
     },
     {
@@ -368,7 +368,7 @@
       "file_type": "rationale",
       "source_file": "/Users/a36/obikhod/seosite/scripts/local_cluster.py",
       "source_location": "L128",
-      "community": 14,
+      "community": 1,
       "norm_label": "\u0432\u043e\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u0442 \u00ab\u043a\u043e\u0440\u0435\u043d\u044c\u00bb (cluster-id) \u0434\u043b\u044f key.      \u0434\u043b\u044f \u043b\u0443\u0447\u0448\u0435\u0438 \u043a\u043b\u0430\u0441\u0442\u0435\u0440\u0438\u0437\u0430\u0446\u0438\u0438 \u2014 \u043a\u043e\u043c\u0431\u043e",
       "id": "local_cluster_rationale_128"
     },
@@ -377,7 +377,7 @@
       "file_type": "rationale",
       "source_file": "/Users/a36/obikhod/seosite/scripts/local_cluster.py",
       "source_location": "L150",
-      "community": 14,
+      "community": 1,
       "norm_label": "\u0438\u0437 \u0442\u0435\u0441\u0442\u043e\u0432\u043e\u0433\u043e jm-csv (50 \u043a\u043b\u044e\u0447\u0435\u0438, gzip) \u0431\u0435\u0440\u0435\u043c \u0447\u0430\u0441\u0442\u043e\u0442\u044b \u2014 \u0442\u0430\u043c, \u0433\u0434\u0435 \u0435\u0441\u0442\u044c.",
       "id": "local_cluster_rationale_150"
     },
@@ -513,7 +513,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_wsfreq.py",
       "source_location": "L1",
       "id": "users_a36_obikhod_seosite_scripts_jm_wsfreq_py",
-      "community": 1,
+      "community": 20,
       "norm_label": "jm_wsfreq.py"
     },
     {
@@ -522,7 +522,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_wsfreq.py",
       "source_location": "L32",
       "id": "jm_wsfreq_load_env",
-      "community": 1,
+      "community": 20,
       "norm_label": "load_env()"
     },
     {
@@ -531,7 +531,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_wsfreq.py",
       "source_location": "L43",
       "id": "jm_wsfreq_post",
-      "community": 1,
+      "community": 20,
       "norm_label": "post()"
     },
     {
@@ -540,7 +540,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_wsfreq.py",
       "source_location": "L49",
       "id": "jm_wsfreq_main",
-      "community": 1,
+      "community": 20,
       "norm_label": "main()"
     },
     {
@@ -630,7 +630,7 @@
       "source_file": "/Users/a36/obikhod/site/postcss.config.mjs",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_postcss_config_mjs",
-      "community": 62,
+      "community": 70,
       "norm_label": "postcss.config.mjs"
     },
     {
@@ -657,7 +657,7 @@
       "source_file": "/Users/a36/obikhod/site/playwright.config.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_playwright_config_ts",
-      "community": 63,
+      "community": 71,
       "norm_label": "playwright.config.ts"
     },
     {
@@ -666,7 +666,7 @@
       "source_file": "/Users/a36/obikhod/site/eslint.config.mjs",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_eslint_config_mjs",
-      "community": 64,
+      "community": 72,
       "norm_label": "eslint.config.mjs"
     },
     {
@@ -675,7 +675,7 @@
       "source_file": "/Users/a36/obikhod/site/next.config.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_next_config_ts",
-      "community": 65,
+      "community": 73,
       "norm_label": "next.config.ts"
     },
     {
@@ -684,7 +684,7 @@
       "source_file": "/Users/a36/obikhod/site/blocks/LeadForm.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_blocks_leadform_ts",
-      "community": 66,
+      "community": 74,
       "norm_label": "leadform.ts"
     },
     {
@@ -693,7 +693,7 @@
       "source_file": "/Users/a36/obikhod/site/blocks/Hero.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_blocks_hero_ts",
-      "community": 67,
+      "community": 75,
       "norm_label": "hero.ts"
     },
     {
@@ -702,7 +702,7 @@
       "source_file": "/Users/a36/obikhod/site/blocks/Faq.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_blocks_faq_ts",
-      "community": 68,
+      "community": 76,
       "norm_label": "faq.ts"
     },
     {
@@ -711,7 +711,7 @@
       "source_file": "/Users/a36/obikhod/site/blocks/CtaBanner.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_blocks_ctabanner_ts",
-      "community": 69,
+      "community": 77,
       "norm_label": "ctabanner.ts"
     },
     {
@@ -720,7 +720,7 @@
       "source_file": "/Users/a36/obikhod/site/blocks/index.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_blocks_index_ts",
-      "community": 70,
+      "community": 78,
       "norm_label": "index.ts"
     },
     {
@@ -729,7 +729,7 @@
       "source_file": "/Users/a36/obikhod/site/blocks/TextContent.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_blocks_textcontent_ts",
-      "community": 71,
+      "community": 79,
       "norm_label": "textcontent.ts"
     },
     {
@@ -738,7 +738,7 @@
       "source_file": "/Users/a36/obikhod/site/globals/SiteChrome.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_globals_sitechrome_ts",
-      "community": 15,
+      "community": 14,
       "norm_label": "sitechrome.ts"
     },
     {
@@ -747,7 +747,7 @@
       "source_file": "/Users/a36/obikhod/site/globals/SiteChrome.ts",
       "source_location": "L29",
       "id": "sitechrome_validatemenuitem",
-      "community": 15,
+      "community": 14,
       "norm_label": "validatemenuitem()"
     },
     {
@@ -756,7 +756,7 @@
       "source_file": "/Users/a36/obikhod/site/globals/SiteChrome.ts",
       "source_location": "L47",
       "id": "sitechrome_validatesocialurl",
-      "community": 15,
+      "community": 14,
       "norm_label": "validatesocialurl()"
     },
     {
@@ -765,7 +765,7 @@
       "source_file": "/Users/a36/obikhod/site/globals/SiteChrome.ts",
       "source_location": "L55",
       "id": "sitechrome_validatee164",
-      "community": 15,
+      "community": 14,
       "norm_label": "validatee164()"
     },
     {
@@ -774,7 +774,7 @@
       "source_file": "/Users/a36/obikhod/site/globals/SiteChrome.ts",
       "source_location": "L58",
       "id": "sitechrome_validateinn",
-      "community": 15,
+      "community": 14,
       "norm_label": "validateinn()"
     },
     {
@@ -783,7 +783,7 @@
       "source_file": "/Users/a36/obikhod/site/globals/SiteChrome.ts",
       "source_location": "L64",
       "id": "sitechrome_menuitemarrayfield",
-      "community": 15,
+      "community": 14,
       "norm_label": "menuitemarrayfield()"
     },
     {
@@ -792,7 +792,7 @@
       "source_file": "/Users/a36/obikhod/site/globals/SeoSettings.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_globals_seosettings_ts",
-      "community": 72,
+      "community": 80,
       "norm_label": "seosettings.ts"
     },
     {
@@ -801,7 +801,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_193000_seo_override_blog_b2b_districts.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260426_193000_seo_override_blog_b2b_districts_ts",
-      "community": 19,
+      "community": 21,
       "norm_label": "20260426_193000_seo_override_blog_b2b_districts.ts"
     },
     {
@@ -810,7 +810,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_193000_seo_override_blog_b2b_districts.ts",
       "source_location": "L28",
       "id": "20260426_193000_seo_override_blog_b2b_districts_readsql",
-      "community": 19,
+      "community": 21,
       "norm_label": "readsql()"
     },
     {
@@ -819,7 +819,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_193000_seo_override_blog_b2b_districts.ts",
       "source_location": "L33",
       "id": "20260426_193000_seo_override_blog_b2b_districts_up",
-      "community": 19,
+      "community": 21,
       "norm_label": "up()"
     },
     {
@@ -828,7 +828,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_193000_seo_override_blog_b2b_districts.ts",
       "source_location": "L38",
       "id": "20260426_193000_seo_override_blog_b2b_districts_down",
-      "community": 19,
+      "community": 21,
       "norm_label": "down()"
     },
     {
@@ -837,7 +837,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_200000_authors_collection.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260426_200000_authors_collection_ts",
-      "community": 20,
+      "community": 22,
       "norm_label": "20260426_200000_authors_collection.ts"
     },
     {
@@ -846,7 +846,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_200000_authors_collection.ts",
       "source_location": "L26",
       "id": "20260426_200000_authors_collection_readsql",
-      "community": 20,
+      "community": 22,
       "norm_label": "readsql()"
     },
     {
@@ -855,7 +855,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_200000_authors_collection.ts",
       "source_location": "L31",
       "id": "20260426_200000_authors_collection_up",
-      "community": 20,
+      "community": 22,
       "norm_label": "up()"
     },
     {
@@ -864,7 +864,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_200000_authors_collection.ts",
       "source_location": "L36",
       "id": "20260426_200000_authors_collection_down",
-      "community": 20,
+      "community": 22,
       "norm_label": "down()"
     },
     {
@@ -873,7 +873,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260424_133242_us_3_blocks_and_seo.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260424_133242_us_3_blocks_and_seo_ts",
-      "community": 21,
+      "community": 23,
       "norm_label": "20260424_133242_us_3_blocks_and_seo.ts"
     },
     {
@@ -882,7 +882,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260424_133242_us_3_blocks_and_seo.ts",
       "source_location": "L45",
       "id": "20260424_133242_us_3_blocks_and_seo_readsql",
-      "community": 21,
+      "community": 23,
       "norm_label": "readsql()"
     },
     {
@@ -891,7 +891,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260424_133242_us_3_blocks_and_seo.ts",
       "source_location": "L50",
       "id": "20260424_133242_us_3_blocks_and_seo_up",
-      "community": 21,
+      "community": 23,
       "norm_label": "up()"
     },
     {
@@ -900,7 +900,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260424_133242_us_3_blocks_and_seo.ts",
       "source_location": "L57",
       "id": "20260424_133242_us_3_blocks_and_seo_down",
-      "community": 21,
+      "community": 23,
       "norm_label": "down()"
     },
     {
@@ -909,7 +909,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_220000_authors_array_snapshot_uuid.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260426_220000_authors_array_snapshot_uuid_ts",
-      "community": 22,
+      "community": 24,
       "norm_label": "20260426_220000_authors_array_snapshot_uuid.ts"
     },
     {
@@ -918,7 +918,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_220000_authors_array_snapshot_uuid.ts",
       "source_location": "L18",
       "id": "20260426_220000_authors_array_snapshot_uuid_readsql",
-      "community": 22,
+      "community": 24,
       "norm_label": "readsql()"
     },
     {
@@ -927,7 +927,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_220000_authors_array_snapshot_uuid.ts",
       "source_location": "L23",
       "id": "20260426_220000_authors_array_snapshot_uuid_up",
-      "community": 22,
+      "community": 24,
       "norm_label": "up()"
     },
     {
@@ -936,7 +936,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_220000_authors_array_snapshot_uuid.ts",
       "source_location": "L28",
       "id": "20260426_220000_authors_array_snapshot_uuid_down",
-      "community": 22,
+      "community": 24,
       "norm_label": "down()"
     },
     {
@@ -945,7 +945,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_180000_seo_override_fields.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260426_180000_seo_override_fields_ts",
-      "community": 23,
+      "community": 25,
       "norm_label": "20260426_180000_seo_override_fields.ts"
     },
     {
@@ -954,7 +954,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_180000_seo_override_fields.ts",
       "source_location": "L34",
       "id": "20260426_180000_seo_override_fields_readsql",
-      "community": 23,
+      "community": 25,
       "norm_label": "readsql()"
     },
     {
@@ -963,7 +963,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_180000_seo_override_fields.ts",
       "source_location": "L39",
       "id": "20260426_180000_seo_override_fields_up",
-      "community": 23,
+      "community": 25,
       "norm_label": "up()"
     },
     {
@@ -972,7 +972,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_180000_seo_override_fields.ts",
       "source_location": "L44",
       "id": "20260426_180000_seo_override_fields_down",
-      "community": 23,
+      "community": 25,
       "norm_label": "down()"
     },
     {
@@ -981,7 +981,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260427_010000_subservice_content_fields.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260427_010000_subservice_content_fields_ts",
-      "community": 24,
+      "community": 26,
       "norm_label": "20260427_010000_subservice_content_fields.ts"
     },
     {
@@ -990,7 +990,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260427_010000_subservice_content_fields.ts",
       "source_location": "L18",
       "id": "20260427_010000_subservice_content_fields_readsql",
-      "community": 24,
+      "community": 26,
       "norm_label": "readsql()"
     },
     {
@@ -999,7 +999,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260427_010000_subservice_content_fields.ts",
       "source_location": "L23",
       "id": "20260427_010000_subservice_content_fields_up",
-      "community": 24,
+      "community": 26,
       "norm_label": "up()"
     },
     {
@@ -1008,7 +1008,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260427_010000_subservice_content_fields.ts",
       "source_location": "L28",
       "id": "20260427_010000_subservice_content_fields_down",
-      "community": 24,
+      "community": 26,
       "norm_label": "down()"
     },
     {
@@ -1017,7 +1017,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_153500_users_api_key.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260426_153500_users_api_key_ts",
-      "community": 25,
+      "community": 27,
       "norm_label": "20260426_153500_users_api_key.ts"
     },
     {
@@ -1026,7 +1026,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_153500_users_api_key.ts",
       "source_location": "L48",
       "id": "20260426_153500_users_api_key_readsql",
-      "community": 25,
+      "community": 27,
       "norm_label": "readsql()"
     },
     {
@@ -1035,7 +1035,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_153500_users_api_key.ts",
       "source_location": "L53",
       "id": "20260426_153500_users_api_key_up",
-      "community": 25,
+      "community": 27,
       "norm_label": "up()"
     },
     {
@@ -1044,7 +1044,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_153500_users_api_key.ts",
       "source_location": "L58",
       "id": "20260426_153500_users_api_key_down",
-      "community": 25,
+      "community": 27,
       "norm_label": "down()"
     },
     {
@@ -1053,7 +1053,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_210000_v_version_join_tables_fixup.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260426_210000_v_version_join_tables_fixup_ts",
-      "community": 26,
+      "community": 28,
       "norm_label": "20260426_210000_v_version_join_tables_fixup.ts"
     },
     {
@@ -1062,7 +1062,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_210000_v_version_join_tables_fixup.ts",
       "source_location": "L22",
       "id": "20260426_210000_v_version_join_tables_fixup_readsql",
-      "community": 26,
+      "community": 28,
       "norm_label": "readsql()"
     },
     {
@@ -1071,7 +1071,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_210000_v_version_join_tables_fixup.ts",
       "source_location": "L27",
       "id": "20260426_210000_v_version_join_tables_fixup_up",
-      "community": 26,
+      "community": 28,
       "norm_label": "up()"
     },
     {
@@ -1080,7 +1080,43 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_210000_v_version_join_tables_fixup.ts",
       "source_location": "L32",
       "id": "20260426_210000_v_version_join_tables_fixup_down",
-      "community": 26,
+      "community": 28,
+      "norm_label": "down()"
+    },
+    {
+      "label": "20260428_140000_users_telegram_chat_id.ts",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/migrations/20260428_140000_users_telegram_chat_id.ts",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_migrations_20260428_140000_users_telegram_chat_id_ts",
+      "community": 29,
+      "norm_label": "20260428_140000_users_telegram_chat_id.ts"
+    },
+    {
+      "label": "readSql()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/migrations/20260428_140000_users_telegram_chat_id.ts",
+      "source_location": "L30",
+      "id": "20260428_140000_users_telegram_chat_id_readsql",
+      "community": 29,
+      "norm_label": "readsql()"
+    },
+    {
+      "label": "up()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/migrations/20260428_140000_users_telegram_chat_id.ts",
+      "source_location": "L36",
+      "id": "20260428_140000_users_telegram_chat_id_up",
+      "community": 29,
+      "norm_label": "up()"
+    },
+    {
+      "label": "down()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/migrations/20260428_140000_users_telegram_chat_id.ts",
+      "source_location": "L42",
+      "id": "20260428_140000_users_telegram_chat_id_down",
+      "community": 29,
       "norm_label": "down()"
     },
     {
@@ -1089,7 +1125,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_230000_v_seo_override_columns_fixup.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260426_230000_v_seo_override_columns_fixup_ts",
-      "community": 27,
+      "community": 30,
       "norm_label": "20260426_230000_v_seo_override_columns_fixup.ts"
     },
     {
@@ -1098,7 +1134,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_230000_v_seo_override_columns_fixup.ts",
       "source_location": "L20",
       "id": "20260426_230000_v_seo_override_columns_fixup_readsql",
-      "community": 27,
+      "community": 30,
       "norm_label": "readsql()"
     },
     {
@@ -1107,7 +1143,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_230000_v_seo_override_columns_fixup.ts",
       "source_location": "L25",
       "id": "20260426_230000_v_seo_override_columns_fixup_up",
-      "community": 27,
+      "community": 30,
       "norm_label": "up()"
     },
     {
@@ -1116,7 +1152,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_230000_v_seo_override_columns_fixup.ts",
       "source_location": "L30",
       "id": "20260426_230000_v_seo_override_columns_fixup_down",
-      "community": 27,
+      "community": 30,
       "norm_label": "down()"
     },
     {
@@ -1125,7 +1161,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260425_cleanup_seo_settings_org_columns.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260425_cleanup_seo_settings_org_columns_ts",
-      "community": 28,
+      "community": 31,
       "norm_label": "20260425_cleanup_seo_settings_org_columns.ts"
     },
     {
@@ -1134,7 +1170,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260425_cleanup_seo_settings_org_columns.ts",
       "source_location": "L36",
       "id": "20260425_cleanup_seo_settings_org_columns_readsql",
-      "community": 28,
+      "community": 31,
       "norm_label": "readsql()"
     },
     {
@@ -1143,7 +1179,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260425_cleanup_seo_settings_org_columns.ts",
       "source_location": "L41",
       "id": "20260425_cleanup_seo_settings_org_columns_up",
-      "community": 28,
+      "community": 31,
       "norm_label": "up()"
     },
     {
@@ -1152,7 +1188,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260425_cleanup_seo_settings_org_columns.ts",
       "source_location": "L48",
       "id": "20260425_cleanup_seo_settings_org_columns_down",
-      "community": 28,
+      "community": 31,
       "norm_label": "down()"
     },
     {
@@ -1161,7 +1197,7 @@
       "source_file": "/Users/a36/obikhod/site/app/robots.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_robots_ts",
-      "community": 36,
+      "community": 41,
       "norm_label": "robots.ts"
     },
     {
@@ -1170,7 +1206,7 @@
       "source_file": "/Users/a36/obikhod/site/app/robots.ts",
       "source_location": "L5",
       "id": "robots_robots",
-      "community": 36,
+      "community": 41,
       "norm_label": "robots()"
     },
     {
@@ -1179,7 +1215,7 @@
       "source_file": "/Users/a36/obikhod/site/app/sitemap.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_sitemap_ts",
-      "community": 6,
+      "community": 5,
       "norm_label": "sitemap.ts"
     },
     {
@@ -1188,7 +1224,7 @@
       "source_file": "/Users/a36/obikhod/site/app/sitemap.ts",
       "source_location": "L56",
       "id": "sitemap_sitemap",
-      "community": 6,
+      "community": 5,
       "norm_label": "sitemap()"
     },
     {
@@ -1197,7 +1233,7 @@
       "source_file": "/Users/a36/obikhod/site/app/sitemap.ts",
       "source_location": "L197",
       "id": "sitemap_fetchservices",
-      "community": 6,
+      "community": 5,
       "norm_label": "fetchservices()"
     },
     {
@@ -1206,7 +1242,7 @@
       "source_file": "/Users/a36/obikhod/site/app/sitemap.ts",
       "source_location": "L216",
       "id": "sitemap_fetchdistricts",
-      "community": 6,
+      "community": 5,
       "norm_label": "fetchdistricts()"
     },
     {
@@ -1215,7 +1251,7 @@
       "source_file": "/Users/a36/obikhod/site/app/sitemap.ts",
       "source_location": "L232",
       "id": "sitemap_fetchpublishedservicedistricts",
-      "community": 6,
+      "community": 5,
       "norm_label": "fetchpublishedservicedistricts()"
     },
     {
@@ -1224,7 +1260,7 @@
       "source_file": "/Users/a36/obikhod/site/app/sitemap.ts",
       "source_location": "L249",
       "id": "sitemap_fetchcases",
-      "community": 6,
+      "community": 5,
       "norm_label": "fetchcases()"
     },
     {
@@ -1233,7 +1269,7 @@
       "source_file": "/Users/a36/obikhod/site/app/sitemap.ts",
       "source_location": "L265",
       "id": "sitemap_fetchpublishedblog",
-      "community": 6,
+      "community": 5,
       "norm_label": "fetchpublishedblog()"
     },
     {
@@ -1242,7 +1278,7 @@
       "source_file": "/Users/a36/obikhod/site/app/sitemap.ts",
       "source_location": "L282",
       "id": "sitemap_fetchpublishedb2b",
-      "community": 6,
+      "community": 5,
       "norm_label": "fetchpublishedb2b()"
     },
     {
@@ -1251,7 +1287,7 @@
       "source_file": "/Users/a36/obikhod/site/app/sitemap.ts",
       "source_location": "L299",
       "id": "sitemap_fetchpublishedauthors",
-      "community": 6,
+      "community": 5,
       "norm_label": "fetchpublishedauthors()"
     },
     {
@@ -1260,7 +1296,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/layout.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_layout_tsx",
-      "community": 5,
+      "community": 7,
       "norm_label": "layout.tsx"
     },
     {
@@ -1269,7 +1305,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/layout.tsx",
       "source_location": "L56",
       "id": "layout_marketinglayout",
-      "community": 5,
+      "community": 7,
       "norm_label": "marketinglayout()"
     },
     {
@@ -1278,7 +1314,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_page_tsx",
-      "community": 73,
+      "community": 81,
       "norm_label": "page.tsx"
     },
     {
@@ -1287,7 +1323,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/raiony/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_raiony_page_tsx",
-      "community": 74,
+      "community": 82,
       "norm_label": "page.tsx"
     },
     {
@@ -1323,7 +1359,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/avtory/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_avtory_page_tsx",
-      "community": 75,
+      "community": 83,
       "norm_label": "page.tsx"
     },
     {
@@ -1341,7 +1377,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/garantii/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_garantii_page_tsx",
-      "community": 5,
+      "community": 7,
       "norm_label": "page.tsx"
     },
     {
@@ -1350,7 +1386,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/garantii/page.tsx",
       "source_location": "L20",
       "id": "page_guaranteespage",
-      "community": 5,
+      "community": 7,
       "norm_label": "guaranteespage()"
     },
     {
@@ -1395,7 +1431,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/b2b/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_b2b_page_tsx",
-      "community": 76,
+      "community": 84,
       "norm_label": "page.tsx"
     },
     {
@@ -1413,7 +1449,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/kejsy/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_kejsy_page_tsx",
-      "community": 77,
+      "community": 85,
       "norm_label": "page.tsx"
     },
     {
@@ -1440,7 +1476,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/kak-my-rabotaem/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_kak_my_rabotaem_page_tsx",
-      "community": 5,
+      "community": 7,
       "norm_label": "page.tsx"
     },
     {
@@ -1449,7 +1485,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/kak-my-rabotaem/page.tsx",
       "source_location": "L48",
       "id": "page_howweworkpage",
-      "community": 5,
+      "community": 7,
       "norm_label": "howweworkpage()"
     },
     {
@@ -1458,7 +1494,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/o-kompanii/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_o_kompanii_page_tsx",
-      "community": 5,
+      "community": 7,
       "norm_label": "page.tsx"
     },
     {
@@ -1467,7 +1503,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/o-kompanii/page.tsx",
       "source_location": "L36",
       "id": "page_aboutpage",
-      "community": 5,
+      "community": 7,
       "norm_label": "aboutpage()"
     },
     {
@@ -1485,7 +1521,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/[service]/[district]/SubServiceView.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_service_district_subserviceview_tsx",
-      "community": 78,
+      "community": 86,
       "norm_label": "subserviceview.tsx"
     },
     {
@@ -1503,7 +1539,7 @@
       "source_file": "/Users/a36/obikhod/site/app/api/seed/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_api_seed_route_ts",
-      "community": 8,
+      "community": 6,
       "norm_label": "route.ts"
     },
     {
@@ -1512,7 +1548,7 @@
       "source_file": "/Users/a36/obikhod/site/app/api/seed/route.ts",
       "source_location": "L33",
       "id": "route_lexicalparagraph",
-      "community": 8,
+      "community": 6,
       "norm_label": "lexicalparagraph()"
     },
     {
@@ -1521,7 +1557,7 @@
       "source_file": "/Users/a36/obikhod/site/app/api/seed/route.ts",
       "source_location": "L67",
       "id": "route_ensurestats",
-      "community": 8,
+      "community": 6,
       "norm_label": "ensurestats()"
     },
     {
@@ -1530,16 +1566,16 @@
       "source_file": "/Users/a36/obikhod/site/app/api/seed/route.ts",
       "source_location": "L73",
       "id": "route_findonebyslug",
-      "community": 8,
+      "community": 6,
       "norm_label": "findonebyslug()"
     },
     {
       "label": "POST()",
       "file_type": "code",
-      "source_file": "/Users/a36/obikhod/site/app/api/fal/generate/route.ts",
-      "source_location": "L13",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/api/telegram/webhook/route.ts",
+      "source_location": "L46",
       "id": "route_post",
-      "community": 8,
+      "community": 6,
       "norm_label": "post()"
     },
     {
@@ -1566,7 +1602,7 @@
       "source_file": "/Users/a36/obikhod/site/app/api/fal/generate/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_api_fal_generate_route_ts",
-      "community": 8,
+      "community": 6,
       "norm_label": "route.ts"
     },
     {
@@ -1611,8 +1647,26 @@
       "source_file": "/Users/a36/obikhod/site/app/og/route.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_og_route_tsx",
-      "community": 79,
+      "community": 87,
       "norm_label": "route.tsx"
+    },
+    {
+      "label": "forbidden.tsx",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/forbidden.tsx",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_app_payload_forbidden_tsx",
+      "community": 42,
+      "norm_label": "forbidden.tsx"
+    },
+    {
+      "label": "AdminForbidden()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/forbidden.tsx",
+      "source_location": "L13",
+      "id": "forbidden_adminforbidden",
+      "community": 42,
+      "norm_label": "adminforbidden()"
     },
     {
       "label": "layout.tsx",
@@ -1620,7 +1674,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/layout.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_layout_tsx",
-      "community": 37,
+      "community": 43,
       "norm_label": "layout.tsx"
     },
     {
@@ -1629,8 +1683,44 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/layout.tsx",
       "source_location": "L25",
       "id": "layout_layout",
-      "community": 37,
+      "community": 43,
       "norm_label": "layout()"
+    },
+    {
+      "label": "error.tsx",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/error.tsx",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_app_payload_error_tsx",
+      "community": 44,
+      "norm_label": "error.tsx"
+    },
+    {
+      "label": "AdminError()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/error.tsx",
+      "source_location": "L124",
+      "id": "error_adminerror",
+      "community": 44,
+      "norm_label": "adminerror()"
+    },
+    {
+      "label": "not-found.tsx",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/not-found.tsx",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_app_payload_not_found_tsx",
+      "community": 45,
+      "norm_label": "not-found.tsx"
+    },
+    {
+      "label": "AdminNotFound()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/not-found.tsx",
+      "source_location": "L11",
+      "id": "not_found_adminnotfound",
+      "community": 45,
+      "norm_label": "adminnotfound()"
     },
     {
       "label": "importMap.js",
@@ -1638,7 +1728,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/admin/importMap.js",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_admin_importmap_js",
-      "community": 80,
+      "community": 88,
       "norm_label": "importmap.js"
     },
     {
@@ -1665,7 +1755,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/admin/[[...segments]]/not-found.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_admin_segments_not_found_tsx",
-      "community": 30,
+      "community": 35,
       "norm_label": "not-found.tsx"
     },
     {
@@ -1674,7 +1764,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/admin/[[...segments]]/not-found.tsx",
       "source_location": "L13",
       "id": "not_found_generatemetadata",
-      "community": 30,
+      "community": 35,
       "norm_label": "generatemetadata()"
     },
     {
@@ -1683,7 +1773,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/admin/[[...segments]]/not-found.tsx",
       "source_location": "L16",
       "id": "not_found_notfound",
-      "community": 30,
+      "community": 35,
       "norm_label": "notfound()"
     },
     {
@@ -1692,8 +1782,35 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/api/graphql-playground/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_api_graphql_playground_route_ts",
-      "community": 81,
+      "community": 89,
       "norm_label": "route.ts"
+    },
+    {
+      "label": "route.ts",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/api/admin/page-catalog/csv/route.ts",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_app_payload_api_admin_page_catalog_csv_route_ts",
+      "community": 1,
+      "norm_label": "route.ts"
+    },
+    {
+      "label": "escapeCsvField()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/api/admin/page-catalog/csv/route.ts",
+      "source_location": "L46",
+      "id": "route_escapecsvfield",
+      "community": 1,
+      "norm_label": "escapecsvfield()"
+    },
+    {
+      "label": "rowToCsv()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/api/admin/page-catalog/csv/route.ts",
+      "source_location": "L55",
+      "id": "route_rowtocsv",
+      "community": 1,
+      "norm_label": "rowtocsv()"
     },
     {
       "label": "route.ts",
@@ -1701,7 +1818,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/api/[...slug]/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_api_slug_route_ts",
-      "community": 82,
+      "community": 90,
       "norm_label": "route.ts"
     },
     {
@@ -1710,7 +1827,16 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/api/graphql/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_api_graphql_route_ts",
-      "community": 83,
+      "community": 91,
+      "norm_label": "route.ts"
+    },
+    {
+      "label": "route.ts",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/api/telegram/webhook/route.ts",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_app_payload_api_telegram_webhook_route_ts",
+      "community": 6,
       "norm_label": "route.ts"
     },
     {
@@ -1741,6 +1867,15 @@
       "norm_label": "haspublishedservices()"
     },
     {
+      "label": "admin-login.spec.ts",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-login.spec.ts",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_tests_e2e_admin_login_spec_ts",
+      "community": 92,
+      "norm_label": "admin-login.spec.ts"
+    },
+    {
       "label": "us6-wave2b-subservices.spec.ts",
       "file_type": "code",
       "source_file": "/Users/a36/obikhod/site/tests/e2e/us6-wave2b-subservices.spec.ts",
@@ -1764,7 +1899,7 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/landing.spec.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_tests_e2e_landing_spec_ts",
-      "community": 84,
+      "community": 93,
       "norm_label": "landing.spec.ts"
     },
     {
@@ -1773,7 +1908,7 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-smoke.spec.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_tests_e2e_admin_smoke_spec_ts",
-      "community": 85,
+      "community": 94,
       "norm_label": "admin-smoke.spec.ts"
     },
     {
@@ -1800,7 +1935,7 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/site-chrome.spec.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_tests_e2e_site_chrome_spec_ts",
-      "community": 86,
+      "community": 95,
       "norm_label": "site-chrome.spec.ts"
     },
     {
@@ -1809,7 +1944,7 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-design-compliance.spec.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_tests_e2e_admin_design_compliance_spec_ts",
-      "community": 31,
+      "community": 36,
       "norm_label": "admin-design-compliance.spec.ts"
     },
     {
@@ -1818,7 +1953,7 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-design-compliance.spec.ts",
       "source_location": "L79",
       "id": "admin_design_compliance_spec_toms",
-      "community": 31,
+      "community": 36,
       "norm_label": "toms()"
     },
     {
@@ -1827,7 +1962,7 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-design-compliance.spec.ts",
       "source_location": "L89",
       "id": "admin_design_compliance_spec_cssnorm",
-      "community": 31,
+      "community": 36,
       "norm_label": "cssnorm()"
     },
     {
@@ -1836,7 +1971,7 @@
       "source_file": "/Users/a36/obikhod/site/components/PreviewBanner.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_previewbanner_tsx",
-      "community": 38,
+      "community": 46,
       "norm_label": "previewbanner.tsx"
     },
     {
@@ -1845,7 +1980,7 @@
       "source_file": "/Users/a36/obikhod/site/components/PreviewBanner.tsx",
       "source_location": "L10",
       "id": "previewbanner_previewbanner",
-      "community": 38,
+      "community": 46,
       "norm_label": "previewbanner()"
     },
     {
@@ -1854,7 +1989,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/Hero.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_blocks_hero_tsx",
-      "community": 32,
+      "community": 37,
       "norm_label": "hero.tsx"
     },
     {
@@ -1863,7 +1998,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/Hero.tsx",
       "source_location": "L40",
       "id": "hero_mediaurl",
-      "community": 32,
+      "community": 37,
       "norm_label": "mediaurl()"
     },
     {
@@ -1872,7 +2007,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/Hero.tsx",
       "source_location": "L46",
       "id": "hero_mediaalt",
-      "community": 32,
+      "community": 37,
       "norm_label": "mediaalt()"
     },
     {
@@ -1917,7 +2052,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/BlockRenderer.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_blocks_blockrenderer_tsx",
-      "community": 39,
+      "community": 47,
       "norm_label": "blockrenderer.tsx"
     },
     {
@@ -1926,7 +2061,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/BlockRenderer.tsx",
       "source_location": "L20",
       "id": "blockrenderer_blockrenderer",
-      "community": 39,
+      "community": 47,
       "norm_label": "blockrenderer()"
     },
     {
@@ -1935,7 +2070,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/types.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_blocks_types_ts",
-      "community": 87,
+      "community": 96,
       "norm_label": "types.ts"
     },
     {
@@ -1944,7 +2079,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/TextContent.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_blocks_textcontent_tsx",
-      "community": 88,
+      "community": 97,
       "norm_label": "textcontent.tsx"
     },
     {
@@ -1953,7 +2088,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/CtaBanner.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_blocks_ctabanner_tsx",
-      "community": 40,
+      "community": 48,
       "norm_label": "ctabanner.tsx"
     },
     {
@@ -1962,7 +2097,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/CtaBanner.tsx",
       "source_location": "L31",
       "id": "ctabanner_resolveaccent",
-      "community": 40,
+      "community": 48,
       "norm_label": "resolveaccent()"
     },
     {
@@ -1971,7 +2106,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/Faq.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_blocks_faq_tsx",
-      "community": 41,
+      "community": 49,
       "norm_label": "faq.tsx"
     },
     {
@@ -1980,8 +2115,44 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/Faq.tsx",
       "source_location": "L16",
       "id": "faq_extracttext",
-      "community": 41,
+      "community": 49,
       "norm_label": "extracttext()"
+    },
+    {
+      "label": "AdminLogin.tsx",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/AdminLogin.tsx",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_components_admin_adminlogin_tsx",
+      "community": 32,
+      "norm_label": "adminlogin.tsx"
+    },
+    {
+      "label": "describeError()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/AdminLogin.tsx",
+      "source_location": "L75",
+      "id": "adminlogin_describeerror",
+      "community": 32,
+      "norm_label": "describeerror()"
+    },
+    {
+      "label": "classifyError()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/AdminLogin.tsx",
+      "source_location": "L89",
+      "id": "adminlogin_classifyerror",
+      "community": 32,
+      "norm_label": "classifyerror()"
+    },
+    {
+      "label": "handleSubmit()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/AdminLogin.tsx",
+      "source_location": "L109",
+      "id": "adminlogin_handlesubmit",
+      "community": 32,
+      "norm_label": "handlesubmit()"
     },
     {
       "label": "DashboardTile.tsx",
@@ -1989,7 +2160,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/DashboardTile.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_admin_dashboardtile_tsx",
-      "community": 89,
+      "community": 98,
       "norm_label": "dashboardtile.tsx"
     },
     {
@@ -1998,7 +2169,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/EmptyErrorStates.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_admin_emptyerrorstates_tsx",
-      "community": 90,
+      "community": 99,
       "norm_label": "emptyerrorstates.tsx"
     },
     {
@@ -2007,7 +2178,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/PageCatalog.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_admin_pagecatalog_tsx",
-      "community": 6,
+      "community": 5,
       "norm_label": "pagecatalog.tsx"
     },
     {
@@ -2016,7 +2187,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/PageCatalog.tsx",
       "source_location": "L135",
       "id": "pagecatalog_formatdate",
-      "community": 6,
+      "community": 5,
       "norm_label": "formatdate()"
     },
     {
@@ -2025,7 +2196,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/PageCatalog.tsx",
       "source_location": "L146",
       "id": "pagecatalog_loadcatalog",
-      "community": 6,
+      "community": 5,
       "norm_label": "loadcatalog()"
     },
     {
@@ -2034,7 +2205,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/BrandLogo.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_admin_brandlogo_tsx",
-      "community": 91,
+      "community": 100,
       "norm_label": "brandlogo.tsx"
     },
     {
@@ -2043,17 +2214,17 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/BeforeLoginLockup.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_admin_beforeloginlockup_tsx",
-      "community": 42,
+      "community": 50,
       "norm_label": "beforeloginlockup.tsx"
     },
     {
-      "label": "SeasonsCircleMark()",
+      "label": "BeforeLoginLockup()",
       "file_type": "code",
       "source_file": "/Users/a36/obikhod/site/components/admin/BeforeLoginLockup.tsx",
-      "source_location": "L59",
-      "id": "beforeloginlockup_seasonscirclemark",
-      "community": 42,
-      "norm_label": "seasonscirclemark()"
+      "source_location": "L41",
+      "id": "beforeloginlockup_beforeloginlockup",
+      "community": 50,
+      "norm_label": "beforeloginlockup()"
     },
     {
       "label": "icons.tsx",
@@ -2425,12 +2596,39 @@
       "norm_label": "expiredicon()"
     },
     {
+      "label": "PageCatalogWidget.tsx",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/PageCatalogWidget.tsx",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_components_admin_pagecatalogwidget_tsx",
+      "community": 5,
+      "norm_label": "pagecatalogwidget.tsx"
+    },
+    {
+      "label": "formatDate()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/PageCatalogWidget.tsx",
+      "source_location": "L151",
+      "id": "pagecatalogwidget_formatdate",
+      "community": 5,
+      "norm_label": "formatdate()"
+    },
+    {
+      "label": "loadTopN()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/PageCatalogWidget.tsx",
+      "source_location": "L180",
+      "id": "pagecatalogwidget_loadtopn",
+      "community": 5,
+      "norm_label": "loadtopn()"
+    },
+    {
       "label": "BrandIcon.tsx",
       "file_type": "code",
       "source_file": "/Users/a36/obikhod/site/components/admin/BrandIcon.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_admin_brandicon_tsx",
-      "community": 43,
+      "community": 51,
       "norm_label": "brandicon.tsx"
     },
     {
@@ -2439,7 +2637,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/BrandIcon.tsx",
       "source_location": "L17",
       "id": "brandicon_brandicon",
-      "community": 43,
+      "community": 51,
       "norm_label": "brandicon()"
     },
     {
@@ -2448,7 +2646,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/AfterLoginFooter.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_admin_afterloginfooter_tsx",
-      "community": 44,
+      "community": 52,
       "norm_label": "afterloginfooter.tsx"
     },
     {
@@ -2457,7 +2655,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/AfterLoginFooter.tsx",
       "source_location": "L26",
       "id": "afterloginfooter_afterloginfooter",
-      "community": 44,
+      "community": 52,
       "norm_label": "afterloginfooter()"
     },
     {
@@ -2466,7 +2664,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/BeforeDashboardStartHere.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_admin_beforedashboardstarthere_tsx",
-      "community": 6,
+      "community": 5,
       "norm_label": "beforedashboardstarthere.tsx"
     },
     {
@@ -2475,7 +2673,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/BeforeDashboardStartHere.tsx",
       "source_location": "L54",
       "id": "beforedashboardstarthere_loadstats",
-      "community": 6,
+      "community": 5,
       "norm_label": "loadstats()"
     },
     {
@@ -2484,7 +2682,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/BeforeDashboardStartHere.tsx",
       "source_location": "L110",
       "id": "beforedashboardstarthere_loadrecentedits",
-      "community": 6,
+      "community": 5,
       "norm_label": "loadrecentedits()"
     },
     {
@@ -2493,7 +2691,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/BeforeDashboardStartHere.tsx",
       "source_location": "L148",
       "id": "beforedashboardstarthere_formatrelative",
-      "community": 6,
+      "community": 5,
       "norm_label": "formatrelative()"
     },
     {
@@ -2700,7 +2898,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/LicenseBadge.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_licensebadge_tsx",
-      "community": 45,
+      "community": 53,
       "norm_label": "licensebadge.tsx"
     },
     {
@@ -2709,7 +2907,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/LicenseBadge.tsx",
       "source_location": "L5",
       "id": "licensebadge_licensebadge",
-      "community": 45,
+      "community": 53,
       "norm_label": "licensebadge()"
     },
     {
@@ -2718,7 +2916,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/CtaMessengers.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_ctamessengers_tsx",
-      "community": 46,
+      "community": 54,
       "norm_label": "ctamessengers.tsx"
     },
     {
@@ -2727,7 +2925,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/CtaMessengers.tsx",
       "source_location": "L12",
       "id": "ctamessengers_ctamessengers",
-      "community": 46,
+      "community": 54,
       "norm_label": "ctamessengers()"
     },
     {
@@ -2736,7 +2934,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/Footer.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_footer_tsx",
-      "community": 92,
+      "community": 101,
       "norm_label": "footer.tsx"
     },
     {
@@ -2745,7 +2943,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/RichTextRenderer.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_richtextrenderer_tsx",
-      "community": 47,
+      "community": 55,
       "norm_label": "richtextrenderer.tsx"
     },
     {
@@ -2754,7 +2952,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/RichTextRenderer.tsx",
       "source_location": "L8",
       "id": "richtextrenderer_richtextrenderer",
-      "community": 47,
+      "community": 55,
       "norm_label": "richtextrenderer()"
     },
     {
@@ -2799,7 +2997,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Hero.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_hero_tsx",
-      "community": 93,
+      "community": 102,
       "norm_label": "hero.tsx"
     },
     {
@@ -2808,7 +3006,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Team.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_team_tsx",
-      "community": 48,
+      "community": 56,
       "norm_label": "team.tsx"
     },
     {
@@ -2817,7 +3015,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Team.tsx",
       "source_location": "L42",
       "id": "team_team",
-      "community": 48,
+      "community": 56,
       "norm_label": "team()"
     },
     {
@@ -2826,7 +3024,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Subscription.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_subscription_tsx",
-      "community": 94,
+      "community": 103,
       "norm_label": "subscription.tsx"
     },
     {
@@ -2835,7 +3033,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/LeadForm.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_leadform_tsx",
-      "community": 49,
+      "community": 57,
       "norm_label": "leadform.tsx"
     },
     {
@@ -2844,7 +3042,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/LeadForm.tsx",
       "source_location": "L10",
       "id": "leadform_leadform",
-      "community": 49,
+      "community": 57,
       "norm_label": "leadform()"
     },
     {
@@ -2853,7 +3051,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/CtaFooter.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_ctafooter_tsx",
-      "community": 95,
+      "community": 104,
       "norm_label": "ctafooter.tsx"
     },
     {
@@ -2862,7 +3060,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Guarantees.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_guarantees_tsx",
-      "community": 50,
+      "community": 58,
       "norm_label": "guarantees.tsx"
     },
     {
@@ -2871,7 +3069,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Guarantees.tsx",
       "source_location": "L60",
       "id": "guarantees_guarantees",
-      "community": 50,
+      "community": 58,
       "norm_label": "guarantees()"
     },
     {
@@ -2880,7 +3078,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Services.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_services_tsx",
-      "community": 51,
+      "community": 59,
       "norm_label": "services.tsx"
     },
     {
@@ -2889,7 +3087,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Services.tsx",
       "source_location": "L126",
       "id": "services_sw",
-      "community": 51,
+      "community": 59,
       "norm_label": "sw()"
     },
     {
@@ -2898,7 +3096,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/B2B.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_b2b_tsx",
-      "community": 52,
+      "community": 60,
       "norm_label": "b2b.tsx"
     },
     {
@@ -2907,7 +3105,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/B2B.tsx",
       "source_location": "L4",
       "id": "b2b_b2b",
-      "community": 52,
+      "community": 60,
       "norm_label": "b2b()"
     },
     {
@@ -2916,7 +3114,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Calculator.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_calculator_tsx",
-      "community": 29,
+      "community": 33,
       "norm_label": "calculator.tsx"
     },
     {
@@ -2925,7 +3123,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Calculator.tsx",
       "source_location": "L169",
       "id": "calculator_initsliders",
-      "community": 29,
+      "community": 33,
       "norm_label": "initsliders()"
     },
     {
@@ -2934,7 +3132,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Calculator.tsx",
       "source_location": "L180",
       "id": "calculator_fmt",
-      "community": 29,
+      "community": 33,
       "norm_label": "fmt()"
     },
     {
@@ -2943,7 +3141,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Calculator.tsx",
       "source_location": "L182",
       "id": "calculator_calculator",
-      "community": 29,
+      "community": 33,
       "norm_label": "calculator()"
     },
     {
@@ -2952,7 +3150,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Cases.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_cases_tsx",
-      "community": 96,
+      "community": 105,
       "norm_label": "cases.tsx"
     },
     {
@@ -2961,7 +3159,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/FAQ.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_faq_tsx",
-      "community": 97,
+      "community": 106,
       "norm_label": "faq.tsx"
     },
     {
@@ -2970,7 +3168,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Reviews.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_reviews_tsx",
-      "community": 98,
+      "community": 107,
       "norm_label": "reviews.tsx"
     },
     {
@@ -2979,7 +3177,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/How.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_how_tsx",
-      "community": 53,
+      "community": 61,
       "norm_label": "how.tsx"
     },
     {
@@ -2988,7 +3186,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/How.tsx",
       "source_location": "L49",
       "id": "how_how",
-      "community": 53,
+      "community": 61,
       "norm_label": "how()"
     },
     {
@@ -2997,7 +3195,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/LogoMark.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_shared_logomark_tsx",
-      "community": 54,
+      "community": 62,
       "norm_label": "logomark.tsx"
     },
     {
@@ -3006,7 +3204,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/LogoMark.tsx",
       "source_location": "L3",
       "id": "logomark_logomark",
-      "community": 54,
+      "community": 62,
       "norm_label": "logomark()"
     },
     {
@@ -3015,7 +3213,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/Icon.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_shared_icon_tsx",
-      "community": 55,
+      "community": 63,
       "norm_label": "icon.tsx"
     },
     {
@@ -3024,7 +3222,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/Icon.tsx",
       "source_location": "L5",
       "id": "icon_base",
-      "community": 55,
+      "community": 63,
       "norm_label": "base()"
     },
     {
@@ -3033,7 +3231,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/graphics.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_shared_graphics_tsx",
-      "community": 56,
+      "community": 64,
       "norm_label": "graphics.tsx"
     },
     {
@@ -3042,7 +3240,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/graphics.tsx",
       "source_location": "L8",
       "id": "graphics_ringspattern",
-      "community": 56,
+      "community": 64,
       "norm_label": "ringspattern()"
     },
     {
@@ -3051,7 +3249,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/Placeholder.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_shared_placeholder_tsx",
-      "community": 33,
+      "community": 38,
       "norm_label": "placeholder.tsx"
     },
     {
@@ -3060,7 +3258,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/Placeholder.tsx",
       "source_location": "L10",
       "id": "placeholder_placeholder",
-      "community": 33,
+      "community": 38,
       "norm_label": "placeholder()"
     },
     {
@@ -3069,7 +3267,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/Placeholder.tsx",
       "source_location": "L28",
       "id": "placeholder_avatar",
-      "community": 33,
+      "community": 38,
       "norm_label": "avatar()"
     },
     {
@@ -3078,7 +3276,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/CloseDetailsOnClickOutside.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_shared_closedetailsonclickoutside_tsx",
-      "community": 57,
+      "community": 65,
       "norm_label": "closedetailsonclickoutside.tsx"
     },
     {
@@ -3087,7 +3285,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/CloseDetailsOnClickOutside.tsx",
       "source_location": "L16",
       "id": "closedetailsonclickoutside_closedetailsonclickoutside",
-      "community": 57,
+      "community": 65,
       "norm_label": "closedetailsonclickoutside()"
     },
     {
@@ -3096,7 +3294,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/BeforeAfter.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_shared_beforeafter_tsx",
-      "community": 58,
+      "community": 66,
       "norm_label": "beforeafter.tsx"
     },
     {
@@ -3105,7 +3303,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/BeforeAfter.tsx",
       "source_location": "L15",
       "id": "beforeafter_beforeafter",
-      "community": 58,
+      "community": 66,
       "norm_label": "beforeafter()"
     },
     {
@@ -3114,7 +3312,7 @@
       "source_file": "/Users/a36/obikhod/site/components/seo/JsonLd.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_seo_jsonld_tsx",
-      "community": 59,
+      "community": 67,
       "norm_label": "jsonld.tsx"
     },
     {
@@ -3123,7 +3321,7 @@
       "source_file": "/Users/a36/obikhod/site/components/seo/JsonLd.tsx",
       "source_location": "L9",
       "id": "jsonld_jsonld",
-      "community": 59,
+      "community": 67,
       "norm_label": "jsonld()"
     },
     {
@@ -3132,7 +3330,7 @@
       "source_file": "/Users/a36/obikhod/site/components/seo/Breadcrumbs.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_seo_breadcrumbs_tsx",
-      "community": 99,
+      "community": 108,
       "norm_label": "breadcrumbs.tsx"
     },
     {
@@ -3141,7 +3339,7 @@
       "source_file": "/Users/a36/obikhod/site/components/analytics/YandexMetrika.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_analytics_yandexmetrika_tsx",
-      "community": 100,
+      "community": 109,
       "norm_label": "yandexmetrika.tsx"
     },
     {
@@ -3222,7 +3420,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/fal-generate.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_scripts_fal_generate_ts",
-      "community": 7,
+      "community": 8,
       "norm_label": "fal-generate.ts"
     },
     {
@@ -3231,7 +3429,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/fal-generate.ts",
       "source_location": "L17",
       "id": "fal_generate_parseargs",
-      "community": 7,
+      "community": 8,
       "norm_label": "parseargs()"
     },
     {
@@ -3240,7 +3438,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/fal-generate.ts",
       "source_location": "L35",
       "id": "fal_generate_main",
-      "community": 7,
+      "community": 8,
       "norm_label": "main()"
     },
     {
@@ -3249,7 +3447,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/generate-logo-concepts.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_scripts_generate_logo_concepts_ts",
-      "community": 34,
+      "community": 39,
       "norm_label": "generate-logo-concepts.ts"
     },
     {
@@ -3258,7 +3456,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/generate-logo-concepts.ts",
       "source_location": "L88",
       "id": "generate_logo_concepts_download",
-      "community": 34,
+      "community": 39,
       "norm_label": "download()"
     },
     {
@@ -3267,7 +3465,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/generate-logo-concepts.ts",
       "source_location": "L95",
       "id": "generate_logo_concepts_main",
-      "community": 34,
+      "community": 39,
       "norm_label": "main()"
     },
     {
@@ -3321,7 +3519,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/render-logo-exports.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_scripts_render_logo_exports_ts",
-      "community": 60,
+      "community": 68,
       "norm_label": "render-logo-exports.ts"
     },
     {
@@ -3330,8 +3528,44 @@
       "source_file": "/Users/a36/obikhod/site/scripts/render-logo-exports.ts",
       "source_location": "L38",
       "id": "render_logo_exports_main",
-      "community": 60,
+      "community": 68,
       "norm_label": "main()"
+    },
+    {
+      "label": "telegram-smoke.mjs",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/scripts/admin/telegram-smoke.mjs",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_scripts_admin_telegram_smoke_mjs",
+      "community": 34,
+      "norm_label": "telegram-smoke.mjs"
+    },
+    {
+      "label": "api()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/scripts/admin/telegram-smoke.mjs",
+      "source_location": "L27",
+      "id": "telegram_smoke_api",
+      "community": 34,
+      "norm_label": "api()"
+    },
+    {
+      "label": "step()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/scripts/admin/telegram-smoke.mjs",
+      "source_location": "L29",
+      "id": "telegram_smoke_step",
+      "community": 34,
+      "norm_label": "step()"
+    },
+    {
+      "label": "getJson()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/scripts/admin/telegram-smoke.mjs",
+      "source_location": "L42",
+      "id": "telegram_smoke_getjson",
+      "community": 34,
+      "norm_label": "getjson()"
     },
     {
       "label": "chrome.ts",
@@ -3375,7 +3609,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/payload.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_payload_ts",
-      "community": 6,
+      "community": 5,
       "norm_label": "payload.ts"
     },
     {
@@ -3384,7 +3618,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/payload.ts",
       "source_location": "L10",
       "id": "payload_payloadclient",
-      "community": 6,
+      "community": 5,
       "norm_label": "payloadclient()"
     },
     {
@@ -3393,7 +3627,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/fal/generators.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_fal_generators_ts",
-      "community": 7,
+      "community": 8,
       "norm_label": "generators.ts"
     },
     {
@@ -3402,7 +3636,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/fal/generators.ts",
       "source_location": "L33",
       "id": "generators_runt2i",
-      "community": 7,
+      "community": 8,
       "norm_label": "runt2i()"
     },
     {
@@ -3411,7 +3645,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/fal/generators.ts",
       "source_location": "L44",
       "id": "generators_generatehero",
-      "community": 7,
+      "community": 8,
       "norm_label": "generatehero()"
     },
     {
@@ -3420,7 +3654,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/fal/generators.ts",
       "source_location": "L48",
       "id": "generators_generateog",
-      "community": 7,
+      "community": 8,
       "norm_label": "generateog()"
     },
     {
@@ -3429,7 +3663,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/fal/generators.ts",
       "source_location": "L52",
       "id": "generators_generateblogcover",
-      "community": 7,
+      "community": 8,
       "norm_label": "generateblogcover()"
     },
     {
@@ -3438,7 +3672,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/fal/generators.ts",
       "source_location": "L60",
       "id": "generators_generatecaseviz",
-      "community": 7,
+      "community": 8,
       "norm_label": "generatecaseviz()"
     },
     {
@@ -3447,7 +3681,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/fal/generators.ts",
       "source_location": "L81",
       "id": "generators_generatebyusecase",
-      "community": 7,
+      "community": 8,
       "norm_label": "generatebyusecase()"
     },
     {
@@ -3456,7 +3690,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/fal/prompts.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_fal_prompts_ts",
-      "community": 7,
+      "community": 8,
       "norm_label": "prompts.ts"
     },
     {
@@ -3465,7 +3699,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/fal/prompts.ts",
       "source_location": "L37",
       "id": "prompts_heroprompt",
-      "community": 7,
+      "community": 8,
       "norm_label": "heroprompt()"
     },
     {
@@ -3474,7 +3708,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/fal/prompts.ts",
       "source_location": "L56",
       "id": "prompts_ogprompt",
-      "community": 7,
+      "community": 8,
       "norm_label": "ogprompt()"
     },
     {
@@ -3483,7 +3717,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/fal/prompts.ts",
       "source_location": "L85",
       "id": "prompts_casevizprompt",
-      "community": 7,
+      "community": 8,
       "norm_label": "casevizprompt()"
     },
     {
@@ -3492,7 +3726,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/fal/prompts.ts",
       "source_location": "L116",
       "id": "prompts_blogcoverprompt",
-      "community": 7,
+      "community": 8,
       "norm_label": "blogcoverprompt()"
     },
     {
@@ -3501,7 +3735,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/fal/client.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_fal_client_ts",
-      "community": 7,
+      "community": 8,
       "norm_label": "client.ts"
     },
     {
@@ -3510,7 +3744,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/fal/client.ts",
       "source_location": "L5",
       "id": "client_ensureconfigured",
-      "community": 7,
+      "community": 8,
       "norm_label": "ensureconfigured()"
     },
     {
@@ -3519,7 +3753,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/fal/client.ts",
       "source_location": "L29",
       "id": "client_falrun",
-      "community": 7,
+      "community": 8,
       "norm_label": "falrun()"
     },
     {
@@ -3528,7 +3762,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/admin/publish-gate-messages.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_admin_publish_gate_messages_ts",
-      "community": 101,
+      "community": 110,
       "norm_label": "publish-gate-messages.ts"
     },
     {
@@ -3537,7 +3771,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/admin/publish-gate.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_admin_publish_gate_ts",
-      "community": 35,
+      "community": 40,
       "norm_label": "publish-gate.ts"
     },
     {
@@ -3546,7 +3780,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/admin/publish-gate.ts",
       "source_location": "L26",
       "id": "publish_gate_countlexicalwords",
-      "community": 35,
+      "community": 40,
       "norm_label": "countlexicalwords()"
     },
     {
@@ -3555,7 +3789,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/admin/publish-gate.ts",
       "source_location": "L62",
       "id": "publish_gate_buildpublishgate",
-      "community": 35,
+      "community": 40,
       "norm_label": "buildpublishgate()"
     },
     {
@@ -3595,12 +3829,93 @@
       "norm_label": "ispreviewablecollection()"
     },
     {
+      "label": "sendMessage.ts",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/lib/telegram/sendMessage.ts",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_lib_telegram_sendmessage_ts",
+      "community": 6,
+      "norm_label": "sendmessage.ts"
+    },
+    {
+      "label": "TelegramSendError",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/lib/telegram/sendMessage.ts",
+      "source_location": "L20",
+      "id": "sendmessage_telegramsenderror",
+      "community": 6,
+      "norm_label": "telegramsenderror"
+    },
+    {
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/lib/telegram/sendMessage.ts",
+      "source_location": "L21",
+      "id": "sendmessage_telegramsenderror_constructor",
+      "community": 6,
+      "norm_label": ".constructor()"
+    },
+    {
+      "label": "sendMessage()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/lib/telegram/sendMessage.ts",
+      "source_location": "L41",
+      "id": "sendmessage_sendmessage",
+      "community": 6,
+      "norm_label": "sendmessage()"
+    },
+    {
+      "label": "email.ts",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/lib/messengers/email.ts",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_lib_messengers_email_ts",
+      "community": 18,
+      "norm_label": "email.ts"
+    },
+    {
+      "label": "EmailSendError",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/lib/messengers/email.ts",
+      "source_location": "L24",
+      "id": "email_emailsenderror",
+      "community": 18,
+      "norm_label": "emailsenderror"
+    },
+    {
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/lib/messengers/email.ts",
+      "source_location": "L25",
+      "id": "email_emailsenderror_constructor",
+      "community": 18,
+      "norm_label": ".constructor()"
+    },
+    {
+      "label": "getTransporter()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/lib/messengers/email.ts",
+      "source_location": "L51",
+      "id": "email_gettransporter",
+      "community": 18,
+      "norm_label": "gettransporter()"
+    },
+    {
+      "label": "sendEmail()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/lib/messengers/email.ts",
+      "source_location": "L81",
+      "id": "email_sendemail",
+      "community": 18,
+      "norm_label": "sendemail()"
+    },
+    {
       "label": "queries.ts",
       "file_type": "code",
       "source_file": "/Users/a36/obikhod/site/lib/seo/queries.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_seo_queries_ts",
-      "community": 102,
+      "community": 111,
       "norm_label": "queries.ts"
     },
     {
@@ -3654,7 +3969,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/jsonld.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_seo_jsonld_ts",
-      "community": 5,
+      "community": 7,
       "norm_label": "jsonld.ts"
     },
     {
@@ -3663,7 +3978,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/jsonld.ts",
       "source_location": "L48",
       "id": "jsonld_stripundefined",
-      "community": 5,
+      "community": 7,
       "norm_label": "stripundefined()"
     },
     {
@@ -3672,7 +3987,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/jsonld.ts",
       "source_location": "L65",
       "id": "jsonld_nonempty",
-      "community": 5,
+      "community": 7,
       "norm_label": "nonempty()"
     },
     {
@@ -3681,7 +3996,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/jsonld.ts",
       "source_location": "L121",
       "id": "jsonld_organizationschema",
-      "community": 5,
+      "community": 7,
       "norm_label": "organizationschema()"
     },
     {
@@ -3690,7 +4005,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/jsonld.ts",
       "source_location": "L187",
       "id": "jsonld_websiteschema",
-      "community": 5,
+      "community": 7,
       "norm_label": "websiteschema()"
     },
     {
@@ -3699,7 +4014,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/jsonld.ts",
       "source_location": "L211",
       "id": "jsonld_localbusinessschema",
-      "community": 5,
+      "community": 7,
       "norm_label": "localbusinessschema()"
     },
     {
@@ -3708,7 +4023,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/jsonld.ts",
       "source_location": "L270",
       "id": "jsonld_serviceschema",
-      "community": 5,
+      "community": 7,
       "norm_label": "serviceschema()"
     },
     {
@@ -3717,7 +4032,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/jsonld.ts",
       "source_location": "L312",
       "id": "jsonld_faqpageschema",
-      "community": 5,
+      "community": 7,
       "norm_label": "faqpageschema()"
     },
     {
@@ -3726,7 +4041,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/jsonld.ts",
       "source_location": "L323",
       "id": "jsonld_breadcrumblistschema",
-      "community": 5,
+      "community": 7,
       "norm_label": "breadcrumblistschema()"
     },
     {
@@ -3735,7 +4050,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/jsonld.ts",
       "source_location": "L353",
       "id": "jsonld_personschema",
-      "community": 5,
+      "community": 7,
       "norm_label": "personschema()"
     },
     {
@@ -3744,7 +4059,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/jsonld.ts",
       "source_location": "L370",
       "id": "jsonld_articleschema",
-      "community": 5,
+      "community": 7,
       "norm_label": "articleschema()"
     },
     {
@@ -3816,7 +4131,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/B2BPages.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_b2bpages_ts",
-      "community": 103,
+      "community": 112,
       "norm_label": "b2bpages.ts"
     },
     {
@@ -3825,7 +4140,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Blog.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_blog_ts",
-      "community": 104,
+      "community": 113,
       "norm_label": "blog.ts"
     },
     {
@@ -3834,7 +4149,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Authors.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_authors_ts",
-      "community": 105,
+      "community": 114,
       "norm_label": "authors.ts"
     },
     {
@@ -3843,7 +4158,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Districts.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_districts_ts",
-      "community": 106,
+      "community": 115,
       "norm_label": "districts.ts"
     },
     {
@@ -3852,7 +4167,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/ServiceDistricts.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_servicedistricts_ts",
-      "community": 61,
+      "community": 69,
       "norm_label": "servicedistricts.ts"
     },
     {
@@ -3861,7 +4176,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/ServiceDistricts.ts",
       "source_location": "L17",
       "id": "servicedistricts_requiregatesforpublish",
-      "community": 61,
+      "community": 69,
       "norm_label": "requiregatesforpublish()"
     },
     {
@@ -3870,7 +4185,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Leads.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_leads_ts",
-      "community": 107,
+      "community": 116,
       "norm_label": "leads.ts"
     },
     {
@@ -3879,7 +4194,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Redirects.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_redirects_ts",
-      "community": 108,
+      "community": 117,
       "norm_label": "redirects.ts"
     },
     {
@@ -3888,7 +4203,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Cases.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_cases_ts",
-      "community": 109,
+      "community": 118,
       "norm_label": "cases.ts"
     },
     {
@@ -3897,7 +4212,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Persons.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_persons_ts",
-      "community": 110,
+      "community": 119,
       "norm_label": "persons.ts"
     },
     {
@@ -3906,7 +4221,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Users.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_users_ts",
-      "community": 111,
+      "community": 120,
       "norm_label": "users.ts"
     },
     {
@@ -3915,7 +4230,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Media.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_media_ts",
-      "community": 112,
+      "community": 121,
       "norm_label": "media.ts"
     },
     {
@@ -3924,7 +4239,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Services.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_services_ts",
-      "community": 113,
+      "community": 122,
       "norm_label": "services.ts"
     },
     {
@@ -6143,6 +6458,66 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/migrations/20260428_140000_users_telegram_chat_id.ts",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_migrations_20260428_140000_users_telegram_chat_id_ts",
+      "_tgt": "20260428_140000_users_telegram_chat_id_readsql",
+      "source": "users_a36_obikhod_site_migrations_20260428_140000_users_telegram_chat_id_ts",
+      "target": "20260428_140000_users_telegram_chat_id_readsql",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/migrations/20260428_140000_users_telegram_chat_id.ts",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_migrations_20260428_140000_users_telegram_chat_id_ts",
+      "_tgt": "20260428_140000_users_telegram_chat_id_up",
+      "source": "users_a36_obikhod_site_migrations_20260428_140000_users_telegram_chat_id_ts",
+      "target": "20260428_140000_users_telegram_chat_id_up",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/migrations/20260428_140000_users_telegram_chat_id.ts",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_migrations_20260428_140000_users_telegram_chat_id_ts",
+      "_tgt": "20260428_140000_users_telegram_chat_id_down",
+      "source": "users_a36_obikhod_site_migrations_20260428_140000_users_telegram_chat_id_ts",
+      "target": "20260428_140000_users_telegram_chat_id_down",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/migrations/20260428_140000_users_telegram_chat_id.ts",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_src": "20260428_140000_users_telegram_chat_id_up",
+      "_tgt": "20260428_140000_users_telegram_chat_id_readsql",
+      "source": "20260428_140000_users_telegram_chat_id_readsql",
+      "target": "20260428_140000_users_telegram_chat_id_up",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/migrations/20260428_140000_users_telegram_chat_id.ts",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_src": "20260428_140000_users_telegram_chat_id_down",
+      "_tgt": "20260428_140000_users_telegram_chat_id_readsql",
+      "source": "20260428_140000_users_telegram_chat_id_readsql",
+      "target": "20260428_140000_users_telegram_chat_id_down",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_230000_v_seo_override_columns_fixup.ts",
       "source_location": "L20",
       "weight": 1.0,
@@ -7005,6 +7380,18 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/api/telegram/webhook/route.ts",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_app_payload_api_telegram_webhook_route_ts",
+      "_tgt": "route_post",
+      "source": "route_post",
+      "target": "users_a36_obikhod_site_app_payload_api_telegram_webhook_route_ts",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
@@ -7027,6 +7414,30 @@
       "_tgt": "generators_generatebyusecase",
       "source": "route_post",
       "target": "generators_generatebyusecase"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/api/telegram/webhook/route.ts",
+      "source_location": "L87",
+      "weight": 1.0,
+      "_src": "route_post",
+      "_tgt": "payload_payloadclient",
+      "source": "route_post",
+      "target": "payload_payloadclient"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/api/telegram/webhook/route.ts",
+      "source_location": "L103",
+      "weight": 1.0,
+      "_src": "route_post",
+      "_tgt": "sendmessage_sendmessage",
+      "source": "route_post",
+      "target": "sendmessage_sendmessage"
     },
     {
       "relation": "contains",
@@ -7086,6 +7497,18 @@
       "_tgt": "route_get",
       "source": "route_get",
       "target": "users_a36_obikhod_site_app_api_revalidate_route_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/api/admin/page-catalog/csv/route.ts",
+      "source_location": "L66",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_app_payload_api_admin_page_catalog_csv_route_ts",
+      "_tgt": "route_get",
+      "source": "route_get",
+      "target": "users_a36_obikhod_site_app_payload_api_admin_page_catalog_csv_route_ts",
       "confidence_score": 1.0
     },
     {
@@ -7199,6 +7622,18 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/forbidden.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_app_payload_forbidden_tsx",
+      "_tgt": "forbidden_adminforbidden",
+      "source": "users_a36_obikhod_site_app_payload_forbidden_tsx",
+      "target": "forbidden_adminforbidden",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "/Users/a36/obikhod/site/app/(payload)/layout.tsx",
       "source_location": "L25",
       "weight": 1.0,
@@ -7206,6 +7641,30 @@
       "_tgt": "layout_layout",
       "source": "users_a36_obikhod_site_app_payload_layout_tsx",
       "target": "layout_layout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/error.tsx",
+      "source_location": "L124",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_app_payload_error_tsx",
+      "_tgt": "error_adminerror",
+      "source": "users_a36_obikhod_site_app_payload_error_tsx",
+      "target": "error_adminerror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/not-found.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_app_payload_not_found_tsx",
+      "_tgt": "not_found_adminnotfound",
+      "source": "users_a36_obikhod_site_app_payload_not_found_tsx",
+      "target": "not_found_adminnotfound",
       "confidence_score": 1.0
     },
     {
@@ -7242,6 +7701,42 @@
       "_tgt": "not_found_notfound",
       "source": "users_a36_obikhod_site_app_payload_admin_segments_not_found_tsx",
       "target": "not_found_notfound",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/api/admin/page-catalog/csv/route.ts",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_app_payload_api_admin_page_catalog_csv_route_ts",
+      "_tgt": "route_escapecsvfield",
+      "source": "users_a36_obikhod_site_app_payload_api_admin_page_catalog_csv_route_ts",
+      "target": "route_escapecsvfield",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/api/admin/page-catalog/csv/route.ts",
+      "source_location": "L55",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_app_payload_api_admin_page_catalog_csv_route_ts",
+      "_tgt": "route_rowtocsv",
+      "source": "users_a36_obikhod_site_app_payload_api_admin_page_catalog_csv_route_ts",
+      "target": "route_rowtocsv",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/api/admin/page-catalog/csv/route.ts",
+      "source_location": "L57",
+      "weight": 1.0,
+      "_src": "route_rowtocsv",
+      "_tgt": "route_escapecsvfield",
+      "source": "route_escapecsvfield",
+      "target": "route_rowtocsv",
       "confidence_score": 1.0
     },
     {
@@ -7427,6 +7922,54 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/components/admin/AdminLogin.tsx",
+      "source_location": "L75",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_components_admin_adminlogin_tsx",
+      "_tgt": "adminlogin_describeerror",
+      "source": "users_a36_obikhod_site_components_admin_adminlogin_tsx",
+      "target": "adminlogin_describeerror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/components/admin/AdminLogin.tsx",
+      "source_location": "L89",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_components_admin_adminlogin_tsx",
+      "_tgt": "adminlogin_classifyerror",
+      "source": "users_a36_obikhod_site_components_admin_adminlogin_tsx",
+      "target": "adminlogin_classifyerror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/components/admin/AdminLogin.tsx",
+      "source_location": "L109",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_components_admin_adminlogin_tsx",
+      "_tgt": "adminlogin_handlesubmit",
+      "source": "users_a36_obikhod_site_components_admin_adminlogin_tsx",
+      "target": "adminlogin_handlesubmit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/components/admin/AdminLogin.tsx",
+      "source_location": "L146",
+      "weight": 1.0,
+      "_src": "adminlogin_handlesubmit",
+      "_tgt": "adminlogin_classifyerror",
+      "source": "adminlogin_classifyerror",
+      "target": "adminlogin_handlesubmit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "/Users/a36/obikhod/site/components/admin/PageCatalog.tsx",
       "source_location": "L135",
       "weight": 1.0,
@@ -7464,12 +8007,12 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/Users/a36/obikhod/site/components/admin/BeforeLoginLockup.tsx",
-      "source_location": "L59",
+      "source_location": "L41",
       "weight": 1.0,
       "_src": "users_a36_obikhod_site_components_admin_beforeloginlockup_tsx",
-      "_tgt": "beforeloginlockup_seasonscirclemark",
+      "_tgt": "beforeloginlockup_beforeloginlockup",
       "source": "users_a36_obikhod_site_components_admin_beforeloginlockup_tsx",
-      "target": "beforeloginlockup_seasonscirclemark",
+      "target": "beforeloginlockup_beforeloginlockup",
       "confidence_score": 1.0
     },
     {
@@ -7951,6 +8494,42 @@
       "source": "users_a36_obikhod_site_components_admin_icons_tsx",
       "target": "icons_expiredicon",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/components/admin/PageCatalogWidget.tsx",
+      "source_location": "L151",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_components_admin_pagecatalogwidget_tsx",
+      "_tgt": "pagecatalogwidget_formatdate",
+      "source": "users_a36_obikhod_site_components_admin_pagecatalogwidget_tsx",
+      "target": "pagecatalogwidget_formatdate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/components/admin/PageCatalogWidget.tsx",
+      "source_location": "L180",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_components_admin_pagecatalogwidget_tsx",
+      "_tgt": "pagecatalogwidget_loadtopn",
+      "source": "users_a36_obikhod_site_components_admin_pagecatalogwidget_tsx",
+      "target": "pagecatalogwidget_loadtopn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/Users/a36/obikhod/site/components/admin/PageCatalogWidget.tsx",
+      "source_location": "L182",
+      "weight": 1.0,
+      "_src": "pagecatalogwidget_loadtopn",
+      "_tgt": "payload_payloadclient",
+      "source": "pagecatalogwidget_loadtopn",
+      "target": "payload_payloadclient"
     },
     {
       "relation": "contains",
@@ -9119,6 +9698,42 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/scripts/admin/telegram-smoke.mjs",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_scripts_admin_telegram_smoke_mjs",
+      "_tgt": "telegram_smoke_api",
+      "source": "users_a36_obikhod_site_scripts_admin_telegram_smoke_mjs",
+      "target": "telegram_smoke_api",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/scripts/admin/telegram-smoke.mjs",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_scripts_admin_telegram_smoke_mjs",
+      "_tgt": "telegram_smoke_step",
+      "source": "users_a36_obikhod_site_scripts_admin_telegram_smoke_mjs",
+      "target": "telegram_smoke_step",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/scripts/admin/telegram-smoke.mjs",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_scripts_admin_telegram_smoke_mjs",
+      "_tgt": "telegram_smoke_getjson",
+      "source": "users_a36_obikhod_site_scripts_admin_telegram_smoke_mjs",
+      "target": "telegram_smoke_getjson",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "/Users/a36/obikhod/site/lib/chrome.ts",
       "source_location": "L168",
       "weight": 1.0,
@@ -9558,6 +10173,102 @@
       "_tgt": "preview_routes_resolveslug",
       "source": "preview_routes_computepreviewurl",
       "target": "preview_routes_resolveslug",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/lib/telegram/sendMessage.ts",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_lib_telegram_sendmessage_ts",
+      "_tgt": "sendmessage_telegramsenderror",
+      "source": "users_a36_obikhod_site_lib_telegram_sendmessage_ts",
+      "target": "sendmessage_telegramsenderror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/lib/telegram/sendMessage.ts",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_lib_telegram_sendmessage_ts",
+      "_tgt": "sendmessage_sendmessage",
+      "source": "users_a36_obikhod_site_lib_telegram_sendmessage_ts",
+      "target": "sendmessage_sendmessage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/lib/telegram/sendMessage.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_src": "sendmessage_telegramsenderror",
+      "_tgt": "sendmessage_telegramsenderror_constructor",
+      "source": "sendmessage_telegramsenderror",
+      "target": "sendmessage_telegramsenderror_constructor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/lib/messengers/email.ts",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_lib_messengers_email_ts",
+      "_tgt": "email_emailsenderror",
+      "source": "users_a36_obikhod_site_lib_messengers_email_ts",
+      "target": "email_emailsenderror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/lib/messengers/email.ts",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_lib_messengers_email_ts",
+      "_tgt": "email_gettransporter",
+      "source": "users_a36_obikhod_site_lib_messengers_email_ts",
+      "target": "email_gettransporter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/lib/messengers/email.ts",
+      "source_location": "L81",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_lib_messengers_email_ts",
+      "_tgt": "email_sendemail",
+      "source": "users_a36_obikhod_site_lib_messengers_email_ts",
+      "target": "email_sendemail",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/lib/messengers/email.ts",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_src": "email_emailsenderror",
+      "_tgt": "email_emailsenderror_constructor",
+      "source": "email_emailsenderror",
+      "target": "email_emailsenderror_constructor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/lib/messengers/email.ts",
+      "source_location": "L87",
+      "weight": 1.0,
+      "_src": "email_sendemail",
+      "_tgt": "email_gettransporter",
+      "source": "email_gettransporter",
+      "target": "email_sendemail",
       "confidence_score": 1.0
     },
     {
