@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Дизайн-система ОБИХОД · магазин · brand-guide-shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  /* ───────── ТОКЕНЫ (наследуем из brand-guide.html, см. site/app/globals.css) ───────── */
+  :root {
+    --c-primary: #2d5a3d;
+    --c-primary-ink: #1f3f2b;
+    --c-accent: #e6a23c;
+    --c-accent-ink: #c18724;
+    --c-ink: #1c1c1c;
+    --c-ink-soft: #2b2b2b;
+    --c-muted: #8c8377;
+    --c-line: #e6e1d6;
+    --c-bg: #f7f5f0;
+    --c-bg-alt: #efebe0;
+    --c-card: #ffffff;
+    --c-success: #4a7c59;
+    --c-error: #b54828;
+    --c-on-primary: #f7f5f0;
+    --radius-sm: 6px;
+    --radius: 10px;
+    --radius-lg: 16px;
+    --maxw: 1180px;
+    --pad: 28px;
+    --font-sans: 'Golos Text', 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--c-bg);
+    color: var(--c-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--c-primary); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code { font-family: var(--font-mono); font-size: 0.88em; background: var(--c-bg-alt); padding: 2px 6px; border-radius: var(--radius-sm); }
+  hr { border: none; border-top: 1px solid var(--c-line); margin: 48px 0; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); }
+
+  /* ───────── HEADER ───────── */
+  header.site {
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(247,245,240,0.92);
+    backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--c-line);
+  }
+  header.site .inner {
+    display: flex; align-items: center; gap: 20px;
+    height: 60px;
+  }
+  .gh-brand {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-weight: 700; letter-spacing: -0.01em;
+    color: var(--c-ink); text-decoration: none;
+  }
+  .gh-brand:hover { text-decoration: none; color: var(--c-ink); }
+  .gh-mark {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: var(--c-primary); color: var(--c-on-primary);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 18px; letter-spacing: -0.02em;
+  }
+  .gh-wordmark { font-size: 14px; line-height: 1; white-space: nowrap; }
+  .gh-wordmark .gh-sep { color: var(--c-muted); font-weight: 400; margin: 0 6px; }
+  .gh-wordmark .gh-sys { color: var(--c-ink-soft); font-weight: 500; }
+
+  .gh-nav { flex: 1; display: flex; gap: 4px; justify-content: center; font-size: 14px; font-weight: 500; }
+  .gh-nav a {
+    padding: 8px 12px; border-radius: 8px; color: var(--c-ink-soft);
+    transition: background-color .15s ease, color .15s ease;
+  }
+  .gh-nav a:hover { background: var(--c-bg-alt); color: var(--c-primary); text-decoration: none; }
+
+  .gh-version {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 11px; border-radius: 999px;
+    background: rgba(230,162,60,0.14); color: var(--c-accent-ink);
+    font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.06em; border: 1px solid rgba(230,162,60,0.22);
+  }
+  .gh-version::before {
+    content: ''; width: 6px; height: 6px; border-radius: 999px;
+    background: var(--c-primary);
+  }
+
+  /* ───────── HERO ───────── */
+  .hero {
+    padding: 80px 0 56px;
+    background: linear-gradient(180deg, var(--c-bg) 0%, var(--c-bg-alt) 100%);
+    border-bottom: 1px solid var(--c-line);
+  }
+  .hero .meta {
+    display: inline-flex; gap: 8px; align-items: center;
+    font-family: var(--font-mono); font-size: 12px; color: var(--c-muted);
+    margin-bottom: 16px; letter-spacing: 0.04em;
+  }
+  .hero .meta .dot { width: 4px; height: 4px; background: var(--c-muted); border-radius: 50%; }
+  .display {
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 700; line-height: 1.05; letter-spacing: -0.02em;
+    margin: 0 0 16px;
+  }
+  .display .suffix { color: var(--c-muted); font-weight: 500; }
+  .lead { font-size: 19px; line-height: 1.55; color: var(--c-ink-soft); max-width: 760px; margin: 0 0 24px; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-family: var(--font-mono); font-size: 12px;
+    padding: 5px 10px; border-radius: 999px;
+    border: 1px solid var(--c-line); background: var(--c-card); color: var(--c-ink-soft);
+  }
+  .tag.primary { background: var(--c-primary); color: var(--c-on-primary); border-color: var(--c-primary); }
+
+  /* ───────── SECTIONS ───────── */
+  section { padding: 64px 0; border-top: 1px solid var(--c-line); }
+  section:first-of-type { border-top: none; }
+  section h2 {
+    font-size: clamp(26px, 3vw, 36px);
+    font-weight: 700; letter-spacing: -0.015em;
+    margin: 0 0 8px;
+  }
+  section .sub {
+    color: var(--c-muted); font-size: 14px;
+    font-family: var(--font-mono); letter-spacing: 0.04em;
+    margin: 0 0 32px;
+  }
+
+  h3 { font-size: 20px; margin: 32px 0 12px; }
+  p { margin: 0 0 16px; color: var(--c-ink-soft); }
+
+  /* ───────── CARDS / BLOCKS ───────── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 768px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+  .card {
+    background: var(--c-card);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+  .card h3 { margin-top: 0; }
+  .card .badge {
+    display: inline-block;
+    font-family: var(--font-mono); font-size: 11px;
+    padding: 3px 8px; border-radius: 999px;
+    background: var(--c-bg-alt); color: var(--c-muted);
+    margin-bottom: 12px;
+  }
+
+  /* TOV scales */
+  .scale { font-family: var(--font-mono); font-size: 13px; line-height: 2.1; color: var(--c-ink-soft); }
+  .scale .row { display: grid; grid-template-columns: 140px 1fr 140px; gap: 12px; align-items: center; }
+  .scale .bar { position: relative; height: 8px; background: var(--c-bg-alt); border-radius: 999px; }
+  .scale .bar .dot {
+    position: absolute; top: -3px; width: 14px; height: 14px;
+    background: var(--c-primary); border-radius: 50%;
+  }
+
+  /* DO / DONT */
+  .dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+  .dodont .col {
+    background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius);
+    padding: 20px;
+  }
+  .dodont .col.do { border-left: 4px solid var(--c-success); }
+  .dodont .col.dont { border-left: 4px solid var(--c-error); }
+  .dodont .col h4 {
+    font-size: 12px; font-family: var(--font-mono); letter-spacing: 0.08em;
+    margin: 0 0 12px; text-transform: uppercase;
+  }
+  .dodont .col.do h4 { color: var(--c-success); }
+  .dodont .col.dont h4 { color: var(--c-error); }
+  .dodont ul { padding: 0; margin: 0; list-style: none; }
+  .dodont li { padding: 8px 0; border-bottom: 1px dashed var(--c-line); font-size: 14px; }
+  .dodont li:last-child { border-bottom: none; }
+  .dodont li .why { display: block; color: var(--c-muted); font-size: 12px; margin-top: 3px; }
+
+  /* TABLES */
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--c-line); vertical-align: top; }
+  th { background: var(--c-bg-alt); font-weight: 600; font-size: 13px; }
+  td code { font-size: 0.92em; }
+  .table-compact { font-size: 13px; }
+  .table-compact th, .table-compact td { padding: 6px 8px; }
+  .table-compact td.center, .table-compact th.center { text-align: center; }
+
+  /* VOICE SAMPLE */
+  .voice-sample {
+    background: var(--c-card);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin: 16px 0;
+    position: relative;
+  }
+  .voice-sample::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: var(--c-primary); border-radius: var(--radius) 0 0 var(--radius);
+  }
+  .voice-sample .label {
+    display: block; font-family: var(--font-mono); font-size: 11px;
+    color: var(--c-muted); letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .voice-sample .body { font-size: 15px; line-height: 1.65; color: var(--c-ink); }
+  .voice-sample .body p:last-child { margin-bottom: 0; }
+  .voice-sample.muted::before { background: var(--c-muted); }
+
+  /* PRODUCT CARD MOCK */
+  .product-mock {
+    background: var(--c-card);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    padding: 20px;
+    max-width: 380px;
+  }
+  .product-mock .photo {
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, #d4d0c4 0%, #efebe0 100%);
+    border-radius: var(--radius-sm);
+    margin-bottom: 14px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--c-muted); font-family: var(--font-mono); font-size: 11px;
+  }
+  .product-mock .title { font-size: 15px; font-weight: 600; margin: 0 0 6px; line-height: 1.3; }
+  .product-mock .meta { font-size: 12px; color: var(--c-muted); font-family: var(--font-mono); margin-bottom: 12px; }
+  .product-mock .specs { font-size: 13px; color: var(--c-ink-soft); margin-bottom: 16px; }
+  .product-mock .specs strong { color: var(--c-ink); }
+  .product-mock .price-row { display: flex; align-items: baseline; gap: 12px; justify-content: space-between; }
+  .product-mock .price { font-size: 22px; font-weight: 700; }
+  .product-mock .stock { font-size: 12px; color: var(--c-success); font-family: var(--font-mono); }
+
+  /* CALLOUTS */
+  .callout {
+    background: var(--c-bg-alt);
+    border-left: 4px solid var(--c-accent);
+    padding: 16px 20px;
+    border-radius: var(--radius-sm);
+    margin: 24px 0;
+    font-size: 14px;
+  }
+  .callout strong { color: var(--c-accent-ink); }
+
+  /* FOOTER */
+  footer.site {
+    border-top: 1px solid var(--c-line);
+    padding: 40px 0; margin-top: 80px;
+    font-size: 13px; color: var(--c-muted);
+  }
+  footer.site .inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  /* PILL list (lexicon, anti-words) */
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .pill {
+    padding: 6px 12px; border-radius: 999px; font-size: 13px;
+    background: var(--c-card); border: 1px solid var(--c-line); color: var(--c-ink-soft);
+    font-family: var(--font-mono);
+  }
+  .pill.do { border-color: var(--c-success); color: var(--c-success); background: rgba(74,124,89,0.06); }
+  .pill.dont { border-color: var(--c-error); color: var(--c-error); background: rgba(181,72,40,0.06); text-decoration: line-through; text-decoration-color: var(--c-error); text-decoration-thickness: 1px; }
+
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap inner">
+    <a class="gh-brand" href="brand-guide.html">
+      <span class="gh-mark">О</span>
+      <span class="gh-wordmark">ОБИХОД<span class="gh-sep">·</span><span class="gh-sys">магазин</span></span>
+    </a>
+    <nav class="gh-nav">
+      <a href="#identity">Кто мы</a>
+      <a href="#tov">Голос</a>
+      <a href="#lexicon">Лексика</a>
+      <a href="#antiwords">Запреты</a>
+      <a href="#samples">Сценарии</a>
+      <a href="#components">Компоненты</a>
+      <a href="#photo">Фото</a>
+      <a href="#heritage">Наследие</a>
+    </nav>
+    <span class="gh-version">v1.0</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" style="border-top:none;">
+  <div class="wrap">
+    <div class="meta">
+      <span>v1.0</span><span class="dot"></span>
+      <span>approved 2026-04-28</span><span class="dot"></span>
+      <span>materialized 2026-04-29</span><span class="dot"></span>
+      <span>scope: apps/shop/</span>
+    </div>
+    <h1 class="display">ОБИХОД <span class="suffix">· магазин</span></h1>
+    <p class="lead">
+      Питомник саженцев и товаров для сада. Visual язык наследуем из основного бренда —
+      палитра, типографика, радиусы те же. Меняется <strong>голос</strong>: вместо «бригадира,
+      который закрыл штраф ГЖИ» — питомниковод, который знает свой материал, разговаривает
+      с покупателем как с равным и не давит сезоном.
+    </p>
+    <div class="hero-tags">
+      <span class="tag primary">Caregiver 50%</span>
+      <span class="tag primary">Sage 50%</span>
+      <span class="tag">профи-садовод</span>
+      <span class="tag">опытный дачник</span>
+      <span class="tag">B2B как UI-опция</span>
+      <span class="tag">источник истины: <code>tov/shop.md</code></span>
+    </div>
+  </div>
+</section>
+
+<!-- IDENTITY -->
+<section id="identity">
+  <div class="wrap">
+    <h2>Кто мы и кому продаём</h2>
+    <p class="sub">§01 · archetype + audience</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <span class="badge">архетип</span>
+        <h3>Caregiver + Sage, без Ruler</h3>
+        <p>Из основного бренда уходит Ruler-нота. В магазине мы не «командир бригады»,
+          а <strong>питомниковод</strong> с понятным материалом. Caregiver проявляется в
+          гарантии приживаемости, упаковке ЗКС/ОКС, инструкции по посадке. Sage — в
+          сравнениях сортов, ботанике, рекомендациях по подвою и зоне.</p>
+      </div>
+      <div class="card">
+        <span class="badge">аудитория</span>
+        <h3>Профи-садовод и опытный дачник</h3>
+        <p>Покупатель знает термины <em>подвой</em>, <em>ЗКС</em>, <em>зона зимостойкости</em>,
+          либо готов узнать. Новичка не отталкиваем: при первом упоминании термина даём
+          короткое пояснение в скобках, а не упрощаем язык до «деревце для участка».</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>B2B (опт, ландшафтники)</strong> — не отдельный голос и не отдельная витрина.
+      Реализуется как UI-чекбокс <em>«оплата от юр. лица»</em> в чекауте. Опт-сетки в
+      карточках товара по умолчанию убраны.
+    </div>
+  </div>
+</section>
+
+<!-- TOV -->
+<section id="tov">
+  <div class="wrap">
+    <h2>Голос магазина в одной фразе</h2>
+    <p class="sub">§02 · voice</p>
+
+    <p style="font-size:22px; line-height:1.4; color:var(--c-ink); max-width:740px;">
+      «Питомниковод, который сравнивает сорта вслух — а покупатель сам выбирает».
+    </p>
+
+    <h3>Шкалы</h3>
+    <div class="scale">
+      <div class="row"><span>Funny</span><div class="bar"><span class="dot" style="left: 78%;"></span></div><span style="text-align:right;">Serious</span></div>
+      <div class="row"><span>Formal</span><div class="bar"><span class="dot" style="left: 38%;"></span></div><span style="text-align:right;">Casual</span></div>
+      <div class="row"><span>Respectful</span><div class="bar"><span class="dot" style="left: 8%;"></span></div><span style="text-align:right;">Irreverent</span></div>
+      <div class="row"><span>Enthusiastic</span><div class="bar"><span class="dot" style="left: 65%;"></span></div><span style="text-align:right;">Matter-of-fact</span></div>
+      <div class="row"><span>Authority</span><div class="bar"><span class="dot" style="left: 30%;"></span></div><span style="text-align:right;">Equal</span></div>
+    </div>
+
+    <h3>Пять принципов</h3>
+    <ol>
+      <li><strong>«Сорт сам себя продаёт».</strong> Описание = ботаника + поведение в саду + честные ограничения. Без «эксклюзивный», «суперсорт», «лучший».</li>
+      <li><strong>«Приживётся или вернём».</strong> Гарантия в цифрах и условиях, не в слогане.</li>
+      <li><strong>«Сезон — это срок, не повод спешить».</strong> Окно посадки сообщаем как факт. Не давим «успей».</li>
+      <li><strong>«Каталог — не магазин, а справочник».</strong> Карточка должна быть полезна и тому, кто не купит сегодня.</li>
+      <li><strong>«Контейнер и подвой — обязательная часть имени товара».</strong> Не «Яблоня Антоновка», а «Яблоня Антоновка обыкновенная, подвой&nbsp;54-118, C7,5».</li>
+    </ol>
+  </div>
+</section>
+
+<!-- LEXICON -->
+<section id="lexicon">
+  <div class="wrap">
+    <h2>Доменная лексика</h2>
+    <p class="sub">§03 · lexicon · что говорим как есть и что поясняем</p>
+
+    <p>При первом упоминании термина в карточке товара или на странице категории —
+      даём короткое пояснение в скобках или в helper-тексте. Дальше используем как есть.</p>
+
+    <table>
+      <thead>
+        <tr><th>Термин</th><th>Helper / пояснение для UI</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>ЗКС</strong></td><td>закрытая корневая система — растение в контейнере, можно сажать с весны до осени</td></tr>
+        <tr><td><strong>ОКС</strong></td><td>открытая корневая система — без контейнера, сажаем только в межсезонье</td></tr>
+        <tr><td><strong>Подвой</strong></td><td>корневая основа привитого саженца; определяет высоту и зимостойкость</td></tr>
+        <tr><td><strong>Подвой 54-118</strong></td><td>полукарликовый яблоневый подвой, дерево 3,5–4 м, плодоношение с 3–4 года</td></tr>
+        <tr><td><strong>Подвой М9</strong></td><td>карликовый, дерево 2–2,5 м, требует опоры</td></tr>
+        <tr><td><strong>Зона зимостойкости</strong></td><td>USDA-зона; для МО рабочие зоны 4–5</td></tr>
+        <tr><td><strong>Габитус</strong></td><td>форма кроны взрослого растения (пирамидальный, шаровидный, плакучий)</td></tr>
+        <tr><td><strong>Опылитель</strong></td><td>сорт-сосед для перекрёстного опыления; без него урожая может не быть</td></tr>
+        <tr><td><strong>Контейнер C7,5 / C10 / C25</strong></td><td>объём горшка в литрах; влияет на возраст и приживаемость</td></tr>
+        <tr><td><strong>Привитой / корнесобственный</strong></td><td>способ размножения; влияет на повторяемость сортовых признаков</td></tr>
+        <tr><td><strong>Двухлетка / трёхлетка</strong></td><td>возраст саженца; коррелирует с ценой и сроком до плодоношения</td></tr>
+        <tr><td><strong>Крупномер</strong></td><td>дерево от 2 м с комом; отдельная логистика и посадка</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Глаголы — что делает магазин</h3>
+    <div class="pills">
+      <span class="pill do">приживётся</span>
+      <span class="pill do">выкопаем с комом</span>
+      <span class="pill do">довезём</span>
+      <span class="pill do">упакуем</span>
+      <span class="pill do">подберём сорт под зону</span>
+      <span class="pill do">подскажем опылитель</span>
+      <span class="pill do">зарезервируем на сезон</span>
+      <span class="pill do">закрепим позицию</span>
+      <span class="pill do">заменим по гарантии</span>
+    </div>
+
+    <h3>Сезонные формулы</h3>
+    <div class="pills">
+      <span class="pill do">окно посадки апрель–май</span>
+      <span class="pill do">сентябрь–октябрь</span>
+      <span class="pill do">ОКС только до распускания почек</span>
+      <span class="pill do">зарезервируем на весну 2027</span>
+      <span class="pill do">закрепим позицию на сезон</span>
+    </div>
+  </div>
+</section>
+
+<!-- ANTI-WORDS -->
+<section id="antiwords">
+  <div class="wrap">
+    <h2>Anti-words shop</h2>
+    <p class="sub">§04 · запреты + handoff в hook protect-immutable.sh</p>
+
+    <p>Слова и формулировки, которые ломают Sage-авторитет питомника, давят сезоном
+      или подменяют ботанические факты маркетинговой ватой. После апрува v1.0 уходят
+      в <code>.claude/hooks/protect-immutable.sh</code> с областью действия <code>apps/shop/</code>.</p>
+
+    <div class="dodont">
+      <div class="col dont">
+        <h4>Не говорим</h4>
+        <ul>
+          <li>«магазинчик»<span class="why">уменьшительное → подрывает Sage-авторитет. Мы — питомник.</span></li>
+          <li>«эксклюзивный»<span class="why">маркетинговая вата. У саженца есть сорт и подвой, не эксклюзивность.</span></li>
+          <li>«суперсорт», «лучший сорт», «топ-сорт»<span class="why">сорт оценивается характеристиками, не превосходными степенями.</span></li>
+          <li>«спешите», «успейте», «не упустите»<span class="why">давление времени. Сезон — окно, не дедлайн.</span></li>
+          <li>«осталось N шт» как FOMO-маркер<span class="why">остаток показываем как факт стока, не как pressure.</span></li>
+          <li>«органический» (в маркетинговом смысле)<span class="why">если есть сертификация — называем её. Иначе не используем.</span></li>
+          <li>«настоящий», «правильный» (как эпитеты сорта)<span class="why">«Настоящая Антоновка» — нет такой характеристики.</span></li>
+          <li>«уникальный», «премиум», «элитный»<span class="why">пустые эпитеты.</span></li>
+          <li>«хит продаж», «бестселлер»<span class="why">социальное доказательство — цифрой, не лейблом.</span></li>
+        </ul>
+      </div>
+      <div class="col do">
+        <h4>Говорим вместо</h4>
+        <ul>
+          <li>«питомник»<span class="why">самоопределение, корректное и для B2C, и для B2B-чекбокса</span></li>
+          <li>«сорт народной селекции», «авторская селекция»<span class="why">конкретное происхождение вместо «эксклюзивности»</span></li>
+          <li>«проверенный сорт для зоны 4», «районирован для МО»<span class="why">факт вместо превосходства</span></li>
+          <li>«окно посадки апрель–май», «партия выкопана 24 апреля»<span class="why">срок как факт, не давление</span></li>
+          <li>«в наличии 12 шт», «партия 2026 распродана — резерв на 2027»<span class="why">сток-факт, не FOMO</span></li>
+          <li>«сертифицирован Bio Suisse», «без обработки фунгицидами с июля»<span class="why">конкретика, не «органический»</span></li>
+          <li>«районированный», «привитой на 54-118»<span class="why">характеристика, не оценка</span></li>
+          <li>«продано 240 шт за сезон 2025», «возвращений по приживаемости — 1.4%»<span class="why">данные, не «хит»</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      Anti-words из основного бренда (<code>услуги населению</code>, <code>имеем честь</code>,
+      <code>от 1 000 ₽</code>, <code>в кратчайшие сроки</code>, <code>индивидуальный подход</code>)
+      <strong>продолжают действовать</strong> и в shop.
+    </div>
+
+    <h3>Hook — pseudocode для <code>protect-immutable.sh</code></h3>
+    <pre style="background:var(--c-card); border:1px solid var(--c-line); border-radius:var(--radius); padding:16px; font-family:var(--font-mono); font-size:13px; overflow-x:auto; line-height:1.6;">SHOP_ANTI_WORDS=(
+  "магазинчик"
+  "эксклюзивный"
+  "суперсорт" "лучший сорт" "топ-сорт"
+  "спешите" "успейте" "не упустите"
+  "органический"   # маркетинговый, не сертификационный
+  "настоящий" "правильный"   # как эпитеты сорта
+  "уникальный" "премиум" "элитный"
+  "хит продаж" "бестселлер"
+)
+# scope: paths matching apps/shop/
+# whitelist: escape via `obihod:ok` marker on same line
+# numeric stock «осталось N шт» — НЕ блокируется как цифра,
+# блокируется только формулировка «осталось всего», «торопитесь — осталось», «последние»</pre>
+  </div>
+</section>
+
+<!-- VOICE SAMPLES -->
+<section id="samples">
+  <div class="wrap">
+    <h2>Пять голосовых сценариев</h2>
+    <p class="sub">§05 · voice in context</p>
+
+    <div class="voice-sample">
+      <span class="label">5.1 · карточка товара (description)</span>
+      <div class="body">
+        <p><strong>Яблоня Антоновка обыкновенная, подвой&nbsp;54-118, C7,5</strong></p>
+        <p>Зимний сорт народной селекции, проверенный на МО более ста лет. На полукарликовом
+          54-118 дерево вырастает до 3,5–4 м, в плодоношение входит на 3–4 год. Зимостойкость —
+          зона 4, переносит −40 °C без укрытия.</p>
+        <p>Опылители — Осеннее полосатое, Уэлси, Мелба. Без соседа-опылителя завязь идёт слабо.</p>
+        <p>Контейнер C7,5, корневая закрытая — сажайте с апреля по октябрь. ОКС-вариант
+          доступен в марте и октябре.</p>
+      </div>
+    </div>
+
+    <div class="voice-sample">
+      <span class="label">5.2 · фильтр / категория</span>
+      <div class="body">
+        <p><strong>Яблони на полукарликовом подвое (54-118)</strong></p>
+        <p>18 сортов · от 1 200 ₽ · окно посадки апрель–октябрь (ЗКС)</p>
+        <p>Полукарлик подходит для участков 6–10 соток. Дерево держится 25–30 лет, не требует
+          опоры в отличие от карликового М9. Под МО — рабочая зимостойкость от зоны 4.</p>
+      </div>
+    </div>
+
+    <div class="voice-sample">
+      <span class="label">5.3 · чекаут с B2B-опцией</span>
+      <div class="body">
+        <p>Доставим в Раменское 2026-05-04, до 14:00. Бесплатно при заказе от 8 000 ₽.</p>
+        <p>☐ Оплата от юр. лица (счёт + закрывающие документы)</p>
+        <p>Срок резерва — 3 дня после оплаты. Если посадка позже — закрепим позицию на
+          сезон без доплаты.</p>
+      </div>
+    </div>
+
+    <div class="voice-sample">
+      <span class="label">5.4 · бронь на сезон (out of stock в межсезонье)</span>
+      <div class="body">
+        <p>Сорт выкопан, новая партия — апрель 2027.</p>
+        <p>Зарезервируем по предзаказу: вы фиксируете цену сезона 2026, мы откладываем
+          саженец, как только партия поступит. Предоплата 30%, остаток — при отгрузке.</p>
+        <p style="font-family:var(--font-mono); font-size:13px; color:var(--c-primary);">
+          [Зарезервировать на весну 2027]
+        </p>
+      </div>
+    </div>
+
+    <div class="voice-sample">
+      <span class="label">5.5 · после заявки (toast / email)</span>
+      <div class="body">
+        <p>Заявка ОБИ-2026-S-00118 принята.</p>
+        <p>Менеджер питомника свяжется в течение рабочего дня, подтвердит наличие подвоя
+          54-118 в нужном размере и сроки доставки. Если что-то по сорту лучше заменить —
+          предложим альтернативу с сопоставимой зимостойкостью и сроком плодоношения.</p>
+      </div>
+    </div>
+
+    <h3>Anti-pattern — чего НЕ делаем (показываем для контраста)</h3>
+    <div class="voice-sample muted">
+      <span class="label">❌ как не пишем · «Купите сейчас!» в межсезонье</span>
+      <div class="body">
+        <p style="color:var(--c-error);">«Не упустите шанс! Эксклюзивная Антоновка от лучших селекционеров.
+          Осталось всего 3 саженца! Спешите оформить заказ — премиум-сорт по специальной цене 999 ₽!»</p>
+        <p style="font-size:13px; color:var(--c-muted);">
+          Что сломано: давление времени («не упустите», «спешите», «осталось всего»),
+          пустые эпитеты («эксклюзивная», «лучших», «премиум-сорт»), цена-крючок
+          с восклицанием. Каждое слово в этом примере — anti-word.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPONENTS -->
+<section id="components">
+  <div class="wrap">
+    <h2>Компоненты магазина — spec-каркас</h2>
+    <p class="sub">§06 · components shell · подробные spec.md — задача Wave 1 на ui-shop / ux-shop</p>
+
+    <div class="grid-2">
+      <div>
+        <h3>Карточка товара (mock)</h3>
+        <div class="product-mock">
+          <div class="photo">фото · 4:3 · сорт + контейнер в кадре</div>
+          <p class="title">Яблоня Антоновка обыкновенная</p>
+          <p class="meta">подвой 54-118 · C7,5 · двухлетка</p>
+          <div class="specs">
+            <div><strong>Зона:</strong> 4 · до −40 °C</div>
+            <div><strong>Высота:</strong> 3,5–4 м</div>
+            <div><strong>Плодоношение:</strong> с 3–4 года</div>
+            <div><strong>Опылитель:</strong> Уэлси, Мелба</div>
+          </div>
+          <div class="price-row">
+            <span class="price">1 850 ₽</span>
+            <span class="stock">в наличии 12 шт</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3>Обязательные поля карточки — что показываем</h3>
+        <p style="font-size:13px;">Минимум фактов в карточке зависит от категории.
+          ✓ — обязательно, · — опционально, — — не применимо.</p>
+        <table class="table-compact">
+          <thead>
+            <tr>
+              <th>Поле</th>
+              <th class="center">Плодовые</th>
+              <th class="center">Колон.</th>
+              <th class="center">Розы</th>
+              <th class="center">Хвойные</th>
+              <th class="center">Цветы</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Сорт / культивар</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td></tr>
+            <tr><td>Подвой</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">—</td><td class="center">—</td></tr>
+            <tr><td>Контейнер (C…)</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td></tr>
+            <tr><td>Зона зимостойкости</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td></tr>
+            <tr><td>Габитус</td><td class="center">✓</td><td class="center">✓</td><td class="center">·</td><td class="center">✓</td><td class="center">·</td></tr>
+            <tr><td>Опылитель</td><td class="center">✓</td><td class="center">✓</td><td class="center">—</td><td class="center">—</td><td class="center">—</td></tr>
+            <tr><td>Срок до плодоношения</td><td class="center">✓</td><td class="center">✓</td><td class="center">—</td><td class="center">—</td><td class="center">—</td></tr>
+            <tr><td>Окно посадки</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td><td class="center">✓</td></tr>
+            <tr><td>Опора (М9)</td><td class="center">✓</td><td class="center">✓</td><td class="center">—</td><td class="center">—</td><td class="center">—</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:12px; color:var(--c-muted);">
+          Полная per-category таблица (9 категорий × 12 полей) — в
+          <a href="tov/shop.md">tov/shop.md §8</a>.
+        </p>
+      </div>
+    </div>
+
+    <h3>Каркас компонентов (Wave 1 backlog)</h3>
+    <div class="grid-3">
+      <div class="card">
+        <span class="badge">spec todo</span>
+        <h3>Фильтры каталога</h3>
+        <p>Категория → подвой → зона зимостойкости → размер контейнера → срок до
+          плодоношения → опылитель. Множественный выбор, не radio. Без «спешите».</p>
+      </div>
+      <div class="card">
+        <span class="badge">spec todo</span>
+        <h3>Чекаут с B2B-опцией</h3>
+        <p>Чекбокс «Оплата от юр. лица» открывает поля ИНН/КПП/название, переключает
+          flow на счёт + закрывающие. Опт-сетки в карточках по умолчанию выключены.</p>
+      </div>
+      <div class="card">
+        <span class="badge">spec todo</span>
+        <h3>Спец-таблица сорта</h3>
+        <p>Параметры один в один, подвой / зона / габитус / срок / опылитель / контейнер.
+          Сравнение двух сортов колонками. На мобиле — accordion.</p>
+      </div>
+      <div class="card">
+        <span class="badge">spec todo</span>
+        <h3>Бронь на сезон</h3>
+        <p>Когда сорт «выкопан, ждём весны 2027» — карточка показывает форму резерва
+          с предоплатой 30%. Без давления и таймера.</p>
+      </div>
+      <div class="card">
+        <span class="badge">spec todo</span>
+        <h3>Cross-sell опылителя</h3>
+        <p>В карточку плодового — блок «Без опылителя завязь идёт слабо. Подходящие
+          соседи: …». Это не «увеличить чек», это часть продукта.</p>
+      </div>
+      <div class="card">
+        <span class="badge">spec todo</span>
+        <h3>Крупномер flow</h3>
+        <p>Отдельный flow: запрос предложения вместо «купить», логистика крана,
+          посадочная яма, сопровождение посадки. Заказ через менеджера.</p>
+      </div>
+    </div>
+
+    <p style="font-size:13px; color:var(--c-muted); margin-top:24px;">
+      Полные spec'и для каждого компонента готовит <code>ux-shop</code> + <code>ui-shop</code>
+      по брифам от <code>poshop</code>. Wave 1 расписан в
+      <a href="tov/shop.md#12-roadmap">tov/shop.md §12</a>.
+    </p>
+  </div>
+</section>
+
+<!-- PHOTO -->
+<section id="photo">
+  <div class="wrap">
+    <h2>Photography mood</h2>
+    <p class="sub">§07 · delta к foundations/photography.md</p>
+
+    <p>Базовые правила (документальный стиль, без stock, без вспышек, без B&W) —
+      из <a href="foundations/photography.md">foundations/photography.md</a>.
+      Для shop добавляем shop-дельту.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Что в кадре нужно</h3>
+        <ul>
+          <li><strong>Растение в питомнике, с комом или в контейнере.</strong> Не «на белом фоне». Видно подвой, корневую шейку, прививку.</li>
+          <li><strong>Три кадра на карточку:</strong> общий вид саженца → плод/цветок крупно (если сезон) → взрослое дерево из питомника-родителя или ботанического архива.</li>
+          <li><strong>Масштаб:</strong> рядом ставим складной метр или человека. Особенно для крупномеров.</li>
+          <li><strong>Сезонность:</strong> апрельский саженец до распускания + тот же сорт в плодоношении в одной карточке (если есть архив).</li>
+          <li><strong>Упаковка:</strong> ОКС с увлажнённой мешковиной и стяжкой; ЗКС в маркированном контейнере с этикеткой сорта. Это часть бренда, а не «техническое фото».</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Чего в кадре НЕ должно быть</h3>
+        <ul>
+          <li>Stock-моделей с лейками и панамами.</li>
+          <li>Instagram-LUT'ов — только базовая коррекция.</li>
+          <li>«Готовый сад» вместо саженца — не подменяем продукт визуализацией.</li>
+          <li>Эмодзи-стикеров, наклеек «новинка» / «хит» поверх фото.</li>
+          <li>Лиц клиентов или сотрудников без согласия (152-ФЗ).</li>
+          <li>Fish-eye, золотых LUT'ов, насыщенности > +10%.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Wave 1 backlog</h3>
+    <div class="pills">
+      <span class="pill">фото-протокол для крупномеров</span>
+      <span class="pill">cross-sell-фото опылителя (парный кадр)</span>
+      <span class="pill">архив сезона: апрель vs август одного сорта</span>
+    </div>
+  </div>
+</section>
+
+<!-- HERITAGE -->
+<section id="heritage">
+  <div class="wrap">
+    <h2>Visual heritage</h2>
+    <p class="sub">§08 · что наследуем из основного brand-guide.html</p>
+
+    <p>Visual язык shop полностью наследуется из основного бренда.
+      <strong>Не дублируем</strong> в этом гайде то, что уже зафиксировано в
+      <a href="brand-guide.html">brand-guide.html</a>.</p>
+
+    <table>
+      <thead>
+        <tr><th>Зона</th><th>Источник</th><th>В shop</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Палитра (primary, accent, ink, bg, line)</td><td><a href="brand-guide.html#color">#color</a></td><td>один к одному</td></tr>
+        <tr><td>Типографика (Golos Text, JetBrains Mono)</td><td><a href="brand-guide.html#type">#type</a></td><td>один к одному</td></tr>
+        <tr><td>Радиусы, spacing, shadow, motion</td><td><a href="brand-guide.html#shape">#shape</a></td><td>один к одному</td></tr>
+        <tr><td>Кнопки, формы, поля ввода</td><td><a href="brand-guide.html#components">#components</a></td><td>один к одному</td></tr>
+        <tr><td>Логотип</td><td><a href="brand-guide.html#logo">#logo</a></td><td>основной wordmark + suffix <code>· магазин</code> в header</td></tr>
+        <tr><td>Иконография services (49 glyph)</td><td><a href="brand-guide.html#icons">#icons</a></td><td><strong>не переиспользуем без адаптации</strong> — питомник просит свой набор (Wave 2 backlog)</td></tr>
+        <tr><td>Mega-menu / pagination / notifications / errors</td><td><a href="brand-guide.html#nav">#nav</a> и далее</td><td>один к одному, контент адаптируется под shop-сценарии</td></tr>
+        <tr><td>Microcopy (label / placeholder / error / success)</td><td><a href="foundations/microcopy.md">foundations/microcopy.md</a></td><td>один к одному, с shop-исключениями (см. §03 lexicon)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>Правило расхождения:</strong> при конфликте этого HTML-render'а и
+      <a href="tov/shop.md"><code>tov/shop.md</code></a> — <strong>первичен markdown</strong>.
+      HTML — рендер для команды; markdown — канон.
+    </div>
+  </div>
+</section>
+
+<hr style="margin:0; border-color:var(--c-line);" />
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="wrap">
+    <h2>Roadmap</h2>
+    <p class="sub">§09 · что зафиксировано · что в работе · что в backlog</p>
+
+    <table>
+      <thead>
+        <tr><th>Wave</th><th>Что</th><th>Owner</th><th>Статус</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>0</strong></td>
+          <td>Канон markdown <code>tov/shop.md</code> + HTML-render <code>brand-guide-shop.html</code></td>
+          <td><code>art</code></td>
+          <td>✓ <strong>v1.0 / v0.2 — 2026-04-29</strong></td>
+        </tr>
+        <tr>
+          <td><strong>1.A</strong></td>
+          <td>Hook anti-words shop в <code>protect-immutable.sh</code> с whitelist <code>obihod:ok</code></td>
+          <td><code>do</code>, <code>tamd</code></td>
+          <td>передано в работу</td>
+        </tr>
+        <tr>
+          <td><strong>1.B</strong></td>
+          <td>Sub-briefs <code>cw</code> / <code>ui-shop</code> / <code>ux-shop</code> на основные компоненты</td>
+          <td><code>poshop</code></td>
+          <td>передано в работу</td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>Иконография shop (контейнер, прививка, подвой, опылитель, зона) — отдельный glyph-набор</td>
+          <td><code>art</code> + <code>ui</code></td>
+          <td>backlog</td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td>Cross-sell pattern — опылитель рядом с основным сортом, парный визуал</td>
+          <td><code>ux-shop</code> + <code>cw</code></td>
+          <td>backlog</td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td>Фото-протокол для крупномеров (большой контейнер, кран, посадочная яма)</td>
+          <td><code>art</code></td>
+          <td>backlog</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap inner">
+    <div>
+      <strong>ОБИХОД · магазин · brand-guide</strong> · v1.0 · 2026-04-29<br />
+      Owner: <code>art</code> + <code>poshop</code> · Render для команды shop · Канон в
+      <a href="tov/shop.md">tov/shop.md</a>
+    </div>
+    <div style="text-align:right;">
+      <a href="brand-guide.html">← основной бренд</a> ·
+      <a href="../team/shop/poshop.md">poshop</a> ·
+      <a href="../CLAUDE.md">CLAUDE.md</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
