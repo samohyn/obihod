@@ -3,7 +3,7 @@ import type { FC } from 'react'
 /**
  * BrandLogo — wordmark для login-страницы и welcome-screen Payload admin.
  *
- * Art-концепт: текст без символа (team/specs/admin-visual/art-concept.md §4).
+ * Art-концепт: текст без символа (specs/admin-visual/art-concept.md §4).
  * TM-знак Обихода пока не утверждён — любой временный символ = самодеятельность.
  * Кириллическое «ОБИХОД» плотным sans-serif работает как штамп само по себе.
  *

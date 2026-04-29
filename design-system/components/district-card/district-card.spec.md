@@ -124,7 +124,7 @@
 
 ## Integration
 
-- **Данные:** Payload collection `Districts` + связь с `ServiceDistricts` (см. [US-1 seed](../../../team/specs/US-1-seed-prod-db/)).
+- **Данные:** Payload collection `Districts` + связь с `ServiceDistricts` (см. [US-1 seed](../../../specs/US-1-seed-prod-db/)).
 - **Компонент:** Server Component в App Router — данные через Payload LocalAPI, без client-side fetch.
 - **Кэширование:** `unstable_cache` на 1 час (списки услуг меняются редко).
 

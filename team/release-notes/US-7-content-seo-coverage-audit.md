@@ -11,7 +11,7 @@
 
 ## Что изменилось
 
-- Прокручен полный SEO-аудит 43 URL из `sitemap.xml` (Python crawl + JSON-LD parser) — отчёт в [`team/specs/US-7-content-seo-coverage-audit/seo2-audit-2026-04-27.md`](../specs/US-7-content-seo-coverage-audit/seo2-audit-2026-04-27.md) + CSV.
+- Прокручен полный SEO-аудит 43 URL из `sitemap.xml` (Python crawl + JSON-LD parser) — отчёт в [`specs/US-7-content-seo-coverage-audit/seo2-audit-2026-04-27.md`](../specs/US-7-content-seo-coverage-audit/seo2-audit-2026-04-27.md) + CSV.
 - На главную добавлен `alternates: { canonical: '/' }` (issue #1 из аудита, severity medium).
 - Подтверждено: 4 pillar-кластера wsfreq Wave 2 (192K из 209K = **92% ядра**) покрыты на 100%.
 - Расширен sitemap до 43 URL (sub-services + programmatic SD + Cases + b2b + blog + авторы).

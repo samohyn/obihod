@@ -405,7 +405,7 @@ seo.organization.telephone`. Только `chrome.contacts.phoneE164` (с деф
    - `curl -sS https://obikhod.ru/api/health?deep=1` → 200.
    - `curl -sS https://obikhod.ru/ | grep application/ld+json` → `Organization` на месте,
      `telephone`, `taxID`, `sameAs` — как были.
-5. **Postmortem** в `team/specs/US-2-cms-header-footer-globals/` (новый файл
+5. **Postmortem** в `specs/US-2-cms-header-footer-globals/` (новый файл
    `rollback.md`): что сломалось, почему CI не поймал, что добавить в AC/QA.
 
 RTO (recovery time objective) — до 20 минут. RPO (recovery point objective) — 0 данных
