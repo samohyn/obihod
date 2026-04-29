@@ -28,7 +28,7 @@ session: us-12 epic launch
 
 | # | Вопрос | Решение оператора | Влияние на scope |
 |---|---|---|---|
-| 1 | Login auth | **Magic link через Telegram** | Wave 2 расширен: MagicLinkTokens collection + Telegram bot integration |
+| 1 | Login auth | ~~**Magic link через Telegram**~~ → **email+password (Wave 2.A only)**, magic link **drop** 2026-04-29 (см. секцию «Decision log» ниже) | Wave 2.B cancelled, PAN-9/PAN-10 уходят в US-8 |
 | 2 | PageCatalog | **Отдельная страница `/admin/catalog` + widget на dashboard** | Wave 3: full-page route + top-6 widget |
 | 3 | CSV export | **Сразу в этой US** | Wave 3 включает `/api/admin/page-catalog.csv` |
 | 4 | Profile dropdown | **Минимум `Мой профиль` + `Выйти`** | без расширений |
@@ -129,3 +129,45 @@ specs/US-12-admin-redesign/
 2. Запустить `sa-panel` на спеки Wave 2/3/4/5 параллельно
 3. Координация с `podev` по Telegram-боту (US-8 статус)
 4. Создать Linear sub-issue для US-12.0 — финальный polish текущей ветки `fix/admin-stat-cards-12-3` (Wave 1 polish, не из roadmap, но висит)
+
+---
+
+## Decision log 2026-04-29
+
+### D-2026-04-29-01 · Drop Wave 2.B (Magic link)
+
+**Контекст:** оператор задал в сессии: «а зачем нам magic link в итоге?». popanel дал честный разбор за/против, рекомендация — drop. Оператор подтвердил.
+
+**Что меняется:**
+- `sa-panel-wave2b.md` → `status: cancelled` (спека сохранена как архив).
+- US-12 auth-scope = только Wave 2.A (email+password Login UI поверх native Payload).
+- **PAN-9** (Telegram bot) → ownership переходит в **US-8** (lead notifications, podev).
+- **PAN-10** (SMTP) → ownership переходит в **US-8** (email формы заявок) либо «общая инфраструктура» под `do`.
+- **PAN-11** (Wave 2.B) → closed wont-do.
+
+**Почему drop:**
+1. Wave 2.A полностью закрывает UX-боль «admin выглядит ужасно» — auth-механика без password не часть «admin redesign».
+2. 2 ЧД + два блокера + новая collection + custom auth strategy + token в URL — слишком дорого для одного оператора-пользователя.
+3. Реальная защита от credential phishing — TOTP 2FA (1 ЧД, одна коллекция), а не magic link через Telegram.
+4. Telegram bot нужен под US-8, привязка к admin auth = coupling двух разных feature-lanes.
+
+**Karpathy #2 (простота прежде всего):** меньше surface = меньше регрессий + быстрее релиз US-12.
+
+**Что добавлено в panel-беклог как замена:**
+- `PANEL-AUTH-2FA` — TOTP 2FA коллекция + endpoint setup (опционально, не блокер US-12 release). RICE = 4 / 3 / 4 / 1, Should-have.
+
+### Скоуп US-12 после drop
+
+| Wave | Что | Статус | Owner | Объём |
+|---|---|---|---|---|
+| 0 | ADR-0005 | в работе у tamd | tamd | 0.5 чд |
+| 1 | custom.scss admin design refresh | **Done** | (Wave 1 closed) | — |
+| 2.A | Login UI (email+password) | **dev-ready**, sa-panel approved | be-panel + fe-panel | 1 чд (down from 2) |
+| ~~2.B~~ | ~~Magic link~~ | **cancelled 2026-04-29** | — | — |
+| 3 | PageCatalog page + widget + CSV + Leads badge | sa-panel approved | be-panel + fe-panel | 1.5 чд |
+| 4 | Tabs field в 10 коллекциях | sa-panel approved (pending cw + be-panel audit) | be-panel + cw | 1.5 чд |
+| 5 | EmptyState/ErrorState/SkeletonTable финал | sa-panel approved (pending cw) | fe-panel | 1 чд |
+| 6 | Mobile admin responsive | спека не написана | fe-panel + ux-panel | 1.5 чд |
+| 7 | Polish + a11y + Playwright | спека не написана | qa-panel + cr-panel | 1 чд |
+
+**Итого после drop:** 8 человеко-дней (было 9), снято 2 блокера (PAN-9, PAN-10).
