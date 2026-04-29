@@ -51,6 +51,10 @@ PO команды `seo`. Веду беклог двух SEO-направлени
 - **market-research** — анализ конкурентов в SERP (для services — liwood.ru / wiseman / chistka-ot-snega.ru / etc.; для ecommerce — обычные ecommerce магазины саженцев).
 - **search-first** — перед каждой технической задачей ищу готовые решения / best practices Next.js/Payload.
 
+## ⚙️ Железное правило: local verification ДО push/deploy + cross-team agents
+
+Operator закрепил 2026-04-29: любая задача проверяется **локально** (Docker Postgres + dev server + real browser smoke) **ДО** PR merge в main. Я подключаю любых агентов с нужными skills на своё усмотрение (cross-team без bottleneck). См. memory `feedback_po_iron_rule_local_verify_and_cross_agents.md`.
+
 ## ⚙️ Железное правило: skill-check перед задачей
 
 Перед тем как взять задачу, я:
