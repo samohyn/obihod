@@ -332,35 +332,46 @@ html[data-theme='dark'] {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
-/* Submit button on login. Native Payload submit имеет class только
- * `form-submit` (НЕ btn--style-primary). reason: Wave 1 SCSS использовал
- * .btn--style-primary — это другой button type в admin (icon buttons на
- * dashboard). На login form-submit без btn class. */
-.login__form .form-submit,
+/* Submit button on login.
+ *
+ * DOM structure: div.form-submit > button.btn--style-primary > span.btn__content > span.btn__label
+ * Wave 1 SCSS целился в .form-submit (div) — это создавало «button-в-button»
+ * (inner native btn--size-large + outer styled div, total height ~116px).
+ * Visual styles теперь только на button[type='submit'] (inner). div.form-submit
+ * остаётся transparent wrapper — его задача только flex-order. */
+.login__form .form-submit {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  width: 100%;
+}
+
 .login__form button[type='submit'] {
+  width: 100%;
+  padding: 11px;
+  font-size: 14px;
+  font-family: var(--font-body);
+  font-weight: 600;
   background-color: var(--brand-obihod-accent) !important;
-  border-color: var(--brand-obihod-accent) !important;
+  border: 1px solid var(--brand-obihod-accent) !important;
   color: var(--brand-obihod-ink) !important;
   border-radius: var(--brand-obihod-radius-sm);
-  font-weight: 600;
+  cursor: pointer;
   transition:
     background-color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard),
     border-color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard),
     transform 80ms var(--brand-obihod-ease-standard),
     box-shadow var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard);
 }
-.login__form .form-submit:hover:not([disabled]),
 .login__form button[type='submit']:hover:not([disabled]) {
   background-color: var(--brand-obihod-accent-hover) !important;
   border-color: var(--brand-obihod-accent-hover) !important;
 }
-.login__form .form-submit:active:not([disabled]),
 .login__form button[type='submit']:active:not([disabled]) {
   background-color: var(--brand-obihod-accent-ink) !important;
   border-color: var(--brand-obihod-accent-ink) !important;
   transform: translateY(1px);
 }
-.login__form .form-submit:focus-visible,
 .login__form button[type='submit']:focus-visible {
   outline: none;
   box-shadow: var(--brand-obihod-shadow-focus-accent);
@@ -416,14 +427,6 @@ html[data-theme='dark'] {
   border-color: var(--brand-obihod-line-hover);
 }
 
-.login__form .form-submit,
-.login__form button[type='submit'] {
-  width: 100%;
-  padding: 11px;
-  font-size: 14px;
-  font-family: var(--font-body);
-}
-
 /* Flex column + order: «Войти» → «Забыли пароль?» (mockup §12.1 order).
  * Native Payload рендерит link перед button — переставляем через flex order. */
 .login__form {
@@ -433,8 +436,7 @@ html[data-theme='dark'] {
 .login__form .login__form__inputWrap {
   order: 1;
 }
-.login__form .form-submit,
-.login__form button[type='submit'] {
+.login__form .form-submit {
   order: 2;
 }
 .login__form a {
@@ -466,7 +468,6 @@ html[data-theme='dark'] {
  * ──────────────────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .payload__app .btn--style-primary:active,
-  .login__form .form-submit:active,
   .login__form button[type='submit']:active {
     transform: none;
   }

@@ -78,10 +78,9 @@ test.describe('PAN-16 — Admin login UI smoke', () => {
       test.skip(true, `Admin не отвечает — пропуск`)
     }
 
-    // Корректный selector — без .payload__app префикса (PAN-13 ADR-0007 finding).
-    // На login screen нет ancestor .payload__app — это и был root cause Wave 1
-    // SCSS dead code на проде.
-    const styles = await page.locator('form.login__form .form-submit').evaluate((el) => ({
+    // PAN-18: visual styles теперь на inner button[type='submit'] (не на div.form-submit
+    // wrapper). Wrapper transparent — иначе создавалась «button-в-button» (height ~116px).
+    const styles = await page.locator('form.login__form button[type="submit"]').evaluate((el) => ({
       bg: getComputedStyle(el).backgroundColor,
       color: getComputedStyle(el).color,
     }))
@@ -189,19 +188,25 @@ test.describe('PAN-16 — Admin login UI smoke', () => {
     expect(input.borderTopColor).toBe('rgb(230, 225, 214)')
   })
 
-  test('AC-31: submit width 100% (full-width внутри 320px - 64px padding)', async ({ page }) => {
+  test('AC-31: submit button width 100% + height ≈ 46px (не 116px double-layer)', async ({
+    page,
+  }) => {
     const resp = await page.goto('/admin/login/', { waitUntil: 'domcontentloaded' })
     if (!resp || resp.status() >= 500) test.skip(true, `Admin не отвечает — пропуск`)
 
-    const submit = await page.locator('form.login__form .form-submit').evaluate((el) => ({
+    const btn = await page.locator('form.login__form button[type="submit"]').evaluate((el) => ({
       width: getComputedStyle(el).width,
       padding: getComputedStyle(el).padding,
+      height: el.getBoundingClientRect().height,
     }))
 
-    // 320px max-width form - 2px (1px*2 border) - 64px (32px*2 padding) = 254px content area
-    // (form имеет box-sizing: border-box, border включён в max-width).
-    expect(submit.width).toBe('254px')
-    expect(submit.padding).toBe('11px')
+    // 320px form - 2px border - 64px padding = 254px (border-box).
+    expect(btn.width).toBe('254px')
+    expect(btn.padding).toBe('11px')
+    // Защита от regression «button-в-button» (когда div.form-submit + inner button
+    // оба styled → height ~116px). Normal button-46px (11px padding *2 + 14px font + line-height).
+    expect(btn.height).toBeLessThan(60)
+    expect(btn.height).toBeGreaterThan(36)
   })
 
   test('AC-32: link «Забыли пароль?» color brand-зелёный + no underline + центр', async ({
