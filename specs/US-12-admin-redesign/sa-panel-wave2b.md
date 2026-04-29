@@ -1,12 +1,36 @@
 # sa-panel — Wave 2.B · Magic link auth flow (REST + Telegram + email fallback)
 
-**Issue:** [PAN-11](https://linear.app/samohyn/issue/PAN-11)
+**Issue:** ~~PAN-11~~ (Linear отключён 2026-04-29)
 **Wave:** 2.B (split from Wave 2 решением popanel 2026-04-28)
 **Source of truth:** [brand-guide.html §12.1](../../../design-system/brand-guide.html) · [art-concept-v2.md §1](art-concept-v2.md) · [ADR-0005](../../adr/ADR-0005-admin-customization-strategy.md)
-**Status:** `approved` (popanel 2026-04-28) · **blocked by [PAN-9](https://linear.app/samohyn/issue/PAN-9) Telegram + [PAN-10](https://linear.app/samohyn/issue/PAN-10) SMTP**
+**Status:** `cancelled` (оператор + popanel 2026-04-29) — см. секцию «Решение об отмене» ниже.
 **Skills активированы:** `api-design` (REST endpoints), `hexagonal-architecture` (ports/adapters)
 **Author:** sa-panel
-**Date:** 2026-04-28
+**Date:** 2026-04-28 · **Cancelled:** 2026-04-29
+
+---
+
+## Решение об отмене (2026-04-29)
+
+**Кто:** оператор + popanel в одной сессии.
+
+**Why drop:**
+1. Wave 2.A (Login UI поверх native Payload email+password) **полностью закрывает UX-боль оператора** — «admin выглядит ужасно». Auth-механика без password — отдельное nice-to-have, не часть «admin redesign».
+2. Стоимость: **2 ЧД be-panel + fe-panel** + блок на PAN-9 (Telegram bot) + PAN-10 (SMTP). Новая collection `MagicLinkTokens`, REST endpoints, custom auth strategy, hexagonal adapters — большой surface для одного оператора-пользователя.
+3. Реальная угроза модели — фишинг + утечка credentials. Закрывается **password manager + TOTP 2FA** (1 ЧД, одна коллекция), а не magic link через Telegram.
+4. Token в URL — security compromise; magic link даёт тот же риск-уровень, что и пароль в password manager, но дороже в поддержке (два канала: Telegram primary + email fallback).
+5. Telegram bot всё равно нужен под US-8 (lead notifications) — там это owns ценность. Привязывать к нему admin auth = coupling двух разных feature-lanes.
+
+**What stays in US-12 auth-scope:**
+- Wave 2.A (Login UI + email+password) — dev-ready, идёт в работу.
+- 2FA TOTP — добавим отдельным мини-US в panel-беклог (не блокер US-12 release).
+
+**What moves out:**
+- PAN-9 (Telegram bot) → ownership переходит в **US-8** (lead notifications), команда product/podev.
+- PAN-10 (SMTP) → ownership переходит в **US-8** (email формы заявок) либо «общая инфраструктура» под `do`.
+- PAN-11 (Wave 2.B) → **closed as wont-do**, эта спека сохраняется как историческая ссылка на случай «через год вернёмся к passwordless».
+
+**Скоуп ниже сохраняется для архива** — если в будущем понадобится magic link, спека не потеряна.
 
 ---
 
