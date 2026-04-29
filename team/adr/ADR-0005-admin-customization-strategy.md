@@ -1,7 +1,8 @@
 # ADR-0005 — Admin Customization Strategy (Payload 3 admin под brand-guide §12)
 
 **Дата:** 2026-04-28
-**Статус:** Accepted
+**Статус:** Accepted (partially superseded by ADR-0007 — Login UI mechanism)
+**⚠️ Superseded:** §Уровень 2 «AdminLogin custom view через `admin.components.views.Login`» — incorrect ассумпшен для Payload 3.84. См. **ADR-0007** для proper Login UI mechanism (CSS-only Подход E через `custom.scss` + native slots, не view override). Incident 2026-04-28 leadqa-RC-1 BLOCK confirmed.
 **Автор:** tamd
 **Контекст US:** [PAN-1 US-12 Admin Redesign](https://linear.app/samohyn/issue/PAN-1) → [PAN-2 ADR-0005](https://linear.app/samohyn/issue/PAN-2)
 **Skill:** активирован `architecture-decision-records` (skill-check iron rule, см. [tamd.md §⚙️ Железное правило](../common/tamd.md))
