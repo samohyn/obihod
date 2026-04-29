@@ -53,10 +53,19 @@
 
 ```
 obikhod/
+├── specs/           # Артефакты задач (вынесены из team/ 2026-04-29)
+│   ├── README.md    # Обзор структуры + текущие эпики
+│   ├── EPIC-<N>-<slug>/             # Крупная программа из нескольких US
+│   │   ├── README.md                # Цель эпика, состав US, статусы
+│   │   └── US-<N>-<slug>/           # intake, ba, sa-*, qa-*, cr-*, leadqa
+│   ├── TASK-<DOMAIN>-AD-HOC/        # Одиночные задачи (bug/ops/content)
+│   │   └── US-<N>-<slug>/           # та же структура артефактов
+│   └── <legacy US-N-slug>/          # Исторические US до 2026-04-29 (плоско)
 ├── team/         # 42 ролевых AI-агента в 7 функциональных командах + WORKFLOW + PROJECT_CONTEXT
 │   ├── PROJECT_CONTEXT.md   # единый контекст для всех агентов
 │   ├── WORKFLOW.md          # пайплайн задачи intake → release → leadqa → operator → do
 │   ├── README — legend.md   # легенда команды (от оператора)
+│   ├── backlog.md           # cross-team таблица беклога (priority, status, deps)
 │   ├── business/   # cpo, ba, in, re, aemd, da — оркестрация продукта
 │   ├── common/     # tamd, dba, do, release, leadqa — shared, подключаются по запросу
 │   ├── design/     # art (lead), ux, ui — изолированная ветка design/integration
@@ -67,7 +76,6 @@ obikhod/
 │   │               #   qa-shop — e-commerce саженцев (apps/shop, отдельная ветка)
 │   ├── panel/      # popanel, sa-panel, be-panel, fe-panel, ux-panel, cr-panel,
 │   │               #   qa-panel — Payload admin (источник истины: brand-guide §12)
-│   ├── specs/US-<N>-<slug>/ # intake, ba, sa-*, qa-*, cr-*, release-blockers, leadqa
 │   ├── adr/ADR-<N>-<slug>.md
 │   └── release-notes/{RC-N,leadqa-N,US-N}.md
 ├── contex/          # Стратегические артефакты (нумерация 01_, 02_, …)
@@ -86,6 +94,11 @@ obikhod/
   [team/PROJECT_CONTEXT.md](team/PROJECT_CONTEXT.md). Пайплайн — в
   [team/WORKFLOW.md](team/WORKFLOW.md). Исходная легенда от оператора —
   в [team/README — legend.md](team/README%20%E2%80%94%20legend.md).
+- **Артефакты задач** живут в [specs/](specs/) (вынесено из `team/specs/`
+  2026-04-29). Новые US оборачиваются в `EPIC-<N>-<slug>/` (для крупных
+  программ) или `TASK-<DOMAIN>-AD-HOC/` (для одиночных задач). Исторические
+  US (US-1..US-12, OBI-19, PAN-9, admin-visual) остаются плоским списком
+  как archeological data, не реорганизуются.
 - Устаревшее правило «agents/ удалён, не восстанавливать» снято 2026-04-22 после
   адаптации команды под Обиход из легенды
 
@@ -115,10 +128,12 @@ obikhod/
 
 Команда — 42 роли в [team/](team/), сгруппированных по 7 функциональным
 командам. Все на `opus-4-7` (`claude-opus-4-7`, 1M context) с
-`reasoning_effort: max`. Hand-off, RACI, Linear-интеграция (workspace
-`samohyn`, team keys **OBI** / **SEO** / **DES** / **DEV** / **SHOP** /
-**PANEL**) — в [team/WORKFLOW.md](team/WORKFLOW.md). Единый контекст
-проекта — в [team/PROJECT_CONTEXT.md](team/PROJECT_CONTEXT.md).
+`reasoning_effort: max`. Hand-off, RACI, артефакты — в
+[team/WORKFLOW.md](team/WORKFLOW.md). Единый контекст проекта — в
+[team/PROJECT_CONTEXT.md](team/PROJECT_CONTEXT.md). Внешний task-tracker
+**не используется** (Linear отключён 2026-04-29) — единственный источник
+истины задачи — папка [specs/](specs/) на корне репо (новые US — внутри
+обёртки `EPIC-<N>-<slug>/` или `TASK-<DOMAIN>-AD-HOC/`).
 
 **Структура команд (7):**
 - **business/** — оркестрация продукта: `cpo` (Chief PO над всеми), `ba`, `in`, `re`, `aemd`, `da`.
@@ -150,8 +165,9 @@ obikhod/
 
 **Owner Payload-коллекций — команда panel** (`be-panel` + `dba`). Команды product/shop читают через Payload Local API, не правят схему. Cross-team запросы на изменение схем — через `cpo` к `popanel`.
 
-**Assignee в Linear — всегда оператор.** Роль маркируется label `role:<code>`,
-фаза — label `phase:<name>`.
+**Owner задачи — всегда оператор.** Роль, ведущая текущую фазу, и сама фаза
+фиксируются в frontmatter артефактов в `specs/US-<N>-<slug>/` (`role:`,
+`phase:`). Внешний tracker не ведётся.
 
 Никаких финтех-следов в агентах (банк / брокер / ЦБ РФ / KYC / AML) — это домен
 Обихода (арбористика, крыши, мусор, демонтаж, Москва и МО).

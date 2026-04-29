@@ -29,9 +29,11 @@
 - **Репозиторий:** `samohyn/obihod` (private), основная ветка `main`,
   + 4 integration-ветки (`design/integration`, `panel/integration`,
   `shop/integration`, `product/integration`).
-- **Linear:** workspace `samohyn`, **6 team keys**: `OBI` (Product сайта услуг),
-  `SEO`, `DES` (Design), `DEV` (общий dev/ops), **`SHOP`** (магазин), **`PANEL`**
-  (admin-панель Payload).
+- **Task-tracker:** внешний tracker **не используется** (Linear отключён
+  2026-04-29 — см. [adr/ADR-0008-drop-linear-task-tracker.md](adr/ADR-0008-drop-linear-task-tracker.md)).
+  Единственный источник истины для задачи — папка `specs/US-<N>-<slug>/`
+  (`intake.md` + `ba.md` + `sa-<team>.md` + `qa-<team>.md` + `cr-<team>.md`).
+  Беклог и приоритизация — в `team/backlog.md` (ведёт `cpo`).
 
 ---
 
@@ -43,15 +45,15 @@
 
 ### 1.0. 7 команд верхнего уровня
 
-| Папка | Команд-роли | Lead | Integration-ветка | Linear team |
-|---|---|---|---|---|
-| `business/` (6) | cpo, ba, in, re, aemd, da | **cpo** (CPO) | main | OBI |
-| `common/` (5) | tamd, dba, do, release, leadqa | — (shared) | main | DEV |
-| `design/` (3) | art, ux, ui | **art** | `design/integration` | DES |
-| `product/` (8) | podev, sa-site, be-site, fe-site, lp-site, pa-site, cr-site, qa-site | **podev** | `product/integration` | OBI |
-| `seo/` (6) | poseo, sa-seo, seo-content, seo-tech, cw, cms | **poseo** | main | SEO |
-| `shop/` (7) | poshop, sa-shop, be-shop, fe-shop, ux-shop, cr-shop, qa-shop | **poshop** | `shop/integration` | SHOP |
-| `panel/` (7) | popanel, sa-panel, be-panel, fe-panel, ux-panel, cr-panel, qa-panel | **popanel** | `panel/integration` | PANEL |
+| Папка | Команд-роли | Lead | Integration-ветка |
+|---|---|---|---|
+| `business/` (6) | cpo, ba, in, re, aemd, da | **cpo** (CPO) | main |
+| `common/` (5) | tamd, dba, do, release, leadqa | — (shared) | main |
+| `design/` (3) | art, ux, ui | **art** | `design/integration` |
+| `product/` (8) | podev, sa-site, be-site, fe-site, lp-site, pa-site, cr-site, qa-site | **podev** | `product/integration` |
+| `seo/` (6) | poseo, sa-seo, seo-content, seo-tech, cw, cms | **poseo** | main |
+| `shop/` (7) | poshop, sa-shop, be-shop, fe-shop, ux-shop, cr-shop, qa-shop | **poshop** | `shop/integration` |
+| `panel/` (7) | popanel, sa-panel, be-panel, fe-panel, ux-panel, cr-panel, qa-panel | **popanel** | `panel/integration` |
 
 **Подчинение:**
 
@@ -178,7 +180,7 @@ a11y, отчитывается оператору. **Оператор апрув
                                   ▼
 [be-X | fe-X | lp-X | cms] ── implement в фича-ветке
                                   │
-[qa-X] первичная проверка ───────►│  team/specs/US-N/qa-<team>.md
+[qa-X] первичная проверка ───────►│  specs/US-N/qa-<team>.md
 [cr-X] code review ─────────────►│  cr-approval (PR)
                                   ▼
                          PR в integration-ветку
@@ -228,7 +230,7 @@ a11y, отчитывается оператору. **Оператор апрув
 
 1. **ba** строит трассируемость: цель → gap → требование → решение → AC + DoD.
 2. При необходимости подключает **re** для рыночного/конкурентного контекста.
-3. Готовит артефакт: `team/specs/US-<N>-<slug>/ba.md`.
+3. Готовит артефакт: `specs/US-<N>-<slug>/ba.md`.
 4. Возвращает на **утверждение оператору**. Оператор подтверждает — передаём
    `→ cpo`. **cpo** распределяет по PO команды (`podev` / `poseo` / `popanel` /
    `poshop`). Не подтверждает — правки.
@@ -252,7 +254,7 @@ a11y, отчитывается оператору. **Оператор апрув
 - Definition of Done,
 - Open questions.
 
-Артефакт: `team/specs/US-<N>-<slug>/sa-<team>.md`. Возврат `→ PO команды` →
+Артефакт: `specs/US-<N>-<slug>/sa-<team>.md`. Возврат `→ PO команды` →
 оператор утверждает (через cpo).
 
 ### Фаза 5. Architecture Gate (условная)
@@ -284,20 +286,21 @@ Postgres 16 + Beget), пересмотр стека — только по явн
 
 > Если задача требует параллели (ускорение спринта) — PO команды поднимает запрос
 > к `cpo`; `cpo` может временно подключить инженера из shared `common/` или
-> другой команды, явно фиксируя в Linear через `role:` label.
+> другой команды, фиксируя факт в frontmatter `sa-<team>.md` (`role:` поле +
+> комментарий «temporary cross-team»).
 
 ### Фаза 8. QA
 
 `qa-<team>` (qa-site / qa-shop / qa-panel) прогоняет по AC из спеки `sa-<team>`.
 QA **не верит на слово**: даже если FE/BE говорит «проверил» — QA прогоняет
-заново. Артефакт: `team/specs/US-<N>-<slug>/qa-<team>.md` (pass или bug report
+заново. Артефакт: `specs/US-<N>-<slug>/qa-<team>.md` (pass или bug report
 с воспроизведением).
 
 ### Фаза 9. Code Review
 
 `cr-<team>` (cr-site / cr-shop / cr-panel) проверяет: читаемость, безопасность,
 соответствие `CLAUDE.md`, тесты, производительность, отсутствие мёртвого кода.
-Блок / апрув. Артефакт — коммент в PR или `team/specs/US-<N>-<slug>/cr-<team>.md`.
+Блок / апрув. Артефакт — коммент в PR или `specs/US-<N>-<slug>/cr-<team>.md`.
 
 ### Фаза 10. Release Gate (release)
 
@@ -450,9 +453,9 @@ git fetch --all
 - `design-system/**`,
 - `package.json`, `pnpm-lock.yaml`
 
-`do` создаёт Linear-issue с label `merge-conflict` и пингует **двух
-соответствующих PO** (например `popanel` + `poshop` если конфликт в
-`payload.config.ts`).
+`do` создаёт `team/ops/merge-conflicts/<YYYY-MM-DD>-<branch>.md` с описанием
+конфликта и пингует **двух соответствующих PO** напрямую через сообщение
+оператору (например `popanel` + `poshop` если конфликт в `payload.config.ts`).
 
 ### 6.3. Merge order на main
 
@@ -473,257 +476,166 @@ design → panel → shop → product
 ## 7. Артефакты и папки
 
 ```
-team/
-├── PROJECT_CONTEXT.md       # единый контекст (все агенты ссылаются сюда)
-├── WORKFLOW.md              # этот файл
-├── README — legend.md       # исходная легенда команды от оператора
-├── business/<code>.md       # cpo, ba, in, re, aemd, da
-├── common/<code>.md         # tamd, dba, do, release, leadqa
-├── design/<code>.md         # art, ux, ui
-├── product/<code>.md        # podev, sa-site, be-site, fe-site, lp-site, pa-site, cr-site, qa-site
-├── seo/<code>.md            # poseo, sa-seo, seo-content, seo-tech, cw, cms
-├── shop/<code>.md           # poshop, sa-shop, be-shop, fe-shop, ux-shop, cr-shop, qa-shop
-├── panel/<code>.md          # popanel, sa-panel, be-panel, fe-panel, ux-panel, cr-panel, qa-panel
-├── specs/
-│   └── US-<N>-<slug>/
-│       ├── intake.md        # бриф от in
-│       ├── ba.md            # бизнес-анализ, требования
-│       ├── sa-<team>.md     # системная спека: US, AC, UML, ERD, DoD
-│       ├── qa-<team>.md     # тест-отчёт от qa-site / qa-shop / qa-panel
-│       ├── cr-<team>.md     # код-ревью (если не в PR)
-│       └── leadqa.md        # verify-отчёт (если делается в спеке)
-├── adr/
-│   └── ADR-<N>-<slug>.md    # архитектурные решения tamd
-└── release-notes/
-    ├── RC-<N>.md            # release candidate checklist (release)
-    ├── leadqa-<N>.md        # verify-отчёт оператору (leadqa)
-    └── <N>.md               # пост-релизная заметка (cpo)
+<repo-root>/
+├── specs/                              # все артефакты задач (на корне репо, не внутри team/)
+│   ├── README.md                       # обзор: эпики, текущие US, таблица backlog (опц.)
+│   ├── EPIC-<N>-<slug>/                # обёртка эпика — для крупных программ из нескольких US
+│   │   ├── README.md                   # цель эпика, состав US, статусы
+│   │   └── US-<N>-<slug>/              # отдельная US внутри эпика
+│   │       ├── intake.md               # бриф от in
+│   │       ├── ba.md                   # бизнес-анализ, требования
+│   │       ├── sa-<team>.md            # системная спека: US, AC, UML, ERD, DoD
+│   │       ├── qa-<team>.md            # тест-отчёт от qa-site / qa-shop / qa-panel
+│   │       ├── cr-<team>.md            # код-ревью (если не в PR)
+│   │       └── leadqa.md               # verify-отчёт (если делается в спеке)
+│   ├── TASK-<DOMAIN>-AD-HOC/           # обёртка для одиночных задач (баги, разовые ops, content-правки)
+│   │   └── US-<N>-<slug>/              # та же структура артефактов внутри
+│   │       └── ...
+│   └── <legacy US-N-slug>/             # исторические US до 2026-04-29 (плоский список, без EPIC-обёртки)
+└── team/
+    ├── PROJECT_CONTEXT.md              # единый контекст (все агенты ссылаются сюда)
+    ├── WORKFLOW.md                     # этот файл
+    ├── README — legend.md              # исходная легенда команды от оператора
+    ├── backlog.md                      # cross-team таблица беклога (priority, status, deps)
+    ├── business/<code>.md              # cpo, ba, in, re, aemd, da
+    ├── common/<code>.md                # tamd, dba, do, release, leadqa
+    ├── design/<code>.md                # art, ux, ui
+    ├── product/<code>.md               # podev, sa-site, be-site, fe-site, lp-site, pa-site, cr-site, qa-site
+    ├── seo/<code>.md                   # poseo, sa-seo, seo-content, seo-tech, cw, cms
+    ├── shop/<code>.md                  # poshop, sa-shop, be-shop, fe-shop, ux-shop, cr-shop, qa-shop
+    ├── panel/<code>.md                 # popanel, sa-panel, be-panel, fe-panel, ux-panel, cr-panel, qa-panel
+    ├── adr/
+    │   └── ADR-<N>-<slug>.md           # архитектурные решения tamd
+    └── release-notes/
+        ├── RC-<N>.md                   # release candidate checklist (release)
+        ├── leadqa-<N>.md               # verify-отчёт оператору (leadqa)
+        └── <N>.md                      # пост-релизная заметка (cpo)
 ```
 
-> Папки `team/specs/US-<N>-<slug>/` сохраняются как исторические директории; в
-> заголовке артефактов фиксируется `**Linear Issue:** OBI-<N>` / `SHOP-<N>` /
-> `PANEL-<N>` / `SEO-<N>` / `DES-<N>` / `DEV-<N>` без `US-<N>`-дублирования.
+> **`specs/` — единственный источник истины задачи** (на уровне корня репо,
+> вынесен из `team/` решением оператора 2026-04-29). В заголовке артефактов
+> фиксируется `**US:** US-<N>` + frontmatter с `epic:`, `role:`, `phase:`.
+> Внешний task-tracker не используется (см. ADR-0008).
+>
+> **Правила группировки внутри `specs/`:**
+> - **Крупная программа из нескольких US** → обязательно `EPIC-<N>-<slug>/`.
+> - **Одиночные задачи** (bugfix, разовый ops, content-правка) →
+>   `TASK-<DOMAIN>-AD-HOC/` (например, `TASK-INFRA-AD-HOC/`,
+>   `TASK-CONTENT-AD-HOC/`, `TASK-PANEL-AD-HOC/`).
+> - **US никогда не лежит напрямую в `specs/`** для новых задач после
+>   2026-04-29 — всегда через EPIC или TASK-AD-HOC обёртку. Исторические US
+>   (US-1..US-12, OBI-19, PAN-9, admin-visual) остаются плоским списком как
+>   archeological data.
 
 ---
 
-## 7.5. Интеграция с Linear
+## 7.5. Беклог и трекинг (без внешнего tracker'а)
 
-Linear — **операторское окно и источник истины для беклога**. Каждая задача
-зеркалируется как Issue в одной из 6 teams.
+С 2026-04-29 проект **не использует Linear** и любой другой внешний
+task-tracker (см. [adr/ADR-0008-drop-linear-task-tracker.md](adr/ADR-0008-drop-linear-task-tracker.md)).
+Беклог, статусы, фазы и hand-off ведутся в репозитории.
 
-### 7.5.1. Linear team keys
-
-| Team key | Команда | Что внутри |
-|----------|---------|------------|
-| **OBI** | business/ + product/ | Стратегия, BA, продуктовые US сайта услуг |
-| **SEO** | seo/ | SEO-программа, программные посадочные, контент |
-| **DES** | design/ | Design-system, токены, brand-guide |
-| **DEV** | common/ | Инфра, ADR, RC, deploy, merge-conflicts |
-| **SHOP** | shop/ | Магазин саженцев (`apps/shop`) |
-| **PANEL** | panel/ | Admin Payload, коллекции, RBAC |
-
-Cross-team задачи — sub-issue в нужных teams через `parentId`. Hand-off между
-teams — через relations `blocks` / `blocked by`.
-
-### 7.5.2. Что где живёт
+### 7.5.1. Где что живёт
 
 | Слой | Где | Владелец |
 |------|-----|----------|
-| Беклог (приоритизация, статусы) | Linear (OBI/SEO/DES/DEV/SHOP/PANEL) | соответствующий PO команды; кросс-команда — cpo |
-| Артефакты (intake, ba, sa-`<team>`, qa-`<team>`, cr-`<team>`) | `team/specs/US-<N>-<slug>/` | соответствующие роли |
-| ADR | `team/adr/` | tamd |
-| Research | `team/specs/US-<N>-<slug>/re.md` или `team/research/` | re |
-| RC + leadqa report | `team/release-notes/RC-*.md`, `team/release-notes/leadqa-*.md` | release / leadqa |
-| Release notes | `team/release-notes/<N>.md` | cpo |
-| История hand-off-ов | Комментарии в Linear Issue | все роли |
+| Беклог + приоритизация (P0..P3) | `team/backlog.md` (одна таблица: id, title, команда, PO, priority, status, deps) | `cpo` (cross-team), PO команды (внутри своей секции) |
+| Артефакты задачи | `specs/EPIC-<N>-<slug>/US-<N>-<slug>/` (для эпиков) или `specs/TASK-<DOMAIN>-AD-HOC/US-<N>-<slug>/` (для одиночных) — `intake.md`, `ba.md`, `sa-<team>.md`, `qa-<team>.md`, `cr-<team>.md` | соответствующие роли |
+| Обзор эпика | `specs/EPIC-<N>-<slug>/README.md` (цель, состав US, статусы) | `cpo` или owning PO команды |
+| ADR | `team/adr/` | `tamd` |
+| Research | `specs/<EPIC-или-TASK>/<US>/re.md` или `team/research/` | `re` |
+| RC + verify report | `team/release-notes/RC-*.md`, `team/release-notes/leadqa-*.md` | `release` / `leadqa` |
+| Release notes | `team/release-notes/<N>.md` | `cpo` |
+| История hand-off-ов | Раздел `## Hand-off log` в самом артефакте (`sa-<team>.md` и т. п.) | роль, выполняющая hand-off |
+| Merge-conflicts | `team/ops/merge-conflicts/<YYYY-MM-DD>-<branch>.md` | `do` |
 
-Правило: **Linear не дублирует содержимое артефактов**. В description Issue —
-резюме + ссылки (относительные пути в репо).
+### 7.5.2. Frontmatter артефактов
 
-### 7.5.3. Маппинг: фаза ↔ Linear state / labels
+Каждый файл в `specs/<EPIC-или-TASK>/US-<N>-<slug>/` начинается с
+YAML-frontmatter. Это заменяет Linear-labels:
 
-В каждой команде используем 4 рабочих state-а: `Backlog` / `Todo` / `In Progress`
-/ `Done`. **Assignee в Linear всегда — оператор (фаундер проекта).** Роль,
-ведущая задачу в текущей фазе, маркируется через label `role/<code>`. Фаза —
-через label `phase/<name>`.
-
-Между `review` и `release` добавлены два новых state-метки: **`gate`** (release
-работает) и **`verify`** (leadqa). Они укладываются в Linear state `In Progress`
-и различаются label `phase/*`.
-
-| Фаза [WORKFLOW §3] | Linear state | Label `phase/*` | Label `role/*` (пример) |
-|---------------------|--------------|------------|---------------------|
-| 1. Intake | Backlog | `phase/intake` | `role/in` |
-| 2. BA + 3. PO planning + 4. SA | In Progress | `phase/spec` | `role/ba`, `role/sa-site` (или `sa-shop` / `sa-panel` / `sa-seo`), `role/cpo`, `role/podev` (или `poseo` / `popanel` / `poshop`) |
-| 5. Architecture | In Progress | `phase/spec` | `role/tamd` (+ `role/dba`, `role/be-panel` при данных) |
-| 6. Design | In Progress | `phase/design` | `role/art`, `role/ui`, `role/ux` (или `ux-shop` / `ux-panel`), `role/lp-site` |
-| 7. Implementation | In Progress | `phase/dev` | `role/fe-site`/`fe-shop`/`fe-panel`, `role/be-site`/`be-shop`/`be-panel`, `role/seo-tech`, `role/seo-content`, `role/cw`, `role/cms`, `role/aemd`, `role/do` |
-| 8. QA (team) | In Progress | `phase/qa` | `role/qa-site` / `role/qa-shop` / `role/qa-panel` |
-| 9. Code Review (team) | In Progress | `phase/review` | `role/cr-site` / `role/cr-shop` / `role/cr-panel` |
-| 10. Release gate | In Progress | `phase/gate` | `role/release` |
-| 11. Verify gate | In Progress | `phase/verify` | `role/leadqa` |
-| 12. Operator decision | In Progress | `phase/release` | (нет role-метки — ждём оператора) |
-| 13. Released | Done | `phase/release` | `role/cpo` (закрытие + retro) |
-| Canceled / Parked | Canceled / Duplicate | — | — |
-
-**Правило лейблов на hand-off:**
-
-- `phase/*` — один активный, меняется при смене фазы.
-- `role/*` — может быть **несколько одновременно**, когда несколько ролей
-  работают параллельно в рамках одной фазы (например, в `phase/dev` могут висеть
-  `role/fe-site` + `role/be-site` + `role/seo-tech` + `role/aemd` сразу).
-- **Assignee не меняется на протяжении всего жизненного цикла Issue — всегда
-  оператор.**
-
-### 7.5.4. Каталог labels (обновлён 2026-04-28 под 42-ролевую модель)
-
-Linear-labels организованы в **5 hierarchical групп** + плоские type-labels.
-
-**Type-labels** (плоские, тип задачи): `Feature` · `Bug` · `Research` · `Ops` ·
-`Content` · `Design Refresh` · `Improvement` · `Design System` · `Tech Debt` ·
-`Migration` (специально для bulk-rename и команд-миграции).
-
-**Priority** (плоские): `P0` (blocker) · `P1` (high) · `P2` (normal) · `P3` (low).
-
-**Group `role`** (42 кода + cpo/leadqa/release как mutually exclusive — **одна**
-ведущая роль на issue):
-
-`in` · `ba` · `re` · `cpo` · `aemd` · `da` ·
-`tamd` · `dba` · `do` · `release` · `leadqa` ·
-`art` · `ux` · `ui` ·
-`podev` · `sa-site` · `be-site` · `fe-site` · `lp-site` · `pa-site` · `cr-site` · `qa-site` ·
-`poseo` · `sa-seo` · `seo-content` · `seo-tech` · `cw` · `cms` ·
-`poshop` · `sa-shop` · `be-shop` · `fe-shop` · `ux-shop` · `cr-shop` · `qa-shop` ·
-`popanel` · `sa-panel` · `be-panel` · `fe-panel` · `ux-panel` · `cr-panel` · `qa-panel`.
-
-**Group `phase`** (одна метка одновременно): `intake` · `spec` (объединение
-ba + sa-`<team>` + PO команды + tamd) · `design` · `dev` · `qa` · `review` (cr) ·
-**`gate`** (release) · **`verify`** (leadqa) · `release`.
-
-**Group `segment`** (одна метка): `b2c` · `b2b` · `cross` · `internal` (для
-panel/internal-tools).
-
-**Group `epic`** (одна или несколько меток для группировки): `us-3..us-15` · …
-актуальный список ведёт `cpo`.
-
-**Минимальный набор labels на каждом issue (6):** Priority + Type + epic + role +
-phase + segment.
-
-### 7.5.5. Bulk-rename labels (миграция 30→42 ролей)
-
-При миграции старые role-labels пересажены на новые. Это **контекст для
-документа**, не runtime-команда — переименование выполняется отдельным US за
-`do` + `cpo`.
-
-| Старый label | Новый label |
-|---|---|
-| `role:po` | `role:cpo` + `role:podev` (split — старые задачи сайта получают `podev`, кросс-командные — `cpo`) |
-| `role:out` | `role:release` (acceptance-функция переехала в release-gate) |
-| `role:fe1` / `role:fe2` | `role:fe-site` (если задача про сайт услуг) или `role:fe-shop` / `role:fe-panel` |
-| `role:be3` / `role:be4` | `role:be-site` / `role:be-panel` / `role:be-shop` (по контексту) |
-| `role:be1` / `role:be2` (Go-резерв) | `role:be-site` (резерв снят, Go-инженеров нет в новой структуре) |
-| `role:qa1` / `role:qa2` | `role:qa-site` / `role:qa-shop` / `role:qa-panel` |
-| `role:seo1` | `role:seo-content` |
-| `role:seo2` | `role:seo-tech` |
-| `role:sa` | `role:sa-site` / `role:sa-shop` / `role:sa-panel` / `role:sa-seo` |
-| `role:cr` | `role:cr-site` / `role:cr-shop` / `role:cr-panel` |
-
-**Новые labels к созданию:** `role:leadqa`, `role:release`, `role:poseo`,
-`role:popanel`, `role:poshop`, `role:cpo`, `role:podev`, `role:ux-shop`,
-`role:ux-panel`, `role:pa-site`, `role:cms`, и все `role:*-shop`, `role:*-panel`,
-`role:*-seo`, `role:*-site`. Plus phase-метки `gate` + `verify`.
-
-### 7.5.6. Правила работы с Issue
-
-1. **Создание.** `in` создаёт Issue при оформлении `intake.md` в team **OBI**
-   (по умолчанию). Если сразу понятно, что задача shop/panel/seo — `cpo` после BA
-   переносит в нужную team. Title = `<семантический заголовок>` (без `US-<N>:`
-   префикса). State = Backlog. **Assignee = оператор.** Labels (минимум 6):
-   priority + type + `epic/us-<N>` (если эпик) + `role/in` + `phase/intake` +
-   `segment/<…>`.
-2. **Описание.** Description Issue — шаблон из §7.5.7.
-3. **Hand-off.** Каждый переход между ролями фиксируется комментарием в Issue:
-   «`ba` → `cpo`: `ba.md` готов, pending approve», со ссылкой на коммит / файл.
-4. **Смена фазы.** При переходе в следующую фазу текущий исполнитель меняет
-   `phase/*`, снимает свой `role/*`, добавляет `role/*` новой роли. **Assignee
-   не трогаем.**
-5. **Параллель по коду.** В `phase/dev` могут висеть несколько `role/*` —
-   например, `role/fe-site` + `role/be-site` + `role/seo-tech` + `role/aemd`
-   одновременно.
-6. **Release gate.** При переходе `review → gate` команда добавляет
-   `phase/gate` + `role/release`. `release` собирает RC, на success меняет на
-   `phase/verify` + `role/leadqa`.
-7. **Verify gate.** `leadqa` после прогона ставит `phase/release` (без role —
-   ждём оператора).
-8. **Закрытие.** При релизе `cpo` ставит Done, прикладывает ссылку на release
-   note.
-9. **Cross-team.** Sub-issue в другой team через Linear `parentId`.
-
-### 7.5.7. Шаблон description Issue
-
-Title пишется **без** `US-<N>:` префикса — связь с эпиком фиксируется через
-`epic/us-<N>` label.
-
-```markdown
-# <семантический заголовок>
-
-**Тип:** <Feature / Bug / Research / Ops / Content / Design Refresh / Improvement / Migration>
-**Приоритет:** <P0 / P1 / P2 / P3>
-**Эпик:** <us-N> (если применимо, иначе пусто или `programmatic`)
-**Сегмент:** <b2c / b2b / cross / internal>
-**Команда:** <OBI / SEO / DES / DEV / SHOP / PANEL>
-**Lead PO:** <cpo / podev / poseo / popanel / poshop>
-**Assignee:** @оператор (не меняется)
-
-## Контекст
-<2–4 предложения, бизнес-смысл>
-
-## Артефакты (относительно корня репо)
-- Intake: `team/specs/US-<N>-<slug>/intake.md`
-- BA: `team/specs/US-<N>-<slug>/ba.md`
-- SA: `team/specs/US-<N>-<slug>/sa-<team>.md`
-- ADR (если есть): `team/adr/ADR-<M>-<slug>.md`
-- QA report: `team/specs/US-<N>-<slug>/qa-<team>.md`
-- RC: `team/release-notes/RC-<N>.md`
-- Verify: `team/release-notes/leadqa-<N>.md`
-- Release note (после релиза): `team/release-notes/<N>.md`
-
-## Workflow
-Фаза по `team/WORKFLOW.md`: <№ фазы, имя>.
-Текущий статус: <одна строка>.
-Активные роли: <role/X, role/Y>.
-
-## Связи
-- Parent: OBI-<X> / SHOP-<X> / PANEL-<X> (если sub-task)
-- Blocks: OBI-<X>, SHOP-<Y>
-- Blocked by: PANEL-<Z>
-- Related: SEO-<W>
+```yaml
+---
+us: US-<N>
+title: <семантический заголовок>
+epic: EPIC-<N>-<slug>           # имя обёртки: EPIC-... или TASK-<DOMAIN>-AD-HOC
+team: business | common | design | product | seo | shop | panel
+po: cpo | podev | poseo | popanel | poshop
+type: feature | bug | research | ops | content | design-refresh | improvement | migration
+priority: P0 | P1 | P2 | P3
+segment: b2c | b2b | cross | internal
+phase: intake | spec | design | dev | qa | review | gate | verify | release
+role: <одна или несколько ролей через запятую — кто сейчас работает>
+status: backlog | in-progress | done | blocked | canceled
+blocks: [US-<X>, US-<Y>]
+blocked_by: [US-<Z>]
+related: [US-<W>]
+created: YYYY-MM-DD
+updated: YYYY-MM-DD
+---
 ```
 
-### 7.5.8. Инициатор каждого действия
+`epic:` обязательно для всех новых артефактов. Для исторических US (плоский
+список в `specs/`) поле может отсутствовать или быть пустым.
 
-| Действие | Делает |
-|----------|--------|
-| Создание Issue в Linear | `in` (при intake) |
-| Перевод Issue в team SHOP/PANEL/SEO/DES | `cpo` после BA |
-| Изменение `phase/*` / `role/*` при hand-off | уходящая роль |
-| Комментарий-hand-off со ссылкой на артефакт | уходящая роль |
-| Переход в `phase/gate` | `cr-<team>` после approve |
-| Переход в `phase/verify` | `release` после RC pass |
-| Переход в `phase/release` | `leadqa` после verify pass |
-| Управление приоритетами Pn | PO команды (для своей team), `cpo` (для кросс) |
-| Ссылки `blocks` / `blocked by` | `sa-<team>` (на уровне спеки) или PO команды (на уровне беклога) |
-| Закрытие | `cpo` (при релизе) |
+Phase-значения по фазам §3:
 
-### 7.5.9. Что НЕ делаем в Linear
+| Фаза [WORKFLOW §3] | `phase:` | Типичный `role:` |
+|---|---|---|
+| 1. Intake | `intake` | `in` |
+| 2. BA + 3. PO planning + 4. SA | `spec` | `ba`, `sa-<team>`, `cpo`, `podev`/`poseo`/`popanel`/`poshop` |
+| 5. Architecture | `spec` | `tamd` (+ `dba`, `be-panel` при данных) |
+| 6. Design | `design` | `art`, `ui`, `ux` (или `ux-shop`/`ux-panel`), `lp-site` |
+| 7. Implementation | `dev` | `fe-<team>`, `be-<team>`, `seo-tech`, `seo-content`, `cw`, `cms`, `aemd`, `do` |
+| 8. QA (team) | `qa` | `qa-<team>` |
+| 9. Code Review (team) | `review` | `cr-<team>` |
+| 10. Release gate | `gate` | `release` |
+| 11. Verify gate | `verify` | `leadqa` |
+| 12. Operator decision | `release` | (пусто — ждём оператора) |
+| 13. Released | `release` + `status: done` | `cpo` (retro) |
 
-- Не меняем assignee — всегда оператор.
-- Не ведём длинные дискуссии по требованиям / архитектуре — они идут в
-  markdown-артефактах. В Linear — короткие hand-off-комментарии.
-- Не дублируем диаграммы / код / полные спеки — только ссылки.
-- Не используем Linear для заметок внутри роли — личное остаётся в md-файлах.
-- Не создаём Issue без прохождения `in`.
-- Не деплоим до апрува оператора (даже если в Linear `phase/release`).
+### 7.5.3. Hand-off log внутри артефакта
+
+В каждом артефакте поддерживается секция:
+
+```markdown
+## Hand-off log
+
+- 2026-04-29 14:32 · `ba` → `podev`: `ba.md` готов, ожидает приоритизации в команду.
+- 2026-04-29 16:10 · `podev` → `sa-site`: подняли в спринт, поручаем спеку.
+```
+
+Это заменяет Linear-комментарии. При смене фазы уходящая роль:
+1. Дописывает строку в Hand-off log (timestamp + `from` → `to` + 1 фраза).
+2. Обновляет frontmatter (`phase:`, `role:`, `updated:`).
+
+### 7.5.4. Создание новой задачи
+
+1. **`in` определяет EPIC или TASK-AD-HOC:**
+   - Часть существующего эпика → кладёт в `specs/EPIC-<N>-<slug>/US-<N>-<slug>/`.
+   - Новая программа из нескольких US → создаёт `specs/EPIC-<M>-<slug>/`
+     с `README.md` (цель, состав US) и кладёт первый US внутрь.
+   - Одиночная задача (bugfix, разовый ops, content-правка) → кладёт в
+     `specs/TASK-<DOMAIN>-AD-HOC/US-<N>-<slug>/`. Если соответствующего
+     `TASK-<DOMAIN>-AD-HOC/` ещё нет — создаёт. Допустимые `<DOMAIN>`:
+     `INFRA`, `CONTENT`, `SEO`, `PANEL`, `SHOP`, `SITE`, `DESIGN`, `OPS`.
+2. **`in`** создаёт `<выбранная-папка>/US-<N>-<slug>/intake.md` с frontmatter
+   (`epic:`, `phase: intake`, `role: in`, `status: backlog`).
+3. **`in`** добавляет строку в `team/backlog.md` (одна строка, человеко-читаемая).
+4. После approve оператором — передача `→ ba`. `ba` начинает `ba.md` и обновляет
+   frontmatter intake-артефакта (`phase: spec`, `role: ba`).
+5. Cross-team задачи фиксируются в `related:` / `blocked_by:` обоих
+   `sa-<team>.md` файлов.
+
+### 7.5.5. Что НЕ делаем
+
+- Не используем внешние трекеры (Linear, Jira, GitHub Projects, Trello).
+- Не дублируем `intake.md` / `ba.md` в README или wiki — только репозиторий.
+- Не ведём состояние задачи в чате — фактическое состояние = frontmatter
+  артефакта. Чат — операторские решения и hand-off-сообщения.
+- Не создаём задачу без `in` (формальный intake обязателен).
+- Не кладём новые US напрямую в `specs/` без EPIC или TASK-AD-HOC обёртки.
+- Не деплоим до апрува оператора.
 
 ---
 
@@ -806,8 +718,8 @@ Context*). Базовые назначения по командам:
 ```markdown
 # RC-<N>: <заголовок>
 
-**Linear Issue:** <OBI/SHOP/PANEL/SEO/DES/DEV>-<M>
-**Команда:** <OBI / SHOP / PANEL / SEO / DES / DEV>
+**US:** US-<N>
+**Команда:** business / common / design / product / seo / shop / panel
 **PR:** <url>
 **Ветка:** <integration-branch>
 **Дата RC:** YYYY-MM-DD
@@ -866,7 +778,7 @@ Branch для verify: <…>
 **Статус:** Released / Rolled back
 **Дата релиза:** YYYY-MM-DD
 **Автор RN:** cpo
-**Linear Issue:** <OBI/SHOP/PANEL/SEO/DES/DEV>-<M>
+**US:** US-<N>
 **Ветка:** <git-branch>
 **Коммит / PR:** <sha / url>
 **RC:** team/release-notes/RC-<N>.md
@@ -915,7 +827,7 @@ Branch для verify: <…>
 
 **Входы:** свободный текст оператора (в чате, голосом, ссылкой на документ).
 
-**Выходы:** `team/specs/US-<N>-<slug>/intake.md`:
+**Выходы:** `specs/US-<N>-<slug>/intake.md`:
 
 - Исходный текст оператора (как получено).
 - Резюме запроса в 2–4 предложения.
@@ -986,6 +898,16 @@ shop → product.
   `.claude/hooks/protect-immutable.sh` блокирует подобные запросы.
 - TOV — из [contex/03_brand_naming.md](../contex/03_brand_naming.md). Анти-TOV
   слова запрещены в `site/`, `apps/shop/`, `content/`, `assets/`.
+- **Design-system awareness** — все 42 роли проекта обязаны сверяться с
+  [`design-system/brand-guide.html`](../design-system/brand-guide.html) перед
+  любой задачей с visual / UX / копирайт / TOV-следом. Команда `team/design/`
+  (`art` → `ui` / `ux`) — авторы и сопровождающие brand-guide. **TOV split:**
+  `brand-guide.html` (общий, для всех) · `brand-guide-shop.html` (магазин,
+  дополнительно к общему, ведёт `team/shop/`) · `brand-guide-landshaft.html`
+  (услуга «Дизайн ландшафта», follow-up — пока спрашивать `art` через `cpo`).
+  Анти-паттерн — использовать `contex/07_brand_system.html` или старые
+  snapshot-ы (incident OBI-19 2026-04-27, PR #68 закрыт). Iron rule зашит в
+  каждый ролевой файл — секция `## ⚙️ Железное правило: design-system awareness`.
 - Каналы коммуникации с клиентом — Telegram + MAX + WhatsApp (Wazzup24) + телефон.
 - Фокус SEO — **Яндекс** (поиск + нейро-выдачи). Google — вторичный рынок.
 - **Не** коммитить `node_modules/`, `playwright-report/`, `test-results/`,
@@ -1029,7 +951,8 @@ shop → product.
 - Изменения workflow — через **cpo**, с апрувом оператора.
 - Новые роли — добавить в [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) +
   [README — legend.md](README%20%E2%80%94%20legend.md) + создать
-  `team/<dir>/<code>.md` + обновить §1 здесь + добавить `role/<code>` в §7.5.4.
-- Новая команда — обновить §1.0 (таблица команд + branch + Linear team) + §6
-  (merge order) + §7.5.1 (team key) + frontmatter всех артефактов.
+  `team/<dir>/<code>.md` + обновить §1 здесь + добавить разрешённое значение
+  `role:` в §7.5.2 frontmatter.
+- Новая команда — обновить §1.0 (таблица команд + branch) + §6 (merge order) +
+  §7.5.2 (разрешённые значения `team:`) + frontmatter всех новых артефактов.
 - Исправления опечаток — любой агент, PR в одну строку.

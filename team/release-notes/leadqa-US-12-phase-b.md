@@ -81,7 +81,7 @@
 
 ### Telegram bot (PAN-9)
 
-- [ ] **`curl setWebhook`** выполнен оператором (см. инструкцию `team/specs/US-12-admin-redesign/pre-tasks/podev-telegram-bot-setup.md` step 3)
+- [ ] **`curl setWebhook`** выполнен оператором (см. инструкцию `specs/US-12-admin-redesign/pre-tasks/podev-telegram-bot-setup.md` step 3)
 - [ ] **`/start` боту в Telegram** → получаешь greeting «Готов получать magic-link...»
 - [ ] **`Users.telegramChatId`** в `/admin/collections/users/<your-id>` заполнен chat_id
 - [ ] Webhook secret верифицируется (timing-safe): попробовать `curl -X POST https://obikhod.ru/api/telegram/webhook -H "X-Telegram-Bot-Api-Secret-Token: wrong"` → 401

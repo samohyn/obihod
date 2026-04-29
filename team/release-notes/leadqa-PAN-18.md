@@ -44,7 +44,7 @@ Pixel-perfect совпадение `/admin/login` с brand-guide §12.1 mockup �
 | `site/components/admin/BeforeLoginLockup.tsx` | Replaced inline self-drawn `SeasonsCircleMark` + отдельный wordmark на real `horizontal-compact.svg` (inline JSX, детальный 4-квадрант знак с wordmark внутри одного SVG, 1280×480 viewBox, height 56px) |
 | `site/app/(payload)/custom.scss` | Добавлены: hide `.template-minimal__wrap .login__brand` (default Payload logo), `.login__form label` (13/500/ink/6mb), `.login__form input` full style (padding/font/border/radius/width), focus 2px solid primary, `.login__form a` (3px order, color/decoration/center/«→» suffix), `.login__form .field-type` (16px mb), flex column + order (link AFTER submit) |
 | `site/tests/e2e/admin-login.spec.ts` | +8 tests under PAN-18 (AC-27..33), fix старого ОБИХОД test под SVG `<text>` selector, fix submit width 254px (border-box) |
-| `team/specs/US-12-admin-redesign/sa-panel-wave2a-v2.md` | Addendum V2.6–V2.11 + AC-27..34 (operator pixel-perfect mandate) |
+| `specs/US-12-admin-redesign/sa-panel-wave2a-v2.md` | Addendum V2.6–V2.11 + AC-27..34 (operator pixel-perfect mandate) |
 
 ## Что НЕ было сделано (по дизайну)
 

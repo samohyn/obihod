@@ -241,7 +241,7 @@
 
 Эта работа **не зависит** от финального ADR и не переделывается, если рекомендация подтвердится:
 
-1. **`sa` — описание каждого типа блока как data contract (независимо от имплементации).** Для 10+ планируемых типов (hero, text-content, lead-form, photo-estimate-form, calculator-arborist, calculator-roof, calculator-trash, calculator-demolition, cases, faq, services-grid, districts-grid, trust-badges, testimonials, cta-banner, promotion-banner, map-region, video) — список полей, типы, required/optional, описание назначения. Этот контракт нужен для US-5 в любом из трёх вариантов паттерна. Формат: `team/specs/US-5-blocks-library/sa.md` секция «Block contracts».
+1. **`sa` — описание каждого типа блока как data contract (независимо от имплементации).** Для 10+ планируемых типов (hero, text-content, lead-form, photo-estimate-form, calculator-arborist, calculator-roof, calculator-trash, calculator-demolition, cases, faq, services-grid, districts-grid, trust-badges, testimonials, cta-banner, promotion-banner, map-region, video) — список полей, типы, required/optional, описание назначения. Этот контракт нужен для US-5 в любом из трёх вариантов паттерна. Формат: `specs/US-5-blocks-library/sa.md` секция «Block contracts».
 2. **`sa` — матрица «коллекция × допустимые типы блоков».** Services, ServiceDistricts, Cases, Blog, B2BPages, StaticPages — для каждой определить, какие типы блоков разрешены (например, Blog не имеет lead-form, Cases не имеет calculator). Это в любом варианте — атрибут конфигурации. Готовится в `sa.md` US-5.
 3. **`sa` / `cw` совместно — набор правил publish-gate (SA-Q7).** Конкретный список правил, которые блокируют publish: «ровно один hero», «≥ 1 text-content блок с ≥ 300 слов», «≥ 1 контактный блок (lead-form | photo-estimate-form | cta-banner)», «не более одного promotion-banner одновременно активного по датам». В любом варианте паттерна эти правила — одинаковые. Формат: `sa.md` US-5 секция «Publish-gate rules».
 4. **`sa` + `be4` — mock-тексты ошибок publish-gate (REQ-6.5).** На базе правил из п. 3, `cw` пишет формулировки через TOV-фильтр. Это разблокирует REQ-6.5 на уровне текста, `cw` начинает независимо от имплементации.
@@ -259,7 +259,7 @@
 
 ## 8. Открытые вопросы (до перевода в Accepted)
 
-- [ ] PoC-1..PoC-5 выполнен `be4`+`sa`, результаты задокументированы в `team/specs/US-5-blocks-library/tamd-poc.md`.
+- [ ] PoC-1..PoC-5 выполнен `be4`+`sa`, результаты задокументированы в `specs/US-5-blocks-library/tamd-poc.md`.
 - [ ] `ui` подтверждает, что карточная сетка палитры реализуема через один override Payload slot (UI-Q3).
 - [ ] `do` подтверждает, что автоматизация `pnpm generate:importmap` в `predeploy` workflow покрывает сценарий «добавили новый Block → deploy без ручного шага» (открытый вопрос BA из REQ-4.1 зоны).
 - [ ] Оператор не требует Notion-like inline-поток (подтверждается `ux` на usability-сессии по макету `ui`).

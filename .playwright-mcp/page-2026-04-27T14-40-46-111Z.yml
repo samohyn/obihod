@@ -492,9 +492,9 @@
     - heading "Шкала админки (Payload)" [level=3] [ref=e420]
     - paragraph [ref=e421]:
       - text: Плотная — админка инструмент, не витрина. Подробности и обоснование — в
-      - link "devteam/specs/admin-visual/art-concept.md" [ref=e422] [cursor=pointer]:
-        - /url: ../devteam/specs/admin-visual/art-concept.md
-        - code [ref=e423]: devteam/specs/admin-visual/art-concept.md
+      - link "devspecs/admin-visual/art-concept.md" [ref=e422] [cursor=pointer]:
+        - /url: ../devspecs/admin-visual/art-concept.md
+        - code [ref=e423]: devspecs/admin-visual/art-concept.md
       - text: .
     - table [ref=e424]:
       - rowgroup [ref=e425]:
@@ -668,7 +668,7 @@
       - code [ref=e576]: fe1
       - text: по
       - link "art-brief-ui.md" [ref=e577] [cursor=pointer]:
-        - /url: ../devteam/specs/US-11-ia-extension/art-brief-ui.md
+        - /url: ../devspecs/US-11-ia-extension/art-brief-ui.md
         - code [ref=e578]: art-brief-ui.md
       - text: .
     - img "Визуальный реестр 16 service-иконок Обихода — спил, валка, корчевание, обрезка, каблинг, опрыскивание, снег с крыши, водостоки, альпинизм, автовышка, вывоз мусора, демонтаж, измельчение, фикс-цена, отклик 10 минут, штрафы на нас" [ref=e580]
@@ -886,7 +886,7 @@
       - code [ref=e770]: fe1
       - text: через
       - link "art-brief-ui.md" [ref=e771] [cursor=pointer]:
-        - /url: ../devteam/specs/US-11-ia-extension/art-brief-ui.md
+        - /url: ../devspecs/US-11-ia-extension/art-brief-ui.md
         - code [ref=e772]: art-brief-ui.md
       - text: (US-11, задача 3).
     - generic [ref=e773]:
@@ -1613,7 +1613,7 @@
     - paragraph [ref=e1430]:
       - text: Паблик и админка Payload живут на одних токенах — это сняли в
       - link "admin-visual/art-concept.md" [ref=e1431] [cursor=pointer]:
-        - /url: ../devteam/specs/admin-visual/art-concept.md
+        - /url: ../devspecs/admin-visual/art-concept.md
         - code [ref=e1432]: admin-visual/art-concept.md
       - text: . В админке поднимаем плотность UI, палитра та же.
     - table [ref=e1433]:
@@ -1721,11 +1721,11 @@
     - paragraph [ref=e1529]:
       - text: v1 (
       - link "art-concept.md" [ref=e1530] [cursor=pointer]:
-        - /url: ../devteam/specs/admin-visual/art-concept.md
+        - /url: ../devspecs/admin-visual/art-concept.md
         - code [ref=e1531]: art-concept.md
       - text: ) закрыл токены и группировку, но дефолтный Payload UI поверх остался. v2 (
       - link "art-concept-v2.md" [ref=e1532] [cursor=pointer]:
-        - /url: ../devteam/specs/US-12-admin-redesign/art-concept-v2.md
+        - /url: ../devspecs/US-12-admin-redesign/art-concept-v2.md
         - code [ref=e1533]: art-concept-v2.md
       - text: ") добавляет 8 экранов:"
       - strong [ref=e1534]: Login · Sidebar · Dashboard + Page Catalog · List · Edit (tabs) · Empty / Error / 403
@@ -1744,7 +1744,7 @@
       - code [ref=e1541]: "#f7f5f0"
       - text: ", белая карточка, primary-кнопка янтарная. Состояния (default / loading / error / success) — описаны в"
       - link "art-concept-v2 §1" [ref=e1542] [cursor=pointer]:
-        - /url: ../devteam/specs/US-12-admin-redesign/art-concept-v2.md#1-login-screen-новое
+        - /url: ../devspecs/US-12-admin-redesign/art-concept-v2.md#1-login-screen-новое
         - code [ref=e1543]: art-concept-v2 §1
       - text: .
     - generic [ref=e1544]:
@@ -2276,7 +2276,7 @@
     - paragraph [ref=e2052]:
       - text: Spec для реализации —
       - link "art-concept-v2.md" [ref=e2053] [cursor=pointer]:
-        - /url: ../devteam/specs/US-12-admin-redesign/art-concept-v2.md
+        - /url: ../devspecs/US-12-admin-redesign/art-concept-v2.md
         - code [ref=e2054]: art-concept-v2.md
       - text: (10 разделов с anatomy + token-map). Реализация —
       - code [ref=e2055]: fe1
@@ -2284,11 +2284,11 @@
       - code [ref=e2056]: be4
       - text: через
       - link "art-brief-ui.md" [ref=e2057] [cursor=pointer]:
-        - /url: ../devteam/specs/US-12-admin-redesign/art-brief-ui.md
+        - /url: ../devspecs/US-12-admin-redesign/art-brief-ui.md
         - code [ref=e2058]: art-brief-ui.md
       - text: и
       - link "art-brief-cw.md" [ref=e2059] [cursor=pointer]:
-        - /url: ../devteam/specs/US-12-admin-redesign/art-brief-cw.md
+        - /url: ../devspecs/US-12-admin-redesign/art-brief-cw.md
         - code [ref=e2060]: art-brief-cw.md
       - text: (~10 человеко-дней). Live на
       - code [ref=e2061]: obikhod.ru/admin
@@ -2393,7 +2393,7 @@
         - code [ref=e2151]: 03_brand_naming.md §Визуальная подача
       - text: + реалии админки из
       - link "art-concept.md" [ref=e2152] [cursor=pointer]:
-        - /url: ../devteam/specs/admin-visual/art-concept.md
+        - /url: ../devspecs/admin-visual/art-concept.md
         - code [ref=e2153]: art-concept.md
       - text: .
     - heading "Визуал" [level=3] [ref=e2154]
@@ -2564,7 +2564,7 @@
         - text: +
         - code [ref=e2265]: be4
         - text: ~10 чд по 6 brief'ам в
-        - code [ref=e2266]: devteam/specs/US-12-admin-redesign/
+        - code [ref=e2266]: devspecs/US-12-admin-redesign/
         - text: .
       - listitem [ref=e2267]:
         - strong [ref=e2269]: Admin v1.8.1 — login lockup (SVG) + sidebar icons + interaction states palette
@@ -2901,4 +2901,4 @@
           - /url: ../devteam/art.md
         - text: ·
         - link "admin-visual/art-concept.md" [ref=e2484] [cursor=pointer]:
-          - /url: ../devteam/specs/admin-visual/art-concept.md
+          - /url: ../devspecs/admin-visual/art-concept.md

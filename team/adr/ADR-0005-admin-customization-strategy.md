@@ -8,7 +8,7 @@
 **Skill:** активирован `architecture-decision-records` (skill-check iron rule, см. [tamd.md §⚙️ Железное правило](../common/tamd.md))
 **Related:**
 - [design-system/brand-guide.html](../../design-system/brand-guide.html) §12
-- [team/specs/US-12-admin-redesign/](../specs/US-12-admin-redesign/) — art-concept-v2 + 3 art-brief'а
+- [specs/US-12-admin-redesign/](../specs/US-12-admin-redesign/) — art-concept-v2 + 3 art-brief'а
 - [site/app/(payload)/custom.scss](../../site/app/(payload)/custom.scss) — Wave 1 implementation
 - [project memory: US-12 Admin Redesign мандат](../../.claude/memory/handoff.md)
 

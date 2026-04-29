@@ -6,7 +6,7 @@ import { EmptyState } from './EmptyErrorStates'
 /**
  * PageCatalog — каталог опубликованных страниц на dashboard /admin.
  *
- * OBI-29 / Wave 3 из OBI-19 admin redesign. Anatomy — team/specs/
+ * OBI-29 / Wave 3 из OBI-19 admin redesign. Anatomy — specs/
  * US-12-admin-redesign/art-concept-v2.md §3 + brand-guide.html §12.3.
  *
  * Запрос оператора (art-concept-v2 §3): «приходит в admin утром → видит

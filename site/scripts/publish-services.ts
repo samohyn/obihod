@@ -14,7 +14,7 @@
  *
  * Идемпотентен: уже опубликованные services пропускаются.
  *
- * Source: team/specs/EPIC-SITE-MANAGEABILITY (см. OBI-16, OBI-17).
+ * Source: specs/EPIC-SITE-MANAGEABILITY (см. OBI-16, OBI-17).
  */
 import { getPayload } from 'payload'
 import type { Payload } from 'payload'

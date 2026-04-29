@@ -263,19 +263,26 @@ CI/CD:       GitHub Actions (ci.yml + deploy.yml), PM2 + nginx на VPS
 
 ## 8. Управление проектом
 
-- **Linear workspace:** `samohyn`. **6 team keys** (по командам):
-  - `OBI` — business/ + product/ (стратегия + сайт услуг),
-  - `SEO` — seo/ (SEO-программа, программные посадочные),
-  - `DES` — design/ (design-system, brand-guide),
-  - `DEV` — common/ (инфра, ADR, RC, deploy),
-  - `SHOP` — shop/ (магазин саженцев `apps/shop`),
-  - `PANEL` — panel/ (admin Payload, коллекции, RBAC).
-- Каждая фича — отдельная user story в нужной команде. Детали интеграции — в
-  [WORKFLOW.md](WORKFLOW.md) §7.5.
-- **Assignee в Linear:** всегда оператор (фаундер). Роль, ведущая задачу,
-  маркируется label `role/<code>` (например, `role/sa-site`, `role/fe-shop`,
-  `role/leadqa`).
-- **Фазы:** label `phase/<name>` — меняется при hand-off. Релиз-цикл:
+- **Внешний task-tracker не используется** (Linear отключён 2026-04-29 — см.
+  [adr/ADR-0008-drop-linear-task-tracker.md](adr/ADR-0008-drop-linear-task-tracker.md)).
+  Единственный источник истины задачи — папка [`specs/`](../specs/) на корне
+  репо (вынесена из `team/` 2026-04-29). Структура:
+  - `specs/EPIC-<N>-<slug>/US-<N>-<slug>/` — для US внутри крупной программы
+    (обязательно `EPIC-<N>-<slug>/README.md` с целью эпика и составом US).
+  - `specs/TASK-<DOMAIN>-AD-HOC/US-<N>-<slug>/` — для одиночных задач
+    (bugfix, разовый ops, content-правка). Допустимые `<DOMAIN>`: `INFRA`,
+    `CONTENT`, `SEO`, `PANEL`, `SHOP`, `SITE`, `DESIGN`, `OPS`.
+  - Артефакты внутри каждой US-папки: `intake.md`, `ba.md`, `sa-<team>.md`,
+    `qa-<team>.md`, `cr-<team>.md`.
+  - Исторические US (US-1..US-12, OBI-19, PAN-9, admin-visual) остаются
+    плоским списком в `specs/` без EPIC-обёртки — archeological data.
+- **Беклог + приоритизация:** `team/backlog.md` (cross-team таблица: id, title,
+  команда, PO, priority, status, deps). Ведут `cpo` (cross-team) и PO команд
+  (внутри своих секций).
+- **Owner задачи:** всегда оператор (фаундер). Роль, ведущая текущую фазу,
+  фиксируется в frontmatter артефакта (`role:` поле). Hand-off — строкой в
+  секции `## Hand-off log` внутри артефакта.
+- **Фазы:** `phase:` поле frontmatter — меняется при hand-off. Релиз-цикл:
   `intake → spec → design → dev → qa → review → gate (release) → verify
   (leadqa) → release`.
 - **Gate перед оператором:** двухступенчатый — `release` (RC + checklist) →
@@ -283,12 +290,13 @@ CI/CD:       GitHub Actions (ci.yml + deploy.yml), PM2 + nginx на VPS
 - **Входная точка:** `in` → всегда. Оператор не пишет напрямую исполнителям.
   Sticky agent sessions: `@<code>` / `/<code>` / «`<code>`, …» — деталь в
   [WORKFLOW.md](WORKFLOW.md) §5.4.
-- **Модель:** все 42 роли работают на `opus-4-6` с `reasoning_effort: max`.
+- **Модель:** все 42 роли работают на `opus-4-7` с `reasoning_effort: max`.
 - **Параллельная работа:** в каждой команде разработки **по одному инженеру**
   на роль (`fe-site`, `be-site`, `qa-site`, `cr-site` и т. п.). PO команды
   координирует свою команду; `cpo` — кросс-команда. Если задача требует
   ускорения — `cpo` через PO команды подключает shared-инженера из `common/`
-  или временно из соседней команды (фиксируется в Linear через `role/` label).
+  или временно из соседней команды (фиксируется в frontmatter `role:` +
+  комментарий «temporary cross-team»).
 
 ---
 
@@ -307,8 +315,9 @@ main (prod)
 фича-ветки + PR. **Owner merge train — `do`** (common/). Daily cron
 `git fetch --all` + `git merge-tree` детектит конфликты на hot-paths
 (`payload.config.ts`, `apps/shop/**`, `app/(payload)/admin/**`,
-`design-system/**`, `package.json`, `pnpm-lock.yaml`) и заводит Linear-issue
-`merge-conflict` с пингом двух соответствующих PO команд.
+`design-system/**`, `package.json`, `pnpm-lock.yaml`) и заводит файл
+`team/ops/merge-conflicts/<YYYY-MM-DD>-<branch>.md` с пингом двух
+соответствующих PO команд напрямую через сообщение оператору.
 
 **Merge order на main:** `design → panel → shop → product`. Дизайн-токены первыми
 (база для всех), затем схема Payload (база для shop/product), затем магазин,

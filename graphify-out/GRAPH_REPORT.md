@@ -1,7 +1,7 @@
 # Graph Report - /Users/a36/obikhod  (2026-04-29)
 
 ## Corpus Check
-- 166 files · ~824,445 words
+- 166 files · ~856,564 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
