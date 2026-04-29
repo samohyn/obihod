@@ -51,3 +51,5 @@ Architecture Decision Records. Владелец — `tamd`. Нумерация �
 | [0005](ADR-0005-admin-customization-strategy.md) | Admin Customization Strategy (Payload 3 admin под brand-guide §12) | Accepted (partial supersede by 0007) | 2026-04-28 |
 | [0006](ADR-0006-shop-data-storage.md) | Shop data storage architecture (apps/shop · Drizzle · своя schema · JWT SSO) | Proposed | 2026-04-28 |
 | [0007](ADR-0007-payload-login-customization.md) | Payload 3.84 admin Login UI customization (CSS-only Approach E) | Accepted | 2026-04-29 |
+| [0008](ADR-0008-drop-linear-task-tracker.md) | Drop Linear task tracker (specs/ + team/backlog.md sole source of truth) | Accepted | 2026-04-29 |
+| [0009](ADR-0009-tsx-payload-cjs-shim.md) | tsx + Payload Local API CJS-shim для @next/env default-import | Accepted | 2026-04-29 |
