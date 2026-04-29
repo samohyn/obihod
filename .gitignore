@@ -24,6 +24,9 @@ graphify-out/transcripts/
 # Playwright скриншоты — локально, не коммитить
 screen/
 
+# Playwright MCP — auto-snapshots от browser tools, не коммитить
+.playwright-mcp/
+
 # Heavy media assets — не коммитим исходники, только мета и README
 assets/photos/
 assets/videos/
