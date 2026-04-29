@@ -48,5 +48,6 @@ Architecture Decision Records. Владелец — `tamd`. Нумерация �
 | [0002](ADR-0002-site-chrome-dedup-seosettings.md) | SiteChrome / SeoSettings dedup | Accepted | 2026-04-23 |
 | [0003](ADR-0003-blocks-pattern.md) | Blocks pattern для Payload коллекций | Accepted | 2026-04-25 |
 | [0004](ADR-0004-team-restructure-v2.md) | Team restructure v2 (30 → 42 ролей в 7 командах) | Accepted | 2026-04-28 |
-| [0005](ADR-0005-admin-customization-strategy.md) | Admin Customization Strategy (Payload 3 admin под brand-guide §12) | Accepted | 2026-04-28 |
+| [0005](ADR-0005-admin-customization-strategy.md) | Admin Customization Strategy (Payload 3 admin под brand-guide §12) | Accepted (partial supersede by 0007) | 2026-04-28 |
 | [0006](ADR-0006-shop-data-storage.md) | Shop data storage architecture (apps/shop · Drizzle · своя schema · JWT SSO) | Proposed | 2026-04-28 |
+| [0007](ADR-0007-payload-login-customization.md) | Payload 3.84 admin Login UI customization (CSS-only Approach E) | Accepted | 2026-04-29 |
