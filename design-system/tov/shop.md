@@ -4,9 +4,11 @@
 **Зона:** саженцы и товары для сада, `apps/shop/`
 **Источник:** [contex/03_brand_naming.md §Tone of Voice](../../contex/03_brand_naming.md) + дельта shop ниже
 **Owner:** `art` (визуал/архетип) + `poshop` (домен/каталог) + `cw` (тексты)
-**Render для команды:** [brand-guide-shop.html](../brand-guide-shop.html)
+**Render для команды:** [brand-guide.html §15-§29](../brand-guide.html#shop-identity)
 
-> При расхождении `brand-guide-shop.html` и этого файла — **первичен этот markdown**.
+> При расхождении `brand-guide.html §15-§29` и этого файла — **первичен этот markdown**.
+
+> История: до 2026-04-29 рендер жил в отдельном `design-system/brand-guide-shop.html`. После решения оператора «один источник истины» содержимое объединено в `brand-guide.html` §15-§29 + расширено до полной e-commerce; отдельный файл удалён.
 
 ---
 
@@ -202,12 +204,12 @@ SHOP_ANTI_WORDS=(
 
 ## 11. Visual heritage
 
-Visual язык shop **полностью наследуется** из основного [brand-guide.html](../brand-guide.html):
+Visual язык shop **полностью наследуется** из основного [brand-guide.html §1-§14](../brand-guide.html):
 - Палитра, типографика (Golos Text + JetBrains Mono), радиусы, spacing, shadow, motion.
-- Логотип `ОБИХОД` остаётся базовым; для shop добавляется suffix `· магазин` в header в стиле `gh-wordmark` основного гайда.
+- Логотип `ОБИХОД` — **единый wordmark без суффиксов** (см. [§33.3 iron rule](../brand-guide.html#site-chrome)). Header — один Header.tsx на весь сайт, без shop-special-version. До 2026-04-29 канон допускал suffix `· магазин`, но это был документационный артефакт shop-guide; prod-сайт всегда использовал единый wordmark.
 - Иконография services не переиспользуется в shop без адаптации — питомник просит свой набор (контейнер, прививка, подвой, опылитель, зона). Это backlog Wave 2.
 
-В рендере для команды (`brand-guide-shop.html`) визуальные секции — короткая reference-полоса со ссылкой на основной guide; основной объём — **TOV-shop, лексика, компоненты магазина, photography delta**.
+Render для команды живёт в [§15-§29 brand-guide.html](../brand-guide.html#shop-identity) — TOV / лексика / компоненты магазина / photography delta. Раньше был отдельный `brand-guide-shop.html`, удалён 2026-04-29.
 
 ## 12. Roadmap
 
@@ -228,7 +230,7 @@ Visual язык shop **полностью наследуется** из осно
 - [x] Per-category таблица обязательных полей карточки (9 категорий × 12 полей)
 - [x] Photography delta + backlog Wave 1
 - [x] Микрокопи-формулы наследуются из `foundations/microcopy.md`
-- [x] Render-файл `brand-guide-shop.html` материализован
+- [x] Render объединён в `brand-guide.html §15-§29` (раньше — отдельный `brand-guide-shop.html`, удалён 2026-04-29 после merge)
 - [ ] Hook anti-words shop в `protect-immutable.sh` — **передано `do` / `tamd`**
 - [ ] Sub-briefs `cw` / `ui-shop` / `ux-shop` — **передано `poshop`**
 
@@ -238,5 +240,5 @@ Visual язык shop **полностью наследуется** из осно
 - Visual базис: [design-system/brand-guide.html](../brand-guide.html)
 - Microcopy формулы: [design-system/foundations/microcopy.md](../foundations/microcopy.md)
 - Photography база: [design-system/foundations/photography.md](../foundations/photography.md)
-- Render для команды shop: [design-system/brand-guide-shop.html](../brand-guide-shop.html)
+- Render для команды shop: [design-system/brand-guide.html §15-§29](../brand-guide.html#shop-identity)
 - Карточки ролей shop: [team/shop/](../../team/shop/) (poshop, cw, ux-shop, fe-shop, qa-shop)
