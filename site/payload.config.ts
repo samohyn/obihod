@@ -31,7 +31,15 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
     meta: {
       titleSuffix: '— Обиход admin',
-      icons: [{ rel: 'icon', type: 'image/png', url: '/favicon.ico' }],
+      // W9 (US-12 prod alignment): type/url mismatch fix — было
+      // type: 'image/png' с url '/favicon.ico'. Браузер мог отвергать favicon
+      // как corrupt (вид «кривого favicon» на скрине prod 2026-04-30).
+      // Используем .ico с правильным MIME + добавляем PNG fallback для
+      // современных браузеров (Next.js auto-публикует app/icon.png → /icon.png).
+      icons: [
+        { rel: 'icon', type: 'image/x-icon', url: '/favicon.ico' },
+        { rel: 'icon', type: 'image/png', url: '/icon.png' },
+      ],
     },
     components: {
       graphics: {
