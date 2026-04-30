@@ -67,19 +67,28 @@ export default buildConfig({
     fallbackLanguage: 'ru',
     supportedLanguages: { ru, en },
   },
+  // Wave 8 (US-12, sa-panel-wave8.md §8.1): порядок коллекций определяет
+  // порядок групп в sidebar — Payload рендерит группы в порядке первой
+  // коллекции с этим admin.group. Цель — 01 → 02 → 03 → 04 → 09 per
+  // brand-guide §12.2 mockup (lines 2993-3011 brand-guide.html).
   collections: [
-    Users,
-    Media,
+    // 01 · Заявки
+    Leads,
+    // 02 · Контент (порядок per brand-guide §12.2 mockup)
     Services,
     Districts,
     ServiceDistricts,
     Cases,
-    Persons,
-    Authors,
     Blog,
+    Authors,
     B2BPages,
-    Leads,
+    Persons,
+    // 03 · Медиа
+    Media,
+    // 04 · SEO
     Redirects,
+    // 09 · Система
+    Users,
   ],
   globals: [SeoSettings, SiteChrome],
   editor: lexicalEditor(),
