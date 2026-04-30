@@ -456,3 +456,33 @@ popanel передаёт через PO orchestration (iron rule #7, без эс�
 ```
 
 **Crit-path до US-12 actual closure:** ~0.5 ЧД (W8+W9 deploy → leadqa post-deploy smoke на staging/prod → operator approve → release closure).
+
+### D-2026-04-30-14 · PR #110 MERGED — W9 закрыт в main
+
+**Merge:** оператор смержил [PR #110](https://github.com/samohyn/obihod/pull/110) 2026-04-30 18:30 UTC. Merge commit `1458378`.
+
+**Cleanup:** локальная и remote ветка `feature/us-12-w9-deeper-alignment` удалены. main pulled.
+
+**Backlog обновлён (`team/backlog.md`):**
+- panel.done: + W9 (PR #110) после W8 (PR #109)
+- panel.later: + `PANEL-CSS-PREFIX-CLEANUP` (RICE 5.6) + `PANEL-LIST-CREATE-AMBER` (RICE 21 — top кандидат после release)
+
+**US-12 финальный статус:**
+- 9 wave merged (W1, W2.A v2, W3, W4, W5 part1, W5 part2 ADR-closure, W6, W7, W8, W9)
+- Все 13 файлов исходного scope + 9 ad-hoc closure waves
+- `9cc702f` (W8) и `1458378` (W9) в main, ждут deploy
+
+**Что дальше:**
+1. **`do` deploy `1458378`** через `deploy.yml` (W8 + W9 включены)
+2. **`leadqa` post-deploy smoke** на `obikhod.ru/admin`:
+   - W8: sidebar order, 13 иконок, dashboard cleanup
+   - W9: forced `prefers-color-scheme: dark` test (Chrome devtools) → admin остаётся light
+   - W9: BrandIcon в crumbs не cropped (sanity на 1+ edit view)
+   - W9: favicon shows correctly in browser tab (Chrome/Safari/Firefox)
+   - Отчёт: `team/release-notes/leadqa-RC-2.md` (или leadqa-US-12-final.md)
+3. **Operator approve** → `do` deploy + `cpo` post-release retro
+4. **US-12 CLOSED** — переход к panel.later top кандидатам:
+   - `PANEL-LIST-CREATE-AMBER` (RICE 21, low-effort cosmetic)
+   - `PANEL-LEADS-INBOX` (RICE 11.25, daily-use оператора)
+
+**Crit-path до US-12 actual closure:** ~0.5 ЧД (deploy + leadqa + approve).
