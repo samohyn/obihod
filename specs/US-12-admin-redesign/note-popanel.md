@@ -251,14 +251,15 @@ specs/US-12-admin-redesign/
 2. **W4 структурно done в main** — все 10 коллекций (Services 6 tabs, Cases 4, Blog 5, Districts/B2BPages/Authors/ServiceDistricts/Leads/Media/SiteChrome) имеют `type: 'tabs'`. Реальный остаток W4 = CSS has-error indicator (1 правило) + cw `admin.description` audit.
 3. **W5 регистрация через `views.list.Empty`** API не verified (та же категория риска как `views.login` v1). W5 part 1 = инфраструктура; part 2 blocked by tamd.
 
-**3 PR в очереди:**
-- [#100](https://github.com/samohyn/obihod/pull/100) — W3 finish (catalog page + leads/count + LeadsBadge)
-- [#101](https://github.com/samohyn/obihod/pull/101) — W5 part 1 (EmptyCollection + Skeletons + pulse)
-- (W4 closure) — has-error indicator + backlog/note-popanel update
+**3 PR в очереди (зафиксировано на момент написания):**
+- [#100](https://github.com/samohyn/obihod/pull/100) — W3 finish (catalog page + leads/count + LeadsBadge) — **MERGED** 2026-04-30
+- [#101](https://github.com/samohyn/obihod/pull/101) — W5 part 1 (EmptyCollection + Skeletons + pulse) — **MERGED** 2026-04-30
+- [#102](https://github.com/samohyn/obihod/pull/102) — W4 closure (has-error indicator + backlog/note-popanel update)
+- [#103](https://github.com/samohyn/obihod/pull/103) — W7 spec + ADR-0010 closure (W5 part 2)
 
-**Статус US-12 после merge всех трёх PR:**
+**Статус US-12 после merge всех PR:**
 - ✅ W1 / W2.A v2 / W3 / W4 (structural + CSS) / W5 part 1 — DONE
-- 🔵 W5 part 2 (Payload `views.list.*` registration) — blocked by tamd research
-- 📋 W6 Mobile / W7 Polish/a11y — спеки не написаны
+- ✅ W5 part 2 — closed via ADR-0010 (skip registration, public exports only)
+- 📋 W6 Mobile / W7 Polish/a11y dev — спеки готовы (W7 spec в PR #103), W6 spec ещё не написан
 
-**Crit-path до US-12 release:** ≈3 ЧД (W5 part 2 + W6 + W7 + опц. cw audit).
+**Crit-path до US-12 release:** ≈2.7 ЧД (W6 + W7 + опц. cw audit).
