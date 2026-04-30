@@ -31,11 +31,40 @@ export const Services: CollectionConfig = {
                 typeof v === 'string' && /^[a-z][a-z0-9-]{2,40}$/.test(v)
                   ? true
                   : 'kebab-case латиницей, 3–40 символов',
+              admin: {
+                description: 'Часть URL: /<slug>/. Меняешь — старый URL умрёт, нужен redirect.',
+              },
             },
-            { name: 'title', type: 'text', required: true, maxLength: 80 },
-            { name: 'h1', type: 'text', required: true, maxLength: 90 },
-            { name: 'priceFrom', type: 'number', required: true, min: 0 },
-            { name: 'priceTo', type: 'number', required: true, min: 0 },
+            {
+              name: 'title',
+              type: 'text',
+              required: true,
+              maxLength: 80,
+              admin: {
+                description: 'Название в каталоге услуг и breadcrumbs. До 80 символов.',
+              },
+            },
+            {
+              name: 'h1',
+              type: 'text',
+              required: true,
+              maxLength: 90,
+              admin: { description: 'Заголовок на странице услуги. Длиннее title — как H1.' },
+            },
+            {
+              name: 'priceFrom',
+              type: 'number',
+              required: true,
+              min: 0,
+              admin: { description: 'Минимальная цена для отображения «от X ₽».' },
+            },
+            {
+              name: 'priceTo',
+              type: 'number',
+              required: true,
+              min: 0,
+              admin: { description: 'Верхняя граница для расчёта средней цены и фильтров.' },
+            },
             {
               name: 'priceUnit',
               type: 'select',
@@ -47,6 +76,9 @@ export const Services: CollectionConfig = {
                 { label: 'за смену', value: 'shift' },
                 { label: 'за м²', value: 'm2' },
               ],
+              admin: {
+                description: 'Единица цены — что считаем (объект, дерево, м³, смена).',
+              },
             },
           ],
         },
@@ -54,12 +86,27 @@ export const Services: CollectionConfig = {
           label: 'Контент',
           description: 'Intro, hero-image, галерея.',
           fields: [
-            { name: 'intro', type: 'richText', required: true },
-            { name: 'heroImage', type: 'upload', relationTo: 'media' },
+            {
+              name: 'intro',
+              type: 'richText',
+              required: true,
+              admin: {
+                description: 'Lead-параграф на странице услуги — answer-first, 2-3 фразы.',
+              },
+            },
+            {
+              name: 'heroImage',
+              type: 'upload',
+              relationTo: 'media',
+              admin: {
+                description: 'Главное фото услуги — наш реальный объект, не сток.',
+              },
+            },
             {
               name: 'gallery',
               type: 'array',
               maxRows: 12,
+              admin: { description: 'Галерея до 12 фото. Реальные кейсы, не stock.' },
               fields: [{ name: 'image', type: 'upload', relationTo: 'media', required: true }],
             },
           ],
@@ -74,10 +121,29 @@ export const Services: CollectionConfig = {
               type: 'array',
               labels: { singular: 'Sub-услуга', plural: 'Sub-услуги' },
               fields: [
-                { name: 'slug', type: 'text', required: true },
-                { name: 'title', type: 'text', required: true },
-                { name: 'h1', type: 'text', required: true },
-                { name: 'priceFrom', type: 'number' },
+                {
+                  name: 'slug',
+                  type: 'text',
+                  required: true,
+                  admin: { description: 'Часть URL: /<service>/<slug>/.' },
+                },
+                {
+                  name: 'title',
+                  type: 'text',
+                  required: true,
+                  admin: { description: 'Название sub-услуги в каталоге внутри pillar.' },
+                },
+                {
+                  name: 'h1',
+                  type: 'text',
+                  required: true,
+                  admin: { description: 'H1 на отдельной странице sub-услуги.' },
+                },
+                {
+                  name: 'priceFrom',
+                  type: 'number',
+                  admin: { description: 'Цена «от» для конкретной sub-услуги.' },
+                },
                 {
                   name: 'intro',
                   type: 'textarea',
@@ -95,8 +161,18 @@ export const Services: CollectionConfig = {
                       'Полный контент sub-услуги ~600-800 слов: что включает, цены, документы, для кого, кейсы.',
                   },
                 },
-                { name: 'metaTitle', type: 'text', maxLength: 60 },
-                { name: 'metaDescription', type: 'textarea', maxLength: 160 },
+                {
+                  name: 'metaTitle',
+                  type: 'text',
+                  maxLength: 60,
+                  admin: { description: 'Title в SERP для sub-страницы. До 60 символов.' },
+                },
+                {
+                  name: 'metaDescription',
+                  type: 'textarea',
+                  maxLength: 160,
+                  admin: { description: 'Description в SERP. 140-160 символов оптимум.' },
+                },
               ],
             },
           ],
@@ -111,9 +187,23 @@ export const Services: CollectionConfig = {
               minRows: 0,
               maxRows: 12,
               labels: { singular: 'FAQ', plural: 'Общие FAQ' },
+              admin: {
+                description: 'FAQ на pillar-странице. Идёт в FAQPage Schema для GEO.',
+              },
               fields: [
-                { name: 'question', type: 'text', required: true, maxLength: 160 },
-                { name: 'answer', type: 'richText', required: true },
+                {
+                  name: 'question',
+                  type: 'text',
+                  required: true,
+                  maxLength: 160,
+                  admin: { description: 'Вопрос так, как формулирует клиент в Яндексе.' },
+                },
+                {
+                  name: 'answer',
+                  type: 'richText',
+                  required: true,
+                  admin: { description: 'Прямой ответ — без воды, 2-4 предложения.' },
+                },
               ],
             },
           ],
@@ -122,16 +212,36 @@ export const Services: CollectionConfig = {
           label: 'SEO',
           description: 'Meta-теги, OG, JSON-LD override.',
           fields: [
-            { name: 'metaTitle', type: 'text', required: true, maxLength: 60 },
+            {
+              name: 'metaTitle',
+              type: 'text',
+              required: true,
+              maxLength: 60,
+              admin: { description: 'Title в SERP. Оптимум 50-60 символов с услугой и регионом.' },
+            },
             {
               name: 'metaDescription',
               type: 'textarea',
               required: true,
               minLength: 140,
               maxLength: 160,
+              admin: {
+                description: 'Description в SERP. 140-160 символов с УТП и call-to-action.',
+              },
             },
-            { name: 'ogImage', type: 'upload', relationTo: 'media' },
-            { name: 'schemaJsonLdOverride', type: 'json' },
+            {
+              name: 'ogImage',
+              type: 'upload',
+              relationTo: 'media',
+              admin: { description: 'Картинка в шаринге (Telegram/VK/WA). 1200×630.' },
+            },
+            {
+              name: 'schemaJsonLdOverride',
+              type: 'json',
+              admin: {
+                description: 'JSON-LD override — только если автогенерируемая schema плохая.',
+              },
+            },
           ],
         },
         {
@@ -144,6 +254,9 @@ export const Services: CollectionConfig = {
               relationTo: 'services',
               hasMany: true,
               maxRows: 3,
+              admin: {
+                description: 'До 3 связанных услуг для блока «Похожие» на странице.',
+              },
             },
           ],
         },
