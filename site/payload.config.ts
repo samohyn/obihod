@@ -36,9 +36,13 @@ export default buildConfig({
       // как corrupt (вид «кривого favicon» на скрине prod 2026-04-30).
       // Используем .ico с правильным MIME + добавляем PNG fallback для
       // современных браузеров (Next.js auto-публикует app/icon.png → /icon.png).
+      // PANEL-FAVICON-BRAND (2026-05-01): зеркалим публичный набор от art
+      // (favicon.ico + favicon.svg + apple-touch-icon.png). Бренд-favicon ОБИХОД
+      // §3 master lockup — единый на admin + public, см. note-art.md.
       icons: [
         { rel: 'icon', type: 'image/x-icon', url: '/favicon.ico' },
-        { rel: 'icon', type: 'image/png', url: '/icon.png' },
+        { rel: 'icon', type: 'image/svg+xml', url: '/favicon.svg' },
+        { rel: 'apple-touch-icon', url: '/apple-touch-icon.png' },
       ],
     },
     components: {

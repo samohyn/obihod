@@ -453,10 +453,12 @@ test.describe('OBI-19 — Admin design compliance (Wave 1)', () => {
     )
   })
 
-  test('Wave 9 (US-12): favicon meta type/url consistency', async () => {
-    // §9.3 — payload.config.ts admin.meta.icons имел type: 'image/png' для
-    // url: '/favicon.ico' (mismatch). Fix: type: 'image/x-icon' для .ico +
-    // PNG fallback.
+  test('PANEL-FAVICON-BRAND (post-W9): favicon meta type/url consistency', async () => {
+    // PANEL-FAVICON-BRAND 2026-05-01 — бренд-favicon ОБИХОД (§3 master lockup):
+    // payload.config.ts admin.meta.icons теперь синхронизирует публичный набор:
+    // .ico (multi-res) + .svg (primary, modern browsers) + apple-touch-icon (180×180).
+    // Legacy `/icon.png` удалён (US-3 orphan, перекрывал metadata через Next.js
+    // auto-convention).
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const fs = require('fs') as typeof import('fs')
     // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -464,7 +466,13 @@ test.describe('OBI-19 — Admin design compliance (Wave 1)', () => {
     const cfg = fs.readFileSync(path.resolve(__dirname, '../../payload.config.ts'), 'utf-8')
     // .ico с правильным MIME
     expect(cfg).toMatch(/type:\s*['"]image\/x-icon['"][^}]*url:\s*['"]\/favicon\.ico['"]/)
-    // PNG fallback
-    expect(cfg).toMatch(/type:\s*['"]image\/png['"][^}]*url:\s*['"]\/icon\.png['"]/)
+    // SVG primary (modern browsers)
+    expect(cfg).toMatch(/type:\s*['"]image\/svg\+xml['"][^}]*url:\s*['"]\/favicon\.svg['"]/)
+    // apple-touch-icon (iOS Safari home-screen)
+    expect(cfg).toMatch(
+      /rel:\s*['"]apple-touch-icon['"][^}]*url:\s*['"]\/apple-touch-icon\.png['"]/,
+    )
+    // Legacy /icon.png должен отсутствовать (orphan US-3, перекрывал metadata)
+    expect(cfg).not.toMatch(/url:\s*['"]\/icon\.png['"]/)
   })
 })
