@@ -237,3 +237,29 @@ specs/US-12-admin-redesign/
 - Ветка `feature/us-12-w3-page-catalog` физически не создана — это работа be-panel/fe-panel в их сессии (создаётся от main через `git checkout -b feature/us-12-w3-page-catalog main`).
 - Никакого кода не написано (popanel — координирует, gate, и DoD; реализация — be-panel + fe-panel).
 - Hand-off log в backlog'е — фиксация, не runtime-уведомление; оператор переключит роль через `@be-panel` или `@fe-panel` для старта.
+
+---
+
+## Decision log 2026-04-30 (auto-mode сессия продолжение)
+
+### D-2026-04-30-03 · Прогресс через 3 PR + W4 фактически done
+
+**Контекст:** оператор «делай дальше» в auto mode. popanel импersonates fe-panel + be-panel для execution.
+
+**3 открытия за разведку:**
+1. **W2.A v2 уже в main** (commits PAN-15 + PAN-18 от 2026-04-29). Backlog был устаревшим.
+2. **W4 структурно done в main** — все 10 коллекций (Services 6 tabs, Cases 4, Blog 5, Districts/B2BPages/Authors/ServiceDistricts/Leads/Media/SiteChrome) имеют `type: 'tabs'`. Реальный остаток W4 = CSS has-error indicator (1 правило) + cw `admin.description` audit.
+3. **W5 регистрация через `views.list.Empty`** API не verified (та же категория риска как `views.login` v1). W5 part 1 = инфраструктура; part 2 blocked by tamd.
+
+**3 PR в очереди (зафиксировано на момент написания):**
+- [#100](https://github.com/samohyn/obihod/pull/100) — W3 finish (catalog page + leads/count + LeadsBadge) — **MERGED** 2026-04-30
+- [#101](https://github.com/samohyn/obihod/pull/101) — W5 part 1 (EmptyCollection + Skeletons + pulse) — **MERGED** 2026-04-30
+- [#102](https://github.com/samohyn/obihod/pull/102) — W4 closure (has-error indicator + backlog/note-popanel update)
+- [#103](https://github.com/samohyn/obihod/pull/103) — W7 spec + ADR-0010 closure (W5 part 2)
+
+**Статус US-12 после merge всех PR:**
+- ✅ W1 / W2.A v2 / W3 / W4 (structural + CSS) / W5 part 1 — DONE
+- ✅ W5 part 2 — closed via ADR-0010 (skip registration, public exports only)
+- 📋 W6 Mobile / W7 Polish/a11y dev — спеки готовы (W7 spec в PR #103), W6 spec ещё не написан
+
+**Crit-path до US-12 release:** ≈2.7 ЧД (W6 + W7 + опц. cw audit).

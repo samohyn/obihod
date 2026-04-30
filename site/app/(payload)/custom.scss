@@ -328,6 +328,20 @@ a.nav__link[href*='/admin/collections/leads'][data-leads-count]::after {
   outline-offset: 2px;
 }
 
+/* Validation error indicator на tab (Wave 4 · sa-panel-wave4 §4.6).
+ * Native Payload добавляет `has-error` class или `aria-invalid="true"` на
+ * tab при validation failure внутри. Красная точка справа от label
+ * сигналит оператору на какой tab нужно вернуться. */
+.payload__app .tabs-field__tab-button.has-error::after,
+.payload__app .tabs-field__tab-button[aria-invalid='true']::after {
+  content: '•';
+  color: var(--brand-obihod-danger);
+  margin-left: 6px;
+  font-weight: 700;
+  font-size: 1.1em;
+  line-height: 1;
+}
+
 /* ────────────────────────────────────────────────────────────────────
  *  LOGIN SCREEN — карточка-форма 320px по brand-guide §12.1
  *
