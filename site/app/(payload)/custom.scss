@@ -533,4 +533,142 @@ a.nav__link[href*='/admin/collections/leads'][data-leads-count]::after {
   .brand-skeleton .brand-skeleton__bar {
     animation: none;
   }
+  /* Disable smooth tabs scroll on mobile когда reduced-motion */
+  .tabs-field__tabs {
+    scroll-behavior: auto;
+  }
 }
+
+/* ────────────────────────────────────────────────────────────────────
+ *  MOBILE RESPONSIVE (Wave 6 · PAN-7, sa-panel-wave6.md)
+ *  Approach: CSS-only @media queries (ADR-0010 — override custom views
+ *  отвергнут). Breakpoints: tablet ≤1024px, mobile ≤640px.
+ *
+ *  Все Payload selectors verified через DOM debug 2026-04-30 на live admin:
+ *  - aside.nav (НЕ .nav-wrapper) — sidebar
+ *  - .nav-toggler (с .hamburger icon внутри) — burger button
+ *  - .template-default--nav-open (body class) — drawer open state
+ *  - tr.row-N + td.cell-<fieldname> — list rows/cells
+ *  - .tabs-field__tabs (НЕ __tabs-list) — tabs row
+ *  - .tabs-field__tab-button + --active modifier
+ * ──────────────────────────────────────────────────────────────────── */
+
+/* §6.3 Tablet+mobile common (≤1024px) — touch targets WCAG 2.5.5 + sidebar.
+ * NOTE: Payload использует `@layer payload-default` для своих стилей — наш
+ * vanilla CSS уступает по cascade order. Используем `!important` на rules
+ * которые перебивают native layout (touch heights, overflow). reason:
+ * Payload @layer cascade override; см. DOM debug 2026-04-30. */
+@media (max-width: 1024px) {
+  /* Touch targets ≥44×44 (WCAG 2.5.5 AA) на всех interactive elements */
+  .payload__app button,
+  .payload__app .btn,
+  .payload__app .nav__link,
+  .payload__app .tabs-field__tab-button,
+  .login__form button[type='submit'],
+  .login__form a,
+  .nav-toggler {
+    min-height: 44px !important; /* reason: Payload @layer override */
+  }
+  .payload__app input:not([type='checkbox']):not([type='radio']),
+  .payload__app textarea,
+  .login__form input {
+    min-height: 44px !important; /* reason: Payload @layer override */
+  }
+
+  /* Hamburger nav-toggler — brand styling + visible touch zone */
+  .nav-toggler {
+    min-width: 44px !important; /* reason: Payload @layer override */
+    color: var(--brand-obihod-ink);
+  }
+
+  /* Sidebar drawer (aside.nav) — brand shadow при open state */
+  aside.nav.nav--nav-open {
+    box-shadow: 4px 0 16px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Backdrop при drawer open. Payload native не выставляет separate
+   * backdrop element — используем body-state class через :has() (CSS L4). */
+  body:has(.template-default--nav-open)::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(28, 28, 28, 0.4);
+    z-index: 50;
+    pointer-events: none;
+  }
+}
+
+/* §6.2/6.4-6.7 Mobile-only (≤640px) */
+@media (max-width: 640px) {
+  /* §6.2 Login fullscreen */
+  .login {
+    padding: 16px 16px 32px;
+    min-height: 100vh;
+  }
+  .login__form {
+    /* override desktop 320px → 100%. reason: brand-guide §12.1 mobile
+     * = full-width form; Wave 1 уже использует !important на max-width. */
+    max-width: 100% !important;
+    padding: 24px 20px;
+  }
+
+  /* §6.4 List view → horizontal-scroll fallback (block-stack DROPPED:
+   * Payload не выставляет data-label attribute на td.cell-<name>,
+   * нужен JS-mapping для column titles. Fallback overflow-x: auto +
+   * white-space: nowrap оставляет table читаемым через swipe).
+   * !important — reason: Payload @layer override `display: table`. */
+  .payload__app table {
+    display: block !important; /* reason: Payload @layer override */
+    overflow-x: auto !important; /* reason: Payload @layer override */
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+  .payload__app table thead,
+  .payload__app table tbody {
+    display: table !important; /* reason: keep table-row inside scrollable wrapper */
+    width: max-content;
+    min-width: 100%;
+  }
+  .payload__app table td,
+  .payload__app table th {
+    white-space: normal; /* cell content wraps, but row stays table-row */
+  }
+
+  /* §6.5 Tabs horizontal scroll + scroll-snap-x.
+   * !important — reason: Payload @layer override `flex-wrap` и `overflow`. */
+  .tabs-field__tabs {
+    overflow-x: auto !important; /* reason: Payload @layer override */
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    flex-wrap: nowrap !important; /* reason: Payload @layer override */
+    scrollbar-width: none;
+  }
+  .tabs-field__tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .tabs-field__tab-button {
+    scroll-snap-align: start;
+    min-width: max-content; /* prevent text-truncate */
+    padding: 10px 14px;
+  }
+
+  /* §6.6 PageCatalogWidget scrollable (max-height + overflow-y).
+   * Selector через aria-label установленный в PageCatalogWidget.tsx */
+  section[aria-label='Свежие изменения'],
+  section[aria-label='Каталог опубликованных страниц'] {
+    max-height: 360px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* §6.7 Bulk-action disabled — скрываем select-checkbox column на mobile
+   * (cell-_select — first cell в каждой row, проверено DOM debug).
+   * !important — reason: Payload @layer override `display: table-cell`. */
+  .payload__app td.cell-_select,
+  .payload__app th:first-child:has(input[type='checkbox']) {
+    display: none !important; /* reason: Payload @layer override */
+  }
+}
+
+/* §6.1 Desktop 1440+ — no changes (baseline остаётся) */
