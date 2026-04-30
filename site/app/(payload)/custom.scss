@@ -832,3 +832,48 @@ a.nav__link[href*='/admin/globals/seo-settings'] {
 a.nav__link[href*='/admin/globals/site-chrome'] {
   --brand-obihod-nav-icon: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='16' rx='1.2'/><path d='M3 8 L21 8'/><circle cx='6' cy='6' r='0.6' fill='%23000'/><circle cx='8' cy='6' r='0.6' fill='%23000'/><path d='M6 12 L18 12' stroke-dasharray='2 1.5'/><path d='M6 16 L14 16' stroke-dasharray='2 1.5'/></svg>");
 }
+
+/* ────────────────────────────────────────────────────────────────────
+ *  PANEL-LIST-CREATE-AMBER (US-12 W9 follow-up, RICE 21)
+ *  brand-guide §12.4.1: primary CTA = янтарный #e6a23c на ink #1c1c1c.
+ *  Native Payload list-create-new-doc__create-new-button использует
+ *  .btn--style-pill (bg #d6d0bf line-hover) — neutral grey, не primary.
+ *  Daily-use оператора → стилизуем как primary CTA. Token-map зеркало
+ *  W1 .btn--style-primary (lines 155-185), но без .payload__app префикса
+ *  (verified W8/W9: ancestor отсутствует на admin shell).
+ * ──────────────────────────────────────────────────────────────────── */
+.list-create-new-doc__create-new-button {
+  background-color: var(--brand-obihod-accent);
+  border-color: var(--brand-obihod-accent);
+  color: var(--brand-obihod-ink);
+  font-weight: 600;
+  transition:
+    background-color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard),
+    border-color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard),
+    transform 80ms var(--brand-obihod-ease-standard),
+    box-shadow var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard);
+}
+
+.list-create-new-doc__create-new-button:hover:not([disabled]) {
+  background-color: var(--brand-obihod-accent-hover);
+  border-color: var(--brand-obihod-accent-hover);
+  color: var(--brand-obihod-ink);
+}
+
+.list-create-new-doc__create-new-button:active:not([disabled]) {
+  background-color: var(--brand-obihod-accent-ink);
+  border-color: var(--brand-obihod-accent-ink);
+  transform: translateY(1px);
+}
+
+.list-create-new-doc__create-new-button:focus-visible {
+  outline: none;
+  box-shadow: var(--brand-obihod-shadow-focus-accent);
+}
+
+/* Reduced-motion: отключаем translate на pressed (motion.json guardrails) */
+@media (prefers-reduced-motion: reduce) {
+  .list-create-new-doc__create-new-button:active {
+    transform: none;
+  }
+}

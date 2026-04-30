@@ -425,6 +425,34 @@ test.describe('OBI-19 — Admin design compliance (Wave 1)', () => {
     expect(src).toContain('О')
   })
 
+  test('PANEL-LIST-CREATE-AMBER (US-12 W9 follow-up): "Создать" pill amber primary CTA', async () => {
+    // brand-guide §12.4.1 primary CTA = #e6a23c amber. Native Payload
+    // .list-create-new-doc__create-new-button использует .btn--style-pill (#d6d0bf
+    // line-hover) — neutral grey. Custom.scss override на amber. Static check
+    // через CSS rules (без auth-required runtime).
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const fs = require('fs') as typeof import('fs')
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const path = require('path') as typeof import('path')
+    const css = fs.readFileSync(path.resolve(__dirname, '../../app/(payload)/custom.scss'), 'utf-8')
+    // Базовое правило с amber bg
+    expect(css).toMatch(
+      /\.list-create-new-doc__create-new-button\s*\{[^}]*background-color:\s*var\(--brand-obihod-accent\)/,
+    )
+    // Hover state с accent-hover
+    expect(css).toMatch(
+      /\.list-create-new-doc__create-new-button:hover[^{]*\{[^}]*background-color:\s*var\(--brand-obihod-accent-hover\)/,
+    )
+    // Pressed state с translateY (transform)
+    expect(css).toMatch(
+      /\.list-create-new-doc__create-new-button:active[^{]*\{[^}]*transform:\s*translateY\(1px\)/,
+    )
+    // Reduced-motion override
+    expect(css).toMatch(
+      /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*\.list-create-new-doc__create-new-button:active[^}]*transform:\s*none/,
+    )
+  })
+
   test('Wave 9 (US-12): favicon meta type/url consistency', async () => {
     // §9.3 — payload.config.ts admin.meta.icons имел type: 'image/png' для
     // url: '/favicon.ico' (mismatch). Fix: type: 'image/x-icon' для .ico +
