@@ -51,6 +51,23 @@ export const metadata: Metadata = {
   },
   twitter: { card: 'summary_large_image' },
   robots: { index: true, follow: true },
+  // PANEL-FAVICON-BRAND (2026-05-01): бренд-favicon ОБИХОД на всём периметре.
+  // Source assets от art (note-art.md) — §3 brand-guide master lockup
+  // (скруглённый квадрат + кремовая «О» на primary `#2d5a3d`).
+  // favicon.ico лежит в site/app/ (Next.js 16 auto-convention), но дублируем
+  // через metadata API чтобы явно подвязать SVG + apple-touch + PWA-icons.
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/apple-touch-icon.png',
+    other: [
+      { rel: 'icon', url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { rel: 'icon', url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+    ],
+  },
+  manifest: '/site.webmanifest',
 }
 
 export default async function MarketingLayout({
