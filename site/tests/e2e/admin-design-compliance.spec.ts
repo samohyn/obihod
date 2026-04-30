@@ -162,4 +162,121 @@ test.describe('OBI-19 — Admin design compliance (Wave 1)', () => {
 
     await expect(page.getByText('Каталог опубликованных страниц')).toBeVisible()
   })
+
+  /* ───────── W7 Polish smoke (sa-panel-wave7.md §7.2) ───────── */
+
+  test('Wave 4 (PAN-3): tabs has-error CSS rule deployed (red dot indicator)', async ({ page }) => {
+    const resp = await page.goto(ADMIN_PATH, { waitUntil: 'domcontentloaded' })
+    if (!resp || resp.status() >= 500) {
+      test.skip(true, `Admin не отвечает (${resp?.status()})`)
+    }
+    // Проверка что W4 closure CSS rule (has-error::after content '•') в stylesheet
+    const ruleDeployed = await page.evaluate(() => {
+      for (const sheet of Array.from(document.styleSheets)) {
+        try {
+          for (const rule of Array.from(sheet.cssRules || [])) {
+            const r = rule as CSSStyleRule
+            if (
+              r.selectorText &&
+              /tabs-field__tab-button.*has-error.*::after|tabs-field__tab-button.*aria-invalid.*::after/.test(
+                r.selectorText,
+              ) &&
+              /'•'|"•"/.test(r.cssText)
+            ) {
+              return true
+            }
+          }
+        } catch {
+          // skip
+        }
+      }
+      return false
+    })
+    expect(ruleDeployed, 'W4 has-error tab indicator CSS rule должен быть в custom.scss').toBe(true)
+  })
+
+  test('Wave 5 part 1 (PAN-4): brand-skeleton-pulse keyframes deployed', async ({ page }) => {
+    const resp = await page.goto(ADMIN_PATH, { waitUntil: 'domcontentloaded' })
+    if (!resp || resp.status() >= 500) {
+      test.skip(true, `Admin не отвечает (${resp?.status()})`)
+    }
+    // Verify @keyframes brand-skeleton-pulse + .brand-skeleton__bar { animation } в DOM
+    const result = await page.evaluate(() => {
+      let hasKeyframes = false
+      let hasAnimationRule = false
+      for (const sheet of Array.from(document.styleSheets)) {
+        try {
+          for (const rule of Array.from(sheet.cssRules || [])) {
+            // CSSKeyframesRule has type === 7 (CSSRule.KEYFRAMES_RULE)
+            if (
+              rule.constructor.name === 'CSSKeyframesRule' &&
+              (rule as CSSKeyframesRule).name === 'brand-skeleton-pulse'
+            ) {
+              hasKeyframes = true
+            }
+            const sr = rule as CSSStyleRule
+            if (
+              sr.selectorText &&
+              /\.brand-skeleton.*\.brand-skeleton__bar/.test(sr.selectorText) &&
+              /brand-skeleton-pulse/.test(sr.cssText)
+            ) {
+              hasAnimationRule = true
+            }
+          }
+        } catch {
+          // skip
+        }
+      }
+      return { hasKeyframes, hasAnimationRule }
+    })
+    expect(result.hasKeyframes, '@keyframes brand-skeleton-pulse должен быть в custom.scss').toBe(
+      true,
+    )
+    expect(
+      result.hasAnimationRule,
+      '.brand-skeleton__bar animation rule должен быть в custom.scss',
+    ).toBe(true)
+  })
+
+  test('Wave 6 (PAN-7): mobile @media (max-width: 640px) deployed', async ({ page }) => {
+    const resp = await page.goto(ADMIN_PATH, { waitUntil: 'domcontentloaded' })
+    if (!resp || resp.status() >= 500) {
+      test.skip(true, `Admin не отвечает (${resp?.status()})`)
+    }
+    // Verify W6 mobile breakpoints + key rules
+    const found = await page.evaluate(() => {
+      const r = { mobile: false, tablet: false, loginFullscreen: false, tabsScroll: false }
+      for (const sheet of Array.from(document.styleSheets)) {
+        try {
+          for (const rule of Array.from(sheet.cssRules || [])) {
+            const mq = rule as CSSMediaRule
+            if (mq.media && mq.media.mediaText.includes('640')) {
+              r.mobile = true
+              for (const inner of Array.from(mq.cssRules || [])) {
+                const ir = inner as CSSStyleRule
+                if (
+                  /login__form/.test(ir.selectorText || '') &&
+                  /max-width:\s*100/.test(ir.cssText)
+                )
+                  r.loginFullscreen = true
+                if (
+                  /tabs-field__tabs$/.test(ir.selectorText || '') &&
+                  /overflow-x:\s*auto/.test(ir.cssText)
+                )
+                  r.tabsScroll = true
+              }
+            }
+            if (mq.media && mq.media.mediaText.includes('1024')) r.tablet = true
+          }
+        } catch {
+          // skip
+        }
+      }
+      return r
+    })
+    expect(found.mobile, '@media (max-width: 640px) должен быть deployed').toBe(true)
+    expect(found.tablet, '@media (max-width: 1024px) должен быть deployed').toBe(true)
+    expect(found.loginFullscreen, 'login fullscreen mobile rule deployed').toBe(true)
+    expect(found.tabsScroll, 'tabs horizontal-scroll mobile rule deployed').toBe(true)
+  })
 })
