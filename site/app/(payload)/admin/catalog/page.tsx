@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react'
+import type { Metadata } from 'next'
 import { headers as nextHeaders } from 'next/headers'
 import { redirect } from 'next/navigation'
 
@@ -17,9 +18,16 @@ import { PageCatalog } from '@/components/admin/PageCatalog'
  *
  * MVP без client-side фильтров/поиска (Karpathy простота — оператор-один,
  * 53 записи, фильтрация позже как W3.1 polish если запросит).
+ *
+ * a11y W7 (PAN-8): document-title metadata обязательна (axe-core
+ * `document-title (serious)` — WCAG 2.4.2 Page Titled).
  */
 
 export const dynamic = 'force-dynamic'
+
+export const metadata: Metadata = {
+  title: 'Каталог опубликованных страниц — Обиход admin',
+}
 
 const layoutStyle: CSSProperties = {
   padding: '32px 48px',
