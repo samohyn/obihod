@@ -77,6 +77,7 @@ update_protocol: каждый PO команды держит свою секци
 | ID | Что | Дата merge |
 |---|---|---|
 | US-12 W1 | custom.scss 375 строк — admin design refresh (OBI-19) | 2026-04-27 |
+| **US-12 W5 part 2** | Per-collection EmptyState/Loading registration — closed by [ADR-0010](../team/adr/ADR-0010-payload-views-list-customization.md) (Payload 3.84 не имеет `views.list.Empty/Loading` API; компоненты остаются как public exports) | 2026-04-30 (closure через ADR) |
 
 ### Dropped
 
