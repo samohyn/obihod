@@ -375,4 +375,68 @@ test.describe('OBI-19 — Admin design compliance (Wave 1)', () => {
       items.length - 1,
     )
   })
+
+  test('Wave 9 (US-12): force-light theme depth — --theme-elevation-* light даже при dark', async ({
+    page,
+  }) => {
+    // §9.1 (sa-panel-wave9.md). Payload в data-theme='dark' инвертирует
+    // --theme-elevation-* через var(--color-base-N). Без W9 override input
+    // background = #15140f (тёмный), tab/sidebar тёмные. После W9 явный
+    // override на light values. Этот тест force-set data-theme=dark и проверяет
+    // computed values остаются light.
+    const resp = await page.goto(ADMIN_PATH, { waitUntil: 'domcontentloaded' })
+    if (!resp || resp.status() >= 500) {
+      test.skip(true, `Admin не отвечает (status=${resp?.status()}) — пропуск`)
+    }
+    const tokens = await page.evaluate(() => {
+      document.documentElement.setAttribute('data-theme', 'dark')
+      const cs = getComputedStyle(document.documentElement)
+      return {
+        bg: cs.getPropertyValue('--theme-bg').trim(),
+        elev0: cs.getPropertyValue('--theme-elevation-0').trim(),
+        elev100: cs.getPropertyValue('--theme-elevation-100').trim(),
+        inputBg: cs.getPropertyValue('--theme-input-bg').trim(),
+        text: cs.getPropertyValue('--theme-text').trim(),
+      }
+    })
+    expect(tokens.bg.toLowerCase()).toBe('#f7f5f0')
+    expect(tokens.elev0.toLowerCase()).toBe('#f7f5f0')
+    expect(tokens.elev100.toLowerCase()).toBe('#e6e1d6')
+    // --theme-input-bg может быть '#fff' (короткая запись) или '#ffffff'
+    expect(['#fff', '#ffffff']).toContain(tokens.inputBg.toLowerCase())
+    expect(tokens.text.toLowerCase()).toBe('#1c1c1c')
+  })
+
+  test('Wave 9 (US-12): BrandIcon SVG 20×20 для step-nav slot fit', async () => {
+    // §9.2 — BrandIcon был 32×32, step-nav slot height 20px → cropping. Fix
+    // 20×20. Тест читает BrandIcon.tsx и проверяет SVG dimensions без
+    // запроса к dev server (статический check).
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const fs = require('fs') as typeof import('fs')
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const path = require('path') as typeof import('path')
+    const src = fs.readFileSync(
+      path.resolve(__dirname, '../../components/admin/BrandIcon.tsx'),
+      'utf-8',
+    )
+    expect(src).toMatch(/width="20"\s+height="20"/)
+    expect(src).toMatch(/viewBox="0 0 20 20"/)
+    // Сохраняем кириллицу 'О' (не латинская O)
+    expect(src).toContain('О')
+  })
+
+  test('Wave 9 (US-12): favicon meta type/url consistency', async () => {
+    // §9.3 — payload.config.ts admin.meta.icons имел type: 'image/png' для
+    // url: '/favicon.ico' (mismatch). Fix: type: 'image/x-icon' для .ico +
+    // PNG fallback.
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const fs = require('fs') as typeof import('fs')
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const path = require('path') as typeof import('path')
+    const cfg = fs.readFileSync(path.resolve(__dirname, '../../payload.config.ts'), 'utf-8')
+    // .ico с правильным MIME
+    expect(cfg).toMatch(/type:\s*['"]image\/x-icon['"][^}]*url:\s*['"]\/favicon\.ico['"]/)
+    // PNG fallback
+    expect(cfg).toMatch(/type:\s*['"]image\/png['"][^}]*url:\s*['"]\/icon\.png['"]/)
+  })
 })
