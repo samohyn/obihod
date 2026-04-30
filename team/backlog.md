@@ -55,7 +55,7 @@ update_protocol: каждый PO команды держит свою секци
 | ID | Что | Owner | Effort | RICE | M | Статус |
 |---|---|---|---|---|---|---|
 | US-12 W6 | Mobile admin responsive (`≤640px`, list/edit views) | fe-panel + ux-panel | 1.5 чд | 2×3×0.6 / 1.5 = 2.4 | S | спека не написана, после Waves 2-5 в `panel/integration` |
-| US-12 W7 | Polish + a11y WCAG 2.2 AA + Playwright admin smoke (`admin-design-compliance.spec.ts`) | qa-panel + cr-panel | 1 чд | 5×4×1.0 / 1 = 20 | M | спека не написана, после W6 — release gate |
+| US-12 W7 | Polish + a11y WCAG 2.2 AA + Playwright admin smoke (axe-core integration + 5+ routes + W3/W4/W5 polish smoke + reduced-motion + release readiness gate) | qa-panel + cr-panel + release + leadqa | 1.2 чд | 5×4×1.0 / 1.2 = 16.7 | M | **spec written 2026-04-30 sa-panel-wave7.md** (draft, popanel review pending). Не блокирует W5 part 2 / W6, может стартовать после approve. |
 
 ### Later (post-US-12)
 
