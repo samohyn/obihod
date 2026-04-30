@@ -281,6 +281,28 @@ html[data-theme='dark'] {
   outline-offset: -2px;
 }
 
+/* Sidebar Leads badge counter (Wave 3 · PAN-6 part 3, sa-panel-wave3 §3.5).
+ * Plan B: client polls /api/admin/leads/count?status=new и проставляет
+ * data-leads-count attribute на nav-link Leads через MutationObserver.
+ *
+ * NOTE: `.payload__app` префикс НЕ применим — sidebar nav__link не имеет этого
+ * ancestor (verified DOM 2026-04-30, аналогично login__form комментарий выше).
+ * Селектор привязан к классу `.nav__link` + attribute filter. */
+a.nav__link[href*='/admin/collections/leads'][data-leads-count]::after {
+  content: attr(data-leads-count);
+  display: inline-block;
+  margin-left: auto;
+  padding: 1px 7px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--brand-obihod-ink);
+  background-color: var(--brand-obihod-accent);
+  border-radius: 9px;
+}
+
 /* ────────────────────────────────────────────────────────────────────
  *  TABS (Edit-view длинных форм — art-concept-v2 §5, brand-guide §12.4)
  * ──────────────────────────────────────────────────────────────────── */
