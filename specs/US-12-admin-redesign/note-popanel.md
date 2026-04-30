@@ -361,3 +361,32 @@ popanel передаёт через PO orchestration (iron rule #7, без эс�
 19:00 popanel → do → green CI локально
 19:05 popanel → release → готов к gate (нужен PR + CI run + leadqa verify + operator approve)
 ```
+
+### D-2026-04-30-08 · PR #109 MERGED — US-12 закрыт в main
+
+**Merge:** оператор смержил [PR #109](https://github.com/samohyn/obihod/pull/109) 2026-04-30 17:49 UTC. Merge commit `9cc702f`.
+
+**Cleanup:** локальная и remote ветка `feature/us-12-w8-prod-alignment` удалены. main pulled.
+
+**Backlog обновлён (`team/backlog.md`):**
+- panel.now: пуст (US-12 закрыт)
+- panel.next: добавлен `US-12 release closure` (RC-2 + leadqa post-deploy + operator approve + do deploy)
+- panel.later: добавлены `PANEL-GLOBAL-SEARCH` (Q-3 deferred, RICE 3.4) + `PANEL-PERSONS-RENAME` (Q-2 deferred, RICE 8)
+- panel.done: добавлены W6 (PR #106), W7 (PR #107), W8 (PR #109)
+- panel.risks: обновлены — US-12 deploy risk (mask-image cross-browser, mobile drawer, a11y); PANEL-GLOBAL-SEARCH performance; PANEL-PERSONS-RENAME slug safety
+
+**Что дальше (для следующей сессии):**
+
+1. **Deploy 9cc702f на прод** — `do` через `deploy.yml` (workflow_dispatch). Содержит W6 + W7 + W8 surface — non-trivial.
+2. **leadqa post-deploy smoke** на `obikhod.ru/admin`:
+   - W8 §8.1 sidebar order: 01→02→03→04→09→05 (verify через Playwright DOM snapshot)
+   - W8 §8.2 13 иконок видны (manual screenshot review + axe 0 violations)
+   - W8 §8.3 dashboard clean (no ModularDashboard cards)
+   - W6 mobile drawer работает на iPhone Safari (mask-image cross-browser sanity)
+   - W7 a11y axe-core 0 violations на 5 routes
+   - Отчёт: `team/release-notes/leadqa-RC-2.md`
+3. **Оператор approve** только после leadqa report.
+4. **`do` deploy** + `cpo` post-release retro.
+5. **US-12 формально CLOSED** — переход к `PANEL-LEADS-INBOX` (RICE 11.25, главный кандидат next).
+
+**Crit-path до US-12 actual closure:** ~0.5 ЧД (release notes + leadqa real-browser smoke + operator approve + do deploy).

@@ -41,18 +41,13 @@ update_protocol: каждый PO команды держит свою секци
 
 ### Now
 
-| ID | Что | Owner | Effort | RICE | M | Статус |
-|---|---|---|---|---|---|---|
-| **US-12 W2.A v2** | CSS-only Login UI (Approach E через `custom.scss` + native slots, brand-guide §12.1) | fe-panel + qa-panel + cr-panel | 0.7 чд | 5×4×1.0 / 0.7 = 28.6 | M | **in-dev, hand-off 2026-04-30** popanel → fe-panel. sa-panel-wave2a-v2.md approved, ADR-0007 Accepted. Ветка: `feature/us-12-w2a-login-css` от main. be-panel НЕ нужен (CSS-only). |
-| **US-12 W3** | PageCatalog page `/admin/catalog` + dashboard widget + CSV + Leads badge | be-panel + fe-panel | 1.5 чд | 5×5×0.9 / 1.5 = 15 | M | **in-dev, hand-off 2026-04-30** popanel → be-panel + fe-panel. sa-panel-wave3.md approved, ADR-0005 Accepted. Ветка: `feature/us-12-w3-page-catalog` от main. fe-panel подключается после своего W2.A merge (split scope). |
-| **US-12 W4** | Tabs field в 10 коллекциях + has-error indicator | structurally done | 0.1 чд | 5×4×0.8 / 0.1 = 160 | M | **structurally done в main** (Services 6 tabs, Cases 4, Blog 5, Districts/B2BPages/Authors/ServiceDistricts/Leads/Media/SiteChrome — все имеют tabs). Этот PR закрывает CSS has-error indicator. Pending follow-up: cw `admin.description` audit для всех fields. |
+(US-12 закрыт в main 2026-04-30 после merge W8 — `9cc702f`. Ждёт deploy → leadqa post-deploy smoke → operator approve → release closure.)
 
-### Next (US-12 closure)
+### Next (post-US-12)
 
 | ID | Что | Owner | Effort | RICE | M | Статус |
 |---|---|---|---|---|---|---|
-| **US-12 W6** | Mobile responsive admin (CSS-only `@media (max-width: 1024px/640px)` queries по ADR-0010) | qa-panel + fe-panel + cr-panel + leadqa | 1.3 чд | 2×3×0.7 / 1.3 = 3.2 | S | **spec written 2026-04-30 sa-panel-wave6.md** (draft, popanel review pending). 6 sections: login fullscreen, sidebar drawer, list-view block-stack, tabs h-scroll, widget scrollable, bulk-action disabled, touch targets 44×44 WCAG 2.5.5. После approve → qa-panel pre-flight DOM debug → fe-panel dev. Параллелен с W7 dev. |
-| US-12 W7 | Polish + a11y WCAG 2.2 AA + Playwright admin smoke (axe-core integration + 5+ routes + W3/W4/W5 polish smoke + reduced-motion + release readiness gate) | qa-panel + cr-panel + release + leadqa | 1.2 чд | 5×4×1.0 / 1.2 = 16.7 | M | **spec written 2026-04-30 sa-panel-wave7.md** (draft, popanel review pending). Не блокирует W5 part 2 / W6, может стартовать после approve. |
+| **US-12 release closure** | RC-2 от release · leadqa post-deploy smoke на проде (W6 mobile + W7 a11y + W8 alignment) · operator approve · do deploy · post-release retro от cpo | release + leadqa + do + cpo | 0.5 чд | — | M | blocked by deploy 9cc702f. После closure — переход к panel.later (PANEL-LEADS-INBOX как главный кандидат). |
 
 ### Later (post-US-12)
 
@@ -60,6 +55,8 @@ update_protocol: каждый PO команды держит свою секци
 |---|---|---|---|---|---|---|
 | PANEL-AUTH-2FA | TOTP 2FA коллекция + setup flow в Login (замена магического линка) | be-panel + fe-panel | 1 чд | 4×3×0.8 / 1 = 9.6 | S | idea, нужна sa-panel; не блокер релиза US-12 |
 | PANEL-LEADS-INBOX | Leads collection UX-полировка (status workflow, фильтры, быстрые действия) — main daily-use оператора | be-panel + fe-panel + ux-panel | 2 чд | 5×5×0.9 / 2 = 11.25 | M | nужна sa-panel; в работу после US-12 release |
+| PANEL-GLOBAL-SEARCH | Top-bar global search по контенту (REST aggregation 7 коллекций, как PageCatalog в W3) — закрывает §12.2 mockup `<input class="ad-search">` line 3016 | be-panel + fe-panel | 2.5 чд | 4×3×0.7 / 2.5 = 3.4 | C | deferred из US-12 W8 Q-3 (sa-panel-wave8.md). idea, нужна sa-panel |
+| PANEL-PERSONS-RENAME | Persons коллекция → решить рефакторить в "Команда" (label only) или объединить с Authors. brand-guide §12.2 mockup её не упоминает | popanel + cw + be-panel | 0.3 чд | 2×2×0.6 / 0.3 = 8 | C | deferred из US-12 W8 Q-2 (sa-panel-wave8.md). cosmetic, не блокер |
 | PANEL-BULK-PUBLISH | Bulk-publish + bulk-edit для Cases / Blog / Services / ServiceDistricts | be-panel + cms | 1.5 чд | 3×4×0.7 / 1.5 = 5.6 | C | idea, нужна sa-panel |
 | PANEL-AUDIT-LOG | Кто/что/когда менял (Payload `versions` history + diff view) | be-panel + dba | 2 чд | 2×3×0.6 / 2 = 1.8 | C | idea, нужна sa-panel + ADR (storage стратегия) |
 | PANEL-MEDIA-LIBRARY | Media browser + cleanup orphaned uploads | be-panel + fe-panel | 1.5 чд | 3×3×0.6 / 1.5 = 3.6 | C | idea, нужна sa-panel |
@@ -81,6 +78,9 @@ update_protocol: каждый PO команды держит свою секци
 | **US-12 W3 finish** | `/admin/catalog` page + `/api/admin/leads/count` + LeadsBadge sidebar pill | 2026-04-30 ([PR #100](https://github.com/samohyn/obihod/pull/100) MERGED) |
 | **US-12 W5 part 1** | EmptyCollection + 4 wrappers + SkeletonTable/Form + brand-skeleton pulse animation | 2026-04-30 ([PR #101](https://github.com/samohyn/obihod/pull/101) MERGED) |
 | **US-12 W5 part 2** | Per-collection EmptyState/Loading registration — closed by [ADR-0010](../team/adr/ADR-0010-payload-views-list-customization.md) (Payload 3.84 не имеет `views.list.Empty/Loading` API; компоненты остаются как public exports) | 2026-04-30 (closure через ADR) |
+| **US-12 W6** | Mobile responsive admin · 6 секций CSS-only @media queries (login fullscreen / sidebar drawer / list-view h-scroll / tabs h-scroll / widget scrollable / bulk-action disabled) + touch targets 44×44 WCAG 2.5.5 | 2026-04-30 ([PR #106](https://github.com/samohyn/obihod/pull/106) MERGED) |
+| **US-12 W7** | Polish + a11y WCAG 2.2 AA · @axe-core/playwright integration + 5+ routes + W3/W4/W5 polish smoke + reduced-motion + release readiness gate | 2026-04-30 ([PR #107](https://github.com/samohyn/obihod/pull/107) MERGED) |
+| **US-12 W8** | Admin v2 prod alignment · sidebar group order + 13 line-art SVG иконок (CSS mask-image, ADR-0011) + hide default ModularDashboard. Закрывает gap mockup §12.2/§12.3 vs prod | 2026-04-30 ([PR #109](https://github.com/samohyn/obihod/pull/109) MERGED) |
 
 ### Dropped
 
@@ -90,9 +90,9 @@ update_protocol: каждый PO команды держит свою секци
 
 ### Risks (popanel ведёт)
 
-- **W4 Tabs schema** — затрагивает 10 коллекций, минор регрессия может сломать существующие edit-views. Mitigation: ADR-0005 `:where()` обёртка + e2e admin smoke перед merge.
-- **W6 Mobile admin** — Payload native mobile-поддержка ограничена. Может потребоваться custom view для list/edit. Принимать решение в `sa-panel-wave6.md`.
-- **W7 Playwright admin** — нужен изолированный тест-юзер + seed для admin URL. Coordination с `dba`.
+- **US-12 release deploy** — 9cc702f содержит non-trivial CSS surface (W6 mobile + W7 a11y + W8 alignment). Post-deploy leadqa должен real-browser smoke на staging/prod, особенно: W8 sidebar icons (mask-image поддержка во всех browsers оператора), W6 mobile drawer (если оператор использует с телефона), W7 a11y axe routes. Mitigation: leadqa-RC-2 + screenshot evidence перед operator approve.
+- **PANEL-GLOBAL-SEARCH (later)** — REST aggregation по 7 коллекциям требует правильный pagination/cache; может задеть Payload Local API performance. Mitigation: ADR в момент написания sa-panel.
+- **PANEL-PERSONS-RENAME (later)** — переименование может сломать seed/migration logic если используется slug. Mitigation: только label rename без изменения slug.
 
 ---
 
