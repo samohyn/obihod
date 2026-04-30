@@ -486,7 +486,26 @@ a.nav__link[href*='/admin/collections/leads'][data-leads-count]::after {
 }
 
 /* ────────────────────────────────────────────────────────────────────
+ *  SKELETON pulse animation (Wave 5 · PAN-4, sa-panel-wave5 §5.2-5.3)
+ *  Используется в SkeletonTable + SkeletonForm. opacity 0.5→1→0.5 в 1.6s.
+ * ──────────────────────────────────────────────────────────────────── */
+@keyframes brand-skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.brand-skeleton .brand-skeleton__bar {
+  animation: brand-skeleton-pulse 1.6s var(--brand-obihod-ease-standard) infinite;
+}
+
+/* ────────────────────────────────────────────────────────────────────
  *  REDUCED MOTION — отключаем transform-translate (motion.json guardrails)
+ *  + skeleton pulse (a11y prefers-reduced-motion).
  * ──────────────────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .payload__app .btn--style-primary:active,
@@ -496,5 +515,8 @@ a.nav__link[href*='/admin/collections/leads'][data-leads-count]::after {
   .payload__app *,
   .login__form * {
     transition-duration: 0.01ms !important;
+  }
+  .brand-skeleton .brand-skeleton__bar {
+    animation: none;
   }
 }
