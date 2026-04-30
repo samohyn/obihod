@@ -399,7 +399,7 @@ export default () => (
 | `cw` финализирует empty texts (12 → 1 generic + Leads особый) | `cw` | 0.2 чд |
 | Generic `EmptyCollection.tsx` + Leads override | `fe-panel` | 0.2 чд |
 | `SkeletonTable` + `SkeletonForm` | `fe-panel` | 0.2 чд |
-| 12 коллекций — `admin.components.views.list.Empty/Loading` | `be-panel` | 0.2 чд |
+| ~~12 коллекций — `admin.components.views.list.Empty/Loading`~~ | ~~`be-panel`~~ | ~~0.2 чд~~ — **отменено по [ADR-0010](../../team/adr/ADR-0010-payload-views-list-customization.md)** (Payload 3.84 не имеет `views.list.Empty/Loading` API; компоненты остаются как public exports для catalog page + boundaries) |
 | `error.tsx` + `forbidden.tsx` + `not-found.tsx` | `fe-panel` | 0.2 чд |
 | custom.scss pulse animation + reduced-motion | `fe-panel` | 0.05 чд |
 | Toast (если Q1 = «in Wave 5») | `fe-panel` | 0.2 чд (опционально) |
@@ -417,4 +417,20 @@ export default () => (
 
 - `popanel` — Q1/Q2/Q3/Q4 approve
 - `cw` — финализировать empty texts (parallel start с popanel approve)
+
+---
+
+## ADR-0010 closure notice (2026-04-30)
+
+W5 part 2 (per-collection registration) **закрыт без подключения** по [ADR-0010](../../team/adr/ADR-0010-payload-views-list-customization.md).
+
+**Root cause:** проверка `node_modules/payload/dist/collections/config/types.d.ts:342-351` показала что `admin.components.views.list` имеет только `actions` + `Component`. `Empty`/`Loading` не существуют в Payload 3.84 API. Spec §5.1 (rewrite per Q3) ассумировал несуществующий API — это та же категория ошибки как `views.login` v1 (см. ADR-0007 lessons).
+
+**Решение по ADR-0010 — Альтернатива 4 (skip registration):**
+- `EmptyCollection` + `ServicesEmpty/CasesEmpty/BlogEmpty/LeadsEmpty` остаются как public exports в `site/components/admin/empty/`
+- Компоненты используются в `/admin/catalog` (через PageCatalog), `error.tsx`, `forbidden.tsx`, `not-found.tsx` (уже подключены)
+- Native list-views оператора показывают native «Документы не найдены» (acceptable degradation; visual inconsistency между custom routes и native list-views — задокументирована)
+- `SkeletonTable/Form` также остаются public exports — для будущих custom routes / Mobile views (W6)
+
+**Если оператор требует брендовый EmptyState в нативных list-views** — отдельная US с ADR-0011 для Альтернативы 1 (full list view override через `views.list.Component` × 11 collections, ~700 строк per collection, high regression risk).
 - `qa-panel` — pre-flight: проверить какие коллекции реально пустые на проде сейчас (для smoke testing fixtures)
