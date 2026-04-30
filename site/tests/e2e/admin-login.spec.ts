@@ -53,7 +53,17 @@ test.describe('PAN-16 — Admin login UI smoke', () => {
     await expect(page.getByText(/© 2026.*Обиход/)).toBeVisible()
   })
 
-  test('форма carд: white bg + 320px max-width + 32px padding + 10px radius', async ({ page }) => {
+  test('форма carд: white bg + 320px max-width + 32px padding + 10px radius', async ({
+    page,
+  }, testInfo) => {
+    // Desktop-only assertion: W6 mobile responsive (PR #106) переопределяет
+    // max-width 100% + padding 24×20 на ≤640px viewport. Mobile поведение
+    // покрыто admin-mobile.spec.ts.
+    test.skip(
+      testInfo.project.name !== 'chromium',
+      'Desktop-only: 320px max-width — mobile в admin-mobile.spec.ts',
+    )
+
     const resp = await page.goto('/admin/login/', { waitUntil: 'domcontentloaded' })
     if (!resp || resp.status() >= 500) {
       test.skip(true, `Admin не отвечает — пропуск`)
@@ -190,7 +200,15 @@ test.describe('PAN-16 — Admin login UI smoke', () => {
 
   test('AC-31: submit button width 100% + height ≈ 46px (не 116px double-layer)', async ({
     page,
-  }) => {
+  }, testInfo) => {
+    // Desktop-only: width=254px вычислено из 320px-2-64. На mobile (W6 PR #106)
+    // form занимает 100% viewport (например 412px на Pixel 7) → submit width != 254px.
+    // Mobile assertion (touch target ≥44px) в admin-mobile.spec.ts.
+    test.skip(
+      testInfo.project.name !== 'chromium',
+      'Desktop-only: 254px width derived from 320px form; mobile в admin-mobile.spec.ts',
+    )
+
     const resp = await page.goto('/admin/login/', { waitUntil: 'domcontentloaded' })
     if (!resp || resp.status() >= 500) test.skip(true, `Admin не отвечает — пропуск`)
 
