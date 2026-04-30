@@ -51,7 +51,7 @@ update_protocol: каждый PO команды держит свою секци
 
 | ID | Что | Owner | Effort | RICE | M | Статус |
 |---|---|---|---|---|---|---|
-| US-12 W6 | Mobile admin responsive (`≤640px`, list/edit views) | fe-panel + ux-panel | 1.5 чд | 2×3×0.6 / 1.5 = 2.4 | S | спека не написана, после Waves 2-5 смержены в main |
+| **US-12 W6** | Mobile responsive admin (CSS-only `@media (max-width: 1024px/640px)` queries по ADR-0010) | qa-panel + fe-panel + cr-panel + leadqa | 1.3 чд | 2×3×0.7 / 1.3 = 3.2 | S | **spec written 2026-04-30 sa-panel-wave6.md** (draft, popanel review pending). 6 sections: login fullscreen, sidebar drawer, list-view block-stack, tabs h-scroll, widget scrollable, bulk-action disabled, touch targets 44×44 WCAG 2.5.5. После approve → qa-panel pre-flight DOM debug → fe-panel dev. Параллелен с W7 dev. |
 | US-12 W7 | Polish + a11y WCAG 2.2 AA + Playwright admin smoke (axe-core integration + 5+ routes + W3/W4/W5 polish smoke + reduced-motion + release readiness gate) | qa-panel + cr-panel + release + leadqa | 1.2 чд | 5×4×1.0 / 1.2 = 16.7 | M | **spec written 2026-04-30 sa-panel-wave7.md** (draft, popanel review pending). Не блокирует W5 part 2 / W6, может стартовать после approve. |
 
 ### Later (post-US-12)
