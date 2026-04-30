@@ -281,6 +281,28 @@ html[data-theme='dark'] {
   outline-offset: -2px;
 }
 
+/* Sidebar Leads badge counter (Wave 3 · PAN-6 part 3, sa-panel-wave3 §3.5).
+ * Plan B: client polls /api/admin/leads/count?status=new и проставляет
+ * data-leads-count attribute на nav-link Leads через MutationObserver.
+ *
+ * NOTE: `.payload__app` префикс НЕ применим — sidebar nav__link не имеет этого
+ * ancestor (verified DOM 2026-04-30, аналогично login__form комментарий выше).
+ * Селектор привязан к классу `.nav__link` + attribute filter. */
+a.nav__link[href*='/admin/collections/leads'][data-leads-count]::after {
+  content: attr(data-leads-count);
+  display: inline-block;
+  margin-left: auto;
+  padding: 1px 7px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--brand-obihod-ink);
+  background-color: var(--brand-obihod-accent);
+  border-radius: 9px;
+}
+
 /* ────────────────────────────────────────────────────────────────────
  *  TABS (Edit-view длинных форм — art-concept-v2 §5, brand-guide §12.4)
  * ──────────────────────────────────────────────────────────────────── */
@@ -464,7 +486,26 @@ html[data-theme='dark'] {
 }
 
 /* ────────────────────────────────────────────────────────────────────
+ *  SKELETON pulse animation (Wave 5 · PAN-4, sa-panel-wave5 §5.2-5.3)
+ *  Используется в SkeletonTable + SkeletonForm. opacity 0.5→1→0.5 в 1.6s.
+ * ──────────────────────────────────────────────────────────────────── */
+@keyframes brand-skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.brand-skeleton .brand-skeleton__bar {
+  animation: brand-skeleton-pulse 1.6s var(--brand-obihod-ease-standard) infinite;
+}
+
+/* ────────────────────────────────────────────────────────────────────
  *  REDUCED MOTION — отключаем transform-translate (motion.json guardrails)
+ *  + skeleton pulse (a11y prefers-reduced-motion).
  * ──────────────────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .payload__app .btn--style-primary:active,
@@ -474,5 +515,8 @@ html[data-theme='dark'] {
   .payload__app *,
   .login__form * {
     transition-duration: 0.01ms !important;
+  }
+  .brand-skeleton .brand-skeleton__bar {
+    animation: none;
   }
 }

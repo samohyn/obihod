@@ -421,3 +421,13 @@ sequenceDiagram
 ---
 
 **Передаю → `fe-panel` (PAN-15)** для re-implement по Approach E.
+
+---
+
+## Hand-off log
+
+| Timestamp | From | To | Что |
+|---|---|---|---|
+| 2026-04-29 | sa-panel | popanel | Spec v2 готов, regression rewrite после v1 cancelled |
+| 2026-04-29 | popanel | sa-panel | Implicit approve через regression mandate оператора (memory `feedback_po_iron_rule_local_verify_and_cross_agents`) |
+| 2026-04-30 | popanel | fe-panel | **W2.A v2 в dev (вариант B параллельно с W3 за быстрый wow для оператора).** ADR-0005+ADR-0007 Accepted, seed-admin merged (PR #99) — оба блокера сняты. Ветка: `feature/us-12-w2a-login-css` от `main` (НЕ от ветки W3 — конфликтов нет, разные feature surfaces). Iron rules: (1) skill-check `frontend-patterns` + `ui-styling` перед стартом + зафиксировать в коммите; (2) brand-guide §12.1 = single source UI; (3) ADR-0007 Approach E (CSS-only через `custom.scss` + native slots, БЕЗ React view override); (4) a11y WCAG 2.2 AA + reduced-motion; (5) **local verification ДО push обязательна** (memory `feedback_po_iron_rule_local_verify_and_cross_agents`) — Docker Postgres + dev server + real browser smoke на `/admin/login` + DevTools Console verify per AC §"Local verification" блок; (6) do-checks (type-check + lint + format:check) ДО PR. Состав: fe-panel (CSS) + qa-panel (Playwright admin login spec параллельно) + cr-panel (review). be-panel НЕ нужен (CSS-only, no schema changes). После dev → cr-panel review → leadqa real-browser smoke → PR в main. |

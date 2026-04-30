@@ -37,16 +37,14 @@ update_protocol: каждый PO команды держит свою секци
 
 ## panel · Admin Payload
 
-**PO:** popanel · **branch:** `panel/integration` · **last update:** 2026-04-29
+**PO:** popanel · **branch:** feature-ветки от `main` (по pattern PR #99) · **last update:** 2026-04-30
 
 ### Now
 
 | ID | Что | Owner | Effort | RICE | M | Статус |
 |---|---|---|---|---|---|---|
-| **PANEL-DEV-SEED-ADMIN** | Seed admin user для local dev + Playwright fixtures (`pnpm seed:admin`, idempotent, `.env.example`, `AGENTS.md`) | be-panel + tamd | 0.3 + 0.5 чд | 5×4×1.0 / 0.3 = **66.7** | M | **verify-passed**, ready-to-merge — все 5 AC ✅, browser smoke ✅, do-checks ✅. Ждёт cr-panel + PR. · [spec](../specs/TASK-PANEL-DEV-SEED-ADMIN/sa-panel.md) |
-| US-12 W0 | ADR-0005 Admin Customization Strategy | tamd | 0.5 чд | 5×5×1.0 / 0.5 = 50 | M | в работе у tamd |
-| US-12 W2.A | Login UI email+password (поверх native Payload) | be-panel + fe-panel | 1 чд | 5×4×1.0 / 1 = 20 | M | dev-ready, sa-panel approved, blocked by W0 + PANEL-DEV-SEED-ADMIN |
-| US-12 W3 | PageCatalog page `/admin/catalog` + dashboard widget + CSV + Leads badge | be-panel + fe-panel | 1.5 чд | 5×5×0.9 / 1.5 = 15 | M | sa-panel approved, parallel |
+| **US-12 W2.A v2** | CSS-only Login UI (Approach E через `custom.scss` + native slots, brand-guide §12.1) | fe-panel + qa-panel + cr-panel | 0.7 чд | 5×4×1.0 / 0.7 = 28.6 | M | **in-dev, hand-off 2026-04-30** popanel → fe-panel. sa-panel-wave2a-v2.md approved, ADR-0007 Accepted. Ветка: `feature/us-12-w2a-login-css` от main. be-panel НЕ нужен (CSS-only). |
+| **US-12 W3** | PageCatalog page `/admin/catalog` + dashboard widget + CSV + Leads badge | be-panel + fe-panel | 1.5 чд | 5×5×0.9 / 1.5 = 15 | M | **in-dev, hand-off 2026-04-30** popanel → be-panel + fe-panel. sa-panel-wave3.md approved, ADR-0005 Accepted. Ветка: `feature/us-12-w3-page-catalog` от main. fe-panel подключается после своего W2.A merge (split scope). |
 | US-12 W4 | Tabs field в 10 коллекциях (Services, Districts, Cases, Blog, B2BPages, Authors, ServiceDistricts, SiteChrome, FAQ, Prices) | be-panel + cw | 1.5 чд | 5×4×0.8 / 1.5 = 10.7 | M | sa-panel approved, pending cw labels + be-panel schema audit, parallel |
 | US-12 W5 | Empty/Error/Skeleton финал (Payload providers + per-collection EmptyState + SkeletonTable + 500/403 boundaries) | fe-panel + cw | 1 чд | 4×3×0.9 / 1 = 10.8 | M | sa-panel approved, pending cw empty texts, parallel |
 
@@ -54,7 +52,7 @@ update_protocol: каждый PO команды держит свою секци
 
 | ID | Что | Owner | Effort | RICE | M | Статус |
 |---|---|---|---|---|---|---|
-| US-12 W6 | Mobile admin responsive (`≤640px`, list/edit views) | fe-panel + ux-panel | 1.5 чд | 2×3×0.6 / 1.5 = 2.4 | S | спека не написана, после Waves 2-5 в `panel/integration` |
+| US-12 W6 | Mobile admin responsive (`≤640px`, list/edit views) | fe-panel + ux-panel | 1.5 чд | 2×3×0.6 / 1.5 = 2.4 | S | спека не написана, после Waves 2-5 смержены в main |
 | US-12 W7 | Polish + a11y WCAG 2.2 AA + Playwright admin smoke (axe-core integration + 5+ routes + W3/W4/W5 polish smoke + reduced-motion + release readiness gate) | qa-panel + cr-panel + release + leadqa | 1.2 чд | 5×4×1.0 / 1.2 = 16.7 | M | **spec written 2026-04-30 sa-panel-wave7.md** (draft, popanel review pending). Не блокирует W5 part 2 / W6, может стартовать после approve. |
 
 ### Later (post-US-12)
@@ -77,6 +75,8 @@ update_protocol: каждый PO команды держит свою секци
 | ID | Что | Дата merge |
 |---|---|---|
 | US-12 W1 | custom.scss 375 строк — admin design refresh (OBI-19) | 2026-04-27 |
+| **US-12 W0** | ADR-0005 Admin Customization Strategy (3-уровневая стратегия + защитный контракт) | 2026-04-28 (Accepted; partially superseded by ADR-0007 для Login UI) |
+| **PANEL-DEV-SEED-ADMIN** | Seed admin user для local dev + Playwright fixtures + ADR-0009 CJS shim | 2026-04-29 (PR #99 MERGED) |
 | **US-12 W5 part 2** | Per-collection EmptyState/Loading registration — closed by [ADR-0010](../team/adr/ADR-0010-payload-views-list-customization.md) (Payload 3.84 не имеет `views.list.Empty/Loading` API; компоненты остаются как public exports) | 2026-04-30 (closure через ADR) |
 
 ### Dropped

@@ -47,6 +47,10 @@ export default buildConfig({
       afterDashboard: ['@/components/admin/PageCatalogWidget'],
       beforeLogin: ['@/components/admin/BeforeLoginLockup'],
       afterLogin: ['@/components/admin/AfterLoginFooter'],
+      // Wave 3 part 3 (PAN-6): sidebar Leads badge counter polling 30s через
+      // DOM injection [data-leads-count] (Plan B per ADR-0005 §2 +
+      // sa-panel-wave3.md §3.5). CSS селектор в custom.scss блок «SIDEBAR».
+      providers: ['@/components/admin/LeadsBadgeProvider'],
       // Wave 2.A (PAN-5) revert 2026-04-29: views.login НЕ в Payload 3.84 API
       // (см. node_modules/payload/dist/config/types.d.ts:746-756 — views принимает
       // только account / dashboard / [key:string] custom views, login обрабатывается
