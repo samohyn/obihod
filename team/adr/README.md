@@ -53,3 +53,4 @@ Architecture Decision Records. Владелец — `tamd`. Нумерация �
 | [0007](ADR-0007-payload-login-customization.md) | Payload 3.84 admin Login UI customization (CSS-only Approach E) | Accepted | 2026-04-29 |
 | [0008](ADR-0008-drop-linear-task-tracker.md) | Drop Linear task tracker (specs/ + team/backlog.md sole source of truth) | Accepted | 2026-04-29 |
 | [0009](ADR-0009-tsx-payload-cjs-shim.md) | tsx + Payload Local API CJS-shim для @next/env default-import | Accepted | 2026-04-29 |
+| [0010](ADR-0010-payload-views-list-customization.md) | Payload 3.84 list-view customization — skip registration, public exports only (W5 part 2 closure) | Accepted | 2026-04-30 |
