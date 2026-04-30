@@ -58,7 +58,6 @@ update_protocol: каждый PO команды держит свою секци
 | PANEL-GLOBAL-SEARCH | Top-bar global search по контенту (REST aggregation 7 коллекций, как PageCatalog в W3) — закрывает §12.2 mockup `<input class="ad-search">` line 3016 | be-panel + fe-panel | 2.5 чд | 4×3×0.7 / 2.5 = 3.4 | C | deferred из US-12 W8 Q-3 (sa-panel-wave8.md). idea, нужна sa-panel |
 | PANEL-PERSONS-RENAME | Persons коллекция → решить рефакторить в "Команда" (label only) или объединить с Authors. brand-guide §12.2 mockup её не упоминает | popanel + cw + be-panel | 0.3 чд | 2×2×0.6 / 0.3 = 8 | C | deferred из US-12 W8 Q-2 (sa-panel-wave8.md). cosmetic, не блокер |
 | PANEL-CSS-PREFIX-CLEANUP | Убрать `.payload__app` префикс из W1 правил (btn-primary, secondary, inputs focus, status pills, tabs, has-error indicator) — ancestor отсутствует на admin shell, rules dead. Визуально admin OK благодаря `--theme-elevation-*` cascade (W9.1), cleanup для maintainability. | fe-panel + cr-panel | 0.5 чд | 2×2×0.7 / 0.5 = 5.6 | C | deferred из US-12 W9 audit (sa-panel-wave9.md). idea, нужна sa-panel |
-| PANEL-LIST-CREATE-AMBER | List view "Создать" pill — native Payload `.btn--style-pill` (#d6d0bf line-hover) ≠ brand-guide §12.4.1 primary янтарный (#e6a23c). Custom стиль для list-create-new-doc__create-new-button. | fe-panel | 0.2 чд | 3×2×0.7 / 0.2 = 21 | C | deferred из US-12 W9 audit. cosmetic, заметно операторам |
 | PANEL-BULK-PUBLISH | Bulk-publish + bulk-edit для Cases / Blog / Services / ServiceDistricts | be-panel + cms | 1.5 чд | 3×4×0.7 / 1.5 = 5.6 | C | idea, нужна sa-panel |
 | PANEL-AUDIT-LOG | Кто/что/когда менял (Payload `versions` history + diff view) | be-panel + dba | 2 чд | 2×3×0.6 / 2 = 1.8 | C | idea, нужна sa-panel + ADR (storage стратегия) |
 | PANEL-MEDIA-LIBRARY | Media browser + cleanup orphaned uploads | be-panel + fe-panel | 1.5 чд | 3×3×0.6 / 1.5 = 3.6 | C | idea, нужна sa-panel |
@@ -84,6 +83,7 @@ update_protocol: каждый PO команды держит свою секци
 | **US-12 W7** | Polish + a11y WCAG 2.2 AA · @axe-core/playwright integration + 5+ routes + W3/W4/W5 polish smoke + reduced-motion + release readiness gate | 2026-04-30 ([PR #107](https://github.com/samohyn/obihod/pull/107) MERGED) |
 | **US-12 W8** | Admin v2 prod alignment · sidebar group order + 13 line-art SVG иконок (CSS mask-image, ADR-0011) + hide default ModularDashboard. Закрывает gap mockup §12.2/§12.3 vs prod | 2026-04-30 ([PR #109](https://github.com/samohyn/obihod/pull/109) MERGED) |
 | **US-12 W9** | Admin v2 deeper alignment · force-light theme depth (--theme-elevation-* override 0..1000) + BrandIcon 32→20 для step-nav fit + favicon meta type/url consistency. Закрывает 3 issue после W8 merge (тёмная тема внутри edit, кривой лого в crumbs, кривой favicon) | 2026-04-30 ([PR #110](https://github.com/samohyn/obihod/pull/110) MERGED) |
+| **PANEL-LIST-CREATE-AMBER** | List view «Создать» pill amber primary CTA per §12.4.1 (full state matrix + reduced-motion). Native Payload pill (#d6d0bf) → brand янтарный (#e6a23c). Daily-use оператора | 2026-04-30 ([PR #111](https://github.com/samohyn/obihod/pull/111) MERGED) |
 
 ### Dropped
 
