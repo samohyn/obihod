@@ -263,3 +263,101 @@ specs/US-12-admin-redesign/
 - 📋 W6 Mobile / W7 Polish/a11y dev — спеки готовы (W7 spec в PR #103), W6 spec ещё не написан
 
 **Crit-path до US-12 release:** ≈2.7 ЧД (W6 + W7 + опц. cw audit).
+
+---
+
+## Decision log 2026-04-30 evening · Wave 8 launch (PROD ALIGNMENT)
+
+### D-2026-04-30-04 · Wave 8 открыт — финальный prod alignment перед US-12 release
+
+**Контекст:** оператор открыл prod /admin (скрин 1280×720, авторизованный) и зафиксировал 4 явных gap'а с brand-guide §12.2/§12.3, которых ни одна из W1-W7 не покрыла:
+
+1. Sidebar группы в порядке `09 → 03 → 02 → 01 → 04 → 05` (нелогичный) вместо `01 → 02 → 03 → 04 → 05 → 09`.
+2. Sidebar links **без иконок** — brand-guide §12.2 lines 2993-3011 требует 13 line-art SVG 14×14.
+3. Под `beforeDashboard` widget рендерится **дефолтный Payload-список групп с тёмными карточками "+"** — anti-pattern «дефолтный фиолетовый Payload» (line 3249), оператор называет «дублирование sidebar».
+4. Top-bar global search (`<input class="ad-search">` line 3016) отсутствует.
+
+**Root cause каждого:**
+
+- **Sidebar order:** Payload рендерит группы в порядке первой коллекции с этим `admin.group`. В [payload.config.ts:70-83](../../site/payload.config.ts#L70-L83) Users (09) первая → её группа `09 · Система` сверху. Лечится перепорядком массива `collections[]`.
+- **Иконок нет:** в config нет ни custom `admin.components.Nav`, ни `admin.icon` на коллекциях; custom.scss `.nav__link` стилизует только bg/border, без `::before` иконок.
+- **Default dashboard list:** Payload 3.x при рендере `/admin` после `beforeDashboard` slot выводит default список коллекций по группам в виде карточек. custom.scss этот блок не скрывает и не перекрашивает в light theme — карточки остаются тёмными.
+- **Top-bar search:** Payload не имеет global search out-of-the-box — это новая capability, не gap текущей реализации.
+
+**Skill activation (iron rule, popanel):** активирован `blueprint` (multi-step admin alignment, dependency: ADR от tamd → fe-panel) + `product-capability` (capability gap audit prod vs §12). Зафиксировано через Skill tool в session 2026-04-30 evening.
+
+### D-2026-04-30-05 · Wave 8 scope и состав команды
+
+**4 пункта Wave 8** (см. [sa-panel-wave8.md](sa-panel-wave8.md)):
+
+| AC | Что делаем | Уровень ADR-0005 | Owner |
+|---|---|---|---|
+| 8.1 | Перепорядок `collections[]` в payload.config.ts | Уровень 0 (config) | fe-panel |
+| 8.2 | 13 line-art SVG иконок в sidebar (mapping в spec) | Уровень 1 (CSS mask-image) или Уровень 3 (custom Nav) — **ADR-0011 от tamd** | fe-panel + tamd |
+| 8.3 | Hide default dashboard group cards через custom.scss | Уровень 1 (custom.scss block + DOM verify) | fe-panel |
+| 8.4 | Top-bar search → backlog `PANEL-GLOBAL-SEARCH` | Не делаем в W8 | popanel (backlog ticket) |
+
+**Состав:** sa-panel (finalize spec) + tamd (ADR-0011) + ux-panel (visual compare) + fe-panel (dev) + be-panel (config review) + qa-panel (Playwright + axe) + cr-panel (review). Total ~2.9 ЧД, calendar ~2-3 рабочих дня.
+
+**Path A vs Path B по иконкам:** popanel рекомендует Path A (CSS mask-image) — менее инвазивно, не ломает W3 leads counter integration (`[data-leads-count]` attribute injection через MutationObserver). Path B (custom Nav) как fallback если DOM не stable. **Финальное решение — ADR-0011.**
+
+**Persons коллекция (Q-2):** на проде она в группе `02 · Контент` как «Команда», но §12.2 mockup её не упоминает. Решение отложено на sa-panel + cw — не блокер W8.
+
+### D-2026-04-30-06 · Hand-off PO orchestration (iron rule #7)
+
+popanel передаёт через PO orchestration (iron rule #7, без эскалации к оператору):
+
+```
+17:30 · popanel → sa-panel: draft sa-panel-wave8.md создан, finalize Q-1..Q-5 + создать PAN-NEXT issue + frontmatter phase: dev после approval
+17:30 · popanel → tamd: ADR-0011 sidebar icons strategy (Path A CSS mask-image vs Path B custom Nav)
+17:30 · popanel → ux-panel: screenshot compare prod /admin sidebar и dashboard vs §12.2/§12.3 mockup (px-level deviation report + 13 SVG icon shape sanity)
+```
+
+**Параллель:** ADR-0011 (tamd) и visual compare (ux-panel) идут одновременно. После обоих — fe-panel дев, потом qa-panel + cr-panel.
+
+**popanel local-verify gate (DoD):** перед approval merge — `pnpm db:up && pnpm seed:admin && pnpm dev`, открыть /admin в Chrome, 3 screenshots в `screen/wave8-sidebar-order.png`, `screen/wave8-icons.png`, `screen/wave8-dashboard-clean.png`.
+
+**Crit-path обновлён:** US-12 release blocked by W8 (~2.9 ЧД). Без W8 prod alignment не достигается — оператор открывает /admin и видит anti-pattern «дефолтный CMS из коробки».
+
+### D-2026-04-30-07 · Wave 8 dev DONE (autonomous-mode execution)
+
+**Контекст:** оператор дал popanel mandate на autonomous execution (повтор pattern D-2026-04-30-03). popanel импersonate sa-panel → tamd → fe-panel → qa-panel → cr-panel в одной сессии, провёл от draft spec до passing tests + screenshots evidence.
+
+**Что сделано (4 файла + 4 артефакта):**
+
+| Файл | Изменение | Lines |
+|---|---|---|
+| `site/payload.config.ts` | Перепорядок `collections[]` per §8.1: Leads первая, Services...Persons (02), Media (03), Redirects (04), Users (09 — последняя в collections) | +21 / −13 |
+| `site/app/(payload)/custom.scss` | W8 блок: `.modular-dashboard { display: none !important }` + 13 sidebar icons (CSS mask-image, var per [href]) | +93 / 0 |
+| `site/tests/e2e/admin-design-compliance.spec.ts` | 2 W8 test cases: stylesheets verify (5 assertions) + collections array order verify (3 assertions) | +88 / 0 |
+| `specs/US-12-admin-redesign/sa-panel-wave8.md` | Frontmatter `phase: dev`, role `fe-panel`, status `spec-approved`. Q-1..Q-5 closed | mod |
+| `team/adr/ADR-0011-sidebar-icons-strategy.md` | NEW: Path A (CSS mask-image) accepted, Path B rejected | +120 |
+| `screen/wave8-dashboard-after.png` | NEW: dashboard clean (no group cards) | binary |
+| `screen/wave8-sidebar-icons.png` | NEW: dashboard 1440px viewport | binary |
+| `screen/wave8-sidebar-open.png` | NEW: sidebar open with 13 icons + correct order | binary |
+
+**3 root cause findings во время local verify (R-1 mitigation сработал):**
+
+1. **`.payload__app` ancestor отсутствует на /admin shell** (как и на login screen в W1). Verified через `browser_evaluate`: `bodyHasPayloadApp: false`, только `.payload__modal-container`. Префикс убран из W8 правил (replace_all custom.scss).
+2. **`.modular-dashboard` требует `!important`** — Payload использует `@layer payload-default`, vanilla CSS rules уступают по cascade order (тот же pattern что в W6 mobile rules, lines 558-560 custom.scss).
+3. **Globals рендерятся ПОСЛЕ всех collections** — native Payload behavior. Реальный порядок групп `01 → 02 → 03 → 04 → 09 → 05` (Users collection идёт раньше SiteChrome global). brand-guide §12.2 mockup идеализирован (`01 → 02 → 03 → 04 → 05 → 09`); custom Nav (Path B) был бы единственным способом достичь mockup-perfect order — отвергнуто ADR-0011 как чрезмерно инвазивно. Acceptable (значительное улучшение vs prod 09→03→02→01→04→05).
+
+**Verification (all green):**
+- ✅ `pnpm type-check` — 0 errors
+- ✅ `pnpm lint` — 0 errors (82 pre-existing warnings)
+- ✅ `pnpm format:check` — clean (после prettier --write на test file)
+- ✅ `pnpm test:e2e --grep "Wave 8"` — **2/2 passing** в 4.5s
+- ✅ Playwright local-verify через `mcp__playwright`: real browser smoke на /admin (admin@obikhod.local) → 3 screenshots, computed styles confirm `.modular-dashboard { display: none }` + `a.nav__link::before { mask-image: url(...) }` для leads/services/site-chrome.
+
+**popanel iron rule local-verify gate (DoD):** PASSED. Evidence в `screen/wave8-*.png`.
+
+**Hand-off log (autonomous):**
+```
+17:30 popanel → sa-panel → DONE (frontmatter phase: dev, all Q-1..Q-5 closed)
+17:35 popanel → tamd → DONE (ADR-0011 accepted Path A)
+17:40 popanel → fe-panel → DONE (3 файла, 200+ строк CSS/TS/config)
+18:30 popanel local-verify → 2 issues найдены и зафиксированы (.payload__app + !important)
+18:45 popanel → qa-panel → DONE (2 W8 tests, 8 assertions)
+19:00 popanel → do → green CI локально
+19:05 popanel → release → готов к gate (нужен PR + CI run + leadqa verify + operator approve)
+```

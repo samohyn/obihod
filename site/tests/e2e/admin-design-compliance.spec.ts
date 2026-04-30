@@ -279,4 +279,100 @@ test.describe('OBI-19 — Admin design compliance (Wave 1)', () => {
     expect(found.loginFullscreen, 'login fullscreen mobile rule deployed').toBe(true)
     expect(found.tabsScroll, 'tabs horizontal-scroll mobile rule deployed').toBe(true)
   })
+
+  test('Wave 8 (US-12): sidebar icons + modular-dashboard hide rules deployed', async ({
+    page,
+  }) => {
+    // brand-guide §12.2 sidebar icons (Path A · CSS mask-image, ADR-0011) +
+    // §12.3 dashboard cleanup. Stylesheets verify — не требует auth, проверяет
+    // что custom.scss W8 block deployed. Полная visual verification — ux-panel
+    // screenshot review (sa-panel-wave8.md AC W8 общие).
+    const resp = await page.goto(ADMIN_PATH, { waitUntil: 'domcontentloaded' })
+    if (!resp || resp.status() >= 500) {
+      test.skip(true, `Admin не отвечает (status=${resp?.status()}) — пропуск`)
+    }
+
+    const found = await page.evaluate(() => {
+      const r = {
+        modularDashboardHidden: false,
+        navLinkBeforePseudo: false,
+        leadsIcon: false,
+        servicesIcon: false,
+        siteChromeIcon: false,
+      }
+      for (const sheet of Array.from(document.styleSheets)) {
+        try {
+          for (const rule of Array.from(sheet.cssRules)) {
+            if (rule.constructor.name !== 'CSSStyleRule') continue
+            const sr = rule as CSSStyleRule
+            const sel = sr.selectorText || ''
+            const text = sr.cssText || ''
+            if (sel === '.modular-dashboard' && /display:\s*none/.test(text)) {
+              r.modularDashboardHidden = true
+            }
+            if (
+              sel === 'a.nav__link::before' &&
+              /mask-image:\s*var\(--brand-obihod-nav-icon/.test(text)
+            ) {
+              r.navLinkBeforePseudo = true
+            }
+            if (sel.includes('/admin/collections/leads') && /--brand-obihod-nav-icon/.test(text)) {
+              r.leadsIcon = true
+            }
+            if (
+              sel.includes('/admin/collections/services') &&
+              /--brand-obihod-nav-icon/.test(text)
+            ) {
+              r.servicesIcon = true
+            }
+            if (
+              sel.includes('/admin/globals/site-chrome') &&
+              /--brand-obihod-nav-icon/.test(text)
+            ) {
+              r.siteChromeIcon = true
+            }
+          }
+        } catch {
+          // CORS-protected sheets skipped
+        }
+      }
+      return r
+    })
+    expect(found.modularDashboardHidden, '§8.3 .modular-dashboard скрыт').toBe(true)
+    expect(found.navLinkBeforePseudo, '§8.2 a.nav__link::before mask-image инжектирован').toBe(true)
+    expect(found.leadsIcon, '§8.2 leads icon var deployed').toBe(true)
+    expect(found.servicesIcon, '§8.2 services icon var deployed').toBe(true)
+    expect(found.siteChromeIcon, '§8.2 site-chrome global icon var deployed').toBe(true)
+  })
+
+  test('Wave 8 (US-12): collections array order matches §8.1 (Leads first)', async () => {
+    // §8.1 — sidebar group order driven by collections[] order in payload.config.ts.
+    // Native Payload рендерит группы в порядке первой коллекции с этим admin.group.
+    // Critical: Leads (01 · Заявки) первая для правильного порядка групп.
+    // Globals (SeoSettings 04, SiteChrome 05) рендерятся после всех collections —
+    // architectural constraint native Payload (см. sa-panel-wave8.md §8.1 + Q-5).
+    // Этот тест читает payload.config.ts, не runtime DOM.
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const fs = require('fs') as typeof import('fs')
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const path = require('path') as typeof import('path')
+    const cfg = fs.readFileSync(path.resolve(__dirname, '../../payload.config.ts'), 'utf-8')
+    // Извлекаем массив collections: [...] (упрощённый regex; для AST нужен ts-morph)
+    const m = cfg.match(/collections:\s*\[([\s\S]*?)\]/)
+    expect(m, 'collections array найден в payload.config.ts').toBeTruthy()
+    const arr = m![1]
+    // Очищаем комментарии и whitespace
+    const items = arr
+      .split('\n')
+      .map((l) => l.replace(/\/\/.*$/, '').trim())
+      .filter((l) => l && !l.startsWith('/*') && !l.startsWith('//'))
+      .map((l) => l.replace(/,\s*$/, ''))
+      .filter(Boolean)
+    expect(items[0], 'Leads первая в collections (для группы 01 · Заявки)').toBe('Leads')
+    const usersIdx = items.indexOf('Users')
+    expect(usersIdx, 'Users присутствует').toBeGreaterThan(-1)
+    expect(usersIdx, 'Users последняя в collections (для группы 09 · Система перед globals)').toBe(
+      items.length - 1,
+    )
+  })
 })
