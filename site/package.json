@@ -20,6 +20,8 @@
     "lint:schema": "tsx scripts/lint-schema.ts",
     "seed:authors": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/seed-authors.ts",
     "seed:authors:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/seed-authors.ts",
+    "seed:etalons": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/seed-content-etalons.ts",
+    "seed:etalons:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/seed-content-etalons.ts",
     "migrate:slug-chistka": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/migrate-slug-chistka-krysh.ts",
     "migrate:slug-chistka:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/migrate-slug-chistka-krysh.ts",
     "migrate:blocks:services": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/migrate-services-to-blocks.ts",
