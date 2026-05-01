@@ -107,15 +107,13 @@ test.describe('US-12 W6 — Admin mobile responsive (CSS deployment guards)', ()
     )
     expect(loginRule, 'login__form max-width 100% должен быть в @media 640').toBeDefined()
 
-    // §6.4 List view horizontal-scroll fallback
-    const tableRule = rules.find(
-      (r) =>
-        /\.payload__app table$/.test(r.selector) &&
-        r.declarations.some((d) => /display:\s*block/.test(d)),
-    )
-    expect(tableRule, 'table display: block должен быть в @media 640').toBeDefined()
+    // §6.4 List view horizontal-scroll fallback — REMOVED в
+    // PANEL-CSS-PREFIX-CLEANUP (2026-05-01): `.payload__app table` selector был
+    // dead (ancestor отсутствует в Payload 3.84). Backlog PANEL-W6-MOBILE-REVIVE
+    // — пересоздать через `.template-default table` ancestor, тогда восстановить
+    // эту проверку.
 
-    // §6.5 Tabs horizontal scroll
+    // §6.5 Tabs horizontal scroll — live (без префикса)
     const tabsRule = rules.find(
       (r) =>
         /\.tabs-field__tabs$/.test(r.selector) &&
@@ -129,12 +127,9 @@ test.describe('US-12 W6 — Admin mobile responsive (CSS deployment guards)', ()
     )
     expect(widgetRule, 'widget max-height для scroll должен быть в @media 640').toBeDefined()
 
-    // §6.7 Bulk-action disabled (cell-_select hidden)
-    const bulkRule = rules.find(
-      (r) =>
-        /cell-_select/.test(r.selector) && r.declarations.some((d) => /display:\s*none/.test(d)),
-    )
-    expect(bulkRule, 'cell-_select display: none должен быть в @media 640').toBeDefined()
+    // §6.7 Bulk-action disabled (cell-_select hidden) — REMOVED в
+    // PANEL-CSS-PREFIX-CLEANUP (2026-05-01): селектор `.payload__app td.cell-_select`
+    // был dead. Backlog PANEL-W6-MOBILE-REVIVE — recreate через `.template-default`.
   })
 
   test('login form rendering на mobile-chrome (real-device behaviour)', async ({ page }) => {
