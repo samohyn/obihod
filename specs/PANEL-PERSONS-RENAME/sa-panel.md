@@ -6,13 +6,16 @@ po: popanel
 type: refactor
 priority: C
 segment: admin
-phase: spec-approved
+phase: shipped
 role: sa-panel
-status: dev-blocked-by-us-12-release
+status: shipped
 related: [US-12-admin-redesign, PANEL-UX-AUDIT]
 created: 2026-05-01
 updated: 2026-05-01
 popanel_review: approved 2026-05-01 (autonomous mandate) — defaults sound, R3 mitigation matches US-12 W6 fixup pattern, 7 AC sufficient, dev start unblocks after US-12 closure
+shipped_at: 2026-05-01
+shipped_by: be-panel + dba + cw (sequential dev, autonomous mandate)
+notes_cr_panel: note-cr-panel.md (inline approve, all AC met, brand-guide §12+§13 compliant)
 skills: [product-capability, design-system]
 skills_activated: [product-capability, design-system]
 ---
@@ -319,3 +322,6 @@ default). Все остальные defaults задокументированы 
 |---|---|---|---|
 | 2026-05-01 12:55 | popanel | sa-panel + dba | spec request (autonomous mandate) — merge Persons → Authors variant (b). |
 | 2026-05-01 13:10 | sa-panel + dba | popanel | spec ready for review. Reconnaissance complete (apps/shop отсутствует, factual schema diff собран, refs полностью отинвентаризированы). Готов передавать be-panel + dba для implementation после popanel approve. |
+| 2026-05-01 15:30 | popanel | be-panel + dba + cw | dev mandate (autonomous, sequential). Branch `feature/panel-persons-rename`. |
+| 2026-05-01 15:55 | be-panel + dba + cw | cr-panel (inline) | Implementation complete. Migration UP/DOWN/UP roundtrip clean. 1 record migrated (aleksey-semenov, 0 conflicts). Browser smoke OK (sidebar/list/Blog/Cases). Type-check + lint + format clean. ServiceDistricts.reviewedBy (5-я reference, spec пропустил) мигрирован в рамках scope. cr-panel sign-off: [note-cr-panel.md](note-cr-panel.md). |
+| 2026-05-01 16:05 | cr-panel (inline) | release | APPROVED. Готов к merge. AC #1-7 met, brand-guide §12+§13 compliant. |

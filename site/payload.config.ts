@@ -13,7 +13,6 @@ import { Services } from './collections/Services'
 import { Districts } from './collections/Districts'
 import { ServiceDistricts } from './collections/ServiceDistricts'
 import { Cases } from './collections/Cases'
-import { Persons } from './collections/Persons'
 import { Authors } from './collections/Authors'
 import { Blog } from './collections/Blog'
 import { B2BPages } from './collections/B2BPages'
@@ -116,7 +115,6 @@ export default buildConfig({
     Blog,
     Authors,
     B2BPages,
-    Persons,
     // 03 · Медиа
     Media,
     // 04 · SEO

@@ -228,7 +228,7 @@ export const ServiceDistricts: CollectionConfig = {
             {
               name: 'reviewedBy',
               type: 'relationship',
-              relationTo: 'persons',
+              relationTo: 'authors',
               admin: {
                 description: 'Эксперт-автор. Попадает в Article.author для E-E-A-T.',
               },

@@ -1,5 +1,5 @@
 /**
- * Seed-скрипт US-1: 4 Services × 7 пилотных Districts = 28 ServiceDistricts + 1 mock-Case + 1 Persons.
+ * Seed-скрипт US-1: 4 Services × 7 пилотных Districts = 28 ServiceDistricts + 1 mock-Case + 1 Author.
  *
  * Запуск (локально):
  *   pnpm seed
@@ -716,44 +716,48 @@ async function main() {
     }
   }
 
-  // ───────── 4. Persons (Алексей Семёнов) ─────────
-  const personStats = ensureStats(cs, 'persons')
-  let aleksey = await findOneBySlug(payload, 'persons', 'aleksey-semenov')
+  // ───────── 4. Authors (Алексей Семёнов) ─────────
+  // PANEL-PERSONS-RENAME (2026-05-01): merged Persons → Authors. Idempotent
+  // через findOneBySlug на authors slug.
+  const personStats = ensureStats(cs, 'authors')
+  let aleksey = await findOneBySlug(payload, 'authors', 'aleksey-semenov')
   if (!aleksey) {
     try {
       const worksIn = districtIdBySlug['ramenskoye'] ? [districtIdBySlug['ramenskoye']] : []
       aleksey = await payload.create({
-        collection: 'persons',
+        collection: 'authors',
         data: {
           slug: 'aleksey-semenov',
           firstName: 'Алексей',
           lastName: 'Семёнов',
           jobTitle: 'Бригадир-арборист',
-          bio: lexicalParagraph(
-            'Алексей закрывает Раменское и Жуковский. 11 лет опыта, допуск 3-й группы по высоте (Минтруд №782н), сертификат European Tree Worker.',
-          ),
+          bio: 'Алексей закрывает Раменское и Жуковский. 11 лет опыта, допуск 3-й группы по высоте (Минтруд №782н), сертификат European Tree Worker.',
           knowsAbout: [{ topic: 'арбористика' }, { topic: 'промальп' }],
           sameAs: [{ url: 'https://t.me/aleksey_obihod' }],
           credentials: [
             {
               name: 'Допуск Минтруда №782н, 3-я группа по высоте',
               issuer: 'Минтруд',
-              year: 2018,
+              issuedAt: new Date('2018-01-01').toISOString(),
             },
-            { name: 'European Tree Worker (ETW)', issuer: 'EAC', year: 2020 },
+            {
+              name: 'European Tree Worker (ETW)',
+              issuer: 'EAC',
+              issuedAt: new Date('2020-01-01').toISOString(),
+            },
           ],
           worksInDistricts: worksIn,
         } as never,
       })
       personStats.created += 1
-      console.log('✓ Person «Алексей Семёнов»: создан')
+      console.log('✓ Author «Алексей Семёнов»: создан')
     } catch (e) {
       personStats.errors += 1
-      console.error('❌ Person «Алексей Семёнов»:', e instanceof Error ? e.message : e)
+      console.error('❌ Author «Алексей Семёнов»:', e instanceof Error ? e.message : e)
     }
   } else {
     personStats.skipped += 1
-    console.log('• Person «Алексей Семёнов»: уже есть')
+    console.log('• Author «Алексей Семёнов»: уже есть')
   }
 
   // ───────── 5. 28 ServiceDistricts (4 × 7) ─────────

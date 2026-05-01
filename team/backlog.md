@@ -45,9 +45,7 @@ update_protocol: каждый PO команды держит свою секци
 
 ### Next — dev-ready / dev-queued (autonomous mandate)
 
-| ID | Что | Owner | Effort | RICE | M | Статус |
-|---|---|---|---|---|---|---|
-| **PANEL-PERSONS-RENAME (b)** | Persons → Authors merge (4 schema gap fixes + R3 `_v` join tables fixup pattern + R1 slug `aleksey-semenov` conflict). **Note** Postgres ENUM TYPE pattern для `role` field (memory `reference_payload_select_postgres_enum`). | be-panel + dba + cw | 0.5 чд | 8 | C | [sa-panel.md](../specs/PANEL-PERSONS-RENAME/sa-panel.md) — operator approved 2026-05-01 (b), popanel approved · **dev-ready** (LEADS-INBOX merged → migrations free) |
+_(пусто — все dev-ready задачи из Next закрыты или передвинуты в Later)_
 
 ### Later — 7 spec-approved + 2 cpo retro follow-ups
 
@@ -97,6 +95,7 @@ update_protocol: каждый PO команды держит свою секци
 | **PANEL-UX-AUDIT** | Полный проход /admin (login → 7 коллекций → mobile drawer) — feed для HEADER-CHROME-POLISH + EMPTY-LIST-WIRING + A11Y-TARGET-SIZE + SERVICES-PREVIEW-TAB | 2026-05-01 (note-uxpanel.md) |
 | **US-12 Admin Redesign (cumulative)** | 13 PR cumulative shipped (W1-W9 + LIST-AMBER + FAVICON + A11Y + SERVICES-PREVIEW + HEADER-CHROME + DRAFT-PREVIEW + EMPTY-LIST + RSC-FIX + NAV-HOME-LINK + UX-AUDIT) → operator approve → cpo retro | 2026-05-01 ([US-12-retro.md](../team/release-notes/US-12-retro.md)) |
 | **PANEL-LEADS-INBOX** | Leads UX: status canonical (7 + spam) + status_history jsonb + statusHistory tab + 8-chip filters + StatusPillCell + RowActionsCell dropdown + Postgres ENUM TYPE migration up/down/idempotent. Phase 3 (bulk actions / date-range UI / confirm) deferred → PANEL-LEADS-INBOX-V2 | 2026-05-01 ([PR #123 part](https://github.com/samohyn/obihod/pull/123) + [PR #125](https://github.com/samohyn/obihod/pull/125) MERGED) |
+| **PANEL-PERSONS-RENAME (b)** | Persons → Authors merge: 1 record migrated (Алексей Семёнов), bio richText→textarea Lexical extract OK, credentials.year→issuedAt='YYYY-01-01', worksInDistricts addded к Authors, sidebar §12.2 — одна иконка вместо двух, label «Авторы / Команда». Spec пропустил ServiceDistricts.reviewedBy (5-я reference) — мигрирован в рамках scope. Migration UP/DOWN/UP roundtrip clean | 2026-05-01 |
 
 ### Dropped
 

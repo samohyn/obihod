@@ -84,7 +84,7 @@ export const Cases: CollectionConfig = {
             {
               name: 'brigade',
               type: 'relationship',
-              relationTo: 'persons',
+              relationTo: 'authors',
               hasMany: true,
               admin: { description: 'Кто работал — для E-E-A-T и связи с командой.' },
             },
@@ -241,7 +241,7 @@ export const Cases: CollectionConfig = {
     {
       name: 'reviewedBy',
       type: 'relationship',
-      relationTo: 'persons',
+      relationTo: 'authors',
       admin: {
         position: 'sidebar',
         description: 'Кто проверил факты — для E-E-A-T.',

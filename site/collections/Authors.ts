@@ -1,27 +1,31 @@
 import type { CollectionConfig } from 'payload'
 
 /**
- * Authors — E-E-A-T авторы статей и услуг.
+ * Authors — E-E-A-T авторы и команда (бригадиры, арбористы, промальпинисты).
  *
- * Отличие от `Persons`:
- *   - `Persons` — для legal/contact entities (юрлицо, ИНН, телефон) →
- *     используется в Organization JSON-LD (SiteChrome.requisites).
- *   - `Authors` — для контентных авторов: подписи статей блога, владелец
- *     services-страниц (E-E-A-T), reviewedBy в Cases/Blog.
+ * Объединяет два контекста после PANEL-PERSONS-RENAME (variant b, 2026-05-01):
+ *   - авторы статей блога / эксперты на услугах (Person JSON-LD на /avtory/<slug>/);
+ *   - команда: кто работал на кейсе (Cases.brigade), кто верифицировал статью
+ *     (Blog.reviewedBy, Cases.reviewedBy, ServiceDistricts.reviewedBy).
+ *
+ * Legal/contact entities (юрлицо, ИНН, телефон) живут в `globals/SiteChrome.requisites` —
+ * к Authors не относятся.
  *
  * Page route: `/avtory/<slug>/` (см. sitemap-tree v0.4, ADR-uМ-10).
  * JSON-LD: Person schema через `lib/seo/jsonld.ts → personSchema()`.
  *
  * OBI-24 admin §12.4 — UI tabs grouping (unnamed tabs, без миграции БД).
+ * brand-guide §13: TOV «Caregiver+Ruler» — спокойно, авторитетно, без хайпа.
  */
 export const Authors: CollectionConfig = {
   slug: 'authors',
-  labels: { singular: 'Автор', plural: 'Авторы' },
+  labels: { singular: 'Автор / Сотрудник', plural: 'Авторы / Команда' },
   admin: {
     useAsTitle: 'fullName',
     defaultColumns: ['fullName', 'jobTitle', 'slug'],
     group: '02 · Контент',
-    description: 'Авторы статей и эксперты для E-E-A-T (Person schema на /avtory/<slug>/).',
+    description:
+      'Авторы статей, эксперты услуг и команда (арбористы, бригадиры, промальпинисты). Person schema на /avtory/<slug>/ — основа E-E-A-T.',
   },
   versions: { drafts: true },
   access: { read: () => true },
@@ -163,6 +167,16 @@ export const Authors: CollectionConfig = {
               admin: {
                 description:
                   'СРО арбористов, сертификаты безопасности на высоте, профильное образование.',
+              },
+            },
+            {
+              name: 'worksInDistricts',
+              type: 'relationship',
+              relationTo: 'districts',
+              hasMany: true,
+              admin: {
+                description:
+                  'Районы, где работает сотрудник — для Cases.brigade и локальной E-E-A-T.',
               },
             },
           ],
