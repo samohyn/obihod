@@ -3,6 +3,9 @@ import type { FC } from 'react'
 
 import { DefaultListView } from '@payloadcms/ui'
 
+import { LIST_VIEW_CLIENT_PROP_KEYS } from '@/lib/admin/rsc/clientPropKeys'
+import { pickClientProps } from '@/lib/admin/rsc/pickClientProps'
+
 import { EmptyState } from './EmptyErrorStates'
 
 /**
@@ -50,53 +53,6 @@ export type CollectionListWithEmptyProps = ListViewClientProps &
     }
   }
 
-/**
- * Whitelist ключей `ListViewClientProps` (см. `payload/dist/index.bundled.d.ts:7863`)
- * + `ListViewSlots` (там же `:7840`). Всё, что НЕ в этом списке (включая
- * `collectionConfig`, `data`, `payload`, `req`, `i18n`, `permissions`, `user`,
- * etc.) — server-only и НЕ должно пересекать RSC границу к DefaultListView.
- */
-const CLIENT_PROP_KEYS = [
-  // ListViewClientProps:
-  'beforeActions',
-  'collectionSlug',
-  'columnState',
-  'disableBulkDelete',
-  'disableBulkEdit',
-  'disableQueryPresets',
-  'enableRowSelections',
-  'hasCreatePermission',
-  'hasDeletePermission',
-  'hasTrashPermission',
-  'listPreferences',
-  'newDocumentURL',
-  'preferenceKey',
-  'queryPreset',
-  'queryPresetPermissions',
-  'renderedFilters',
-  'resolvedFilterOptions',
-  'viewType',
-  // ListViewSlots:
-  'AfterList',
-  'AfterListTable',
-  'BeforeList',
-  'BeforeListTable',
-  'Description',
-  'listMenuItems',
-  'Table',
-] as const satisfies ReadonlyArray<keyof ListViewClientProps>
-
-const pickClientProps = (props: CollectionListWithEmptyProps): ListViewClientProps => {
-  const result = {} as Record<string, unknown>
-  for (const key of CLIENT_PROP_KEYS) {
-    const value = (props as Record<string, unknown>)[key]
-    if (value !== undefined) {
-      result[key] = value
-    }
-  }
-  return result as ListViewClientProps
-}
-
 const CollectionListWithEmpty: FC<CollectionListWithEmptyProps> = (props) => {
   // `data` — server-only (`ListViewServerPropsOnly`), нужен только для
   // onboarding-check на сервере. Дальше в DefaultListView не пробрасываем.
@@ -111,7 +67,13 @@ const CollectionListWithEmpty: FC<CollectionListWithEmptyProps> = (props) => {
     )
   }
 
-  return <DefaultListView {...pickClientProps(props)} />
+  // Whitelist через `pickClientProps` — единственный канонический способ
+  // пересечь RSC границу к DefaultListView. См. ADR-0015.
+  const clientProps = pickClientProps(
+    props as unknown as Record<string, unknown>,
+    LIST_VIEW_CLIENT_PROP_KEYS,
+  ) as unknown as ListViewClientProps
+  return <DefaultListView {...clientProps} />
 }
 
 export default CollectionListWithEmpty
