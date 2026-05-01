@@ -47,5 +47,53 @@ export const Users: CollectionConfig = {
         readOnly: true,
       },
     },
+    // PANEL-AUTH-2FA — TOTP 2FA для admin (sa-panel.md AC-1).
+    //
+    // 3 поля + миграция 20260501_120000_users_totp_fields:
+    //   - totpEnabled (boolean, default false) — UI badge статус, admin-readonly
+    //   - totpSecretEnc (text, encrypted at rest, hidden) — AES-256-GCM blob
+    //   - recoveryCodes (array, hidden) — bcrypt hashes + consumed_at
+    //
+    // Backwards compat: дефолт false → existing seed admin продолжает работать
+    // без 2FA. Управляются ТОЛЬКО через /api/admin/auth/2fa-* endpoints
+    // (Payload Local API игнорирует field-level access — server-side OK).
+    //
+    // SECURITY: read=false / update=false закрывают field от admin UI и REST API.
+    // Endpoints вручную whitelist что отдают (никогда не возвращают
+    // totpSecretEnc / recoveryCodes naked).
+    {
+      name: 'totpEnabled',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        readOnly: true,
+        description:
+          'Двухфакторная аутентификация (TOTP). Управляется через профиль «Безопасность».',
+      },
+    },
+    {
+      name: 'totpSecretEnc',
+      type: 'text',
+      admin: { hidden: true },
+      access: {
+        read: () => false,
+        update: () => false,
+        create: () => false,
+      },
+    },
+    {
+      name: 'recoveryCodes',
+      type: 'array',
+      admin: { hidden: true },
+      access: {
+        read: () => false,
+        update: () => false,
+        create: () => false,
+      },
+      fields: [
+        { name: 'hash', type: 'text', required: true },
+        { name: 'consumedAt', type: 'date' },
+      ],
+    },
   ],
 }
