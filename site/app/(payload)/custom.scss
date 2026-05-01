@@ -936,3 +936,168 @@ a.nav__link[href*='/admin/globals/site-chrome'] {
     justify-content: center !important;
   }
 }
+
+/* ════════════════════════════════════════════════════════════════════
+ *  WAVE 10 · HEADER CHROME POLISH (PANEL-HEADER-CHROME-POLISH)
+ *  3 пина оператора 2026-05-01:
+ *    §A · breadcrumb «О» alignment fix (slot 18→20)
+ *    §B · home-link в sidebar через beforeNavLinks slot
+ *    §C · dark-theme toggle UI-only stub в settingsMenu slot
+ *  Spec: specs/PANEL-HEADER-CHROME-POLISH/sa-panel-header-chrome.md
+ * ════════════════════════════════════════════════════════════════════ */
+
+/* §A · Breadcrumb «О» — расширяем slot 18×18 → 20×20 под BrandIcon SVG.
+ * Probe ux-panel 2026-05-01: native .step-nav__home width/height 18px (desktop)
+ * и 16px (mid-break) клиппят 20×20 SVG. Решение оператора 2026-05-01:
+ * расширить slot, не уменьшать SVG (SVG 20×20 нужен для viewBox центрирования
+ * <text x=10 y=14> кириллической «О» weight 700 letterSpacing -0.02em).
+ *
+ * !important — reason: Payload @layer payload-default override
+ * (verified W8/W9, аналогично mobile responsive overrides). */
+.step-nav__home {
+  width: 20px !important; /* reason: Payload @layer override */
+  height: 20px !important; /* reason: Payload @layer override */
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* SVG внутри slot: убираем `display: block` от Payload `.step-nav * { display: block }`
+ * через явное flex-child + height/width 100% (SVG растёт под slot). */
+.step-nav__home > span,
+.step-nav__home > a > span {
+  display: inline-flex !important; /* reason: Payload .step-nav * { display: block } override */
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.step-nav__home svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+/* Mid-break (≤1024px) — Payload native ужимает slot до 16px.
+ * Перебиваем: оставляем 20×20 даже на tablet — у нас target ≥44 уже покрыт
+ * W6 mobile rules для всех buttons/links, breadcrumb home — visual logo-mark,
+ * читаемость > tablet-fitting. */
+@media (max-width: 1024px) {
+  .step-nav__home {
+    width: 20px !important; /* reason: Payload @layer mid-break override */
+    height: 20px !important; /* reason: Payload @layer mid-break override */
+  }
+  .step-nav__home svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* §B · Home-link в sidebar (Pin-2 Variant A).
+ * Renders первым в .nav__wrap через beforeNavLinks slot (NavHomeLink.tsx).
+ * Наследует W1+W8 .nav__link styling; добавляем визуальный отступ ниже как
+ * group separator + inline-flex для SVG + label gap. Inline SVG (НЕ
+ * ::before mask-image как W8) — link не ведёт на коллекцию, не имеет
+ * href[*=collections/...] селектора. */
+.nav__link--home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--brand-obihod-line);
+  color: var(--brand-obihod-ink-soft);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 13px;
+  transition:
+    color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard),
+    background-color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard);
+}
+
+.nav__link--home svg {
+  flex-shrink: 0;
+  opacity: 0.65;
+  transition: opacity var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard);
+}
+
+.nav__link--home:hover {
+  color: var(--brand-obihod-primary);
+  background-color: var(--brand-obihod-paper);
+  text-decoration: none;
+}
+.nav__link--home:hover svg {
+  opacity: 0.9;
+}
+
+.nav__link--home:focus-visible {
+  outline: none;
+  box-shadow: var(--brand-obihod-shadow-focus-primary);
+  border-radius: var(--brand-obihod-radius-sm);
+}
+
+/* Mobile (≤1024px) — touch target 44×44 (WCAG 2.5.5, зеркало W6 §6.3). */
+@media (max-width: 1024px) {
+  .nav__link--home {
+    min-height: 44px;
+    padding: 12px;
+  }
+}
+
+/* §C · Theme toggle stub (Pin-3 Variant A · admin.settingsMenu).
+ * UI-only — никаких реальных theme switching хуков
+ * (полная dark-theme логика — отдельный US PANEL-DARK-THEME-LOGIC).
+ * Размещён через admin.components.settingsMenu (gear-popup в nav__controls). */
+.theme-toggle-stub {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 12px;
+  background: transparent;
+  border: 0;
+  border-radius: var(--brand-obihod-radius-sm);
+  color: var(--brand-obihod-ink-soft);
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    background-color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard),
+    color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard);
+}
+
+.theme-toggle-stub svg {
+  flex-shrink: 0;
+  opacity: 0.65;
+  transition: opacity var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard);
+}
+
+.theme-toggle-stub:hover {
+  background-color: var(--brand-obihod-paper);
+  color: var(--brand-obihod-primary);
+}
+.theme-toggle-stub:hover svg {
+  opacity: 0.9;
+}
+
+.theme-toggle-stub:focus-visible {
+  outline: none;
+  box-shadow: var(--brand-obihod-shadow-focus-primary);
+}
+
+/* Pressed state (aria-pressed=true) — moon visible — слегка enhance opacity */
+.theme-toggle-stub[aria-pressed='true'] svg {
+  opacity: 1;
+}
+.theme-toggle-stub[aria-pressed='true'] {
+  color: var(--brand-obihod-primary);
+}
+
+@media (max-width: 1024px) {
+  .theme-toggle-stub {
+    min-height: 44px; /* WCAG 2.5.5 */
+  }
+}
