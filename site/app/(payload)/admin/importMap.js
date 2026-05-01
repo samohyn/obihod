@@ -30,6 +30,7 @@ import { default as default_34a40cc685c7df316e31d445e114f485 } from '@/component
 import { default as default_7c23d4e1b8f8c3d2a1e5f6a7b8c9d0e1 } from '@/components/admin/ServicePreviewPanel'
 import { default as default_5b1f0a2e3c4d5e6f7081a2b3c4d5e6f7 } from '@/components/admin/NavHomeLink'
 import { default as default_6c2a1b3f4d5e6f7081a2b3c4d5e6f708 } from '@/components/admin/ThemeToggleStub'
+import { default as default_7d3b2c4e5f607182a3b4c5d6e7f80819 } from '@/components/admin/CollectionListWithEmpty'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -66,5 +67,6 @@ export const importMap = {
   "@/components/admin/ServicePreviewPanel#default": default_7c23d4e1b8f8c3d2a1e5f6a7b8c9d0e1,
   "@/components/admin/NavHomeLink#default": default_5b1f0a2e3c4d5e6f7081a2b3c4d5e6f7,
   "@/components/admin/ThemeToggleStub#default": default_6c2a1b3f4d5e6f7081a2b3c4d5e6f708,
+  "@/components/admin/CollectionListWithEmpty#default": default_7d3b2c4e5f607182a3b4c5d6e7f80819,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

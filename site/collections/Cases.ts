@@ -8,6 +8,26 @@ export const Cases: CollectionConfig = {
     defaultColumns: ['title', 'service', 'district', 'dateCompleted'],
     group: '02 · Контент',
     description: 'Реальные объекты Обихода: фото до/после, бригада, район.',
+    // PANEL-EMPTY-LIST-WIRING (sa-panel.md AC2): custom list-view wrapper
+    // подменяет native пустой Payload-table на §12.6 EmptyState с CTA при
+    // global empty (totalDocs === 0). Filtered-empty оставляем native.
+    components: {
+      views: {
+        list: {
+          Component: {
+            path: '@/components/admin/CollectionListWithEmpty#default',
+            clientProps: {
+              emptyConfig: {
+                title: 'Кейсов пока нет',
+                text: 'Добавьте первый кейс — он появится в портфолио сайта и в SEO landing-pages.',
+                actionLabel: '+ Добавить кейс',
+                actionHref: '/admin/collections/cases/create',
+              },
+            },
+          },
+        },
+      },
+    },
   },
   versions: { drafts: true },
   access: { read: () => true },
