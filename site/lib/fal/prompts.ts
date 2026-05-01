@@ -154,29 +154,32 @@ export type DistrictHeroOpts = {
 
 /**
  * Hero для District Hub `/raiony/<district>/`.
- * Бригада в фирменной форме на фоне characteristic-объекта района МО.
- * Без сезонной привязки по умолчанию (SEASON.summer) — переопределяется опцией.
+ * Landmark-only direction (R1 решение: вариант B, district-hub.md §Art changes).
+ * Без бригады в кадре — гибрид «landmark + бригада» деградирует в catalog-shot и
+ * ломает brand-guide §14 (документальный стиль, не туристическая открытка).
+ * Гео-сигнал держится через eyebrow + H1 + alt-text, не через постановку.
  */
 export function districtHeroPrompt(o: DistrictHeroOpts): string {
   const sceneByCluster: Record<ServiceCluster, string> = {
     arboristika:
-      'arborist team in branded blue work uniform inspecting a mature tree on a private suburban property',
+      'mature trees on a private suburban property — old apple trees, pine trees, no people, late afternoon light',
     krishi:
-      'roof maintenance team in branded blue uniform with safety harness checking pitched roof of a suburban cottage',
+      'pitched roof of a suburban cottage covered in fresh snow, no people visible, soft winter daylight',
     musor:
-      'crew in branded blue uniform loading construction debris into a clean dump truck near a private house',
+      'clean dump truck parked at a private house gate, no people in frame, neutral mid-day light',
     demontazh:
-      'demolition crew in branded blue uniform on a private lot, working calmly on an old wooden shed',
+      'old wooden shed on a private lot, ready for demolition, no people, overcast soft light',
   }
   const scene = o.cluster
     ? sceneByCluster[o.cluster]
-    : 'small crew in branded blue work uniform calmly walking through a Moscow Region suburb street, clipboard and tools at hand'
+    : 'Moscow Region suburb street, low-rise houses, fences, mature trees, daylight, no people in frame'
   return [
     DOCUMENTARY_STYLE,
     scene,
     `${o.districtName} district, Moscow Region, Russia, recognizable suburban context (low-rise houses, mixed dachas)`,
     o.season ? SEASON[o.season] : SEASON.summer,
-    'no district landmarks fakery: keep generic suburban МО details (mixed roofs, fences, trees), brand legibility on uniform only',
+    'real МО suburban details (mixed roofs, fences, trees), no fake recognizable landmarks',
+    'no humans, no figures, no silhouettes, no people in frame',
     ANTI_STOCK,
     NEGATIVE_DEFAULT,
   ].join(', ')
@@ -190,24 +193,26 @@ export type B2bHeroOpts = {
 
 /**
  * Hero для B2B-сегмент-страниц `/b2b/<segment>/`.
- * Конкретный сегмент → конкретная сцена встречи / handoff'a.
+ * Inspection / site-walk / clipboard situations без рукопожатий и key-handoff'ов
+ * (brand-guide §14 anti: «постановочные лица», «рукопожатия = corporate cliché»,
+ * «Рыцарь / щит / герб»). Caregiver+Ruler — спокойная ответственность, не «вызов на ринг».
  */
 export function b2bHeroPrompt(o: B2bHeroOpts): string {
   const sceneBySegment: Record<B2bSegment, string> = {
     'uk-tszh':
-      'site visit at a multi-storey residential courtyard: brigade leader in branded blue uniform talking with a property manager (woman in business-casual), clipboard with contract, focused-warm but matter-of-fact expression',
-    fm: 'commercial property handover: brigade leader in branded blue uniform handing keys/access to a facility manager near service entrance of a low-rise office building, both holding tablets',
+      'site inspection at a multi-storey residential courtyard: brigade leader in branded blue uniform reviewing a service checklist on clipboard, property manager (woman in business-casual) standing nearby looking at the same checklist, no handshake, no posed gestures, focused-warm but matter-of-fact',
+    fm: 'commercial property walkthrough: brigade leader in branded blue uniform pointing at service entrance maintenance details, facility manager taking notes on tablet, low-rise office building visible, no handshake, no key-handoff',
     zastrojschiki:
-      'construction site coordination: brigade leader in branded blue uniform with hi-vis vest discussing schedule with a project engineer over printed plans, half-built suburban housing in soft background',
+      'construction site coordination: brigade leader in branded blue uniform with hi-vis vest reviewing printed site plans on a portable table with a project engineer, half-built suburban housing in soft background, no handshake, no posed gestures',
     goszakaz:
-      'municipal site inspection: brigade leader in branded blue uniform shaking hands with a municipal contracts officer near a public service yard, formal but unstaged',
+      'municipal site inspection: brigade leader in branded blue uniform examining a public service yard with a municipal contracts officer holding documents, both looking at the same area, no handshake, formal but unstaged',
   }
   return [
     DOCUMENTARY_STYLE,
     sceneBySegment[o.segment],
     'business-formal but not stiff, real working setting, no boardroom backdrop',
     'Moscow Region, Russia, late morning daylight',
-    'no green-leaf eco-cliche, no over-the-top corporate smile, no posed gestures',
+    'no handshakes, no key handoffs, no posed corporate gestures, no over-the-top corporate smile, no green-leaf eco-cliche',
     ANTI_STOCK,
     NEGATIVE_DEFAULT,
   ].join(', ')
