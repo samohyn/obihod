@@ -152,8 +152,9 @@ test.describe('PANEL-LEADS-INBOX — list-view UX', () => {
 
     // URL должен содержать where[status][equals]=new
     await page.waitForFunction(
-      () => window.location.search.includes('where%5Bstatus%5D%5Bequals%5D=new') ||
-            window.location.search.includes('where[status][equals]=new'),
+      () =>
+        window.location.search.includes('where%5Bstatus%5D%5Bequals%5D=new') ||
+        window.location.search.includes('where[status][equals]=new'),
       { timeout: 3000 },
     )
 
