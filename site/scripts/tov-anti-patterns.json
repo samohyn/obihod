@@ -1,0 +1,249 @@
+{
+  "_meta": {
+    "version": 1,
+    "source": "design-system/brand-guide.html §13 (Tone of Voice — Нет) + §14 (Анти-паттерны) + §18 (Anti-words shop)",
+    "owner": "cw + art",
+    "updated": "2026-05-01",
+    "scope": [
+      "site/content/",
+      "seosite/",
+      "site/app/(marketing)/**/*.{md,mdx,tsx}",
+      "Lexical body fields в Payload (через --all)"
+    ],
+    "whitelist_marker": "obihod:ok",
+    "notes": "Файл сам по себе содержит цитаты анти-TOV для блокировки (это его работа). Маркер `obihod:ok` отключает регекс на той же строке. Так используется в учебных материалах, цитатах конкурентов, deep-профилях. obihod:ok"
+  },
+  "patterns": [
+    {
+      "id": "uslugi-naseleniyu",
+      "regex": "услуг[аи]\\s+населени[юе]",
+      "category": "kazenshchina",
+      "severity": "error",
+      "hint": "→ выезд бригады / работаем по объекту"
+    },
+    {
+      "id": "imeem-chest",
+      "regex": "име[ею]м\\s+(чест[ьи]|удовольствие)",
+      "category": "kazenshchina",
+      "severity": "error",
+      "hint": "просто предлагаем без декора"
+    },
+    {
+      "id": "osushchestvlyaem-deyatelnost",
+      "regex": "осуществля[ею]м\\s+(деятельност[ьи]|работ[уы])",
+      "category": "kazenshchina",
+      "severity": "error",
+      "hint": "делаем / работаем / конкретный глагол"
+    },
+    {
+      "id": "tko-b2c",
+      "regex": "тверд[ыа][а-яё]*\\s+коммунальн[а-яё]+\\s+отход",
+      "category": "kazenshchina",
+      "severity": "error",
+      "hint": "В B2C — мусор / строительный мусор / КГМ"
+    },
+    {
+      "id": "drevesno-kustarnikovaya",
+      "regex": "древесно[-\\s]кустарников[а-яё]+\\s+растительност",
+      "category": "kazenshchina",
+      "severity": "error",
+      "hint": "В B2C — деревья / кустарники / конкретно"
+    },
+
+    {
+      "id": "ot-rublej-bez-konkretiki",
+      "regex": "от\\s+\\d[\\d\\s]*\\s*₽",
+      "category": "no-numbers",
+      "severity": "error",
+      "hint": "Конкретная цифра вместо вилки от X (brand-guide §13 #2). Если действительно диапазон — пиши от X до Y ₽."
+    },
+    {
+      "id": "ot-rublej-slovami",
+      "regex": "от\\s+\\d[\\d\\s]*\\s*рубл",
+      "category": "no-numbers",
+      "severity": "error",
+      "hint": "Та же причина"
+    },
+    {
+      "id": "tseny-dogovornye",
+      "regex": "цен[ыа]\\s+договорн",
+      "category": "no-numbers",
+      "severity": "error",
+      "hint": "→ диапазон от … до … или конкретная цифра"
+    },
+    {
+      "id": "uznavaite-zvonite",
+      "regex": "(звоните|обращайтесь|пишите)[\\s,—-]+(узнавайте|узнайте|уточняйте)",
+      "category": "no-numbers",
+      "severity": "error",
+      "hint": "→ цифру в текст / а не отсыл к телефону"
+    },
+
+    {
+      "id": "v-kratchaishie-sroki",
+      "regex": "в\\s+кратчайш(ие|их)\\s+срок",
+      "category": "vague-time",
+      "severity": "error",
+      "hint": "→ послезавтра до 12:00 / за 24 часа / конкретное окно"
+    },
+    {
+      "id": "kak-mozhno-skoree",
+      "regex": "как\\s+можно\\s+скорее",
+      "category": "vague-time",
+      "severity": "error",
+      "hint": "→ конкретное время реакции (SLA в часах)"
+    },
+    {
+      "id": "operativno",
+      "regex": "(оперативно|максимально\\s+быстро|молниеносно)",
+      "category": "vague-time",
+      "severity": "warn",
+      "hint": "→ конкретный SLA: выезд за 1–2 часа на аварийные"
+    },
+
+    {
+      "id": "garantiruem-kachestvo",
+      "regex": "гарантиру[ею]м\\s+качеств",
+      "category": "empty-claim",
+      "severity": "error",
+      "hint": "→ конкретная гарантия: страховка ГО 10 млн ₽ / штрафы ГЖИ берём на себя"
+    },
+    {
+      "id": "individualnyi-podhod",
+      "regex": "индивидуальн[а-яё]+\\s+подход",
+      "category": "empty-claim",
+      "severity": "error",
+      "hint": "→ что именно делаете под клиента (смета по фото / договор по объекту)"
+    },
+    {
+      "id": "dorozhim-reputaciei",
+      "regex": "дорожим\\s+(своей\\s+)?репутац",
+      "category": "empty-claim",
+      "severity": "error",
+      "hint": "→ конкретный факт: работаем с 2024 / 86 объектов в Раменском за сезон"
+    },
+    {
+      "id": "luchshie-na-rynke",
+      "regex": "(лучш(ие|ий)|номер\\s*1|№\\s*1)\\s+(на\\s+рынке|в\\s+(москв|мо|регионе))",
+      "category": "empty-claim",
+      "severity": "error",
+      "hint": "Превосходные степени без подтверждения = пустота"
+    },
+    {
+      "id": "professionaly-svoego-dela",
+      "regex": "профессионал[а-яё]*\\s+своего\\s+дел",
+      "category": "empty-claim",
+      "severity": "error",
+      "hint": "→ конкретные допуски: допуск Минтруда №782н / 3-я группа по высоте"
+    },
+    {
+      "id": "vysokoe-kachestvo",
+      "regex": "высоко(е|го|му)\\s+качеств",
+      "category": "empty-claim",
+      "severity": "warn",
+      "hint": "→ что именно высокое: фрезеровка пня до Ø 60 см / уборка территории входит"
+    },
+    {
+      "id": "kachestvenno-i-v-srok",
+      "regex": "качественно\\s+и\\s+в\\s+срок",
+      "category": "empty-claim",
+      "severity": "error",
+      "hint": "Клише вакансий — заменить на цифру и SLA"
+    },
+    {
+      "id": "shirokii-spektr-uslug",
+      "regex": "широкий\\s+спектр\\s+услуг",
+      "category": "empty-claim",
+      "severity": "error",
+      "hint": "→ перечислить 4 направления: спил / снег / вывоз / демонтаж"
+    },
+
+    {
+      "id": "klient-b2c",
+      "regex": "(?<![а-яё])клиент(а|у|ом|ам|ов|ами|ах)?(?![а-яё])",
+      "category": "b2c-cold",
+      "severity": "warn",
+      "hint": "В B2C — вы / собственник / по объекту. Клиент допустим в B2B-договорной риторике."
+    },
+
+    {
+      "id": "exclam-multi",
+      "regex": "!{2,}",
+      "category": "tone-noise",
+      "severity": "error",
+      "hint": "Matter-of-fact: восклицания не нужны / особенно множественные"
+    },
+    {
+      "id": "caps-rus",
+      "regex": "(?<![А-ЯЁ])[А-ЯЁ]{5,}(?![А-ЯЁ])",
+      "category": "tone-noise",
+      "severity": "warn",
+      "hint": "CAPSLOCK ≥4 кириллических символов — не стиль Обихода. Аббревиатуры (СРО / ГЖИ / ОАТИ) ловятся отдельно через whitelist."
+    },
+    {
+      "id": "emoji-decor",
+      "regex": "[\\u{1F300}-\\u{1F9FF}\\u{2600}-\\u{27BF}]",
+      "category": "tone-noise",
+      "severity": "warn",
+      "hint": "Эмодзи-декораторы запрещены (§14). Иконки только из ServiceIcons."
+    },
+
+    {
+      "id": "ups",
+      "regex": "(?<![а-яё])[Уу]пс[!.\\s]",
+      "category": "error-page-cringe",
+      "severity": "error",
+      "hint": "Анти-TOV: на error-страницах никаких клишированных извинений."
+    },
+    {
+      "id": "chto-to-poshlo-ne-tak",
+      "regex": "что[-\\s]то\\s+пошло\\s+не\\s+так",
+      "category": "error-page-cringe",
+      "severity": "error",
+      "hint": "→ Страница временно недоступна / Не нашли запрос — позвоним за 5 минут"
+    },
+
+    {
+      "id": "spec-acc-uborka-magazinchik",
+      "regex": "(?<![а-яё])магазинчик",
+      "category": "shop-anti",
+      "severity": "error",
+      "hint": "Shop §18: уменьшительные подрывают Sage-авторитет. Используем питомник."
+    },
+    {
+      "id": "shop-eksklyuzivnyi",
+      "regex": "(?<![а-яё])эксклюзивн",
+      "category": "shop-anti",
+      "severity": "warn",
+      "hint": "Shop §18: маркетинговая вата"
+    },
+    {
+      "id": "shop-supersort",
+      "regex": "(?<![а-яё])(суперсорт|топ[-\\s]сорт|лучший\\s+сорт)",
+      "category": "shop-anti",
+      "severity": "warn",
+      "hint": "Shop §18"
+    },
+    {
+      "id": "shop-spehite",
+      "regex": "(?<![а-яё])(спешите|успейте|не\\s+упустите|торопитесь)",
+      "category": "shop-anti",
+      "severity": "warn",
+      "hint": "Shop §18: давление времени"
+    },
+    {
+      "id": "shop-hit-prodazh",
+      "regex": "(?<![а-яё])(хит\\s+продаж|бестселлер)",
+      "category": "shop-anti",
+      "severity": "warn",
+      "hint": "Shop §18"
+    },
+    {
+      "id": "shop-uniqualnyi",
+      "regex": "(?<![а-яё])(уникальн|премиум|элитн)[а-яё]*",
+      "category": "shop-anti",
+      "severity": "warn",
+      "hint": "Shop §18: пустые эпитеты"
+    }
+  ]
+}
