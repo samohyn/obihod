@@ -1,12 +1,15 @@
 import Link from 'next/link'
 
-import type { CtaBannerBlock, CtaAccent } from './types'
+import { RichTextRenderer } from '@/components/marketing/RichTextRenderer'
+
+import type { CtaAccent, CtaBannerBlock, CtaLink } from './types'
 
 /**
- * Контрастный CTA-баннер. Accent берётся из `accent` или `variant`:
- *  - primary → зелёный (--c-primary)
- *  - warning → янтарный (--c-accent)  [= variant=accent]
- *  - success → зелёный более светлый (--c-success)
+ * Контрастный CTA-баннер.
+ *
+ * Поддерживает обе схемы (US-0 W3 Track B-3):
+ *  - cw-схема: h2, body, ctaPrimary{label,href}, variant
+ *  - legacy:    heading, cta{label,href}, accent, variant, ctaLabel/ctaHref
  *
  * Server component.
  */
@@ -35,10 +38,23 @@ function resolveAccent(block: CtaBannerBlock): CtaAccent {
   return 'primary'
 }
 
+function pickCta(block: CtaBannerBlock): CtaLink | null {
+  if (block.ctaPrimary?.label || block.ctaPrimary?.href) return block.ctaPrimary
+  if (block.cta?.label || block.cta?.href) return block.cta
+  // Payload legacy `ctaLabel/ctaHref` (плоские поля).
+  const legacy = block as unknown as { ctaLabel?: string; ctaHref?: string }
+  if (legacy.ctaLabel && legacy.ctaHref) {
+    return { label: legacy.ctaLabel, href: legacy.ctaHref }
+  }
+  return null
+}
+
 export function CtaBanner(block: CtaBannerBlock) {
   const accent = resolveAccent(block)
   const tokens = accentMap[accent]
   const isDark = block.variant === 'dark'
+  const heading = block.h2 ?? block.heading ?? null
+  const cta = pickCta(block)
 
   return (
     <section id={block.anchor ?? undefined} style={{ padding: 'clamp(48px, 8vw, 96px) 0' }}>
@@ -56,33 +72,49 @@ export function CtaBanner(block: CtaBannerBlock) {
           }}
         >
           <div>
-            {block.heading && (
+            {heading && (
               <h2 className="h-xl" style={{ color: tokens.text, margin: 0 }}>
-                {block.heading}
+                {heading}
               </h2>
             )}
-            {block.body && (
-              <p
-                style={{
-                  marginTop: 16,
-                  fontSize: 'clamp(16px, 1.6vw, 19px)',
-                  lineHeight: 1.5,
-                  color:
-                    accent === 'warning'
-                      ? 'var(--c-ink-soft)'
-                      : 'color-mix(in oklab, var(--c-on-primary) 85%, transparent)',
-                  maxWidth: 640,
-                }}
-              >
-                {block.body}
-              </p>
-            )}
+            {block.body &&
+              (typeof block.body === 'string' ? (
+                <p
+                  style={{
+                    marginTop: 16,
+                    fontSize: 'clamp(16px, 1.6vw, 19px)',
+                    lineHeight: 1.5,
+                    color:
+                      accent === 'warning'
+                        ? 'var(--c-ink-soft)'
+                        : 'color-mix(in oklab, var(--c-on-primary) 85%, transparent)',
+                    maxWidth: 640,
+                  }}
+                >
+                  {block.body}
+                </p>
+              ) : (
+                <div
+                  style={{
+                    marginTop: 16,
+                    fontSize: 'clamp(16px, 1.6vw, 19px)',
+                    lineHeight: 1.5,
+                    color:
+                      accent === 'warning'
+                        ? 'var(--c-ink-soft)'
+                        : 'color-mix(in oklab, var(--c-on-primary) 85%, transparent)',
+                    maxWidth: 640,
+                  }}
+                >
+                  <RichTextRenderer data={block.body} />
+                </div>
+              ))}
           </div>
 
-          {block.cta?.label && block.cta?.href && (
+          {cta?.label && cta?.href && (
             <div>
-              <Link href={block.cta.href} className={`btn btn-lg ${tokens.btnClass}`}>
-                {block.cta.label}
+              <Link href={cta.href} className={`btn btn-lg ${tokens.btnClass}`}>
+                {cta.label}
               </Link>
             </div>
           )}

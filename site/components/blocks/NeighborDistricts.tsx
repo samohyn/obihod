@@ -3,30 +3,55 @@ import Link from 'next/link'
 import type { NeighborDistrictItem, NeighborDistrictsBlock } from './types'
 
 /**
- * 3 ближайших района из District.relatedDistricts.
+ * 3 ближайших района.
  *
- * Используется на /raiony/<district>/ и /<service>/<district>/.
- * Если задан serviceSlug — ссылки уходят на /<service>/<district>/,
- * иначе — на /raiony/<district>/ (district hub).
+ * Поддерживает обе схемы (US-0 W3 Track B-3):
+ *  - cw-схема: items[] = { name|label, href, distance }
+ *  - legacy:    items[] = { name, slug, distance }
  *
- * Контракт: US-0 sa-seo AC-2.5 «NeighborDistricts — 3 ближайших района
- * из District.relatedDistricts».
+ * Если задан `serviceSlug` — ссылки на /<service>/<district>/, иначе fallback
+ * на href (если cw уже передал) или /raiony/<slug>/.
  *
  * Server component.
  */
-function buildHref(districtSlug: string, serviceSlug?: string | null): string {
-  if (serviceSlug) {
-    const svc = serviceSlug.replace(/^\/+|\/+$/g, '')
-    return `/${svc}/${districtSlug}/`
-  }
-  return `/raiony/${districtSlug}/`
+
+interface NormalizedItem {
+  name: string
+  href: string
+  distance?: string | null
 }
 
-function Card({ item, serviceSlug }: { item: NeighborDistrictItem; serviceSlug?: string | null }) {
-  const href = buildHref(item.slug, serviceSlug)
+function buildHref(item: NeighborDistrictItem, serviceSlug?: string | null): string | null {
+  // cw уже передал готовый href
+  if (item.href) {
+    if (serviceSlug && item.slug) {
+      const svc = serviceSlug.replace(/^\/+|\/+$/g, '')
+      return `/${svc}/${item.slug}/`
+    }
+    return item.href
+  }
+  if (!item.slug) return null
+  if (serviceSlug) {
+    const svc = serviceSlug.replace(/^\/+|\/+$/g, '')
+    return `/${svc}/${item.slug}/`
+  }
+  return `/raiony/${item.slug}/`
+}
+
+function normalizeItem(
+  it: NeighborDistrictItem,
+  serviceSlug?: string | null,
+): NormalizedItem | null {
+  const name = it.name ?? it.label ?? null
+  const href = buildHref(it, serviceSlug)
+  if (!name || !href) return null
+  return { name, href, distance: it.distance ?? null }
+}
+
+function Card({ item }: { item: NormalizedItem }) {
   return (
     <Link
-      href={href}
+      href={item.href}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -67,12 +92,13 @@ function Card({ item, serviceSlug }: { item: NeighborDistrictItem; serviceSlug?:
 
 export function NeighborDistricts(block: NeighborDistrictsBlock) {
   const items = (block.items ?? [])
-    .filter((it): it is NeighborDistrictItem =>
-      Boolean(it && typeof it.name === 'string' && typeof it.slug === 'string'),
-    )
+    .map((it) => normalizeItem(it, block.serviceSlug))
+    .filter((it): it is NormalizedItem => Boolean(it))
     .slice(0, 3)
 
   if (items.length === 0) return null
+
+  const heading = block.h2 ?? block.heading ?? 'Соседние районы'
 
   return (
     <section
@@ -88,7 +114,7 @@ export function NeighborDistricts(block: NeighborDistrictsBlock) {
             maxWidth: 760,
           }}
         >
-          {block.heading ?? 'Соседние районы'}
+          {heading}
         </h2>
         <div
           style={{
@@ -97,8 +123,8 @@ export function NeighborDistricts(block: NeighborDistrictsBlock) {
             gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
           }}
         >
-          {items.map((it) => (
-            <Card key={it.slug} item={it} serviceSlug={block.serviceSlug} />
+          {items.map((it, i) => (
+            <Card key={`${it.href}-${i}`} item={it} />
           ))}
         </div>
       </div>

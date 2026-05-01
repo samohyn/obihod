@@ -7,11 +7,14 @@ import { RichTextRenderer } from '@/components/marketing/RichTextRenderer'
 import type { FaqBlock } from './types'
 
 /**
- * FAQ-аккордеон с schema.org FAQPage разметкой (если generateFaqPageSchema=true).
+ * FAQ-аккордеон с schema.org FAQPage разметкой.
  *
- * Извлечение текста ответа для JSON-LD — плоская свёртка Lexical-дерева
- * (достаточно для большинства ответов; be4 может подвезти формальный
- * сериалайзер позже).
+ * Поддерживает обе схемы (US-0 W3 Track B-3):
+ *  - cw-схема: h2, items[]={question, answer:string}
+ *  - legacy:    heading, items[]={question, answer:Lexical}
+ *
+ * Renderer-приоритет: h2 → heading; answer:string выводится как plain-текст,
+ * answer:Lexical — через RichTextRenderer.
  */
 function extractText(node: unknown): string {
   if (!node) return ''
@@ -29,6 +32,7 @@ function extractText(node: unknown): string {
 export function Faq(block: FaqBlock) {
   const items = (block.items ?? []).filter((i) => i?.question)
   const [openIdx, setOpenIdx] = useState<number | null>(0)
+  const heading = block.h2 ?? block.heading ?? null
 
   const schema =
     block.generateFaqPageSchema && items.length > 0
@@ -49,15 +53,16 @@ export function Faq(block: FaqBlock) {
   return (
     <section id={block.anchor ?? undefined} style={{ padding: 'clamp(48px, 8vw, 96px) 0' }}>
       <div className="wrap">
-        {block.heading && (
+        {heading && (
           <h2 className="h-l" style={{ marginBottom: 32, maxWidth: 760 }}>
-            {block.heading}
+            {heading}
           </h2>
         )}
 
         <div className="faq-list">
           {items.map((it, i) => {
             const isOpen = openIdx === i
+            const answerIsString = typeof it.answer === 'string'
             return (
               <div key={i} className={`faq-item ${isOpen ? 'is-open' : ''}`}>
                 <button
@@ -72,7 +77,13 @@ export function Faq(block: FaqBlock) {
                   </span>
                 </button>
                 <div className="faq-a" role="region">
-                  {it.answer ? <RichTextRenderer data={it.answer} /> : null}
+                  {it.answer ? (
+                    answerIsString ? (
+                      <p>{it.answer as string}</p>
+                    ) : (
+                      <RichTextRenderer data={it.answer} />
+                    )
+                  ) : null}
                 </div>
               </div>
             )

@@ -5,24 +5,40 @@ import type { ServicesGridBlock, ServicesGridItem } from './types'
 /**
  * Сетка карточек услуг с иконками.
  *
- * Контракт: US-0 sa-seo AC-2.5 «список карточек sub-services под pillar
- * (4-9 шт), иконки из реестра §9 brand-guide (services line: 22 иконки),
- * заголовок + ссылка».
+ * Поддерживает обе схемы (US-0 W3 Track B-3):
+ *  - cw-схема: items[] = { title, description, href, iconId, priceAnchor }
+ *  - legacy:    items[] = { title, slug, icon, summary }
  *
- * Сетка: 2-кол на mobile, 3-кол на md, 4-кол на lg.
- *
- * Иконка — placeholder div с инициалами/маркером линии (реальные SVG-glyph'ы
- * из brand-guide §9 подвозятся отдельным PR в site/components/icons/, не
- * блокируем US-0). Ключ icon хранится; при отсутствии иконки — рисуется
- * декоративный квадрат с символом услуги.
+ * Renderer-приоритет: href → /<slug>/, iconId → icon, description → summary.
  *
  * Server component.
  */
+
+interface NormalizedItem {
+  title: string
+  href: string
+  description?: string | null
+  iconId?: string | null
+  priceAnchor?: string | null
+}
+
+function normalizeItem(it: ServicesGridItem): NormalizedItem | null {
+  const title = it.title ?? null
+  const href = it.href ?? (it.slug ? (it.slug.startsWith('/') ? it.slug : `/${it.slug}/`) : null)
+  if (!title || !href) return null
+  return {
+    title,
+    href,
+    description: it.description ?? it.summary ?? null,
+    iconId: it.iconId ?? it.icon ?? null,
+    priceAnchor: it.priceAnchor ?? null,
+  }
+}
+
 function IconPlaceholder({ icon }: { icon?: string | null }) {
-  // Берём первую букву после префикса (s-musor → М-как-маркер).
   const symbol =
     (icon ?? '')
-      .replace(/^s-|^sh-|^d-|^c-/, '')
+      .replace(/^s-|^sh-|^d-|^c-|^vyvoz-|^arboristika|^chistka-|^demontazh/, '')
       .slice(0, 1)
       .toUpperCase() || '·'
   return (
@@ -48,11 +64,10 @@ function IconPlaceholder({ icon }: { icon?: string | null }) {
   )
 }
 
-function Card({ item }: { item: ServicesGridItem }) {
-  const href = item.slug.startsWith('/') ? item.slug : `/${item.slug}/`
+function Card({ item }: { item: NormalizedItem }) {
   return (
     <Link
-      href={href}
+      href={item.href}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -68,7 +83,7 @@ function Card({ item }: { item: ServicesGridItem }) {
       }}
       className="services-grid-card"
     >
-      <IconPlaceholder icon={item.icon} />
+      <IconPlaceholder icon={item.iconId} />
       <h3
         style={{
           margin: 0,
@@ -80,7 +95,7 @@ function Card({ item }: { item: ServicesGridItem }) {
       >
         {item.title}
       </h3>
-      {item.summary && (
+      {item.description && (
         <p
           style={{
             margin: 0,
@@ -89,28 +104,44 @@ function Card({ item }: { item: ServicesGridItem }) {
             color: 'var(--c-ink-soft)',
           }}
         >
-          {item.summary}
+          {item.description}
         </p>
+      )}
+      {item.priceAnchor && (
+        <span
+          style={{
+            marginTop: 'auto',
+            fontSize: 13,
+            fontFamily: 'var(--font-mono)',
+            color: 'var(--c-primary)',
+            fontWeight: 600,
+          }}
+        >
+          {item.priceAnchor}
+        </span>
       )}
     </Link>
   )
 }
 
 export function ServicesGrid(block: ServicesGridBlock) {
-  const items = (block.items ?? []).filter((it): it is ServicesGridItem =>
-    Boolean(it && typeof it.title === 'string' && typeof it.slug === 'string'),
-  )
+  const items = (block.items ?? [])
+    .map(normalizeItem)
+    .filter((it): it is NormalizedItem => Boolean(it))
+
   if (items.length === 0) return null
+
+  const heading = block.h2 ?? block.heading ?? null
 
   return (
     <section id={block.anchor ?? undefined} style={{ padding: 'clamp(48px, 8vw, 96px) 0' }}>
       <div className="wrap">
-        {(block.eyebrow || block.heading) && (
+        {(block.eyebrow || heading) && (
           <header style={{ maxWidth: 760, marginBottom: 32 }}>
             {block.eyebrow && <span className="eyebrow">{block.eyebrow}</span>}
-            {block.heading && (
+            {heading && (
               <h2 className="h-l" style={{ marginTop: block.eyebrow ? 12 : 0 }}>
-                {block.heading}
+                {heading}
               </h2>
             )}
           </header>
@@ -123,8 +154,8 @@ export function ServicesGrid(block: ServicesGridBlock) {
             gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
           }}
         >
-          {items.map((it) => (
-            <Card key={it.slug} item={it} />
+          {items.map((it, i) => (
+            <Card key={`${it.href}-${i}`} item={it} />
           ))}
         </div>
       </div>

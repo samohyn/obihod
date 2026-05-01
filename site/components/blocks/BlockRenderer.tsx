@@ -6,6 +6,7 @@ import { Hero } from './Hero'
 import { LeadForm } from './LeadForm'
 import { MiniCase } from './MiniCase'
 import { NeighborDistricts } from './NeighborDistricts'
+import { RelatedPosts } from './RelatedPosts'
 import { RelatedServices } from './RelatedServices'
 import { ServicesGrid } from './ServicesGrid'
 import { TextContent } from './TextContent'
@@ -54,6 +55,8 @@ export function BlockRenderer({ blocks }: { blocks: AnyBlock[] | null | undefine
             return <MiniCase key={block.id ?? i} {...block} />
           case 'related-services':
             return <RelatedServices key={block.id ?? i} {...block} />
+          case 'related-posts':
+            return <RelatedPosts key={block.id ?? i} {...block} />
           case 'neighbor-districts':
             return <NeighborDistricts key={block.id ?? i} {...block} />
           case 'calculator-placeholder':

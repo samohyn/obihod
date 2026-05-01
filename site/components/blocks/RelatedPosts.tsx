@@ -1,15 +1,13 @@
 import Link from 'next/link'
 
-import type { RelatedServiceItem, RelatedServicesBlock } from './types'
+import type { RelatedPostsBlock, RelatedPostItem } from './types'
 
 /**
- * 3 карточки cross-link на pillar/sub-services.
+ * Карточки статей блога — для author-эталона (cw-схема).
  *
- * Поддерживает обе схемы (US-0 W3 Track B-3):
- *  - cw-схема: items[] = { title, description, href, iconId }
- *  - legacy:    items[] = { title, slug, summary }
- *
- * 1..3 элементов; больше — обрезается.
+ * cw fixture `author.json` использует blockType `related-posts` с items =
+ * [{ title, href, description, publishedAt }, ...]. Это специализированный
+ * близнец RelatedServices, но для блога.
  *
  * Server component.
  */
@@ -17,18 +15,16 @@ interface NormalizedItem {
   title: string
   href: string
   description?: string | null
-  iconId?: string | null
+  publishedAt?: string | null
 }
 
-function normalizeItem(it: RelatedServiceItem): NormalizedItem | null {
-  const title = it.title ?? null
-  const href = it.href ?? (it.slug ? (it.slug.startsWith('/') ? it.slug : `/${it.slug}/`) : null)
-  if (!title || !href) return null
+function normalize(it: RelatedPostItem): NormalizedItem | null {
+  if (!it.title || !it.href) return null
   return {
-    title,
-    href,
-    description: it.description ?? it.summary ?? null,
-    iconId: it.iconId ?? null,
+    title: it.title,
+    href: it.href,
+    description: it.description ?? null,
+    publishedAt: it.publishedAt ?? null,
   }
 }
 
@@ -46,11 +42,26 @@ function Card({ item }: { item: NormalizedItem }) {
         border: '1px solid var(--c-line, color-mix(in oklab, var(--c-ink) 10%, transparent))',
         textDecoration: 'none',
         color: 'var(--c-ink)',
-        minHeight: 120,
-        transition: 'border-color 120ms ease',
+        minHeight: 132,
       }}
-      className="related-service-card"
+      className="related-post-card"
     >
+      {item.publishedAt && (
+        <span
+          style={{
+            fontSize: 11,
+            fontFamily: 'var(--font-mono)',
+            color: 'var(--c-ink-soft)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+          }}
+        >
+          {new Date(item.publishedAt).toLocaleDateString('ru-RU', {
+            year: 'numeric',
+            month: 'long',
+          })}
+        </span>
+      )}
       <h3
         style={{
           margin: 0,
@@ -75,21 +86,18 @@ function Card({ item }: { item: NormalizedItem }) {
           fontFamily: 'var(--font-mono)',
         }}
       >
-        Подробнее →
+        Читать →
       </span>
     </Link>
   )
 }
 
-export function RelatedServices(block: RelatedServicesBlock) {
-  const items = (block.items ?? [])
-    .map(normalizeItem)
-    .filter((it): it is NormalizedItem => Boolean(it))
-    .slice(0, 3)
+export function RelatedPosts(block: RelatedPostsBlock) {
+  const items = (block.items ?? []).map(normalize).filter((it): it is NormalizedItem => Boolean(it))
 
   if (items.length === 0) return null
 
-  const heading = block.h2 ?? block.heading ?? 'Похожие услуги'
+  const heading = block.h2 ?? 'Статьи автора'
 
   return (
     <section id={block.anchor ?? undefined} style={{ padding: 'clamp(48px, 8vw, 96px) 0' }}>

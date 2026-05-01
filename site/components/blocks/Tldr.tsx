@@ -3,25 +3,31 @@ import { RichTextRenderer } from '@/components/marketing/RichTextRenderer'
 import type { TldrBlock } from './types'
 
 /**
- * Tldr — короткий «нейро-формат» блок для цитируемости (Perplexity / Алиса /
- * AI Overviews). 2-3 предложения с акцентом.
+ * Tldr — короткий «нейро-формат» блок.
  *
- * Контракт: US-0 sa-seo AC-2.5 «нейро-формат: 2-3 предложения с акцентом,
- * eyebrow «Если коротко» / «TL;DR»; mark-up <aside aria-label="Краткий ответ">
- * для нейро-цитируемости».
+ * Поддерживает обе схемы (US-0 W3 Track B-3):
+ *  - cw-схема: body — plain-string («Если коротко: ...»)
+ *  - legacy:    text — plain-string (приоритет), body — Lexical fallback
  *
- * Стиль: акцент-рамка слева через --c-accent, светлый фон --c-bg-soft
- * (fallback на --c-bg-alt — токен `--c-bg-soft` пока не объявлен в globals.css,
- * fallback на родственный токен корректен).
+ * Renderer-приоритет: text → body.string → body.Lexical.
  *
- * Server component. Принимает `text: string` (приоритетнее) или `body: Lexical`.
+ * Server component. mark-up <aside aria-label="Краткий ответ"> для
+ * нейро-цитируемости.
  */
+function isPlainString(v: unknown): v is string {
+  return typeof v === 'string'
+}
+
 export function Tldr(block: TldrBlock) {
   const eyebrow = block.eyebrow ?? 'Если коротко'
-  const hasText = typeof block.text === 'string' && block.text.trim().length > 0
-  const hasBody = block.body != null
+  const text = block.text ?? null
+  const body = block.body
+  const hasText = isPlainString(text) && text.trim().length > 0
+  const bodyAsString = isPlainString(body) ? body : null
+  const hasBodyString = bodyAsString !== null && bodyAsString.trim().length > 0
+  const hasBodyLexical = body != null && !isPlainString(body)
 
-  if (!hasText && !hasBody) return null
+  if (!hasText && !hasBodyString && !hasBodyLexical) return null
 
   return (
     <section id={block.anchor ?? undefined} style={{ padding: 'clamp(24px, 4vw, 40px) 0' }}>
@@ -61,7 +67,19 @@ export function Tldr(block: TldrBlock) {
                 fontWeight: 500,
               }}
             >
-              {block.text}
+              {text}
+            </p>
+          ) : hasBodyString ? (
+            <p
+              style={{
+                margin: 0,
+                fontSize: 'clamp(16px, 1.6vw, 18px)',
+                lineHeight: 1.55,
+                color: 'var(--c-ink)',
+                fontWeight: 500,
+              }}
+            >
+              {bodyAsString}
             </p>
           ) : (
             <div
@@ -72,7 +90,7 @@ export function Tldr(block: TldrBlock) {
                 fontWeight: 500,
               }}
             >
-              <RichTextRenderer data={block.body} />
+              <RichTextRenderer data={body} />
             </div>
           )}
         </aside>

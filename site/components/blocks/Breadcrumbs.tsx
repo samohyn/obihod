@@ -2,24 +2,38 @@ import Link from 'next/link'
 
 import { breadcrumbListSchema } from '@/lib/seo/jsonld'
 
-import type { BreadcrumbsBlock } from './types'
+import type { BreadcrumbItem, BreadcrumbsBlock } from './types'
 
 /**
  * Хлебные крошки + JSON-LD BreadcrumbList.
  *
- * Server component. На главной (1 элемент) или при пустом списке — не рендерится
- * (защита от <li> с одним элементом и от мусорной разметки).
+ * Поддерживает обе схемы (US-0 W3 Track B-3):
+ *  - cw-схема: items[] = [{ label, href }, ...]
+ *  - legacy:    items[] = [{ name, url }, ...]
+ *
+ * Renderer-приоритет: label → name; href → url.
+ *
+ * Server component. На главной (1 элемент) или при пустом списке — не рендерится.
  *
  * A11y: role="navigation" + aria-label="Хлебные крошки".
  * Текущая страница (последний элемент) рендерится без <a>, с aria-current="page".
- *
- * Контракт: brand-guide §10 Nav, US-0 sa-seo AC-2.5 «Breadcrumbs — UI +
- * BreadcrumbList JSON-LD schema (генератор из site/lib/seo/jsonld.ts)».
  */
+
+interface NormalizedItem {
+  name: string
+  url: string
+}
+
+function normalizeItem(it: BreadcrumbItem): NormalizedItem | null {
+  const name = it.label ?? it.name ?? null
+  const url = it.href ?? it.url ?? null
+  if (!name || !url) return null
+  return { name, url }
+}
+
 export function Breadcrumbs(block: BreadcrumbsBlock) {
-  const items = (block.items ?? []).filter((it): it is { name: string; url: string } =>
-    Boolean(it && typeof it.name === 'string' && typeof it.url === 'string'),
-  )
+  const rawItems = block.items ?? []
+  const items = rawItems.map(normalizeItem).filter((it): it is NormalizedItem => Boolean(it))
 
   // Защита от пустого/одно-элементного списка (на главной).
   if (items.length < 2) return null
