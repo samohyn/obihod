@@ -22,6 +22,8 @@
     "seed:authors:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/seed-authors.ts",
     "migrate:slug-chistka": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/migrate-slug-chistka-krysh.ts",
     "migrate:slug-chistka:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/migrate-slug-chistka-krysh.ts",
+    "migrate:blocks:services": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/migrate-services-to-blocks.ts",
+    "migrate:blocks:services:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/migrate-services-to-blocks.ts",
     "audit:prune": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/audit/prune.ts",
     "audit:prune:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/audit/prune.ts",
     "db:up": "docker compose up -d postgres",
