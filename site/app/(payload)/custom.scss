@@ -877,3 +877,62 @@ a.nav__link[href*='/admin/globals/site-chrome'] {
     transform: none;
   }
 }
+
+/* ────────────────────────────────────────────────────────────────────
+ *  PANEL-A11Y-TARGET-SIZE (post-W9, 2026-05-01)
+ *  WCAG 2.2 AA · SC 2.5.5 (Target Size 44×44).
+ *
+ *  Audit Payload 3.84 (verified 2026-05-01 в node_modules/@payloadcms/ui):
+ *   - .popup-button (PopupTrigger kebab/3-dot row-action) — height 100%,
+ *     padding base(0.2)≈5px → ~25-28px на mobile (W6 покрывает только
+ *     `.payload__app button` высотой 44, но width не задан и popup-button
+ *     рендерится через PopupTrigger вне `.payload__app` ancestor для list
+ *     row-actions — selector нужен напрямую).
+ *   - .checkbox-input__input (bulk-select td.cell-_select) — width/height
+ *     $baseline ≈25px (verified fields/Checkbox/index.scss:42-43). Скрыт на
+ *     ≤640px (W6 §6.7), но visible 641-1024px → tap zone <44.
+ *   - .list-create-new-doc__create-new-button — already covered W9 (font-weight,
+ *     padding via .btn--style-pill native ≥40px height); +safety min-h.
+ *
+ *  Strategy: min-width/min-height 44px + adequate padding. Visual icon
+ *  preserved (только touch-zone расширена). Cascade — `!important` чтобы
+ *  перебить Payload @layer payload-default (W6/W8/W9 precedent: lines 614,
+ *  664, 738). Только @media (max-width: 1024px) — desktop SC 2.5.8 24×24
+ *  достаточно (mouse pointer).
+ * ──────────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  /* PopupTrigger kebab row-action (3-dot menu в каждой list row).
+   * Selector БЕЗ `.payload__app` — verified PopupTrigger.js рендерится
+   * через portal-like fragment, ancestor может отсутствовать. */
+  .popup-button {
+    min-width: 44px !important; /* reason: Payload @layer override */
+    min-height: 44px !important; /* reason: Payload @layer override */
+    padding: 10px !important; /* base(0.2) ≈5px → 10px keeps icon visual size, expand touch */
+    box-sizing: border-box !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Bulk-select checkbox cell (.cell-_select). W6 скрывает на ≤640px,
+   * но 641-1024px (tablet portrait) checkbox видим и имеет 25×25.
+   * Расширяем hit-area через outer cell padding + inner box. */
+  .payload__app td.cell-_select,
+  .payload__app th:has(input[type='checkbox']):first-child {
+    min-width: 44px !important; /* reason: Payload @layer override */
+  }
+  .payload__app .checkbox-input__input {
+    min-width: 24px !important; /* SC 2.5.8 fallback for form controls */
+    min-height: 24px !important;
+  }
+  /* Outer wrapper expands clickable area до 44×44 без визуального
+   * увеличения checkbox icon. */
+  .payload__app .cell-_select .checkbox-input,
+  .payload__app td.cell-_select > * {
+    min-width: 44px !important; /* reason: Payload @layer override */
+    min-height: 44px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
