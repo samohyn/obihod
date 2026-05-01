@@ -165,34 +165,15 @@ test.describe('OBI-19 — Admin design compliance (Wave 1)', () => {
 
   /* ───────── W7 Polish smoke (sa-panel-wave7.md §7.2) ───────── */
 
-  test('Wave 4 (PAN-3): tabs has-error CSS rule deployed (red dot indicator)', async ({ page }) => {
-    const resp = await page.goto(ADMIN_PATH, { waitUntil: 'domcontentloaded' })
-    if (!resp || resp.status() >= 500) {
-      test.skip(true, `Admin не отвечает (${resp?.status()})`)
-    }
-    // Проверка что W4 closure CSS rule (has-error::after content '•') в stylesheet
-    const ruleDeployed = await page.evaluate(() => {
-      for (const sheet of Array.from(document.styleSheets)) {
-        try {
-          for (const rule of Array.from(sheet.cssRules || [])) {
-            const r = rule as CSSStyleRule
-            if (
-              r.selectorText &&
-              /tabs-field__tab-button.*has-error.*::after|tabs-field__tab-button.*aria-invalid.*::after/.test(
-                r.selectorText,
-              ) &&
-              /'•'|"•"/.test(r.cssText)
-            ) {
-              return true
-            }
-          }
-        } catch {
-          // skip
-        }
-      }
-      return false
-    })
-    expect(ruleDeployed, 'W4 has-error tab indicator CSS rule должен быть в custom.scss').toBe(true)
+  test.skip('Wave 4 (PAN-3): tabs has-error CSS rule deployed (red dot indicator)', async ({
+    page,
+  }) => {
+    // SKIPPED · PANEL-CSS-PREFIX-CLEANUP (2026-05-01):
+    // W4 rule был `.payload__app .tabs-field__tab-button.has-error::after` —
+    // selector никогда не работал (ancestor `.payload__app` отсутствует в
+    // Payload 3.84 admin shell). Rule удалён в cleanup; backlog
+    // PANEL-W4-TABS-REVIVE — пересоздать через `.template-default` ancestor.
+    void page
   })
 
   test('Wave 5 part 1 (PAN-4): brand-skeleton-pulse keyframes deployed', async ({ page }) => {

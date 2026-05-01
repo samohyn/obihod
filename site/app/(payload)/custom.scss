@@ -182,147 +182,22 @@ html[data-theme='dark'] {
   --color-base-1000: #000000;
 }
 
-/* Tabular nums для всех чисел в admin (зеркально с globals.css). */
-.payload__app,
-.payload__app input,
-.payload__app table,
-.payload__app code {
-  font-variant-numeric: tabular-nums;
-}
-
-/* ────────────────────────────────────────────────────────────────────
- *  PRIMARY BUTTON — ЯНТАРНЫЙ (brand-guide §12.4.1, art-concept-v2 §1)
- *  В admin primary CTA = accent (#e6a23c) на ink (#1c1c1c), не brand-зелёный.
- *  Зелёный применяется к secondary/ghost кнопкам и status published-pill.
- * ──────────────────────────────────────────────────────────────────── */
-.payload__app .btn--style-primary,
-.payload__app .btn--style-primary:not([disabled]) {
-  background-color: var(--brand-obihod-accent);
-  border-color: var(--brand-obihod-accent);
-  color: var(--brand-obihod-ink);
-  transition:
-    background-color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard),
-    border-color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard),
-    transform 80ms var(--brand-obihod-ease-standard),
-    box-shadow var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard);
-}
-.payload__app .btn--style-primary:hover:not([disabled]) {
-  background-color: var(--brand-obihod-accent-hover);
-  border-color: var(--brand-obihod-accent-hover);
-}
-.payload__app .btn--style-primary:active:not([disabled]) {
-  background-color: var(--brand-obihod-accent-ink);
-  border-color: var(--brand-obihod-accent-ink);
-  transform: translateY(1px);
-}
-.payload__app .btn--style-primary:focus-visible {
-  outline: none;
-  box-shadow: var(--brand-obihod-shadow-focus-accent);
-}
-.payload__app .btn--style-primary[disabled],
-.payload__app .btn--style-primary[aria-disabled='true'] {
-  background-color: var(--brand-obihod-paper-warm);
-  border-color: var(--brand-obihod-line);
-  color: var(--brand-obihod-disabled-text);
-  cursor: not-allowed;
-}
-
-/* ────────────────────────────────────────────────────────────────────
- *  SECONDARY (GHOST) BUTTON — outline brand-зелёный
- * ──────────────────────────────────────────────────────────────────── */
-.payload__app .btn--style-secondary {
-  background-color: transparent;
-  border-color: var(--brand-obihod-line);
-  color: var(--brand-obihod-primary);
-  transition:
-    background-color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard),
-    border-color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard),
-    color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard);
-}
-.payload__app .btn--style-secondary:hover:not([disabled]) {
-  background-color: var(--brand-obihod-paper);
-  border-color: var(--brand-obihod-line-hover);
-  color: var(--brand-obihod-primary-ink);
-}
-.payload__app .btn--style-secondary:focus-visible {
-  outline: none;
-  border-color: var(--brand-obihod-primary);
-  box-shadow: 0 0 0 3px rgba(45, 90, 61, 0.18);
-}
-
-/* ────────────────────────────────────────────────────────────────────
- *  INPUTS / TEXTAREA / SELECT — focus brand-зелёный с soft ring
- *  (input.spec.md states + brand-guide §12.4.1 token map)
- * ──────────────────────────────────────────────────────────────────── */
-.payload__app input:focus-visible,
-.payload__app textarea:focus-visible,
-.payload__app select:focus-visible,
-.payload__app .field-type input:focus-visible,
-.payload__app .field-type textarea:focus-visible {
-  outline: none;
-  border-color: var(--brand-obihod-primary);
-  box-shadow: var(--brand-obihod-shadow-focus-primary);
-}
-.payload__app input:hover:not([disabled]):not(:focus),
-.payload__app textarea:hover:not([disabled]):not(:focus) {
-  border-color: var(--brand-obihod-line-hover);
-}
-.payload__app input[aria-invalid='true'],
-.payload__app textarea[aria-invalid='true'] {
-  border-color: var(--brand-obihod-danger);
-  box-shadow: var(--brand-obihod-shadow-focus-error);
-}
-
-/* ────────────────────────────────────────────────────────────────────
- *  STATUS PILLS — brand colors (brand-guide §12.5)
- *  publ = зелёный, draft = янтарный, archive = серый, error = красный.
- * ──────────────────────────────────────────────────────────────────── */
-.payload__app .pill--style-success {
-  background-color: var(--brand-obihod-primary);
-  color: var(--brand-obihod-on-primary);
-  border-color: transparent;
-}
-.payload__app .pill--style-warning {
-  background-color: var(--brand-obihod-accent);
-  color: var(--brand-obihod-ink);
-  border-color: transparent;
-}
-.payload__app .pill--style-error {
-  background-color: var(--brand-obihod-danger);
-  color: var(--brand-obihod-on-primary);
-  border-color: transparent;
-}
-.payload__app .pill--style-light-gray,
-.payload__app .pill--style-default {
-  background-color: var(--brand-obihod-line);
-  color: var(--brand-obihod-muted);
-  border-color: transparent;
-}
-
-/* ────────────────────────────────────────────────────────────────────
- *  SIDEBAR — active link = bg primary green + 3px accent left border
- *  (art-concept-v2 §2 + brand-guide §12.2)
- * ──────────────────────────────────────────────────────────────────── */
-.payload__app .nav__link {
-  transition:
-    background-color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard),
-    color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard);
-}
-.payload__app .nav__link:hover {
-  background-color: var(--brand-obihod-card);
-  color: var(--brand-obihod-ink);
-}
-.payload__app .nav__link.active,
-.payload__app .nav__link[aria-current='page'] {
-  background-color: var(--brand-obihod-primary);
-  color: var(--brand-obihod-on-primary);
-  border-left: 3px solid var(--brand-obihod-accent);
-  padding-left: calc(var(--style-h-padding, 16px) - 3px);
-}
-.payload__app .nav__link:focus-visible {
-  outline: 2px solid var(--brand-obihod-primary);
-  outline-offset: -2px;
-}
+/* PANEL-CSS-PREFIX-CLEANUP (2026-05-01):
+ * W1 правила вида `.payload__app X` УДАЛЕНЫ — в Payload 3.84 admin shell
+ * НЕ имеет ancestor `.payload__app` (verified DOM 2026-05-01: outer wrapper —
+ * `.template-default`, не `.payload__app`). Все W1 button/input/pill/sidebar/
+ * tabs стили были dead code (зеркало incident leadqa-RC-1 2026-04-28 для
+ * login screen, теперь подтверждено для всего authed admin shell).
+ *
+ * ВНИМАНИЕ: visible UI не меняется (правила и так не применялись), но
+ * brand-token override на admin button/pill/input — это backlog
+ * follow-up (PANEL-W1-REVIVE-OR-DROP). Сейчас оставляем native Payload
+ * defaults на этих primitives.
+ *
+ * Live правила без префикса (login__form, nav__link__home, lead-*,
+ * tabs-field на mobile, list-create-new-doc__create-new-button,
+ * step-nav__home, modular-dashboard, popup-button mobile, theme-toggle-stub,
+ * brand-skeleton, a.nav__link[href*='/admin/...'] icons) — ОСТАЛИСЬ. */
 
 /* Sidebar Leads badge counter (Wave 3 · PAN-6 part 3, sa-panel-wave3 §3.5).
  * Plan B: client polls /api/admin/leads/count?status=new и проставляет
@@ -347,43 +222,14 @@ a.nav__link[href*='/admin/collections/leads'][data-leads-count]::after {
 }
 
 /* ────────────────────────────────────────────────────────────────────
- *  TABS (Edit-view длинных форм — art-concept-v2 §5, brand-guide §12.4)
+ *  TABS (Edit-view длинных форм)
+ *  PANEL-CSS-PREFIX-CLEANUP: dead `.payload__app .tabs-field__tab-button`
+ *  selectors удалены (ancestor отсутствует в Payload 3.84). Native Payload
+ *  tabs остаются с дефолтными стилями. Backlog PANEL-W4-TABS-REVIVE —
+ *  recreate brand стили (hover green, active ink+border-bottom green,
+ *  focus-visible primary outline, has-error red dot) через `.template-default`
+ *  ancestor если оператор отметит regression UX в edit-view tabs.
  * ──────────────────────────────────────────────────────────────────── */
-.payload__app .tabs-field__tab-button {
-  transition:
-    color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard),
-    background-color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard),
-    border-color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard);
-}
-.payload__app .tabs-field__tab-button:hover {
-  color: var(--brand-obihod-primary);
-  background-color: var(--brand-obihod-paper);
-}
-.payload__app .tabs-field__tab-button--active,
-.payload__app .tabs-field__tab-button[aria-selected='true'] {
-  color: var(--brand-obihod-ink);
-  background-color: var(--brand-obihod-card);
-  border-bottom-color: var(--brand-obihod-primary);
-  font-weight: 500;
-}
-.payload__app .tabs-field__tab-button:focus-visible {
-  outline: 2px solid var(--brand-obihod-primary);
-  outline-offset: 2px;
-}
-
-/* Validation error indicator на tab (Wave 4 · sa-panel-wave4 §4.6).
- * Native Payload добавляет `has-error` class или `aria-invalid="true"` на
- * tab при validation failure внутри. Красная точка справа от label
- * сигналит оператору на какой tab нужно вернуться. */
-.payload__app .tabs-field__tab-button.has-error::after,
-.payload__app .tabs-field__tab-button[aria-invalid='true']::after {
-  content: '•';
-  color: var(--brand-obihod-danger);
-  margin-left: 6px;
-  font-weight: 700;
-  font-size: 1.1em;
-  line-height: 1;
-}
 
 /* ────────────────────────────────────────────────────────────────────
  *  LOGIN SCREEN — карточка-форма 320px по brand-guide §12.1
@@ -565,11 +411,13 @@ a.nav__link[href*='/admin/collections/leads'][data-leads-count]::after {
  *  + skeleton pulse (a11y prefers-reduced-motion).
  * ──────────────────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .payload__app .btn--style-primary:active,
+  /* PANEL-CSS-PREFIX-CLEANUP: убрали dead `.payload__app` selectors;
+   * остаются live: login__form transform/transition + global skeleton +
+   * tabs scroll-behavior. Native Payload elements respect prefers-reduced-motion
+   * через свои @media rules в @payloadcms/ui. */
   .login__form button[type='submit']:active {
     transform: none;
   }
-  .payload__app *,
   .login__form * {
     transition-duration: 0.01ms !important;
   }
@@ -602,18 +450,19 @@ a.nav__link[href*='/admin/collections/leads'][data-leads-count]::after {
  * которые перебивают native layout (touch heights, overflow). reason:
  * Payload @layer cascade override; см. DOM debug 2026-04-30. */
 @media (max-width: 1024px) {
-  /* Touch targets ≥44×44 (WCAG 2.5.5 AA) на всех interactive elements */
-  .payload__app button,
-  .payload__app .btn,
-  .payload__app .nav__link,
-  .payload__app .tabs-field__tab-button,
+  /* Touch targets ≥44×44 (WCAG 2.5.5 AA).
+   * PANEL-CSS-PREFIX-CLEANUP: dead `.payload__app X` selectors удалены
+   * (ancestor отсутствует в Payload 3.84 admin shell). Live правила без
+   * префикса (login__form, nav-toggler) сохранены.
+   *
+   * Backlog PANEL-W6-MOBILE-REVIVE — подтвердить что native Payload mobile
+   * @media обеспечивает 44×44 на admin button/input/nav__link/tab; иначе
+   * recreate селекторы через `.template-default` ancestor. */
   .login__form button[type='submit'],
   .login__form a,
   .nav-toggler {
     min-height: 44px !important; /* reason: Payload @layer override */
   }
-  .payload__app input:not([type='checkbox']):not([type='radio']),
-  .payload__app textarea,
   .login__form input {
     min-height: 44px !important; /* reason: Payload @layer override */
   }
@@ -655,27 +504,11 @@ a.nav__link[href*='/admin/collections/leads'][data-leads-count]::after {
     padding: 24px 20px;
   }
 
-  /* §6.4 List view → horizontal-scroll fallback (block-stack DROPPED:
-   * Payload не выставляет data-label attribute на td.cell-<name>,
-   * нужен JS-mapping для column titles. Fallback overflow-x: auto +
-   * white-space: nowrap оставляет table читаемым через swipe).
-   * !important — reason: Payload @layer override `display: table`. */
-  .payload__app table {
-    display: block !important; /* reason: Payload @layer override */
-    overflow-x: auto !important; /* reason: Payload @layer override */
-    -webkit-overflow-scrolling: touch;
-    white-space: nowrap;
-  }
-  .payload__app table thead,
-  .payload__app table tbody {
-    display: table !important; /* reason: keep table-row inside scrollable wrapper */
-    width: max-content;
-    min-width: 100%;
-  }
-  .payload__app table td,
-  .payload__app table th {
-    white-space: normal; /* cell content wraps, but row stays table-row */
-  }
+  /* §6.4 List view → horizontal-scroll fallback.
+   * PANEL-CSS-PREFIX-CLEANUP: dead `.payload__app table` selectors удалены
+   * (ancestor отсутствует в Payload 3.84). Backlog PANEL-W6-MOBILE-REVIVE:
+   * recreate через `.template-default table` если native Payload не покрывает
+   * mobile horizontal-scroll для list view. */
 
   /* §6.5 Tabs horizontal scroll + scroll-snap-x.
    * !important — reason: Payload @layer override `flex-wrap` и `overflow`. */
@@ -705,13 +538,9 @@ a.nav__link[href*='/admin/collections/leads'][data-leads-count]::after {
     -webkit-overflow-scrolling: touch;
   }
 
-  /* §6.7 Bulk-action disabled — скрываем select-checkbox column на mobile
-   * (cell-_select — first cell в каждой row, проверено DOM debug).
-   * !important — reason: Payload @layer override `display: table-cell`. */
-  .payload__app td.cell-_select,
-  .payload__app th:first-child:has(input[type='checkbox']) {
-    display: none !important; /* reason: Payload @layer override */
-  }
+  /* §6.7 Bulk-action disabled — PANEL-CSS-PREFIX-CLEANUP: dead `.payload__app`
+   * selectors удалены. Backlog PANEL-W6-MOBILE-REVIVE: recreate через
+   * `.template-default td.cell-_select` если нужно скрыть на mobile. */
 }
 
 /* §6.1 Desktop 1440+ — no changes (baseline остаётся) */
@@ -914,27 +743,11 @@ a.nav__link[href*='/admin/globals/site-chrome'] {
     justify-content: center !important;
   }
 
-  /* Bulk-select checkbox cell (.cell-_select). W6 скрывает на ≤640px,
-   * но 641-1024px (tablet portrait) checkbox видим и имеет 25×25.
-   * Расширяем hit-area через outer cell padding + inner box. */
-  .payload__app td.cell-_select,
-  .payload__app th:has(input[type='checkbox']):first-child {
-    min-width: 44px !important; /* reason: Payload @layer override */
-  }
-  .payload__app .checkbox-input__input {
-    min-width: 24px !important; /* SC 2.5.8 fallback for form controls */
-    min-height: 24px !important;
-  }
-  /* Outer wrapper expands clickable area до 44×44 без визуального
-   * увеличения checkbox icon. */
-  .payload__app .cell-_select .checkbox-input,
-  .payload__app td.cell-_select > * {
-    min-width: 44px !important; /* reason: Payload @layer override */
-    min-height: 44px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
+  /* Bulk-select checkbox cell (.cell-_select).
+   * PANEL-CSS-PREFIX-CLEANUP: dead `.payload__app` selectors удалены.
+   * Backlog PANEL-A11Y-TARGET-SIZE-REVIVE — recreate через `.template-default`
+   * ancestor если a11y audit показывает что bulk-select touch <44px на tablet
+   * portrait (641-1024px) — W6 §6.7 уже скрывает на ≤640px. */
 }
 
 /* ════════════════════════════════════════════════════════════════════
@@ -1473,7 +1286,11 @@ a.nav__link.nav__link--home::before {
 }
 
 /* §F · Hide virtual `_actions` field в edit-view (only useful в list-view).
- * Payload рендерит его как пустой text input если не скрыть. */
-.payload__app .field-type[id*='field-_actions'] {
+ * Payload рендерит его как пустой text input если не скрыть.
+ * PANEL-CSS-PREFIX-CLEANUP: убрали dead `.payload__app` префикс (ancestor
+ * отсутствует в Payload 3.84). Селектор `.field-type[id*='field-_actions']`
+ * без префикса — global, но id очень specific (только virtual _actions),
+ * collision risk = 0. */
+.field-type[id*='field-_actions'] {
   display: none;
 }
