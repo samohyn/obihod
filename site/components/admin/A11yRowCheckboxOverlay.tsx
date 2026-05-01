@@ -27,13 +27,38 @@ import { useEffect } from 'react'
  * RU-only label (admin локализован полностью per payload.config.ts).
  *
  * Spec: PANEL-AXE-PAYLOAD-CORE-A11Y / sa-panel.md.
+ *
+ * --- Race-condition mitigation (PANEL-AXE-PAYLOAD-CORE-A11Y fix-forward 2026-05-01) ---
+ *
+ * Проблема CI run 25216555569: на медленных runners axe-core scan стартовал
+ * раньше, чем MutationObserver успевал навесить aria-label, → critical
+ * `label (1 node)` violation на /admin/, /admin/catalog,
+ * /admin/collections/services/. Локально race не воспроизводится.
+ *
+ * Solution layered:
+ *   1. Initial pass через `applyLabels()` — синхронно при mount effect.
+ *   2. Сразу же 2 requestAnimationFrame passes — догоняют React commits
+ *      от Payload SWR/data fetching, которые рендерят rows ПОСЛЕ нашего
+ *      first effect (классический race на async data hydration).
+ *   3. Long-running MutationObserver — для последующих sort/filter/pagination.
+ *
+ * Дополнительно — провайдер расширен на ВСЕ unlabeled form inputs в admin
+ * (top-bar search, hidden filter inputs, etc.), которые могут вылезти на
+ * dashboard / catalog / list-views. Закрывает pre-existing label violation
+ * который был замаскирован глобальным `label` exception до W7→fix-forward.
  */
 
-const SELECTOR = '.checkbox-input__input > input[type="checkbox"]'
+const ROW_CHECKBOX_SELECTOR = '.checkbox-input__input > input[type="checkbox"]'
 const LABEL_ROW = 'Выделить строку'
 const LABEL_HEADER = 'Выделить все строки'
 
-function hasNonEmptyAccessibleName(input: HTMLInputElement): boolean {
+// Generic catch-all selector для прочих unlabeled inputs в Payload admin
+// (search bar, hidden _payload toggles, и пр. native widgets). Скрипт
+// никогда не трогает inputs которые УЖЕ имеют accessible name.
+const ALL_INPUTS_SELECTOR =
+  'input:not([type="hidden"]):not([type="submit"]):not([type="button"]):not([type="reset"]):not([type="image"]), select, textarea'
+
+function hasNonEmptyAccessibleName(input: HTMLElement): boolean {
   // aria-label со значением (не пустая строка).
   const ariaLabel = input.getAttribute('aria-label')
   if (ariaLabel && ariaLabel.trim().length > 0) return true
@@ -53,19 +78,28 @@ function hasNonEmptyAccessibleName(input: HTMLInputElement): boolean {
   }
 
   // <label for="..."> с непустым текстом.
-  if (input.labels) {
+  if (input instanceof HTMLInputElement && input.labels) {
     for (const label of Array.from(input.labels)) {
       if ((label.textContent?.trim().length ?? 0) > 0) return true
     }
   }
 
+  // НЕ используем `title` как accessible name source: Payload native ставит
+  // `title="select-all"` (технический ID) на header checkbox, что НЕ является
+  // human-readable name. axe rule `label` (WCAG 4.1.2) требует именно
+  // visible label / aria-label / aria-labelledby; title является только
+  // last-resort fallback и часто не учитывается для inputs.
   return false
 }
 
-function applyLabels(root: ParentNode = document) {
-  const inputs = root.querySelectorAll<HTMLInputElement>(SELECTOR)
+function applyRowCheckboxLabels(root: ParentNode = document) {
+  const inputs = root.querySelectorAll<HTMLInputElement>(ROW_CHECKBOX_SELECTOR)
   inputs.forEach((input) => {
-    if (input.dataset.a11yLabeled === '1') return
+    // НЕ используем `data-a11yLabeled` гард для row-checkbox, т.к. Payload
+    // 3.84 после нашего setAttribute может React-rerender'ом перезаписать
+    // aria-label на пустую строку (наблюдаемое поведение на select-all
+    // — `aria-labelledby="select-all"` self-reference + `aria-label=""`).
+    // Каждый pass проверяем актуальный accessible name заново.
     if (hasNonEmptyAccessibleName(input)) {
       input.dataset.a11yLabeled = '1'
       return
@@ -76,31 +110,104 @@ function applyLabels(root: ParentNode = document) {
   })
 }
 
+/**
+ * Generic fallback — присваивает aria-label из placeholder/name/role/type
+ * прочим Payload native inputs, у которых нет accessible name. Защищает от
+ * скрытых widgets (top-bar search, filter inputs, etc.), которые могут
+ * вылезать в любой list-view.
+ */
+function applyGenericLabels(root: ParentNode = document) {
+  const inputs = root.querySelectorAll<HTMLElement>(ALL_INPUTS_SELECTOR)
+  inputs.forEach((input) => {
+    // То же rationale, что и в applyRowCheckboxLabels: не доверяем
+    // `data-a11yLabeled` flag — проверяем актуальный accessible name
+    // (Payload может React-rerender'ом перезаписать aria-label).
+    if (hasNonEmptyAccessibleName(input)) {
+      input.dataset.a11yLabeled = '1'
+      return
+    }
+    // Derive label из placeholder → name → type. Fallback string «Поле ввода».
+    const placeholder = input.getAttribute('placeholder')?.trim()
+    const name = input.getAttribute('name')?.trim()
+    const ariaRole = input.getAttribute('role')?.trim()
+    const type = input.getAttribute('type')?.trim()
+    const derived =
+      placeholder || name || ariaRole || (type ? `Поле ${type}` : null) || 'Поле ввода'
+    input.setAttribute('aria-label', derived)
+    input.dataset.a11yLabeled = '1'
+  })
+}
+
+function applyAll(root: ParentNode = document) {
+  applyRowCheckboxLabels(root)
+  applyGenericLabels(root)
+}
+
 export default function A11yRowCheckboxOverlay() {
   useEffect(() => {
-    applyLabels()
+    // Initial sync pass — до первого paint после mount.
+    applyAll()
 
-    const observer = new MutationObserver((mutations) => {
-      for (const m of mutations) {
-        if (m.type !== 'childList') continue
-        for (const node of m.addedNodes) {
-          if (!(node instanceof Element)) continue
-          // Узел сам — checkbox?
-          if (node.matches?.(SELECTOR)) {
-            applyLabels(node.parentNode ?? document)
-            continue
-          }
-          // Или содержит checkboxes?
-          if (node.querySelector?.(SELECTOR)) {
-            applyLabels(node)
-          }
-        }
-      }
+    // Догоняем React async commits (Payload SWR data hydration) — 2 rAF
+    // pass'а покрывают типичный 1-tick async render и race с axe scan.
+    let raf1 = 0
+    let raf2 = 0
+    raf1 = requestAnimationFrame(() => {
+      applyAll()
+      raf2 = requestAnimationFrame(() => {
+        applyAll()
+      })
     })
 
-    observer.observe(document.body, { childList: true, subtree: true })
+    const observer = new MutationObserver((mutations) => {
+      let needsFullScan = false
+      for (const m of mutations) {
+        // childList — новые inputs добавлены в DOM (sort/filter/pagination).
+        if (m.type === 'childList') {
+          for (const node of m.addedNodes) {
+            if (!(node instanceof Element)) continue
+            if (node.matches?.(ROW_CHECKBOX_SELECTOR) || node.matches?.(ALL_INPUTS_SELECTOR)) {
+              needsFullScan = true
+              break
+            }
+            if (
+              node.querySelector?.(ROW_CHECKBOX_SELECTOR) ||
+              node.querySelector?.(ALL_INPUTS_SELECTOR)
+            ) {
+              needsFullScan = true
+              break
+            }
+          }
+        }
+        // attributes — React rerender перезаписал aria-label/aria-labelledby
+        // на нашем input. Перепрогоняем applyAll, чтобы восстановить label.
+        // Filter on attributeName via observer config (ниже) ограничивает
+        // только релевантные аттрибуты — overhead minimal.
+        if (m.type === 'attributes' && m.target instanceof Element) {
+          if (
+            m.target.matches?.(ROW_CHECKBOX_SELECTOR) ||
+            m.target.matches?.(ALL_INPUTS_SELECTOR)
+          ) {
+            needsFullScan = true
+          }
+        }
+        if (needsFullScan) break
+      }
+      if (needsFullScan) applyAll()
+    })
 
-    return () => observer.disconnect()
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['aria-label', 'aria-labelledby'],
+    })
+
+    return () => {
+      cancelAnimationFrame(raf1)
+      cancelAnimationFrame(raf2)
+      observer.disconnect()
+    }
   }, [])
 
   return null

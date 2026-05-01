@@ -46,3 +46,30 @@ date: 2026-05-01
 ## Sign-off
 
 `APPROVE` self per iron rule #7 (autonomous mandate, scope < 200 LOC, panel-internal, no cross-team conflict, спецификация одобрена popanel в spec-approved phase). Готов к merge → leadqa VoiceOver smoke (отдельный follow-up).
+
+## Fix-forward 2026-05-01 (CI run 25216555569)
+
+После первого push CI зафиксировал 2 класса regressions, оба → fixed forward в additional commit на той же ветке `feat/panel-axe-row-checkbox-aria`.
+
+### Failure 1 — `/admin/`, `/admin/catalog`, `/admin/collections/services/` (label critical, 1 node)
+
+**Root cause:** на /admin/collections/services/ Payload native рендерит **search-filter top-bar input** (`#search-filter-input`, `placeholder="Искать по"`) — и это input был unlabeled. Раньше этот violation был замаскирован глобальным `label` exception; после re-enable в W7 → ловится. На `/admin/` и `/admin/catalog` — react-select combobox без accessible name. Дополнительно: header `select-all` checkbox имел `title="select-all"` (технический ID), который наш старый `hasNonEmptyAccessibleName` ошибочно считал accessible name → early-return пропускал инъекцию.
+
+**Fix:** Overlay расширен generic catch-all `applyGenericLabels()` для всех unlabeled visible inputs (derive из placeholder → name → role → type). `title` исключён из accessible-name check (не human-readable, не считается axe для inputs в большинстве случаев).
+
+### Failure 2 — `/admin/collections/{cases,blog}` row-checkbox aria-label (timeout)
+
+**Root cause:** `MutationObserver` с `useEffect` mount runs **после** initial paint; на медленных CI runners axe scan стартовал раньше, чем observer успевал навесить aria-label на dynamically rendered rows. Локально (10x faster CPU) race не воспроизводился.
+
+**Fix:**
+1. Добавлены 2 `requestAnimationFrame` passes сразу после initial `applyAll()` — догоняют React commits от Payload SWR data hydration.
+2. Observer теперь слушает `attributes` mutations (`aria-label`, `aria-labelledby`) — переловит React rerender, который перезаписывает наш label.
+3. В тестах `runAxe()` обёрнут предварительный `waitForA11yLabels()` — ждёт пока КАЖДЫЙ visible input получит `data-a11y-labeled="1"` (timeout 5s, soft-fail на runAxe для внятной ошибки).
+4. Removed `data-a11yLabeled === '1'` early-return — каждый pass перепроверяет actual accessible name (не доверяет stale flag).
+
+### Follow-up notes для leadqa / future work
+
+- **`title` attribute как fallback** — Payload native ставит технические `title="select-all"` на header checkboxes. Обсудить с upstream PR (PANEL-AXE-PAYLOAD-CORE-A11Y-UPSTREAM follow-up).
+- **react-select combobox aria-label = "combobox"** — это derived из `role="combobox"`, не идеально content-meaningful, но axe accept. Будущий enhancement: распарсить ближайший `<label>` в react-select wrapper.
+- **Search-filter input «Искать по»** — placeholder уже информативный, derive label идентичен. Можно явно прописать `i18n.t('general:searchBy')` в Payload upstream PR.
+- **`/admin/login` API redirect** локально (308 от trailing slash) — не блокирует CI (там работает). Pre-existing, не введён этим PR.

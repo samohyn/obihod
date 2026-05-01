@@ -52,7 +52,39 @@ async function tryLogin(page: import('@playwright/test').Page): Promise<boolean>
   return res.ok()
 }
 
+/**
+ * Ждём, пока A11yRowCheckboxOverlay успеет навесить aria-label на все
+ * Payload native inputs (row-checkbox + generic catch-all). Без этого
+ * ожидания axe scan на медленных CI runners ловит race condition —
+ * MutationObserver ещё не отработал на момент scan'а
+ * (incident: CI run 25216555569).
+ *
+ * Условие: КАЖДЫЙ visible form input в DOM имеет `data-a11y-labeled="1"`
+ * (provider гарантирует это либо инъекцией aria-label, либо подтверждением
+ * что accessible name уже есть).
+ *
+ * Скипаем ожидание если на странице нет inputs (login-screen имеет только
+ * email/password с native `<label>`, до A11yRowCheckboxOverlay не доходит).
+ */
+async function waitForA11yLabels(page: import('@playwright/test').Page) {
+  await page
+    .waitForFunction(
+      () => {
+        const inputs = document.querySelectorAll<HTMLElement>(
+          'input:not([type="hidden"]):not([type="submit"]):not([type="button"]):not([type="reset"]):not([type="image"]), select, textarea',
+        )
+        if (inputs.length === 0) return true
+        return Array.from(inputs).every((i) => i.dataset.a11yLabeled === '1')
+      },
+      { timeout: 5_000 },
+    )
+    .catch(() => {
+      // Не fatal — fallback на runAxe(), который выдаст внятную ошибку.
+    })
+}
+
 async function runAxe(page: import('@playwright/test').Page, label: string) {
+  await waitForA11yLabels(page)
   const builder = new AxeBuilder({ page })
     .withTags(WCAG_TAGS)
     .disableRules(PAYLOAD_NATIVE_EXCEPTIONS)
