@@ -16,11 +16,7 @@ import Link from 'next/link'
  */
 const NavHomeLink: FC = () => {
   return (
-    <Link
-      className="nav__link nav__link--home"
-      href="/admin/"
-      aria-label="Вернуться в панель"
-    >
+    <Link className="nav__link nav__link--home" href="/admin/" aria-label="Вернуться в панель">
       <svg
         width="14"
         height="14"
