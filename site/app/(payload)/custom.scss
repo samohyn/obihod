@@ -1471,3 +1471,9 @@ a.nav__link.nav__link--home::before {
     gap: 4px;
   }
 }
+
+/* §F · Hide virtual `_actions` field в edit-view (only useful в list-view).
+ * Payload рендерит его как пустой text input если не скрыть. */
+.payload__app .field-type[id*='field-_actions'] {
+  display: none;
+}

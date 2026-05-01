@@ -240,9 +240,14 @@ export const Leads: CollectionConfig = {
       name: '_actions',
       type: 'text',
       virtual: true,
+      label: 'Действия',
       admin: {
         readOnly: true,
         disableListColumn: false,
+        // В edit-view это поле бесполезно — скрываем заголовок через CSS,
+        // оставляя только list-view rendering (см. custom.scss
+        // .field-type[data-field-name="_actions"]).
+        description: 'Технические действия — отображаются только в списке заявок.',
         components: {
           Cell: '@/components/admin/leads/RowActionsCell#RowActionsCell',
         },
