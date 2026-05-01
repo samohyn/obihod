@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
+import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { LicenseBadge } from '@/components/marketing/LicenseBadge'
 import { RichTextRenderer } from '@/components/marketing/RichTextRenderer'
@@ -65,6 +66,30 @@ export default async function PillarPage({ params }: { params: Promise<{ service
     question: q.question,
     answer: extractText(q.answer),
   }))
+
+  // US-0 W3 Track B-3 — приоритет blocks[] из Payload (из cw fixture).
+  // Если есть blocks[] — рендерим через BlockRenderer + JSON-LD остаётся.
+  // Legacy rendering сохраняется как fallback (для существующих pillar до seed:etalons).
+  const docBlocks = (service as { blocks?: unknown[] | null }).blocks
+  const hasBlocks = Array.isArray(docBlocks) && docBlocks.length > 0
+
+  if (hasBlocks) {
+    return (
+      <>
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        <BlockRenderer blocks={docBlocks as any} />
+        <JsonLd
+          schema={[
+            serviceSchema(service as any),
+            breadcrumbListSchema(
+              breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
+            ),
+            ...(richTextFaq.length > 0 ? [faqPageSchema(richTextFaq)] : []),
+          ]}
+        />
+      </>
+    )
+  }
 
   return (
     <article>

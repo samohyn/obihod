@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { RichTextRenderer } from '@/components/marketing/RichTextRenderer'
@@ -29,8 +30,9 @@ type B2BPageDoc = {
   h1: string
   metaTitle?: string | null
   metaDescription?: string | null
-  audience: keyof typeof AUDIENCE_LABELS
+  audience: keyof typeof AUDIENCE_LABELS | 'uk-tszh'
   body: unknown
+  blocks?: unknown[] | null
   krishaShtraf?: boolean
   canonicalOverride?: string | null
   contractTemplateUrl?: string | null
@@ -76,6 +78,24 @@ export default async function B2BPage({ params }: { params: Promise<{ slug: stri
     { name: 'B2B', href: '/b2b/' },
     { name: page.title, href: `/b2b/${page.slug}/` },
   ]
+
+  // US-0 W3 Track B-3 — приоритет blocks[] (cw fixture).
+  const hasBlocks = Array.isArray(page.blocks) && page.blocks.length > 0
+  if (hasBlocks) {
+    return (
+      <>
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        <BlockRenderer blocks={page.blocks as any} />
+        <JsonLd
+          schema={[
+            breadcrumbListSchema(
+              breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
+            ),
+          ]}
+        />
+      </>
+    )
+  }
 
   return (
     <>

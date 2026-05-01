@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema, personSchema, type Author as AuthorSchema } from '@/lib/seo/jsonld'
@@ -32,6 +33,7 @@ type AuthorDoc = {
     issuedAt?: string | null
     id?: string
   }> | null
+  blocks?: unknown[] | null
 }
 
 export async function generateStaticParams() {
@@ -87,6 +89,25 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
     imageUrl: author.avatar?.url ?? undefined,
     sameAs: (author.sameAs ?? []).map((s) => s.url).filter(Boolean),
     knowsAbout: (author.knowsAbout ?? []).map((k) => k.topic).filter(Boolean),
+  }
+
+  // US-0 W3 Track B-3 — приоритет blocks[] (cw fixture).
+  const hasBlocks = Array.isArray(author.blocks) && author.blocks.length > 0
+  if (hasBlocks) {
+    return (
+      <>
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        <BlockRenderer blocks={author.blocks as any} />
+        <JsonLd
+          schema={[
+            personSchema(authorForSchema),
+            breadcrumbListSchema(
+              breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
+            ),
+          ]}
+        />
+      </>
+    )
   }
 
   return (

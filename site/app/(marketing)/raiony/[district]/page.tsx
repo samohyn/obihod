@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
+import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { getSiteChrome } from '@/lib/chrome'
 import { buildDistrictHubMetadata } from '@/lib/seo/metadata'
@@ -52,6 +53,27 @@ export default async function DistrictHub({ params }: { params: Promise<{ distri
     { name: 'Районы', href: '/raiony/' },
     { name: district.nameNominative, href: `/raiony/${district.slug}/` },
   ]
+
+  // US-0 W3 Track B-3 — приоритет blocks[] из Payload (cw fixture).
+  const districtBlocks = (district as { blocks?: unknown[] | null }).blocks
+  const hasBlocks = Array.isArray(districtBlocks) && districtBlocks.length > 0
+
+  if (hasBlocks) {
+    return (
+      <>
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        <BlockRenderer blocks={districtBlocks as any} />
+        <JsonLd
+          schema={[
+            localBusinessSchema(chrome, seo, district as any),
+            breadcrumbListSchema(
+              breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
+            ),
+          ]}
+        />
+      </>
+    )
+  }
 
   return (
     <section className="mx-auto max-w-5xl px-6 py-12">

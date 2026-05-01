@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
+import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { LicenseBadge } from '@/components/marketing/LicenseBadge'
 import { RichTextRenderer } from '@/components/marketing/RichTextRenderer'
@@ -164,6 +165,30 @@ export default async function ProgrammaticPage({
   }))
 
   const isReviewOrDraft = !sd || sd.publishStatus !== 'published'
+
+  // US-0 W3 Track B-3 — приоритет blocks[] из Payload (cw fixture).
+  // SD blocks[] могут содержать full программную страницу.
+  const sdBlocks = (sd as { blocks?: unknown[] | null } | null)?.blocks
+  const hasBlocks = Array.isArray(sdBlocks) && sdBlocks.length > 0
+
+  if (hasBlocks) {
+    return (
+      <>
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        <BlockRenderer blocks={sdBlocks as any} />
+        <JsonLd
+          schema={[
+            serviceSchema(service as any, district as any),
+            localBusinessSchema(chrome, seo, district as any),
+            breadcrumbListSchema(
+              breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
+            ),
+            ...(localFaq.length > 0 ? [faqPageSchema(localFaq)] : []),
+          ]}
+        />
+      </>
+    )
+  }
 
   return (
     <article>
