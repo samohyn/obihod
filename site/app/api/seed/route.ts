@@ -22,7 +22,7 @@ import path from 'node:path'
  *  2. SiteChrome  (global) — header/footer/contacts/requisites
  *  3. 4 Services  — арбористика, чистка крыш, вывоз мусора, демонтаж
  *  4. 7 Districts — Одинцово, Красногорск, Мытищи, Химки, Истра, Пушкино, Раменское
- *  5. Persons     — Алексей Семёнов
+ *  5. Authors    — Алексей Семёнов (после PANEL-PERSONS-RENAME 2026-05-01)
  *  6. 28 ServiceDistricts — 4×7, draft + noindex
  *  7. Mock Case   — «Сняли пень в Гостице» с фото из site/content/seed/cases/
  *                   Если файлы отсутствуют (placeholder-ы не задеплоены) —
@@ -653,44 +653,48 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // ───────── 4. Persons ─────────
-    const personStats = ensureStats(cs, 'persons')
-    let aleksey = await findOneBySlug(payload, 'persons', 'aleksey-semenov')
+    // ───────── 4. Authors ─────────
+    // PANEL-PERSONS-RENAME (2026-05-01): merged Persons → Authors. Idempotent
+    // через findOneBySlug на authors slug.
+    const personStats = ensureStats(cs, 'authors')
+    let aleksey = await findOneBySlug(payload, 'authors', 'aleksey-semenov')
     if (!aleksey) {
       try {
         const worksIn = districtIdBySlug['ramenskoye'] ? [districtIdBySlug['ramenskoye']] : []
         aleksey = await payload.create({
-          collection: 'persons',
+          collection: 'authors',
           data: {
             slug: 'aleksey-semenov',
             firstName: 'Алексей',
             lastName: 'Семёнов',
             jobTitle: 'Бригадир-арборист',
-            bio: lexicalParagraph(
-              'Алексей закрывает Раменское и Жуковский. 11 лет опыта, допуск 3-й группы по высоте (Минтруд №782н), сертификат European Tree Worker.',
-            ),
+            bio: 'Алексей закрывает Раменское и Жуковский. 11 лет опыта, допуск 3-й группы по высоте (Минтруд №782н), сертификат European Tree Worker.',
             knowsAbout: [{ topic: 'арбористика' }, { topic: 'промальп' }],
             sameAs: [{ url: 'https://t.me/aleksey_obihod' }],
             credentials: [
               {
                 name: 'Допуск Минтруда №782н, 3-я группа по высоте',
                 issuer: 'Минтруд',
-                year: 2018,
+                issuedAt: new Date('2018-01-01').toISOString(),
               },
-              { name: 'European Tree Worker (ETW)', issuer: 'EAC', year: 2020 },
+              {
+                name: 'European Tree Worker (ETW)',
+                issuer: 'EAC',
+                issuedAt: new Date('2020-01-01').toISOString(),
+              },
             ],
             worksInDistricts: worksIn,
           } as never,
         })
         personStats.created += 1
-        log.push('✓ Person «Алексей Семёнов»: создан')
+        log.push('✓ Author «Алексей Семёнов»: создан')
       } catch (e) {
         personStats.errors += 1
-        log.push(`❌ Person «Алексей Семёнов»: ${e instanceof Error ? e.message : String(e)}`)
+        log.push(`❌ Author «Алексей Семёнов»: ${e instanceof Error ? e.message : String(e)}`)
       }
     } else {
       personStats.skipped += 1
-      log.push('• Person «Алексей Семёнов»: уже есть')
+      log.push('• Author «Алексей Семёнов»: уже есть')
     }
 
     // ───────── 5. 28 ServiceDistricts ─────────

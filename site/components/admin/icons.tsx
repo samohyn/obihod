@@ -114,8 +114,9 @@ export function B2BPagesIcon(props: IconProps) {
   )
 }
 
-/** Persons — силуэт человека в каске (бригадир). */
-export function PersonsIcon(props: IconProps) {
+/** Authors — силуэт человека в каске (бригадир / автор / эксперт).
+ *  После PANEL-PERSONS-RENAME (2026-05-01) merged-icon для коллекции `authors`. */
+export function AuthorsIcon(props: IconProps) {
   return (
     <Svg {...props}>
       {/* Каска */}
@@ -589,7 +590,7 @@ export const collectionIconMap = {
   cases: CasesIcon,
   blog: BlogIcon,
   'b2b-pages': B2BPagesIcon,
-  persons: PersonsIcon,
+  authors: AuthorsIcon,
   leads: LeadsIcon,
   redirects: RedirectsIcon,
   media: MediaIcon,

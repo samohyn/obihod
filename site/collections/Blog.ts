@@ -65,7 +65,7 @@ export const Blog: CollectionConfig = {
             {
               name: 'author',
               type: 'relationship',
-              relationTo: 'persons',
+              relationTo: 'authors',
               required: true,
               admin: { description: 'Автор статьи — для E-E-A-T и authoritativeness.' },
             },
@@ -272,7 +272,7 @@ export const Blog: CollectionConfig = {
     {
       name: 'reviewedBy',
       type: 'relationship',
-      relationTo: 'persons',
+      relationTo: 'authors',
       admin: {
         position: 'sidebar',
         description: 'Эксперт, проверивший статью (E-E-A-T).',
