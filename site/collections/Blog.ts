@@ -8,6 +8,26 @@ export const Blog: CollectionConfig = {
     defaultColumns: ['title', 'category', 'publishedAt', 'modifiedAt'],
     group: '02 · Контент',
     description: 'Статьи и гайды по четырём направлениям + B2B/регуляторика.',
+    // PANEL-EMPTY-LIST-WIRING (sa-panel.md AC2): custom list-view wrapper
+    // подменяет native пустой Payload-table на §12.6 EmptyState с CTA при
+    // global empty (totalDocs === 0). Filtered-empty оставляем native.
+    components: {
+      views: {
+        list: {
+          Component: {
+            path: '@/components/admin/CollectionListWithEmpty#default',
+            clientProps: {
+              emptyConfig: {
+                title: 'Постов пока нет',
+                text: 'Первый пост запустит SEO-страницу /blog/. Можно использовать конструктор автозаполнения от seo-content.',
+                actionLabel: '+ Написать пост',
+                actionHref: '/admin/collections/blog/create',
+              },
+            },
+          },
+        },
+      },
+    },
   },
   versions: { drafts: { autosave: true } },
   access: { read: () => true },
