@@ -40,13 +40,12 @@
       "eyebrow": "Вывоз мусора · Одинцово",
       "h1": "Вывоз мусора в Одинцово — 12 800 ₽ за объект, бригада за 24 часа",
       "subUsp": "Стройка, КГМ, мебель, садовый — по всему Одинцовскому округу. Работаем в районе с 2024 года.",
-      "ctaPrimary": { "label": "Смета по фото", "href": "/foto-smeta/?service=vyvoz-musora&district=odincovo" },
+      "ctaPrimary": {
+        "label": "Смета по фото",
+        "href": "/foto-smeta/?service=vyvoz-musora&district=odincovo"
+      },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": [
-        "24 ч выезд",
-        "район-привязка",
-        "акт-приёмки"
-      ],
+      "trustRow": ["24 ч выезд", "район-привязка", "акт-приёмки"],
       "image": {
         "src": "TBD-fal.ai-district-odincovo-landmark.png",
         "alt": "Усадьба Голицыно в Одинцово — район выезда бригады Обихода",
@@ -126,11 +125,29 @@
       "serviceHint": "Вывоз мусора",
       "districtHint": "Одинцово",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
-        { "name": "address", "label": "Адрес или микрорайон", "type": "text", "required": false, "placeholder": "Например: Трёхгорка, Кутузовская улица" },
+        {
+          "name": "address",
+          "label": "Адрес или микрорайон",
+          "type": "text",
+          "required": false,
+          "placeholder": "Например: Трёхгорка, Кутузовская улица"
+        },
         { "name": "objects", "label": "Что вывозим", "type": "textarea", "required": false },
-        { "name": "photos", "label": "Фото объекта", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото объекта",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

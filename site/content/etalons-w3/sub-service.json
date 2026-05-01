@@ -31,14 +31,12 @@
       "eyebrow": "Вывоз мусора → Старая мебель",
       "h1": "Вывоз старой мебели — 12 800 ₽ за объект, приедем послезавтра",
       "subUsp": "Шкафы, диваны, кухни, кровати — разберём и заберём за один заезд.",
-      "ctaPrimary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=vyvoz-musora&sub=staraya-mebel" },
+      "ctaPrimary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=vyvoz-musora&sub=staraya-mebel"
+      },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": [
-        "фикс-цена",
-        "разбор включён",
-        "8:00–22:00 МСК",
-        "Газель 5 м³"
-      ],
+      "trustRow": ["фикс-цена", "разбор включён", "8:00–22:00 МСК", "Газель 5 м³"],
       "image": {
         "src": "TBD-fal.ai-sub-staraya-mebel.png",
         "alt": "Бригада Обихода разбирает старый шкаф в коридоре частного дома перед погрузкой",
@@ -69,10 +67,28 @@
       "h2": "Получите смету за 10 минут",
       "serviceHint": "Старая мебель",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
-        { "name": "objects", "label": "Что вывозим", "type": "textarea", "required": false, "placeholder": "Например: шкаф-купе 2,2 м, диван трёхместный, кухонный гарнитур" },
-        { "name": "photos", "label": "Фото объекта", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "objects",
+          "label": "Что вывозим",
+          "type": "textarea",
+          "required": false,
+          "placeholder": "Например: шкаф-купе 2,2 м, диван трёхместный, кухонный гарнитур"
+        },
+        {
+          "name": "photos",
+          "label": "Фото объекта",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

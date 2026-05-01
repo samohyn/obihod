@@ -30,14 +30,12 @@
       "eyebrow": "Вывоз мусора · Москва и МО",
       "h1": "Вывоз мусора. Объект под ключ за 10 минут после фото.",
       "subUsp": "Стройка, КГМ, мебель, садовый — 12 800 ₽ за объект, бригада послезавтра до 12:00.",
-      "ctaPrimary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=vyvoz-musora" },
+      "ctaPrimary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=vyvoz-musora"
+      },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": [
-        "4-в-1 strip",
-        "СРО",
-        "152-ФЗ",
-        "~6 лет в районах МО"
-      ],
+      "trustRow": ["4-в-1 strip", "СРО", "152-ФЗ", "~6 лет в районах МО"],
       "image": {
         "src": "TBD-fal.ai-pillar-vyvoz-musora.png",
         "alt": "Бригада Обихода грузит контейнер строительного мусора на объекте в Одинцовском округе",
@@ -129,10 +127,35 @@
       "h2": "Получите смету за 10 минут",
       "serviceHint": "Вывоз мусора",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
-        { "name": "objects", "label": "Что вывозим", "type": "select", "required": false, "options": ["Строительный мусор", "КГМ", "Старая мебель", "Садовый мусор", "Контейнер 8/20 м³", "Другое"] },
-        { "name": "photos", "label": "Фото объекта", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "objects",
+          "label": "Что вывозим",
+          "type": "select",
+          "required": false,
+          "options": [
+            "Строительный мусор",
+            "КГМ",
+            "Старая мебель",
+            "Садовый мусор",
+            "Контейнер 8/20 м³",
+            "Другое"
+          ]
+        },
+        {
+          "name": "photos",
+          "label": "Фото объекта",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

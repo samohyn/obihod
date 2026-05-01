@@ -396,6 +396,16 @@ const SERVICES: ServiceSeed[] = [
         h1: 'Уборка участка от хлама',
         priceFrom: 1000,
       },
+      // US-0 W3 эталон AC-11.1 — sub-service для /vyvoz-musora/staraya-mebel/.
+      // priceFrom 12 800 ₽ — фикс-цена за объект до 5 м³ (cw cluster
+      // vyvoz-musora.md, freq 4957). cw fixture sub-service.json дополняет
+      // полный контент (intro/body/h1/meta) через seed:etalons.
+      {
+        slug: 'staraya-mebel',
+        title: 'Вывоз старой мебели',
+        h1: 'Вывоз старой мебели',
+        priceFrom: 12800,
+      },
     ],
     leadTemplate: (prep) =>
       `Обиход вывозит мусор ${prep} с фиксированной ценой за м³. Строительный, садовый, порубочные остатки, хлам с участка — подъезжаем с самосвалом и грузчиками. Уборка территории входит в цену. Смета в Telegram, MAX или WhatsApp за 10 минут.`,

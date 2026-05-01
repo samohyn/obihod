@@ -12,13 +12,18 @@
  *   b2b-segment                   → B2BPages
  *   author                        → Authors
  *
- * **NB Track B-1 dependency**: JSON-fixtures от cw используют обновлённую
- * блок-схему (h1/eyebrow/items[].label+href вместо title/heading/items[].name+url),
- * а Payload block configs (`site/blocks/*.ts`) ещё на старой схеме (US-0 §AC-2
- * не закрыт). Поэтому seed:etalons сохраняет ТОЛЬКО legacy-поля (slug, title,
- * h1, meta*, intro, body, photos), пропуская `blocks[]`. После Track B-1
- * (обновление block configs под art-approved wireframe 2026-05-01) — нужно
- * пере-запустить seed:etalons с активацией fillBlocks() секции.
+ * **US-0 W3 Track B-3 Consolidation**: cw fixtures используют новую схему
+ * (h1/eyebrow/subUsp/ctaPrimary/ctaSecondary/image — для hero;
+ * label+href — для breadcrumbs items; iconId/href — для services-grid items;
+ * imageUrl — для mini-case items). Payload Block configs остаются на legacy-
+ * именах (title/subtitle/ctaLabel/ctaHref/items[].name+url). Renderer'ы (blocks
+ * /*.tsx) обновлены на чтение обеих схем (приоритет cw).
+ *
+ * Seed-стратегия: blocks[] ИЗ cw fixture сохраняем КАК ЕСТЬ (cw-схема), Payload
+ * принимает unknown fields в JSON-схеме blocks без валидации (поскольку
+ * блок-конфиги имеют admin description-only поля; database column для каждого
+ * named-field). Если Payload отвергнет лишние ключи — оборачиваем в
+ * `pickBlockData()` и фильтруем до нативных Payload-полей.
  *
  * Lexical richText: markdown body в text-content блоках конвертируется в
  * простой Lexical paragraph (compatible с @payloadcms/richtext-lexical 3.84).
@@ -163,6 +168,272 @@ async function findOneBySlug(
 }
 
 /**
+ * Преобразует один блок из cw-схемы в Payload-совместимую форму (legacy schema).
+ *
+ * Соответствие:
+ *   hero.h1            → title
+ *   hero.subUsp        → subtitle
+ *   hero.ctaPrimary    → ctaLabel/ctaHref
+ *   hero.image         → пропускаем (Payload ждёт upload-relationship, у cw — TBD)
+ *
+ *   breadcrumbs.items[].label/href → items[].name/url
+ *
+ *   text-content.h2  → heading
+ *   text-content.body (markdown string) → Lexical paragraph
+ *
+ *   tldr.body (string) → text (legacy field)
+ *
+ *   services-grid.items[].title/href/iconId/description → items[].title/slug/icon/summary
+ *   services-grid.h2 → heading (drop unknown variant + items.priceAnchor)
+ *
+ *   mini-case.items[]  → inline (берём первый); items[].imageUrl/href/title/facts → inline equivalents.
+ *   mini-case.h2 → DROPPED (legacy не имеет h2, заголовок передаём через MiniCase block через "title")
+ *
+ *   lead-form.h2/helper/ctaLabel/serviceHint/districtHint → heading/subheading
+ *
+ *   cta-banner.h2 → heading; ctaPrimary → cta
+ *
+ *   faq.h2 → heading; items[].answer (string) → Lexical paragraph
+ *
+ *   related-services.items[].title/href/description → items[].title/slug/summary
+ *
+ *   neighbor-districts.items[].name/href → items[].name/slug
+ *
+ * Неизвестные cw-поля удаляются (Payload не пропустит).
+ *
+ * Если блок имеет lexical body — оставляем как есть.
+ */
+type CwBlock = Record<string, unknown> & { blockType: string }
+
+function cwToPayloadCta(cta: unknown): { label?: string; href?: string } | undefined {
+  if (!cta || typeof cta !== 'object') return undefined
+  const c = cta as { label?: string; href?: string }
+  if (!c.label && !c.href) return undefined
+  return { label: c.label, href: c.href }
+}
+
+function cwBlockToPayload(block: CwBlock): Record<string, unknown> | null {
+  const t = block.blockType
+  switch (t) {
+    case 'hero': {
+      const ctaPrimary = cwToPayloadCta(block.ctaPrimary)
+      return {
+        blockType: 'hero',
+        title: (block.h1 as string) ?? (block.title as string) ?? '',
+        subtitle: (block.subUsp as string) ?? (block.subtitle as string) ?? undefined,
+        ctaLabel: ctaPrimary?.label,
+        ctaHref: ctaPrimary?.href,
+        seasonalTheme: 'summer',
+      }
+    }
+    case 'breadcrumbs': {
+      const items = ((block.items as unknown[]) ?? [])
+        .map((it) => {
+          const i = it as { label?: string; href?: string; name?: string; url?: string }
+          const name = i.label ?? i.name
+          const url = i.href ?? i.url
+          if (!name || !url) return null
+          return { name, url }
+        })
+        .filter((it): it is { name: string; url: string } => Boolean(it))
+      return { blockType: 'breadcrumbs', items, generateSchema: true }
+    }
+    case 'tldr': {
+      const text =
+        typeof block.body === 'string' ? block.body : ((block.text as string) ?? undefined)
+      if (!text) return null
+      return {
+        blockType: 'tldr',
+        eyebrow: (block.eyebrow as string) ?? 'Если коротко',
+        text: text.slice(0, 500),
+      }
+    }
+    case 'services-grid': {
+      const items = ((block.items as unknown[]) ?? [])
+        .map((it) => {
+          const i = it as {
+            title?: string
+            href?: string
+            slug?: string
+            iconId?: string
+            description?: string
+            summary?: string
+          }
+          if (!i.title) return null
+          // Payload требует slug — берём из href (`/foo/bar/` → `foo/bar`).
+          const slug = i.slug ?? (i.href ? i.href.replace(/^\/+|\/+$/g, '') : undefined)
+          if (!slug) return null
+          return {
+            title: i.title.slice(0, 80),
+            slug,
+            icon: i.iconId,
+            summary: (i.description ?? i.summary ?? '').slice(0, 200),
+          }
+        })
+        .filter((it): it is NonNullable<typeof it> => Boolean(it))
+      return {
+        blockType: 'services-grid',
+        heading: (block.h2 as string) ?? (block.heading as string) ?? '',
+        items,
+      }
+    }
+    case 'text-content': {
+      const body = block.body
+      const lexicalBody =
+        typeof body === 'string' ? lexicalParagraph(body) : (body ?? lexicalParagraph(''))
+      return {
+        blockType: 'text-content',
+        heading: (block.h2 as string) ?? (block.heading as string) ?? '',
+        body: lexicalBody,
+        columns: '1',
+      }
+    }
+    case 'lead-form': {
+      const helper = (block.helper as string) ?? undefined
+      return {
+        blockType: 'lead-form',
+        variant: 'short',
+        heading: (block.h2 as string) ?? (block.heading as string) ?? '',
+        subheading: helper,
+        submitLabel: (block.ctaLabel as string) ?? 'Отправить',
+        successMessage: 'Спасибо, перезвоним за 15 минут.',
+      }
+    }
+    case 'cta-banner': {
+      const cta = cwToPayloadCta(block.ctaPrimary) ?? cwToPayloadCta(block.cta)
+      if (!cta?.label || !cta?.href) return null
+      const variantRaw = (block.variant as string) ?? 'primary'
+      // Payload accent: primary | warning | success
+      const accent = variantRaw === 'dark' || variantRaw === 'primary' ? 'primary' : 'warning'
+      return {
+        blockType: 'cta-banner',
+        title: (block.h2 as string) ?? (block.heading as string) ?? '',
+        body: typeof block.body === 'string' ? lexicalParagraph(block.body) : block.body,
+        ctaLabel: cta.label,
+        ctaHref: cta.href,
+        accent,
+      }
+    }
+    case 'faq': {
+      const items = ((block.items as unknown[]) ?? [])
+        .map((it) => {
+          const i = it as { question?: string; answer?: unknown }
+          if (!i.question) return null
+          const ans = typeof i.answer === 'string' ? lexicalParagraph(i.answer) : i.answer
+          return { question: i.question, answer: ans ?? lexicalParagraph('') }
+        })
+        .filter((it): it is NonNullable<typeof it> => Boolean(it))
+      if (items.length < 2) return null // Payload Faq requires minRows: 2
+      return {
+        blockType: 'faq',
+        heading: (block.h2 as string) ?? (block.heading as string) ?? 'Частые вопросы',
+        items,
+        generateFaqPageSchema: true,
+      }
+    }
+    case 'related-services': {
+      const items = ((block.items as unknown[]) ?? [])
+        .map((it) => {
+          const i = it as {
+            title?: string
+            href?: string
+            slug?: string
+            description?: string
+            summary?: string
+          }
+          if (!i.title) return null
+          const slug = i.slug ?? (i.href ? i.href.replace(/^\/+|\/+$/g, '') : undefined)
+          if (!slug) return null
+          return {
+            title: i.title.slice(0, 80),
+            slug,
+            summary: (i.description ?? i.summary ?? '').slice(0, 200),
+          }
+        })
+        .filter((it): it is { title: string; slug: string; summary: string } => Boolean(it))
+      return {
+        blockType: 'related-services',
+        heading: (block.h2 as string) ?? (block.heading as string) ?? 'Похожие услуги',
+        items: items.slice(0, 3),
+      }
+    }
+    case 'neighbor-districts': {
+      const items = ((block.items as unknown[]) ?? [])
+        .map((it) => {
+          const i = it as {
+            name?: string
+            label?: string
+            slug?: string
+            href?: string
+            distance?: string
+          }
+          const name = i.name ?? i.label
+          const slug =
+            i.slug ??
+            (i.href
+              ? i.href
+                  .replace(/^\/+|\/+$/g, '')
+                  .split('/')
+                  .pop()
+              : undefined)
+          if (!name || !slug) return null
+          return { name, slug, distance: i.distance }
+        })
+        .filter((it): it is NonNullable<typeof it> => Boolean(it))
+      return {
+        blockType: 'neighbor-districts',
+        heading: (block.h2 as string) ?? (block.heading as string) ?? 'Соседние районы',
+        items: items.slice(0, 3),
+      }
+    }
+    case 'mini-case': {
+      // cw — массив items[]; в Payload mini-case есть `inline` group + `caseRef`.
+      // Берём первый item как inline.
+      const itemsCw = (block.items as unknown[]) ?? []
+      if (itemsCw.length === 0) return null
+      const i = itemsCw[0] as {
+        title?: string
+        imageUrl?: string
+        imageAlt?: string
+        facts?: { label: string; value: string }[]
+        href?: string
+      }
+      return {
+        blockType: 'mini-case',
+        inline: {
+          title: i.title?.slice(0, 140) ?? '',
+          // photo Payload type=upload — пропускаем cw imageUrl placeholder
+          facts: (i.facts ?? []).slice(0, 4).map((f) => ({
+            label: f.label.slice(0, 40),
+            value: f.value.slice(0, 80),
+          })),
+          link: i.href,
+        },
+      }
+    }
+    case 'related-posts': {
+      // Payload не имеет related-posts блока — пропускаем (cw author эталон).
+      // Это OK: BlockRenderer на frontend сделает rendering, но Payload
+      // блок-схема не содержит related-posts. Страница сохраняется без блока.
+      return null
+    }
+    default:
+      // Неизвестный blockType — пропускаем.
+      return null
+  }
+}
+
+/**
+ * Преобразует cw blocks[] в Payload blocks[] (legacy schema).
+ *
+ * Возвращает массив, готовый к записи в Payload `blocks` field.
+ */
+function fixtureBlocksToPayload(fix: BaseFixture): Record<string, unknown>[] {
+  const cw = (fix.blocks ?? []) as CwBlock[]
+  return cw.map((b) => cwBlockToPayload(b)).filter((b): b is Record<string, unknown> => Boolean(b))
+}
+
+/**
  * Извлекает первый text-content блок body (markdown) и превращает в
  * Lexical paragraph. Если блока нет — fallback на metaDescription/h1.
  */
@@ -200,8 +471,9 @@ async function seedPillar(payload: Payload, fix: PillarFixture): Promise<SeedRes
       message: `Service «${fix.slug}» не найден. Сначала pnpm seed (создаёт 4 pillar).`,
     }
   }
-  // Обновляем только legacy-meta + intro. blocks[] — Track B-1.
+  // Обновляем legacy-meta + intro + blocks[] (US-0 W3 Track B-3).
   try {
+    const blocks = fixtureBlocksToPayload(fix)
     await payload.update({
       collection: 'services',
       id: (existing as { id: string | number }).id,
@@ -210,6 +482,7 @@ async function seedPillar(payload: Payload, fix: PillarFixture): Promise<SeedRes
         metaTitle: fix.metaTitle,
         metaDescription: fix.metaDescription,
         intro: extractBody(fix),
+        blocks,
       } as never,
       overrideAccess: true,
     })
@@ -217,7 +490,7 @@ async function seedPillar(payload: Payload, fix: PillarFixture): Promise<SeedRes
       type: fix.type,
       url,
       status: 'updated',
-      message: 'pillar legacy-fields (h1+meta+intro) updated; blocks[] skipped (Track B-1)',
+      message: `pillar updated: h1+meta+intro + blocks[] (${blocks.length} blocks)`,
     }
   } catch (e) {
     return {
@@ -245,6 +518,8 @@ async function seedSubService(payload: Payload, fix: SubFixture): Promise<SeedRe
     []) as Array<Record<string, unknown>>
 
   const idx = subServices.findIndex((s) => s.slug === subSlug)
+  // sub-service не имеет blocks[] (это вложенный array в Service.subServices),
+  // только legacy intro/body. Sub-эталон рендерится через SubServiceView.
   const subRecord = {
     slug: subSlug,
     title: 'Старая мебель',
@@ -317,14 +592,16 @@ async function seedProgrammaticSd(
     overrideAccess: true,
   })
 
-  // Минимальное обновление SD: leadParagraph + seoTitle/seoDescription/seoH1.
-  // publishStatus не трогаем — programmatic publish-gate в Cases hook ServiceDistricts
-  // блокирует если нет miniCase. blocks[] — Track B-1.
-  const sdData = {
+  // SD update: leadParagraph + seoTitle/seoDescription/seoH1 + blocks[].
+  // publishStatus не трогаем — programmatic publish-gate в Cases hook
+  // ServiceDistricts блокирует если нет miniCase.
+  const blocks = fixtureBlocksToPayload(fix)
+  const sdData: Record<string, unknown> = {
     leadParagraph: lexicalParagraph(extractTldr(fix) || fix.metaDescription || fix.h1 || ''),
     seoTitle: fix.metaTitle,
     seoDescription: fix.metaDescription,
     seoH1: fix.h1,
+    blocks,
   }
 
   try {
@@ -382,12 +659,14 @@ async function seedDistrictHub(payload: Payload, fix: DistrictHubFixture): Promi
   }
 
   try {
+    const blocks = fixtureBlocksToPayload(fix)
     await payload.update({
       collection: 'districts',
       id: (existing as { id: string | number }).id,
       data: {
         metaTitle: fix.metaTitle,
         metaDescription: fix.metaDescription,
+        blocks,
       } as never,
       overrideAccess: true,
     })
@@ -395,7 +674,7 @@ async function seedDistrictHub(payload: Payload, fix: DistrictHubFixture): Promi
       type: fix.type,
       url,
       status: 'updated',
-      message: `district hub legacy-meta updated; blocks[] skipped (Track B-1)`,
+      message: `district hub updated: meta + blocks[] (${blocks.length})`,
     }
   } catch (e) {
     return {
@@ -411,7 +690,29 @@ async function seedAuthor(payload: Payload, fix: AuthorFixture): Promise<SeedRes
   const url = fix.url ?? `/avtory/${fix.slug}/`
   const existing = await findOneBySlug(payload, 'authors', fix.slug)
   if (existing) {
-    return { type: fix.type, url, status: 'skipped', message: `author «${fix.slug}» уже есть` }
+    // US-0 W3 Track B-3 — обновить blocks[] вместо skip.
+    try {
+      const blocks = fixtureBlocksToPayload(fix)
+      await payload.update({
+        collection: 'authors',
+        id: (existing as { id: string | number }).id,
+        data: { blocks, _status: 'published' } as never,
+        overrideAccess: true,
+      })
+      return {
+        type: fix.type,
+        url,
+        status: 'updated',
+        message: `author updated: blocks[] (${blocks.length})`,
+      }
+    } catch (e) {
+      return {
+        type: fix.type,
+        url,
+        status: 'error',
+        message: e instanceof Error ? e.message : String(e),
+      }
+    }
   }
 
   // Создаём company author напрямую (seed-authors.ts падает на лимите bio>600).
@@ -433,6 +734,7 @@ async function seedAuthor(payload: Payload, fix: AuthorFixture): Promise<SeedRes
 
   try {
     const knowsAbout = (fix.knowsAbout ?? []).map((topic) => ({ topic }))
+    const blocks = fixtureBlocksToPayload(fix)
     await payload.create({
       collection: 'authors',
       data: {
@@ -444,6 +746,7 @@ async function seedAuthor(payload: Payload, fix: AuthorFixture): Promise<SeedRes
         knowsAbout,
         sameAs: (fix.sameAs ?? []).map((u) => ({ url: u })),
         worksInDistricts: districtIds,
+        blocks,
         _status: 'published',
       } as never,
       overrideAccess: true,
@@ -452,7 +755,7 @@ async function seedAuthor(payload: Payload, fix: AuthorFixture): Promise<SeedRes
       type: fix.type,
       url,
       status: 'created',
-      message: 'author created with short bio; full bio in blocks[] (Track B-1)',
+      message: `author created with short bio + blocks[] (${blocks.length})`,
     }
   } catch (e) {
     return {
@@ -468,7 +771,28 @@ async function seedBlogPost(payload: Payload, fix: BlogFixture): Promise<SeedRes
   const url = fix.url ?? `/blog/${fix.slug}/`
   const existing = await findOneBySlug(payload, 'blog', fix.slug)
   if (existing) {
-    return { type: fix.type, url, status: 'skipped', message: `blog «${fix.slug}» уже есть` }
+    try {
+      const blocks = fixtureBlocksToPayload(fix)
+      await payload.update({
+        collection: 'blog',
+        id: (existing as { id: string | number }).id,
+        data: { blocks, _status: 'published' } as never,
+        overrideAccess: true,
+      })
+      return {
+        type: fix.type,
+        url,
+        status: 'updated',
+        message: `blog updated: blocks[] (${blocks.length})`,
+      }
+    } catch (e) {
+      return {
+        type: fix.type,
+        url,
+        status: 'error',
+        message: e instanceof Error ? e.message : String(e),
+      }
+    }
   }
 
   const authorSlug = fix.author?.slug ?? 'brigada-vyvoza-obihoda'
@@ -486,6 +810,7 @@ async function seedBlogPost(payload: Payload, fix: BlogFixture): Promise<SeedRes
   const body = extractBody(fix)
 
   try {
+    const blocks = fixtureBlocksToPayload(fix)
     await payload.create({
       collection: 'blog',
       data: {
@@ -498,6 +823,7 @@ async function seedBlogPost(payload: Payload, fix: BlogFixture): Promise<SeedRes
         modifiedAt: fix.dateModified ?? fix.datePublished ?? '2026-04-25',
         intro,
         body,
+        blocks,
         metaTitle: fix.metaTitle,
         metaDescription: fix.metaDescription,
         _status: 'published',
@@ -508,7 +834,7 @@ async function seedBlogPost(payload: Payload, fix: BlogFixture): Promise<SeedRes
       type: fix.type,
       url,
       status: 'created',
-      message: 'blog post created (legacy fields); blocks[] skipped (Track B-1)',
+      message: `blog created + blocks[] (${blocks.length})`,
     }
   } catch (e) {
     return {
@@ -524,7 +850,28 @@ async function seedCase(payload: Payload, fix: CaseFixture): Promise<SeedResult>
   const url = fix.url ?? `/kejsy/${fix.slug}/`
   const existing = await findOneBySlug(payload, 'cases', fix.slug)
   if (existing) {
-    return { type: fix.type, url, status: 'skipped', message: `case «${fix.slug}» уже есть` }
+    try {
+      const blocks = fixtureBlocksToPayload(fix)
+      await payload.update({
+        collection: 'cases',
+        id: (existing as { id: string | number }).id,
+        data: { blocks, _status: 'published' } as never,
+        overrideAccess: true,
+      })
+      return {
+        type: fix.type,
+        url,
+        status: 'updated',
+        message: `case updated: blocks[] (${blocks.length})`,
+      }
+    } catch (e) {
+      return {
+        type: fix.type,
+        url,
+        status: 'error',
+        message: e instanceof Error ? e.message : String(e),
+      }
+    }
   }
 
   const arbo = await findOneBySlug(payload, 'services', 'arboristika')
@@ -572,6 +919,7 @@ async function seedCase(payload: Payload, fix: CaseFixture): Promise<SeedResult>
       overrideAccess: true,
     })
 
+    const blocks = fixtureBlocksToPayload(fix)
     await payload.create({
       collection: 'cases',
       data: {
@@ -596,6 +944,7 @@ async function seedCase(payload: Payload, fix: CaseFixture): Promise<SeedResult>
             caption: 'Объект после работ',
           },
         ],
+        blocks,
         metaTitle: fix.metaTitle,
         metaDescription: fix.metaDescription,
       } as never,
@@ -605,7 +954,7 @@ async function seedCase(payload: Payload, fix: CaseFixture): Promise<SeedResult>
       type: fix.type,
       url,
       status: 'created',
-      message: 'case + 2 media created; blocks[] skipped (Track B-1)',
+      message: `case + 2 media + blocks[] (${blocks.length})`,
     }
   } catch (e) {
     return {
@@ -621,20 +970,52 @@ async function seedB2B(payload: Payload, fix: B2BFixture): Promise<SeedResult> {
   const url = fix.url ?? `/b2b/${fix.slug}/`
   const existing = await findOneBySlug(payload, 'b2b-pages', fix.slug)
   if (existing) {
-    return { type: fix.type, url, status: 'skipped', message: `b2b «${fix.slug}» уже есть` }
+    try {
+      const blocks = fixtureBlocksToPayload(fix)
+      const audienceFromFixture = (fix as { audience?: string }).audience
+      await payload.update({
+        collection: 'b2b-pages',
+        id: (existing as { id: string | number }).id,
+        data: {
+          blocks,
+          audience: audienceFromFixture ?? 'uk',
+          _status: 'published',
+        } as never,
+        overrideAccess: true,
+      })
+      return {
+        type: fix.type,
+        url,
+        status: 'updated',
+        message: `b2b updated: blocks[] (${blocks.length})`,
+      }
+    } catch (e) {
+      return {
+        type: fix.type,
+        url,
+        status: 'error',
+        message: e instanceof Error ? e.message : String(e),
+      }
+    }
   }
 
   const body = extractBody(fix)
 
   try {
+    // audience берём из fixture (cw эталон uk-tszh — combined сегмент);
+    // fallback на 'uk' если поле не заполнено.
+    const audienceFromFixture = (fix as { audience?: string }).audience
+    const audience = audienceFromFixture ?? 'uk'
+    const blocks = fixtureBlocksToPayload(fix)
     await payload.create({
       collection: 'b2b-pages',
       data: {
         slug: fix.slug,
         title: fix.h1 ?? fix.slug,
         h1: fix.h1 ?? fix.slug,
-        audience: 'uk',
+        audience,
         body,
+        blocks,
         krishaShtraf: true,
         metaTitle: fix.metaTitle,
         metaDescription: fix.metaDescription,
@@ -646,7 +1027,7 @@ async function seedB2B(payload: Payload, fix: B2BFixture): Promise<SeedResult> {
       type: fix.type,
       url,
       status: 'created',
-      message: 'b2b page created; blocks[] skipped (Track B-1)',
+      message: `b2b page created + blocks[] (${blocks.length})`,
     }
   } catch (e) {
     return {

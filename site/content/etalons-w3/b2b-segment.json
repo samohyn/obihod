@@ -12,6 +12,7 @@
   "type": "b2b-segment",
   "url": "/b2b/uk-tszh/",
   "slug": "uk-tszh",
+  "audience": "uk-tszh",
   "h1": "Для УК и ТСЖ — штрафы ГЖИ и ОАТИ берём на себя по договору",
   "metaTitle": "Подрядчик для УК и ТСЖ в Москве и МО — штрафы ГЖИ на нас",
   "metaDescription": "Сезонный или круглогодичный договор с УК и ТСЖ. Уборка территории, спил, чистка крыш, вывоз КГМ. Штрафы ГЖИ — по своему счёту, без перевыставления УК.",
@@ -35,12 +36,7 @@
       "subUsp": "Сезонный или круглогодичный договор. Уборка территории, спил аварийных, чистка крыш зимой, вывоз КГМ. Работаем с УК Москвы и МО.",
       "ctaPrimary": { "label": "Запросить договор", "href": "#lead-form" },
       "ctaSecondary": { "label": "Получить тарифы PDF", "href": "/b2b/uk-tszh/tarify.pdf" },
-      "trustRow": [
-        "247 УК РФ",
-        "СРО",
-        "152-ФЗ",
-        "~6 лет в районах МО"
-      ],
+      "trustRow": ["247 УК РФ", "СРО", "152-ФЗ", "~6 лет в районах МО"],
       "image": {
         "src": "TBD-fal.ai-b2b-uk-tszh-hero.png",
         "alt": "Бригада Обихода с документами договора на объекте управляющей компании в Москве",
@@ -142,9 +138,26 @@
         {
           "legend": "Организация",
           "fields": [
-            { "name": "organization", "label": "Название УК или ТСЖ", "type": "text", "required": true },
-            { "name": "inn", "label": "ИНН", "type": "text", "required": true, "pattern": "\\d{10}|\\d{12}", "ariaDescribedby": "inn-helper" },
-            { "name": "innHelper", "type": "helper", "id": "inn-helper", "text": "10 цифр для юр.лица, 12 для ИП." }
+            {
+              "name": "organization",
+              "label": "Название УК или ТСЖ",
+              "type": "text",
+              "required": true
+            },
+            {
+              "name": "inn",
+              "label": "ИНН",
+              "type": "text",
+              "required": true,
+              "pattern": "\\d{10}|\\d{12}",
+              "ariaDescribedby": "inn-helper"
+            },
+            {
+              "name": "innHelper",
+              "type": "helper",
+              "id": "inn-helper",
+              "text": "10 цифр для юр.лица, 12 для ИП."
+            }
           ]
         },
         {
@@ -152,14 +165,26 @@
           "fields": [
             { "name": "name", "label": "ФИО", "type": "text", "required": false },
             { "name": "position", "label": "Должность", "type": "text", "required": false },
-            { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+            {
+              "name": "phone",
+              "label": "Телефон",
+              "type": "tel",
+              "required": true,
+              "inputmode": "numeric"
+            },
             { "name": "email", "label": "Email", "type": "email", "required": false }
           ]
         },
         {
           "legend": "Объекты",
           "fields": [
-            { "name": "objects", "label": "Адреса и тип объектов", "type": "textarea", "required": false, "placeholder": "Например: МКД на ул. Кутузовская 12 (4 подъезда), ТСЖ на ул. Лесная 5 (2 подъезда)" }
+            {
+              "name": "objects",
+              "label": "Адреса и тип объектов",
+              "type": "textarea",
+              "required": false,
+              "placeholder": "Например: МКД на ул. Кутузовская 12 (4 подъезда), ТСЖ на ул. Лесная 5 (2 подъезда)"
+            }
           ]
         }
       ],

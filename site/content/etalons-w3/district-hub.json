@@ -34,12 +34,7 @@
       "subUsp": "4 услуги по Одинцовскому округу с одной бригадой. ~6 лет в районе, выезд за 24 часа.",
       "ctaPrimary": { "label": "Смета по фото", "href": "/foto-smeta/?district=odincovo" },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": [
-        "4-в-1 strip",
-        "~6 лет в районе",
-        "24 ч выезд",
-        "полигон МО"
-      ],
+      "trustRow": ["4-в-1 strip", "~6 лет в районе", "24 ч выезд", "полигон МО"],
       "image": {
         "src": "TBD-fal.ai-district-odincovo-hero.png",
         "alt": "Одинцово, район выезда бригады Обихода — landmark Усадьба Голицыно",
@@ -137,12 +132,42 @@
       "h2": "Заявка из Одинцово",
       "districtHint": "Одинцово",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
-        { "name": "service", "label": "Что нужно сделать", "type": "select", "required": false, "options": ["Вывоз мусора", "Арбористика (спил/обрезка)", "Чистка крыш", "Демонтаж", "Несколько услуг (4-в-1)"] },
-        { "name": "address", "label": "Адрес или микрорайон", "type": "text", "required": false, "placeholder": "Например: Барвиха, Лесной городок" },
+        {
+          "name": "service",
+          "label": "Что нужно сделать",
+          "type": "select",
+          "required": false,
+          "options": [
+            "Вывоз мусора",
+            "Арбористика (спил/обрезка)",
+            "Чистка крыш",
+            "Демонтаж",
+            "Несколько услуг (4-в-1)"
+          ]
+        },
+        {
+          "name": "address",
+          "label": "Адрес или микрорайон",
+          "type": "text",
+          "required": false,
+          "placeholder": "Например: Барвиха, Лесной городок"
+        },
         { "name": "objects", "label": "Описание объекта", "type": "textarea", "required": false },
-        { "name": "photos", "label": "Фото объекта", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото объекта",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",
