@@ -6,9 +6,9 @@ po: popanel
 type: feature
 priority: C
 segment: admin
-phase: spec-approved
+phase: review
 role: sa-panel
-status: dev-ready
+status: dev-done
 blocks: []
 blocked_by: []
 related: [PANEL-LEADS-INBOX, US-12-admin-redesign-wave5]
@@ -113,3 +113,8 @@ admin: {
 - 2026-05-01 · popanel → sa-panel: batch spec request (autonomous mandate).
 - 2026-05-01 · sa-panel → popanel: spec ready, dev-ready (Payload native, no ADR).
 - 2026-05-01 · popanel → sa-panel: self-approved per autonomous mandate, status dev-ready.
+- 2026-05-01 · be-panel/fe-panel/cw/qa-panel (combined) → cr-panel: PR ready,
+  Payload 3.84 native bulk-bar + SCSS chip-bar + e2e test, smoke pass на всех
+  4 коллекциях. Скриншоты в `screen/bulk-publish-*.png`. См. note-cr-panel.md.
+- 2026-05-01 · cr-panel → release: approve, AC2/AC4 расходятся со spec в
+  сторону «лучше» (always-confirm > ≥10-only; «В архив» out-of-scope).

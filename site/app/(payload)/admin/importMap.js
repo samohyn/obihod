@@ -27,6 +27,7 @@ import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { default as default_d03472628439acc211410a14ee55a3b2 } from '@/components/admin/ServicePreviewPanel'
 import { default as default_e4dbeb0edaceac949adaabe10b3c4864 } from '@/components/admin/CollectionListWithEmpty'
+import { default as default_9b12155b20b9c2b1aaa48f6181ff9b3d } from '@/components/admin/media/MediaListView'
 import { default as default_e954268a077ecb721d2d8ed736c62a6f } from '@/components/admin/ThemeToggleStub'
 import { default as default_d9087a380941d12f95aff168665b00b4 } from '@/components/admin/BrandIcon'
 import { default as default_a3457937f7e47ac09ffe2b1355b88586 } from '@/components/admin/PageCatalogWidget'
@@ -37,7 +38,6 @@ import { default as default_03c174bc83c57c8b0eee299d05fde10d } from '@/component
 import { default as default_34a40cc685c7df316e31d445e114f485 } from '@/components/admin/LeadsBadgeProvider'
 import { default as default_52ccffaeb32b1decd698281bdb4d4c82 } from '@/components/admin/A11yRowCheckboxProvider'
 import { default as default_9ef388c09eeca65ffd7a9ea7e3838839 } from '@/components/admin/SecurityView'
-import { default as default_media_list_view_a8c9b1d2e3f4a5b6 } from '@/components/admin/media/MediaListView'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -71,6 +71,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@/components/admin/ServicePreviewPanel#default": default_d03472628439acc211410a14ee55a3b2,
   "@/components/admin/CollectionListWithEmpty#default": default_e4dbeb0edaceac949adaabe10b3c4864,
+  "@/components/admin/media/MediaListView#default": default_9b12155b20b9c2b1aaa48f6181ff9b3d,
   "@/components/admin/ThemeToggleStub#default": default_e954268a077ecb721d2d8ed736c62a6f,
   "@/components/admin/BrandIcon#default": default_d9087a380941d12f95aff168665b00b4,
   "@/components/admin/PageCatalogWidget#default": default_a3457937f7e47ac09ffe2b1355b88586,
@@ -81,6 +82,5 @@ export const importMap = {
   "@/components/admin/LeadsBadgeProvider#default": default_34a40cc685c7df316e31d445e114f485,
   "@/components/admin/A11yRowCheckboxProvider#default": default_52ccffaeb32b1decd698281bdb4d4c82,
   "@/components/admin/SecurityView#default": default_9ef388c09eeca65ffd7a9ea7e3838839,
-  "@/components/admin/media/MediaListView#default": default_media_list_view_a8c9b1d2e3f4a5b6,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }
