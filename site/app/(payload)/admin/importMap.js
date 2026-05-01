@@ -35,6 +35,7 @@ import { default as default_2a1d81a7d65f9955a05645b23ded3574 } from '@/component
 import { default as default_32028fb024cb14273af0f6878c5e5f16 } from '@/components/admin/BeforeLoginLockup'
 import { default as default_03c174bc83c57c8b0eee299d05fde10d } from '@/components/admin/NavHomeLink'
 import { default as default_34a40cc685c7df316e31d445e114f485 } from '@/components/admin/LeadsBadgeProvider'
+import { default as default_52ccffaeb32b1decd698281bdb4d4c82 } from '@/components/admin/A11yRowCheckboxProvider'
 import { default as default_9ef388c09eeca65ffd7a9ea7e3838839 } from '@/components/admin/SecurityView'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
@@ -77,6 +78,7 @@ export const importMap = {
   "@/components/admin/BeforeLoginLockup#default": default_32028fb024cb14273af0f6878c5e5f16,
   "@/components/admin/NavHomeLink#default": default_03c174bc83c57c8b0eee299d05fde10d,
   "@/components/admin/LeadsBadgeProvider#default": default_34a40cc685c7df316e31d445e114f485,
+  "@/components/admin/A11yRowCheckboxProvider#default": default_52ccffaeb32b1decd698281bdb4d4c82,
   "@/components/admin/SecurityView#default": default_9ef388c09eeca65ffd7a9ea7e3838839,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

@@ -30,7 +30,11 @@ const PAYLOAD_NATIVE_EXCEPTIONS = [
   'region', // sidebar/main отсутствуют у Payload admin shell
   'landmark-one-main', // ditto
   'page-has-heading-one', // login screen не имеет h1 (использует logo lockup как visual heading)
-  'label', // Payload native list-view (search input, select-checkbox) — framework labels не контролируем
+  // 'label' — re-enabled 2026-05-01 (PANEL-AXE-PAYLOAD-CORE-A11Y):
+  //   row-select checkbox (input.checkbox-input__input) теперь получает
+  //   aria-label через A11yRowCheckboxProvider. Если Payload вернёт другие
+  //   unlabeled inputs (search, фильтры) — их ловим отдельным spec'ом или
+  //   расширяем provider, не возвращаем глобальный exception.
   'aria-allowed-role', // Payload native может использовать non-standard role combinations
   'color-contrast', // Payload native palette — наш override через :root vars; reasoning per token, не на element
   // 'target-size' — re-enabled 2026-05-01 (PANEL-A11Y-TARGET-SIZE):
@@ -125,4 +129,52 @@ test.describe('US-12 W7 — Admin a11y (axe-core WCAG 2.2 AA)', () => {
     const results = await runAxe(page, editHref!)
     expect(results.violations).toEqual([])
   })
+
+  /**
+   * PANEL-AXE-PAYLOAD-CORE-A11Y — explicit assertion на row-select checkbox
+   * aria-label, который вешает A11yRowCheckboxProvider через MutationObserver.
+   * Закрывает critical violation `aria-input-field-name` / `label` (WCAG SC
+   * 4.1.2 / SC 1.3.1) из leadqa-RC-3-hotfix.md § Findings F1.
+   *
+   * Cases (4 docs) + Blog (5 docs) — те самые routes, на которых RC-3
+   * leadqa зафиксировал baseline violation.
+   */
+  for (const slug of ['cases', 'blog'] as const) {
+    test(`/admin/collections/${slug} row-checkbox имеет aria-label`, async ({ page }) => {
+      const ok = await tryLogin(page)
+      if (!ok) test.skip(true, `Login API rejected ${ADMIN_EMAIL}`)
+      await page.goto(`/admin/collections/${slug}/`, { waitUntil: 'networkidle' })
+      if (page.url().includes('/admin/login')) {
+        test.skip(true, 'Login session не сохранилась')
+      }
+      // MutationObserver запускается после mount → даём React tick.
+      await page.waitForFunction(
+        () => {
+          const inputs = document.querySelectorAll<HTMLInputElement>(
+            '.checkbox-input__input > input[type="checkbox"]',
+          )
+          if (inputs.length === 0) return false
+          return Array.from(inputs).every((i) => Boolean(i.getAttribute('aria-label')))
+        },
+        { timeout: 5_000 },
+      )
+
+      const labels = await page.$$eval(
+        '.checkbox-input__input > input[type="checkbox"]',
+        (inputs) =>
+          inputs.map((i) => ({
+            label: i.getAttribute('aria-label'),
+            inHeader: i.closest('th') !== null,
+          })),
+      )
+      expect(labels.length).toBeGreaterThan(0)
+      for (const { label, inHeader } of labels) {
+        expect(label).toBe(inHeader ? 'Выделить все строки' : 'Выделить строку')
+      }
+
+      // Sanity: после явной aria-label инъекции — axe чист на этом route.
+      const results = await runAxe(page, `/admin/collections/${slug}/`)
+      expect(results.violations).toEqual([])
+    })
+  }
 })

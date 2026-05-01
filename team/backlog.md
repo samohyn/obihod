@@ -47,11 +47,10 @@ update_protocol: каждый PO команды держит свою секци
 
 _(пусто — все dev-ready задачи из Next закрыты или передвинуты в Later)_
 
-### Later — 7 spec-approved + 2 cpo retro follow-ups
+### Later — 6 spec-approved + 1 cpo retro follow-up
 
 | ID | Что | Owner | Effort | RICE | M | Статус |
 |---|---|---|---|---|---|---|
-| **PANEL-AXE-PAYLOAD-CORE-A11Y** | 1 critical baseline a11y violation в leadqa-RC-3: Payload native row-checkbox без label (4 nodes). Local CSS override либо upstream PR в Payload 3 | fe-panel + qa-panel + cr-panel | 0.5 чд (local) или 2-3 (upstream) | 16.8 | S | new 2026-05-01 (cpo retro follow-up); idea, нужна sa-panel mini-spec |
 | **PANEL-RSC-LINT** | 3-layer defense: type guard `pickClientProps()` + ESLint custom rule `obikhod/no-spread-server-props-in-client` + Playwright CI gate на коллекциях `totalDocs > 0` (prevent RC-2 #120 повтора) | fe-panel + tamd + do + qa-panel | 4-4.5 чд | tbd | S | [sa-panel.md](../specs/PANEL-RSC-LINT/sa-panel.md) + [ADR-0015](../team/adr/ADR-0015-panel-rsc-lint.md) Accepted 2026-05-01 — spec dev-ready |
 | **PANEL-SITECHROME-RESTRUCTURE** | SiteChrome 405-строчный global → section-tabs (PO decision: no separate `SiteChromeBlocks` collection) | sa-panel + ux-panel + be-panel + fe-panel | 1.5 чд | **4.2** | C | [sa-panel.md](../specs/PANEL-SITECHROME-RESTRUCTURE/sa-panel.md) — spec ready 2026-05-01, dev-ready (no ADR) |
 | PANEL-GLOBAL-SEARCH | Top-bar global search 7 коллекций (pg_trgm UNION ALL + post-filter access control) + `Cmd/Ctrl+K` | be-panel + fe-panel + dba | 2.5 чд | 3.4 | C | [sa-panel.md](../specs/PANEL-GLOBAL-SEARCH/sa-panel.md) + [ADR-0013](../team/adr/ADR-0013-panel-global-search-performance.md) Accepted 2026-05-01 — **dev-ready** |
@@ -96,6 +95,7 @@ _(пусто — все dev-ready задачи из Next закрыты или �
 | **PANEL-LEADS-INBOX** | Leads UX: status canonical (7 + spam) + status_history jsonb + statusHistory tab + 8-chip filters + StatusPillCell + RowActionsCell dropdown + Postgres ENUM TYPE migration up/down/idempotent. Phase 3 (bulk actions / date-range UI / confirm) deferred → PANEL-LEADS-INBOX-V2 | 2026-05-01 ([PR #123 part](https://github.com/samohyn/obihod/pull/123) + [PR #125](https://github.com/samohyn/obihod/pull/125) MERGED) |
 | **PANEL-PERSONS-RENAME (b)** | Persons → Authors merge: 1 record migrated (Алексей Семёнов), bio richText→textarea Lexical extract OK, credentials.year→issuedAt='YYYY-01-01', worksInDistricts addded к Authors, sidebar §12.2 — одна иконка вместо двух, label «Авторы / Команда». Spec пропустил ServiceDistricts.reviewedBy (5-я reference) — мигрирован в рамках scope. Migration UP/DOWN/UP roundtrip clean | 2026-05-01 |
 | **PANEL-CSS-PREFIX-CLEANUP** | Удалены 32 dead `.payload__app X` selectors из W1 custom.scss — ancestor отсутствует в Payload 3.84 admin shell. 1479→1296 строк (-12%). 6 routes pixel-identical, 36/36 admin E2E specs passed. Backlog follow-ups в SCSS comments (PANEL-W1-REVIVE-OR-DROP / W4-TABS-REVIVE / W6-MOBILE-REVIVE / A11Y-TARGET-SIZE-REVIVE) | 2026-05-01 ([PR #127](https://github.com/samohyn/obihod/pull/127)) |
+| **PANEL-AXE-PAYLOAD-CORE-A11Y** | A11yRowCheckboxProvider (MutationObserver) + aria-label на Payload native row-select checkbox во всех list-views. Закрывает critical axe violation `aria-input-field-name` / `label` (WCAG SC 4.1.2 / SC 1.3.1) из leadqa-RC-3-hotfix.md § Findings F1. `label` rule re-enabled в admin-a11y.spec.ts. Verified локально на 6 routes (cases / blog / leads / services / authors / districts) — 0 critical. Selector скорректирован под реальный DOM Payload 3.84 (`.checkbox-input__input > input`). Header select-all с broken `aria-labelledby` self-reference корректно перезаписан | 2026-05-01 |
 
 ### Dropped
 
