@@ -1,7 +1,6 @@
-import { headers as nextHeaders, cookies as nextCookies } from 'next/headers'
+import { headers as nextHeaders } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { payloadClient } from '@/lib/payload'
-import { computeSecondFactorToken, SECOND_FACTOR_COOKIE } from '@/lib/auth/totp/secondFactorCookie'
 import TwoFactorLoginForm from '@/components/admin/TwoFactorLoginForm'
 
 /**
@@ -11,9 +10,9 @@ import TwoFactorLoginForm from '@/components/admin/TwoFactorLoginForm'
  *
  * Server logic:
  * - Если нет session (нет payload-token / невалиден) → redirect /admin/login.
- * - Если у user totpEnabled=false → set passed-cookie + redirect /admin/.
- *   Это покрывает случай когда middleware ложно сюда отправил пользователя
- *   без 2FA (после первого логина без passed-cookie).
+ * - Если у user totpEnabled=false → redirect /api/admin/auth/2fa-passthrough
+ *   (Route Handler выставит obihod_2fa_passed cookie и кинет на /admin).
+ *   В RSC нельзя `cookies().set()` — только в Server Actions / Route Handlers.
  * - Иначе рендерим форму OTP / recovery code (client component).
  */
 
@@ -31,19 +30,7 @@ export default async function TwoFactorLoginPage() {
   const user = auth.user as { id: string | number; totpEnabled?: boolean }
 
   if (!user.totpEnabled) {
-    // У user нет 2FA — выставляем cookie и пускаем дальше.
-    // Cookie set делается через next/headers cookies (server action).
-    const cookieStore = await nextCookies()
-    cookieStore.set({
-      name: SECOND_FACTOR_COOKIE,
-      value: computeSecondFactorToken(user.id),
-      httpOnly: true,
-      sameSite: 'strict',
-      secure: process.env.NODE_ENV === 'production',
-      path: '/',
-      maxAge: 7 * 24 * 60 * 60,
-    })
-    redirect('/admin')
+    redirect('/api/admin/auth/2fa-passthrough')
   }
 
   return <TwoFactorLoginForm />

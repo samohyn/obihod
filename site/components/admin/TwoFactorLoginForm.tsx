@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, type CSSProperties, type FormEvent } from 'react'
-import { useRouter } from 'next/navigation'
 
 /**
  * TwoFactorLoginForm — client UI для /admin/login/2fa.
@@ -72,7 +71,6 @@ const otpInputStyle: CSSProperties = {
 }
 
 export default function TwoFactorLoginForm() {
-  const router = useRouter()
   const [mode, setMode] = useState<Mode>('otp')
   const [otp, setOtp] = useState('')
   const [recovery, setRecovery] = useState('')
@@ -106,8 +104,10 @@ export default function TwoFactorLoginForm() {
       if (data?.usedRecoveryCode) {
         setRemaining(data.recoveryCodesRemaining)
       }
-      router.push('/admin')
-      router.refresh()
+      // Hard navigation — гарантирует server-side re-eval с новым
+      // obihod_2fa_passed cookie. router.push() без refresh не вызывает RSC
+      // re-render, и страница `/admin/login/2fa` повторно showает форму.
+      window.location.href = '/admin/'
     } catch {
       setErrorMsg('Не удалось проверить код. Проверь интернет.')
       setState('error')

@@ -5,10 +5,50 @@ import { NextResponse, type NextRequest } from 'next/server'
  * 1. http → https (на проде; локально игнорируем)
  * 2. www → non-www
  * 3. Trailing slash на всех маршрутах кроме /api/, /admin/, и файлов с расширениями
+ * 4. PANEL-AUTH-2FA (sa-panel.md AC-4): /admin/* gated по второй ступени —
+ *    если есть payload-token cookie И НЕТ obihod_2fa_passed cookie → redirect
+ *    на /admin/login/2fa (страница сама решает: totpEnabled=false → set passed
+ *    cookie + redirect /admin; иначе рендерит OTP/recovery форму).
  *
  * Legacy redirects из коллекции `redirects` Payload — реализуем позже
  * (нужен in-memory snapshot, обновляемый по ISR).
  */
+
+const ADMIN_PASS_THROUGH = [
+  '/admin/login',
+  '/admin/forgot',
+  '/admin/reset',
+  '/admin/create-first-user',
+  '/admin/unauthorized',
+]
+
+const ADMIN_API_PASS_THROUGH = [
+  // 2FA endpoints
+  '/api/admin/auth/2fa-login',
+  '/api/admin/auth/2fa-setup',
+  '/api/admin/auth/2fa-verify',
+  '/api/admin/auth/2fa-disable',
+  '/api/admin/auth/2fa-regenerate-codes',
+  '/api/admin/auth/2fa-passthrough',
+  // Native Payload auth endpoints
+  '/api/users/login',
+  '/api/users/logout',
+  '/api/users/forgot-password',
+  '/api/users/reset-password',
+  '/api/users/me',
+  '/api/users/refresh-token',
+]
+
+function isAdminPassThrough(pathname: string): boolean {
+  for (const prefix of ADMIN_PASS_THROUGH) {
+    if (pathname === prefix || pathname.startsWith(prefix + '/')) return true
+  }
+  for (const prefix of ADMIN_API_PASS_THROUGH) {
+    if (pathname === prefix || pathname.startsWith(prefix + '/')) return true
+  }
+  return false
+}
+
 export function proxy(req: NextRequest) {
   const url = req.nextUrl.clone()
   const host = req.headers.get('host') ?? ''
@@ -24,6 +64,36 @@ export function proxy(req: NextRequest) {
   if (host.startsWith('www.')) {
     url.host = host.replace(/^www\./, '')
     return NextResponse.redirect(url, 301)
+  }
+
+  // 4. PANEL-AUTH-2FA gate.
+  const { pathname } = req.nextUrl
+  const isAdminScope = pathname.startsWith('/admin') || pathname.startsWith('/api/admin')
+  if (isAdminScope && !isAdminPassThrough(pathname)) {
+    const payloadToken = req.cookies.get('payload-token')?.value
+    if (payloadToken) {
+      const passed = req.cookies.get('obihod_2fa_passed')?.value
+      if (!passed) {
+        const target = req.nextUrl.clone()
+        target.pathname = '/admin/login/2fa'
+        target.search = ''
+        return NextResponse.redirect(target)
+      }
+    } else if (req.cookies.get('obihod_2fa_passed')?.value) {
+      // Нет payload-token (logout/expire), но есть stale 2fa-passed → чистим.
+      // Иначе следующий login пропустит вторую ступень с старой cookie.
+      const response = NextResponse.next()
+      response.cookies.set({
+        name: 'obihod_2fa_passed',
+        value: '',
+        httpOnly: true,
+        sameSite: 'strict',
+        secure: process.env.NODE_ENV === 'production',
+        path: '/',
+        maxAge: 0,
+      })
+      return response
+    }
   }
 
   // Trailing slash управляется Next.js через next.config.ts (`trailingSlash: true`)
