@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { Hero, TextContent, RelatedServices, CtaBanner, Breadcrumbs } from '@/blocks'
 
 /**
  * Authors — E-E-A-T авторы и команда (бригадиры, арбористы, промальпинисты).
@@ -177,6 +178,27 @@ export const Authors: CollectionConfig = {
               admin: {
                 description:
                   'Районы, где работает сотрудник — для Cases.brigade и локальной E-E-A-T.',
+              },
+            },
+          ],
+        },
+        {
+          label: 'Контент страницы',
+          description:
+            'Блочный конструктор для страницы автора /avtory/<slug>/. Расширенный контент сверх bio.',
+          fields: [
+            // US-0 Track B-2 — blocks[] для author-страниц.
+            // Whitelist: hero, text-content, related-services, cta-banner,
+            // breadcrumbs.
+            {
+              name: 'blocks',
+              type: 'blocks',
+              blockReferences: [Hero, TextContent, RelatedServices, CtaBanner, Breadcrumbs],
+              blocks: [],
+              admin: {
+                initCollapsed: true,
+                description:
+                  'Конструктор страницы автора: hero, текст (статьи / экспертиза), похожие услуги, CTA, breadcrumbs. bio в tab «Био» остаётся для Person.description schema.',
               },
             },
           ],
