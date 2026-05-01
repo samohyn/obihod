@@ -2041,7 +2041,7 @@
       "label": "login()",
       "file_type": "code",
       "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-header-chrome-polish.spec.ts",
-      "source_location": "L23",
+      "source_location": "L24",
       "id": "admin_header_chrome_polish_spec_login",
       "community": 46,
       "norm_label": "login()"
@@ -8238,7 +8238,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-header-chrome-polish.spec.ts",
-      "source_location": "L23",
+      "source_location": "L24",
       "weight": 1.0,
       "_src": "users_a36_obikhod_site_tests_e2e_admin_header_chrome_polish_spec_ts",
       "_tgt": "admin_header_chrome_polish_spec_login",
