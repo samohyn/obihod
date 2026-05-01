@@ -114,7 +114,7 @@ export const Services: CollectionConfig = {
         {
           label: 'Sub-услуги',
           description:
-            'Каждая sub-услуга получает публичный URL /<service>/<slug>/. Контент-поля (intro/body/meta) заполняются для отдельной страницы sub.',
+            'Каждая sub-услуга получает публичный URL /<service>/<slug>/. Контент-поля (intro/body/meta) заполняются для отдельной страницы sub. Связанные услуги — для cross-link блока «Похожие» (до 3).',
           fields: [
             {
               name: 'subServices',
@@ -174,6 +174,20 @@ export const Services: CollectionConfig = {
                   admin: { description: 'Description в SERP. 140-160 символов оптимум.' },
                 },
               ],
+            },
+            // PANEL-SERVICES-PREVIEW-TAB · merge tab «Связи» → «Sub-услуги».
+            // Field `relatedServices` переехал из бывшего отдельного tab «Связи»,
+            // потому что cross-link блок логически принадлежит pillar-группе
+            // под-услуг. Schema БД не меняется (named field остался прежним).
+            {
+              name: 'relatedServices',
+              type: 'relationship',
+              relationTo: 'services',
+              hasMany: true,
+              maxRows: 3,
+              admin: {
+                description: 'До 3 связанных услуг для блока «Похожие» на странице.',
+              },
             },
           ],
         },
@@ -245,17 +259,19 @@ export const Services: CollectionConfig = {
           ],
         },
         {
-          label: 'Связи',
-          description: 'Связанные услуги — для cross-link блока.',
+          // PANEL-SERVICES-PREVIEW-TAB · brand-guide §12.4 mockup line 3086.
+          // Phase 1: tab-контейнер для card с primary-button «Открыть на сайте».
+          // Phase 2 (отдельный US): inline iframe preview (требует ADR от tamd).
+          label: 'Превью',
+          description: 'Открыть страницу услуги на публичном сайте в новой вкладке.',
           fields: [
             {
-              name: 'relatedServices',
-              type: 'relationship',
-              relationTo: 'services',
-              hasMany: true,
-              maxRows: 3,
+              name: 'previewPanel',
+              type: 'ui',
               admin: {
-                description: 'До 3 связанных услуг для блока «Похожие» на странице.',
+                components: {
+                  Field: '@/components/admin/ServicePreviewPanel',
+                },
               },
             },
           ],
