@@ -26,14 +26,17 @@ export async function computePreviewUrl(
 ): Promise<string | null> {
   switch (collection) {
     case 'services':
-      return doc.slug ? `/uslugi/${doc.slug}` : null
+      // Реальный публичный route: app/(marketing)/[service]/page.tsx → `/<slug>/`.
+      // Префикс `/uslugi/` устарел (до OBI-16). PANEL-DRAFT-PREVIEW-ROUTE.
+      return doc.slug ? `/${doc.slug}/` : null
 
     case 'service-districts': {
-      // Может быть relation в виде ID или populated object
+      // Реальный route: app/(marketing)/[service]/[district]/page.tsx → `/<service>/<district>/`.
+      // Может быть relation в виде ID или populated object.
       const serviceSlug = await resolveSlug(doc.service, 'services', payload)
       const districtSlug = await resolveSlug(doc.district, 'districts', payload)
       if (!serviceSlug || !districtSlug) return null
-      return `/uslugi/${serviceSlug}/${districtSlug}/`
+      return `/${serviceSlug}/${districtSlug}/`
     }
 
     case 'cases':
