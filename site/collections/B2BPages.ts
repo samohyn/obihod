@@ -1,4 +1,15 @@
 import type { CollectionConfig } from 'payload'
+import {
+  Hero,
+  TextContent,
+  LeadForm,
+  ServicesGrid,
+  MiniCase,
+  Faq,
+  CtaBanner,
+  Tldr,
+  Breadcrumbs,
+} from '@/blocks'
 
 export const B2BPages: CollectionConfig = {
   slug: 'b2b-pages',
@@ -39,7 +50,8 @@ export const B2BPages: CollectionConfig = {
         },
         {
           label: 'Контент',
-          description: 'Тело страницы, кейсы, форма, договорные оферты.',
+          description:
+            'Тело страницы, кейсы, форма, договорные оферты. Для расширенной структуры используйте блочный конструктор ниже.',
           fields: [
             { name: 'body', type: 'richText', required: true },
             {
@@ -55,6 +67,30 @@ export const B2BPages: CollectionConfig = {
               type: 'checkbox',
               defaultValue: true,
               admin: { description: '«Штрафы ГЖИ берём на себя по договору»' },
+            },
+            // US-0 Track B-2 — blocks[] для B2B-страниц (/b2b/<slug>/).
+            // Whitelist: hero, text-content, lead-form, services-grid, mini-case,
+            // faq, cta-banner, tldr, breadcrumbs.
+            {
+              name: 'blocks',
+              type: 'blocks',
+              blockReferences: [
+                Hero,
+                TextContent,
+                LeadForm,
+                ServicesGrid,
+                MiniCase,
+                Faq,
+                CtaBanner,
+                Tldr,
+                Breadcrumbs,
+              ],
+              blocks: [],
+              admin: {
+                initCollapsed: true,
+                description:
+                  'Конструктор B2B-страницы: hero, текст, форма, сетка услуг, мини-кейсы, FAQ, CTA, TL;DR, breadcrumbs. Legacy body выше остаётся для обратной совместимости.',
+              },
             },
           ],
         },
