@@ -8,9 +8,10 @@ priority: C
 segment: admin
 phase: spec-approved
 role: sa-panel
-status: dev-blocked-by-adr
+status: dev-ready
 blocks: []
-blocked_by: [ADR-PANEL-AUDIT-LOG-STORAGE]
+blocked_by: []
+adr: ADR-0014 (Accepted 2026-05-01 by popanel autonomous mandate) — Hybrid (Payload versions для content + custom audit_log для PII + retention policy)
 related: [PANEL-BULK-PUBLISH, PANEL-AUTH-2FA, PANEL-LEADS-INBOX]
 created: 2026-05-01
 updated: 2026-05-01

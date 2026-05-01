@@ -8,9 +8,10 @@ priority: C
 segment: admin
 phase: spec-approved
 role: sa-panel
-status: dev-blocked-by-adr
+status: dev-ready
 blocks: []
-blocked_by: [ADR-PANEL-GLOBAL-SEARCH-PERFORMANCE]
+blocked_by: []
+adr: ADR-0013 (Accepted 2026-05-01 by popanel autonomous mandate) — pg_trgm UNION ALL + post-filter access control
 related: [PANEL-DASHBOARD-V2, US-12-admin-redesign-wave3]
 created: 2026-05-01
 updated: 2026-05-01
