@@ -71,7 +71,13 @@ export default buildConfig({
       providers: [
         '@/components/admin/LeadsBadgeProvider',
         '@/components/admin/A11yRowCheckboxProvider',
+        // PANEL-GLOBAL-SEARCH (ADR-0013): Cmd+K hotkey + dropdown overlay по
+        // 7 коллекциям + Districts через pg_trgm UNION + post-filter access.
+        '@/components/admin/GlobalSearchProvider',
       ],
+      // PANEL-GLOBAL-SEARCH: visible top-bar trigger (icon + ⌘K hint) рядом с
+      // gear/account. brand-guide §12.2 ad-search slot, mockup line 3016.
+      actions: ['@/components/admin/GlobalSearchTrigger'],
       // PANEL-HEADER-CHROME-POLISH (W10, 2026-05-01) §B: home-link первым
       // элементом в .nav__wrap через native Payload slot. Оператор 2026-05-01
       // переименовал «На сайт» (target=_blank → obikhod.ru/) на «Вернуться в
