@@ -45,14 +45,8 @@ export function StatusPillCell({ cellData, rowData }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null)
 
   const serverStatus: LeadStatus = isLeadStatus(cellData) ? cellData : 'new'
-  const status: LeadStatus = override ?? serverStatus
-
-  // Когда сервер прислал тот же status что мы выставили optimistically — clear override.
-  useEffect(() => {
-    if (override !== null && serverStatus === override) {
-      setOverride(null)
-    }
-  }, [override, serverStatus])
+  // Override активен только во время pending PATCH; cleared в finally блоке apply().
+  const status: LeadStatus = pending && override ? override : serverStatus
 
   // Close dropdown on outside click + Escape.
   useEffect(() => {
@@ -104,10 +98,12 @@ export function StatusPillCell({ cellData, rowData }: Props) {
         }),
       )
     } catch (err) {
-      if (!isArchive) setOverride(null)
       toast.error('Не удалось обновить — попробуй ещё раз')
       console.error('[StatusPillCell] PATCH failed', err)
     } finally {
+      // Clear optimistic override; ifaffected пользовательский UI снова показывает
+      // serverStatus (для success — он уже обновлён, для failure — rollback).
+      setOverride(null)
       setPending(false)
     }
   }
