@@ -1,4 +1,65 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionBeforeDeleteHook, CollectionConfig, Where } from 'payload'
+import { APIError } from 'payload'
+
+/**
+ * PANEL-MEDIA-LIBRARY · sa-panel.md «Risks #1» (race condition).
+ *
+ * Между orphan-check (на client/в endpoint) и фактическим DELETE оператор мог
+ * успеть привязать media к новому документу в другой вкладке. Без re-check
+ * bulk-delete стёр бы живой файл. Hook повторяет orphan-проверку на момент
+ * удаления и бросает 409, если media уже используется.
+ *
+ * Источник правды по upload-полям — единый с `app/(payload)/api/admin/media/
+ * orphans/route.ts` (manual sync, см. Out-of-scope «reflection»). Если в
+ * Cases/Services добавится новое upload-поле — обе таблицы надо обновить.
+ */
+const MEDIA_REFS: { slug: string; fields: string[]; isGlobal?: boolean }[] = [
+  { slug: 'authors', fields: ['avatar'] },
+  { slug: 'cases', fields: ['photosBefore.image', 'photosAfter.image', 'ogImage'] },
+  { slug: 'blog', fields: ['heroImage', 'ogImage'] },
+  { slug: 'districts', fields: ['heroImage', 'photoGeo'] },
+  { slug: 'service-districts', fields: ['ogImage'] },
+  { slug: 'services', fields: ['heroImage', 'gallery.image', 'ogImage'] },
+  { slug: 'seo-settings', fields: ['defaultOgImage'], isGlobal: true },
+]
+
+const beforeDeleteRaceGuard: CollectionBeforeDeleteHook = async ({ id, req }) => {
+  const { payload } = req
+  // Для каждой коллекции/global — параллель fast index lookups. Если хоть
+  // один match → блокируем delete с 409 Conflict.
+  const checks = MEDIA_REFS.flatMap((ref) =>
+    ref.fields.map(async (field) => {
+      try {
+        if (ref.isGlobal) {
+          const doc = await payload.findGlobal({ slug: ref.slug as 'seo-settings', depth: 0 })
+          const value = (doc as Record<string, unknown>)[field]
+          return value === id || value === Number(id) || value === String(id)
+        }
+        const res = await payload.find({
+          collection: ref.slug as 'authors' | 'cases' | 'blog' | 'districts',
+          where: { [field]: { equals: id } } as Where,
+          limit: 1,
+          depth: 0,
+          pagination: false,
+        })
+        return res.docs.length > 0
+      } catch {
+        return false
+      }
+    }),
+  )
+
+  const anyUsed = (await Promise.all(checks)).some(Boolean)
+  if (anyUsed) {
+    // 409 Conflict — публичное сообщение для оператора, не утечка stacktrace.
+    throw new APIError(
+      'Файл используется в одном из документов и не может быть удалён. Обновите список.',
+      409,
+      undefined,
+      true,
+    )
+  }
+}
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -6,8 +67,23 @@ export const Media: CollectionConfig = {
   admin: {
     group: '03 · Медиа',
     description: 'Фото объектов, OG-картинки, сканы документов.',
+    // PANEL-MEDIA-LIBRARY · sa-panel.md AC1: переопределяем native list-view
+    // на grid-вид с thumbnails + filters + orphan detection + bulk cleanup.
+    // Sort/pagination/bulk-delete — наши, через client-side fetch к Payload
+    // REST API (`/api/media`). См. ADR-0010 — это единственный поддерживаемый
+    // механизм override list-view в Payload 3.84.
+    components: {
+      views: {
+        list: {
+          Component: '@/components/admin/media/MediaListView#default',
+        },
+      },
+    },
   },
   access: { read: () => true },
+  hooks: {
+    beforeDelete: [beforeDeleteRaceGuard],
+  },
   upload: {
     staticDir: 'media',
     adminThumbnail: 'card',

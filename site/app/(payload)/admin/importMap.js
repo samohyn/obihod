@@ -37,6 +37,7 @@ import { default as default_03c174bc83c57c8b0eee299d05fde10d } from '@/component
 import { default as default_34a40cc685c7df316e31d445e114f485 } from '@/components/admin/LeadsBadgeProvider'
 import { default as default_52ccffaeb32b1decd698281bdb4d4c82 } from '@/components/admin/A11yRowCheckboxProvider'
 import { default as default_9ef388c09eeca65ffd7a9ea7e3838839 } from '@/components/admin/SecurityView'
+import { default as default_media_list_view_a8c9b1d2e3f4a5b6 } from '@/components/admin/media/MediaListView'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -80,5 +81,6 @@ export const importMap = {
   "@/components/admin/LeadsBadgeProvider#default": default_34a40cc685c7df316e31d445e114f485,
   "@/components/admin/A11yRowCheckboxProvider#default": default_52ccffaeb32b1decd698281bdb4d4c82,
   "@/components/admin/SecurityView#default": default_9ef388c09eeca65ffd7a9ea7e3838839,
+  "@/components/admin/media/MediaListView#default": default_media_list_view_a8c9b1d2e3f4a5b6,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }
