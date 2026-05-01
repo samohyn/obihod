@@ -1294,3 +1294,89 @@ a.nav__link.nav__link--home::before {
 .field-type[id*='field-_actions'] {
   display: none;
 }
+
+/* ════════════════════════════════════════════════════════════════════
+ *  PANEL-BULK-PUBLISH (2026-05-01)
+ *  Brand-guide §12.5 «Status badges + Bulk action bar» (line 3167+).
+ *
+ *  Payload 3.84 native `<ListSelection_v4>` (PublishMany / UnpublishMany /
+ *  EditMany / DeleteMany) поставляется out-of-the-box для коллекций с
+ *  `versions: { drafts: true }` — Cases / Blog / Services / ServiceDistricts
+ *  получают bulk-actions без custom компонента.
+ *
+ *  i18n: лейблы ru уже из @payloadcms/translations/dist/languages/ru.js
+ *  («Публиковать» / «Отменить публикацию» / «Удалить» / «Подтвердить» /
+ *  «Отмена» / «N выбрано»). cw audit подтверждает совместимость с TOV §13
+ *  Caregiver+Ruler — спокойные глаголы, без emoji.
+ *
+ *  SCSS-кастомизация: подвод lib-default `.list-selection` к brand-guide
+ *  §12.5 chip-bar — кремовый фон, янтарный accent для primary action,
+ *  divider «—» приглушённый, gap по rhythm 8px.
+ * ──────────────────────────────────────────────────────────────────── */
+.list-selection {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 12px;
+  background: var(--brand-obihod-paper-warm);
+  border: 1px solid var(--brand-obihod-line);
+  border-radius: var(--brand-obihod-radius-pill, 999px);
+  font-family: var(--brand-obihod-font-sans, inherit);
+  font-size: 13px;
+  color: var(--brand-obihod-ink-soft);
+
+  /* Counter «N выбрано» — bold ink */
+  > span:first-child {
+    font-weight: 600;
+    color: var(--brand-obihod-ink);
+  }
+
+  &__actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__button {
+    color: var(--brand-obihod-ink);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 4px 10px;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: 1.4;
+    transition:
+      background 120ms ease,
+      border-color 120ms ease,
+      color 120ms ease;
+    white-space: nowrap;
+
+    &:hover:not([disabled]) {
+      background: var(--brand-obihod-card);
+      border-color: var(--brand-obihod-line-hover);
+      color: var(--brand-obihod-primary);
+      text-decoration: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-obihod-primary);
+      outline-offset: 2px;
+    }
+
+    &[disabled],
+    &[aria-busy='true'] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+/* Reduced-motion: убираем transition на actions, оставляем только color */
+@media (prefers-reduced-motion: reduce) {
+  .list-selection__button {
+    transition: color 120ms ease;
+  }
+}
