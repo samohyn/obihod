@@ -1,18 +1,57 @@
 import type { CollectionConfig } from 'payload'
 
+import { LEAD_STATUS_OPTIONS, isLeadStatus } from '@/lib/leads/status'
+
 export const Leads: CollectionConfig = {
   slug: 'leads',
   labels: { singular: 'Заявка', plural: 'Заявки' },
   admin: {
     useAsTitle: 'phone',
-    defaultColumns: ['phone', 'name', 'service', 'district', 'status', 'createdAt'],
+    defaultColumns: ['phone', 'name', 'service', 'district', 'status', '_actions', 'createdAt'],
+    listSearchableFields: ['phone', 'name', 'utmSource', 'utmCampaign'],
     group: '01 · Заявки',
     description: 'Входящие лиды с сайта — телефон, канал связи, черновик сметы.',
+    components: {
+      // PANEL-LEADS-INBOX § B.2 — quick-filter chips в header list-view.
+      views: {
+        list: {
+          actions: ['@/components/admin/leads/LeadsQuickFilters#LeadsQuickFilters'],
+        },
+      },
+    },
   },
   access: {
     read: ({ req }) =>
       Boolean(req.user) &&
       ['admin', 'manager'].includes((req.user as { role?: string })?.role ?? ''),
+  },
+  // PANEL-LEADS-INBOX § A.3 — audit log смен status (jsonb backed by migration
+  // 20260501_140100_leads_status_history). Hook gar­antirovs invariant
+  // «любая смена status → entry в statusHistory» включая API-direct calls.
+  hooks: {
+    beforeChange: [
+      ({ data, originalDoc, req, operation }) => {
+        if (operation !== 'update') return data
+        if (!originalDoc) return data
+        const next = data?.status
+        const prev = originalDoc.status
+        if (!isLeadStatus(next)) return data
+        if (next === prev) return data
+
+        const entry = {
+          from: isLeadStatus(prev) ? prev : null,
+          to: next,
+          changedBy: (req.user as { id?: string | number } | null)?.id ?? null,
+          changedAt: new Date().toISOString(),
+        }
+
+        const existing = Array.isArray(originalDoc.statusHistory) ? originalDoc.statusHistory : []
+        // Cap at 50 entries (per ADR-0012 § Negative consequences) — truncate oldest.
+        const merged = [...existing, entry]
+        data.statusHistory = merged.length > 50 ? merged.slice(merged.length - 50) : merged
+        return data
+      },
+    ],
   },
   // Wave 4 (PAN-3) — UI tabs grouping (art-concept-v2 §5, brand-guide §12.4).
   // Unnamed tabs — БД schema не меняется, миграции не требуются.
@@ -140,19 +179,43 @@ export const Leads: CollectionConfig = {
           description: 'Воронка обработки заявки и связь с amoCRM.',
           fields: [
             {
+              // PANEL-LEADS-INBOX § A.1 — canonical 7-status enum (brand-guide §32.4).
+              // Old → new mapping выполнен миграцией 20260501_140000.
+              // Cell renderer: pill + inline-update dropdown (per ADR-0012 Plan A).
               name: 'status',
               type: 'select',
               defaultValue: 'new',
-              options: [
-                { label: 'Новый', value: 'new' },
-                { label: 'В amoCRM', value: 'in_amocrm' },
-                { label: 'Смета готова', value: 'estimated' },
-                { label: 'Конвертирован', value: 'converted' },
-                { label: 'Потерян', value: 'lost' },
-                { label: 'Спам', value: 'spam' },
-              ],
+              options: LEAD_STATUS_OPTIONS,
               admin: {
-                description: 'Этап воронки. Новый → перезвонил → смета → договор/потеря.',
+                description: 'Этап воронки: новая → на связи → смета → бригада → завершена.',
+                components: {
+                  Cell: '@/components/admin/leads/StatusPillCell#StatusPillCell',
+                },
+              },
+            },
+            {
+              // § A.3 — audit log (jsonb backed by migration 20260501_140100).
+              // Hook beforeChange (выше) — единственный writer; admin readOnly.
+              name: 'statusHistory',
+              type: 'json',
+              defaultValue: [],
+              admin: {
+                readOnly: true,
+                description: 'История смен статуса (read-only, append через beforeChange hook).',
+                components: {
+                  Field: '@/components/admin/leads/StatusHistoryField#StatusHistoryField',
+                },
+              },
+            },
+            {
+              // § C.3 — soft-delete. Default-фильтр list-view скрывает archived.
+              name: 'archivedAt',
+              type: 'date',
+              admin: {
+                description: 'Если заполнено — заявка в архиве. Снять для возврата в активный inbox.',
+                date: {
+                  pickerAppearance: 'dayAndTime',
+                },
               },
             },
             {
@@ -168,6 +231,21 @@ export const Leads: CollectionConfig = {
           ],
         },
       ],
+    },
+    {
+      // § C.2 — virtual field для per-row «⋯» dropdown в list-view (ADR-0012 Plan A).
+      // virtual: true = не пишется в БД (no migration needed). Cell получает rowData
+      // и рендерит RowActionsCell в каждой строке.
+      name: '_actions',
+      type: 'text',
+      virtual: true,
+      admin: {
+        readOnly: true,
+        disableListColumn: false,
+        components: {
+          Cell: '@/components/admin/leads/RowActionsCell#RowActionsCell',
+        },
+      },
     },
   ],
   timestamps: true,
