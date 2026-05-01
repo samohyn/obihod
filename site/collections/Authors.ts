@@ -101,10 +101,10 @@ export const Authors: CollectionConfig = {
             {
               name: 'bio',
               type: 'textarea',
-              maxLength: 600,
+              maxLength: 2000,
               admin: {
                 description:
-                  'Краткая биография — для Person.description + страница /avtory/<slug>/.',
+                  'Биография — для Person.description + страница /avtory/<slug>/. До 2000 символов (US-0 W3 — bumped с 600 для company-page «Бригада вывоза Обихода» и расширенных авторских био).',
               },
             },
             {

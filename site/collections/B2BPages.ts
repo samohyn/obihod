@@ -41,6 +41,7 @@ export const B2BPages: CollectionConfig = {
               options: [
                 { label: 'Управляющие компании', value: 'uk' },
                 { label: 'ТСЖ', value: 'tszh' },
+                { label: 'УК + ТСЖ (общий сегмент)', value: 'uk-tszh' },
                 { label: 'Facility Management', value: 'fm' },
                 { label: 'Застройщики', value: 'zastroyshchik' },
                 { label: 'Госзакупки 44/223-ФЗ', value: 'gostorgi' },
