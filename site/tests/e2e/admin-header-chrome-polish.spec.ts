@@ -3,9 +3,10 @@ import { expect, test } from '@playwright/test'
 /**
  * PANEL-HEADER-CHROME-POLISH · e2e smoke.
  *
- * 3 пина оператора 2026-05-01:
- *   §A · breadcrumb «О» в .step-nav__home — slot 20×20, центрирован
- *   §B · home-link «На сайт» через beforeNavLinks slot — target=_blank → obikhod.ru
+ * Пины оператора 2026-05-01:
+ *   §A · breadcrumb home-icon — оператор 2026-05-01 убрал (graphics.Icon →
+ *        EmptyIcon, BrandIcon удалён). Тест §A снят.
+ *   §B · home-link «Вернуться в панель» через beforeNavLinks slot — same-tab → /admin/
  *   §C · dark-theme toggle stub в settingsMenu — aria-pressed toggles on click
  *
  * Полный flow требует authenticated session с БД + seed-юзером. На CI с
@@ -44,8 +45,8 @@ async function login(page: import('@playwright/test').Page): Promise<boolean> {
   }
 }
 
-test.describe('PANEL-HEADER-CHROME-POLISH — header chrome polish (3 пина)', () => {
-  test('§A · breadcrumb «О» (.step-nav__home) — 20×20 slot центрирован', async ({ page }) => {
+test.describe('PANEL-HEADER-CHROME-POLISH — header chrome polish', () => {
+  test('§A · breadcrumb home-icon убран — .step-nav__home без SVG', async ({ page }) => {
     const ok = await login(page)
     if (!ok) test.skip(true, 'Admin auth недоступен (БД/seed) — пропуск')
 
@@ -55,24 +56,16 @@ test.describe('PANEL-HEADER-CHROME-POLISH — header chrome polish (3 пина)'
     }
 
     const home = page.locator('.step-nav__home').first()
-    if (!(await home.isVisible().catch(() => false))) {
+    if (!(await home.count())) {
       test.skip(true, 'step-nav__home отсутствует на этой странице — пропуск')
     }
 
-    const box = await home.boundingBox()
-    expect(box).not.toBeNull()
-    // AC-A.1/A.2: slot должен быть 20×20 (CSS override 18→20 native).
-    expect(box!.width).toBeGreaterThanOrEqual(19)
-    expect(box!.width).toBeLessThanOrEqual(22)
-    expect(box!.height).toBeGreaterThanOrEqual(19)
-    expect(box!.height).toBeLessThanOrEqual(22)
-
-    // SVG inside растёт под slot
-    const svg = home.locator('svg').first()
-    await expect(svg).toBeVisible()
+    // graphics.Icon → EmptyIcon (рендерит null) → внутри home-slot SVG быть не должно
+    const svgCount = await home.locator('svg').count()
+    expect(svgCount).toBe(0)
   })
 
-  test('§B · home-link «На сайт» в sidebar — target=_blank → obikhod.ru', async ({ page }) => {
+  test('§B · home-link «Вернуться в панель» в sidebar — same-tab → /admin/', async ({ page }) => {
     const ok = await login(page)
     if (!ok) test.skip(true, 'Admin auth недоступен (БД/seed) — пропуск')
 
@@ -84,23 +77,17 @@ test.describe('PANEL-HEADER-CHROME-POLISH — header chrome polish (3 пина)'
     const homeLink = page.locator('.nav__link--home').first()
     await expect(homeLink).toBeVisible()
 
-    // AC-B.2/B.3: target=_blank + rel=noopener noreferrer
-    await expect(homeLink).toHaveAttribute('target', '_blank')
-    const rel = (await homeLink.getAttribute('rel')) || ''
-    expect(rel).toContain('noopener')
-    expect(rel).toContain('noreferrer')
+    // same-tab: target отсутствует
+    expect(await homeLink.getAttribute('target')).toBeNull()
 
-    // AC-B.4: aria-label содержит «На сайт» + «новой вкладке»
-    const ariaLabel = (await homeLink.getAttribute('aria-label')) || ''
-    expect(ariaLabel).toContain('На сайт')
-    expect(ariaLabel).toContain('новой вкладке')
+    // aria-label «Вернуться в панель»
+    expect(await homeLink.getAttribute('aria-label')).toBe('Вернуться в панель')
 
-    // href ведёт на public site (default obikhod.ru или NEXT_PUBLIC_SITE_ORIGIN)
-    const href = (await homeLink.getAttribute('href')) || ''
-    expect(href).toMatch(/obikhod\.ru|^https?:\/\//)
+    // href → /admin/
+    expect(await homeLink.getAttribute('href')).toBe('/admin/')
 
-    // visible label «На сайт»
-    await expect(homeLink).toContainText('На сайт')
+    // visible label «Вернуться в панель»
+    await expect(homeLink).toContainText('Вернуться в панель')
   })
 
   test('§C · theme toggle stub — aria-pressed переключается на click', async ({ page }) => {
