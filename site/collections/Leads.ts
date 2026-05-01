@@ -212,7 +212,8 @@ export const Leads: CollectionConfig = {
               name: 'archivedAt',
               type: 'date',
               admin: {
-                description: 'Если заполнено — заявка в архиве. Снять для возврата в активный inbox.',
+                description:
+                  'Если заполнено — заявка в архиве. Снять для возврата в активный inbox.',
                 date: {
                   pickerAppearance: 'dayAndTime',
                 },
