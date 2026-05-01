@@ -33,11 +33,10 @@ const PAYLOAD_NATIVE_EXCEPTIONS = [
   'label', // Payload native list-view (search input, select-checkbox) — framework labels не контролируем
   'aria-allowed-role', // Payload native может использовать non-standard role combinations
   'color-contrast', // Payload native palette — наш override через :root vars; reasoning per token, не на element
-  'target-size', // Payload native row-action icons (edit pencil, 3-dot menu) <44×44 на mobile;
-  // наш CSS @media (max-width: 1024px) покрывает основные buttons/links/tabs
-  // через `min-height: 44px !important`, но row-icons имеют specific class
-  // selectors с inline width/height — framework constraint. Real-device
-  // smoke leadqa проверит functional impact (W6 mobile real-device test).
+  // 'target-size' — re-enabled 2026-05-01 (PANEL-A11Y-TARGET-SIZE):
+  //   .popup-button (kebab row-action) и td.cell-_select bulk-checkbox
+  //   получили min-width/min-height 44px на ≤1024px (custom.scss).
+  //   WCAG 2.2 AA · SC 2.5.5. Desktop (>1024px) — SC 2.5.8 24×24 (mouse).
   'aria-hidden-focus', // Payload native dashboard wraps focusable element в aria-hidden
   // (например stat-card hidden div со screen-reader text внутри). Framework constraint.
 ]
