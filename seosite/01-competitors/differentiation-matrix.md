@@ -16,6 +16,7 @@
 - 🟡 medium (средний по выборке)
 - 🔴 low (ниже медианы)
 - ⚪ pending (нужен live audit W3)
+- ⚪H pending-with-hypothesis (W2 prima facie без crawl, помечено в stub)
 - ✓ — кандидат в топ-3 для DoD-опережения
 - ◯ — есть профиль, но устарел / неполный
 - ✗ — нет deep-профиля, stub создан
@@ -27,19 +28,19 @@
 | # | Конкурент | Pillar | Deep-профиль | URL-объём (1) | Контент-глубина (2) | E-E-A-T (3) | UX (4) | Schema (5) | Топ-3 кандидат? |
 |--:|---|---|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 | 1 | **musor.moscow** | мусор | ✓ | 🟢 huge (~1387 URL, 137 гео) | 🟡 medium (103 blog + 1051 новость, но автоген) | 🔴 low (нет авторов / СРО на видном месте) | 🟡 medium (калькулятор на главной) | 🟡 medium (Service?+FAQ?) ⚪ | **✓** (URL-объём axis) |
-| 2 | grunlit-eco.ru | мусор | ✗ stub | ⚪ pending | ⚪ pending | ⚪ pending (B2B-фокус — гипотеза сильный) | ⚪ pending | ⚪ pending | pending live audit W3 |
+| 2 | grunlit-eco.ru | мусор | ✗ stub+H | ⚪H | ⚪H | ⚪H (B2B-фокус — гипотеза сильный) | ⚪ pending | ⚪ pending | pending live audit W3 |
 | 3 | **liwood.ru** | арбо | ✓ | 🟡 medium (247 URL, 40 districts × 1 service) | 🟢 huge (85 blog + 29 sub-обрезка по породам, 3 уровня) | 🟡 medium (gallery 13 + калькулятор, но без авторов) | 🟢 strong (калькулятор + онлайн-консультация) | 🟡 medium ⚪ | **✓** (контент-глубина axis) |
 | 4 | promtehalp.ru | арбо | ✓ | 🔴 low (5 sub flat, 0 districts) | 🔴 low (5 статей блога) | 🟡 medium (СРО-упоминание + /work + /video) | 🔴 low (sitemap старый 2021) | 🔴 low ⚪ | — |
-| 5 | lesoruby.ru | арбо | ✗ stub | ⚪ pending | ⚪ pending | ⚪ pending | ⚪ pending | ⚪ pending | pending (+ проверить связь с lesoruby.com) |
+| 5 | lesoruby.ru | арбо | ✗ stub+H | ⚪H | ⚪H | ⚪H (фолк-Hero TOV — анти-эталон для нас) | ⚪ pending | ⚪ pending | pending (+ проверить связь с lesoruby.com) |
 | 6 | alpme.ru | арбо/промальп | ◯ | 🟡 medium (2 уровня + /msk/) | 🔴 low (нет блога) | 🔴 low | 🟡 medium (калькулятор) | 🔴 low ⚪ | — |
 | 7 | arboristik.ru | арбо | ◯ | 🟡 medium (~60 районов в навигации) | 🟡 medium (~50 blog) | 🔴 low (sitemap 2017, HTTP) | 🔴 low (legacy) | 🔴 low ⚪ | — |
-| 8 | arborist.su | арбо | ✗ stub | ⚪ pending | ⚪ pending | ⚪ pending (если есть expert-positioning — гипотеза средне) | ⚪ pending | ⚪ pending | pending |
-| 9 | forest-service.ru | арбо/лес | ✗ stub | ⚪ pending | ⚪ pending | ⚪ pending | ⚪ pending | ⚪ pending | pending |
-| 10 | tvoi-sad.com | арбо/сад | ✗ stub | ⚪ pending | ⚪ pending (сезонные кластеры?) | ⚪ pending | ⚪ pending | ⚪ pending | pending (+ проверить пересечение с apps/shop/) |
-| 11 | spilservis.ru | арбо узкий | ✗ stub | ⚪ pending (вероятно низкий) | ⚪ pending | ⚪ pending | ⚪ pending | ⚪ pending | pending |
-| 12 | lesovod.su | арбо/расчистка | ✗ stub | ⚪ pending | ⚪ pending | ⚪ pending | ⚪ pending | ⚪ pending | pending |
-| 13 | virubka-dereva.ru | арбо узкий (EMD) | ✗ stub | ⚪ pending (EMD-эффект) | ⚪ pending | ⚪ pending | ⚪ pending | ⚪ pending | pending |
-| 14 | chistka-ot-snega.ru | крыши (EMD) | ✗ stub | ⚪ pending (EMD-эффект) | ⚪ pending | ⚪ pending | ⚪ pending | ⚪ pending | pending (потенциально топ-3 по pillar крыш) |
+| 8 | arborist.su | арбо | ✗ stub+H | ⚪H | ⚪H | ⚪H (Sage expert-positioning — гипотеза средне) | ⚪ pending | ⚪ pending | pending |
+| 9 | forest-service.ru | арбо/лес | ✗ stub+H | ⚪H | ⚪H | ⚪H | ⚪ pending | ⚪ pending | pending |
+| 10 | tvoi-sad.com | арбо/сад | ✗ stub+H | ⚪H | ⚪H (сезонные кластеры?) | ⚪H | ⚪ pending | ⚪ pending | pending (+ проверить пересечение с apps/shop/) |
+| 11 | spilservis.ru | арбо узкий | ✗ stub+H | ⚪H (вероятно низкий) | ⚪H | ⚪H | ⚪ pending | ⚪ pending | pending |
+| 12 | lesovod.su | арбо/расчистка | ✗ stub+H | ⚪H | ⚪H | ⚪H | ⚪ pending | ⚪ pending | pending |
+| 13 | virubka-dereva.ru | арбо узкий (EMD) | ✗ stub+H | ⚪H (EMD-эффект подтверждён гипотезой) | ⚪H | ⚪H | ⚪ pending | ⚪ pending | pending |
+| 14 | chistka-ot-snega.ru | крыши (EMD) | ✗ stub+H | ⚪H (EMD-эффект подтверждён гипотезой) | ⚪H | ⚪H | ⚪ pending | ⚪ pending | pending (потенциально топ-3 по pillar крыш) |
 | 15 | demontazhmsk.ru | демонтаж | ✓ | 🟡 medium (programmatic material × object) | 🔴 low (нет блога) | 🔴 low | 🟡 medium | 🟡 medium ⚪ | — |
 | 16 | **cleaning-moscow.ru** | E-E-A-T (клининг) | ✓ | 🟡 medium (11 pillar, 2 уровня) | 🟡 medium (статьи на корне — антипаттерн) | 🟢 strong (отдельные авторы как посадочные + /proverka-informacii/) | 🟡 medium (B2B/B2C сегментация) | 🟡 medium ⚪ | **✓ (альт)** (E-E-A-T axis) |
 | 17 | **fasadrf.ru** | контент (фасады) | ✓ | 🟢 huge (4 уровня иерархии, 148 blog) | 🟢 huge (148 статей, 4 уровня по производителям) | 🔴 low (HTTP, без авторов) | 🟡 medium | 🟡 medium ⚪ | **✓ (альт)** (блог axis) |
@@ -225,11 +226,37 @@
 
 ---
 
+## Сводка гипотез W2 (по 9 stub-профилям)
+
+> Добавлено 2026-05-01 ahead of schedule. **Это гипотезы**, не факты. Live audit W3
+> подтверждает или опровергает.
+
+| Stub | Главная гипотеза silы | Topic для копирования | Risk для нас |
+|---|---|---|---|
+| grunlit-eco.ru | B2B-договор + ФККО-таблицы | Формат типового договора с УК | Низкий (узкий B2B, не B2C) |
+| lesoruby.ru | Фолк-нейминг как анти-эталон TOV | Sub-структура спила (если глубокая) | Низкий (TOV у нас сильнее) |
+| arborist.su | `.su`-старый бренд, реальный авторstvo | Authorship-pattern для Авторов | Средний (E-E-A-T накопленный) |
+| forest-service.ru | Лесные услуги + B2B для СНТ | Расширение B2B-хаба на СНТ-сегмент | Низкий (B2B канал слабый у узкой ниши) |
+| tvoi-sad.com | Сезонный календарь работ + magazin? | TLDR-структура + интеграция shop | **Средний** (если есть магазин) |
+| spilservis.ru | CR-pathway узкой услуги + прайс | Прозрачный прайс-формат | Средний (топ-10 по «спил») |
+| lesovod.su | Расчистка-кластер + region | Sub детализация для raschistka-uchastka | Средний (Q-15 ADR-uМ-15) |
+| virubka-dereva.ru | EMD-эффект «вырубка дерева» | Slug-стратегия (не используем «вырубка») | **Высокий** EMD по точному ключу |
+| chistka-ot-snega.ru | EMD «чистка от снега» + B2B договор сезон | Метод-sub + B2B-договор | **Высокий** EMD в зимний сезон |
+
+**Live audit W3 priority** (порядок проверки):
+1. **chistka-ot-snega.ru** — наш единственный pillar-конкурент по крышам, EMD-риск.
+2. **virubka-dereva.ru** — EMD-риск по арбо.
+3. **grunlit-eco.ru** — главный для B2B-эталона.
+4. **tvoi-sad.com** — пересечение с apps/shop/landshaft.
+5. **spilservis.ru** — узкая ниша, CR-эталон для одной услуги.
+6-9. Остальные — стандартный аудит.
+
 ## История версий
 
 | Дата | Версия | Кто | Что |
 |---|---|---|---|
 | 2026-05-01 | W3-draft (pre-audit) | re + poseo | Создан W2 ahead of schedule. 9 stub-профилей, гипотезы топ-3, TODO для W3. |
+| 2026-05-01 | W3-draft + W2 hypotheses | seo-content + cw + cms + seo-tech | Дополнены 9 stub-файлов prima facie hypothesis (без crawl). Матрица помечена ⚪H где гипотезы добавлены. Сводка гипотез + live-audit priority order. |
 | pending | W3-baseline (final) | re + seo-content | Заполнить после Keys.so/Topvisor запуска |
 | pending | W7-mid | seo-content | После Stage 1 + начала Stage 2 |
 | pending | W14-final | seo-content | DoD финальная сверка |
