@@ -57,7 +57,6 @@ update_protocol: каждый PO команды держит свою секци
 
 | ID | Что | Owner | Effort | RICE | M | Статус |
 |---|---|---|---|---|---|---|
-| PANEL-AUTH-2FA | TOTP 2FA коллекция + setup flow в Login (замена магического линка) | be-panel + fe-panel | 1 чд | 4×3×0.8 / 1 = 9.6 | S | idea, нужна sa-panel; не блокер релиза US-12 |
 | PANEL-LEADS-INBOX | Leads collection UX-полировка (status workflow `new→contacted→smeta→brigade→done` + 7 quick-filter chips + bulk-actions + per-row dropdown + soft-delete archived). [sa-panel.md spec ready](../specs/PANEL-LEADS-INBOX/sa-panel.md) — **8 open Q's оператору**. | be-panel + fe-panel + ux-panel | 2 чд | 5×5×0.9 / 2 = 11.25 | M | spec ready 2026-05-01; ждёт popanel/operator answers + US-12 release closure |
 | **PANEL-A11Y-TARGET-SIZE** | Row-actions touch targets <44×44 на mobile (WCAG 2.5.5 risk) — обнаружено ux-panel audit 2026-05-01. Включает ре-enable axe `target-size` rule (отключён в W7 fix). | fe-panel + qa-panel | 0.5 чд | 4×4×0.85 / 0.5 = **27.2** | M | new 2026-05-01 (ux-panel finding P0). idea, нужна sa-panel mini-spec |
 | **PANEL-SERVICES-PREVIEW-TAB** | Tab «Превью» в Services edit-view (brand-guide §12.4 mockup line 3086 — 6 tabs, у нас 5). Live iframe или edit-top-bar action «Открыть на сайте». Daily-use оператора («обновить цену → проверить» 1-2 раза в день). | sa-panel + fe-panel + be-panel | 1 чд | 5×4×0.8 / 1 = **16** | M | new 2026-05-01 (ux-panel finding P0 brand-guide gap). idea, нужна sa-panel |
@@ -92,6 +91,7 @@ update_protocol: каждый PO команды держит свою секци
 | **US-12 W8** | Admin v2 prod alignment · sidebar group order + 13 line-art SVG иконок (CSS mask-image, ADR-0011) + hide default ModularDashboard. Закрывает gap mockup §12.2/§12.3 vs prod | 2026-04-30 ([PR #109](https://github.com/samohyn/obihod/pull/109) MERGED) |
 | **US-12 W9** | Admin v2 deeper alignment · force-light theme depth (--theme-elevation-* override 0..1000) + BrandIcon 32→20 для step-nav fit + favicon meta type/url consistency. Закрывает 3 issue после W8 merge (тёмная тема внутри edit, кривой лого в crumbs, кривой favicon) | 2026-04-30 ([PR #110](https://github.com/samohyn/obihod/pull/110) MERGED) |
 | **PANEL-LIST-CREATE-AMBER** | List view «Создать» pill amber primary CTA per §12.4.1 (full state matrix + reduced-motion). Native Payload pill (#d6d0bf) → brand янтарный (#e6a23c). Daily-use оператора | 2026-04-30 ([PR #111](https://github.com/samohyn/obihod/pull/111) MERGED) |
+| **PANEL-AUTH-2FA** | TOTP 2FA для admin (otplib v12 + qrcode + bcryptjs). 5 endpoints + custom view `/admin/security` + 10 recovery codes + AES-256-GCM encryption at rest + Next.js 16 proxy.ts gate. Backwards compat: `totpEnabled=false` default → existing seed admin без 2FA логинится без второй ступени | 2026-05-01 ([PR #123](https://github.com/samohyn/obihod/pull/123) MERGED) |
 
 ### Dropped
 
