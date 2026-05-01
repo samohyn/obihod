@@ -47,11 +47,10 @@ update_protocol: каждый PO команды держит свою секци
 
 _(пусто — все dev-ready задачи из Next закрыты или передвинуты в Later)_
 
-### Later — 5 spec-approved + 1 cpo retro follow-up
+### Later — 4 spec-approved + 1 cpo retro follow-up
 
 | ID | Что | Owner | Effort | RICE | M | Статус |
 |---|---|---|---|---|---|---|
-| **PANEL-RSC-LINT** | 3-layer defense: type guard `pickClientProps()` + ESLint custom rule `obikhod/no-spread-server-props-in-client` + Playwright CI gate на коллекциях `totalDocs > 0` (prevent RC-2 #120 повтора) | fe-panel + tamd + do + qa-panel | 4-4.5 чд | tbd | S | [sa-panel.md](../specs/PANEL-RSC-LINT/sa-panel.md) + [ADR-0015](../team/adr/ADR-0015-panel-rsc-lint.md) Accepted 2026-05-01 — spec dev-ready |
 | PANEL-MEDIA-LIBRARY | Media grid + filters + orphan detection + bulk cleanup + per-asset detail | be-panel + fe-panel + qa-panel | 1.5 чд | 3.6 | C | [sa-panel.md](../specs/PANEL-MEDIA-LIBRARY/sa-panel.md) — spec ready 2026-05-01, dev-ready (no ADR) |
 | PANEL-LEADS-INBOX-V2 | Bulk actions (§ C.1) + date-range/source UI (§ B.3-B.4) + composite index (defer until volume >1000) + ConfirmDialog для bulk «Спам». Phase 3 follow-up к LEADS-INBOX | be-panel + fe-panel + qa-panel | 1 чд | tbd | C | new 2026-05-01 (LEADS-INBOX dev defer); spec-pending |
 | PANEL-DASHBOARD-V2 | HTML5 drag-drop widgets + `users.dashboardLayout` persistence + 5 widgets registry | fe-panel + be-panel + qa-panel | 2 чд | 1.5 | W | [sa-panel.md](../specs/PANEL-DASHBOARD-V2/sa-panel.md) — spec ready 2026-05-01, dev-ready (priority W — после M/S/C) |
@@ -64,6 +63,7 @@ _(пусто — все dev-ready задачи из Next закрыты или �
 
 | ID | Что | Дата merge |
 |---|---|---|
+| **PANEL-RSC-LINT** | 3-layer defense: shared `pickClientProps()` utility + custom ESLint rule `obikhod/no-spread-server-props-in-client` (scope `components/admin/**` + `app/(payload)/**`) + Playwright runtime smoke spec на 7 коллекциях. Phase 2 verdict: build-custom (npm community plugin не подходит, Next.js 16 `next lint` removed). Prevents RC-2 #120 повтора | 2026-05-01 (TBD-MERGE-COMMIT) |
 | **PANEL-GLOBAL-SEARCH** | Cmd+K top-bar search 7 коллекций + Districts (pg_trgm UNION + post-filter access). 57ms server / 69ms client локально | 2026-05-01 ([PR #132](https://github.com/samohyn/obihod/pull/132) MERGED · `cc70fa9`) |
 | **PANEL-AUDIT-LOG** | Hybrid: Payload `versions` для 7 content + custom `audit_log` для PII (Leads/Users/Media/Redirects) + security events (login/logout/rbac). PII masking write-time. UI `/admin/audit` UNION ALL timeline + side-by-side diff. Retention 365d/90d via cron. ADR-0014. Fix-forward [PR #134](https://github.com/samohyn/obihod/pull/134): fire-and-forget capture + CI timeout — устранил pool-starvation hang seed admin (await capture блокировал save транзакцию первого user) | 2026-05-01 ([PR #133](https://github.com/samohyn/obihod/pull/133) + #134 fix) |
 | US-12 W1 | custom.scss 375 строк — admin design refresh (OBI-19) | 2026-04-27 |
