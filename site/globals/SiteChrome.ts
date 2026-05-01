@@ -212,6 +212,10 @@ export const SiteChrome: GlobalConfig = {
           ],
         },
         // -------- FOOTER --------
+        // PANEL-SITECHROME-RESTRUCTURE 2026-05-01: вложенные unnamed tabs
+        // «Контент» / «Юридические ссылки» внутри group `footer`. Schema
+        // не меняется (Payload tabs UI-only при unnamed) — все колонки
+        // остаются flat `footer_*`, см. migration 20260424_133242.
         {
           label: 'Footer',
           fields: [
@@ -219,37 +223,53 @@ export const SiteChrome: GlobalConfig = {
               name: 'footer',
               type: 'group',
               fields: [
-                { name: 'slogan', type: 'textarea', maxLength: 200 },
                 {
-                  name: 'columns',
-                  type: 'array',
-                  labels: { singular: 'Колонка', plural: 'Колонки' },
-                  maxRows: 4,
-                  fields: [
-                    { name: 'title', type: 'text', required: true, maxLength: 24 },
-                    menuItemArrayField('items'),
+                  type: 'tabs',
+                  tabs: [
+                    {
+                      label: 'Контент',
+                      fields: [
+                        { name: 'slogan', type: 'textarea', maxLength: 200 },
+                        {
+                          name: 'columns',
+                          type: 'array',
+                          labels: { singular: 'Колонка', plural: 'Колонки' },
+                          maxRows: 4,
+                          fields: [
+                            { name: 'title', type: 'text', required: true, maxLength: 24 },
+                            menuItemArrayField('items'),
+                          ],
+                        },
+                      ],
+                    },
+                    {
+                      label: 'Юридические ссылки',
+                      fields: [
+                        {
+                          name: 'privacyUrl',
+                          type: 'text',
+                          defaultValue: '/politika-konfidentsialnosti/',
+                          maxLength: 200,
+                        },
+                        {
+                          name: 'ofertaUrl',
+                          type: 'text',
+                          defaultValue: '/oferta/',
+                          maxLength: 200,
+                        },
+                        {
+                          name: 'copyrightPrefix',
+                          type: 'text',
+                          defaultValue: '© Обиход,',
+                          maxLength: 60,
+                          admin: {
+                            description:
+                              'Префикс копирайтной строки. Год добавляется автоматически.',
+                          },
+                        },
+                      ],
+                    },
                   ],
-                },
-                {
-                  name: 'privacyUrl',
-                  type: 'text',
-                  defaultValue: '/politika-konfidentsialnosti/',
-                  maxLength: 200,
-                },
-                {
-                  name: 'ofertaUrl',
-                  type: 'text',
-                  defaultValue: '/oferta/',
-                  maxLength: 200,
-                },
-                {
-                  name: 'copyrightPrefix',
-                  type: 'text',
-                  defaultValue: '© Обиход,',
-                  maxLength: 60,
-                  admin: {
-                    description: 'Префикс копирайтной строки. Год добавляется автоматически.',
-                  },
                 },
               ],
             },
@@ -297,6 +317,10 @@ export const SiteChrome: GlobalConfig = {
           ],
         },
         // -------- REQUISITES --------
+        // PANEL-SITECHROME-RESTRUCTURE 2026-05-01: collapsible-блоки
+        // «Юридическое лицо» + «Адрес» внутри group `requisites`. Оба
+        // открыты по умолчанию (`initCollapsed: false`). Schema не меняется
+        // — все колонки остаются flat `requisites_*`.
         {
           label: 'Реквизиты',
           description: 'Для B2B и JSON-LD. Заполнить после регистрации юрлица.',
@@ -306,58 +330,72 @@ export const SiteChrome: GlobalConfig = {
               type: 'group',
               fields: [
                 {
-                  name: 'legalName',
-                  type: 'text',
-                  maxLength: 120,
-                  admin: {
-                    description: 'Например «ООО «Обиход-МО»» — заполнить после регистрации',
-                  },
+                  type: 'collapsible',
+                  label: 'Юридическое лицо',
+                  admin: { initCollapsed: false },
+                  fields: [
+                    {
+                      name: 'legalName',
+                      type: 'text',
+                      maxLength: 120,
+                      admin: {
+                        description: 'Например «ООО «Обиход-МО»» — заполнить после регистрации',
+                      },
+                    },
+                    {
+                      name: 'taxId',
+                      type: 'text',
+                      required: true,
+                      maxLength: 12,
+                      defaultValue: '7847729123',
+                      admin: {
+                        description: 'временный ИНН, подлежит замене при регистрации юрлица Обиход',
+                      },
+                      validate: validateInn,
+                    },
+                    {
+                      name: 'kpp',
+                      type: 'text',
+                      maxLength: 9,
+                      admin: { description: 'Заполнить после регистрации юрлица' },
+                    },
+                    {
+                      name: 'ogrn',
+                      type: 'text',
+                      maxLength: 15,
+                      admin: { description: 'Заполнить после регистрации юрлица' },
+                    },
+                  ],
                 },
                 {
-                  name: 'taxId',
-                  type: 'text',
-                  required: true,
-                  maxLength: 12,
-                  defaultValue: '7847729123',
-                  admin: {
-                    description: 'временный ИНН, подлежит замене при регистрации юрлица Обиход',
-                  },
-                  validate: validateInn,
-                },
-                {
-                  name: 'kpp',
-                  type: 'text',
-                  maxLength: 9,
-                  admin: { description: 'Заполнить после регистрации юрлица' },
-                },
-                {
-                  name: 'ogrn',
-                  type: 'text',
-                  maxLength: 15,
-                  admin: { description: 'Заполнить после регистрации юрлица' },
-                },
-                {
-                  name: 'addressRegion',
-                  type: 'text',
-                  maxLength: 80,
-                  admin: { description: 'Напр. «Московская область»' },
-                },
-                {
-                  name: 'addressLocality',
-                  type: 'text',
-                  maxLength: 80,
-                  admin: { description: 'Напр. «Одинцово»' },
-                },
-                {
-                  name: 'streetAddress',
-                  type: 'text',
-                  maxLength: 200,
-                  admin: { description: 'Улица, дом, корпус' },
-                },
-                {
-                  name: 'postalCode',
-                  type: 'text',
-                  maxLength: 10,
+                  type: 'collapsible',
+                  label: 'Адрес',
+                  admin: { initCollapsed: false },
+                  fields: [
+                    {
+                      name: 'addressRegion',
+                      type: 'text',
+                      maxLength: 80,
+                      admin: { description: 'Напр. «Московская область»' },
+                    },
+                    {
+                      name: 'addressLocality',
+                      type: 'text',
+                      maxLength: 80,
+                      admin: { description: 'Напр. «Одинцово»' },
+                    },
+                    {
+                      name: 'streetAddress',
+                      type: 'text',
+                      maxLength: 200,
+                      admin: { description: 'Улица, дом, корпус' },
+                    },
+                    {
+                      name: 'postalCode',
+                      type: 'text',
+                      maxLength: 10,
+                    },
+                  ],
                 },
               ],
             },
