@@ -79,6 +79,18 @@ export default buildConfig({
       // через admin.routes.login path и собственный wrapper). AdminLogin.tsx остаётся
       // в репо для будущего proper override mechanism (research issue TBD).
       // Native Payload login + brand-lockup через beforeLogin slot — рабочий fallback.
+      //
+      // PANEL-AUTH-2FA — custom view /admin/security для управления TOTP 2FA
+      // (включить / отключить / regenerate recovery codes). Server-rendered
+      // SecurityView читает initPageResult.req.user, client-side SecurityPanel
+      // оркестрирует setup → recovery codes → idle.
+      views: {
+        security: {
+          Component: '@/components/admin/SecurityView',
+          path: '/security',
+          exact: true,
+        },
+      },
     },
   },
   // Локализация admin на русский (brand-guide §12 mockup на ru). Pакет
