@@ -948,12 +948,9 @@ a.nav__link[href*='/admin/globals/site-chrome'] {
 
 /* §A · Breadcrumb «О» — расширяем slot 18×18 → 20×20 под BrandIcon SVG.
  * Probe ux-panel 2026-05-01: native .step-nav__home width/height 18px (desktop)
- * и 16px (mid-break) клиппят 20×20 SVG. Решение оператора 2026-05-01:
- * расширить slot, не уменьшать SVG (SVG 20×20 нужен для viewBox центрирования
- * <text x=10 y=14> кириллической «О» weight 700 letterSpacing -0.02em).
+ * и 16px (mid-break) клиппят 20×20 SVG.
  *
- * !important — reason: Payload @layer payload-default override
- * (verified W8/W9, аналогично mobile responsive overrides). */
+ * !important — reason: Payload @layer payload-default override. */
 .step-nav__home {
   width: 20px !important; /* reason: Payload @layer override */
   height: 20px !important; /* reason: Payload @layer override */
@@ -962,8 +959,6 @@ a.nav__link[href*='/admin/globals/site-chrome'] {
   justify-content: center;
 }
 
-/* SVG внутри slot: убираем `display: block` от Payload `.step-nav * { display: block }`
- * через явное flex-child + height/width 100% (SVG растёт под slot). */
 .step-nav__home > span,
 .step-nav__home > a > span {
   display: inline-flex !important; /* reason: Payload .step-nav * { display: block } override */
@@ -979,10 +974,6 @@ a.nav__link[href*='/admin/globals/site-chrome'] {
   height: 20px;
 }
 
-/* Mid-break (≤1024px) — Payload native ужимает slot до 16px.
- * Перебиваем: оставляем 20×20 даже на tablet — у нас target ≥44 уже покрыт
- * W6 mobile rules для всех buttons/links, breadcrumb home — visual logo-mark,
- * читаемость > tablet-fitting. */
 @media (max-width: 1024px) {
   .step-nav__home {
     width: 20px !important; /* reason: Payload @layer mid-break override */
@@ -1014,6 +1005,18 @@ a.nav__link[href*='/admin/globals/site-chrome'] {
   transition:
     color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard),
     background-color var(--brand-obihod-duration-fast) var(--brand-obihod-ease-standard);
+}
+
+/* Глобальный W8-rule `a.nav__link::before` создаёт 14×14 mask-icon квадрат
+ * через background-color: currentColor + mask-image. У home-link CSS-variable
+ * --brand-obihod-nav-icon не задан → mask=none → виден сплошной ink-квадрат
+ * (incident 2026-05-01: оператор увидел его как «зелёный квадрат» в sidebar).
+ * SVG-домик уже inline в JSX — ::before не нужен, гасим.
+ * !important — reason: W8 `a.nav__link::before` имеет равную специфичность,
+ * cascade order может зависеть от build порядка SCSS. */
+a.nav__link.nav__link--home::before {
+  display: none !important;
+  content: none !important;
 }
 
 .nav__link--home svg {

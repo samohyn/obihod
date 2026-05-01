@@ -63,10 +63,10 @@ export default buildConfig({
       // DOM injection [data-leads-count] (Plan B per ADR-0005 §2 +
       // sa-panel-wave3.md §3.5). CSS селектор в custom.scss блок «SIDEBAR».
       providers: ['@/components/admin/LeadsBadgeProvider'],
-      // PANEL-HEADER-CHROME-POLISH (W10, 2026-05-01) §B: home-link «На сайт»
-      // первым элементом в .nav__wrap через native Payload slot. Renders
-      // server-component <a target=_blank> на obikhod.ru/ перед NavGroups.
-      // Spec: specs/PANEL-HEADER-CHROME-POLISH/sa-panel-header-chrome.md §B.
+      // PANEL-HEADER-CHROME-POLISH (W10, 2026-05-01) §B: home-link первым
+      // элементом в .nav__wrap через native Payload slot. Оператор 2026-05-01
+      // переименовал «На сайт» (target=_blank → obikhod.ru/) на «Вернуться в
+      // панель» (same-tab → /admin/). Spec §B обновлён.
       beforeNavLinks: ['@/components/admin/NavHomeLink'],
       // PANEL-HEADER-CHROME-POLISH (W10, 2026-05-01) §C: dark-theme toggle
       // UI-only stub в gear-popup (settingsMenu) рядом с logout. НЕТ реального

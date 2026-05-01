@@ -1,28 +1,25 @@
 import type { FC } from 'react'
+import Link from 'next/link'
 
 /**
- * NavHomeLink — sidebar link «На сайт» для возврата на публичный obikhod.ru.
+ * NavHomeLink — sidebar link «Вернуться в панель» → /admin/.
  *
  * Wired через admin.components.beforeNavLinks (payload.config.ts) — рендерится
  * первой записью внутри <nav class="nav__wrap"> перед native NavGroups.
  *
- * - target="_blank" + rel="noopener noreferrer" (security + UX: не теряем admin tab)
- * - aria-label полный («На сайт obikhod.ru, открыть в новой вкладке»)
- * - className `nav__link nav__link--home` — наследует W1+W8 sidebar styling
- *   (focus-visible, hover, opacity 0.65→0.9), но добавляем suffix для §B CSS hook
- * - SVG 14×14 line-art currentColor, brand-guide §9 (W8 visual language)
+ * Оператор 2026-05-01: переименован с «На сайт» (target=_blank → obikhod.ru/)
+ * на «Вернуться в панель» (same-tab → /admin/).
  *
- * Spec: PANEL-HEADER-CHROME-POLISH §B.
+ * - className `nav__link nav__link--home` — наследует W1+W8 sidebar styling
+ *   (focus-visible, hover, opacity 0.65→0.9)
+ * - SVG 14×14 line-art currentColor, brand-guide §9
  */
 const NavHomeLink: FC = () => {
-  const href = process.env.NEXT_PUBLIC_SITE_ORIGIN || 'https://obikhod.ru/'
   return (
-    <a
+    <Link
       className="nav__link nav__link--home"
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="На сайт obikhod.ru, открыть в новой вкладке"
+      href="/admin/"
+      aria-label="Вернуться в панель"
     >
       <svg
         width="14"
@@ -40,8 +37,8 @@ const NavHomeLink: FC = () => {
         <path d="M5 10 L5 20 L19 20 L19 10" />
         <path d="M10 20 L10 14 L14 14 L14 20" />
       </svg>
-      <span className="nav__link-label">На сайт</span>
-    </a>
+      <span className="nav__link-label">Вернуться в панель</span>
+    </Link>
   )
 }
 
