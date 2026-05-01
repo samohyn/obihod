@@ -30,6 +30,8 @@
     "migrate:blocks:cases:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/migrate-cases-to-blocks.ts",
     "migrate:blocks:b2bpages": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/migrate-b2bpages-to-blocks.ts",
     "migrate:blocks:b2bpages:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/migrate-b2bpages-to-blocks.ts",
+    "migrate:blocks:districts": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/migrate-districts-to-blocks.ts",
+    "migrate:blocks:districts:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/migrate-districts-to-blocks.ts",
     "audit:prune": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/audit/prune.ts",
     "audit:prune:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/audit/prune.ts",
     "db:up": "docker compose up -d postgres",
