@@ -39,36 +39,30 @@ update_protocol: каждый PO команды держит свою секци
 
 **PO:** popanel · **branch:** feature-ветки от `main` (по pattern PR #99) · **last update:** 2026-05-01
 
-### Now
+### Now — autonomous mandate active (operator 2026-05-01)
 
-(US-12 закрыт в main 2026-04-30 после merge W8 — `9cc702f`. Ждёт deploy → leadqa post-deploy smoke → operator approve → release closure. Параллельно — 3 новых US от оператора 2026-05-01.)
+(US-12 release closure ✅ closed 2026-05-01 11:15 UTC. cpo retro: [US-12-retro.md](../team/release-notes/US-12-retro.md). PANEL-AUTH-2FA + PANEL-LEADS-INBOX shipped 2026-05-01. Operator-блокеров нет — popanel ведёт автономно.)
 
-### Next (parallel — operator approved 2026-05-01)
-
-| ID | Что | Owner | Effort | RICE | M | Статус |
-|---|---|---|---|---|---|---|
-| **US-12 release closure** | RC-2 от release · leadqa post-deploy smoke на проде (W6 mobile + W7 a11y + W8 alignment) · operator approve · do deploy · post-release retro от cpo | release + leadqa + do + cpo | 0.5 чд | — | M | blocked by deploy 9cc702f |
-| **PANEL-FAVICON-BRAND** | Бренд-favicon ОБИХОД (master lockup §3) на всём периметре сайта — заменить дефолтный Next.js favicon (чёрный круг с белым треугольником) на `.svg` + `.ico` + `apple-touch-icon` 180×180 + sync `payload.config.ts` admin meta. Cross-team: art делает SVG из §3, fe-panel + fe-site подкладывают файлы. | art (asset) → fe-panel + fe-site | 0.5 чд | 5×4×0.95 / 0.5 = **38** | M | intake готов 2026-05-01, ждёт sa-panel + trigger в art через cpo. [intake](../specs/PANEL-FAVICON-BRAND/intake.md) |
-| **PANEL-UX-AUDIT** | ux-panel проходит весь `/admin` (login → dashboard → 7 коллекций → list → edit → mobile drawer) + проверяет 3 точки оператора (breadcrumb «О» alignment, header home-icon spot, dark-toggle placement). Findings → feed в HEADER-CHROME-POLISH spec + INBOX UX. | ux-panel + popanel | 0.5 чд | process | M | hand-off popanel → ux-panel 2026-05-01. [intake](../specs/PANEL-UX-AUDIT/intake.md) |
-| **PANEL-HEADER-CHROME-POLISH** | 3 фикса в одной волне: (1) home-icon в sidebar рядом с collapse `<` (Pin-2 A) (2) dark-theme toggle в user-menu dropdown (Pin-3 A, UI-only stub) (3) breadcrumb «О» fix через CSS override `.step-nav__home` slot 18→20 (Pin-1 probe — конфликт BrandIcon 20×20 vs Payload slot 18×18). Spec — на feed от PANEL-UX-AUDIT. | sa-panel → fe-panel + qa-panel + cr-panel | 1.5 чд | 5×3×0.85 / 1.5 = 8.5 | S | unblocked 2026-05-01 ux-panel completed. [intake](../specs/PANEL-HEADER-CHROME-POLISH/intake.md) |
-| **PANEL-LEADS-INBOX** (spec parallel) | sa-panel пишет спеку параллельно (UX-полировка Leads, status workflow, фильтры, быстрые действия). Dev стартует после US-12 closure. | sa-panel + ux-panel | 2 чд | 11.25 (см. later) | M | spec parallel start 2026-05-01 |
-
-### Later (post-US-12)
+### Next — dev-ready / dev-queued (autonomous mandate)
 
 | ID | Что | Owner | Effort | RICE | M | Статус |
 |---|---|---|---|---|---|---|
-| PANEL-LEADS-INBOX | Leads collection UX-полировка (status workflow `new→contacted→smeta→brigade→done` + 7 quick-filter chips + bulk-actions + per-row dropdown + soft-delete archived). [sa-panel.md spec ready](../specs/PANEL-LEADS-INBOX/sa-panel.md) — **8 open Q's оператору**. | be-panel + fe-panel + ux-panel | 2 чд | 5×5×0.9 / 2 = 11.25 | M | spec ready 2026-05-01; ждёт popanel/operator answers + US-12 release closure |
-| **PANEL-A11Y-TARGET-SIZE** | Row-actions touch targets <44×44 на mobile (WCAG 2.5.5 risk) — обнаружено ux-panel audit 2026-05-01. Включает ре-enable axe `target-size` rule (отключён в W7 fix). | fe-panel + qa-panel | 0.5 чд | 4×4×0.85 / 0.5 = **27.2** | M | new 2026-05-01 (ux-panel finding P0). idea, нужна sa-panel mini-spec |
-| **PANEL-SERVICES-PREVIEW-TAB** | Tab «Превью» в Services edit-view (brand-guide §12.4 mockup line 3086 — 6 tabs, у нас 5). Live iframe или edit-top-bar action «Открыть на сайте». Daily-use оператора («обновить цену → проверить» 1-2 раза в день). | sa-panel + fe-panel + be-panel | 1 чд | 5×4×0.8 / 1 = **16** | M | new 2026-05-01 (ux-panel finding P0 brand-guide gap). idea, нужна sa-panel |
-| **PANEL-EMPTY-LIST-WIRING** | `EmptyErrorStates.tsx` существует, но не подключён к list-view коллекций (Cases / Blog). Оператор видит дефолтный пустой Payload-table вместо §12.6 EmptyState с CTA «+ Добавить». | fe-panel | 0.7 чд | 3×3×0.75 / 0.7 = **9.6** | S | new 2026-05-01 (ux-panel finding P1). custom view via `admin.components.views.list` |
-| **PANEL-SITECHROME-RESTRUCTURE** | SiteChrome global = 405 строк config = anti-pattern «длинный скролл». Разбить на section-tabs (Header / Footer / Mega-menu / Mobile-menu / SEO-defaults) либо вынести в коллекцию `SiteChromeBlocks`. | sa-panel + ux-panel + be-panel | 1.5 чд | 3×3×0.7 / 1.5 = **4.2** | C | new 2026-05-01 (ux-panel finding P0 anti-pattern). idea, нужна sa-panel + popanel decision |
-| PANEL-GLOBAL-SEARCH | Top-bar global search по контенту (REST aggregation 7 коллекций, как PageCatalog в W3) — закрывает §12.2 mockup `<input class="ad-search">` line 3016 | be-panel + fe-panel | 2.5 чд | 4×3×0.7 / 2.5 = 3.4 | C | deferred из US-12 W8 Q-3 (sa-panel-wave8.md). idea, нужна sa-panel |
-| PANEL-PERSONS-RENAME | Persons коллекция → решить рефакторить в "Команда" (label only) или объединить с Authors. brand-guide §12.2 mockup её не упоминает | popanel + cw + be-panel | 0.3 чд | 2×2×0.6 / 0.3 = 8 | C | deferred из US-12 W8 Q-2 (sa-panel-wave8.md). cosmetic, не блокер |
-| PANEL-CSS-PREFIX-CLEANUP | Убрать `.payload__app` префикс из W1 правил (btn-primary, secondary, inputs focus, status pills, tabs, has-error indicator) — ancestor отсутствует на admin shell, rules dead. Визуально admin OK благодаря `--theme-elevation-*` cascade (W9.1), cleanup для maintainability. | fe-panel + cr-panel | 0.5 чд | 2×2×0.7 / 0.5 = 5.6 | C | deferred из US-12 W9 audit (sa-panel-wave9.md). idea, нужна sa-panel |
-| PANEL-BULK-PUBLISH | Bulk-publish + bulk-edit для Cases / Blog / Services / ServiceDistricts | be-panel + cms | 1.5 чд | 3×4×0.7 / 1.5 = 5.6 | C | idea, нужна sa-panel |
-| PANEL-AUDIT-LOG | Кто/что/когда менял (Payload `versions` history + diff view) | be-panel + dba | 2 чд | 2×3×0.6 / 2 = 1.8 | C | idea, нужна sa-panel + ADR (storage стратегия) |
-| PANEL-MEDIA-LIBRARY | Media browser + cleanup orphaned uploads | be-panel + fe-panel | 1.5 чд | 3×3×0.6 / 1.5 = 3.6 | C | idea, нужна sa-panel |
-| PANEL-DASHBOARD-V2 | Кастомизируемый dashboard (drag-drop widgets оператора) | fe-panel | 2 чд | 2×3×0.5 / 2 = 1.5 | W | idea, после стабилизации W3 widget |
+| **PANEL-PERSONS-RENAME (b)** | Persons → Authors merge (4 schema gap fixes + R3 `_v` join tables fixup pattern + R1 slug `aleksey-semenov` conflict). **Note** Postgres ENUM TYPE pattern для `role` field (memory `reference_payload_select_postgres_enum`). | be-panel + dba + cw | 0.5 чд | 8 | C | [sa-panel.md](../specs/PANEL-PERSONS-RENAME/sa-panel.md) — operator approved 2026-05-01 (b), popanel approved · **dev-ready** (LEADS-INBOX merged → migrations free) |
+
+### Later — 7 spec-approved + 2 cpo retro follow-ups
+
+| ID | Что | Owner | Effort | RICE | M | Статус |
+|---|---|---|---|---|---|---|
+| **PANEL-AXE-PAYLOAD-CORE-A11Y** | 1 critical baseline a11y violation в leadqa-RC-3: Payload native row-checkbox без label (4 nodes). Local CSS override либо upstream PR в Payload 3 | fe-panel + qa-panel + cr-panel | 0.5 чд (local) или 2-3 (upstream) | 16.8 | S | new 2026-05-01 (cpo retro follow-up); idea, нужна sa-panel mini-spec |
+| **PANEL-RSC-LINT** | Lint-rule / CI gate ловящий spread server-props в client component (prevent повторения RC-2 #120 incident pattern) | tamd ADR + fe-panel + do | tbd | tbd | S | new 2026-05-01 (cpo retro L2); ADR через tamd needed (eslint-plugin vs custom CI gate) |
+| **PANEL-SITECHROME-RESTRUCTURE** | SiteChrome 405-строчный global → section-tabs (PO decision: no separate `SiteChromeBlocks` collection) | sa-panel + ux-panel + be-panel + fe-panel | 1.5 чд | **4.2** | C | [sa-panel.md](../specs/PANEL-SITECHROME-RESTRUCTURE/sa-panel.md) — spec ready 2026-05-01, dev-ready (no ADR) |
+| PANEL-GLOBAL-SEARCH | Top-bar global search 7 коллекций (REST aggregation §12.2 mockup line 3016) + `Cmd/Ctrl+K` | be-panel + fe-panel + tamd | 2.5 чд | 3.4 | C | [sa-panel.md](../specs/PANEL-GLOBAL-SEARCH/sa-panel.md) — spec ready 2026-05-01, **dev-blocked-by-adr** (tamd: performance) |
+| PANEL-CSS-PREFIX-CLEANUP | Удалить dead `.payload__app`-prefixed правила из W1 `custom.scss` (W9 force-light theme overrides перекрыли) | fe-panel + qa-panel + cr-panel | 0.5 чд | 5.6 | C | [sa-panel.md](../specs/PANEL-CSS-PREFIX-CLEANUP/sa-panel.md) — spec ready 2026-05-01, dev-ready (no ADR) |
+| PANEL-BULK-PUBLISH | Bulk-publish Cases / Blog / Services / ServiceDistricts (Payload 3 native). Bulk-edit Phase 2 — отдельный US | be-panel + fe-panel + cw + qa-panel | 1.5 чд | 5.6 | C | [sa-panel.md](../specs/PANEL-BULK-PUBLISH/sa-panel.md) — spec ready 2026-05-01, dev-ready (no ADR) |
+| PANEL-AUDIT-LOG | Кто/что/когда менял + diff view + `/admin/audit` global + PII masking | be-panel + dba + fe-panel + tamd | 2 чд | 1.8 | C | [sa-panel.md](../specs/PANEL-AUDIT-LOG/sa-panel.md) — spec ready 2026-05-01, **dev-blocked-by-adr** (tamd: storage strategy) |
+| PANEL-MEDIA-LIBRARY | Media grid + filters + orphan detection + bulk cleanup + per-asset detail | be-panel + fe-panel + qa-panel | 1.5 чд | 3.6 | C | [sa-panel.md](../specs/PANEL-MEDIA-LIBRARY/sa-panel.md) — spec ready 2026-05-01, dev-ready (no ADR) |
+| PANEL-LEADS-INBOX-V2 | Bulk actions (§ C.1) + date-range/source UI (§ B.3-B.4) + composite index (defer until volume >1000) + ConfirmDialog для bulk «Спам». Phase 3 follow-up к LEADS-INBOX | be-panel + fe-panel + qa-panel | 1 чд | tbd | C | new 2026-05-01 (LEADS-INBOX dev defer); spec-pending |
+| PANEL-DASHBOARD-V2 | HTML5 drag-drop widgets + `users.dashboardLayout` persistence + 5 widgets registry | fe-panel + be-panel + qa-panel | 2 чд | 1.5 | W | [sa-panel.md](../specs/PANEL-DASHBOARD-V2/sa-panel.md) — spec ready 2026-05-01, dev-ready (priority W — после M/S/C) |
 
 ### Blocked
 
@@ -92,6 +86,17 @@ update_protocol: каждый PO команды держит свою секци
 | **US-12 W9** | Admin v2 deeper alignment · force-light theme depth (--theme-elevation-* override 0..1000) + BrandIcon 32→20 для step-nav fit + favicon meta type/url consistency. Закрывает 3 issue после W8 merge (тёмная тема внутри edit, кривой лого в crumbs, кривой favicon) | 2026-04-30 ([PR #110](https://github.com/samohyn/obihod/pull/110) MERGED) |
 | **PANEL-LIST-CREATE-AMBER** | List view «Создать» pill amber primary CTA per §12.4.1 (full state matrix + reduced-motion). Native Payload pill (#d6d0bf) → brand янтарный (#e6a23c). Daily-use оператора | 2026-04-30 ([PR #111](https://github.com/samohyn/obihod/pull/111) MERGED) |
 | **PANEL-AUTH-2FA** | TOTP 2FA для admin (otplib v12 + qrcode + bcryptjs). 5 endpoints + custom view `/admin/security` + 10 recovery codes + AES-256-GCM encryption at rest + Next.js 16 proxy.ts gate. Backwards compat: `totpEnabled=false` default → existing seed admin без 2FA логинится без второй ступени | 2026-05-01 ([PR #123](https://github.com/samohyn/obihod/pull/123) MERGED) |
+| **PANEL-FAVICON-BRAND** | Бренд-favicon ОБИХОД (§3 master lockup) на весь периметр сайта + admin meta sync | 2026-04-30 ([PR #112](https://github.com/samohyn/obihod/pull/112) MERGED) |
+| **PANEL-A11Y-TARGET-SIZE** | Row-actions ≥44×44 + axe `target-size` rule re-enable (WCAG 2.5.5) | 2026-05-01 ([PR #115](https://github.com/samohyn/obihod/pull/115) MERGED) |
+| **PANEL-SERVICES-PREVIEW-TAB** | Tab «Превью» в Services edit-view (Phase 1, brand-guide §12.4 mockup line 3086) | 2026-05-01 ([PR #116](https://github.com/samohyn/obihod/pull/116) MERGED) |
+| **PANEL-HEADER-CHROME-POLISH** | 3 фикса: home-icon в sidebar + dark-toggle stub + breadcrumb «О» fix | 2026-05-01 ([PR #117](https://github.com/samohyn/obihod/pull/117) MERGED) |
+| **PANEL-DRAFT-PREVIEW-ROUTE** | Draft preview URL sync — fix регресса роутинга | 2026-05-01 ([PR #119](https://github.com/samohyn/obihod/pull/119) MERGED) |
+| **PANEL-EMPTY-LIST-WIRING** | EmptyState wired to Cases + Blog list-view (custom view via `admin.components.views.list`) | 2026-05-01 ([PR #120](https://github.com/samohyn/obihod/pull/120) MERGED) |
+| **PANEL-EMPTY-LIST-WIRING-RSC-FIX** | Hotfix: explicit whitelist `CLIENT_PROP_KEYS` через `pickClientProps()` — server props не пересекают RSC border (fix RC-2 BLOCK regression) | 2026-05-01 ([PR #122](https://github.com/samohyn/obihod/pull/122) MERGED) |
+| **PANEL-NAV-HOME-LINK-CLEANUP** | Sidebar квадрат + rename «Вернуться в панель» (link state polish) | 2026-05-01 ([PR #121](https://github.com/samohyn/obihod/pull/121) MERGED) |
+| **PANEL-UX-AUDIT** | Полный проход /admin (login → 7 коллекций → mobile drawer) — feed для HEADER-CHROME-POLISH + EMPTY-LIST-WIRING + A11Y-TARGET-SIZE + SERVICES-PREVIEW-TAB | 2026-05-01 (note-uxpanel.md) |
+| **US-12 Admin Redesign (cumulative)** | 13 PR cumulative shipped (W1-W9 + LIST-AMBER + FAVICON + A11Y + SERVICES-PREVIEW + HEADER-CHROME + DRAFT-PREVIEW + EMPTY-LIST + RSC-FIX + NAV-HOME-LINK + UX-AUDIT) → operator approve → cpo retro | 2026-05-01 ([US-12-retro.md](../team/release-notes/US-12-retro.md)) |
+| **PANEL-LEADS-INBOX** | Leads UX: status canonical (7 + spam) + status_history jsonb + statusHistory tab + 8-chip filters + StatusPillCell + RowActionsCell dropdown + Postgres ENUM TYPE migration up/down/idempotent. Phase 3 (bulk actions / date-range UI / confirm) deferred → PANEL-LEADS-INBOX-V2 | 2026-05-01 ([PR #123 part](https://github.com/samohyn/obihod/pull/123) + [PR #125](https://github.com/samohyn/obihod/pull/125) MERGED) |
 
 ### Dropped
 
@@ -101,9 +106,10 @@ update_protocol: каждый PO команды держит свою секци
 
 ### Risks (popanel ведёт)
 
-- **US-12 release deploy** — 9cc702f содержит non-trivial CSS surface (W6 mobile + W7 a11y + W8 alignment). Post-deploy leadqa должен real-browser smoke на staging/prod, особенно: W8 sidebar icons (mask-image поддержка во всех browsers оператора), W6 mobile drawer (если оператор использует с телефона), W7 a11y axe routes. Mitigation: leadqa-RC-2 + screenshot evidence перед operator approve.
-- **PANEL-GLOBAL-SEARCH (later)** — REST aggregation по 7 коллекциям требует правильный pagination/cache; может задеть Payload Local API performance. Mitigation: ADR в момент написания sa-panel.
-- **PANEL-PERSONS-RENAME (later)** — переименование может сломать seed/migration logic если используется slug. Mitigation: только label rename без изменения slug.
+- **PANEL-PERSONS-RENAME dev** — duplicate slug `aleksey-semenov` (Persons + Authors seed) + `_blog_v_*` / `_cases_v_*` join tables. Mitigation: sequential UPDATE→ALTER + mapping table `_persons_to_authors_map`.
+- **PANEL-GLOBAL-SEARCH + PANEL-AUDIT-LOG (later)** — оба dev-blocked-by-adr (tamd performance + storage strategy). Mitigation: capability contract стабилен поверх любой выбранной strategy.
+- **Repeat RC-2 #120 incident** — PANEL-RSC-LINT в later (cpo retro L2). До implementation — каждый PR с RSC components обязан local browser-smoke (iron rule #4 strengthening).
+- **Parallel dev agents race condition** — incident 2026-05-01: AUTH-2FA + LEADS-INBOX dev в одной working copy → AUTH-2FA squash проглотил часть LEADS-INBOX commits. Memory `feedback_parallel_dev_agents_worktree` — sequential default, parallel только через `Agent.isolation: "worktree"`.
 
 ---
 
