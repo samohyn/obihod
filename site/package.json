@@ -34,6 +34,8 @@
     "migrate:blocks:districts:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/migrate-districts-to-blocks.ts",
     "migrate:blocks:authors": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/migrate-authors-to-blocks.ts",
     "migrate:blocks:authors:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/migrate-authors-to-blocks.ts",
+    "migrate:blocks:all": "pnpm migrate:blocks:services && pnpm migrate:blocks:blog && pnpm migrate:blocks:cases && pnpm migrate:blocks:b2bpages && pnpm migrate:blocks:districts && pnpm migrate:blocks:authors",
+    "migrate:blocks:all:prod": "pnpm migrate:blocks:services:prod && pnpm migrate:blocks:blog:prod && pnpm migrate:blocks:cases:prod && pnpm migrate:blocks:b2bpages:prod && pnpm migrate:blocks:districts:prod && pnpm migrate:blocks:authors:prod",
     "audit:prune": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/audit/prune.ts",
     "audit:prune:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/audit/prune.ts",
     "db:up": "docker compose up -d postgres",
