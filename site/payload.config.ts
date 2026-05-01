@@ -82,7 +82,12 @@ export default buildConfig({
       // элементом в .nav__wrap через native Payload slot. Оператор 2026-05-01
       // переименовал «На сайт» (target=_blank → obikhod.ru/) на «Вернуться в
       // панель» (same-tab → /admin/). Spec §B обновлён.
-      beforeNavLinks: ['@/components/admin/NavHomeLink'],
+      beforeNavLinks: [
+        '@/components/admin/NavHomeLink',
+        // PANEL-AUDIT-LOG (ADR-0014): unified `/admin/audit` timeline link.
+        // Visible всем — server-side RBAC (admin only) enforced в AuditView.
+        '@/components/admin/audit/NavAuditLink',
+      ],
       // PANEL-HEADER-CHROME-POLISH (W10, 2026-05-01) §C: dark-theme toggle
       // UI-only stub в gear-popup (settingsMenu) рядом с logout. НЕТ реального
       // theme apply / persistence — placement reservation. Полная логика —
@@ -103,6 +108,19 @@ export default buildConfig({
         security: {
           Component: '@/components/admin/SecurityView',
           path: '/security',
+          exact: true,
+        },
+        // PANEL-AUDIT-LOG (ADR-0014): /admin/audit unified timeline view +
+        // /admin/audit/[id] diff view. Admin-only RBAC enforced server-side
+        // (AuditView.tsx + AuditDiffView.tsx + REST endpoint).
+        audit: {
+          Component: '@/components/admin/audit/AuditView',
+          path: '/audit',
+          exact: true,
+        },
+        auditDiff: {
+          Component: '@/components/admin/audit/AuditDiffView',
+          path: '/audit/:id',
           exact: true,
         },
       },

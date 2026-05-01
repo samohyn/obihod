@@ -36,10 +36,13 @@ import { default as default_f9dc2b7ceddb6da73471b0df4f7f7ab3 } from '@/component
 import { default as default_2a1d81a7d65f9955a05645b23ded3574 } from '@/components/admin/BeforeDashboardStartHere'
 import { default as default_32028fb024cb14273af0f6878c5e5f16 } from '@/components/admin/BeforeLoginLockup'
 import { default as default_03c174bc83c57c8b0eee299d05fde10d } from '@/components/admin/NavHomeLink'
+import { default as default_ed54d05c0b4ebef664cae6ff5497053c } from '@/components/admin/audit/NavAuditLink'
 import { default as default_34a40cc685c7df316e31d445e114f485 } from '@/components/admin/LeadsBadgeProvider'
 import { default as default_52ccffaeb32b1decd698281bdb4d4c82 } from '@/components/admin/A11yRowCheckboxProvider'
 import { default as default_a9f089bac6756d1335f49860c09bb91c } from '@/components/admin/GlobalSearchProvider'
 import { default as default_9ef388c09eeca65ffd7a9ea7e3838839 } from '@/components/admin/SecurityView'
+import { default as default_c790932fb8bc64daf1223e4d5a57e095 } from '@/components/admin/audit/AuditView'
+import { default as default_0e974c03de5d87e72c00eca605a44d22 } from '@/components/admin/audit/AuditDiffView'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -82,9 +85,12 @@ export const importMap = {
   "@/components/admin/BeforeDashboardStartHere#default": default_2a1d81a7d65f9955a05645b23ded3574,
   "@/components/admin/BeforeLoginLockup#default": default_32028fb024cb14273af0f6878c5e5f16,
   "@/components/admin/NavHomeLink#default": default_03c174bc83c57c8b0eee299d05fde10d,
+  "@/components/admin/audit/NavAuditLink#default": default_ed54d05c0b4ebef664cae6ff5497053c,
   "@/components/admin/LeadsBadgeProvider#default": default_34a40cc685c7df316e31d445e114f485,
   "@/components/admin/A11yRowCheckboxProvider#default": default_52ccffaeb32b1decd698281bdb4d4c82,
   "@/components/admin/GlobalSearchProvider#default": default_a9f089bac6756d1335f49860c09bb91c,
   "@/components/admin/SecurityView#default": default_9ef388c09eeca65ffd7a9ea7e3838839,
+  "@/components/admin/audit/AuditView#default": default_c790932fb8bc64daf1223e4d5a57e095,
+  "@/components/admin/audit/AuditDiffView#default": default_0e974c03de5d87e72c00eca605a44d22,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

@@ -16,6 +16,8 @@
     "publish-services": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/publish-services.ts",
     "publish-services:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/publish-services.ts",
     "fal:gen": "tsx --env-file=.env.local scripts/fal-generate.ts",
+    "audit:prune": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/audit/prune.ts",
+    "audit:prune:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/audit/prune.ts",
     "db:up": "docker compose up -d postgres",
     "db:down": "docker compose down",
     "db:logs": "docker compose logs -f postgres",
