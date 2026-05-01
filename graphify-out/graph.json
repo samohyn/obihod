@@ -9,7 +9,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_sugpar.py",
       "source_location": "L1",
       "id": "users_a36_obikhod_seosite_scripts_jm_sugpar_py",
-      "community": 15,
+      "community": 16,
       "norm_label": "jm_sugpar.py"
     },
     {
@@ -18,7 +18,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_sugpar.py",
       "source_location": "L27",
       "id": "jm_sugpar_load_env",
-      "community": 15,
+      "community": 16,
       "norm_label": "load_env()"
     },
     {
@@ -27,7 +27,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_sugpar.py",
       "source_location": "L38",
       "id": "jm_sugpar_load_seeds",
-      "community": 15,
+      "community": 16,
       "norm_label": "load_seeds()"
     },
     {
@@ -36,7 +36,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_sugpar.py",
       "source_location": "L46",
       "id": "jm_sugpar_post",
-      "community": 15,
+      "community": 16,
       "norm_label": "post()"
     },
     {
@@ -45,7 +45,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_sugpar.py",
       "source_location": "L52",
       "id": "jm_sugpar_main",
-      "community": 15,
+      "community": 16,
       "norm_label": "main()"
     },
     {
@@ -54,7 +54,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/keysso_export.py",
       "source_location": "L1",
       "id": "users_a36_obikhod_seosite_scripts_keysso_export_py",
-      "community": 1,
+      "community": 0,
       "norm_label": "keysso_export.py"
     },
     {
@@ -63,7 +63,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/keysso_export.py",
       "source_location": "L30",
       "id": "keysso_export_load_env",
-      "community": 1,
+      "community": 0,
       "norm_label": "load_env()"
     },
     {
@@ -72,7 +72,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/keysso_export.py",
       "source_location": "L41",
       "id": "keysso_export_fetch_domain",
-      "community": 1,
+      "community": 0,
       "norm_label": "fetch_domain()"
     },
     {
@@ -81,7 +81,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/keysso_export.py",
       "source_location": "L87",
       "id": "keysso_export_main",
-      "community": 1,
+      "community": 0,
       "norm_label": "main()"
     },
     {
@@ -90,7 +90,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster_batched.py",
       "source_location": "L1",
       "id": "users_a36_obikhod_seosite_scripts_jm_cluster_batched_py",
-      "community": 6,
+      "community": 2,
       "norm_label": "jm_cluster_batched.py"
     },
     {
@@ -99,7 +99,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster_batched.py",
       "source_location": "L33",
       "id": "jm_cluster_batched_load_env",
-      "community": 6,
+      "community": 2,
       "norm_label": "load_env()"
     },
     {
@@ -108,7 +108,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster_batched.py",
       "source_location": "L44",
       "id": "jm_cluster_batched_ping_until_alive",
-      "community": 6,
+      "community": 2,
       "norm_label": "ping_until_alive()"
     },
     {
@@ -117,7 +117,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster_batched.py",
       "source_location": "L65",
       "id": "jm_cluster_batched_post_with_retry",
-      "community": 6,
+      "community": 2,
       "norm_label": "post_with_retry()"
     },
     {
@@ -126,7 +126,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster_batched.py",
       "source_location": "L90",
       "id": "jm_cluster_batched_submit_grpomn",
-      "community": 6,
+      "community": 2,
       "norm_label": "submit_grpomn()"
     },
     {
@@ -135,7 +135,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster_batched.py",
       "source_location": "L115",
       "id": "jm_cluster_batched_wait_until_fin",
-      "community": 6,
+      "community": 2,
       "norm_label": "wait_until_fin()"
     },
     {
@@ -144,7 +144,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster_batched.py",
       "source_location": "L149",
       "id": "jm_cluster_batched_fetch_csv",
-      "community": 6,
+      "community": 2,
       "norm_label": "fetch_csv()"
     },
     {
@@ -153,7 +153,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster_batched.py",
       "source_location": "L158",
       "id": "jm_cluster_batched_main",
-      "community": 6,
+      "community": 2,
       "norm_label": "main()"
     },
     {
@@ -161,7 +161,7 @@
       "file_type": "rationale",
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster_batched.py",
       "source_location": "L45",
-      "community": 6,
+      "community": 2,
       "norm_label": "\u0436\u0434\u0435\u043c \u043f\u043e\u043a\u0430 jm \u043d\u0435 \u043f\u0435\u0440\u0435\u0441\u0442\u0430\u043d\u0435\u0442 \u043e\u0442\u0434\u0430\u0432\u0430\u0442\u044c 503/connection errors.",
       "id": "jm_cluster_batched_rationale_45"
     },
@@ -333,7 +333,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/local_cluster.py",
       "source_location": "L1",
       "id": "users_a36_obikhod_seosite_scripts_local_cluster_py",
-      "community": 1,
+      "community": 14,
       "norm_label": "local_cluster.py"
     },
     {
@@ -342,7 +342,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/local_cluster.py",
       "source_location": "L127",
       "id": "local_cluster_detect_root",
-      "community": 1,
+      "community": 14,
       "norm_label": "detect_root()"
     },
     {
@@ -351,7 +351,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/local_cluster.py",
       "source_location": "L149",
       "id": "local_cluster_load_test_freqs",
-      "community": 1,
+      "community": 14,
       "norm_label": "load_test_freqs()"
     },
     {
@@ -360,7 +360,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/local_cluster.py",
       "source_location": "L176",
       "id": "local_cluster_main",
-      "community": 1,
+      "community": 14,
       "norm_label": "main()"
     },
     {
@@ -368,7 +368,7 @@
       "file_type": "rationale",
       "source_file": "/Users/a36/obikhod/seosite/scripts/local_cluster.py",
       "source_location": "L128",
-      "community": 1,
+      "community": 14,
       "norm_label": "\u0432\u043e\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u0442 \u00ab\u043a\u043e\u0440\u0435\u043d\u044c\u00bb (cluster-id) \u0434\u043b\u044f key.      \u0434\u043b\u044f \u043b\u0443\u0447\u0448\u0435\u0438 \u043a\u043b\u0430\u0441\u0442\u0435\u0440\u0438\u0437\u0430\u0446\u0438\u0438 \u2014 \u043a\u043e\u043c\u0431\u043e",
       "id": "local_cluster_rationale_128"
     },
@@ -377,7 +377,7 @@
       "file_type": "rationale",
       "source_file": "/Users/a36/obikhod/seosite/scripts/local_cluster.py",
       "source_location": "L150",
-      "community": 1,
+      "community": 14,
       "norm_label": "\u0438\u0437 \u0442\u0435\u0441\u0442\u043e\u0432\u043e\u0433\u043e jm-csv (50 \u043a\u043b\u044e\u0447\u0435\u0438, gzip) \u0431\u0435\u0440\u0435\u043c \u0447\u0430\u0441\u0442\u043e\u0442\u044b \u2014 \u0442\u0430\u043c, \u0433\u0434\u0435 \u0435\u0441\u0442\u044c.",
       "id": "local_cluster_rationale_150"
     },
@@ -387,7 +387,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster.py",
       "source_location": "L1",
       "id": "users_a36_obikhod_seosite_scripts_jm_cluster_py",
-      "community": 16,
+      "community": 0,
       "norm_label": "jm_cluster.py"
     },
     {
@@ -396,7 +396,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster.py",
       "source_location": "L34",
       "id": "jm_cluster_load_env",
-      "community": 16,
+      "community": 0,
       "norm_label": "load_env()"
     },
     {
@@ -405,7 +405,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster.py",
       "source_location": "L45",
       "id": "jm_cluster_post",
-      "community": 16,
+      "community": 0,
       "norm_label": "post()"
     },
     {
@@ -414,7 +414,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster.py",
       "source_location": "L57",
       "id": "jm_cluster_main",
-      "community": 16,
+      "community": 0,
       "norm_label": "main()"
     },
     {
@@ -422,7 +422,7 @@
       "file_type": "rationale",
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_cluster.py",
       "source_location": "L46",
-      "community": 16,
+      "community": 0,
       "norm_label": "form-encoded \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e; multipart=true \u0434\u043b\u044f \u0431\u043e\u043b\u044c\u0448\u0438\u0445 payload (>50kb).",
       "id": "jm_cluster_rationale_46"
     },
@@ -432,7 +432,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_wsfreq_micro.py",
       "source_location": "L1",
       "id": "users_a36_obikhod_seosite_scripts_jm_wsfreq_micro_py",
-      "community": 10,
+      "community": 11,
       "norm_label": "jm_wsfreq_micro.py"
     },
     {
@@ -441,7 +441,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_wsfreq_micro.py",
       "source_location": "L33",
       "id": "jm_wsfreq_micro_load_env",
-      "community": 10,
+      "community": 11,
       "norm_label": "load_env()"
     },
     {
@@ -450,7 +450,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_wsfreq_micro.py",
       "source_location": "L44",
       "id": "jm_wsfreq_micro_post",
-      "community": 10,
+      "community": 11,
       "norm_label": "post()"
     },
     {
@@ -459,7 +459,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_wsfreq_micro.py",
       "source_location": "L48",
       "id": "jm_wsfreq_micro_submit_batch",
-      "community": 10,
+      "community": 11,
       "norm_label": "submit_batch()"
     },
     {
@@ -468,7 +468,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_wsfreq_micro.py",
       "source_location": "L74",
       "id": "jm_wsfreq_micro_wait_fin",
-      "community": 10,
+      "community": 11,
       "norm_label": "wait_fin()"
     },
     {
@@ -477,7 +477,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_wsfreq_micro.py",
       "source_location": "L96",
       "id": "jm_wsfreq_micro_fetch_csv",
-      "community": 10,
+      "community": 11,
       "norm_label": "fetch_csv()"
     },
     {
@@ -486,7 +486,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_wsfreq_micro.py",
       "source_location": "L111",
       "id": "jm_wsfreq_micro_load_priority_kw",
-      "community": 10,
+      "community": 11,
       "norm_label": "load_priority_kw()"
     },
     {
@@ -495,7 +495,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_wsfreq_micro.py",
       "source_location": "L134",
       "id": "jm_wsfreq_micro_main",
-      "community": 10,
+      "community": 11,
       "norm_label": "main()"
     },
     {
@@ -503,7 +503,7 @@
       "file_type": "rationale",
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_wsfreq_micro.py",
       "source_location": "L112",
-      "community": 10,
+      "community": 11,
       "norm_label": "\u0441\u043d\u0430\u0447\u0430\u043b\u0430 seed, \u043f\u043e\u0442\u043e\u043c sug_par, \u043f\u043e\u0442\u043e\u043c \u0432\u0441\u0435 \u043e\u0441\u0442\u0430\u043b\u044c\u043d\u043e\u0435 \u0438\u0437 pool.",
       "id": "jm_wsfreq_micro_rationale_112"
     },
@@ -513,7 +513,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_wsfreq.py",
       "source_location": "L1",
       "id": "users_a36_obikhod_seosite_scripts_jm_wsfreq_py",
-      "community": 20,
+      "community": 0,
       "norm_label": "jm_wsfreq.py"
     },
     {
@@ -522,7 +522,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_wsfreq.py",
       "source_location": "L32",
       "id": "jm_wsfreq_load_env",
-      "community": 20,
+      "community": 0,
       "norm_label": "load_env()"
     },
     {
@@ -531,7 +531,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_wsfreq.py",
       "source_location": "L43",
       "id": "jm_wsfreq_post",
-      "community": 20,
+      "community": 0,
       "norm_label": "post()"
     },
     {
@@ -540,7 +540,7 @@
       "source_file": "/Users/a36/obikhod/seosite/scripts/jm_wsfreq.py",
       "source_location": "L49",
       "id": "jm_wsfreq_main",
-      "community": 20,
+      "community": 0,
       "norm_label": "main()"
     },
     {
@@ -616,12 +616,21 @@
       "norm_label": "main()"
     },
     {
+      "label": "generate-favicons.mjs",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/scripts/generate-favicons.mjs",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_scripts_generate_favicons_mjs",
+      "community": 78,
+      "norm_label": "generate-favicons.mjs"
+    },
+    {
       "label": "payload.config.ts",
       "file_type": "code",
       "source_file": "/Users/a36/obikhod/site/payload.config.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_payload_config_ts",
-      "community": 11,
+      "community": 10,
       "norm_label": "payload.config.ts"
     },
     {
@@ -630,7 +639,7 @@
       "source_file": "/Users/a36/obikhod/site/postcss.config.mjs",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_postcss_config_mjs",
-      "community": 70,
+      "community": 79,
       "norm_label": "postcss.config.mjs"
     },
     {
@@ -639,7 +648,7 @@
       "source_file": "/Users/a36/obikhod/site/proxy.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_proxy_ts",
-      "community": 1,
+      "community": 0,
       "norm_label": "proxy.ts"
     },
     {
@@ -648,7 +657,7 @@
       "source_file": "/Users/a36/obikhod/site/proxy.ts",
       "source_location": "L12",
       "id": "proxy_proxy",
-      "community": 1,
+      "community": 0,
       "norm_label": "proxy()"
     },
     {
@@ -657,7 +666,7 @@
       "source_file": "/Users/a36/obikhod/site/playwright.config.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_playwright_config_ts",
-      "community": 71,
+      "community": 80,
       "norm_label": "playwright.config.ts"
     },
     {
@@ -666,7 +675,7 @@
       "source_file": "/Users/a36/obikhod/site/eslint.config.mjs",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_eslint_config_mjs",
-      "community": 72,
+      "community": 81,
       "norm_label": "eslint.config.mjs"
     },
     {
@@ -675,7 +684,7 @@
       "source_file": "/Users/a36/obikhod/site/next.config.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_next_config_ts",
-      "community": 73,
+      "community": 82,
       "norm_label": "next.config.ts"
     },
     {
@@ -684,7 +693,7 @@
       "source_file": "/Users/a36/obikhod/site/blocks/LeadForm.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_blocks_leadform_ts",
-      "community": 74,
+      "community": 83,
       "norm_label": "leadform.ts"
     },
     {
@@ -693,7 +702,7 @@
       "source_file": "/Users/a36/obikhod/site/blocks/Hero.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_blocks_hero_ts",
-      "community": 75,
+      "community": 84,
       "norm_label": "hero.ts"
     },
     {
@@ -702,7 +711,7 @@
       "source_file": "/Users/a36/obikhod/site/blocks/Faq.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_blocks_faq_ts",
-      "community": 76,
+      "community": 85,
       "norm_label": "faq.ts"
     },
     {
@@ -711,7 +720,7 @@
       "source_file": "/Users/a36/obikhod/site/blocks/CtaBanner.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_blocks_ctabanner_ts",
-      "community": 77,
+      "community": 86,
       "norm_label": "ctabanner.ts"
     },
     {
@@ -720,7 +729,7 @@
       "source_file": "/Users/a36/obikhod/site/blocks/index.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_blocks_index_ts",
-      "community": 78,
+      "community": 87,
       "norm_label": "index.ts"
     },
     {
@@ -729,7 +738,7 @@
       "source_file": "/Users/a36/obikhod/site/blocks/TextContent.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_blocks_textcontent_ts",
-      "community": 79,
+      "community": 88,
       "norm_label": "textcontent.ts"
     },
     {
@@ -738,7 +747,7 @@
       "source_file": "/Users/a36/obikhod/site/globals/SiteChrome.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_globals_sitechrome_ts",
-      "community": 14,
+      "community": 15,
       "norm_label": "sitechrome.ts"
     },
     {
@@ -747,7 +756,7 @@
       "source_file": "/Users/a36/obikhod/site/globals/SiteChrome.ts",
       "source_location": "L29",
       "id": "sitechrome_validatemenuitem",
-      "community": 14,
+      "community": 15,
       "norm_label": "validatemenuitem()"
     },
     {
@@ -756,7 +765,7 @@
       "source_file": "/Users/a36/obikhod/site/globals/SiteChrome.ts",
       "source_location": "L47",
       "id": "sitechrome_validatesocialurl",
-      "community": 14,
+      "community": 15,
       "norm_label": "validatesocialurl()"
     },
     {
@@ -765,7 +774,7 @@
       "source_file": "/Users/a36/obikhod/site/globals/SiteChrome.ts",
       "source_location": "L55",
       "id": "sitechrome_validatee164",
-      "community": 14,
+      "community": 15,
       "norm_label": "validatee164()"
     },
     {
@@ -774,7 +783,7 @@
       "source_file": "/Users/a36/obikhod/site/globals/SiteChrome.ts",
       "source_location": "L58",
       "id": "sitechrome_validateinn",
-      "community": 14,
+      "community": 15,
       "norm_label": "validateinn()"
     },
     {
@@ -783,7 +792,7 @@
       "source_file": "/Users/a36/obikhod/site/globals/SiteChrome.ts",
       "source_location": "L64",
       "id": "sitechrome_menuitemarrayfield",
-      "community": 14,
+      "community": 15,
       "norm_label": "menuitemarrayfield()"
     },
     {
@@ -792,7 +801,7 @@
       "source_file": "/Users/a36/obikhod/site/globals/SeoSettings.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_globals_seosettings_ts",
-      "community": 80,
+      "community": 89,
       "norm_label": "seosettings.ts"
     },
     {
@@ -801,7 +810,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_193000_seo_override_blog_b2b_districts.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260426_193000_seo_override_blog_b2b_districts_ts",
-      "community": 21,
+      "community": 20,
       "norm_label": "20260426_193000_seo_override_blog_b2b_districts.ts"
     },
     {
@@ -810,7 +819,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_193000_seo_override_blog_b2b_districts.ts",
       "source_location": "L28",
       "id": "20260426_193000_seo_override_blog_b2b_districts_readsql",
-      "community": 21,
+      "community": 20,
       "norm_label": "readsql()"
     },
     {
@@ -819,7 +828,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_193000_seo_override_blog_b2b_districts.ts",
       "source_location": "L33",
       "id": "20260426_193000_seo_override_blog_b2b_districts_up",
-      "community": 21,
+      "community": 20,
       "norm_label": "up()"
     },
     {
@@ -828,7 +837,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_193000_seo_override_blog_b2b_districts.ts",
       "source_location": "L38",
       "id": "20260426_193000_seo_override_blog_b2b_districts_down",
-      "community": 21,
+      "community": 20,
       "norm_label": "down()"
     },
     {
@@ -837,7 +846,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_200000_authors_collection.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260426_200000_authors_collection_ts",
-      "community": 22,
+      "community": 21,
       "norm_label": "20260426_200000_authors_collection.ts"
     },
     {
@@ -846,7 +855,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_200000_authors_collection.ts",
       "source_location": "L26",
       "id": "20260426_200000_authors_collection_readsql",
-      "community": 22,
+      "community": 21,
       "norm_label": "readsql()"
     },
     {
@@ -855,7 +864,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_200000_authors_collection.ts",
       "source_location": "L31",
       "id": "20260426_200000_authors_collection_up",
-      "community": 22,
+      "community": 21,
       "norm_label": "up()"
     },
     {
@@ -864,7 +873,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_200000_authors_collection.ts",
       "source_location": "L36",
       "id": "20260426_200000_authors_collection_down",
-      "community": 22,
+      "community": 21,
       "norm_label": "down()"
     },
     {
@@ -873,7 +882,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260424_133242_us_3_blocks_and_seo.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260424_133242_us_3_blocks_and_seo_ts",
-      "community": 23,
+      "community": 22,
       "norm_label": "20260424_133242_us_3_blocks_and_seo.ts"
     },
     {
@@ -882,7 +891,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260424_133242_us_3_blocks_and_seo.ts",
       "source_location": "L45",
       "id": "20260424_133242_us_3_blocks_and_seo_readsql",
-      "community": 23,
+      "community": 22,
       "norm_label": "readsql()"
     },
     {
@@ -891,7 +900,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260424_133242_us_3_blocks_and_seo.ts",
       "source_location": "L50",
       "id": "20260424_133242_us_3_blocks_and_seo_up",
-      "community": 23,
+      "community": 22,
       "norm_label": "up()"
     },
     {
@@ -900,7 +909,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260424_133242_us_3_blocks_and_seo.ts",
       "source_location": "L57",
       "id": "20260424_133242_us_3_blocks_and_seo_down",
-      "community": 23,
+      "community": 22,
       "norm_label": "down()"
     },
     {
@@ -909,7 +918,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_220000_authors_array_snapshot_uuid.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260426_220000_authors_array_snapshot_uuid_ts",
-      "community": 24,
+      "community": 23,
       "norm_label": "20260426_220000_authors_array_snapshot_uuid.ts"
     },
     {
@@ -918,7 +927,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_220000_authors_array_snapshot_uuid.ts",
       "source_location": "L18",
       "id": "20260426_220000_authors_array_snapshot_uuid_readsql",
-      "community": 24,
+      "community": 23,
       "norm_label": "readsql()"
     },
     {
@@ -927,7 +936,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_220000_authors_array_snapshot_uuid.ts",
       "source_location": "L23",
       "id": "20260426_220000_authors_array_snapshot_uuid_up",
-      "community": 24,
+      "community": 23,
       "norm_label": "up()"
     },
     {
@@ -936,7 +945,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_220000_authors_array_snapshot_uuid.ts",
       "source_location": "L28",
       "id": "20260426_220000_authors_array_snapshot_uuid_down",
-      "community": 24,
+      "community": 23,
       "norm_label": "down()"
     },
     {
@@ -945,7 +954,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_180000_seo_override_fields.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260426_180000_seo_override_fields_ts",
-      "community": 25,
+      "community": 24,
       "norm_label": "20260426_180000_seo_override_fields.ts"
     },
     {
@@ -954,7 +963,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_180000_seo_override_fields.ts",
       "source_location": "L34",
       "id": "20260426_180000_seo_override_fields_readsql",
-      "community": 25,
+      "community": 24,
       "norm_label": "readsql()"
     },
     {
@@ -963,7 +972,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_180000_seo_override_fields.ts",
       "source_location": "L39",
       "id": "20260426_180000_seo_override_fields_up",
-      "community": 25,
+      "community": 24,
       "norm_label": "up()"
     },
     {
@@ -972,7 +981,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_180000_seo_override_fields.ts",
       "source_location": "L44",
       "id": "20260426_180000_seo_override_fields_down",
-      "community": 25,
+      "community": 24,
       "norm_label": "down()"
     },
     {
@@ -981,7 +990,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260427_010000_subservice_content_fields.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260427_010000_subservice_content_fields_ts",
-      "community": 26,
+      "community": 25,
       "norm_label": "20260427_010000_subservice_content_fields.ts"
     },
     {
@@ -990,7 +999,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260427_010000_subservice_content_fields.ts",
       "source_location": "L18",
       "id": "20260427_010000_subservice_content_fields_readsql",
-      "community": 26,
+      "community": 25,
       "norm_label": "readsql()"
     },
     {
@@ -999,7 +1008,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260427_010000_subservice_content_fields.ts",
       "source_location": "L23",
       "id": "20260427_010000_subservice_content_fields_up",
-      "community": 26,
+      "community": 25,
       "norm_label": "up()"
     },
     {
@@ -1008,7 +1017,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260427_010000_subservice_content_fields.ts",
       "source_location": "L28",
       "id": "20260427_010000_subservice_content_fields_down",
-      "community": 26,
+      "community": 25,
       "norm_label": "down()"
     },
     {
@@ -1017,7 +1026,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_153500_users_api_key.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260426_153500_users_api_key_ts",
-      "community": 27,
+      "community": 26,
       "norm_label": "20260426_153500_users_api_key.ts"
     },
     {
@@ -1026,7 +1035,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_153500_users_api_key.ts",
       "source_location": "L48",
       "id": "20260426_153500_users_api_key_readsql",
-      "community": 27,
+      "community": 26,
       "norm_label": "readsql()"
     },
     {
@@ -1035,7 +1044,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_153500_users_api_key.ts",
       "source_location": "L53",
       "id": "20260426_153500_users_api_key_up",
-      "community": 27,
+      "community": 26,
       "norm_label": "up()"
     },
     {
@@ -1044,7 +1053,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_153500_users_api_key.ts",
       "source_location": "L58",
       "id": "20260426_153500_users_api_key_down",
-      "community": 27,
+      "community": 26,
       "norm_label": "down()"
     },
     {
@@ -1053,7 +1062,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_210000_v_version_join_tables_fixup.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260426_210000_v_version_join_tables_fixup_ts",
-      "community": 28,
+      "community": 27,
       "norm_label": "20260426_210000_v_version_join_tables_fixup.ts"
     },
     {
@@ -1062,7 +1071,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_210000_v_version_join_tables_fixup.ts",
       "source_location": "L22",
       "id": "20260426_210000_v_version_join_tables_fixup_readsql",
-      "community": 28,
+      "community": 27,
       "norm_label": "readsql()"
     },
     {
@@ -1071,7 +1080,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_210000_v_version_join_tables_fixup.ts",
       "source_location": "L27",
       "id": "20260426_210000_v_version_join_tables_fixup_up",
-      "community": 28,
+      "community": 27,
       "norm_label": "up()"
     },
     {
@@ -1080,7 +1089,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_210000_v_version_join_tables_fixup.ts",
       "source_location": "L32",
       "id": "20260426_210000_v_version_join_tables_fixup_down",
-      "community": 28,
+      "community": 27,
       "norm_label": "down()"
     },
     {
@@ -1089,7 +1098,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260428_140000_users_telegram_chat_id.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260428_140000_users_telegram_chat_id_ts",
-      "community": 29,
+      "community": 28,
       "norm_label": "20260428_140000_users_telegram_chat_id.ts"
     },
     {
@@ -1098,7 +1107,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260428_140000_users_telegram_chat_id.ts",
       "source_location": "L30",
       "id": "20260428_140000_users_telegram_chat_id_readsql",
-      "community": 29,
+      "community": 28,
       "norm_label": "readsql()"
     },
     {
@@ -1107,7 +1116,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260428_140000_users_telegram_chat_id.ts",
       "source_location": "L36",
       "id": "20260428_140000_users_telegram_chat_id_up",
-      "community": 29,
+      "community": 28,
       "norm_label": "up()"
     },
     {
@@ -1116,7 +1125,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260428_140000_users_telegram_chat_id.ts",
       "source_location": "L42",
       "id": "20260428_140000_users_telegram_chat_id_down",
-      "community": 29,
+      "community": 28,
       "norm_label": "down()"
     },
     {
@@ -1125,7 +1134,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_230000_v_seo_override_columns_fixup.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260426_230000_v_seo_override_columns_fixup_ts",
-      "community": 30,
+      "community": 29,
       "norm_label": "20260426_230000_v_seo_override_columns_fixup.ts"
     },
     {
@@ -1134,7 +1143,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_230000_v_seo_override_columns_fixup.ts",
       "source_location": "L20",
       "id": "20260426_230000_v_seo_override_columns_fixup_readsql",
-      "community": 30,
+      "community": 29,
       "norm_label": "readsql()"
     },
     {
@@ -1143,7 +1152,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_230000_v_seo_override_columns_fixup.ts",
       "source_location": "L25",
       "id": "20260426_230000_v_seo_override_columns_fixup_up",
-      "community": 30,
+      "community": 29,
       "norm_label": "up()"
     },
     {
@@ -1152,7 +1161,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260426_230000_v_seo_override_columns_fixup.ts",
       "source_location": "L30",
       "id": "20260426_230000_v_seo_override_columns_fixup_down",
-      "community": 30,
+      "community": 29,
       "norm_label": "down()"
     },
     {
@@ -1161,7 +1170,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260425_cleanup_seo_settings_org_columns.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_migrations_20260425_cleanup_seo_settings_org_columns_ts",
-      "community": 31,
+      "community": 30,
       "norm_label": "20260425_cleanup_seo_settings_org_columns.ts"
     },
     {
@@ -1170,7 +1179,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260425_cleanup_seo_settings_org_columns.ts",
       "source_location": "L36",
       "id": "20260425_cleanup_seo_settings_org_columns_readsql",
-      "community": 31,
+      "community": 30,
       "norm_label": "readsql()"
     },
     {
@@ -1179,7 +1188,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260425_cleanup_seo_settings_org_columns.ts",
       "source_location": "L41",
       "id": "20260425_cleanup_seo_settings_org_columns_up",
-      "community": 31,
+      "community": 30,
       "norm_label": "up()"
     },
     {
@@ -1188,7 +1197,7 @@
       "source_file": "/Users/a36/obikhod/site/migrations/20260425_cleanup_seo_settings_org_columns.ts",
       "source_location": "L48",
       "id": "20260425_cleanup_seo_settings_org_columns_down",
-      "community": 31,
+      "community": 30,
       "norm_label": "down()"
     },
     {
@@ -1197,7 +1206,7 @@
       "source_file": "/Users/a36/obikhod/site/app/robots.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_robots_ts",
-      "community": 41,
+      "community": 40,
       "norm_label": "robots.ts"
     },
     {
@@ -1206,7 +1215,7 @@
       "source_file": "/Users/a36/obikhod/site/app/robots.ts",
       "source_location": "L5",
       "id": "robots_robots",
-      "community": 41,
+      "community": 40,
       "norm_label": "robots()"
     },
     {
@@ -1215,7 +1224,7 @@
       "source_file": "/Users/a36/obikhod/site/app/sitemap.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_sitemap_ts",
-      "community": 5,
+      "community": 4,
       "norm_label": "sitemap.ts"
     },
     {
@@ -1224,7 +1233,7 @@
       "source_file": "/Users/a36/obikhod/site/app/sitemap.ts",
       "source_location": "L56",
       "id": "sitemap_sitemap",
-      "community": 5,
+      "community": 4,
       "norm_label": "sitemap()"
     },
     {
@@ -1233,7 +1242,7 @@
       "source_file": "/Users/a36/obikhod/site/app/sitemap.ts",
       "source_location": "L197",
       "id": "sitemap_fetchservices",
-      "community": 5,
+      "community": 4,
       "norm_label": "fetchservices()"
     },
     {
@@ -1242,7 +1251,7 @@
       "source_file": "/Users/a36/obikhod/site/app/sitemap.ts",
       "source_location": "L216",
       "id": "sitemap_fetchdistricts",
-      "community": 5,
+      "community": 4,
       "norm_label": "fetchdistricts()"
     },
     {
@@ -1251,7 +1260,7 @@
       "source_file": "/Users/a36/obikhod/site/app/sitemap.ts",
       "source_location": "L232",
       "id": "sitemap_fetchpublishedservicedistricts",
-      "community": 5,
+      "community": 4,
       "norm_label": "fetchpublishedservicedistricts()"
     },
     {
@@ -1260,7 +1269,7 @@
       "source_file": "/Users/a36/obikhod/site/app/sitemap.ts",
       "source_location": "L249",
       "id": "sitemap_fetchcases",
-      "community": 5,
+      "community": 4,
       "norm_label": "fetchcases()"
     },
     {
@@ -1269,7 +1278,7 @@
       "source_file": "/Users/a36/obikhod/site/app/sitemap.ts",
       "source_location": "L265",
       "id": "sitemap_fetchpublishedblog",
-      "community": 5,
+      "community": 4,
       "norm_label": "fetchpublishedblog()"
     },
     {
@@ -1278,7 +1287,7 @@
       "source_file": "/Users/a36/obikhod/site/app/sitemap.ts",
       "source_location": "L282",
       "id": "sitemap_fetchpublishedb2b",
-      "community": 5,
+      "community": 4,
       "norm_label": "fetchpublishedb2b()"
     },
     {
@@ -1287,7 +1296,7 @@
       "source_file": "/Users/a36/obikhod/site/app/sitemap.ts",
       "source_location": "L299",
       "id": "sitemap_fetchpublishedauthors",
-      "community": 5,
+      "community": 4,
       "norm_label": "fetchpublishedauthors()"
     },
     {
@@ -1303,7 +1312,7 @@
       "label": "MarketingLayout()",
       "file_type": "code",
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/layout.tsx",
-      "source_location": "L56",
+      "source_location": "L73",
       "id": "layout_marketinglayout",
       "community": 7,
       "norm_label": "marketinglayout()"
@@ -1314,7 +1323,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_page_tsx",
-      "community": 81,
+      "community": 90,
       "norm_label": "page.tsx"
     },
     {
@@ -1323,7 +1332,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/raiony/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_raiony_page_tsx",
-      "community": 82,
+      "community": 91,
       "norm_label": "page.tsx"
     },
     {
@@ -1332,7 +1341,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/raiony/[district]/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_raiony_district_page_tsx",
-      "community": 2,
+      "community": 3,
       "norm_label": "page.tsx"
     },
     {
@@ -1341,7 +1350,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/[service]/[district]/page.tsx",
       "source_location": "L49",
       "id": "page_generatestaticparams",
-      "community": 2,
+      "community": 3,
       "norm_label": "generatestaticparams()"
     },
     {
@@ -1350,7 +1359,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/admin/[[...segments]]/page.tsx",
       "source_location": "L15",
       "id": "page_generatemetadata",
-      "community": 2,
+      "community": 3,
       "norm_label": "generatemetadata()"
     },
     {
@@ -1359,7 +1368,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/avtory/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_avtory_page_tsx",
-      "community": 83,
+      "community": 92,
       "norm_label": "page.tsx"
     },
     {
@@ -1368,7 +1377,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/avtory/[slug]/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_avtory_slug_page_tsx",
-      "community": 2,
+      "community": 3,
       "norm_label": "page.tsx"
     },
     {
@@ -1395,7 +1404,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/blog/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_blog_page_tsx",
-      "community": 2,
+      "community": 3,
       "norm_label": "page.tsx"
     },
     {
@@ -1404,7 +1413,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/blog/[slug]/page.tsx",
       "source_location": "L96",
       "id": "page_formatdate",
-      "community": 2,
+      "community": 3,
       "norm_label": "formatdate()"
     },
     {
@@ -1413,7 +1422,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/blog/[slug]/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_blog_slug_page_tsx",
-      "community": 2,
+      "community": 3,
       "norm_label": "page.tsx"
     },
     {
@@ -1422,7 +1431,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/blog/[slug]/page.tsx",
       "source_location": "L104",
       "id": "page_richtexttoplain",
-      "community": 2,
+      "community": 3,
       "norm_label": "richtexttoplain()"
     },
     {
@@ -1431,7 +1440,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/b2b/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_b2b_page_tsx",
-      "community": 84,
+      "community": 93,
       "norm_label": "page.tsx"
     },
     {
@@ -1440,7 +1449,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/b2b/[slug]/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_b2b_slug_page_tsx",
-      "community": 2,
+      "community": 3,
       "norm_label": "page.tsx"
     },
     {
@@ -1449,7 +1458,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/kejsy/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_kejsy_page_tsx",
-      "community": 85,
+      "community": 94,
       "norm_label": "page.tsx"
     },
     {
@@ -1458,7 +1467,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/kejsy/[slug]/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_kejsy_slug_page_tsx",
-      "community": 2,
+      "community": 3,
       "norm_label": "page.tsx"
     },
     {
@@ -1467,7 +1476,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/[service]/[district]/page.tsx",
       "source_location": "L302",
       "id": "page_photourl",
-      "community": 2,
+      "community": 3,
       "norm_label": "photourl()"
     },
     {
@@ -1512,7 +1521,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/[service]/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_service_page_tsx",
-      "community": 2,
+      "community": 3,
       "norm_label": "page.tsx"
     },
     {
@@ -1521,7 +1530,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/[service]/[district]/SubServiceView.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_service_district_subserviceview_tsx",
-      "community": 86,
+      "community": 95,
       "norm_label": "subserviceview.tsx"
     },
     {
@@ -1530,7 +1539,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/[service]/[district]/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_marketing_service_district_page_tsx",
-      "community": 2,
+      "community": 3,
       "norm_label": "page.tsx"
     },
     {
@@ -1539,7 +1548,7 @@
       "source_file": "/Users/a36/obikhod/site/app/api/seed/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_api_seed_route_ts",
-      "community": 6,
+      "community": 2,
       "norm_label": "route.ts"
     },
     {
@@ -1548,7 +1557,7 @@
       "source_file": "/Users/a36/obikhod/site/app/api/seed/route.ts",
       "source_location": "L33",
       "id": "route_lexicalparagraph",
-      "community": 6,
+      "community": 2,
       "norm_label": "lexicalparagraph()"
     },
     {
@@ -1557,7 +1566,7 @@
       "source_file": "/Users/a36/obikhod/site/app/api/seed/route.ts",
       "source_location": "L67",
       "id": "route_ensurestats",
-      "community": 6,
+      "community": 2,
       "norm_label": "ensurestats()"
     },
     {
@@ -1566,7 +1575,7 @@
       "source_file": "/Users/a36/obikhod/site/app/api/seed/route.ts",
       "source_location": "L73",
       "id": "route_findonebyslug",
-      "community": 6,
+      "community": 2,
       "norm_label": "findonebyslug()"
     },
     {
@@ -1575,7 +1584,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/api/telegram/webhook/route.ts",
       "source_location": "L46",
       "id": "route_post",
-      "community": 6,
+      "community": 2,
       "norm_label": "post()"
     },
     {
@@ -1584,7 +1593,7 @@
       "source_file": "/Users/a36/obikhod/site/app/api/health/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_api_health_route_ts",
-      "community": 1,
+      "community": 0,
       "norm_label": "route.ts"
     },
     {
@@ -1593,7 +1602,7 @@
       "source_file": "/Users/a36/obikhod/site/app/indexnow/[keyfile]/route.ts",
       "source_location": "L5",
       "id": "route_get",
-      "community": 1,
+      "community": 0,
       "norm_label": "get()"
     },
     {
@@ -1602,7 +1611,7 @@
       "source_file": "/Users/a36/obikhod/site/app/api/fal/generate/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_api_fal_generate_route_ts",
-      "community": 6,
+      "community": 2,
       "norm_label": "route.ts"
     },
     {
@@ -1611,7 +1620,7 @@
       "source_file": "/Users/a36/obikhod/site/app/api/preview-sign/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_api_preview_sign_route_ts",
-      "community": 1,
+      "community": 0,
       "norm_label": "route.ts"
     },
     {
@@ -1620,7 +1629,7 @@
       "source_file": "/Users/a36/obikhod/site/app/api/preview/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_api_preview_route_ts",
-      "community": 1,
+      "community": 0,
       "norm_label": "route.ts"
     },
     {
@@ -1629,7 +1638,7 @@
       "source_file": "/Users/a36/obikhod/site/app/api/exit-preview/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_api_exit_preview_route_ts",
-      "community": 1,
+      "community": 0,
       "norm_label": "route.ts"
     },
     {
@@ -1638,7 +1647,7 @@
       "source_file": "/Users/a36/obikhod/site/app/api/revalidate/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_api_revalidate_route_ts",
-      "community": 1,
+      "community": 0,
       "norm_label": "route.ts"
     },
     {
@@ -1647,7 +1656,7 @@
       "source_file": "/Users/a36/obikhod/site/app/og/route.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_og_route_tsx",
-      "community": 87,
+      "community": 96,
       "norm_label": "route.tsx"
     },
     {
@@ -1656,7 +1665,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/forbidden.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_forbidden_tsx",
-      "community": 42,
+      "community": 41,
       "norm_label": "forbidden.tsx"
     },
     {
@@ -1665,7 +1674,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/forbidden.tsx",
       "source_location": "L13",
       "id": "forbidden_adminforbidden",
-      "community": 42,
+      "community": 41,
       "norm_label": "adminforbidden()"
     },
     {
@@ -1674,7 +1683,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/layout.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_layout_tsx",
-      "community": 43,
+      "community": 42,
       "norm_label": "layout.tsx"
     },
     {
@@ -1683,7 +1692,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/layout.tsx",
       "source_location": "L25",
       "id": "layout_layout",
-      "community": 43,
+      "community": 42,
       "norm_label": "layout()"
     },
     {
@@ -1692,7 +1701,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/error.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_error_tsx",
-      "community": 44,
+      "community": 43,
       "norm_label": "error.tsx"
     },
     {
@@ -1701,7 +1710,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/error.tsx",
       "source_location": "L124",
       "id": "error_adminerror",
-      "community": 44,
+      "community": 43,
       "norm_label": "adminerror()"
     },
     {
@@ -1710,7 +1719,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/not-found.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_not_found_tsx",
-      "community": 45,
+      "community": 44,
       "norm_label": "not-found.tsx"
     },
     {
@@ -1719,7 +1728,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/not-found.tsx",
       "source_location": "L11",
       "id": "not_found_adminnotfound",
-      "community": 45,
+      "community": 44,
       "norm_label": "adminnotfound()"
     },
     {
@@ -1728,8 +1737,26 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/admin/importMap.js",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_admin_importmap_js",
-      "community": 88,
+      "community": 97,
       "norm_label": "importmap.js"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/admin/catalog/page.tsx",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_app_payload_admin_catalog_page_tsx",
+      "community": 4,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "AdminCatalogPage()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/admin/catalog/page.tsx",
+      "source_location": "L83",
+      "id": "page_admincatalogpage",
+      "community": 4,
+      "norm_label": "admincatalogpage()"
     },
     {
       "label": "page.tsx",
@@ -1737,7 +1764,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/admin/[[...segments]]/page.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_admin_segments_page_tsx",
-      "community": 2,
+      "community": 3,
       "norm_label": "page.tsx"
     },
     {
@@ -1746,7 +1773,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/admin/[[...segments]]/page.tsx",
       "source_location": "L18",
       "id": "page_page",
-      "community": 2,
+      "community": 3,
       "norm_label": "page()"
     },
     {
@@ -1755,7 +1782,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/admin/[[...segments]]/not-found.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_admin_segments_not_found_tsx",
-      "community": 35,
+      "community": 34,
       "norm_label": "not-found.tsx"
     },
     {
@@ -1764,7 +1791,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/admin/[[...segments]]/not-found.tsx",
       "source_location": "L13",
       "id": "not_found_generatemetadata",
-      "community": 35,
+      "community": 34,
       "norm_label": "generatemetadata()"
     },
     {
@@ -1773,7 +1800,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/admin/[[...segments]]/not-found.tsx",
       "source_location": "L16",
       "id": "not_found_notfound",
-      "community": 35,
+      "community": 34,
       "norm_label": "notfound()"
     },
     {
@@ -1782,7 +1809,16 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/api/graphql-playground/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_api_graphql_playground_route_ts",
-      "community": 89,
+      "community": 98,
+      "norm_label": "route.ts"
+    },
+    {
+      "label": "route.ts",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/api/admin/leads/count/route.ts",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_app_payload_api_admin_leads_count_route_ts",
+      "community": 0,
       "norm_label": "route.ts"
     },
     {
@@ -1791,7 +1827,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/api/admin/page-catalog/csv/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_api_admin_page_catalog_csv_route_ts",
-      "community": 1,
+      "community": 0,
       "norm_label": "route.ts"
     },
     {
@@ -1800,7 +1836,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/api/admin/page-catalog/csv/route.ts",
       "source_location": "L46",
       "id": "route_escapecsvfield",
-      "community": 1,
+      "community": 0,
       "norm_label": "escapecsvfield()"
     },
     {
@@ -1809,7 +1845,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/api/admin/page-catalog/csv/route.ts",
       "source_location": "L55",
       "id": "route_rowtocsv",
-      "community": 1,
+      "community": 0,
       "norm_label": "rowtocsv()"
     },
     {
@@ -1818,7 +1854,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/api/[...slug]/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_api_slug_route_ts",
-      "community": 90,
+      "community": 99,
       "norm_label": "route.ts"
     },
     {
@@ -1827,7 +1863,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/api/graphql/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_api_graphql_route_ts",
-      "community": 91,
+      "community": 100,
       "norm_label": "route.ts"
     },
     {
@@ -1836,7 +1872,7 @@
       "source_file": "/Users/a36/obikhod/site/app/(payload)/api/telegram/webhook/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_payload_api_telegram_webhook_route_ts",
-      "community": 6,
+      "community": 2,
       "norm_label": "route.ts"
     },
     {
@@ -1845,7 +1881,7 @@
       "source_file": "/Users/a36/obikhod/site/app/indexnow/[keyfile]/route.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_app_indexnow_keyfile_route_ts",
-      "community": 1,
+      "community": 0,
       "norm_label": "route.ts"
     },
     {
@@ -1854,7 +1890,7 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/seo.spec.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_tests_e2e_seo_spec_ts",
-      "community": 1,
+      "community": 0,
       "norm_label": "seo.spec.ts"
     },
     {
@@ -1863,7 +1899,7 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/seo.spec.ts",
       "source_location": "L23",
       "id": "seo_spec_haspublishedservices",
-      "community": 1,
+      "community": 0,
       "norm_label": "haspublishedservices()"
     },
     {
@@ -1872,7 +1908,7 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-login.spec.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_tests_e2e_admin_login_spec_ts",
-      "community": 92,
+      "community": 101,
       "norm_label": "admin-login.spec.ts"
     },
     {
@@ -1881,7 +1917,7 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/us6-wave2b-subservices.spec.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_tests_e2e_us6_wave2b_subservices_spec_ts",
-      "community": 1,
+      "community": 0,
       "norm_label": "us6-wave2b-subservices.spec.ts"
     },
     {
@@ -1890,7 +1926,7 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/us6-wave2b-subservices.spec.ts",
       "source_location": "L15",
       "id": "us6_wave2b_subservices_spec_findfirstsubwithcontent",
-      "community": 1,
+      "community": 0,
       "norm_label": "findfirstsubwithcontent()"
     },
     {
@@ -1899,8 +1935,44 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/landing.spec.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_tests_e2e_landing_spec_ts",
-      "community": 93,
+      "community": 102,
       "norm_label": "landing.spec.ts"
+    },
+    {
+      "label": "admin-reduced-motion.spec.ts",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-reduced-motion.spec.ts",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_tests_e2e_admin_reduced_motion_spec_ts",
+      "community": 103,
+      "norm_label": "admin-reduced-motion.spec.ts"
+    },
+    {
+      "label": "admin-a11y.spec.ts",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-a11y.spec.ts",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_tests_e2e_admin_a11y_spec_ts",
+      "community": 2,
+      "norm_label": "admin-a11y.spec.ts"
+    },
+    {
+      "label": "tryLogin()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-a11y.spec.ts",
+      "source_location": "L44",
+      "id": "admin_a11y_spec_trylogin",
+      "community": 2,
+      "norm_label": "trylogin()"
+    },
+    {
+      "label": "runAxe()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-a11y.spec.ts",
+      "source_location": "L51",
+      "id": "admin_a11y_spec_runaxe",
+      "community": 2,
+      "norm_label": "runaxe()"
     },
     {
       "label": "admin-smoke.spec.ts",
@@ -1908,7 +1980,7 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-smoke.spec.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_tests_e2e_admin_smoke_spec_ts",
-      "community": 94,
+      "community": 104,
       "norm_label": "admin-smoke.spec.ts"
     },
     {
@@ -1917,7 +1989,7 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/us6-wave2a-routes.spec.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_tests_e2e_us6_wave2a_routes_spec_ts",
-      "community": 1,
+      "community": 0,
       "norm_label": "us6-wave2a-routes.spec.ts"
     },
     {
@@ -1926,7 +1998,7 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/us6-wave2a-routes.spec.ts",
       "source_location": "L11",
       "id": "us6_wave2a_routes_spec_haspublished",
-      "community": 1,
+      "community": 0,
       "norm_label": "haspublished()"
     },
     {
@@ -1935,8 +2007,62 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/site-chrome.spec.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_tests_e2e_site_chrome_spec_ts",
-      "community": 95,
+      "community": 105,
       "norm_label": "site-chrome.spec.ts"
+    },
+    {
+      "label": "admin-empty-list-wiring.spec.ts",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-empty-list-wiring.spec.ts",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_tests_e2e_admin_empty_list_wiring_spec_ts",
+      "community": 45,
+      "norm_label": "admin-empty-list-wiring.spec.ts"
+    },
+    {
+      "label": "login()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-empty-list-wiring.spec.ts",
+      "source_location": "L22",
+      "id": "admin_empty_list_wiring_spec_login",
+      "community": 45,
+      "norm_label": "login()"
+    },
+    {
+      "label": "admin-header-chrome-polish.spec.ts",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-header-chrome-polish.spec.ts",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_tests_e2e_admin_header_chrome_polish_spec_ts",
+      "community": 46,
+      "norm_label": "admin-header-chrome-polish.spec.ts"
+    },
+    {
+      "label": "login()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-header-chrome-polish.spec.ts",
+      "source_location": "L23",
+      "id": "admin_header_chrome_polish_spec_login",
+      "community": 46,
+      "norm_label": "login()"
+    },
+    {
+      "label": "admin-services-preview.spec.ts",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-services-preview.spec.ts",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_tests_e2e_admin_services_preview_spec_ts",
+      "community": 47,
+      "norm_label": "admin-services-preview.spec.ts"
+    },
+    {
+      "label": "login()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-services-preview.spec.ts",
+      "source_location": "L22",
+      "id": "admin_services_preview_spec_login",
+      "community": 47,
+      "norm_label": "login()"
     },
     {
       "label": "admin-design-compliance.spec.ts",
@@ -1944,7 +2070,7 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-design-compliance.spec.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_tests_e2e_admin_design_compliance_spec_ts",
-      "community": 36,
+      "community": 35,
       "norm_label": "admin-design-compliance.spec.ts"
     },
     {
@@ -1953,7 +2079,7 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-design-compliance.spec.ts",
       "source_location": "L79",
       "id": "admin_design_compliance_spec_toms",
-      "community": 36,
+      "community": 35,
       "norm_label": "toms()"
     },
     {
@@ -1962,8 +2088,35 @@
       "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-design-compliance.spec.ts",
       "source_location": "L89",
       "id": "admin_design_compliance_spec_cssnorm",
-      "community": 36,
+      "community": 35,
       "norm_label": "cssnorm()"
+    },
+    {
+      "label": "admin-mobile.spec.ts",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-mobile.spec.ts",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_tests_e2e_admin_mobile_spec_ts",
+      "community": 2,
+      "norm_label": "admin-mobile.spec.ts"
+    },
+    {
+      "label": "tryLogin()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-mobile.spec.ts",
+      "source_location": "L27",
+      "id": "admin_mobile_spec_trylogin",
+      "community": 2,
+      "norm_label": "trylogin()"
+    },
+    {
+      "label": "findMediaQueryRules()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-mobile.spec.ts",
+      "source_location": "L39",
+      "id": "admin_mobile_spec_findmediaqueryrules",
+      "community": 2,
+      "norm_label": "findmediaqueryrules()"
     },
     {
       "label": "PreviewBanner.tsx",
@@ -1971,7 +2124,7 @@
       "source_file": "/Users/a36/obikhod/site/components/PreviewBanner.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_previewbanner_tsx",
-      "community": 46,
+      "community": 48,
       "norm_label": "previewbanner.tsx"
     },
     {
@@ -1980,7 +2133,7 @@
       "source_file": "/Users/a36/obikhod/site/components/PreviewBanner.tsx",
       "source_location": "L10",
       "id": "previewbanner_previewbanner",
-      "community": 46,
+      "community": 48,
       "norm_label": "previewbanner()"
     },
     {
@@ -1989,7 +2142,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/Hero.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_blocks_hero_tsx",
-      "community": 37,
+      "community": 36,
       "norm_label": "hero.tsx"
     },
     {
@@ -1998,7 +2151,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/Hero.tsx",
       "source_location": "L40",
       "id": "hero_mediaurl",
-      "community": 37,
+      "community": 36,
       "norm_label": "mediaurl()"
     },
     {
@@ -2007,7 +2160,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/Hero.tsx",
       "source_location": "L46",
       "id": "hero_mediaalt",
-      "community": 37,
+      "community": 36,
       "norm_label": "mediaalt()"
     },
     {
@@ -2016,7 +2169,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/LeadForm.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_blocks_leadform_tsx",
-      "community": 1,
+      "community": 0,
       "norm_label": "leadform.tsx"
     },
     {
@@ -2025,7 +2178,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/LeadForm.tsx",
       "source_location": "L12",
       "id": "leadform_hintvalue",
-      "community": 1,
+      "community": 0,
       "norm_label": "hintvalue()"
     },
     {
@@ -2034,7 +2187,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/LeadForm.tsx",
       "source_location": "L20",
       "id": "leadform_hintlabel",
-      "community": 1,
+      "community": 0,
       "norm_label": "hintlabel()"
     },
     {
@@ -2043,7 +2196,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/LeadForm.tsx",
       "source_location": "L30",
       "id": "leadform_onsubmit",
-      "community": 1,
+      "community": 0,
       "norm_label": "onsubmit()"
     },
     {
@@ -2052,7 +2205,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/BlockRenderer.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_blocks_blockrenderer_tsx",
-      "community": 47,
+      "community": 49,
       "norm_label": "blockrenderer.tsx"
     },
     {
@@ -2061,7 +2214,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/BlockRenderer.tsx",
       "source_location": "L20",
       "id": "blockrenderer_blockrenderer",
-      "community": 47,
+      "community": 49,
       "norm_label": "blockrenderer()"
     },
     {
@@ -2070,7 +2223,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/types.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_blocks_types_ts",
-      "community": 96,
+      "community": 106,
       "norm_label": "types.ts"
     },
     {
@@ -2079,7 +2232,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/TextContent.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_blocks_textcontent_tsx",
-      "community": 97,
+      "community": 107,
       "norm_label": "textcontent.tsx"
     },
     {
@@ -2088,7 +2241,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/CtaBanner.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_blocks_ctabanner_tsx",
-      "community": 48,
+      "community": 50,
       "norm_label": "ctabanner.tsx"
     },
     {
@@ -2097,7 +2250,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/CtaBanner.tsx",
       "source_location": "L31",
       "id": "ctabanner_resolveaccent",
-      "community": 48,
+      "community": 50,
       "norm_label": "resolveaccent()"
     },
     {
@@ -2106,7 +2259,7 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/Faq.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_blocks_faq_tsx",
-      "community": 49,
+      "community": 51,
       "norm_label": "faq.tsx"
     },
     {
@@ -2115,8 +2268,44 @@
       "source_file": "/Users/a36/obikhod/site/components/blocks/Faq.tsx",
       "source_location": "L16",
       "id": "faq_extracttext",
-      "community": 49,
+      "community": 51,
       "norm_label": "extracttext()"
+    },
+    {
+      "label": "SkeletonTable.tsx",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/SkeletonTable.tsx",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_components_admin_skeletontable_tsx",
+      "community": 108,
+      "norm_label": "skeletontable.tsx"
+    },
+    {
+      "label": "ServicePreviewPanel.tsx",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/ServicePreviewPanel.tsx",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_components_admin_servicepreviewpanel_tsx",
+      "community": 109,
+      "norm_label": "servicepreviewpanel.tsx"
+    },
+    {
+      "label": "LeadsBadgeOverlay.tsx",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/LeadsBadgeOverlay.tsx",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_components_admin_leadsbadgeoverlay_tsx",
+      "community": 52,
+      "norm_label": "leadsbadgeoverlay.tsx"
+    },
+    {
+      "label": "LeadsBadgeOverlay()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/LeadsBadgeOverlay.tsx",
+      "source_location": "L17",
+      "id": "leadsbadgeoverlay_leadsbadgeoverlay",
+      "community": 52,
+      "norm_label": "leadsbadgeoverlay()"
     },
     {
       "label": "AdminLogin.tsx",
@@ -2124,7 +2313,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/AdminLogin.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_admin_adminlogin_tsx",
-      "community": 32,
+      "community": 31,
       "norm_label": "adminlogin.tsx"
     },
     {
@@ -2133,7 +2322,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/AdminLogin.tsx",
       "source_location": "L75",
       "id": "adminlogin_describeerror",
-      "community": 32,
+      "community": 31,
       "norm_label": "describeerror()"
     },
     {
@@ -2142,7 +2331,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/AdminLogin.tsx",
       "source_location": "L89",
       "id": "adminlogin_classifyerror",
-      "community": 32,
+      "community": 31,
       "norm_label": "classifyerror()"
     },
     {
@@ -2151,7 +2340,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/AdminLogin.tsx",
       "source_location": "L109",
       "id": "adminlogin_handlesubmit",
-      "community": 32,
+      "community": 31,
       "norm_label": "handlesubmit()"
     },
     {
@@ -2160,7 +2349,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/DashboardTile.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_admin_dashboardtile_tsx",
-      "community": 98,
+      "community": 110,
       "norm_label": "dashboardtile.tsx"
     },
     {
@@ -2169,7 +2358,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/EmptyErrorStates.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_admin_emptyerrorstates_tsx",
-      "community": 99,
+      "community": 111,
       "norm_label": "emptyerrorstates.tsx"
     },
     {
@@ -2178,7 +2367,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/PageCatalog.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_admin_pagecatalog_tsx",
-      "community": 5,
+      "community": 4,
       "norm_label": "pagecatalog.tsx"
     },
     {
@@ -2187,7 +2376,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/PageCatalog.tsx",
       "source_location": "L135",
       "id": "pagecatalog_formatdate",
-      "community": 5,
+      "community": 4,
       "norm_label": "formatdate()"
     },
     {
@@ -2196,7 +2385,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/PageCatalog.tsx",
       "source_location": "L146",
       "id": "pagecatalog_loadcatalog",
-      "community": 5,
+      "community": 4,
       "norm_label": "loadcatalog()"
     },
     {
@@ -2205,7 +2394,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/BrandLogo.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_admin_brandlogo_tsx",
-      "community": 100,
+      "community": 112,
       "norm_label": "brandlogo.tsx"
     },
     {
@@ -2214,7 +2403,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/BeforeLoginLockup.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_admin_beforeloginlockup_tsx",
-      "community": 50,
+      "community": 53,
       "norm_label": "beforeloginlockup.tsx"
     },
     {
@@ -2223,8 +2412,44 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/BeforeLoginLockup.tsx",
       "source_location": "L41",
       "id": "beforeloginlockup_beforeloginlockup",
-      "community": 50,
+      "community": 53,
       "norm_label": "beforeloginlockup()"
+    },
+    {
+      "label": "LeadsBadgeProvider.tsx",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/LeadsBadgeProvider.tsx",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_components_admin_leadsbadgeprovider_tsx",
+      "community": 54,
+      "norm_label": "leadsbadgeprovider.tsx"
+    },
+    {
+      "label": "LeadsBadgeProvider()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/LeadsBadgeProvider.tsx",
+      "source_location": "L11",
+      "id": "leadsbadgeprovider_leadsbadgeprovider",
+      "community": 54,
+      "norm_label": "leadsbadgeprovider()"
+    },
+    {
+      "label": "CollectionListWithEmpty.tsx",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/CollectionListWithEmpty.tsx",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_components_admin_collectionlistwithempty_tsx",
+      "community": 113,
+      "norm_label": "collectionlistwithempty.tsx"
+    },
+    {
+      "label": "SkeletonForm.tsx",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/SkeletonForm.tsx",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_components_admin_skeletonform_tsx",
+      "community": 114,
+      "norm_label": "skeletonform.tsx"
     },
     {
       "label": "icons.tsx",
@@ -2232,7 +2457,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_admin_icons_tsx",
-      "community": 0,
+      "community": 1,
       "norm_label": "icons.tsx"
     },
     {
@@ -2241,7 +2466,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L22",
       "id": "icons_svg",
-      "community": 0,
+      "community": 1,
       "norm_label": "svg()"
     },
     {
@@ -2250,7 +2475,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L48",
       "id": "icons_servicesicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "servicesicon()"
     },
     {
@@ -2259,7 +2484,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L61",
       "id": "icons_districtsicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "districtsicon()"
     },
     {
@@ -2268,7 +2493,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L71",
       "id": "icons_servicedistrictsicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "servicedistrictsicon()"
     },
     {
@@ -2277,7 +2502,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L83",
       "id": "icons_casesicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "casesicon()"
     },
     {
@@ -2286,7 +2511,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L94",
       "id": "icons_blogicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "blogicon()"
     },
     {
@@ -2295,7 +2520,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L106",
       "id": "icons_b2bpagesicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "b2bpagesicon()"
     },
     {
@@ -2304,7 +2529,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L118",
       "id": "icons_personsicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "personsicon()"
     },
     {
@@ -2313,7 +2538,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L134",
       "id": "icons_leadsicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "leadsicon()"
     },
     {
@@ -2322,7 +2547,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L143",
       "id": "icons_redirectsicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "redirectsicon()"
     },
     {
@@ -2331,7 +2556,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L155",
       "id": "icons_mediaicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "mediaicon()"
     },
     {
@@ -2340,7 +2565,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L166",
       "id": "icons_usersicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "usersicon()"
     },
     {
@@ -2349,7 +2574,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L182",
       "id": "icons_heroblockicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "heroblockicon()"
     },
     {
@@ -2358,7 +2583,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L193",
       "id": "icons_textcontentblockicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "textcontentblockicon()"
     },
     {
@@ -2367,7 +2592,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L205",
       "id": "icons_leadformblockicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "leadformblockicon()"
     },
     {
@@ -2376,7 +2601,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L217",
       "id": "icons_photoestimateformblockicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "photoestimateformblockicon()"
     },
     {
@@ -2385,7 +2610,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L231",
       "id": "icons_calculatorblockicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "calculatorblockicon()"
     },
     {
@@ -2394,7 +2619,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L247",
       "id": "icons_casescarouselblockicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "casescarouselblockicon()"
     },
     {
@@ -2403,7 +2628,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L259",
       "id": "icons_faqblockicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "faqblockicon()"
     },
     {
@@ -2412,7 +2637,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L270",
       "id": "icons_servicesgridblockicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "servicesgridblockicon()"
     },
     {
@@ -2421,7 +2646,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L282",
       "id": "icons_districtsgridblockicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "districtsgridblockicon()"
     },
     {
@@ -2430,7 +2655,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L298",
       "id": "icons_trustbadgesblockicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "trustbadgesblockicon()"
     },
     {
@@ -2439,7 +2664,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L308",
       "id": "icons_testimonialsblockicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "testimonialsblockicon()"
     },
     {
@@ -2448,7 +2673,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L318",
       "id": "icons_ctabannerblockicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "ctabannerblockicon()"
     },
     {
@@ -2457,7 +2682,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L329",
       "id": "icons_promotionbannerblockicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "promotionbannerblockicon()"
     },
     {
@@ -2466,7 +2691,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L342",
       "id": "icons_mapregionblockicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "mapregionblockicon()"
     },
     {
@@ -2475,7 +2700,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L353",
       "id": "icons_videoblockicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "videoblockicon()"
     },
     {
@@ -2484,7 +2709,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L367",
       "id": "icons_adddistricttileicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "adddistricttileicon()"
     },
     {
@@ -2493,7 +2718,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L379",
       "id": "icons_updatepricetileicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "updatepricetileicon()"
     },
     {
@@ -2502,7 +2727,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L394",
       "id": "icons_publishcasetileicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "publishcasetileicon()"
     },
     {
@@ -2511,7 +2736,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L407",
       "id": "icons_replaceherotileicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "replaceherotileicon()"
     },
     {
@@ -2520,7 +2745,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L419",
       "id": "icons_addpromotiontileicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "addpromotiontileicon()"
     },
     {
@@ -2529,7 +2754,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L432",
       "id": "icons_buildpagetileicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "buildpagetileicon()"
     },
     {
@@ -2538,7 +2763,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L449",
       "id": "icons_summericon",
-      "community": 0,
+      "community": 1,
       "norm_label": "summericon()"
     },
     {
@@ -2547,7 +2772,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L466",
       "id": "icons_wintericon",
-      "community": 0,
+      "community": 1,
       "norm_label": "wintericon()"
     },
     {
@@ -2556,7 +2781,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L483",
       "id": "icons_promoicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "promoicon()"
     },
     {
@@ -2565,7 +2790,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L504",
       "id": "icons_obikhodlogomark",
-      "community": 0,
+      "community": 1,
       "norm_label": "obikhodlogomark()"
     },
     {
@@ -2574,7 +2799,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L537",
       "id": "icons_drafticon",
-      "community": 0,
+      "community": 1,
       "norm_label": "drafticon()"
     },
     {
@@ -2583,7 +2808,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L550",
       "id": "icons_publishedicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "publishedicon()"
     },
     {
@@ -2592,7 +2817,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/icons.tsx",
       "source_location": "L563",
       "id": "icons_expiredicon",
-      "community": 0,
+      "community": 1,
       "norm_label": "expiredicon()"
     },
     {
@@ -2601,7 +2826,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/PageCatalogWidget.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_admin_pagecatalogwidget_tsx",
-      "community": 5,
+      "community": 4,
       "norm_label": "pagecatalogwidget.tsx"
     },
     {
@@ -2610,7 +2835,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/PageCatalogWidget.tsx",
       "source_location": "L151",
       "id": "pagecatalogwidget_formatdate",
-      "community": 5,
+      "community": 4,
       "norm_label": "formatdate()"
     },
     {
@@ -2619,8 +2844,17 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/PageCatalogWidget.tsx",
       "source_location": "L180",
       "id": "pagecatalogwidget_loadtopn",
-      "community": 5,
+      "community": 4,
       "norm_label": "loadtopn()"
+    },
+    {
+      "label": "ThemeToggleStub.tsx",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/ThemeToggleStub.tsx",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_components_admin_themetogglestub_tsx",
+      "community": 115,
+      "norm_label": "themetogglestub.tsx"
     },
     {
       "label": "BrandIcon.tsx",
@@ -2628,7 +2862,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/BrandIcon.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_admin_brandicon_tsx",
-      "community": 51,
+      "community": 55,
       "norm_label": "brandicon.tsx"
     },
     {
@@ -2637,8 +2871,26 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/BrandIcon.tsx",
       "source_location": "L17",
       "id": "brandicon_brandicon",
-      "community": 51,
+      "community": 55,
       "norm_label": "brandicon()"
+    },
+    {
+      "label": "NavHomeLink.tsx",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/NavHomeLink.tsx",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_components_admin_navhomelink_tsx",
+      "community": 56,
+      "norm_label": "navhomelink.tsx"
+    },
+    {
+      "label": "NavHomeLink()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/NavHomeLink.tsx",
+      "source_location": "L17",
+      "id": "navhomelink_navhomelink",
+      "community": 56,
+      "norm_label": "navhomelink()"
     },
     {
       "label": "AfterLoginFooter.tsx",
@@ -2646,7 +2898,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/AfterLoginFooter.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_admin_afterloginfooter_tsx",
-      "community": 52,
+      "community": 57,
       "norm_label": "afterloginfooter.tsx"
     },
     {
@@ -2655,7 +2907,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/AfterLoginFooter.tsx",
       "source_location": "L26",
       "id": "afterloginfooter_afterloginfooter",
-      "community": 52,
+      "community": 57,
       "norm_label": "afterloginfooter()"
     },
     {
@@ -2664,7 +2916,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/BeforeDashboardStartHere.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_admin_beforedashboardstarthere_tsx",
-      "community": 5,
+      "community": 4,
       "norm_label": "beforedashboardstarthere.tsx"
     },
     {
@@ -2673,7 +2925,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/BeforeDashboardStartHere.tsx",
       "source_location": "L54",
       "id": "beforedashboardstarthere_loadstats",
-      "community": 5,
+      "community": 4,
       "norm_label": "loadstats()"
     },
     {
@@ -2682,7 +2934,7 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/BeforeDashboardStartHere.tsx",
       "source_location": "L110",
       "id": "beforedashboardstarthere_loadrecentedits",
-      "community": 5,
+      "community": 4,
       "norm_label": "loadrecentedits()"
     },
     {
@@ -2691,8 +2943,80 @@
       "source_file": "/Users/a36/obikhod/site/components/admin/BeforeDashboardStartHere.tsx",
       "source_location": "L148",
       "id": "beforedashboardstarthere_formatrelative",
-      "community": 5,
+      "community": 4,
       "norm_label": "formatrelative()"
+    },
+    {
+      "label": "EmptyCollection.tsx",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/empty/EmptyCollection.tsx",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_components_admin_empty_emptycollection_tsx",
+      "community": 116,
+      "norm_label": "emptycollection.tsx"
+    },
+    {
+      "label": "CasesEmpty.tsx",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/empty/CasesEmpty.tsx",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_components_admin_empty_casesempty_tsx",
+      "community": 58,
+      "norm_label": "casesempty.tsx"
+    },
+    {
+      "label": "CasesEmpty()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/empty/CasesEmpty.tsx",
+      "source_location": "L3",
+      "id": "casesempty_casesempty",
+      "community": 58,
+      "norm_label": "casesempty()"
+    },
+    {
+      "label": "LeadsEmpty.tsx",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/empty/LeadsEmpty.tsx",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_components_admin_empty_leadsempty_tsx",
+      "community": 117,
+      "norm_label": "leadsempty.tsx"
+    },
+    {
+      "label": "BlogEmpty.tsx",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/empty/BlogEmpty.tsx",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_components_admin_empty_blogempty_tsx",
+      "community": 59,
+      "norm_label": "blogempty.tsx"
+    },
+    {
+      "label": "BlogEmpty()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/empty/BlogEmpty.tsx",
+      "source_location": "L3",
+      "id": "blogempty_blogempty",
+      "community": 59,
+      "norm_label": "blogempty()"
+    },
+    {
+      "label": "ServicesEmpty.tsx",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/empty/ServicesEmpty.tsx",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_components_admin_empty_servicesempty_tsx",
+      "community": 60,
+      "norm_label": "servicesempty.tsx"
+    },
+    {
+      "label": "ServicesEmpty()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/components/admin/empty/ServicesEmpty.tsx",
+      "source_location": "L3",
+      "id": "servicesempty_servicesempty",
+      "community": 60,
+      "norm_label": "servicesempty()"
     },
     {
       "label": "index.tsx",
@@ -2700,7 +3024,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_icons_services_index_tsx",
-      "community": 4,
+      "community": 6,
       "norm_label": "index.tsx"
     },
     {
@@ -2709,7 +3033,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L14",
       "id": "index_baseprops",
-      "community": 4,
+      "community": 6,
       "norm_label": "baseprops()"
     },
     {
@@ -2718,7 +3042,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L28",
       "id": "index_spilicon",
-      "community": 4,
+      "community": 6,
       "norm_label": "spilicon()"
     },
     {
@@ -2727,7 +3051,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L40",
       "id": "index_valkaicon",
-      "community": 4,
+      "community": 6,
       "norm_label": "valkaicon()"
     },
     {
@@ -2736,7 +3060,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L54",
       "id": "index_udaleniecelikomicon",
-      "community": 4,
+      "community": 6,
       "norm_label": "udaleniecelikomicon()"
     },
     {
@@ -2745,7 +3069,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L65",
       "id": "index_udaleniechastiamiicon",
-      "community": 4,
+      "community": 6,
       "norm_label": "udaleniechastiamiicon()"
     },
     {
@@ -2754,7 +3078,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L77",
       "id": "index_korchevaniyeicon",
-      "community": 4,
+      "community": 6,
       "norm_label": "korchevaniyeicon()"
     },
     {
@@ -2763,7 +3087,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L91",
       "id": "index_kronirovaniyeicon",
-      "community": 4,
+      "community": 6,
       "norm_label": "kronirovaniyeicon()"
     },
     {
@@ -2772,7 +3096,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L104",
       "id": "index_sanitarnayaicon",
-      "community": 4,
+      "community": 6,
       "norm_label": "sanitarnayaicon()"
     },
     {
@@ -2781,7 +3105,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L116",
       "id": "index_kablingicon",
-      "community": 4,
+      "community": 6,
       "norm_label": "kablingicon()"
     },
     {
@@ -2790,7 +3114,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L130",
       "id": "index_uborkasnegaicon",
-      "community": 4,
+      "community": 6,
       "norm_label": "uborkasnegaicon()"
     },
     {
@@ -2799,7 +3123,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L143",
       "id": "index_vyvozsnegaicon",
-      "community": 4,
+      "community": 6,
       "norm_label": "vyvozsnegaicon()"
     },
     {
@@ -2808,7 +3132,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L155",
       "id": "index_chistkavodostokovicon",
-      "community": 4,
+      "community": 6,
       "norm_label": "chistkavodostokovicon()"
     },
     {
@@ -2817,7 +3141,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L168",
       "id": "index_alpinizmicon",
-      "community": 4,
+      "community": 6,
       "norm_label": "alpinizmicon()"
     },
     {
@@ -2826,7 +3150,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L180",
       "id": "index_avtovyshkaicon",
-      "community": 4,
+      "community": 6,
       "norm_label": "avtovyshkaicon()"
     },
     {
@@ -2835,7 +3159,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L193",
       "id": "index_pokostravyicon",
-      "community": 4,
+      "community": 6,
       "norm_label": "pokostravyicon()"
     },
     {
@@ -2844,7 +3168,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L208",
       "id": "index_vyvozbytovogoicon",
-      "community": 4,
+      "community": 6,
       "norm_label": "vyvozbytovogoicon()"
     },
     {
@@ -2853,7 +3177,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L223",
       "id": "index_vyvozstroitelnogoicon",
-      "community": 4,
+      "community": 6,
       "norm_label": "vyvozstroitelnogoicon()"
     },
     {
@@ -2862,7 +3186,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L237",
       "id": "index_konteynericon",
-      "community": 4,
+      "community": 6,
       "norm_label": "konteynericon()"
     },
     {
@@ -2871,7 +3195,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L247",
       "id": "index_demontazhsaraevicon",
-      "community": 4,
+      "community": 6,
       "norm_label": "demontazhsaraevicon()"
     },
     {
@@ -2880,7 +3204,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L258",
       "id": "index_demontazhperegorodokicon",
-      "community": 4,
+      "community": 6,
       "norm_label": "demontazhperegorodokicon()"
     },
     {
@@ -2889,7 +3213,7 @@
       "source_file": "/Users/a36/obikhod/site/components/icons/services/index.tsx",
       "source_location": "L271",
       "id": "index_raschistkaicon",
-      "community": 4,
+      "community": 6,
       "norm_label": "raschistkaicon()"
     },
     {
@@ -2898,7 +3222,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/LicenseBadge.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_licensebadge_tsx",
-      "community": 53,
+      "community": 61,
       "norm_label": "licensebadge.tsx"
     },
     {
@@ -2907,7 +3231,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/LicenseBadge.tsx",
       "source_location": "L5",
       "id": "licensebadge_licensebadge",
-      "community": 53,
+      "community": 61,
       "norm_label": "licensebadge()"
     },
     {
@@ -2916,7 +3240,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/CtaMessengers.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_ctamessengers_tsx",
-      "community": 54,
+      "community": 62,
       "norm_label": "ctamessengers.tsx"
     },
     {
@@ -2925,7 +3249,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/CtaMessengers.tsx",
       "source_location": "L12",
       "id": "ctamessengers_ctamessengers",
-      "community": 54,
+      "community": 62,
       "norm_label": "ctamessengers()"
     },
     {
@@ -2934,7 +3258,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/Footer.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_footer_tsx",
-      "community": 101,
+      "community": 118,
       "norm_label": "footer.tsx"
     },
     {
@@ -2943,7 +3267,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/RichTextRenderer.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_richtextrenderer_tsx",
-      "community": 55,
+      "community": 63,
       "norm_label": "richtextrenderer.tsx"
     },
     {
@@ -2952,7 +3276,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/RichTextRenderer.tsx",
       "source_location": "L8",
       "id": "richtextrenderer_richtextrenderer",
-      "community": 55,
+      "community": 63,
       "norm_label": "richtextrenderer()"
     },
     {
@@ -2997,7 +3321,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Hero.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_hero_tsx",
-      "community": 102,
+      "community": 119,
       "norm_label": "hero.tsx"
     },
     {
@@ -3006,7 +3330,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Team.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_team_tsx",
-      "community": 56,
+      "community": 64,
       "norm_label": "team.tsx"
     },
     {
@@ -3015,7 +3339,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Team.tsx",
       "source_location": "L42",
       "id": "team_team",
-      "community": 56,
+      "community": 64,
       "norm_label": "team()"
     },
     {
@@ -3024,7 +3348,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Subscription.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_subscription_tsx",
-      "community": 103,
+      "community": 120,
       "norm_label": "subscription.tsx"
     },
     {
@@ -3033,7 +3357,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/LeadForm.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_leadform_tsx",
-      "community": 57,
+      "community": 65,
       "norm_label": "leadform.tsx"
     },
     {
@@ -3042,7 +3366,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/LeadForm.tsx",
       "source_location": "L10",
       "id": "leadform_leadform",
-      "community": 57,
+      "community": 65,
       "norm_label": "leadform()"
     },
     {
@@ -3051,7 +3375,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/CtaFooter.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_ctafooter_tsx",
-      "community": 104,
+      "community": 121,
       "norm_label": "ctafooter.tsx"
     },
     {
@@ -3060,7 +3384,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Guarantees.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_guarantees_tsx",
-      "community": 58,
+      "community": 66,
       "norm_label": "guarantees.tsx"
     },
     {
@@ -3069,7 +3393,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Guarantees.tsx",
       "source_location": "L60",
       "id": "guarantees_guarantees",
-      "community": 58,
+      "community": 66,
       "norm_label": "guarantees()"
     },
     {
@@ -3078,7 +3402,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Services.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_services_tsx",
-      "community": 59,
+      "community": 67,
       "norm_label": "services.tsx"
     },
     {
@@ -3087,7 +3411,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Services.tsx",
       "source_location": "L126",
       "id": "services_sw",
-      "community": 59,
+      "community": 67,
       "norm_label": "sw()"
     },
     {
@@ -3096,7 +3420,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/B2B.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_b2b_tsx",
-      "community": 60,
+      "community": 68,
       "norm_label": "b2b.tsx"
     },
     {
@@ -3105,7 +3429,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/B2B.tsx",
       "source_location": "L4",
       "id": "b2b_b2b",
-      "community": 60,
+      "community": 68,
       "norm_label": "b2b()"
     },
     {
@@ -3114,7 +3438,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Calculator.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_calculator_tsx",
-      "community": 33,
+      "community": 32,
       "norm_label": "calculator.tsx"
     },
     {
@@ -3123,7 +3447,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Calculator.tsx",
       "source_location": "L169",
       "id": "calculator_initsliders",
-      "community": 33,
+      "community": 32,
       "norm_label": "initsliders()"
     },
     {
@@ -3132,7 +3456,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Calculator.tsx",
       "source_location": "L180",
       "id": "calculator_fmt",
-      "community": 33,
+      "community": 32,
       "norm_label": "fmt()"
     },
     {
@@ -3141,7 +3465,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Calculator.tsx",
       "source_location": "L182",
       "id": "calculator_calculator",
-      "community": 33,
+      "community": 32,
       "norm_label": "calculator()"
     },
     {
@@ -3150,7 +3474,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Cases.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_cases_tsx",
-      "community": 105,
+      "community": 122,
       "norm_label": "cases.tsx"
     },
     {
@@ -3159,7 +3483,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/FAQ.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_faq_tsx",
-      "community": 106,
+      "community": 123,
       "norm_label": "faq.tsx"
     },
     {
@@ -3168,7 +3492,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/Reviews.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_reviews_tsx",
-      "community": 107,
+      "community": 124,
       "norm_label": "reviews.tsx"
     },
     {
@@ -3177,7 +3501,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/How.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_sections_how_tsx",
-      "community": 61,
+      "community": 69,
       "norm_label": "how.tsx"
     },
     {
@@ -3186,7 +3510,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/sections/How.tsx",
       "source_location": "L49",
       "id": "how_how",
-      "community": 61,
+      "community": 69,
       "norm_label": "how()"
     },
     {
@@ -3195,7 +3519,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/LogoMark.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_shared_logomark_tsx",
-      "community": 62,
+      "community": 70,
       "norm_label": "logomark.tsx"
     },
     {
@@ -3204,7 +3528,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/LogoMark.tsx",
       "source_location": "L3",
       "id": "logomark_logomark",
-      "community": 62,
+      "community": 70,
       "norm_label": "logomark()"
     },
     {
@@ -3213,7 +3537,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/Icon.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_shared_icon_tsx",
-      "community": 63,
+      "community": 71,
       "norm_label": "icon.tsx"
     },
     {
@@ -3222,7 +3546,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/Icon.tsx",
       "source_location": "L5",
       "id": "icon_base",
-      "community": 63,
+      "community": 71,
       "norm_label": "base()"
     },
     {
@@ -3231,7 +3555,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/graphics.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_shared_graphics_tsx",
-      "community": 64,
+      "community": 72,
       "norm_label": "graphics.tsx"
     },
     {
@@ -3240,7 +3564,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/graphics.tsx",
       "source_location": "L8",
       "id": "graphics_ringspattern",
-      "community": 64,
+      "community": 72,
       "norm_label": "ringspattern()"
     },
     {
@@ -3249,7 +3573,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/Placeholder.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_shared_placeholder_tsx",
-      "community": 38,
+      "community": 37,
       "norm_label": "placeholder.tsx"
     },
     {
@@ -3258,7 +3582,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/Placeholder.tsx",
       "source_location": "L10",
       "id": "placeholder_placeholder",
-      "community": 38,
+      "community": 37,
       "norm_label": "placeholder()"
     },
     {
@@ -3267,7 +3591,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/Placeholder.tsx",
       "source_location": "L28",
       "id": "placeholder_avatar",
-      "community": 38,
+      "community": 37,
       "norm_label": "avatar()"
     },
     {
@@ -3276,7 +3600,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/CloseDetailsOnClickOutside.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_shared_closedetailsonclickoutside_tsx",
-      "community": 65,
+      "community": 73,
       "norm_label": "closedetailsonclickoutside.tsx"
     },
     {
@@ -3285,7 +3609,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/CloseDetailsOnClickOutside.tsx",
       "source_location": "L16",
       "id": "closedetailsonclickoutside_closedetailsonclickoutside",
-      "community": 65,
+      "community": 73,
       "norm_label": "closedetailsonclickoutside()"
     },
     {
@@ -3294,7 +3618,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/BeforeAfter.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_marketing_shared_beforeafter_tsx",
-      "community": 66,
+      "community": 74,
       "norm_label": "beforeafter.tsx"
     },
     {
@@ -3303,7 +3627,7 @@
       "source_file": "/Users/a36/obikhod/site/components/marketing/_shared/BeforeAfter.tsx",
       "source_location": "L15",
       "id": "beforeafter_beforeafter",
-      "community": 66,
+      "community": 74,
       "norm_label": "beforeafter()"
     },
     {
@@ -3312,7 +3636,7 @@
       "source_file": "/Users/a36/obikhod/site/components/seo/JsonLd.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_seo_jsonld_tsx",
-      "community": 67,
+      "community": 75,
       "norm_label": "jsonld.tsx"
     },
     {
@@ -3321,7 +3645,7 @@
       "source_file": "/Users/a36/obikhod/site/components/seo/JsonLd.tsx",
       "source_location": "L9",
       "id": "jsonld_jsonld",
-      "community": 67,
+      "community": 75,
       "norm_label": "jsonld()"
     },
     {
@@ -3330,7 +3654,7 @@
       "source_file": "/Users/a36/obikhod/site/components/seo/Breadcrumbs.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_seo_breadcrumbs_tsx",
-      "community": 108,
+      "community": 125,
       "norm_label": "breadcrumbs.tsx"
     },
     {
@@ -3339,7 +3663,7 @@
       "source_file": "/Users/a36/obikhod/site/components/analytics/YandexMetrika.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_components_analytics_yandexmetrika_tsx",
-      "community": 109,
+      "community": 126,
       "norm_label": "yandexmetrika.tsx"
     },
     {
@@ -3348,7 +3672,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/publish-services.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_scripts_publish_services_ts",
-      "community": 11,
+      "community": 10,
       "norm_label": "publish-services.ts"
     },
     {
@@ -3357,7 +3681,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/publish-services.ts",
       "source_location": "L25",
       "id": "publish_services_publishdraftservices",
-      "community": 11,
+      "community": 10,
       "norm_label": "publishdraftservices()"
     },
     {
@@ -3366,7 +3690,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/publish-services.ts",
       "source_location": "L61",
       "id": "publish_services_main",
-      "community": 11,
+      "community": 10,
       "norm_label": "main()"
     },
     {
@@ -3375,7 +3699,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/seed.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_scripts_seed_ts",
-      "community": 11,
+      "community": 10,
       "norm_label": "seed.ts"
     },
     {
@@ -3384,7 +3708,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/seed.ts",
       "source_location": "L34",
       "id": "seed_lexicalparagraph",
-      "community": 11,
+      "community": 10,
       "norm_label": "lexicalparagraph()"
     },
     {
@@ -3393,7 +3717,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/seed.ts",
       "source_location": "L65",
       "id": "seed_findonebyslug",
-      "community": 11,
+      "community": 10,
       "norm_label": "findonebyslug()"
     },
     {
@@ -3402,7 +3726,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/seed.ts",
       "source_location": "L78",
       "id": "seed_ensurestats",
-      "community": 11,
+      "community": 10,
       "norm_label": "ensurestats()"
     },
     {
@@ -3411,7 +3735,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/seed.ts",
       "source_location": "L442",
       "id": "seed_main",
-      "community": 11,
+      "community": 10,
       "norm_label": "main()"
     },
     {
@@ -3447,7 +3771,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/generate-logo-concepts.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_scripts_generate_logo_concepts_ts",
-      "community": 39,
+      "community": 38,
       "norm_label": "generate-logo-concepts.ts"
     },
     {
@@ -3456,7 +3780,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/generate-logo-concepts.ts",
       "source_location": "L88",
       "id": "generate_logo_concepts_download",
-      "community": 39,
+      "community": 38,
       "norm_label": "download()"
     },
     {
@@ -3465,7 +3789,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/generate-logo-concepts.ts",
       "source_location": "L95",
       "id": "generate_logo_concepts_main",
-      "community": 39,
+      "community": 38,
       "norm_label": "main()"
     },
     {
@@ -3514,12 +3838,39 @@
       "norm_label": "main()"
     },
     {
+      "label": "seed-admin.ts",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/scripts/seed-admin.ts",
+      "source_location": "L1",
+      "id": "users_a36_obikhod_site_scripts_seed_admin_ts",
+      "community": 10,
+      "norm_label": "seed-admin.ts"
+    },
+    {
+      "label": "ensureUser()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/scripts/seed-admin.ts",
+      "source_location": "L20",
+      "id": "seed_admin_ensureuser",
+      "community": 10,
+      "norm_label": "ensureuser()"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "/Users/a36/obikhod/site/scripts/seed-admin.ts",
+      "source_location": "L37",
+      "id": "seed_admin_main",
+      "community": 10,
+      "norm_label": "main()"
+    },
+    {
       "label": "render-logo-exports.ts",
       "file_type": "code",
       "source_file": "/Users/a36/obikhod/site/scripts/render-logo-exports.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_scripts_render_logo_exports_ts",
-      "community": 68,
+      "community": 76,
       "norm_label": "render-logo-exports.ts"
     },
     {
@@ -3528,7 +3879,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/render-logo-exports.ts",
       "source_location": "L38",
       "id": "render_logo_exports_main",
-      "community": 68,
+      "community": 76,
       "norm_label": "main()"
     },
     {
@@ -3537,7 +3888,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/admin/telegram-smoke.mjs",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_scripts_admin_telegram_smoke_mjs",
-      "community": 34,
+      "community": 33,
       "norm_label": "telegram-smoke.mjs"
     },
     {
@@ -3546,7 +3897,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/admin/telegram-smoke.mjs",
       "source_location": "L27",
       "id": "telegram_smoke_api",
-      "community": 34,
+      "community": 33,
       "norm_label": "api()"
     },
     {
@@ -3555,7 +3906,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/admin/telegram-smoke.mjs",
       "source_location": "L29",
       "id": "telegram_smoke_step",
-      "community": 34,
+      "community": 33,
       "norm_label": "step()"
     },
     {
@@ -3564,7 +3915,7 @@
       "source_file": "/Users/a36/obikhod/site/scripts/admin/telegram-smoke.mjs",
       "source_location": "L42",
       "id": "telegram_smoke_getjson",
-      "community": 34,
+      "community": 33,
       "norm_label": "getjson()"
     },
     {
@@ -3609,7 +3960,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/payload.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_payload_ts",
-      "community": 5,
+      "community": 4,
       "norm_label": "payload.ts"
     },
     {
@@ -3618,7 +3969,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/payload.ts",
       "source_location": "L10",
       "id": "payload_payloadclient",
-      "community": 5,
+      "community": 4,
       "norm_label": "payloadclient()"
     },
     {
@@ -3762,7 +4113,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/admin/publish-gate-messages.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_admin_publish_gate_messages_ts",
-      "community": 110,
+      "community": 127,
       "norm_label": "publish-gate-messages.ts"
     },
     {
@@ -3771,7 +4122,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/admin/publish-gate.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_admin_publish_gate_ts",
-      "community": 40,
+      "community": 39,
       "norm_label": "publish-gate.ts"
     },
     {
@@ -3780,7 +4131,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/admin/publish-gate.ts",
       "source_location": "L26",
       "id": "publish_gate_countlexicalwords",
-      "community": 40,
+      "community": 39,
       "norm_label": "countlexicalwords()"
     },
     {
@@ -3789,7 +4140,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/admin/publish-gate.ts",
       "source_location": "L62",
       "id": "publish_gate_buildpublishgate",
-      "community": 40,
+      "community": 39,
       "norm_label": "buildpublishgate()"
     },
     {
@@ -3798,7 +4149,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/admin/preview-routes.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_admin_preview_routes_ts",
-      "community": 1,
+      "community": 0,
       "norm_label": "preview-routes.ts"
     },
     {
@@ -3807,25 +4158,25 @@
       "source_file": "/Users/a36/obikhod/site/lib/admin/preview-routes.ts",
       "source_location": "L22",
       "id": "preview_routes_computepreviewurl",
-      "community": 1,
+      "community": 0,
       "norm_label": "computepreviewurl()"
     },
     {
       "label": "resolveSlug()",
       "file_type": "code",
       "source_file": "/Users/a36/obikhod/site/lib/admin/preview-routes.ts",
-      "source_location": "L53",
+      "source_location": "L56",
       "id": "preview_routes_resolveslug",
-      "community": 1,
+      "community": 0,
       "norm_label": "resolveslug()"
     },
     {
       "label": "isPreviewableCollection()",
       "file_type": "code",
       "source_file": "/Users/a36/obikhod/site/lib/admin/preview-routes.ts",
-      "source_location": "L88",
+      "source_location": "L91",
       "id": "preview_routes_ispreviewablecollection",
-      "community": 1,
+      "community": 0,
       "norm_label": "ispreviewablecollection()"
     },
     {
@@ -3834,7 +4185,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/telegram/sendMessage.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_telegram_sendmessage_ts",
-      "community": 6,
+      "community": 2,
       "norm_label": "sendmessage.ts"
     },
     {
@@ -3843,7 +4194,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/telegram/sendMessage.ts",
       "source_location": "L20",
       "id": "sendmessage_telegramsenderror",
-      "community": 6,
+      "community": 2,
       "norm_label": "telegramsenderror"
     },
     {
@@ -3852,7 +4203,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/telegram/sendMessage.ts",
       "source_location": "L21",
       "id": "sendmessage_telegramsenderror_constructor",
-      "community": 6,
+      "community": 2,
       "norm_label": ".constructor()"
     },
     {
@@ -3861,7 +4212,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/telegram/sendMessage.ts",
       "source_location": "L41",
       "id": "sendmessage_sendmessage",
-      "community": 6,
+      "community": 2,
       "norm_label": "sendmessage()"
     },
     {
@@ -3915,7 +4266,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/queries.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_seo_queries_ts",
-      "community": 111,
+      "community": 128,
       "norm_label": "queries.ts"
     },
     {
@@ -3924,7 +4275,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/canonical.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_seo_canonical_ts",
-      "community": 2,
+      "community": 3,
       "norm_label": "canonical.ts"
     },
     {
@@ -3933,7 +4284,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/canonical.ts",
       "source_location": "L44",
       "id": "canonical_normalizepath",
-      "community": 2,
+      "community": 3,
       "norm_label": "normalizepath()"
     },
     {
@@ -3942,7 +4293,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/canonical.ts",
       "source_location": "L65",
       "id": "canonical_canonicalfor",
-      "community": 2,
+      "community": 3,
       "norm_label": "canonicalfor()"
     },
     {
@@ -3951,7 +4302,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/canonical.ts",
       "source_location": "L114",
       "id": "canonical_canonicalforlisting",
-      "community": 2,
+      "community": 3,
       "norm_label": "canonicalforlisting()"
     },
     {
@@ -3960,7 +4311,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/canonical.ts",
       "source_location": "L131",
       "id": "canonical_canonicalwithoverride",
-      "community": 2,
+      "community": 3,
       "norm_label": "canonicalwithoverride()"
     },
     {
@@ -4068,7 +4419,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/indexnow.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_seo_indexnow_ts",
-      "community": 1,
+      "community": 0,
       "norm_label": "indexnow.ts"
     },
     {
@@ -4077,7 +4428,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/indexnow.ts",
       "source_location": "L7",
       "id": "indexnow_pushtoindexnow",
-      "community": 1,
+      "community": 0,
       "norm_label": "pushtoindexnow()"
     },
     {
@@ -4086,7 +4437,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/metadata.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_lib_seo_metadata_ts",
-      "community": 2,
+      "community": 3,
       "norm_label": "metadata.ts"
     },
     {
@@ -4095,7 +4446,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/metadata.ts",
       "source_location": "L13",
       "id": "metadata_buildhomemetadata",
-      "community": 2,
+      "community": 3,
       "norm_label": "buildhomemetadata()"
     },
     {
@@ -4104,7 +4455,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/metadata.ts",
       "source_location": "L39",
       "id": "metadata_buildpillarmetadata",
-      "community": 2,
+      "community": 3,
       "norm_label": "buildpillarmetadata()"
     },
     {
@@ -4113,7 +4464,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/metadata.ts",
       "source_location": "L74",
       "id": "metadata_buildprogrammaticmetadata",
-      "community": 2,
+      "community": 3,
       "norm_label": "buildprogrammaticmetadata()"
     },
     {
@@ -4122,7 +4473,7 @@
       "source_file": "/Users/a36/obikhod/site/lib/seo/metadata.ts",
       "source_location": "L114",
       "id": "metadata_builddistricthubmetadata",
-      "community": 2,
+      "community": 3,
       "norm_label": "builddistricthubmetadata()"
     },
     {
@@ -4131,7 +4482,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/B2BPages.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_b2bpages_ts",
-      "community": 112,
+      "community": 129,
       "norm_label": "b2bpages.ts"
     },
     {
@@ -4140,7 +4491,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Blog.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_blog_ts",
-      "community": 113,
+      "community": 130,
       "norm_label": "blog.ts"
     },
     {
@@ -4149,7 +4500,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Authors.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_authors_ts",
-      "community": 114,
+      "community": 131,
       "norm_label": "authors.ts"
     },
     {
@@ -4158,7 +4509,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Districts.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_districts_ts",
-      "community": 115,
+      "community": 132,
       "norm_label": "districts.ts"
     },
     {
@@ -4167,7 +4518,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/ServiceDistricts.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_servicedistricts_ts",
-      "community": 69,
+      "community": 77,
       "norm_label": "servicedistricts.ts"
     },
     {
@@ -4176,7 +4527,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/ServiceDistricts.ts",
       "source_location": "L17",
       "id": "servicedistricts_requiregatesforpublish",
-      "community": 69,
+      "community": 77,
       "norm_label": "requiregatesforpublish()"
     },
     {
@@ -4185,7 +4536,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Leads.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_leads_ts",
-      "community": 116,
+      "community": 133,
       "norm_label": "leads.ts"
     },
     {
@@ -4194,7 +4545,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Redirects.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_redirects_ts",
-      "community": 117,
+      "community": 134,
       "norm_label": "redirects.ts"
     },
     {
@@ -4203,7 +4554,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Cases.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_cases_ts",
-      "community": 118,
+      "community": 135,
       "norm_label": "cases.ts"
     },
     {
@@ -4212,7 +4563,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Persons.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_persons_ts",
-      "community": 119,
+      "community": 136,
       "norm_label": "persons.ts"
     },
     {
@@ -4221,7 +4572,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Users.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_users_ts",
-      "community": 120,
+      "community": 137,
       "norm_label": "users.ts"
     },
     {
@@ -4230,7 +4581,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Media.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_media_ts",
-      "community": 121,
+      "community": 138,
       "norm_label": "media.ts"
     },
     {
@@ -4239,7 +4590,7 @@
       "source_file": "/Users/a36/obikhod/site/collections/Services.ts",
       "source_location": "L1",
       "id": "users_a36_obikhod_site_collections_services_ts",
-      "community": 122,
+      "community": 139,
       "norm_label": "services.ts"
     },
     {
@@ -4248,7 +4599,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L1",
       "id": "users_a36_obikhod_design_system_icons_services_serviceicons_tsx",
-      "community": 3,
+      "community": 5,
       "norm_label": "serviceicons.tsx"
     },
     {
@@ -4257,7 +4608,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L35",
       "id": "serviceicons_spilicon",
-      "community": 3,
+      "community": 5,
       "norm_label": "spilicon()"
     },
     {
@@ -4266,7 +4617,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L48",
       "id": "serviceicons_valkaicon",
-      "community": 3,
+      "community": 5,
       "norm_label": "valkaicon()"
     },
     {
@@ -4275,7 +4626,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L63",
       "id": "serviceicons_stumpicon",
-      "community": 3,
+      "community": 5,
       "norm_label": "stumpicon()"
     },
     {
@@ -4284,7 +4635,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L78",
       "id": "serviceicons_pruneicon",
-      "community": 3,
+      "community": 5,
       "norm_label": "pruneicon()"
     },
     {
@@ -4293,7 +4644,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L94",
       "id": "serviceicons_kablingicon",
-      "community": 3,
+      "community": 5,
       "norm_label": "kablingicon()"
     },
     {
@@ -4302,7 +4653,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L107",
       "id": "serviceicons_sprayicon",
-      "community": 3,
+      "community": 5,
       "norm_label": "sprayicon()"
     },
     {
@@ -4311,7 +4662,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L124",
       "id": "serviceicons_roofsnowicon",
-      "community": 3,
+      "community": 5,
       "norm_label": "roofsnowicon()"
     },
     {
@@ -4320,7 +4671,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L138",
       "id": "serviceicons_guttericon",
-      "community": 3,
+      "community": 5,
       "norm_label": "guttericon()"
     },
     {
@@ -4329,7 +4680,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L152",
       "id": "serviceicons_climbericon",
-      "community": 3,
+      "community": 5,
       "norm_label": "climbericon()"
     },
     {
@@ -4338,7 +4689,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L165",
       "id": "serviceicons_boomlifticon",
-      "community": 3,
+      "community": 5,
       "norm_label": "boomlifticon()"
     },
     {
@@ -4347,7 +4698,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L181",
       "id": "serviceicons_dumpstericon",
-      "community": 3,
+      "community": 5,
       "norm_label": "dumpstericon()"
     },
     {
@@ -4356,7 +4707,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L197",
       "id": "serviceicons_demolitionicon",
-      "community": 3,
+      "community": 5,
       "norm_label": "demolitionicon()"
     },
     {
@@ -4365,7 +4716,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L210",
       "id": "serviceicons_chippericon",
-      "community": 3,
+      "community": 5,
       "norm_label": "chippericon()"
     },
     {
@@ -4374,7 +4725,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L227",
       "id": "serviceicons_fixedpriceicon",
-      "community": 3,
+      "community": 5,
       "norm_label": "fixedpriceicon()"
     },
     {
@@ -4383,7 +4734,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L237",
       "id": "serviceicons_fastresponseicon",
-      "community": 3,
+      "community": 5,
       "norm_label": "fastresponseicon()"
     },
     {
@@ -4392,7 +4743,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L247",
       "id": "serviceicons_legalshieldicon",
-      "community": 3,
+      "community": 5,
       "norm_label": "legalshieldicon()"
     },
     {
@@ -4401,7 +4752,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L255",
       "id": "serviceicons_snowtruckicon",
-      "community": 3,
+      "community": 5,
       "norm_label": "snowtruckicon()"
     },
     {
@@ -4410,7 +4761,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L271",
       "id": "serviceicons_lawnmowericon",
-      "community": 3,
+      "community": 5,
       "norm_label": "lawnmowericon()"
     },
     {
@@ -4419,7 +4770,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L285",
       "id": "serviceicons_excavatoricon",
-      "community": 3,
+      "community": 5,
       "norm_label": "excavatoricon()"
     },
     {
@@ -4428,7 +4779,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L298",
       "id": "serviceicons_brushicon",
-      "community": 3,
+      "community": 5,
       "norm_label": "brushicon()"
     },
     {
@@ -4437,7 +4788,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L314",
       "id": "serviceicons_winterdecoricon",
-      "community": 3,
+      "community": 5,
       "norm_label": "winterdecoricon()"
     },
     {
@@ -4446,7 +4797,7 @@
       "source_file": "/Users/a36/obikhod/design-system/icons/services/ServiceIcons.tsx",
       "source_location": "L332",
       "id": "serviceicons_facadecleanicon",
-      "community": 3,
+      "community": 5,
       "norm_label": "facadecleanicon()"
     }
   ],
@@ -5892,6 +6243,18 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/scripts/seed-admin.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_scripts_seed_admin_ts",
+      "_tgt": "users_a36_obikhod_site_payload_config_ts",
+      "source": "users_a36_obikhod_site_payload_config_ts",
+      "target": "users_a36_obikhod_site_scripts_seed_admin_ts",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/Users/a36/obikhod/site/proxy.ts",
@@ -6915,7 +7278,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/Users/a36/obikhod/site/app/(marketing)/layout.tsx",
-      "source_location": "L56",
+      "source_location": "L73",
       "weight": 1.0,
       "_src": "users_a36_obikhod_site_app_marketing_layout_tsx",
       "_tgt": "layout_marketinglayout",
@@ -7440,6 +7803,30 @@
       "target": "sendmessage_sendmessage"
     },
     {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-a11y.spec.ts",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_src": "route_post",
+      "_tgt": "admin_a11y_spec_trylogin",
+      "source": "route_post",
+      "target": "admin_a11y_spec_trylogin"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-mobile.spec.ts",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_src": "route_post",
+      "_tgt": "admin_mobile_spec_trylogin",
+      "source": "route_post",
+      "target": "admin_mobile_spec_trylogin"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/Users/a36/obikhod/site/app/api/health/route.ts",
@@ -7497,6 +7884,18 @@
       "_tgt": "route_get",
       "source": "route_get",
       "target": "users_a36_obikhod_site_app_api_revalidate_route_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/api/admin/leads/count/route.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_app_payload_api_admin_leads_count_route_ts",
+      "_tgt": "route_get",
+      "source": "route_get",
+      "target": "users_a36_obikhod_site_app_payload_api_admin_leads_count_route_ts",
       "confidence_score": 1.0
     },
     {
@@ -7670,6 +8069,30 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/admin/catalog/page.tsx",
+      "source_location": "L83",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_app_payload_admin_catalog_page_tsx",
+      "_tgt": "page_admincatalogpage",
+      "source": "users_a36_obikhod_site_app_payload_admin_catalog_page_tsx",
+      "target": "page_admincatalogpage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/Users/a36/obikhod/site/app/(payload)/admin/catalog/page.tsx",
+      "source_location": "L76",
+      "weight": 1.0,
+      "_src": "page_admincatalogpage",
+      "_tgt": "payload_payloadclient",
+      "source": "page_admincatalogpage",
+      "target": "payload_payloadclient"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "/Users/a36/obikhod/site/app/(payload)/admin/[[...segments]]/page.tsx",
       "source_location": "L18",
       "weight": 1.0,
@@ -7766,6 +8189,30 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-a11y.spec.ts",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_tests_e2e_admin_a11y_spec_ts",
+      "_tgt": "admin_a11y_spec_trylogin",
+      "source": "users_a36_obikhod_site_tests_e2e_admin_a11y_spec_ts",
+      "target": "admin_a11y_spec_trylogin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-a11y.spec.ts",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_tests_e2e_admin_a11y_spec_ts",
+      "_tgt": "admin_a11y_spec_runaxe",
+      "source": "users_a36_obikhod_site_tests_e2e_admin_a11y_spec_ts",
+      "target": "admin_a11y_spec_runaxe",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "/Users/a36/obikhod/site/tests/e2e/us6-wave2a-routes.spec.ts",
       "source_location": "L11",
       "weight": 1.0,
@@ -7773,6 +8220,42 @@
       "_tgt": "us6_wave2a_routes_spec_haspublished",
       "source": "users_a36_obikhod_site_tests_e2e_us6_wave2a_routes_spec_ts",
       "target": "us6_wave2a_routes_spec_haspublished",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-empty-list-wiring.spec.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_tests_e2e_admin_empty_list_wiring_spec_ts",
+      "_tgt": "admin_empty_list_wiring_spec_login",
+      "source": "users_a36_obikhod_site_tests_e2e_admin_empty_list_wiring_spec_ts",
+      "target": "admin_empty_list_wiring_spec_login",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-header-chrome-polish.spec.ts",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_tests_e2e_admin_header_chrome_polish_spec_ts",
+      "_tgt": "admin_header_chrome_polish_spec_login",
+      "source": "users_a36_obikhod_site_tests_e2e_admin_header_chrome_polish_spec_ts",
+      "target": "admin_header_chrome_polish_spec_login",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-services-preview.spec.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_tests_e2e_admin_services_preview_spec_ts",
+      "_tgt": "admin_services_preview_spec_login",
+      "source": "users_a36_obikhod_site_tests_e2e_admin_services_preview_spec_ts",
+      "target": "admin_services_preview_spec_login",
       "confidence_score": 1.0
     },
     {
@@ -7797,6 +8280,30 @@
       "_tgt": "admin_design_compliance_spec_cssnorm",
       "source": "users_a36_obikhod_site_tests_e2e_admin_design_compliance_spec_ts",
       "target": "admin_design_compliance_spec_cssnorm",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-mobile.spec.ts",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_tests_e2e_admin_mobile_spec_ts",
+      "_tgt": "admin_mobile_spec_trylogin",
+      "source": "users_a36_obikhod_site_tests_e2e_admin_mobile_spec_ts",
+      "target": "admin_mobile_spec_trylogin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/tests/e2e/admin-mobile.spec.ts",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_tests_e2e_admin_mobile_spec_ts",
+      "_tgt": "admin_mobile_spec_findmediaqueryrules",
+      "source": "users_a36_obikhod_site_tests_e2e_admin_mobile_spec_ts",
+      "target": "admin_mobile_spec_findmediaqueryrules",
       "confidence_score": 1.0
     },
     {
@@ -7922,6 +8429,18 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/components/admin/LeadsBadgeOverlay.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_components_admin_leadsbadgeoverlay_tsx",
+      "_tgt": "leadsbadgeoverlay_leadsbadgeoverlay",
+      "source": "users_a36_obikhod_site_components_admin_leadsbadgeoverlay_tsx",
+      "target": "leadsbadgeoverlay_leadsbadgeoverlay",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "/Users/a36/obikhod/site/components/admin/AdminLogin.tsx",
       "source_location": "L75",
       "weight": 1.0,
@@ -8013,6 +8532,18 @@
       "_tgt": "beforeloginlockup_beforeloginlockup",
       "source": "users_a36_obikhod_site_components_admin_beforeloginlockup_tsx",
       "target": "beforeloginlockup_beforeloginlockup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/components/admin/LeadsBadgeProvider.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_components_admin_leadsbadgeprovider_tsx",
+      "_tgt": "leadsbadgeprovider_leadsbadgeprovider",
+      "source": "users_a36_obikhod_site_components_admin_leadsbadgeprovider_tsx",
+      "target": "leadsbadgeprovider_leadsbadgeprovider",
       "confidence_score": 1.0
     },
     {
@@ -8546,6 +9077,18 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/components/admin/NavHomeLink.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_components_admin_navhomelink_tsx",
+      "_tgt": "navhomelink_navhomelink",
+      "source": "users_a36_obikhod_site_components_admin_navhomelink_tsx",
+      "target": "navhomelink_navhomelink",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "/Users/a36/obikhod/site/components/admin/AfterLoginFooter.tsx",
       "source_location": "L26",
       "weight": 1.0,
@@ -8614,6 +9157,42 @@
       "_tgt": "payload_payloadclient",
       "source": "beforedashboardstarthere_loadrecentedits",
       "target": "payload_payloadclient"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/components/admin/empty/CasesEmpty.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_components_admin_empty_casesempty_tsx",
+      "_tgt": "casesempty_casesempty",
+      "source": "users_a36_obikhod_site_components_admin_empty_casesempty_tsx",
+      "target": "casesempty_casesempty",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/components/admin/empty/BlogEmpty.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_components_admin_empty_blogempty_tsx",
+      "_tgt": "blogempty_blogempty",
+      "source": "users_a36_obikhod_site_components_admin_empty_blogempty_tsx",
+      "target": "blogempty_blogempty",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/components/admin/empty/ServicesEmpty.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_components_admin_empty_servicesempty_tsx",
+      "_tgt": "servicesempty_servicesempty",
+      "source": "users_a36_obikhod_site_components_admin_empty_servicesempty_tsx",
+      "target": "servicesempty_servicesempty",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -9686,6 +10265,42 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/scripts/seed-admin.ts",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_scripts_seed_admin_ts",
+      "_tgt": "seed_admin_ensureuser",
+      "source": "users_a36_obikhod_site_scripts_seed_admin_ts",
+      "target": "seed_admin_ensureuser",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/scripts/seed-admin.ts",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_src": "users_a36_obikhod_site_scripts_seed_admin_ts",
+      "_tgt": "seed_admin_main",
+      "source": "users_a36_obikhod_site_scripts_seed_admin_ts",
+      "target": "seed_admin_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/a36/obikhod/site/scripts/seed-admin.ts",
+      "source_location": "L58",
+      "weight": 1.0,
+      "_src": "seed_admin_main",
+      "_tgt": "seed_admin_ensureuser",
+      "source": "seed_admin_ensureuser",
+      "target": "seed_admin_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "/Users/a36/obikhod/site/scripts/render-logo-exports.ts",
       "source_location": "L38",
       "weight": 1.0,
@@ -10143,7 +10758,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/Users/a36/obikhod/site/lib/admin/preview-routes.ts",
-      "source_location": "L53",
+      "source_location": "L56",
       "weight": 1.0,
       "_src": "users_a36_obikhod_site_lib_admin_preview_routes_ts",
       "_tgt": "preview_routes_resolveslug",
@@ -10155,7 +10770,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/Users/a36/obikhod/site/lib/admin/preview-routes.ts",
-      "source_location": "L88",
+      "source_location": "L91",
       "weight": 1.0,
       "_src": "users_a36_obikhod_site_lib_admin_preview_routes_ts",
       "_tgt": "preview_routes_ispreviewablecollection",
@@ -10167,7 +10782,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "/Users/a36/obikhod/site/lib/admin/preview-routes.ts",
-      "source_location": "L33",
+      "source_location": "L36",
       "weight": 1.0,
       "_src": "preview_routes_computepreviewurl",
       "_tgt": "preview_routes_resolveslug",

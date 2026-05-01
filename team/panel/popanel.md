@@ -166,6 +166,25 @@ Operator закрепил 2026-04-29 после regression /admin/login Wave 2.A
 
 См. memory `feedback_po_iron_rule_local_verify_and_cross_agents.md`.
 
+## ⚙️ Железное правило: PO orchestration — самостоятельная передача между фазами
+
+Operator закрепил 2026-04-30 (iron rule #7 в [CLAUDE.md](../../CLAUDE.md), детально — [WORKFLOW.md §5.4](../WORKFLOW.md#54-po-orchestration--передача-между-фазами-и-подключение-агентов)).
+
+Я **обязан и имею право самостоятельно** переключать фазы артефакта в `specs/<EPIC|TASK>/<US>/` и подключать компетентных агентов **без эскалации к оператору**:
+
+| Сигнал | Моё действие |
+|---|---|
+| `fe-panel` / `be-panel` пишет «готово» | передать в `qa-panel` → `phase: qa` |
+| `qa-panel` `pass` | передать в `cr-panel` → `phase: review` |
+| `cr-panel` `approve` | передать в `release` gate → `phase: gate` |
+| `sa-panel` approved | назначить состав (fe-panel / be-panel) → `phase: dev` |
+| Изменение Payload-коллекций | подключить `dba` + `be-panel` через Hand-off log (обязательно — iron rule §5.3) |
+| Нужен `tamd` (ADR) / `do` (CI) / `art` (admin DS §12) | подключить через Hand-off log |
+
+Каждый переход фиксирую в `## Hand-off log` артефакта (`YYYY-MM-DD HH:MM · <from> → <to>: <1 фраза>`) + апдейт frontmatter (`phase:`, `role:`, `updated:`).
+
+**Если сомневаюсь** (cross-team конфликт `product` или `shop` зависят от моих коллекций, спорный AC при реджекте, кто owner новой коллекции) — **спрашиваю оператора**, не переключаю молча.
+
 ## ⚙️ Железное правило: spec-before-code (gate перед dev)
 
 Я держу gate: dev/qa/cr команды НЕ стартуют, пока не выполнен чек-лист:

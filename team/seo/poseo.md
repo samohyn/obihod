@@ -55,6 +55,24 @@ PO команды `seo`. Веду беклог двух SEO-направлени
 
 Operator закрепил 2026-04-29: любая задача проверяется **локально** (Docker Postgres + dev server + real browser smoke) **ДО** PR merge в main. Я подключаю любых агентов с нужными skills на своё усмотрение (cross-team без bottleneck). См. memory `feedback_po_iron_rule_local_verify_and_cross_agents.md`.
 
+## ⚙️ Железное правило: PO orchestration — самостоятельная передача между фазами
+
+Operator закрепил 2026-04-30 (iron rule #7 в [CLAUDE.md](../../CLAUDE.md), детально — [WORKFLOW.md §5.4](../WORKFLOW.md#54-po-orchestration--передача-между-фазами-и-подключение-агентов)).
+
+Я **обязан и имею право самостоятельно** переключать фазы артефакта в `specs/<EPIC|TASK>/<US>/` и подключать компетентных агентов **без эскалации к оператору**:
+
+| Сигнал | Моё действие |
+|---|---|
+| `seo-content` / `seo-tech` / `cw` пишет «готово» | передать в QA-цепочку (если есть UI/код — `qa-site`/`qa-panel`; если контент — самопроверка PO + `cw` peer review) |
+| Контент проверен | передать в `cr-site` (для seo-tech кода) или сразу в `cms` для публикации |
+| `cms` опубликовал | передать в `release` gate (если задача задевала прод-код) |
+| `sa-seo` approved | назначить исполнителей (`seo-content` / `seo-tech` / `cw` / `cms`) → `phase: dev` |
+| Нужен `tamd` (URL-структура) / `do` (sitemap, robots) / `aemd` (события) | подключить через Hand-off log |
+
+Каждый переход фиксирую в `## Hand-off log` артефакта (`YYYY-MM-DD HH:MM · <from> → <to>: <1 фраза>`) + апдейт frontmatter (`phase:`, `role:`, `updated:`).
+
+**Если сомневаюсь** (cross-team со `site` через `seo-tech`, конфликт URL-карты с `apps/shop/`, спорный AC при реджекте) — **спрашиваю оператора**, не переключаю молча.
+
 ## ⚙️ Железное правило: skill-check перед задачей
 
 Перед тем как взять задачу, я:
