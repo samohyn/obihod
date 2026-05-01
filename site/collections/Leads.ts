@@ -1,6 +1,10 @@
 import type { CollectionConfig } from 'payload'
 
 import { LEAD_STATUS_OPTIONS, isLeadStatus } from '@/lib/leads/status'
+import {
+  buildAfterChangeAuditHook,
+  buildAfterDeleteAuditHook,
+} from '@/lib/admin/audit/captureHooks'
 
 export const Leads: CollectionConfig = {
   slug: 'leads',
@@ -51,6 +55,21 @@ export const Leads: CollectionConfig = {
         data.statusHistory = merged.length > 50 ? merged.slice(merged.length - 50) : merged
         return data
       },
+    ],
+    // PANEL-AUDIT-LOG (ADR-0014): capture в audit_log с PII masking write-time.
+    // Leads НЕ имеют versions: true (PII safety) — единственный audit-trail
+    // через эти хуки + maskPII.ts strip phone/email/name перед jsonb insert.
+    afterChange: [
+      buildAfterChangeAuditHook('leads', (doc) => {
+        const phone = typeof doc?.phone === 'string' ? doc.phone : null
+        return phone ? `Заявка ${phone.slice(-4)}` : null
+      }),
+    ],
+    afterDelete: [
+      buildAfterDeleteAuditHook('leads', (doc) => {
+        const phone = typeof doc?.phone === 'string' ? doc.phone : null
+        return phone ? `Заявка ${phone.slice(-4)}` : null
+      }),
     ],
   },
   // Wave 4 (PAN-3) — UI tabs grouping (art-concept-v2 §5, brand-guide §12.4).

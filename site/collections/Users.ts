@@ -1,5 +1,13 @@
 import type { CollectionConfig } from 'payload'
 
+import {
+  buildAfterChangeAuditHook,
+  buildAfterDeleteAuditHook,
+  captureLogin,
+  captureLogout,
+  captureRbacChange,
+} from '@/lib/admin/audit/captureHooks'
+
 export const Users: CollectionConfig = {
   slug: 'users',
   // useAPIKey: true — позволяет генерировать API ключи на странице юзера
@@ -20,6 +28,67 @@ export const Users: CollectionConfig = {
     useAsTitle: 'email',
     defaultColumns: ['email', 'name', 'role', 'enableAPIKey'],
     group: '09 · Система',
+  },
+  // PANEL-AUDIT-LOG (ADR-0014): security-event capture.
+  // - afterChange: detect role transition → captureRbacChange + general
+  //   user-update entry (email/role/2FA changes — masked PII).
+  // - afterLogin / afterLogout: __auth pseudo-collection events.
+  // - afterDelete: rare-but-tracked admin removal.
+  hooks: {
+    afterChange: [
+      buildAfterChangeAuditHook('users', (doc) =>
+        typeof doc?.email === 'string' ? doc.email : null,
+      ),
+      async ({ doc, previousDoc, req }) => {
+        // RBAC change detection — separate semantic event.
+        const prevRole = (previousDoc as { role?: string } | undefined)?.role ?? null
+        const nextRole = (doc as { role?: string } | undefined)?.role ?? ''
+        if (prevRole && nextRole && prevRole !== nextRole) {
+          const targetId = typeof doc?.id === 'number' ? doc.id : Number(doc?.id)
+          const actor = (req as { user?: { id?: number | string } } | null)?.user
+          const actorId =
+            typeof actor?.id === 'number'
+              ? actor.id
+              : typeof actor?.id === 'string'
+                ? Number(actor.id)
+                : null
+          if (Number.isFinite(targetId)) {
+            await captureRbacChange(
+              targetId,
+              prevRole,
+              nextRole,
+              Number.isFinite(actorId) ? actorId : null,
+              req,
+            )
+          }
+        }
+        return doc
+      },
+    ],
+    afterDelete: [
+      buildAfterDeleteAuditHook('users', (doc) =>
+        typeof doc?.email === 'string' ? doc.email : null,
+      ),
+    ],
+    afterLogin: [
+      async ({ user, req }) => {
+        const id = typeof user?.id === 'number' ? user.id : Number(user?.id)
+        const email = typeof user?.email === 'string' ? user.email : ''
+        if (Number.isFinite(id)) {
+          await captureLogin(id, email, req)
+        }
+        return user
+      },
+    ],
+    afterLogout: [
+      async ({ req }) => {
+        const u = (req as { user?: { id?: number | string } } | null)?.user
+        const id = typeof u?.id === 'number' ? u.id : Number(u?.id)
+        if (Number.isFinite(id)) {
+          await captureLogout(id, req)
+        }
+      },
+    ],
   },
   fields: [
     { name: 'name', type: 'text' },

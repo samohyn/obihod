@@ -1,6 +1,11 @@
 import type { CollectionBeforeDeleteHook, CollectionConfig, Where } from 'payload'
 import { APIError } from 'payload'
 
+import {
+  buildAfterChangeAuditHook,
+  buildAfterDeleteAuditHook,
+} from '@/lib/admin/audit/captureHooks'
+
 /**
  * PANEL-MEDIA-LIBRARY · sa-panel.md «Risks #1» (race condition).
  *
@@ -83,6 +88,20 @@ export const Media: CollectionConfig = {
   access: { read: () => true },
   hooks: {
     beforeDelete: [beforeDeleteRaceGuard],
+    // PANEL-AUDIT-LOG (ADR-0014): Media НЕ versioned (большой бинарь, только
+    // metadata changes). audit_log capture upload/edit/delete events.
+    afterChange: [
+      buildAfterChangeAuditHook('media', (doc) => {
+        const filename = typeof doc?.filename === 'string' ? doc.filename : null
+        const alt = typeof doc?.alt === 'string' ? doc.alt : null
+        return filename ?? alt
+      }),
+    ],
+    afterDelete: [
+      buildAfterDeleteAuditHook('media', (doc) =>
+        typeof doc?.filename === 'string' ? doc.filename : null,
+      ),
+    ],
   },
   upload: {
     staticDir: 'media',

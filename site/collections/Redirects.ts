@@ -1,5 +1,10 @@
 import type { CollectionConfig } from 'payload'
 
+import {
+  buildAfterChangeAuditHook,
+  buildAfterDeleteAuditHook,
+} from '@/lib/admin/audit/captureHooks'
+
 export const Redirects: CollectionConfig = {
   slug: 'redirects',
   labels: { singular: 'Редирект', plural: 'Редиректы' },
@@ -9,6 +14,20 @@ export const Redirects: CollectionConfig = {
     description: 'Редиректы 301/302/410 — переезды URL, устаревшие посадочные.',
   },
   access: { read: () => true },
+  // PANEL-AUDIT-LOG (ADR-0014): Redirects НЕ versioned (простая schema
+  // from/to/code), audit через audit_log table. Полные diffs (без PII).
+  hooks: {
+    afterChange: [
+      buildAfterChangeAuditHook('redirects', (doc) =>
+        typeof doc?.from === 'string' ? doc.from : null,
+      ),
+    ],
+    afterDelete: [
+      buildAfterDeleteAuditHook('redirects', (doc) =>
+        typeof doc?.from === 'string' ? doc.from : null,
+      ),
+    ],
+  },
   fields: [
     {
       name: 'from',
