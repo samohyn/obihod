@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { Hero, TextContent, Faq, CtaBanner, Tldr, Breadcrumbs, RelatedServices } from '@/blocks'
 
 export const Blog: CollectionConfig = {
   slug: 'blog',
@@ -100,7 +101,8 @@ export const Blog: CollectionConfig = {
         },
         {
           label: 'Контент',
-          description: 'Lead-параграф (intro), основное тело статьи, hero и OG-изображения.',
+          description:
+            'Lead-параграф (intro), основное тело статьи, hero и OG-изображения. Для расширенной структуры используйте блочный конструктор ниже.',
           fields: [
             {
               name: 'intro',
@@ -130,6 +132,28 @@ export const Blog: CollectionConfig = {
               type: 'upload',
               relationTo: 'media',
               admin: { description: 'Картинка для шаринга (Telegram/VK). 1200×630.' },
+            },
+            // US-0 Track B-2 — blocks[] для Blog post-страниц.
+            // Whitelist: hero, text-content, faq, cta-banner, tldr, breadcrumbs,
+            // related-services. Уже Track B-1 ввёл тип-кэш в types.ts.
+            {
+              name: 'blocks',
+              type: 'blocks',
+              blockReferences: [
+                Hero,
+                TextContent,
+                Faq,
+                CtaBanner,
+                Tldr,
+                Breadcrumbs,
+                RelatedServices,
+              ],
+              blocks: [],
+              admin: {
+                initCollapsed: true,
+                description:
+                  'Конструктор страницы статьи: hero, текст, FAQ, CTA, TL;DR, breadcrumbs, похожие услуги. Legacy body выше остаётся для обратной совместимости.',
+              },
             },
           ],
         },
