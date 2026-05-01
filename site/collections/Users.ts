@@ -39,8 +39,10 @@ export const Users: CollectionConfig = {
       buildAfterChangeAuditHook('users', (doc) =>
         typeof doc?.email === 'string' ? doc.email : null,
       ),
-      async ({ doc, previousDoc, req }) => {
+      ({ doc, previousDoc, req }) => {
         // RBAC change detection — separate semantic event.
+        // Fire-and-forget: capture не блокирует save (см. captureHooks.ts
+        // INCIDENT 2026-05-01).
         const prevRole = (previousDoc as { role?: string } | undefined)?.role ?? null
         const nextRole = (doc as { role?: string } | undefined)?.role ?? ''
         if (prevRole && nextRole && prevRole !== nextRole) {
@@ -53,7 +55,7 @@ export const Users: CollectionConfig = {
                 ? Number(actor.id)
                 : null
           if (Number.isFinite(targetId)) {
-            await captureRbacChange(
+            captureRbacChange(
               targetId,
               prevRole,
               nextRole,
@@ -71,21 +73,22 @@ export const Users: CollectionConfig = {
       ),
     ],
     afterLogin: [
-      async ({ user, req }) => {
+      ({ user, req }) => {
+        // Fire-and-forget: login response не должен ждать audit INSERT.
         const id = typeof user?.id === 'number' ? user.id : Number(user?.id)
         const email = typeof user?.email === 'string' ? user.email : ''
         if (Number.isFinite(id)) {
-          await captureLogin(id, email, req)
+          captureLogin(id, email, req)
         }
         return user
       },
     ],
     afterLogout: [
-      async ({ req }) => {
+      ({ req }) => {
         const u = (req as { user?: { id?: number | string } } | null)?.user
         const id = typeof u?.id === 'number' ? u.id : Number(u?.id)
         if (Number.isFinite(id)) {
-          await captureLogout(id, req)
+          captureLogout(id, req)
         }
       },
     ],

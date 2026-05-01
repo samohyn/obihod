@@ -125,6 +125,10 @@ jobs:
         # Миграция US-3 (diff к prod-state) не применяется в CI — и не должна,
         # потому что push уже создаёт финальную схему.
         # На проде — push:false (через NODE_ENV=production) + миграция через psql в deploy.yml.
+        # SAFETY: timeout-minutes ограничивает шаг 5 минутами вместо 6 часов GHA default.
+        # Incident 2026-05-01 (PR #133): warmup висел 60min на seed admin из-за audit hook
+        # pool starvation. Лучше fail-fast чем тратить minutes на zombie job.
+        timeout-minutes: 5
         run: |
           pnpm dev > /tmp/dev.log 2>&1 &
           DEV=$!
@@ -146,14 +150,17 @@ jobs:
           # редиректит /api/users/first-register → /api/users/first-register/ (308),
           # без -L curl остановится на редиректе и тело не дойдёт до handler.
           echo "  seeding admin user via /api/users/first-register/..."
-          seed_resp=$(curl -sSL -X POST http://localhost:3000/api/users/first-register/ \
+          # --max-time 30: отсечка против re-incident 2026-05-01 (audit hook
+          # pool starvation вешал endpoint навсегда). Если что-то опять висит —
+          # лучше fail быстро и видеть dev.log, чем час ждать GHA timeout.
+          seed_resp=$(curl --max-time 30 -sSL -X POST http://localhost:3000/api/users/first-register/ \
             -H "Content-Type: application/json" \
             -d '{"email":"ci@obikhod.test","password":"ci-test-password-12345","name":"CI Admin","role":"admin"}' \
-            -w "\nHTTP_CODE:%{http_code}" || echo "CURL_FAILED")
+            -w "\nHTTP_CODE:%{http_code}" || echo "CURL_FAILED_OR_TIMEOUT")
           echo "  first-register response: $seed_resp"
           # Verify admin создан — /api/users/me на свежем cookie должен 200
           # (но без login сессии тут просто проверим что users count > 0)
-          users_count=$(curl -sSL http://localhost:3000/api/users?limit=1 | grep -o '"totalDocs":[0-9]*' | head -1)
+          users_count=$(curl --max-time 15 -sSL http://localhost:3000/api/users?limit=1 | grep -o '"totalDocs":[0-9]*' | head -1)
           echo "  users in DB: $users_count"
           kill $DEV 2>/dev/null || true
           wait $DEV 2>/dev/null || true
