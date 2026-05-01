@@ -30,7 +30,11 @@ const PAYLOAD_NATIVE_EXCEPTIONS = [
   'region', // sidebar/main отсутствуют у Payload admin shell
   'landmark-one-main', // ditto
   'page-has-heading-one', // login screen не имеет h1 (использует logo lockup как visual heading)
-  'label', // Payload native list-view (search input, select-checkbox) — framework labels не контролируем
+  // 'label' — re-enabled 2026-05-01 (PANEL-AXE-PAYLOAD-CORE-A11Y):
+  //   row-select checkbox (input.checkbox-input__input) теперь получает
+  //   aria-label через A11yRowCheckboxProvider. Если Payload вернёт другие
+  //   unlabeled inputs (search, фильтры) — их ловим отдельным spec'ом или
+  //   расширяем provider, не возвращаем глобальный exception.
   'aria-allowed-role', // Payload native может использовать non-standard role combinations
   'color-contrast', // Payload native palette — наш override через :root vars; reasoning per token, не на element
   // 'target-size' — re-enabled 2026-05-01 (PANEL-A11Y-TARGET-SIZE):
@@ -48,7 +52,39 @@ async function tryLogin(page: import('@playwright/test').Page): Promise<boolean>
   return res.ok()
 }
 
+/**
+ * Ждём, пока A11yRowCheckboxOverlay успеет навесить aria-label на все
+ * Payload native inputs (row-checkbox + generic catch-all). Без этого
+ * ожидания axe scan на медленных CI runners ловит race condition —
+ * MutationObserver ещё не отработал на момент scan'а
+ * (incident: CI run 25216555569).
+ *
+ * Условие: КАЖДЫЙ visible form input в DOM имеет `data-a11y-labeled="1"`
+ * (provider гарантирует это либо инъекцией aria-label, либо подтверждением
+ * что accessible name уже есть).
+ *
+ * Скипаем ожидание если на странице нет inputs (login-screen имеет только
+ * email/password с native `<label>`, до A11yRowCheckboxOverlay не доходит).
+ */
+async function waitForA11yLabels(page: import('@playwright/test').Page) {
+  await page
+    .waitForFunction(
+      () => {
+        const inputs = document.querySelectorAll<HTMLElement>(
+          'input:not([type="hidden"]):not([type="submit"]):not([type="button"]):not([type="reset"]):not([type="image"]), select, textarea',
+        )
+        if (inputs.length === 0) return true
+        return Array.from(inputs).every((i) => i.dataset.a11yLabeled === '1')
+      },
+      { timeout: 5_000 },
+    )
+    .catch(() => {
+      // Не fatal — fallback на runAxe(), который выдаст внятную ошибку.
+    })
+}
+
 async function runAxe(page: import('@playwright/test').Page, label: string) {
+  await waitForA11yLabels(page)
   const builder = new AxeBuilder({ page })
     .withTags(WCAG_TAGS)
     .disableRules(PAYLOAD_NATIVE_EXCEPTIONS)
@@ -125,4 +161,61 @@ test.describe('US-12 W7 — Admin a11y (axe-core WCAG 2.2 AA)', () => {
     const results = await runAxe(page, editHref!)
     expect(results.violations).toEqual([])
   })
+
+  /**
+   * PANEL-AXE-PAYLOAD-CORE-A11Y — explicit assertion на row-select checkbox
+   * aria-label, который вешает A11yRowCheckboxProvider через MutationObserver.
+   * Закрывает critical violation `aria-input-field-name` / `label` (WCAG SC
+   * 4.1.2 / SC 1.3.1) из leadqa-RC-3-hotfix.md § Findings F1.
+   *
+   * Cases (4 docs) + Blog (5 docs) — те самые routes, на которых RC-3
+   * leadqa зафиксировал baseline violation.
+   *
+   * --- CI seed gap (PANEL-AXE-PAYLOAD-CORE-A11Y fix-forward 2026-05-01) ---
+   * CI workflow (`.github/workflows/ci.yml`) сидит ТОЛЬКО admin user через
+   * `/api/users/first-register/` — `pnpm seed` (cases/blog content) НЕ
+   * запускается. Поэтому на CI коллекции пустые → row-checkboxes отсутствуют,
+   * остаётся только header `select-all` если Payload рендерит пустую таблицу.
+   * Тест graceful-skip'ает row-level assertion если row-inputs нет; provider
+   * валидируется на header (если есть) + axe scan остаётся обязательным.
+   * Local-run после `pnpm seed` валидирует full row-checkbox path.
+   * Follow-up PANEL-CI-SEED-CONTENT (backlog) — добавить `pnpm seed` в ci.yml.
+   */
+  for (const slug of ['cases', 'blog'] as const) {
+    test(`/admin/collections/${slug} row-checkbox имеет aria-label`, async ({ page }) => {
+      const ok = await tryLogin(page)
+      if (!ok) test.skip(true, `Login API rejected ${ADMIN_EMAIL}`)
+      await page.goto(`/admin/collections/${slug}/`, { waitUntil: 'networkidle' })
+      if (page.url().includes('/admin/login')) {
+        test.skip(true, 'Login session не сохранилась')
+      }
+      // Дать MutationObserver + 2 rAF passes отработать (см. A11yRowCheckboxOverlay).
+      // На CI без seed таблица пустая — checkboxes могут отсутствовать вовсе.
+      await page.waitForTimeout(500)
+
+      const labels = await page.$$eval(
+        '.checkbox-input__input > input[type="checkbox"]',
+        (inputs) =>
+          inputs.map((i) => ({
+            label: i.getAttribute('aria-label'),
+            inHeader: i.closest('th') !== null,
+          })),
+      )
+
+      // CI seed gap: если коллекция пустая (нет ни header, ни row checkboxes),
+      // skip — provider всё равно валидируется на /admin/collections/services/.
+      if (labels.length === 0) {
+        test.skip(true, `Коллекция ${slug} пустая (CI без pnpm seed) — skip row-checkbox assertion`)
+      }
+
+      // Все checkboxes (header + rows) должны иметь корректный aria-label.
+      for (const { label, inHeader } of labels) {
+        expect(label).toBe(inHeader ? 'Выделить все строки' : 'Выделить строку')
+      }
+
+      // Sanity: после явной aria-label инъекции — axe чист на этом route.
+      const results = await runAxe(page, `/admin/collections/${slug}/`)
+      expect(results.violations).toEqual([])
+    })
+  }
 })

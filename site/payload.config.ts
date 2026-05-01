@@ -61,7 +61,17 @@ export default buildConfig({
       // Wave 3 part 3 (PAN-6): sidebar Leads badge counter polling 30s через
       // DOM injection [data-leads-count] (Plan B per ADR-0005 §2 +
       // sa-panel-wave3.md §3.5). CSS селектор в custom.scss блок «SIDEBAR».
-      providers: ['@/components/admin/LeadsBadgeProvider'],
+      //
+      // PANEL-AXE-PAYLOAD-CORE-A11Y (2026-05-01): A11yRowCheckboxProvider
+      // вешает aria-label на Payload native row-select checkbox
+      // (input.checkbox-input__input) во всех list-views — закрывает
+      // critical axe violation (WCAG 2.2 SC 4.1.2 / SC 1.3.1) из
+      // leadqa-RC-3-hotfix.md § Findings F1. JS injection через
+      // MutationObserver — CSS pseudo-elements не дают input'у accessible name.
+      providers: [
+        '@/components/admin/LeadsBadgeProvider',
+        '@/components/admin/A11yRowCheckboxProvider',
+      ],
       // PANEL-HEADER-CHROME-POLISH (W10, 2026-05-01) §B: home-link первым
       // элементом в .nav__wrap через native Payload slot. Оператор 2026-05-01
       // переименовал «На сайт» (target=_blank → obikhod.ru/) на «Вернуться в
