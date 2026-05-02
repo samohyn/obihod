@@ -39,7 +39,15 @@ export const ServiceDistricts: CollectionConfig = {
     description: 'Programmatic-посадочные услуга × район. Без кейса — noindex.',
   },
   versions: { drafts: true },
-  indexes: [{ fields: ['service', 'district'], unique: true }],
+  // US-3 Wave 0.1: композитный индекс для быстрых lookup'ов
+  // (service, district, subServiceSlug). UNIQUE-семантика реализована
+  // НЕ здесь — Payload `unique: true` не работает корректно с NULL в
+  // Postgres (NULL != NULL → дубликаты pillar-level pairs). Вместо этого
+  // используются партиальные unique indexes из migration
+  // `20260502_120000_sd_subservice_extend`:
+  //   • pillar-level (subServiceSlug IS NULL): UNIQUE(service, district)
+  //   • sub-level    (subServiceSlug IS NOT NULL): UNIQUE(service, district, subServiceSlug)
+  indexes: [{ fields: ['service', 'district', 'subServiceSlug'] }],
   access: { read: () => true },
   fields: [
     {
@@ -68,6 +76,18 @@ export const ServiceDistricts: CollectionConfig = {
               index: true,
               admin: {
                 description: 'Какой район из каталога. Часть programmatic-связки «услуга × район».',
+              },
+            },
+            {
+              name: 'subServiceSlug',
+              type: 'text',
+              required: false,
+              index: true,
+              admin: {
+                description:
+                  'Sub-service slug для 4-уровневой иерархии URL `/<service>/<sub>/<district>/`. ' +
+                  'Должен совпадать с одним из `services.subServices[].slug` parent-pillar. ' +
+                  'Пусто — pillar-level SD `/<service>/<district>/` (sustained Stage 2 default).',
               },
             },
             {
@@ -331,31 +351,44 @@ export const ServiceDistricts: CollectionConfig = {
           console.warn('[service-districts.afterChange] revalidateTag failed:', e)
         }
 
-        // 2. HTTP webhook на /api/revalidate — нужен только если Payload
-        // запускается отдельным процессом (не embedded в Next.js).
-        // На текущем deploy embedded, но оставляем как defense-in-depth.
+        // 2. HTTP webhook на /api/revalidate — fire-and-forget с 5s timeout
+        // (US-3 Wave 0.5 / sustained reference_payload_hooks_async_fire_and_forget).
+        // Sync await тут вызывал pg pool starvation на bulk publish 100+ SD
+        // (incident audit-payload-hooks Stage 2 W11). НЕ блокируем сохранение
+        // документа на сетевые операции; ошибки логируем, не фейлим transaction.
         const url = process.env.SITE_URL
         const secret = process.env.REVALIDATE_SECRET
-        if (!url || !secret) return doc
-        try {
-          const svc = await req.payload.findByID({
-            collection: 'services',
-            id: doc.service,
+        if (url && secret) {
+          setImmediate(() => {
+            void Promise.race([
+              (async () => {
+                const svc = await req.payload.findByID({
+                  collection: 'services',
+                  id: doc.service,
+                })
+                const dst = await req.payload.findByID({
+                  collection: 'districts',
+                  id: doc.district,
+                })
+                const tag = `sd-${svc.slug}-${dst.slug}`
+                revalidateTag(tag, 'max')
+                await fetch(`${url}/api/revalidate?tag=${tag}`, {
+                  headers: { 'x-revalidate-secret': secret },
+                })
+                await fetch(`${url}/api/revalidate?tag=sitemap`, {
+                  headers: { 'x-revalidate-secret': secret },
+                })
+              })(),
+              new Promise((_, reject) =>
+                setTimeout(
+                  () => reject(new Error('service-districts.afterChange timeout 5s')),
+                  5000,
+                ),
+              ),
+            ]).catch((e) => {
+              console.warn('[service-districts.afterChange] fire-forget failed:', e)
+            })
           })
-          const dst = await req.payload.findByID({
-            collection: 'districts',
-            id: doc.district,
-          })
-          const tag = `sd-${svc.slug}-${dst.slug}`
-          revalidateTag(tag, 'max')
-          await fetch(`${url}/api/revalidate?tag=${tag}`, {
-            headers: { 'x-revalidate-secret': secret },
-          })
-          await fetch(`${url}/api/revalidate?tag=sitemap`, {
-            headers: { 'x-revalidate-secret': secret },
-          })
-        } catch (e) {
-          console.warn('[service-districts.afterChange] revalidate webhook failed:', e)
         }
         return doc
       },
