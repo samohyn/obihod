@@ -6,7 +6,7 @@ team: seo
 po: poseo
 sa: sa-seo
 type: content
-phase: planning
+phase: dev
 role: poseo
 status: open
 priority: P0
@@ -803,6 +803,18 @@ day 7 (Sun):
 
 - **`2026-05-02 · poseo`**: создан intake US-3 на основе approved EPIC intake.md + Stage 2 W11 closure + memory `project_seo_stage2_milestone_2026-05-02`. Передаю `sa-seo` через Agent на написание `sa-seo.md` для US-3 (включая Wave 0 mini-fix sprint AC + ~60 SD batch + Blog M3 + 6 cases + cross-team coordination be-panel/fe-site/art).
 - **`2026-05-02 · sa-seo`**: написана спека US-3 sa-seo.md (~1300 строк, 12 AC групп, 9 рисков, 14-day production timeline). Активированы skills: [seo, architecture-decision-records, api-design, product-capability, blueprint, accessibility, design-system]. Создан новый cluster file `seosite/03-clusters/priority-b-districts.md` (stub с TODO W12 day 1-2 для seo-content на финализацию wsfreq через Wordstat XML — sustained iron rule `project_seo_stack`). Spec покрывает Wave 0 mini-fix sprint (5 fix workstreams parallel) + Wave 1 priority-B production (16 pillar SD + 60 sub SD + 10 blog M3 + 6 cases additional). ADR-кандидаты identified для tamd post-US-3: (1) Nested dynamic over catch-all для 3-уровневой иерархии routes; (2) fire-and-forget pattern в Payload afterChange как iron rule; (3) Stage 3 keyword-research methodology codified. Передаю обратно poseo для запуска Wave 0 mini-fix (be-panel/fe-site через podev + cross-team coordination) + параллельно cw на Run 0 keyword research W12 day 1-2.
+- **`2026-05-02 · poseo` Wave 0 closure**: Wave 0 mini-fix sprint W12 day 1-4 закрыт (autonomous run, 11 atomic commits на `feature/seo-content-fill-stage-0` от `fdba55d` до `d0903da`).
+  - **AC-Wave0.1 PASS:** Payload SD `subServiceSlug` field + triple partial unique + nested route `[service]/[district]/[locality]/page.tsx` (renamed do verify — Next.js 16 не разрешает sibling `[district]` + `[sub]` под `[service]/`; public URL не меняется через generateStaticParams маппинг).
+  - **AC-Wave0.2 PASS:** 3 missing static `/sro-licenzii/`, `/komanda/`, `/park-tehniki/` — все HTTP 200.
+  - **AC-Wave0.3 PASS:** localBusinessSchema `url` field — 31 lint:schema warns → 0.
+  - **AC-Wave0.4 PASS:** Unicode codepoint-safe `truncateMeta()` utility, replaced `.slice()` в metadata.ts + blog/[slug] + avtory/[slug].
+  - **AC-Wave0.5 PASS:** afterChange fire-and-forget с 5s timeout (sustained AUDIT-LOG 2026-05-01 pattern).
+  - **AC-Wave0.6 PASS** (cr-site review unified): type-check 0 / lint 0 / prettier 13/13 / migration applied / curl smoke 5/5 HTTP 200 / Playwright screenshots в `screen/wave0-routes-smoke/`.
+  - **Pre-existing bug закрыт:** blog/[slug] HTTP 500 — `getAllBlogSlugs` возвращал null slug → defensive filter в `lib/seo/queries.ts`.
+  - **Архитектурное deviation от моего intake §3.0.1:** collection `sub-services` НЕ существует — sub-услуги inline в `Services.subServices: array`. Track AB адаптировал → text field `subServiceSlug` matches parent-pillar slug. Я (poseo) **accept** — реальный data-model правильнее изначального решения.
+  - **Pending follow-up (popanel scope):** audit_log push:true conflict (memory `reference_audit_log_push_disable.md`). Wave 1 production использует sustained `PAYLOAD_DISABLE_PUSH=1` escape-hatch.
+
+  Phase transition: `phase: planning` → `phase: dev` для Wave 1 production tracks. Следующий шаг — запуск Wave 1: `cw` 4 text-runs sequential (vyvoz / arbo / chistka / demontazh per priority-B district = 16 pillar SD content + 60 sub SD content) + `art` reuse-pillar-hero confirm + `cms` publish + Blog M3 cw + 6 cases pack.
 
 ## 10 · Open questions для poseo (минимизировано)
 
