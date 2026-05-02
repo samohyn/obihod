@@ -4,10 +4,13 @@ import {
   caseVizPrompt,
   heroPrompt,
   ogPrompt,
+  pillarHeroPrompt,
+  uspFotoSmetaPrompt,
   type BlogCoverPromptOpts,
   type CaseVizPromptOpts,
   type HeroPromptOpts,
   type OgPromptOpts,
+  type PillarHeroOpts,
 } from './prompts'
 
 // Flux Schnell — быстрый и дешёвый (≈$0.003/img, 4 шагов).
@@ -76,7 +79,15 @@ export async function generateCaseViz(
   return runT2I(prompt, o)
 }
 
-export type UseCase = 'hero' | 'og' | 'case-viz' | 'blog-cover'
+export async function generatePillarHero(o: PillarHeroOpts & BaseOpts): Promise<FalImageResult> {
+  return runT2I(pillarHeroPrompt(o), { imageSize: 'landscape_16_9', ...o })
+}
+
+export async function generateUspFotoSmeta(o: BaseOpts = {}): Promise<FalImageResult> {
+  return runT2I(uspFotoSmetaPrompt(), { imageSize: 'landscape_16_9', ...o })
+}
+
+export type UseCase = 'hero' | 'og' | 'case-viz' | 'blog-cover' | 'pillar-hero' | 'usp-foto-smeta'
 
 export async function generateByUseCase(
   useCase: UseCase,
@@ -93,5 +104,9 @@ export async function generateByUseCase(
       )
     case 'blog-cover':
       return generateBlogCover(params as BlogCoverPromptOpts & BaseOpts)
+    case 'pillar-hero':
+      return generatePillarHero(params as PillarHeroOpts & BaseOpts)
+    case 'usp-foto-smeta':
+      return generateUspFotoSmeta(params as BaseOpts)
   }
 }

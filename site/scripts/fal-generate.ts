@@ -12,7 +12,14 @@
  */
 import { generateByUseCase, type UseCase } from '../lib/fal/generators'
 
-const USE_CASES: UseCase[] = ['hero', 'og', 'case-viz', 'blog-cover']
+const USE_CASES: UseCase[] = [
+  'hero',
+  'og',
+  'case-viz',
+  'blog-cover',
+  'pillar-hero',
+  'usp-foto-smeta',
+]
 
 function parseArgs(argv: string[]): { useCase: UseCase; params: Record<string, unknown> } {
   const [, , useCase, ...rest] = argv

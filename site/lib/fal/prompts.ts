@@ -218,6 +218,69 @@ export function b2bHeroPrompt(o: B2bHeroOpts): string {
   ].join(', ')
 }
 
+// ─────────────────────────────────────────────────────────────────
+// Stage 1 W4: pillar hero (4 услуги) + USP /foto-smeta/.
+//
+// art consistency rule (Stage 0 R1): pillar hero — landmark/object only,
+// БЕЗ людей в кадре. Это согласует pillar visual с districts visual
+// (`districtHeroPrompt` тоже landmark-only). Геo-сигнал и социальный
+// proof — через eyebrow + H1 + alt-text, не через постановку бригады.
+//
+// Anti-§14 brand-guide: no stock-photo, no eco-leaf cliché, no axe/saw
+// macho, no knight/shield. Caregiver+Ruler — спокойная компетентность.
+// ─────────────────────────────────────────────────────────────────
+
+export type PillarHeroOpts = {
+  service: 'vyvoz-musora' | 'arboristika' | 'chistka-krysh' | 'demontazh'
+  season?: keyof typeof SEASON
+}
+
+/**
+ * Hero для pillar-страниц `/vyvoz-musora/`, `/arboristika/`, `/chistka-krysh/`,
+ * `/demontazh/`. Landmark/object-only direction (no humans).
+ * Согласовано с art Stage 0 R1: pillar visual = districts visual.
+ */
+export function pillarHeroPrompt(o: PillarHeroOpts): string {
+  const sceneByService: Record<PillarHeroOpts['service'], string> = {
+    'vyvoz-musora':
+      'a clean professional dump truck loaded with construction debris (broken drywall, wooden boards, plastic bags) parked at the gate of a private suburban house, no people in frame, mid-day daylight, suburban context — fence, mature trees, low-rise neighbourhood',
+    arboristika:
+      'mature trees on a private suburban property — old oak, pine and birch standing tall over a wooden house, no people, late afternoon golden light, real wear on bark, leaves on the ground',
+    'chistka-krysh':
+      'pitched metal roof of a suburban cottage covered with fresh heavy snow and long icicles hanging over the eaves, no people in frame, soft winter daylight, real cold-day atmosphere',
+    demontazh:
+      'a small simple wooden garden house in a tidy quiet backyard, weathered grey-brown vertical planks, plain pitched slate roof, single closed door, surrounded by short green grass, plain wooden fence across the back, mature deciduous trees behind the fence, overcast soft daylight, peaceful empty composition, completely clean surroundings, nothing on the roof, nothing on the walls, nothing on the ground next to it',
+  }
+  return [
+    DOCUMENTARY_STYLE,
+    sceneByService[o.service],
+    'Moscow Region, Russia',
+    o.season ? SEASON[o.season] : SEASON.summer,
+    'no humans, no figures, no silhouettes, no people in frame, no creatures, no characters, no toys, no mascots, no figurines',
+    'no chainsaw, no axe, no power tools, no sledgehammer, no construction tools, no equipment in frame',
+    ANTI_STOCK,
+    NEGATIVE_DEFAULT,
+  ].join(', ')
+}
+
+/**
+ * Hero для USP-pillar `/foto-smeta/`.
+ * Object-focused: smartphone + printed estimate на столе, без лиц.
+ * Поддерживает narrative «3 фото → смета за 10 минут» через визуальные объекты.
+ */
+export function uspFotoSmetaPrompt(): string {
+  return [
+    DOCUMENTARY_STYLE,
+    'overhead still-life composition: a smartphone lying flat on a wooden table, its screen out of focus and intentionally unreadable, next to it a sheet of paper with abstract horizontal lines and number-like glyphs (not actual words), a pen, a small ceramic mug, soft directional window light from the right',
+    'shallow depth of field, neutral muted palette (warm wood, white paper, cool grey phone)',
+    'absolutely no humans, no faces, no hands, no fingers, no figures, no silhouettes, no creatures',
+    'no readable text in any language, no visible letters, no words on the paper, no app names on the phone screen — only abstract document-like shapes and blurred glyphs that suggest a price list without spelling anything',
+    'no logos, no brand names, no UI mockups',
+    ANTI_STOCK,
+    NEGATIVE_DEFAULT,
+  ].join(', ')
+}
+
 export type CompanyAuthorAvatarOpts = {
   /**
    * Роль для подсказки stylization (бригада / оператор и т.п.).
