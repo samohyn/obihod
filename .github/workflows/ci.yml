@@ -207,12 +207,12 @@ jobs:
           PLAYWRIGHT_EXTERNAL_SERVER: "1"
         run: pnpm exec playwright test --project=chromium --project=mobile-chrome
 
-      # US-0 Track C, AC-6: lint:schema на работающем сервере.
-      # Soft-fail: если sitemap пуст (CI fresh БД без seed) — exit 0.
-      # Real gate включится в US-0 W3 когда staging будет с реальными URL.
+      # US-1 Stage 1 Track C (W7 transition): lint:schema жёсткий gate.
+      # Stage 0 был soft-fail (continue-on-error=true). После W7 Stage 1 имеет
+      # 25 живых страниц с заполненной schema → переключаем в hard gate.
+      # Скрипт сам exit 0 на errors=0 (warns игнорируются — non-blocking).
       - name: lint:schema (JSON-LD validation)
         run: pnpm run lint:schema --url http://localhost:3000 --sample 10
-        continue-on-error: true
 
       - name: Stop Next.js
         if: always()
