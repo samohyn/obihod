@@ -20,7 +20,7 @@
   "metaTitle": "Раменское — 4 услуги одной бригадой, фикс-цена | Обиход",
   "metaDescription": "Вывоз мусора, спил деревьев, чистка крыш и демонтаж по Раменскому. Одна бригада, один договор, 12 800 ₽ за объект. Аварийная за 1–2 часа 24/7.",
   "ogImageAlt": "Раменское — район выезда бригады Обихода, 4 услуги одной бригадой",
-  "heroImageUrl": "TBD-fal.ai-district-ramenskoye-hero.png",
+  "heroImageUrl": "/uploads/stage1-w5/district-ramenskoye-hero.jpg",
   "heroImageAlt": "Раменский округ, Новорязанское шоссе у въезда в Раменское — район выезда бригады Обихода",
   "blocks": [
     {
@@ -40,7 +40,7 @@
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
       "trustRow": ["4-в-1 одной бригадой", "20 км покрытие", "24 ч выезд", "штрафы ГЖИ берём"],
       "image": {
-        "src": "TBD-fal.ai-district-ramenskoye-hero.png",
+        "src": "/uploads/stage1-w5/district-ramenskoye-hero.jpg",
         "alt": "Раменский округ, Новорязанское шоссе у въезда в Раменское — район выезда бригады Обихода",
         "width": 720,
         "height": 540

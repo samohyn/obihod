@@ -19,7 +19,7 @@
   "metaTitle": "Красногорск — 4 услуги одной бригадой, фикс-цена | Обиход",
   "metaDescription": "Вывоз мусора, спил деревьев, чистка крыш и демонтаж по Красногорску. Одна бригада, один договор, 12 800 ₽ за объект. Аварийная за 1–2 часа 24/7.",
   "ogImageAlt": "Красногорск — район выезда бригады Обихода, 4 услуги одной бригадой",
-  "heroImageUrl": "TBD-fal.ai-district-krasnogorsk-hero.png",
+  "heroImageUrl": "/uploads/stage1-w5/district-krasnogorsk-hero.jpg",
   "heroImageAlt": "Красногорский округ, Волоколамское шоссе у Павшинской Поймы — район выезда бригады Обихода",
   "blocks": [
     {
@@ -39,7 +39,7 @@
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
       "trustRow": ["4-в-1 одной бригадой", "20 км покрытие", "24 ч выезд", "штрафы ГЖИ берём"],
       "image": {
-        "src": "TBD-fal.ai-district-krasnogorsk-hero.png",
+        "src": "/uploads/stage1-w5/district-krasnogorsk-hero.jpg",
         "alt": "Красногорский округ, Волоколамское шоссе у Павшинской Поймы — район выезда бригады Обихода",
         "width": 720,
         "height": 540
