@@ -28,10 +28,16 @@ ALTER TABLE "_service_districts_v"
 
 -- 3. Дроп старых unique constraint/index на pair (service_id, district_id).
 --    Payload v3 генерирует имена в формате `<table>_<col>_<col>_unique` или
---    `<table>_<col>_<col>_idx`. Делаем defensive lookup через pg_catalog.
+--    `<table>_<col>_<col>_idx` (фактически `service_district_idx`). Делаем
+--    defensive lookup через pg_catalog. Используем set-сравнение через
+--    `<@`/`@>` (ARRAY ordering — service|district vs district|service —
+--    зависит от colorder в DDL и отличается между версиями Payload).
+--    Также пропускаем НАШИ partial unique indexes (WHERE-clause присутствует),
+--    чтобы re-run не дропнул то, что мы только что создали.
 DO $$
 DECLARE
   cname text;
+  cols name[];
 BEGIN
   -- Constraint форма
   SELECT conname INTO cname
@@ -40,24 +46,34 @@ BEGIN
     AND contype = 'u'
     AND array_length(conkey, 1) = 2
     AND (
-      SELECT array_agg(attname ORDER BY attnum) FROM pg_attribute
+      SELECT array_agg(attname) FROM pg_attribute
       WHERE attrelid = conrelid AND attnum = ANY(conkey)
-    ) = ARRAY['district_id', 'service_id']::name[]
+    ) <@ ARRAY['district_id', 'service_id']::name[]
+    AND (
+      SELECT array_agg(attname) FROM pg_attribute
+      WHERE attrelid = conrelid AND attnum = ANY(conkey)
+    ) @> ARRAY['district_id', 'service_id']::name[]
   LIMIT 1;
   IF cname IS NOT NULL THEN
     EXECUTE format('ALTER TABLE service_districts DROP CONSTRAINT IF EXISTS %I', cname);
   END IF;
 
-  -- Index форма (если был создан как indexes без constraint)
+  -- Index форма (без constraint). Pg_index.indpred IS NULL отсекает наши
+  -- partial unique indexes (у них indpred = WHERE-clause не NULL).
   FOR cname IN
     SELECT i.relname FROM pg_index x
     JOIN pg_class i ON i.oid = x.indexrelid
     WHERE x.indrelid = 'service_districts'::regclass
       AND x.indisunique
+      AND x.indpred IS NULL
       AND (
-        SELECT array_agg(a.attname ORDER BY a.attnum) FROM pg_attribute a
+        SELECT array_agg(a.attname) FROM pg_attribute a
         WHERE a.attrelid = x.indrelid AND a.attnum = ANY(x.indkey::int[])
-      ) = ARRAY['district_id', 'service_id']::name[]
+      ) <@ ARRAY['district_id', 'service_id']::name[]
+      AND (
+        SELECT array_agg(a.attname) FROM pg_attribute a
+        WHERE a.attrelid = x.indrelid AND a.attnum = ANY(x.indkey::int[])
+      ) @> ARRAY['district_id', 'service_id']::name[]
   LOOP
     EXECUTE format('DROP INDEX IF EXISTS %I', cname);
   END LOOP;
