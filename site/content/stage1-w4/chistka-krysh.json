@@ -16,7 +16,7 @@
   "metaTitle": "Чистка крыш от снега и наледи — 1 000 ₽/м², Обиход",
   "metaDescription": "Чистим кровли частных домов, МКД и складов от снега и наледи по Москве и МО. 1 000 ₽/м² по факту, абонемент 45 000 ₽/мес, штрафы ГЖИ на нас.",
   "ogImageAlt": "Промышленный альпинист Обихода сбивает наледь с края скатной кровли частного дома, район Красногорска",
-  "heroImageUrl": "TBD-fal.ai-pillar-chistka-krysh.png",
+  "heroImageUrl": "/uploads/stage1-w4/pillar-chistka-krysh-hero.jpg",
   "heroImageAlt": "Промышленный альпинист Обихода в обвязке сбивает наледь с края скатной кровли частного дома в Красногорске",
   "blocks": [
     {
@@ -37,9 +37,14 @@
         "href": "/foto-smeta/?service=chistka-krysh"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["Допуск 3-й группы по высоте", "Страховка ГО 10 млн ₽", "Договор-абонемент УК", "СОП высотные работы"],
+      "trustRow": [
+        "Допуск 3-й группы по высоте",
+        "Страховка ГО 10 млн ₽",
+        "Договор-абонемент УК",
+        "СОП высотные работы"
+      ],
       "image": {
-        "src": "TBD-fal.ai-pillar-chistka-krysh.png",
+        "src": "/uploads/stage1-w4/pillar-chistka-krysh-hero.jpg",
         "alt": "Промышленный альпинист Обихода в обвязке сбивает наледь с края скатной кровли частного дома в Красногорске",
         "width": 720,
         "height": 540
@@ -55,7 +60,10 @@
       "variant": "light",
       "h2": "Кровля под наледью? Вышлите фото",
       "body": "Telegram · MAX · WhatsApp · 8:00–22:00 МСК. Аварийный выезд при риске обрушения — 1–2 часа.",
-      "ctaPrimary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=chistka-krysh" }
+      "ctaPrimary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=chistka-krysh"
+      }
     },
     {
       "blockType": "services-grid",
@@ -196,7 +204,10 @@
       "variant": "dark",
       "h2": "Договор-абонемент для УК и ТСЖ",
       "body": "Москва и МО · сезон 15 ноября — 15 апреля · аварийка 24/7 · штрафы ГЖИ по нашему счёту.",
-      "ctaPrimary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=chistka-krysh" },
+      "ctaPrimary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=chistka-krysh"
+      },
       "ctaSecondary": { "label": "Подробности B2B", "href": "/b2b/uk-tszh/" }
     },
     {

@@ -17,7 +17,7 @@
   "metaTitle": "Арбористика в Москве и МО — спил 700 ₽, Обиход",
   "metaDescription": "Спил, обрезка, удаление пней по Москве и МО. 700 ₽ за дерево до 20 см, аварийный спил 24/7, порубочный билет оформляем, страховка ГО 10 млн ₽.",
   "ogImageAlt": "Арборист Обихода в обвязке снимает крупную ветку с тополя, район Истры",
-  "heroImageUrl": "TBD-fal.ai-pillar-arboristika.png",
+  "heroImageUrl": "/uploads/stage1-w4/pillar-arboristika-hero.jpg",
   "heroImageAlt": "Арборист Обихода в страховочной обвязке снимает ветку тополя на участке частного дома, район Истры",
   "blocks": [
     {
@@ -38,9 +38,14 @@
         "href": "/foto-smeta/?service=arboristika"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["Допуск 3-й группы по высоте", "Страховка ГО 10 млн ₽", "Аварийка 24/7", "Вывоз в одной смете"],
+      "trustRow": [
+        "Допуск 3-й группы по высоте",
+        "Страховка ГО 10 млн ₽",
+        "Аварийка 24/7",
+        "Вывоз в одной смете"
+      ],
       "image": {
-        "src": "TBD-fal.ai-pillar-arboristika.png",
+        "src": "/uploads/stage1-w4/pillar-arboristika-hero.jpg",
         "alt": "Арборист Обихода в страховочной обвязке снимает ветку тополя на участке частного дома, район Истры",
         "width": 720,
         "height": 540
@@ -56,7 +61,10 @@
       "variant": "light",
       "h2": "Пришлите фото дерева — посчитаем смету за 10 минут",
       "body": "Telegram · MAX · WhatsApp · 8:00–22:00 МСК. Аварийный спил — за 1–2 часа 24/7.",
-      "ctaPrimary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=arboristika" }
+      "ctaPrimary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=arboristika"
+      }
     },
     {
       "blockType": "services-grid",
@@ -240,7 +248,10 @@
       "variant": "dark",
       "h2": "Аварийное дерево? Звоните в любое время",
       "body": "Москва и МО · 24/7 · бригада с автовышкой за 1–2 часа.",
-      "ctaPrimary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=arboristika" },
+      "ctaPrimary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=arboristika"
+      },
       "ctaSecondary": { "label": "Позвонить аварийному диспетчеру", "href": "tel:+74951234567" }
     },
     {

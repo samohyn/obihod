@@ -15,7 +15,7 @@
   "metaTitle": "Смета за 10 минут по фото — Обиход, Москва и МО",
   "metaDescription": "Пришлите три фото в Telegram, MAX или WhatsApp — посчитаем смету за 10 минут. Без выезда замерщика, без обязательств. Цена фиксируется до выезда бригады.",
   "ogImageAlt": "Скриншот сметы Обихода в Telegram с расчётом за 10 минут после трёх фото объекта",
-  "heroImageUrl": "TBD-fal.ai-pillar-foto-smeta.png",
+  "heroImageUrl": "/uploads/stage1-w4/usp-foto-smeta-hero.jpg",
   "heroImageAlt": "Бригадир Обихода смотрит на телефон с тремя фото объекта от собственника и считает смету",
   "blocks": [
     {
@@ -38,7 +38,7 @@
       "ctaTertiary": { "label": "WhatsApp", "href": "https://wa.me/74951234567" },
       "trustRow": ["10 минут от первого фото", "Точность ±5%", "Бесплатно", "Без обязательств"],
       "image": {
-        "src": "TBD-fal.ai-pillar-foto-smeta.png",
+        "src": "/uploads/stage1-w4/usp-foto-smeta-hero.jpg",
         "alt": "Бригадир Обихода смотрит на телефон с тремя фото объекта от собственника и считает смету",
         "width": 720,
         "height": 540

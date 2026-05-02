@@ -17,7 +17,7 @@
   "metaTitle": "Вывоз мусора в Москве и МО — 12 800 ₽ за объект, Обиход",
   "metaDescription": "Вывозим стройку, КГМ, мебель и садовый мусор по Москве и МО. Фикс-цена 12 800 ₽ за объект до 5 м³, смета по фото за 10 минут, бригада послезавтра до 12:00.",
   "ogImageAlt": "Бригада Обихода грузит контейнер строительного мусора, район Одинцово",
-  "heroImageUrl": "TBD-fal.ai-pillar-vyvoz-musora.png",
+  "heroImageUrl": "/uploads/stage1-w4/pillar-vyvoz-musora-hero.jpg",
   "heroImageAlt": "Бригада Обихода грузит контейнер строительного мусора на объекте в Одинцовском округе",
   "blocks": [
     {
@@ -40,7 +40,7 @@
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
       "trustRow": ["4-в-1 одной бригадой", "СРО строителей", "152-ФЗ", "~6 лет в районах МО"],
       "image": {
-        "src": "TBD-fal.ai-pillar-vyvoz-musora.png",
+        "src": "/uploads/stage1-w4/pillar-vyvoz-musora-hero.jpg",
         "alt": "Бригада Обихода грузит контейнер строительного мусора на объекте в Одинцовском округе",
         "width": 720,
         "height": 540
@@ -56,7 +56,10 @@
       "variant": "light",
       "h2": "Пришлите три фото — посчитаем смету за 10 минут",
       "body": "Telegram · MAX · WhatsApp · 8:00–22:00 МСК. Цена фиксируется до выезда.",
-      "ctaPrimary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=vyvoz-musora" }
+      "ctaPrimary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=vyvoz-musora"
+      }
     },
     {
       "blockType": "services-grid",
@@ -222,7 +225,10 @@
       "variant": "dark",
       "h2": "Закажите выезд бригады",
       "body": "Москва и МО · 8:00–22:00 МСК · смета за 10 минут.",
-      "ctaPrimary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=vyvoz-musora" },
+      "ctaPrimary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=vyvoz-musora"
+      },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" }
     },
     {
