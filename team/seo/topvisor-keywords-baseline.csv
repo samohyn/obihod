@@ -1,0 +1,201 @@
+keyword,pillar,wsfreq,intent,cluster_id
+вывоз мусора,vyvoz-musora,102789,общий,localFALLBACK-WITHFREQ-20260425T151607Z:2
+вывоз мусора контейнером,vyvoz-musora,11991,общий,localFALLBACK-WITHFREQ-20260425T151607Z:4
+вывоз строительного мусора,vyvoz-musora,10284,общий,localFALLBACK-WITHFREQ-20260425T151607Z:17
+вывоз мусора москва,vyvoz-musora,9208,локальный,localFALLBACK-WITHFREQ-20260425T151607Z:2
+вывоз бытового мусора,vyvoz-musora,4994,общий,localFALLBACK-WITHFREQ-20260425T151607Z:28
+вывоз старой мебели,vyvoz-musora,4957,общий,localFALLBACK-WITHFREQ-20260425T151607Z:57
+вывоз мусора московская область,vyvoz-musora,3995,локальный,localFALLBACK-WITHFREQ-20260425T151607Z:2
+вывоз мусора цена,vyvoz-musora,3437,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:2
+вывоз мусора грузчиками,vyvoz-musora,1632,общий,localFALLBACK-WITHFREQ-20260425T151607Z:2
+вывоз мусора газель,vyvoz-musora,1453,общий,localFALLBACK-WITHFREQ-20260425T151607Z:40
+вывоз мусора подмосковье,vyvoz-musora,1103,общий,localFALLBACK-WITHFREQ-20260425T151607Z:2
+вывоз мусора недорого,vyvoz-musora,939,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:2
+вывоз мусора с участка,vyvoz-musora,814,общий,localFALLBACK-WITHFREQ-20260425T151607Z:2
+вывоз крупногабаритного мусора,vyvoz-musora,750,общий,localFALLBACK-WITHFREQ-20260425T151607Z:25
+вывоз веток,vyvoz-musora,727,общий,localFALLBACK-WITHFREQ-20260425T151607Z:11
+авито вывоз мусора,vyvoz-musora,645,общий,test50-1505300:30
+вывоз мусора одинцово,vyvoz-musora,644,локальный,localFALLBACK-WITHFREQ-20260425T151607Z:2
+вывоз мусора 8 кубов,vyvoz-musora,622,общий,localFALLBACK-WITHFREQ-20260425T151607Z:2
+вывоз хлама,vyvoz-musora,539,общий,localFALLBACK-WITHFREQ-20260425T151607Z:36
+вывоз мусора с дачи,vyvoz-musora,301,общий,localFALLBACK-WITHFREQ-20260425T151607Z:2
+вывоз мусора 20 кубов,vyvoz-musora,256,общий,localFALLBACK-WITHFREQ-20260425T151607Z:2
+вывоз садового мусора,vyvoz-musora,187,общий,localFALLBACK-WITHFREQ-20260425T151607Z:56
+вывоз листвы,vyvoz-musora,108,общий,localFALLBACK-WITHFREQ-20260425T151607Z:118
+вывоз мусора 27 кубов,vyvoz-musora,87,общий,localFALLBACK-WITHFREQ-20260425T151607Z:2
+вывоз строймусора,vyvoz-musora,41,общий,localFALLBACK-WITHFREQ-20260425T151607Z:50
+авито вывоз мусора с дачи,vyvoz-musora,4,общий,test50-1505300:26
+вывоз ветвей,vyvoz-musora,1,общий,localFALLBACK-WITHFREQ-20260425T151607Z:117
+балашиха вывоз мусора,vyvoz-musora,0,локальный,localFALLBACK-WITHFREQ-20260425T151607Z:2
+большую часть мусора загрязняющего землю составляют,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:112
+бункер 8 кубов вывоз мусора,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:2
+бункер для мусора заказать,vyvoz-musora,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:77
+бункер мусорный,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:113
+бытовой мусор,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:28
+бытовой мусор это,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:28
+вакансии водитель мусоровоза,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:114
+вес мусора при демонтаже в смете,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:9
+вес мусора строительного,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:17
+вес строительного мусора,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:17
+вес строительного мусора в 1 м3 таблица при демонтаже в смете,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:9
+виды мусора,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:115
+водитель мусоровоза,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:78
+водитель мусоровоза вакансии,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:78
+вывезти мусор,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:116
+вывезти мусор из квартиры с грузчиками,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:79
+вывезти мусор строительный,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:63
+вывезти строительный мусор,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:63
+вывоз бытового мусора в москве,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:28
+вывоз бытового мусора в москве из квартиры,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:28
+вывоз бытового мусора из квартиры,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:28
+вывоз бытового мусора из квартиры с грузчиками,vyvoz-musora,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:28
+спил деревьев,arboristika,11228,общий,localFALLBACK-WITHFREQ-20260425T151607Z:5
+вырубка деревьев,arboristika,7008,общий,localFALLBACK-WITHFREQ-20260425T151607Z:15
+выравнивание участка,arboristika,5523,общий,localFALLBACK-WITHFREQ-20260425T151607Z:37
+валка деревьев,arboristika,1099,общий,localFALLBACK-WITHFREQ-20260425T151607Z:29
+вырубка деревьев москва,arboristika,512,локальный,localFALLBACK-WITHFREQ-20260425T151607Z:15
+выкорчевывание пня,arboristika,398,общий,localFALLBACK-WITHFREQ-20260425T151607Z:10
+вырубка елей,arboristika,292,общий,localFALLBACK-WITHFREQ-20260425T151607Z:15
+аварийный спил дерева,arboristika,160,общий,test50-1505300:4
+аварийный спил деревьев,arboristika,160,общий,test50-1505300:4
+авито обрезка деревьев,arboristika,157,общий,test50-1505300:27
+вырубка леса под строительство,arboristika,125,общий,localFALLBACK-WITHFREQ-20260425T151607Z:15
+декоративная обрезка деревьев,arboristika,92,общий,localFALLBACK-WITHFREQ-20260425T151607Z:41
+вырубка елок,arboristika,43,общий,localFALLBACK-WITHFREQ-20260425T151607Z:82
+аммиачная селитра для удаления пней,arboristika,34,общий,test50-1505300:17
+валка деревьев частями,arboristika,24,общий,localFALLBACK-WITHFREQ-20260425T151607Z:29
+авито спил деревьев цена,arboristika,6,коммерческий,test50-1505300:31
+безопасный спил дерева,arboristika,1,общий,localFALLBACK-WITHFREQ-20260425T151607Z:5
+болезни плодовых деревьев,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:3
+болезни плодовых деревьев описание с фотографиями,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:3
+болезнь деревьев,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:3
+валка деревьев гэсн,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:29
+валка деревьев мягких пород с корня диаметр стволов до 16 см,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:29
+валка деревьев расценка в смете,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:29
+валка деревьев расценка в смете гэсн,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:29
+валка деревьев с корня,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:29
+валка деревьев с корня это как,arboristika,0,информационный,localFALLBACK-WITHFREQ-20260425T151607Z:29
+валка деревьев с помощью лебедки,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:29
+валка деревьев с применением автогидроподъемника,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:29
+валка деревьев цена за штуку в московской области,arboristika,0,коммерческий+локальный,localFALLBACK-WITHFREQ-20260425T151607Z:29
+весенняя обработка деревьев,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:3
+весенняя обработка плодовых деревьев и кустарников ранней весной,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:3
+весенняя обрезка плодовых деревьев,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:6
+весенняя обрезка сливы,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:6
+виды прививки деревьев,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:3
+виды прививок деревьев,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:3
+виды прививок плодовых деревьев,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:3
+вывоз деревьев и веток с участка,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:11
+выкорчевывание деревьев на участке цена,arboristika,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:3
+выравнивание участка московская область,arboristika,0,локальный,localFALLBACK-WITHFREQ-20260425T151607Z:37
+выравнивание участка мотоблоком,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:37
+выравнивание участка песком,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:37
+выравнивание участка под газон,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:37
+выравнивание участка под ключ,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:37
+выравнивание участка своими руками с чего начать,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:37
+выравнивание участка трактором,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:37
+выравнивание участка цена,arboristika,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:37
+выравнивание участка цена за сотку московская область,arboristika,0,коммерческий+локальный,localFALLBACK-WITHFREQ-20260425T151607Z:37
+выровнять участок,arboristika,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:51
+выровнять участок цена,arboristika,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:51
+выровнять участок цена московская область,arboristika,0,коммерческий+локальный,localFALLBACK-WITHFREQ-20260425T151607Z:51
+чистка крыш,chistka-krysh,888,общий,localFALLBACK-WITHFREQ-20260425T151607Z:34
+вывоз и уборка снега,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+вывоз снега,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+вывоз снега в москве,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+вывоз снега в москве с погрузкой,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+вывоз снега в москве с погрузкой цена,chistka-krysh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+вывоз снега москва,chistka-krysh,0,локальный,localFALLBACK-WITHFREQ-20260425T151607Z:1
+вывоз снега с территории,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+вывоз снега со двора,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+вывоз снега стоимость,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+вывоз снега цена,chistka-krysh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+вывоз снега цена за 1 м3,chistka-krysh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+заказать трактор для уборки снега,chistka-krysh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+зимняя уборка придомовой территории,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:129
+зимняя уборка территории,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:130
+куда вывозят снег из города,chistka-krysh,0,информационный,localFALLBACK-WITHFREQ-20260425T151607Z:1
+механизированная уборка снега,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+механизированная уборка территории от снега,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка дорог от снега,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка кровли,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:55
+очистка кровли от мха,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:55
+очистка кровли от снега,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка кровли от снега в москве,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка кровли от снега и наледи,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:16
+очистка кровли от снега и наледи цена,chistka-krysh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:16
+очистка кровли от снега и наледи цена в москве,chistka-krysh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:16
+очистка кровли от снега цена за м2,chistka-krysh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка кровли от сосулек,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:55
+очистка кровли расценка в смете,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:55
+очистка крыш,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:34
+очистка крыш от снега,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка крыш от снега и наледи,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:16
+очистка крыш от снега киров,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка крыш от снега стоимость,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка крыш от снега цена,chistka-krysh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка крыши,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:34
+очистка крыши от снега,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка крыши от снега в москве,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка крыши от снега веревкой,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка крыши от снега и наледи цены,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:16
+очистка крыши от снега инструмент,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка крыши от снега своими руками,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка крыши от снега цена,chistka-krysh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка от снега,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка от снега крыш,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка от снега расценка в смете,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка снега,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка снега на территории стоимость,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка снега с крыши,chistka-krysh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+очистка снега с крыши цена,chistka-krysh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:1
+демонтаж дачи,demontazh,143,общий,localFALLBACK-WITHFREQ-20260425T151607Z:30
+демонтаж бани,demontazh,82,общий,localFALLBACK-WITHFREQ-20260425T151607Z:43
+вес 1 м2 рубероида при демонтаже,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:9
+вес бетона в 1 м3 при демонтаже в смете,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:9
+вес кирпичной кладки в 1 м3 при демонтаже,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:9
+вес рубероида 1 м2 при демонтаже,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:9
+вес щебня в 1 м3 при демонтаже в смете,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:9
+выплаты за снос гаража в москве 2026,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:21
+демонтаж бани из бревна цена,demontazh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:43
+демонтаж бани из бревна цена за работу,demontazh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:43
+демонтаж бани цена,demontazh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:43
+демонтаж бани цена за работу,demontazh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:43
+демонтаж вывески на фасаде здания,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:9
+демонтаж гаража,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:21
+демонтаж гаража и вывоз металлолома,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:21
+демонтаж гаража на металлолом,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:21
+демонтаж гаража расценка в смете,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:21
+демонтаж гаража цена,demontazh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:21
+демонтаж дачного дома,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:30
+демонтаж дачного дома в выборге,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:30
+демонтаж дачного дома выборг,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:30
+демонтаж дачного дома приморск,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:30
+демонтаж дачного дома цена,demontazh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:30
+демонтаж дачных домов,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:30
+демонтаж деревянного дома,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:9
+демонтаж деревянного дома стоимость,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:9
+демонтаж деревянного дома стоимость работ,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:9
+демонтаж деревянного дома цена,demontazh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:9
+демонтаж деревянного дома цена за 1м2,demontazh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:9
+демонтаж деревянных домов,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:9
+демонтаж дома,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:14
+демонтаж дома деревянного,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:14
+демонтаж дома деревянного цена за работу,demontazh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:14
+демонтаж дома одесса,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:14
+демонтаж дома после пожара,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:14
+демонтаж дома стоимость,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:14
+демонтаж дома цена,demontazh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:14
+демонтаж дома это,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:14
+демонтаж домов,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:14
+демонтаж домов цена,demontazh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:14
+демонтаж забора,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:31
+демонтаж забора гэсн,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:31
+демонтаж забора из профлиста,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:31
+демонтаж забора из профлиста расценка в смете,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:31
+демонтаж забора из сетки рабицы расценка в смете,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:31
+демонтаж забора расценка в смете,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:31
+демонтаж забора расценка в смете гэсн,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:31
+демонтаж забора цена,demontazh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:31
+демонтаж забора цена за метр,demontazh,0,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:31
+демонтаж забора это,demontazh,0,общий,localFALLBACK-WITHFREQ-20260425T151607Z:31
