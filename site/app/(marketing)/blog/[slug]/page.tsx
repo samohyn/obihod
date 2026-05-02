@@ -3,7 +3,6 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
-import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { RichTextRenderer } from '@/components/marketing/RichTextRenderer'
@@ -15,6 +14,7 @@ import {
 } from '@/lib/seo/jsonld'
 import { canonicalFor } from '@/lib/seo/canonical'
 import { getAllBlogSlugs, getBlogPostBySlug } from '@/lib/seo/queries'
+import { truncateMeta } from '@/lib/seo/text'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -45,7 +45,6 @@ type BlogPostDoc = {
   h1: string
   intro: string
   body: unknown
-  blocks?: unknown[] | null
   publishedAt: string
   modifiedAt: string
   category: keyof typeof CATEGORY_LABELS
@@ -76,7 +75,7 @@ export async function generateMetadata({
   if (!post) return {}
   return {
     title: { absolute: post.metaTitle ?? post.title },
-    description: post.metaDescription ?? post.intro.slice(0, 155),
+    description: post.metaDescription ?? truncateMeta(post.intro, 155),
     alternates: {
       canonical: post.canonicalOverride ?? canonicalFor(`/blog/${post.slug}/`),
     },
@@ -85,7 +84,7 @@ export async function generateMetadata({
       locale: 'ru_RU',
       url: `/blog/${post.slug}/`,
       title: post.title,
-      description: post.intro.slice(0, 200),
+      description: truncateMeta(post.intro, 200),
       publishedTime: post.publishedAt,
       modifiedTime: post.modifiedAt,
       authors: post.author ? [`${SITE_URL}/avtory/${post.author.slug}/`] : undefined,
@@ -150,26 +149,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           answer: richTextToPlain(item.answer),
         }))
       : null
-
-  // US-0 W3 Track B-3 — приоритет blocks[] (cw fixture).
-  const hasBlocks = Array.isArray(post.blocks) && post.blocks.length > 0
-  if (hasBlocks) {
-    return (
-      <>
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-        <BlockRenderer blocks={post.blocks as any} />
-        <JsonLd
-          schema={[
-            articleSchema(blogPostSchema),
-            ...(faqForSchema ? [faqPageSchema(faqForSchema)] : []),
-            breadcrumbListSchema(
-              breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
-            ),
-          ]}
-        />
-      </>
-    )
-  }
 
   return (
     <>

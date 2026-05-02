@@ -2,12 +2,12 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
-import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema, personSchema, type Author as AuthorSchema } from '@/lib/seo/jsonld'
 import { canonicalFor } from '@/lib/seo/canonical'
 import { getAllAuthorSlugs, getAuthorBySlug } from '@/lib/seo/queries'
+import { truncateMeta } from '@/lib/seo/text'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -33,7 +33,6 @@ type AuthorDoc = {
     issuedAt?: string | null
     id?: string
   }> | null
-  blocks?: unknown[] | null
 }
 
 export async function generateStaticParams() {
@@ -54,7 +53,7 @@ export async function generateMetadata({
     title: { absolute: author.metaTitle ?? `${fullName} — эксперт Обихода` },
     description:
       author.metaDescription ??
-      author.bio?.slice(0, 155) ??
+      (author.bio ? truncateMeta(author.bio, 155) : undefined) ??
       `${fullName} — ${author.jobTitle ?? 'эксперт'} в Обиходе.`,
     alternates: { canonical: canonicalFor(`/avtory/${author.slug}/`) },
     openGraph: {
@@ -62,7 +61,7 @@ export async function generateMetadata({
       locale: 'ru_RU',
       url: `/avtory/${author.slug}/`,
       title: fullName,
-      description: author.bio?.slice(0, 200) ?? undefined,
+      description: author.bio ? truncateMeta(author.bio, 200) : undefined,
     },
     robots: { index: true, follow: true },
   }
@@ -89,25 +88,6 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
     imageUrl: author.avatar?.url ?? undefined,
     sameAs: (author.sameAs ?? []).map((s) => s.url).filter(Boolean),
     knowsAbout: (author.knowsAbout ?? []).map((k) => k.topic).filter(Boolean),
-  }
-
-  // US-0 W3 Track B-3 — приоритет blocks[] (cw fixture).
-  const hasBlocks = Array.isArray(author.blocks) && author.blocks.length > 0
-  if (hasBlocks) {
-    return (
-      <>
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-        <BlockRenderer blocks={author.blocks as any} />
-        <JsonLd
-          schema={[
-            personSchema(authorForSchema),
-            breadcrumbListSchema(
-              breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
-            ),
-          ]}
-        />
-      </>
-    )
   }
 
   return (
