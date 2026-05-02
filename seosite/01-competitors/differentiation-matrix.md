@@ -1,11 +1,12 @@
 # Differentiation Matrix — 17 × 5 осей
 
-**Статус:** W7 mid-check update (2026-05-02). W3 baseline draft → W7 fallback-methodology check (без Topvisor live).
-**Источники:** `seosite/01-competitors/deep/<domain>.md` (24 deep + stubs) + `seosite/01-competitors/{shortlist.md,ia-patterns.md}` + наш Stage 1 actual (22/22 URL HTTP 200).
-**Обновляется:** W3 baseline (гипотезы) → ~~W3 live audit~~ deferred → **W7 mid (текущая версия, fallback methodology)** → W14 final (с Topvisor если creds дойдут).
+**Статус:** **W11 mid-check update (2026-05-02)**. W3 baseline draft → W7 fallback-methodology → **W11 Stage 2 update**.
+**Источники:** `seosite/01-competitors/deep/<domain>.md` (24 deep + stubs) + `seosite/01-competitors/{shortlist.md,ia-patterns.md}` + наш Stage 2 actual (119/119 URL HTTP 200 sitemap).
+**Обновляется:** W3 baseline → ~~W3 live audit~~ deferred → W7 mid → **W11 mid (текущая версия)** → W14 final (с Topvisor если creds дойдут).
 **Owner:** seo-content + re (cross-team) под poseo orchestration.
 **DoD-цель к W14:** опережение топ-3 конкурентов по ≥3 из 5 осей (URL-объём / контент-глубина / E-E-A-T / UX / schema-coverage).
-**DoD W7 (mid-check):** ≥1 ось в опережении + ≥40% URL-gap closure → **2 оси confirmed (schema +50pp, UX уникальный USP); URL-closure PARTIAL** — см. `benchmark-W7-mid.md` §7 для расчёта.
+**DoD W7 (mid-check):** ≥1 ось в опережении + ≥40% URL-gap closure → **2 оси confirmed (schema +50pp, UX уникальный USP); URL-closure PARTIAL**.
+**DoD W11 (mid-check):** ≥40% closure + ≥2 confirmed оси → **3 confirmed оси (Schema +50pp, UX, 4-в-1) + 48.2% closure к liwood медиане ✅ PASS** — см. `benchmark-W11-mid.md` §4-7 для расчёта.
 
 > **ВАЖНО:** Текущая версия — гипотезы до live audit на основе деad-профилей 2026-04-25/26 + shortlist. **Цифры там где их не было — не инвентируются**, помечены `pending`. Реальные данные подставит `re` + `seo-content` после Keys.so/Topvisor запуска в W3.
 
@@ -31,6 +32,7 @@
 | # | Конкурент | Pillar | Deep-профиль | URL-объём (1) | Контент-глубина (2) | E-E-A-T (3) | UX (4) | Schema (5) | Топ-3 кандидат? |
 |--:|---|---|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 | 0 | **ОБИХОД (наш Stage 1)** | 4-в-1 | n/a | 🔴 22 URL (W7) → 150+ к W14 | 🟡 ~3000 слов pillar + 5 blog | 🟡 placeholder Authors, 100% Person→Organization | 🟢 фото→смета USP-pillar | 🟢 100% (Service+FAQ+BreadcrumbList) | n/a |
+| 0 | **ОБИХОД (наш Stage 2 W11)** | 4-в-1 | n/a | 🟡 **119 URL** (sitemap actual) → 200+ к W14 | 🟢 **~125k слов** (47 sub avg ~1500 + 11 cases + 17 blog) | 🟡 placeholder Authors, 100% Person→Organization (real-name pending operator W12) | 🟢 фото→смета USP + 119/119 lead-form | 🟢 **100%** (lint:schema 0 errors / 31 url warns) | n/a |
 | 1 | **musor.moscow** | мусор | ✓ | 🟢 huge (~1387 URL, 137 гео) | 🟡 medium (103 blog + 1051 новость, но автоген) | 🔴 low (нет авторов / СРО на видном месте) | 🟡 medium (калькулятор на главной) | 🟡 medium (Service?+FAQ?) ⚪ | **✓** (URL-объём axis) |
 | 2 | grunlit-eco.ru | мусор | ✗ stub+H | ⚪H | ⚪H | ⚪H (B2B-фокус — гипотеза сильный) | ⚪ pending | ⚪ pending | pending live audit W3 |
 | 3 | **liwood.ru** | арбо | ✓ | 🟡 medium (247 URL, 40 districts × 1 service) | 🟢 huge (85 blog + 29 sub-обрезка по породам, 3 уровня) | 🟡 medium (gallery 13 + калькулятор, но без авторов) | 🟢 strong (калькулятор + онлайн-консультация) | 🟡 medium ⚪ | **✓** (контент-глубина axis) |
@@ -262,7 +264,8 @@
 | 2026-05-01 | W3-draft (pre-audit) | re + poseo | Создан W2 ahead of schedule. 9 stub-профилей, гипотезы топ-3, TODO для W3. |
 | 2026-05-01 | W3-draft + W2 hypotheses | seo-content + cw + cms + seo-tech | Дополнены 9 stub-файлов prima facie hypothesis (без crawl). Матрица помечена ⚪H где гипотезы добавлены. Сводка гипотез + live-audit priority order. |
 | ~~pending~~ | W3-baseline (final) | re + seo-content | **Deferred** — Keys.so/Topvisor creds не переданы оператором. Заменено fallback methodology W7. |
-| **2026-05-02** | **W7-mid (fallback methodology)** | **qa-site + re + seo-content** | **Track E.2 finalize: deep-profiles + manual cluster wsfreq + наш Stage 1 actual; топ-3 hypothesis sustained; 2 оси confirmed в опережении (schema +50pp, UX USP уникальный); E-E-A-T parity с cleaning-moscow; URL-closure PARTIAL (raw 8.9%, по 4-pillar PASS). См. `benchmark-W7-mid.md`.** |
+| 2026-05-02 | W7-mid (fallback methodology) | qa-site + re + seo-content | Stage 1 actual: 22 URL, 2 оси confirmed (schema +50pp, UX USP уникальный); E-E-A-T parity с cleaning-moscow; URL-closure PARTIAL (raw 8.9%, по 4-pillar PASS). См. `benchmark-W7-mid.md`. |
+| **2026-05-02** | **W11-mid (Stage 2)** | **seo-tech + qa-site + re + seo-content** | **Stage 2 actual: 119 URL (sitemap), 3 confirmed оси опережения (Schema +50pp, UX foto-smeta, 4-в-1 multi-pillar); URL closure 48.2% к liwood медиане → ≥40% PASS. 84 sub-level SD deferred Stage 3 (404, dynamic route TODO). 51 axe.json: 0 critical / 1 serious (`color-contrast` на TLDR `--c-accent-ink` на `--c-accent` background — design-system token issue, backlog). См. `benchmark-W11-mid.md`.** |
 | pending | W14-final | seo-content + re | После Stage 4 + Topvisor live (если creds дойдут к W14) |
 
 ---
