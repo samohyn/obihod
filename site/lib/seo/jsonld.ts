@@ -215,6 +215,7 @@ export function localBusinessSchema(
 ): Record<string, unknown> {
   const id = district ? `${SITE_URL}/raiony/${district.slug}/#lb` : LB_ID
   const name = district ? `Обиход — ${district.nameNominative}` : 'Обиход'
+  const url = district ? `${SITE_URL}/raiony/${district.slug}/` : SITE_URL
 
   const contacts = chrome?.contacts ?? null
   const lb = seo?.localBusiness ?? null
@@ -243,6 +244,7 @@ export function localBusinessSchema(
     '@type': 'HomeAndConstructionBusiness',
     '@id': id,
     name,
+    url,
     parentOrganization: { '@id': ORG_ID },
     image: `${SITE_URL}/og.jpg`,
     telephone: nonEmpty(contacts?.phoneE164),
