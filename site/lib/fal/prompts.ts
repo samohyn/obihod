@@ -343,6 +343,111 @@ export function uspFotoSmetaPrompt(): string {
   ].join(', ')
 }
 
+// ─────────────────────────────────────────────────────────────────
+// Stage 1 W6 Track B Run 3: SD hero (service × district).
+//
+// SD hero — это специальный variant pillar hero с district context. Тот же
+// landmark/object-only direction (Stage 0 R1, no humans), но сцена детализирована
+// под услугу + конкретный район (МО context: low-rise houses, mature trees,
+// fences). Геo-сигнал держится через eyebrow/H1/alt-text, не через постановку.
+//
+// Anti-§14 brand-guide: no people, no eco-leaf cliché, no axe/saw macho.
+// Caregiver+Ruler — спокойная компетентность, не «вызов на ринг».
+// ─────────────────────────────────────────────────────────────────
+
+export type SdHeroOpts = {
+  service: 'vyvoz-musora' | 'arboristika' | 'chistka-krysh' | 'demontazh'
+  districtName: string // Odintsovo / Krasnogorsk / ...
+  season?: keyof typeof SEASON
+  /**
+   * Дополнительная подсказка по визуальному контексту района.
+   * Например: «mature trees + low-rise wooden houses + МО fences».
+   */
+  landmarkHint?: string
+}
+
+/**
+ * Hero для SD-страниц `/<service>/<district>/`.
+ * Object-focused: услуга в характерном МО suburban контексте конкретного района.
+ * Согласовано с pillar/district visual direction (Run 1+2).
+ */
+export function sdHeroPrompt(o: SdHeroOpts): string {
+  const sceneByService: Record<SdHeroOpts['service'], string> = {
+    'vyvoz-musora':
+      'a clean professional dump truck loaded with construction debris (broken drywall, wooden boards, plastic bags) parked at the gate of a private suburban house, no people in frame, mid-day daylight',
+    arboristika:
+      'mature deciduous trees on a private suburban property — old apple and pine trees standing tall over a wooden house, no people, late afternoon golden light, real bark texture, leaves on the ground',
+    'chistka-krysh':
+      'pitched roof of a suburban cottage covered in fresh heavy snow with long icicles hanging over the eaves, no people in frame, soft winter daylight, real cold-day atmosphere',
+    demontazh:
+      'an old simple wooden shed on a private lot, ready for demolition, weathered grey-brown vertical planks, sagging slate roof, surrounded by short grass and plain wooden fence, no people, overcast soft light, peaceful empty composition',
+  }
+  return [
+    DOCUMENTARY_STYLE,
+    sceneByService[o.service],
+    `${o.districtName} district, Moscow Region, Russia, recognizable suburban context (low-rise wooden houses, mixed dachas, mature trees, plain wooden fences)`,
+    o.landmarkHint,
+    o.season ? SEASON[o.season] : SEASON.summer,
+    'real МО suburban details (mixed roofs, fences, trees), no fake recognizable landmarks',
+    'no humans, no figures, no silhouettes, no people in frame, no creatures, no characters',
+    'no chainsaw, no axe, no power tools, no sledgehammer, no construction tools, no equipment in frame',
+    ANTI_STOCK,
+    NEGATIVE_DEFAULT,
+  ]
+    .filter(Boolean)
+    .join(', ')
+}
+
+// ─────────────────────────────────────────────────────────────────
+// Stage 1 W5 Track B Run 3: static hero (о компании, как мы работаем, гарантии).
+//
+// Static hero — object-focused still-life под конкретный narrative страницы:
+// собственно «инструменты бригады» / «фото→смета» / «контракт+гарантии».
+// БЕЗ людей в кадре. Согласовано с pillar/district/USP/home (Run 1+2).
+//
+// Anti-§14: no readable text, no logo overlays, no stock office aesthetic.
+// ─────────────────────────────────────────────────────────────────
+
+export type StaticHeroOpts = {
+  /**
+   * Тип страницы — для подсказки tone/lighting/composition. Определяет
+   * direction визуала, но не fixed scene (которая задаётся через visualConcept).
+   */
+  type: 'o-kompanii' | 'kak-my-rabotaem' | 'garantii'
+  /**
+   * Конкретный визуальный концепт: что именно лежит на столе/в кадре. Передаётся
+   * с art-side для Run 3 (пер-page composition в intake.md). Без людей.
+   */
+  visualConcept: string
+}
+
+/**
+ * Hero для static-страниц `/o-kompanii/`, `/kak-my-rabotaem/`, `/garantii/`.
+ * Object-focused still-life direction (no humans).
+ */
+export function staticHeroPrompt(o: StaticHeroOpts): string {
+  const moodByType: Record<StaticHeroOpts['type'], string> = {
+    'o-kompanii':
+      'calm matter-of-fact mood, neutral mid-day light, real material textures',
+    'kak-my-rabotaem':
+      'practical how-it-works editorial mood, soft directional daylight from the right',
+    garantii:
+      'formal-warm tone, mid-day daylight, trustworthy composure, real wood and paper textures',
+  }
+  return [
+    DOCUMENTARY_STYLE,
+    o.visualConcept,
+    moodByType[o.type],
+    'editorial 16:9 framing with breathing space and clear focal hierarchy',
+    'absolutely no humans, no faces, no hands, no fingers, no figures, no silhouettes, no creatures',
+    'no readable text in any language, no visible letters, no words on documents — only abstract document-like shapes and blurred glyphs that suggest a contract or estimate without spelling anything',
+    'no logos, no brand names, no UI mockups',
+    'no stock photo aesthetic, no overly polished glossy surfaces, no fake corporate office',
+    ANTI_STOCK,
+    NEGATIVE_DEFAULT,
+  ].join(', ')
+}
+
 export type CompanyAuthorAvatarOpts = {
   /**
    * Роль для подсказки stylization (бригада / оператор и т.п.).
@@ -365,7 +470,15 @@ export function companyAuthorAvatarPrompt(o: CompanyAuthorAvatarOpts = {}): stri
   const role = o.roleName ?? 'brigade'
   const variant = o.variant ?? 'back-shot'
 
-  const subjectByRole: Record<NonNullable<CompanyAuthorAvatarOpts['roleName']>, string> = {
+  // ВАЖНО: для silhouette / symbol modes subject задаётся ВНУТРИ variantLine,
+  // не отдельной строкой через subjectByRole. Иначе flux/schnell видит «3 figures»
+  // или «single figure at a desk» как primary subject и фабрикует фронтальные
+  // лица — нарушение privacy guard и §14 stock-photo. Run 3 incident: первая
+  // итерация silhouette = full frontal group portrait. Fixed.
+  const backShotSubjectByRole: Record<
+    NonNullable<CompanyAuthorAvatarOpts['roleName']>,
+    string
+  > = {
     brigade: 'three-person crew in branded blue work uniform',
     operator: 'single figure at a tidy office desk in branded blue uniform vest',
     arborist: 'climber figure in branded blue uniform with rope harness',
@@ -373,17 +486,52 @@ export function companyAuthorAvatarPrompt(o: CompanyAuthorAvatarOpts = {}): stri
     driver: 'figure leaning on the door of a clean dump truck, branded blue uniform',
   }
 
-  const variantLine =
-    variant === 'silhouette'
-      ? 'pure silhouette against a soft solid background, no facial features, no skin detail, only outline and uniform colors'
-      : variant === 'symbol'
-        ? 'object-focused composition: clean tools, work gloves on a wooden bench, neat coiled rope, branded uniform jacket folded — no humans visible'
-        : 'back-shot composition: figure facing away from camera, shoulders and uniform clearly readable, head intentionally cropped or in profile from behind'
+  // silhouette: explicit subject «outline of crew in branded blue uniform» —
+  // ставим в начало, дальше — pure silhouette guard и multiple anti-face
+  // negative reinforcers. Background — однотонный мягкий пастельный фон.
+  const silhouetteSubject =
+    role === 'brigade'
+      ? 'pure flat silhouette of three-person crew standing together, all wearing branded blue work uniforms — only solid blue uniform shapes against the background, completely featureless dark figures'
+      : 'pure flat silhouette of a single figure in branded blue work uniform — only the solid blue uniform shape against the background, completely featureless dark figure'
 
+  // symbol: NO figures at all. Object-only flat-lay or table-shot. Subject —
+  // предметы (форма, инструменты, перчатки), а не «figure at a desk».
+  const symbolSubject =
+    role === 'operator'
+      ? 'overhead still-life flat-lay on a clean wooden office desk: a folded branded blue work uniform jacket on the right, a folded clipboard with abstract horizontal lines (no readable letters), a slim black ballpoint pen, a small ceramic mug — completely empty composition with no humans, no figures, no hands, no arms, no body parts visible anywhere in the frame'
+      : 'overhead still-life flat-lay: a folded branded blue work uniform jacket, neat coiled rope, leather-palm work gloves, a clipboard, a small thermos — all on a clean wooden bench surface, completely empty composition with no humans, no figures, no body parts visible anywhere in the frame'
+
+  if (variant === 'silhouette') {
+    return [
+      'editorial silhouette illustration for an author/team page on a Russian services website',
+      silhouetteSubject,
+      'pure silhouette technique — solid uniform-blue figure shapes on a soft solid pastel background (light grey-blue or warm beige), no facial features at all, no skin tone, no eyes, no mouth, no facial detail, only outline and flat uniform colors, completely featureless figures',
+      'square 1:1 framing, soft even diffuse light, calm matter-of-fact mood',
+      'Caregiver+Ruler brand voice: trustworthy, calm, in-control, not heroic',
+      'absolutely no faces, no facial features, no identifiable individuals, no celebrity look-alike, no skin texture, no eyes, no smiles',
+      ANTI_STOCK,
+      NEGATIVE_DEFAULT,
+    ].join(', ')
+  }
+
+  if (variant === 'symbol') {
+    return [
+      'editorial object-focused still-life for an author/team page on a Russian services website',
+      symbolSubject,
+      'square 1:1 framing, soft directional natural daylight, real wood and fabric textures, calm matter-of-fact mood, muted warm-grey palette',
+      'Caregiver+Ruler brand voice: trustworthy, calm, in-control, not heroic',
+      'absolutely no humans, no faces, no hands, no fingers, no arms, no torso, no body parts, no figures, no silhouettes, no creatures anywhere in the frame',
+      'no readable text in any language, no visible letters, no logos, no brand names',
+      ANTI_STOCK,
+      NEGATIVE_DEFAULT,
+    ].join(', ')
+  }
+
+  // back-shot (default): figure visible from behind, head cropped/in profile.
   return [
     'editorial portrait for an author/team page on a Russian services website',
-    subjectByRole[role],
-    variantLine,
+    backShotSubjectByRole[role],
+    'back-shot composition: figure facing away from camera, shoulders and uniform clearly readable, head intentionally cropped or in profile from behind',
     'square 1:1 framing, soft directional light, real material textures, calm matter-of-fact mood',
     'Caregiver+Ruler brand voice: trustworthy, calm, in-control, not heroic',
     'no faces shown, no identifiable individuals, no celebrity look-alike',

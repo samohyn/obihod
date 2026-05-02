@@ -2,18 +2,24 @@ import { falRun, type FalImageResult } from './client'
 import {
   blogCoverPrompt,
   caseVizPrompt,
+  companyAuthorAvatarPrompt,
   districtHeroPrompt,
   heroPrompt,
   homeHeroPrompt,
   ogPrompt,
   pillarHeroPrompt,
+  sdHeroPrompt,
+  staticHeroPrompt,
   uspFotoSmetaPrompt,
   type BlogCoverPromptOpts,
   type CaseVizPromptOpts,
+  type CompanyAuthorAvatarOpts,
   type DistrictHeroOpts,
   type HeroPromptOpts,
   type OgPromptOpts,
   type PillarHeroOpts,
+  type SdHeroOpts,
+  type StaticHeroOpts,
 } from './prompts'
 
 // Flux Schnell — быстрый и дешёвый (≈$0.003/img, 4 шагов).
@@ -100,6 +106,22 @@ export async function generateHomeHero(o: BaseOpts = {}): Promise<FalImageResult
   return runT2I(homeHeroPrompt(), { imageSize: 'landscape_16_9', ...o })
 }
 
+export async function generateSdHero(o: SdHeroOpts & BaseOpts): Promise<FalImageResult> {
+  return runT2I(sdHeroPrompt(o), { imageSize: 'landscape_16_9', ...o })
+}
+
+export async function generateStaticHero(
+  o: StaticHeroOpts & BaseOpts,
+): Promise<FalImageResult> {
+  return runT2I(staticHeroPrompt(o), { imageSize: 'landscape_16_9', ...o })
+}
+
+export async function generateAuthorAvatar(
+  o: CompanyAuthorAvatarOpts & BaseOpts,
+): Promise<FalImageResult> {
+  return runT2I(companyAuthorAvatarPrompt(o), { imageSize: 'square', ...o })
+}
+
 export type UseCase =
   | 'hero'
   | 'og'
@@ -109,6 +131,9 @@ export type UseCase =
   | 'usp-foto-smeta'
   | 'district-hero'
   | 'home-hero'
+  | 'sd-hero'
+  | 'static-hero'
+  | 'author-avatar'
 
 export async function generateByUseCase(
   useCase: UseCase,
@@ -133,5 +158,11 @@ export async function generateByUseCase(
       return generateDistrictHero(params as DistrictHeroOpts & BaseOpts)
     case 'home-hero':
       return generateHomeHero(params as BaseOpts)
+    case 'sd-hero':
+      return generateSdHero(params as SdHeroOpts & BaseOpts)
+    case 'static-hero':
+      return generateStaticHero(params as StaticHeroOpts & BaseOpts)
+    case 'author-avatar':
+      return generateAuthorAvatar(params as CompanyAuthorAvatarOpts & BaseOpts)
   }
 }
