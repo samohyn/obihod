@@ -33,8 +33,16 @@ export const dynamicParams = true
 /**
  * US-3 Wave 0.1 — sub-level service-district route.
  *
- * URL: `/<service>/<sub>/<district>/` — sub-service внутри района.
+ * URL: `/<service>/<sub-slug>/<district-slug>/` — sub-service внутри района.
  * Пример: `/vyvoz-musora/kontejner/odintsovo/` — «контейнер 8 м³ в Одинцово».
+ *
+ * Имена сегментов в Next.js routing:
+ *  - `[service]` — pillar slug (`vyvoz-musora`)
+ *  - `[district]` — на этом уровне семантически = sub-slug (`kontejner`),
+ *    но имя slug-сегмента совпадает с родительским `[service]/[district]/`
+ *    (Next 16 запрещает sibling slugs с разными именами + nested duplicates,
+ *    поэтому 2-й уровень одинаков).
+ *  - `[locality]` — реальный district slug на 3-м уровне (`odintsovo`).
  *
  * Backed by: ServiceDistricts SD doc с triple (service, district, subServiceSlug).
  * Sub-service сам по себе живёт inline в Services.subServices array — это
@@ -46,10 +54,13 @@ export const dynamicParams = true
  * services.subServices[].slug parent-pillar.
  */
 export async function generateStaticParams() {
-  return getAllSubLevelSdParams()
+  // Backed by getAllSubLevelSdParams() returning { service, sub, district }.
+  // Маппим в Next route schema: { service, district: sub, locality: district }.
+  const raw = await getAllSubLevelSdParams()
+  return raw.map((p) => ({ service: p.service, district: p.sub, locality: p.district }))
 }
 
-type Params = { service: string; sub: string; district: string }
+type Params = { service: string; district: string; locality: string }
 
 function unicodeSliceMeta(source: string, max: number): string {
   // sustained Wave 0.4 codepoint-aware truncation — `Array.from` сохраняет
@@ -58,7 +69,7 @@ function unicodeSliceMeta(source: string, max: number): string {
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
-  const { service: serviceSlug, sub: subSlug, district: districtSlug } = await params
+  const { service: serviceSlug, district: subSlug, locality: districtSlug } = await params
 
   const [service, district, sd, subResult] = await Promise.all([
     getServiceBySlug(serviceSlug),
@@ -100,7 +111,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 }
 
 export default async function SubLevelSDPage({ params }: { params: Promise<Params> }) {
-  const { service: serviceSlug, sub: subSlug, district: districtSlug } = await params
+  const { service: serviceSlug, district: subSlug, locality: districtSlug } = await params
 
   const [service, district, sd, subResult, chrome, seo] = await Promise.all([
     getServiceBySlug(serviceSlug),
