@@ -376,16 +376,33 @@ async function main() {
 
   const payload = await getPayload({ config })
 
-  const dir = resolve(process.cwd(), 'content/stage3-w12')
-  const files = readdirSync(dir)
-    .filter((f) => f.endsWith('.json'))
-    .sort()
+  // STAGE3_DIRS — comma-separated relative paths из site/. Default — Wave 1
+  // Run 1 (16 pillar SD) + Run 2 (60 sub SD).
+  // Файл `_manifest.json` пропускается, т.к. это side-output генератора (не SD).
+  const dirsEnv =
+    process.env.STAGE3_DIRS ?? 'content/stage3-w12,content/stage3-w13-sd'
+  const dirs = dirsEnv
+    .split(',')
+    .map((d) => d.trim())
+    .filter((d) => d.length > 0)
+    .map((d) => resolve(process.cwd(), d))
 
-  console.log(`[seed-stage3] Найдено ${files.length} fixtures в ${dir}`)
+  console.log(`[seed-stage3] Источники fixtures (${dirs.length}):`)
+  for (const d of dirs) console.log(`  • ${d}`)
+
+  const filesWithDir: { dir: string; file: string }[] = []
+  for (const dir of dirs) {
+    const files = readdirSync(dir)
+      .filter((f) => f.endsWith('.json') && f !== '_manifest.json')
+      .sort()
+    for (const f of files) filesWithDir.push({ dir, file: f })
+  }
+
+  console.log(`[seed-stage3] Найдено ${filesWithDir.length} fixtures всего`)
 
   const results: SeedResult[] = []
 
-  for (const f of files) {
+  for (const { dir, file: f } of filesWithDir) {
     const path = resolve(dir, f)
     const raw = readFileSync(path, 'utf-8')
     const fix = JSON.parse(raw) as ServiceDistrictFixture
