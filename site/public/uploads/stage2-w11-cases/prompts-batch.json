@@ -1,0 +1,257 @@
+{
+  "_meta": {
+    "stage": "stage2-w11-cases",
+    "run": "Track B Run 4 — case before/after",
+    "owner": "cms (Track B Run 4) + art self-review",
+    "track": "Stage 2 Track B Run 4 — 16 case images (8 cases × before+after)",
+    "art_consistency": "object-focused before/after, NO humans/figures/silhouettes (Run 1+2+3 unified rule, Stage 0 R1)",
+    "antiPatterns_§14": [
+      "no humans / figures / silhouettes",
+      "no chainsaw / axe / power-tools macho",
+      "no eco-leaf cliché",
+      "no stock photo aesthetic",
+      "no fake recognizable landmarks",
+      "no readable text / logos"
+    ],
+    "model_default": "fal-ai/flux/schnell",
+    "imageSize": "landscape_16_9 (1024×576 native)",
+    "downloadedFormat": "JPEG (flux/schnell auto-detect)",
+    "fixturesUpdated": [
+      "site/content/stage2-w11-cases/01-vyvoz-stroymusora-odincovo-mart.json (heroImageUrl=after)",
+      "site/content/stage2-w11-cases/02-vyvoz-mkd-mytishchi-uk-podpis.json (heroImageUrl=after)",
+      "site/content/stage2-w11-cases/03-spil-avariynyy-krasnogorsk.json (heroImageUrl=after)",
+      "site/content/stage2-w11-cases/04-obrezka-fruktovogo-sada-ramenskoye.json (heroImageUrl=after)",
+      "site/content/stage2-w11-cases/05-chistka-naledi-mkd-odincovo.json (heroImageUrl=after)",
+      "site/content/stage2-w11-cases/06-chistka-chastnyy-dom-mytishchi.json (heroImageUrl=after)",
+      "site/content/stage2-w11-cases/07-demontazh-dachi-staraya-krasnogorsk.json (heroImageUrl=after)",
+      "site/content/stage2-w11-cases/08-snos-zabora-zastroyshchik-ramenskoye.json (heroImageUrl=after)"
+    ],
+    "before_images_note": "before-варианты сохраняются в /uploads/stage2-w11-cases/ как media library / portfolio (W14 album будет ссылаться на них). Текущие case JSONs ссылаются только на -after.jpg (heroImageUrl + hero.image.src)."
+  },
+  "items": [
+    {
+      "id": "case-stroymusor-odincovo-before",
+      "page": "/kejsy/vyvoz-stroymusora-odincovo-mart/",
+      "fixture": "site/content/stage2-w11-cases/01-vyvoz-stroymusora-odincovo-mart.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "musor",
+        "stage": "before",
+        "extra": "apartment-building стage entrance area cluttered with construction debris, broken bricks, drywall sheets, cardboard packaging, no people, no figures, no silhouettes, no creatures, Moscow Region urban context, daylight, real material textures"
+      },
+      "outFile": "site/public/uploads/stage2-w11-cases/case-stroymusor-odincovo-before.jpg",
+      "publicPath": "/uploads/stage2-w11-cases/case-stroymusor-odincovo-before.jpg",
+      "alt": "Загромождённая лестничная площадка в Одинцово до вывоза стройотходов"
+    },
+    {
+      "id": "case-stroymusor-odincovo-after",
+      "page": "/kejsy/vyvoz-stroymusora-odincovo-mart/",
+      "fixture": "site/content/stage2-w11-cases/01-vyvoz-stroymusora-odincovo-mart.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "musor",
+        "stage": "after",
+        "extra": "apartment-building stage entrance now completely cleaned, swept floor, no debris, no people, no figures, no silhouettes, calm matter-of-fact daylight, real material textures, Moscow Region urban context"
+      },
+      "outFile": "site/public/uploads/stage2-w11-cases/case-stroymusor-odincovo-after.jpg",
+      "publicPath": "/uploads/stage2-w11-cases/case-stroymusor-odincovo-after.jpg",
+      "alt": "Чистая лестничная площадка и пустой подъезд в Одинцово после вывоза стройотходов бригадой Обихода"
+    },
+    {
+      "id": "case-uk-mytishchi-before",
+      "page": "/kejsy/vyvoz-mkd-mytishchi-uk-podpis/",
+      "fixture": "site/content/stage2-w11-cases/02-vyvoz-mkd-mytishchi-uk-podpis.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "musor",
+        "stage": "before",
+        "extra": "container site near a multi-apartment building (МКД) overflowing with bulky waste КГМ — old furniture, mattress, broken cabinets, cardboard, plastic bags piled around the dumpsters, no people, no figures, no silhouettes, mid-day overcast soft light, Moscow Region courtyard context"
+      },
+      "outFile": "site/public/uploads/stage2-w11-cases/case-uk-mytishchi-before.jpg",
+      "publicPath": "/uploads/stage2-w11-cases/case-uk-mytishchi-before.jpg",
+      "alt": "Переполненная контейнерная площадка МКД в Мытищах с КГМ до вывоза"
+    },
+    {
+      "id": "case-uk-mytishchi-after",
+      "page": "/kejsy/vyvoz-mkd-mytishchi-uk-podpis/",
+      "fixture": "site/content/stage2-w11-cases/02-vyvoz-mkd-mytishchi-uk-podpis.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "musor",
+        "stage": "after",
+        "extra": "container site near a multi-apartment building (МКД) now completely clean, dumpsters empty and properly closed, swept asphalt around them, no debris, no people, no figures, no silhouettes, mid-day soft light, Moscow Region courtyard context, peaceful tidy composition"
+      },
+      "outFile": "site/public/uploads/stage2-w11-cases/case-uk-mytishchi-after.jpg",
+      "publicPath": "/uploads/stage2-w11-cases/case-uk-mytishchi-after.jpg",
+      "alt": "Чистая контейнерная площадка двух МКД в Мытищах после еженедельного вывоза КГМ бригадой Обихода"
+    },
+    {
+      "id": "case-spil-krasnogorsk-before",
+      "page": "/kejsy/spil-avariynyy-krasnogorsk/",
+      "fixture": "site/content/stage2-w11-cases/03-spil-avariynyy-krasnogorsk.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "arboristika",
+        "stage": "before",
+        "extra": "an old large birch tree visibly leaning over the corner of a private wooden house in a Krasnogorsk-style suburban property, cracked bark, dead upper branches, threat to the roof, no people, no figures, no silhouettes, no chainsaw, no axe, soft overcast daylight, real Moscow Region context"
+      },
+      "outFile": "site/public/uploads/stage2-w11-cases/case-spil-krasnogorsk-before.jpg",
+      "publicPath": "/uploads/stage2-w11-cases/case-spil-krasnogorsk-before.jpg",
+      "alt": "Аварийная берёза, нависшая над домом в Красногорске, до спила"
+    },
+    {
+      "id": "case-spil-krasnogorsk-after",
+      "page": "/kejsy/spil-avariynyy-krasnogorsk/",
+      "fixture": "site/content/stage2-w11-cases/03-spil-avariynyy-krasnogorsk.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "arboristika",
+        "stage": "after",
+        "extra": "the same corner of the private wooden house now safely clear of the threatening tree, fresh stump cleanly cut at ground level, neat raked yard, no branches, no debris, no people, no figures, no silhouettes, soft golden hour daylight, real Moscow Region context, calm peaceful composition"
+      },
+      "outFile": "site/public/uploads/stage2-w11-cases/case-spil-krasnogorsk-after.jpg",
+      "publicPath": "/uploads/stage2-w11-cases/case-spil-krasnogorsk-after.jpg",
+      "alt": "Чистый угол дома в Красногорске и аккуратный пень после аварийного спила берёзы"
+    },
+    {
+      "id": "case-obrezka-ramenskoye-before",
+      "page": "/kejsy/obrezka-fruktovogo-sada-ramenskoye/",
+      "fixture": "site/content/stage2-w11-cases/04-obrezka-fruktovogo-sada-ramenskoye.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "arboristika",
+        "stage": "before",
+        "extra": "an old fruit garden on a private dacha plot, mature apple and pear trees with overgrown crowns, dense tangled branches, dead twigs, weeds at the base, no people, no figures, no silhouettes, no shears, no chainsaw, soft early-spring daylight before leafing out, real Moscow Region dacha context"
+      },
+      "outFile": "site/public/uploads/stage2-w11-cases/case-obrezka-ramenskoye-before.jpg",
+      "publicPath": "/uploads/stage2-w11-cases/case-obrezka-ramenskoye-before.jpg",
+      "alt": "Запущенный фруктовый сад в Раменском с разросшимися яблонями до санитарной обрезки"
+    },
+    {
+      "id": "case-obrezka-ramenskoye-after",
+      "page": "/kejsy/obrezka-fruktovogo-sada-ramenskoye/",
+      "fixture": "site/content/stage2-w11-cases/04-obrezka-fruktovogo-sada-ramenskoye.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "arboristika",
+        "stage": "after",
+        "extra": "the same fruit garden now after sanitary pruning, mature apple and pear trees with neat clean crowns, dead branches removed, ground raked clean, peaceful tidy plot, no people, no figures, no silhouettes, soft early-spring daylight, real Moscow Region dacha context"
+      },
+      "outFile": "site/public/uploads/stage2-w11-cases/case-obrezka-ramenskoye-after.jpg",
+      "publicPath": "/uploads/stage2-w11-cases/case-obrezka-ramenskoye-after.jpg",
+      "alt": "Аккуратный фруктовый сад в Раменском после санитарной обрезки яблонь и груш"
+    },
+    {
+      "id": "case-naled-odincovo-before",
+      "page": "/kejsy/chistka-naledi-mkd-odincovo/",
+      "fixture": "site/content/stage2-w11-cases/05-chistka-naledi-mkd-odincovo.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "krishi",
+        "stage": "before",
+        "extra": "pitched metal roof of a multi-apartment building (МКД) covered in heavy compacted snow, large icicles hanging dangerously over the eaves above the entrance, frosted facade, no people, no figures, no silhouettes, soft cold winter daylight, Moscow Region urban courtyard context"
+      },
+      "outFile": "site/public/uploads/stage2-w11-cases/case-naled-odincovo-before.jpg",
+      "publicPath": "/uploads/stage2-w11-cases/case-naled-odincovo-before.jpg",
+      "alt": "Скатная крыша МКД в Одинцово с тяжёлой наледью и сосульками над входом до очистки"
+    },
+    {
+      "id": "case-naled-odincovo-after",
+      "page": "/kejsy/chistka-naledi-mkd-odincovo/",
+      "fixture": "site/content/stage2-w11-cases/05-chistka-naledi-mkd-odincovo.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "krishi",
+        "stage": "after",
+        "extra": "the same pitched metal roof of the multi-apartment building (МКД) now completely clear of snow and ice, clean edges, no icicles, safe entrance below, frosted facade still cold but tidy, no people, no figures, no silhouettes, soft cold winter morning daylight, Moscow Region urban courtyard context"
+      },
+      "outFile": "site/public/uploads/stage2-w11-cases/case-naled-odincovo-after.jpg",
+      "publicPath": "/uploads/stage2-w11-cases/case-naled-odincovo-after.jpg",
+      "alt": "Чистая скатная кровля МКД и фасад без сосулек в Одинцово после очистки бригадой Обихода"
+    },
+    {
+      "id": "case-chistka-mytishchi-before",
+      "page": "/kejsy/chistka-chastnyy-dom-mytishchi/",
+      "fixture": "site/content/stage2-w11-cases/06-chistka-chastnyy-dom-mytishchi.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "krishi",
+        "stage": "before",
+        "extra": "pitched roof of a private suburban cottage covered in heavy fresh snow, long icicles hanging over the eaves, snow-covered chimney, frosted yard around the house, no people, no figures, no silhouettes, soft cold winter daylight, Moscow Region private property context"
+      },
+      "outFile": "site/public/uploads/stage2-w11-cases/case-chistka-mytishchi-before.jpg",
+      "publicPath": "/uploads/stage2-w11-cases/case-chistka-mytishchi-before.jpg",
+      "alt": "Скатная крыша частного дома в Мытищах с тяжёлым снегом и сосульками до очистки"
+    },
+    {
+      "id": "case-chistka-mytishchi-after",
+      "page": "/kejsy/chistka-chastnyy-dom-mytishchi/",
+      "fixture": "site/content/stage2-w11-cases/06-chistka-chastnyy-dom-mytishchi.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "krishi",
+        "stage": "after",
+        "extra": "the same pitched roof of the private suburban cottage now completely clear of snow and ice, clean edges, no icicles, snow on the ground around the house in tidy piles away from the eaves, no people, no figures, no silhouettes, soft cold winter morning daylight, Moscow Region private property context, peaceful tidy composition"
+      },
+      "outFile": "site/public/uploads/stage2-w11-cases/case-chistka-mytishchi-after.jpg",
+      "publicPath": "/uploads/stage2-w11-cases/case-chistka-mytishchi-after.jpg",
+      "alt": "Чистая скатная крыша частного дома в Мытищах после очистки от снега и наледи бригадой Обихода"
+    },
+    {
+      "id": "case-demontazh-dachi-krasnogorsk-before",
+      "page": "/kejsy/demontazh-dachi-staraya-krasnogorsk/",
+      "fixture": "site/content/stage2-w11-cases/07-demontazh-dachi-staraya-krasnogorsk.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "demontazh",
+        "stage": "before",
+        "extra": "an old dilapidated wooden dacha on a private suburban plot, weathered grey-brown vertical planks, sagging slate roof, cracked windows, leaning porch, surrounded by overgrown grass and a plain wooden fence, no people, no figures, no silhouettes, no construction tools in frame, overcast soft daylight, real Moscow Region dacha context"
+      },
+      "outFile": "site/public/uploads/stage2-w11-cases/case-demontazh-dachi-krasnogorsk-before.jpg",
+      "publicPath": "/uploads/stage2-w11-cases/case-demontazh-dachi-krasnogorsk-before.jpg",
+      "alt": "Старая ветхая дача в Красногорске до демонтажа"
+    },
+    {
+      "id": "case-demontazh-dachi-krasnogorsk-after",
+      "page": "/kejsy/demontazh-dachi-staraya-krasnogorsk/",
+      "fixture": "site/content/stage2-w11-cases/07-demontazh-dachi-staraya-krasnogorsk.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "demontazh",
+        "stage": "after",
+        "extra": "the same private suburban plot now after full demolition, empty leveled ground, no shed, no debris, raked clean soil, plain wooden fence still standing, mature trees in background, no people, no figures, no silhouettes, no construction tools in frame, overcast soft daylight, real Moscow Region dacha context, peaceful tidy composition"
+      },
+      "outFile": "site/public/uploads/stage2-w11-cases/case-demontazh-dachi-krasnogorsk-after.jpg",
+      "publicPath": "/uploads/stage2-w11-cases/case-demontazh-dachi-krasnogorsk-after.jpg",
+      "alt": "Свободный выровненный участок в Красногорске после демонтажа старой дачи"
+    },
+    {
+      "id": "case-snos-zabora-ramenskoye-before",
+      "page": "/kejsy/snos-zabora-zastroyshchik-ramenskoye/",
+      "fixture": "site/content/stage2-w11-cases/08-snos-zabora-zastroyshchik-ramenskoye.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "demontazh",
+        "stage": "before",
+        "extra": "an old failing wooden fence along the perimeter of a residential development plot in a Ramenskoye-style suburban setting, leaning posts, broken slats, overgrown grass at the base, mature trees behind the fence line, no people, no figures, no silhouettes, no tools in frame, overcast soft daylight, real Moscow Region context"
+      },
+      "outFile": "site/public/uploads/stage2-w11-cases/case-snos-zabora-ramenskoye-before.jpg",
+      "publicPath": "/uploads/stage2-w11-cases/case-snos-zabora-ramenskoye-before.jpg",
+      "alt": "Старый ветхий забор по периметру участка в Раменском до сноса"
+    },
+    {
+      "id": "case-snos-zabora-ramenskoye-after",
+      "page": "/kejsy/snos-zabora-zastroyshchik-ramenskoye/",
+      "fixture": "site/content/stage2-w11-cases/08-snos-zabora-zastroyshchik-ramenskoye.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "demontazh",
+        "stage": "after",
+        "extra": "the same residential development plot perimeter now completely cleared of the old fence, fresh empty post-holes dug at regular intervals along the boundary, no debris, raked clean soil, mature trees behind the line, no people, no figures, no silhouettes, no tools in frame, overcast soft daylight, real Moscow Region context, peaceful tidy composition"
+      },
+      "outFile": "site/public/uploads/stage2-w11-cases/case-snos-zabora-ramenskoye-after.jpg",
+      "publicPath": "/uploads/stage2-w11-cases/case-snos-zabora-ramenskoye-after.jpg",
+      "alt": "Свободный периметр КП «Лесная гавань» в Раменском с готовыми ямами под новые столбы после сноса старого забора"
+    }
+  ]
+}
