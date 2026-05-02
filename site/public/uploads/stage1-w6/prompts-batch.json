@@ -1,0 +1,99 @@
+{
+  "_meta": {
+    "stage": "stage1-w6",
+    "owner": "cms (Track B Run 2) + art consult",
+    "track": "Track B Run 2 — 5 blog cover images (Wave 1 cornerstone topics)",
+    "art_consistency": "object-focused, NO humans/figures/silhouettes (Run 1 unified rule)",
+    "antiPatterns_§14": [
+      "no stock photo aesthetic",
+      "no green-leaf eco-cliché",
+      "no axe / no chainsaw / no power saws / no aggressive tools",
+      "no knight/shield",
+      "no matryoshka",
+      "no logo overlays",
+      "no emoji decorators",
+      "no readable text fakery (Cyrillic prefer abstract glyphs)"
+    ],
+    "model_default": "fal-ai/flux/schnell",
+    "imageSize": "landscape_16_9 (model native 1024×576). 1200×630 OG-target — браузер апскейлит, ок для blog covers.",
+    "fixturesUpdated": [
+      "TBD: cw Run 3 пишет blog/* JSON-fixtures параллельно. После Run 3 close — sec-update heroImageUrl Track B."
+    ],
+    "downloadedFormat": "JPEG (flux/schnell всегда возвращает JPEG-байты)",
+    "iterations": {
+      "blog-4-v-1-cover": 1,
+      "blog-spilit-derevo-cover": 1,
+      "blog-shtraf-cover": "1 (artifact: 'AR' псевдо-логотип на пне; borderline anti-stock — оставлен)",
+      "blog-razreshenie-mo-cover": 1,
+      "blog-smeta-cover": "4 (1-я: chainsaw bar в кадре — FAIL §14; 2-я: подкаст-микрофон/torch — minor; 3-я: камера + paper — minor; 4-я финальная: smartphone+notepad+pen с лёгким артефактом по краям — PASS, narrative «фото→смета» поддержан)"
+    },
+    "todo_post_run_3": "Заменить heroImageUrl placeholders в site/content/stage1-w6/blog-*.json на /uploads/stage1-w6/blog-*-cover.jpg после возврата cw Run 3."
+  },
+  "items": [
+    {
+      "id": "blog-4-v-1-cover",
+      "page": "/blog/4-v-1-uslugi/",
+      "fixture": "site/content/stage1-w6/blog-4-v-1-uslugi.json",
+      "useCase": "blog-cover",
+      "params": {
+        "topic": "4-в-1 в обслуживании участка — арбористика, крыши, мусор, демонтаж",
+        "visualConcept": "high-angle aerial view of a Moscow Region private suburban property at midday, showing four distinct visual elements distributed across the lot: a clean dump truck parked at the gate, a mature tree in the foreground, a private house with a pitched metal roof in the middle ground, an old wooden shed at the back of the lot, mature trees and wooden fences around, calm matter-of-fact composition"
+      },
+      "outFile": "site/public/uploads/stage1-w6/blog-4-v-1-cover.jpg",
+      "publicPath": "/uploads/stage1-w6/blog-4-v-1-cover.jpg",
+      "alt": "Подмосковный участок с четырьмя направлениями работ — деревья, крыша, мусор и старый сарай — на одной территории"
+    },
+    {
+      "id": "blog-spilit-derevo-cover",
+      "page": "/blog/mozhno-li-spilit-derevo-na-svoem-uchastke/",
+      "fixture": "site/content/stage1-w6/blog-mozhno-li-spilit-derevo.json",
+      "useCase": "blog-cover",
+      "params": {
+        "topic": "Можно ли спилить дерево на своём участке — что говорит закон",
+        "visualConcept": "still-life on a wooden outdoor table at the foot of a mature deciduous tree on a private property, on the table a folded paper document tied with string suggesting an official permit, a metal measuring tape and a pencil next to it, soft morning light filtered through leaves, depth of field on the document with the tree trunk slightly out of focus"
+      },
+      "outFile": "site/public/uploads/stage1-w6/blog-spilit-derevo-cover.jpg",
+      "publicPath": "/uploads/stage1-w6/blog-spilit-derevo-cover.jpg",
+      "alt": "Документ-разрешение на столе под старой берёзой на частном участке — нужно ли разрешение на спил"
+    },
+    {
+      "id": "blog-shtraf-cover",
+      "page": "/blog/shtraf-za-spil-bez-razresheniya/",
+      "fixture": "site/content/stage1-w6/blog-shtraf-za-spil.json",
+      "useCase": "blog-cover",
+      "params": {
+        "topic": "Штраф за спил дерева без разрешения — суммы и как избежать",
+        "visualConcept": "still-life on a dark wooden table indoors: an open hard-cover document folder with abstract horizontal lines suggesting a regulation text (no readable letters, only line glyphs), a freshly cut tree stump cross-section placed next to it as a visual rhyme, a small wooden judge gavel on the corner of the table, neutral grey wall in the background, dramatic side light from a window"
+      },
+      "outFile": "site/public/uploads/stage1-w6/blog-shtraf-cover.jpg",
+      "publicPath": "/uploads/stage1-w6/blog-shtraf-cover.jpg",
+      "alt": "Документ КоАП и пень дерева на столе — штраф за спил без разрешения"
+    },
+    {
+      "id": "blog-razreshenie-mo-cover",
+      "page": "/blog/razreshenie-na-spil-moskovskaya-oblast/",
+      "fixture": "site/content/stage1-w6/blog-razreshenie-na-spil-mo.json",
+      "useCase": "blog-cover",
+      "params": {
+        "topic": "Где получить разрешение на спил дерева в Московской области",
+        "visualConcept": "exterior shot — a mature birch tree standing in the foreground on a quiet suburban property edge, a clipboard with a paper application form attached to its side resting against the tree trunk, a low-rise municipal-style brick administrative building blurred in the background across the road, overcast soft daylight, calm matter-of-fact composition"
+      },
+      "outFile": "site/public/uploads/stage1-w6/blog-razreshenie-mo-cover.jpg",
+      "publicPath": "/uploads/stage1-w6/blog-razreshenie-mo-cover.jpg",
+      "alt": "Берёза с заявлением на спил на фоне административного здания МО — где получить порубочный билет"
+    },
+    {
+      "id": "blog-smeta-cover",
+      "page": "/blog/smeta-za-10-minut/",
+      "fixture": "site/content/stage1-w6/blog-smeta-za-10-minut.json",
+      "useCase": "blog-cover",
+      "params": {
+        "topic": "Смета за 10 минут по фото — как Обиход считает стоимость",
+        "visualConcept": "minimal overhead still-life on a clean light beige wooden office table: a modern smartphone lying flat on the left with its screen out of focus and showing a faint photo of a private property, a small lined paper notepad in the centre with thin blank horizontal lines (no letters, no numbers, no symbols, no glyphs, just blank ruled lines), a slim black ballpoint pen between them resting on the notepad, soft natural daylight from above, muted warm-grey palette. Editorial flat-lay composition with breathing space"
+      },
+      "outFile": "site/public/uploads/stage1-w6/blog-smeta-cover.jpg",
+      "publicPath": "/uploads/stage1-w6/blog-smeta-cover.jpg",
+      "alt": "Смартфон с фото объекта и блокнот со сметой на офисном столе — расчёт стоимости за 10 минут"
+    }
+  ]
+}
