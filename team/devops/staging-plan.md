@@ -5,7 +5,7 @@ owner: do
 requested_by: poseo
 created: 2026-05-01
 target_ready: 2026-05-15  # W2 end (US-0 Stage 0 — gate W3 dependency)
-status: planning  # planning → provisioning → ready
+status: provisioned  # planning → provisioning → provisioned → ready (после DNS+TLS+first deploy)
 related:
   - specs/EPIC-SEO-CONTENT-FILL/US-0-templates-ux-migration/sa-seo.md (AC-11, AC-13.1)
   - .claude/projects/-Users-a36-obikhod/memory/project_infra.md
@@ -399,6 +399,17 @@ build-time piki до 1.5GB. Postgres ~200MB. Запас может схлопн�
 - `2026-05-01 23:00 · do → poseo: план провижининга готов (этот файл). ETA первый
   deploy 2026-05-08, готовность к US-0 эталонам 2026-05-15. Открытый вопрос: апгрейд
   VPS до 4GB до Stage 2 (US-2 batch ~150 SD) — поднять с оператором отдельно.`
+- `2026-05-02 08:10 · operator → do: VPS уже 4GB (R-S1 закрыт), basic-auth credentials
+  obihod-staging/<random24>, TG bot OFF, Я.Метрика OFF. Staging deploy approved.`
+- `2026-05-02 08:30 · do → poseo/operator: инфра провижининг завершён (status: provisioned).
+  Готово: postgres database obikhod_staging + user, /opt/obikhod-staging/{shared/.env,
+  ecosystem.config.cjs, releases/, backups/}, /var/log/obikhod-staging/, nginx vhost
+  staging.obikhod.ru с basic-auth + X-Robots-Tag + /robots.txt Disallow,
+  htpasswd-staging создан, .github/workflows/deploy-staging.yml готов (паттерн prod).
+  БЛОКЕР: DNS A-record staging.obikhod.ru → 45.153.190.107 НЕ настроен — нужен
+  ручной шаг оператора через Beget DNS-панель (нет API credentials у do).
+  После DNS: certbot --nginx → first deploy через workflow_dispatch deploy-staging.yml
+  (требует GitHub secrets STAGING_SSH_HOST/USER/KEY/PORT/DEPLOY_PATH/BASIC_AUTH).`
 
 ## 12 · Открытые вопросы для оператора
 
