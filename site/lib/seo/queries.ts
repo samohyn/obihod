@@ -398,10 +398,13 @@ export const getAllBlogSlugs = cache(
         pagination: false,
         select: { slug: true, updatedAt: true },
       })
-      return r.docs.map((d) => ({
-        slug: (d as { slug: string }).slug,
-        updatedAt: (d as { updatedAt?: string }).updatedAt,
-      }))
+      const out: Array<{ slug: string; updatedAt?: string }> = []
+      for (const d of r.docs) {
+        const slug = (d as { slug?: unknown }).slug
+        if (typeof slug !== 'string' || slug.length === 0) continue
+        out.push({ slug, updatedAt: (d as { updatedAt?: string }).updatedAt })
+      }
+      return out
     } catch (e) {
       console.error('[queries.getAllBlogSlugs] failed:', e)
       return []
