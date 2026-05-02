@@ -162,7 +162,7 @@ const MEGA_COLUMNS: MegaColumn[] = [
 ]
 
 const PILOT_DISTRICTS: { slug: string; name: string }[] = [
-  { slug: 'odintsovo', name: 'Одинцово' },
+  { slug: 'odincovo', name: 'Одинцово' },
   { slug: 'krasnogorsk', name: 'Красногорск' },
   { slug: 'mytishchi', name: 'Мытищи' },
   { slug: 'khimki', name: 'Химки' },
