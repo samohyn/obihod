@@ -111,6 +111,12 @@ export function caseVizPrompt(o: CaseVizPromptOpts): string {
 export type BlogCoverPromptOpts = {
   topic: string // free-form: "когда спиливать берёзу на участке"
   mood?: 'editorial' | 'practical' | 'seasonal'
+  /**
+   * Run 2 (Stage 1 W6): explicit visual concept overrides default «conceptual
+   * illustration» framing. Используется для blog covers с object-focused
+   * композицией (smartphone, документ КоАП, разрешение и т.п.) — без людей.
+   */
+  visualConcept?: string
 }
 
 export function blogCoverPrompt(o: BlogCoverPromptOpts): string {
@@ -120,12 +126,59 @@ export function blogCoverPrompt(o: BlogCoverPromptOpts): string {
       : o.mood === 'seasonal'
         ? 'seasonal atmospheric mood, evocative light'
         : 'editorial magazine cover style, calm'
+  // Если задан visualConcept — используем DOCUMENTARY_STYLE + anti-people + ANTI_STOCK
+  // (Run 2 контракт). Иначе legacy ветка (Run 0) — STYLE_BASE + topic-based prompt.
+  if (o.visualConcept) {
+    return [
+      DOCUMENTARY_STYLE,
+      o.visualConcept,
+      `editorial cover for an article about: ${o.topic}`,
+      'Russian suburban context, Moscow Region setting',
+      moodLine,
+      '16:9 composition with clear focal subject and breathing space',
+      'no humans, no figures, no silhouettes, no people in frame, no faces, no hands close-up',
+      'no axe, no chainsaw, no power saws, no aggressive tools in frame',
+      ANTI_STOCK,
+      NEGATIVE_DEFAULT,
+    ].join(', ')
+  }
   return [
     STYLE_BASE,
     `conceptual illustration for an article about: ${o.topic}`,
     'Russian suburban context, private property setting',
     moodLine,
     '16:9 composition with clear focal subject and breathing space',
+    NEGATIVE_DEFAULT,
+  ].join(', ')
+}
+
+// ─────────────────────────────────────────────────────────────────
+// Stage 1 W5: home hero (Главная).
+//
+// art consistency rule: home hero — landmark/object only direction,
+// БЕЗ людей в кадре. Согласовано с pillar/district/USP visuals (Run 1).
+// Cohesion: МО suburban panorama showing variety (trees, roof, dacha) —
+// визуальный аналог 4-в-1 USP (4 pillar в одном кадре через объекты).
+// Палитра: brand greens + amber muted (NOT eco-leaf cliché).
+// ─────────────────────────────────────────────────────────────────
+
+/**
+ * Hero для главной страницы `/`. Object-focused МО suburban panorama at
+ * golden hour — через визуальное разнообразие объектов поддерживает narrative
+ * 4-в-1 (видны trees, roof, dacha area, fences). Caregiver+Ruler — спокойная
+ * компетентная атмосфера, не «эко-обещание».
+ */
+export function homeHeroPrompt(): string {
+  return [
+    DOCUMENTARY_STYLE,
+    'wide cinematic panorama of a Moscow Region suburban property at golden hour: in foreground a private wooden house with a pitched metal roof, mature deciduous trees casting long warm shadows on green grass, in mid-ground a small wooden garden shed and plain wooden fence, in background more low-rise dacha-style houses and tree line, soft amber-warm sunlight from low sun on the right',
+    'no people, no figures, no silhouettes, no creatures, no animals',
+    'muted brand palette — warm amber sunlight, deep greens of foliage, weathered grey-brown wood tones, soft blue-grey sky',
+    'no eco-leaf cliché, no exaggerated green saturation, no fake glow, no lens flare overload',
+    'no power tools, no chainsaw, no axe, no equipment in frame, no debris',
+    'Moscow Region, Russia, late summer or early autumn, calm peaceful atmosphere, real depth, atmospheric haze in background',
+    'cinematic 16:9 framing with breathing space, clear focal hierarchy, real material textures',
+    ANTI_STOCK,
     NEGATIVE_DEFAULT,
   ].join(', ')
 }
@@ -150,6 +203,12 @@ export type DistrictHeroOpts = {
   districtName: string
   cluster?: ServiceCluster
   season?: keyof typeof SEASON
+  /**
+   * Дополнительная подсказка по визуальному контексту района (без узнаваемых
+   * landmarks — flux/schnell их фабрикует). Например: «mature trees + low-rise
+   * houses», «residential building в фоне», «dachi-style fences».
+   */
+  landmarkHint?: string
 }
 
 /**
@@ -177,12 +236,15 @@ export function districtHeroPrompt(o: DistrictHeroOpts): string {
     DOCUMENTARY_STYLE,
     scene,
     `${o.districtName} district, Moscow Region, Russia, recognizable suburban context (low-rise houses, mixed dachas)`,
+    o.landmarkHint,
     o.season ? SEASON[o.season] : SEASON.summer,
     'real МО suburban details (mixed roofs, fences, trees), no fake recognizable landmarks',
     'no humans, no figures, no silhouettes, no people in frame',
     ANTI_STOCK,
     NEGATIVE_DEFAULT,
-  ].join(', ')
+  ]
+    .filter(Boolean)
+    .join(', ')
 }
 
 export type B2bSegment = 'uk-tszh' | 'fm' | 'zastrojschiki' | 'goszakaz'

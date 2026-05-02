@@ -2,12 +2,15 @@ import { falRun, type FalImageResult } from './client'
 import {
   blogCoverPrompt,
   caseVizPrompt,
+  districtHeroPrompt,
   heroPrompt,
+  homeHeroPrompt,
   ogPrompt,
   pillarHeroPrompt,
   uspFotoSmetaPrompt,
   type BlogCoverPromptOpts,
   type CaseVizPromptOpts,
+  type DistrictHeroOpts,
   type HeroPromptOpts,
   type OgPromptOpts,
   type PillarHeroOpts,
@@ -87,7 +90,25 @@ export async function generateUspFotoSmeta(o: BaseOpts = {}): Promise<FalImageRe
   return runT2I(uspFotoSmetaPrompt(), { imageSize: 'landscape_16_9', ...o })
 }
 
-export type UseCase = 'hero' | 'og' | 'case-viz' | 'blog-cover' | 'pillar-hero' | 'usp-foto-smeta'
+export async function generateDistrictHero(
+  o: DistrictHeroOpts & BaseOpts,
+): Promise<FalImageResult> {
+  return runT2I(districtHeroPrompt(o), { imageSize: 'landscape_16_9', ...o })
+}
+
+export async function generateHomeHero(o: BaseOpts = {}): Promise<FalImageResult> {
+  return runT2I(homeHeroPrompt(), { imageSize: 'landscape_16_9', ...o })
+}
+
+export type UseCase =
+  | 'hero'
+  | 'og'
+  | 'case-viz'
+  | 'blog-cover'
+  | 'pillar-hero'
+  | 'usp-foto-smeta'
+  | 'district-hero'
+  | 'home-hero'
 
 export async function generateByUseCase(
   useCase: UseCase,
@@ -108,5 +129,9 @@ export async function generateByUseCase(
       return generatePillarHero(params as PillarHeroOpts & BaseOpts)
     case 'usp-foto-smeta':
       return generateUspFotoSmeta(params as BaseOpts)
+    case 'district-hero':
+      return generateDistrictHero(params as DistrictHeroOpts & BaseOpts)
+    case 'home-hero':
+      return generateHomeHero(params as BaseOpts)
   }
 }
