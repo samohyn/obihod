@@ -3,8 +3,8 @@
   "service": "vyvoz-musora",
   "district": "istra",
   "subServiceSlug": null,
-  "publishStatus": "published",
-  "noindexUntilCase": false,
+  "publishStatus": "draft",
+  "noindexUntilCase": true,
   "computedTitle": "Вывоз мусора в Истре",
   "leadParagraph": {
     "root": {

@@ -3,8 +3,8 @@
   "service": "demontazh",
   "district": "pushkino",
   "subServiceSlug": null,
-  "publishStatus": "published",
-  "noindexUntilCase": false,
+  "publishStatus": "draft",
+  "noindexUntilCase": true,
   "computedTitle": "Демонтаж в Пушкино",
   "leadParagraph": {
     "root": {

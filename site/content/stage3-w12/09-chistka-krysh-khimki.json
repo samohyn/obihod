@@ -3,8 +3,8 @@
   "service": "chistka-krysh",
   "district": "khimki",
   "subServiceSlug": null,
-  "publishStatus": "published",
-  "noindexUntilCase": false,
+  "publishStatus": "draft",
+  "noindexUntilCase": true,
   "computedTitle": "Чистка крыш в Химках",
   "leadParagraph": {
     "root": {

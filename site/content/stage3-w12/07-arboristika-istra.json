@@ -3,8 +3,8 @@
   "service": "arboristika",
   "district": "istra",
   "subServiceSlug": null,
-  "publishStatus": "published",
-  "noindexUntilCase": false,
+  "publishStatus": "draft",
+  "noindexUntilCase": true,
   "computedTitle": "Арбористика в Истре",
   "leadParagraph": {
     "root": {

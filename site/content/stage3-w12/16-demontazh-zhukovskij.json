@@ -1,10 +1,10 @@
 {
   "type": "service-district",
   "service": "demontazh",
-  "district": "zhukovskij",
+  "district": "zhukovsky",
   "subServiceSlug": null,
-  "publishStatus": "published",
-  "noindexUntilCase": false,
+  "publishStatus": "draft",
+  "noindexUntilCase": true,
   "computedTitle": "Демонтаж в Жуковском",
   "leadParagraph": {
     "root": {
@@ -88,7 +88,7 @@
       "consentHref": "/policy/",
       "ctaLabel": "Получить смету",
       "helper": "Перезвоним в 8:00–22:00 МСК · смета за 10 минут.",
-      "hiddenFields": { "service": "demontazh", "district": "zhukovskij" }
+      "hiddenFields": { "service": "demontazh", "district": "zhukovsky" }
     },
     {
       "blockType": "faq",
