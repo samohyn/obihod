@@ -1,0 +1,95 @@
+{
+  "_meta": {
+    "stage": "stage1-w6",
+    "run": "Track B Run 3",
+    "owner": "cms (Track B Run 3) + art consult",
+    "track": "Track B Run 3 — 4 SD hero (Одинцово × 4 услуги)",
+    "art_consistency": "landmark/object only, NO humans/figures/silhouettes (Run 1+2 unified rule, Stage 0 R1)",
+    "antiPatterns_§14": [
+      "no stock photo aesthetic",
+      "no overly polished smiles",
+      "no green-leaf eco-cliché",
+      "no axe/chainsaw macho",
+      "no knight/shield",
+      "no matryoshka",
+      "no logo overlays",
+      "no emoji decorators",
+      "no fake recognizable landmarks (МО suburban context only)"
+    ],
+    "model_default": "fal-ai/flux/schnell (cheap, 4 steps, ~$0.003/img)",
+    "imageSize": "landscape_16_9 (model native 1024×576)",
+    "fixturesUpdated": [
+      "site/content/stage1-w6/vyvoz-musora-odincovo.json",
+      "site/content/stage1-w6/arboristika-odincovo.json",
+      "site/content/stage1-w6/chistka-krysh-odincovo.json",
+      "site/content/stage1-w6/demontazh-odincovo.json"
+    ],
+    "downloadedFormat": "JPEG (flux/schnell всегда возвращает JPEG-байты — script auto-detects через magic bytes)",
+    "outputResolution": "1024×576 (model native; landscape_16_9). Достаточно для hero на десктопе.",
+    "iterations": {
+      "sd-vyvoz-musora-odincovo-hero": "1 (PASS; minor §14: на левом борту псевдо-логотип «S30/SAD» — borderline no-logo, оставлен — текст не читается полностью)",
+      "sd-arboristika-odincovo-hero": "1 (PASS; деревья + дом, золотой свет, попадание в pillar-arboristika visual)",
+      "sd-chistka-krysh-odincovo-hero": "2 (1-я: фигура в капюшоне с инструментом в кадре — FAIL anti-people guard; усилен landmarkHint c «completely empty composition with absolutely no figures»; 2-я: бревенчатый дом в снегу + сосульки + забор + деревья, БЕЗ людей — PASS)",
+      "sd-demontazh-odincovo-hero": "1 (PASS; старый сарай на участке, забор, деревья, без людей)"
+    }
+  },
+  "items": [
+    {
+      "id": "sd-vyvoz-musora-odincovo-hero",
+      "page": "/vyvoz-musora/odincovo/",
+      "fixture": "site/content/stage1-w6/vyvoz-musora-odincovo.json",
+      "useCase": "sd-hero",
+      "params": {
+        "service": "vyvoz-musora",
+        "districtName": "Odintsovo",
+        "landmarkHint": "suburban МО context — quiet street, mature trees and old wooden fences along it, mix of low-rise wooden private houses and small cottages, no recognizable landmarks, no people"
+      },
+      "outFile": "site/public/uploads/stage1-w6/sd-vyvoz-musora-odincovo-hero.jpg",
+      "publicPath": "/uploads/stage1-w6/sd-vyvoz-musora-odincovo-hero.jpg",
+      "alt": "Газель с строительным мусором у ворот частного дома в Одинцовском округе — район выезда бригады Обихода"
+    },
+    {
+      "id": "sd-arboristika-odincovo-hero",
+      "page": "/arboristika/odincovo/",
+      "fixture": "site/content/stage1-w6/arboristika-odincovo.json",
+      "useCase": "sd-hero",
+      "params": {
+        "service": "arboristika",
+        "districtName": "Odintsovo",
+        "landmarkHint": "suburban МО context — old apple and pine trees standing tall over a wooden private house, weathered wooden fences, no people"
+      },
+      "outFile": "site/public/uploads/stage1-w6/sd-arboristika-odincovo-hero.jpg",
+      "publicPath": "/uploads/stage1-w6/sd-arboristika-odincovo-hero.jpg",
+      "alt": "Старые яблони и сосны на частном участке в Одинцовском округе — район выезда арбористов Обихода"
+    },
+    {
+      "id": "sd-chistka-krysh-odincovo-hero",
+      "page": "/chistka-krysh/odincovo/",
+      "fixture": "site/content/stage1-w6/chistka-krysh-odincovo.json",
+      "useCase": "sd-hero",
+      "params": {
+        "service": "chistka-krysh",
+        "districtName": "Odintsovo",
+        "season": "winter",
+        "landmarkHint": "suburban МО context — pitched roof of a private cottage covered in fresh heavy snow, long icicles hanging from the eaves, completely empty yard, mature trees with snow on branches in the background, plain wooden fence, completely empty composition with absolutely no figures, no humans, no silhouettes anywhere in the frame, no creatures, no characters"
+      },
+      "outFile": "site/public/uploads/stage1-w6/sd-chistka-krysh-odincovo-hero.jpg",
+      "publicPath": "/uploads/stage1-w6/sd-chistka-krysh-odincovo-hero.jpg",
+      "alt": "Скатная крыша частного дома в снегу в Одинцовском округе — район выезда кровельщиков Обихода"
+    },
+    {
+      "id": "sd-demontazh-odincovo-hero",
+      "page": "/demontazh/odincovo/",
+      "fixture": "site/content/stage1-w6/demontazh-odincovo.json",
+      "useCase": "sd-hero",
+      "params": {
+        "service": "demontazh",
+        "districtName": "Odintsovo",
+        "landmarkHint": "suburban МО context — old wooden shed on a private lot, weathered grey-brown vertical planks, simple pitched roof, plain wooden fence behind, mature deciduous trees, no people"
+      },
+      "outFile": "site/public/uploads/stage1-w6/sd-demontazh-odincovo-hero.jpg",
+      "publicPath": "/uploads/stage1-w6/sd-demontazh-odincovo-hero.jpg",
+      "alt": "Старый деревянный сарай под снос на участке в Одинцовском округе — район выезда демонтажников Обихода"
+    }
+  ]
+}

@@ -20,13 +20,13 @@
   "metaTitle": "Спил дерева на своём участке — закон 2026 | Обиход",
   "metaDescription": "Когда можно спилить дерево на своём участке без разрешения, а когда нужен порубочный билет. Статьи КоАП РФ, кадастр, штрафы и порядок действий собственника.",
   "ogImageAlt": "Лиственный участок СНТ Подмосковья — закон о спиле дерева на собственном участке",
-  "coverImageUrl": "TBD-fal.ai-blog-spil-zakon-cover.png",
+  "coverImageUrl": "/uploads/stage1-w6/blog-spilit-derevo-cover.jpg",
   "coverImageAlt": "Лиственный участок СНТ Подмосковья с межевой полосой — иллюстрация к закону о спиле дерева на собственном участке",
   "author": {
     "slug": "georgy-s",
     "name": "Georgy S.",
     "role": "Оператор Обихода, B2B-договоры с УК и ТСЖ Подмосковья",
-    "avatarUrl": "TBD-fal.ai-author-georgy-silhouette.png",
+    "avatarUrl": "/uploads/stage1-w6/author-operator-symbol.jpg",
     "avatarAlt": "Силуэт оператора Обихода в офисе, без лица",
     "_replaceable": "placeholder до W7 — оператор передаст реальное имя/bio через PoSEO"
   },
@@ -53,13 +53,13 @@
       "authorMeta": {
         "name": "Georgy S.",
         "href": "/avtory/georgy-s/",
-        "avatarUrl": "TBD-fal.ai-author-georgy-silhouette.png",
+        "avatarUrl": "/uploads/stage1-w6/author-operator-symbol.jpg",
         "avatarAlt": "Силуэт оператора Обихода"
       },
       "datePublished": "2026-05-29",
       "readingTime": "8 мин чтения",
       "coverImage": {
-        "src": "TBD-fal.ai-blog-spil-zakon-cover.png",
+        "src": "/uploads/stage1-w6/blog-spilit-derevo-cover.jpg",
         "alt": "Лиственный участок СНТ Подмосковья с межевой полосой — иллюстрация к закону о спиле дерева на собственном участке",
         "width": 960,
         "height": 540

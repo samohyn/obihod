@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "stage": "stage1-w5",
+    "run": "Track B Run 3",
+    "owner": "cms (Track B Run 3) + art consult",
+    "track": "Track B Run 3 — 3 static hero (о компании, как мы работаем, гарантии)",
+    "art_consistency": "object-focused still-life, NO humans/figures/silhouettes (Run 1+2 unified rule, Stage 0 R1)",
+    "antiPatterns_§14": [
+      "no stock photo aesthetic",
+      "no fake corporate office",
+      "no overly polished glossy surfaces",
+      "no readable text fakery",
+      "no logo overlays",
+      "no green-leaf eco-cliché"
+    ],
+    "model_default": "fal-ai/flux/schnell",
+    "imageSize": "landscape_16_9 (model native 1024×576)",
+    "fixturesUpdated": [
+      "site/content/stage1-w5/o-kompanii.json",
+      "site/content/stage1-w5/kak-my-rabotaem.json",
+      "site/content/stage1-w5/garantii.json"
+    ],
+    "downloadedFormat": "JPEG (flux/schnell auto-detect)",
+    "iterations": {
+      "static-o-kompanii-hero": "1 (PASS; клипборд + перчатки + куртка + термос + рулетка на дощатом столе с домом-сруб в фоне, БЕЗ людей; minor §14: на клипборде псевдо-«SERVICES» — latin glyph, в рамках допустимого)",
+      "static-kak-my-rabotaem-hero": "1 (PASS; flat-lay смартфон с фото частного дома + распечатанный документ с абстрактными glyphs + ручка, БЕЗ людей; чистая narrative «фото→смета»)",
+      "static-garantii-hero": "1 (PASS; договор с круглой печатью + ручка + куртка на walnut столе, БЕЗ людей; minor §14: на печати latin pseudo-glyphs «ESTRTACT/STAGE» — borderline text-fakery, оставлен)"
+    }
+  },
+  "items": [
+    {
+      "id": "static-o-kompanii-hero",
+      "page": "/o-kompanii/",
+      "fixture": "site/content/stage1-w5/o-kompanii.json",
+      "useCase": "static-hero",
+      "params": {
+        "type": "o-kompanii",
+        "visualConcept": "wide overhead still-life on a worn wooden outdoor table set in a Moscow Region suburban property: a folded clipboard with abstract horizontal lines suggesting a service checklist, leather-palm work gloves laid neatly next to it, a folded blue branded uniform jacket on the right side of the table, a small thermos and a metal measuring tape, in the soft-blurred background — a private wooden house with a pitched roof and mature trees, neutral mid-day daylight, calm matter-of-fact composition"
+      },
+      "outFile": "site/public/uploads/stage1-w5/static-o-kompanii-hero.jpg",
+      "publicPath": "/uploads/stage1-w5/static-o-kompanii-hero.jpg",
+      "alt": "Инструменты бригады Обихода на столе на фоне подмосковного участка — клипборд, перчатки, фирменная форма"
+    },
+    {
+      "id": "static-kak-my-rabotaem-hero",
+      "page": "/kak-my-rabotaem/",
+      "fixture": "site/content/stage1-w5/kak-my-rabotaem.json",
+      "useCase": "static-hero",
+      "params": {
+        "type": "kak-my-rabotaem",
+        "visualConcept": "minimal overhead still-life on a clean light beige wooden office table: a modern smartphone lying flat on the left with its screen out of focus and showing a faint photo of a private suburban property, next to it a printed sheet of paper with abstract horizontal lines and number-like glyphs (no actual readable letters or numbers — only abstract document shapes), a slim black ballpoint pen between them, soft natural daylight from the right, muted warm palette"
+      },
+      "outFile": "site/public/uploads/stage1-w5/static-kak-my-rabotaem-hero.jpg",
+      "publicPath": "/uploads/stage1-w5/static-kak-my-rabotaem-hero.jpg",
+      "alt": "Смартфон с фото объекта и распечатанная смета на офисном столе — как Обиход считает работу"
+    },
+    {
+      "id": "static-garantii-hero",
+      "page": "/garantii/",
+      "fixture": "site/content/stage1-w5/garantii.json",
+      "useCase": "static-hero",
+      "params": {
+        "type": "garantii",
+        "visualConcept": "overhead still-life on a dark walnut wooden table indoors: a printed contract document with a circular ink stamp impression and abstract horizontal lines suggesting clauses (no readable letters, only abstract document shapes and blurred glyphs), a black classic fountain pen resting on it, a folded blue branded work uniform jacket on the corner of the table, soft mid-day daylight from a window on the left, calm formal-warm tone, real wood and paper textures"
+      },
+      "outFile": "site/public/uploads/stage1-w5/static-garantii-hero.jpg",
+      "publicPath": "/uploads/stage1-w5/static-garantii-hero.jpg",
+      "alt": "Договор с печатью, ручка и фирменная форма на деревянном столе — гарантии Обихода"
+    }
+  ]
+}

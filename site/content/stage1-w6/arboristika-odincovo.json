@@ -30,7 +30,7 @@
   "metaTitle": "Спил деревьев в Одинцово — 700 ₽ за ствол, Обиход",
   "metaDescription": "Спил, обрезка, удаление пней по Одинцовскому округу. 700 ₽ за ствол до 20 см, порубочный билет 8 600 ₽, аварийка 24/7 за 1–2 часа. Стволы вывозим сами.",
   "ogImageAlt": "Барвиха Hills — район выезда арбористов Обихода в Одинцовском округе",
-  "heroImageUrl": "TBD-fal.ai-sd-arbo-odincovo-hero.png",
+  "heroImageUrl": "/uploads/stage1-w6/sd-arboristika-odincovo-hero.jpg",
   "heroImageAlt": "Барвиха Hills, въездная аллея — район выезда арбористов Обихода в Одинцовском округе",
   "blocks": [
     {
@@ -58,7 +58,7 @@
         "Вывоз в одной смете"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-arbo-odincovo-hero.png",
+        "src": "/uploads/stage1-w6/sd-arboristika-odincovo-hero.jpg",
         "alt": "Барвиха Hills, въездная аллея — район выезда арбористов Обихода в Одинцовском округе",
         "width": 720,
         "height": 540

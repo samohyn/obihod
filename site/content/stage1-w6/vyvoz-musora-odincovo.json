@@ -32,7 +32,7 @@
   "metaTitle": "Вывоз мусора в Одинцово — 12 800 ₽ за объект, Обиход",
   "metaDescription": "Вывозим стройку, КГМ, мебель и садовый по Одинцовскому округу. 12 800 ₽ за объект до 5 м³, выезд послезавтра до 12:00, акт-приёмки и полигон в МО.",
   "ogImageAlt": "Можайское шоссе с указателем на Барвиху и Голицыно — район выезда бригады Обихода",
-  "heroImageUrl": "TBD-fal.ai-sd-vyvoz-odincovo-hero.png",
+  "heroImageUrl": "/uploads/stage1-w6/sd-vyvoz-musora-odincovo-hero.jpg",
   "heroImageAlt": "Можайское шоссе с указателем на Барвиху и Голицыно — район выезда бригады Обихода",
   "blocks": [
     {
@@ -55,7 +55,7 @@
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
       "trustRow": ["24 ч выезд", "20 км покрытие", "акт-приёмки", "штрафы ГЖИ берём"],
       "image": {
-        "src": "TBD-fal.ai-sd-vyvoz-odincovo-hero.png",
+        "src": "/uploads/stage1-w6/sd-vyvoz-musora-odincovo-hero.jpg",
         "alt": "Можайское шоссе с указателем на Барвиху и Голицыно — район выезда бригады Обихода",
         "width": 720,
         "height": 540

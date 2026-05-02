@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "stage": "stage1-w6",
+    "run": "Track B Run 3",
+    "owner": "cms (Track B Run 3) + art consult",
+    "track": "Track B Run 3 — 2 author avatars (silhouette + symbol)",
+    "art_consistency": "no faces shown, privacy-first, brand voice Caregiver+Ruler (not heroic). Согласовано со seed-authors.ts (W2-W3 заменит ФИО Georgy S.).",
+    "antiPatterns_§14": [
+      "no stock photo aesthetic",
+      "no overly polished smiles",
+      "no celebrity look-alike",
+      "no green-leaf eco-cliché",
+      "no axe/chainsaw macho",
+      "no logo overlays"
+    ],
+    "model_default": "fal-ai/flux/schnell",
+    "imageSize": "square (model 1024×1024 native; square 1:1 for author/team page avatars)",
+    "fixturesUpdated": [
+      "5 blog JSONs `site/content/stage1-w6/blog-*.json` — author.avatarUrl + authorMeta.avatarUrl"
+    ],
+    "downloadedFormat": "JPEG (flux/schnell auto-detect)",
+    "iterations": {
+      "author-brigada-silhouette": "2 (1-я: full frontal group portrait с лицами и улыбками — FAIL §14 stock-photo + privacy guard; root cause: subjectByRole «three-person crew» добавлялось ПЕРЕД variantLine «pure silhouette» — flux воспринимал human portrait как primary subject. Fix: переписан companyAuthorAvatarPrompt — для silhouette/symbol modes subject задаётся ВНУТРИ variantLine с anti-face reinforcement; 2-я: чистые синие силуэты на бежевом фоне, БЕЗ features — PASS)",
+      "author-operator-symbol": "2 (1-я: над flat-lay видна фигура в форме (торс/руки) — FAIL anti-figure guard; root cause тот же; 2-я: чистый flat-lay clipboard + ручка + куртка + чашка + растение, БЕЗ человеческих частей — PASS; minor §14: на clipboard видна псевдо-надпись «Camomille» — text-fakery artifact, latin не кириллица, оставлен)"
+    },
+    "prompts_ts_changes": "lib/fal/prompts.ts: companyAuthorAvatarPrompt переписан — silhouette/symbol modes теперь идут отдельной веткой с subject inline, без primary subjectByRole. См. ADR-0009 не нужен (точечная правка, не архитектура).",
+    "todo_w2_w3": "Через Payload Admin UI прицепить эти аватары к Authors collection (см. seed-authors.ts TODO §art)."
+  },
+  "items": [
+    {
+      "id": "author-brigada-silhouette",
+      "page": "/avtory/brigada-vyvoza-obihoda/",
+      "fixture": "site/content/stage1-w6/blog-4-v-1-uslugi.json (+ blog-smeta-za-10-minut.json)",
+      "useCase": "author-avatar",
+      "params": {
+        "roleName": "brigade",
+        "variant": "silhouette",
+        "imageSize": "square"
+      },
+      "outFile": "site/public/uploads/stage1-w6/author-brigada-silhouette.jpg",
+      "publicPath": "/uploads/stage1-w6/author-brigada-silhouette.jpg",
+      "alt": "Силуэт бригады Обихода в фирменной синей форме на однотонном фоне — без лиц"
+    },
+    {
+      "id": "author-operator-symbol",
+      "page": "/avtory/georgy-s/",
+      "fixture": "site/content/stage1-w6/blog-mozhno-li-spilit-derevo.json (+ blog-shtraf + blog-razreshenie)",
+      "useCase": "author-avatar",
+      "params": {
+        "roleName": "operator",
+        "variant": "symbol",
+        "imageSize": "square"
+      },
+      "outFile": "site/public/uploads/stage1-w6/author-operator-symbol.jpg",
+      "publicPath": "/uploads/stage1-w6/author-operator-symbol.jpg",
+      "alt": "Фирменная синяя рабочая форма Обихода и инструменты на деревянной скамье — символьный портрет оператора"
+    }
+  ]
+}

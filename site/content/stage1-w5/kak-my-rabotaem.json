@@ -15,7 +15,7 @@
   "metaTitle": "Как работает Обиход — 4 шага от фото до закрытия объекта",
   "metaDescription": "Фото в Telegram → смета за 10 минут → бригада послезавтра до 12:00 → закрытие по договору. Цена фиксируется до выезда, аварийная заявка за 1–2 часа 24/7.",
   "ogImageAlt": "Схема процесса Обихода — 4 шага: фото, смета, выезд, закрытие",
-  "heroImageUrl": "TBD-fal.ai-kak-my-rabotaem-hero.png",
+  "heroImageUrl": "/uploads/stage1-w5/static-kak-my-rabotaem-hero.jpg",
   "heroImageAlt": "Схема процесса Обихода — 4 шага: фото, смета, выезд, закрытие",
   "blocks": [
     {
@@ -33,7 +33,7 @@
       "ctaPrimary": { "label": "Получить смету", "href": "/foto-smeta/" },
       "trustRow": ["10 минут на смету", "24 часа до выезда", "цена фиксируется до выезда", "акт на руки"],
       "image": {
-        "src": "TBD-fal.ai-kak-my-rabotaem-hero.png",
+        "src": "/uploads/stage1-w5/static-kak-my-rabotaem-hero.jpg",
         "alt": "Схема процесса Обихода — 4 шага: фото, смета, выезд, закрытие",
         "width": 1280,
         "height": 720

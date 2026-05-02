@@ -15,7 +15,7 @@
   "metaTitle": "Гарантии Обихода — страховка ГО 10 млн ₽, штрафы ГЖИ на нас",
   "metaDescription": "Страховка гражданской ответственности 10 млн ₽, штрафы ГЖИ и ОАТИ берём по договору с УК. Цена в смете = цена в акте, перерасчёт по согласию.",
   "ogImageAlt": "Договор Обихода с подписью и печатью на столе бригадира",
-  "heroImageUrl": "TBD-fal.ai-garantii-hero.png",
+  "heroImageUrl": "/uploads/stage1-w5/static-garantii-hero.jpg",
   "heroImageAlt": "Договор Обихода с подписью и печатью на столе бригадира",
   "blocks": [
     {
@@ -33,7 +33,7 @@
       "ctaPrimary": { "label": "Запросить договор", "href": "/foto-smeta/" },
       "trustRow": ["страховка 10 млн ₽", "штрафы ГЖИ берём", "цена фиксируется до выезда", "акт-приёмки на руки"],
       "image": {
-        "src": "TBD-fal.ai-garantii-hero.png",
+        "src": "/uploads/stage1-w5/static-garantii-hero.jpg",
         "alt": "Договор Обихода с подписью и печатью на столе бригадира",
         "width": 1280,
         "height": 720

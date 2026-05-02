@@ -30,7 +30,7 @@
   "metaTitle": "Чистка крыш в Одинцово — 1 000 ₽/м² скатной, Обиход",
   "metaDescription": "Чистка кровли от снега и наледи по Одинцовскому округу. 1 000 ₽/м² скатной, абонемент УК 45 000–180 000 ₽/мес, штрафы ГЖИ берём, аварийка за 1–2 часа 24/7.",
   "ogImageAlt": "МКД на Можайке в Одинцово — чистка кровли альпинистами Обихода",
-  "heroImageUrl": "TBD-fal.ai-sd-roof-odincovo-hero.png",
+  "heroImageUrl": "/uploads/stage1-w6/sd-chistka-krysh-odincovo-hero.jpg",
   "heroImageAlt": "МКД на Можайке в Одинцово — чистка кровли альпинистами Обихода в обвязке",
   "blocks": [
     {
@@ -58,7 +58,7 @@
         "Штрафы ГЖИ берём"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-roof-odincovo-hero.png",
+        "src": "/uploads/stage1-w6/sd-chistka-krysh-odincovo-hero.jpg",
         "alt": "МКД на Можайке в Одинцово — чистка кровли альпинистами Обихода в обвязке",
         "width": 720,
         "height": 540

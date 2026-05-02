@@ -20,12 +20,12 @@
   "metaTitle": "Смета по фото за 10 минут — как считаем | Обиход",
   "metaDescription": "Как мы считаем смету на вывоз, спил, чистку или демонтаж за 10 минут после трёх фото. Какие фото нужны, точность ±5%, что не пересчитываем на месте.",
   "ogImageAlt": "Телефон с фото объекта и сметой Обихода — расчёт по фото за 10 минут",
-  "coverImageUrl": "TBD-fal.ai-blog-smeta-foto-cover.png",
+  "coverImageUrl": "/uploads/stage1-w6/blog-smeta-cover.jpg",
   "coverImageAlt": "Телефон с фото объекта и сметой Обихода — иллюстрация процесса расчёта стоимости по фото",
   "author": {
     "slug": "brigada-vyvoza-obihoda",
     "name": "Бригада вывоза Обихода",
-    "avatarUrl": "TBD-fal.ai-author-silhouette.png",
+    "avatarUrl": "/uploads/stage1-w6/author-brigada-silhouette.jpg",
     "avatarAlt": "Силуэт бригады Обихода в рабочей одежде, без лиц"
   },
   "datePublished": "2026-05-29",
@@ -48,13 +48,13 @@
       "authorMeta": {
         "name": "Бригада вывоза Обихода",
         "href": "/avtory/brigada-vyvoza-obihoda/",
-        "avatarUrl": "TBD-fal.ai-author-silhouette.png",
+        "avatarUrl": "/uploads/stage1-w6/author-brigada-silhouette.jpg",
         "avatarAlt": "Силуэт бригады Обихода"
       },
       "datePublished": "2026-05-29",
       "readingTime": "7 мин чтения",
       "coverImage": {
-        "src": "TBD-fal.ai-blog-smeta-foto-cover.png",
+        "src": "/uploads/stage1-w6/blog-smeta-cover.jpg",
         "alt": "Телефон с фото объекта и сметой Обихода — иллюстрация процесса расчёта стоимости по фото",
         "width": 960,
         "height": 540

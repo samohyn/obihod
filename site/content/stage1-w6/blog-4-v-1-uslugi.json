@@ -21,12 +21,12 @@
   "metaTitle": "4 в 1 услуги — мусор, деревья, крыши, демонтаж | Обиход",
   "metaDescription": "Метод 4-в-1: одна бригада закрывает мусор, спил деревьев, чистку крыш и демонтаж за один выезд. Объясняем механику, цены и когда окупается, а когда — нет.",
   "ogImageAlt": "Обиход — 4 услуги одной бригадой по Москве и Московской области",
-  "coverImageUrl": "TBD-fal.ai-blog-4v1-uslugi-cover.png",
+  "coverImageUrl": "/uploads/stage1-w6/blog-4-v-1-cover.jpg",
   "coverImageAlt": "Газель Обихода с инструментами для четырёх направлений работ — арбористики, кровли, демонтажа и вывоза",
   "author": {
     "slug": "brigada-vyvoza-obihoda",
     "name": "Бригада вывоза Обихода",
-    "avatarUrl": "TBD-fal.ai-author-silhouette.png",
+    "avatarUrl": "/uploads/stage1-w6/author-brigada-silhouette.jpg",
     "avatarAlt": "Силуэт бригады Обихода в рабочей одежде, без лиц"
   },
   "datePublished": "2026-05-29",
@@ -49,13 +49,13 @@
       "authorMeta": {
         "name": "Бригада вывоза Обихода",
         "href": "/avtory/brigada-vyvoza-obihoda/",
-        "avatarUrl": "TBD-fal.ai-author-silhouette.png",
+        "avatarUrl": "/uploads/stage1-w6/author-brigada-silhouette.jpg",
         "avatarAlt": "Силуэт бригады Обихода"
       },
       "datePublished": "2026-05-29",
       "readingTime": "8 мин чтения",
       "coverImage": {
-        "src": "TBD-fal.ai-blog-4v1-uslugi-cover.png",
+        "src": "/uploads/stage1-w6/blog-4-v-1-cover.jpg",
         "alt": "Газель Обихода с инструментами для четырёх направлений работ — арбористики, кровли, демонтажа и вывоза",
         "width": 960,
         "height": 540

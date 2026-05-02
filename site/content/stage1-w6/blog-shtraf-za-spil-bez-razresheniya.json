@@ -20,13 +20,13 @@
   "metaTitle": "Штраф за спил дерева без разрешения — суммы 2026 | Обиход",
   "metaDescription": "Штраф за спил дерева без билета: 8.28 КоАП — 4 тыс. для физлиц, 300 тыс. для юрлиц. 8.28.1 КоАП и компенсация по МО. Что делать, если уже выписали.",
   "ogImageAlt": "Спиленный пень во дворе МКД — иллюстрация к штрафу за спил без разрешения",
-  "coverImageUrl": "TBD-fal.ai-blog-shtraf-spil-cover.png",
+  "coverImageUrl": "/uploads/stage1-w6/blog-shtraf-cover.jpg",
   "coverImageAlt": "Спиленный пень во дворе МКД с предписанием на двери — иллюстрация к штрафу за спил без разрешения",
   "author": {
     "slug": "georgy-s",
     "name": "Georgy S.",
     "role": "Оператор Обихода, B2B-договоры с УК и ТСЖ Подмосковья",
-    "avatarUrl": "TBD-fal.ai-author-georgy-silhouette.png",
+    "avatarUrl": "/uploads/stage1-w6/author-operator-symbol.jpg",
     "avatarAlt": "Силуэт оператора Обихода в офисе, без лица",
     "_replaceable": "placeholder до W7 — оператор передаст реальное имя/bio через PoSEO"
   },
@@ -53,13 +53,13 @@
       "authorMeta": {
         "name": "Georgy S.",
         "href": "/avtory/georgy-s/",
-        "avatarUrl": "TBD-fal.ai-author-georgy-silhouette.png",
+        "avatarUrl": "/uploads/stage1-w6/author-operator-symbol.jpg",
         "avatarAlt": "Силуэт оператора Обихода"
       },
       "datePublished": "2026-05-29",
       "readingTime": "8 мин чтения",
       "coverImage": {
-        "src": "TBD-fal.ai-blog-shtraf-spil-cover.png",
+        "src": "/uploads/stage1-w6/blog-shtraf-cover.jpg",
         "alt": "Спиленный пень во дворе МКД с предписанием на двери — иллюстрация к штрафу за спил без разрешения",
         "width": 960,
         "height": 540
