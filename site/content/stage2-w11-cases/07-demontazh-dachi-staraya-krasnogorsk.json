@@ -25,16 +25,25 @@
   "metaTitle": "Кейс: снос дачи 6×6 в Красногорске, 78 000 ₽ за объект",
   "metaDescription": "Демонтировали ветхую дачу 6×6 м (1978) в СНТ «Заря» Красногорск: каркас, кровля, печь, фундамент столбчатый оставили. Бригада 4 чел., 2 дня, 90 800 ₽.",
   "ogImageAlt": "Расчищенный участок 8 соток в Красногорске после сноса ветхой дачи 6×6 метров бригадой Обихода",
-  "heroImageUrl": "TBD-fal.ai-case-demontazh-dachi-krasnogorsk-after.jpg",
+  "heroImageUrl": "/uploads/stage2-w11-cases/case-demontazh-dachi-krasnogorsk-after.jpg",
   "heroImageAlt": "Чистый участок 8 соток с сохранённым столбчатым фундаментом после сноса ветхой дачи в СНТ «Заря», Красногорск",
   "publishedAt": "2026-04-18",
   "blocks": [
     {
       "blockType": "breadcrumbs",
       "items": [
-        { "label": "Главная", "href": "/" },
-        { "label": "Кейсы", "href": "/kejsy/" },
-        { "label": "Снос дачи в Красногорске", "href": "/kejsy/demontazh-dachi-staraya-krasnogorsk/" }
+        {
+          "label": "Главная",
+          "href": "/"
+        },
+        {
+          "label": "Кейсы",
+          "href": "/kejsy/"
+        },
+        {
+          "label": "Снос дачи в Красногорске",
+          "href": "/kejsy/demontazh-dachi-staraya-krasnogorsk/"
+        }
       ]
     },
     {
@@ -44,13 +53,25 @@
       "h1": "Снесли ветхую дачу 6×6 в Красногорске за 2 дня, 90 800 ₽ под ключ",
       "subUsp": "СНТ «Заря», участок 8 соток. Дача 1978 года, каркас брусовой, кровля шиферная, печь кирпичная, столбчатый фундамент — оставили под новую постройку.",
       "factsStrip": [
-        { "label": "Срок", "value": "2 дня" },
-        { "label": "Бригада", "value": "4 чел." },
-        { "label": "Объём", "value": "≈32 м³" },
-        { "label": "Цена снос", "value": "78 000 ₽" }
+        {
+          "label": "Срок",
+          "value": "2 дня"
+        },
+        {
+          "label": "Бригада",
+          "value": "4 чел."
+        },
+        {
+          "label": "Объём",
+          "value": "≈32 м³"
+        },
+        {
+          "label": "Цена снос",
+          "value": "78 000 ₽"
+        }
       ],
       "image": {
-        "src": "TBD-fal.ai-case-demontazh-dachi-krasnogorsk-after.jpg",
+        "src": "/uploads/stage2-w11-cases/case-demontazh-dachi-krasnogorsk-after.jpg",
         "alt": "Чистый участок 8 соток с сохранённым столбчатым фундаментом после сноса ветхой дачи в СНТ «Заря», Красногорск",
         "width": 960,
         "height": 540
@@ -97,7 +118,10 @@
       "variant": "dark",
       "h2": "Сносим дачу под новую постройку?",
       "body": "Пришлите фото — посчитаем смету за 10 минут.",
-      "ctaPrimary": { "label": "Смета по фото", "href": "/foto-smeta/?service=demontazh&sub=demontazh-dachi" }
+      "ctaPrimary": {
+        "label": "Смета по фото",
+        "href": "/foto-smeta/?service=demontazh&sub=demontazh-dachi"
+      }
     },
     {
       "blockType": "related-services",

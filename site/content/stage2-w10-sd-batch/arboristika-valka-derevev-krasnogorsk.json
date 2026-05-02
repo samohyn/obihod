@@ -28,7 +28,7 @@
   "metaTitle": "Валка деревьев целиком в Красногорске — Обиход",
   "metaDescription": "Делаем валка деревьев целиком в Красногорске и по всему Красногорскому ГО. 22 км от МКАД, выезд послезавтра до 12:00, полигон в Красногорском районе.",
   "ogImageAlt": "Красногорск — район выезда бригады Обихода, валка деревьев целиком",
-  "heroImageUrl": "TBD-fal.ai-sd-arboristika-valka-derevev-krasnogorsk-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-arboristika-krasnogorsk-hero.jpg",
   "heroImageAlt": "Красногорск — район выезда бригады Обихода, валка деревьев целиком",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-arboristika-valka-derevev-krasnogorsk-hero.png",
+        "src": "/uploads/stage2-w10/sd-arboristika-krasnogorsk-hero.jpg",
         "alt": "Красногорск — район выезда бригады Обихода, валка деревьев целиком",
         "width": 720,
         "height": 540

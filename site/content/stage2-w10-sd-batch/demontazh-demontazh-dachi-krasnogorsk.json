@@ -28,7 +28,7 @@
   "metaTitle": "Демонтаж дачи 6×6 м в Красногорске — Обиход",
   "metaDescription": "Делаем демонтаж дачи 6×6 м в Красногорске и по всему Красногорскому ГО. 22 км от МКАД, выезд послезавтра до 12:00, полигон в Красногорском районе.",
   "ogImageAlt": "Красногорск — район выезда бригады Обихода, демонтаж дачи 6×6 м",
-  "heroImageUrl": "TBD-fal.ai-sd-demontazh-demontazh-dachi-krasnogorsk-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-demontazh-krasnogorsk-hero.jpg",
   "heroImageAlt": "Красногорск — район выезда бригады Обихода, демонтаж дачи 6×6 м",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-demontazh-demontazh-dachi-krasnogorsk-hero.png",
+        "src": "/uploads/stage2-w10/sd-demontazh-krasnogorsk-hero.jpg",
         "alt": "Красногорск — район выезда бригады Обихода, демонтаж дачи 6×6 м",
         "width": 720,
         "height": 540

@@ -28,7 +28,7 @@
   "metaTitle": "Аренда автовышки 17–22 м в Раменском — Обиход",
   "metaDescription": "Делаем аренда автовышки 17–22 м в Раменском и по всему Раменскому ГО. 35 км от МКАД, выезд послезавтра до 12:00, полигон в Воскресенском районе.",
   "ogImageAlt": "Раменское — район выезда бригады Обихода, аренда автовышки 17–22 м",
-  "heroImageUrl": "TBD-fal.ai-sd-arenda-tehniki-avtovyshka-ramenskoye-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-avtovyshka-ramenskoye-hero.jpg",
   "heroImageAlt": "Раменское — район выезда бригады Обихода, аренда автовышки 17–22 м",
   "blocks": [
     {
@@ -71,7 +71,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-arenda-tehniki-avtovyshka-ramenskoye-hero.png",
+        "src": "/uploads/stage2-w10/sd-avtovyshka-ramenskoye-hero.jpg",
         "alt": "Раменское — район выезда бригады Обихода, аренда автовышки 17–22 м",
         "width": 720,
         "height": 540

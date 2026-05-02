@@ -25,16 +25,25 @@
   "metaTitle": "Кейс: аварийный спил тополя в Красногорске, 1 800 ₽/дерево",
   "metaDescription": "Сняли расщеплённый тополь 14 м с крыши бани в СНТ «Берёзка» в Красногорске. Выезд через 1 ч 40 мин, автовышка, страховка ГО 10 млн ₽. Цена 1 800 ₽/дерево.",
   "ogImageAlt": "Бригада Обихода снимает с крыши бани в Красногорске расщеплённый ветром тополь, на участке автовышка",
-  "heroImageUrl": "TBD-fal.ai-case-spil-krasnogorsk-after.jpg",
+  "heroImageUrl": "/uploads/stage2-w11-cases/case-spil-krasnogorsk-after.jpg",
   "heroImageAlt": "Зачищенный участок с пнём тополя и целая крыша бани в Красногорске после аварийного спила бригадой Обихода",
   "publishedAt": "2026-04-08",
   "blocks": [
     {
       "blockType": "breadcrumbs",
       "items": [
-        { "label": "Главная", "href": "/" },
-        { "label": "Кейсы", "href": "/kejsy/" },
-        { "label": "Аварийный спил в Красногорске", "href": "/kejsy/spil-avariynyy-krasnogorsk/" }
+        {
+          "label": "Главная",
+          "href": "/"
+        },
+        {
+          "label": "Кейсы",
+          "href": "/kejsy/"
+        },
+        {
+          "label": "Аварийный спил в Красногорске",
+          "href": "/kejsy/spil-avariynyy-krasnogorsk/"
+        }
       ]
     },
     {
@@ -44,13 +53,25 @@
       "h1": "Аварийный спил тополя 14 м после ветра в Красногорске за 5 часов",
       "subUsp": "СНТ «Берёзка», тополь упал на крышу бани после порыва ветра 22 м/с. Выезд за 1 ч 40 мин, автовышка, бригада 3 чел.",
       "factsStrip": [
-        { "label": "Реакция", "value": "1 ч 40 мин" },
-        { "label": "Бригада", "value": "3 чел." },
-        { "label": "Высота", "value": "14 м" },
-        { "label": "Цена", "value": "1 800 ₽/дерево" }
+        {
+          "label": "Реакция",
+          "value": "1 ч 40 мин"
+        },
+        {
+          "label": "Бригада",
+          "value": "3 чел."
+        },
+        {
+          "label": "Высота",
+          "value": "14 м"
+        },
+        {
+          "label": "Цена",
+          "value": "1 800 ₽/дерево"
+        }
       ],
       "image": {
-        "src": "TBD-fal.ai-case-spil-krasnogorsk-after.jpg",
+        "src": "/uploads/stage2-w11-cases/case-spil-krasnogorsk-after.jpg",
         "alt": "Зачищенный участок с пнём тополя и целая крыша бани в Красногорске после аварийного спила бригадой Обихода",
         "width": 960,
         "height": 540
@@ -97,7 +118,10 @@
       "variant": "dark",
       "h2": "Дерево упало или угрожает падением?",
       "body": "Аварийный выезд бригады в зоне 1–2 часа по Москве и МО.",
-      "ctaPrimary": { "label": "Вызвать бригаду", "href": "/foto-smeta/?service=arboristika&urgency=avariynyy" }
+      "ctaPrimary": {
+        "label": "Вызвать бригаду",
+        "href": "/foto-smeta/?service=arboristika&urgency=avariynyy"
+      }
     },
     {
       "blockType": "related-services",

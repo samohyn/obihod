@@ -28,7 +28,7 @@
   "metaTitle": "Расчистка участка в Одинцово — Обиход",
   "metaDescription": "Делаем расчистка участка в Одинцово и по всему Одинцовскому ГО. 24 км от МКАД, выезд послезавтра до 12:00, полигон в Можайском районе.",
   "ogImageAlt": "Одинцово — район выезда бригады Обихода, расчистка участка",
-  "heroImageUrl": "TBD-fal.ai-sd-arboristika-raschistka-uchastka-odincovo-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-arboristika-odincovo-hero.jpg",
   "heroImageAlt": "Одинцово — район выезда бригады Обихода, расчистка участка",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-arboristika-raschistka-uchastka-odincovo-hero.png",
+        "src": "/uploads/stage2-w10/sd-arboristika-odincovo-hero.jpg",
         "alt": "Одинцово — район выезда бригады Обихода, расчистка участка",
         "width": 720,
         "height": 540

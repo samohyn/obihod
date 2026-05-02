@@ -25,16 +25,25 @@
   "metaTitle": "Кейс: чистка наледи МКД в Одинцово, 22 000 ₽ за крышу",
   "metaDescription": "Сняли наледь со скатной кровли 2 200 м² и сосульки с фасада МКД на ул. Чикина в Одинцово после оттепели. Бригада 4 чел., альпинисты, акт для УК.",
   "ogImageAlt": "Альпинисты Обихода работают на крыше 9-этажного МКД в Одинцово, скалывают наледь и сбивают сосульки",
-  "heroImageUrl": "TBD-fal.ai-case-naled-odincovo-after.jpg",
+  "heroImageUrl": "/uploads/stage2-w11-cases/case-naled-odincovo-after.jpg",
   "heroImageAlt": "Чистая скатная кровля МКД и фасад без сосулек в Одинцово после очистки бригадой Обихода",
   "publishedAt": "2026-02-15",
   "blocks": [
     {
       "blockType": "breadcrumbs",
       "items": [
-        { "label": "Главная", "href": "/" },
-        { "label": "Кейсы", "href": "/kejsy/" },
-        { "label": "Наледь МКД в Одинцово", "href": "/kejsy/chistka-naledi-mkd-odincovo/" }
+        {
+          "label": "Главная",
+          "href": "/"
+        },
+        {
+          "label": "Кейсы",
+          "href": "/kejsy/"
+        },
+        {
+          "label": "Наледь МКД в Одинцово",
+          "href": "/kejsy/chistka-naledi-mkd-odincovo/"
+        }
       ]
     },
     {
@@ -44,13 +53,25 @@
       "h1": "Сняли наледь и сосульки с МКД 9 этажей в Одинцово за 8 часов",
       "subUsp": "ул. Чикина, 4 подъезда, скатная кровля 2 200 м². Аварийный вызов УК после оттепели и заморозков. Бригада 4 чел., альпинисты, бригадир Александр.",
       "factsStrip": [
-        { "label": "Реакция", "value": "2 ч 10 мин" },
-        { "label": "Бригада", "value": "4 чел." },
-        { "label": "Площадь", "value": "2 200 м²" },
-        { "label": "Цена крыши", "value": "1 000 ₽/м²" }
+        {
+          "label": "Реакция",
+          "value": "2 ч 10 мин"
+        },
+        {
+          "label": "Бригада",
+          "value": "4 чел."
+        },
+        {
+          "label": "Площадь",
+          "value": "2 200 м²"
+        },
+        {
+          "label": "Цена крыши",
+          "value": "1 000 ₽/м²"
+        }
       ],
       "image": {
-        "src": "TBD-fal.ai-case-naled-odincovo-after.jpg",
+        "src": "/uploads/stage2-w11-cases/case-naled-odincovo-after.jpg",
         "alt": "Чистая скатная кровля МКД и фасад без сосулек в Одинцово после очистки бригадой Обихода",
         "width": 960,
         "height": 540
@@ -97,7 +118,10 @@
       "variant": "dark",
       "h2": "Снег и наледь на МКД?",
       "body": "Аварийный выезд бригады альпинистов по округу. Штрафы ГЖИ берём по своему счёту.",
-      "ctaPrimary": { "label": "Заявка с УК", "href": "/foto-smeta/?service=chistka-krysh&audience=b2b" }
+      "ctaPrimary": {
+        "label": "Заявка с УК",
+        "href": "/foto-smeta/?service=chistka-krysh&audience=b2b"
+      }
     },
     {
       "blockType": "related-services",

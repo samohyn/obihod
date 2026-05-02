@@ -28,7 +28,7 @@
   "metaTitle": "Сбивание сосулек и наледи в Мытищах — Обиход",
   "metaDescription": "Делаем сбивание сосулек и наледи в Мытищах и по всему Мытищинскому ГО. 17 км от МКАД, выезд послезавтра до 12:00, полигон в Пушкинском районе.",
   "ogImageAlt": "Мытищи — район выезда бригады Обихода, сбивание сосулек и наледи",
-  "heroImageUrl": "TBD-fal.ai-sd-chistka-krysh-sbivanie-sosulek-mytishchi-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-chistka-krysh-mytishchi-hero.jpg",
   "heroImageAlt": "Мытищи — район выезда бригады Обихода, сбивание сосулек и наледи",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-chistka-krysh-sbivanie-sosulek-mytishchi-hero.png",
+        "src": "/uploads/stage2-w10/sd-chistka-krysh-mytishchi-hero.jpg",
         "alt": "Мытищи — район выезда бригады Обихода, сбивание сосулек и наледи",
         "width": 720,
         "height": 540

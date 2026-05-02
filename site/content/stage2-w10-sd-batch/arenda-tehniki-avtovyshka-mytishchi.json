@@ -28,7 +28,7 @@
   "metaTitle": "Аренда автовышки 17–22 м в Мытищах — Обиход",
   "metaDescription": "Делаем аренда автовышки 17–22 м в Мытищах и по всему Мытищинскому ГО. 17 км от МКАД, выезд послезавтра до 12:00, полигон в Пушкинском районе.",
   "ogImageAlt": "Мытищи — район выезда бригады Обихода, аренда автовышки 17–22 м",
-  "heroImageUrl": "TBD-fal.ai-sd-arenda-tehniki-avtovyshka-mytishchi-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-avtovyshka-mytishchi-hero.jpg",
   "heroImageAlt": "Мытищи — район выезда бригады Обихода, аренда автовышки 17–22 м",
   "blocks": [
     {
@@ -71,7 +71,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-arenda-tehniki-avtovyshka-mytishchi-hero.png",
+        "src": "/uploads/stage2-w10/sd-avtovyshka-mytishchi-hero.jpg",
         "alt": "Мытищи — район выезда бригады Обихода, аренда автовышки 17–22 м",
         "width": 720,
         "height": 540

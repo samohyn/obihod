@@ -28,7 +28,7 @@
   "metaTitle": "Валка деревьев целиком в Раменском — Обиход",
   "metaDescription": "Делаем валка деревьев целиком в Раменском и по всему Раменскому ГО. 35 км от МКАД, выезд послезавтра до 12:00, полигон в Воскресенском районе.",
   "ogImageAlt": "Раменское — район выезда бригады Обихода, валка деревьев целиком",
-  "heroImageUrl": "TBD-fal.ai-sd-arboristika-valka-derevev-ramenskoye-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-arboristika-ramenskoye-hero.jpg",
   "heroImageAlt": "Раменское — район выезда бригады Обихода, валка деревьев целиком",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-arboristika-valka-derevev-ramenskoye-hero.png",
+        "src": "/uploads/stage2-w10/sd-arboristika-ramenskoye-hero.jpg",
         "alt": "Раменское — район выезда бригады Обихода, валка деревьев целиком",
         "width": 720,
         "height": 540

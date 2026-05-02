@@ -28,7 +28,7 @@
   "metaTitle": "Аренда автовышки 17–22 м в Одинцово — Обиход",
   "metaDescription": "Делаем аренда автовышки 17–22 м в Одинцово и по всему Одинцовскому ГО. 24 км от МКАД, выезд послезавтра до 12:00, полигон в Можайском районе.",
   "ogImageAlt": "Одинцово — район выезда бригады Обихода, аренда автовышки 17–22 м",
-  "heroImageUrl": "TBD-fal.ai-sd-arenda-tehniki-avtovyshka-odincovo-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-avtovyshka-odincovo-hero.jpg",
   "heroImageAlt": "Одинцово — район выезда бригады Обихода, аренда автовышки 17–22 м",
   "blocks": [
     {
@@ -71,7 +71,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-arenda-tehniki-avtovyshka-odincovo-hero.png",
+        "src": "/uploads/stage2-w10/sd-avtovyshka-odincovo-hero.jpg",
         "alt": "Одинцово — район выезда бригады Обихода, аренда автовышки 17–22 м",
         "width": 720,
         "height": 540

@@ -28,7 +28,7 @@
   "metaTitle": "Вырубка ёлок к Новому году в Красногорске — Обиход",
   "metaDescription": "Делаем вырубка ёлок к новому году в Красногорске и по всему Красногорскому ГО. 22 км от МКАД, выезд послезавтра до 12:00, полигон в Красногорском районе.",
   "ogImageAlt": "Красногорск — район выезда бригады Обихода, вырубка ёлок к новому году",
-  "heroImageUrl": "TBD-fal.ai-sd-arboristika-vyrubka-elok-krasnogorsk-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-arboristika-krasnogorsk-hero.jpg",
   "heroImageAlt": "Красногорск — район выезда бригады Обихода, вырубка ёлок к новому году",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-arboristika-vyrubka-elok-krasnogorsk-hero.png",
+        "src": "/uploads/stage2-w10/sd-arboristika-krasnogorsk-hero.jpg",
         "alt": "Красногорск — район выезда бригады Обихода, вырубка ёлок к новому году",
         "width": 720,
         "height": 540

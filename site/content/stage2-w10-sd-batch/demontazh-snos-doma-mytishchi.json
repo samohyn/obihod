@@ -28,7 +28,7 @@
   "metaTitle": "Снос частного дома в Мытищах — Обиход",
   "metaDescription": "Делаем снос частного дома в Мытищах и по всему Мытищинскому ГО. 17 км от МКАД, выезд послезавтра до 12:00, полигон в Пушкинском районе.",
   "ogImageAlt": "Мытищи — район выезда бригады Обихода, снос частного дома",
-  "heroImageUrl": "TBD-fal.ai-sd-demontazh-snos-doma-mytishchi-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-demontazh-mytishchi-hero.jpg",
   "heroImageAlt": "Мытищи — район выезда бригады Обихода, снос частного дома",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-demontazh-snos-doma-mytishchi-hero.png",
+        "src": "/uploads/stage2-w10/sd-demontazh-mytishchi-hero.jpg",
         "alt": "Мытищи — район выезда бригады Обихода, снос частного дома",
         "width": 720,
         "height": 540

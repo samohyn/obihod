@@ -28,7 +28,7 @@
   "metaTitle": "Расчистка участка в Раменском — Обиход",
   "metaDescription": "Делаем расчистка участка в Раменском и по всему Раменскому ГО. 35 км от МКАД, выезд послезавтра до 12:00, полигон в Воскресенском районе.",
   "ogImageAlt": "Раменское — район выезда бригады Обихода, расчистка участка",
-  "heroImageUrl": "TBD-fal.ai-sd-arboristika-raschistka-uchastka-ramenskoye-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-arboristika-ramenskoye-hero.jpg",
   "heroImageAlt": "Раменское — район выезда бригады Обихода, расчистка участка",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-arboristika-raschistka-uchastka-ramenskoye-hero.png",
+        "src": "/uploads/stage2-w10/sd-arboristika-ramenskoye-hero.jpg",
         "alt": "Раменское — район выезда бригады Обихода, расчистка участка",
         "width": 720,
         "height": 540

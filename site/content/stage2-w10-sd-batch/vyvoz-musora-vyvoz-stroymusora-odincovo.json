@@ -28,7 +28,7 @@
   "metaTitle": "Вывоз строительного мусора в Одинцово — Обиход",
   "metaDescription": "Делаем вывоз строительного мусора в Одинцово и по всему Одинцовскому ГО. 24 км от МКАД, выезд послезавтра до 12:00, полигон в Можайском районе.",
   "ogImageAlt": "Одинцово — район выезда бригады Обихода, вывоз строительного мусора",
-  "heroImageUrl": "TBD-fal.ai-sd-vyvoz-musora-vyvoz-stroymusora-odincovo-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-vyvoz-musora-odincovo-hero.jpg",
   "heroImageAlt": "Одинцово — район выезда бригады Обихода, вывоз строительного мусора",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-vyvoz-musora-vyvoz-stroymusora-odincovo-hero.png",
+        "src": "/uploads/stage2-w10/sd-vyvoz-musora-odincovo-hero.jpg",
         "alt": "Одинцово — район выезда бригады Обихода, вывоз строительного мусора",
         "width": 720,
         "height": 540

@@ -25,16 +25,25 @@
   "metaTitle": "Кейс: чистка крыши дома в Мытищах, 18 000 ₽ за кровлю",
   "metaDescription": "Сняли 35 см мокрого снега со скатной кровли 180 м² и козырьков веранды частного дома в КП «Лесной парк», Мытищи. Бригада 2 чел., 4 часа, 21 600 ₽.",
   "ogImageAlt": "Чистая металлочерепица скатной кровли частного дома в Мытищах после очистки от снега",
-  "heroImageUrl": "TBD-fal.ai-case-krysha-dom-mytishchi-after.jpg",
+  "heroImageUrl": "/uploads/stage2-w11-cases/case-chistka-mytishchi-after.jpg",
   "heroImageAlt": "Очищенная скатная кровля частного дома 240 м² и козырьки веранды в КП «Лесной парк», Мытищи",
   "publishedAt": "2026-02-22",
   "blocks": [
     {
       "blockType": "breadcrumbs",
       "items": [
-        { "label": "Главная", "href": "/" },
-        { "label": "Кейсы", "href": "/kejsy/" },
-        { "label": "Чистка дома в Мытищах", "href": "/kejsy/chistka-chastnyy-dom-mytishchi/" }
+        {
+          "label": "Главная",
+          "href": "/"
+        },
+        {
+          "label": "Кейсы",
+          "href": "/kejsy/"
+        },
+        {
+          "label": "Чистка дома в Мытищах",
+          "href": "/kejsy/chistka-chastnyy-dom-mytishchi/"
+        }
       ]
     },
     {
@@ -44,13 +53,25 @@
       "h1": "Очистили кровлю частного дома в Мытищах после метели за 4 часа",
       "subUsp": "КП «Лесной парк», дом 240 м². Скатная кровля 180 м², 35 см мокрого снега + 1,2 м снега на козырьках веранды и навесах. Бригада 2 чел.",
       "factsStrip": [
-        { "label": "Срок", "value": "4 часа" },
-        { "label": "Бригада", "value": "2 чел." },
-        { "label": "Площадь", "value": "180 м²" },
-        { "label": "Цена", "value": "1 000 ₽/м²" }
+        {
+          "label": "Срок",
+          "value": "4 часа"
+        },
+        {
+          "label": "Бригада",
+          "value": "2 чел."
+        },
+        {
+          "label": "Площадь",
+          "value": "180 м²"
+        },
+        {
+          "label": "Цена",
+          "value": "1 000 ₽/м²"
+        }
       ],
       "image": {
-        "src": "TBD-fal.ai-case-krysha-dom-mytishchi-after.jpg",
+        "src": "/uploads/stage2-w11-cases/case-chistka-mytishchi-after.jpg",
         "alt": "Очищенная скатная кровля частного дома 240 м² и козырьки веранды в КП «Лесной парк», Мытищи",
         "width": 960,
         "height": 540
@@ -97,7 +118,10 @@
       "variant": "dark",
       "h2": "Снег на крыше частного дома?",
       "body": "Бригада с верёвочной страховкой выезжает по округу за смену.",
-      "ctaPrimary": { "label": "Записать дом на чистку", "href": "/foto-smeta/?service=chistka-krysh&sub=chastnyy-dom" }
+      "ctaPrimary": {
+        "label": "Записать дом на чистку",
+        "href": "/foto-smeta/?service=chistka-krysh&sub=chastnyy-dom"
+      }
     },
     {
       "blockType": "related-services",

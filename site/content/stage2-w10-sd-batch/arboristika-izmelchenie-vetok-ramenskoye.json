@@ -28,7 +28,7 @@
   "metaTitle": "Измельчение веток в щепу в Раменском — Обиход",
   "metaDescription": "Делаем измельчение веток в щепу в Раменском и по всему Раменскому ГО. 35 км от МКАД, выезд послезавтра до 12:00, полигон в Воскресенском районе.",
   "ogImageAlt": "Раменское — район выезда бригады Обихода, измельчение веток в щепу",
-  "heroImageUrl": "TBD-fal.ai-sd-arboristika-izmelchenie-vetok-ramenskoye-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-arboristika-ramenskoye-hero.jpg",
   "heroImageAlt": "Раменское — район выезда бригады Обихода, измельчение веток в щепу",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-arboristika-izmelchenie-vetok-ramenskoye-hero.png",
+        "src": "/uploads/stage2-w10/sd-arboristika-ramenskoye-hero.jpg",
         "alt": "Раменское — район выезда бригады Обихода, измельчение веток в щепу",
         "width": 720,
         "height": 540

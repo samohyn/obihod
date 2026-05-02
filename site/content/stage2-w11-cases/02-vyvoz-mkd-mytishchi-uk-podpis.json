@@ -25,16 +25,25 @@
   "metaTitle": "Кейс: УК Мытищи, 2 МКД, годовой договор на ТКО и КГМ",
   "metaDescription": "Подписали с УК в Мытищах рамочный договор на год: 2 МКД серии П-44Т, 18 подъездов, ежедневный вывоз ТКО, еженедельный КГМ. ЭДО Диадок, штрафы ГЖИ берём.",
   "ogImageAlt": "Бункер Обихода и две Газели у двух МКД серии П-44Т в Мытищах после очередного выезда по договору",
-  "heroImageUrl": "TBD-fal.ai-case-uk-mytishchi-after.jpg",
+  "heroImageUrl": "/uploads/stage2-w11-cases/case-uk-mytishchi-after.jpg",
   "heroImageAlt": "Чистая контейнерная площадка двух МКД в Мытищах после еженедельного вывоза КГМ бригадой Обихода",
   "publishedAt": "2026-03-28",
   "blocks": [
     {
       "blockType": "breadcrumbs",
       "items": [
-        { "label": "Главная", "href": "/" },
-        { "label": "Кейсы", "href": "/kejsy/" },
-        { "label": "УК Мытищи · годовой договор", "href": "/kejsy/vyvoz-mkd-mytishchi-uk-podpis/" }
+        {
+          "label": "Главная",
+          "href": "/"
+        },
+        {
+          "label": "Кейсы",
+          "href": "/kejsy/"
+        },
+        {
+          "label": "УК Мытищи · годовой договор",
+          "href": "/kejsy/vyvoz-mkd-mytishchi-uk-podpis/"
+        }
       ]
     },
     {
@@ -44,13 +53,25 @@
       "h1": "Подписали годовой контракт с УК в Мытищах на 2 МКД и 18 подъездов",
       "subUsp": "2 дома серии П-44Т, ежедневный вывоз ТКО, еженедельный КГМ. ЭДО Диадок, штрафы ГЖИ и ОАТИ берём по своему счёту, без перевыставления УК.",
       "factsStrip": [
-        { "label": "Срок договора", "value": "12 мес." },
-        { "label": "Объекты", "value": "2 МКД, 18 подъездов" },
-        { "label": "Объём ТКО", "value": "≈90 м³/мес." },
-        { "label": "Тариф КГМ", "value": "12 800 ₽/м³ до 5" }
+        {
+          "label": "Срок договора",
+          "value": "12 мес."
+        },
+        {
+          "label": "Объекты",
+          "value": "2 МКД, 18 подъездов"
+        },
+        {
+          "label": "Объём ТКО",
+          "value": "≈90 м³/мес."
+        },
+        {
+          "label": "Тариф КГМ",
+          "value": "12 800 ₽/м³ до 5"
+        }
       ],
       "image": {
-        "src": "TBD-fal.ai-case-uk-mytishchi-after.jpg",
+        "src": "/uploads/stage2-w11-cases/case-uk-mytishchi-after.jpg",
         "alt": "Чистая контейнерная площадка двух МКД в Мытищах после еженедельного вывоза КГМ бригадой Обихода",
         "width": 960,
         "height": 540
@@ -97,7 +118,10 @@
       "variant": "dark",
       "h2": "Подпишем договор с вашей УК",
       "body": "Расчёт по тарифам ТКО и КГМ под объём дома — за 1 рабочий день.",
-      "ctaPrimary": { "label": "Заявка на договор", "href": "/foto-smeta/?service=vyvoz-musora&audience=b2b" }
+      "ctaPrimary": {
+        "label": "Заявка на договор",
+        "href": "/foto-smeta/?service=vyvoz-musora&audience=b2b"
+      }
     },
     {
       "blockType": "related-services",

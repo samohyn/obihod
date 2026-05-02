@@ -28,7 +28,7 @@
   "metaTitle": "Снос частного дома в Одинцово — Обиход",
   "metaDescription": "Делаем снос частного дома в Одинцово и по всему Одинцовскому ГО. 24 км от МКАД, выезд послезавтра до 12:00, полигон в Можайском районе.",
   "ogImageAlt": "Одинцово — район выезда бригады Обихода, снос частного дома",
-  "heroImageUrl": "TBD-fal.ai-sd-demontazh-snos-doma-odincovo-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-demontazh-odincovo-hero.jpg",
   "heroImageAlt": "Одинцово — район выезда бригады Обихода, снос частного дома",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-demontazh-snos-doma-odincovo-hero.png",
+        "src": "/uploads/stage2-w10/sd-demontazh-odincovo-hero.jpg",
         "alt": "Одинцово — район выезда бригады Обихода, снос частного дома",
         "width": 720,
         "height": 540

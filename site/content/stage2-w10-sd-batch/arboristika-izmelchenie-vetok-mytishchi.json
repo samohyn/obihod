@@ -28,7 +28,7 @@
   "metaTitle": "Измельчение веток в щепу в Мытищах — Обиход",
   "metaDescription": "Делаем измельчение веток в щепу в Мытищах и по всему Мытищинскому ГО. 17 км от МКАД, выезд послезавтра до 12:00, полигон в Пушкинском районе.",
   "ogImageAlt": "Мытищи — район выезда бригады Обихода, измельчение веток в щепу",
-  "heroImageUrl": "TBD-fal.ai-sd-arboristika-izmelchenie-vetok-mytishchi-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-arboristika-mytishchi-hero.jpg",
   "heroImageAlt": "Мытищи — район выезда бригады Обихода, измельчение веток в щепу",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-arboristika-izmelchenie-vetok-mytishchi-hero.png",
+        "src": "/uploads/stage2-w10/sd-arboristika-mytishchi-hero.jpg",
         "alt": "Мытищи — район выезда бригады Обихода, измельчение веток в щепу",
         "width": 720,
         "height": 540

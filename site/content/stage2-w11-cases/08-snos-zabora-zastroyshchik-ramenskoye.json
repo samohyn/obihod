@@ -25,16 +25,25 @@
   "metaTitle": "Кейс: снос забора КП в Раменском, 1 200 ₽/м.п.",
   "metaDescription": "Демонтировали 412 м.п. старого металлического забора КП «Лесная гавань» в Раменском под новый периметр. Бригада 5 чел., 3 дня, 494 400 ₽, ЭДО Диадок.",
   "ogImageAlt": "Расчищенный периметр КП в Раменском после сноса 412 метров старого металлического забора бригадой Обихода",
-  "heroImageUrl": "TBD-fal.ai-case-snos-zabora-ramenskoye-after.jpg",
+  "heroImageUrl": "/uploads/stage2-w11-cases/case-snos-zabora-ramenskoye-after.jpg",
   "heroImageAlt": "Свободный периметр КП «Лесная гавань» в Раменском с готовыми ямами под новые столбы после сноса старого забора",
   "publishedAt": "2026-04-22",
   "blocks": [
     {
       "blockType": "breadcrumbs",
       "items": [
-        { "label": "Главная", "href": "/" },
-        { "label": "Кейсы", "href": "/kejsy/" },
-        { "label": "Снос забора КП в Раменском", "href": "/kejsy/snos-zabora-zastroyshchik-ramenskoye/" }
+        {
+          "label": "Главная",
+          "href": "/"
+        },
+        {
+          "label": "Кейсы",
+          "href": "/kejsy/"
+        },
+        {
+          "label": "Снос забора КП в Раменском",
+          "href": "/kejsy/snos-zabora-zastroyshchik-ramenskoye/"
+        }
       ]
     },
     {
@@ -44,13 +53,25 @@
       "h1": "Снесли 412 м.п. забора КП в Раменском за 3 дня для застройщика",
       "subUsp": "КП «Лесная гавань», периметр 412 м.п. Старый металлический забор на бетонных столбах, демонтаж под новый. Бригада 5 чел., ЭДО Диадок.",
       "factsStrip": [
-        { "label": "Срок", "value": "3 дня" },
-        { "label": "Бригада", "value": "5 чел." },
-        { "label": "Периметр", "value": "412 м.п." },
-        { "label": "Цена", "value": "1 200 ₽/м.п." }
+        {
+          "label": "Срок",
+          "value": "3 дня"
+        },
+        {
+          "label": "Бригада",
+          "value": "5 чел."
+        },
+        {
+          "label": "Периметр",
+          "value": "412 м.п."
+        },
+        {
+          "label": "Цена",
+          "value": "1 200 ₽/м.п."
+        }
       ],
       "image": {
-        "src": "TBD-fal.ai-case-snos-zabora-ramenskoye-after.jpg",
+        "src": "/uploads/stage2-w11-cases/case-snos-zabora-ramenskoye-after.jpg",
         "alt": "Свободный периметр КП «Лесная гавань» в Раменском с готовыми ямами под новые столбы после сноса старого забора",
         "width": 960,
         "height": 540
@@ -97,7 +118,10 @@
       "variant": "dark",
       "h2": "Подрядчик на демонтаж периметра?",
       "body": "ЭДО, рамочный договор, штрафы ОАТИ берём. Расчёт за 1 рабочий день.",
-      "ctaPrimary": { "label": "Заявка от застройщика", "href": "/foto-smeta/?service=demontazh&audience=b2b" }
+      "ctaPrimary": {
+        "label": "Заявка от застройщика",
+        "href": "/foto-smeta/?service=demontazh&audience=b2b"
+      }
     },
     {
       "blockType": "related-services",

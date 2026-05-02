@@ -28,7 +28,7 @@
   "metaTitle": "Контейнер 8 / 20 / 27 м³ под вывоз в Красногорске — Обиход",
   "metaDescription": "Делаем контейнер 8 / 20 / 27 м³ под вывоз в Красногорске и по всему Красногорскому ГО. 22 км от МКАД, выезд послезавтра до 12:00, полигон в Красногорском районе.",
   "ogImageAlt": "Красногорск — район выезда бригады Обихода, контейнер 8 / 20 / 27 м³ под вывоз",
-  "heroImageUrl": "TBD-fal.ai-sd-vyvoz-musora-kontejner-krasnogorsk-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-vyvoz-musora-krasnogorsk-hero.jpg",
   "heroImageAlt": "Красногорск — район выезда бригады Обихода, контейнер 8 / 20 / 27 м³ под вывоз",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-vyvoz-musora-kontejner-krasnogorsk-hero.png",
+        "src": "/uploads/stage2-w10/sd-vyvoz-musora-krasnogorsk-hero.jpg",
         "alt": "Красногорск — район выезда бригады Обихода, контейнер 8 / 20 / 27 м³ под вывоз",
         "width": 720,
         "height": 540

@@ -28,7 +28,7 @@
   "metaTitle": "Контейнер 8 / 20 / 27 м³ под вывоз в Раменском — Обиход",
   "metaDescription": "Делаем контейнер 8 / 20 / 27 м³ под вывоз в Раменском и по всему Раменскому ГО. 35 км от МКАД, выезд послезавтра до 12:00, полигон в Воскресенском районе.",
   "ogImageAlt": "Раменское — район выезда бригады Обихода, контейнер 8 / 20 / 27 м³ под вывоз",
-  "heroImageUrl": "TBD-fal.ai-sd-vyvoz-musora-kontejner-ramenskoye-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-vyvoz-musora-ramenskoye-hero.jpg",
   "heroImageAlt": "Раменское — район выезда бригады Обихода, контейнер 8 / 20 / 27 м³ под вывоз",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-vyvoz-musora-kontejner-ramenskoye-hero.png",
+        "src": "/uploads/stage2-w10/sd-vyvoz-musora-ramenskoye-hero.jpg",
         "alt": "Раменское — район выезда бригады Обихода, контейнер 8 / 20 / 27 м³ под вывоз",
         "width": 720,
         "height": 540

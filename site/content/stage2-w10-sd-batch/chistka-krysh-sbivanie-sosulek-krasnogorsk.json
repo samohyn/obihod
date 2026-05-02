@@ -28,7 +28,7 @@
   "metaTitle": "Сбивание сосулек и наледи в Красногорске — Обиход",
   "metaDescription": "Делаем сбивание сосулек и наледи в Красногорске и по всему Красногорскому ГО. 22 км от МКАД, выезд послезавтра до 12:00, полигон в Красногорском районе.",
   "ogImageAlt": "Красногорск — район выезда бригады Обихода, сбивание сосулек и наледи",
-  "heroImageUrl": "TBD-fal.ai-sd-chistka-krysh-sbivanie-sosulek-krasnogorsk-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-chistka-krysh-krasnogorsk-hero.jpg",
   "heroImageAlt": "Красногорск — район выезда бригады Обихода, сбивание сосулек и наледи",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-chistka-krysh-sbivanie-sosulek-krasnogorsk-hero.png",
+        "src": "/uploads/stage2-w10/sd-chistka-krysh-krasnogorsk-hero.jpg",
         "alt": "Красногорск — район выезда бригады Обихода, сбивание сосулек и наледи",
         "width": 720,
         "height": 540

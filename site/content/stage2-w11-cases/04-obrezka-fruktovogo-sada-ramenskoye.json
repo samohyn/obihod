@@ -25,16 +25,25 @@
   "metaTitle": "Кейс: обрезка фруктового сада в Раменском, 22 дерева",
   "metaDescription": "Сделали санитарную и формовочную обрезку 22 деревьев (12 яблонь, 6 груш, 4 сливы) в СНТ «Сосновый Бор», Раменское. 6 часов, 39 600 ₽, вар на срезы.",
   "ogImageAlt": "Обрезанная яблоня в фруктовом саду в Раменском после санитарной и формовочной обрезки бригадой Обихода",
-  "heroImageUrl": "TBD-fal.ai-case-obrezka-ramenskoye-after.jpg",
+  "heroImageUrl": "/uploads/stage2-w11-cases/case-obrezka-ramenskoye-after.jpg",
   "heroImageAlt": "Фруктовый сад из 22 деревьев в Раменском с правильно сформированной кроной после плановой обрезки",
   "publishedAt": "2026-03-22",
   "blocks": [
     {
       "blockType": "breadcrumbs",
       "items": [
-        { "label": "Главная", "href": "/" },
-        { "label": "Кейсы", "href": "/kejsy/" },
-        { "label": "Обрезка сада в Раменском", "href": "/kejsy/obrezka-fruktovogo-sada-ramenskoye/" }
+        {
+          "label": "Главная",
+          "href": "/"
+        },
+        {
+          "label": "Кейсы",
+          "href": "/kejsy/"
+        },
+        {
+          "label": "Обрезка сада в Раменском",
+          "href": "/kejsy/obrezka-fruktovogo-sada-ramenskoye/"
+        }
       ]
     },
     {
@@ -44,13 +53,25 @@
       "h1": "Обрезали 22 фруктовых дерева в Раменском за 1 день, 39 600 ₽ за сад",
       "subUsp": "СНТ «Сосновый Бор», участок 18 соток. 12 яблонь, 6 груш, 4 сливы — санитарная и формовочная обрезка до начала сокодвижения.",
       "factsStrip": [
-        { "label": "Срок", "value": "6 часов" },
-        { "label": "Бригада", "value": "2 чел." },
-        { "label": "Деревьев", "value": "22 шт." },
-        { "label": "Цена", "value": "1 800 ₽/дерево" }
+        {
+          "label": "Срок",
+          "value": "6 часов"
+        },
+        {
+          "label": "Бригада",
+          "value": "2 чел."
+        },
+        {
+          "label": "Деревьев",
+          "value": "22 шт."
+        },
+        {
+          "label": "Цена",
+          "value": "1 800 ₽/дерево"
+        }
       ],
       "image": {
-        "src": "TBD-fal.ai-case-obrezka-ramenskoye-after.jpg",
+        "src": "/uploads/stage2-w11-cases/case-obrezka-ramenskoye-after.jpg",
         "alt": "Фруктовый сад из 22 деревьев в Раменском с правильно сформированной кроной после плановой обрезки",
         "width": 960,
         "height": 540
@@ -97,7 +118,10 @@
       "variant": "dark",
       "h2": "Сезон обрезки — до сокодвижения",
       "body": "Запишитесь на февраль-март. Бригада работает по округу.",
-      "ctaPrimary": { "label": "Записать сад на обрезку", "href": "/foto-smeta/?service=arboristika&sub=sanitarnaya-obrezka" }
+      "ctaPrimary": {
+        "label": "Записать сад на обрезку",
+        "href": "/foto-smeta/?service=arboristika&sub=sanitarnaya-obrezka"
+      }
     },
     {
       "blockType": "related-services",

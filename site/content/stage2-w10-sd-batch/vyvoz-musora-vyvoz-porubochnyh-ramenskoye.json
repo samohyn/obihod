@@ -28,7 +28,7 @@
   "metaTitle": "Вывоз порубочных остатков в Раменском — Обиход",
   "metaDescription": "Делаем вывоз порубочных остатков в Раменском и по всему Раменскому ГО. 35 км от МКАД, выезд послезавтра до 12:00, полигон в Воскресенском районе.",
   "ogImageAlt": "Раменское — район выезда бригады Обихода, вывоз порубочных остатков",
-  "heroImageUrl": "TBD-fal.ai-sd-vyvoz-musora-vyvoz-porubochnyh-ramenskoye-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-vyvoz-musora-ramenskoye-hero.jpg",
   "heroImageAlt": "Раменское — район выезда бригады Обихода, вывоз порубочных остатков",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-vyvoz-musora-vyvoz-porubochnyh-ramenskoye-hero.png",
+        "src": "/uploads/stage2-w10/sd-vyvoz-musora-ramenskoye-hero.jpg",
         "alt": "Раменское — район выезда бригады Обихода, вывоз порубочных остатков",
         "width": 720,
         "height": 540

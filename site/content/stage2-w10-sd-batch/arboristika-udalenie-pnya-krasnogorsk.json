@@ -28,7 +28,7 @@
   "metaTitle": "Удаление пня в Красногорске — Обиход",
   "metaDescription": "Делаем удаление пня в Красногорске и по всему Красногорскому ГО. 22 км от МКАД, выезд послезавтра до 12:00, полигон в Красногорском районе.",
   "ogImageAlt": "Красногорск — район выезда бригады Обихода, удаление пня",
-  "heroImageUrl": "TBD-fal.ai-sd-arboristika-udalenie-pnya-krasnogorsk-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-arboristika-krasnogorsk-hero.jpg",
   "heroImageAlt": "Красногорск — район выезда бригады Обихода, удаление пня",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-arboristika-udalenie-pnya-krasnogorsk-hero.png",
+        "src": "/uploads/stage2-w10/sd-arboristika-krasnogorsk-hero.jpg",
         "alt": "Красногорск — район выезда бригады Обихода, удаление пня",
         "width": 720,
         "height": 540

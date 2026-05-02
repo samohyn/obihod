@@ -28,7 +28,7 @@
   "metaTitle": "Санитарная обрезка дерева в Красногорске — Обиход",
   "metaDescription": "Делаем санитарная обрезка дерева в Красногорске и по всему Красногорскому ГО. 22 км от МКАД, выезд послезавтра до 12:00, полигон в Красногорском районе.",
   "ogImageAlt": "Красногорск — район выезда бригады Обихода, санитарная обрезка дерева",
-  "heroImageUrl": "TBD-fal.ai-sd-arboristika-sanitarnaya-obrezka-krasnogorsk-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-arboristika-krasnogorsk-hero.jpg",
   "heroImageAlt": "Красногорск — район выезда бригады Обихода, санитарная обрезка дерева",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-arboristika-sanitarnaya-obrezka-krasnogorsk-hero.png",
+        "src": "/uploads/stage2-w10/sd-arboristika-krasnogorsk-hero.jpg",
         "alt": "Красногорск — район выезда бригады Обихода, санитарная обрезка дерева",
         "width": 720,
         "height": 540

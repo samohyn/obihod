@@ -28,7 +28,7 @@
   "metaTitle": "Демонтаж бани в Красногорске — Обиход",
   "metaDescription": "Делаем демонтаж бани в Красногорске и по всему Красногорскому ГО. 22 км от МКАД, выезд послезавтра до 12:00, полигон в Красногорском районе.",
   "ogImageAlt": "Красногорск — район выезда бригады Обихода, демонтаж бани",
-  "heroImageUrl": "TBD-fal.ai-sd-demontazh-demontazh-bani-krasnogorsk-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-demontazh-krasnogorsk-hero.jpg",
   "heroImageAlt": "Красногорск — район выезда бригады Обихода, демонтаж бани",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-demontazh-demontazh-bani-krasnogorsk-hero.png",
+        "src": "/uploads/stage2-w10/sd-demontazh-krasnogorsk-hero.jpg",
         "alt": "Красногорск — район выезда бригады Обихода, демонтаж бани",
         "width": 720,
         "height": 540

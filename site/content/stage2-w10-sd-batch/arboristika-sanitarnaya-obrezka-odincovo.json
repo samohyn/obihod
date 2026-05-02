@@ -28,7 +28,7 @@
   "metaTitle": "Санитарная обрезка дерева в Одинцово — Обиход",
   "metaDescription": "Делаем санитарная обрезка дерева в Одинцово и по всему Одинцовскому ГО. 24 км от МКАД, выезд послезавтра до 12:00, полигон в Можайском районе.",
   "ogImageAlt": "Одинцово — район выезда бригады Обихода, санитарная обрезка дерева",
-  "heroImageUrl": "TBD-fal.ai-sd-arboristika-sanitarnaya-obrezka-odincovo-hero.png",
+  "heroImageUrl": "/uploads/stage2-w10/sd-arboristika-odincovo-hero.jpg",
   "heroImageAlt": "Одинцово — район выезда бригады Обихода, санитарная обрезка дерева",
   "blocks": [
     {
@@ -72,7 +72,7 @@
         "24 ч выезд"
       ],
       "image": {
-        "src": "TBD-fal.ai-sd-arboristika-sanitarnaya-obrezka-odincovo-hero.png",
+        "src": "/uploads/stage2-w10/sd-arboristika-odincovo-hero.jpg",
         "alt": "Одинцово — район выезда бригады Обихода, санитарная обрезка дерева",
         "width": 720,
         "height": 540
