@@ -45,6 +45,12 @@ type Pattern = {
 type AntiPatterns = {
   _meta: Record<string, unknown>
   patterns: Pattern[]
+  /**
+   * Whitelist для id=caps-rus — легитимные кириллические CAPS-аббревиатуры
+   * (юр.сокращения / нормативка / госорганы / документы), которые caps-rus
+   * regex иначе ложно срабатывает. Сравнение точное (case-sensitive).
+   */
+  caps_rus_whitelist?: string[]
 }
 
 type Violation = {
@@ -89,6 +95,7 @@ function scanText(
   text: string,
   filename: string,
   compiled: { pattern: Pattern; re: RegExp }[],
+  capsRusWhitelist: Set<string>,
 ): Violation[] {
   const lines = text.split(/\r?\n/)
   const out: Violation[] = []
@@ -102,6 +109,12 @@ function scanText(
       while ((m = re.exec(line)) !== null) {
         const start = m.index
         const matched = m[0]
+        // caps-rus whitelist: пропускаем легитимные юр-аббревиатуры
+        // (ОКВЭД / ЕГРЮЛ / ИНН / СанПиН / …). Сравнение точное по совпадению.
+        if (pattern.id === 'caps-rus' && capsRusWhitelist.has(matched)) {
+          if (m[0].length === 0) re.lastIndex++
+          continue
+        }
         const ctxStart = Math.max(0, start - 20)
         const ctxEnd = Math.min(line.length, start + matched.length + 20)
         out.push({
@@ -187,6 +200,7 @@ async function main() {
   const opts = parseArgs(process.argv)
   const patterns = loadPatterns()
   const compiled = compilePatterns(patterns)
+  const capsRusWhitelist = new Set(patterns.caps_rus_whitelist ?? [])
 
   const inputs: { name: string; text: string }[] = []
 
@@ -224,7 +238,7 @@ async function main() {
 
   const allViolations: Violation[] = []
   for (const { name, text } of inputs) {
-    const v = scanText(text, name, compiled)
+    const v = scanText(text, name, compiled, capsRusWhitelist)
     allViolations.push(...v)
     if (opts.llm) {
       const llmV = await llmPass(text, name)
