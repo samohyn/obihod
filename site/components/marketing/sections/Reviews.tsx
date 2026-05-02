@@ -76,7 +76,7 @@ export function Reviews() {
         <div className="reviews-grid">
           {REVIEWS.map((r, i) => (
             <div key={i} className="review-card">
-              <div className="review-stars" aria-label={`${r.stars} из 5`}>
+              <div className="review-stars" role="img" aria-label={`Рейтинг ${r.stars} из 5 звёзд`}>
                 {Array.from({ length: r.stars }, (_, k) => (
                   <Icon.Star key={k} size={16} />
                 ))}
