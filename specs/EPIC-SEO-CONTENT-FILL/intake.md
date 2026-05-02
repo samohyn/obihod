@@ -93,13 +93,12 @@ related:
 
 | US | Stage | Период | Owner-PO | Phase |
 |---|---|---|---|---|
-| **US-0-templates-ux-migration** | Stage 0 | W1-W3 | poseo + popanel | spec |
-| **US-1-pillars-pilot** | Stage 1 | W4-W7 | poseo | TBD |
-| **US-2-sub-and-programmatic** | Stage 2 | W8-W10 | poseo | TBD |
-| **US-3-b2b-cases-extras** | Stage 2 | W11 | poseo | TBD |
-| **US-4-priority-b-districts** | Stage 3 | W12-W13 | poseo | TBD |
-| **US-5-eeat-monitoring** | Stage 3 | W14 | poseo | TBD |
-| **US-6-competitor-benchmark** | сквозная | W3 / W7 / W14 | poseo | TBD |
+| **US-0-templates-ux-migration** | Stage 0 | W1-W3 | poseo + popanel | done |
+| **US-1-pillars-pilot** | Stage 1 | W4-W7 | poseo | done |
+| **US-2-sub-and-programmatic** | Stage 2 | W8-W11 | poseo | done (включает B2B + Cases pack — US-3-b2b-cases-extras свёрнут в US-2) |
+| **US-3-priority-b-districts** | Stage 3 | W12-W13 | poseo | spec (intake → sa-seo) |
+| **US-4-eeat-monitoring** | Stage 3 | W14 | poseo | spec (intake → sa-seo) |
+| **US-6-competitor-benchmark** | сквозная | W3 / W7 / W14 | poseo | partial (W3+W7+W11 done, W14 в US-4) |
 
 ## Cross-team зависимости
 
@@ -128,3 +127,19 @@ related:
   Следующий шаг — sa-seo пишет sa-spec для US-0-templates-ux-migration
   (Stage 0 W1-W3). Подключение sa-seo через Agent после отмашки оператора
   по запуску W1.
+- `2026-05-02 · poseo` (autonomous mandate): Stage 0+1+2 закрыты в одной
+  сессии (50+ commits, ~250 URL, 125k слов, DoD W11 PASS — 3 confirmed
+  winning angles из 5). US-3-b2b-cases-extras свёрнут в US-2 (B2B + Cases
+  pack сделаны в US-2 Run 2-3). Создан **Stage 3 intake-пакет**:
+  - [US-3-priority-b-districts/intake.md](US-3-priority-b-districts/intake.md)
+    — W12-W13: 4 priority-B districts + ~60 SD batch + Blog M3 + 6 cases +
+    Wave 0 mini-fix sprint (84 sub-level SD route + 3 missing routes).
+  - [US-4-eeat-monitoring/intake.md](US-4-eeat-monitoring/intake.md) — W14:
+    E-E-A-T hub + neuro-SEO + monitoring + final SEO-tech sweep + W14
+    Competitor Benchmark Final + operator-gate-W14.md.
+
+  Следующий шаг — `sa-seo` пишет `sa-seo.md` для US-3 (приоритетно — Wave 0
+  mini-fix blocker для be-panel/fe-site через podev) + US-4 параллельно.
+  Подключение sa-seo через Agent (autonomous, без operator approval per
+  mandate). Operator gate W14 финальный (memory
+  `project_poseo_autonomous_mandate_2026-05-02`).
