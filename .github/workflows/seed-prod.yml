@@ -175,6 +175,9 @@ jobs:
              export OBIKHOD_SEED_CONFIRM=yes OBIKHOD_ENV=production PAYLOAD_DISABLE_PUSH=1
              SHIM='./scripts/_payload-cjs-shim.cjs'
 
+             echo '=== Stage 0 BASE — pillar + districts (sustained ADR-0001 seed.ts) ==='
+             pnpm dlx tsx --require=\$SHIM scripts/seed.ts
+
              echo '=== Stage 0 authors + etalons ==='
              pnpm dlx tsx --require=\$SHIM scripts/seed-authors.ts || echo '(authors skip)'
              pnpm dlx tsx --require=\$SHIM scripts/seed-content-etalons.ts || echo '(etalons skip)'
