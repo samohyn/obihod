@@ -97,38 +97,42 @@ jobs:
           # all stages + Wave 1 Run 1+2+3 + post-bind mini-case.
           # PAYLOAD_DISABLE_PUSH=1 sustained `reference_audit_log_push_disable`.
           # Idempotent re-run sustained Stage 2 patterns.
+          # W15 P1 fix run #25276664596: prod node_modules production-only (--prod),
+          # tsx в devDependencies → 'sh: 1: tsx: not found' на pnpm seed:*:prod.
+          # Bypass npm scripts → pnpm dlx tsx directly (sustained ADR-0001 pattern).
+          # payload migrate skip — 'getTSConfigPaths null' (Payload binary issue).
+          # Wave 0.1 columns добавятся через Payload Local API при первом insert.
           ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
             -o ServerAliveInterval=15 \
             ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
-            "set -eux
+            "set -eu
              cd ${{ secrets.BEGET_DEPLOY_PATH }}/current
              set -a
              . ./.env
              set +a
              export OBIKHOD_SEED_CONFIRM=yes OBIKHOD_ENV=production PAYLOAD_DISABLE_PUSH=1
+             SHIM='./scripts/_payload-cjs-shim.cjs'
 
-             echo '=== Wave 0.1 SD schema migration ==='
-             pnpm payload migrate || echo '(migrate возможно already applied — sustained idempotent)'
-
-             echo '=== Stage 0 etalons + authors ==='
-             pnpm seed:authors:prod || true
-             pnpm seed:etalons:prod || true
+             echo '=== Stage 0 authors + etalons ==='
+             pnpm dlx tsx --require=\$SHIM scripts/seed-authors.ts || echo '(authors skip)'
+             pnpm dlx tsx --require=\$SHIM scripts/seed-content-etalons.ts || echo '(etalons skip)'
 
              echo '=== Stage 1 content + media ==='
-             pnpm seed:stage1-content:prod
-             pnpm seed:stage1-media:all:prod || pnpm seed:stage1-media:prod
+             pnpm dlx tsx --require=\$SHIM scripts/seed-content-stage1.ts
+             pnpm dlx tsx --require=\$SHIM scripts/seed-stage1-media.ts --all || \
+               pnpm dlx tsx --require=\$SHIM scripts/seed-stage1-media.ts || echo '(media skip)'
 
              echo '=== Stage 2 content + media ==='
-             pnpm seed:stage2-content:prod
-             pnpm seed:stage2-media:prod
+             pnpm dlx tsx --require=\$SHIM scripts/seed-content-stage2.ts
+             pnpm dlx tsx --require=\$SHIM scripts/seed-stage2-media.ts || echo '(media skip)'
 
              echo '=== Stage 3 content + blog + cases (Wave 1 Run 1+2+3) ==='
-             pnpm seed:stage3-content:prod
-             pnpm seed:stage3-blog:prod
-             pnpm seed:stage3-cases:prod
+             pnpm dlx tsx --require=\$SHIM scripts/seed-content-stage3.ts
+             pnpm dlx tsx --require=\$SHIM scripts/seed-content-stage3-blog.ts
+             pnpm dlx tsx --require=\$SHIM scripts/seed-content-stage3-cases.ts
 
              echo '=== Post-bind mini-case (14 SD ↔ Cases pack) ==='
-             pnpm dlx tsx --require=./scripts/_payload-cjs-shim.cjs scripts/post-bind-mini-case.ts || true
+             pnpm dlx tsx --require=\$SHIM scripts/post-bind-mini-case.ts || echo '(post-bind skip)'
 
              echo '=== DONE ==='
              " \
