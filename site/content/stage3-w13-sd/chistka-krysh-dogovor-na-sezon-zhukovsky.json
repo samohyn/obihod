@@ -1,7 +1,7 @@
 {
   "type": "service-district",
   "service": "chistka-krysh",
-  "district": "zhukovsky",
+  "district": "zhukovskij",
   "subServiceSlug": "dogovor-na-sezon",
   "publishStatus": "draft",
   "noindexUntilCase": true,
@@ -156,7 +156,7 @@
       "hiddenFields": {
         "service": "chistka-krysh",
         "sub": "dogovor-na-sezon",
-        "district": "zhukovsky"
+        "district": "zhukovskij"
       }
     },
     {

@@ -1,7 +1,7 @@
 {
   "type": "service-district",
   "service": "arboristika",
-  "district": "zhukovsky",
+  "district": "zhukovskij",
   "subServiceSlug": "kronirovanie",
   "publishStatus": "draft",
   "noindexUntilCase": true,
@@ -156,7 +156,7 @@
       "hiddenFields": {
         "service": "arboristika",
         "sub": "kronirovanie",
-        "district": "zhukovsky"
+        "district": "zhukovskij"
       }
     },
     {

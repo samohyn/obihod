@@ -1,7 +1,7 @@
 {
   "type": "service-district",
   "service": "arboristika",
-  "district": "zhukovsky",
+  "district": "zhukovskij",
   "subServiceSlug": null,
   "publishStatus": "draft",
   "noindexUntilCase": true,
@@ -120,7 +120,7 @@
       "consentHref": "/policy/",
       "ctaLabel": "Получить смету",
       "helper": "Перезвоним в 8:00–22:00 МСК · смета за 10 минут.",
-      "hiddenFields": { "service": "arboristika", "district": "zhukovsky" }
+      "hiddenFields": { "service": "arboristika", "district": "zhukovskij" }
     },
     {
       "blockType": "faq",
