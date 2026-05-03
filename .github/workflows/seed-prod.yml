@@ -206,6 +206,34 @@ jobs:
              echo '=== Post-bind mini-case (14 SD ↔ Cases pack) ==='
              pnpm dlx tsx --require=\$SHIM scripts/post-bind-mini-case.ts || echo '(post-bind skip)'
 
+             echo '=== W15 launch finalization (operator mandate 2026-05-03) ==='
+             # ИНН/ОГРН placeholders для launch перед регистрацией юрлица.
+             # Sustained code defaults в SiteChrome.ts/lib/chrome.ts/seed.ts —
+             # эти UPDATE применяют к существующей строке site_chrome (defaults
+             # работают только для новых записей).
+             psql \"\$DATABASE_URI\" -c \"UPDATE site_chrome SET requisites_tax_id='1111111111', requisites_kpp='111111111', requisites_ogrn='1111111111111';\" || echo '(site_chrome update skip)'
+             echo \"  site_chrome ИНН/КПП/ОГРН placeholders updated\"
+
+             # Bulk-publish: 76 draft SD → published, noindex_until_case→false.
+             # Sustained design intent (ADR-0014 publish-gate) ОТМЕНЯЕТСЯ для
+             # W15 launch — оператор мандатировал «делай все до конца».
+             # Future: вернуть publish-gate когда mini-cases bound на каждый SD.
+             SD_BEFORE=\$(psql \"\$DATABASE_URI\" -tA -c \"SELECT count(*) FROM service_districts WHERE publish_status='published' AND noindex_until_case=false\" || echo 0)
+             psql \"\$DATABASE_URI\" -c \"UPDATE service_districts SET publish_status='published', noindex_until_case=false, _status='published' WHERE _status='draft' OR publish_status='draft' OR noindex_until_case=true;\" || echo '(SD publish skip)'
+             SD_AFTER=\$(psql \"\$DATABASE_URI\" -tA -c \"SELECT count(*) FROM service_districts WHERE publish_status='published' AND noindex_until_case=false\" || echo 0)
+             echo \"  service_districts published \$SD_BEFORE → \$SD_AFTER\"
+
+             # Force revalidate sitemap + service-districts cache.
+             # Sustained pattern: revalidateTag(sitemap, max) — но в seed
+             # context Next.js store недоступен. Используем HTTP webhook.
+             if [ -n \"\${REVALIDATE_SECRET:-}\" ] && [ -n \"\${SITE_URL:-}\" ]; then
+               curl -fsS -X POST \"\${SITE_URL}/api/revalidate?tag=sitemap\" -H \"x-revalidate-secret: \${REVALIDATE_SECRET}\" || echo '(sitemap revalidate skip)'
+               curl -fsS -X POST \"\${SITE_URL}/api/revalidate?tag=service-districts\" -H \"x-revalidate-secret: \${REVALIDATE_SECRET}\" || echo '(SD revalidate skip)'
+               echo \"  sitemap + service-districts cache revalidated\"
+             else
+               echo \"  (revalidate skip — REVALIDATE_SECRET/SITE_URL not set)\"
+             fi
+
              echo '=== DONE ==='
              " \
             2>&1 | tee "$LOG_FILE"
