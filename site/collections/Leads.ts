@@ -25,9 +25,15 @@ export const Leads: CollectionConfig = {
     },
   },
   access: {
+    // US-8 hot-fix: anonymous public POST разрешён для inbound лидов с сайта.
+    // Создание лида = публичный inbound (форма на marketing-странице, без auth);
+    // защита через rate-limit + honeypot в /api/leads/route.ts adapter.
+    create: () => true,
     read: ({ req }) =>
       Boolean(req.user) &&
       ['admin', 'manager'].includes((req.user as { role?: string })?.role ?? ''),
+    update: ({ req }) => Boolean((req.user as { email?: string } | null)?.email),
+    delete: ({ req }) => Boolean((req.user as { email?: string } | null)?.email),
   },
   // PANEL-LEADS-INBOX § A.3 — audit log смен status (jsonb backed by migration
   // 20260501_140100_leads_status_history). Hook gar­antirovs invariant
