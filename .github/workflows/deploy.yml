@@ -427,6 +427,20 @@ jobs:
           );
           SQL
 
+             # W15 bootstrap detection: если services_blocks_hero существует
+             # но payload_migrations пустая → schema applied через initial
+             # bootstrap (seed-prod.yml). Mark все *.up.sql как applied.
+             SCHEMA_EXISTS=\$(psql \"\$DATABASE_URI\" -tA -c \"SELECT count(*) FROM pg_tables WHERE tablename='services_blocks_hero'\")
+             TRACKER_COUNT=\$(psql \"\$DATABASE_URI\" -tA -c \"SELECT count(*) FROM payload_migrations\")
+             if [ \"\$SCHEMA_EXISTS\" = \"1\" ] && [ \"\$TRACKER_COUNT\" = \"0\" ]; then
+               echo \">> Bootstrap detected: schema exists, tracker empty. Marking all *.up.sql as applied.\"
+               for UP_FILE in \$(ls migrations/*.up.sql | sort); do
+                 MIGRATION_NAME=\$(basename \"\$UP_FILE\" .up.sql)
+                 psql \"\$DATABASE_URI\" -c \"INSERT INTO payload_migrations (name, batch) VALUES ('\$MIGRATION_NAME', 1) ON CONFLICT DO NOTHING\" > /dev/null
+               done
+               echo \">> Marked \$(ls migrations/*.up.sql | wc -l) migrations as applied (bootstrap path).\"
+             fi
+
              # Apply each *.up.sql in lexicographic order, skip if already tracked
              for UP_FILE in \$(ls migrations/*.up.sql | sort); do
                MIGRATION_NAME=\$(basename \"\$UP_FILE\" .up.sql)
