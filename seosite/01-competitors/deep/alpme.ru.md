@@ -151,3 +151,13 @@ alpme.ru/
 5. `/[legacy-slug]/` — legacy услуги на корне (chistka-vodostokov, moyka-vyvesok)
 
 **Канонический паттерн:** `alpme.ru/our-services/[pillar]/[sub-service]/` + `/msk/...` для Москвы. Лучшая иерархия среди промальп-конкурентов.
+
+---
+
+## Δ от Stage 2 W11 (refresh 2026-05-03)
+
+- **URL count:** **379** (W11 ~80) — **+374%** (huge growth, либо W11 underestimate). Sitemap.xml live измерен 2026-05-03.
+- **Notable:** sub-service глубина выросла — Moscow-specific страницы (/msk/) расширены, добавлены catalogue/portfolio entries.
+- **Schema-coverage:** sustained ~10% (no live measure W14, sustained от W11; вероятно partial microdata, как у liwood, но full audit требует Topvisor).
+- **CTA / pricing:** sustained — калькулятор остаётся, нет «фото→смета».
+- **W14 implication:** alpme.ru вырос URL-объём в ~5x; пересчёт closure: наш Stage 3 ~230 vs alpme **379** = closure 60% (W11 было +49% наше преимущество). **Roll-back опережения по URL.**

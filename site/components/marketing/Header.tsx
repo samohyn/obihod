@@ -8,15 +8,12 @@ import styles from './Header.module.css'
 import {
   AlpinizmIcon,
   AvtovyshkaIcon,
-  ChistkaVodostokovIcon,
   DemontazhPeregorodokIcon,
   DemontazhSaraevIcon,
   KablingIcon,
   KonteynerIcon,
   KorchevaniyeIcon,
   KronirovaniyeIcon,
-  PokosTravyIcon,
-  RaschistkaIcon,
   SanitarnayaIcon,
   SpilIcon,
   UborkaSnegaIcon,
@@ -129,14 +126,8 @@ const MEGA_COLUMNS: MegaColumn[] = [
         label: 'Сбивание сосулек',
         icon: VyvozSnegaIcon,
       },
-      {
-        href: '/chistka-krysh/chastnyy-dom/',
-        label: 'Частный дом',
-        icon: ChistkaVodostokovIcon,
-      },
       { href: '/promyshlennyj-alpinizm/', label: 'Промальп', icon: AlpinizmIcon },
       { href: '/arenda-tehniki/avtovyshka/', label: 'Автовышка', icon: AvtovyshkaIcon },
-      { href: '/arboristika/pokos-travy/', label: 'Покос травы', icon: PokosTravyIcon },
     ],
     allHref: '/chistka-krysh/',
     allLabel: 'Все услуги по крышам',
@@ -150,11 +141,6 @@ const MEGA_COLUMNS: MegaColumn[] = [
         label: 'Демонтаж бани',
         icon: DemontazhPeregorodokIcon,
       },
-      {
-        href: '/demontazh/raschistka-uchastka/',
-        label: 'Расчистка участка',
-        icon: RaschistkaIcon,
-      },
     ],
     allHref: '/demontazh/',
     allLabel: 'Все услуги демонтажа',
@@ -162,7 +148,7 @@ const MEGA_COLUMNS: MegaColumn[] = [
 ]
 
 const PILOT_DISTRICTS: { slug: string; name: string }[] = [
-  { slug: 'odintsovo', name: 'Одинцово' },
+  { slug: 'odincovo', name: 'Одинцово' },
   { slug: 'krasnogorsk', name: 'Красногорск' },
   { slug: 'mytishchi', name: 'Мытищи' },
   { slug: 'khimki', name: 'Химки' },

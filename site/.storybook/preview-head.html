@@ -1,0 +1,23 @@
+<!--
+  Storybook preview head — шрифты brand-guide §6.
+
+  В Storybook `next/font` не работает напрямую (compiler-level loader),
+  поэтому Golos Text + JetBrains Mono грузим через Google Fonts CDN.
+  Подменяем CSS-переменные шрифтов, используемые в globals.css
+  (--font-golos-text, --font-jetbrains-mono).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+  rel="stylesheet"
+/>
+<style>
+  :root {
+    --font-golos-text: 'Golos Text', system-ui, -apple-system, sans-serif;
+    --font-jetbrains-mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  body {
+    font-family: var(--font-golos-text);
+  }
+</style>

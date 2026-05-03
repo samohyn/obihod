@@ -1,0 +1,506 @@
+{
+  "generated_at": "2026-05-02T12:37:26.415Z",
+  "total": 100,
+  "sd_fixtures": [
+    {
+      "url": "/vyvoz-musora/kontejner/odincovo/",
+      "file": "vyvoz-musora-kontejner-odincovo.json",
+      "words": 1156
+    },
+    {
+      "url": "/vyvoz-musora/kontejner/krasnogorsk/",
+      "file": "vyvoz-musora-kontejner-krasnogorsk.json",
+      "words": 1156
+    },
+    {
+      "url": "/vyvoz-musora/kontejner/mytishchi/",
+      "file": "vyvoz-musora-kontejner-mytishchi.json",
+      "words": 1153
+    },
+    {
+      "url": "/vyvoz-musora/kontejner/ramenskoye/",
+      "file": "vyvoz-musora-kontejner-ramenskoye.json",
+      "words": 1153
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-stroymusora/odincovo/",
+      "file": "vyvoz-musora-vyvoz-stroymusora-odincovo.json",
+      "words": 1164
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-stroymusora/krasnogorsk/",
+      "file": "vyvoz-musora-vyvoz-stroymusora-krasnogorsk.json",
+      "words": 1164
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-stroymusora/mytishchi/",
+      "file": "vyvoz-musora-vyvoz-stroymusora-mytishchi.json",
+      "words": 1161
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-stroymusora/ramenskoye/",
+      "file": "vyvoz-musora-vyvoz-stroymusora-ramenskoye.json",
+      "words": 1161
+    },
+    {
+      "url": "/vyvoz-musora/staraya-mebel/odincovo/",
+      "file": "vyvoz-musora-staraya-mebel-odincovo.json",
+      "words": 1021
+    },
+    {
+      "url": "/vyvoz-musora/staraya-mebel/krasnogorsk/",
+      "file": "vyvoz-musora-staraya-mebel-krasnogorsk.json",
+      "words": 1021
+    },
+    {
+      "url": "/vyvoz-musora/staraya-mebel/mytishchi/",
+      "file": "vyvoz-musora-staraya-mebel-mytishchi.json",
+      "words": 1018
+    },
+    {
+      "url": "/vyvoz-musora/staraya-mebel/ramenskoye/",
+      "file": "vyvoz-musora-staraya-mebel-ramenskoye.json",
+      "words": 1018
+    },
+    {
+      "url": "/vyvoz-musora/krupnogabarit/odincovo/",
+      "file": "vyvoz-musora-krupnogabarit-odincovo.json",
+      "words": 978
+    },
+    {
+      "url": "/vyvoz-musora/krupnogabarit/krasnogorsk/",
+      "file": "vyvoz-musora-krupnogabarit-krasnogorsk.json",
+      "words": 978
+    },
+    {
+      "url": "/vyvoz-musora/krupnogabarit/mytishchi/",
+      "file": "vyvoz-musora-krupnogabarit-mytishchi.json",
+      "words": 975
+    },
+    {
+      "url": "/vyvoz-musora/krupnogabarit/ramenskoye/",
+      "file": "vyvoz-musora-krupnogabarit-ramenskoye.json",
+      "words": 975
+    },
+    {
+      "url": "/vyvoz-musora/gazel/odincovo/",
+      "file": "vyvoz-musora-gazel-odincovo.json",
+      "words": 1026
+    },
+    {
+      "url": "/vyvoz-musora/gazel/krasnogorsk/",
+      "file": "vyvoz-musora-gazel-krasnogorsk.json",
+      "words": 1026
+    },
+    {
+      "url": "/vyvoz-musora/gazel/mytishchi/",
+      "file": "vyvoz-musora-gazel-mytishchi.json",
+      "words": 1023
+    },
+    {
+      "url": "/vyvoz-musora/gazel/ramenskoye/",
+      "file": "vyvoz-musora-gazel-ramenskoye.json",
+      "words": 1023
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-sadovogo-musora/odincovo/",
+      "file": "vyvoz-musora-vyvoz-sadovogo-musora-odincovo.json",
+      "words": 1057
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-sadovogo-musora/krasnogorsk/",
+      "file": "vyvoz-musora-vyvoz-sadovogo-musora-krasnogorsk.json",
+      "words": 1057
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-sadovogo-musora/mytishchi/",
+      "file": "vyvoz-musora-vyvoz-sadovogo-musora-mytishchi.json",
+      "words": 1054
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-sadovogo-musora/ramenskoye/",
+      "file": "vyvoz-musora-vyvoz-sadovogo-musora-ramenskoye.json",
+      "words": 1054
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-porubochnyh/odincovo/",
+      "file": "vyvoz-musora-vyvoz-porubochnyh-odincovo.json",
+      "words": 1089
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-porubochnyh/krasnogorsk/",
+      "file": "vyvoz-musora-vyvoz-porubochnyh-krasnogorsk.json",
+      "words": 1089
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-porubochnyh/mytishchi/",
+      "file": "vyvoz-musora-vyvoz-porubochnyh-mytishchi.json",
+      "words": 1086
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-porubochnyh/ramenskoye/",
+      "file": "vyvoz-musora-vyvoz-porubochnyh-ramenskoye.json",
+      "words": 1086
+    },
+    {
+      "url": "/arboristika/spil-derevev/odincovo/",
+      "file": "arboristika-spil-derevev-odincovo.json",
+      "words": 1268
+    },
+    {
+      "url": "/arboristika/spil-derevev/krasnogorsk/",
+      "file": "arboristika-spil-derevev-krasnogorsk.json",
+      "words": 1268
+    },
+    {
+      "url": "/arboristika/spil-derevev/mytishchi/",
+      "file": "arboristika-spil-derevev-mytishchi.json",
+      "words": 1265
+    },
+    {
+      "url": "/arboristika/spil-derevev/ramenskoye/",
+      "file": "arboristika-spil-derevev-ramenskoye.json",
+      "words": 1265
+    },
+    {
+      "url": "/arboristika/kronirovanie/odincovo/",
+      "file": "arboristika-kronirovanie-odincovo.json",
+      "words": 1145
+    },
+    {
+      "url": "/arboristika/kronirovanie/krasnogorsk/",
+      "file": "arboristika-kronirovanie-krasnogorsk.json",
+      "words": 1145
+    },
+    {
+      "url": "/arboristika/kronirovanie/mytishchi/",
+      "file": "arboristika-kronirovanie-mytishchi.json",
+      "words": 1142
+    },
+    {
+      "url": "/arboristika/kronirovanie/ramenskoye/",
+      "file": "arboristika-kronirovanie-ramenskoye.json",
+      "words": 1142
+    },
+    {
+      "url": "/arboristika/udalenie-pnya/odincovo/",
+      "file": "arboristika-udalenie-pnya-odincovo.json",
+      "words": 1077
+    },
+    {
+      "url": "/arboristika/udalenie-pnya/krasnogorsk/",
+      "file": "arboristika-udalenie-pnya-krasnogorsk.json",
+      "words": 1077
+    },
+    {
+      "url": "/arboristika/udalenie-pnya/mytishchi/",
+      "file": "arboristika-udalenie-pnya-mytishchi.json",
+      "words": 1074
+    },
+    {
+      "url": "/arboristika/udalenie-pnya/ramenskoye/",
+      "file": "arboristika-udalenie-pnya-ramenskoye.json",
+      "words": 1074
+    },
+    {
+      "url": "/arboristika/avariynyy-spil/odincovo/",
+      "file": "arboristika-avariynyy-spil-odincovo.json",
+      "words": 1095
+    },
+    {
+      "url": "/arboristika/avariynyy-spil/krasnogorsk/",
+      "file": "arboristika-avariynyy-spil-krasnogorsk.json",
+      "words": 1095
+    },
+    {
+      "url": "/arboristika/avariynyy-spil/mytishchi/",
+      "file": "arboristika-avariynyy-spil-mytishchi.json",
+      "words": 1092
+    },
+    {
+      "url": "/arboristika/avariynyy-spil/ramenskoye/",
+      "file": "arboristika-avariynyy-spil-ramenskoye.json",
+      "words": 1092
+    },
+    {
+      "url": "/arboristika/sanitarnaya-obrezka/odincovo/",
+      "file": "arboristika-sanitarnaya-obrezka-odincovo.json",
+      "words": 1210
+    },
+    {
+      "url": "/arboristika/sanitarnaya-obrezka/krasnogorsk/",
+      "file": "arboristika-sanitarnaya-obrezka-krasnogorsk.json",
+      "words": 1210
+    },
+    {
+      "url": "/arboristika/sanitarnaya-obrezka/mytishchi/",
+      "file": "arboristika-sanitarnaya-obrezka-mytishchi.json",
+      "words": 1207
+    },
+    {
+      "url": "/arboristika/sanitarnaya-obrezka/ramenskoye/",
+      "file": "arboristika-sanitarnaya-obrezka-ramenskoye.json",
+      "words": 1207
+    },
+    {
+      "url": "/arboristika/raschistka-uchastka/odincovo/",
+      "file": "arboristika-raschistka-uchastka-odincovo.json",
+      "words": 1103
+    },
+    {
+      "url": "/arboristika/raschistka-uchastka/krasnogorsk/",
+      "file": "arboristika-raschistka-uchastka-krasnogorsk.json",
+      "words": 1103
+    },
+    {
+      "url": "/arboristika/raschistka-uchastka/mytishchi/",
+      "file": "arboristika-raschistka-uchastka-mytishchi.json",
+      "words": 1100
+    },
+    {
+      "url": "/arboristika/raschistka-uchastka/ramenskoye/",
+      "file": "arboristika-raschistka-uchastka-ramenskoye.json",
+      "words": 1100
+    },
+    {
+      "url": "/arboristika/valka-derevev/odincovo/",
+      "file": "arboristika-valka-derevev-odincovo.json",
+      "words": 1293
+    },
+    {
+      "url": "/arboristika/valka-derevev/krasnogorsk/",
+      "file": "arboristika-valka-derevev-krasnogorsk.json",
+      "words": 1293
+    },
+    {
+      "url": "/arboristika/valka-derevev/mytishchi/",
+      "file": "arboristika-valka-derevev-mytishchi.json",
+      "words": 1290
+    },
+    {
+      "url": "/arboristika/valka-derevev/ramenskoye/",
+      "file": "arboristika-valka-derevev-ramenskoye.json",
+      "words": 1290
+    },
+    {
+      "url": "/arboristika/izmelchenie-vetok/odincovo/",
+      "file": "arboristika-izmelchenie-vetok-odincovo.json",
+      "words": 1190
+    },
+    {
+      "url": "/arboristika/izmelchenie-vetok/krasnogorsk/",
+      "file": "arboristika-izmelchenie-vetok-krasnogorsk.json",
+      "words": 1190
+    },
+    {
+      "url": "/arboristika/izmelchenie-vetok/mytishchi/",
+      "file": "arboristika-izmelchenie-vetok-mytishchi.json",
+      "words": 1187
+    },
+    {
+      "url": "/arboristika/izmelchenie-vetok/ramenskoye/",
+      "file": "arboristika-izmelchenie-vetok-ramenskoye.json",
+      "words": 1187
+    },
+    {
+      "url": "/arboristika/vyrubka-elok/odincovo/",
+      "file": "arboristika-vyrubka-elok-odincovo.json",
+      "words": 1336
+    },
+    {
+      "url": "/arboristika/vyrubka-elok/krasnogorsk/",
+      "file": "arboristika-vyrubka-elok-krasnogorsk.json",
+      "words": 1336
+    },
+    {
+      "url": "/arboristika/vyrubka-elok/mytishchi/",
+      "file": "arboristika-vyrubka-elok-mytishchi.json",
+      "words": 1333
+    },
+    {
+      "url": "/arboristika/vyrubka-elok/ramenskoye/",
+      "file": "arboristika-vyrubka-elok-ramenskoye.json",
+      "words": 1333
+    },
+    {
+      "url": "/chistka-krysh/chistka-krysh-chastnyy-dom/odincovo/",
+      "file": "chistka-krysh-chistka-krysh-chastnyy-dom-odincovo.json",
+      "words": 1430
+    },
+    {
+      "url": "/chistka-krysh/chistka-krysh-chastnyy-dom/krasnogorsk/",
+      "file": "chistka-krysh-chistka-krysh-chastnyy-dom-krasnogorsk.json",
+      "words": 1430
+    },
+    {
+      "url": "/chistka-krysh/chistka-krysh-chastnyy-dom/mytishchi/",
+      "file": "chistka-krysh-chistka-krysh-chastnyy-dom-mytishchi.json",
+      "words": 1427
+    },
+    {
+      "url": "/chistka-krysh/chistka-krysh-chastnyy-dom/ramenskoye/",
+      "file": "chistka-krysh-chistka-krysh-chastnyy-dom-ramenskoye.json",
+      "words": 1427
+    },
+    {
+      "url": "/chistka-krysh/chistka-krysh-mkd/odincovo/",
+      "file": "chistka-krysh-chistka-krysh-mkd-odincovo.json",
+      "words": 1450
+    },
+    {
+      "url": "/chistka-krysh/chistka-krysh-mkd/krasnogorsk/",
+      "file": "chistka-krysh-chistka-krysh-mkd-krasnogorsk.json",
+      "words": 1450
+    },
+    {
+      "url": "/chistka-krysh/chistka-krysh-mkd/mytishchi/",
+      "file": "chistka-krysh-chistka-krysh-mkd-mytishchi.json",
+      "words": 1447
+    },
+    {
+      "url": "/chistka-krysh/chistka-krysh-mkd/ramenskoye/",
+      "file": "chistka-krysh-chistka-krysh-mkd-ramenskoye.json",
+      "words": 1447
+    },
+    {
+      "url": "/chistka-krysh/sbivanie-sosulek/odincovo/",
+      "file": "chistka-krysh-sbivanie-sosulek-odincovo.json",
+      "words": 1389
+    },
+    {
+      "url": "/chistka-krysh/sbivanie-sosulek/krasnogorsk/",
+      "file": "chistka-krysh-sbivanie-sosulek-krasnogorsk.json",
+      "words": 1389
+    },
+    {
+      "url": "/chistka-krysh/sbivanie-sosulek/mytishchi/",
+      "file": "chistka-krysh-sbivanie-sosulek-mytishchi.json",
+      "words": 1386
+    },
+    {
+      "url": "/chistka-krysh/sbivanie-sosulek/ramenskoye/",
+      "file": "chistka-krysh-sbivanie-sosulek-ramenskoye.json",
+      "words": 1386
+    },
+    {
+      "url": "/demontazh/demontazh-dachi/odincovo/",
+      "file": "demontazh-demontazh-dachi-odincovo.json",
+      "words": 1671
+    },
+    {
+      "url": "/demontazh/demontazh-dachi/krasnogorsk/",
+      "file": "demontazh-demontazh-dachi-krasnogorsk.json",
+      "words": 1671
+    },
+    {
+      "url": "/demontazh/demontazh-dachi/mytishchi/",
+      "file": "demontazh-demontazh-dachi-mytishchi.json",
+      "words": 1668
+    },
+    {
+      "url": "/demontazh/demontazh-dachi/ramenskoye/",
+      "file": "demontazh-demontazh-dachi-ramenskoye.json",
+      "words": 1668
+    },
+    {
+      "url": "/demontazh/demontazh-bani/odincovo/",
+      "file": "demontazh-demontazh-bani-odincovo.json",
+      "words": 1592
+    },
+    {
+      "url": "/demontazh/demontazh-bani/krasnogorsk/",
+      "file": "demontazh-demontazh-bani-krasnogorsk.json",
+      "words": 1592
+    },
+    {
+      "url": "/demontazh/demontazh-bani/mytishchi/",
+      "file": "demontazh-demontazh-bani-mytishchi.json",
+      "words": 1589
+    },
+    {
+      "url": "/demontazh/demontazh-bani/ramenskoye/",
+      "file": "demontazh-demontazh-bani-ramenskoye.json",
+      "words": 1589
+    },
+    {
+      "url": "/demontazh/demontazh-saraya/odincovo/",
+      "file": "demontazh-demontazh-saraya-odincovo.json",
+      "words": 1490
+    },
+    {
+      "url": "/demontazh/demontazh-saraya/krasnogorsk/",
+      "file": "demontazh-demontazh-saraya-krasnogorsk.json",
+      "words": 1490
+    },
+    {
+      "url": "/demontazh/demontazh-saraya/mytishchi/",
+      "file": "demontazh-demontazh-saraya-mytishchi.json",
+      "words": 1487
+    },
+    {
+      "url": "/demontazh/demontazh-saraya/ramenskoye/",
+      "file": "demontazh-demontazh-saraya-ramenskoye.json",
+      "words": 1487
+    },
+    {
+      "url": "/demontazh/snos-doma/odincovo/",
+      "file": "demontazh-snos-doma-odincovo.json",
+      "words": 1868
+    },
+    {
+      "url": "/demontazh/snos-doma/krasnogorsk/",
+      "file": "demontazh-snos-doma-krasnogorsk.json",
+      "words": 1868
+    },
+    {
+      "url": "/demontazh/snos-doma/mytishchi/",
+      "file": "demontazh-snos-doma-mytishchi.json",
+      "words": 1865
+    },
+    {
+      "url": "/demontazh/snos-doma/ramenskoye/",
+      "file": "demontazh-snos-doma-ramenskoye.json",
+      "words": 1865
+    },
+    {
+      "url": "/demontazh/snos-garazha/odincovo/",
+      "file": "demontazh-snos-garazha-odincovo.json",
+      "words": 1656
+    },
+    {
+      "url": "/demontazh/snos-garazha/krasnogorsk/",
+      "file": "demontazh-snos-garazha-krasnogorsk.json",
+      "words": 1656
+    },
+    {
+      "url": "/demontazh/snos-garazha/mytishchi/",
+      "file": "demontazh-snos-garazha-mytishchi.json",
+      "words": 1653
+    },
+    {
+      "url": "/demontazh/snos-garazha/ramenskoye/",
+      "file": "demontazh-snos-garazha-ramenskoye.json",
+      "words": 1653
+    },
+    {
+      "url": "/arenda-tehniki/avtovyshka/odincovo/",
+      "file": "arenda-tehniki-avtovyshka-odincovo.json",
+      "words": 505
+    },
+    {
+      "url": "/arenda-tehniki/avtovyshka/krasnogorsk/",
+      "file": "arenda-tehniki-avtovyshka-krasnogorsk.json",
+      "words": 505
+    },
+    {
+      "url": "/arenda-tehniki/avtovyshka/mytishchi/",
+      "file": "arenda-tehniki-avtovyshka-mytishchi.json",
+      "words": 502
+    },
+    {
+      "url": "/arenda-tehniki/avtovyshka/ramenskoye/",
+      "file": "arenda-tehniki-avtovyshka-ramenskoye.json",
+      "words": 502
+    }
+  ]
+}

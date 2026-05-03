@@ -7,6 +7,7 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema, personSchema, type Author as AuthorSchema } from '@/lib/seo/jsonld'
 import { canonicalFor } from '@/lib/seo/canonical'
 import { getAllAuthorSlugs, getAuthorBySlug } from '@/lib/seo/queries'
+import { truncateMeta } from '@/lib/seo/text'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -52,7 +53,7 @@ export async function generateMetadata({
     title: { absolute: author.metaTitle ?? `${fullName} — эксперт Обихода` },
     description:
       author.metaDescription ??
-      author.bio?.slice(0, 155) ??
+      (author.bio ? truncateMeta(author.bio, 155) : undefined) ??
       `${fullName} — ${author.jobTitle ?? 'эксперт'} в Обиходе.`,
     alternates: { canonical: canonicalFor(`/avtory/${author.slug}/`) },
     openGraph: {
@@ -60,7 +61,7 @@ export async function generateMetadata({
       locale: 'ru_RU',
       url: `/avtory/${author.slug}/`,
       title: fullName,
-      description: author.bio?.slice(0, 200) ?? undefined,
+      description: author.bio ? truncateMeta(author.bio, 200) : undefined,
     },
     robots: { index: true, follow: true },
   }

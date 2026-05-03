@@ -1,4 +1,17 @@
 import type { CollectionConfig } from 'payload'
+import {
+  Hero,
+  TextContent,
+  LeadForm,
+  CtaBanner,
+  Faq,
+  Breadcrumbs,
+  Tldr,
+  ServicesGrid,
+  MiniCase,
+  RelatedServices,
+  Calculator,
+} from '@/blocks'
 
 export const Services: CollectionConfig = {
   slug: 'services',
@@ -84,7 +97,7 @@ export const Services: CollectionConfig = {
         },
         {
           label: 'Контент',
-          description: 'Intro, hero-image, галерея.',
+          description: 'Intro, hero-image, галерея + блочный конструктор страницы.',
           fields: [
             {
               name: 'intro',
@@ -108,6 +121,33 @@ export const Services: CollectionConfig = {
               maxRows: 12,
               admin: { description: 'Галерея до 12 фото. Реальные кейсы, не stock.' },
               fields: [{ name: 'image', type: 'upload', relationTo: 'media', required: true }],
+            },
+            // US-0 Track B-2 — blocks[] для pillar/sub Service-страниц.
+            // Whitelist: hero, text-content, lead-form, cta-banner, faq, services-grid,
+            // mini-case, related-services, tldr, breadcrumbs, calculator-placeholder.
+            // before-after — opt-in в US-3 (sa-spec AC-3.4).
+            {
+              name: 'blocks',
+              type: 'blocks',
+              blockReferences: [
+                Hero,
+                TextContent,
+                LeadForm,
+                CtaBanner,
+                Faq,
+                ServicesGrid,
+                MiniCase,
+                RelatedServices,
+                Tldr,
+                Breadcrumbs,
+                Calculator,
+              ],
+              blocks: [],
+              admin: {
+                initCollapsed: true,
+                description:
+                  'Конструктор страницы услуги: hero, текст, FAQ, CTA, сетка sub-услуг, мини-кейс, похожие услуги, TL;DR, breadcrumbs, калькулятор. Legacy intro выше остаётся для обратной совместимости.',
+              },
             },
           ],
         },

@@ -1,0 +1,88 @@
+{
+  "_meta": {
+    "stage": "stage1-w4",
+    "owner": "cms (Track B Run 1) + art consult",
+    "track": "Track B Run 1 — pillar hero × 4 + USP /foto-smeta/ hero",
+    "art_consistency": "landmark/object only, NO humans/figures/silhouettes (Stage 0 R1 decision)",
+    "antiPatterns_§14": [
+      "no stock photo aesthetic",
+      "no overly polished smiles",
+      "no green-leaf eco-cliché",
+      "no axe/chainsaw macho",
+      "no knight/shield",
+      "no matryoshka",
+      "no logo overlays",
+      "no emoji decorators"
+    ],
+    "model_default": "fal-ai/flux/schnell (cheap, 4 steps); upgrade to fal-ai/flux/dev if Run-1 needs higher fidelity",
+    "imageSize": "landscape_16_9 (1280×720 minimum, output is variable per model)",
+    "fixturesUpdated": [
+      "site/content/stage1-w4/vyvoz-musora.json",
+      "site/content/stage1-w4/arboristika.json",
+      "site/content/stage1-w4/chistka-krysh.json",
+      "site/content/stage1-w4/demontazh.json",
+      "site/content/stage1-w4/foto-smeta.json"
+    ],
+    "iterations": {
+      "pillar-vyvoz-musora-hero": 1,
+      "pillar-arboristika-hero": 1,
+      "pillar-chistka-krysh-hero": 1,
+      "pillar-demontazh-hero": "4 (flux/schnell упорно ассоциирует контекст с chainsaw/axe; финальная итерация: нейтральный 'garden house in backyard' без слов demolition/shed/barn)",
+      "usp-foto-smeta-hero": "2 (1-я итерация — английский 'ESTIMATE' на бумаге; 2-я с явным 'no readable text in any language' — PASS)"
+    },
+    "downloadedFormat": "JPEG (flux/schnell всегда возвращает JPEG-байты независимо от запрошенного расширения; script auto-detects через magic bytes и сохраняет с правильным .jpg)",
+    "outputResolution": "1024×576 (model native; landscape_16_9). Достаточно для hero на десктопе с retina-апскейлом. Для production fidelity при необходимости перегенерировать через flux/dev model override."
+  },
+  "items": [
+    {
+      "id": "pillar-vyvoz-musora-hero",
+      "page": "/vyvoz-musora/",
+      "fixture": "site/content/stage1-w4/vyvoz-musora.json",
+      "useCase": "pillar-hero",
+      "params": { "service": "vyvoz-musora" },
+      "outFile": "site/public/uploads/stage1-w4/pillar-vyvoz-musora-hero.jpg",
+      "publicPath": "/uploads/stage1-w4/pillar-vyvoz-musora-hero.jpg",
+      "alt": "Бригада Обихода грузит контейнер строительного мусора на объекте в Одинцовском округе"
+    },
+    {
+      "id": "pillar-arboristika-hero",
+      "page": "/arboristika/",
+      "fixture": "site/content/stage1-w4/arboristika.json",
+      "useCase": "pillar-hero",
+      "params": { "service": "arboristika" },
+      "outFile": "site/public/uploads/stage1-w4/pillar-arboristika-hero.jpg",
+      "publicPath": "/uploads/stage1-w4/pillar-arboristika-hero.jpg",
+      "alt": "Арборист Обихода в страховочной обвязке снимает ветку тополя на участке частного дома, район Истры"
+    },
+    {
+      "id": "pillar-chistka-krysh-hero",
+      "page": "/chistka-krysh/",
+      "fixture": "site/content/stage1-w4/chistka-krysh.json",
+      "useCase": "pillar-hero",
+      "params": { "service": "chistka-krysh", "season": "winter" },
+      "outFile": "site/public/uploads/stage1-w4/pillar-chistka-krysh-hero.jpg",
+      "publicPath": "/uploads/stage1-w4/pillar-chistka-krysh-hero.jpg",
+      "alt": "Промышленный альпинист Обихода в обвязке сбивает наледь с края скатной кровли частного дома в Красногорске"
+    },
+    {
+      "id": "pillar-demontazh-hero",
+      "page": "/demontazh/",
+      "fixture": "site/content/stage1-w4/demontazh.json",
+      "useCase": "pillar-hero",
+      "params": { "service": "demontazh" },
+      "outFile": "site/public/uploads/stage1-w4/pillar-demontazh-hero.jpg",
+      "publicPath": "/uploads/stage1-w4/pillar-demontazh-hero.jpg",
+      "alt": "Бригада Обихода демонтирует старую деревянную дачу с разбором по доскам в Раменском районе"
+    },
+    {
+      "id": "usp-foto-smeta-hero",
+      "page": "/foto-smeta/",
+      "fixture": "site/content/stage1-w4/foto-smeta.json",
+      "useCase": "usp-foto-smeta",
+      "params": {},
+      "outFile": "site/public/uploads/stage1-w4/usp-foto-smeta-hero.jpg",
+      "publicPath": "/uploads/stage1-w4/usp-foto-smeta-hero.jpg",
+      "alt": "Бригадир Обихода смотрит на телефон с тремя фото объекта от собственника и считает смету"
+    }
+  ]
+}

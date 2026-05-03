@@ -325,6 +325,25 @@ const SERVICES: ServiceSeed[] = [
         h1: 'Сбивание сосулек с кровли',
         priceFrom: 1000,
       },
+      // ADR-uМ-13 + sitemap-tree v0.4: 3 новых sub под pillar chistka-krysh.
+      {
+        slug: 'chistka-krysh-ot-snega',
+        title: 'Чистка крыш от снега',
+        h1: 'Чистка крыш от снега',
+        priceFrom: 1000,
+      },
+      {
+        slug: 'chistka-krysh-uborka-territorii-zima',
+        title: 'Зимняя уборка территории',
+        h1: 'Зимняя уборка территории и кровли',
+        priceFrom: 1000,
+      },
+      {
+        slug: 'chistka-krysh-dogovor-na-sezon',
+        title: 'Договор на сезон',
+        h1: 'Договор на чистку крыш на сезон (B2B)',
+        priceFrom: 1000,
+      },
     ],
     leadTemplate: (prep) =>
       `Обиход чистит крыши от снега и наледи ${prep} с фиксированной ценой за м². Работаем по частным домам, УК, ТСЖ и жилым комплексам. Промальп и автовышка, страховка водостоков и окон за наш счёт. Смета по фото за 10 минут в Telegram, MAX или WhatsApp.`,
@@ -376,6 +395,16 @@ const SERVICES: ServiceSeed[] = [
         title: 'Уборка участка',
         h1: 'Уборка участка от хлама',
         priceFrom: 1000,
+      },
+      // US-0 W3 эталон AC-11.1 — sub-service для /vyvoz-musora/staraya-mebel/.
+      // priceFrom 12 800 ₽ — фикс-цена за объект до 5 м³ (cw cluster
+      // vyvoz-musora.md, freq 4957). cw fixture sub-service.json дополняет
+      // полный контент (intro/body/h1/meta) через seed:etalons.
+      {
+        slug: 'staraya-mebel',
+        title: 'Вывоз старой мебели',
+        h1: 'Вывоз старой мебели',
+        priceFrom: 12800,
       },
     ],
     leadTemplate: (prep) =>

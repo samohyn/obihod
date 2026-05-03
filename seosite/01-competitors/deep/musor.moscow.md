@@ -1,6 +1,6 @@
 # musor.moscow
 
-**Дата сканирования:** 2026-04-25
+**Дата сканирования:** 2026-04-25 (Stage 1) · refresh **2026-05-03 (W14)**
 **Услуги в каталоге:** вывоз мусора-only + контейнеры + аренда техники + снег + спил/демонтаж
 
 ## Sitemap / IA
@@ -154,3 +154,72 @@ musor.moscow/
 ## IA Score: 5/5
 
 В категории «вывоз мусора» — эталон. 109 районов + 19 городов + 9 округов = ~140 гео-посадочных. Калькулятор на главной. Глубокий блог.
+
+---
+
+## W14 refresh (2026-05-03)
+
+### URL count
+
+| Sub-sitemap | URL | Δ vs W11 baseline |
+|---|--:|---|
+| post-sitemap.xml | 1 056 | +56 (W11 ~1000) |
+| post-sitemap2.xml | 500 | +198 (W11 302) |
+| page-sitemap.xml | 102 | +17 (W11 85) |
+| **Итого** | **1 658** | **+271 (+19.5%)** vs W11 ~1387 |
+
+> Method: WebFetch live на 3 nested sitemaps 2026-05-03 (sitemap-index lastmod 2026-05-01).
+> Источник: `https://musor.moscow/sitemap.xml`.
+
+### Content-depth (5-page sample)
+
+| URL | Word count (raw HTML strip) | JSON-LD |
+|---|--:|:-:|
+| `/vyvoz-musora-iz-kvartiry/` | 2 367 | ✅ |
+| `/rajony-obsluzhivanija/arbat/` | 2 289 | ✅ |
+| `/blog/chto-takoe-tbo/` | 4 803 | ✅ |
+| `/cao/` | 2 140 | ✅ |
+| `/goroda/vyvoz-musora-balashiha/` | 2 872 | ✅ |
+| **Avg** | **~2 894 (≈1700-1900 visible content)** | **5/5 = 100%** |
+
+> Method: `curl -sL ... | sed 's/<[^>]*>//g' | wc -w`. Numbers include nav/footer (overcount ~30-40%); estimated **visible content ~1 700-1 900 слов на page**.
+
+### Schema-coverage (BIG Δ)
+
+- **W11 baseline:** ~50% (estimate)
+- **W14 measured:** **100% на 5/5 sample pages** (JSON-LD `<script type="application/ld+json">` present)
+- **Δ:** **+50pp** улучшение vs W11 — конкурент догнал 100% schema-coverage
+
+> **Implication:** ось «Schema-coverage» — наше опережение vs musor.moscow закрылось. Их структурные данные теперь на parity с нашими (если их JSON-LD валиден; lint не проверяли). Confirmed parity ≠ опережение.
+
+### UX features (homepage check 2026-05-03)
+
+- ✅ Калькулятор (sustained)
+- ✅ **NEW** Telegram + WhatsApp + **MAX** floating buttons (W11 не проверяли MAX; W14 confirmed)
+- ✅ Lead form на hero (volume + location)
+- ❌ Нет live-чата
+- ❌ Нет «фото→смета» (вывоз мусора этой механики не требует)
+- ✅ /licenzii/ ссылка (E-E-A-T-сигнал sustained)
+- 🟡 INN/OGRN на homepage не показаны (только ИНН на /licenzii/ из W11)
+- ❌ Нет authors-страниц (E-E-A-T low — sustained)
+
+### 4-в-1 status
+
+- **Single pillar (мусор-only)** — sustained. Снег = sub-кластер, демонтаж/арбо упомянуты в /vyvoz-derevev/ и /vyvoz-musora-posle-demontazha/, но это под-типы вывоза, не отдельные услуги.
+
+### Δ summary W14 vs W11
+
+| Метрика | W11 | W14 | Δ |
+|---|--:|--:|---|
+| URL count | ~1 387 | **1 658** | **+19.5%** |
+| Schema-coverage | ~50% | **100%** | **+50pp** ⚠ closing gap |
+| Content-depth (avg pillar) | ~2 800 | ~2 900 | +3% (sustained) |
+| UX (calc + chat + lead) | calc + lead | calc + lead + MAX/TG/WA | +1 widget |
+| 4-в-1 | 1 pillar | 1 pillar | sustained |
+| E-E-A-T | low (no authors) | low (no authors) | sustained |
+
+### W14 implication для нас
+
+- **«Schema 100% → опережение +50pp» больше не actuary** vs musor.moscow specifically. Vs остальных 16 конкурентов sustained.
+- URL-объём gap: 1 658 vs наш ~230 (Stage 3) → closure 14% к musor.moscow (был 8.6% W11). Musor.moscow остаётся outlier auto-gen каталог; medianный benchmark = liwood (~319 URL).
+

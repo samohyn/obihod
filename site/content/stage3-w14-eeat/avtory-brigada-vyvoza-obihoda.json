@@ -1,0 +1,101 @@
+{
+  "_meta": {
+    "stage": "stage3-w14-eeat",
+    "stage_origin": "etalons-w3/author.json",
+    "run": "cw US-4 W14 day 1 — finalize Author 1 company-page",
+    "wireframe": "seosite/04-url-map/wireframes/author.md (sustained от Stage 1) + seosite/06-eeat/authors.md §1.1 + §2.1",
+    "tov_check": "pnpm tov:check site/content/stage3-w14-eeat/avtory-brigada-vyvoza-obihoda.json",
+    "ac_match": "AC-2.3 + AC-2.5 + AC-2.6 (US-4 §3.2.1)",
+    "winning_angle": "company-page sustained vs cleaning-moscow / liwood (у конкурентов нет /avtory/ hub с Person+Organization JSON-LD); cross-domain sameAs pattern (TODO operator)",
+    "author_note": "cw US-4 finalize — Author 1 sustained Stage 1 etalon, расширен по seosite/06-eeat/authors.md spec; sameAs pending operator W14 day 3 (VK/TG channel URLs)",
+    "todo": "Operator передаёт VK/TG channel URLs → cms replace sameAs array. До этого — sameAs []",
+    "eeat_hub_ref": "seosite/06-eeat/authors.md §1.1 + §2.1 + §3"
+  },
+  "type": "author",
+  "url": "/avtory/brigada-vyvoza-obihoda/",
+  "slug": "brigada-vyvoza-obihoda",
+  "kind": "organization",
+  "h1": "Бригада вывоза Обихода",
+  "metaTitle": "Бригада вывоза Обихода — 4 услуги по Москве и МО",
+  "metaDescription": "Бригада Обихода: вывоз мусора, арбористика, чистка крыш, демонтаж по 8 округам МО. СРО, лицензия Росприроднадзора, страховка ГО 10 млн ₽, допуски Минтруда №782н.",
+  "ogImageAlt": "Силуэт бригады Обихода в рабочей одежде на объекте, без лиц",
+  "avatarUrl": "TBD-fal.ai-author-silhouette.png",
+  "avatarAlt": "Силуэт бригады Обихода — фигуры в рабочей одежде, без лиц",
+  "jobTitle": "Команда",
+  "schemaType": "Organization",
+  "schemaSubOrganizationOf": "https://obikhod.ru/#organization",
+  "knowsAbout": [
+    "вывоз мусора",
+    "арбористика",
+    "чистка крыш",
+    "демонтаж",
+    "B2B-договоры с УК и ТСЖ",
+    "штрафы ГЖИ и ОАТИ",
+    "ФККО классификация отходов",
+    "Минтруда №782н работы на высоте"
+  ],
+  "worksInDistricts": [
+    "odincovo",
+    "krasnogorsk",
+    "mytishchi",
+    "ramenskoye",
+    "khimki",
+    "pushkino",
+    "istra",
+    "zhukovskij"
+  ],
+  "sameAs": [],
+  "blocks": [
+    {
+      "blockType": "breadcrumbs",
+      "items": [
+        { "label": "Главная", "href": "/" },
+        { "label": "Авторы", "href": "/avtory/" },
+        { "label": "Бригада вывоза Обихода", "href": "/avtory/brigada-vyvoza-obihoda/" }
+      ]
+    },
+    {
+      "blockType": "hero",
+      "variant": "author",
+      "eyebrow": "Авторы Обихода",
+      "h1": "Бригада вывоза Обихода",
+      "jobTitle": "Подрядчик 4-в-1 · Москва и МО · 4 бригады по 8 округам",
+      "metaStrip": ["4 услуги", "8 округов МО", "СРО + лицензия Росприроднадзора"],
+      "avatar": {
+        "src": "TBD-fal.ai-author-silhouette.png",
+        "alt": "Силуэт бригады Обихода — фигуры в рабочей одежде, без лиц",
+        "width": 200,
+        "height": 200,
+        "shape": "rounded-square"
+      },
+      "ctaPrimary": { "label": "Получить смету", "href": "/foto-smeta/" }
+    },
+    {
+      "blockType": "text-content",
+      "h2": "Кто мы",
+      "body": "## Кто мы\n\nБригада Обихода работает в Москве и Московской области с 2024 года. Закрываем четыре направления одним договором: вывоз мусора, спил деревьев, чистку крыш от снега и демонтаж построек. За первый сезон отработали 86 объектов в Раменском, Одинцовском и Красногорском городских округах — в основном частный сектор и небольшие УК.\n\nПо договору с УК и ТСЖ берём на себя штрафы ГЖИ и ОАТИ в пределах ответственности подрядчика. Страховка ГО — 10 млн ₽, лицензия Росприроднадзора на транспортирование отходов IV класса, СРО строителей. Допуски Минтруда №782н, 3-я группа по высоте — для работ на кровлях и арбористики на высоте.\n\nСмету присылаем за 10 минут после трёх фото в Telegram, MAX или WhatsApp. Окна выезда — типовая заявка послезавтра до 12:00, аварийная (упало дерево, затопило подвал) — за 1–2 часа 24/7. Минимальный заказ зависит от плеча: в Москве и ближнем поясе МО — без минимума, дальше 30 км от МКАД — 8 000 ₽ за плечо.\n\n## Что мы знаем\n\n- Вывоз мусора (ФККО классы 7 31 110 01 22 5 / 7 31 110 02 21 5 / 7 12 200 01 22 4)\n- Арбористика (включая высотные спилы по Минтруда №782н 3-я группа)\n- Чистка крыш МКД и частных домов\n- Демонтаж капитальных и некапитальных строений (по СРО + Градкодекс ст. 55.5)\n- B2B-договоры с УК и ТСЖ (штрафы ГЖИ/ОАТИ на нашей стороне)\n- Методики работы по ГОСТ + ОКВЭД + 89-ФЗ + 384-ФЗ\n\n## Где работаем\n\nWave 1 округов МО: Одинцово, Красногорск, Мытищи, Раменское (priority-A) + Химки, Пушкино, Истра, Жуковский (priority-B). По крупным УК и тендерам расширяем географию по мере подписания договоров.\n\n## Документы и СРО\n\nЛицензия Росприроднадзора, СРО строителей, страховой полис ГО 10 млн ₽, допуски Минтруда — все документы по запросу высылаем УК или собственнику до подписания договора. Подробнее — на странице [/sro-licenzii/](/sro-licenzii/) (включая ФККО классы и ОКВЭД коды). Состав бригад по округам — на странице [/komanda/](/komanda/)."
+    },
+    {
+      "blockType": "related-posts",
+      "h2": "Статьи бригады",
+      "items": [
+        {
+          "imageUrl": "TBD-fal.ai-blog-4v1-cover.png",
+          "imageAlt": "Газель Обихода с инструментами для четырёх направлений",
+          "title": "Что такое «4-в-1» у Обихода",
+          "datePublished": "2026-04-25",
+          "readingTime": "8 мин",
+          "href": "/blog/chto-takoe-4-v-1/"
+        }
+      ],
+      "_todo": "cms — после re-author 17 blog добавить ещё 2-3 cards info-cluster статей."
+    },
+    {
+      "blockType": "cta-banner",
+      "variant": "dark",
+      "h2": "Закажите услугу у нашей бригады",
+      "body": "Мусор, деревья, крыши, демонтаж — за один выезд.",
+      "ctaPrimary": { "label": "Смета по фото", "href": "/foto-smeta/" }
+    }
+  ]
+}

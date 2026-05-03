@@ -5,6 +5,7 @@
 import type { Metadata } from 'next'
 
 import type { District, Service } from './jsonld'
+import { truncateMeta } from './text'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -86,7 +87,7 @@ export function buildProgrammaticMetadata(args: {
 
   const title = `${s.h1} ${d.namePrepositional} — цена от ${adjustedPriceFrom.toLocaleString('ru-RU')} ₽ | Обиход`
   const description = localPriceNote
-    ? `${localPriceNote.slice(0, 110)} Смета за 10 минут в TG/MAX/WhatsApp.`
+    ? `${truncateMeta(localPriceNote, 110)} Смета за 10 минут в TG/MAX/WhatsApp.`
     : `${s.h1} ${d.namePrepositional}. Фикс-цена за объект, смета по фото за 10 минут. Обиход.`
 
   return {

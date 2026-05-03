@@ -1,0 +1,101 @@
+{
+  "_meta": {
+    "stage": "stage1-w5",
+    "owner": "cms (Track B Run 2) + art consult",
+    "track": "Track B Run 2 — 4 districts hero + 1 home hero",
+    "art_consistency": "landmark/object only, NO humans/figures/silhouettes (Stage 0 R1 + Run 1 unified rule)",
+    "antiPatterns_§14": [
+      "no stock photo aesthetic",
+      "no overly polished smiles",
+      "no green-leaf eco-cliché",
+      "no axe/chainsaw macho",
+      "no knight/shield",
+      "no matryoshka",
+      "no logo overlays",
+      "no emoji decorators",
+      "no fake recognizable landmarks (МО suburban context only)"
+    ],
+    "model_default": "fal-ai/flux/schnell (cheap, 4 steps)",
+    "imageSize": "landscape_16_9 (model native 1024×576)",
+    "fixturesUpdated": [
+      "site/content/stage1-w5/odincovo.json",
+      "site/content/stage1-w5/krasnogorsk.json",
+      "site/content/stage1-w5/mytishchi.json",
+      "site/content/stage1-w5/ramenskoye.json",
+      "site/content/stage1-w5/home.json"
+    ],
+    "downloadedFormat": "JPEG (flux/schnell всегда возвращает JPEG-байты независимо от запрошенного расширения; script auto-detects через magic bytes и сохраняет с правильным .jpg)",
+    "outputResolution": "1024×576 (model native; landscape_16_9). Достаточно для hero на десктопе с retina-апскейлом.",
+    "iterations": {
+      "district-odincovo-hero": 1,
+      "district-krasnogorsk-hero": "2 (1-я: фигура с камерой/инструментом в кадре — FAIL anti-people; 2-я: empty street + apartment block в фоне — PASS)",
+      "district-mytishchi-hero": 1,
+      "district-ramenskoye-hero": 1,
+      "home-hero": 1
+    }
+  },
+  "items": [
+    {
+      "id": "district-odincovo-hero",
+      "page": "/raiony/odincovo/",
+      "fixture": "site/content/stage1-w5/odincovo.json",
+      "useCase": "district-hero",
+      "params": {
+        "districtName": "Odintsovo",
+        "landmarkHint": "suburban МО context — mature trees and old fences along a quiet street, mix of low-rise wooden private houses and small cottages, no recognizable landmarks, no people"
+      },
+      "outFile": "site/public/uploads/stage1-w5/district-odincovo-hero.jpg",
+      "publicPath": "/uploads/stage1-w5/district-odincovo-hero.jpg",
+      "alt": "Одинцовский округ, Можайское шоссе с указателем на Барвиху и Голицыно — район выезда бригады Обихода"
+    },
+    {
+      "id": "district-krasnogorsk-hero",
+      "page": "/raiony/krasnogorsk/",
+      "fixture": "site/content/stage1-w5/krasnogorsk.json",
+      "useCase": "district-hero",
+      "params": {
+        "districtName": "Krasnogorsk",
+        "landmarkHint": "МО suburban context — quiet empty street with a modern mid-rise residential apartment block visible in the distant background, low-rise private cottages and dachas in the middle ground, mature trees on both sides, wooden fences, completely empty street with no people, no cars in motion, no figures of any kind"
+      },
+      "outFile": "site/public/uploads/stage1-w5/district-krasnogorsk-hero.jpg",
+      "publicPath": "/uploads/stage1-w5/district-krasnogorsk-hero.jpg",
+      "alt": "Красногорский округ, Волоколамское шоссе у Павшинской Поймы — район выезда бригады Обихода"
+    },
+    {
+      "id": "district-mytishchi-hero",
+      "page": "/raiony/mytishchi/",
+      "fixture": "site/content/stage1-w5/mytishchi.json",
+      "useCase": "district-hero",
+      "params": {
+        "districtName": "Mytishchi",
+        "landmarkHint": "МО suburban context with mixed roofs of private houses (pitched metal, slate, soft shingles) and visible tree line, fences and unpaved side road, no people"
+      },
+      "outFile": "site/public/uploads/stage1-w5/district-mytishchi-hero.jpg",
+      "publicPath": "/uploads/stage1-w5/district-mytishchi-hero.jpg",
+      "alt": "Мытищинский округ, Ярославское шоссе у Перловки — район выезда бригады Обихода"
+    },
+    {
+      "id": "district-ramenskoye-hero",
+      "page": "/raiony/ramenskoye/",
+      "fixture": "site/content/stage1-w5/ramenskoye.json",
+      "useCase": "district-hero",
+      "params": {
+        "districtName": "Ramenskoye",
+        "landmarkHint": "МО suburban context with weathered dacha-style wooden fences, plot dividers, mature deciduous trees behind the fence, simple wooden gates, no people, far edge of Moscow Region"
+      },
+      "outFile": "site/public/uploads/stage1-w5/district-ramenskoye-hero.jpg",
+      "publicPath": "/uploads/stage1-w5/district-ramenskoye-hero.jpg",
+      "alt": "Раменский округ, Новорязанское шоссе у въезда в Раменское — район выезда бригады Обихода"
+    },
+    {
+      "id": "home-hero",
+      "page": "/",
+      "fixture": "site/content/stage1-w5/home.json",
+      "useCase": "home-hero",
+      "params": {},
+      "outFile": "site/public/uploads/stage1-w5/home-hero.jpg",
+      "publicPath": "/uploads/stage1-w5/home-hero.jpg",
+      "alt": "Подмосковный участок при тёплом вечернем свете — частный дом, скатная крыша, плодовые деревья и забор, фон бригады выезда Обихода"
+    }
+  ]
+}

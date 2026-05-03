@@ -11,7 +11,7 @@ export function LeadForm() {
   return (
     <form className="cta-form" aria-label="Заявка на замер" onSubmit={(e) => e.preventDefault()}>
       <div className="cta-form-title">Заявка на замер</div>
-      <label htmlFor="cta-name" style={{ display: 'none' }}>
+      <label htmlFor="cta-name" className="sr-only">
         Имя
       </label>
       <input
@@ -21,7 +21,7 @@ export function LeadForm() {
         placeholder="Ваше имя"
         autoComplete="name"
       />
-      <label htmlFor="cta-phone" style={{ display: 'none' }}>
+      <label htmlFor="cta-phone" className="sr-only">
         Телефон
       </label>
       <input
@@ -32,11 +32,11 @@ export function LeadForm() {
         placeholder="+7 (___) ___-__-__"
         autoComplete="tel"
       />
-      <label htmlFor="cta-addr" style={{ display: 'none' }}>
+      <label htmlFor="cta-addr" className="sr-only">
         Адрес
       </label>
       <input id="cta-addr" name="address" className="cta-input" placeholder="Адрес или район" />
-      <label htmlFor="cta-svc" style={{ display: 'none' }}>
+      <label htmlFor="cta-svc" className="sr-only">
         Тип работы
       </label>
       <select id="cta-svc" name="service" className="cta-input" defaultValue="">

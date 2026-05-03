@@ -6,6 +6,7 @@ import { unstable_cache } from 'next/cache'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
+import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { LicenseBadge } from '@/components/marketing/LicenseBadge'
 import { RichTextRenderer } from '@/components/marketing/RichTextRenderer'
@@ -71,6 +72,25 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
   const photoUrl = (m: any) => (typeof m === 'object' && m?.url ? m.url : null)
   const before = (c as any).photosBefore?.[0]
   const after = (c as any).photosAfter?.[0]
+
+  // US-0 W3 Track B-3 — приоритет blocks[] (cw fixture).
+  const caseBlocks = (c as { blocks?: unknown[] | null }).blocks
+  const hasBlocks = Array.isArray(caseBlocks) && caseBlocks.length > 0
+  if (hasBlocks) {
+    return (
+      <>
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        <BlockRenderer blocks={caseBlocks as any} />
+        <JsonLd
+          schema={[
+            breadcrumbListSchema(
+              breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
+            ),
+          ]}
+        />
+      </>
+    )
+  }
 
   return (
     <article className="mx-auto max-w-5xl px-6 py-10">

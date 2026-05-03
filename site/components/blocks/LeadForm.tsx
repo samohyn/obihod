@@ -2,12 +2,17 @@
 
 import { useState } from 'react'
 
-import type { LeadFormBlock } from './types'
+import type { LeadFormBlock, LeadFormField } from './types'
 
 /**
- * Форма заявки — placeholder.
- * Отправляет на /api/leads если такой endpoint существует; иначе alert.
- * Полноценная интеграция — be3/be4 в следующей итерации.
+ * Форма заявки.
+ *
+ * Поддерживает обе схемы (US-0 W3 Track B-3):
+ *  - cw-схема: h2, helper, ctaLabel, fields[]={name,label,type,required,...}
+ *  - legacy:    heading, subheading, services, submitLabel, successMessage
+ *
+ * Server-side submit на /api/leads (если ready); иначе мягкий fallback с
+ * alert (US-8 MVP — Payload Leads collection).
  */
 function hintValue(
   h: LeadFormBlock['serviceHint'] | LeadFormBlock['districtHint'],
@@ -22,10 +27,122 @@ function hintLabel(h: LeadFormBlock['serviceHint']): string | undefined {
   return (h as { title?: string }).title
 }
 
+/**
+ * Renders single field according to cw-схема fields[] description.
+ */
+function FieldRender({ field }: { field: LeadFormField }) {
+  const id = `lf-${field.name}`
+  const required = Boolean(field.required)
+
+  if (field.type === 'select' && Array.isArray(field.options)) {
+    return (
+      <label htmlFor={id} style={{ fontSize: 13, fontWeight: 500 }}>
+        {field.label}
+        {required && ' *'}
+        <select
+          id={id}
+          name={field.name}
+          required={required}
+          className="cta-input"
+          style={{ marginTop: 6 }}
+        >
+          <option value="">— выберите —</option>
+          {field.options.map((opt) => (
+            <option key={opt} value={opt}>
+              {opt}
+            </option>
+          ))}
+        </select>
+      </label>
+    )
+  }
+
+  if (field.type === 'textarea') {
+    return (
+      <label htmlFor={id} style={{ fontSize: 13, fontWeight: 500 }}>
+        {field.label}
+        {required && ' *'}
+        <textarea
+          id={id}
+          name={field.name}
+          required={required}
+          className="cta-input"
+          placeholder={field.placeholder ?? ''}
+          rows={3}
+          style={{ marginTop: 6 }}
+        />
+      </label>
+    )
+  }
+
+  if (field.type === 'file') {
+    return (
+      <label htmlFor={id} style={{ fontSize: 13, fontWeight: 500 }}>
+        {field.label}
+        {required && ' *'}
+        <input
+          id={id}
+          name={field.name}
+          type="file"
+          multiple={Boolean(field.multiple)}
+          accept={field.accept ?? undefined}
+          required={required}
+          style={{ marginTop: 6, display: 'block' }}
+        />
+      </label>
+    )
+  }
+
+  return (
+    <label htmlFor={id} style={{ fontSize: 13, fontWeight: 500 }}>
+      {field.label}
+      {required && ' *'}
+      <input
+        id={id}
+        name={field.name}
+        type={field.type ?? 'text'}
+        required={required}
+        inputMode={field.inputmode as React.HTMLAttributes<HTMLInputElement>['inputMode']}
+        placeholder={field.placeholder ?? ''}
+        autoComplete={
+          field.name === 'phone'
+            ? 'tel'
+            : field.name === 'name'
+              ? 'name'
+              : field.name === 'email'
+                ? 'email'
+                : undefined
+        }
+        className="cta-input"
+        style={{ marginTop: 6, marginBottom: 0 }}
+      />
+    </label>
+  )
+}
+
+const DEFAULT_FIELDS: LeadFormField[] = [
+  { name: 'name', label: 'Имя', type: 'text', required: false },
+  { name: 'phone', label: 'Телефон', type: 'tel', required: true, inputmode: 'numeric' },
+  { name: 'service', label: 'Что нужно сделать', type: 'text', required: false },
+]
+
 export function LeadForm(block: LeadFormBlock) {
   const [submitting, setSubmitting] = useState(false)
   const [success, setSuccess] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+
+  // Resolve fields: cw fields → cw fieldsets[] → defaults
+  const cwFields: LeadFormField[] = (() => {
+    if (block.fields && block.fields.length > 0) return block.fields
+    if (block.fieldsets && block.fieldsets.length > 0) {
+      return block.fieldsets.flatMap((fs) => fs.fields ?? [])
+    }
+    return DEFAULT_FIELDS
+  })()
+
+  // Если в форме нет phone — добавим, потому что бизнес-правило
+  const hasPhone = cwFields.some((f) => f.name === 'phone')
+  const fields = hasPhone ? cwFields : [...cwFields, DEFAULT_FIELDS[1]]
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -58,7 +175,6 @@ export function LeadForm(block: LeadFormBlock) {
         setSuccess(block.successMessage ?? 'Спасибо, перезвоним за 15 минут.')
         form.reset()
       } else if (res.status === 404) {
-        // Роут /api/leads ещё не готов — мягкий fallback.
         alert('Заявка отправлена. Перезвоним в течение 15 минут.')
         form.reset()
       } else {
@@ -72,7 +188,15 @@ export function LeadForm(block: LeadFormBlock) {
     }
   }
 
+  const heading = block.h2 ?? block.heading ?? null
+  const helper = block.helper ?? block.subheading ?? null
+  const ctaLabel = block.ctaLabel ?? 'Отправить заявку'
+  const consentText = block.consentText ?? null
+  const consentHref = block.consentHref ?? null
   const serviceDefault = hintLabel(block.serviceHint)
+
+  // Hidden default override через service field if present
+  const serviceField = fields.find((f) => f.name === 'service')
 
   return (
     <section
@@ -80,10 +204,10 @@ export function LeadForm(block: LeadFormBlock) {
       style={{ padding: 'clamp(48px, 8vw, 96px) 0', background: 'var(--c-bg-alt)' }}
     >
       <div className="wrap" style={{ maxWidth: 720 }}>
-        {block.heading && <h2 className="h-l">{block.heading}</h2>}
-        {block.subheading && (
+        {heading && <h2 className="h-l">{heading}</h2>}
+        {helper && (
           <p className="lead" style={{ marginTop: 16, color: 'var(--c-ink-soft)' }}>
-            {block.subheading}
+            {helper}
           </p>
         )}
 
@@ -100,47 +224,25 @@ export function LeadForm(block: LeadFormBlock) {
           }}
           aria-label="Заявка на замер"
         >
-          <label htmlFor="lf-name" style={{ fontSize: 13, fontWeight: 500 }}>
-            Имя
-            <input
-              id="lf-name"
-              name="name"
-              className="cta-input"
-              placeholder="Как вас зовут"
-              autoComplete="name"
-              style={{ marginTop: 6, marginBottom: 0 }}
+          {fields.map((f) => (
+            <FieldRender
+              key={f.name}
+              field={
+                f.name === 'service' && serviceDefault && !serviceField?.placeholder
+                  ? { ...f, placeholder: serviceDefault }
+                  : f
+              }
             />
-          </label>
+          ))}
 
-          <label htmlFor="lf-phone" style={{ fontSize: 13, fontWeight: 500 }}>
-            Телефон *
-            <input
-              id="lf-phone"
-              name="phone"
-              type="tel"
-              required
-              className="cta-input"
-              placeholder="+7 (___) ___-__-__"
-              autoComplete="tel"
-              style={{ marginTop: 6, marginBottom: 0 }}
-            />
-          </label>
-
-          <label htmlFor="lf-service" style={{ fontSize: 13, fontWeight: 500 }}>
-            Что нужно сделать
-            <input
-              id="lf-service"
-              name="service"
-              className="cta-input"
-              defaultValue={serviceDefault}
-              placeholder="Спилить тополь / убрать снег / вывезти мусор"
-              style={{ marginTop: 6, marginBottom: 0 }}
-            />
-          </label>
-
-          {block.consentText && (
+          {(consentText || consentHref) && (
             <p className="cta-note" style={{ margin: 0 }}>
-              {block.consentText}
+              {consentText}{' '}
+              {consentHref && (
+                <a href={consentHref} style={{ textDecoration: 'underline' }}>
+                  политика
+                </a>
+              )}
             </p>
           )}
 
@@ -161,7 +263,7 @@ export function LeadForm(block: LeadFormBlock) {
             disabled={submitting}
             style={{ justifyContent: 'center', marginTop: 8 }}
           >
-            {submitting ? 'Отправляем…' : 'Отправить заявку'}
+            {submitting ? 'Отправляем…' : ctaLabel}
           </button>
         </form>
       </div>

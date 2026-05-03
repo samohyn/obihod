@@ -167,7 +167,13 @@ export default buildConfig({
     // написанные как diff к prod-state, не применятся на пустой БД).
     // На проде (NODE_ENV=production) миграции применяются отдельным step в deploy.yml
     // через psql (Payload CLI сломан на extensionless ESM — root cause d2cac65).
-    push: process.env.NODE_ENV !== 'production',
+    //
+    // PAYLOAD_DISABLE_PUSH=1 — local-verify escape hatch (US-3 Wave 0 verify
+    // 2026-05-02): когда в БД есть raw-managed таблицы (audit_log из ADR-0014),
+    // Payload push:true видит их как «orphan» и блокируется на интерактивном
+    // prompt про DROP. Установка ENV даёт чистый non-interactive run против
+    // уже-мигрированной БД. На prod env уже push:false по NODE_ENV.
+    push: process.env.NODE_ENV !== 'production' && process.env.PAYLOAD_DISABLE_PUSH !== '1',
     migrationDir: path.resolve(dirname, 'migrations'),
   }),
   sharp,

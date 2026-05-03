@@ -1,4 +1,14 @@
 import type { CollectionConfig } from 'payload'
+import {
+  Hero,
+  TextContent,
+  ServicesGrid,
+  LeadForm,
+  MiniCase,
+  NeighborDistricts,
+  Tldr,
+  Breadcrumbs,
+} from '@/blocks'
 
 export const Districts: CollectionConfig = {
   slug: 'districts',
@@ -129,7 +139,8 @@ export const Districts: CollectionConfig = {
         },
         {
           label: 'Контент',
-          description: 'Hero-картинка и фото с EXIF geo для контента страницы района.',
+          description:
+            'Hero-картинка, фото с EXIF geo, блочный конструктор для District Hub /raiony/<district>/.',
           fields: [
             { name: 'heroImage', type: 'upload', relationTo: 'media' },
             {
@@ -137,6 +148,35 @@ export const Districts: CollectionConfig = {
               type: 'upload',
               relationTo: 'media',
               admin: { description: 'Фото с EXIF geo (для schema contentLocation)' },
+            },
+            // US-0 Track B-2 — blocks[] для District Hub /raiony/<district>/.
+            // Whitelist: hero, text-content, services-grid, lead-form, mini-case,
+            // neighbor-districts, tldr, breadcrumbs.
+            //
+            // NOTE по naming: sa-seo (US-0 §AC-3.3) упоминает «relatedDistricts»,
+            // но в текущей schema поле уже называется `neighborDistricts` (выше,
+            // в tab «Программа SEO»). NeighborDistricts блок использует именно
+            // его. Переименование сломает downstream (блок NeighborDistricts
+            // в Track B-1 + sd.md wireframes) — оставляем существующее имя.
+            {
+              name: 'blocks',
+              type: 'blocks',
+              blockReferences: [
+                Hero,
+                TextContent,
+                ServicesGrid,
+                LeadForm,
+                MiniCase,
+                NeighborDistricts,
+                Tldr,
+                Breadcrumbs,
+              ],
+              blocks: [],
+              admin: {
+                initCollapsed: true,
+                description:
+                  'Конструктор District Hub: hero, текст, сетка услуг, форма, мини-кейсы, соседние районы, TL;DR, breadcrumbs. Используется для /raiony/<district>/.',
+              },
             },
           ],
         },

@@ -1,0 +1,312 @@
+{
+  "generated_at": "2026-05-02T23:23:43.317Z",
+  "total": 60,
+  "breakdown_per_district": {
+    "khimki": 15,
+    "pushkino": 15,
+    "istra": 15,
+    "zhukovsky": 15
+  },
+  "sd_fixtures": [
+    {
+      "url": "/vyvoz-musora/kontejner/khimki/",
+      "file": "vyvoz-musora-kontejner-khimki.json",
+      "words": 445
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-stroymusora/khimki/",
+      "file": "vyvoz-musora-vyvoz-stroymusora-khimki.json",
+      "words": 443
+    },
+    {
+      "url": "/vyvoz-musora/staraya-mebel/khimki/",
+      "file": "vyvoz-musora-staraya-mebel-khimki.json",
+      "words": 446
+    },
+    {
+      "url": "/vyvoz-musora/krupnogabarit/khimki/",
+      "file": "vyvoz-musora-krupnogabarit-khimki.json",
+      "words": 443
+    },
+    {
+      "url": "/vyvoz-musora/gazel/khimki/",
+      "file": "vyvoz-musora-gazel-khimki.json",
+      "words": 446
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-sadovogo-musora/khimki/",
+      "file": "vyvoz-musora-vyvoz-sadovogo-musora-khimki.json",
+      "words": 446
+    },
+    {
+      "url": "/vyvoz-musora/dlya-uk-tszh/khimki/",
+      "file": "vyvoz-musora-dlya-uk-tszh-khimki.json",
+      "words": 453
+    },
+    {
+      "url": "/arboristika/spil-derevev/khimki/",
+      "file": "arboristika-spil-derevev-khimki.json",
+      "words": 460
+    },
+    {
+      "url": "/arboristika/udalenie-pnya/khimki/",
+      "file": "arboristika-udalenie-pnya-khimki.json",
+      "words": 460
+    },
+    {
+      "url": "/arboristika/sanitarnaya-obrezka/khimki/",
+      "file": "arboristika-sanitarnaya-obrezka-khimki.json",
+      "words": 460
+    },
+    {
+      "url": "/arboristika/kronirovanie/khimki/",
+      "file": "arboristika-kronirovanie-khimki.json",
+      "words": 457
+    },
+    {
+      "url": "/chistka-krysh/ot-snega/khimki/",
+      "file": "chistka-krysh-ot-snega-khimki.json",
+      "words": 455
+    },
+    {
+      "url": "/chistka-krysh/chistka-krysh-mkd/khimki/",
+      "file": "chistka-krysh-chistka-krysh-mkd-khimki.json",
+      "words": 452
+    },
+    {
+      "url": "/chistka-krysh/sbivanie-sosulek/khimki/",
+      "file": "chistka-krysh-sbivanie-sosulek-khimki.json",
+      "words": 449
+    },
+    {
+      "url": "/chistka-krysh/dogovor-na-sezon/khimki/",
+      "file": "chistka-krysh-dogovor-na-sezon-khimki.json",
+      "words": 456
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-sadovogo-musora/pushkino/",
+      "file": "vyvoz-musora-vyvoz-sadovogo-musora-pushkino.json",
+      "words": 442
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-stroymusora/pushkino/",
+      "file": "vyvoz-musora-vyvoz-stroymusora-pushkino.json",
+      "words": 439
+    },
+    {
+      "url": "/vyvoz-musora/kontejner/pushkino/",
+      "file": "vyvoz-musora-kontejner-pushkino.json",
+      "words": 441
+    },
+    {
+      "url": "/vyvoz-musora/krupnogabarit/pushkino/",
+      "file": "vyvoz-musora-krupnogabarit-pushkino.json",
+      "words": 439
+    },
+    {
+      "url": "/arboristika/spil-derevev/pushkino/",
+      "file": "arboristika-spil-derevev-pushkino.json",
+      "words": 460
+    },
+    {
+      "url": "/arboristika/udalenie-pnya/pushkino/",
+      "file": "arboristika-udalenie-pnya-pushkino.json",
+      "words": 460
+    },
+    {
+      "url": "/arboristika/raschistka-uchastka/pushkino/",
+      "file": "arboristika-raschistka-uchastka-pushkino.json",
+      "words": 460
+    },
+    {
+      "url": "/arboristika/kronirovanie/pushkino/",
+      "file": "arboristika-kronirovanie-pushkino.json",
+      "words": 457
+    },
+    {
+      "url": "/arboristika/sanitarnaya-obrezka/pushkino/",
+      "file": "arboristika-sanitarnaya-obrezka-pushkino.json",
+      "words": 460
+    },
+    {
+      "url": "/chistka-krysh/ot-snega/pushkino/",
+      "file": "chistka-krysh-ot-snega-pushkino.json",
+      "words": 455
+    },
+    {
+      "url": "/chistka-krysh/sbivanie-sosulek/pushkino/",
+      "file": "chistka-krysh-sbivanie-sosulek-pushkino.json",
+      "words": 449
+    },
+    {
+      "url": "/chistka-krysh/chistka-krysh-chastnyy-dom/pushkino/",
+      "file": "chistka-krysh-chistka-krysh-chastnyy-dom-pushkino.json",
+      "words": 455
+    },
+    {
+      "url": "/demontazh/demontazh-dachi/pushkino/",
+      "file": "demontazh-demontazh-dachi-pushkino.json",
+      "words": 452
+    },
+    {
+      "url": "/demontazh/demontazh-bani/pushkino/",
+      "file": "demontazh-demontazh-bani-pushkino.json",
+      "words": 452
+    },
+    {
+      "url": "/demontazh/snos-zabora/pushkino/",
+      "file": "demontazh-snos-zabora-pushkino.json",
+      "words": 452
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-sadovogo-musora/istra/",
+      "file": "vyvoz-musora-vyvoz-sadovogo-musora-istra.json",
+      "words": 450
+    },
+    {
+      "url": "/vyvoz-musora/kontejner/istra/",
+      "file": "vyvoz-musora-kontejner-istra.json",
+      "words": 449
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-stroymusora/istra/",
+      "file": "vyvoz-musora-vyvoz-stroymusora-istra.json",
+      "words": 447
+    },
+    {
+      "url": "/arboristika/spil-derevev/istra/",
+      "file": "arboristika-spil-derevev-istra.json",
+      "words": 463
+    },
+    {
+      "url": "/arboristika/raschistka-uchastka/istra/",
+      "file": "arboristika-raschistka-uchastka-istra.json",
+      "words": 463
+    },
+    {
+      "url": "/arboristika/udalenie-pnya/istra/",
+      "file": "arboristika-udalenie-pnya-istra.json",
+      "words": 463
+    },
+    {
+      "url": "/arboristika/kronirovanie/istra/",
+      "file": "arboristika-kronirovanie-istra.json",
+      "words": 460
+    },
+    {
+      "url": "/chistka-krysh/ot-snega/istra/",
+      "file": "chistka-krysh-ot-snega-istra.json",
+      "words": 459
+    },
+    {
+      "url": "/chistka-krysh/sbivanie-sosulek/istra/",
+      "file": "chistka-krysh-sbivanie-sosulek-istra.json",
+      "words": 453
+    },
+    {
+      "url": "/chistka-krysh/uborka-territorii-zima/istra/",
+      "file": "chistka-krysh-uborka-territorii-zima-istra.json",
+      "words": 456
+    },
+    {
+      "url": "/demontazh/demontazh-dachi/istra/",
+      "file": "demontazh-demontazh-dachi-istra.json",
+      "words": 457
+    },
+    {
+      "url": "/demontazh/demontazh-bani/istra/",
+      "file": "demontazh-demontazh-bani-istra.json",
+      "words": 457
+    },
+    {
+      "url": "/demontazh/snos-zabora/istra/",
+      "file": "demontazh-snos-zabora-istra.json",
+      "words": 457
+    },
+    {
+      "url": "/arboristika/sanitarnaya-obrezka/istra/",
+      "file": "arboristika-sanitarnaya-obrezka-istra.json",
+      "words": 463
+    },
+    {
+      "url": "/vyvoz-musora/krupnogabarit/istra/",
+      "file": "vyvoz-musora-krupnogabarit-istra.json",
+      "words": 447
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-stroymusora/zhukovsky/",
+      "file": "vyvoz-musora-vyvoz-stroymusora-zhukovsky.json",
+      "words": 444
+    },
+    {
+      "url": "/vyvoz-musora/kontejner/zhukovsky/",
+      "file": "vyvoz-musora-kontejner-zhukovsky.json",
+      "words": 446
+    },
+    {
+      "url": "/vyvoz-musora/krupnogabarit/zhukovsky/",
+      "file": "vyvoz-musora-krupnogabarit-zhukovsky.json",
+      "words": 444
+    },
+    {
+      "url": "/arboristika/spil-derevev/zhukovsky/",
+      "file": "arboristika-spil-derevev-zhukovsky.json",
+      "words": 460
+    },
+    {
+      "url": "/arboristika/kronirovanie/zhukovsky/",
+      "file": "arboristika-kronirovanie-zhukovsky.json",
+      "words": 457
+    },
+    {
+      "url": "/arboristika/udalenie-pnya/zhukovsky/",
+      "file": "arboristika-udalenie-pnya-zhukovsky.json",
+      "words": 460
+    },
+    {
+      "url": "/chistka-krysh/dogovor-na-sezon/zhukovsky/",
+      "file": "chistka-krysh-dogovor-na-sezon-zhukovsky.json",
+      "words": 462
+    },
+    {
+      "url": "/chistka-krysh/chistka-krysh-mkd/zhukovsky/",
+      "file": "chistka-krysh-chistka-krysh-mkd-zhukovsky.json",
+      "words": 458
+    },
+    {
+      "url": "/chistka-krysh/ot-snega/zhukovsky/",
+      "file": "chistka-krysh-ot-snega-zhukovsky.json",
+      "words": 461
+    },
+    {
+      "url": "/chistka-krysh/sbivanie-sosulek/zhukovsky/",
+      "file": "chistka-krysh-sbivanie-sosulek-zhukovsky.json",
+      "words": 455
+    },
+    {
+      "url": "/demontazh/snos-doma/zhukovsky/",
+      "file": "demontazh-snos-doma-zhukovsky.json",
+      "words": 457
+    },
+    {
+      "url": "/demontazh/snos-zabora/zhukovsky/",
+      "file": "demontazh-snos-zabora-zhukovsky.json",
+      "words": 457
+    },
+    {
+      "url": "/demontazh/demontazh-dachi/zhukovsky/",
+      "file": "demontazh-demontazh-dachi-zhukovsky.json",
+      "words": 457
+    },
+    {
+      "url": "/vyvoz-musora/vyvoz-sadovogo-musora/zhukovsky/",
+      "file": "vyvoz-musora-vyvoz-sadovogo-musora-zhukovsky.json",
+      "words": 447
+    },
+    {
+      "url": "/arboristika/sanitarnaya-obrezka/zhukovsky/",
+      "file": "arboristika-sanitarnaya-obrezka-zhukovsky.json",
+      "words": 460
+    }
+  ]
+}

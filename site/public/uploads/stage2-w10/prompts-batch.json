@@ -1,0 +1,235 @@
+{
+  "_meta": {
+    "stage": "stage2-w10",
+    "run": "Track B Run 4 — programmatic SD heroes",
+    "owner": "cms (Track B Run 4) + art self-review",
+    "track": "Stage 2 Track B Run 4 — 20 SD hero (4 pillar × 4 districts + 4 avtovyshka)",
+    "art_consistency": "object-focused, NO humans/figures/silhouettes (Run 1+2+3 unified rule, Stage 0 R1)",
+    "cohesion_rationale": "20 unique hero на 100 SD URL: shared per (pillar × district) + 4 avtovyshka × district. Mini-case imageUrl в SD JSONs остаются TBD (defer to W14 cleanup, cost-sensitive).",
+    "antiPatterns_§14": [
+      "no humans / figures / silhouettes",
+      "no chainsaw / axe / power-tools macho",
+      "no eco-leaf cliché",
+      "no stock photo aesthetic",
+      "no fake recognizable landmarks",
+      "no readable text / logos"
+    ],
+    "model_default": "fal-ai/flux/schnell",
+    "imageSize": "landscape_16_9 (1024×576 native)",
+    "downloadedFormat": "JPEG (flux/schnell auto-detect)"
+  },
+  "items": [
+    {
+      "id": "sd-vyvoz-musora-odincovo-hero",
+      "page": "shared for /vyvoz-musora/<sub>/odincovo/",
+      "fixture": "site/content/stage2-w10-sd-batch/vyvoz-musora-*-odincovo.json",
+      "useCase": "sd-hero",
+      "params": { "service": "vyvoz-musora", "districtName": "Odintsovo" },
+      "outFile": "site/public/uploads/stage2-w10/sd-vyvoz-musora-odincovo-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-vyvoz-musora-odincovo-hero.jpg",
+      "alt": "Одинцово — район выезда бригады Обихода, вывоз мусора"
+    },
+    {
+      "id": "sd-vyvoz-musora-krasnogorsk-hero",
+      "page": "shared for /vyvoz-musora/<sub>/krasnogorsk/",
+      "fixture": "site/content/stage2-w10-sd-batch/vyvoz-musora-*-krasnogorsk.json",
+      "useCase": "sd-hero",
+      "params": { "service": "vyvoz-musora", "districtName": "Krasnogorsk" },
+      "outFile": "site/public/uploads/stage2-w10/sd-vyvoz-musora-krasnogorsk-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-vyvoz-musora-krasnogorsk-hero.jpg",
+      "alt": "Красногорск — район выезда бригады Обихода, вывоз мусора"
+    },
+    {
+      "id": "sd-vyvoz-musora-mytishchi-hero",
+      "page": "shared for /vyvoz-musora/<sub>/mytishchi/",
+      "fixture": "site/content/stage2-w10-sd-batch/vyvoz-musora-*-mytishchi.json",
+      "useCase": "sd-hero",
+      "params": { "service": "vyvoz-musora", "districtName": "Mytishchi" },
+      "outFile": "site/public/uploads/stage2-w10/sd-vyvoz-musora-mytishchi-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-vyvoz-musora-mytishchi-hero.jpg",
+      "alt": "Мытищи — район выезда бригады Обихода, вывоз мусора"
+    },
+    {
+      "id": "sd-vyvoz-musora-ramenskoye-hero",
+      "page": "shared for /vyvoz-musora/<sub>/ramenskoye/",
+      "fixture": "site/content/stage2-w10-sd-batch/vyvoz-musora-*-ramenskoye.json",
+      "useCase": "sd-hero",
+      "params": { "service": "vyvoz-musora", "districtName": "Ramenskoye" },
+      "outFile": "site/public/uploads/stage2-w10/sd-vyvoz-musora-ramenskoye-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-vyvoz-musora-ramenskoye-hero.jpg",
+      "alt": "Раменское — район выезда бригады Обихода, вывоз мусора"
+    },
+    {
+      "id": "sd-arboristika-odincovo-hero",
+      "page": "shared for /arboristika/<sub>/odincovo/",
+      "fixture": "site/content/stage2-w10-sd-batch/arboristika-*-odincovo.json",
+      "useCase": "sd-hero",
+      "params": { "service": "arboristika", "districtName": "Odintsovo" },
+      "outFile": "site/public/uploads/stage2-w10/sd-arboristika-odincovo-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-arboristika-odincovo-hero.jpg",
+      "alt": "Одинцово — район выезда бригады Обихода, арбористика"
+    },
+    {
+      "id": "sd-arboristika-krasnogorsk-hero",
+      "page": "shared for /arboristika/<sub>/krasnogorsk/",
+      "fixture": "site/content/stage2-w10-sd-batch/arboristika-*-krasnogorsk.json",
+      "useCase": "sd-hero",
+      "params": { "service": "arboristika", "districtName": "Krasnogorsk" },
+      "outFile": "site/public/uploads/stage2-w10/sd-arboristika-krasnogorsk-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-arboristika-krasnogorsk-hero.jpg",
+      "alt": "Красногорск — район выезда бригады Обихода, арбористика"
+    },
+    {
+      "id": "sd-arboristika-mytishchi-hero",
+      "page": "shared for /arboristika/<sub>/mytishchi/",
+      "fixture": "site/content/stage2-w10-sd-batch/arboristika-*-mytishchi.json",
+      "useCase": "sd-hero",
+      "params": { "service": "arboristika", "districtName": "Mytishchi" },
+      "outFile": "site/public/uploads/stage2-w10/sd-arboristika-mytishchi-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-arboristika-mytishchi-hero.jpg",
+      "alt": "Мытищи — район выезда бригады Обихода, арбористика"
+    },
+    {
+      "id": "sd-arboristika-ramenskoye-hero",
+      "page": "shared for /arboristika/<sub>/ramenskoye/",
+      "fixture": "site/content/stage2-w10-sd-batch/arboristika-*-ramenskoye.json",
+      "useCase": "sd-hero",
+      "params": { "service": "arboristika", "districtName": "Ramenskoye" },
+      "outFile": "site/public/uploads/stage2-w10/sd-arboristika-ramenskoye-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-arboristika-ramenskoye-hero.jpg",
+      "alt": "Раменское — район выезда бригады Обихода, арбористика"
+    },
+    {
+      "id": "sd-chistka-krysh-odincovo-hero",
+      "page": "shared for /chistka-krysh/<sub>/odincovo/",
+      "fixture": "site/content/stage2-w10-sd-batch/chistka-krysh-*-odincovo.json",
+      "useCase": "sd-hero",
+      "params": { "service": "chistka-krysh", "districtName": "Odintsovo", "season": "winter" },
+      "outFile": "site/public/uploads/stage2-w10/sd-chistka-krysh-odincovo-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-chistka-krysh-odincovo-hero.jpg",
+      "alt": "Одинцово — район выезда бригады Обихода, чистка крыш"
+    },
+    {
+      "id": "sd-chistka-krysh-krasnogorsk-hero",
+      "page": "shared for /chistka-krysh/<sub>/krasnogorsk/",
+      "fixture": "site/content/stage2-w10-sd-batch/chistka-krysh-*-krasnogorsk.json",
+      "useCase": "sd-hero",
+      "params": { "service": "chistka-krysh", "districtName": "Krasnogorsk", "season": "winter" },
+      "outFile": "site/public/uploads/stage2-w10/sd-chistka-krysh-krasnogorsk-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-chistka-krysh-krasnogorsk-hero.jpg",
+      "alt": "Красногорск — район выезда бригады Обихода, чистка крыш"
+    },
+    {
+      "id": "sd-chistka-krysh-mytishchi-hero",
+      "page": "shared for /chistka-krysh/<sub>/mytishchi/",
+      "fixture": "site/content/stage2-w10-sd-batch/chistka-krysh-*-mytishchi.json",
+      "useCase": "sd-hero",
+      "params": { "service": "chistka-krysh", "districtName": "Mytishchi", "season": "winter" },
+      "outFile": "site/public/uploads/stage2-w10/sd-chistka-krysh-mytishchi-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-chistka-krysh-mytishchi-hero.jpg",
+      "alt": "Мытищи — район выезда бригады Обихода, чистка крыш"
+    },
+    {
+      "id": "sd-chistka-krysh-ramenskoye-hero",
+      "page": "shared for /chistka-krysh/<sub>/ramenskoye/",
+      "fixture": "site/content/stage2-w10-sd-batch/chistka-krysh-*-ramenskoye.json",
+      "useCase": "sd-hero",
+      "params": { "service": "chistka-krysh", "districtName": "Ramenskoye", "season": "winter" },
+      "outFile": "site/public/uploads/stage2-w10/sd-chistka-krysh-ramenskoye-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-chistka-krysh-ramenskoye-hero.jpg",
+      "alt": "Раменское — район выезда бригады Обихода, чистка крыш"
+    },
+    {
+      "id": "sd-demontazh-odincovo-hero",
+      "page": "shared for /demontazh/<sub>/odincovo/",
+      "fixture": "site/content/stage2-w10-sd-batch/demontazh-*-odincovo.json",
+      "useCase": "sd-hero",
+      "params": { "service": "demontazh", "districtName": "Odintsovo" },
+      "outFile": "site/public/uploads/stage2-w10/sd-demontazh-odincovo-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-demontazh-odincovo-hero.jpg",
+      "alt": "Одинцово — район выезда бригады Обихода, демонтаж"
+    },
+    {
+      "id": "sd-demontazh-krasnogorsk-hero",
+      "page": "shared for /demontazh/<sub>/krasnogorsk/",
+      "fixture": "site/content/stage2-w10-sd-batch/demontazh-*-krasnogorsk.json",
+      "useCase": "sd-hero",
+      "params": { "service": "demontazh", "districtName": "Krasnogorsk" },
+      "outFile": "site/public/uploads/stage2-w10/sd-demontazh-krasnogorsk-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-demontazh-krasnogorsk-hero.jpg",
+      "alt": "Красногорск — район выезда бригады Обихода, демонтаж"
+    },
+    {
+      "id": "sd-demontazh-mytishchi-hero",
+      "page": "shared for /demontazh/<sub>/mytishchi/",
+      "fixture": "site/content/stage2-w10-sd-batch/demontazh-*-mytishchi.json",
+      "useCase": "sd-hero",
+      "params": { "service": "demontazh", "districtName": "Mytishchi" },
+      "outFile": "site/public/uploads/stage2-w10/sd-demontazh-mytishchi-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-demontazh-mytishchi-hero.jpg",
+      "alt": "Мытищи — район выезда бригады Обихода, демонтаж"
+    },
+    {
+      "id": "sd-demontazh-ramenskoye-hero",
+      "page": "shared for /demontazh/<sub>/ramenskoye/",
+      "fixture": "site/content/stage2-w10-sd-batch/demontazh-*-ramenskoye.json",
+      "useCase": "sd-hero",
+      "params": { "service": "demontazh", "districtName": "Ramenskoye" },
+      "outFile": "site/public/uploads/stage2-w10/sd-demontazh-ramenskoye-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-demontazh-ramenskoye-hero.jpg",
+      "alt": "Раменское — район выезда бригады Обихода, демонтаж"
+    },
+    {
+      "id": "sd-avtovyshka-odincovo-hero",
+      "page": "/arenda-tehniki/avtovyshka/odincovo/",
+      "fixture": "site/content/stage2-w10-sd-batch/arenda-tehniki-avtovyshka-odincovo.json",
+      "useCase": "static-hero",
+      "params": {
+        "type": "kak-my-rabotaem",
+        "visualConcept": "a clean professional truck-mounted aerial work platform (cherry picker / boom lift) parked on a private suburban driveway in front of a wooden house, telescopic boom extended diagonally upward toward the upper crown of a mature tree, empty work basket at the end of the boom, no people in basket, no people on ground, mid-day overcast soft daylight, real industrial yellow-and-grey vehicle paint, real Moscow Region suburban context (low-rise wooden houses, plain wooden fence, mature deciduous trees in background), Odintsovo district feel"
+      },
+      "outFile": "site/public/uploads/stage2-w10/sd-avtovyshka-odincovo-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-avtovyshka-odincovo-hero.jpg",
+      "alt": "Одинцово — автовышка 17–22 м на участке, бригада Обихода"
+    },
+    {
+      "id": "sd-avtovyshka-krasnogorsk-hero",
+      "page": "/arenda-tehniki/avtovyshka/krasnogorsk/",
+      "fixture": "site/content/stage2-w10-sd-batch/arenda-tehniki-avtovyshka-krasnogorsk.json",
+      "useCase": "static-hero",
+      "params": {
+        "type": "kak-my-rabotaem",
+        "visualConcept": "a clean professional truck-mounted aerial work platform (cherry picker / boom lift) parked at the edge of a private suburban property in front of a small wooden cottage, telescopic boom extended sideways toward a tall pine tree, empty work basket at the end of the boom, no people in basket, no people on ground, late afternoon directional daylight, real industrial yellow-and-grey vehicle paint, Krasnogorsk-style Moscow Region context (low-rise houses, plain wooden fences, mature trees), peaceful empty composition"
+      },
+      "outFile": "site/public/uploads/stage2-w10/sd-avtovyshka-krasnogorsk-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-avtovyshka-krasnogorsk-hero.jpg",
+      "alt": "Красногорск — автовышка 17–22 м на участке, бригада Обихода"
+    },
+    {
+      "id": "sd-avtovyshka-mytishchi-hero",
+      "page": "/arenda-tehniki/avtovyshka/mytishchi/",
+      "fixture": "site/content/stage2-w10-sd-batch/arenda-tehniki-avtovyshka-mytishchi.json",
+      "useCase": "static-hero",
+      "params": {
+        "type": "kak-my-rabotaem",
+        "visualConcept": "a clean professional truck-mounted aerial work platform (cherry picker / boom lift) parked along a quiet suburban street near a private wooden house, telescopic boom extended upward toward the eaves of the roof, empty work basket at the end of the boom, no people in basket, no people on ground, mid-morning soft daylight, real industrial yellow-and-grey vehicle paint, Mytishchi-style Moscow Region suburban context (mixed dachas, wooden fences, mature deciduous trees), calm matter-of-fact composition"
+      },
+      "outFile": "site/public/uploads/stage2-w10/sd-avtovyshka-mytishchi-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-avtovyshka-mytishchi-hero.jpg",
+      "alt": "Мытищи — автовышка 17–22 м на участке, бригада Обихода"
+    },
+    {
+      "id": "sd-avtovyshka-ramenskoye-hero",
+      "page": "/arenda-tehniki/avtovyshka/ramenskoye/",
+      "fixture": "site/content/stage2-w10-sd-batch/arenda-tehniki-avtovyshka-ramenskoye.json",
+      "useCase": "static-hero",
+      "params": {
+        "type": "kak-my-rabotaem",
+        "visualConcept": "a clean professional truck-mounted aerial work platform (cherry picker / boom lift) standing on a wide private dacha plot, telescopic boom extended diagonally toward the crown of a mature birch tree, empty work basket at the end of the boom, no people in basket, no people on ground, golden-hour soft daylight, real industrial yellow-and-grey vehicle paint, Ramenskoye-style Moscow Region context (mixed roofs, plain wooden fences, mature trees, dachas in background), peaceful empty composition"
+      },
+      "outFile": "site/public/uploads/stage2-w10/sd-avtovyshka-ramenskoye-hero.jpg",
+      "publicPath": "/uploads/stage2-w10/sd-avtovyshka-ramenskoye-hero.jpg",
+      "alt": "Раменское — автовышка 17–22 м на участке, бригада Обихода"
+    }
+  ]
+}

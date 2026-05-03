@@ -1,6 +1,6 @@
 # liwood.ru
 
-**Дата сканирования:** 2026-04-25
+**Дата сканирования:** 2026-04-25 (Stage 1) · refresh **2026-05-03 (W14)**
 **Услуги в каталоге:** арбо + промальп + уборка территории + ландшафт (нет: вывоз мусора, демонтаж)
 
 ## Sitemap / IA
@@ -182,3 +182,69 @@ www.liwood.ru/
 ## IA Score: 5/5
 
 Самая глубокая и чистая структура из всех 15 конкурентов. Programmatic, иерархия, актуальный sitemap, калькулятор. Ровно то, на что нужно ориентироваться obikhod.ru — но с дополнениями: B2B-кластер + полный programmatic для всех 4 услуг (не только арбо).
+
+---
+
+## W14 refresh (2026-05-03)
+
+### URL count
+
+| Sub-sitemap | URL | Δ vs W11 baseline (247) |
+|---|--:|---|
+| sitemap-iblock-8.xml (services) | 213 | +68 (W11 ~145) |
+| sitemap-iblock-19.xml (promo) | 3 | +0 |
+| sitemap-iblock-21.xml (info/articles) | 91 | +6 (W11 ~85) |
+| sitemap-iblock-23.xml (gallery) | 12 | -1 (W11 ~13) |
+| sitemap-files.xml | n/a | (документы, не страницы) |
+| **Итого** | **319** | **+72 (+29%)** vs W11 247 |
+
+> Method: WebFetch live на 4 content nested sitemaps 2026-05-03 (sitemap-index lastmod 2026-04-30).
+> Источник: `https://www.liwood.ru/sitemap.xml`.
+
+### Content-depth (5-page sample)
+
+| URL | Word count (raw HTML strip) | JSON-LD | Microdata |
+|---|--:|:-:|:-:|
+| `/services/udalenie-derevev/` | 3 424 | ❌ | ✅ 103 itemtype |
+| `/services/obrezka-derevev/sanitarnaya-obrezka/` | 2 791 | ❌ | ✅ 88 itemtype |
+| `/services/udalenie-derevev/balashiha/` | 2 225 | ❌ | ✅ 88 itemtype |
+| `/info/articles/sposoby-valki-derevev/` | 2 099 | ❌ | ✅ 88 itemtype |
+| `/services/promyshlennyy-alpinizm/` | 2 215 | ❌ | ✅ 87 itemtype |
+| **Avg** | **~2 551 (≈1700-2000 visible)** | **0/5** | **5/5 microdata** |
+
+> **CORRECTION W14:** liwood использует **schema.org microdata** (атрибуты `itemtype="http://schema.org/..."` в HTML), не JSON-LD. Это **валидный schema** для Google/Yandex. Наша W11 оценка «~50%» была занижена — liwood **формально 100% schema через microdata**, без JSON-LD.
+> **Implication:** ось «Schema-coverage» = parity (оба 100%, разные форматы), но JSON-LD считается современнее и predicted чище для LLM-парсеров → наше опережение «JSON-LD-форматный» → soft, не hard.
+
+### UX features (homepage check 2026-05-03)
+
+- ✅ Калькулятор `/info/calculator/` (sustained)
+- ✅ WhatsApp icon (+79152932823) — chat widget
+- ✅ Lead form «Заказать звонок» (callback)
+- ❌ Нет «фото→смета» (sustained — winning angle уник)
+- ❌ Нет authors-страниц (sustained)
+- ❌ INN/OGRN/SRO не показаны на homepage (sustained — слабая E-E-A-T)
+
+### 4-в-1 status
+
+- **3 pillar** (арбо + промальп + уборка территории) + ландшафт (5-й) — НО **нет вывоза мусора и демонтажа** → не 4-в-1.
+- Sustained: 1-3 pillar; не парик нашему 4-в-1.
+
+### Δ summary W14 vs W11
+
+| Метрика | W11 | W14 | Δ |
+|---|--:|--:|---|
+| URL count | 247 | **319** | **+29.1%** |
+| Sub-services depth (services iblock) | ~145 | **213** | **+47%** ⚠ |
+| Schema-coverage (factuality) | ~50% (JSON-LD only) | **100% microdata** | reclassified parity |
+| Content-depth (avg pillar) | ~3 000 | ~2 551 sample (~2 000 visible) | -15% |
+| UX (calc + lead) | sustained | sustained + WhatsApp | +1 widget |
+| 4-в-1 | 3 pillar | 3 pillar | sustained |
+| E-E-A-T | parity | parity (no authors) | sustained |
+
+### W14 implication для нас
+
+- **URL closure:** наш Stage 3 ~211-230 vs liwood 319 → closure **66-72%** vs liwood медиане (W11 было 48.2%). Если на W14 closure нужен ≥80%, нам нужно +25-50 URL (sub-level SD route).
+- **Sub-services growth:** liwood добавил +68 sub-services за 2 недели — конкурент строит каталог быстрее нас Stage 3. Hot signal.
+- **Microdata vs JSON-LD:** наша «Schema +50pp» опережение vs liwood — soft confirmed только если LLM/parser-readiness засчитывается. Hard differentiation = JSON-LD-формат сам по себе.
+- **«Foto-smeta» USP** — sustained absent у liwood → confirmed опережение продолжается.
+

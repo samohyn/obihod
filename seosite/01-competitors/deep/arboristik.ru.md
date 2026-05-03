@@ -96,3 +96,13 @@ arboristik.ru/
 - `/category/[topic]/page/N/` — пагинация в категориях
 
 **Канонический паттерн:** `arboristik.ru/[slug]/`. Никакой иерархии услуг — типичный SEO-старый-WordPress.
+
+---
+
+## Δ от Stage 2 W11 (refresh 2026-05-03)
+
+- **URL count:** **78** (W11 ~150 estimate) — **-48%**. Реальный sitemap.xml даёт 78 URL; W11 оценка была завышена. Sitemap-генератор: gensitemap.ru, lastmod 2017-01-10 (sustained — давно не обновлялся).
+- **Notable:** sustained legacy WordPress, никакой иерархии. Контент outdated (2017 sitemap).
+- **Schema-coverage:** sustained ~5% (no JSON-LD).
+- **CTA / pricing:** sustained.
+- **W14 implication:** наш Stage 3 ~230 vs arboristik **78** = closure **295%** (мы значительно опережаем). Sustained опережение confirmed по URL + содержательной свежести.

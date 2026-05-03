@@ -116,3 +116,13 @@ fasadrf.ru/
 5. `/work/[id]/` — портфолио по числовым ID
 
 **Канонический паттерн:** `fasadrf.ru/[pillar]/[type]/[sub]/[detail]/`. Лучшая категоризация по типам объектов и материалам, но без гео.
+
+---
+
+## Δ от Stage 2 W11 (refresh 2026-05-03)
+
+- **URL count:** **360** (W11 ~200) — **+80%**. Sitemap.xml live 360 URL (priority distribution: 1×1.0, 10×0.9, 189×0.8, 119×0.7, 41×0.6).
+- **Notable:** глубочайшая иерархия 4 уровня (производители × подсистемы), 148 blog sustained.
+- **Schema-coverage:** sustained ~40%.
+- **CTA / pricing:** sustained.
+- **W14 implication:** наш Stage 3 ~230 vs fasadrf **360** = closure **64%** (W11 было 60%). Они вырастают быстрее нас в нише фасадов; sustained — мы не taргетируем фасады pillar отдельно (внутри demontazh / specialne услуги).

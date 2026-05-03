@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { Hero, TextContent, MiniCase, CtaBanner, RelatedServices, Breadcrumbs } from '@/blocks'
 
 export const Cases: CollectionConfig = {
   slug: 'cases',
@@ -92,7 +93,8 @@ export const Cases: CollectionConfig = {
         },
         {
           label: 'История',
-          description: 'Описание объекта, видео, длительность работ.',
+          description:
+            'Описание объекта, видео, длительность работ. Для расширенной структуры используйте блочный конструктор ниже.',
           fields: [
             {
               name: 'description',
@@ -119,6 +121,27 @@ export const Cases: CollectionConfig = {
               name: 'finalPrice',
               type: 'number',
               admin: { description: 'Финальная цена — только для аналитики, не публикуется.' },
+            },
+            // US-0 Track B-2 — blocks[] для Cases-страниц (/kejsy/<slug>/).
+            // Whitelist: hero, text-content, mini-case, cta-banner, related-services,
+            // breadcrumbs. before-after — opt-in в US-3 (sa-spec AC-3.4).
+            {
+              name: 'blocks',
+              type: 'blocks',
+              blockReferences: [
+                Hero,
+                TextContent,
+                MiniCase,
+                CtaBanner,
+                RelatedServices,
+                Breadcrumbs,
+              ],
+              blocks: [],
+              admin: {
+                initCollapsed: true,
+                description:
+                  'Конструктор страницы кейса: hero, текст, мини-кейсы (соседние), CTA, похожие услуги, breadcrumbs. Legacy description выше остаётся для обратной совместимости.',
+              },
             },
           ],
         },

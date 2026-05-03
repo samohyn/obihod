@@ -14,6 +14,7 @@ import {
 } from '@/lib/seo/jsonld'
 import { canonicalFor } from '@/lib/seo/canonical'
 import { getAllBlogSlugs, getBlogPostBySlug } from '@/lib/seo/queries'
+import { truncateMeta } from '@/lib/seo/text'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -74,7 +75,7 @@ export async function generateMetadata({
   if (!post) return {}
   return {
     title: { absolute: post.metaTitle ?? post.title },
-    description: post.metaDescription ?? post.intro.slice(0, 155),
+    description: post.metaDescription ?? truncateMeta(post.intro, 155),
     alternates: {
       canonical: post.canonicalOverride ?? canonicalFor(`/blog/${post.slug}/`),
     },
@@ -83,7 +84,7 @@ export async function generateMetadata({
       locale: 'ru_RU',
       url: `/blog/${post.slug}/`,
       title: post.title,
-      description: post.intro.slice(0, 200),
+      description: truncateMeta(post.intro, 200),
       publishedTime: post.publishedAt,
       modifiedTime: post.modifiedAt,
       authors: post.author ? [`${SITE_URL}/avtory/${post.author.slug}/`] : undefined,

@@ -131,6 +131,78 @@ export const getPublishedServiceDistricts = cache(async () => {
   }
 })
 
+/**
+ * Triple lookup для US-3 Wave 0.1 nested route `/<service>/<sub>/<district>/`.
+ * Filter: service.slug + district.slug + subServiceSlug (text). Возвращает
+ * single SD или null.
+ */
+export const getServiceSubDistrict = cache(
+  async (serviceSlug: string, subSlug: string, districtSlug: string) => {
+    try {
+      const payload = await payloadClient()
+      const sd = await payload.find({
+        collection: 'service-districts',
+        where: {
+          and: [
+            { 'service.slug': { equals: serviceSlug } },
+            { 'district.slug': { equals: districtSlug } },
+            { subServiceSlug: { equals: subSlug } },
+          ],
+        },
+        limit: 1,
+        depth: 3,
+      })
+      return sd.docs[0] ?? null
+    } catch (e) {
+      console.error('[queries.getServiceSubDistrict] failed:', e)
+      return null
+    }
+  },
+)
+
+/**
+ * Triple для generateStaticParams — все SD с заполненным subServiceSlug
+ * и publishStatus=published, noindexUntilCase!=true.
+ */
+export const getAllSubLevelSdParams = cache(
+  async (): Promise<Array<{ service: string; sub: string; district: string }>> => {
+    try {
+      const payload = await payloadClient()
+      const r = await payload.find({
+        collection: 'service-districts',
+        where: {
+          and: [{ publishStatus: { equals: 'published' } }, { subServiceSlug: { exists: true } }],
+        },
+        limit: 1000,
+        pagination: false,
+        depth: 1,
+      })
+      const out: Array<{ service: string; sub: string; district: string }> = []
+      for (const sd of r.docs) {
+        const sdRaw = sd as unknown as {
+          service?: { slug?: string } | string | null
+          district?: { slug?: string } | string | null
+          subServiceSlug?: string | null
+        }
+        const service =
+          typeof sdRaw.service === 'object' && sdRaw.service !== null
+            ? (sdRaw.service.slug ?? '')
+            : ''
+        const district =
+          typeof sdRaw.district === 'object' && sdRaw.district !== null
+            ? (sdRaw.district.slug ?? '')
+            : ''
+        const sub = sdRaw.subServiceSlug ?? ''
+        if (service && sub && district) out.push({ service, sub, district })
+      }
+      return out
+    } catch (e) {
+      console.error('[queries.getAllSubLevelSdParams] failed:', e)
+      return []
+    }
+  },
+)
+
 export const getSeoSettings = cache(async () => {
   try {
     const payload = await payloadClient()
@@ -326,10 +398,13 @@ export const getAllBlogSlugs = cache(
         pagination: false,
         select: { slug: true, updatedAt: true },
       })
-      return r.docs.map((d) => ({
-        slug: (d as { slug: string }).slug,
-        updatedAt: (d as { updatedAt?: string }).updatedAt,
-      }))
+      const out: Array<{ slug: string; updatedAt?: string }> = []
+      for (const d of r.docs) {
+        const slug = (d as { slug?: unknown }).slug
+        if (typeof slug !== 'string' || slug.length === 0) continue
+        out.push({ slug, updatedAt: (d as { updatedAt?: string }).updatedAt })
+      }
+      return out
     } catch (e) {
       console.error('[queries.getAllBlogSlugs] failed:', e)
       return []

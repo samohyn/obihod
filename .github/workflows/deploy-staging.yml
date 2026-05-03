@@ -1,0 +1,374 @@
+name: Deploy to staging
+
+# Staging instance: staging.obikhod.ru → 45.153.190.107:3001 (pm2 app obikhod-staging)
+# Запускается:
+#   - автоматически на push в feature/seo-content-fill-stage-0 (US-0 Stage 0 dev branch)
+#   - вручную через workflow_dispatch для preview любой ветки
+#
+# DNS, basic-auth, postgres database obikhod_staging — провижатся вручную do.
+# Подробности: team/devops/staging-plan.md, US-0 AC-11.
+#
+# Required GitHub secrets (Settings → Secrets and variables → Actions):
+#   STAGING_SSH_HOST, STAGING_SSH_USER, STAGING_SSH_KEY, STAGING_SSH_PORT (default 22)
+#     (для удобства можно reuse BEGET_SSH_* — это та же VPS deploy@45.153.190.107)
+#   STAGING_DEPLOY_PATH (рекомендуется /opt/obikhod-staging)
+#   STAGING_BASIC_AUTH (формат "user:pass" для smoke-check curl -u)
+#
+# Reuse from prod (одни и те же секреты):
+#   PAYLOAD_SECRET — НЕ переиспользуем, для staging свой в shared/.env на VPS
+#   REVALIDATE_SECRET — staging свой, GHA push в shared/.env
+#
+# .env на staging-сервере: /opt/obikhod-staging/shared/.env (managed do напрямую,
+# НЕ перезаписывается из workflow — отличается от prod где REVALIDATE_SECRET
+# upsert'ится из GHA секрета).
+
+on:
+  push:
+    branches: [feature/seo-content-fill-stage-0]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Git ref to deploy (branch/tag/sha)"
+        required: false
+        default: "feature/seo-content-fill-stage-0"
+
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  preflight:
+    name: Preflight — проверка secrets
+    runs-on: ubuntu-latest
+    outputs:
+      ready: ${{ steps.check.outputs.ready }}
+    steps:
+      - id: check
+        env:
+          HOST: ${{ secrets.STAGING_SSH_HOST }}
+          USER: ${{ secrets.STAGING_SSH_USER }}
+          KEY: ${{ secrets.STAGING_SSH_KEY }}
+          PATH_: ${{ secrets.STAGING_DEPLOY_PATH }}
+        run: |
+          if [ -z "$HOST" ] || [ -z "$USER" ] || [ -z "$KEY" ] || [ -z "$PATH_" ]; then
+            echo "::error::Secrets STAGING_SSH_* отсутствуют. См. team/devops/staging-plan.md §10."
+            echo "ready=false" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+          echo "ready=true" >> $GITHUB_OUTPUT
+
+  build:
+    name: Build staging bundle
+    needs: preflight
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: obikhod
+          POSTGRES_PASSWORD: obikhod_dev
+          POSTGRES_DB: obikhod
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      # Ephemeral DATABASE_URI для build (на VPS будет переопределён из shared/.env)
+      DATABASE_URI: postgres://obikhod:obikhod_dev@localhost:5432/obikhod
+      PAYLOAD_SECRET: ${{ secrets.STAGING_PAYLOAD_SECRET || secrets.PAYLOAD_SECRET }}
+      PAYLOAD_PREVIEW_SECRET: ${{ secrets.STAGING_PAYLOAD_PREVIEW_SECRET || secrets.PAYLOAD_PREVIEW_SECRET }}
+      NEXT_PUBLIC_SITE_URL: https://staging.obikhod.ru
+      REVALIDATE_SECRET: ${{ secrets.STAGING_REVALIDATE_SECRET || secrets.REVALIDATE_SECRET }}
+      # Я.Метрика OFF на staging (operator decision 2026-05-02 — не загрязнять prod-данные)
+      NEXT_PUBLIC_YANDEX_METRIKA_ID: ''
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.ref || github.ref }}
+
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: site/package.json
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          cache-dependency-path: site/pnpm-lock.yaml
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Wait for Postgres
+        run: |
+          for i in {1..30}; do
+            pg_isready -h localhost -p 5432 -U obikhod && break
+            sleep 1
+          done
+
+      - name: Warmup DB (dev push:true создаёт схему)
+        # Тот же паттерн что prod build job — generateStaticParams требует валидную схему.
+        run: |
+          pnpm dev > /tmp/dev.log 2>&1 &
+          DEV=$!
+          for i in $(seq 1 60); do
+            curl -fsS http://localhost:3000/ -o /dev/null 2>/dev/null && { echo "dev ready after ${i}s"; break; }
+            sleep 2
+          done
+          kill $DEV 2>/dev/null || true
+          wait $DEV 2>/dev/null || true
+          tail -30 /tmp/dev.log || true
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Install production deps
+        run: |
+          rm -rf node_modules
+          pnpm install --prod --frozen-lockfile --prefer-offline
+
+      - name: Pack artifact
+        run: |
+          rm -rf .next/dev .next/cache
+          cat > /tmp/deploy-filelist <<'EOF'
+          .next
+          public
+          node_modules
+          package.json
+          pnpm-lock.yaml
+          pnpm-workspace.yaml
+          next.config.ts
+          payload.config.ts
+          proxy.ts
+          app
+          collections
+          components
+          lib
+          globals
+          blocks
+          migrations
+          scripts
+          EOF
+          set +e
+          tar --warning=no-file-changed --ignore-failed-read -czf ../deploy.tar.gz -T /tmp/deploy-filelist
+          rc=$?
+          set -e
+          if [ $rc -gt 1 ]; then
+            echo "::error::tar failed with code $rc"
+            exit $rc
+          fi
+          ls -lh ../deploy.tar.gz
+          if ! tar tzf ../deploy.tar.gz | grep -q 'api/health/route.js'; then
+            echo "::error::health route отсутствует в tarball"
+            exit 1
+          fi
+
+      - name: Upload bundle to GitHub Release (transport)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REL: ${{ github.sha }}
+        working-directory: ${{ github.workspace }}
+        run: |
+          set -eu
+          TAG="deploy-staging-${REL}"
+          gh release create "$TAG" \
+            --repo "${{ github.repository }}" \
+            --target "${{ github.sha }}" \
+            --prerelease \
+            --title "Temp staging deploy bundle $REL" \
+            --notes "Staging transport bundle. Auto-deleted after deploy." \
+            deploy.tar.gz
+
+  deploy:
+    name: Deploy to VPS + reload PM2 (obikhod-staging)
+    needs: [preflight, build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.STAGING_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p ${{ secrets.STAGING_SSH_PORT || '22' }} -H ${{ secrets.STAGING_SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Prepare release dir
+        env:
+          REL: ${{ github.sha }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.STAGING_SSH_PORT || '22' }} \
+            ${{ secrets.STAGING_SSH_USER }}@${{ secrets.STAGING_SSH_HOST }} \
+            "mkdir -p ${{ secrets.STAGING_DEPLOY_PATH }}/releases/${REL} && \
+             mkdir -p ${{ secrets.STAGING_DEPLOY_PATH }}/shared"
+
+      - name: Resolve GitHub Release asset URL
+        id: asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REL: ${{ github.sha }}
+        run: |
+          set -eu
+          TAG="deploy-staging-${REL}"
+          for i in $(seq 1 15); do
+            URL=$(gh release view "$TAG" --repo "${{ github.repository }}" \
+                    --json assets --jq '.assets[] | select(.name == "deploy.tar.gz") | .apiUrl' 2>/dev/null || true)
+            if [ -n "$URL" ]; then break; fi
+            sleep 2
+          done
+          if [ -z "$URL" ]; then
+            echo "::error::could not resolve asset URL for release $TAG"
+            exit 1
+          fi
+          echo "asset_url=$URL" >> "$GITHUB_OUTPUT"
+
+      - name: Download release bundle to VPS
+        env:
+          REL: ${{ github.sha }}
+          ASSET_URL: ${{ steps.asset.outputs.asset_url }}
+          GH_PAT: ${{ github.token }}
+          BP: ${{ secrets.STAGING_DEPLOY_PATH }}
+        run: |
+          set -eu
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.STAGING_SSH_PORT || '22' }} \
+              -o ServerAliveInterval=30 -o ConnectTimeout=30 -o TCPKeepAlive=yes \
+              ${{ secrets.STAGING_SSH_USER }}@${{ secrets.STAGING_SSH_HOST }} \
+              'bash -s' <<REMOTE
+          set -eu
+          export GH_TOKEN='${GH_PAT}'
+          ASSET_URL='${ASSET_URL}'
+          REL='${REL}'
+          BP='${BP}'
+          cd "\$BP/releases/\$REL"
+          time curl -fsSL --retry 3 --retry-delay 5 --max-time 1200 \\
+              -H "Authorization: Bearer \$GH_TOKEN" \\
+              -H "Accept: application/octet-stream" \\
+              -o deploy.tar.gz \\
+              "\$ASSET_URL"
+          SIZE=\$(stat -c%s deploy.tar.gz)
+          if [ "\$SIZE" -lt 50000000 ]; then
+            echo "::error::downloaded bundle suspiciously small: \$SIZE bytes"
+            exit 1
+          fi
+          REMOTE
+
+      - name: Unpack + link shared .env
+        env:
+          REL: ${{ github.sha }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.STAGING_SSH_PORT || '22' }} -o ServerAliveInterval=15 \
+            ${{ secrets.STAGING_SSH_USER }}@${{ secrets.STAGING_SSH_HOST }} \
+            "set -eux
+             BP='${{ secrets.STAGING_DEPLOY_PATH }}'
+             REL='${REL}'
+             cd \$BP/releases/\$REL
+             tar xzf deploy.tar.gz && rm deploy.tar.gz
+             ln -sfn \$BP/shared/.env .env"
+
+      - name: Apply Payload migrations to staging DB
+        # Тот же idempotent psql паттерн что prod (по payload_migrations tracker)
+        env:
+          REL: ${{ github.sha }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.STAGING_SSH_PORT || '22' }} -o ServerAliveInterval=15 \
+            ${{ secrets.STAGING_SSH_USER }}@${{ secrets.STAGING_SSH_HOST }} \
+            "set -eu
+             BP='${{ secrets.STAGING_DEPLOY_PATH }}'
+             REL='${REL}'
+             # syntax check shared/.env (incident 2026-04-28 паттерн)
+             if ! bash -n \"\$BP/shared/.env\" 2>&1; then
+               echo \"::error::shared/.env syntax error\"; exit 1
+             fi
+             set -a; . \$BP/shared/.env; set +a
+             cd \$BP/releases/\$REL
+             psql \"\$DATABASE_URI\" -v ON_ERROR_STOP=1 <<'SQL'
+          CREATE TABLE IF NOT EXISTS \"payload_migrations\" (
+            \"id\" serial PRIMARY KEY,
+            \"name\" varchar,
+            \"batch\" numeric,
+            \"updated_at\" timestamp(3) with time zone DEFAULT now() NOT NULL,
+            \"created_at\" timestamp(3) with time zone DEFAULT now() NOT NULL
+          );
+          SQL
+             for UP_FILE in \$(ls migrations/*.up.sql 2>/dev/null | sort); do
+               MIGRATION_NAME=\$(basename \"\$UP_FILE\" .up.sql)
+               ALREADY=\$(psql \"\$DATABASE_URI\" -tA -c \"SELECT count(*) FROM payload_migrations WHERE name='\$MIGRATION_NAME'\")
+               if [ \"\$ALREADY\" = \"1\" ]; then
+                 echo \">> migration \$MIGRATION_NAME already applied\"
+               else
+                 echo \">> applying \$MIGRATION_NAME\"
+                 psql \"\$DATABASE_URI\" -v ON_ERROR_STOP=1 -f \"\$UP_FILE\"
+                 psql \"\$DATABASE_URI\" -c \"INSERT INTO payload_migrations (name, batch) VALUES ('\$MIGRATION_NAME', 1)\"
+               fi
+             done"
+
+      - name: Flip symlink + reload PM2
+        env:
+          REL: ${{ github.sha }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.STAGING_SSH_PORT || '22' }} -o ServerAliveInterval=15 \
+            ${{ secrets.STAGING_SSH_USER }}@${{ secrets.STAGING_SSH_HOST }} \
+            "set -eux
+             BP='${{ secrets.STAGING_DEPLOY_PATH }}'
+             APP='obikhod-staging'
+             REL='${REL}'
+             cd \$BP
+             ln -sfn releases/\$REL current
+             pm2 delete \$APP 2>/dev/null || true
+             pm2 start \$BP/ecosystem.config.cjs --update-env
+             pm2 save
+             cd \$BP/releases
+             ls -1t | tail -n +6 | xargs -r rm -rf"
+
+      - name: Smoke check (через basic-auth)
+        # Если DNS staging.obikhod.ru пропагирован — проверяем https endpoint.
+        # Если нет — fallback на localhost:3001 на VPS через ssh.
+        run: |
+          set -eu
+          if [ -n "${{ secrets.STAGING_BASIC_AUTH }}" ]; then
+            URL="https://staging.obikhod.ru"
+            AUTH="-u ${{ secrets.STAGING_BASIC_AUTH }}"
+            for i in $(seq 1 30); do
+              body=$(curl -sL -m 5 $AUTH "$URL/api/health" 2>/dev/null || echo "")
+              if echo "$body" | grep -q '"status":"ok"'; then
+                echo "healthy after ${i}s: $body"
+                exit 0
+              fi
+              sleep 2
+            done
+            echo "::warning::HTTPS smoke не прошёл — пробуем localhost через ssh"
+          fi
+          # Fallback: проверить через ssh на VPS (если DNS/TLS ещё не готовы)
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.STAGING_SSH_PORT || '22' }} \
+              ${{ secrets.STAGING_SSH_USER }}@${{ secrets.STAGING_SSH_HOST }} \
+              "for i in \$(seq 1 30); do
+                 body=\$(curl -sL -m 5 http://127.0.0.1:3001/api/health 2>/dev/null || echo '')
+                 if echo \"\$body\" | grep -q '\"status\":\"ok\"'; then
+                   echo \"healthy on localhost:3001 after \${i}s: \$body\"
+                   exit 0
+                 fi
+                 sleep 2
+               done
+               echo '::error::staging health не отвечает на localhost:3001'
+               pm2 logs obikhod-staging --lines 50 --nostream || true
+               exit 1"
+
+      - name: Cleanup temp GitHub Release
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REL: ${{ github.sha }}
+        run: |
+          TAG="deploy-staging-${REL}"
+          gh release delete "$TAG" \
+              --repo "${{ github.repository }}" \
+              --yes --cleanup-tag 2>&1 \
+            || echo "::warning::cleanup of $TAG failed — skipping"

@@ -1,8 +1,16 @@
+import { Breadcrumbs } from './Breadcrumbs'
+import { Calculator } from './Calculator'
 import { CtaBanner } from './CtaBanner'
 import { Faq } from './Faq'
 import { Hero } from './Hero'
 import { LeadForm } from './LeadForm'
+import { MiniCase } from './MiniCase'
+import { NeighborDistricts } from './NeighborDistricts'
+import { RelatedPosts } from './RelatedPosts'
+import { RelatedServices } from './RelatedServices'
+import { ServicesGrid } from './ServicesGrid'
 import { TextContent } from './TextContent'
+import { Tldr } from './Tldr'
 import type { AnyBlock } from './types'
 
 /**
@@ -10,12 +18,12 @@ import type { AnyBlock } from './types'
  *
  * Отключённые блоки (`enabled === false`) пропускаются.
  * Неизвестные blockType — тихо игнорируются (forward-compat: be4 может
- * добавить блок 6..15, а fe1 — дорасти в следующей итерации).
+ * добавить блок 13..N, а fe1 — дорасти в следующей итерации).
  *
- * TODO(fe1): поддержать оставшиеся 10 блоков из sa.md §3:
- * photo-estimate-form, calculator, cases-carousel, services-grid,
+ * Поддерживается 12 блоков (5 базовых + 7 новых из US-0).
+ * Будущие кандидаты (backlog): photo-estimate-form, cases-carousel,
  * districts-grid, trust-badges, testimonials, promotion-banner,
- * map-region, video.
+ * map-region, video, before-after.
  */
 export function BlockRenderer({ blocks }: { blocks: AnyBlock[] | null | undefined }) {
   if (!blocks || blocks.length === 0) return null
@@ -37,6 +45,22 @@ export function BlockRenderer({ blocks }: { blocks: AnyBlock[] | null | undefine
             return <CtaBanner key={block.id ?? i} {...block} />
           case 'faq':
             return <Faq key={block.id ?? i} {...block} />
+          case 'breadcrumbs':
+            return <Breadcrumbs key={block.id ?? i} {...block} />
+          case 'tldr':
+            return <Tldr key={block.id ?? i} {...block} />
+          case 'services-grid':
+            return <ServicesGrid key={block.id ?? i} {...block} />
+          case 'mini-case':
+            return <MiniCase key={block.id ?? i} {...block} />
+          case 'related-services':
+            return <RelatedServices key={block.id ?? i} {...block} />
+          case 'related-posts':
+            return <RelatedPosts key={block.id ?? i} {...block} />
+          case 'neighbor-districts':
+            return <NeighborDistricts key={block.id ?? i} {...block} />
+          case 'calculator-placeholder':
+            return <Calculator key={block.id ?? i} {...block} />
           default:
             if (process.env.NODE_ENV !== 'production') {
               // Полезно в dev: подскажет, что be4 добавил новый тип.
