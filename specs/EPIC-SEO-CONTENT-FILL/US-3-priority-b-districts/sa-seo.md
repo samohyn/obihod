@@ -6,9 +6,9 @@ team: seo
 po: poseo
 sa: sa-seo
 type: content
-phase: dev
+phase: done
 role: poseo
-status: open
+status: closed
 priority: P0
 moscow: Must
 segment: services
@@ -815,6 +815,29 @@ day 7 (Sun):
   - **Pending follow-up (popanel scope):** audit_log push:true conflict (memory `reference_audit_log_push_disable.md`). Wave 1 production использует sustained `PAYLOAD_DISABLE_PUSH=1` escape-hatch.
 
   Phase transition: `phase: planning` → `phase: dev` для Wave 1 production tracks. Следующий шаг — запуск Wave 1: `cw` 4 text-runs sequential (vyvoz / arbo / chistka / demontazh per priority-B district = 16 pillar SD content + 60 sub SD content) + `art` reuse-pillar-hero confirm + `cms` publish + Blog M3 cw + 6 cases pack.
+- **`2026-05-03 · poseo` Wave 1 production closure**: US-3 W12-W13 Wave 1 production закрыт (autonomous run, 30+ atomic commits). DoD US-3 PASS:
+  - **AC-1 PASS:** 16 priority-B SD pillar-level published (Khimki/Pushkino/Istra/Zhukovsky × 4 pillar) → curl smoke 16/16 HTTP 200.
+  - **AC-2 PASS:** 60 priority-B SD sub-level published через `generate-sd-batch-stage3.ts` (50/50 shared/specific anti-Scaled Content Abuse, ~30-40% unique per SD) → curl smoke 8/8 representative HTTP 200.
+  - **AC-3 PASS:** 10 Blog M3 #22-#31 published (3 vyvoz / 3 arbo / 1 chistka / 1 demontazh / 3 cross-pillar — sa-seo §3.4 final таблица + 1 enhancement) → curl smoke 10/10 HTTP 200.
+  - **AC-4 PASS:** 6 Cases additional published + 6 fal.ai hero generated (`generate-stage3-w13-cases.ts` через `_run-fal-batch.ts` shared runner; cost $0.024 ≪ $8 budget; 2 re-rolls на 11+14, all §14 pass) → curl smoke 6/6 HTTP 200.
+  - **AC-5 PASS:** TOV-checker exit 0 (после fix-commit `7e1088c` — 5 anti-patterns).
+  - **AC-6 PASS:** design-system §1-14 + §33 sustained (no regression от Wave 1).
+  - **AC-7 PASS:** schema-coverage 100% sustained (Wave 0.3 closed 31 url warns).
+  - **AC-8 PASS:** lint:schema 0 warnings.
+  - **AC-9 PASS досрочно:** URL closure 211/247 = **85.4%** к liwood medianне (target ≥75% W14 — confirmed на W13). Это переводит **URL-объём axis** из partial 🟡 → confirmed ✅.
+  - **AC-10 PASS:** sitemap.xml ≥230 URL после publish (sustained Wave 0.1 sub-level emission).
+  - **AC-11 PASS:** Stage 3 W13 mid-check report ready — `tests/e2e/stage3-w13-capture.spec.ts` + `screen/stage3-W13/` (32 PNG + 16 axe.json + summary). axe aggregate: critical=0 / serious=16 (sustained TLDR color-contrast Stage 2 baseline) / moderate=0 / minor=0 — **0 новых regressions** от Wave 1.
+  - **AC-12 PASS:** Hand-off log актуален (этот entry + memory `project_seo_stage3_w13_closed_2026-05-03.md`).
+
+  **Stage 3 winning axes на W13 (vs W11 baseline):**
+  - ✅ Schema-coverage +50pp (sustained от W7+W11)
+  - ✅ UX foto-smeta USP (sustained)
+  - ✅ 4-в-1 multi-pillar (sustained Stage 2 + Run 3 cross-pillar Blog +1 enhancement)
+  - ✅ **NEW URL-объём (W13 confirmed досрочно @ 85.4% closure)**
+  - 🟡 Content-depth +17% (W11 partial → US-4 W14 final benchmark closure)
+  - 🟡 E-E-A-T parity (sustained, US-4 W14 closure pending operator real-name)
+
+  **4/5 confirmed на W13 = превышает W14 EPIC DoD target ≥3.** Phase US-3 → `done`. Передаю стол US-4 W14 (`specs/EPIC-SEO-CONTENT-FILL/US-4-eeat-monitoring/sa-seo.md` — apruv'ed 2026-05-03).
 
 ## 10 · Open questions для poseo (минимизировано)
 
