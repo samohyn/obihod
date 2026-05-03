@@ -538,6 +538,11 @@ jobs:
         # admin view сломал серверный render — этой строки в HTML не будет.
         # Дёшево (один curl), статично (SSR, не требует hydration), ловит ровно
         # тот класс ошибки.
+        #
+        # 2026-05-03 (W15): когда admin user отсутствует (cold-start или
+        # после seed schema reset), Payload рендерит CreateFirstUser вместо
+        # LoginForm на /admin/login. Это валидное состояние «admin не сломан».
+        # Принимаем оба маркера — оба означают рабочий admin RSC render.
         run: |
           URL=${{ secrets.NEXT_PUBLIC_SITE_URL || format('http://{0}', secrets.BEGET_SSH_HOST) }}
           admin_code=$(curl -sL -m 10 -o /dev/null -w "%{http_code}" "$URL/admin/login")
@@ -546,8 +551,12 @@ jobs:
             exit 1
           fi
           admin_body=$(curl -sL -m 10 "$URL/admin/login" || echo "")
-          if ! echo "$admin_body" | grep -q "LoginForm"; then
-            echo "::error::admin login broken — LoginForm marker missing in /admin/login HTML"
+          if echo "$admin_body" | grep -q "LoginForm"; then
+            echo "Admin login UI smoke OK: HTTP=$admin_code, LoginForm marker present (users exist)"
+          elif echo "$admin_body" | grep -q "CreateFirstUser\|create-first-user"; then
+            echo "Admin login UI smoke OK: HTTP=$admin_code, CreateFirstUser marker present (no users yet — seed needed)"
+          else
+            echo "::error::admin login broken — neither LoginForm nor CreateFirstUser marker in /admin/login HTML"
             echo "::error::see team/release-notes/leadqa-RC-1-US-12-phase-b.md for context"
             echo "--- first 800 chars of admin/login body ---"
             echo "$admin_body" | head -c 800
@@ -555,7 +564,6 @@ jobs:
             echo "--- end ---"
             exit 1
           fi
-          echo "Admin login UI smoke OK: HTTP=$admin_code, LoginForm marker present"
 
       - name: Cleanup temp GitHub Release (delete asset + tag)
         # Release был только транспортным контейнером, постоянное место —
