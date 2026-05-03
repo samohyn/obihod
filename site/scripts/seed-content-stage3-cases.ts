@@ -230,6 +230,31 @@ async function findOneBySlug(
   return (r.docs[0] as { id: string | number } | undefined) ?? null
 }
 
+// Известные drift-aliases между cw fixtures и БД (на 2026-05-02).
+// Хирургический фикс: cw Run 3b использует «zhukovskij», БД sustained
+// «zhukovsky» (sustained Stage 1). Не патчим fixtures (TOV-pass, оператор
+// ревьюил), а резолвим alias на этапе seed.
+const DISTRICT_SLUG_ALIASES: Record<string, string> = {
+  zhukovskij: 'zhukovsky',
+}
+
+async function resolveDistrict(
+  payload: Payload,
+  slug: string,
+): Promise<{ id: string | number; resolvedSlug: string } | null> {
+  const direct = await findOneBySlug(payload, 'districts', slug)
+  if (direct) return { id: direct.id, resolvedSlug: slug }
+  const alias = DISTRICT_SLUG_ALIASES[slug]
+  if (alias) {
+    const aliased = await findOneBySlug(payload, 'districts', alias)
+    if (aliased) {
+      console.log(`  ⚠ district «${slug}» → fallback alias «${alias}» (id=${aliased.id})`)
+      return { id: aliased.id, resolvedSlug: alias }
+    }
+  }
+  return null
+}
+
 async function seedCase(
   payload: Payload,
   fix: CaseFixture,
@@ -239,7 +264,7 @@ async function seedCase(
   const description = extractBody(fix)
 
   const service = await findOneBySlug(payload, 'services', fix.service)
-  const district = await findOneBySlug(payload, 'districts', fix.district)
+  const district = await resolveDistrict(payload, fix.district)
   if (!service || !district) {
     return {
       file: fileName,
