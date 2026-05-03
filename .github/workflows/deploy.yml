@@ -436,7 +436,7 @@ jobs:
                echo \">> Bootstrap detected: schema exists, tracker empty. Marking all *.up.sql as applied.\"
                for UP_FILE in \$(ls migrations/*.up.sql | sort); do
                  MIGRATION_NAME=\$(basename \"\$UP_FILE\" .up.sql)
-                 psql \"\$DATABASE_URI\" -c \"INSERT INTO payload_migrations (name, batch) VALUES ('\$MIGRATION_NAME', 1) ON CONFLICT DO NOTHING\" > /dev/null
+                 psql \"\$DATABASE_URI\" -c \"INSERT INTO payload_migrations (name, batch) SELECT '\$MIGRATION_NAME', 1 WHERE NOT EXISTS (SELECT 1 FROM payload_migrations WHERE name='\$MIGRATION_NAME')\" > /dev/null
                done
                echo \">> Marked \$(ls migrations/*.up.sql | wc -l) migrations as applied (bootstrap path).\"
              fi

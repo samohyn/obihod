@@ -145,10 +145,11 @@ jobs:
              psql \"\$DATABASE_URI\" -f migrations/00000000_000000_initial_schema_bootstrap.sql
 
              echo '=== Mark all legacy *.up.sql migrations как applied (deploy.yml будет skip) ==='
-             psql \"\$DATABASE_URI\" -c \"CREATE TABLE IF NOT EXISTS payload_migrations (id SERIAL PRIMARY KEY, name TEXT UNIQUE, batch INTEGER, executed_at TIMESTAMP DEFAULT NOW());\"
+             # payload_migrations.name doesn't have UNIQUE constraint (sustained
+             # schema). Use WHERE NOT EXISTS pattern instead of ON CONFLICT.
              for migration in migrations/*.up.sql; do
                name=\$(basename \"\$migration\" .up.sql)
-               psql \"\$DATABASE_URI\" -c \"INSERT INTO payload_migrations (name, batch) VALUES ('\$name', 1) ON CONFLICT (name) DO NOTHING;\" > /dev/null
+               psql \"\$DATABASE_URI\" -c \"INSERT INTO payload_migrations (name, batch) SELECT '\$name', 1 WHERE NOT EXISTS (SELECT 1 FROM payload_migrations WHERE name='\$name');\" > /dev/null
              done
              echo \"Marked \$(ls migrations/*.up.sql | wc -l) migrations as applied.\"
 
