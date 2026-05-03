@@ -106,3 +106,13 @@ promtehalp.ru/
 4. `/work`, `/video`, `/articles`, `/vacancy`, `/contact` — корневые разделы
 
 **Канонический паттерн:** `promtehalp.ru/service/[slug]/`. Слабая иерархия, B2B-tilt без B2B-IA.
+
+---
+
+## Δ от Stage 2 W11 (refresh 2026-05-03)
+
+- **URL count:** **50** (W11 ~30) — +67% URL. Sitemap.xml live 50 URL, sustained legacy structure (HTTP, lastmod 2021).
+- **Notable:** sustained 2021 sitemap; B2B-implicit, /service/[slug]/ flat.
+- **Schema-coverage:** sustained 0% (no JSON-LD, no microdata по предыдущим проверкам).
+- **CTA / pricing:** sustained.
+- **W14 implication:** наш Stage 3 ~230 vs promtehalp **50** = closure **460%**. Sustained опережение по всем axes.

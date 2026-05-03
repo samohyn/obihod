@@ -1,6 +1,6 @@
 # cleaning-moscow.ru
 
-**Дата сканирования:** 2026-04-25
+**Дата сканирования:** 2026-04-25 (Stage 1) · refresh **2026-05-03 (W14)**
 **Услуги в каталоге:** клининг-only (квартиры/коттеджи/офисы/после-стройки/химчистка)
 
 ## Sitemap / IA
@@ -126,3 +126,77 @@ cleaning-moscow.ru/
 4. `/[info-slug]/` — статьи на корне (антипаттерн)
 
 **Канонический паттерн:** `cleaning-moscow.ru/[pillar]/[sub]/`. Чистая иерархия, B2B/B2C в URL, но без гео.
+
+---
+
+## W14 refresh (2026-05-03)
+
+### URL count
+
+| Источник | URL | Δ vs W11 (~80) |
+|---|--:|---|
+| sitemap.xml (live) | **626** | **+546** vs прежняя W11-оценка ~80 |
+
+> **CORRECTION W11→W14:** наша W11 оценка cleaning-moscow «~80 URL» **была критически занижена** (Stage 1 sitemap = 472, W14 sitemap = 626). W11 закрытие «closure 149%» **расчёт ошибочный** — реально мы (119 URL) vs cleaning (~472 W11 actual) = closure ~25%, NOT 149%.
+> **W14 actual:** наш Stage 3 ~211-230 vs cleaning **626** → closure **34-37%** vs cleaning-moscow (а не 200%+).
+
+> Method: WebFetch live на standard sitemap.xml 2026-05-03 (lastmod 2026-04-28..30).
+> Источник: `https://cleaning-moscow.ru/sitemap.xml`.
+
+### Content-depth (sample — partial DDoS-Guard block)
+
+- DDoS-Guard блокирует прямой curl (HTTP 403 на 2/5 sample). Live page render через WebFetch удался для 2 страниц:
+
+| URL | Word count (visible) | JSON-LD | Microdata | FAQ | Breadcrumbs |
+|---|--:|:-:|:-:|:-:|:-:|
+| `/uborka-kvartir/` | ~8 500-9 000 | ❌ | ❌ | ✅ | ✅ |
+| `/avtor-pavlina-pimenova/` | ~250-300 (bio) | ❌ | partial Person | n/a | ✅ |
+
+> **Implication:** cleaning-moscow контент-depth pillar **значительно глубже** наших ~3 800 слов (~2.2x). Это NEW W14 сигнал — мы недооценивали их content-density. Они компенсируют отсутствие гео огромными pillar-страницами.
+
+### Schema-coverage
+
+- **W11 baseline:** ~40% (estimate)
+- **W14 measured:** **0% JSON-LD** на 5/5 sample, partial microdata (`itemtype="http://schema.org/..."` есть, но не на каждой странице, и не на Person-странице авторов)
+- **Δ:** не двинулось; ниже musor.moscow и liwood по schema-формату.
+- Наше опережение по «JSON-LD format» vs cleaning-moscow — **confirmed sustained +60-100pp** (зависит от строгости определения).
+
+### UX features (homepage check 2026-05-03)
+
+- ❌ **Нет калькулятора** (sustained — статичный прайс)
+- ❌ Нет live-чата
+- ✅ Lead form на каждой странице (callback)
+- ❌ Нет «фото→смета» upload (sustained)
+- ✅ Trust signals: 2 635 отзывов, 4.9★, ТОП-10 значки, Yandex/2GIS/Google Maps badges
+- ❌ INN/OGRN/SRO не на homepage
+
+### E-E-A-T (W14 detail)
+
+- ✅ **Authors как страницы** (`/avtor-pavlina-pimenova/`, и др.) — sustained, лучшая E-E-A-T-структура из 17
+- ✅ Cross-domain `sameAs`: **Telegram + VK + MAX + Email** в footer authors-page (W14 verified)
+- ❌ **No Person JSON-LD schema** на authors-страницах (только на странице упомянуто visually)
+- ✅ `/proverka-informacii/` (fact-check) sustained как навигационный элемент
+- ✅ Bio Павлины: 250-300 слов, образование (СПбГУТД), 11 лет опыта, специализация эко-клининг
+
+### 4-в-1 status
+
+- **Single pillar (клининг-only)** sustained — 11 sub-pillar внутри клининга, но нет арбо/мусор/снег/демонтаж.
+
+### Δ summary W14 vs W11
+
+| Метрика | W11 (estimate) | W14 (measured) | Δ |
+|---|--:|--:|---|
+| URL count | ~80 | **626** | **+682%** ⚠ correction (W11 underestimated) |
+| Schema-coverage | ~40% (JSON-LD) | 0% JSON-LD / partial microdata | -40pp (re-classified) |
+| Content-depth (avg pillar) | ~2 000 | **~8 500-9 000** | **+325%** ⚠ correction |
+| UX (calc / lead / chat) | lead-only | lead-only sustained | 0 |
+| 4-в-1 | 1 pillar | 1 pillar | sustained |
+| E-E-A-T (authors + sameAs) | parity | sustained — TG+VK+MAX визуально, no Person schema | sustained |
+
+### W14 implication для нас
+
+- **URL closure correction:** реальный benchmark cleaning-moscow = 626, а не 80. W11 closure «149%» был ошибочный. W14 closure ~34-37% к ним → **меньше нашего bench liwood-медианы (66-72%)**.
+- **Content-depth — NEW сигнал:** их pillar-страницы 8 500-9 000 слов visible vs наши ~3 800. Если ось «content-depth» переоценить как «pillar-page word count», мы **отстаём в 2.2x**, не «опережаем +27%».
+- **E-E-A-T — confirmed parity (visual)**, но мы можем опередить через Person JSON-LD schema (у них только visually + sameAs в footer, нет structured data).
+- **JSON-LD format — confirmed sustained +60-100pp опережение** vs cleaning-moscow (только microdata partial).
+

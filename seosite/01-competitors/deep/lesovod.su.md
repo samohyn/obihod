@@ -76,3 +76,13 @@ pending live audit W3.
 - [ ] Keys.so export топ-100 ключей в Я.Москва+МО
 - [ ] Manual IA-скан главной + 3 random URL → screenshots
 - [ ] Заполнить все «pending» поля
+
+---
+
+## Δ от Stage 2 W11 (refresh 2026-05-03)
+
+- **URL count:** **5** (post-sitemap 4 + page-sitemap 4 — overlap, факт = ~5 URL уникальных). **One-pager-style сайт.**
+- **Notable:** sustained — homepage + about + spasibo + contacts. Yoast SEO. Не сайт-каталог.
+- **Schema-coverage:** sustained low.
+- **CTA / pricing:** sustained.
+- **W14 implication:** наш Stage 3 ~230 vs lesovod **5** = trivial опережение; **исключить из 5-axes calculation как not-comparable**.

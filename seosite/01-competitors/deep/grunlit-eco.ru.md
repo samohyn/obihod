@@ -85,3 +85,13 @@ pending live audit W3 — главный фокус для этого конку
 - [ ] Лицензии Росприроднадзора, ФККО — где живут на сайте
 - [ ] Manual IA-скан главной + 3 random URL → screenshots
 - [ ] Заполнить все «pending» поля
+
+---
+
+## Δ от Stage 2 W11 (refresh 2026-05-03)
+
+- **URL count:** **sustained estimate** (no live fetch — site не отвечал на standard sitemap.xml путь, ECONNREFUSED). W11 hypothesis sustained.
+- **Notable:** B2B-focused (industrial cleaning of equipment), sustained — наша вертикаль pересекается ограниченно.
+- **Schema-coverage:** sustained hypothesis (no measure).
+- **CTA / pricing:** sustained.
+- **W14 implication:** **honest flag — sustained от W11 hypothesis**, не measured. Recommend оператору не учитывать в финальной 5-axes calculation как hard input.

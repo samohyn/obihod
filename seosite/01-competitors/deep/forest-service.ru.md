@@ -77,3 +77,13 @@ pending live audit W3.
 - [ ] Лесная регуляторика (порубочный билет, лесорубочный, ОПФ) — где живёт
 - [ ] Manual IA-скан главной + 3 random URL → screenshots
 - [ ] Заполнить все «pending» поля
+
+---
+
+## Δ от Stage 2 W11 (refresh 2026-05-03)
+
+- **URL count:** **4** (W11 hypothesis sustained ~10) — *sitemap public измерен*: 4 URL total (homepage / privacy / price / uslugi-po-spilu-derevev). **Один лендинг, не сайт-каталог.**
+- **Notable:** lead-only лендинг (Rank Math SEO Plugin), sustained.
+- **Schema-coverage:** sustained low.
+- **CTA / pricing:** sustained.
+- **W14 implication:** наш Stage 3 ~230 vs forest-service **4** = trivial опережение; **исключить из benchmark calculation как not-comparable** (one-pager).

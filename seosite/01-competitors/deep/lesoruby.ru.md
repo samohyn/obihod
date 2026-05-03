@@ -79,3 +79,13 @@ pending live audit W3.
 - [ ] Сверить с deep/lesoruby.com.md и решить: merge или keep separate
 - [ ] Manual IA-скан главной + 3 random URL → screenshots
 - [ ] Заполнить все «pending» поля
+
+---
+
+## Δ от Stage 2 W11 (refresh 2026-05-03)
+
+- **URL count:** **no live measure** (sitemap.xml fetch вернул certificate verification error). W11 hypothesis sustained ~50 URL.
+- **Notable:** sustained — арбо-only, без programmatic district.
+- **Schema-coverage:** sustained hypothesis.
+- **CTA / pricing:** sustained.
+- **W14 implication:** **honest flag — no W14 measure**, sustained от W11.

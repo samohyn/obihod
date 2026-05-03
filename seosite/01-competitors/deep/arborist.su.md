@@ -75,3 +75,13 @@ pending live audit W3.
 - [ ] Manual IA-скан главной + 3 random URL → screenshots
 - [ ] TOV анализ (Caregiver / Sage / Hero / другое)
 - [ ] Заполнить все «pending» поля
+
+---
+
+## Δ от Stage 2 W11 (refresh 2026-05-03)
+
+- **URL count:** sitemap-index 12 entries (Bitrix iblocks), nested sitemaps дают 404 на public access. **Live measure failed — Bitrix protect.** W11 hypothesis sustained ~80 URL.
+- **Notable:** sustained — арбо-only с похожей структурой как liwood (Bitrix iblocks 5/9/11/24/25/26/29).
+- **Schema-coverage:** sustained hypothesis.
+- **CTA / pricing:** sustained.
+- **W14 implication:** **honest flag — sitemap-index visible но iblock-detail не публичны**.

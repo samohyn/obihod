@@ -76,3 +76,13 @@ pending live audit W3.
 - [ ] Keys.so export топ-100 ключей в Я.Москва+МО
 - [ ] Manual IA-скан главной + 3 random URL → screenshots
 - [ ] Заполнить все «pending» поля
+
+---
+
+## Δ от Stage 2 W11 (refresh 2026-05-03)
+
+- **URL count:** **244** (W11 hypothesis sustained ~50) — **+388%** vs W11 estimate. **Significantly underestimated в W11.** Sitemap.xml live измерен 2026-05-03.
+- **Notable:** sustained — арбо-фокус, programmatic district вероятно расширен (требует deep follow-up audit для подтверждения структуры).
+- **Schema-coverage:** sustained hypothesis (no live measure).
+- **CTA / pricing:** sustained.
+- **W14 implication:** **NEW W14 signal — spilservis.ru должен быть в shortlist actively-tracked**. Closure: наш Stage 3 ~230 vs spilservis **244** = **94%** (essentially parity по URL-объёму). Это **важный конкурент**, который недооценивали W11. Recommend поднять spilservis.ru в priority track для US-5 weekly monitoring.

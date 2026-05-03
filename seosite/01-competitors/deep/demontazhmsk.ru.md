@@ -134,3 +134,13 @@ demontazhmsk.ru/
 3. `/[static]/` — статика (kontakty, vakansii, privacy, rekvizity)
 
 **Канонический паттерн:** `demontazhmsk.ru/services/[slug]/`. Чистый каталог демонтажа с глубокой semantic-программаткой по материалам, но без блога и гео.
+
+---
+
+## Δ от Stage 2 W11 (refresh 2026-05-03)
+
+- **URL count:** **107** (W11 ~50) — **+114%**. Sitemap.xml live 107 URL — programmatic material × object расширен.
+- **Notable:** programmatic шаблон расширен; sustained — нет блога, no E-E-A-T.
+- **Schema-coverage:** sustained ~30% (partial JSON-LD, не полный).
+- **CTA / pricing:** sustained.
+- **W14 implication:** наш Stage 3 ~230 vs demontazhmsk **107** = closure **215%** (мы опережаем). Sustained опережение по schema + UX + 4-в-1.

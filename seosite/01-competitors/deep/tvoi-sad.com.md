@@ -81,3 +81,13 @@ pending live audit W3.
 - [ ] Keys.so export топ-100 ключей в Я.Москва+МО
 - [ ] Manual IA-скан главной + 3 random URL → screenshots
 - [ ] Заполнить все «pending» поля
+
+---
+
+## Δ от Stage 2 W11 (refresh 2026-05-03)
+
+- **URL count:** **17** (W11 hypothesis sustained). Sitemap.xml live измерен 17 URL — небольшой ландшафтный сайт.
+- **Notable:** sustained — landshaft/sad nicheing; передан в EPIC-SEO-LANDSHAFT (наш не-первичный pillar).
+- **Schema-coverage:** sustained hypothesis low.
+- **CTA / pricing:** sustained.
+- **W14 implication:** наш Stage 3 ~230 vs tvoi-sad **17** — out-of-vertical для services pillar; **передать в landshaft EPIC, исключить из benchmark calculation**.

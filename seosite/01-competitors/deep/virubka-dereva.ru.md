@@ -79,3 +79,13 @@ pending live audit W3.
 - [ ] Keys.so export топ-100 ключей в Я.Москва+МО
 - [ ] Manual IA-скан главной + 3 random URL → screenshots
 - [ ] Заполнить все «pending» поля
+
+---
+
+## Δ от Stage 2 W11 (refresh 2026-05-03)
+
+- **URL count:** **68** (post-sitemap 68 URL + page-sitemap inaccessible 404). **W11 hypothesis ~30 sustained underestimated.** Sitemap live 2026-05-03.
+- **Notable:** EMD-домен «вырубка-дерева», programmatic district (Балашиха / Долгопрудный / Подольск etc.), арбо-only.
+- **Schema-coverage:** sustained hypothesis low.
+- **CTA / pricing:** sustained.
+- **W14 implication:** наш Stage 3 ~230 vs virubka-dereva **68** = closure **338%** (мы опережаем). Sustained опережение confirmed.

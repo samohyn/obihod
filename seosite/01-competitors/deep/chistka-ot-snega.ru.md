@@ -88,3 +88,13 @@ pending live audit W3.
 - [ ] Manual IA-скан главной + 3 random URL → screenshots
 - [ ] Schema-coverage (LocalBusiness?, Service?, FAQPage?)
 - [ ] Заполнить все «pending» поля
+
+---
+
+## Δ от Stage 2 W11 (refresh 2026-05-03)
+
+- **URL count:** **no live measure** (ECONNREFUSED). W11 hypothesis sustained ~50.
+- **Notable:** EMD-домен «чистка-от-снега», B2B-focused.
+- **Schema-coverage:** sustained hypothesis.
+- **CTA / pricing:** sustained.
+- **W14 implication:** **honest flag — no W14 measure**, sustained от W11.
