@@ -210,21 +210,71 @@ art/ux/ui) — автор; при правке делаю PR в `design/integrat
   per service one per request?), как связано с amoCRM Lead-ом (наш ID vs их
   ID).
 
-### 2. Миграции — процесс
+### 2. Миграции — процесс (sustained ADR-0016)
 
-**Правило:** любое изменение схемы на prod — через `payload migrate`, не через
-`pg_dump --schema-only`.
+**Правило:** schema lifecycle на prod — через raw SQL (Option B, sustained
+[ADR-0016](../adr/ADR-0016-payload-migrations-prod-strategy.md)). Payload CLI
+binary НЕ используется на prod (`getTSConfigPaths null` ошибка sustained,
+sustained ADR-0009 tsx shim не покрывает CLI lifecycle).
 
-План перехода (OBI-N, блокер для второго релиза схемы):
+#### Schema source of truth
 
-1. Создать `site/collections/Users.ts` (Payload требует minimum одну
-   auth-коллекцию, чтобы включить миграции).
-2. `pnpm payload migrate:create initial_schema` локально — он сгенерирует
-   миграцию с текущей схемы.
-3. Залить эту миграцию на prod (единоразово, помечая `migrated_at`).
-4. Добавить в `.github/workflows/deploy.yml` шаг `pnpm payload migrate` перед
-   `pm2 start`.
-5. Новые изменения схемы — через `payload migrate:create <name>` и PR.
+- `site/migrations/00000000_*_initial_schema_bootstrap.sql` — полный
+  `pg_dump --schema-only` snapshot текущего push:true state (regenerable).
+- `site/migrations/<timestamp>_<name>.up.sql` — diff migrations, пишутся
+  вручную перед merge PR со schema change.
+- `site/migrations/<timestamp>_<name>.down.sql` — rollback migrations.
+- `site/migrations/<timestamp>_<name>.ts` — Payload metadata (используется
+  только локально для `pnpm payload migrate:status`, на prod игнорируется).
+
+#### Manual diff *.up.sql workflow (для PR со schema change)
+
+1. **Snapshot ДО изменения** (на чистом локальном Postgres):
+   ```bash
+   pnpm db:up  # Docker Postgres
+   PAYLOAD_DISABLE_PUSH=1 psql $DATABASE_URI -f migrations/00000000_*.sql
+   for f in migrations/*.up.sql; do psql $DATABASE_URI -f "$f"; done
+   pg_dump --schema-only "$DATABASE_URI" > /tmp/schema-before.sql
+   ```
+2. **Внести изменение в Payload collection** (ADD/RENAME field, etc.).
+3. **Snapshot ПОСЛЕ изменения**:
+   ```bash
+   PAYLOAD_DISABLE_PUSH=0 pnpm dev  # push:true применяет diff
+   # дождаться `Database synced` в логах, остановить dev
+   pg_dump --schema-only "$DATABASE_URI" > /tmp/schema-after.sql
+   ```
+4. **Diff и оформление *.up.sql/*.down.sql**:
+   ```bash
+   diff -u /tmp/schema-before.sql /tmp/schema-after.sql
+   # выписать только meaningful DDL (ALTER TABLE, CREATE TYPE, etc.)
+   # имя файла: migrations/$(date -u +%Y%m%d_%H%M%S)_<short_name>.up.sql
+   ```
+5. **Verify clean apply**:
+   ```bash
+   docker compose down -v && pnpm db:up
+   PAYLOAD_DISABLE_PUSH=1 psql $DATABASE_URI -f migrations/00000000_*.sql
+   for f in migrations/*.up.sql; do psql $DATABASE_URI -v ON_ERROR_STOP=1 -f "$f"; done
+   # expected: zero errors, 233+ tables
+   ```
+6. **PR review by tamd** + smoke на staging Postgres перед merge.
+
+#### Apply pipeline
+
+- `deploy.yml` (sustained ADR-0016 Phase 1):
+  - Empty DB → bootstrap snapshot + mark все *.up.sql как applied.
+  - Warm DB → apply только новые *.up.sql, skip-if-tracked через
+    `payload_migrations` table.
+- `seed-prod.yml` schema lifecycle НЕ trogает (только data). Если deploy
+  не запускался — fail fast с понятной ошибкой.
+
+#### Bootstrap regeneration (когда нужно)
+
+После крупных collection refactor (10+ изменений schema) или раз в quarter
+для свежего baseline. Phase 2 backlog: автоматизация через
+`site/scripts/regen-bootstrap.ts` + `regen-bootstrap.yml` workflow_dispatch.
+До Phase 2 — manual: `pg_dump --schema-only` из CI Postgres + commit в PR
+с обоснованием. Sustained iron rule «после schema change всегда regen
+bootstrap или зафиксируй diff *.up.sql».
 
 ### 3. Индексы и производительность
 

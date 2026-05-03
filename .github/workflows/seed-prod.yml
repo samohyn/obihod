@@ -21,7 +21,11 @@ on:
         default: ''
 
 concurrency:
-  group: seed-prod
+  # Sustained ADR-0016 §«Race condition»: same group as deploy.yml.
+  # seed-prod и deploy сериализуются — schema apply (deploy) и data insert
+  # (seed) не пересекаются. Sustained iron rule «schema lifecycle owned by
+  # deploy.yml only» (ADR-0016 Phase 1).
+  group: deploy-beget
   cancel-in-progress: false
 
 jobs:
@@ -91,71 +95,59 @@ jobs:
              rm -f \$ENV_FILE.bak
              echo 'TELEGRAM env vars injected.'"
 
-      - name: "Upload scripts/ + content/ + migrations/ + lib/ + blocks/ to VPS (W15 P1)"
+      - name: "Upload scripts/ + content/ + lib/ + blocks/ + tsconfig.json to VPS (ADR-0016 Phase 1)"
         run: |
           set -eo pipefail
-          # W15 Stage 4 P1: full sequence требует scripts/ (все *.ts seeders),
-          # content/ (Stage 1+2+3 fixtures), migrations/ (Wave 0.1 SD schema),
-          # lib/ + blocks/ (TS path aliases @/lib/* + @/blocks/* used in collections).
-          # Sustained ADR-0001 fallback расширён — было только seed.ts.
+          # ADR-0016 Phase 1: schema lifecycle moved to deploy.yml — здесь
+          # rsync только runtime-зависимостей seed-скриптов:
+          #   scripts/ — все *.ts seeders (sustained ADR-0001)
+          #   content/ — Stage 0/1/2/3 fixtures (НЕ в deploy.yml filelist)
+          #   lib/ + blocks/ — TS path aliases @/lib/* + @/blocks/* used by tsx
+          #   tsconfig.json — paths resolution (НЕ в deploy.yml filelist; sustained backlog)
+          # migrations/ убраны — schema apply делает deploy.yml (single source).
           ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
             ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
             "mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/current/scripts \
                       ${{ secrets.BEGET_DEPLOY_PATH }}/current/content \
-                      ${{ secrets.BEGET_DEPLOY_PATH }}/current/migrations \
                       ${{ secrets.BEGET_DEPLOY_PATH }}/current/lib \
                       ${{ secrets.BEGET_DEPLOY_PATH }}/current/blocks"
-          for dir in scripts content migrations lib blocks; do
+          for dir in scripts content lib blocks; do
             rsync -avz --delete \
               -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o StrictHostKeyChecking=no" \
               site/$dir/ \
               ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/$dir/
           done
-          # tsconfig.json missing from deploy.yml filelist → tsx loader не resolves @/* aliases.
-          # Sustained backlog: extend deploy.yml filelist (deploy/README.md update).
           rsync -avz \
             -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o StrictHostKeyChecking=no" \
             site/tsconfig.json \
             ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/tsconfig.json
 
-      - name: "Apply schema (DROP + recreate, force-clean — W15 P1 cpo extended mandate)"
+      - name: "Verify schema present (ADR-0016 Phase 1: deploy.yml owns schema lifecycle)"
         run: |
           set -eo pipefail
-          # CPO extended mandate 2026-05-03: operator approved destructive op
-          # (drop+recreate) для решения schema drift между local и prod.
-          # 5-я попытка показала created=1/errors=13 — partial schema. 6-я
-          # подтвердила drift. Sustained iron rule push:false НЕ нарушаем
-          # (используем raw SQL dump). Backup делается на VPS перед drop.
+          # ADR-0016 Phase 1: seed-prod больше НЕ применяет/удаляет schema.
+          # Если deploy.yml ещё не запускался — schema отсутствует, seed
+          # упадёт на отсутствующих таблицах. Fail fast с понятной ошибкой.
           ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
             ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
             "set -eu
              cd ${{ secrets.BEGET_DEPLOY_PATH }}/current
-             set -a
-             . ./.env
-             set +a
-             BACKUP_FILE=/tmp/obikhod-backup-pre-w15-\$(date -u +%Y%m%dT%H%M%SZ).sql
-             echo \"=== Pre-drop backup → \$BACKUP_FILE ===\"
-             pg_dump \"\$DATABASE_URI\" > \"\$BACKUP_FILE\" || echo '(backup failed — continue, БД likely пустая)'
-             ls -lh \"\$BACKUP_FILE\" 2>/dev/null || true
-
-             echo '=== DROP SCHEMA public CASCADE + recreate ==='
-             psql \"\$DATABASE_URI\" -c 'DROP SCHEMA public CASCADE; CREATE SCHEMA public; GRANT ALL ON SCHEMA public TO public;'
-
-             echo '=== Apply fresh schema (233 tables) ==='
-             psql \"\$DATABASE_URI\" -f migrations/00000000_000000_initial_schema_bootstrap.sql
-
-             echo '=== Mark all legacy *.up.sql migrations как applied (deploy.yml будет skip) ==='
-             # payload_migrations.name doesn't have UNIQUE constraint (sustained
-             # schema). Use WHERE NOT EXISTS pattern instead of ON CONFLICT.
-             for migration in migrations/*.up.sql; do
-               name=\$(basename \"\$migration\" .up.sql)
-               psql \"\$DATABASE_URI\" -c \"INSERT INTO payload_migrations (name, batch) SELECT '\$name', 1 WHERE NOT EXISTS (SELECT 1 FROM payload_migrations WHERE name='\$name');\" > /dev/null
+             set -a; . ./.env; set +a
+             USER_TABLES=\$(psql \"\$DATABASE_URI\" -tA -c \"SELECT count(*) FROM pg_tables WHERE schemaname='public'\")
+             echo \"public schema user-tables count: \$USER_TABLES\"
+             if [ \"\$USER_TABLES\" = \"0\" ]; then
+               echo \"::error::Schema empty — запусти deploy.yml ДО seed-prod (sustained ADR-0016: schema lifecycle owned by deploy.yml only)\"
+               exit 1
+             fi
+             # Sanity: ключевые таблицы должны существовать
+             for tbl in services districts service_districts payload_migrations leads; do
+               EXISTS=\$(psql \"\$DATABASE_URI\" -tA -c \"SELECT count(*) FROM pg_tables WHERE schemaname='public' AND tablename='\$tbl'\")
+               if [ \"\$EXISTS\" != \"1\" ]; then
+                 echo \"::error::Table '\$tbl' missing — schema corrupted, run deploy.yml first\"
+                 exit 1
+               fi
              done
-             echo \"Marked \$(ls migrations/*.up.sql | wc -l) migrations as applied.\"
-
-             echo '=== Verify schema state ==='
-             psql \"\$DATABASE_URI\" -tAc \"SELECT count(*) FROM pg_tables WHERE schemaname='public';\"
-             echo 'Schema apply complete.'"
+             echo \"schema check OK: \$USER_TABLES tables, core tables present\""
 
       - name: "Run full seed sequence via SSH (W15 P1, Stage 1+2+3 + Wave 0.1 migration)"
         run: |

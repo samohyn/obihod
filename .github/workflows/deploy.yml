@@ -384,15 +384,26 @@ jobs:
              echo '>> link shared .env'
              ln -sfn \$BP/shared/.env .env"
 
-      - name: Apply Payload migrations to prod DB (raw SQL)
-        # Критически важный порядок: миграции применяются ДО flip symlink и
-        # ДО pm2 restart. Иначе рантайм нового релиза прочитает старую схему
-        # и упадёт на отсутствующих таблицах / колонках.
-        # Идемпотентность — через payload_migrations tracker:
-        # проверяем наличие записи по имени миграции → пропускаем если есть.
-        # Payload CLI обойдён через чистый psql — см. build job выше.
-        # Применяем ВСЕ *.up.sql в лексикографическом порядке (timestamp-префикс
-        # в имени файла гарантирует правильную последовательность).
+      - name: Apply Payload schema to prod DB (raw SQL — ADR-0016 Phase 1)
+        # Sustained ADR-0016 (Option B Pure raw SQL workflow).
+        # Критически важный порядок: schema apply ДО flip symlink и pm2 restart.
+        # Иначе рантайм нового релиза прочитает старую схему и упадёт на
+        # отсутствующих таблицах / колонках.
+        #
+        # Two paths:
+        #   Cold-start (empty DB) → apply 00000000_*_initial_schema_bootstrap.sql,
+        #     mark all *.up.sql as already-applied (bootstrap snapshot includes
+        #     all of them — tracker mirrors that state).
+        #   Warm path (DB has user tables) → apply only new *.up.sql migrations
+        #     not yet tracked, in lexicographic order.
+        #
+        # Empty-DB detection — explicit count of pg_tables in public schema.
+        # Sustained risk mitigation per ADR §«Empty-DB detection misfires»:
+        # detect by SCHEMA presence, not row counts (нельзя путать «schema
+        # пустая» с «collections пустые»).
+        #
+        # Payload CLI обойдён через чистый psql — sustained ADR-0016 §«Root
+        # cause #1». Bootstrap regen — manual через dba.md workflow.
         env:
           REL: ${{ github.sha }}
         run: |
@@ -416,8 +427,33 @@ jobs:
              # \$BP/releases/\$REL/migrations/
              cd \$BP/releases/\$REL
 
-             # Ensure tracker table exists
-             psql \"\$DATABASE_URI\" -v ON_ERROR_STOP=1 <<'SQL'
+             # Empty-DB detection BEFORE any DDL (sustained ADR-0016).
+             # pg_tables view excludes pg_catalog system catalogs; filtering
+             # by schemaname='public' counts only user-application tables.
+             USER_TABLES=\$(psql \"\$DATABASE_URI\" -tA -c \"SELECT count(*) FROM pg_tables WHERE schemaname='public'\")
+             echo \">> public schema user-tables count: \$USER_TABLES\"
+
+             if [ \"\$USER_TABLES\" = \"0\" ]; then
+               echo \">> [cold-start] empty DB detected → applying bootstrap snapshot\"
+               BOOTSTRAP_FILE=\$(ls migrations/00000000_*_initial_schema_bootstrap.sql 2>/dev/null | head -1)
+               if [ -z \"\$BOOTSTRAP_FILE\" ]; then
+                 echo \"::error::bootstrap snapshot не найден (00000000_*_initial_schema_bootstrap.sql)\"
+                 exit 1
+               fi
+               echo \">> applying \$BOOTSTRAP_FILE\"
+               psql \"\$DATABASE_URI\" -v ON_ERROR_STOP=1 -f \"\$BOOTSTRAP_FILE\"
+               echo \">> bootstrap applied. Marking all *.up.sql as already-applied (snapshot includes them)\"
+               for UP_FILE in \$(ls migrations/*.up.sql 2>/dev/null | sort); do
+                 MIGRATION_NAME=\$(basename \"\$UP_FILE\" .up.sql)
+                 psql \"\$DATABASE_URI\" -c \"INSERT INTO payload_migrations (name, batch) SELECT '\$MIGRATION_NAME', 1 WHERE NOT EXISTS (SELECT 1 FROM payload_migrations WHERE name='\$MIGRATION_NAME')\" > /dev/null
+               done
+               TRACKED=\$(psql \"\$DATABASE_URI\" -tA -c \"SELECT count(*) FROM payload_migrations\")
+               echo \">> [cold-start] complete: schema bootstrapped, \$TRACKED migrations tracked\"
+             else
+               echo \">> [warm] DB has \$USER_TABLES user tables → applying new migrations only\"
+               # Ensure tracker exists для legacy DB без bootstrap (pre-ADR-0016).
+               # CREATE IF NOT EXISTS — idempotent guard.
+               psql \"\$DATABASE_URI\" -v ON_ERROR_STOP=1 <<'SQL'
           CREATE TABLE IF NOT EXISTS \"payload_migrations\" (
             \"id\" serial PRIMARY KEY,
             \"name\" varchar,
@@ -426,34 +462,20 @@ jobs:
             \"created_at\" timestamp(3) with time zone DEFAULT now() NOT NULL
           );
           SQL
-
-             # W15 bootstrap detection: если services_blocks_hero существует
-             # но payload_migrations пустая → schema applied через initial
-             # bootstrap (seed-prod.yml). Mark все *.up.sql как applied.
-             SCHEMA_EXISTS=\$(psql \"\$DATABASE_URI\" -tA -c \"SELECT count(*) FROM pg_tables WHERE tablename='services_blocks_hero'\")
-             TRACKER_COUNT=\$(psql \"\$DATABASE_URI\" -tA -c \"SELECT count(*) FROM payload_migrations\")
-             if [ \"\$SCHEMA_EXISTS\" = \"1\" ] && [ \"\$TRACKER_COUNT\" = \"0\" ]; then
-               echo \">> Bootstrap detected: schema exists, tracker empty. Marking all *.up.sql as applied.\"
-               for UP_FILE in \$(ls migrations/*.up.sql | sort); do
+               for UP_FILE in \$(ls migrations/*.up.sql 2>/dev/null | sort); do
                  MIGRATION_NAME=\$(basename \"\$UP_FILE\" .up.sql)
-                 psql \"\$DATABASE_URI\" -c \"INSERT INTO payload_migrations (name, batch) SELECT '\$MIGRATION_NAME', 1 WHERE NOT EXISTS (SELECT 1 FROM payload_migrations WHERE name='\$MIGRATION_NAME')\" > /dev/null
+                 ALREADY=\$(psql \"\$DATABASE_URI\" -tA -c \"SELECT count(*) FROM payload_migrations WHERE name='\$MIGRATION_NAME'\")
+                 if [ \"\$ALREADY\" = \"1\" ]; then
+                   echo \">> migration \$MIGRATION_NAME already applied — skipping\"
+                 else
+                   echo \">> applying migration \$MIGRATION_NAME to prod DB\"
+                   psql \"\$DATABASE_URI\" -v ON_ERROR_STOP=1 -f \"\$UP_FILE\"
+                   psql \"\$DATABASE_URI\" -c \"INSERT INTO payload_migrations (name, batch) VALUES ('\$MIGRATION_NAME', 1)\"
+                   echo \">> migration \$MIGRATION_NAME applied successfully\"
+                 fi
                done
-               echo \">> Marked \$(ls migrations/*.up.sql | wc -l) migrations as applied (bootstrap path).\"
-             fi
-
-             # Apply each *.up.sql in lexicographic order, skip if already tracked
-             for UP_FILE in \$(ls migrations/*.up.sql | sort); do
-               MIGRATION_NAME=\$(basename \"\$UP_FILE\" .up.sql)
-               ALREADY=\$(psql \"\$DATABASE_URI\" -tA -c \"SELECT count(*) FROM payload_migrations WHERE name='\$MIGRATION_NAME'\")
-               if [ \"\$ALREADY\" = \"1\" ]; then
-                 echo \">> migration \$MIGRATION_NAME already applied — skipping\"
-               else
-                 echo \">> applying migration \$MIGRATION_NAME to prod DB\"
-                 psql \"\$DATABASE_URI\" -v ON_ERROR_STOP=1 -f \"\$UP_FILE\"
-                 psql \"\$DATABASE_URI\" -c \"INSERT INTO payload_migrations (name, batch) VALUES ('\$MIGRATION_NAME', 1)\"
-                 echo \">> migration \$MIGRATION_NAME applied successfully\"
-               fi
-             done"
+               echo \">> [warm] complete\"
+             fi"
 
       - name: Flip symlink + reload PM2
         env:

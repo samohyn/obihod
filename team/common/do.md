@@ -218,7 +218,12 @@ Rollback: `deploy/rollback.sh` (переключает symlink обратно, `
 
 ### 10. Follow-ups (техдолг)
 
-- **Payload migrations.** Сейчас схема залита одноразово через `pg_dump --schema-only`. Перед следующим релизом схемы перейти на Payload migrations (apply + rollback).
+- **Payload migrations — sustained стратегия.** Sustained [ADR-0016](../adr/ADR-0016-payload-migrations-prod-strategy.md) (Option B Pure raw SQL workflow). Schema lifecycle owned by `deploy.yml` only:
+  - Cold-start (empty DB) → apply `migrations/00000000_*_initial_schema_bootstrap.sql` + mark all `*.up.sql` as already-applied.
+  - Warm path (DB has user tables) → apply only new `*.up.sql` migrations not yet tracked.
+  - `seed-prod.yml` НЕ трогает schema (только runtime data via tsx scripts) — sustained iron rule.
+  - Phase 2 backlog (3-4h): `site/scripts/regen-bootstrap.ts` + `regen-bootstrap.yml` workflow_dispatch для regeneration bootstrap snapshot после крупных collection refactor (owner — dba).
+  - Phase 3 backlog (1h): schema-drift CI lint (hash push:true result vs hash bootstrap+up.sql) + ADR-0016 status Proposed → Accepted.
 - **Branch protection.** Отложен: private repo на GitHub Free не поддерживает. Варианты: сделать repo публичным (`samohyn/obihod`), либо GitHub Pro $4/мес.
 - **Uptime monitor.** Подключить Uptime Robot (external pulse), если ещё не подключен.
 - **Seed данных.** См. §9.
