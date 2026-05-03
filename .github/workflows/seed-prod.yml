@@ -62,39 +62,76 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -p ${{ secrets.BEGET_SSH_PORT || '22' }} -H ${{ secrets.BEGET_SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Upload scripts/seed.ts to VPS
+      - name: Upload scripts/ + content/ + migrations/ to VPS (W15 P1)
         run: |
           set -eo pipefail
-          # deploy.yml filelist не включает scripts/ (ADR-backlog: расширить filelist
-          # вместе с миграциями tsx → node-compat). На время fallback докидываем
-          # seed.ts точечно через scp — payload.config.ts уже на VPS из deploy.
+          # W15 Stage 4 P1: full sequence требует scripts/ (все *.ts seeders),
+          # content/ (Stage 1+2+3 fixtures), migrations/ (Wave 0.1 SD schema).
+          # Sustained ADR-0001 fallback расширён — было только seed.ts.
           ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
             ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
-            "mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/current/scripts"
-          scp -i ~/.ssh/deploy_key -P ${{ secrets.BEGET_SSH_PORT || '22' }} \
-            -o StrictHostKeyChecking=no \
-            site/scripts/seed.ts \
-            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/scripts/seed.ts
+            "mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/current/scripts \
+                      ${{ secrets.BEGET_DEPLOY_PATH }}/current/content \
+                      ${{ secrets.BEGET_DEPLOY_PATH }}/current/migrations"
+          rsync -avz --delete \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o StrictHostKeyChecking=no" \
+            site/scripts/ \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/scripts/
+          rsync -avz --delete \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o StrictHostKeyChecking=no" \
+            site/content/ \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/content/
+          rsync -avz --delete \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o StrictHostKeyChecking=no" \
+            site/migrations/ \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/migrations/
 
-      - name: Run seed via SSH
+      - name: Run full seed sequence via SSH (W15 P1: Stage 1+2+3 + Wave 0.1 migration)
         run: |
           set -eo pipefail
           LOG_DIR=seed-logs
           mkdir -p "$LOG_DIR"
           LOG_FILE="$LOG_DIR/seed-$(date -u +%Y%m%dT%H%M%SZ).log"
 
-          # tsx в devDependencies; prod-артефакт содержит только --prod node_modules.
-          # Используем `pnpm dlx tsx` — tsx подтянется во временную папку на лету.
+          # W15 Stage 4 P1: full sequence applies Wave 0.1 migration + seed
+          # all stages + Wave 1 Run 1+2+3 + post-bind mini-case.
+          # PAYLOAD_DISABLE_PUSH=1 sustained `reference_audit_log_push_disable`.
+          # Idempotent re-run sustained Stage 2 patterns.
           ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
             -o ServerAliveInterval=15 \
             ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
             "set -eux
-             mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/current/scripts
              cd ${{ secrets.BEGET_DEPLOY_PATH }}/current
              set -a
              . ./.env
              set +a
-             OBIKHOD_SEED_CONFIRM=yes OBIKHOD_ENV=production pnpm dlx tsx scripts/seed.ts" \
+             export OBIKHOD_SEED_CONFIRM=yes OBIKHOD_ENV=production PAYLOAD_DISABLE_PUSH=1
+
+             echo '=== Wave 0.1 SD schema migration ==='
+             pnpm payload migrate || echo '(migrate возможно already applied — sustained idempotent)'
+
+             echo '=== Stage 0 etalons + authors ==='
+             pnpm seed:authors:prod || true
+             pnpm seed:etalons:prod || true
+
+             echo '=== Stage 1 content + media ==='
+             pnpm seed:stage1-content:prod
+             pnpm seed:stage1-media:all:prod || pnpm seed:stage1-media:prod
+
+             echo '=== Stage 2 content + media ==='
+             pnpm seed:stage2-content:prod
+             pnpm seed:stage2-media:prod
+
+             echo '=== Stage 3 content + blog + cases (Wave 1 Run 1+2+3) ==='
+             pnpm seed:stage3-content:prod
+             pnpm seed:stage3-blog:prod
+             pnpm seed:stage3-cases:prod
+
+             echo '=== Post-bind mini-case (14 SD ↔ Cases pack) ==='
+             pnpm dlx tsx --require=./scripts/_payload-cjs-shim.cjs scripts/post-bind-mini-case.ts || true
+
+             echo '=== DONE ==='
+             " \
             2>&1 | tee "$LOG_FILE"
           echo "SEED_LOG=$LOG_FILE" >> $GITHUB_ENV
 
