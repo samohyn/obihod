@@ -120,7 +120,9 @@ export const DEFAULT_SITE_CHROME: SiteChrome = {
     phoneE164: '+79851705111',
   },
   requisites: {
-    taxId: '7847729123',
+    taxId: '1111111111',
+    kpp: '111111111',
+    ogrn: '1111111111111',
   },
   social: [],
 }

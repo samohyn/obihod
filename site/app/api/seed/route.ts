@@ -552,7 +552,7 @@ export async function POST(req: NextRequest) {
               phoneDisplay: '+7 (985) 170-51-11',
               phoneE164: '+79851705111',
             },
-            requisites: { taxId: '7847729123' },
+            requisites: { taxId: '1111111111', kpp: '111111111', ogrn: '1111111111111' },
             social: [],
           } as never,
         })
