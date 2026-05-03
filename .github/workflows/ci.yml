@@ -201,11 +201,22 @@ jobs:
           cat server.log
           exit 1
 
-      - name: Run Playwright (desktop + mobile chromium)
+      - name: Run Playwright (desktop + mobile chromium — critical path)
         env:
           PLAYWRIGHT_BASE_URL: http://localhost:3000
           PLAYWRIGHT_EXTERNAL_SERVER: "1"
-        run: pnpm exec playwright test --project=chromium --project=mobile-chrome
+        # W15: Critical-path PR-блокеры (~5 specs). Heritage specs (etalons-w3,
+        # stage1-w7, stage2-w11, admin-*, panel-*) ran sustained earlier и не
+        # должны блокировать каждый PR (sequential workers=1 retries=2 =
+        # 1-2 часа running). Stage 4 backlog: cron-based nightly full E2E ИЛИ
+        # CI_PLAYWRIGHT_SCOPE env-trigger для full-mode.
+        run: |
+          pnpm exec playwright test --project=chromium --project=mobile-chrome \
+            tests/e2e/landing.spec.ts \
+            tests/e2e/seo.spec.ts \
+            tests/e2e/site-chrome.spec.ts \
+            tests/e2e/stage3-w13-capture.spec.ts \
+            tests/e2e/leadqa-w14-smoke.spec.ts
 
       # US-1 Stage 1 Track C (W7 transition): lint:schema жёсткий gate.
       # Stage 0 был soft-fail (continue-on-error=true). После W7 Stage 1 имеет
