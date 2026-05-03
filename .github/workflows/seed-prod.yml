@@ -62,29 +62,26 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -p ${{ secrets.BEGET_SSH_PORT || '22' }} -H ${{ secrets.BEGET_SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: "Upload scripts/ + content/ + migrations/ to VPS (W15 P1)"
+      - name: "Upload scripts/ + content/ + migrations/ + lib/ + blocks/ to VPS (W15 P1)"
         run: |
           set -eo pipefail
           # W15 Stage 4 P1: full sequence требует scripts/ (все *.ts seeders),
-          # content/ (Stage 1+2+3 fixtures), migrations/ (Wave 0.1 SD schema).
+          # content/ (Stage 1+2+3 fixtures), migrations/ (Wave 0.1 SD schema),
+          # lib/ + blocks/ (TS path aliases @/lib/* + @/blocks/* used in collections).
           # Sustained ADR-0001 fallback расширён — было только seed.ts.
           ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
             ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
             "mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/current/scripts \
                       ${{ secrets.BEGET_DEPLOY_PATH }}/current/content \
-                      ${{ secrets.BEGET_DEPLOY_PATH }}/current/migrations"
-          rsync -avz --delete \
-            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o StrictHostKeyChecking=no" \
-            site/scripts/ \
-            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/scripts/
-          rsync -avz --delete \
-            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o StrictHostKeyChecking=no" \
-            site/content/ \
-            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/content/
-          rsync -avz --delete \
-            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o StrictHostKeyChecking=no" \
-            site/migrations/ \
-            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/migrations/
+                      ${{ secrets.BEGET_DEPLOY_PATH }}/current/migrations \
+                      ${{ secrets.BEGET_DEPLOY_PATH }}/current/lib \
+                      ${{ secrets.BEGET_DEPLOY_PATH }}/current/blocks"
+          for dir in scripts content migrations lib blocks; do
+            rsync -avz --delete \
+              -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o StrictHostKeyChecking=no" \
+              site/$dir/ \
+              ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/$dir/
+          done
 
       - name: "Run full seed sequence via SSH (W15 P1, Stage 1+2+3 + Wave 0.1 migration)"
         run: |
