@@ -176,26 +176,32 @@ jobs:
              export OBIKHOD_SEED_CONFIRM=yes OBIKHOD_ENV=production PAYLOAD_DISABLE_PUSH=1
              SHIM='./scripts/_payload-cjs-shim.cjs'
 
+             # Sustained fail-soft per stage: каждый seed-script считает errors
+             # в своём summary и exit 1 при errors > 0. Под set -e это убивало
+             # весь heredoc — Stage 3 не запускался даже при единичных fixture
+             # ошибках (incident seed-prod #11 2026-05-03: Stage 2 errors=1
+             # → Stage 3 skipped). Sustained pattern: || echo skip — лог-метка,
+             # cumulative outcome видим в LOG_FILE + Upload seed log artifact.
              echo '=== Stage 0 BASE — pillar + districts (sustained ADR-0001 seed.ts) ==='
-             pnpm dlx tsx --require=\$SHIM scripts/seed.ts
+             pnpm dlx tsx --require=\$SHIM scripts/seed.ts || echo '(stage 0 base skip)'
 
              echo '=== Stage 0 authors + etalons ==='
              pnpm dlx tsx --require=\$SHIM scripts/seed-authors.ts || echo '(authors skip)'
              pnpm dlx tsx --require=\$SHIM scripts/seed-content-etalons.ts || echo '(etalons skip)'
 
              echo '=== Stage 1 content + media ==='
-             pnpm dlx tsx --require=\$SHIM scripts/seed-content-stage1.ts
+             pnpm dlx tsx --require=\$SHIM scripts/seed-content-stage1.ts || echo '(stage 1 content skip)'
              pnpm dlx tsx --require=\$SHIM scripts/seed-stage1-media.ts --all || \
                pnpm dlx tsx --require=\$SHIM scripts/seed-stage1-media.ts || echo '(media skip)'
 
              echo '=== Stage 2 content + media ==='
-             pnpm dlx tsx --require=\$SHIM scripts/seed-content-stage2.ts
+             pnpm dlx tsx --require=\$SHIM scripts/seed-content-stage2.ts || echo '(stage 2 content skip)'
              pnpm dlx tsx --require=\$SHIM scripts/seed-stage2-media.ts || echo '(media skip)'
 
              echo '=== Stage 3 content + blog + cases (Wave 1 Run 1+2+3) ==='
-             pnpm dlx tsx --require=\$SHIM scripts/seed-content-stage3.ts
-             pnpm dlx tsx --require=\$SHIM scripts/seed-content-stage3-blog.ts
-             pnpm dlx tsx --require=\$SHIM scripts/seed-content-stage3-cases.ts
+             pnpm dlx tsx --require=\$SHIM scripts/seed-content-stage3.ts || echo '(stage 3 content skip)'
+             pnpm dlx tsx --require=\$SHIM scripts/seed-content-stage3-blog.ts || echo '(stage 3 blog skip)'
+             pnpm dlx tsx --require=\$SHIM scripts/seed-content-stage3-cases.ts || echo '(stage 3 cases skip)'
 
              echo '=== Post-bind mini-case (14 SD ↔ Cases pack) ==='
              pnpm dlx tsx --require=\$SHIM scripts/post-bind-mini-case.ts || echo '(post-bind skip)'
