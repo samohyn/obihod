@@ -270,7 +270,7 @@ async function main() {
   )
 
   if (errors.length > 0) process.exit(1)
-  process.exit(2)
+  process.exit(0)
 }
 
 main().catch((e) => {
