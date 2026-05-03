@@ -185,11 +185,11 @@ poseo_apruv: pending
 
 ## TOV constraints
 
-- Bio — Caregiver+Ruler. «Бригада», «делаем», «приходим», «закрываем». НЕ «мы — профессионалы своего дела».
+- Bio — Caregiver+Ruler. «Бригада», «делаем», «приходим», «закрываем». НЕ «мы — профессионалы своего дела». <!-- obihod:ok -->
 - Конкретика: «~6 лет», «8 районов», «4 услуги», «250 объектов в год» (если данные есть; если нет — без выдуманных).
 - Privacy + бренд: **никаких лиц** в avatar (silhouette/back-shot обязательно — see brand-guide §14 Don't + memory `companyAuthorAvatarPrompt`).
 - Author-bio для company: «Бригада вывоза Обихода» — TOV-черновик от cw → apruv art (TOV §13/§14) → apruv poseo (SEO).
-- НЕ: «дружный коллектив», «команда настоящих профи», «индивидуальный подход».
+- НЕ: «дружный коллектив», «команда настоящих профи», «индивидуальный подход». <!-- obihod:ok -->
 
 ## Эталонный URL для W3
 `/avtory/brigada-vyvoza-obihoda/` (company-page seed Stage 0).
