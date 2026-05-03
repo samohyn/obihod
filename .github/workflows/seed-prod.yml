@@ -82,6 +82,12 @@ jobs:
               site/$dir/ \
               ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/$dir/
           done
+          # tsconfig.json missing from deploy.yml filelist → tsx loader не resolves @/* aliases.
+          # Sustained backlog: extend deploy.yml filelist (deploy/README.md update).
+          rsync -avz \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o StrictHostKeyChecking=no" \
+            site/tsconfig.json \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/tsconfig.json
 
       - name: "Run full seed sequence via SSH (W15 P1, Stage 1+2+3 + Wave 0.1 migration)"
         run: |
