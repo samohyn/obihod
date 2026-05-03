@@ -198,6 +198,25 @@ const DISTRICTS: DistrictSeed[] = [
     ],
     courtsJurisdiction: 'Администрация Пушкинского ГО',
   },
+  {
+    // Sustained project memory project_first_districts.md: Раменское +
+    // Жуковский — первые programmatic-районы (M1 MVP). Жуковский был
+    // missing в base seed → Stage 3 cases (`zhukovskij`) падал на findOne.
+    slug: 'zhukovskij',
+    nameNominative: 'Жуковский',
+    namePrepositional: 'в Жуковском',
+    nameDative: 'по Жуковскому',
+    nameGenitive: 'из Жуковского',
+    coverageRadius: 18,
+    distanceFromMkad: 26,
+    centerGeo: [38.1149, 55.5996],
+    priority: 'B',
+    landmarks: [
+      { name: 'аэродром ЛИИ Громова', type: 'kp' },
+      { name: 'СНТ Авиатор', type: 'snt' },
+    ],
+    courtsJurisdiction: 'Администрация городского округа Жуковский',
+  },
 ]
 
 // ───────── Кластеры услуг (sa.md §5.4) ─────────

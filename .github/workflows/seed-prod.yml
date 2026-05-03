@@ -173,7 +173,7 @@ jobs:
              set -a
              . ./.env
              set +a
-             export OBIKHOD_SEED_CONFIRM=yes OBIKHOD_ENV=production PAYLOAD_DISABLE_PUSH=1
+             export OBIKHOD_SEED_CONFIRM=yes OBIKHOD_BIND_CONFIRM=yes OBIKHOD_ENV=production PAYLOAD_DISABLE_PUSH=1
              SHIM='./scripts/_payload-cjs-shim.cjs'
 
              # Sustained fail-soft per stage: каждый seed-script считает errors
