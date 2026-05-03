@@ -89,6 +89,31 @@ jobs:
             site/tsconfig.json \
             ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/tsconfig.json
 
+      - name: "Apply initial schema bootstrap via psql (W15 P1 — production DB пустая)"
+        run: |
+          set -eo pipefail
+          # Sustained do.md §9 blocker «БД пустая». 5-я попытка seed выявила
+          # 'relation services_blocks_hero does not exist' — production Postgres
+          # никогда не получал Payload schema. Sustained iron rule push:false на
+          # проде → используем raw SQL dump из dev/CI Postgres (где push:true
+          # создаёт schema). Idempotent re-run: psql variant '\dt|grep' check.
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
+            "set -eu
+             cd ${{ secrets.BEGET_DEPLOY_PATH }}/current
+             set -a
+             . ./.env
+             set +a
+             # Idempotent check — apply schema только если services_blocks_hero отсутствует
+             EXISTS=\$(echo \"SELECT 1 FROM pg_tables WHERE tablename='services_blocks_hero';\" | psql \"\$DATABASE_URI\" -tA 2>/dev/null || echo '')
+             if [ -n \"\$EXISTS\" ]; then
+               echo 'Schema already applied — skipping bootstrap'
+             else
+               echo 'Applying initial schema bootstrap (233 tables)...'
+               psql \"\$DATABASE_URI\" -f migrations/00000000_000000_initial_schema_bootstrap.sql
+               echo 'Schema bootstrap complete.'
+             fi"
+
       - name: "Run full seed sequence via SSH (W15 P1, Stage 1+2+3 + Wave 0.1 migration)"
         run: |
           set -eo pipefail
