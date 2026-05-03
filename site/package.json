@@ -17,6 +17,7 @@
     "publish-services:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/publish-services.ts",
     "fal:gen": "tsx --env-file=.env.local scripts/fal-generate.ts",
     "fal:gen:stage1-w4": "tsx --env-file=.env.local scripts/generate-stage1-w4-heroes.ts",
+    "fal:gen:stage3-w13-cases": "tsx --env-file=.env.local scripts/generate-stage3-w13-cases.ts",
     "tov:check": "tsx scripts/tov-checker.ts",
     "lint:schema": "tsx scripts/lint-schema.ts",
     "seed:authors": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/seed-authors.ts",

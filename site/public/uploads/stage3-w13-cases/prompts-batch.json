@@ -1,0 +1,119 @@
+{
+  "_meta": {
+    "_escapeHatch": "obikhod:ok — anti-pattern §14 mentions (legit quote in art self-review checklist)",
+    "stage": "stage3-w13-cases",
+    "run": "Stage 3 W13 Wave 1 Run 3 — 6 case hero (priority-B + cross-pillar)",
+    "owner": "art (fal.ai batch) + cms (publish in parallel)",
+    "track": "Stage 3 W13 — 6 case hero images (after-only, sustained Stage 2 pattern)",
+    "art_consistency": "object-focused after-only, NO humans/figures/silhouettes (sustained Stage 0 R1 + Stage 2 W11 unified rule)",
+    "antiPatterns_§14": [
+      "no humans / figures / silhouettes",
+      "no chainsaw / axe / power-tools macho",
+      "no eco-leaf cliché",
+      "no stock photo aesthetic",
+      "no fake recognizable landmarks (Шереметьево / ЛИИ / Истринское вдхр — без реальных лого/тэгов)",
+      "no readable text / logos",
+      "no Тильда glossy / no clip-art icons / no capslock signage"
+    ],
+    "model_default": "fal-ai/flux/schnell",
+    "imageSize": "landscape_16_9 (1024×576 native)",
+    "downloadedFormat": "JPEG (flux/schnell auto-detect)",
+    "fixturesUpdated": [
+      "site/content/stage3-w13-cases/09-case-vyvoz-konteyner-27m3-khimki-aviasklad.json (heroImageUrl=after)",
+      "site/content/stage3-w13-cases/10-case-spil-8-derevev-snt-pushkino.json (heroImageUrl=after)",
+      "site/content/stage3-w13-cases/11-case-chistka-livnevyh-krysh-istra.json (heroImageUrl=after)",
+      "site/content/stage3-w13-cases/12-case-demontazh-aviasklada-zhukovskij.json (heroImageUrl=after)",
+      "site/content/stage3-w13-cases/13-case-4v1-dacha-istra-cross-pillar.json (heroImageUrl=after)",
+      "site/content/stage3-w13-cases/14-case-sezon-chistka-vpp-spil-zhukovskij-cross-pillar.json (heroImageUrl=after)"
+    ],
+    "after_only_note": "Stage 3 priority-B cases — только after-варианты (cw fixtures имеют только after-image ref). Если W14 album потребует before — отдельный batch. Sustained Stage 2 W11 cohesion: object-focused result framing."
+  },
+  "items": [
+    {
+      "id": "case-09-khimki-aviasklad-after",
+      "page": "/kejsy/vyvoz-konteyner-27m3-khimki-aviasklad/",
+      "fixture": "site/content/stage3-w13-cases/09-case-vyvoz-konteyner-27m3-khimki-aviasklad.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "musor",
+        "stage": "after",
+        "extra": "industrial logistics yard at a Moscow Region air-cargo warehouse complex, large 27 cubic meter rolloff metal container fully loaded with sorted commercial waste — broken wooden pallets, stretch wrap rolls, cardboard boxes — being lifted onto a clean flatbed truck for removal, swept asphalt around it, no people, no figures, no silhouettes, large hangar-style warehouse buildings in the background, mid-day overcast soft daylight, real Moscow Region industrial context, peaceful matter-of-fact composition"
+      },
+      "outFile": "site/public/uploads/stage3-w13-cases/case-09-khimki-aviasklad-after.jpg",
+      "publicPath": "/uploads/stage3-w13-cases/case-09-khimki-aviasklad-after.jpg",
+      "alt": "Контейнер 27 м³ с отсортированным мусором у склада в Химках после еженедельного вывоза бригадой Обихода"
+    },
+    {
+      "id": "case-10-pushkino-snt-after",
+      "page": "/kejsy/spil-8-derevev-snt-pushkino/",
+      "fixture": "site/content/stage3-w13-cases/10-case-spil-8-derevev-snt-pushkino.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "arboristika",
+        "stage": "after",
+        "extra": "a 30-sotka private СНТ dacha plot in Moscow Region, freshly completed sanitary tree removal — eight cleanly cut tree stumps clearly visible on the cleared lawn at ground level, neat raked grass around them, all branches and chipped material removed, mature surrounding trees still standing in the background, modest wooden dacha house visible at the edge of the plot, plain wooden fence along the perimeter, no people, no figures, no silhouettes, no chainsaw, no axe, soft late-afternoon golden daylight, real Moscow Region СНТ context, peaceful tidy composition"
+      },
+      "outFile": "site/public/uploads/stage3-w13-cases/case-10-pushkino-snt-after.jpg",
+      "publicPath": "/uploads/stage3-w13-cases/case-10-pushkino-snt-after.jpg",
+      "alt": "Расчищенный участок СНТ в Пушкино с восемью аккуратно срезанными пнями после санитарного спила бригадой Обихода"
+    },
+    {
+      "id": "case-11-istra-chistka-after",
+      "page": "/kejsy/chistka-livnevyh-krysh-istra/",
+      "fixture": "site/content/stage3-w13-cases/11-case-chistka-livnevyh-krysh-istra.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "krishi",
+        "stage": "after",
+        "extra": "elevated overhead view of a clean dry flat roof of a multi-storey residential building in late spring, completely free of snow, freshly cleaned drainage system after seasonal maintenance — clearly visible storm drain inlet at the centre of the parapet section, clear roof gutters along the edge, vertical downpipes running down the building wall, dry roof membrane, no debris, no leaves, no standing water, two stainless anchor points and a neatly coiled safety line near a closed roof hatch, no people, no figures, no silhouettes, mature pine trees and a calm reservoir surface visible far in the background, soft warm late-morning daylight, real Moscow Region context, peaceful tidy maintenance composition",
+        "seed": 31415
+      },
+      "outFile": "site/public/uploads/stage3-w13-cases/case-11-istra-chistka-after.jpg",
+      "publicPath": "/uploads/stage3-w13-cases/case-11-istra-chistka-after.jpg",
+      "alt": "Чистая плоская кровля МКД с прочищенными ливневками в водоохранной зоне Истры после очистки бригадой Обихода"
+    },
+    {
+      "id": "case-12-zhukovskij-aviasklad-after",
+      "page": "/kejsy/demontazh-aviasklada-zhukovskij/",
+      "fixture": "site/content/stage3-w13-cases/12-case-demontazh-aviasklada-zhukovskij.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "demontazh",
+        "stage": "after",
+        "extra": "industrial site after full demolition of an old Soviet-era aviation hangar on a Moscow Region airfield perimeter, leveled concrete pad swept clean of debris, neat stacks of sorted scrap metal — i-beams, sheet metal panels — ready for removal, the airfield runway and low-rise utility buildings visible in the far background, no people, no figures, no silhouettes, no torches, no oxygen-acetylene equipment in frame, overcast soft daylight, real Moscow Region industrial context, peaceful matter-of-fact composition"
+      },
+      "outFile": "site/public/uploads/stage3-w13-cases/case-12-zhukovskij-aviasklad-after.jpg",
+      "publicPath": "/uploads/stage3-w13-cases/case-12-zhukovskij-aviasklad-after.jpg",
+      "alt": "Расчищенная площадка после демонтажа авиационного ангара в Жуковском с отсортированным металлоломом для вывоза"
+    },
+    {
+      "id": "case-13-istra-4v1-after",
+      "page": "/kejsy/4v1-dacha-istra-cross-pillar/",
+      "fixture": "site/content/stage3-w13-cases/13-case-4v1-dacha-istra-cross-pillar.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "demontazh",
+        "stage": "after",
+        "extra": "wide composition of a fully restored 100-sotka private dacha estate in Moscow Region after complete 4-in-1 cross-pillar service — clean pitched metal roof of the main house with no snow, no ice, no debris, freshly pruned mature trees with neat crowns around the property, leveled empty area where an old shed once stood, plain rolloff dump truck loaded with construction debris parked at the gate ready to leave, plain wooden fence along the boundary, neat raked grass everywhere, no people, no figures, no silhouettes, no equipment piles in frame, soft golden late-afternoon daylight, real Moscow Region dacha context, peaceful comprehensive tidy composition"
+      },
+      "outFile": "site/public/uploads/stage3-w13-cases/case-13-istra-4v1-after.jpg",
+      "publicPath": "/uploads/stage3-w13-cases/case-13-istra-4v1-after.jpg",
+      "alt": "Дача 100 соток в Истре после комплексной услуги 4-в-1: чистая кровля, обрезанные деревья, расчищенный участок, готовый к вывозу мусор"
+    },
+    {
+      "id": "case-14-zhukovskij-vpp-after",
+      "page": "/kejsy/sezon-chistka-vpp-spil-zhukovskij-cross-pillar/",
+      "fixture": "site/content/stage3-w13-cases/14-case-sezon-chistka-vpp-spil-zhukovskij-cross-pillar.json",
+      "useCase": "case-viz",
+      "params": {
+        "cluster": "krishi",
+        "stage": "after",
+        "extra": "wide ground-level documentary composition of a Moscow Region airfield perimeter after seasonal cross-pillar maintenance — in the foreground a low industrial hangar with a clean metal pitched roof completely free of snow and ice and debris, in the mid-ground beside the hangar a small grassy strip with one freshly cut tree stump at ground level (no branches, no chips, neat raked grass around it), in the far background the airfield concrete runway with parked utility vehicles, plain utility buildings, faint silhouette of a small aircraft on the apron, no people, no figures, no silhouettes of humans, no chainsaw, no axe, no power tools, no fallen logs in frame, soft cold late-morning daylight, real Moscow Region industrial airfield context, peaceful tidy composition, completely natural ground-level perspective with the stump on grass and the hangar roof visible separately, NOT a stump on top of a roof",
+        "seed": 27182
+      },
+      "outFile": "site/public/uploads/stage3-w13-cases/case-14-zhukovskij-vpp-after.jpg",
+      "publicPath": "/uploads/stage3-w13-cases/case-14-zhukovskij-vpp-after.jpg",
+      "alt": "Чистая кровля ангара и аккуратный пень спиленного дерева на периметре аэродрома в Жуковском после сезонного обслуживания бригадой Обихода"
+    }
+  ]
+}
