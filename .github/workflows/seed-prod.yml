@@ -62,7 +62,7 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -p ${{ secrets.BEGET_SSH_PORT || '22' }} -H ${{ secrets.BEGET_SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Upload scripts/ + content/ + migrations/ to VPS (W15 P1)
+      - name: "Upload scripts/ + content/ + migrations/ to VPS (W15 P1)"
         run: |
           set -eo pipefail
           # W15 Stage 4 P1: full sequence требует scripts/ (все *.ts seeders),
@@ -86,7 +86,7 @@ jobs:
             site/migrations/ \
             ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/migrations/
 
-      - name: Run full seed sequence via SSH (W15 P1: Stage 1+2+3 + Wave 0.1 migration)
+      - name: "Run full seed sequence via SSH (W15 P1, Stage 1+2+3 + Wave 0.1 migration)"
         run: |
           set -eo pipefail
           LOG_DIR=seed-logs
