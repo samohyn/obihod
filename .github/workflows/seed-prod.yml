@@ -144,6 +144,14 @@ jobs:
              echo '=== Apply fresh schema (233 tables) ==='
              psql \"\$DATABASE_URI\" -f migrations/00000000_000000_initial_schema_bootstrap.sql
 
+             echo '=== Mark all legacy *.up.sql migrations как applied (deploy.yml будет skip) ==='
+             psql \"\$DATABASE_URI\" -c \"CREATE TABLE IF NOT EXISTS payload_migrations (id SERIAL PRIMARY KEY, name TEXT UNIQUE, batch INTEGER, executed_at TIMESTAMP DEFAULT NOW());\"
+             for migration in migrations/*.up.sql; do
+               name=\$(basename \"\$migration\" .up.sql)
+               psql \"\$DATABASE_URI\" -c \"INSERT INTO payload_migrations (name, batch) VALUES ('\$name', 1) ON CONFLICT (name) DO NOTHING;\" > /dev/null
+             done
+             echo \"Marked \$(ls migrations/*.up.sql | wc -l) migrations as applied.\"
+
              echo '=== Verify schema state ==='
              psql \"\$DATABASE_URI\" -tAc \"SELECT count(*) FROM pg_tables WHERE schemaname='public';\"
              echo 'Schema apply complete.'"
