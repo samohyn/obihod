@@ -365,10 +365,19 @@ async function main() {
   const isProd = process.env.NODE_ENV === 'production' || !!process.env.OBIKHOD_SEED_CONFIRM
   const dbUri = process.env.DATABASE_URI ?? ''
 
-  if (isProd && !/obikhod_prod/i.test(dbUri)) {
+  // Sustained ADR-0001 safety gate: explicit operator confirmation required
+  // for prod runs. Regex check на DB name removed 2026-05-03 — prod DB
+  // называется `obikhod` (not `obikhod_prod`), regex blocked seed-prod #12
+  // Stage 3 main. Other Stage 3 scripts (blog, cases) работают на тех же
+  // env vars без regex check — pattern unified.
+  if (isProd && process.env.OBIKHOD_SEED_CONFIRM !== 'yes') {
     console.error(
-      '[seed-stage3] Safety-gate: prod mode требует DATABASE_URI matching /obikhod_prod/i',
+      '[seed-stage3] Safety-gate: prod mode требует OBIKHOD_SEED_CONFIRM=yes',
     )
+    process.exit(1)
+  }
+  if (!dbUri) {
+    console.error('[seed-stage3] DATABASE_URI not set')
     process.exit(1)
   }
 
