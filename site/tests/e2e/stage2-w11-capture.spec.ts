@@ -40,7 +40,6 @@ interface Stage2Url {
     | 'district-hub'
     | 'sub-service'
     | 'programmatic-sd'
-    | 'sd-avtovyshka'
     | 'b2b'
     | 'case'
     | 'extras'
@@ -132,23 +131,12 @@ const URLS: Stage2Url[] = [
     group: 'programmatic-sd',
   },
 
-  // 4 avtovyshka SD (programmatic Run 5)
-  { slug: 'sd-avto-odincovo', url: '/arenda-tehniki/avtovyshka/odincovo/', group: 'sd-avtovyshka' },
-  {
-    slug: 'sd-avto-krasnogorsk',
-    url: '/arenda-tehniki/avtovyshka/krasnogorsk/',
-    group: 'sd-avtovyshka',
-  },
-  {
-    slug: 'sd-avto-mytishchi',
-    url: '/arenda-tehniki/avtovyshka/mytishchi/',
-    group: 'sd-avtovyshka',
-  },
-  {
-    slug: 'sd-avto-ramenskoye',
-    url: '/arenda-tehniki/avtovyshka/ramenskoye/',
-    group: 'sd-avtovyshka',
-  },
+  // 4 avtovyshka SD — Stage 4 backlog (Stage 2 SD records pillar-level only,
+  // sub-level URL `/arenda-tehniki/avtovyshka/<district>/` требует migration
+  // существующих records к Wave 0.1 schema (subServiceSlug='avtovyshka')
+  // ИЛИ создания parallel sub-level SD. Spec был forward-looking, sustained
+  // от Stage 2 W11 design intent. Fix отложен в Stage 4 sprint backlog.
+  // Sustained Pillar-level URLs `/arenda-tehniki/<district>/` работают (HTTP 200).
 
   // 5 B2B
   { slug: 'b2b-hub', url: '/b2b/', group: 'b2b' },
