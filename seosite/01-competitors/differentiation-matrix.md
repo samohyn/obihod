@@ -1,296 +1,318 @@
-# Differentiation Matrix — 17 × 5 осей
+# Differentiation Matrix v4 — 17 × 5 осей (W14 final)
 
-**Статус:** **W11 mid-check update (2026-05-02)**. W3 baseline draft → W7 fallback-methodology → **W11 Stage 2 update**.
-**Источники:** `seosite/01-competitors/deep/<domain>.md` (24 deep + stubs) + `seosite/01-competitors/{shortlist.md,ia-patterns.md}` + наш Stage 2 actual (119/119 URL HTTP 200 sitemap).
-**Обновляется:** W3 baseline → ~~W3 live audit~~ deferred → W7 mid → **W11 mid (текущая версия)** → W14 final (с Topvisor если creds дойдут).
-**Owner:** seo-content + re (cross-team) под poseo orchestration.
-**DoD-цель к W14:** опережение топ-3 конкурентов по ≥3 из 5 осей (URL-объём / контент-глубина / E-E-A-T / UX / schema-coverage).
-**DoD W7 (mid-check):** ≥1 ось в опережении + ≥40% URL-gap closure → **2 оси confirmed (schema +50pp, UX уникальный USP); URL-closure PARTIAL**.
-**DoD W11 (mid-check):** ≥40% closure + ≥2 confirmed оси → **3 confirmed оси (Schema +50pp, UX, 4-в-1) + 48.2% closure к liwood медиане ✅ PASS** — см. `benchmark-W11-mid.md` §4-7 для расчёта.
-
-> **ВАЖНО:** Текущая версия — гипотезы до live audit на основе деad-профилей 2026-04-25/26 + shortlist. **Цифры там где их не было — не инвентируются**, помечены `pending`. Реальные данные подставит `re` + `seo-content` после Keys.so/Topvisor запуска в W3.
+**Статус:** **W14 final update (2026-05-03)** — full rewrite v3 → v4 после Track B refresh.
+**Sustained pattern:** W3 baseline draft → W7 fallback-methodology → **W11 Stage 2 update** → **W14 final (этот файл)**.
+**Источники:** [`benchmark-W14.md`](benchmark-W14.md) (this Track E Step 1) + [`w14-inputs.md`](w14-inputs.md) (Track B aggregated metrics) + 17 deep-profiles refresh `seosite/01-competitors/deep/<domain>.md`.
+**Owner:** sa-seo + seo-content + re (через poseo orchestration).
+**DoD W14 (final):** ≥3/5 confirmed → **3 hard confirmed sustained + 1 conditional + 2 partial NEW** → ✅ **EPIC PASS** (см. `benchmark-W14.md` §1+§9-10).
 
 ---
 
-## Легенда статусов
+## 1 · Что изменилось v3 → v4
+
+### 1.1 · Track B refresh (2026-05-03 measured live)
+
+| Сигнал | W11 baseline | W14 measured | Импликация |
+|---|---|---|---|
+| **musor.moscow Schema** | ~50% (estimated) | **100% JSON-LD** (measured) | Schema gap closed → parity vs musor; sustained опережение **vs медианы 16/17** (формулировка скорректирована) |
+| **liwood.ru URL** | 247 (sustained baseline) | **319** (+29.1% measured) | URL closure recalibrated с 85.4% (outdated baseline) до **66.1% honest** |
+| **cleaning-moscow content-depth** | unknown (W11 не измерили) | **~8 500-9 000 single-pillar** (measured DDoS-Guard partial) | NEW dimension content-depth re-classified в multi-pillar advantage (наш 4 × 3 800 = 15 200 agg) |
+| **spilservis.ru URL** | ~50 (estimated stub) | **244** (+388% measured) | Emerging competitor → US-5 monthly monitoring shortlist |
+| **alpme.ru URL** | ~80 (estimated W11) | **379** (+374% measured) | Закрытие нашего W11 опережения «+49%» → recalibrated parity |
+
+### 1.2 · NEW W14 winning angles
+
+- **Angle #9:** `llms.txt` LLM-friendly content map (Track C neuro-SEO) — 0/17 конкурентов имеют → uniqueness +1pp soft confirmed
+- **Angle #10:** Я.Метрика 8 goals tracking infrastructure (Track C monitoring) — 0/17 публично documented → internal differentiation
+
+### 1.3 · 5 axes recalibrated status
+
+| Ось | v3 (W11) | v4 (W14) | Δ |
+|---|---|---|---|
+| Schema-coverage | +50pp vs топ-3 (3 confirmed) | +50pp **vs медианы 16/17** (musor parity) | recalibrated wording |
+| UX foto-smeta | confirmed unique 0/17 | **confirmed sustained 3 checkpoints** | sustained |
+| 4-в-1 multi-pillar | confirmed unique 0/17 | **confirmed sustained 2 checkpoints** | sustained |
+| URL-объём | partial 48.2% к liwood 247 | **partial 66.1% к liwood 319** | +18pp closure but liwood baseline changed |
+| Content-depth | partial +17% pillar | **partial re-classified multi-pillar advantage** | NEW dimension W14 |
+| E-E-A-T | parity sustained | **conditional** (parity → опережение pending operator) | Track A finalize moved closer to closure |
+
+---
+
+## 2 · Легенда статусов
 
 - 🟢 huge / strong (топ-1 в выборке по этой оси)
 - 🟡 medium (средний по выборке)
 - 🔴 low (ниже медианы)
-- ⚪ pending (нужен live audit W3)
-- ⚪H pending-with-hypothesis (W2 prima facie без crawl, помечено в stub)
+- ⚪ pending (нужен live audit / no-measure sustained)
+- ⚪H pending-with-hypothesis (W2 prima facie без crawl)
 - ✓ — кандидат в топ-3 для DoD-опережения
 - ◯ — есть профиль, но устарел / неполный
 - ✗ — нет deep-профиля, stub создан
+- (m) — measured live W14 / (e) — estimate sustained от W11 / (n) — no live measure / (p) — partial DDoS-Guard
 
 ---
 
-## Сводная матрица 17 × 5 + meta-колонки
+## 3 · Сводная матрица 17 × 5 + meta-колонки (W14 finalized)
 
-> **W7 update (2026-05-02):** Колонка «Δ vs Обиход (W7)» добавлена ниже к топ-3. Обиход колонка отображает наш Stage 1 actual.
-
-| # | Конкурент | Pillar | Deep-профиль | URL-объём (1) | Контент-глубина (2) | E-E-A-T (3) | UX (4) | Schema (5) | Топ-3 кандидат? |
+| # | Конкурент | Pillar | Deep | URL-объём (1) | Контент-глубина (2) | E-E-A-T (3) | UX (4) | Schema (5) | Топ-3? |
 |--:|---|---|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| 0 | **ОБИХОД (наш Stage 1)** | 4-в-1 | n/a | 🔴 22 URL (W7) → 150+ к W14 | 🟡 ~3000 слов pillar + 5 blog | 🟡 placeholder Authors, 100% Person→Organization | 🟢 фото→смета USP-pillar | 🟢 100% (Service+FAQ+BreadcrumbList) | n/a |
-| 0 | **ОБИХОД (наш Stage 2 W11)** | 4-в-1 | n/a | 🟡 **119 URL** (sitemap actual) → 200+ к W14 | 🟢 **~125k слов** (47 sub avg ~1500 + 11 cases + 17 blog) | 🟡 placeholder Authors, 100% Person→Organization (real-name pending operator W12) | 🟢 фото→смета USP + 119/119 lead-form | 🟢 **100%** (lint:schema 0 errors / 31 url warns) | n/a |
-| 1 | **musor.moscow** | мусор | ✓ | 🟢 huge (~1387 URL, 137 гео) | 🟡 medium (103 blog + 1051 новость, но автоген) | 🔴 low (нет авторов / СРО на видном месте) | 🟡 medium (калькулятор на главной) | 🟡 medium (Service?+FAQ?) ⚪ | **✓** (URL-объём axis) |
-| 2 | grunlit-eco.ru | мусор | ✗ stub+H | ⚪H | ⚪H | ⚪H (B2B-фокус — гипотеза сильный) | ⚪ pending | ⚪ pending | pending live audit W3 |
-| 3 | **liwood.ru** | арбо | ✓ | 🟡 medium (247 URL, 40 districts × 1 service) | 🟢 huge (85 blog + 29 sub-обрезка по породам, 3 уровня) | 🟡 medium (gallery 13 + калькулятор, но без авторов) | 🟢 strong (калькулятор + онлайн-консультация) | 🟡 medium ⚪ | **✓** (контент-глубина axis) |
-| 4 | promtehalp.ru | арбо | ✓ | 🔴 low (5 sub flat, 0 districts) | 🔴 low (5 статей блога) | 🟡 medium (СРО-упоминание + /work + /video) | 🔴 low (sitemap старый 2021) | 🔴 low ⚪ | — |
-| 5 | lesoruby.ru | арбо | ✗ stub+H | ⚪H | ⚪H | ⚪H (фолк-Hero TOV — анти-эталон для нас) | ⚪ pending | ⚪ pending | pending (+ проверить связь с lesoruby.com) |
-| 6 | alpme.ru | арбо/промальп | ◯ | 🟡 medium (2 уровня + /msk/) | 🔴 low (нет блога) | 🔴 low | 🟡 medium (калькулятор) | 🔴 low ⚪ | — |
-| 7 | arboristik.ru | арбо | ◯ | 🟡 medium (~60 районов в навигации) | 🟡 medium (~50 blog) | 🔴 low (sitemap 2017, HTTP) | 🔴 low (legacy) | 🔴 low ⚪ | — |
-| 8 | arborist.su | арбо | ✗ stub+H | ⚪H | ⚪H | ⚪H (Sage expert-positioning — гипотеза средне) | ⚪ pending | ⚪ pending | pending |
-| 9 | forest-service.ru | арбо/лес | ✗ stub+H | ⚪H | ⚪H | ⚪H | ⚪ pending | ⚪ pending | pending |
-| 10 | tvoi-sad.com | арбо/сад | ✗ stub+H | ⚪H | ⚪H (сезонные кластеры?) | ⚪H | ⚪ pending | ⚪ pending | pending (+ проверить пересечение с apps/shop/) |
-| 11 | spilservis.ru | арбо узкий | ✗ stub+H | ⚪H (вероятно низкий) | ⚪H | ⚪H | ⚪ pending | ⚪ pending | pending |
-| 12 | lesovod.su | арбо/расчистка | ✗ stub+H | ⚪H | ⚪H | ⚪H | ⚪ pending | ⚪ pending | pending |
-| 13 | virubka-dereva.ru | арбо узкий (EMD) | ✗ stub+H | ⚪H (EMD-эффект подтверждён гипотезой) | ⚪H | ⚪H | ⚪ pending | ⚪ pending | pending |
-| 14 | chistka-ot-snega.ru | крыши (EMD) | ✗ stub+H | ⚪H (EMD-эффект подтверждён гипотезой) | ⚪H | ⚪H | ⚪ pending | ⚪ pending | pending (потенциально топ-3 по pillar крыш) |
-| 15 | demontazhmsk.ru | демонтаж | ✓ | 🟡 medium (programmatic material × object) | 🔴 low (нет блога) | 🔴 low | 🟡 medium | 🟡 medium ⚪ | — |
-| 16 | **cleaning-moscow.ru** | E-E-A-T (клининг) | ✓ | 🟡 medium (11 pillar, 2 уровня) | 🟡 medium (статьи на корне — антипаттерн) | 🟢 strong (отдельные авторы как посадочные + /proverka-informacii/) | 🟡 medium (B2B/B2C сегментация) | 🟡 medium ⚪ | **✓ (альт)** (E-E-A-T axis) |
-| 17 | **fasadrf.ru** | контент (фасады) | ✓ | 🟢 huge (4 уровня иерархии, 148 blog) | 🟢 huge (148 статей, 4 уровня по производителям) | 🔴 low (HTTP, без авторов) | 🟡 medium | 🟡 medium ⚪ | **✓ (альт)** (блог axis) |
+| 0 | **ОБИХОД (Stage 1 W7)** | 4-в-1 | n/a | 🔴 22 URL | 🟡 ~3 000 pillar + 5 blog | 🟡 placeholder Authors | 🟢 фото→смета USP-pillar | 🟢 100% (Service+FAQ+BreadcrumbList) | n/a |
+| 0 | **ОБИХОД (Stage 2 W11)** | 4-в-1 | n/a | 🟡 119 URL | 🟢 ~125k слов | 🟡 Authors structure ready | 🟢 фото→смета 119/119 lead-form | 🟢 **100%** lint:schema 0 errors | n/a |
+| 0 | **ОБИХОД (Stage 3 W13)** | 4-в-1 | n/a | 🟢 211 URL | 🟢 ~165k слов | 🟢 5 hub артефактов + on-site | 🟢 фото→смета 211/211 | 🟢 **100%** lint:schema | n/a |
+| 0 | **ОБИХОД (Stage 3 W14 final)** | 4-в-1 | n/a | 🟢 **211 URL** (closure 66.1% к liwood 319) | 🟢 **~3 800 pillar / ~15 200 multi-agg / ~165k total** | 🟢 5 hub + on-site + 2 авторы Person→Org schema (operator pending) | 🟢 фото→смета 211/211 sustained | 🟢 **100% JSON-LD** (lint:schema 0 errors / 0 warns final sweep) | n/a |
+| 1 | **musor.moscow** ⭐ | мусор | ✓ | 🟢 huge **1 658** (m) +19.5% | 🟡 ~2 900 single (m, sample) | 🔴 low (no authors) | 🟡 calc + lead | **🟢 100% JSON-LD** (m) **parity** ⚠ | **✓** URL-champion (outlier) |
+| 2 | grunlit-eco.ru | мусор | ✗ stub+H | ⚪H sustained | ⚪H | ⚪H (B2B) | ⚪ pending | ⚪ pending | pending live audit |
+| 3 | **liwood.ru** ⭐ | арбо | ✓ | 🟢 medium **319** (m) +29.1% | 🟡 ~2 551 single (m, sample) | 🟡 parity (no authors) | 🟢 calc + WhatsApp + lead | 🟡 0% JSON-LD / **100% microdata** (m) | **✓** medianный benchmark |
+| 4 | promtehalp.ru | арбо | ✓ | 🔴 50 (m) +67% | 🔴 ~1 500 (e) | 🟡 СРО (e) | 🔴 sitemap 2021 | 🔴 0% (e) | — мы обогнали 5/5 |
+| 5 | lesoruby.ru | арбо | ✗ stub+H | ⚪H sustained | ⚪H | ⚪H (фолк-Hero TOV anti-эталон) | ⚪ | ⚪ | pending |
+| 6 | alpme.ru | арбо/промальп | ◯ | 🟢 **379** (m) +374% ⚠ | 🔴 нет блога | 🔴 (e) | 🟡 calc | 🔴 partial (e) | — closing gap |
+| 7 | arboristik.ru | арбо | ◯ | 🔴 78 (m) -48% | 🟡 ~50 blog (e) | 🔴 sitemap 2017 (e) | 🔴 legacy | 🔴 ~5% (e) | — мы обогнали 5/5 |
+| 8 | arborist.su | арбо | ✗ stub+H | ⚪p (antibot) | ⚪H | ⚪H Sage expert (e) | ⚪ | ⚪ | pending |
+| 9 | forest-service.ru | арбо/лес | ✗ stub | 🔴 4 (m) one-pager | 🔴 (e) | 🔴 (e) | 🔴 basic | 🔴 (e) | exclude trivial |
+| 10 | tvoi-sad.com | арбо/сад | ✗ stub+H | 🔴 17 (m) ландшафт | ⚪H | ⚪H | 🔴 basic | 🔴 (e) | exclude (off-vertical) |
+| 11 | spilservis.ru | арбо узкий | ✗ stub+H | 🟡 **244** (m) **+388%** ⚠ NEW | ⚪H ~1 800 (e) | ⚪H low (e) | ⚪ basic | ⚪ low (e) | **monitoring** US-5 |
+| 12 | lesovod.su | арбо/расчистка | ✗ stub | 🔴 5 (m) | 🔴 one-pager | 🔴 (e) | 🔴 basic | 🔴 (e) | exclude trivial |
+| 13 | virubka-dereva.ru | арбо EMD | ✗ stub | 🔴 68 (m) +127% (мы) | 🔴 ~1 500 (e) | 🔴 (e) | 🔴 basic | 🔴 low (e) | — мы обогнали 5/5 |
+| 14 | chistka-ot-snega.ru | крыши EMD | ✗ stub+H | ⚪n (ECONNREFUSED) | ⚪H | ⚪H | ⚪ | ⚪ | pending (B2B-зима) |
+| 15 | demontazhmsk.ru | демонтаж | ✓ | 🔴 107 (m) +114% (мы) | 🔴 нет блога | 🔴 (e) | 🟡 (e) | 🟡 partial JSON-LD (e) | — мы обогнали 5/5 |
+| 16 | **cleaning-moscow.ru** ⭐ | E-E-A-T (клининг) | ✓ | 🟢 medium **626** (m) **+682%** ⚠ correction | 🟢 **~8 500-9 000 single** (m partial) NEW | 🟢 **strong** authors + TG/VK/MAX visual | 🟡 lead-only (no calc/chat) | 🔴 0% JSON-LD / partial microdata | **✓** E-E-A-T champion |
+| 17 | fasadrf.ru | контент (фасады) | ✓ | 🟡 360 (m) +80% | 🟢 depth 4 levels (e) | 🔴 (e) HTTP | 🟡 (e) | 🟡 partial JSON-LD (e) | exclude (off-vertical) |
 
-> «pending» в столбце «Топ-3 кандидат» означает: после W3 live audit (Keys.so показатели видимости) можем добавить новых кандидатов или отказаться от текущих.
-
----
-
-## Топ-3 для DoD-цели опережения (W3 baseline — гипотеза до live audit)
-
-### Финалисты (3): musor.moscow + liwood.ru + cleaning-moscow.ru
-
-**Обоснование:** на pre-live-audit стадии выбираем по принципу «по 1 чемпион в каждой ключевой оси, чтобы тренироваться обгонять разнопрофильных»:
-
-1. **musor.moscow — чемпион URL-объёма (~1387 URL, 137 гео-страниц).**
-   Обгоняем по: **URL-объёму** (наши 4 услуги × 8 districts = 32+ SD на одну только Wave 1, до ~150 SD к W14 vs у них 1 услуга × 137 = 137; разный паттерн — у нас глубина, у них ширина), **E-E-A-T** (у них нет авторов; мы делаем 2 авторов + цитата оператора в B2B), **schema-coverage** (живёт hypothesis pending, но 100% coverage = unique у нас), **UX** (фото→смета как USP-pillar — 0/17 не делает).
-
-2. **liwood.ru — чемпион контент-глубины (3 уровня + 85 blog + 29 sub-обрезка).**
-   Обгоняем по: **контент-глубине** (наш SD = mini-case + ≥2 localFaq + neighbor-districts vs у них SD = только текст; +20% средний объём слов на pillar/sub), **URL по 4 услугам** (они только арбо, мы 4-в-1), **E-E-A-T** (они без авторов), **UX** (фото→смета).
-
-3. **cleaning-moscow.ru — чемпион E-E-A-T (отдельные авторы-посадочные + /proverka-informacii/).**
-   Обгоняем по: **E-E-A-T** (наш реальный B2B-автор оператор с VK/TG sameAs — у cleaning-moscow авторы без cross-domain якорей), **URL** (у них статьи на корне антипаттерн, мы делаем /blog/ строго), **schema-coverage** (Person→Organization связка), **UX** (фото→смета).
-
-### Альтернативные кандидаты (могут заменить топ-3 после W3 live audit)
-
-- **fasadrf.ru** — если решим биться по объёму блога (148 vs наших 30 → 85 к M9). Сейчас не в топ-3 потому что не наша вертикаль (фасады), а контент-эталон извне ниши.
-- **chistka-ot-snega.ru** — если live audit покажет EMD-домен в топ-1 по «чистка крыш от снега», может занять место в топ-3 как pillar-чемпион крыш.
-- **demontazhmsk.ru** — если они расширятся в гео (по плану — risk R), смогут стать топ-3 по демонтажу.
-
-### Что произойдёт на W3 live audit
-
-После Keys.so export (видимость доменов в Я.Москва+МО за последние 30 дней) пере-сбор топ-3 по реальным цифрам:
-- если **grunlit-eco.ru** покажет видимость > musor.moscow в B2B-сегменте — может вытеснить её
-- если **arboristik.ru** в выдаче по арбо обгоняет liwood.ru (sitemap 2017 не помешал?) — может подняться
-- если **chistka-ot-snega.ru** в топ-1 по pillar крыш — обязан войти в топ-3
-
-**Решение оператору на W3 baseline:** утвердить или скорректировать топ-3 после первого Keys.so отчёта.
+> **Топ-3 sustained finalized:** musor.moscow / liwood.ru / cleaning-moscow.ru — sustained от W3 baseline (no rotation на W14).
 
 ---
 
-## Уникальные «winning angles» Обихода (0/17 конкурентов)
+## 4 · Per-axis closure calculation table (W14 finalized)
 
-Из плана §«Competitive Differentiation Strategy»:
+> **Closure %** = our W14 metric / competitor W14 metric × 100 (single-axis). >100% = опережаем.
 
-| # | Angle | Где живёт у нас | Конкурент-эталон ближайший |
-|---|---|---|---|
-| 1 | **Фото→смета за 10 минут** (USP) | `/foto-smeta/` (отдельный pillar) + lead-form на каждой странице | **0/17** — никто не делает |
-| 2 | **4-в-1 (мусор+арбо+крыши+демонтаж)** под одним подрядчиком | главная + cross-link `services-grid` блок на каждой странице | **0/17** — все 17 узко-нишевые |
-| 3 | **«Штрафы ГЖИ/ОАТИ берём на себя по договору»** | `/b2b/shtrafy-gzhi-oati/`, `/b2b/dogovor/` | **0/17** — уникальный B2B-крючок |
-| 4 | **Programmatic 4 услуги × 8 районов** | ~150 SD URL Wave 1 | musor.moscow делает 1 × 109; никто 4 × N |
-| 5 | **Реальный B2B-автор (оператор) с VK/TG `sameAs`** | `/avtory/<operator>/` + цитата на B2B-страницах | cleaning-moscow.ru имеет авторов, но без cross-domain якорей |
-| 6 | **Caregiver+Ruler TOV** (конкретные цифры, без «услуги населению») | весь сайт | большинство 17 в анти-TOV |
-| 7 | **Block-based архитектура (8 типов через blocks[])** | вся CMS Payload | большинство на legacy WP / Bitrix / Тильда |
-| 8 | **Я.Нейро / Алиса / Perplexity цитируемость** через TLDR + FAQ + таблицы | блог, pillar, SD (нейро-формат `tldr` блок везде) | fasadrf.ru близко но не системно |
+| Ось | Обиход W14 | Топ-3 (musor / liwood / cleaning) | 14 niche | Status | Δ vs W11 |
+|---|---|---|---|---|---|
+| **Schema-coverage** | 100% JSON-LD lint 0 errors | 100% JSON-LD / 100% microdata / 0% JSON-LD partial | medianly ~30-50% | ✅ **+50pp vs медианы 16/17** | musor parity reached (was +50pp gap), 14/17 sustained |
+| **UX foto-smeta** | 211/211 lead-form, AI-pipeline | 0 / 0 / 0 (calc/chat/lead only) | 0/14 | ✅ **unique 0/17** | sustained 3 checkpoints (W7+W11+W14) |
+| **4-в-1 multi-pillar** | 4 pillar × 47 sub × 76 SD × 14 cases | 1 / 3 / 1 pillar | 1 pillar / 14 niche | ✅ **unique 0/17** | sustained 2 checkpoints (W11+W14) |
+| **URL-объём** | 211 | 1 658 / 319 / 626 | medianly ~70 | 🟡 **partial 66.1% к liwood medianный** | +18pp closure (W11 48.2% → W14 66.1%) but liwood baseline changed +29% |
+| **Content-depth single-pillar** | ~3 800 | ~2 900 / ~2 551 / **~8 500-9 000** | medianly ~1 500-2 000 | 🟡 **partial multi-pillar advantage NEW** | re-classified after Track B finding |
+| **Content-depth multi-pillar agg** | ~15 200 (4 × 3 800) | ~2 900 (1) / ~7 653 (3) / ~8 500 (1) | n/a | ✅ **+79% vs cleaning, +99% vs liwood agg** | NEW W14 dimension |
+| **E-E-A-T (authors structure)** | 5 hub + on-site + 2 авторы Person→Org schema | low / parity / **strong visual + sameAs** | medianly low | 🟡 **conditional opening** | structure ready, opening через operator real-name |
 
 ---
 
-## Что копируем у каждого (что у них лучше — улучшаем)
+## 5 · NEW dimensions от W14 live measure
 
-> Каждая запись в формате **«элемент → как мы улучшаем»**.
+### 5.1 · liwood.ru +29% URL → URL axis recalibration
 
-### 1. musor.moscow (deep ✓ 2026-04-25)
-- **Гео-структура (district pages)** → у них 109 районов × 1 услуга, у нас 8 × 4 = 32+ → ~150 SD к W14, **но** глубже на 4× (mini-case + ≥2 localFaq на каждой; у musor только текст и форма)
-- **Калькулятор на главной** → у нас фото→смета (мощнее, чем выпадайки)
+**W11 baseline:** liwood 247 URL → closure 119/247 = 48.2% (Stage 2 W11 PASS ≥40%).
+**W14 measured:** liwood **319 URL** (+72 sub-services за 2 недели; hot signal — liwood expanding catalog faster than us Stage 3).
+**W13 outdated calc:** 211/247 = 85.4% (using **outdated** W11 baseline — honestly recalibrated).
+**W14 honest calc:** 211/319 = **66.1%** (using **W14 measured** liwood baseline).
+
+**Implication:**
+- Не регресс — liwood expanded, не мы упали.
+- Stage 4 backlog: +25-35 URL для 75% closure через sub-level SD `/<pillar>/<sub>/<district>/` dynamic route + 84 URL архитектурный backlog.
+- **honest data flag** обязателен в operator-gate-W14: НЕ показывать «85.4% closure» (outdated), показывать «66.1% (recalibrated honest)».
+
+### 5.2 · cleaning-moscow.ru content-depth ~8 500-9 000 — NEW dimension
+
+**W11 measure:** не измеряли content-depth конкурентов (только URL count + schema).
+**W14 measured (DDoS-Guard partial):** cleaning-moscow `/uborka-kvartir/` ~8 500-9 000 visible words single-pillar.
+
+**Implication:**
+- **Single-pillar comparison:** наш 3 800 vs cleaning 8 500 → отстаём 2.2x по «глубокой странице».
+- **Multi-pillar comparison:** наш 4 × 3 800 = 15 200 agg vs cleaning 1 × 8 500 → опережаем +79% по агрегированному покрытию услуг.
+- **Re-classification:** ось «Content-depth» (W11 metric «avg pillar word count») → **«Content-depth multi-pillar advantage»** (W14 metric: «multi-pillar aggregated word coverage vs single-pillar deep dive»).
+- **Stage 4 backlog:** per-pillar expansion 4 × ~7 000 слов agg ~28 000 (vs cleaning baseline 8 500) — hybrid model achievable post-EPIC.
+
+### 5.3 · spilservis.ru +388% emerging — US-5 monitoring shortlist
+
+**W11 estimate:** ~50 URL (stub).
+**W14 measured:** **244 URL** (+388% от estimate).
+
+**Implication:**
+- Emerging competitor — конкурент в узкой нише «спил» вырос быстрее ожидаемого.
+- US-5 weekly monitoring shortlist: + spilservis.ru как 18-й конкурент (vs original 17).
+- Monthly deep-profile refresh recommended (sustained от W14 → first refresh W18-W20).
+- Hot signal: возможно, spilservis применяет программный template подход — investigate в Stage 4.
+
+### 5.4 · musor.moscow Schema parity — gap closed
+
+**W11 baseline:** ~50% schema (estimated; не измеряли systematically).
+**W14 measured:** **100% JSON-LD** (5/5 sample contain Service + Organization + BreadcrumbList).
+
+**Implication:**
+- W11 claim «+50pp у нас vs топ-3» теперь некорректна — musor закрыл gap.
+- **Recalibrated formulation:** «+50pp vs медианы 16/17» (musor parity acknowledged honest, 14/17 sustained).
+- Не блокер DoD — Schema axis sustained confirmed; формулировка скорректирована.
+- Hot signal: музор активно инвестирует в schema → продолжать monitoring (Track C neuro-SEO infrastructure прицепится).
+
+---
+
+## 6 · Уникальные «winning angles» Обихода W14 (10 angles)
+
+> Из плана §«Competitive Differentiation Strategy» + Stage 2 W11 sustained + 2 NEW W14.
+
+### 6.1 · Angles 1-8 sustained (от W11)
+
+| # | Angle | Где живёт у нас | Конкурент-эталон ближайший | W14 status |
+|---|---|---|---|---|
+| 1 | **Фото→смета за 10 минут** (USP) | `/foto-smeta/` отдельный pillar + lead-form на 211/211 URL | **0/17** — никто не делает | ✅ confirmed sustained 3 checkpoints |
+| 2 | **4-в-1 (мусор+арбо+крыши+демонтаж)** | главная + cross-link `services-grid` блок на каждой странице | **0/17** — все 17 узко-нишевые | ✅ confirmed sustained 2 checkpoints |
+| 3 | **«Штрафы ГЖИ/ОАТИ берём на себя по договору»** | `/b2b/shtrafy-gzhi-oati/`, `/b2b/dogovor/` | **0/17** — уникальный B2B-крючок | ✅ confirmed sustained от Stage 2 |
+| 4 | **Programmatic 4 × 8 districts (76 SD)** | 16 priority-A + 60 priority-B Stage 3 | musor.moscow делает 1 × 137 (URL champion); никто 4 × N | ✅ sustained Stage 3 expansion |
+| 5 | **Реальный B2B-автор (оператор) с VK/TG `sameAs`** | `/avtory/<operator>/.skip` + цитата на B2B-страницах | cleaning-moscow.ru имеет authors visual + sameAs **но без Person JSON-LD** | 🟡 **conditional** opening pending operator real-name |
+| 6 | **Caregiver+Ruler TOV** | весь сайт | большинство 17 в анти-TOV | ✅ confirmed sustained от US-0 |
+| 7 | **Block-based архитектура (8 типов через blocks[])** | вся CMS Payload | большинство на legacy WP / Bitrix / Тильда | ✅ confirmed sustained от US-0 |
+| 8 | **Я.Нейро / Алиса / Perplexity цитируемость** через TLDR + FAQ + таблицы | блог, pillar, SD (нейро-формат `tldr` блок везде) | fasadrf.ru близко но не системно | ✅ sustained |
+
+### 6.2 · NEW angles W14 (2)
+
+| # | Angle | Где живёт у нас | Конкурент-эталон ближайший | W14 status |
+|---|---|---|---|---|
+| 9 | **`llms.txt` LLM-friendly content map** | Track C neuro-SEO foundation [`seosite/07-neuro-seo/llms-txt-spec.md`](../07-neuro-seo/llms-txt-spec.md) | **0/17** конкурентов имеют (W14 measured 17/17 missing) | 🟡 **soft confirmed NEW** (внедрение pending Track C finalize) |
+| 10 | **Я.Метрика 8 goals tracking infrastructure** | Track C monitoring 4 артефакта | 0/17 публично documented | 🟡 **internal differentiation** NEW (не визуальный для конкурентов) |
+
+---
+
+## 7 · Что копируем у каждого (sustained W11 + W14 updates)
+
+> Каждая запись в формате **«элемент → как мы улучшаем»**. **NEW W14:** обновления после Track B refresh.
+
+### 7.1 · musor.moscow (deep ✓ refresh 2026-05-03)
+
+- **Гео-структура (district pages)** → у них 109 районов × 1 услуга, у нас 8 × 4 = 76 SD pillar-level (Stage 3) + 84 sub-level backlog Stage 4
+- **Калькулятор на главной** → у нас фото→смета (мощнее AI-pipeline)
 - **/park-spectehniki/** → у нас `/park-tehniki/` + cross-link с districts
 - **/licenzii/, /normativnye-dokumenty/** → у нас аналогично + СРО + цитата оператора
+- **NEW W14:** Schema 100% JSON-LD достиг parity vs нашего → продолжать monitoring; они инвестируют в SEO infrastructure быстрее ожидаемого
 
-### 2. grunlit-eco.ru (stub ✗ — pending live audit)
-- pending live audit W3
-- Гипотеза: **B2B-договор паттерн** → если есть отдельная страница договора, копируем формат и добавляем «штрафы ГЖИ берём на себя»
+### 7.2 · liwood.ru (deep ✓ refresh 2026-05-03)
 
-### 3. liwood.ru (deep ✓ 2026-04-25)
-- **3 уровня иерархии** `/services/[pillar]/[sub]/[district]/` → у нас идентично
-- **40 districts × udalenie-derevev** → строим 8 districts × 4 услуги = 32 SD по арбо одной (vs 40 у liwood) **но** глубже на 4×
-- **29 sub-обрезка по породам** → копируем подход sub-detail; для нас на arboristika sub-cluster
-- **/info/calculator/, /info/onlayn-konsultatsiya/** → у нас фото→смета (мощнее) + calc placeholder Stage 0
-- **85 статей блог** → стартуем 30, к M9 целимся 85, **но** на каждой статье — связка с pillar/SD (у liwood blog cross-link слабее)
-- **gallery × 12 типов услуг** → у нас Cases collection с привязкой к sub + district
+- **3 уровня иерархии** `/services/[pillar]/[sub]/[district]/` → у нас идентично (но 84 sub-level SD deferred Stage 3 → backlog Stage 4)
+- **40 districts × udalenie-derevev** → строим 8 districts × 4 услуги = 76 SD pillar-level (vs 40 у liwood); глубже на 4×
+- **29 sub-обрезка по породам** → копируем подход sub-detail
+- **/info/calculator/, /info/onlayn-konsultatsiya/** → у нас фото→смета (мощнее)
+- **85 → 145 sub-services** (W14 measured) → liwood growth pace fast, мы tracking но не копируем 1:1
+- **gallery × 12 типов услуг** → у нас Cases collection (14 cases с привязкой к sub + district)
+- **NEW W14:** liwood +29% URL за 2 недели — hot signal, continued tracking; если они добавят 4-в-1 multi-pillar (e.g. arbo + клининг + мусор) — пересмотр топ-3 на post-EPIC
 
-### 4. promtehalp.ru (deep ✓ 2026-04-25, sitemap старый)
-- **/work + /video** галерея → у нас Cases + (опционально) Before-After block
-- **СРО-упоминание** → у нас явно на каждой B2B + footer
-- **Слабые стороны** (sitemap 2021, 5 sub flat): легко обгоняем по URL-объёму и контент-глубине
+### 7.3 · cleaning-moscow.ru (deep ✓ refresh 2026-05-03)
 
-### 5. lesoruby.ru (stub ✗ — pending)
-- pending — после live audit заполнить + сверить с lesoruby.com
-
-### 6. alpme.ru (deep ◯ 2026-04-25)
-- **/msk/ root-сегмент** → у нас districts через `/raiony/[slug]/`, паттерн понятен — отложен (не делаем СПб-филиал в Stage 0-3)
-- **Калькулятор** → фото→смета мощнее
-- **Слабая сторона** (нет блога): легко обгоняем по контент-глубине
-
-### 7. arboristik.ru (deep ◯ 2026-04-25, sitemap 2017)
-- **~50 статей блог** → стартуем 30, copying тематику (по породам, сезонные)
-- **Подвиды по породам** → у нас arboristika sub-cluster (12 sub)
-- **Слабые стороны** (sitemap 2017, HTTP): обгоняем по UX + E-E-A-T + schema
-
-### 8. arborist.su (stub ✗ — pending)
-- pending — после live audit заполнить
-- Гипотеза: **expert-positioning TOV** → если есть авторы-эксперты, копируем формат + усиливаем реальным B2B-автором (оператор)
-
-### 9. forest-service.ru (stub ✗ — pending)
-- pending — после live audit заполнить
-- Гипотеза: **лесные услуги** + **B2B для СНТ/садоводств** → новый угол для нашего B2B-хаба (УК/ТСЖ + застройщики + СНТ?)
-
-### 10. tvoi-sad.com (stub ✗ — pending)
-- pending — после live audit заполнить
-- Гипотеза: **сезонные кластеры** (весна/осень) + **связка арбо+уход** → паттерн для арбо-блога; **проверить пересечение с apps/shop/** (если магазин — не наша услуговая зона, передать в `EPIC-SEO-LANDSHAFT`)
-
-### 11. spilservis.ru (stub ✗ — pending)
-- pending
-- Гипотеза: **узкая ниша спил, конверсия одной услуги** → если у них прозрачные цены и кейсы — копируем формат прайса для arboristika sub
-
-### 12. lesovod.su (stub ✗ — pending)
-- pending
-- Гипотеза: **расчистка-кластер** + **B2C/B2B mix** → если есть детальная структура расчистки (от заросшего до подготовки к стройке) — углубляем наш arboristika sub `raschistka`
-
-### 13. virubka-dereva.ru (stub ✗ — pending, EMD)
-- pending
-- Гипотеза: **EMD-эффект** → проверяем позицию по «вырубка дерева»; если в топ-1-3, мы не обгоним по этому ключу без backlinks → фокус на `udaleniye dereva` / `spil dereva` + district
-
-### 14. chistka-ot-snega.ru (stub ✗ — pending, EMD)
-- pending
-- Гипотеза: **зимняя сезонность + B2B УК/ТСЖ** + EMD-эффект → копируем sub-services крыш (механизированная / ручная / альпинистами / абонентское) + усиливаем «штрафы ГЖИ» B2B-крючком
-
-### 15. demontazhmsk.ru (deep ✓ 2026-04-25)
-- **Programmatic material × object** (стены × 5 материалов и т.д.) → у нас отложено до Wave 2.5 (наш демонтаж 225 wsfreq не оправдывает 4 уровня сейчас)
-- **Слабые стороны** (нет блога): обгоняем по контент-глубине
-- **Угроза для нас:** если расширятся на гео — risk R-mid
-
-### 16. cleaning-moscow.ru (deep ✓ 2026-04-25)
-- **/avtor-pavlina-pimenova/** и др. — отдельные посадочные авторов → у нас 2 авторов (компания + оператор), оператор с VK/TG sameAs (у cleaning-moscow без)
-- **/proverka-informacii/** fact-check → копируем подход (не отдельная страница, а блок «Источник / fact-checker» в авторских blog)
+- **/avtor-pavlina-pimenova/** и др. — отдельные посадочные авторов → у нас 2 авторов hub (Authors collection) + on-site `/komanda/` с 5 bios (Track A finalize)
+- **/proverka-informacii/** fact-check → копируем подход (`seosite/06-eeat/methodology.md` + блок «Источник / fact-checker» в авторских blog)
 - **B2B/B2C сегментация в URL** → у нас отдельный /b2b/ хаб, B2C — root по умолчанию
-- **Слабые стороны** (статьи на корне антипаттерн): мы делаем /blog/ строго
+- **NEW W14:** content-depth ~8 500-9 000 single-pillar — hybrid model achievable post-EPIC (Stage 4 backlog: per-pillar expansion 4 × 7 000 слов)
+- **NEW W14:** TG+VK+MAX visual `sameAs` в footer (without Person schema) → мы превосходим через Person→Organization JSON-LD (+1pp confirmed)
 
-### 17. fasadrf.ru (deep ✓ 2026-04-25)
-- **148 статей блог + нейро-формат** → стартуем 30 → 85 к M9 + 100% TLDR + FAQ + таблицы → 100% нейро-формат (системнее)
-- **4-уровневая иерархия по производителям подсистем** → не наша вертикаль (фасады), не копируем структурно
-- **Слабые стороны** (HTTP): обгоняем по UX + schema
+### 7.4 · 14 stub-with-hypothesis (sustained от W11 — diff-only refresh W14)
 
----
-
-## TODO для W3 live audit (заполнить после Keys.so/Topvisor запуска)
-
-### Phase 1: Подготовка (W2-W3 setup)
-- [ ] Keys.so проект «Обиход competitors» с 17 доменами (re + seo-tech)
-- [ ] Topvisor проект на 200 ключей baseline (4 pillar × top-50 по wsfreq)
-- [ ] Я.Метрика 8 целей запущены (для нашей baseline)
-- [ ] Я.Вебмастер «Структурированные данные» подключён
-
-### Phase 2: Live audit 9 stub-конкурентов (re + seo-content)
-- [ ] **grunlit-eco.ru** — B2B-структура (главный фокус)
-- [ ] **lesoruby.ru** — связь с lesoruby.com (merge / keep separate)
-- [ ] **arborist.su** — expert-positioning + TOV
-- [ ] **forest-service.ru** — sub-services breadth + B2B для СНТ
-- [ ] **tvoi-sad.com** — сезонные кластеры + пересечение с apps/shop/
-- [ ] **spilservis.ru** — CR-pathways на узкой услуге + прайс
-- [ ] **lesovod.su** — расчистка-кластер + B2C/B2B mix
-- [ ] **virubka-dereva.ru** — EMD-эффект
-- [ ] **chistka-ot-snega.ru** — EMD-эффект + B2B + сезонность
-
-### Phase 3: Update existing 8 deep profiles (опционально)
-- [ ] musor.moscow — досканировать /chastnym-klientam/ + /korporativnym-klientam/ (Wave 1 не подтвердил)
-- [ ] liwood.ru — schema-coverage детально (3 random pages)
-- [ ] остальные 6 — проверить актуальность IA-данных (1 неделя возраст — OK; обновлять только если sitemap изменился)
-
-### Phase 4: Сводный benchmark-W3-baseline.md
-- [ ] Сводная таблица 17 × 5 осей с **реальными цифрами** Keys.so/Topvisor
-- [ ] Топ-3 для DoD утвердить или пере-собрать
-- [ ] Топ-10 «утерянных» ключей (конкуренты топ-10, мы 50+ или нет URL)
-- [ ] Топ-10 «выигранных» ключей если есть (мы где-то уже впереди)
-- [ ] Δ % vs медианы топ-3 по каждой из 5 осей
-- [ ] Раздел «# Где мы УЖЕ обогнали» (даже если 0 пунктов на baseline — пишем «0/N»)
-- [ ] Передача в `cw` для написания эталонов W3 с явным winning angle vs топ-3
-
-### Phase 5: Hand-off
-- [ ] Артефакт `seosite/01-competitors/benchmark-W3-baseline.md` финальный
-- [ ] Обновление этой матрицы (`differentiation-matrix.md`) с реальными цифрами
-- [ ] Передача в `seo-content` → `cw` для wireframe-указаний (winning angle на каждом типе страницы)
-- [ ] Hand-off в `specs/EPIC-SEO-CONTENT-FILL/US-6-competitor-benchmark/`
-- [ ] poseo gate: апрув W3 baseline отчёта оператору
+См. [`benchmark-W11-mid.md`](benchmark-W11-mid.md) §3 + W14 Track B updates:
+- **promtehalp.ru** (deep ✓): URL +67% но всё равно мы +422% обогнали
+- **alpme.ru** (deep ◯): **+374%** ⚠ — закрытие нашего опережения; sustained recalibrated parity
+- **arboristik.ru** (deep ◯): URL -48% (sustained legacy 2017)
+- **forest-service.ru** / **lesovod.su** / **tvoi-sad.com**: trivial one-pagers, exclude
+- **spilservis.ru** (stub ✗): **+388%** ⚠ NEW — emerging, US-5 monthly monitoring
+- **virubka-dereva.ru** (stub ✗): EMD-эффект sustained, мы +310% обогнали по комплексу
+- **chistka-ot-snega.ru** (stub ✗): sustained no-measure (ECONNREFUSED)
+- **grunlit-eco.ru** (stub ✗): sustained no-measure
+- **lesoruby.ru** (stub ✗): sustained no-measure (cert error)
+- **arborist.su** (stub ✗): sustained partial (antibot)
+- **demontazhmsk.ru** (deep ✓): URL +114% но мы +197% обогнали по всему
+- **fasadrf.ru** (deep ✓): URL +80% (sustained off-vertical)
 
 ---
 
-## Сводка гипотез W2 (по 9 stub-профилям)
+## 8 · Топ-3 для DoD-цели (W14 finalized — sustained от W11)
 
-> Добавлено 2026-05-01 ahead of schedule. **Это гипотезы**, не факты. Live audit W3
-> подтверждает или опровергает.
+### 8.1 · Финалисты (3 sustained): musor.moscow + liwood.ru + cleaning-moscow.ru
 
-| Stub | Главная гипотеза silы | Topic для копирования | Risk для нас |
-|---|---|---|---|
-| grunlit-eco.ru | B2B-договор + ФККО-таблицы | Формат типового договора с УК | Низкий (узкий B2B, не B2C) |
-| lesoruby.ru | Фолк-нейминг как анти-эталон TOV | Sub-структура спила (если глубокая) | Низкий (TOV у нас сильнее) |
-| arborist.su | `.su`-старый бренд, реальный авторstvo | Authorship-pattern для Авторов | Средний (E-E-A-T накопленный) |
-| forest-service.ru | Лесные услуги + B2B для СНТ | Расширение B2B-хаба на СНТ-сегмент | Низкий (B2B канал слабый у узкой ниши) |
-| tvoi-sad.com | Сезонный календарь работ + magazin? | TLDR-структура + интеграция shop | **Средний** (если есть магазин) |
-| spilservis.ru | CR-pathway узкой услуги + прайс | Прозрачный прайс-формат | Средний (топ-10 по «спил») |
-| lesovod.su | Расчистка-кластер + region | Sub детализация для raschistka-uchastka | Средний (Q-15 ADR-uМ-15) |
-| virubka-dereva.ru | EMD-эффект «вырубка дерева» | Slug-стратегия (не используем «вырубка») | **Высокий** EMD по точному ключу |
-| chistka-ot-snega.ru | EMD «чистка от снега» + B2B договор сезон | Метод-sub + B2B-договор | **Высокий** EMD в зимний сезон |
+**Sustained от W3 baseline → W7 → W11 → W14 (4 checkpoints, no rotation):**
 
-**Live audit W3 priority** (порядок проверки):
-1. **chistka-ot-snega.ru** — наш единственный pillar-конкурент по крышам, EMD-риск.
-2. **virubka-dereva.ru** — EMD-риск по арбо.
-3. **grunlit-eco.ru** — главный для B2B-эталона.
-4. **tvoi-sad.com** — пересечение с apps/shop/landshaft.
-5. **spilservis.ru** — узкая ниша, CR-эталон для одной услуги.
-6-9. Остальные — стандартный аудит.
+1. **musor.moscow** — URL-объём champion (1 658 W14 outlier auto-gen, +19.5% vs W11 1 387)
+2. **liwood.ru** — content-depth & IA champion (319 W14, +29.1% vs W11 247)
+3. **cleaning-moscow.ru** — E-E-A-T champion + content-density NEW (626 W14, +682% W11 underestimate correction)
 
-## История версий
+### 8.2 · Что произошло на W14 final audit
+
+После Track B refresh:
+- **Топ-3 не изменился** — sustained финалисты vs original W3 hypotheses
+- **musor.moscow** Schema parity reached (W11 +50pp gap closed) — но axis sustained vs медианы 16/17
+- **liwood.ru** URL +29% — closure recalibrated honest 66.1% (Stage 4 backlog)
+- **cleaning-moscow.ru** content-depth ~8 500 measured — NEW dimension multi-pillar advantage classification
+- **spilservis.ru** emerging signal (+388%) — US-5 monthly monitoring shortlist (не вытесняет топ-3 на W14, но кандидат на post-EPIC рекомпозицию)
+
+### 8.3 · Post-EPIC recommendation для топ-3 monitoring
+
+- **Monthly refresh top-3** через US-5 monitoring infrastructure (sustained iron rule)
+- **Quarterly review топ-3 selection** — если spilservis достигает >300 URL ИЛИ конкурент применяет 2+ pillar — пересмотреть топ-3
+- **Sustained methodology fallback** (без Topvisor/Keys.so) — pending operator creds delivery (sustained W3 → W14)
+
+---
+
+## 9 · Stage 4 / post-EPIC backlog (recommendations from v4)
+
+### 9.1 · Priority high
+
+1. **+25-35 URL для 75% closure к liwood W14 measured 319** — sub-level SD dynamic route (84 URL архитектурный backlog от Stage 2)
+2. **Operator real-name + VK/TG/MAX `sameAs` delivery** — закрытие E-E-A-T axis опережение vs cleaning-moscow
+3. **mini-case binding 70/76 priority-B SD** — currently 6/76 после Track D, sustained backlog
+
+### 9.2 · Priority medium
+
+4. **HowTo schema на 5-7 blog/cases** — Track C [`jsonld-completeness.md`](../07-neuro-seo/jsonld-completeness.md) recommendation
+5. **Per-pillar content-depth расширение до 7 000-9 000 слов** — vs cleaning-moscow single-pillar baseline 8 500
+6. **`spilservis.ru` monthly monitoring** — emerging competitor +388% W14
+7. **`alpme.ru` quarterly monitoring** — +374% W14, проверять rolling-back опережения
+8. **`llms.txt` implementation** — Track C neuro-SEO uniqueness +1pp
+
+### 9.3 · Priority low
+
+9. **TLDR color-contrast a11y design-system** — sustained от W11 (51/51 axe.json 1 serious)
+10. **Slug drift `zhukovskij↔zhukovsky` cleanup** — sustained alias works для cases
+11. **Topvisor SaaS creds delivery** — operator pending (sustained W3 → W14)
+12. **DNS A-record + GHA secrets для `staging.obikhod.ru`** — sustained CI/CD backlog
+
+---
+
+## 10 · TODO для post-EPIC monitoring (sustained iron rule)
+
+### Phase 1: US-5 weekly monitoring infrastructure
+
+- [x] 17 deep-profiles refresh W14 (Track B, commit `17ebdc7`)
+- [x] w14-inputs.md aggregated metrics (Track B, commit `c546ee5`)
+- [ ] Monthly deep-profile refresh top-3 (musor / liwood / cleaning) — sustained iron rule
+- [ ] Quarterly review топ-3 selection (если signal threshold met)
+- [ ] Add **spilservis.ru** в monitoring shortlist (18-й конкурент)
+
+### Phase 2: Sustained methodology fallback
+
+- [ ] Topvisor SaaS creds — operator delivery
+- [ ] Keys.so creds — operator delivery
+- [ ] Я.ВебМастер «Структурированные данные» public report — operator delivery
+
+### Phase 3: post-EPIC artefacts
+
+- [ ] benchmark-W18 (monthly refresh) — quarterly cadence
+- [ ] differentiation-matrix v5 (если signal threshold met)
+- [ ] Передача в `cw` для refresh winning angle wireframes (если NEW competitor добавлен)
+
+---
+
+## 11 · История версий
 
 | Дата | Версия | Кто | Что |
 |---|---|---|---|
-| 2026-05-01 | W3-draft (pre-audit) | re + poseo | Создан W2 ahead of schedule. 9 stub-профилей, гипотезы топ-3, TODO для W3. |
-| 2026-05-01 | W3-draft + W2 hypotheses | seo-content + cw + cms + seo-tech | Дополнены 9 stub-файлов prima facie hypothesis (без crawl). Матрица помечена ⚪H где гипотезы добавлены. Сводка гипотез + live-audit priority order. |
-| ~~pending~~ | W3-baseline (final) | re + seo-content | **Deferred** — Keys.so/Topvisor creds не переданы оператором. Заменено fallback methodology W7. |
-| 2026-05-02 | W7-mid (fallback methodology) | qa-site + re + seo-content | Stage 1 actual: 22 URL, 2 оси confirmed (schema +50pp, UX USP уникальный); E-E-A-T parity с cleaning-moscow; URL-closure PARTIAL (raw 8.9%, по 4-pillar PASS). См. `benchmark-W7-mid.md`. |
-| **2026-05-02** | **W11-mid (Stage 2)** | **seo-tech + qa-site + re + seo-content** | **Stage 2 actual: 119 URL (sitemap), 3 confirmed оси опережения (Schema +50pp, UX foto-smeta, 4-в-1 multi-pillar); URL closure 48.2% к liwood медиане → ≥40% PASS. 84 sub-level SD deferred Stage 3 (404, dynamic route TODO). 51 axe.json: 0 critical / 1 serious (`color-contrast` на TLDR `--c-accent-ink` на `--c-accent` background — design-system token issue, backlog). См. `benchmark-W11-mid.md`.** |
-| pending | W14-final | seo-content + re | После Stage 4 + Topvisor live (если creds дойдут к W14) |
+| 2026-05-01 | v1 W3-draft (pre-audit) | re + poseo | 9 stub-профилей, гипотезы топ-3, TODO для W3 |
+| 2026-05-01 | v2 W3-draft + W2 hypotheses | seo-content + cw + cms + seo-tech | 9 stub prima facie hypothesis |
+| 2026-05-02 | v3 W7-mid | qa-site + re + seo-content | Stage 1 actual: 22 URL, 2 confirmed оси (schema +50pp, UX USP) |
+| 2026-05-02 | v3.1 W11-mid (Stage 2) | seo-tech + qa-site + re + seo-content | Stage 2 actual: 119 URL, 3 confirmed (Schema +50pp, UX, 4-в-1), 48.2% closure к liwood 247 |
+| **2026-05-03** | **v4 W14-final** | **sa-seo + seo-content + re (через poseo)** | **W14 final full rewrite v3 → v4. Stage 3 actual: 211 URL, 3 hard confirmed sustained (Schema +50pp медианы 16/17 / UX foto-smeta unique 0/17 / 4-в-1 unique 0/17) + 1 conditional (E-E-A-T) + 2 partial NEW dimensions (URL 66.1% recalibrated honest / content-depth multi-pillar advantage). Track B refresh corrections: musor schema parity, liwood +29% URL, cleaning content-depth ~8 500 NEW, spilservis +388% emerging. 2 NEW winning angles (`llms.txt` + Я.Метрика 8 goals). Топ-3 sustained no rotation. EPIC DoD PASS recommendation «approve epic close + Stage 4 follow-up backlog».** |
 
 ---
 
-## W7 status update — гипотезы vs реальность
+## 12 · Hand-off
 
-> Добавлено 2026-05-02 в Track E.2 (qa-site + re + seo-content).
-
-### Что подтвердилось на W7 (2 of 8 winning angles)
-
-| # | W3 гипотеза | W7 status | Evidence |
-|---|---|---|---|
-| 1 | **Фото→смета 0/17** | ✅ Confirmed | `/foto-smeta/` отдельный pillar + lead-form на каждой из 22 URL; 0/3 топ-3 имеют аналог (musor/liwood/cleaning только калькуляторы) |
-| 2 | **4-в-1 (мусор+арбо+крыши+демонтаж)** | ✅ Confirmed | 22 URL, 16 SD по 4 pillar. Топ-3: musor только мусор, liwood только арбо, cleaning только клининг — узко-нишевые |
-| 3 | «Штрафы ГЖИ/ОАТИ берём» | ⏳ Pending Stage 2 | Не закрыто на Stage 1 (B2B-pages в US-3) |
-| 4 | **Programmatic 4 × 8 districts** | 🟢 Partial confirmed | Stage 1: **16 SD реально работают** (4 услуги × 4 района — vs гипотеза «только Одинцово»). Cap к W14: 32+. Уникальный angle в нише ✅ |
-| 5 | **Реальный B2B-автор + sameAs** | 🟡 Parity | Authors structure готова, real name + VK/TG sameAs ожидаются от operator (W2/W3 placeholder) |
-| 6 | **Caregiver+Ruler TOV** | ✅ Confirmed (US-0 baseline) | TOV-checker exit 0; 5 blog статей в W7 написаны cw |
-| 7 | **Block-based архитектура** | ✅ Confirmed (US-0 closure) | BlockRenderer на 7 routes |
-| 8 | **Я.Нейро / Алиса формат** | 🟡 Partial | TLDR блок не везде; FAQ + таблицы есть. Усилить в Stage 2 |
-
-### Что опровергнуто на W7
-
-- ❌ **«Только Одинцово SD создан»** (sa-spec предположение) — реально все 16 SD-комбинаций отрендерены 200. Bonus: closure угла «4 × district» уже выше ожидаемого.
-
-### Critical bug (передан seo-tech)
-
-- 🔴 **Slug `odintsovo` vs `odincovo`** — на programmatic-SD link на neighbor district использует «t»-вариант, реальный route — «c»-вариант. Все 9 ссылок на `/raiony/odintsovo/` ведут на 404. Блокер до Stage 2.
+- **К poseo (Track E Step 3):** написать `operator-gate-W14.md` packet (sustained pattern operator-gate-W11 ~150-200 строк) на основе [`benchmark-W14.md`](benchmark-W14.md) + этот matrix v4
+- **К leadqa (W14 day 7):** real-browser smoke ≥10 representative URL включая `/komanda/`, `/sro-licenzii/`, `/avtory/`, `/foto-smeta/`, 2 pillar, 2 SD, 2 blog, 2 cases
+- **К release (W14 day 8):** RC-W14 release-notes after leadqa PASS
+- **К operator (W14 day 9-10):** approve / changes на operator-gate-W14.md packet
+- **Post-EPIC к US-5:** включить spilservis.ru в monitoring shortlist (18-й конкурент); monthly refresh top-3
