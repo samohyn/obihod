@@ -371,9 +371,7 @@ async function main() {
   // Stage 3 main. Other Stage 3 scripts (blog, cases) работают на тех же
   // env vars без regex check — pattern unified.
   if (isProd && process.env.OBIKHOD_SEED_CONFIRM !== 'yes') {
-    console.error(
-      '[seed-stage3] Safety-gate: prod mode требует OBIKHOD_SEED_CONFIRM=yes',
-    )
+    console.error('[seed-stage3] Safety-gate: prod mode требует OBIKHOD_SEED_CONFIRM=yes')
     process.exit(1)
   }
   if (!dbUri) {
