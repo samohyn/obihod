@@ -1,7 +1,7 @@
 {
   "type": "service-district",
   "service": "vyvoz-musora",
-  "district": "zhukovsky",
+  "district": "zhukovskij",
   "subServiceSlug": "vyvoz-sadovogo-musora",
   "publishStatus": "draft",
   "noindexUntilCase": true,
@@ -156,7 +156,7 @@
       "hiddenFields": {
         "service": "vyvoz-musora",
         "sub": "vyvoz-sadovogo-musora",
-        "district": "zhukovsky"
+        "district": "zhukovskij"
       }
     },
     {

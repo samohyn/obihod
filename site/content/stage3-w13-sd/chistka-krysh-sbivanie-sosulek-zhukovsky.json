@@ -1,7 +1,7 @@
 {
   "type": "service-district",
   "service": "chistka-krysh",
-  "district": "zhukovsky",
+  "district": "zhukovskij",
   "subServiceSlug": "sbivanie-sosulek",
   "publishStatus": "draft",
   "noindexUntilCase": true,
@@ -156,7 +156,7 @@
       "hiddenFields": {
         "service": "chistka-krysh",
         "sub": "sbivanie-sosulek",
-        "district": "zhukovsky"
+        "district": "zhukovskij"
       }
     },
     {

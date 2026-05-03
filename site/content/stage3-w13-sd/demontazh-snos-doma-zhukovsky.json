@@ -1,7 +1,7 @@
 {
   "type": "service-district",
   "service": "demontazh",
-  "district": "zhukovsky",
+  "district": "zhukovskij",
   "subServiceSlug": "snos-doma",
   "publishStatus": "draft",
   "noindexUntilCase": true,
@@ -156,7 +156,7 @@
       "hiddenFields": {
         "service": "demontazh",
         "sub": "snos-doma",
-        "district": "zhukovsky"
+        "district": "zhukovskij"
       }
     },
     {

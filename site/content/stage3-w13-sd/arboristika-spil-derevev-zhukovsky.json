@@ -1,7 +1,7 @@
 {
   "type": "service-district",
   "service": "arboristika",
-  "district": "zhukovsky",
+  "district": "zhukovskij",
   "subServiceSlug": "spil-derevev",
   "publishStatus": "draft",
   "noindexUntilCase": true,
@@ -156,7 +156,7 @@
       "hiddenFields": {
         "service": "arboristika",
         "sub": "spil-derevev",
-        "district": "zhukovsky"
+        "district": "zhukovskij"
       }
     },
     {
