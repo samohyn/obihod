@@ -5,6 +5,7 @@ import {
   buildAfterChangeAuditHook,
   buildAfterDeleteAuditHook,
 } from '@/lib/admin/audit/captureHooks'
+import { notifyOperatorAboutLead, type LeadDocLike } from '@/lib/telegram/sendMessage'
 
 export const Leads: CollectionConfig = {
   slug: 'leads',
@@ -70,6 +71,25 @@ export const Leads: CollectionConfig = {
         const phone = typeof doc?.phone === 'string' ? doc.phone : null
         return phone ? `Заявка ${phone.slice(-4)}` : null
       }),
+      // US-8 hot-fix (PAN-9): Telegram уведомление оператору о новом лиде.
+      // Sustained fire-and-forget pattern (incident 2026-05-01 sync await
+      // → pg pool starvation deadlock в audit_log hook). 5s timeout — щадящий,
+      // оператор получит сообщение или log-warn если Telegram недоступен.
+      ({ doc, operation }) => {
+        if (operation !== 'create') return doc
+        setImmediate(() => {
+          Promise.race([
+            notifyOperatorAboutLead(doc as LeadDocLike),
+            new Promise<never>((_, reject) =>
+              setTimeout(() => reject(new Error('5s timeout')), 5000),
+            ),
+          ]).catch((e: unknown) => {
+            const msg = e instanceof Error ? e.message : String(e)
+            console.error('[lead-telegram-notify]', msg)
+          })
+        })
+        return doc
+      },
     ],
     afterDelete: [
       buildAfterDeleteAuditHook('leads', (doc) => {
