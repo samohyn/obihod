@@ -62,6 +62,35 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -p ${{ secrets.BEGET_SSH_PORT || '22' }} -H ${{ secrets.BEGET_SSH_HOST }} >> ~/.ssh/known_hosts
 
+      - name: "Inject Telegram env vars to VPS shared/.env (W15 P1, US-8/PAN-9)"
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_OPERATOR_CHAT_ID: ${{ secrets.TELEGRAM_OPERATOR_CHAT_ID }}
+        run: |
+          set -eo pipefail
+          # W15 cpo extended mandate: operator provided real Telegram creds.
+          # Idempotent: removes old TELEGRAM_* lines, appends new. Sustained
+          # iron rule «secrets only on VPS .env, never in git» — secrets via
+          # GitHub Secrets injection, не committed.
+          if [ -z "$TELEGRAM_BOT_TOKEN" ] || [ -z "$TELEGRAM_OPERATOR_CHAT_ID" ]; then
+            echo '::warning::TELEGRAM_* secrets отсутствуют — skip inject (Telegram notifications не будут работать)'
+            exit 0
+          fi
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
+            "set -eu
+             ENV_FILE=${{ secrets.BEGET_DEPLOY_PATH }}/shared/.env
+             if [ ! -f \$ENV_FILE ]; then
+               ENV_FILE=${{ secrets.BEGET_DEPLOY_PATH }}/current/.env
+             fi
+             echo \"Injecting TELEGRAM_* to \$ENV_FILE\"
+             # Idempotent: remove old TELEGRAM_* lines, append fresh
+             sed -i.bak '/^TELEGRAM_BOT_TOKEN=/d;/^TELEGRAM_OPERATOR_CHAT_ID=/d' \$ENV_FILE
+             echo 'TELEGRAM_BOT_TOKEN=$TELEGRAM_BOT_TOKEN' >> \$ENV_FILE
+             echo 'TELEGRAM_OPERATOR_CHAT_ID=$TELEGRAM_OPERATOR_CHAT_ID' >> \$ENV_FILE
+             rm -f \$ENV_FILE.bak
+             echo 'TELEGRAM env vars injected.'"
+
       - name: "Upload scripts/ + content/ + migrations/ + lib/ + blocks/ to VPS (W15 P1)"
         run: |
           set -eo pipefail
