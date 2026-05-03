@@ -3,9 +3,10 @@ epic: EPIC-SEO-CONTENT-FILL
 title: Наполнение services-сайта (без shop) с обгоном 17 конкурентов
 team: seo
 po: poseo
-phase: gate
-role: operator
-status: ready-for-operator-approve
+phase: done
+role: poseo
+status: closed
+deploy_status: deferred-1day-W15-header-fix
 priority: P0
 moscow: Must
 rice: 96.5
