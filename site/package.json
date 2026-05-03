@@ -40,6 +40,8 @@
     "seed:stage3-blog:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/seed-content-stage3-blog.ts",
     "seed:stage3-cases": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/seed-content-stage3-cases.ts",
     "seed:stage3-cases:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/seed-content-stage3-cases.ts",
+    "seed:stage3-eeat": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/seed-content-stage3-eeat.ts",
+    "seed:stage3-eeat:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/seed-content-stage3-eeat.ts",
     "migrate:slug-chistka": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/migrate-slug-chistka-krysh.ts",
     "migrate:slug-chistka:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/migrate-slug-chistka-krysh.ts",
     "migrate:blocks:services": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/migrate-services-to-blocks.ts",
