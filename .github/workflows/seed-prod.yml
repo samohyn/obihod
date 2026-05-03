@@ -83,6 +83,23 @@ jobs:
               ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/$dir/
           done
 
+      - name: "Diagnostic — verify lib/blocks on VPS active release"
+        run: |
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
+            "set -ex
+             cd ${{ secrets.BEGET_DEPLOY_PATH }}/current
+             pwd; readlink -f .
+             echo '=== lib/admin/audit/ contents ==='
+             ls -la lib/admin/audit/ 2>&1 || echo 'DIR MISSING'
+             echo '=== blocks/ contents (head) ==='
+             ls blocks/ 2>&1 | head -10 || echo 'DIR MISSING'
+             echo '=== tsconfig.json paths ==='
+             cat tsconfig.json | head -30 || echo 'tsconfig MISSING'
+             echo '=== captureHooks.ts head ==='
+             head -5 lib/admin/audit/captureHooks.ts 2>&1 || echo 'FILE MISSING'
+             "
+
       - name: "Run full seed sequence via SSH (W15 P1, Stage 1+2+3 + Wave 0.1 migration)"
         run: |
           set -eo pipefail
