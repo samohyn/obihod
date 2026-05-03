@@ -38,12 +38,7 @@
         "href": "/foto-smeta/?service=arboristika&sub=spil-derevev"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": [
-        "допуск 3-й группы",
-        "страховка ГО 10 млн ₽",
-        "аварийка 24/7",
-        "вывоз в смете"
-      ],
+      "trustRow": ["допуск 3-й группы", "страховка ГО 10 млн ₽", "аварийка 24/7", "вывоз в смете"],
       "image": {
         "src": "TBD-fal.ai-sub-spil-hero.jpg",
         "alt": "Арборист Обихода спиливает крупный тополь по частям, частный дом в Истре",
@@ -75,7 +70,13 @@
       "h2": "Получите смету за 10 минут",
       "serviceHint": "Спил дерева",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
         {
           "name": "objects",
@@ -84,7 +85,13 @@
           "required": false,
           "placeholder": "Например: тополь Ø50 см на участке частного дома, рядом провода"
         },
-        { "name": "photos", "label": "Фото дерева", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото дерева",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

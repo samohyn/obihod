@@ -38,7 +38,12 @@
         "href": "/foto-smeta/?service=demontazh&sub=dacha"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["Снос + вывоз = 1 договор", "СРО строителей", "Страховка 10 млн ₽", "Закрываем лицевой счёт"],
+      "trustRow": [
+        "Снос + вывоз = 1 договор",
+        "СРО строителей",
+        "Страховка 10 млн ₽",
+        "Закрываем лицевой счёт"
+      ],
       "image": {
         "src": "TBD-fal.ai-sub-demontazh-dachi-hero.jpg",
         "alt": "Разбор деревянной дачи в Раменском районе",
@@ -70,7 +75,13 @@
       "h2": "Получите смету за 10 минут",
       "serviceHint": "Демонтаж дачи",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
         {
           "name": "objects",
@@ -79,7 +90,13 @@
           "required": false,
           "placeholder": "Например: деревянная дача 6×6 м с верандой, ленточный фундамент мелкозаглублённый, СНТ Раменский район, нужно к концу сезона"
         },
-        { "name": "photos", "label": "Фото дачи и участка", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото дачи и участка",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

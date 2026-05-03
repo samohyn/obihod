@@ -38,7 +38,12 @@
         "href": "/foto-smeta/?service=chistka-krysh&sub=mkd"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["Договор-абонемент 5 мес", "Штрафы ГЖИ на нас", "Аварийка 30 минут", "ЭДО Диадок/СБИС"],
+      "trustRow": [
+        "Договор-абонемент 5 мес",
+        "Штрафы ГЖИ на нас",
+        "Аварийка 30 минут",
+        "ЭДО Диадок/СБИС"
+      ],
       "image": {
         "src": "TBD-fal.ai-sub-chistka-krysh-mkd-hero.jpg",
         "alt": "Альпинисты Обихода чистят кровлю 9-этажного МКД в Балашихе",
@@ -70,7 +75,13 @@
       "h2": "Получите расчёт сезона за 24 часа",
       "serviceHint": "Чистка крыш МКД (УК/ТСЖ)",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Контактное лицо", "type": "text", "required": false },
         {
           "name": "objects",
@@ -79,7 +90,13 @@
           "required": false,
           "placeholder": "Например: УК «Пример-Сервис», 8 МКД 5–9 этажей по Балашихе, общая площадь кровель ~12 000 м², нужен сезонный пакет"
         },
-        { "name": "photos", "label": "Фото объектов или адреса", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото объектов или адреса",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

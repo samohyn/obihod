@@ -38,7 +38,12 @@
         "href": "/foto-smeta/?service=arboristika&sub=kabling"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["альтернатива спилу", "проверка раз в 2 года", "арборист с допуском", "8:00–22:00 МСК"],
+      "trustRow": [
+        "альтернатива спилу",
+        "проверка раз в 2 года",
+        "арборист с допуском",
+        "8:00–22:00 МСК"
+      ],
       "image": {
         "src": "TBD-fal.ai-sub-kabling-hero.jpg",
         "alt": "Арборист Обихода устанавливает динамическую растяжку в кроне старого дуба",
@@ -70,7 +75,13 @@
       "h2": "Получите смету за 10 минут",
       "serviceHint": "Каблинг (растяжки)",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
         {
           "name": "objects",
@@ -79,7 +90,13 @@
           "required": false,
           "placeholder": "Например: тополь Ø60 см с V-развилкой и трещиной в стволе после ветра"
         },
-        { "name": "photos", "label": "Фото дерева и развилки", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото дерева и развилки",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

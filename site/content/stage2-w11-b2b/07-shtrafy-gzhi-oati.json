@@ -73,7 +73,12 @@
         {
           "legend": "Организация",
           "fields": [
-            { "name": "organization", "label": "Название УК или ТСЖ", "type": "text", "required": true },
+            {
+              "name": "organization",
+              "label": "Название УК или ТСЖ",
+              "type": "text",
+              "required": true
+            },
             {
               "name": "inn",
               "label": "ИНН",
@@ -82,15 +87,31 @@
               "pattern": "\\d{10}|\\d{12}",
               "ariaDescribedby": "inn-helper"
             },
-            { "name": "innHelper", "type": "helper", "id": "inn-helper", "text": "10 цифр для юр.лица, 12 для ИП." }
+            {
+              "name": "innHelper",
+              "type": "helper",
+              "id": "inn-helper",
+              "text": "10 цифр для юр.лица, 12 для ИП."
+            }
           ]
         },
         {
           "legend": "Контактное лицо",
           "fields": [
             { "name": "name", "label": "ФИО", "type": "text", "required": false },
-            { "name": "position", "label": "Должность (юрист / эксплуатация)", "type": "text", "required": false },
-            { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+            {
+              "name": "position",
+              "label": "Должность (юрист / эксплуатация)",
+              "type": "text",
+              "required": false
+            },
+            {
+              "name": "phone",
+              "label": "Телефон",
+              "type": "tel",
+              "required": true,
+              "inputmode": "numeric"
+            },
             { "name": "email", "label": "Email", "type": "email", "required": false }
           ]
         }

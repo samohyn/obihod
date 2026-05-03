@@ -21,7 +21,15 @@
           "version": 1,
           "direction": "ltr",
           "children": [
-            { "type": "text", "text": "Демонтаж по Пушкинскому ГО: снос старых дач и бань в СНТ и КП на Ярославском направлении, разбор заборов и хозблоков, демонтаж старых построек 1960–80-х. Снос + вывоз одной бригадой, контейнер под стройотходы в смете. Для СНТ — сезонный график расчисток.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
+            {
+              "type": "text",
+              "text": "Демонтаж по Пушкинскому ГО: снос старых дач и бань в СНТ и КП на Ярославском направлении, разбор заборов и хозблоков, демонтаж старых построек 1960–80-х. Снос + вывоз одной бригадой, контейнер под стройотходы в смете. Для СНТ — сезонный график расчисток.",
+              "version": 1,
+              "format": 0,
+              "detail": 0,
+              "mode": "normal",
+              "style": ""
+            }
           ]
         }
       ]
@@ -78,11 +86,35 @@
       "serviceHint": "Демонтаж",
       "districtHint": "Пушкино",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
-        { "name": "address", "label": "СНТ, посёлок, адрес", "type": "text", "required": false, "placeholder": "Например: СНТ Заветы Ильича, КП Софрино" },
-        { "name": "objects", "label": "Объект и работы", "type": "textarea", "required": false, "placeholder": "Например: снос деревянной дачи 50 м² + бани + хозблока на участке 12 соток" },
-        { "name": "photos", "label": "Фото объекта", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "address",
+          "label": "СНТ, посёлок, адрес",
+          "type": "text",
+          "required": false,
+          "placeholder": "Например: СНТ Заветы Ильича, КП Софрино"
+        },
+        {
+          "name": "objects",
+          "label": "Объект и работы",
+          "type": "textarea",
+          "required": false,
+          "placeholder": "Например: снос деревянной дачи 50 м² + бани + хозблока на участке 12 соток"
+        },
+        {
+          "name": "photos",
+          "label": "Фото объекта",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",
@@ -125,8 +157,14 @@
       "variant": "dark",
       "h2": "Снос дачи в Пушкино — 4-в-1 пакет",
       "body": "Расчистка + снос + спил + вывоз одной бригадой. СНТ Заветы Ильича, КП Зеленоградский. Сезон май–октябрь.",
-      "ctaPrimary": { "label": "Прислать фото в Telegram", "href": "https://t.me/obihod_dispatcher" },
-      "ctaSecondary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=demontazh&district=pushkino" }
+      "ctaPrimary": {
+        "label": "Прислать фото в Telegram",
+        "href": "https://t.me/obihod_dispatcher"
+      },
+      "ctaSecondary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=demontazh&district=pushkino"
+      }
     },
     {
       "blockType": "neighbor-districts",
@@ -134,16 +172,35 @@
       "items": [
         { "iconId": "district-mytishchi", "title": "Мытищи", "href": "/demontazh/mytishchi/" },
         { "iconId": "district-korolev", "title": "Королёв", "href": "/demontazh/korolev/" },
-        { "iconId": "district-sergiev-posad", "title": "Сергиев Посад", "href": "/demontazh/sergiev-posad/" }
+        {
+          "iconId": "district-sergiev-posad",
+          "title": "Сергиев Посад",
+          "href": "/demontazh/sergiev-posad/"
+        }
       ]
     },
     {
       "blockType": "related-services",
       "h2": "Соседние услуги в Пушкино",
       "items": [
-        { "iconId": "vyvoz-musora", "title": "Вывоз мусора в Пушкино", "description": "Контейнер 27 м³ под стройотходы, СНТ-сезон.", "href": "/vyvoz-musora/pushkino/" },
-        { "iconId": "arboristika", "title": "Арбористика в Пушкино", "description": "Спил и расчистка участка перед сносом.", "href": "/arboristika/pushkino/" },
-        { "iconId": "chistka-krysh", "title": "Чистка крыш в Пушкино", "description": "Снег и наледь на коттеджах после застройки.", "href": "/chistka-krysh/pushkino/" }
+        {
+          "iconId": "vyvoz-musora",
+          "title": "Вывоз мусора в Пушкино",
+          "description": "Контейнер 27 м³ под стройотходы, СНТ-сезон.",
+          "href": "/vyvoz-musora/pushkino/"
+        },
+        {
+          "iconId": "arboristika",
+          "title": "Арбористика в Пушкино",
+          "description": "Спил и расчистка участка перед сносом.",
+          "href": "/arboristika/pushkino/"
+        },
+        {
+          "iconId": "chistka-krysh",
+          "title": "Чистка крыш в Пушкино",
+          "description": "Снег и наледь на коттеджах после застройки.",
+          "href": "/chistka-krysh/pushkino/"
+        }
       ]
     }
   ],
@@ -152,31 +209,97 @@
     {
       "question": "Сносите ли старые дачи 1960–80-х в СНТ Заветы Ильича и КП Софрино?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, снос старых дач — флагман района. Деревянная 30–60 м² — 95 000 ₽ за объект, кирпичная — 145 000 ₽, баня — 52 000 ₽. Этапный демонтаж + экскаватор с гидроклином. Пакет «дача + баня + хозблок + забор» — 228 500 ₽ включая контейнер 27 м³. Для СНТ — сезонный договор со скидкой 15% от 5 участков.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, снос старых дач — флагман района. Деревянная 30–60 м² — 95 000 ₽ за объект, кирпичная — 145 000 ₽, баня — 52 000 ₽. Этапный демонтаж + экскаватор с гидроклином. Пакет «дача + баня + хозблок + забор» — 228 500 ₽ включая контейнер 27 м³. Для СНТ — сезонный договор со скидкой 15% от 5 участков.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Сколько времени едет бригада в Пушкино?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Пушкино 35 км через Ярославское шоссе. Для крупных объектов выезд экскаватора согласуем за 2–3 рабочих дня. Аварийная (24/7) при обрушении старой постройки — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Пушкино 35 км через Ярославское шоссе. Для крупных объектов выезд экскаватора согласуем за 2–3 рабочих дня. Аварийная (24/7) при обрушении старой постройки — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Что делать с асбестовым шифером старой дачи в СНТ Пушкинского ГО?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Шифер — спецотход II класса опасности. Нельзя в общий контейнер. Вывозим отдельно на спецполигон Подмосковья по 8 600 ₽ за тонну — лицензия Росприроднадзора, акт. Для дачи 50 м² ~1,5 тонны шифера — отдельная смета 13 000 ₽. Заранее в смете, без сюрпризов.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Шифер — спецотход II класса опасности. Нельзя в общий контейнер. Вывозим отдельно на спецполигон Подмосковья по 8 600 ₽ за тонну — лицензия Росприроднадзора, акт. Для дачи 50 м² ~1,5 тонны шифера — отдельная смета 13 000 ₽. Заранее в смете, без сюрпризов.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     }
   ],

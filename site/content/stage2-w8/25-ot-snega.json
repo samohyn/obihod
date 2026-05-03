@@ -38,7 +38,12 @@
         "href": "/foto-smeta/?service=chistka-krysh&sub=ot-snega"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["1 000 ₽/м² скатной", "1 200 ₽/м² плоской", "Снеготопильная станция", "Акт-приёмки"],
+      "trustRow": [
+        "1 000 ₽/м² скатной",
+        "1 200 ₽/м² плоской",
+        "Снеготопильная станция",
+        "Акт-приёмки"
+      ],
       "image": {
         "src": "TBD-fal.ai-sub-ot-snega-hero.jpg",
         "alt": "Бригада счищает свежий снег со скатной кровли коттеджа",
@@ -70,7 +75,13 @@
       "h2": "Получите смету за 10 минут",
       "serviceHint": "Чистка крыши от снега",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя или организация", "type": "text", "required": false },
         {
           "name": "objects",
@@ -79,7 +90,13 @@
           "required": false,
           "placeholder": "Например: плоская кровля склада 1 200 м², свежий слой ~30 см, нужно почистить за выходные"
         },
-        { "name": "photos", "label": "Фото кровли", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото кровли",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

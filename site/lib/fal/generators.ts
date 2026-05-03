@@ -110,9 +110,7 @@ export async function generateSdHero(o: SdHeroOpts & BaseOpts): Promise<FalImage
   return runT2I(sdHeroPrompt(o), { imageSize: 'landscape_16_9', ...o })
 }
 
-export async function generateStaticHero(
-  o: StaticHeroOpts & BaseOpts,
-): Promise<FalImageResult> {
+export async function generateStaticHero(o: StaticHeroOpts & BaseOpts): Promise<FalImageResult> {
   return runT2I(staticHeroPrompt(o), { imageSize: 'landscape_16_9', ...o })
 }
 

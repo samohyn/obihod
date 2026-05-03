@@ -37,7 +37,10 @@
       "items": [
         { "label": "Главная", "href": "/" },
         { "label": "Блог", "href": "/blog/" },
-        { "label": "Когда заказывать чистку крыш осенью", "href": "/blog/kogda-zakazat-chistku-krysh-osenyu/" }
+        {
+          "label": "Когда заказывать чистку крыш осенью",
+          "href": "/blog/kogda-zakazat-chistku-krysh-osenyu/"
+        }
       ]
     },
     {

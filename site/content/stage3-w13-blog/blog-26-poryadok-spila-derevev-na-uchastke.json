@@ -11,7 +11,11 @@
     "winning_angle": "Точная процедура: 5 шагов от ЕГРН до акта-приёмки + границы порубочного билета + штрафы 8.28 КоАП — vs конкурентов с шаблонным «обратитесь в администрацию»",
     "schema_note": "Article + Person + Organization + BreadcrumbList + FAQPage",
     "author_note": "info-cluster — Бригада вывоза Обихода",
-    "cross_pillar_refs": ["arboristika/spil-derevev", "porubochnyj-bilet", "vyvoz-musora/porubochnye-ostatki"]
+    "cross_pillar_refs": [
+      "arboristika/spil-derevev",
+      "porubochnyj-bilet",
+      "vyvoz-musora/porubochnye-ostatki"
+    ]
   },
   "type": "blog-post",
   "url": "/blog/poryadok-spila-derevev-na-uchastke/",
@@ -37,7 +41,10 @@
       "items": [
         { "label": "Главная", "href": "/" },
         { "label": "Блог", "href": "/blog/" },
-        { "label": "Порядок спила деревьев на участке", "href": "/blog/poryadok-spila-derevev-na-uchastke/" }
+        {
+          "label": "Порядок спила деревьев на участке",
+          "href": "/blog/poryadok-spila-derevev-na-uchastke/"
+        }
       ]
     },
     {

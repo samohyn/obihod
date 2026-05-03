@@ -21,7 +21,15 @@
           "version": 1,
           "direction": "ltr",
           "children": [
-            { "type": "text", "text": "Демонтаж по Жуковскому: снос авиа-инфраструктуры ЛИИ им. Громова, разбор производственных цехов и испытательных стендов ЦАГИ, демонтаж старых ангаров аэродрома «Раменское», B2B-договоры с авиапром-предприятиями. Снос частных объектов в Колонце, ЖК-демонтаж в Туполева. Полигон в Раменском районе.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
+            {
+              "type": "text",
+              "text": "Демонтаж по Жуковскому: снос авиа-инфраструктуры ЛИИ им. Громова, разбор производственных цехов и испытательных стендов ЦАГИ, демонтаж старых ангаров аэродрома «Раменское», B2B-договоры с авиапром-предприятиями. Снос частных объектов в Колонце, ЖК-демонтаж в Туполева. Полигон в Раменском районе.",
+              "version": 1,
+              "format": 0,
+              "detail": 0,
+              "mode": "normal",
+              "style": ""
+            }
           ]
         }
       ]
@@ -78,11 +86,35 @@
       "serviceHint": "Демонтаж",
       "districtHint": "Жуковский",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
-        { "name": "address", "label": "Адрес или объект", "type": "text", "required": false, "placeholder": "Например: ангар ЛИИ, цех ЦАГИ, ЖК Туполева" },
-        { "name": "objects", "label": "Объект и работы", "type": "textarea", "required": false, "placeholder": "Например: ангар 5000 м² на режимной территории ЛИИ, термическая резка металлоконструкций" },
-        { "name": "photos", "label": "Фото объекта", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "address",
+          "label": "Адрес или объект",
+          "type": "text",
+          "required": false,
+          "placeholder": "Например: ангар ЛИИ, цех ЦАГИ, ЖК Туполева"
+        },
+        {
+          "name": "objects",
+          "label": "Объект и работы",
+          "type": "textarea",
+          "required": false,
+          "placeholder": "Например: ангар 5000 м² на режимной территории ЛИИ, термическая резка металлоконструкций"
+        },
+        {
+          "name": "photos",
+          "label": "Фото объекта",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",
@@ -125,8 +157,14 @@
       "variant": "dark",
       "h2": "Демонтаж авиа-инфраструктуры в Жуковском",
       "body": "Ангары ЛИИ, цеха ЦАГИ, аэродром «Раменское». Термическая резка + этапная оплата. B2B-договор с режимной территорией.",
-      "ctaPrimary": { "label": "Прислать фото в Telegram", "href": "https://t.me/obihod_dispatcher" },
-      "ctaSecondary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=demontazh&district=zhukovskij" }
+      "ctaPrimary": {
+        "label": "Прислать фото в Telegram",
+        "href": "https://t.me/obihod_dispatcher"
+      },
+      "ctaSecondary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=demontazh&district=zhukovskij"
+      }
     },
     {
       "blockType": "neighbor-districts",
@@ -141,9 +179,24 @@
       "blockType": "related-services",
       "h2": "Соседние услуги в Жуковском",
       "items": [
-        { "iconId": "vyvoz-musora", "title": "Вывоз мусора в Жуковском", "description": "Контейнер 27 м³ под стройотходы, плечо 25 минут.", "href": "/vyvoz-musora/zhukovskij/" },
-        { "iconId": "chistka-krysh", "title": "Чистка крыш в Жуковском", "description": "Кровли ангаров ВПП с SLA 4 часа.", "href": "/chistka-krysh/zhukovskij/" },
-        { "iconId": "arboristika", "title": "Арбористика в Жуковском", "description": "FOD-кронирование санзоны ВПП.", "href": "/arboristika/zhukovskij/" }
+        {
+          "iconId": "vyvoz-musora",
+          "title": "Вывоз мусора в Жуковском",
+          "description": "Контейнер 27 м³ под стройотходы, плечо 25 минут.",
+          "href": "/vyvoz-musora/zhukovskij/"
+        },
+        {
+          "iconId": "chistka-krysh",
+          "title": "Чистка крыш в Жуковском",
+          "description": "Кровли ангаров ВПП с SLA 4 часа.",
+          "href": "/chistka-krysh/zhukovskij/"
+        },
+        {
+          "iconId": "arboristika",
+          "title": "Арбористика в Жуковском",
+          "description": "FOD-кронирование санзоны ВПП.",
+          "href": "/arboristika/zhukovskij/"
+        }
       ]
     }
   ],
@@ -152,31 +205,97 @@
     {
       "question": "Делаете ли промышленный демонтаж ангаров на режимной территории ЛИИ им. Громова?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, для ЛИИ, ЦАГИ и авиапром-предприятий держим B2B-договор с этапной оплатой и фотопротоколами. Бригада в зоне 30 минут от КПП, допуск на режимную территорию по пропуску. Термическая резка + экскаватор с гидромолотом. Для ангара 5 000 м² — 4 250 000–6 500 000 ₽ за объект, этапы 4–6 недель. Лицензия СРО №<TODO operator>.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, для ЛИИ, ЦАГИ и авиапром-предприятий держим B2B-договор с этапной оплатой и фотопротоколами. Бригада в зоне 30 минут от КПП, допуск на режимную территорию по пропуску. Термическая резка + экскаватор с гидромолотом. Для ангара 5 000 м² — 4 250 000–6 500 000 ₽ за объект, этапы 4–6 недель. Лицензия СРО №<TODO operator>.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Сколько времени едет бригада в Жуковский?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Жуковского 47 км через МКАД и М-5. Для крупных объектов на режимной территории — выезд согласуем за 5–7 рабочих дней с учётом пропусков. Аварийная (24/7) — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Жуковского 47 км через МКАД и М-5. Для крупных объектов на режимной территории — выезд согласуем за 5–7 рабочих дней с учётом пропусков. Аварийная (24/7) — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Какие допуски на работу с термической резкой металлоконструкций?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Термическая резка кислородно-ацетиленовой горелкой требует специального обучения и сертификации в УЦ. Каждый член бригады с допуском к горючим газам, СИЗ, сертификат ОТ. Для авиапром-объектов — аккредитация службой безопасности ЛИИ. Лицензия СРО №<TODO operator>, страховка ГО 10 млн ₽.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Термическая резка кислородно-ацетиленовой горелкой требует специального обучения и сертификации в УЦ. Каждый член бригады с допуском к горючим газам, СИЗ, сертификат ОТ. Для авиапром-объектов — аккредитация службой безопасности ЛИИ. Лицензия СРО №<TODO operator>, страховка ГО 10 млн ₽.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     }
   ],

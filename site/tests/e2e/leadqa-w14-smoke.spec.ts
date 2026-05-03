@@ -36,7 +36,13 @@ interface SmokeUrl {
 
 const URLS: SmokeUrl[] = [
   // 3 E-E-A-T pages (Track A)
-  { name: '01-eeat-sro-licenzii', path: '/sro-licenzii/', group: 'eeat', expectJsonLd: true, expectH1: true },
+  {
+    name: '01-eeat-sro-licenzii',
+    path: '/sro-licenzii/',
+    group: 'eeat',
+    expectJsonLd: true,
+    expectH1: true,
+  },
   { name: '02-eeat-komanda', path: '/komanda/', group: 'eeat', expectJsonLd: true, expectH1: true },
   {
     name: '03-eeat-author-brigada',
@@ -125,7 +131,13 @@ const URLS: SmokeUrl[] = [
   },
 
   // 1 USP
-  { name: '14-usp-foto-smeta', path: '/foto-smeta/', group: 'usp', expectJsonLd: true, expectH1: true },
+  {
+    name: '14-usp-foto-smeta',
+    path: '/foto-smeta/',
+    group: 'usp',
+    expectJsonLd: true,
+    expectH1: true,
+  },
 
   // 1 NEW asset (Track D step 2 verification)
   { name: '15-asset-llms-txt', path: '/llms.txt', group: 'asset' }, // text/markdown asset
@@ -232,7 +244,9 @@ test.describe('leadqa W14 — real-browser smoke ≥10 URL (US-4 closure)', () =
 
       const allParsed = jsonLdData.parsed.every((p) => p.ok)
       expect(jsonLdData.count, `JSON-LD blocks for ${u.path}`).toBeGreaterThanOrEqual(1)
-      expect(allParsed, `JSON-LD parses for ${u.path}: ${JSON.stringify(jsonLdData.parsed)}`).toBe(true)
+      expect(allParsed, `JSON-LD parses for ${u.path}: ${JSON.stringify(jsonLdData.parsed)}`).toBe(
+        true,
+      )
 
       // 6. H1 inspect (semantic heading; могут быть многоуровневые)
       const h1 = await page.evaluate(() => {
@@ -285,7 +299,9 @@ test.describe('leadqa W14 — real-browser smoke ≥10 URL (US-4 closure)', () =
     const screenshotPath = path.join(SCREEN_DIR, '14-usp-foto-smeta-mobile-375.png')
     await page.screenshot({ path: screenshotPath, fullPage: false })
 
-    expect(consoleErrors, `console errors mobile foto-smeta: ${consoleErrors.join(' | ')}`).toEqual([])
+    expect(consoleErrors, `console errors mobile foto-smeta: ${consoleErrors.join(' | ')}`).toEqual(
+      [],
+    )
   })
 
   test.afterAll(async () => {
@@ -297,7 +313,9 @@ test.describe('leadqa W14 — real-browser smoke ≥10 URL (US-4 closure)', () =
           r.http === 200 &&
           r.consoleErrors.length === 0 &&
           r.failedRequests.length === 0 &&
-          (r.group === 'asset' ? r.jsonLdValid : r.jsonLdBlocks >= 1 && r.jsonLdValid && r.h1Visible),
+          (r.group === 'asset'
+            ? r.jsonLdValid
+            : r.jsonLdBlocks >= 1 && r.jsonLdValid && r.h1Visible),
       ).length,
       results,
     }

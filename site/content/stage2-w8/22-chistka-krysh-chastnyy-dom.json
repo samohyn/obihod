@@ -38,7 +38,12 @@
         "href": "/foto-smeta/?service=chistka-krysh&sub=chastnyy-dom"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["1 000 ₽/м² скатной", "Допуск 3-й группы", "Страховка ГО 10 млн ₽", "Аварийка 1–2 часа"],
+      "trustRow": [
+        "1 000 ₽/м² скатной",
+        "Допуск 3-й группы",
+        "Страховка ГО 10 млн ₽",
+        "Аварийка 1–2 часа"
+      ],
       "image": {
         "src": "TBD-fal.ai-sub-chistka-krysh-chastnyy-dom-hero.jpg",
         "alt": "Промышленный альпинист Обихода счищает снег со скатной кровли частного дома",
@@ -70,7 +75,13 @@
       "h2": "Получите смету за 10 минут",
       "serviceHint": "Чистка кровли частного дома",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
         {
           "name": "objects",
@@ -79,7 +90,13 @@
           "required": false,
           "placeholder": "Например: коттедж в Истре, скатная металлочерепица 240 м², наледь на свесах, нужна чистка к выходным"
         },
-        { "name": "photos", "label": "Фото кровли", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото кровли",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

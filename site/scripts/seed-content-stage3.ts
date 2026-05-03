@@ -379,8 +379,7 @@ async function main() {
   // STAGE3_DIRS — comma-separated relative paths из site/. Default — Wave 1
   // Run 1 (16 pillar SD) + Run 2 (60 sub SD).
   // Файл `_manifest.json` пропускается, т.к. это side-output генератора (не SD).
-  const dirsEnv =
-    process.env.STAGE3_DIRS ?? 'content/stage3-w12,content/stage3-w13-sd'
+  const dirsEnv = process.env.STAGE3_DIRS ?? 'content/stage3-w12,content/stage3-w13-sd'
   const dirs = dirsEnv
     .split(',')
     .map((d) => d.trim())

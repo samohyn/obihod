@@ -11,7 +11,12 @@
     "winning_angle": "ФККО классы 30+ типов отходов от ремонта и сноса + 4-в-1 пакет одной бригадой + сравнение с разовыми вывозами по штрафам — vs конкурентов с обещаниями «увезём всё»",
     "schema_note": "Article + Person + Organization + BreadcrumbList + FAQPage",
     "author_note": "info-cluster — Бригада вывоза Обихода (cross-pillar 4-в-1)",
-    "cross_pillar_refs": ["vyvoz-musora/vyvoz-stroymusora", "demontazh", "arboristika/raschistka-uchastka", "porubochnyj-bilet"]
+    "cross_pillar_refs": [
+      "vyvoz-musora/vyvoz-stroymusora",
+      "demontazh",
+      "arboristika/raschistka-uchastka",
+      "porubochnyj-bilet"
+    ]
   },
   "type": "blog-post",
   "url": "/blog/strojmusor-kak-pravilno-izbavit-sya/",
@@ -37,7 +42,10 @@
       "items": [
         { "label": "Главная", "href": "/" },
         { "label": "Блог", "href": "/blog/" },
-        { "label": "Строймусор — как избавиться правильно", "href": "/blog/strojmusor-kak-pravilno-izbavit-sya/" }
+        {
+          "label": "Строймусор — как избавиться правильно",
+          "href": "/blog/strojmusor-kak-pravilno-izbavit-sya/"
+        }
       ]
     },
     {
@@ -110,7 +118,10 @@
       "variant": "dark",
       "h2": "Пакет 4-в-1 для расчистки и сноса",
       "body": "Демонтаж + расчистка + вывоз + документы одной бригадой. Лицензия Росприроднадзора, страховка 10 млн ₽, ППР по 384-ФЗ.",
-      "ctaPrimary": { "label": "Запрос на 4-в-1 пакет", "href": "/foto-smeta/?service=demontazh&package=4v1" }
+      "ctaPrimary": {
+        "label": "Запрос на 4-в-1 пакет",
+        "href": "/foto-smeta/?service=demontazh&package=4v1"
+      }
     },
     {
       "blockType": "related-services",

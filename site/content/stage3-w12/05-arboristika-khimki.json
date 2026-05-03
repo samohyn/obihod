@@ -21,7 +21,15 @@
           "version": 1,
           "direction": "ltr",
           "children": [
-            { "type": "text", "text": "Спил, обрезка и удаление деревьев по Химкам и Химкинскому ГО. Городские дворы, ЖК-новостройки Левобережного и Старых Химок, санитарная зона Шереметьево, частные участки. Альпинистский спил, автовышка 21 м, аварийный режим 24/7. Порубочный билет оформляем сами.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
+            {
+              "type": "text",
+              "text": "Спил, обрезка и удаление деревьев по Химкам и Химкинскому ГО. Городские дворы, ЖК-новостройки Левобережного и Старых Химок, санитарная зона Шереметьево, частные участки. Альпинистский спил, автовышка 21 м, аварийный режим 24/7. Порубочный билет оформляем сами.",
+              "version": 1,
+              "format": 0,
+              "detail": 0,
+              "mode": "normal",
+              "style": ""
+            }
           ]
         }
       ]
@@ -78,11 +86,35 @@
       "serviceHint": "Арбористика",
       "districtHint": "Химки",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
-        { "name": "address", "label": "Адрес или мкр.", "type": "text", "required": false, "placeholder": "Например: Левобережный, Старые Химки, КП Куркино" },
-        { "name": "objects", "label": "Что нужно сделать", "type": "textarea", "required": false, "placeholder": "Например: 3 тополя 50 см у фасада МКД, опасный сухостой, нужен альпинист" },
-        { "name": "photos", "label": "Фото деревьев", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "address",
+          "label": "Адрес или мкр.",
+          "type": "text",
+          "required": false,
+          "placeholder": "Например: Левобережный, Старые Химки, КП Куркино"
+        },
+        {
+          "name": "objects",
+          "label": "Что нужно сделать",
+          "type": "textarea",
+          "required": false,
+          "placeholder": "Например: 3 тополя 50 см у фасада МКД, опасный сухостой, нужен альпинист"
+        },
+        {
+          "name": "photos",
+          "label": "Фото деревьев",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",
@@ -125,14 +157,24 @@
       "variant": "dark",
       "h2": "Спилим дерево в Химках послезавтра",
       "body": "Альпинист + автовышка + порубочный билет. Аварийный за 1–2 часа 24/7. Вывоз порубочных в общей смете.",
-      "ctaPrimary": { "label": "Прислать фото в Telegram", "href": "https://t.me/obihod_dispatcher" },
-      "ctaSecondary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=arboristika&district=khimki" }
+      "ctaPrimary": {
+        "label": "Прислать фото в Telegram",
+        "href": "https://t.me/obihod_dispatcher"
+      },
+      "ctaSecondary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=arboristika&district=khimki"
+      }
     },
     {
       "blockType": "neighbor-districts",
       "h2": "Соседние районы",
       "items": [
-        { "iconId": "district-krasnogorsk", "title": "Красногорск", "href": "/arboristika/krasnogorsk/" },
+        {
+          "iconId": "district-krasnogorsk",
+          "title": "Красногорск",
+          "href": "/arboristika/krasnogorsk/"
+        },
         { "iconId": "district-mytishchi", "title": "Мытищи", "href": "/arboristika/mytishchi/" },
         { "iconId": "district-odincovo", "title": "Одинцово", "href": "/arboristika/odincovo/" }
       ]
@@ -141,9 +183,24 @@
       "blockType": "related-services",
       "h2": "Соседние услуги в Химках",
       "items": [
-        { "iconId": "vyvoz-musora", "title": "Вывоз мусора в Химках", "description": "Контейнер 8 / 20 / 27 м³, авиа-cargo SLA 4 часа.", "href": "/vyvoz-musora/khimki/" },
-        { "iconId": "chistka-krysh", "title": "Чистка крыш в Химках", "description": "ЖК и cargo-кровли Шереметьево.", "href": "/chistka-krysh/khimki/" },
-        { "iconId": "demontazh", "title": "Демонтаж в Химках", "description": "Снос складов и авиа-инфраструктура.", "href": "/demontazh/khimki/" }
+        {
+          "iconId": "vyvoz-musora",
+          "title": "Вывоз мусора в Химках",
+          "description": "Контейнер 8 / 20 / 27 м³, авиа-cargo SLA 4 часа.",
+          "href": "/vyvoz-musora/khimki/"
+        },
+        {
+          "iconId": "chistka-krysh",
+          "title": "Чистка крыш в Химках",
+          "description": "ЖК и cargo-кровли Шереметьево.",
+          "href": "/chistka-krysh/khimki/"
+        },
+        {
+          "iconId": "demontazh",
+          "title": "Демонтаж в Химках",
+          "description": "Снос складов и авиа-инфраструктура.",
+          "href": "/demontazh/khimki/"
+        }
       ]
     }
   ],
@@ -152,31 +209,97 @@
     {
       "question": "Делаете ли санитарную обрезку в полосе подходов Шереметьево?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, для FOD-зоны держим режим: согласование с аэродромной службой Шереметьево, допуск бригадира, фотофиксация до и после. Для КП и частных домов в санитарной зоне работаем по календарному графику весна–осень с высотами, согласованными с ATC. Лицензия СРО №<TODO operator>.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, для FOD-зоны держим режим: согласование с аэродромной службой Шереметьево, допуск бригадира, фотофиксация до и после. Для КП и частных домов в санитарной зоне работаем по календарному графику весна–осень с высотами, согласованными с ATC. Лицензия СРО №<TODO operator>.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Сколько времени едет арборист в Химки?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Химок 26 км через А-107 и Ленинградское шоссе. Аварийная (24/7) — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Химок 26 км через А-107 и Ленинградское шоссе. Аварийная (24/7) — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Работаете ли с ЖК Левобережный и Старыми Химками по аварийным деревьям?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, аварийные тополя и ясени в ЖК Левобережного — наша основная задача в Химках. Альпинист 3-й группы по высоте + автовышка 21 м, спил по частям с тросом, фотопротокол. Для УК — годовой договор с аварийным режимом и плановой обрезкой.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, аварийные тополя и ясени в ЖК Левобережного — наша основная задача в Химках. Альпинист 3-й группы по высоте + автовышка 21 м, спил по частям с тросом, фотопротокол. Для УК — годовой договор с аварийным режимом и плановой обрезкой.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     }
   ],

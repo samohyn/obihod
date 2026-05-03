@@ -38,7 +38,12 @@
         "href": "/foto-smeta/?service=arboristika&sub=alpinist"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["допуск Минтруда №782н", "страховка ГО 10 млн ₽", "3-я группа по высоте", "8:00–22:00 МСК"],
+      "trustRow": [
+        "допуск Минтруда №782н",
+        "страховка ГО 10 млн ₽",
+        "3-я группа по высоте",
+        "8:00–22:00 МСК"
+      ],
       "image": {
         "src": "TBD-fal.ai-sub-alpinist-hero.jpg",
         "alt": "Альпинист Обихода в обвязке снимает крупную ветку, зажатая посадка",
@@ -70,7 +75,13 @@
       "h2": "Получите смету за 10 минут",
       "serviceHint": "Альпинистский спил",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
         {
           "name": "objects",
@@ -79,7 +90,13 @@
           "required": false,
           "placeholder": "Например: тополь Ø60 см между двумя домами, нет проезда для машины"
         },
-        { "name": "photos", "label": "Фото дерева и окружения", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото дерева и окружения",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

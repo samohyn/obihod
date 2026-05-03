@@ -38,7 +38,12 @@
         "href": "/foto-smeta/?service=demontazh&sub=garazh"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["Металл в зачёт сметы", "СРО строителей", "Закрываем кадастр", "Гидромолот для бетона"],
+      "trustRow": [
+        "Металл в зачёт сметы",
+        "СРО строителей",
+        "Закрываем кадастр",
+        "Гидромолот для бетона"
+      ],
       "image": {
         "src": "TBD-fal.ai-sub-snos-garazha-hero.jpg",
         "alt": "Снос кирпичного гаража с фундаментом в Жуковском",
@@ -70,7 +75,13 @@
       "h2": "Получите смету за 10 минут",
       "serviceHint": "Снос гаража",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
         {
           "name": "objects",
@@ -79,7 +90,13 @@
           "required": false,
           "placeholder": "Например: кирпичный гараж 24 м² со смотровой ямой в гаражном кооперативе под Жуковским, есть выписка ЕГРН"
         },
-        { "name": "photos", "label": "Фото гаража", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото гаража",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

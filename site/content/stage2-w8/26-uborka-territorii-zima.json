@@ -70,7 +70,13 @@
       "h2": "Получите смету за 10 минут",
       "serviceHint": "Зимняя уборка территории",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Контактное лицо", "type": "text", "required": false },
         {
           "name": "objects",
@@ -79,7 +85,13 @@
           "required": false,
           "placeholder": "Например: УК «Восход», 6 МКД 5 этажей в Балашихе, нужен сезонный пакет уборки территории + кровли"
         },
-        { "name": "photos", "label": "Фото территории", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото территории",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

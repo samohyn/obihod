@@ -21,7 +21,15 @@
           "version": 1,
           "direction": "ltr",
           "children": [
-            { "type": "text", "text": "Спил, расчистка и аварийный демонтаж деревьев по Истринскому ГО. Большие участки 30–100 соток у Истринского водохранилища, старые ели и сосны после ливней, расчистка под коттедж. Аварийный режим за 1–2 часа 24/7. Альпинист, автовышка, ГБМ. Порубочный билет оформляем сами.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
+            {
+              "type": "text",
+              "text": "Спил, расчистка и аварийный демонтаж деревьев по Истринскому ГО. Большие участки 30–100 соток у Истринского водохранилища, старые ели и сосны после ливней, расчистка под коттедж. Аварийный режим за 1–2 часа 24/7. Альпинист, автовышка, ГБМ. Порубочный билет оформляем сами.",
+              "version": 1,
+              "format": 0,
+              "detail": 0,
+              "mode": "normal",
+              "style": ""
+            }
           ]
         }
       ]
@@ -78,11 +86,35 @@
       "serviceHint": "Арбористика",
       "districtHint": "Истра",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
-        { "name": "address", "label": "Посёлок, СНТ, адрес", "type": "text", "required": false, "placeholder": "Например: КП Снегири, СНТ у ВД, Манихино" },
-        { "name": "objects", "label": "Что нужно сделать", "type": "textarea", "required": false, "placeholder": "Например: 5 старых сосен 60+ см после ветра, накренились на баню, нужен ГБМ" },
-        { "name": "photos", "label": "Фото деревьев", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "address",
+          "label": "Посёлок, СНТ, адрес",
+          "type": "text",
+          "required": false,
+          "placeholder": "Например: КП Снегири, СНТ у ВД, Манихино"
+        },
+        {
+          "name": "objects",
+          "label": "Что нужно сделать",
+          "type": "textarea",
+          "required": false,
+          "placeholder": "Например: 5 старых сосен 60+ см после ветра, накренились на баню, нужен ГБМ"
+        },
+        {
+          "name": "photos",
+          "label": "Фото деревьев",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",
@@ -125,15 +157,29 @@
       "variant": "dark",
       "h2": "Спилим аварийное дерево в Истре за 1–2 часа",
       "body": "Альпинист + ГБМ + автовышка для сосен 60+ см. Аварийный 24/7 в ВД-зоне. Расчистка 50 соток за 5–10 дней.",
-      "ctaPrimary": { "label": "Прислать фото в Telegram", "href": "https://t.me/obihod_dispatcher" },
-      "ctaSecondary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=arboristika&district=istra" }
+      "ctaPrimary": {
+        "label": "Прислать фото в Telegram",
+        "href": "https://t.me/obihod_dispatcher"
+      },
+      "ctaSecondary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=arboristika&district=istra"
+      }
     },
     {
       "blockType": "neighbor-districts",
       "h2": "Соседние районы",
       "items": [
-        { "iconId": "district-krasnogorsk", "title": "Красногорск", "href": "/arboristika/krasnogorsk/" },
-        { "iconId": "district-volokolamsk", "title": "Волоколамск", "href": "/arboristika/volokolamsk/" },
+        {
+          "iconId": "district-krasnogorsk",
+          "title": "Красногорск",
+          "href": "/arboristika/krasnogorsk/"
+        },
+        {
+          "iconId": "district-volokolamsk",
+          "title": "Волоколамск",
+          "href": "/arboristika/volokolamsk/"
+        },
         { "iconId": "district-odincovo", "title": "Одинцово", "href": "/arboristika/odincovo/" }
       ]
     },
@@ -141,9 +187,24 @@
       "blockType": "related-services",
       "h2": "Соседние услуги в Истре",
       "items": [
-        { "iconId": "vyvoz-musora", "title": "Вывоз мусора в Истре", "description": "Контейнер 27 м³ под расчистку 50–100 соток.", "href": "/vyvoz-musora/istra/" },
-        { "iconId": "demontazh", "title": "Демонтаж в Истре", "description": "Снос старой дачи на расчищаемом участке.", "href": "/demontazh/istra/" },
-        { "iconId": "chistka-krysh", "title": "Чистка крыш в Истре", "description": "Снег, наледь, ливневки коттеджей ВД.", "href": "/chistka-krysh/istra/" }
+        {
+          "iconId": "vyvoz-musora",
+          "title": "Вывоз мусора в Истре",
+          "description": "Контейнер 27 м³ под расчистку 50–100 соток.",
+          "href": "/vyvoz-musora/istra/"
+        },
+        {
+          "iconId": "demontazh",
+          "title": "Демонтаж в Истре",
+          "description": "Снос старой дачи на расчищаемом участке.",
+          "href": "/demontazh/istra/"
+        },
+        {
+          "iconId": "chistka-krysh",
+          "title": "Чистка крыш в Истре",
+          "description": "Снег, наледь, ливневки коттеджей ВД.",
+          "href": "/chistka-krysh/istra/"
+        }
       ]
     }
   ],
@@ -152,31 +213,97 @@
     {
       "question": "Делаете ли аварийный спил после ливневого ветровала на участке у ВД?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, аварийный спил в ВД-зоне Истры — наша основная задача в районе. Бригада за 1–2 часа 24/7, тариф 18 400 ₽ за объект до 5 м³. Альпинист + автовышка 21 м, для сосен 60+ см — ГБМ. Спил по частям, фотопротокол. Аварийный ночью (22:00–6:00) — множитель 1,3.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, аварийный спил в ВД-зоне Истры — наша основная задача в районе. Бригада за 1–2 часа 24/7, тариф 18 400 ₽ за объект до 5 м³. Альпинист + автовышка 21 м, для сосен 60+ см — ГБМ. Спил по частям, фотопротокол. Аварийный ночью (22:00–6:00) — множитель 1,3.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Сколько времени едет арборист в Истру?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Истры 50 км через А-107 и Волоколамское шоссе. Аварийная (24/7) — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³. По договору с СНТ держим бригаду в зоне 40 минут.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Истры 50 км через А-107 и Волоколамское шоссе. Аварийная (24/7) — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³. По договору с СНТ держим бригаду в зоне 40 минут.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Спиливаете ли крупные сосны 60–80 см на дачных участках 50–100 соток?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, для крупных стволов 60+ см используем ГБМ (гидро-манипулятор): ствол поднимается без удара о грунт. Бригада из 4 человек. Закрываем 1–2 дерева за смену, общая смета на 5 сосен 60+ см с вывозом — 80 000–120 000 ₽ за объект.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, для крупных стволов 60+ см используем ГБМ (гидро-манипулятор): ствол поднимается без удара о грунт. Бригада из 4 человек. Закрываем 1–2 дерева за смену, общая смета на 5 сосен 60+ см с вывозом — 80 000–120 000 ₽ за объект.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     }
   ],

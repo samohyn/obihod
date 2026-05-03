@@ -37,7 +37,10 @@
       "items": [
         { "label": "Главная", "href": "/" },
         { "label": "Блог", "href": "/blog/" },
-        { "label": "Как выбрать подрядчика на вывоз мусора", "href": "/blog/kak-vybrat-podryadchika-vyvoza-musora/" }
+        {
+          "label": "Как выбрать подрядчика на вывоз мусора",
+          "href": "/blog/kak-vybrat-podryadchika-vyvoza-musora/"
+        }
       ]
     },
     {

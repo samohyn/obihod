@@ -21,7 +21,15 @@
           "version": 1,
           "direction": "ltr",
           "children": [
-            { "type": "text", "text": "Демонтаж по Химкам и Химкинскому ГО: снос складов и cargo-инфраструктуры в зоне Шереметьево, демонтаж ЖК-объектов в Левобережном, разбор старых дач и гаражей в КП Куркино. Промышленный демонтаж B2B + B2C, фикс-цена за объект, вывоз стройотходов одной бригадой.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
+            {
+              "type": "text",
+              "text": "Демонтаж по Химкам и Химкинскому ГО: снос складов и cargo-инфраструктуры в зоне Шереметьево, демонтаж ЖК-объектов в Левобережном, разбор старых дач и гаражей в КП Куркино. Промышленный демонтаж B2B + B2C, фикс-цена за объект, вывоз стройотходов одной бригадой.",
+              "version": 1,
+              "format": 0,
+              "detail": 0,
+              "mode": "normal",
+              "style": ""
+            }
           ]
         }
       ]
@@ -78,11 +86,35 @@
       "serviceHint": "Демонтаж",
       "districtHint": "Химки",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
-        { "name": "address", "label": "Адрес или объект", "type": "text", "required": false, "placeholder": "Например: склад Шереметьево, КП Куркино, ЖК Левобережный" },
-        { "name": "objects", "label": "Объект и работы", "type": "textarea", "required": false, "placeholder": "Например: снос деревянной дачи 50 м² в КП Куркино, нужен демонтаж + вывоз" },
-        { "name": "photos", "label": "Фото объекта", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "address",
+          "label": "Адрес или объект",
+          "type": "text",
+          "required": false,
+          "placeholder": "Например: склад Шереметьево, КП Куркино, ЖК Левобережный"
+        },
+        {
+          "name": "objects",
+          "label": "Объект и работы",
+          "type": "textarea",
+          "required": false,
+          "placeholder": "Например: снос деревянной дачи 50 м² в КП Куркино, нужен демонтаж + вывоз"
+        },
+        {
+          "name": "photos",
+          "label": "Фото объекта",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",
@@ -125,14 +157,24 @@
       "variant": "dark",
       "h2": "Демонтаж в Химках — склады, дачи, ЖК-инфраструктура",
       "body": "Снос + вывоз одной бригадой. B2B авиа-cargo Шереметьево, КП Куркино, ЖК Левобережный.",
-      "ctaPrimary": { "label": "Прислать фото в Telegram", "href": "https://t.me/obihod_dispatcher" },
-      "ctaSecondary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=demontazh&district=khimki" }
+      "ctaPrimary": {
+        "label": "Прислать фото в Telegram",
+        "href": "https://t.me/obihod_dispatcher"
+      },
+      "ctaSecondary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=demontazh&district=khimki"
+      }
     },
     {
       "blockType": "neighbor-districts",
       "h2": "Соседние районы",
       "items": [
-        { "iconId": "district-krasnogorsk", "title": "Красногорск", "href": "/demontazh/krasnogorsk/" },
+        {
+          "iconId": "district-krasnogorsk",
+          "title": "Красногорск",
+          "href": "/demontazh/krasnogorsk/"
+        },
         { "iconId": "district-mytishchi", "title": "Мытищи", "href": "/demontazh/mytishchi/" },
         { "iconId": "district-odincovo", "title": "Одинцово", "href": "/demontazh/odincovo/" }
       ]
@@ -141,9 +183,24 @@
       "blockType": "related-services",
       "h2": "Соседние услуги в Химках",
       "items": [
-        { "iconId": "vyvoz-musora", "title": "Вывоз мусора в Химках", "description": "Контейнер 27 м³ под стройотходы, авиа-cargo SLA.", "href": "/vyvoz-musora/khimki/" },
-        { "iconId": "arboristika", "title": "Арбористика в Химках", "description": "Расчистка участка перед демонтажем.", "href": "/arboristika/khimki/" },
-        { "iconId": "chistka-krysh", "title": "Чистка крыш в Химках", "description": "Сезонная чистка cargo-кровель Шереметьево.", "href": "/chistka-krysh/khimki/" }
+        {
+          "iconId": "vyvoz-musora",
+          "title": "Вывоз мусора в Химках",
+          "description": "Контейнер 27 м³ под стройотходы, авиа-cargo SLA.",
+          "href": "/vyvoz-musora/khimki/"
+        },
+        {
+          "iconId": "arboristika",
+          "title": "Арбористика в Химках",
+          "description": "Расчистка участка перед демонтажем.",
+          "href": "/arboristika/khimki/"
+        },
+        {
+          "iconId": "chistka-krysh",
+          "title": "Чистка крыш в Химках",
+          "description": "Сезонная чистка cargo-кровель Шереметьево.",
+          "href": "/chistka-krysh/khimki/"
+        }
       ]
     }
   ],
@@ -152,31 +209,97 @@
     {
       "question": "Делаете ли промышленный демонтаж складов в зоне Шереметьево?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, для авиа-cargo Шереметьево держим B2B-договор на объект с этапной оплатой и фотопротоколами. Бригада в зоне 30 минут от грузового терминала, допуск на территорию аэропорта по пропуску. Для типового склада 1 000 м² — от 600 000 ₽ за объект. Лицензия СРО №<TODO operator>.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, для авиа-cargo Шереметьево держим B2B-договор на объект с этапной оплатой и фотопротоколами. Бригада в зоне 30 минут от грузового терминала, допуск на территорию аэропорта по пропуску. Для типового склада 1 000 м² — от 600 000 ₽ за объект. Лицензия СРО №<TODO operator>.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Сколько времени едет бригада в Химки?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "По типовой заявке — послезавтра до 12:00. Для крупных объектов (склад, цех) — выезд экскаватора согласуем за 3–5 рабочих дней. Аварийная (24/7) при обрушении конструкций — за 1–2 часа по тарифу 18 400 ₽ за объект.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "По типовой заявке — послезавтра до 12:00. Для крупных объектов (склад, цех) — выезд экскаватора согласуем за 3–5 рабочих дней. Аварийная (24/7) при обрушении конструкций — за 1–2 часа по тарифу 18 400 ₽ за объект.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Берёте ли снос дачи в КП Куркино с вывозом?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, формат «снос + вывоз» — наш типовой пакет в КП. Деревянная дача 50 м² с фундаментом — 95 000 ₽ за демонтаж + 23 500 ₽ за контейнер 27 м³ = 118 500 ₽ за объект. Если на кровле асбестовый шифер — отдельная смета на спецполигон 8 600 ₽ за тонну.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, формат «снос + вывоз» — наш типовой пакет в КП. Деревянная дача 50 м² с фундаментом — 95 000 ₽ за демонтаж + 23 500 ₽ за контейнер 27 м³ = 118 500 ₽ за объект. Если на кровле асбестовый шифер — отдельная смета на спецполигон 8 600 ₽ за тонну.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     }
   ],

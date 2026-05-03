@@ -36,14 +36,7 @@ test.beforeAll(() => {
 interface Stage1Url {
   slug: string
   url: string
-  group:
-    | 'home'
-    | 'pillar'
-    | 'foto-smeta'
-    | 'district-hub'
-    | 'programmatic-sd'
-    | 'blog'
-    | 'static'
+  group: 'home' | 'pillar' | 'foto-smeta' | 'district-hub' | 'programmatic-sd' | 'blog' | 'static'
 }
 
 const URLS: Stage1Url[] = [

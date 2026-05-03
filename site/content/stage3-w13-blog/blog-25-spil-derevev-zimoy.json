@@ -110,7 +110,10 @@
       "variant": "dark",
       "h2": "Зимний спил — пришлите фото",
       "body": "Сезонная скидка 7–15% на спил с декабря по март. Промёрзлый грунт, снежная подушка, открытая крона — выгоднее весны.",
-      "ctaPrimary": { "label": "Смета по фото", "href": "/foto-smeta/?service=arboristika&season=winter" }
+      "ctaPrimary": {
+        "label": "Смета по фото",
+        "href": "/foto-smeta/?service=arboristika&season=winter"
+      }
     },
     {
       "blockType": "related-services",

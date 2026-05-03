@@ -13,9 +13,7 @@
  */
 
 if (!process.env.TOPVISOR_API_TOKEN) {
-  console.log(
-    'Topvisor export skipped — TOPVISOR_API_TOKEN not set (Stage 3 deliverable)',
-  )
+  console.log('Topvisor export skipped — TOPVISOR_API_TOKEN not set (Stage 3 deliverable)')
   process.exit(0)
 }
 

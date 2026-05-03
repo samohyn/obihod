@@ -71,24 +71,84 @@ const URLS: Stage2Url[] = [
   { slug: 'sub-snos-doma', url: '/demontazh/snos-doma/', group: 'sub-service' },
 
   // 12 SD из 100 batch (3 на pillar × 4 districts)
-  { slug: 'sd-vyvoz-kontejner-odincovo', url: '/vyvoz-musora/kontejner/odincovo/', group: 'programmatic-sd' },
-  { slug: 'sd-vyvoz-stroymusor-krasnogorsk', url: '/vyvoz-musora/vyvoz-stroymusora/krasnogorsk/', group: 'programmatic-sd' },
-  { slug: 'sd-vyvoz-mebel-mytishchi', url: '/vyvoz-musora/staraya-mebel/mytishchi/', group: 'programmatic-sd' },
-  { slug: 'sd-arbo-spil-odincovo', url: '/arboristika/spil-derevev/odincovo/', group: 'programmatic-sd' },
-  { slug: 'sd-arbo-kronirovanie-ramenskoye', url: '/arboristika/kronirovanie/ramenskoye/', group: 'programmatic-sd' },
-  { slug: 'sd-arbo-pen-mytishchi', url: '/arboristika/udalenie-pnya/mytishchi/', group: 'programmatic-sd' },
-  { slug: 'sd-krysha-mkd-krasnogorsk', url: '/chistka-krysh/chistka-krysh-mkd/krasnogorsk/', group: 'programmatic-sd' },
-  { slug: 'sd-krysha-sosulki-odincovo', url: '/chistka-krysh/sbivanie-sosulek/odincovo/', group: 'programmatic-sd' },
-  { slug: 'sd-krysha-dom-mytishchi', url: '/chistka-krysh/chistka-krysh-chastnyy-dom/mytishchi/', group: 'programmatic-sd' },
-  { slug: 'sd-demont-dachi-odincovo', url: '/demontazh/demontazh-dachi/odincovo/', group: 'programmatic-sd' },
-  { slug: 'sd-demont-doma-krasnogorsk', url: '/demontazh/snos-doma/krasnogorsk/', group: 'programmatic-sd' },
-  { slug: 'sd-demont-zabora-ramenskoye', url: '/demontazh/snos-zabora/ramenskoye/', group: 'programmatic-sd' },
+  {
+    slug: 'sd-vyvoz-kontejner-odincovo',
+    url: '/vyvoz-musora/kontejner/odincovo/',
+    group: 'programmatic-sd',
+  },
+  {
+    slug: 'sd-vyvoz-stroymusor-krasnogorsk',
+    url: '/vyvoz-musora/vyvoz-stroymusora/krasnogorsk/',
+    group: 'programmatic-sd',
+  },
+  {
+    slug: 'sd-vyvoz-mebel-mytishchi',
+    url: '/vyvoz-musora/staraya-mebel/mytishchi/',
+    group: 'programmatic-sd',
+  },
+  {
+    slug: 'sd-arbo-spil-odincovo',
+    url: '/arboristika/spil-derevev/odincovo/',
+    group: 'programmatic-sd',
+  },
+  {
+    slug: 'sd-arbo-kronirovanie-ramenskoye',
+    url: '/arboristika/kronirovanie/ramenskoye/',
+    group: 'programmatic-sd',
+  },
+  {
+    slug: 'sd-arbo-pen-mytishchi',
+    url: '/arboristika/udalenie-pnya/mytishchi/',
+    group: 'programmatic-sd',
+  },
+  {
+    slug: 'sd-krysha-mkd-krasnogorsk',
+    url: '/chistka-krysh/chistka-krysh-mkd/krasnogorsk/',
+    group: 'programmatic-sd',
+  },
+  {
+    slug: 'sd-krysha-sosulki-odincovo',
+    url: '/chistka-krysh/sbivanie-sosulek/odincovo/',
+    group: 'programmatic-sd',
+  },
+  {
+    slug: 'sd-krysha-dom-mytishchi',
+    url: '/chistka-krysh/chistka-krysh-chastnyy-dom/mytishchi/',
+    group: 'programmatic-sd',
+  },
+  {
+    slug: 'sd-demont-dachi-odincovo',
+    url: '/demontazh/demontazh-dachi/odincovo/',
+    group: 'programmatic-sd',
+  },
+  {
+    slug: 'sd-demont-doma-krasnogorsk',
+    url: '/demontazh/snos-doma/krasnogorsk/',
+    group: 'programmatic-sd',
+  },
+  {
+    slug: 'sd-demont-zabora-ramenskoye',
+    url: '/demontazh/snos-zabora/ramenskoye/',
+    group: 'programmatic-sd',
+  },
 
   // 4 avtovyshka SD (programmatic Run 5)
   { slug: 'sd-avto-odincovo', url: '/arenda-tehniki/avtovyshka/odincovo/', group: 'sd-avtovyshka' },
-  { slug: 'sd-avto-krasnogorsk', url: '/arenda-tehniki/avtovyshka/krasnogorsk/', group: 'sd-avtovyshka' },
-  { slug: 'sd-avto-mytishchi', url: '/arenda-tehniki/avtovyshka/mytishchi/', group: 'sd-avtovyshka' },
-  { slug: 'sd-avto-ramenskoye', url: '/arenda-tehniki/avtovyshka/ramenskoye/', group: 'sd-avtovyshka' },
+  {
+    slug: 'sd-avto-krasnogorsk',
+    url: '/arenda-tehniki/avtovyshka/krasnogorsk/',
+    group: 'sd-avtovyshka',
+  },
+  {
+    slug: 'sd-avto-mytishchi',
+    url: '/arenda-tehniki/avtovyshka/mytishchi/',
+    group: 'sd-avtovyshka',
+  },
+  {
+    slug: 'sd-avto-ramenskoye',
+    url: '/arenda-tehniki/avtovyshka/ramenskoye/',
+    group: 'sd-avtovyshka',
+  },
 
   // 5 B2B
   { slug: 'b2b-hub', url: '/b2b/', group: 'b2b' },
@@ -101,7 +161,11 @@ const URLS: Stage2Url[] = [
   { slug: 'case-vyvoz-stroymusora', url: '/kejsy/vyvoz-stroymusora-odincovo-mart/', group: 'case' },
   { slug: 'case-spil-avariynyy', url: '/kejsy/spil-avariynyy-krasnogorsk/', group: 'case' },
   { slug: 'case-chistka-naledi', url: '/kejsy/chistka-naledi-mkd-odincovo/', group: 'case' },
-  { slug: 'case-demontazh-dachi', url: '/kejsy/demontazh-dachi-staraya-krasnogorsk/', group: 'case' },
+  {
+    slug: 'case-demontazh-dachi',
+    url: '/kejsy/demontazh-dachi-staraya-krasnogorsk/',
+    group: 'case',
+  },
 
   // 5 extras (special pillars + sub)
   { slug: 'extras-raschet', url: '/raschet-stoimosti/', group: 'extras' },

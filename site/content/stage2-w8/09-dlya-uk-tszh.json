@@ -71,7 +71,13 @@
       "h2": "Запросите проект договора",
       "serviceHint": "Договор УК / ТСЖ — вывоз мусора",
       "fields": [
-        { "name": "phone", "label": "Телефон контактного лица УК", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон контактного лица УК",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "ФИО", "type": "text", "required": false },
         {
           "name": "company",

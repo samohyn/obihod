@@ -38,7 +38,12 @@
         "href": "/foto-smeta/?service=arboristika&sub=avtovyshka"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["автовышка 17 м собств.", "21 м под крупные", "СРО строителей", "8:00–22:00 МСК"],
+      "trustRow": [
+        "автовышка 17 м собств.",
+        "21 м под крупные",
+        "СРО строителей",
+        "8:00–22:00 МСК"
+      ],
       "image": {
         "src": "TBD-fal.ai-sub-avtovyshka-hero.jpg",
         "alt": "Автовышка Обихода 21 м у крупного тополя на открытом участке, Долгопрудный",
@@ -70,7 +75,13 @@
       "h2": "Получите смету за 10 минут",
       "serviceHint": "Спил с автовышки",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
         {
           "name": "objects",
@@ -79,7 +90,13 @@
           "required": false,
           "placeholder": "Например: тополь Ø50 см на участке частного дома, проезд 4 м, площадка асфальт"
         },
-        { "name": "photos", "label": "Фото дерева и подъезда", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото дерева и подъезда",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

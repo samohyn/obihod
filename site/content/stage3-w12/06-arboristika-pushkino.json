@@ -21,7 +21,15 @@
           "version": 1,
           "direction": "ltr",
           "children": [
-            { "type": "text", "text": "Спил деревьев, расчистка участков, удаление пней по Пушкинскому ГО. Дачные посёлки и СНТ на Ярославке, лесная зона по границе участков, плодовые сады. Альпинист, автовышка 21 м, измельчитель веток. Порубочный билет оформляем сами. Стволы и порубочные — в общей смете.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
+            {
+              "type": "text",
+              "text": "Спил деревьев, расчистка участков, удаление пней по Пушкинскому ГО. Дачные посёлки и СНТ на Ярославке, лесная зона по границе участков, плодовые сады. Альпинист, автовышка 21 м, измельчитель веток. Порубочный билет оформляем сами. Стволы и порубочные — в общей смете.",
+              "version": 1,
+              "format": 0,
+              "detail": 0,
+              "mode": "normal",
+              "style": ""
+            }
           ]
         }
       ]
@@ -78,11 +86,35 @@
       "serviceHint": "Арбористика",
       "districtHint": "Пушкино",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
-        { "name": "address", "label": "СНТ, посёлок, адрес", "type": "text", "required": false, "placeholder": "Например: СНТ Заветы Ильича, КП Софрино" },
-        { "name": "objects", "label": "Что нужно сделать", "type": "textarea", "required": false, "placeholder": "Например: расчистка 12 соток под коттедж, 8–12 деревьев, корчёвка пней" },
-        { "name": "photos", "label": "Фото деревьев и участка", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "address",
+          "label": "СНТ, посёлок, адрес",
+          "type": "text",
+          "required": false,
+          "placeholder": "Например: СНТ Заветы Ильича, КП Софрино"
+        },
+        {
+          "name": "objects",
+          "label": "Что нужно сделать",
+          "type": "textarea",
+          "required": false,
+          "placeholder": "Например: расчистка 12 соток под коттедж, 8–12 деревьев, корчёвка пней"
+        },
+        {
+          "name": "photos",
+          "label": "Фото деревьев и участка",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",
@@ -125,8 +157,14 @@
       "variant": "dark",
       "h2": "Спилим и расчистим участок в Пушкино",
       "body": "СНТ Заветы Ильича, КП Зеленоградский, ИЖС — расчистка под коттедж за 2–5 дней. Альпинист + автовышка + порубочный билет.",
-      "ctaPrimary": { "label": "Прислать фото в Telegram", "href": "https://t.me/obihod_dispatcher" },
-      "ctaSecondary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=arboristika&district=pushkino" }
+      "ctaPrimary": {
+        "label": "Прислать фото в Telegram",
+        "href": "https://t.me/obihod_dispatcher"
+      },
+      "ctaSecondary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=arboristika&district=pushkino"
+      }
     },
     {
       "blockType": "neighbor-districts",
@@ -134,16 +172,35 @@
       "items": [
         { "iconId": "district-mytishchi", "title": "Мытищи", "href": "/arboristika/mytishchi/" },
         { "iconId": "district-korolev", "title": "Королёв", "href": "/arboristika/korolev/" },
-        { "iconId": "district-sergiev-posad", "title": "Сергиев Посад", "href": "/arboristika/sergiev-posad/" }
+        {
+          "iconId": "district-sergiev-posad",
+          "title": "Сергиев Посад",
+          "href": "/arboristika/sergiev-posad/"
+        }
       ]
     },
     {
       "blockType": "related-services",
       "h2": "Соседние услуги в Пушкино",
       "items": [
-        { "iconId": "vyvoz-musora", "title": "Вывоз мусора в Пушкино", "description": "Контейнер под порубочные, СНТ-сезон.", "href": "/vyvoz-musora/pushkino/" },
-        { "iconId": "demontazh", "title": "Демонтаж в Пушкино", "description": "Снос старой дачи, бани — после расчистки участка.", "href": "/demontazh/pushkino/" },
-        { "iconId": "chistka-krysh", "title": "Чистка крыш в Пушкино", "description": "Снег и наледь на дачах и КП.", "href": "/chistka-krysh/pushkino/" }
+        {
+          "iconId": "vyvoz-musora",
+          "title": "Вывоз мусора в Пушкино",
+          "description": "Контейнер под порубочные, СНТ-сезон.",
+          "href": "/vyvoz-musora/pushkino/"
+        },
+        {
+          "iconId": "demontazh",
+          "title": "Демонтаж в Пушкино",
+          "description": "Снос старой дачи, бани — после расчистки участка.",
+          "href": "/demontazh/pushkino/"
+        },
+        {
+          "iconId": "chistka-krysh",
+          "title": "Чистка крыш в Пушкино",
+          "description": "Снег и наледь на дачах и КП.",
+          "href": "/chistka-krysh/pushkino/"
+        }
       ]
     }
   ],
@@ -152,31 +209,97 @@
     {
       "question": "Делаете ли расчистку лесного участка под коттедж в СНТ Пушкинского ГО?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, расчистка 6–30 соток под фундамент коттеджа — типовой пакет в Пушкино. Спил всех деревьев в зоне застройки + 5-метровая защитная зона + корчёвка пней + щепа ветвей + вывоз стволов. 12 соток закрываем за 2–3 рабочих дня. Общая смета 65 000–95 000 ₽ за объект.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, расчистка 6–30 соток под фундамент коттеджа — типовой пакет в Пушкино. Спил всех деревьев в зоне застройки + 5-метровая защитная зона + корчёвка пней + щепа ветвей + вывоз стволов. 12 соток закрываем за 2–3 рабочих дня. Общая смета 65 000–95 000 ₽ за объект.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Сколько времени едет арборист в Пушкино?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Пушкино 35 км через Ярославское шоссе. Аварийная (24/7) — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Пушкино 35 км через Ярославское шоссе. Аварийная (24/7) — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Работаете ли с СНТ Заветы Ильича и КП Зеленоградский?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, по СНТ и КП Пушкинского ГО держим сезонный график май–октябрь. Один заход бригады закрывает 5–10 участков подряд, скидка 15% от 5 объектов в месяц. Пропуск на территорию — автоматический по списку правления.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, по СНТ и КП Пушкинского ГО держим сезонный график май–октябрь. Один заход бригады закрывает 5–10 участков подряд, скидка 15% от 5 объектов в месяц. Пропуск на территорию — автоматический по списку правления.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     }
   ],

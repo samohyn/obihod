@@ -11,7 +11,11 @@
     "winning_angle": "ППР по 384-ФЗ + СРО + страховка + утилизация ФККО — vs конкурентов с шаблонным «снесём за день»",
     "schema_note": "Article + Person + Organization + BreadcrumbList + FAQPage",
     "author_note": "info-cluster — Бригада вывоза Обихода",
-    "cross_pillar_refs": ["demontazh", "vyvoz-musora/vyvoz-stroymusora", "arboristika/raschistka-uchastka"]
+    "cross_pillar_refs": [
+      "demontazh",
+      "vyvoz-musora/vyvoz-stroymusora",
+      "arboristika/raschistka-uchastka"
+    ]
   },
   "type": "blog-post",
   "url": "/blog/snos-stareyshego-doma-na-dache/",
@@ -110,7 +114,10 @@
       "variant": "dark",
       "h2": "Снос старой дачи под ключ",
       "body": "ППР по 384-ФЗ, СРО подрядчика, страховка 10 млн ₽, утилизация по ФККО. Помогаем со снятием с кадастра.",
-      "ctaPrimary": { "label": "Запрос на смету", "href": "/foto-smeta/?service=demontazh&object=dacha" }
+      "ctaPrimary": {
+        "label": "Запрос на смету",
+        "href": "/foto-smeta/?service=demontazh&object=dacha"
+      }
     },
     {
       "blockType": "related-services",

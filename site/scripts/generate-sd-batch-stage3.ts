@@ -105,7 +105,8 @@ const DISTRICTS: District[] = [
     ],
     pillarAngles: {
       'vyvoz-musora': 'Шереметьево-cargo B2B-режим: контейнеры 27 м³, SLA 4 часа, договор на сезон',
-      arboristika: 'ЖК-территории и приаэродромная зона: спил с автовышки 22 м, кронирование под FOD-prevention',
+      arboristika:
+        'ЖК-территории и приаэродромная зона: спил с автовышки 22 м, кронирование под FOD-prevention',
       'chistka-krysh': 'ЖК-новостройки и cargo-кровли Шереметьево: договор на сезон с SLA',
       demontazh: 'Авиа-склады и промзоны: демонтаж промышленный, снос складских конструкций',
     },
@@ -140,7 +141,8 @@ const DISTRICTS: District[] = [
     ],
     pillarAngles: {
       'vyvoz-musora': 'СНТ-сезонный (May-Oct): садовый мусор, контейнеры под расчистку участка',
-      arboristika: 'Лесная зона + СНТ: спил высоких сосен, расчистка под застройку коттеджа 6-30 соток',
+      arboristika:
+        'Лесная зона + СНТ: спил высоких сосен, расчистка под застройку коттеджа 6-30 соток',
       'chistka-krysh': 'Дачные коттеджи и двускатные кровли: сбивание сосулек, очистка от снега',
       demontazh: 'СНТ старые срубы 1960-80-х: демонтаж дачи, бани, сарая под новую застройку',
     },
@@ -163,7 +165,13 @@ const DISTRICTS: District[] = [
     highway: 'Новорижскому шоссе',
     highwayShort: 'Новорижка',
     centerGeo: [36.8584, 55.9148],
-    landmarks: ['Истринское водохранилище', 'Дедовск', 'Снегири', 'Букарёво', 'КП Резиденция Рублёво-Истра'],
+    landmarks: [
+      'Истринское водохранилище',
+      'Дедовск',
+      'Снегири',
+      'Букарёво',
+      'КП Резиденция Рублёво-Истра',
+    ],
     contextualLandmark: 'Истринское водохранилище и дачные посёлки',
     nearestPolygon: 'Волоколамском районе',
     polygonTimeMin: 55,
@@ -174,7 +182,8 @@ const DISTRICTS: District[] = [
       { slug: 'odincovo', title: 'Одинцово' },
     ],
     pillarAngles: {
-      'vyvoz-musora': 'Большие дачные участки 30-100 соток: контейнеры под расчистку, садовый мусор',
+      'vyvoz-musora':
+        'Большие дачные участки 30-100 соток: контейнеры под расчистку, садовый мусор',
       arboristika: 'Лес у водохранилища: спил высоких деревьев, расчистка участка под застройку',
       'chistka-krysh': 'ВД-зона: ливневые наводнения требуют чистки кровли и водостоков',
       demontazh: 'Старые дачи 1960-80-х под снос: демонтаж дачи, бани, замена забора',
@@ -210,7 +219,8 @@ const DISTRICTS: District[] = [
     ],
     pillarAngles: {
       'vyvoz-musora': 'Авиапром и ЛИИ: контейнеры под промышленные объёмы, B2B договор',
-      arboristika: 'Приаэродромная зона: кронирование под нормы безопасности полётов, спил деревьев',
+      arboristika:
+        'Приаэродромная зона: кронирование под нормы безопасности полётов, спил деревьев',
       'chistka-krysh': 'Промобъекты ЛИИ и ЦАГИ + жилой сектор: договор на сезон, чистка МКД',
       demontazh: 'Снос частного сектора у периметра ЛИИ и ЦАГИ: дачи, заборы, крупный демонтаж',
     },
@@ -241,59 +251,212 @@ interface SubServiceRef {
 
 const SUB_REGISTRY: Record<string, Omit<SubServiceRef, 'slug'> & { slug: string }> = {
   // vyvoz-musora
-  kontejner: { slug: 'kontejner', pillar: 'vyvoz-musora', shortTitle: 'Контейнер 8/20/27 м³', shortTitleLow: 'аренда контейнера' },
-  'vyvoz-stroymusora': { slug: 'vyvoz-stroymusora', pillar: 'vyvoz-musora', shortTitle: 'Вывоз стройотходов', shortTitleLow: 'вывоз стройотходов' },
-  'staraya-mebel': { slug: 'staraya-mebel', pillar: 'vyvoz-musora', shortTitle: 'Вывоз старой мебели', shortTitleLow: 'вывоз старой мебели' },
-  krupnogabarit: { slug: 'krupnogabarit', pillar: 'vyvoz-musora', shortTitle: 'Вывоз крупногабарита', shortTitleLow: 'вывоз КГМ' },
-  gazel: { slug: 'gazel', pillar: 'vyvoz-musora', shortTitle: 'Вывоз мусора Газелью', shortTitleLow: 'вывоз мусора газелью' },
-  'vyvoz-sadovogo-musora': { slug: 'vyvoz-sadovogo-musora', pillar: 'vyvoz-musora', shortTitle: 'Вывоз садового мусора', shortTitleLow: 'вывоз садового мусора' },
-  'dlya-uk-tszh': { slug: 'dlya-uk-tszh', pillar: 'vyvoz-musora', shortTitle: 'Вывоз для УК и ТСЖ', shortTitleLow: 'вывоз мусора для УК и ТСЖ' },
+  kontejner: {
+    slug: 'kontejner',
+    pillar: 'vyvoz-musora',
+    shortTitle: 'Контейнер 8/20/27 м³',
+    shortTitleLow: 'аренда контейнера',
+  },
+  'vyvoz-stroymusora': {
+    slug: 'vyvoz-stroymusora',
+    pillar: 'vyvoz-musora',
+    shortTitle: 'Вывоз стройотходов',
+    shortTitleLow: 'вывоз стройотходов',
+  },
+  'staraya-mebel': {
+    slug: 'staraya-mebel',
+    pillar: 'vyvoz-musora',
+    shortTitle: 'Вывоз старой мебели',
+    shortTitleLow: 'вывоз старой мебели',
+  },
+  krupnogabarit: {
+    slug: 'krupnogabarit',
+    pillar: 'vyvoz-musora',
+    shortTitle: 'Вывоз крупногабарита',
+    shortTitleLow: 'вывоз КГМ',
+  },
+  gazel: {
+    slug: 'gazel',
+    pillar: 'vyvoz-musora',
+    shortTitle: 'Вывоз мусора Газелью',
+    shortTitleLow: 'вывоз мусора газелью',
+  },
+  'vyvoz-sadovogo-musora': {
+    slug: 'vyvoz-sadovogo-musora',
+    pillar: 'vyvoz-musora',
+    shortTitle: 'Вывоз садового мусора',
+    shortTitleLow: 'вывоз садового мусора',
+  },
+  'dlya-uk-tszh': {
+    slug: 'dlya-uk-tszh',
+    pillar: 'vyvoz-musora',
+    shortTitle: 'Вывоз для УК и ТСЖ',
+    shortTitleLow: 'вывоз мусора для УК и ТСЖ',
+  },
   // arboristika
-  'spil-derevev': { slug: 'spil-derevev', pillar: 'arboristika', shortTitle: 'Спил деревьев', shortTitleLow: 'спил деревьев' },
-  'udalenie-pnya': { slug: 'udalenie-pnya', pillar: 'arboristika', shortTitle: 'Удаление пня', shortTitleLow: 'удаление пня' },
-  'sanitarnaya-obrezka': { slug: 'sanitarnaya-obrezka', pillar: 'arboristika', shortTitle: 'Санитарная обрезка', shortTitleLow: 'санитарная обрезка' },
-  kronirovanie: { slug: 'kronirovanie', pillar: 'arboristika', shortTitle: 'Кронирование', shortTitleLow: 'кронирование' },
-  'raschistka-uchastka': { slug: 'raschistka-uchastka', pillar: 'arboristika', shortTitle: 'Расчистка участка', shortTitleLow: 'расчистка участка' },
+  'spil-derevev': {
+    slug: 'spil-derevev',
+    pillar: 'arboristika',
+    shortTitle: 'Спил деревьев',
+    shortTitleLow: 'спил деревьев',
+  },
+  'udalenie-pnya': {
+    slug: 'udalenie-pnya',
+    pillar: 'arboristika',
+    shortTitle: 'Удаление пня',
+    shortTitleLow: 'удаление пня',
+  },
+  'sanitarnaya-obrezka': {
+    slug: 'sanitarnaya-obrezka',
+    pillar: 'arboristika',
+    shortTitle: 'Санитарная обрезка',
+    shortTitleLow: 'санитарная обрезка',
+  },
+  kronirovanie: {
+    slug: 'kronirovanie',
+    pillar: 'arboristika',
+    shortTitle: 'Кронирование',
+    shortTitleLow: 'кронирование',
+  },
+  'raschistka-uchastka': {
+    slug: 'raschistka-uchastka',
+    pillar: 'arboristika',
+    shortTitle: 'Расчистка участка',
+    shortTitleLow: 'расчистка участка',
+  },
   // chistka-krysh
-  'ot-snega': { slug: 'ot-snega', pillar: 'chistka-krysh', shortTitle: 'Чистка крыш от снега', shortTitleLow: 'чистка крыш от снега' },
-  'chistka-krysh-mkd': { slug: 'chistka-krysh-mkd', pillar: 'chistka-krysh', shortTitle: 'Чистка крыш МКД', shortTitleLow: 'чистка крыш МКД' },
-  'sbivanie-sosulek': { slug: 'sbivanie-sosulek', pillar: 'chistka-krysh', shortTitle: 'Сбивание сосулек', shortTitleLow: 'сбивание сосулек' },
-  'dogovor-na-sezon': { slug: 'dogovor-na-sezon', pillar: 'chistka-krysh', shortTitle: 'Договор на сезон чистки', shortTitleLow: 'договор на сезон чистки кровель' },
-  'chistka-krysh-chastnyy-dom': { slug: 'chistka-krysh-chastnyy-dom', pillar: 'chistka-krysh', shortTitle: 'Чистка кровли частного дома', shortTitleLow: 'чистка кровли частного дома' },
-  'uborka-territorii-zima': { slug: 'uborka-territorii-zima', pillar: 'chistka-krysh', shortTitle: 'Уборка территории зимой', shortTitleLow: 'уборка территории зимой' },
+  'ot-snega': {
+    slug: 'ot-snega',
+    pillar: 'chistka-krysh',
+    shortTitle: 'Чистка крыш от снега',
+    shortTitleLow: 'чистка крыш от снега',
+  },
+  'chistka-krysh-mkd': {
+    slug: 'chistka-krysh-mkd',
+    pillar: 'chistka-krysh',
+    shortTitle: 'Чистка крыш МКД',
+    shortTitleLow: 'чистка крыш МКД',
+  },
+  'sbivanie-sosulek': {
+    slug: 'sbivanie-sosulek',
+    pillar: 'chistka-krysh',
+    shortTitle: 'Сбивание сосулек',
+    shortTitleLow: 'сбивание сосулек',
+  },
+  'dogovor-na-sezon': {
+    slug: 'dogovor-na-sezon',
+    pillar: 'chistka-krysh',
+    shortTitle: 'Договор на сезон чистки',
+    shortTitleLow: 'договор на сезон чистки кровель',
+  },
+  'chistka-krysh-chastnyy-dom': {
+    slug: 'chistka-krysh-chastnyy-dom',
+    pillar: 'chistka-krysh',
+    shortTitle: 'Чистка кровли частного дома',
+    shortTitleLow: 'чистка кровли частного дома',
+  },
+  'uborka-territorii-zima': {
+    slug: 'uborka-territorii-zima',
+    pillar: 'chistka-krysh',
+    shortTitle: 'Уборка территории зимой',
+    shortTitleLow: 'уборка территории зимой',
+  },
   // demontazh
-  'demontazh-dachi': { slug: 'demontazh-dachi', pillar: 'demontazh', shortTitle: 'Демонтаж дачи', shortTitleLow: 'демонтаж дачи' },
-  'demontazh-bani': { slug: 'demontazh-bani', pillar: 'demontazh', shortTitle: 'Демонтаж бани', shortTitleLow: 'демонтаж бани' },
-  'snos-zabora': { slug: 'snos-zabora', pillar: 'demontazh', shortTitle: 'Снос забора', shortTitleLow: 'снос забора' },
-  'snos-doma': { slug: 'snos-doma', pillar: 'demontazh', shortTitle: 'Снос дома', shortTitleLow: 'снос дома' },
+  'demontazh-dachi': {
+    slug: 'demontazh-dachi',
+    pillar: 'demontazh',
+    shortTitle: 'Демонтаж дачи',
+    shortTitleLow: 'демонтаж дачи',
+  },
+  'demontazh-bani': {
+    slug: 'demontazh-bani',
+    pillar: 'demontazh',
+    shortTitle: 'Демонтаж бани',
+    shortTitleLow: 'демонтаж бани',
+  },
+  'snos-zabora': {
+    slug: 'snos-zabora',
+    pillar: 'demontazh',
+    shortTitle: 'Снос забора',
+    shortTitleLow: 'снос забора',
+  },
+  'snos-doma': {
+    slug: 'snos-doma',
+    pillar: 'demontazh',
+    shortTitle: 'Снос дома',
+    shortTitleLow: 'снос дома',
+  },
 }
 
 const SHORTLIST: Record<string, string[]> = {
   // 15 sub × 4 districts = 60 SD
   khimki: [
-    'kontejner', 'vyvoz-stroymusora', 'staraya-mebel', 'krupnogabarit', 'gazel',
-    'vyvoz-sadovogo-musora', 'dlya-uk-tszh',
-    'spil-derevev', 'udalenie-pnya', 'sanitarnaya-obrezka', 'kronirovanie',
-    'ot-snega', 'chistka-krysh-mkd', 'sbivanie-sosulek', 'dogovor-na-sezon',
+    'kontejner',
+    'vyvoz-stroymusora',
+    'staraya-mebel',
+    'krupnogabarit',
+    'gazel',
+    'vyvoz-sadovogo-musora',
+    'dlya-uk-tszh',
+    'spil-derevev',
+    'udalenie-pnya',
+    'sanitarnaya-obrezka',
+    'kronirovanie',
+    'ot-snega',
+    'chistka-krysh-mkd',
+    'sbivanie-sosulek',
+    'dogovor-na-sezon',
   ],
   pushkino: [
-    'vyvoz-sadovogo-musora', 'vyvoz-stroymusora', 'kontejner', 'krupnogabarit',
-    'spil-derevev', 'udalenie-pnya', 'raschistka-uchastka', 'kronirovanie', 'sanitarnaya-obrezka',
-    'ot-snega', 'sbivanie-sosulek', 'chistka-krysh-chastnyy-dom',
-    'demontazh-dachi', 'demontazh-bani', 'snos-zabora',
+    'vyvoz-sadovogo-musora',
+    'vyvoz-stroymusora',
+    'kontejner',
+    'krupnogabarit',
+    'spil-derevev',
+    'udalenie-pnya',
+    'raschistka-uchastka',
+    'kronirovanie',
+    'sanitarnaya-obrezka',
+    'ot-snega',
+    'sbivanie-sosulek',
+    'chistka-krysh-chastnyy-dom',
+    'demontazh-dachi',
+    'demontazh-bani',
+    'snos-zabora',
   ],
   istra: [
-    'vyvoz-sadovogo-musora', 'kontejner', 'vyvoz-stroymusora',
-    'spil-derevev', 'raschistka-uchastka', 'udalenie-pnya', 'kronirovanie',
-    'ot-snega', 'sbivanie-sosulek', 'uborka-territorii-zima',
-    'demontazh-dachi', 'demontazh-bani', 'snos-zabora', 'sanitarnaya-obrezka', 'krupnogabarit',
+    'vyvoz-sadovogo-musora',
+    'kontejner',
+    'vyvoz-stroymusora',
+    'spil-derevev',
+    'raschistka-uchastka',
+    'udalenie-pnya',
+    'kronirovanie',
+    'ot-snega',
+    'sbivanie-sosulek',
+    'uborka-territorii-zima',
+    'demontazh-dachi',
+    'demontazh-bani',
+    'snos-zabora',
+    'sanitarnaya-obrezka',
+    'krupnogabarit',
   ],
   zhukovsky: [
-    'vyvoz-stroymusora', 'kontejner', 'krupnogabarit',
-    'spil-derevev', 'kronirovanie', 'udalenie-pnya',
-    'dogovor-na-sezon', 'chistka-krysh-mkd', 'ot-snega', 'sbivanie-sosulek',
-    'snos-doma', 'snos-zabora', 'demontazh-dachi',
-    'vyvoz-sadovogo-musora', 'sanitarnaya-obrezka',
+    'vyvoz-stroymusora',
+    'kontejner',
+    'krupnogabarit',
+    'spil-derevev',
+    'kronirovanie',
+    'udalenie-pnya',
+    'dogovor-na-sezon',
+    'chistka-krysh-mkd',
+    'ot-snega',
+    'sbivanie-sosulek',
+    'snos-doma',
+    'snos-zabora',
+    'demontazh-dachi',
+    'vyvoz-sadovogo-musora',
+    'sanitarnaya-obrezka',
   ],
 }
 
@@ -737,14 +900,10 @@ function checkPublishGate(blocks: CwBlock[]): PublishGateCheck {
     const body = (b.body as string) ?? ''
     return Math.max(max, wordCount(body))
   }, 0)
-  const hasContact = blocks.some(
-    (b) => b.blockType === 'lead-form' || b.blockType === 'cta-banner',
-  )
+  const hasContact = blocks.some((b) => b.blockType === 'lead-form' || b.blockType === 'cta-banner')
   const miniCase = blocks.find((b) => b.blockType === 'mini-case')
   const hasMiniCase = miniCase !== undefined
-  const faqBlock = blocks.find((b) => b.blockType === 'faq') as
-    | { items?: FaqItem[] }
-    | undefined
+  const faqBlock = blocks.find((b) => b.blockType === 'faq') as { items?: FaqItem[] } | undefined
   const localFaqCount = (faqBlock?.items ?? []).filter((i) => i.isLocal === true).length
 
   return {

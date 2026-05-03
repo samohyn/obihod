@@ -46,16 +46,36 @@ const URLS: Stage3Url[] = [
   { name: '08-sub-snos-zhukovsky', path: '/demontazh/snos-doma/zhukovsky/', group: 'sub-sd' },
 
   // 4 Blog M3 sample (1 на pillar)
-  { name: '09-blog-raschistka-stroyka', path: '/blog/raschistka-uchastka-pod-stroyku/', group: 'blog-m3' },
+  {
+    name: '09-blog-raschistka-stroyka',
+    path: '/blog/raschistka-uchastka-pod-stroyku/',
+    group: 'blog-m3',
+  },
   { name: '10-blog-spil-zimoy', path: '/blog/spil-derevev-zimoy/', group: 'blog-m3' },
-  { name: '11-blog-chistka-osen', path: '/blog/kogda-zakazat-chistku-krysh-osenyu/', group: 'blog-m3' },
-  { name: '12-blog-arbo-vs-sadovnik', path: '/blog/cherta-mezhdu-arbo-i-sadovnikom/', group: 'blog-m3' },
+  {
+    name: '11-blog-chistka-osen',
+    path: '/blog/kogda-zakazat-chistku-krysh-osenyu/',
+    group: 'blog-m3',
+  },
+  {
+    name: '12-blog-arbo-vs-sadovnik',
+    path: '/blog/cherta-mezhdu-arbo-i-sadovnikom/',
+    group: 'blog-m3',
+  },
 
   // 4 Cases sample (1 на district)
-  { name: '13-case-khimki-aviasklad', path: '/kejsy/vyvoz-konteyner-27m3-khimki-aviasklad/', group: 'case' },
+  {
+    name: '13-case-khimki-aviasklad',
+    path: '/kejsy/vyvoz-konteyner-27m3-khimki-aviasklad/',
+    group: 'case',
+  },
   { name: '14-case-pushkino-snt', path: '/kejsy/spil-8-derevev-snt-pushkino/', group: 'case' },
   { name: '15-case-istra-livnevki', path: '/kejsy/chistka-livnevyh-krysh-istra/', group: 'case' },
-  { name: '16-case-zhukovsky-aviasklad', path: '/kejsy/demontazh-aviasklada-zhukovskij/', group: 'case' },
+  {
+    name: '16-case-zhukovsky-aviasklad',
+    path: '/kejsy/demontazh-aviasklada-zhukovskij/',
+    group: 'case',
+  },
 ]
 
 const WCAG_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']

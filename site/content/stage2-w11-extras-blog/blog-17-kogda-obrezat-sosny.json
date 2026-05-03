@@ -112,7 +112,10 @@
       "variant": "dark",
       "h2": "Хвойные на участке — пришлите фото",
       "body": "Бригадир посмотрит породу и состояние, предложит сезон и тариф — смета за 10 минут.",
-      "ctaPrimary": { "label": "Смета по фото", "href": "/foto-smeta/?service=arboristika&sub=kronirovanie" }
+      "ctaPrimary": {
+        "label": "Смета по фото",
+        "href": "/foto-smeta/?service=arboristika&sub=kronirovanie"
+      }
     },
     {
       "blockType": "related-services",

@@ -112,7 +112,10 @@
       "variant": "dark",
       "h2": "Спил берёзы — пришлите фото",
       "body": "Бригадир посмотрит, нужен ли билет, и предложит способ спила — смета за 10 минут.",
-      "ctaPrimary": { "label": "Смета по фото", "href": "/foto-smeta/?service=arboristika&sub=spil-berezy" }
+      "ctaPrimary": {
+        "label": "Смета по фото",
+        "href": "/foto-smeta/?service=arboristika&sub=spil-berezy"
+      }
     },
     {
       "blockType": "related-services",

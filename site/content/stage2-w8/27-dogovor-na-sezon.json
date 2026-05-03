@@ -38,7 +38,12 @@
         "href": "/foto-smeta/?service=chistka-krysh&sub=dogovor-na-sezon"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["3 тарифа: 45/95/180 тыс ₽/мес", "Штрафы ГЖИ на нас", "Аварийка 30 минут", "ЭДО Диадок/СБИС"],
+      "trustRow": [
+        "3 тарифа: 45/95/180 тыс ₽/мес",
+        "Штрафы ГЖИ на нас",
+        "Аварийка 30 минут",
+        "ЭДО Диадок/СБИС"
+      ],
       "image": {
         "src": "TBD-fal.ai-sub-dogovor-na-sezon-hero.jpg",
         "alt": "Подписание сезонного договора УК с Обиходом",
@@ -70,7 +75,13 @@
       "h2": "Получите расчёт сезона за 24 часа",
       "serviceHint": "Сезонный договор УК",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Контактное лицо", "type": "text", "required": false },
         {
           "name": "objects",
@@ -79,7 +90,13 @@
           "required": false,
           "placeholder": "Например: УК «Восход», 12 МКД 5–9 этажей, общая площадь кровель ~18 700 м², нужен расчёт пакета на сезон"
         },
-        { "name": "photos", "label": "Список адресов или фото объектов", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Список адресов или фото объектов",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

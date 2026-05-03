@@ -70,7 +70,13 @@
       "h2": "Получите смету за 10 минут",
       "serviceHint": "Демонтаж сарая",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
         {
           "name": "objects",
@@ -79,7 +85,13 @@
           "required": false,
           "placeholder": "Например: сарай 3×4 м + дровяник + старый туалет, СНТ под Раменским, нужно к концу мая, заодно расчистка участка"
         },
-        { "name": "photos", "label": "Фото построек и участка", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото построек и участка",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

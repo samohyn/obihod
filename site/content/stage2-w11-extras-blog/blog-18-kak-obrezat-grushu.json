@@ -113,7 +113,10 @@
       "variant": "dark",
       "h2": "Крупный сад — пришлите фото",
       "body": "Бригада с автовышкой обрежет 6–10 деревьев за смену с измельчением ветвей в щепу.",
-      "ctaPrimary": { "label": "Смета по фото", "href": "/foto-smeta/?service=arboristika&sub=kronirovanie" }
+      "ctaPrimary": {
+        "label": "Смета по фото",
+        "href": "/foto-smeta/?service=arboristika&sub=kronirovanie"
+      }
     },
     {
       "blockType": "related-services",

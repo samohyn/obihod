@@ -21,7 +21,15 @@
           "version": 1,
           "direction": "ltr",
           "children": [
-            { "type": "text", "text": "Чистим крыши ангаров, cargo-зданий и ВПП-инфраструктуры аэродрома «Раменское» в Жуковском, кровли МКД и ЖК Туполева, Гагарина, Чкалова. B2B-договор на сезон для ЛИИ и авиапром-предприятий с SLA подачи 4 часа. Альпинист 3-й группы, СРО, страховка ГО 10 млн ₽.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
+            {
+              "type": "text",
+              "text": "Чистим крыши ангаров, cargo-зданий и ВПП-инфраструктуры аэродрома «Раменское» в Жуковском, кровли МКД и ЖК Туполева, Гагарина, Чкалова. B2B-договор на сезон для ЛИИ и авиапром-предприятий с SLA подачи 4 часа. Альпинист 3-й группы, СРО, страховка ГО 10 млн ₽.",
+              "version": 1,
+              "format": 0,
+              "detail": 0,
+              "mode": "normal",
+              "style": ""
+            }
           ]
         }
       ]
@@ -78,11 +86,35 @@
       "serviceHint": "Чистка крыш",
       "districtHint": "Жуковский",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
-        { "name": "address", "label": "Адрес или объект", "type": "text", "required": false, "placeholder": "Например: ангар ЛИИ, ЖК Туполева, ЦАГИ" },
-        { "name": "objects", "label": "Объект и работы", "type": "textarea", "required": false, "placeholder": "Например: ангар 5000 м² плоская кровля с тестовым оборудованием, нужна сезонная чистка по B2B" },
-        { "name": "photos", "label": "Фото объекта", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "address",
+          "label": "Адрес или объект",
+          "type": "text",
+          "required": false,
+          "placeholder": "Например: ангар ЛИИ, ЖК Туполева, ЦАГИ"
+        },
+        {
+          "name": "objects",
+          "label": "Объект и работы",
+          "type": "textarea",
+          "required": false,
+          "placeholder": "Например: ангар 5000 м² плоская кровля с тестовым оборудованием, нужна сезонная чистка по B2B"
+        },
+        {
+          "name": "photos",
+          "label": "Фото объекта",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",
@@ -125,14 +157,24 @@
       "variant": "dark",
       "h2": "Чистка крыш в Жуковском — ангары ВПП и ЖК",
       "body": "Альпинист 3-й группы + аккредитация ЛИИ. SLA 4 часа для авиапром. Годовой договор для УК.",
-      "ctaPrimary": { "label": "Прислать фото в Telegram", "href": "https://t.me/obihod_dispatcher" },
-      "ctaSecondary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=chistka-krysh&district=zhukovskij" }
+      "ctaPrimary": {
+        "label": "Прислать фото в Telegram",
+        "href": "https://t.me/obihod_dispatcher"
+      },
+      "ctaSecondary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=chistka-krysh&district=zhukovskij"
+      }
     },
     {
       "blockType": "neighbor-districts",
       "h2": "Соседние районы",
       "items": [
-        { "iconId": "district-ramenskoye", "title": "Раменское", "href": "/chistka-krysh/ramenskoye/" },
+        {
+          "iconId": "district-ramenskoye",
+          "title": "Раменское",
+          "href": "/chistka-krysh/ramenskoye/"
+        },
         { "iconId": "district-lyubertsy", "title": "Люберцы", "href": "/chistka-krysh/lyubertsy/" },
         { "iconId": "district-bronnitsy", "title": "Бронницы", "href": "/chistka-krysh/bronnitsy/" }
       ]
@@ -141,9 +183,24 @@
       "blockType": "related-services",
       "h2": "Соседние услуги в Жуковском",
       "items": [
-        { "iconId": "vyvoz-musora", "title": "Вывоз мусора в Жуковском", "description": "Контейнер под сбитую наледь, авиа-стройотходы.", "href": "/vyvoz-musora/zhukovskij/" },
-        { "iconId": "arboristika", "title": "Арбористика в Жуковском", "description": "FOD-кронирование санзоны ВПП.", "href": "/arboristika/zhukovskij/" },
-        { "iconId": "demontazh", "title": "Демонтаж в Жуковском", "description": "Снос старой авиа-инфраструктуры B2B.", "href": "/demontazh/zhukovskij/" }
+        {
+          "iconId": "vyvoz-musora",
+          "title": "Вывоз мусора в Жуковском",
+          "description": "Контейнер под сбитую наледь, авиа-стройотходы.",
+          "href": "/vyvoz-musora/zhukovskij/"
+        },
+        {
+          "iconId": "arboristika",
+          "title": "Арбористика в Жуковском",
+          "description": "FOD-кронирование санзоны ВПП.",
+          "href": "/arboristika/zhukovskij/"
+        },
+        {
+          "iconId": "demontazh",
+          "title": "Демонтаж в Жуковском",
+          "description": "Снос старой авиа-инфраструктуры B2B.",
+          "href": "/demontazh/zhukovskij/"
+        }
       ]
     }
   ],
@@ -152,31 +209,97 @@
     {
       "question": "Чистите ли кровли ангаров аэродрома «Раменское» по договору?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, для ЛИИ, ЦАГИ и авиапром-предприятий держим договор на сезон с SLA 4 часа в рабочий день. Бригада в зоне 30 минут от КПП, допуск на режимную территорию по пропуску. Лицензия СРО №<TODO operator>, страховка ГО 10 млн ₽. Для ангара 5 000 м² — 35 000–60 000 ₽/мес.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, для ЛИИ, ЦАГИ и авиапром-предприятий держим договор на сезон с SLA 4 часа в рабочий день. Бригада в зоне 30 минут от КПП, допуск на режимную территорию по пропуску. Лицензия СРО №<TODO operator>, страховка ГО 10 млн ₽. Для ангара 5 000 м² — 35 000–60 000 ₽/мес.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Сколько времени едет бригада в Жуковский?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Жуковского 47 км через МКАД и М-5. Аварийная (24/7) при угрозе провала — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³. По авиапром-договору SLA 4 часа в рабочий день.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Жуковского 47 км через МКАД и М-5. Аварийная (24/7) при угрозе провала — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³. По авиапром-договору SLA 4 часа в рабочий день.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Берёте ли годовой договор для УК ЖК Туполева и Гагарина?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, для УК Жуковского — годовой договор: чистка после каждого снегопада ≥10 см, аварийная 24/7, отчёт за месяц. Штрафы ГЖИ берём по своему счёту. На 5 МКД по 1 500 м² — 1 250 000 ₽ за сезон. Для ЖК-застройщиков — объектный договор со скидкой 15% от 5 МКД.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, для УК Жуковского — годовой договор: чистка после каждого снегопада ≥10 см, аварийная 24/7, отчёт за месяц. Штрафы ГЖИ берём по своему счёту. На 5 МКД по 1 500 м² — 1 250 000 ₽ за сезон. Для ЖК-застройщиков — объектный договор со скидкой 15% от 5 МКД.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     }
   ],

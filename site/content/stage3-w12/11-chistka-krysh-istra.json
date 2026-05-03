@@ -21,7 +21,15 @@
           "version": 1,
           "direction": "ltr",
           "children": [
-            { "type": "text", "text": "Чистим скатные кровли коттеджей и таунхаусов по Истринскому ГО, прочищаем ливневки и стоки после ливней. ВД-зона: Снегири, Лучинское, Манихино, Дедовск. Двускатные кровли с большим уклоном, очистка ендов и водоотводов после ливневых наводнений. Альпинист 3-й группы, СРО.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
+            {
+              "type": "text",
+              "text": "Чистим скатные кровли коттеджей и таунхаусов по Истринскому ГО, прочищаем ливневки и стоки после ливней. ВД-зона: Снегири, Лучинское, Манихино, Дедовск. Двускатные кровли с большим уклоном, очистка ендов и водоотводов после ливневых наводнений. Альпинист 3-й группы, СРО.",
+              "version": 1,
+              "format": 0,
+              "detail": 0,
+              "mode": "normal",
+              "style": ""
+            }
           ]
         }
       ]
@@ -78,11 +86,35 @@
       "serviceHint": "Чистка крыш",
       "districtHint": "Истра",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
-        { "name": "address", "label": "Посёлок, СНТ, адрес", "type": "text", "required": false, "placeholder": "Например: КП Снегири, Лучинское, Манихино" },
-        { "name": "objects", "label": "Объект и работы", "type": "textarea", "required": false, "placeholder": "Например: коттедж 150 м² двускатная, забились ливневки после ливня, нужна срочная прочистка" },
-        { "name": "photos", "label": "Фото объекта", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "address",
+          "label": "Посёлок, СНТ, адрес",
+          "type": "text",
+          "required": false,
+          "placeholder": "Например: КП Снегири, Лучинское, Манихино"
+        },
+        {
+          "name": "objects",
+          "label": "Объект и работы",
+          "type": "textarea",
+          "required": false,
+          "placeholder": "Например: коттедж 150 м² двускатная, забились ливневки после ливня, нужна срочная прочистка"
+        },
+        {
+          "name": "photos",
+          "label": "Фото объекта",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",
@@ -125,15 +157,29 @@
       "variant": "dark",
       "h2": "Чистка крыш и ливневок в Истре — ВД-зона",
       "body": "Альпинист 3-й группы, аварийный 24/7 после ливня. Прочистка ендов и водостоков от хвои.",
-      "ctaPrimary": { "label": "Прислать фото в Telegram", "href": "https://t.me/obihod_dispatcher" },
-      "ctaSecondary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=chistka-krysh&district=istra" }
+      "ctaPrimary": {
+        "label": "Прислать фото в Telegram",
+        "href": "https://t.me/obihod_dispatcher"
+      },
+      "ctaSecondary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=chistka-krysh&district=istra"
+      }
     },
     {
       "blockType": "neighbor-districts",
       "h2": "Соседние районы",
       "items": [
-        { "iconId": "district-krasnogorsk", "title": "Красногорск", "href": "/chistka-krysh/krasnogorsk/" },
-        { "iconId": "district-volokolamsk", "title": "Волоколамск", "href": "/chistka-krysh/volokolamsk/" },
+        {
+          "iconId": "district-krasnogorsk",
+          "title": "Красногорск",
+          "href": "/chistka-krysh/krasnogorsk/"
+        },
+        {
+          "iconId": "district-volokolamsk",
+          "title": "Волоколамск",
+          "href": "/chistka-krysh/volokolamsk/"
+        },
         { "iconId": "district-odincovo", "title": "Одинцово", "href": "/chistka-krysh/odincovo/" }
       ]
     },
@@ -141,9 +187,24 @@
       "blockType": "related-services",
       "h2": "Соседние услуги в Истре",
       "items": [
-        { "iconId": "vyvoz-musora", "title": "Вывоз мусора в Истре", "description": "Контейнер под ил из ливневок и обломки.", "href": "/vyvoz-musora/istra/" },
-        { "iconId": "arboristika", "title": "Арбористика в Истре", "description": "Аварийный спил сосен, которые роняют хвою на кровлю.", "href": "/arboristika/istra/" },
-        { "iconId": "demontazh", "title": "Демонтаж в Истре", "description": "Снос старой бани или дачи.", "href": "/demontazh/istra/" }
+        {
+          "iconId": "vyvoz-musora",
+          "title": "Вывоз мусора в Истре",
+          "description": "Контейнер под ил из ливневок и обломки.",
+          "href": "/vyvoz-musora/istra/"
+        },
+        {
+          "iconId": "arboristika",
+          "title": "Арбористика в Истре",
+          "description": "Аварийный спил сосен, которые роняют хвою на кровлю.",
+          "href": "/arboristika/istra/"
+        },
+        {
+          "iconId": "demontazh",
+          "title": "Демонтаж в Истре",
+          "description": "Снос старой бани или дачи.",
+          "href": "/demontazh/istra/"
+        }
       ]
     }
   ],
@@ -152,31 +213,97 @@
     {
       "question": "Прочищаете ли ливневки и ендовы после ливневых наводнений в ВД-зоне?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, прочистка ливневок после ливней — отдельный B2C-сегмент в Истре. Альпинист очищает водостоки от листьев и хвои сосен, чистит ендовы и сопряжения, проверяет дождеприёмники у фундамента. Цена 1 200 ₽/п.м. водостока. Аварийный режим (24/7) при подтоплении — 18 400 ₽ за объект до 5 м³.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, прочистка ливневок после ливней — отдельный B2C-сегмент в Истре. Альпинист очищает водостоки от листьев и хвои сосен, чистит ендовы и сопряжения, проверяет дождеприёмники у фундамента. Цена 1 200 ₽/п.м. водостока. Аварийный режим (24/7) при подтоплении — 18 400 ₽ за объект до 5 м³.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Сколько времени едет бригада в Истру?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Истры 50 км через А-107 и Волоколамское шоссе. Аварийная (24/7) после ливня — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Истры 50 км через А-107 и Волоколамское шоссе. Аварийная (24/7) после ливня — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Работаете ли с двускатными коттеджами в КП Снегири и Манихино?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, двускатные коттеджи в КП Истринского ГО — наша основная задача. Альпинист с пластиковой лопатой, очистка ендов и сопряжений, прочистка водостоков от хвои. Для металлочерепицы — пластиковая кромка. Сезонный договор + плановая прочистка ливневок весна–осень.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, двускатные коттеджи в КП Истринского ГО — наша основная задача. Альпинист с пластиковой лопатой, очистка ендов и сопряжений, прочистка водостоков от хвои. Для металлочерепицы — пластиковая кромка. Сезонный договор + плановая прочистка ливневок весна–осень.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     }
   ],

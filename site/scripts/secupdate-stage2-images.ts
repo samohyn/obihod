@@ -94,14 +94,18 @@ function updateSdFixture(file: string): { changed: boolean; before: number; afte
 //
 // Mapping case file slug → -after.jpg short identifier:
 const W11_CASE_AFTER_PATH: Record<string, string> = {
-  '01-vyvoz-stroymusora-odincovo-mart': '/uploads/stage2-w11-cases/case-stroymusor-odincovo-after.jpg',
+  '01-vyvoz-stroymusora-odincovo-mart':
+    '/uploads/stage2-w11-cases/case-stroymusor-odincovo-after.jpg',
   '02-vyvoz-mkd-mytishchi-uk-podpis': '/uploads/stage2-w11-cases/case-uk-mytishchi-after.jpg',
   '03-spil-avariynyy-krasnogorsk': '/uploads/stage2-w11-cases/case-spil-krasnogorsk-after.jpg',
-  '04-obrezka-fruktovogo-sada-ramenskoye': '/uploads/stage2-w11-cases/case-obrezka-ramenskoye-after.jpg',
+  '04-obrezka-fruktovogo-sada-ramenskoye':
+    '/uploads/stage2-w11-cases/case-obrezka-ramenskoye-after.jpg',
   '05-chistka-naledi-mkd-odincovo': '/uploads/stage2-w11-cases/case-naled-odincovo-after.jpg',
   '06-chistka-chastnyy-dom-mytishchi': '/uploads/stage2-w11-cases/case-chistka-mytishchi-after.jpg',
-  '07-demontazh-dachi-staraya-krasnogorsk': '/uploads/stage2-w11-cases/case-demontazh-dachi-krasnogorsk-after.jpg',
-  '08-snos-zabora-zastroyshchik-ramenskoye': '/uploads/stage2-w11-cases/case-snos-zabora-ramenskoye-after.jpg',
+  '07-demontazh-dachi-staraya-krasnogorsk':
+    '/uploads/stage2-w11-cases/case-demontazh-dachi-krasnogorsk-after.jpg',
+  '08-snos-zabora-zastroyshchik-ramenskoye':
+    '/uploads/stage2-w11-cases/case-snos-zabora-ramenskoye-after.jpg',
 }
 
 function updateCaseFixture(file: string): { changed: boolean; before: number; after: number } {
@@ -241,9 +245,7 @@ function main() {
   console.log('=== Sec-update Stage 2 images ===\n')
 
   // W10 SD
-  const w10Files = readdirSync(W10_DIR).filter(
-    (f) => f.endsWith('.json') && f !== '_manifest.json',
-  )
+  const w10Files = readdirSync(W10_DIR).filter((f) => f.endsWith('.json') && f !== '_manifest.json')
   let w10Changed = 0
   let w10TbdBefore = 0
   let w10TbdAfter = 0

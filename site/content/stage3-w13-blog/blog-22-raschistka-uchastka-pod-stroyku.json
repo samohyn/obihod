@@ -11,7 +11,12 @@
     "winning_angle": "4-в-1 пакет (расчистка + спил + вывоз + демонтаж старых построек) одной бригадой одним договором — vs конкурентов с 3-4 субподрядчиками",
     "schema_note": "Article + Person (author Бригада вывоза Обихода) + Organization + BreadcrumbList + FAQPage",
     "author_note": "info-cluster — Бригада вывоза Обихода (sustained Stage 1)",
-    "cross_pillar_refs": ["arboristika/raschistka-uchastka", "demontazh", "vyvoz-musora/vyvoz-stroymusora", "porubochnyj-bilet"]
+    "cross_pillar_refs": [
+      "arboristika/raschistka-uchastka",
+      "demontazh",
+      "vyvoz-musora/vyvoz-stroymusora",
+      "porubochnyj-bilet"
+    ]
   },
   "type": "blog-post",
   "url": "/blog/raschistka-uchastka-pod-stroyku/",
@@ -37,7 +42,10 @@
       "items": [
         { "label": "Главная", "href": "/" },
         { "label": "Блог", "href": "/blog/" },
-        { "label": "Расчистка участка под стройку", "href": "/blog/raschistka-uchastka-pod-stroyku/" }
+        {
+          "label": "Расчистка участка под стройку",
+          "href": "/blog/raschistka-uchastka-pod-stroyku/"
+        }
       ]
     },
     {

@@ -21,7 +21,15 @@
           "version": 1,
           "direction": "ltr",
           "children": [
-            { "type": "text", "text": "Чистим скатные кровли частных домов и КП по Пушкинскому ГО, сбиваем сосульки с фасадов МКД. Двускатные кровли коттеджей в СНТ Заветы Ильича, Зеленоградском, Софрино — частный сектор B2C. Альпинист 3-й группы по высоте, страховка ГО 10 млн ₽, СРО.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
+            {
+              "type": "text",
+              "text": "Чистим скатные кровли частных домов и КП по Пушкинскому ГО, сбиваем сосульки с фасадов МКД. Двускатные кровли коттеджей в СНТ Заветы Ильича, Зеленоградском, Софрино — частный сектор B2C. Альпинист 3-й группы по высоте, страховка ГО 10 млн ₽, СРО.",
+              "version": 1,
+              "format": 0,
+              "detail": 0,
+              "mode": "normal",
+              "style": ""
+            }
           ]
         }
       ]
@@ -46,7 +54,12 @@
         "href": "/foto-smeta/?service=chistka-krysh&district=pushkino"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["альпинист 3-я группа", "СРО + страховка 10 млн", "коттеджи + МКД", "акт-приёмки"],
+      "trustRow": [
+        "альпинист 3-я группа",
+        "СРО + страховка 10 млн",
+        "коттеджи + МКД",
+        "акт-приёмки"
+      ],
       "image": {
         "src": "/uploads/stage2/sd-chistka-krysh-hero.jpg",
         "alt": "Альпинистское звено Обихода чистит снег со скатной кровли коттеджа в КП Зеленоградский, Пушкино",
@@ -78,11 +91,35 @@
       "serviceHint": "Чистка крыш",
       "districtHint": "Пушкино",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
-        { "name": "address", "label": "СНТ, посёлок, адрес", "type": "text", "required": false, "placeholder": "Например: КП Зеленоградский, СНТ Заветы Ильича" },
-        { "name": "objects", "label": "Объект и работы", "type": "textarea", "required": false, "placeholder": "Например: коттедж 150 м² двускатная металлочерепица, нужно убрать снеговой карниз" },
-        { "name": "photos", "label": "Фото объекта", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "address",
+          "label": "СНТ, посёлок, адрес",
+          "type": "text",
+          "required": false,
+          "placeholder": "Например: КП Зеленоградский, СНТ Заветы Ильича"
+        },
+        {
+          "name": "objects",
+          "label": "Объект и работы",
+          "type": "textarea",
+          "required": false,
+          "placeholder": "Например: коттедж 150 м² двускатная металлочерепица, нужно убрать снеговой карниз"
+        },
+        {
+          "name": "photos",
+          "label": "Фото объекта",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",
@@ -125,8 +162,14 @@
       "variant": "dark",
       "h2": "Чистка крыш в Пушкино — коттеджи и МКД",
       "body": "Альпинист 3-й группы + страховка 10 млн ₽. Сезонный договор для КП. Аварийный 1–2 часа 24/7.",
-      "ctaPrimary": { "label": "Прислать фото в Telegram", "href": "https://t.me/obihod_dispatcher" },
-      "ctaSecondary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=chistka-krysh&district=pushkino" }
+      "ctaPrimary": {
+        "label": "Прислать фото в Telegram",
+        "href": "https://t.me/obihod_dispatcher"
+      },
+      "ctaSecondary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=chistka-krysh&district=pushkino"
+      }
     },
     {
       "blockType": "neighbor-districts",
@@ -134,16 +177,35 @@
       "items": [
         { "iconId": "district-mytishchi", "title": "Мытищи", "href": "/chistka-krysh/mytishchi/" },
         { "iconId": "district-korolev", "title": "Королёв", "href": "/chistka-krysh/korolev/" },
-        { "iconId": "district-sergiev-posad", "title": "Сергиев Посад", "href": "/chistka-krysh/sergiev-posad/" }
+        {
+          "iconId": "district-sergiev-posad",
+          "title": "Сергиев Посад",
+          "href": "/chistka-krysh/sergiev-posad/"
+        }
       ]
     },
     {
       "blockType": "related-services",
       "h2": "Соседние услуги в Пушкино",
       "items": [
-        { "iconId": "vyvoz-musora", "title": "Вывоз мусора в Пушкино", "description": "Контейнер под сбитую наледь, СНТ-сезон.", "href": "/vyvoz-musora/pushkino/" },
-        { "iconId": "arboristika", "title": "Арбористика в Пушкино", "description": "Спил аварийных деревьев у фасада коттеджа.", "href": "/arboristika/pushkino/" },
-        { "iconId": "demontazh", "title": "Демонтаж в Пушкино", "description": "Снос старой бани или дачи под застройку.", "href": "/demontazh/pushkino/" }
+        {
+          "iconId": "vyvoz-musora",
+          "title": "Вывоз мусора в Пушкино",
+          "description": "Контейнер под сбитую наледь, СНТ-сезон.",
+          "href": "/vyvoz-musora/pushkino/"
+        },
+        {
+          "iconId": "arboristika",
+          "title": "Арбористика в Пушкино",
+          "description": "Спил аварийных деревьев у фасада коттеджа.",
+          "href": "/arboristika/pushkino/"
+        },
+        {
+          "iconId": "demontazh",
+          "title": "Демонтаж в Пушкино",
+          "description": "Снос старой бани или дачи под застройку.",
+          "href": "/demontazh/pushkino/"
+        }
       ]
     }
   ],
@@ -152,31 +214,97 @@
     {
       "question": "Чистите ли двускатные кровли коттеджей в КП Зеленоградский и Софрино?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, двускатные коттеджи в КП Пушкинского ГО — наша основная задача. Альпинист с пластиковой лопатой по периметру, сбивание снежных карнизов, очистка ендов. Для металлочерепицы — пластиковая кромка скрепера. По правлению КП — сезонный договор со скидкой 15% от 5 объектов.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, двускатные коттеджи в КП Пушкинского ГО — наша основная задача. Альпинист с пластиковой лопатой по периметру, сбивание снежных карнизов, очистка ендов. Для металлочерепицы — пластиковая кромка скрепера. По правлению КП — сезонный договор со скидкой 15% от 5 объектов.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Сколько времени едет бригада в Пушкино?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Пушкино 35 км через Ярославское шоссе. Аварийная (24/7) при угрозе обрушения карниза — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Пушкино 35 км через Ярославское шоссе. Аварийная (24/7) при угрозе обрушения карниза — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Работаете ли с шиферными кровлями старых дач в СНТ Пушкинского ГО?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, но с отдельным режимом: шифер хрупкий. Работаем только с гарантией ущерба под подпись + страховкой ГО 10 млн ₽. Перед работами проверяем состояние материала, при необходимости делаем дополнительные точки страховки. Цены те же — 1 000 ₽/м².", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, но с отдельным режимом: шифер хрупкий. Работаем только с гарантией ущерба под подпись + страховкой ГО 10 млн ₽. Перед работами проверяем состояние материала, при необходимости делаем дополнительные точки страховки. Цены те же — 1 000 ₽/м².",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     }
   ],

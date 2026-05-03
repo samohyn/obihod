@@ -570,10 +570,7 @@ function buildNeighborDistricts(sub: SubService, district: District): SubBlock {
   }
 }
 
-function buildSchemaLocalBusiness(
-  sub: SubService,
-  district: District,
-): Record<string, unknown> {
+function buildSchemaLocalBusiness(sub: SubService, district: District): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
@@ -699,14 +696,10 @@ function checkPublishGate(blocks: SubBlock[]): PublishGateCheck {
     const body = (b.body as string) ?? ''
     return Math.max(max, wordCount(body))
   }, 0)
-  const hasContact = blocks.some(
-    (b) => b.blockType === 'lead-form' || b.blockType === 'cta-banner',
-  )
+  const hasContact = blocks.some((b) => b.blockType === 'lead-form' || b.blockType === 'cta-banner')
   const miniCase = blocks.find((b) => b.blockType === 'mini-case')
   const hasMiniCase = miniCase !== undefined
-  const faqBlock = blocks.find((b) => b.blockType === 'faq') as
-    | { items?: FaqItem[] }
-    | undefined
+  const faqBlock = blocks.find((b) => b.blockType === 'faq') as { items?: FaqItem[] } | undefined
   const localFaqCount = (faqBlock?.items ?? []).filter((i) => i.isLocal === true).length
 
   return {
@@ -774,9 +767,7 @@ function composeSD(sub: SubService, district: District): SDOutput {
     !gate.hasMiniCase ||
     !gate.hasTwoLocalFaq
   ) {
-    throw new Error(
-      `[gen-sd] publish-gate FAIL для ${url}: ${JSON.stringify(gate)}`,
-    )
+    throw new Error(`[gen-sd] publish-gate FAIL для ${url}: ${JSON.stringify(gate)}`)
   }
 
   // metaTitle / metaDescription: district-specific
@@ -880,11 +871,7 @@ function main(): void {
   for (const district of DISTRICTS) {
     try {
       const sd = composeSD(AVTOVYSHKA_BASE, district)
-      const fname = safeFileName([
-        AVTOVYSHKA_BASE.parentSlug,
-        AVTOVYSHKA_BASE.slug,
-        district.slug,
-      ])
+      const fname = safeFileName([AVTOVYSHKA_BASE.parentSlug, AVTOVYSHKA_BASE.slug, district.slug])
       writeFileSync(join(OUTPUT_DIR, fname), JSON.stringify(sd, null, 2) + '\n', 'utf-8')
       const text = sd.blocks.find((b) => b.blockType === 'text-content') as
         | { body?: string }
@@ -904,7 +891,9 @@ function main(): void {
 
   // ─ Лог итогов ─
   console.log(`\n[gen-sd-batch] ✓ generated ${generated.length} SD-fixtures in ${OUTPUT_DIR}`)
-  console.log(`  • core programmatic: ${generated.length - DISTRICTS.length} (24 sub × 4 districts)`)
+  console.log(
+    `  • core programmatic: ${generated.length - DISTRICTS.length} (24 sub × 4 districts)`,
+  )
   console.log(`  • avtovyshka × districts: ${DISTRICTS.length} (ADR-uМ-18)`)
   if (errors.length > 0) {
     console.error(`\n[gen-sd-batch] ✗ ${errors.length} errors:`)

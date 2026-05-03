@@ -38,7 +38,12 @@
         "href": "/foto-smeta/?service=arboristika&sub=sanitarnaya-obrezka"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["арборист с допуском", "5-балльная диагностика", "сезонные пакеты", "8:00–22:00 МСК"],
+      "trustRow": [
+        "арборист с допуском",
+        "5-балльная диагностика",
+        "сезонные пакеты",
+        "8:00–22:00 МСК"
+      ],
       "image": {
         "src": "TBD-fal.ai-sub-sanitar-hero.jpg",
         "alt": "Арборист Обихода удаляет сухие ветви дуба на участке частного дома, Пушкино",
@@ -70,7 +75,13 @@
       "h2": "Получите смету за 10 минут",
       "serviceHint": "Санитарная обрезка",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
         {
           "name": "objects",
@@ -79,7 +90,13 @@
           "required": false,
           "placeholder": "Например: 2 яблони с сухими ветвями + 1 берёза с грибком у основания"
         },
-        { "name": "photos", "label": "Фото деревьев", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото деревьев",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

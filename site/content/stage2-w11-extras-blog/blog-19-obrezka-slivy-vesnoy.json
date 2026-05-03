@@ -113,7 +113,10 @@
       "variant": "dark",
       "h2": "Признаки монилиоза — пришлите фото",
       "body": "Бригадир посмотрит и предложит санитарную обрезку или спил больного дерева — смета за 10 минут.",
-      "ctaPrimary": { "label": "Смета по фото", "href": "/foto-smeta/?service=arboristika&sub=sanitarnaya-obrezka" }
+      "ctaPrimary": {
+        "label": "Смета по фото",
+        "href": "/foto-smeta/?service=arboristika&sub=sanitarnaya-obrezka"
+      }
     },
     {
       "blockType": "related-services",

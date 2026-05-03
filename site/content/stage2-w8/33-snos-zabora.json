@@ -38,7 +38,12 @@
         "href": "/foto-smeta/?service=demontazh&sub=zabor"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["1 200–2 800 ₽/м.п.", "Металл в зачёт", "Согласование границы", "Без повреждения соседа"],
+      "trustRow": [
+        "1 200–2 800 ₽/м.п.",
+        "Металл в зачёт",
+        "Согласование границы",
+        "Без повреждения соседа"
+      ],
       "image": {
         "src": "TBD-fal.ai-sub-snos-zabora-hero.jpg",
         "alt": "Снос старого деревянного забора со столбами",
@@ -70,7 +75,13 @@
       "h2": "Получите смету за 10 минут",
       "serviceHint": "Снос забора",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
         {
           "name": "objects",
@@ -79,7 +90,13 @@
           "required": false,
           "placeholder": "Например: бетонный забор 42 п. м с ленточным фундаментом, граница с соседом, СНТ Ленинский, согласование с кадастровым инженером нужно"
         },
-        { "name": "photos", "label": "Фото забора и углов участка", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото забора и углов участка",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

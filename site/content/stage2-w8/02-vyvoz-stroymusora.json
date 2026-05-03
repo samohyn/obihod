@@ -38,7 +38,12 @@
         "href": "/foto-smeta/?service=vyvoz-musora&sub=stroymusor"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["лицензия Росприроднадзора", "СРО строителей", "полигон в смете", "8:00–22:00 МСК"],
+      "trustRow": [
+        "лицензия Росприроднадзора",
+        "СРО строителей",
+        "полигон в смете",
+        "8:00–22:00 МСК"
+      ],
       "image": {
         "src": "TBD-fal.ai-sub-stroymusor-hero.jpg",
         "alt": "Бригада Обихода грузит бой кирпича и гипсокартон в контейнер 20 м³, Балашиха",
@@ -70,7 +75,13 @@
       "h2": "Получите смету за 10 минут",
       "serviceHint": "Строительный мусор",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
         {
           "name": "objects",
@@ -79,7 +90,13 @@
           "required": false,
           "placeholder": "Например: бой кирпича после демонтажа двух перегородок, окна-двери, гипсокартон листами"
         },
-        { "name": "photos", "label": "Фото объекта", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото объекта",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

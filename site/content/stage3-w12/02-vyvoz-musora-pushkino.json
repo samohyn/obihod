@@ -86,11 +86,35 @@
       "serviceHint": "Вывоз мусора",
       "districtHint": "Пушкино",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
-        { "name": "address", "label": "СНТ, посёлок, адрес", "type": "text", "required": false, "placeholder": "Например: СНТ Заветы Ильича, КП Зеленоградский" },
-        { "name": "objects", "label": "Что вывозим", "type": "textarea", "required": false, "placeholder": "Например: садовый мусор и порубочные после спила, объём около 8 м³" },
-        { "name": "photos", "label": "Фото объекта", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "address",
+          "label": "СНТ, посёлок, адрес",
+          "type": "text",
+          "required": false,
+          "placeholder": "Например: СНТ Заветы Ильича, КП Зеленоградский"
+        },
+        {
+          "name": "objects",
+          "label": "Что вывозим",
+          "type": "textarea",
+          "required": false,
+          "placeholder": "Например: садовый мусор и порубочные после спила, объём около 8 м³"
+        },
+        {
+          "name": "photos",
+          "label": "Фото объекта",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",
@@ -133,8 +157,14 @@
       "variant": "dark",
       "h2": "Вывезем садовый и строительный мусор из Пушкино послезавтра",
       "body": "СНТ, КП, ИЖС — фикс-цена. Спил, расчистка, снос — одной бригадой по одному акту.",
-      "ctaPrimary": { "label": "Прислать фото в Telegram", "href": "https://t.me/obihod_dispatcher" },
-      "ctaSecondary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=vyvoz-musora&district=pushkino" }
+      "ctaPrimary": {
+        "label": "Прислать фото в Telegram",
+        "href": "https://t.me/obihod_dispatcher"
+      },
+      "ctaSecondary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=vyvoz-musora&district=pushkino"
+      }
     },
     {
       "blockType": "neighbor-districts",
@@ -142,16 +172,35 @@
       "items": [
         { "iconId": "district-mytishchi", "title": "Мытищи", "href": "/vyvoz-musora/mytishchi/" },
         { "iconId": "district-korolev", "title": "Королёв", "href": "/vyvoz-musora/korolev/" },
-        { "iconId": "district-sergiev-posad", "title": "Сергиев Посад", "href": "/vyvoz-musora/sergiev-posad/" }
+        {
+          "iconId": "district-sergiev-posad",
+          "title": "Сергиев Посад",
+          "href": "/vyvoz-musora/sergiev-posad/"
+        }
       ]
     },
     {
       "blockType": "related-services",
       "h2": "Соседние услуги в Пушкино",
       "items": [
-        { "iconId": "arboristika", "title": "Арбористика в Пушкино", "description": "Спил деревьев, расчистка участка, удаление пней.", "href": "/arboristika/pushkino/" },
-        { "iconId": "demontazh", "title": "Демонтаж в Пушкино", "description": "Снос дачи, бани, забора — с вывозом одной бригадой.", "href": "/demontazh/pushkino/" },
-        { "iconId": "chistka-krysh", "title": "Чистка крыш в Пушкино", "description": "Снег, наледь, сосульки на дачах и КП.", "href": "/chistka-krysh/pushkino/" }
+        {
+          "iconId": "arboristika",
+          "title": "Арбористика в Пушкино",
+          "description": "Спил деревьев, расчистка участка, удаление пней.",
+          "href": "/arboristika/pushkino/"
+        },
+        {
+          "iconId": "demontazh",
+          "title": "Демонтаж в Пушкино",
+          "description": "Снос дачи, бани, забора — с вывозом одной бригадой.",
+          "href": "/demontazh/pushkino/"
+        },
+        {
+          "iconId": "chistka-krysh",
+          "title": "Чистка крыш в Пушкино",
+          "description": "Снег, наледь, сосульки на дачах и КП.",
+          "href": "/chistka-krysh/pushkino/"
+        }
       ]
     }
   ],
@@ -160,31 +209,97 @@
     {
       "question": "Работаете ли с СНТ и коттеджными посёлками Пушкинского округа?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, по СНТ и КП Пушкинского округа держим сезонный график май–октябрь по согласованию с правлением. Контейнер 20 м³ заходит в субботу утром, забираем в воскресенье вечером. Пропуск на территорию — автоматический по согласованному списку.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, по СНТ и КП Пушкинского округа держим сезонный график май–октябрь по согласованию с правлением. Контейнер 20 м³ заходит в субботу утром, забираем в воскресенье вечером. Пропуск на территорию — автоматический по согласованному списку.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Сколько времени едет бригада в Пушкино?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до центра Пушкино 35 км через Ярославское шоссе. Аварийная (24/7) — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до центра Пушкино 35 км через Ярославское шоссе. Аварийная (24/7) — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Принимает ли полигон садовый мусор отдельно?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Лицензированный полигон в Сергиево-Посадском районе принимает садовый мусор (трава, ветви, корневища) по тарифу IV класса. Отдельной строки в смете нет: подача, перевозка, полигон — одна цена за контейнер. Плечо 30 минут.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Лицензированный полигон в Сергиево-Посадском районе принимает садовый мусор (трава, ветви, корневища) по тарифу IV класса. Отдельной строки в смете нет: подача, перевозка, полигон — одна цена за контейнер. Плечо 30 минут.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     }
   ],

@@ -37,7 +37,10 @@
       "items": [
         { "label": "Главная", "href": "/" },
         { "label": "Блог", "href": "/blog/" },
-        { "label": "Уход за деревьями летом и осенью", "href": "/blog/uhod-za-derevyami-letom-osenyu/" }
+        {
+          "label": "Уход за деревьями летом и осенью",
+          "href": "/blog/uhod-za-derevyami-letom-osenyu/"
+        }
       ]
     },
     {
@@ -110,7 +113,10 @@
       "variant": "dark",
       "h2": "Сезонный пакет ухода — 6 операций",
       "body": "С мая по октябрь по графику. Фикс-цена за дерево, фото-отчёт после каждого выезда. От 10 деревьев на участке.",
-      "ctaPrimary": { "label": "Запрос на сезонный пакет", "href": "/foto-smeta/?service=arboristika&package=season" }
+      "ctaPrimary": {
+        "label": "Запрос на сезонный пакет",
+        "href": "/foto-smeta/?service=arboristika&package=season"
+      }
     },
     {
       "blockType": "related-services",

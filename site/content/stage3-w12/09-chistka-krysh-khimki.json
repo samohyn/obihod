@@ -21,7 +21,15 @@
           "version": 1,
           "direction": "ltr",
           "children": [
-            { "type": "text", "text": "Чистим крыши от снега, наледи и сосулек по Химкам и Химкинскому ГО. ЖК-новостройки Левобережного и Старых Химок, частные дома КП Куркино, cargo-кровли складских комплексов Шереметьево. Альпинистское звено с допуском 3-й группы по высоте, договор на сезон для УК и B2B.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
+            {
+              "type": "text",
+              "text": "Чистим крыши от снега, наледи и сосулек по Химкам и Химкинскому ГО. ЖК-новостройки Левобережного и Старых Химок, частные дома КП Куркино, cargo-кровли складских комплексов Шереметьево. Альпинистское звено с допуском 3-й группы по высоте, договор на сезон для УК и B2B.",
+              "version": 1,
+              "format": 0,
+              "detail": 0,
+              "mode": "normal",
+              "style": ""
+            }
           ]
         }
       ]
@@ -46,7 +54,12 @@
         "href": "/foto-smeta/?service=chistka-krysh&district=khimki"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["альпинист 3-я группа", "СРО + страховка 10 млн", "договор на сезон", "акт-приёмки"],
+      "trustRow": [
+        "альпинист 3-я группа",
+        "СРО + страховка 10 млн",
+        "договор на сезон",
+        "акт-приёмки"
+      ],
       "image": {
         "src": "/uploads/stage2/sd-chistka-krysh-hero.jpg",
         "alt": "Альпинистское звено Обихода чистит снег с крыши cargo-склада в зоне Шереметьево, Химки",
@@ -78,11 +91,35 @@
       "serviceHint": "Чистка крыш",
       "districtHint": "Химки",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
-        { "name": "address", "label": "Адрес или объект", "type": "text", "required": false, "placeholder": "Например: ЖК Левобережный, склад Шереметьево, КП Куркино" },
-        { "name": "objects", "label": "Объект и работы", "type": "textarea", "required": false, "placeholder": "Например: cargo-склад 5000 м² плоская кровля, нужна сезонная чистка по договору" },
-        { "name": "photos", "label": "Фото объекта", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "address",
+          "label": "Адрес или объект",
+          "type": "text",
+          "required": false,
+          "placeholder": "Например: ЖК Левобережный, склад Шереметьево, КП Куркино"
+        },
+        {
+          "name": "objects",
+          "label": "Объект и работы",
+          "type": "textarea",
+          "required": false,
+          "placeholder": "Например: cargo-склад 5000 м² плоская кровля, нужна сезонная чистка по договору"
+        },
+        {
+          "name": "photos",
+          "label": "Фото объекта",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",
@@ -125,14 +162,24 @@
       "variant": "dark",
       "h2": "Чистка крыш в Химках — ЖК и cargo Шереметьево",
       "body": "Альпинист 3-й группы + страховка 10 млн ₽. SLA 4 часа для cargo-кровель. Годовой договор для УК.",
-      "ctaPrimary": { "label": "Прислать фото в Telegram", "href": "https://t.me/obihod_dispatcher" },
-      "ctaSecondary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=chistka-krysh&district=khimki" }
+      "ctaPrimary": {
+        "label": "Прислать фото в Telegram",
+        "href": "https://t.me/obihod_dispatcher"
+      },
+      "ctaSecondary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=chistka-krysh&district=khimki"
+      }
     },
     {
       "blockType": "neighbor-districts",
       "h2": "Соседние районы",
       "items": [
-        { "iconId": "district-krasnogorsk", "title": "Красногорск", "href": "/chistka-krysh/krasnogorsk/" },
+        {
+          "iconId": "district-krasnogorsk",
+          "title": "Красногорск",
+          "href": "/chistka-krysh/krasnogorsk/"
+        },
         { "iconId": "district-mytishchi", "title": "Мытищи", "href": "/chistka-krysh/mytishchi/" },
         { "iconId": "district-odincovo", "title": "Одинцово", "href": "/chistka-krysh/odincovo/" }
       ]
@@ -141,9 +188,24 @@
       "blockType": "related-services",
       "h2": "Соседние услуги в Химках",
       "items": [
-        { "iconId": "vyvoz-musora", "title": "Вывоз мусора в Химках", "description": "Контейнер под сбитую наледь и упаковочный мусор.", "href": "/vyvoz-musora/khimki/" },
-        { "iconId": "arboristika", "title": "Арбористика в Химках", "description": "FOD-кронирование санзоны Шереметьево.", "href": "/arboristika/khimki/" },
-        { "iconId": "demontazh", "title": "Демонтаж в Химках", "description": "Снос складов и авиа-инфраструктура B2B.", "href": "/demontazh/khimki/" }
+        {
+          "iconId": "vyvoz-musora",
+          "title": "Вывоз мусора в Химках",
+          "description": "Контейнер под сбитую наледь и упаковочный мусор.",
+          "href": "/vyvoz-musora/khimki/"
+        },
+        {
+          "iconId": "arboristika",
+          "title": "Арбористика в Химках",
+          "description": "FOD-кронирование санзоны Шереметьево.",
+          "href": "/arboristika/khimki/"
+        },
+        {
+          "iconId": "demontazh",
+          "title": "Демонтаж в Химках",
+          "description": "Снос складов и авиа-инфраструктура B2B.",
+          "href": "/demontazh/khimki/"
+        }
       ]
     }
   ],
@@ -152,31 +214,97 @@
     {
       "question": "Чистите ли cargo-кровли в зоне Шереметьево по договору?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, для авиа-cargo Шереметьево держим договор на сезон с SLA подачи 4 часа в рабочий день. Бригада в зоне 30 минут от грузового терминала, допуск на территорию по пропуску. Стандартные процедуры авиабезопасности учитываем в SLA. Лицензия СРО №<TODO operator>.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, для авиа-cargo Шереметьево держим договор на сезон с SLA подачи 4 часа в рабочий день. Бригада в зоне 30 минут от грузового терминала, допуск на территорию по пропуску. Стандартные процедуры авиабезопасности учитываем в SLA. Лицензия СРО №<TODO operator>.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Сколько времени едет бригада в Химки?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Химок 26 км через А-107 и Ленинградское шоссе. Аварийная (24/7) при угрозе провала кровли — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Химок 26 км через А-107 и Ленинградское шоссе. Аварийная (24/7) при угрозе провала кровли — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Берёте ли годовой договор для УК Химкинского ГО?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, для УК и ТСЖ Химкинского ГО — годовой договор: чистка после каждого снегопада ≥10 см, аварийная 24/7, отчёт за месяц. Штрафы ГЖИ берём по своему счёту. Типовой пакет на 5 МКД 2 000 м² — 1 200 000 ₽ за сезон.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, для УК и ТСЖ Химкинского ГО — годовой договор: чистка после каждого снегопада ≥10 см, аварийная 24/7, отчёт за месяц. Штрафы ГЖИ берём по своему счёту. Типовой пакет на 5 МКД 2 000 м² — 1 200 000 ₽ за сезон.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     }
   ],

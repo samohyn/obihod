@@ -21,7 +21,15 @@
           "version": 1,
           "direction": "ltr",
           "children": [
-            { "type": "text", "text": "Демонтаж по Истринскому ГО: снос больших дачных строений на участках 30–100 соток у Истринского водохранилища, разбор старых дач 1960–80-х в КП Снегири и Манихино, демонтаж бань, теплиц и заборов. Снос + утилизация на полигон Волоколамского района одной бригадой. Этапный график для крупных участков.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
+            {
+              "type": "text",
+              "text": "Демонтаж по Истринскому ГО: снос больших дачных строений на участках 30–100 соток у Истринского водохранилища, разбор старых дач 1960–80-х в КП Снегири и Манихино, демонтаж бань, теплиц и заборов. Снос + утилизация на полигон Волоколамского района одной бригадой. Этапный график для крупных участков.",
+              "version": 1,
+              "format": 0,
+              "detail": 0,
+              "mode": "normal",
+              "style": ""
+            }
           ]
         }
       ]
@@ -78,11 +86,35 @@
       "serviceHint": "Демонтаж",
       "districtHint": "Истра",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
-        { "name": "address", "label": "Посёлок, СНТ, адрес", "type": "text", "required": false, "placeholder": "Например: КП Снегири, СНТ у ВД, Манихино" },
-        { "name": "objects", "label": "Объект и работы", "type": "textarea", "required": false, "placeholder": "Например: участок 50 соток в КП Снегири, нужен снос дачи 60 м² + баня + забор + теплица" },
-        { "name": "photos", "label": "Фото объектов", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "address",
+          "label": "Посёлок, СНТ, адрес",
+          "type": "text",
+          "required": false,
+          "placeholder": "Например: КП Снегири, СНТ у ВД, Манихино"
+        },
+        {
+          "name": "objects",
+          "label": "Объект и работы",
+          "type": "textarea",
+          "required": false,
+          "placeholder": "Например: участок 50 соток в КП Снегири, нужен снос дачи 60 м² + баня + забор + теплица"
+        },
+        {
+          "name": "photos",
+          "label": "Фото объектов",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",
@@ -125,15 +157,29 @@
       "variant": "dark",
       "h2": "Снос на больших участках Истры — этапно",
       "body": "30–100 соток у ВД, серия контейнеров, спил + расчистка одной бригадой. Учёт водоохранной зоны.",
-      "ctaPrimary": { "label": "Прислать фото в Telegram", "href": "https://t.me/obihod_dispatcher" },
-      "ctaSecondary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=demontazh&district=istra" }
+      "ctaPrimary": {
+        "label": "Прислать фото в Telegram",
+        "href": "https://t.me/obihod_dispatcher"
+      },
+      "ctaSecondary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=demontazh&district=istra"
+      }
     },
     {
       "blockType": "neighbor-districts",
       "h2": "Соседние районы",
       "items": [
-        { "iconId": "district-krasnogorsk", "title": "Красногорск", "href": "/demontazh/krasnogorsk/" },
-        { "iconId": "district-volokolamsk", "title": "Волоколамск", "href": "/demontazh/volokolamsk/" },
+        {
+          "iconId": "district-krasnogorsk",
+          "title": "Красногорск",
+          "href": "/demontazh/krasnogorsk/"
+        },
+        {
+          "iconId": "district-volokolamsk",
+          "title": "Волоколамск",
+          "href": "/demontazh/volokolamsk/"
+        },
         { "iconId": "district-odincovo", "title": "Одинцово", "href": "/demontazh/odincovo/" }
       ]
     },
@@ -141,9 +187,24 @@
       "blockType": "related-services",
       "h2": "Соседние услуги в Истре",
       "items": [
-        { "iconId": "vyvoz-musora", "title": "Вывоз мусора в Истре", "description": "Контейнер 27 м³ под стройотходы, серия со скидкой.", "href": "/vyvoz-musora/istra/" },
-        { "iconId": "arboristika", "title": "Арбористика в Истре", "description": "Спил деревьев + расчистка перед сносом.", "href": "/arboristika/istra/" },
-        { "iconId": "chistka-krysh", "title": "Чистка крыш в Истре", "description": "Снег и наледь для нового коттеджа после застройки.", "href": "/chistka-krysh/istra/" }
+        {
+          "iconId": "vyvoz-musora",
+          "title": "Вывоз мусора в Истре",
+          "description": "Контейнер 27 м³ под стройотходы, серия со скидкой.",
+          "href": "/vyvoz-musora/istra/"
+        },
+        {
+          "iconId": "arboristika",
+          "title": "Арбористика в Истре",
+          "description": "Спил деревьев + расчистка перед сносом.",
+          "href": "/arboristika/istra/"
+        },
+        {
+          "iconId": "chistka-krysh",
+          "title": "Чистка крыш в Истре",
+          "description": "Снег и наледь для нового коттеджа после застройки.",
+          "href": "/chistka-krysh/istra/"
+        }
       ]
     }
   ],
@@ -152,31 +213,97 @@
     {
       "question": "Сносите ли несколько построек на участке 50–100 соток в КП Снегири?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, этапный демонтаж на больших участках у ВД — флагман района. Пакет «дача + баня + хозблок + теплица + забор» на 50 сотках — 280 000–380 000 ₽ за объект, серия из 2 контейнеров 27 м³ со скидкой 10%. Этапный график 5–10 рабочих дней с фотопротоколами.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, этапный демонтаж на больших участках у ВД — флагман района. Пакет «дача + баня + хозблок + теплица + забор» на 50 сотках — 280 000–380 000 ₽ за объект, серия из 2 контейнеров 27 м³ со скидкой 10%. Этапный график 5–10 рабочих дней с фотопротоколами.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Сколько времени едет бригада в Истру?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Истры 50 км через А-107 и Волоколамское шоссе. Для крупных объектов выезд экскаватора согласуем за 3–5 рабочих дней. Аварийная (24/7) — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Истры 50 км через А-107 и Волоколамское шоссе. Для крупных объектов выезд экскаватора согласуем за 3–5 рабочих дней. Аварийная (24/7) — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Какие требования при демонтаже в водоохранной зоне ВД?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Для участков в 200-м зоне Истринского водохранилища — 65-ФЗ Водного кодекса РФ: согласование с Росводресурсами, гусеничный экскаватор, складирование на удалении от воды с водоотводом. Эту специфику фиксируем в договоре, чтобы избежать вопросов Росприроднадзора после работ.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Для участков в 200-м зоне Истринского водохранилища — 65-ФЗ Водного кодекса РФ: согласование с Росводресурсами, гусеничный экскаватор, складирование на удалении от воды с водоотводом. Эту специфику фиксируем в договоре, чтобы избежать вопросов Росприроднадзора после работ.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     }
   ],

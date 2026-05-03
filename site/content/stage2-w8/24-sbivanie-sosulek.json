@@ -38,7 +38,12 @@
         "href": "/foto-smeta/?service=chistka-krysh&sub=sbivanie-sosulek"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["Страховка ГО 10 млн ₽", "Допуск 3-й группы", "Без повреждения фасада", "Аварийка 1–2 часа"],
+      "trustRow": [
+        "Страховка ГО 10 млн ₽",
+        "Допуск 3-й группы",
+        "Без повреждения фасада",
+        "Аварийка 1–2 часа"
+      ],
       "image": {
         "src": "TBD-fal.ai-sub-sbivanie-sosulek-hero.jpg",
         "alt": "Альпинист сбивает сосульки с фасада офисного здания",
@@ -70,7 +75,13 @@
       "h2": "Получите смету за 10 минут",
       "serviceHint": "Сбивание сосулек и наледи",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя или организация", "type": "text", "required": false },
         {
           "name": "objects",
@@ -79,7 +90,13 @@
           "required": false,
           "placeholder": "Например: 5-этажный МКД на ул. Ленина, фасад 32 м, сосульки 1–1,5 м над входом, нужна аварийка"
         },
-        { "name": "photos", "label": "Фото фасада и сосулек", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото фасада и сосулек",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

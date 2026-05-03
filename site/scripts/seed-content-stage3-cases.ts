@@ -255,11 +255,7 @@ async function resolveDistrict(
   return null
 }
 
-async function seedCase(
-  payload: Payload,
-  fix: CaseFixture,
-  fileName: string,
-): Promise<SeedResult> {
+async function seedCase(payload: Payload, fix: CaseFixture, fileName: string): Promise<SeedResult> {
   const blocks = fixtureBlocksToPayload(fix)
   const description = extractBody(fix)
 

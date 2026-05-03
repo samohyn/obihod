@@ -142,7 +142,12 @@
         {
           "legend": "Организация",
           "fields": [
-            { "name": "organization", "label": "Название УК, ТСЖ, FM-оператора или застройщика", "type": "text", "required": true },
+            {
+              "name": "organization",
+              "label": "Название УК, ТСЖ, FM-оператора или застройщика",
+              "type": "text",
+              "required": true
+            },
             {
               "name": "inn",
               "label": "ИНН",
@@ -151,12 +156,23 @@
               "pattern": "\\d{10}|\\d{12}",
               "ariaDescribedby": "inn-helper"
             },
-            { "name": "innHelper", "type": "helper", "id": "inn-helper", "text": "10 цифр для юр.лица, 12 для ИП." },
+            {
+              "name": "innHelper",
+              "type": "helper",
+              "id": "inn-helper",
+              "text": "10 цифр для юр.лица, 12 для ИП."
+            },
             {
               "name": "segment",
               "label": "Сегмент",
               "type": "select",
-              "options": ["УК / ТСЖ", "FM-оператор", "Застройщик", "Госзаказ (44-ФЗ / 223-ФЗ)", "Другое"],
+              "options": [
+                "УК / ТСЖ",
+                "FM-оператор",
+                "Застройщик",
+                "Госзаказ (44-ФЗ / 223-ФЗ)",
+                "Другое"
+              ],
               "required": false
             }
           ]
@@ -166,7 +182,13 @@
           "fields": [
             { "name": "name", "label": "ФИО", "type": "text", "required": false },
             { "name": "position", "label": "Должность", "type": "text", "required": false },
-            { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+            {
+              "name": "phone",
+              "label": "Телефон",
+              "type": "tel",
+              "required": true,
+              "inputmode": "numeric"
+            },
             { "name": "email", "label": "Email", "type": "email", "required": false }
           ]
         },

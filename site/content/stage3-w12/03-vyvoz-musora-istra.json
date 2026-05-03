@@ -21,7 +21,15 @@
           "version": 1,
           "direction": "ltr",
           "children": [
-            { "type": "text", "text": "Вывозим мусор по Истринскому городскому округу: с дачных участков 30–100 соток у Истринского водохранилища, со строек коттеджей, с расчистки леса под застройку. Контейнер 20 и 27 м³, фикс-цена за объект, полигон в смете. Подача послезавтра до 12:00, авария за 1–2 часа.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
+            {
+              "type": "text",
+              "text": "Вывозим мусор по Истринскому городскому округу: с дачных участков 30–100 соток у Истринского водохранилища, со строек коттеджей, с расчистки леса под застройку. Контейнер 20 и 27 м³, фикс-цена за объект, полигон в смете. Подача послезавтра до 12:00, авария за 1–2 часа.",
+              "version": 1,
+              "format": 0,
+              "detail": 0,
+              "mode": "normal",
+              "style": ""
+            }
           ]
         }
       ]
@@ -46,7 +54,12 @@
         "href": "/foto-smeta/?service=vyvoz-musora&district=istra"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["фикс-цена за объект", "крупные дачи 30–100 соток", "ВД-зона", "полигон в смете"],
+      "trustRow": [
+        "фикс-цена за объект",
+        "крупные дачи 30–100 соток",
+        "ВД-зона",
+        "полигон в смете"
+      ],
       "image": {
         "src": "/uploads/stage2/sd-vyvoz-musora-hero.jpg",
         "alt": "Контейнер 27 м³ Обихода на участке 50 соток у Истринского водохранилища",
@@ -78,11 +91,35 @@
       "serviceHint": "Вывоз мусора",
       "districtHint": "Истра",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
-        { "name": "address", "label": "Посёлок, СНТ, адрес", "type": "text", "required": false, "placeholder": "Например: КП Снегири, СНТ у ВД, Дедовск" },
-        { "name": "objects", "label": "Что вывозим", "type": "textarea", "required": false, "placeholder": "Например: расчистка участка 50 соток под коттедж, спил 8 деревьев, нужен контейнер 27 м³" },
-        { "name": "photos", "label": "Фото объекта", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "address",
+          "label": "Посёлок, СНТ, адрес",
+          "type": "text",
+          "required": false,
+          "placeholder": "Например: КП Снегири, СНТ у ВД, Дедовск"
+        },
+        {
+          "name": "objects",
+          "label": "Что вывозим",
+          "type": "textarea",
+          "required": false,
+          "placeholder": "Например: расчистка участка 50 соток под коттедж, спил 8 деревьев, нужен контейнер 27 м³"
+        },
+        {
+          "name": "photos",
+          "label": "Фото объекта",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",
@@ -125,15 +162,29 @@
       "variant": "dark",
       "h2": "Вывезем мусор из Истры с участка любого размера",
       "body": "30–100 соток — контейнер 27 м³, фикс-цена. Спил, расчистка, снос — одной бригадой по одному акту.",
-      "ctaPrimary": { "label": "Прислать фото в Telegram", "href": "https://t.me/obihod_dispatcher" },
-      "ctaSecondary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=vyvoz-musora&district=istra" }
+      "ctaPrimary": {
+        "label": "Прислать фото в Telegram",
+        "href": "https://t.me/obihod_dispatcher"
+      },
+      "ctaSecondary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=vyvoz-musora&district=istra"
+      }
     },
     {
       "blockType": "neighbor-districts",
       "h2": "Соседние районы",
       "items": [
-        { "iconId": "district-krasnogorsk", "title": "Красногорск", "href": "/vyvoz-musora/krasnogorsk/" },
-        { "iconId": "district-volokolamsk", "title": "Волоколамск", "href": "/vyvoz-musora/volokolamsk/" },
+        {
+          "iconId": "district-krasnogorsk",
+          "title": "Красногорск",
+          "href": "/vyvoz-musora/krasnogorsk/"
+        },
+        {
+          "iconId": "district-volokolamsk",
+          "title": "Волоколамск",
+          "href": "/vyvoz-musora/volokolamsk/"
+        },
         { "iconId": "district-odincovo", "title": "Одинцово", "href": "/vyvoz-musora/odincovo/" }
       ]
     },
@@ -141,9 +192,24 @@
       "blockType": "related-services",
       "h2": "Соседние услуги в Истре",
       "items": [
-        { "iconId": "arboristika", "title": "Арбористика в Истре", "description": "Аварийный спил после ветра, расчистка участка.", "href": "/arboristika/istra/" },
-        { "iconId": "demontazh", "title": "Демонтаж в Истре", "description": "Снос старой дачи, бани — с вывозом одной бригадой.", "href": "/demontazh/istra/" },
-        { "iconId": "chistka-krysh", "title": "Чистка крыш в Истре", "description": "Снег, наледь, ливневки на коттеджах ВД-зоны.", "href": "/chistka-krysh/istra/" }
+        {
+          "iconId": "arboristika",
+          "title": "Арбористика в Истре",
+          "description": "Аварийный спил после ветра, расчистка участка.",
+          "href": "/arboristika/istra/"
+        },
+        {
+          "iconId": "demontazh",
+          "title": "Демонтаж в Истре",
+          "description": "Снос старой дачи, бани — с вывозом одной бригадой.",
+          "href": "/demontazh/istra/"
+        },
+        {
+          "iconId": "chistka-krysh",
+          "title": "Чистка крыш в Истре",
+          "description": "Снег, наледь, ливневки на коттеджах ВД-зоны.",
+          "href": "/chistka-krysh/istra/"
+        }
       ]
     }
   ],
@@ -152,31 +218,97 @@
     {
       "question": "Работаете ли с участками 50–100 соток у Истринского водохранилища?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, под крупные участки держим контейнеры 27 м³ с подачей по согласованному графику. Для расчистки 50–100 соток типично 1–2 контейнера + Газель. Серия подач — со скидкой 10% от второго контейнера. По КП Снегири, Лучинское, Манихино пропуск автоматический.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, под крупные участки держим контейнеры 27 м³ с подачей по согласованному графику. Для расчистки 50–100 соток типично 1–2 контейнера + Газель. Серия подач — со скидкой 10% от второго контейнера. По КП Снегири, Лучинское, Манихино пропуск автоматический.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Сколько времени едет бригада в Истру?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Истры 50 км через А-107 и Волоколамское шоссе. Аварийная после ливня или ветровала (24/7) — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Истры 50 км через А-107 и Волоколамское шоссе. Аварийная после ливня или ветровала (24/7) — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Принимает ли полигон ил и грязь после наводнения?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, лицензированный полигон в Волоколамском районе принимает ил и грязь после ливневых подтоплений по тарифу IV класса. Контейнер ставим на уплотнённое основание с подкладными досками. Плечо 40 минут от центра Истры.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, лицензированный полигон в Волоколамском районе принимает ил и грязь после ливневых подтоплений по тарифу IV класса. Контейнер ставим на уплотнённое основание с подкладными досками. Плечо 40 минут от центра Истры.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     }
   ],

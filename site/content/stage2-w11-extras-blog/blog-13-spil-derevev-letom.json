@@ -112,7 +112,10 @@
       "variant": "dark",
       "h2": "Аварийный летний спил — 1–2 часа",
       "body": "Упало на провода, наклонилось на крышу, появилось дупло — выезжаем 24/7 по аварийному тарифу.",
-      "ctaPrimary": { "label": "Аварийная заявка", "href": "/foto-smeta/?service=arboristika&urgent=1" },
+      "ctaPrimary": {
+        "label": "Аварийная заявка",
+        "href": "/foto-smeta/?service=arboristika&urgent=1"
+      },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" }
     },
     {

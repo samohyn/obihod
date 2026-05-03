@@ -21,7 +21,15 @@
           "version": 1,
           "direction": "ltr",
           "children": [
-            { "type": "text", "text": "Вывозим мусор по Жуковскому: с авиа-объектов ЛИИ, со складских комплексов, с ЖК, с частного сектора. Контейнер 8 / 20 / 27 м³, фикс-цена за объект, полигон в смете. Подача послезавтра до 12:00, авария за 1–2 часа 24/7. Для авиапром-площадок ВПП — договор на сезон.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
+            {
+              "type": "text",
+              "text": "Вывозим мусор по Жуковскому: с авиа-объектов ЛИИ, со складских комплексов, с ЖК, с частного сектора. Контейнер 8 / 20 / 27 м³, фикс-цена за объект, полигон в смете. Подача послезавтра до 12:00, авария за 1–2 часа 24/7. Для авиапром-площадок ВПП — договор на сезон.",
+              "version": 1,
+              "format": 0,
+              "detail": 0,
+              "mode": "normal",
+              "style": ""
+            }
           ]
         }
       ]
@@ -78,11 +86,35 @@
       "serviceHint": "Вывоз мусора",
       "districtHint": "Жуковский",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
-        { "name": "address", "label": "Адрес или объект", "type": "text", "required": false, "placeholder": "Например: Туполева, ЛИИ, складская зона Быковки" },
-        { "name": "objects", "label": "Что вывозим", "type": "textarea", "required": false, "placeholder": "Например: стройотходы после реконструкции цеха, объём около 25 м³, нужен контейнер 27 м³" },
-        { "name": "photos", "label": "Фото объекта", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "address",
+          "label": "Адрес или объект",
+          "type": "text",
+          "required": false,
+          "placeholder": "Например: Туполева, ЛИИ, складская зона Быковки"
+        },
+        {
+          "name": "objects",
+          "label": "Что вывозим",
+          "type": "textarea",
+          "required": false,
+          "placeholder": "Например: стройотходы после реконструкции цеха, объём около 25 м³, нужен контейнер 27 м³"
+        },
+        {
+          "name": "photos",
+          "label": "Фото объекта",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",
@@ -125,14 +157,24 @@
       "variant": "dark",
       "h2": "Вывезем мусор из Жуковского — авиапром, ЖК, частный сектор",
       "body": "Контейнер 27 м³ под цех, договор на сезон для ЛИИ, SLA 4 часа. Демонтаж + вывоз — одной бригадой.",
-      "ctaPrimary": { "label": "Прислать фото в Telegram", "href": "https://t.me/obihod_dispatcher" },
-      "ctaSecondary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=vyvoz-musora&district=zhukovskij" }
+      "ctaPrimary": {
+        "label": "Прислать фото в Telegram",
+        "href": "https://t.me/obihod_dispatcher"
+      },
+      "ctaSecondary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=vyvoz-musora&district=zhukovskij"
+      }
     },
     {
       "blockType": "neighbor-districts",
       "h2": "Соседние районы",
       "items": [
-        { "iconId": "district-ramenskoye", "title": "Раменское", "href": "/vyvoz-musora/ramenskoye/" },
+        {
+          "iconId": "district-ramenskoye",
+          "title": "Раменское",
+          "href": "/vyvoz-musora/ramenskoye/"
+        },
         { "iconId": "district-lyubertsy", "title": "Люберцы", "href": "/vyvoz-musora/lyubertsy/" },
         { "iconId": "district-bronnitsy", "title": "Бронницы", "href": "/vyvoz-musora/bronnitsy/" }
       ]
@@ -141,9 +183,24 @@
       "blockType": "related-services",
       "h2": "Соседние услуги в Жуковском",
       "items": [
-        { "iconId": "demontazh", "title": "Демонтаж в Жуковском", "description": "Снос авиа-инфраструктуры, демонтаж цехов B2B.", "href": "/demontazh/zhukovskij/" },
-        { "iconId": "chistka-krysh", "title": "Чистка крыш в Жуковском", "description": "Кровли ангаров ВПП, договор на сезон.", "href": "/chistka-krysh/zhukovskij/" },
-        { "iconId": "arboristika", "title": "Арбористика в Жуковском", "description": "Кронирование в санитарной зоне ВПП, FOD-prevention.", "href": "/arboristika/zhukovskij/" }
+        {
+          "iconId": "demontazh",
+          "title": "Демонтаж в Жуковском",
+          "description": "Снос авиа-инфраструктуры, демонтаж цехов B2B.",
+          "href": "/demontazh/zhukovskij/"
+        },
+        {
+          "iconId": "chistka-krysh",
+          "title": "Чистка крыш в Жуковском",
+          "description": "Кровли ангаров ВПП, договор на сезон.",
+          "href": "/chistka-krysh/zhukovskij/"
+        },
+        {
+          "iconId": "arboristika",
+          "title": "Арбористика в Жуковском",
+          "description": "Кронирование в санитарной зоне ВПП, FOD-prevention.",
+          "href": "/arboristika/zhukovskij/"
+        }
       ]
     }
   ],
@@ -152,31 +209,97 @@
     {
       "question": "Работаете ли с авиапром-предприятиями ЛИИ и ВПП-периметра?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, держим B2B-режим для авиапром-объектов: контейнеры 27 м³, SLA подачи 4 часа в рабочий день, договор на сезон. Для ВПП-периметра — заранее оформленный пропуск, сопровождение, фото-регистрация груза. Жидкое топливо, авиамасла, аккумуляторы — отдельный лицензированный подрядчик. Лицензия СРО №<TODO operator>.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, держим B2B-режим для авиапром-объектов: контейнеры 27 м³, SLA подачи 4 часа в рабочий день, договор на сезон. Для ВПП-периметра — заранее оформленный пропуск, сопровождение, фото-регистрация груза. Жидкое топливо, авиамасла, аккумуляторы — отдельный лицензированный подрядчик. Лицензия СРО №<TODO operator>.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Сколько времени едет бригада в Жуковский?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Жуковского 47 км через МКАД и М-5. Аварийная (24/7) — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³. По договору с авиапром-предприятиями держим SLA 4 часа.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Жуковского 47 км через МКАД и М-5. Аварийная (24/7) — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³. По договору с авиапром-предприятиями держим SLA 4 часа.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "На какой полигон возите мусор из Жуковского?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "На лицензированный полигон в Раменском районе — плечо 25 минут от центра Жуковского по Быковскому шоссе. Это одно из самых коротких плеч среди priority-B районов МО. Лицензия Росприроднадзора, акт-приёмки на руки.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "На лицензированный полигон в Раменском районе — плечо 25 минут от центра Жуковского по Быковскому шоссе. Это одно из самых коротких плеч среди priority-B районов МО. Лицензия Росприроднадзора, акт-приёмки на руки.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     }
   ],

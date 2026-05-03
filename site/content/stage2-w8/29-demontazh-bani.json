@@ -38,7 +38,12 @@
         "href": "/foto-smeta/?service=demontazh&sub=banya"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["35 000 ₽ каркас / 72 000 ₽ сруб", "Утилизация шамота", "СРО строителей", "Страховка 10 млн ₽"],
+      "trustRow": [
+        "35 000 ₽ каркас / 72 000 ₽ сруб",
+        "Утилизация шамота",
+        "СРО строителей",
+        "Страховка 10 млн ₽"
+      ],
       "image": {
         "src": "TBD-fal.ai-sub-demontazh-bani-hero.jpg",
         "alt": "Разбор сруба бани с печью на участке СНТ",
@@ -70,7 +75,13 @@
       "h2": "Получите смету за 10 минут",
       "serviceHint": "Демонтаж бани",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
         {
           "name": "objects",
@@ -79,7 +90,13 @@
           "required": false,
           "placeholder": "Например: сруб бани 4×6 м с парилкой, кирпичная печь, СНТ в Жуковском, нужно к концу мая"
         },
-        { "name": "photos", "label": "Фото бани и печи", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото бани и печи",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

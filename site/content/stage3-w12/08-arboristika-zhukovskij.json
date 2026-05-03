@@ -21,7 +21,15 @@
           "version": 1,
           "direction": "ltr",
           "children": [
-            { "type": "text", "text": "Спил, кронирование и обрезка деревьев по Жуковскому. Городские дворы ЖК Туполева и Гагарина, плодовые сады частного сектора, санитарная зона ЛИИ и ВПП аэродрома «Раменское» — кронирование под FOD-prevention. Альпинист, автовышка 21 м, ГБМ. Порубочный билет оформляем сами.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
+            {
+              "type": "text",
+              "text": "Спил, кронирование и обрезка деревьев по Жуковскому. Городские дворы ЖК Туполева и Гагарина, плодовые сады частного сектора, санитарная зона ЛИИ и ВПП аэродрома «Раменское» — кронирование под FOD-prevention. Альпинист, автовышка 21 м, ГБМ. Порубочный билет оформляем сами.",
+              "version": 1,
+              "format": 0,
+              "detail": 0,
+              "mode": "normal",
+              "style": ""
+            }
           ]
         }
       ]
@@ -78,11 +86,35 @@
       "serviceHint": "Арбористика",
       "districtHint": "Жуковский",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
-        { "name": "address", "label": "Адрес или мкр.", "type": "text", "required": false, "placeholder": "Например: Туполева, ЛИИ, Стаханово" },
-        { "name": "objects", "label": "Что нужно сделать", "type": "textarea", "required": false, "placeholder": "Например: 4 берёзы 50 см в санитарной зоне ВПП, нужно кронирование под FOD" },
-        { "name": "photos", "label": "Фото деревьев", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "address",
+          "label": "Адрес или мкр.",
+          "type": "text",
+          "required": false,
+          "placeholder": "Например: Туполева, ЛИИ, Стаханово"
+        },
+        {
+          "name": "objects",
+          "label": "Что нужно сделать",
+          "type": "textarea",
+          "required": false,
+          "placeholder": "Например: 4 берёзы 50 см в санитарной зоне ВПП, нужно кронирование под FOD"
+        },
+        {
+          "name": "photos",
+          "label": "Фото деревьев",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",
@@ -125,14 +157,24 @@
       "variant": "dark",
       "h2": "Спил и кронирование в Жуковском — FOD-prevention и ЖК",
       "body": "Альпинист + автовышка + ГБМ. Аэродромное кронирование с допуском ATC. Аварийный 1–2 часа 24/7.",
-      "ctaPrimary": { "label": "Прислать фото в Telegram", "href": "https://t.me/obihod_dispatcher" },
-      "ctaSecondary": { "label": "Получить смету по фото", "href": "/foto-smeta/?service=arboristika&district=zhukovskij" }
+      "ctaPrimary": {
+        "label": "Прислать фото в Telegram",
+        "href": "https://t.me/obihod_dispatcher"
+      },
+      "ctaSecondary": {
+        "label": "Получить смету по фото",
+        "href": "/foto-smeta/?service=arboristika&district=zhukovskij"
+      }
     },
     {
       "blockType": "neighbor-districts",
       "h2": "Соседние районы",
       "items": [
-        { "iconId": "district-ramenskoye", "title": "Раменское", "href": "/arboristika/ramenskoye/" },
+        {
+          "iconId": "district-ramenskoye",
+          "title": "Раменское",
+          "href": "/arboristika/ramenskoye/"
+        },
         { "iconId": "district-lyubertsy", "title": "Люберцы", "href": "/arboristika/lyubertsy/" },
         { "iconId": "district-bronnitsy", "title": "Бронницы", "href": "/arboristika/bronnitsy/" }
       ]
@@ -141,9 +183,24 @@
       "blockType": "related-services",
       "h2": "Соседние услуги в Жуковском",
       "items": [
-        { "iconId": "vyvoz-musora", "title": "Вывоз мусора в Жуковском", "description": "Контейнер 27 м³ под порубочные и авиа-стройотходы.", "href": "/vyvoz-musora/zhukovskij/" },
-        { "iconId": "chistka-krysh", "title": "Чистка крыш в Жуковском", "description": "Кровли ангаров ВПП, договор на сезон.", "href": "/chistka-krysh/zhukovskij/" },
-        { "iconId": "demontazh", "title": "Демонтаж в Жуковском", "description": "Снос авиа-инфраструктуры и цехов B2B.", "href": "/demontazh/zhukovskij/" }
+        {
+          "iconId": "vyvoz-musora",
+          "title": "Вывоз мусора в Жуковском",
+          "description": "Контейнер 27 м³ под порубочные и авиа-стройотходы.",
+          "href": "/vyvoz-musora/zhukovskij/"
+        },
+        {
+          "iconId": "chistka-krysh",
+          "title": "Чистка крыш в Жуковском",
+          "description": "Кровли ангаров ВПП, договор на сезон.",
+          "href": "/chistka-krysh/zhukovskij/"
+        },
+        {
+          "iconId": "demontazh",
+          "title": "Демонтаж в Жуковском",
+          "description": "Снос авиа-инфраструктуры и цехов B2B.",
+          "href": "/demontazh/zhukovskij/"
+        }
       ]
     }
   ],
@@ -152,31 +209,97 @@
     {
       "question": "Делаете ли аэродромное кронирование в санитарной зоне ВПП «Раменское»?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, для FOD-зоны аэродрома «Раменское» держим режим: согласование графика с ATC, допуск бригадира на территорию ЛИИ, фотофиксация до и после. Для КП и частных домов в санитарной зоне работаем по календарному графику весна–осень. Лицензия СРО №<TODO operator>.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, для FOD-зоны аэродрома «Раменское» держим режим: согласование графика с ATC, допуск бригадира на территорию ЛИИ, фотофиксация до и после. Для КП и частных домов в санитарной зоне работаем по календарному графику весна–осень. Лицензия СРО №<TODO operator>.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Сколько времени едет арборист в Жуковский?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Жуковского 47 км через МКАД и М-5 «Урал». Аварийная (24/7) — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "По типовой заявке — послезавтра до 12:00. Плечо от Одинцово до Жуковского 47 км через МКАД и М-5 «Урал». Аварийная (24/7) — за 1–2 часа по тарифу 18 400 ₽ за объект до 5 м³.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
       "question": "Работаете ли с авиапром-предприятиями ЛИИ и ЦАГИ?",
       "answer": {
-        "root": { "type": "root", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-          { "type": "paragraph", "format": "", "indent": 0, "version": 1, "direction": "ltr", "children": [
-            { "type": "text", "text": "Да, для ЛИИ им. Громова и ЦАГИ держим B2B-режим: годовой сервисный договор на расчистку санитарной зоны и кронирование под FOD-prevention. Допуск бригадира на режимную территорию, СРО + страховка ГО 10 млн ₽.", "version": 1, "format": 0, "detail": 0, "mode": "normal", "style": "" }
-          ] }
-        ] }
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "direction": "ltr",
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "direction": "ltr",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Да, для ЛИИ им. Громова и ЦАГИ держим B2B-режим: годовой сервисный договор на расчистку санитарной зоны и кронирование под FOD-prevention. Допуск бригадира на режимную территорию, СРО + страховка ГО 10 млн ₽.",
+                  "version": 1,
+                  "format": 0,
+                  "detail": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        }
       }
     }
   ],

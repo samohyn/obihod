@@ -242,11 +242,7 @@ async function findFallbackAuthor(payload: Payload): Promise<{ id: string | numb
   return (r.docs[0] as { id: string | number } | undefined) ?? null
 }
 
-async function seedBlog(
-  payload: Payload,
-  fix: BlogFixture,
-  fileName: string,
-): Promise<SeedResult> {
+async function seedBlog(payload: Payload, fix: BlogFixture, fileName: string): Promise<SeedResult> {
   const blocks = fixtureBlocksToPayload(fix)
   const intro = extractTldr(fix)
   const body = extractBody(fix)

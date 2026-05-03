@@ -38,7 +38,12 @@
         "href": "/foto-smeta/?service=demontazh&sub=snos-doma"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["Снос + вывоз = 1 договор", "СРО строителей", "Закрываем лицевой счёт", "Гидромолот для бетона"],
+      "trustRow": [
+        "Снос + вывоз = 1 договор",
+        "СРО строителей",
+        "Закрываем лицевой счёт",
+        "Гидромолот для бетона"
+      ],
       "image": {
         "src": "TBD-fal.ai-sub-snos-doma-hero.jpg",
         "alt": "Гидромолот разбирает кирпичный дом",
@@ -70,7 +75,13 @@
       "h2": "Получите смету за 10 минут",
       "serviceHint": "Снос частного дома",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
         {
           "name": "objects",
@@ -79,7 +90,13 @@
           "required": false,
           "placeholder": "Например: кирпичный дом 100 м² с ленточным фундаментом, Подольский район, после пожара, нужна фотофиксация для страховой"
         },
-        { "name": "photos", "label": "Фото дома и фундамента", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото дома и фундамента",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",

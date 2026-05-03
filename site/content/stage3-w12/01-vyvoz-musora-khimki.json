@@ -54,7 +54,12 @@
         "href": "/foto-smeta/?service=vyvoz-musora&district=khimki"
       },
       "ctaSecondary": { "label": "Позвонить", "href": "tel:+74951234567" },
-      "trustRow": ["фикс-цена за объект", "полигон в смете", "А-107 + Ленинградка", "штрафы ГЖИ берём"],
+      "trustRow": [
+        "фикс-цена за объект",
+        "полигон в смете",
+        "А-107 + Ленинградка",
+        "штрафы ГЖИ берём"
+      ],
       "image": {
         "src": "/uploads/stage2/sd-vyvoz-musora-hero.jpg",
         "alt": "Контейнер 20 м³ Обихода у склада в промзоне Шереметьево, Химки",
@@ -86,7 +91,13 @@
       "serviceHint": "Вывоз мусора",
       "districtHint": "Химки",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
         {
           "name": "address",
@@ -102,7 +113,13 @@
           "required": false,
           "placeholder": "Например: строймусор после ремонта 3-комн. квартиры, объём около 12 м³, нужен контейнер 20 м³"
         },
-        { "name": "photos", "label": "Фото объекта", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото объекта",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",
@@ -161,7 +178,11 @@
       "blockType": "neighbor-districts",
       "h2": "Соседние районы",
       "items": [
-        { "iconId": "district-krasnogorsk", "title": "Красногорск", "href": "/vyvoz-musora/krasnogorsk/" },
+        {
+          "iconId": "district-krasnogorsk",
+          "title": "Красногорск",
+          "href": "/vyvoz-musora/krasnogorsk/"
+        },
         { "iconId": "district-mytishchi", "title": "Мытищи", "href": "/vyvoz-musora/mytishchi/" },
         { "iconId": "district-odincovo", "title": "Одинцово", "href": "/vyvoz-musora/odincovo/" }
       ]

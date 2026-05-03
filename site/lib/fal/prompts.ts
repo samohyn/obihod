@@ -427,8 +427,7 @@ export type StaticHeroOpts = {
  */
 export function staticHeroPrompt(o: StaticHeroOpts): string {
   const moodByType: Record<StaticHeroOpts['type'], string> = {
-    'o-kompanii':
-      'calm matter-of-fact mood, neutral mid-day light, real material textures',
+    'o-kompanii': 'calm matter-of-fact mood, neutral mid-day light, real material textures',
     'kak-my-rabotaem':
       'practical how-it-works editorial mood, soft directional daylight from the right',
     garantii:
@@ -475,10 +474,7 @@ export function companyAuthorAvatarPrompt(o: CompanyAuthorAvatarOpts = {}): stri
   // или «single figure at a desk» как primary subject и фабрикует фронтальные
   // лица — нарушение privacy guard и §14 stock-photo. Run 3 incident: первая
   // итерация silhouette = full frontal group portrait. Fixed.
-  const backShotSubjectByRole: Record<
-    NonNullable<CompanyAuthorAvatarOpts['roleName']>,
-    string
-  > = {
+  const backShotSubjectByRole: Record<NonNullable<CompanyAuthorAvatarOpts['roleName']>, string> = {
     brigade: 'three-person crew in branded blue work uniform',
     operator: 'single figure at a tidy office desk in branded blue uniform vest',
     arborist: 'climber figure in branded blue uniform with rope harness',

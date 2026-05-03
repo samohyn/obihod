@@ -73,7 +73,13 @@
       "h2": "Аварийная заявка — за 5 минут",
       "serviceHint": "Аварийный спил",
       "fields": [
-        { "name": "phone", "label": "Телефон", "type": "tel", "required": true, "inputmode": "numeric" },
+        {
+          "name": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true,
+          "inputmode": "numeric"
+        },
         { "name": "name", "label": "Имя", "type": "text", "required": false },
         {
           "name": "objects",
@@ -82,7 +88,13 @@
           "required": false,
           "placeholder": "Например: тополь упал на крышу гаража после ветра, дерево лежит, объём ствола около 50 см"
         },
-        { "name": "photos", "label": "Фото с двух ракурсов", "type": "file", "multiple": true, "accept": "image/*" }
+        {
+          "name": "photos",
+          "label": "Фото с двух ракурсов",
+          "type": "file",
+          "multiple": true,
+          "accept": "image/*"
+        }
       ],
       "consentText": "Согласен на обработку персональных данных по 152-ФЗ.",
       "consentHref": "/policy/",
