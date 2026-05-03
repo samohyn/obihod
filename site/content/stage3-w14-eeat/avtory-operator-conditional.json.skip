@@ -1,0 +1,93 @@
+{
+  "_meta": {
+    "stage": "stage3-w14-eeat",
+    "run": "cw US-4 W14 day 1 — Author 2 conditional template",
+    "wireframe": "seosite/04-url-map/wireframes/author.md + seosite/06-eeat/authors.md §1.2 + §2.2",
+    "tov_check": "pnpm tov:check site/content/stage3-w14-eeat/avtory-operator-conditional.json (после rename .skip → .json)",
+    "ac_match": "AC-2.4 (US-4 §3.2.1 conditional)",
+    "winning_angle": "individual operator Person с cross-domain sameAs (VK + TG personal) — E-E-A-T axis опережение vs cleaning-moscow (у них /avtor-X/ без cross-domain sameAs)",
+    "author_note": "**ВНИМАНИЕ: суффикс .skip — НЕ публиковать!** cms должен SKIP этого fixture при seed-stage3-eeat. Переименовать в .json (с правильным operator-slug) ТОЛЬКО после operator передачи real-name + VK/TG sameAs URLs.",
+    "publish_condition": "operator real-name + VK/TG personal URLs переданы до W14 day 3 EOD (sustained sa-seo §3.2.1 conditional publish logic)",
+    "todo_replace_before_publish": [
+      "<TODO operator real-name>: имя без отчества (например «Александр»)",
+      "<operator-slug>: lowercase latin slug (например «aleksandr-obihod»)",
+      "<TODO VK personal URL>: https://vk.com/<handle>",
+      "<TODO Telegram personal URL>: https://t.me/<handle>",
+      "<TODO год начала работы>: 2024 (или другой)",
+      "renamed file: avtory-<operator-slug>.json (без conditional + .skip suffix)"
+    ],
+    "fallback_if_pending": "Author 1 sustained (avtory-brigada-vyvoza-obihoda.json); EPIC PASS на 4/5 axes без E-E-A-T опережения",
+    "eeat_hub_ref": "seosite/06-eeat/authors.md §1.2 + §2.2 + §3 + §4"
+  },
+  "type": "author",
+  "url": "/avtory/<operator-slug>/",
+  "slug": "<operator-slug>",
+  "kind": "person",
+  "h1": "<TODO operator real-name>",
+  "metaTitle": "<TODO operator real-name> — основатель Обихода",
+  "metaDescription": "<TODO operator real-name> — основатель и директор Обихода. Закрываю B2B-договоры с УК, ТСЖ, FM и застройщиками. 4 услуги одной бригадой по 8 округам МО.",
+  "ogImageAlt": "<TODO operator real-name> — основатель Обихода (silhouette или real-photo по operator decision)",
+  "avatarUrl": "TBD-fal.ai-operator-silhouette.png",
+  "avatarAlt": "<TODO operator real-name> — silhouette или real-photo",
+  "jobTitle": "Основатель и директор",
+  "schemaType": "Person",
+  "schemaWorksFor": "https://obikhod.ru/avtory/brigada-vyvoza-obihoda/#author",
+  "knowsAbout": [
+    "вывоз мусора",
+    "арбористика",
+    "чистка крыш",
+    "демонтаж",
+    "B2B-продажи",
+    "лицензирование подрядчиков",
+    "договоры с УК и ТСЖ",
+    "штрафы ГЖИ и ОАТИ"
+  ],
+  "sameAs": [
+    "<TODO VK personal URL>",
+    "<TODO Telegram personal URL>"
+  ],
+  "blocks": [
+    {
+      "blockType": "breadcrumbs",
+      "items": [
+        { "label": "Главная", "href": "/" },
+        { "label": "Авторы", "href": "/avtory/" },
+        { "label": "<TODO operator real-name>", "href": "/avtory/<operator-slug>/" }
+      ]
+    },
+    {
+      "blockType": "hero",
+      "variant": "author",
+      "eyebrow": "Авторы Обихода",
+      "h1": "<TODO operator real-name>",
+      "jobTitle": "Основатель и директор · Обиход с <TODO год>",
+      "metaStrip": ["B2B-договоры", "лицензирование", "8 округов МО"],
+      "avatar": {
+        "src": "TBD-fal.ai-operator-silhouette.png",
+        "alt": "<TODO operator real-name> — silhouette или real-photo по решению оператора",
+        "width": 200,
+        "height": 200,
+        "shape": "rounded-square"
+      },
+      "ctaPrimary": { "label": "Получить смету", "href": "/foto-smeta/" }
+    },
+    {
+      "blockType": "text-content",
+      "h2": "Кто я",
+      "body": "## Кто я\n\n<TODO operator real-name> — основатель и директор Обихода с <TODO год начала работы> года. Закрываю B2B-договоры с УК, ТСЖ, FM-операторами и застройщиками; занимаюсь лицензированием подрядчиков и интеграцией Бригады вывоза Обихода с заказчиками.\n\nЗа первый сезон 2024 года бригада отработала 86 объектов в Раменском, Одинцовском и Красногорском городских округах. К W14 эпика SEO-CONTENT-FILL расширились на 8 округов Подмосковья: Одинцово, Красногорск, Мытищи, Раменское, Химки, Пушкино, Истра, Жуковский.\n\n## Документы и СРО\n\nКаждый объект — по СРО строителей (Градкодекс ст. 55.5), лицензии Росприроднадзора на отходы IV класса, страховке ГО 10 млн ₽, допускам Минтруда №782н. Полный список — на [/sro-licenzii/](/sro-licenzii/).\n\n## Контакт\n\nДля B2B-заказчиков и тендеров — Telegram-канал бригады, корпоративный email и форма заявки на [/foto-smeta/](/foto-smeta/). Личный VK и Telegram — по ссылкам ниже (соцсети).\n\nСостав бригад по округам — на странице [/komanda/](/komanda/). Команда Обихода — это [Бригада вывоза Обихода](/avtory/brigada-vyvoza-obihoda/) (компания) + я как основатель."
+    },
+    {
+      "blockType": "related-posts",
+      "h2": "Статьи и материалы",
+      "items": [],
+      "_todo": "cms — после re-author 5 commercial-bridge blog (B2B-крючки, ФККО, СРО) добавить cards 3-5 материалов."
+    },
+    {
+      "blockType": "cta-banner",
+      "variant": "dark",
+      "h2": "B2B-заявка или тендер",
+      "body": "Договор + СРО + лицензия + страховка — за один пакет. УК, ТСЖ, FM, застройщики.",
+      "ctaPrimary": { "label": "Получить смету", "href": "/foto-smeta/" }
+    }
+  ]
+}
