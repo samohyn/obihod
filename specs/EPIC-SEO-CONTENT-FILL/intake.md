@@ -3,9 +3,9 @@ epic: EPIC-SEO-CONTENT-FILL
 title: Наполнение services-сайта (без shop) с обгоном 17 конкурентов
 team: seo
 po: poseo
-phase: spec
-role: poseo
-status: open
+phase: gate
+role: operator
+status: ready-for-operator-approve
 priority: P0
 moscow: Must
 rice: 96.5
@@ -96,9 +96,9 @@ related:
 | **US-0-templates-ux-migration** | Stage 0 | W1-W3 | poseo + popanel | done |
 | **US-1-pillars-pilot** | Stage 1 | W4-W7 | poseo | done |
 | **US-2-sub-and-programmatic** | Stage 2 | W8-W11 | poseo | done (включает B2B + Cases pack — US-3-b2b-cases-extras свёрнут в US-2) |
-| **US-3-priority-b-districts** | Stage 3 | W12-W13 | poseo | spec (intake → sa-seo) |
-| **US-4-eeat-monitoring** | Stage 3 | W14 | poseo | spec (intake → sa-seo) |
-| **US-6-competitor-benchmark** | сквозная | W3 / W7 / W14 | poseo | partial (W3+W7+W11 done, W14 в US-4) |
+| **US-3-priority-b-districts** | Stage 3 | W12-W13 | poseo | done · 211 URL closure 66.1% к liwood |
+| **US-4-eeat-monitoring** | Stage 3 | W14 | poseo | done · operator gate ack pending |
+| **US-6-competitor-benchmark** | сквозная | W3 / W7 / W11 / W14 | poseo | done · benchmark-W14.md + differentiation v4 |
 
 ## Cross-team зависимости
 
