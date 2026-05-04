@@ -30,8 +30,8 @@ export function PricingTable() {
           <div className="hpc-price-row">
             <div className="name">Аварийное удаление 10-25 м</div>
             <div className="desc">
-              Дерево упало или висит — приедем в течение 4 часов в МО, 2 часов в Москве. Каблинг
-              при необходимости.
+              Дерево упало или висит — приедем в течение 4 часов в МО, 2 часов в Москве. Каблинг при
+              необходимости.
             </div>
             <div className="hpc-price-cta">
               <div className="price">
@@ -123,9 +123,12 @@ export function PricingTable() {
 
         <p className="hpc-prices-note">
           Указаны минимальные цены за стандартные работы. Финальная стоимость — в смете после
-          бесплатного замера. Выезд замерщика — 0 ₽ при любом исходе. Полный прайс по 47
-          подуслугам — на странице{' '}
-          <Link href="/ceny" style={{ color: 'var(--c-primary)', borderBottom: '1px dashed var(--c-primary)' }}>
+          бесплатного замера. Выезд замерщика — 0 ₽ при любом исходе. Полный прайс по 47 подуслугам
+          — на странице{' '}
+          <Link
+            href="/ceny"
+            style={{ color: 'var(--c-primary)', borderBottom: '1px dashed var(--c-primary)' }}
+          >
             «Цены»
           </Link>
           .

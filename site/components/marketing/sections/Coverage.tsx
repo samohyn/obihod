@@ -12,14 +12,7 @@ export function Coverage() {
           aria-hidden="true"
         >
           <defs>
-            <pattern
-              id="topo-c"
-              x="0"
-              y="0"
-              width="120"
-              height="120"
-              patternUnits="userSpaceOnUse"
-            >
+            <pattern id="topo-c" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
               <path
                 d="M0 60c20-10 40-10 60 0s40 10 60 0"
                 fill="none"
@@ -46,9 +39,7 @@ export function Coverage() {
 
       <div className="wrap">
         <div className="eyebrow">§ 09 · География · Москва и МО</div>
-        <h2 style={{ maxWidth: '22ch' }}>
-          12 районов в активной работе · до 120 км от МКАД
-        </h2>
+        <h2 style={{ maxWidth: '22ch' }}>12 районов в активной работе · до 120 км от МКАД</h2>
         <p className="lead">
           Литера{' '}
           <span
@@ -166,22 +157,14 @@ export function Coverage() {
               <span className="stat">SLA 6 ч</span>
             </div>
           </Link>
-          <Link
-            href="/raiony/podolsk"
-            className="hp-cov-chip"
-            style={{ textDecoration: 'none' }}
-          >
+          <Link href="/raiony/podolsk" className="hp-cov-chip" style={{ textDecoration: 'none' }}>
             <div className="name">Подольск</div>
             <div className="meta">
               <span className="dist">15 КМ ОТ МКАД</span>
               <span className="stat">SLA 6 ч</span>
             </div>
           </Link>
-          <Link
-            href="/raiony/korolev"
-            className="hp-cov-chip"
-            style={{ textDecoration: 'none' }}
-          >
+          <Link href="/raiony/korolev" className="hp-cov-chip" style={{ textDecoration: 'none' }}>
             <div className="name">Королёв</div>
             <div className="meta">
               <span className="dist">12 КМ ОТ МКАД</span>
