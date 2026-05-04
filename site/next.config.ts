@@ -35,27 +35,27 @@ const nextConfig: NextConfig = {
   },
   async headers() {
     const isProd = process.env.NODE_ENV === 'production'
-    const securityHeaders = [
+    const baseHeaders = [
+      { key: 'X-Content-Type-Options', value: 'nosniff' },
+      { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
       {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=63072000; includeSubDomains; preload',
-          },
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
-          },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(self), geolocation=(self), microphone=()',
-          },
-        ],
+        key: 'Referrer-Policy',
+        value: 'strict-origin-when-cross-origin',
+      },
+      {
+        key: 'Permissions-Policy',
+        value: 'camera=(self), geolocation=(self), microphone=()',
       },
     ]
+    // HSTS нельзя ставить в dev: браузер кэширует его для localhost и начинает
+    // апгрейдить HTTP → HTTPS, ломая /admin после логина (редирект на https://localhost).
+    if (isProd) {
+      baseHeaders.unshift({
+        key: 'Strict-Transport-Security',
+        value: 'max-age=63072000; includeSubDomains; preload',
+      })
+    }
+    const securityHeaders = [{ source: '/:path*', headers: baseHeaders }]
     // Long Cache-Control только в production — в dev это ломает HMR Turbopack
     if (isProd) {
       securityHeaders.push({
