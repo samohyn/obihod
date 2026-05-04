@@ -224,3 +224,7 @@ _…и ещё 15 ключей в normalized.csv (cluster=`localFALLBACK-WITHFREQ
 | демонтаж забора это | 0 | 0 | 0 | общий |
 | снос забора | 0 | 0 | 0 | общий |
 | снос забора судебная практика | 0 | 0 | 0 | общий |
+
+---
+
+> **Wave 3 update (2026-05-03):** см. [`_wave3-update-2026-05-03.md`](_wave3-update-2026-05-03.md) (Wave 3 multi-domain intersect 32 services-конкурентов; whitespace + actionable действия в `seosite/strategy/per-direction/*.md`).

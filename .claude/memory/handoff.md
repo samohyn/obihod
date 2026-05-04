@@ -2,6 +2,37 @@
 
 _Обновляется в конце сессии. Короткий срез: что сделано, что в работе, что следующее. Цель — дать следующей сессии контекст за 30 секунд._
 
+## Где мы сейчас (2026-05-04) — poseo сессия
+
+### Эпик в работе: EPIC-SEO-OUTRANK (`specs/EPIC-SEO-OUTRANK/intake.md`)
+
+**Что сделано в этой сессии:**
+- Анализ реальных URL-структур liwood/arborist/arboristik через Keys.so данные
+- Создан `seosite/01-competitors/url-structure-top3.md`
+- Создана коммерческая семантика: 29 CSV по типам услуг в `seosite/03-clusters/services-commercial/`
+- Создана семантика для блога: `seosite/05-content-plan/blog-semantic-clusters.md`
+- Создана gap-матрица: **`seosite/strategy/service-gap-matrix.md`** — главный артефакт
+- Cleanup seosite/: удалены дубликаты, заархивированы устаревшие скрипты
+
+**Ключевой инсайт:** конкуренты не строят geographic programmatic. Их трафик — на service-type страницах. Наши 105 sub×district страниц (3-й уровень) — заморозить. Нужно создавать страницы по типам работ.
+
+**P0 — что создавать (из gap-матрицы):**
+1. `/arboristika/obrezka-derevev/` + 4 sub (wsk 44k, конкуренты ранжируются)
+2. `/uborka-territorii/vyravnivanie-uchastka/` (arboristik — 73 ключа)
+3. `/uborka-territorii/raschistka-uchastka/` (arboristik — 99 ключей)
+4. `/uborka-territorii/pokos-travy/`
+5. Расширение `/arboristika/udalenie-derevev/` (225 whitespace ключей)
+
+**Блокер:** `tamd` должен ответить — `/uborka-territorii/` как новый 5-й pillar или sub arboristika?
+Без ADR нельзя стартовать спеки у `sa-seo` и роутинг у `podev`.
+
+**Следующий шаг для poseo в новой сессии:**
+1. Передать `@tamd` вопрос ADR про uborka-territorii
+2. Как только ADR готов — `sa-seo` пишет 5 спек по gap-матрице
+3. Параллельно: `seo-tech` Topvisor baseline (100+ коммерческих ключей)
+
+---
+
 ## Где мы сейчас (2026-04-29)
 
 ### Свежайшее: PANEL BACKLOG REBUILD + drop magic link + SEED-ADMIN + ADR-0009 (2026-04-29 ночью)
