@@ -1,0 +1,294 @@
+{
+  "created": "2026-05-03",
+  "created_by": "poseo (operator-led individual bootstrap)",
+  "note": "Keys.so individual projects manifest. Один конкурент = один проект, main = сам домен, competitors = []. Альтернатива групповому подходу — расширенная гибкость per-domain monitoring. obikhod.ru и not-in-base домены отброшены 404. liwood.ru пропущен (slot занят probe-135646).",
+  "tariff": {
+    "projects": "38/50 used",
+    "apiRequest": "~80/50000 monthly"
+  },
+  "tier_summary": {
+    "W14": {
+      "created": 14,
+      "not_in_base": [
+        "grunlit-eco.ru",
+        "chistka-ot-snega.ru"
+      ],
+      "occupied": [
+        "liwood.ru"
+      ]
+    },
+    "extended": {
+      "created": 8,
+      "not_in_base": [],
+      "occupied": []
+    },
+    "broad": {
+      "created": 10,
+      "not_in_base": [],
+      "occupied": []
+    },
+    "shop": {
+      "created": 4,
+      "not_in_base": [
+        "poisk-pitomnik.ru"
+      ],
+      "occupied": []
+    },
+    "landshaft": {
+      "created": 0,
+      "not_in_base": [
+        "studio-fito.ru",
+        "landshaft-bureau.ru",
+        "landshaftnoye.ru",
+        "dachnyu.ru",
+        "yardesign.ru"
+      ],
+      "occupied": []
+    },
+    "self": {
+      "created": 0,
+      "not_in_base": [
+        "obikhod.ru"
+      ],
+      "occupied": []
+    }
+  },
+  "projects": [
+    {
+      "projectId": 135651,
+      "domain": "musor.moscow",
+      "tier": "W14"
+    },
+    {
+      "projectId": 135652,
+      "domain": "promtehalp.ru",
+      "tier": "W14"
+    },
+    {
+      "projectId": 135653,
+      "domain": "lesoruby.ru",
+      "tier": "W14"
+    },
+    {
+      "projectId": 135654,
+      "domain": "alpme.ru",
+      "tier": "W14"
+    },
+    {
+      "projectId": 135655,
+      "domain": "arboristik.ru",
+      "tier": "W14"
+    },
+    {
+      "projectId": 135656,
+      "domain": "arborist.su",
+      "tier": "W14"
+    },
+    {
+      "projectId": 135657,
+      "domain": "forest-service.ru",
+      "tier": "W14"
+    },
+    {
+      "projectId": 135658,
+      "domain": "tvoi-sad.com",
+      "tier": "W14"
+    },
+    {
+      "projectId": 135659,
+      "domain": "spilservis.ru",
+      "tier": "W14"
+    },
+    {
+      "projectId": 135660,
+      "domain": "lesovod.su",
+      "tier": "W14"
+    },
+    {
+      "projectId": 135661,
+      "domain": "virubka-dereva.ru",
+      "tier": "W14"
+    },
+    {
+      "projectId": 135662,
+      "domain": "demontazhmsk.ru",
+      "tier": "W14"
+    },
+    {
+      "projectId": 135663,
+      "domain": "cleaning-moscow.ru",
+      "tier": "W14"
+    },
+    {
+      "projectId": 135664,
+      "domain": "fasadrf.ru",
+      "tier": "W14"
+    },
+    {
+      "projectId": 135665,
+      "domain": "alpbond.org",
+      "tier": "extended"
+    },
+    {
+      "projectId": 135666,
+      "domain": "promalper.ru",
+      "tier": "extended"
+    },
+    {
+      "projectId": 135667,
+      "domain": "umisky.ru",
+      "tier": "extended"
+    },
+    {
+      "projectId": 135668,
+      "domain": "kronotech.ru",
+      "tier": "extended"
+    },
+    {
+      "projectId": 135669,
+      "domain": "udalenie-dereviev.moscow",
+      "tier": "extended"
+    },
+    {
+      "projectId": 135670,
+      "domain": "stroj-musor.moscow",
+      "tier": "extended"
+    },
+    {
+      "projectId": 135671,
+      "domain": "lesoruby.com",
+      "tier": "extended"
+    },
+    {
+      "projectId": 135672,
+      "domain": "arbogarden.ru",
+      "tier": "extended"
+    },
+    {
+      "projectId": 135673,
+      "domain": "drovosek-mo.ru",
+      "tier": "broad"
+    },
+    {
+      "projectId": 135674,
+      "domain": "rusarbo.ru",
+      "tier": "broad"
+    },
+    {
+      "projectId": 135675,
+      "domain": "treeworkers.ru",
+      "tier": "broad"
+    },
+    {
+      "projectId": 135676,
+      "domain": "formula-v.ru",
+      "tier": "broad"
+    },
+    {
+      "projectId": 135677,
+      "domain": "moscleaning24.ru",
+      "tier": "broad"
+    },
+    {
+      "projectId": 135678,
+      "domain": "mmusor.ru",
+      "tier": "broad"
+    },
+    {
+      "projectId": 135679,
+      "domain": "gsvm.ru",
+      "tier": "broad"
+    },
+    {
+      "projectId": 135680,
+      "domain": "snosim.com",
+      "tier": "broad"
+    },
+    {
+      "projectId": 135681,
+      "domain": "snos24.ru",
+      "tier": "broad"
+    },
+    {
+      "projectId": 135682,
+      "domain": "demonti.ru",
+      "tier": "broad"
+    },
+    {
+      "projectId": 135683,
+      "domain": "leroymerlin.ru",
+      "tier": "shop"
+    },
+    {
+      "projectId": 135684,
+      "domain": "podvorje.ru",
+      "tier": "shop"
+    },
+    {
+      "projectId": 135685,
+      "domain": "sad-i-ogorod.ru",
+      "tier": "shop"
+    },
+    {
+      "projectId": 135686,
+      "domain": "gardenia.ru",
+      "tier": "shop"
+    }
+  ],
+  "not_in_base": [
+    {
+      "domain": "grunlit-eco.ru",
+      "tier": "W14"
+    },
+    {
+      "domain": "chistka-ot-snega.ru",
+      "tier": "W14"
+    },
+    {
+      "domain": "poisk-pitomnik.ru",
+      "tier": "shop"
+    },
+    {
+      "domain": "studio-fito.ru",
+      "tier": "landshaft"
+    },
+    {
+      "domain": "landshaft-bureau.ru",
+      "tier": "landshaft"
+    },
+    {
+      "domain": "landshaftnoye.ru",
+      "tier": "landshaft"
+    },
+    {
+      "domain": "dachnyu.ru",
+      "tier": "landshaft"
+    },
+    {
+      "domain": "yardesign.ru",
+      "tier": "landshaft"
+    },
+    {
+      "domain": "obikhod.ru",
+      "tier": "self"
+    }
+  ],
+  "occupied_other": [
+    {
+      "domain": "liwood.ru",
+      "tier": "W14",
+      "reason": "slot занят probe-135646"
+    }
+  ],
+  "probe_kept": {
+    "projectId": 135646,
+    "main": "liwood.ru",
+    "note": "оставлен по причине ранее полученного permission deny на удаление; занимает slot liwood.ru — пропущен в individual bootstrap"
+  },
+  "totals": {
+    "attempted": 46,
+    "created": 36,
+    "not_in_base": 9,
+    "occupied": 1
+  }
+}

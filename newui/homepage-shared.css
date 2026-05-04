@@ -1,0 +1,706 @@
+/* ═══════════════════════════════════════════════════════════════════
+   HOMEPAGE SHARED EXTENSIONS — предложение для §35 brand-guide.html
+   после approve макета. Используем только то, что в гайде нет.
+   Подключается обоими макетами: homepage.html (Direction 1 «Фотосмета»)
+   и homepage-classic.html (Direction 2 «Конкурентный лендинг»).
+   Всё остальное — классы из brand-guide-styles.css.
+
+   Префиксы:
+     .hp-*   — общие компоненты главной (hero / output / pillars / cov / how / cases / subs / b2b / team / cta-dual / mobile)
+     .hpc-*  — classic-specific (Hero с form-card · pricing-table · EEAT trust-cards · classic form в pre-footer)
+
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Hero для главной (отличается от .hero у guide — у нас 2-column grid) */
+.hp-hero { padding: 64px 0 80px; position: relative; overflow: hidden; }
+.hp-hero-bg { position: absolute; inset: 0; opacity: 0.06; pointer-events: none; }
+.hp-hero-grid { display: grid; gap: 48px; grid-template-columns: 1fr; position: relative; }
+@media (min-width: 1024px) { .hp-hero-grid { grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: center; } }
+.hp-hero h1.display { font-size: clamp(48px, 7.5vw, 96px); margin-bottom: 24px; }
+.hp-hero h1.display .arrow { color: var(--c-accent); padding: 0 0.15em; }
+.hp-hero .ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+.hp-hero .trust { font-family: var(--font-mono); font-size: 12px; color: var(--c-muted); margin-top: 16px; letter-spacing: 0.04em; }
+.hp-hero .trust strong { color: var(--c-ink); font-weight: 500; }
+
+/* Hero output card (composed UI «фото→смета») */
+.hp-output { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius-lg); padding: 24px; box-shadow: 0 12px 32px -16px rgba(28,28,28,0.12); position: relative; }
+.hp-output .head { display: flex; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid var(--c-line); margin-bottom: 16px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-muted); }
+.hp-output .photo { aspect-ratio: 4/3; border-radius: var(--radius); background: var(--c-bg-alt); position: relative; overflow: hidden; display: grid; place-items: center; padding: 16px; text-align: center; font-family: var(--font-mono); font-size: 12px; color: var(--c-muted); margin-bottom: 14px; }
+.hp-output .photo::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent 0 12px, rgba(140,131,119,0.08) 12px 13px); }
+.hp-output .photo span { position: relative; z-index: 1; }
+.hp-output .recognized { display: inline-flex; gap: 8px; align-items: center; padding: 6px 12px; background: var(--c-bg); border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 12.5px; color: var(--c-ink); margin-bottom: 14px; }
+.hp-output .recognized .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c-success); }
+.hp-output .price { display: flex; justify-content: space-between; align-items: end; padding-top: 10px; border-top: 1px solid var(--c-line); }
+.hp-output .price .num { font-family: var(--font-mono); font-weight: 700; font-size: clamp(28px, 5vw, 40px); line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.hp-output .price .num .currency { color: var(--c-muted); margin-left: 4px; font-weight: 500; }
+.hp-output .price .meta { text-align: right; font-family: var(--font-mono); font-size: 11px; color: var(--c-muted); letter-spacing: 0.06em; line-height: 1.6; }
+
+/* AmberSeal — круглая печать с вращающимся ободком */
+.hp-seal { position: absolute; top: 14px; right: 14px; width: 56px; height: 56px; }
+.hp-seal .ring { animation: hp-spin 28s linear infinite; transform-origin: center; }
+@keyframes hp-spin { to { transform: rotate(360deg); } }
+
+/* PhotoSmeta drop-zone */
+.hp-dropzone { border: 2px dashed var(--c-primary); border-radius: var(--radius-lg); background: var(--c-card); padding: 40px 24px; text-align: center; display: grid; gap: 10px; place-items: center; min-height: 240px; transition: background 200ms, border-color 200ms; }
+.hp-dropzone:hover { background: var(--c-bg-alt); }
+.hp-dropzone .ic { width: 48px; height: 48px; color: var(--c-primary); }
+.hp-dropzone .t { font-weight: 600; font-size: 18px; color: var(--c-ink); }
+.hp-dropzone .h { font-family: var(--font-mono); font-size: 12px; color: var(--c-muted); letter-spacing: 0.06em; }
+
+.hp-steps { display: grid; gap: 12px; margin-top: 24px; }
+.hp-step { display: grid; grid-template-columns: 56px 1fr; gap: 16px; align-items: center; padding: 16px 18px; background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); }
+.hp-step .n { font-weight: 700; font-size: 40px; line-height: 1; color: var(--c-line); text-align: center; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.hp-step .t { font-weight: 600; font-size: 16px; color: var(--c-ink); margin: 0 0 2px; }
+.hp-step .d { font-size: 13px; color: var(--c-muted); margin: 0; line-height: 1.5; }
+
+.hp-cross { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; font-family: var(--font-mono); font-size: 13px; color: var(--c-primary); border-bottom: 1px dashed var(--c-primary); padding-bottom: 1px; cursor: pointer; }
+.hp-cross:hover { color: var(--c-primary-ink); border-color: var(--c-primary-ink); }
+
+/* Services pillar grid (4-в-1) */
+.hp-pillars { display: grid; gap: 16px; grid-template-columns: 1fr; margin-top: 24px; }
+@media (min-width: 720px) { .hp-pillars { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .hp-pillars { grid-template-columns: repeat(4, 1fr); } }
+.hp-pillar { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; gap: 14px; transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease; }
+.hp-pillar:hover { border-color: var(--c-primary); box-shadow: 0 4px 16px -4px rgba(45,90,61,0.12); transform: translateY(-2px); }
+.hp-pillar .ic { width: 36px; height: 36px; color: var(--c-primary); }
+.hp-pillar h3 { margin: 0; font-size: 20px; font-weight: 700; color: var(--c-ink); }
+.hp-pillar p { font-size: 13.5px; color: var(--c-muted); margin: 0; flex: 1; min-height: 60px; line-height: 1.5; }
+.hp-pillar .price { display: flex; justify-content: space-between; align-items: end; padding-top: 12px; border-top: 1px solid var(--c-line); }
+.hp-pillar .price .from { font-family: var(--font-mono); font-size: 11px; color: var(--c-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+.hp-pillar .price .num { font-family: var(--font-mono); font-weight: 700; font-size: 18px; color: var(--c-ink); font-variant-numeric: tabular-nums; }
+.hp-pillar .price .arrow-link { color: var(--c-primary); font-family: var(--font-mono); font-size: 14px; }
+
+/* Calculator (упрощённо) */
+.hp-calc { display: grid; gap: 24px; grid-template-columns: 1fr; }
+@media (min-width: 1024px) { .hp-calc { grid-template-columns: 1.4fr 1fr; gap: 32px; } }
+.hp-calc-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.hp-calc-tab { padding: 9px 16px; border-radius: 999px; border: 1px solid var(--c-line); background: var(--c-card); font-family: var(--font-mono); font-size: 13px; color: var(--c-ink); cursor: pointer; transition: all 200ms; }
+.hp-calc-tab.is-active { background: var(--c-primary); color: var(--c-on-primary); border-color: var(--c-primary); }
+.hp-calc-fields { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 22px; display: grid; gap: 18px; }
+.hp-calc-row { display: flex; flex-direction: column; gap: 8px; }
+.hp-calc-row .lbl { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-muted); display: flex; justify-content: space-between; }
+.hp-calc-row .lbl span:last-child { color: var(--c-ink); font-weight: 500; }
+.hp-calc-track { width: 100%; height: 4px; background: var(--c-bg-alt); border-radius: 999px; position: relative; }
+.hp-calc-track .fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--c-primary); border-radius: 999px; }
+.hp-calc-track .thumb { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 18px; height: 18px; border-radius: 50%; background: var(--c-card); border: 2px solid var(--c-primary); }
+.hp-calc-options { display: grid; gap: 8px; padding-top: 6px; border-top: 1px solid var(--c-line); }
+.hp-calc-opt { display: flex; gap: 10px; align-items: center; padding: 8px 12px; background: var(--c-bg); border-radius: var(--radius-sm); font-size: 14px; color: var(--c-ink); }
+.hp-calc-opt .box { width: 16px; height: 16px; border: 1.5px solid var(--c-primary); border-radius: 3px; flex-shrink: 0; display: grid; place-items: center; color: var(--c-on-primary); }
+.hp-calc-opt.on .box { background: var(--c-primary); }
+.hp-calc-result { background: var(--c-ink); color: var(--c-on-primary); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; min-height: 280px; }
+.hp-calc-result .lbl { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(247,245,240,0.55); margin-bottom: 6px; }
+.hp-calc-result .num { font-family: var(--font-mono); font-weight: 700; font-size: clamp(40px, 6vw, 60px); line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.hp-calc-result .num .currency { color: var(--c-accent); }
+.hp-calc-result .meta { font-family: var(--font-mono); font-size: 12px; color: rgba(247,245,240,0.7); line-height: 1.7; margin-top: 12px; }
+
+/* Coverage chip-grid */
+.hp-cov-section { position: relative; overflow: hidden; }
+.hp-cov-bg { position: absolute; inset: 0; opacity: 0.18; pointer-events: none; }
+.hp-cov { display: grid; gap: 12px; grid-template-columns: repeat(2, 1fr); margin-top: 24px; position: relative; }
+@media (min-width: 720px) { .hp-cov { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1024px) { .hp-cov { grid-template-columns: repeat(4, 1fr); } }
+.hp-cov-chip { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 14px 18px; display: flex; flex-direction: column; gap: 8px; position: relative; transition: border-color .15s ease, transform .15s ease; cursor: pointer; }
+.hp-cov-chip:hover { border-color: var(--c-primary); transform: translateY(-1px); }
+.hp-cov-chip .name { font-weight: 600; font-size: 17px; color: var(--c-ink); }
+.hp-cov-chip .meta { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.hp-cov-chip .dist { font-size: 11px; color: var(--c-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+.hp-cov-chip .stat { font-size: 12px; color: var(--c-primary); font-weight: 500; }
+.hp-cov-chip.pilot::before { content: 'A'; position: absolute; top: 6px; right: 6px; width: 18px; height: 18px; border-radius: 50%; background: var(--c-accent); color: var(--c-ink); font-family: var(--font-mono); font-size: 10px; font-weight: 700; display: grid; place-items: center; }
+.hp-cov-more { display: flex; justify-content: center; margin-top: 24px; position: relative; }
+.hp-cov-more a { font-family: var(--font-mono); font-size: 13px; color: var(--c-primary); border-bottom: 1px dashed var(--c-primary); padding-bottom: 2px; }
+
+/* How — 5 шагов */
+.hp-how { display: grid; gap: 12px; grid-template-columns: 1fr; counter-reset: hp-how; margin-top: 24px; }
+@media (min-width: 720px) { .hp-how { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .hp-how { grid-template-columns: repeat(5, 1fr); gap: 16px; } }
+.hp-how-card { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 22px; counter-increment: hp-how; position: relative; }
+.hp-how-card::before { content: '0' counter(hp-how); position: absolute; top: 14px; right: 16px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--c-muted); }
+.hp-how-card .ic { width: 28px; height: 28px; color: var(--c-primary); margin-bottom: 14px; }
+.hp-how-card .t { font-weight: 600; font-size: 17px; color: var(--c-ink); margin: 0 0 6px; }
+.hp-how-card .sla { font-family: var(--font-mono); font-size: 11px; color: var(--c-accent-ink); letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 8px; }
+.hp-how-card .d { font-size: 13px; color: var(--c-muted); margin: 0; line-height: 1.5; }
+
+/* Cases — карточки с before/after placeholder и B2C/B2B меткой */
+.hp-cases { display: grid; gap: 18px; grid-template-columns: 1fr; margin-top: 24px; }
+@media (min-width: 768px) { .hp-cases { grid-template-columns: repeat(3, 1fr); } }
+.hp-case { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
+.hp-case .photo { aspect-ratio: 4/3; background: var(--c-bg-alt); position: relative; overflow: hidden; }
+.hp-case .photo::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent 0 12px, rgba(140,131,119,0.12) 12px 13px); }
+.hp-case .photo .divider { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--c-bg); }
+.hp-case .photo .lbl { position: absolute; bottom: 12px; left: 12px; right: 12px; font-family: var(--font-mono); font-size: 10.5px; color: var(--c-on-primary); background: rgba(28,28,28,0.78); padding: 5px 8px; border-radius: 4px; letter-spacing: 0.05em; line-height: 1.35; }
+.hp-case .tag { position: absolute; top: 12px; right: 12px; padding: 4px 10px; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.hp-case .tag.b2c { background: var(--c-success); color: var(--c-on-primary); }
+.hp-case .tag.b2b { background: var(--c-accent); color: var(--c-ink); }
+.hp-case .body { padding: 22px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.hp-case .t { font-weight: 600; font-size: 17px; color: var(--c-ink); margin: 0; line-height: 1.35; }
+.hp-case .meta { display: flex; gap: 14px; font-family: var(--font-mono); font-size: 12px; color: var(--c-muted); flex-wrap: wrap; font-variant-numeric: tabular-nums; }
+.hp-case .meta strong { color: var(--c-ink); font-weight: 500; }
+.hp-case .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding-top: 12px; border-top: 1px solid var(--c-line); margin-top: auto; }
+.hp-case .stats .s { display: flex; flex-direction: column; gap: 2px; }
+.hp-case .stats .s .v { font-family: var(--font-mono); font-weight: 700; font-size: 15px; color: var(--c-ink); font-variant-numeric: tabular-nums; }
+.hp-case .stats .s .l { font-family: var(--font-mono); font-size: 10px; color: var(--c-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* Subscription pricing cards (адаптация .product-card) */
+.hp-subs { display: grid; gap: 18px; grid-template-columns: 1fr; margin-top: 24px; }
+@media (min-width: 768px) { .hp-subs { grid-template-columns: repeat(3, 1fr); } }
+.hp-sub { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 28px 24px; display: flex; flex-direction: column; gap: 16px; position: relative; }
+.hp-sub.featured { border: 2px solid var(--c-primary); box-shadow: 0 12px 36px -12px rgba(45,90,61,0.16); }
+.hp-sub .ribbon { position: absolute; top: -10px; right: 22px; background: var(--c-accent); color: var(--c-ink); padding: 4px 12px; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.hp-sub .name { font-weight: 700; font-size: 20px; color: var(--c-ink); margin: 0; }
+.hp-sub .price { display: flex; align-items: baseline; gap: 8px; padding-bottom: 14px; border-bottom: 1px solid var(--c-line); }
+.hp-sub .price .num { font-family: var(--font-mono); font-weight: 700; font-size: clamp(30px, 4vw, 40px); line-height: 1; color: var(--c-ink); font-variant-numeric: tabular-nums; }
+.hp-sub .price .period { font-family: var(--font-mono); font-size: 12px; color: var(--c-muted); }
+.hp-sub ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 9px; flex: 1; }
+.hp-sub li { display: flex; gap: 8px; align-items: flex-start; font-size: 13.5px; color: var(--c-ink-soft); line-height: 1.5; }
+.hp-sub .check { color: var(--c-success); flex-shrink: 0; margin-top: 3px; }
+
+/* B2B-full cards — на тёмном поверхности */
+.hp-b2b { background: #1a3528; color: rgba(247,245,240,0.85); padding: 80px 0; }
+.hp-b2b .eyebrow, .hp-b2b h2 { color: var(--c-on-primary); }
+.hp-b2b h2 { color: var(--c-on-primary); }
+.hp-b2b .lead { color: rgba(247,245,240,0.78); }
+.hp-b2b-grid { display: grid; gap: 18px; grid-template-columns: 1fr; margin-top: 32px; }
+@media (min-width: 768px) { .hp-b2b-grid { grid-template-columns: repeat(3, 1fr); } }
+.hp-b2b-card { background: rgba(247,245,240,0.04); border: 1px solid rgba(247,245,240,0.1); border-radius: var(--radius); padding: 28px 24px; display: flex; flex-direction: column; gap: 14px; backdrop-filter: blur(6px); }
+.hp-b2b-card .seg { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-accent); }
+.hp-b2b-card .t { font-weight: 700; font-size: 20px; color: var(--c-on-primary); margin: 0; }
+.hp-b2b-card .price { font-family: var(--font-mono); font-weight: 700; font-size: 20px; color: var(--c-on-primary); padding: 10px 0; border-top: 1px solid rgba(247,245,240,0.1); border-bottom: 1px solid rgba(247,245,240,0.1); font-variant-numeric: tabular-nums; }
+.hp-b2b-card ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; flex: 1; }
+.hp-b2b-card li { display: flex; gap: 8px; align-items: flex-start; font-size: 13.5px; color: rgba(247,245,240,0.78); line-height: 1.5; }
+.hp-b2b-card .check { color: var(--c-accent); flex-shrink: 0; margin-top: 3px; }
+
+/* Team — портретные плейсхолдеры с подписями для фотографа */
+.hp-team { display: grid; gap: 18px; grid-template-columns: 1fr; margin-top: 24px; }
+@media (min-width: 768px) { .hp-team { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .hp-team { grid-template-columns: repeat(4, 1fr); } }
+.hp-team-card { display: flex; flex-direction: column; gap: 12px; }
+.hp-team-photo { aspect-ratio: 3/4; border-radius: var(--radius); background: var(--c-bg-alt); position: relative; overflow: hidden; }
+.hp-team-photo::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent 0 14px, rgba(140,131,119,0.12) 14px 15px); }
+.hp-team-photo .lbl { position: absolute; bottom: 12px; left: 12px; right: 12px; font-family: var(--font-mono); font-size: 10px; color: var(--c-on-primary); background: rgba(28,28,28,0.78); padding: 6px 8px; border-radius: 4px; letter-spacing: 0.04em; line-height: 1.4; }
+.hp-team-card .n { font-weight: 700; font-size: 16px; color: var(--c-ink); margin: 0; }
+.hp-team-card .r { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-accent-ink); margin: 0; }
+.hp-team-card .b { font-size: 13px; color: var(--c-muted); margin: 0; line-height: 1.5; }
+
+/* CtaFooter dual — drop-zone + classic form (использует .pre-footer чуть ниже,
+   а сами 2 блока внутри — на bg-alt) */
+.hp-cta-dual { display: grid; gap: 24px; grid-template-columns: 1fr; margin-top: 32px; }
+@media (min-width: 1024px) { .hp-cta-dual { grid-template-columns: 1fr auto 1fr; gap: 32px; align-items: center; } }
+.hp-cta-block { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 28px; }
+.hp-cta-divider { display: none; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--c-muted); text-align: center; }
+@media (min-width: 1024px) { .hp-cta-divider { display: block; } }
+
+/* Pre-footer для главной — в art-brief мы переопределяем default header CTA «Получить смету»
+   на «Сфотографировать объект». Подсвечиваем primary CTA как accent. */
+.hp-pre-footer .btn-on-dark { background: var(--c-accent); color: var(--c-ink); }
+.hp-pre-footer .btn-on-dark.ghost { background: transparent; }
+
+/* Reviews — sources stat + chat-style cards (chat класс уже в brand-guide для TOV-демо) */
+.hp-rev-sources { display: grid; gap: 12px; grid-template-columns: repeat(2, 1fr); margin-top: 20px; margin-bottom: 32px; }
+@media (min-width: 720px) { .hp-rev-sources { grid-template-columns: repeat(4, 1fr); } }
+.hp-rev-card { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 22px; display: flex; flex-direction: column; gap: 10px; }
+.hp-rev-card .head { display: flex; gap: 10px; align-items: center; }
+.hp-rev-card .av { width: 36px; height: 36px; border-radius: 50%; background: var(--c-bg-alt); display: grid; place-items: center; font-weight: 700; color: var(--c-primary); font-size: 15px; flex-shrink: 0; }
+.hp-rev-card .n { font-weight: 600; font-size: 14px; color: var(--c-ink); }
+.hp-rev-card .meta { font-family: var(--font-mono); font-size: 11px; color: var(--c-muted); }
+.hp-rev-card .stars { color: var(--c-accent); font-size: 13px; letter-spacing: 0.08em; }
+.hp-rev-card .text { font-size: 14px; color: var(--c-ink-soft); line-height: 1.55; margin: 0; }
+.hp-revs { display: grid; gap: 14px; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .hp-revs { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .hp-revs { grid-template-columns: repeat(3, 1fr); } }
+
+/* FAQ Accordion */
+.accordion .item {
+  border-bottom: 1px solid var(--c-line);
+}
+.accordion .item:first-child { border-top: 1px solid var(--c-line); }
+.accordion .item summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 0;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--c-ink);
+  user-select: none;
+  line-height: 1.35;
+}
+.accordion .item summary::-webkit-details-marker { display: none; }
+.accordion .item summary::after {
+  content: '';
+  width: 10px; height: 10px; flex-shrink: 0;
+  border-right: 2px solid var(--c-primary);
+  border-bottom: 2px solid var(--c-primary);
+  transform: rotate(45deg);
+  transition: transform 0.28s ease;
+  margin-bottom: 3px;
+}
+.accordion .item[open] summary::after {
+  transform: rotate(225deg);
+  margin-bottom: -3px;
+}
+.accordion .item summary:hover { color: var(--c-primary); }
+.accordion .item .body {
+  overflow: hidden;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--c-ink-soft);
+  transition: height 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.accordion .item .body-inner { padding-bottom: 20px; }
+
+/* Demo-note (не часть макета — пометка что это макет) */
+.hp-note { position: fixed; bottom: 16px; right: 16px; z-index: 200; background: var(--c-ink); color: var(--c-on-primary); padding: 12px 16px; border-radius: var(--radius); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; max-width: 280px; box-shadow: 0 12px 40px rgba(0,0,0,0.2); line-height: 1.5; }
+.hp-note strong { color: var(--c-accent); }
+.hp-note a { color: var(--c-accent); text-decoration: underline; }
+
+/* Section spacing override — у brand-guide section: 72px, у homepage 80px чтобы дать воздух */
+section.hp-section { padding: 80px 0; border-bottom: 1px solid var(--c-line); }
+@media (min-width: 1024px) { section.hp-section { padding: 96px 0; } }
+section.hp-section.alt { background: var(--c-bg-alt); }
+
+/* Site-mega-menu — sticky-header override для .mm-demo обёртки из brand-guide §nav.
+   Структура и стили внутри (.mm-header / .mm-trigger / .mm-panel / .mm-cta / etc.)
+   используются 1-в-1, переопределяем только обёрточные свойства demo-блока. */
+header.site-mm.mm-demo {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-radius: 0;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  margin: 0;
+  background: rgba(247, 245, 240, 0.96);
+  backdrop-filter: saturate(1.4) blur(10px);
+}
+header.site-mm.mm-demo .mm-header {
+  border-radius: 0;
+  background: transparent;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 14px var(--pad);
+}
+header.site-mm.mm-demo .mm-panel {
+  /* для sticky header панель должна выпадать вниз с привязкой к .mm-header,
+     а не относительно .mm-demo обёртки */
+  left: 0;
+  right: 0;
+  top: 100%;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+@media (max-width: 900px) {
+  header.site-mm.mm-demo .mm-panel { border-radius: var(--radius); }
+}
+
+/* §05 grid-2 — 1-col mobile, 2-col desktop */
+.grid-2 { display: grid; gap: 32px; }
+@media (min-width: 960px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+
+/* Footer SVG logo — currentColor наследует светлый цвет из тёмного footer */
+.footer-logo-svg { height: 32px; width: calc(32px * 1280 / 480); display: block; }
+
+/* Inline SVG логотипа — миррорит правила для img */
+header.site-mm.mm-demo .mm-brand .mm-logo-svg { height: 40px; width: calc(40px * 1280 / 480); display: block; }
+@media (max-width: 900px) { header.site-mm.mm-demo .mm-brand .mm-logo-svg { height: 36px; width: calc(36px * 1280 / 480); } }
+@media (max-width: 600px) { header.site-mm.mm-demo .mm-brand .mm-logo-svg { height: 30px; width: calc(30px * 1280 / 480); } }
+
+/* Right-block (phone + auth-cta) — заменяет .mm-cta из demo по §30.1 logged-out */
+header.site-mm.mm-demo .mm-right {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  flex: 0 0 auto;
+}
+header.site-mm.mm-demo .mm-phone {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--c-ink-soft);
+  white-space: nowrap;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+header.site-mm.mm-demo .mm-phone:hover { color: var(--c-primary); text-decoration: none; }
+@media (max-width: 1100px) {
+  header.site-mm.mm-demo .mm-phone { display: none; }
+}
+@media (max-width: 900px) {
+  header.site-mm.mm-demo .auth-cta .btn-login { display: none; }
+}
+
+/* Fix: <button> в браузере не наследует font-family от body — auth-кнопки
+   из §30 рендерились системным шрифтом, а .mm-trigger пунктов меню — Golos Text.
+   Унифицируем семейство и приближаем размер к .mm-trigger (15px). */
+header.site-mm.mm-demo .auth-cta .btn-login,
+header.site-mm.mm-demo .auth-cta .btn-register {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE OVERRIDES (≤900 / ≤768 / ≤600 / ≤414)
+   feedback_newui_mobile_first.md — обязательная адаптация под мобилу
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Tablet 900 → перестроение header */
+@media (max-width: 900px) {
+  header.site-mm.mm-demo .mm-header {
+    padding: 12px 16px;
+    gap: 12px;
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+  header.site-mm.mm-demo .mm-brand img { height: 36px; }
+  /* nav на отдельной строке под logo+auth */
+  header.site-mm.mm-demo .mm-nav {
+    width: 100%;
+    order: 3;
+    flex-wrap: wrap;
+    gap: 0;
+    border-top: 1px solid var(--c-line);
+    padding-top: 8px;
+    margin-top: 4px;
+  }
+  header.site-mm.mm-demo .mm-trigger {
+    padding: 10px 12px;
+    font-size: 14px;
+    min-height: 44px; /* touch-target WCAG 2.5.5 */
+  }
+  header.site-mm.mm-demo .mm-right { gap: 10px; }
+  header.site-mm.mm-demo .auth-cta .btn-register { min-height: 40px; padding: 10px 16px; }
+
+  /* Hero — ужать выноску на мобиле, фон-pattern глуше */
+  .hp-hero { padding: 40px 0 56px; }
+  .hp-hero-bg { opacity: 0.04; }
+  .hp-hero h1.display { font-size: clamp(36px, 9vw, 56px); }
+  .hp-hero .ctas .btn { width: 100%; justify-content: center; }
+  .hp-hero .ctas { flex-direction: column; align-items: stretch; gap: 10px; }
+
+  /* Hero output card — компактнее padding */
+  .hp-output { padding: 18px; }
+  .hp-output .price .num { font-size: clamp(24px, 7vw, 32px); }
+  .hp-seal { width: 44px; height: 44px; top: 10px; right: 10px; }
+
+  /* Section spacing — меньше воздуха */
+  section.hp-section { padding: 56px 0; }
+
+  /* Calculator — упростить grid */
+  .hp-calc-result { min-height: auto; padding: 24px; }
+  .hp-calc-result .num { font-size: clamp(32px, 9vw, 44px); }
+
+  /* B2B section — меньше padding */
+  .hp-b2b { padding: 56px 0; }
+
+  /* CtaFooter — drop-zone и форма ниже друг друга */
+  .hp-cta-block { padding: 22px 18px; }
+
+  /* Pre-footer (B2B-bridge §07) — кнопки full-width */
+  .pre-footer .ctas { width: 100%; flex-direction: column; align-items: stretch; }
+  .pre-footer .ctas .btn-on-dark { justify-content: center; }
+}
+
+/* Mobile 600 → ещё компактнее */
+@media (max-width: 600px) {
+  :root { --pad: 16px; }
+  header.site-mm.mm-demo .mm-brand img { height: 30px; }
+  header.site-mm.mm-demo .mm-trigger { font-size: 13px; padding: 10px 10px; }
+  /* phone и login уже скрыты выше; оставляем только Регистрация */
+  header.site-mm.mm-demo .auth-cta .btn-register { font-size: 13px; padding: 8px 12px; }
+
+  section.hp-section { padding: 40px 0; }
+  section.hp-section.alt { padding: 40px 0; }
+
+  /* Hero — упрощённая verticality, без RingsPattern фона */
+  .hp-hero { padding: 32px 0 40px; }
+  .hp-hero-bg { display: none; }
+  .hp-hero-grid { gap: 28px; }
+  .hp-hero h1.display { font-size: clamp(32px, 10vw, 44px); line-height: 1; letter-spacing: -0.03em; }
+  .hp-hero .lead { font-size: 15px; }
+  .hp-hero .trust { font-size: 11px; }
+
+  /* Hero output card — фото меньше aspect-ratio */
+  .hp-output .photo { aspect-ratio: 4/3; padding: 12px; font-size: 11px; }
+  .hp-output .price { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .hp-output .price .meta { text-align: left; }
+
+  /* PhotoSmeta dropzone компактнее, иконка меньше */
+  .hp-dropzone { padding: 28px 16px; min-height: 200px; }
+  .hp-dropzone .ic { width: 36px; height: 36px; }
+  .hp-dropzone .t { font-size: 16px; }
+
+  /* Steps — карточки в одну колонку, цифра меньше */
+  .hp-step { grid-template-columns: 44px 1fr; gap: 12px; padding: 14px; }
+  .hp-step .n { font-size: 32px; }
+
+  /* CertificateBand — 2x2 сетка из 4 (по умолчанию уже так), но цифры меньше */
+  .cert-band, .stat-tile .val { font-size: clamp(22px, 6vw, 28px); }
+
+  /* Coverage — 1col на маленьких экранах */
+  .hp-cov { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .hp-cov-chip { padding: 12px 14px; }
+  .hp-cov-chip .name { font-size: 15px; }
+
+  /* Cases / Subs / Reviews / Team / B2B — стак вертикально */
+  .hp-cases, .hp-subs, .hp-revs, .hp-team, .hp-b2b-grid, .hp-pillars { gap: 12px; }
+
+  /* Pillar card — уменьшить отступы */
+  .hp-pillar { padding: 20px 18px; gap: 10px; }
+  .hp-pillar h3 { font-size: 18px; }
+
+  /* Subscription / B2B price — компактнее */
+  .hp-sub, .hp-b2b-card { padding: 22px 20px; gap: 12px; }
+  .hp-sub .price .num { font-size: clamp(28px, 7vw, 36px); }
+
+  /* Demo-note — скрыть на mobile (не нужна для презентации макета на телефоне) */
+  .hp-note { display: none; }
+
+  /* CtaFooter dual — обе колонки full-width, уменьшить padding */
+  .hp-cta-block { padding: 18px 16px; }
+  .hp-cta-block .hp-dropzone { min-height: 140px; padding: 20px 12px; }
+
+  /* Footer — компактнее brand col */
+  .site-footer-mock { padding: 32px 16px 16px; }
+  .site-footer-mock .cols { gap: 24px; padding-bottom: 24px; }
+  .site-footer-mock .legal { font-size: 11px; gap: 8px; }
+}
+
+/* Small mobile 414 → крайние оптимизации */
+@media (max-width: 414px) {
+  .hp-hero h1.display { font-size: clamp(28px, 8.5vw, 36px); }
+  .hp-cov { grid-template-columns: 1fr; }
+  .hp-rev-sources { grid-template-columns: 1fr 1fr; }
+  /* Touch-target ≥44 на всех CTA */
+  .btn { min-height: 44px; }
+  .hp-calc-tab { min-height: 36px; }
+}
+
+/* Reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .hp-seal .ring { animation: none; }
+  .mm-demo .mm-panel { transition: opacity 0.15s ease, visibility 0s; transform: none !important; }
+  .mm-demo .mm-has-drop:hover .mm-panel { transform: none !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FIX · mega-menu mobile collapse
+   В brand-guide §nav .mm-* — это DEMO-блок (раскрытый аккордеон на
+   mobile для презентации компонента). У нас — sticky site-header,
+   панели должны быть collapsed по умолчанию.
+   Override base CSS — скрываем .mm-panel на mobile, оставляем :focus-within
+   для toggle через клавиатуру / tap на каждом trigger.
+   ═══════════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  header.site-mm.mm-demo .mm-panel {
+    display: none;
+  }
+  header.site-mm.mm-demo .mm-has-drop:focus-within .mm-panel,
+  header.site-mm.mm-demo .mm-has-drop.is-open .mm-panel {
+    display: block;
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+    border: 1px dashed var(--c-line);
+    margin: 8px 0;
+    padding: 16px;
+    border-radius: var(--radius);
+  }
+  /* Touch-target ≥44 для всех ссылок внутри nav на mobile */
+  header.site-mm.mm-demo .mm-all,
+  header.site-mm.mm-demo .mm-col a,
+  header.site-mm.mm-demo .mm-featured a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  /* Chevron на mobile поворачивается когда open */
+  header.site-mm.mm-demo .mm-has-drop.is-open .mm-chevron { transform: rotate(180deg); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CLASSIC-SPECIFIC (homepage-classic.html · Direction 2 «Конверсионный»)
+   Стиль ближе к лендингам конкурентов (musor.moscow, liwood) — Hero с form
+   справа, pricing-table, E-E-A-T trust-cards с лицензиями/сертификатами.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Hero с form-card вместо output-card */
+.hpc-hero { padding: 64px 0 80px; position: relative; overflow: hidden; }
+.hpc-hero-bg {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    linear-gradient(180deg, rgba(247,245,240,0.95) 0%, rgba(247,245,240,0.75) 60%, rgba(247,245,240,0.95) 100%),
+    repeating-linear-gradient(45deg, transparent 0 14px, rgba(45,90,61,0.05) 14px 15px);
+  opacity: 0.6;
+}
+.hpc-hero-grid { display: grid; gap: 32px; grid-template-columns: 1fr; position: relative; z-index: 1; }
+@media (min-width: 1024px) { .hpc-hero-grid { grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: start; } }
+.hpc-hero h1 {
+  font-weight: 700; font-size: clamp(34px, 5.5vw, 56px); line-height: 1.05;
+  letter-spacing: -0.025em; color: var(--c-ink); margin: 0 0 20px;
+}
+.hpc-hero h1 .accent { color: var(--c-primary); }
+.hpc-hero .lead { margin-bottom: 24px; }
+
+/* Trust-bullets в hero (3-4 пункта с цифрами) */
+.hpc-trust-bullets {
+  display: grid; gap: 14px; margin: 24px 0 32px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 480px) { .hpc-trust-bullets { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+.hpc-trust-bullet { display: flex; flex-direction: column; gap: 4px; }
+.hpc-trust-bullet .v {
+  font-family: var(--font-mono); font-weight: 700;
+  font-size: clamp(24px, 3.2vw, 32px); line-height: 1;
+  color: var(--c-primary); font-variant-numeric: tabular-nums;
+}
+.hpc-trust-bullet .l {
+  font-size: 12px; line-height: 1.4; color: var(--c-ink-soft); margin: 0;
+}
+
+/* Form-card (используется в Hero и в pre-footer повторно) */
+.hpc-form-card {
+  background: var(--c-card); border: 1px solid var(--c-line);
+  border-radius: var(--radius-lg); padding: 28px;
+  box-shadow: 0 12px 32px -16px rgba(28,28,28,0.12);
+  position: relative;
+}
+.hpc-form-card .head { margin-bottom: 18px; }
+.hpc-form-card .head .eyebrow { margin-bottom: 8px; }
+.hpc-form-card .head .t { font-weight: 700; font-size: 20px; color: var(--c-ink); margin: 0 0 4px; line-height: 1.25; }
+.hpc-form-card .head .s { font-size: 13px; color: var(--c-muted); margin: 0; }
+.hpc-form-card form { display: grid; gap: 12px; }
+.hpc-form-card .field { margin: 0; }
+.hpc-form-card .submit-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 4px; }
+.hpc-form-card .submit-row .btn { flex: 1 1 auto; justify-content: center; }
+.hpc-form-card .or { font-family: var(--font-mono); font-size: 11px; color: var(--c-muted); letter-spacing: 0.1em; text-transform: uppercase; text-align: center; margin: 4px 0; padding: 6px 0; border-top: 1px solid var(--c-line); }
+.hpc-form-card .photo-cta {
+  display: flex; gap: 10px; align-items: center;
+  padding: 12px 14px; border: 1px dashed var(--c-primary);
+  border-radius: var(--radius); background: var(--c-bg);
+  font-size: 13px; color: var(--c-ink-soft); cursor: pointer;
+  transition: background 200ms;
+}
+.hpc-form-card .photo-cta:hover { background: var(--c-bg-alt); }
+.hpc-form-card .photo-cta .ic { width: 20px; height: 20px; color: var(--c-primary); flex-shrink: 0; }
+.hpc-form-card .photo-cta strong { color: var(--c-primary); font-weight: 600; }
+.hpc-form-card .note { font-family: var(--font-mono); font-size: 11px; color: var(--c-muted); margin: 8px 0 0; line-height: 1.5; }
+
+/* Pricing table */
+.hpc-prices {
+  background: var(--c-card); border: 1px solid var(--c-line);
+  border-radius: var(--radius); overflow: hidden; margin-top: 32px;
+}
+.hpc-price-row {
+  display: grid; gap: 16px; padding: 18px 22px;
+  grid-template-columns: 1fr;
+  border-bottom: 1px solid var(--c-line);
+  align-items: center; transition: background 150ms;
+}
+.hpc-price-row:last-child { border-bottom: 0; }
+.hpc-price-row:hover { background: var(--c-bg); }
+@media (min-width: 768px) {
+  .hpc-price-row { grid-template-columns: 220px 1fr auto; gap: 24px; }
+}
+.hpc-price-cta { display: flex; align-items: center; gap: 28px; white-space: nowrap; }
+.hpc-price-row .name { font-weight: 600; font-size: 16px; color: var(--c-ink); }
+.hpc-price-row .desc { font-size: 13px; color: var(--c-muted); line-height: 1.5; }
+.hpc-price-row .price {
+  font-family: var(--font-mono); font-weight: 700;
+  font-size: clamp(18px, 2.5vw, 22px); line-height: 1;
+  color: var(--c-ink); font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.hpc-price-row .price .from { font-size: 0.55em; color: var(--c-muted); font-weight: 500; margin-right: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+.hpc-price-row .price .unit { font-size: 0.55em; color: var(--c-muted); font-weight: 500; margin-left: 4px; }
+.hpc-price-row .cta {
+  font-family: var(--font-mono); font-size: 13px;
+  color: var(--c-primary); display: inline-flex; align-items: center; gap: 6px;
+  border-bottom: 1px dashed var(--c-primary); padding-bottom: 1px; align-self: start;
+}
+.hpc-price-row .cta:hover { color: var(--c-primary-ink); }
+.hpc-prices-note {
+  font-family: var(--font-mono); font-size: 12px; color: var(--c-muted);
+  margin-top: 16px; line-height: 1.6;
+}
+
+/* E-E-A-T trust cards (лицензии · СРО · техника · сертификаты) */
+.hpc-trust {
+  display: grid; gap: 14px; margin-top: 32px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 600px) { .hpc-trust { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .hpc-trust { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
+.hpc-trust-card {
+  background: var(--c-card); border: 1px solid var(--c-line);
+  border-radius: var(--radius); padding: 20px; display: flex;
+  flex-direction: column; gap: 12px; transition: border-color .15s ease, transform .15s ease;
+  cursor: pointer;
+}
+.hpc-trust-card:hover { border-color: var(--c-primary); transform: translateY(-2px); }
+.hpc-trust-card .doc {
+  aspect-ratio: 4/5; background: var(--c-bg-alt);
+  border-radius: var(--radius-sm); position: relative; overflow: hidden;
+  display: grid; place-items: center; padding: 14px; text-align: center;
+  font-family: var(--font-mono); font-size: 10px; color: var(--c-muted);
+  letter-spacing: 0.06em; line-height: 1.4;
+}
+.hpc-trust-card .doc::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, transparent 0 14px, rgba(140,131,119,0.12) 14px 15px);
+}
+.hpc-trust-card .doc span { position: relative; z-index: 1; }
+.hpc-trust-card .doc .badge-ok {
+  position: absolute; top: 8px; right: 8px;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--c-success); color: var(--c-on-primary);
+  display: grid; place-items: center; font-size: 13px; font-weight: 700;
+  z-index: 2;
+}
+.hpc-trust-card .t { font-weight: 600; font-size: 15px; color: var(--c-ink); margin: 0; line-height: 1.3; }
+.hpc-trust-card .meta {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.06em; color: var(--c-muted); margin: 0;
+}
+
+/* Hero photo BG (placeholder для документального фото бригады) */
+.hpc-hero-photo {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 50%;
+  background: var(--c-bg-alt); overflow: hidden;
+  border-left: 1px solid var(--c-line); display: none;
+}
+@media (min-width: 1280px) { .hpc-hero-photo { display: block; } }
+.hpc-hero-photo::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, transparent 0 18px, rgba(140,131,119,0.1) 18px 19px);
+}
+.hpc-hero-photo .lbl {
+  position: absolute; bottom: 24px; left: 24px; right: 24px;
+  font-family: var(--font-mono); font-size: 11px; color: var(--c-on-primary);
+  background: rgba(28,28,28,0.78); padding: 8px 12px; border-radius: 4px;
+  letter-spacing: 0.05em; line-height: 1.45;
+}
+
+/* Mobile overrides для classic */
+@media (max-width: 900px) {
+  .hpc-hero { padding: 40px 0 56px; }
+  .hpc-hero h1 { font-size: clamp(28px, 7vw, 40px); }
+  .hpc-trust-bullets { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .hpc-trust-bullet .v { font-size: 22px; }
+  .hpc-trust-bullet .l { font-size: 11px; }
+  .hpc-form-card { padding: 22px 18px; }
+  .hpc-price-row { grid-template-columns: 1fr; gap: 8px; padding: 16px 18px; }
+  .hpc-price-row .price { order: 2; }
+  .hpc-price-row .cta { order: 3; }
+}
+@media (max-width: 600px) {
+  .hpc-hero { padding: 28px 0 40px; }
+  .hpc-hero h1 { font-size: clamp(24px, 8vw, 32px); }
+  .hpc-trust-bullets { grid-template-columns: 1fr; gap: 8px; }
+  .hpc-form-card { padding: 18px 16px; }
+}

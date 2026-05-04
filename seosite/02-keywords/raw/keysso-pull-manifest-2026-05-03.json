@@ -1,0 +1,253 @@
+{
+  "tag": "2026-05-03",
+  "started_utc": "2026-05-03T19:22:25.879329+00:00",
+  "totals": {
+    "domains_attempted": 34,
+    "ok": 32,
+    "empty": 2,
+    "not_in_base": 0,
+    "other_error": 0,
+    "keywords_total": 29256
+  },
+  "domains": [
+    {
+      "domain": "musor.moscow",
+      "max_pages_planned": 8,
+      "kw_count": 2000,
+      "status": "ok",
+      "file": "keysso-musor_moscow-2026-05-03.json"
+    },
+    {
+      "domain": "kronotech.ru",
+      "max_pages_planned": 8,
+      "kw_count": 2000,
+      "status": "ok",
+      "file": "keysso-kronotech_ru-2026-05-03.json"
+    },
+    {
+      "domain": "cleaning-moscow.ru",
+      "max_pages_planned": 8,
+      "kw_count": 2000,
+      "status": "ok",
+      "file": "keysso-cleaning-moscow_ru-2026-05-03.json"
+    },
+    {
+      "domain": "stroj-musor.moscow",
+      "max_pages_planned": 8,
+      "kw_count": 2000,
+      "status": "ok",
+      "file": "keysso-stroj-musor_moscow-2026-05-03.json"
+    },
+    {
+      "domain": "umisky.ru",
+      "max_pages_planned": 8,
+      "kw_count": 2000,
+      "status": "ok",
+      "file": "keysso-umisky_ru-2026-05-03.json"
+    },
+    {
+      "domain": "liwood.ru",
+      "max_pages_planned": 4,
+      "kw_count": 1000,
+      "status": "ok",
+      "file": "keysso-liwood_ru-2026-05-03.json"
+    },
+    {
+      "domain": "promtehalp.ru",
+      "max_pages_planned": 4,
+      "kw_count": 264,
+      "status": "ok",
+      "file": "keysso-promtehalp_ru-2026-05-03.json"
+    },
+    {
+      "domain": "lesoruby.ru",
+      "max_pages_planned": 4,
+      "kw_count": 0,
+      "status": "empty",
+      "file": "keysso-lesoruby_ru-2026-05-03.json"
+    },
+    {
+      "domain": "alpme.ru",
+      "max_pages_planned": 4,
+      "kw_count": 139,
+      "status": "ok",
+      "file": "keysso-alpme_ru-2026-05-03.json"
+    },
+    {
+      "domain": "arboristik.ru",
+      "max_pages_planned": 4,
+      "kw_count": 1000,
+      "status": "ok",
+      "file": "keysso-arboristik_ru-2026-05-03.json"
+    },
+    {
+      "domain": "arborist.su",
+      "max_pages_planned": 4,
+      "kw_count": 1000,
+      "status": "ok",
+      "file": "keysso-arborist_su-2026-05-03.json"
+    },
+    {
+      "domain": "forest-service.ru",
+      "max_pages_planned": 4,
+      "kw_count": 340,
+      "status": "ok",
+      "file": "keysso-forest-service_ru-2026-05-03.json"
+    },
+    {
+      "domain": "tvoi-sad.com",
+      "max_pages_planned": 4,
+      "kw_count": 2,
+      "status": "ok",
+      "file": "keysso-tvoi-sad_com-2026-05-03.json"
+    },
+    {
+      "domain": "spilservis.ru",
+      "max_pages_planned": 4,
+      "kw_count": 782,
+      "status": "ok",
+      "file": "keysso-spilservis_ru-2026-05-03.json"
+    },
+    {
+      "domain": "lesovod.su",
+      "max_pages_planned": 4,
+      "kw_count": 557,
+      "status": "ok",
+      "file": "keysso-lesovod_su-2026-05-03.json"
+    },
+    {
+      "domain": "virubka-dereva.ru",
+      "max_pages_planned": 4,
+      "kw_count": 796,
+      "status": "ok",
+      "file": "keysso-virubka-dereva_ru-2026-05-03.json"
+    },
+    {
+      "domain": "demontazhmsk.ru",
+      "max_pages_planned": 4,
+      "kw_count": 865,
+      "status": "ok",
+      "file": "keysso-demontazhmsk_ru-2026-05-03.json"
+    },
+    {
+      "domain": "fasadrf.ru",
+      "max_pages_planned": 4,
+      "kw_count": 1000,
+      "status": "ok",
+      "file": "keysso-fasadrf_ru-2026-05-03.json"
+    },
+    {
+      "domain": "alpbond.org",
+      "max_pages_planned": 4,
+      "kw_count": 1000,
+      "status": "ok",
+      "file": "keysso-alpbond_org-2026-05-03.json"
+    },
+    {
+      "domain": "promalper.ru",
+      "max_pages_planned": 4,
+      "kw_count": 1000,
+      "status": "ok",
+      "file": "keysso-promalper_ru-2026-05-03.json"
+    },
+    {
+      "domain": "udalenie-dereviev.moscow",
+      "max_pages_planned": 4,
+      "kw_count": 1000,
+      "status": "ok",
+      "file": "keysso-udalenie-dereviev_moscow-2026-05-03.json"
+    },
+    {
+      "domain": "lesoruby.com",
+      "max_pages_planned": 4,
+      "kw_count": 674,
+      "status": "ok",
+      "file": "keysso-lesoruby_com-2026-05-03.json"
+    },
+    {
+      "domain": "arbogarden.ru",
+      "max_pages_planned": 4,
+      "kw_count": 1000,
+      "status": "ok",
+      "file": "keysso-arbogarden_ru-2026-05-03.json"
+    },
+    {
+      "domain": "drovosek-mo.ru",
+      "max_pages_planned": 4,
+      "kw_count": 1000,
+      "status": "ok",
+      "file": "keysso-drovosek-mo_ru-2026-05-03.json"
+    },
+    {
+      "domain": "rusarbo.ru",
+      "max_pages_planned": 4,
+      "kw_count": 444,
+      "status": "ok",
+      "file": "keysso-rusarbo_ru-2026-05-03.json"
+    },
+    {
+      "domain": "treeworkers.ru",
+      "max_pages_planned": 4,
+      "kw_count": 126,
+      "status": "ok",
+      "file": "keysso-treeworkers_ru-2026-05-03.json"
+    },
+    {
+      "domain": "formula-v.ru",
+      "max_pages_planned": 4,
+      "kw_count": 949,
+      "status": "ok",
+      "file": "keysso-formula-v_ru-2026-05-03.json"
+    },
+    {
+      "domain": "moscleaning24.ru",
+      "max_pages_planned": 4,
+      "kw_count": 1000,
+      "status": "ok",
+      "file": "keysso-moscleaning24_ru-2026-05-03.json"
+    },
+    {
+      "domain": "mmusor.ru",
+      "max_pages_planned": 4,
+      "kw_count": 1000,
+      "status": "ok",
+      "file": "keysso-mmusor_ru-2026-05-03.json"
+    },
+    {
+      "domain": "gsvm.ru",
+      "max_pages_planned": 4,
+      "kw_count": 1000,
+      "status": "ok",
+      "file": "keysso-gsvm_ru-2026-05-03.json"
+    },
+    {
+      "domain": "snosim.com",
+      "max_pages_planned": 4,
+      "kw_count": 380,
+      "status": "ok",
+      "file": "keysso-snosim_com-2026-05-03.json"
+    },
+    {
+      "domain": "snos24.ru",
+      "max_pages_planned": 4,
+      "kw_count": 371,
+      "status": "ok",
+      "file": "keysso-snos24_ru-2026-05-03.json"
+    },
+    {
+      "domain": "demonti.ru",
+      "max_pages_planned": 4,
+      "kw_count": 567,
+      "status": "ok",
+      "file": "keysso-demonti_ru-2026-05-03.json"
+    },
+    {
+      "domain": "obikhod.ru",
+      "max_pages_planned": 4,
+      "kw_count": 0,
+      "status": "empty",
+      "file": "keysso-obikhod_ru-2026-05-03.json"
+    }
+  ],
+  "finished_utc": "2026-05-03T19:27:48.663794+00:00"
+}

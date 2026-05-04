@@ -1,0 +1,1131 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Обиход — главная (макет v2 «Фотосмета», на base brand-guide.html)</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<!-- ВСЯ дизайн-система — 1-в-1 из design-system/brand-guide.html (extracted) -->
+<link rel="stylesheet" href="brand-guide-styles.css" />
+
+<link rel="stylesheet" href="homepage-shared.css?v=2" />
+</head>
+
+<body>
+
+<!-- ═════════ HEADER · mega-menu из §nav · canonical (sticky-вариант) ═════════ -->
+<header class="mm-demo site-mm" aria-label="Главное меню Обихода">
+  <div class="mm-header">
+    <a class="mm-brand" href="/" aria-label="Обиход — на главную">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 480" class="mm-logo-svg" role="img" aria-label="Обиход"><title>Обиход</title><defs><style>.stroke-main{fill:none;stroke:currentColor;stroke-width:5.8;stroke-linecap:round;stroke-linejoin:round}.stroke-soft{fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;opacity:.75}.stroke-thick{fill:none;stroke:currentColor;stroke-width:7.8;stroke-linecap:round;stroke-linejoin:round}.fill-ink{fill:currentColor}.label-wordmark{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:160px;font-weight:800;letter-spacing:-4px;fill:currentColor}</style></defs><g color="#2d5a3d"><g transform="translate(240 240) scale(0.36)"><circle cx="0" cy="0" r="560" class="stroke-thick"/><circle cx="0" cy="0" r="435" class="stroke-soft"/><line x1="-560" y1="0" x2="560" y2="0" class="stroke-soft"/><line x1="0" y1="-560" x2="0" y2="560" class="stroke-soft"/><g transform="translate(-300 -270)"><line x1="0" y1="-150" x2="0" y2="150" class="stroke-main"/><g class="stroke-main"><line x1="0" y1="-20" x2="-60" y2="12"/><line x1="0" y1="-20" x2="60" y2="12"/><line x1="0" y1="30" x2="-72" y2="64"/><line x1="0" y1="30" x2="72" y2="64"/><line x1="0" y1="78" x2="-72" y2="112"/><line x1="0" y1="78" x2="72" y2="112"/><line x1="0" y1="122" x2="-52" y2="150"/><line x1="0" y1="122" x2="52" y2="150"/></g></g><g transform="translate(300 -270)"><g class="stroke-main"><line x1="0" y1="-130" x2="0" y2="130"/><line x1="-130" y1="0" x2="130" y2="0"/><line x1="-92" y1="-92" x2="92" y2="92"/><line x1="92" y1="-92" x2="-92" y2="92"/><polyline points="-10,-118 0,-130 10,-118"/><polyline points="-10,118 0,130 10,118"/><polyline points="-118,-10 -130,0 -118,10"/><polyline points="118,-10 130,0 118,10"/></g><circle cx="0" cy="0" r="9" class="stroke-main"/><circle cx="0" cy="0" r="2.6" class="fill-ink"/></g><g transform="translate(-300 300)"><rect x="-115" y="-70" width="230" height="140" class="stroke-main"/><line x1="-115" y1="-4" x2="115" y2="-4" class="stroke-main"/><line x1="18" y1="-70" x2="18" y2="-4" class="stroke-main"/><line x1="-42" y1="-4" x2="-42" y2="70" class="stroke-main"/></g><g transform="translate(300 300)"><polyline points="-100,60 -100,-60 100,-60 100,60" class="stroke-main"/><line x1="-118" y1="-60" x2="118" y2="-60" class="stroke-main"/><g class="stroke-main"><line x1="-48" y1="50" x2="-48" y2="-20"/><line x1="0" y1="50" x2="0" y2="-36"/><polyline points="-14,-20 0,-36 14,-20"/><line x1="48" y1="50" x2="48" y2="-20"/></g></g></g><text x="520" y="295" class="label-wordmark">ОБИХОД</text></g></svg>
+    </a>
+    <div class="mm-nav">
+
+      <div class="mm-has-drop">
+        <button class="mm-trigger" type="button" aria-haspopup="true">Услуги <span class="mm-chevron">▼</span></button>
+        <div class="mm-panel" role="menu">
+          <div class="mm-panel-cols">
+
+            <div class="mm-col">
+              <h4>Арбористика</h4>
+              <ul>
+                <li><a href="/arboristika/spil-derevev"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L12 14"/><path d="M9 6 L12 3 L15 6"/><path d="M8 9 L12 6 L16 9"/><path d="M7 12 L12 9 L17 12"/><path d="M6 15 L18 15" stroke-dasharray="2 1.5"/><path d="M12 15 L12 21"/><path d="M9 21 L15 21"/></svg>Спил деревьев<span class="mm-arrow">→</span></a></li>
+                <li><a href="/arboristika/valka"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 L20 20"/><g transform="rotate(35 10 18)"><path d="M10 9 L10 18"/><path d="M8 11 L10 9 L12 11"/><path d="M7.5 13 L10 11 L12.5 13"/><path d="M7 15 L10 13 L13 15"/></g><path d="M16 14 L20 14 L20 10"/><path d="M20 14 L17 17"/></svg>Валка<span class="mm-arrow">→</span></a></li>
+                <li><a href="/arboristika/udalenie-pnej"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="10" rx="5" ry="1.5"/><path d="M7 10 L7 13"/><path d="M17 10 L17 13"/><path d="M7 13 C 9 14, 15 14, 17 13"/><circle cx="12" cy="10" r="1.6"/><path d="M6 16 C 5 17, 4 18, 3 19"/><path d="M9 16 L8 20"/><path d="M15 16 L16 20"/><path d="M18 16 C 19 17, 20 18, 21 19"/></svg>Корчевание пней<span class="mm-arrow">→</span></a></li>
+                <li><a href="/arboristika/kronirovanie"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11 L12 21"/><path d="M9 21 L15 21"/><path d="M5 11 C 5 6, 19 6, 19 11"/><path d="M8 11 L8 13"/><path d="M12 11 L12 8"/><path d="M16 11 L16 13"/><path d="M3 4 L6 7"/><path d="M4 4 L6 4 L6 6"/></svg>Обрезка, кронирование<span class="mm-arrow">→</span></a></li>
+                <li><a href="/arboristika/kabling"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3 L6 21"/><path d="M18 3 L18 21"/><path d="M6 10 C 9 9, 15 9, 18 10" stroke-dasharray="2 1.5"/><circle cx="6" cy="10" r="1.2" fill="currentColor"/><circle cx="18" cy="10" r="1.2" fill="currentColor"/><path d="M4 21 L8 21"/><path d="M16 21 L20 21"/></svg>Каблинг, брейсинг<span class="mm-arrow">→</span></a></li>
+                <li><a href="/arboristika/opryskivanie"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14 L14 14 L14 20 L10 20 Z"/><path d="M12 14 L12 10"/><path d="M10 10 L14 10 L14 8 L10 8 Z"/><path d="M6 6 L8 7"/><path d="M6 10 L8 10"/><path d="M6 14 L8 13"/><circle cx="4" cy="6" r="0.8"/><circle cx="4" cy="10" r="0.8"/><circle cx="4" cy="14" r="0.8"/></svg>Опрыскивание<span class="mm-arrow">→</span></a></li>
+                <li><a href="/arboristika/izmelchenie"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 6 L17 6 L14 13 L10 13 Z"/><path d="M10 13 L10 18 L14 18 L14 13"/><path d="M5 3 L7 6"/><path d="M3 5 L7 6"/><path d="M17 18 L20 18"/><path d="M19 17 L21 17"/><path d="M19 19 L21 20"/><circle cx="11" cy="20.5" r="1"/><circle cx="13" cy="20.5" r="1"/></svg>Измельчение веток<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/arboristika" class="mm-all">Все услуги арбористики →</a>
+            </div>
+
+            <div class="mm-col">
+              <h4>Крыши и территория</h4>
+              <ul>
+                <li><a href="/chistka-krysh/ot-snega"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14 L12 6 L21 14"/><path d="M5 14 L5 20 L19 20 L19 14"/><circle cx="8" cy="4" r="0.8" fill="currentColor"/><path d="M8 3 L8 5"/><path d="M7 4 L9 4"/><circle cx="16" cy="4" r="0.8" fill="currentColor"/><path d="M16 3 L16 5"/><path d="M15 4 L17 4"/></svg>Уборка снега с крыш<span class="mm-arrow">→</span></a></li>
+                <li><a href="/chistka-krysh/vodostoki"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3 L18 3 L18 6 L6 6 Z"/><path d="M10 6 L10 18"/><path d="M14 6 L14 18"/><path d="M10 18 C 10 20, 14 20, 14 18"/><path d="M10 9 L14 9" stroke-dasharray="1.5 1.5"/><path d="M10 13 L14 13" stroke-dasharray="1.5 1.5"/><path d="M12 20 L12 22"/><path d="M11 21 L13 21"/></svg>Чистка водостоков<span class="mm-arrow">→</span></a></li>
+                <li><a href="/chistka-krysh/promalp"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3 L20 3"/><path d="M12 3 L12 18"/><circle cx="12" cy="10" r="2"/><path d="M10 13 L12 12 L14 13"/><path d="M10 16 L12 14 L14 16"/><path d="M9 19 L15 19"/><path d="M12 19 L12 21"/></svg>Промышленный альпинизм<span class="mm-arrow">→</span></a></li>
+                <li><a href="/chistka-krysh/avtovyshka"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20 L22 20"/><path d="M4 20 L4 16 L10 16 L10 20"/><circle cx="6" cy="20" r="1.2"/><circle cx="8" cy="20" r="1.2"/><path d="M10 18 L15 13"/><path d="M15 13 L18 10" stroke-dasharray="1.8 1.2"/><path d="M17 8 L21 8 L21 12 L17 12 Z"/><path d="M19 10 L19 8"/></svg>Автовышка<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/chistka-krysh" class="mm-all">Все услуги по крышам →</a>
+            </div>
+
+            <div class="mm-col">
+              <h4>Мусор и демонтаж</h4>
+              <ul>
+                <li><a href="/vyvoz-musora"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8 L21 8"/><path d="M5 8 L5 19 L19 19 L19 8"/><circle cx="7.5" cy="20.5" r="1.4"/><circle cx="16.5" cy="20.5" r="1.4"/><path d="M9 14 L9 11"/><path d="M7.5 12.5 L9 11 L10.5 12.5"/><path d="M12 14 L12 11"/><path d="M10.5 12.5 L12 11 L13.5 12.5"/><path d="M15 14 L15 11"/><path d="M13.5 12.5 L15 11 L16.5 12.5"/></svg>Вывоз мусора<span class="mm-arrow">→</span></a></li>
+                <li><a href="/vyvoz-musora/kontejner">Контейнеры 7 / 20 / 30 м³<span class="mm-arrow">→</span></a></li>
+                <li><a href="/demontazh/saraj"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 L12 5 L20 11"/><path d="M6 11 L6 20 L18 20 L18 11"/><path d="M10 20 L10 14 L14 14 L14 20"/><path d="M3 4 L7 8" stroke-width="2"/><path d="M5 2 L9 6" stroke-width="2"/><path d="M6 7 L2 11 L5 14 L9 10"/></svg>Демонтаж сараев<span class="mm-arrow">→</span></a></li>
+                <li><a href="/demontazh/raschistka">Расчистка участка<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/demontazh" class="mm-all">Все услуги по мусору и демонтажу →</a>
+            </div>
+          </div>
+
+          <div class="mm-featured">
+            <strong>Раменское · зима-2026</strong>
+            <span class="muted" style="font-size: 13px;">фикс <span class="mm-price">12 800 ₽</span> за объект · смета за 10 минут по фото</span>
+            <a href="#foto-smeta" class="mm-btn">Прислать фото</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mm-has-drop">
+        <button class="mm-trigger" type="button" aria-haspopup="true">Районы <span class="mm-chevron">▼</span></button>
+        <div class="mm-panel" role="menu">
+          <div class="mm-panel-cols">
+
+            <div class="mm-col">
+              <h4>Запад МО</h4>
+              <ul>
+                <li><a href="/raiony/odintsovo"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4 L20 20"/><path d="M20 4 L4 20"/><circle cx="12" cy="12" r="2.4" fill="currentColor"/></svg>Одинцово<span class="mm-arrow">→</span></a></li>
+                <li><a href="/raiony/krasnogorsk"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18 L9 12 L13 15 L21 18"/><path d="M9 12 L9 8 L11 7 L11 9"/><path d="M9 8 L11 8"/></svg>Красногорск<span class="mm-arrow">→</span></a></li>
+                <li><a href="/raiony/istra"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 C 7 10, 12 16, 17 12 C 19 11, 21 12, 22 13"/><path d="M9 8 C 9 5, 15 5, 15 8"/><path d="M9 8 L15 8"/><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="11" y1="3.5" x2="13" y2="3.5"/><path d="M9 8 L9 18 L15 18 L15 8"/></svg>Истра<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/raiony#zapad" class="mm-all">Все районы запада →</a>
+            </div>
+
+            <div class="mm-col">
+              <h4>Север МО</h4>
+              <ul>
+                <li><a href="/raiony/khimki"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12 L8 11 L11 4 L13 4 L12 11 L20 10 L21 12 L20 14 L12 13 L13 20 L15 22 L9 22 L11 20 L12 13 L8 13 L2 12 Z"/></svg>Химки<span class="mm-arrow">→</span></a></li>
+                <li><a href="/raiony/mytishchi"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6 L18 6"/><path d="M8 6 L8 9 L16 9 L16 6"/><path d="M9 9 L9 20 L15 20 L15 9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="11" y1="20" x2="11" y2="22"/><line x1="13" y1="20" x2="13" y2="22"/></svg>Мытищи<span class="mm-arrow">→</span></a></li>
+                <li><a href="/raiony/pushkino"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L8 9 L10 9 L7 14 L9 14 L7 18 L17 18 L15 14 L17 14 L14 9 L16 9 Z"/><line x1="3" y1="20" x2="21" y2="20"/><line x1="6" y1="19" x2="6" y2="21"/><line x1="12" y1="19" x2="12" y2="21"/><line x1="18" y1="19" x2="18" y2="21"/></svg>Пушкино<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/raiony#sever" class="mm-all">Все районы севера →</a>
+            </div>
+
+            <div class="mm-col">
+              <h4>Юго-Восток МО</h4>
+              <ul>
+                <li><a href="/raiony/ramenskoe"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 C 8 7, 16 7, 21 13"/><line x1="3" y1="13" x2="21" y2="13"/><line x1="6" y1="13" x2="6" y2="18"/><line x1="18" y1="13" x2="18" y2="18"/><path d="M3 18 L21 18" stroke-dasharray="2 1.5"/><path d="M3 21 L21 21" stroke-dasharray="2 1.5"/></svg>Раменское<span class="mm-arrow">→</span></a></li>
+                <li><a href="/raiony/zhukovskij"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L13 11 L21 13 L21 14 L13 13 L13 19 L15 21 L15 22 L9 22 L9 21 L11 19 L11 13 L3 14 L3 13 L11 11 Z"/></svg>Жуковский<span class="mm-arrow">→</span></a></li>
+                <li><a href="/raiony/moskva"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3 L12 21"/><path d="M3 12 L21 12"/><circle cx="12" cy="12" r="2.4" fill="currentColor"/></svg>Москва — все округа<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/raiony" class="mm-all">Карта всех 12 районов →</a>
+            </div>
+          </div>
+
+          <div class="mm-featured">
+            <strong>Не нашли свой район?</strong>
+            <span class="muted" style="font-size: 13px;">Возим технику и бригаду до 120 км от МКАД · фикс-цена за объект</span>
+            <a href="#cta" class="mm-btn">Запросить выезд</a>
+          </div>
+        </div>
+      </div>
+
+      <a class="mm-trigger" href="/dizain-landshafta">Дизайн ландшафта</a>
+
+      <div class="mm-has-drop">
+        <button class="mm-trigger" type="button" aria-haspopup="true">Магазин <span class="mm-chevron">▼</span></button>
+        <div class="mm-panel" role="menu">
+          <div class="mm-panel-cols">
+
+            <div class="mm-col">
+              <h4>Деревья</h4>
+              <ul>
+                <li><a href="/shop/plodovye-derevya"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M12 15 L12 21"/><path d="M9 21 L15 21"/><circle cx="9.5" cy="8" r="1.1" fill="currentColor"/><circle cx="14" cy="10" r="1.1" fill="currentColor"/><circle cx="11" cy="12" r="1.1" fill="currentColor"/></svg>Плодовые деревья<span class="mm-arrow">→</span></a></li>
+                <li><a href="/shop/kolonovidnye"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 C 8.5 3, 8.5 16, 12 16 C 15.5 16, 15.5 3, 12 3 Z"/><path d="M12 16 L12 21"/><path d="M9.5 21 L14.5 21"/><circle cx="11" cy="9" r="0.9" fill="currentColor"/><circle cx="13" cy="12" r="0.9" fill="currentColor"/></svg>Колоновидные<span class="mm-arrow">→</span></a></li>
+                <li><a href="/shop/listvennye"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="9" r="3"/><circle cx="12" cy="6.5" r="3.2"/><circle cx="17" cy="9" r="3"/><path d="M12 12 L12 21"/><path d="M9 21 L15 21"/></svg>Лиственные<span class="mm-arrow">→</span></a></li>
+                <li><a href="/shop/khvojnye"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L8 9 L10 9 L7 13 L9 13 L6 17 L18 17 L15 13 L17 13 L14 9 L16 9 Z"/><path d="M12 17 L12 21"/><path d="M10 21 L14 21"/><circle cx="9" cy="14" r="0.6" fill="currentColor"/><circle cx="14" cy="11" r="0.6" fill="currentColor"/></svg>Хвойные<span class="mm-arrow">→</span></a></li>
+                <li><a href="/shop/krupnomery"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 C 3 4, 9 2, 12 2 C 15 2, 21 4, 21 11"/><path d="M5 14 C 5 9, 12 8, 19 14"/><path d="M12 11 L12 21"/><path d="M9 21 L15 21"/><path d="M3 21 L3 5"/><path d="M2 6 L3 5 L4 6"/><path d="M2 20 L3 21 L4 20"/></svg>Крупномеры<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/shop/derevya" class="mm-all">Все деревья →</a>
+            </div>
+
+            <div class="mm-col">
+              <h4>Кустарники</h4>
+              <ul>
+                <li><a href="/shop/plodovye-kustarniki"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18 C 3 13, 7 12, 8 14 C 8.5 11.5, 15.5 11.5, 16 14 C 17 12, 21 13, 21 18"/><path d="M2 21 L22 21"/><circle cx="7" cy="15" r="1" fill="currentColor"/><circle cx="12" cy="14" r="1" fill="currentColor"/><circle cx="17" cy="15" r="1" fill="currentColor"/></svg>Плодовые кустарники<span class="mm-arrow">→</span></a></li>
+                <li><a href="/shop/dekorativnye-kustarniki"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="6"/><path d="M6 11 C 9 9, 15 9, 18 11" stroke-dasharray="2 1.5"/><path d="M6 13 C 9 15, 15 15, 18 13" stroke-dasharray="2 1.5"/><path d="M12 17 L12 21"/><path d="M9.5 21 L14.5 21"/></svg>Декоративные кустарники<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/shop/kustarniki" class="mm-all">Все кустарники →</a>
+            </div>
+
+            <div class="mm-col">
+              <h4>Цветы</h4>
+              <ul>
+                <li><a href="/shop/cvety"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="1.6"/><circle cx="15.5" cy="8.5" r="1.6"/><circle cx="14" cy="11.5" r="1.6"/><circle cx="10" cy="11.5" r="1.6"/><circle cx="8.5" cy="8.5" r="1.6"/><circle cx="12" cy="9" r="0.9" fill="currentColor"/><path d="M12 13 L12 21"/><path d="M9 21 L15 21"/><path d="M12 17 C 10 16.5, 8.5 17.5, 9 19"/></svg>Цветы<span class="mm-arrow">→</span></a></li>
+                <li><a href="/shop/rozy"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M12 4 C 14 5, 14 9, 12 10"/><path d="M9.5 7 C 10.5 6.5, 13 7, 13.5 8.5"/><path d="M12 11 L12 21"/><path d="M9.5 21 L14.5 21"/><path d="M12 14 C 14 13, 16 14, 15 16"/><path d="M12 17 L10.5 16.5"/><path d="M12 19 L13.5 18.5"/></svg>Розы<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/shop/cvety-i-rozy" class="mm-all">Весь каталог цветов →</a>
+            </div>
+          </div>
+
+          <div class="mm-featured">
+            <strong>Сезон посадки 2026</strong>
+            <span class="muted" style="font-size: 13px;">доставка по МО · посадка с гарантией приживаемости <span class="mm-price">1 год</span> · смета за день</span>
+            <a href="/shop" class="mm-btn">В каталог</a>
+          </div>
+        </div>
+      </div>
+
+      <a class="mm-trigger" href="/kontakty">Контакты</a>
+    </div>
+    <div class="mm-right">
+      <a class="mm-phone" href="tel:+74950000000">+7 (495) 000-00-00</a>
+      <div class="auth-cta">
+        <button class="btn-login" type="button">Войти</button>
+        <button class="btn-register" type="button">Регистрация</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═════════ §01 · HERO ═════════ -->
+<section class="hp-hero hp-section">
+  <div class="hp-hero-bg">
+    <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 1280 600" aria-hidden="true">
+      <defs>
+        <pattern id="rings" x="0" y="0" width="220" height="220" patternUnits="userSpaceOnUse">
+          <circle cx="110" cy="110" r="40" fill="none" stroke="#2d5a3d" stroke-width="0.6"/>
+          <circle cx="110" cy="110" r="65" fill="none" stroke="#2d5a3d" stroke-width="0.6"/>
+          <circle cx="110" cy="110" r="90" fill="none" stroke="#2d5a3d" stroke-width="0.6"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#rings)"/>
+    </svg>
+  </div>
+  <div class="wrap hp-hero-grid">
+    <div>
+      <div class="eyebrow">§ 01 · Хозяйственные работы · Москва и МО</div>
+      <h1 class="display">
+        Фото <span class="arrow">→</span> смета<br>
+        <span class="arrow">→</span> 12 800 ₽<br>
+        <span class="arrow">→</span> бригада
+      </h1>
+      <p class="lead">Сфотографируйте дерево, крышу, баню или кучу мусора — за 10 минут пришлём ориентир в WhatsApp или Telegram. Фикс-цена в договоре, страховка 5 млн ₽, штрафы ГЖИ берём на себя.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="#foto-smeta">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h3l2-3h8l2 3h3v12H3z"/><circle cx="12" cy="13" r="4"/></svg>
+          Сфотографировать объект
+        </a>
+        <a class="btn btn-secondary" href="tel:+74950000000">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2.03Z"/></svg>
+          +7 (495) 000-00-00
+        </a>
+      </div>
+      <p class="trust"><strong>184 отзыва</strong> · <strong>4.9 ★</strong> на Я.Картах · ответ диспетчера &lt; 15 мин</p>
+    </div>
+
+    <div class="hp-output">
+      <div class="head">
+        <span>Обиход · ориентир № 0042</span>
+        <span>11 МАЯ 2026</span>
+      </div>
+      <div class="photo">
+        <span>ФОТО · Аварийная берёза 18 м<br>СНТ Берёзовая роща, Истра</span>
+      </div>
+      <div class="recognized">
+        <span class="dot"></span>
+        Распознали: берёза, ~18 м, аварийный наклон 25°
+      </div>
+      <div class="price">
+        <div>
+          <div class="eyebrow" style="margin-bottom:6px">Ориентир</div>
+          <div class="num">12 800 — 16 400<span class="currency">₽</span></div>
+        </div>
+        <div class="meta">ФИКС НА 14 ДНЕЙ<br>МЕНЕДЖЕР · 10 МИН</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §02 · CERTIFICATE BAND (использует .grid-4 + .stat-tile из brand-guide) ═════════ -->
+<section class="hp-section alt" style="padding: 56px 0;">
+  <div class="wrap">
+    <div class="eyebrow" style="margin-bottom: 20px;">§ 02 · Обязательства · в каждом договоре</div>
+    <div class="grid-4">
+      <div class="stat-tile">
+        <div class="lbl">Страхование</div>
+        <div class="val">5 млн ₽</div>
+        <div class="delta">Ингосстрах · полис в договоре</div>
+      </div>
+      <div class="stat-tile">
+        <div class="lbl">Гарантия</div>
+        <div class="val">12 мес</div>
+        <div class="delta">по сертификату с печатью</div>
+      </div>
+      <div class="stat-tile">
+        <div class="lbl">Выезд замерщика</div>
+        <div class="val">0 ₽</div>
+        <div class="delta">бесплатно — даже если не подойдёт</div>
+      </div>
+      <div class="stat-tile accent">
+        <div class="lbl">Штрафы ГЖИ / ОАТИ</div>
+        <div class="val" style="font-size: 22px;">берём на себя</div>
+        <div class="delta">по договору · не одолжение</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §03 · PHOTO SMETA (USP-якорь) ═════════ -->
+<section class="hp-section" id="foto-smeta">
+  <div class="wrap">
+    <div class="eyebrow">§ 03 · Фото → смета · 10 минут</div>
+    <h2 style="max-width: 18ch;">Сфотографируйте объект — посчитаем за 10 минут</h2>
+    <p class="lead">Не нужно знать диаметр дерева, объём кучи или площадь крыши. Загрузите фото — AI распознаёт параметры, диспетчер подтверждает диапазон цены вручную и присылает в мессенджер.</p>
+
+    <div style="display: grid; gap: 32px; grid-template-columns: 1fr; margin-top: 28px;" class="grid-2">
+      <div>
+        <div class="hp-dropzone">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h3l2-3h8l2 3h3v12H3z"/><circle cx="12" cy="13" r="4"/></svg>
+          <div class="t">Перетащите фото или нажмите</div>
+          <div class="h">JPG · PNG · HEIC · до 8 фото · до 10 МБ</div>
+        </div>
+
+        <div class="hp-steps">
+          <div class="hp-step">
+            <div class="n">1</div>
+            <div>
+              <h4 class="t">Сфотографируйте объект</h4>
+              <p class="d">Дерево, крышу, баню, мусор. С телефона — обычная фотография, без специального ракурса.</p>
+            </div>
+          </div>
+          <div class="hp-step">
+            <div class="n">2</div>
+            <div>
+              <h4 class="t">AI распознаёт параметры</h4>
+              <p class="d">Тип объекта, размеры, состояние. Диспетчер уточняет вручную при необходимости.</p>
+            </div>
+          </div>
+          <div class="hp-step">
+            <div class="n">3</div>
+            <div>
+              <h4 class="t">Ответ за 10 минут</h4>
+              <p class="d">Диапазон цены приходит в WhatsApp, Telegram или MAX. Зафиксирован на 14 дней.</p>
+            </div>
+          </div>
+        </div>
+
+        <a class="hp-cross" href="#calc">Знаете параметры? → Точный калькулятор слайдерами</a>
+      </div>
+
+      <div class="hp-output">
+        <div class="head">
+          <span>Ориентир № 0044</span>
+          <span>10:08 МСК</span>
+        </div>
+        <div class="photo" style="aspect-ratio: 1/1;">
+          <span>ФОТО · Старая баня 4×5 м<br>под демонтаж · Одинцово</span>
+        </div>
+        <div class="recognized">
+          <span class="dot"></span>
+          Каркасная баня, ~20 м², состояние ветхое
+        </div>
+        <div class="price">
+          <div>
+            <div class="eyebrow" style="margin-bottom: 6px;">С вывозом</div>
+            <div class="num">68 000 — 95 000<span class="currency">₽</span></div>
+          </div>
+          <div class="meta">ФИКС НА 14 ДНЕЙ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §04 · SERVICES (4-в-1) ═════════ -->
+<section class="hp-section alt">
+  <div class="wrap">
+    <div class="eyebrow">§ 04 · Что мы делаем · 4 направления</div>
+    <h2 style="max-width: 18ch;">Один подрядчик — все хозяйственные работы на участке</h2>
+    <p class="lead">Не нужно искать арбориста, кровельщика, мусоровоз и демонтажника по отдельности. Бригада, техника, смета и договор — у одного оператора.</p>
+
+    <div class="hp-pillars">
+      <a href="/arboristika" class="hp-pillar" style="text-decoration: none;">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M8 6c-2 2-2 5 0 7M16 6c2 2 2 5 0 7M6 13c-1 1-1 3 0 4M18 13c1 1 1 3 0 4"/></svg>
+        <h3>Арбористика</h3>
+        <p>Спил, валка, аварийное удаление, кронирование, каблинг, удаление пней, расчистка участка. Альпинизм и автовышка.</p>
+        <div class="price">
+          <div>
+            <div class="from">от</div>
+            <div class="num">700 ₽ <span class="muted" style="font-size: 11px; font-weight: 500;">/ дерево</span></div>
+          </div>
+          <span class="arrow-link">→</span>
+        </div>
+      </a>
+
+      <a href="/chistka-krysh" class="hp-pillar" style="text-decoration: none;">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9M5 10v10h14V10M9 20v-6h6v6"/></svg>
+        <h3>Чистка крыш</h3>
+        <p>От снега и наледи, сбивание сосулек, промальп, автовышка. С оформлением акта по форме.</p>
+        <div class="price">
+          <div>
+            <div class="from">от</div>
+            <div class="num">25 ₽ <span class="muted" style="font-size: 11px; font-weight: 500;">/ м²</span></div>
+          </div>
+          <span class="arrow-link">→</span>
+        </div>
+      </a>
+
+      <a href="/vyvoz-musora" class="hp-pillar" style="text-decoration: none;">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="11" rx="1"/><path d="M3 12h18M7 8V5h10v3"/></svg>
+        <h3>Вывоз мусора</h3>
+        <p>Контейнеры 7-30 м³, газель, старая мебель, строительный мусор, садовый, крупногабарит.</p>
+        <div class="price">
+          <div>
+            <div class="from">от</div>
+            <div class="num">5 500 ₽ <span class="muted" style="font-size: 11px; font-weight: 500;">/ объект</span></div>
+          </div>
+          <span class="arrow-link">→</span>
+        </div>
+      </a>
+
+      <a href="/demontazh" class="hp-pillar" style="text-decoration: none;">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l4-3 6 3v11M9 21v-6h6v6"/></svg>
+        <h3>Демонтаж</h3>
+        <p>Снос дома, бани, сарая, внутренний демонтаж под ремонт. Утилизация и вывоз отходов в одном договоре.</p>
+        <div class="price">
+          <div>
+            <div class="from">от</div>
+            <div class="num">25 000 ₽ <span class="muted" style="font-size: 11px; font-weight: 500;">/ объект</span></div>
+          </div>
+          <span class="arrow-link">→</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §05 · CALCULATOR ═════════ -->
+<section class="hp-section" id="calc">
+  <div class="wrap">
+    <div class="eyebrow">§ 05 · Точный калькулятор · слайдеры</div>
+    <h2 style="max-width: 18ch;">Знаете параметры — посчитайте сами</h2>
+    <p class="lead">Калькулятор для тех, кто знает диаметр дерева, объём контейнера или площадь крыши. <a class="hp-cross" href="#foto-smeta" style="margin-left: 8px;">Не знаете объём? → Пришлите фото</a></p>
+
+    <div style="margin-top: 28px;">
+      <div class="hp-calc-tabs">
+        <button class="hp-calc-tab is-active">Арбористика</button>
+        <button class="hp-calc-tab">Чистка крыш</button>
+        <button class="hp-calc-tab">Вывоз мусора</button>
+        <button class="hp-calc-tab">Демонтаж</button>
+      </div>
+
+      <div class="hp-calc">
+        <div class="hp-calc-fields">
+          <div class="hp-calc-row">
+            <div class="lbl"><span>Высота дерева</span><span>18 м</span></div>
+            <div class="hp-calc-track"><div class="fill" style="width: 60%;"></div><div class="thumb" style="left: 60%;"></div></div>
+          </div>
+          <div class="hp-calc-row">
+            <div class="lbl"><span>Диаметр ствола</span><span>40 см</span></div>
+            <div class="hp-calc-track"><div class="fill" style="width: 45%;"></div><div class="thumb" style="left: 45%;"></div></div>
+          </div>
+          <div class="hp-calc-row">
+            <div class="lbl"><span>Состояние</span><span>Аварийное</span></div>
+            <div class="hp-calc-track"><div class="fill" style="width: 80%;"></div><div class="thumb" style="left: 80%;"></div></div>
+          </div>
+          <div class="hp-calc-options">
+            <label class="hp-calc-opt on"><span class="box"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Удаление пня (фрезой)</label>
+            <label class="hp-calc-opt on"><span class="box"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Вывоз веток и щепы</label>
+            <label class="hp-calc-opt"><span class="box"></span>Альпинизм (вместо автовышки)</label>
+          </div>
+        </div>
+
+        <div class="hp-calc-result">
+          <div>
+            <div class="lbl">Ориентир по параметрам</div>
+            <div class="num">14 200<span class="currency"> ₽</span></div>
+            <div class="meta">СПИЛ + ПЕНЬ + ВЫВОЗ<br>~3 ЧАСА · 2 ЧЕЛОВЕКА<br>СТРАХОВКА 5 МЛН ₽</div>
+          </div>
+          <a class="btn btn-primary" href="#cta">Заказать бесплатный замер →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §06 · COVERAGE ═════════ -->
+<section class="hp-section alt hp-cov-section">
+  <div class="hp-cov-bg">
+    <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 1280 600" aria-hidden="true">
+      <defs>
+        <pattern id="topo" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+          <path d="M0 60c20-10 40-10 60 0s40 10 60 0" fill="none" stroke="#2d5a3d" stroke-width="0.6"/>
+          <path d="M0 30c20-10 40-10 60 0s40 10 60 0" fill="none" stroke="#2d5a3d" stroke-width="0.6"/>
+          <path d="M0 90c20-10 40-10 60 0s40 10 60 0" fill="none" stroke="#2d5a3d" stroke-width="0.6"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#topo)"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <div class="eyebrow">§ 06 · География · Москва и МО</div>
+    <h2 style="max-width: 18ch;">Работаем в Москве и Подмосковье</h2>
+    <p class="lead">12 районов в активной работе. Едем в любую точку МО до 120 км от МКАД. Литера <span style="background: var(--c-accent); color: var(--c-ink); font-family: var(--font-mono); padding: 2px 6px; border-radius: 4px; font-size: 11px;">A</span> — приоритет, есть закреплённая бригада.</p>
+
+    <div class="hp-cov">
+      <div class="hp-cov-chip pilot">
+        <div class="name">Одинцово</div>
+        <div class="meta"><span class="dist">14 км от МКАД</span><span class="stat">8 кейсов</span></div>
+      </div>
+      <div class="hp-cov-chip pilot">
+        <div class="name">Красногорск</div>
+        <div class="meta"><span class="dist">9 км от МКАД</span><span class="stat">6 кейсов</span></div>
+      </div>
+      <div class="hp-cov-chip pilot">
+        <div class="name">Мытищи</div>
+        <div class="meta"><span class="dist">8 км от МКАД</span><span class="stat">7 кейсов</span></div>
+      </div>
+      <div class="hp-cov-chip pilot">
+        <div class="name">Химки</div>
+        <div class="meta"><span class="dist">7 км от МКАД</span><span class="stat">SLA 4 ч</span></div>
+      </div>
+      <div class="hp-cov-chip pilot">
+        <div class="name">Истра</div>
+        <div class="meta"><span class="dist">28 км от МКАД</span><span class="stat">4 кейса</span></div>
+      </div>
+      <div class="hp-cov-chip pilot">
+        <div class="name">Пушкино</div>
+        <div class="meta"><span class="dist">15 км от МКАД</span><span class="stat">5 кейсов</span></div>
+      </div>
+      <div class="hp-cov-chip pilot">
+        <div class="name">Раменское</div>
+        <div class="meta"><span class="dist">25 км от МКАД</span><span class="stat">6 кейсов</span></div>
+      </div>
+      <div class="hp-cov-chip">
+        <div class="name">Жуковский</div>
+        <div class="meta"><span class="dist">25 км от МКАД</span><span class="stat">SLA 6 ч</span></div>
+      </div>
+      <div class="hp-cov-chip">
+        <div class="name">Домодедово</div>
+        <div class="meta"><span class="dist">22 км от МКАД</span><span class="stat">SLA 6 ч</span></div>
+      </div>
+      <div class="hp-cov-chip">
+        <div class="name">Подольск</div>
+        <div class="meta"><span class="dist">15 км от МКАД</span><span class="stat">SLA 6 ч</span></div>
+      </div>
+      <div class="hp-cov-chip">
+        <div class="name">Королёв</div>
+        <div class="meta"><span class="dist">12 км от МКАД</span><span class="stat">SLA 6 ч</span></div>
+      </div>
+      <div class="hp-cov-chip">
+        <div class="name">Балашиха</div>
+        <div class="meta"><span class="dist">5 км от МКАД</span><span class="stat">SLA 6 ч</span></div>
+      </div>
+    </div>
+
+    <div class="hp-cov-more">
+      <a href="/raiony">+ ещё 62 района по запросу → /raiony/</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §07 · B2B BRIDGE (использует .pre-footer 1-в-1 как в §33.4.1) ═════════ -->
+<div class="pre-footer">
+  <div class="row">
+    <div class="ttl">
+      <h3>УК, ТСЖ, посёлок, застройщик?</h3>
+      <p>Берём штрафы ГЖИ / ОАТИ на себя по договору. SLA 2 часа на аварию. Работаем с 44/223-ФЗ.</p>
+    </div>
+    <div class="ctas">
+      <a href="/b2b" class="btn-on-dark">Условия для B2B →</a>
+      <a href="tel:+74950000000" class="btn-on-dark ghost">+7 (495) 000-00-00</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ §08 · HOW (5 шагов) ═════════ -->
+<section class="hp-section">
+  <div class="wrap">
+    <div class="eyebrow">§ 08 · Как мы работаем · 5 шагов от заявки до акта</div>
+    <h2 style="max-width: 22ch;">От фото до подписанного акта — без сюрпризов</h2>
+
+    <div class="hp-how">
+      <div class="hp-how-card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2.03Z"/></svg>
+        <h4 class="t">Звонок</h4>
+        <p class="sla">15 мин · диспетчер</p>
+        <p class="d">Уточняем задачу, район, удобное время для замера или сразу присылаем ориентир по фото.</p>
+      </div>
+      <div class="hp-how-card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 7h8M8 11h8M8 15h5"/></svg>
+        <h4 class="t">Смета</h4>
+        <p class="sla">24 ч · фикс-цена</p>
+        <p class="d">Замерщик приезжает бесплатно, выдаёт смету с фиксированной стоимостью на 14 дней.</p>
+      </div>
+      <div class="hp-how-card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-5 7 5v11M10 21v-6h4v6"/></svg>
+        <h4 class="t">Работа</h4>
+        <p class="sla">по графику · бригада</p>
+        <p class="d">Бригада приезжает в согласованную дату, в фирменной одежде, с документами и страховкой.</p>
+      </div>
+      <div class="hp-how-card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h3l2-3h8l2 3h3v12H3z"/><circle cx="12" cy="13" r="4"/></svg>
+        <h4 class="t">Фото-отчёт</h4>
+        <p class="sla">в день работы · в чат</p>
+        <p class="d">Присылаем фото до и после в WhatsApp, Telegram или MAX. Видео — по запросу.</p>
+      </div>
+      <div class="hp-how-card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+        <h4 class="t">Гарантия</h4>
+        <p class="sla">12 мес · по сертификату</p>
+        <p class="d">Подписываем акт, выдаём сертификат с номером и страховкой. Звонок в гарантийный — мгновенно.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §09 · GUARANTEES (использует .grid-3 + .stat-tile) ═════════ -->
+<section class="hp-section alt">
+  <div class="wrap">
+    <div class="eyebrow">§ 09 · Гарантии · 6 пунктов сертификата</div>
+    <h2 style="max-width: 22ch;">За каждым обязательством — цифра, документ, печать</h2>
+
+    <div class="grid-3" style="margin-top: 24px;">
+      <div class="stat-tile accent">
+        <div class="lbl">Страхование</div>
+        <div class="val">5 млн ₽</div>
+        <div class="delta">Ингосстрах. Полис в каждом договоре. Ущерб имуществу или соседям — компенсируется.</div>
+      </div>
+      <div class="stat-tile accent">
+        <div class="lbl">Гарантия</div>
+        <div class="val">12 мес</div>
+        <div class="delta">Если в течение года всплывёт что-то связанное с нашей работой — приедем и переделаем.</div>
+      </div>
+      <div class="stat-tile accent">
+        <div class="lbl">Опоздание</div>
+        <div class="val">−10 %</div>
+        <div class="delta">Бригада опоздала &gt; 30 мин — со счёта −10%. Автоматически.</div>
+      </div>
+      <div class="stat-tile accent">
+        <div class="lbl">Выезд замерщика</div>
+        <div class="val">0 ₽</div>
+        <div class="delta">Замер бесплатный. Не подойдёт смета — за выезд ничего не платите.</div>
+      </div>
+      <div class="stat-tile accent">
+        <div class="lbl">Фикс-цена</div>
+        <div class="val">100 %</div>
+        <div class="delta">Сумма из сметы — окончательная. «А там ещё это» — не бывает.</div>
+      </div>
+      <div class="stat-tile accent">
+        <div class="lbl">Аварийный выезд</div>
+        <div class="val">24 / 7</div>
+        <div class="delta">Дерево на крыше, прорыв снегом, аварийный демонтаж — звоните в любое время. SLA 2 ч в МО.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §10 · CASES ═════════ -->
+<section class="hp-section">
+  <div class="wrap">
+    <div class="eyebrow">§ 10 · Кейсы · реальные объекты</div>
+    <h2 style="max-width: 22ch;">Что мы сделали в этом сезоне</h2>
+    <p class="lead">14 объектов в работе и в портфолио. Все суммы — фактические, со сметы и акта. Фото — из чата с заказчиком.</p>
+
+    <div class="hp-cases">
+      <article class="hp-case">
+        <div class="photo">
+          <span class="tag b2c">B2C</span>
+          <span class="divider"></span>
+          <span class="lbl">ДО / ПОСЛЕ · аварийная берёза 18 м · Истра · 11 апр</span>
+        </div>
+        <div class="body">
+          <h3 class="t">Аварийные берёзы у дома, 18 м</h3>
+          <div class="meta"><span>Истра</span><span><strong>14 200 ₽</strong></span><span>11 апр 2026</span></div>
+          <div class="stats">
+            <div class="s"><span class="v">3 ч</span><span class="l">время</span></div>
+            <div class="s"><span class="v">2 чел</span><span class="l">бригада</span></div>
+            <div class="s"><span class="v">+ пень</span><span class="l">фрезой</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="hp-case">
+        <div class="photo">
+          <span class="tag b2c">B2C</span>
+          <span class="divider"></span>
+          <span class="lbl">ДО / ПОСЛЕ · старая баня 4×5 м · Одинцово · 2 апр</span>
+        </div>
+        <div class="body">
+          <h3 class="t">Старая баня под новую террасу</h3>
+          <div class="meta"><span>Одинцово</span><span><strong>128 500 ₽</strong></span><span>2 апр 2026</span></div>
+          <div class="stats">
+            <div class="s"><span class="v">2 дня</span><span class="l">демонтаж</span></div>
+            <div class="s"><span class="v">27 м³</span><span class="l">отходов</span></div>
+            <div class="s"><span class="v">включ.</span><span class="l">вывоз</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="hp-case">
+        <div class="photo">
+          <span class="tag b2b">B2B</span>
+          <span class="divider"></span>
+          <span class="lbl">ДО / ПОСЛЕ · крыша 850 м² · посёлок Мытищи · сезон</span>
+        </div>
+        <div class="body">
+          <h3 class="t">Сезон уборки снега 2025 — 2026</h3>
+          <div class="meta"><span>Мытищи · посёлок</span><span><strong>89 000 ₽ / мес</strong></span><span>сезон</span></div>
+          <div class="stats">
+            <div class="s"><span class="v">11</span><span class="l">выездов</span></div>
+            <div class="s"><span class="v">850 м²</span><span class="l">площадь</span></div>
+            <div class="s"><span class="v">SLA 4 ч</span><span class="l">авария</span></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §11 · SUBSCRIPTION ═════════ -->
+<section class="hp-section alt">
+  <div class="wrap">
+    <div class="eyebrow">§ 11 · Абонементы · круглый год</div>
+    <h2 style="max-width: 22ch;">Не вызывать каждый раз — есть годовое обслуживание</h2>
+    <p class="lead">Один договор на сезон или год. Бригада приезжает по графику: весной — обрезка, летом — покос, осенью — вывоз, зимой — снег. Цена — фикс, без сюрпризов.</p>
+
+    <div class="hp-subs">
+      <div class="hp-sub">
+        <h3 class="name">Эконом</h3>
+        <div class="price">
+          <div class="num">49 000 <span class="muted" style="font-size: 13px; font-weight: 500;">₽</span></div>
+          <div class="period">/ сезон</div>
+        </div>
+        <ul>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>2 плановых выезда в сезон</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>До 6 деревьев или 200 м² крыши</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>SLA 24 ч на плановый</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Скидка 10% на доп. работы</li>
+        </ul>
+        <a class="btn btn-secondary" href="#cta">Оформить →</a>
+      </div>
+
+      <div class="hp-sub featured">
+        <span class="ribbon">Выбор 72%</span>
+        <h3 class="name">Участок</h3>
+        <div class="price">
+          <div class="num">89 000 <span class="muted" style="font-size: 13px; font-weight: 500;">₽</span></div>
+          <div class="period">/ сезон</div>
+        </div>
+        <ul>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>4 плановых + 2 аварийных</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>До 12 деревьев + покос + вывоз</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>SLA 4 ч на аварию</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Закреплённый бригадир + куратор в чате</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Скидка 15% на доп. работы</li>
+        </ul>
+        <a class="btn btn-primary" href="#cta">Оформить →</a>
+      </div>
+
+      <div class="hp-sub">
+        <h3 class="name">Забота</h3>
+        <div class="price">
+          <div class="num">149 000 <span class="muted" style="font-size: 13px; font-weight: 500;">₽</span></div>
+          <div class="period">/ год</div>
+        </div>
+        <ul>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>12 плановых выездов круглый год</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Все 4 услуги без ограничений</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>SLA 2 ч на аварию · 24/7</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Бригада с приоритетом и личным менеджером</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Подходит для посёлков и УК</li>
+        </ul>
+        <a class="btn btn-secondary" href="#cta">Оформить →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §12 · REVIEWS ═════════ -->
+<section class="hp-section">
+  <div class="wrap">
+    <div class="eyebrow">§ 12 · Отзывы · агрегированные источники</div>
+    <h2 style="max-width: 22ch;">Что пишут заказчики на независимых площадках</h2>
+
+    <div class="hp-rev-sources">
+      <div class="stat-tile">
+        <div class="lbl">Я.Карты</div>
+        <div class="val"><span style="color: var(--c-accent);">★</span> 4.9</div>
+        <div class="delta">128 отзывов</div>
+      </div>
+      <div class="stat-tile">
+        <div class="lbl">2ГИС</div>
+        <div class="val"><span style="color: var(--c-accent);">★</span> 4.8</div>
+        <div class="delta">42 отзыва</div>
+      </div>
+      <div class="stat-tile">
+        <div class="lbl">Авито</div>
+        <div class="val"><span style="color: var(--c-accent);">★</span> 4.9</div>
+        <div class="delta">31 отзыв · 5 рекомендаций</div>
+      </div>
+      <div class="stat-tile">
+        <div class="lbl">NPS внутр. опрос</div>
+        <div class="val">98 <span class="muted" style="font-size: 14px;">/100</span></div>
+        <div class="delta">квартал Q1 2026</div>
+      </div>
+    </div>
+
+    <div class="hp-revs">
+      <article class="hp-rev-card">
+        <div class="head">
+          <div class="av">М</div>
+          <div>
+            <div class="n">Мария К.</div>
+            <div class="meta">Истра · Я.Карты · 14 апр 2026</div>
+          </div>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p class="text">«Сфоткала упавшую берёзу — через 8 минут пришёл ответ в WhatsApp. Приехали через день, всё убрали за 3 часа, увезли пенёк. Цена точно как в смете, ничего не приписали.»</p>
+      </article>
+      <article class="hp-rev-card">
+        <div class="head">
+          <div class="av">В</div>
+          <div>
+            <div class="n">Виктор С.</div>
+            <div class="meta">Раменское · Я.Карты · 6 апр 2026</div>
+          </div>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p class="text">«Демонтаж старой бани с вывозом. Бригада в форме, договор на месте, страховка. Сертификат с печатью отдали вместе с актом — это уровень.»</p>
+      </article>
+      <article class="hp-rev-card">
+        <div class="head">
+          <div class="av">А</div>
+          <div>
+            <div class="n">Анна Л.</div>
+            <div class="meta">FM · посёлок Красногорск · 2ГИС · 3 апр 2026</div>
+          </div>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p class="text">«Заключили годовой договор на крыши и арбо. Один менеджер на всё, штрафы ГЖИ они забрали в свой риск, а это — главное для нас. SLA на аварию держат.»</p>
+      </article>
+      <article class="hp-rev-card">
+        <div class="head">
+          <div class="av">Н</div>
+          <div>
+            <div class="n">Николай Ф.</div>
+            <div class="meta">Одинцово · Авито · 22 мар 2026</div>
+          </div>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p class="text">«Пять лет искал нормального арбориста. Тут — фото отправил в чат, через 10 минут ответили. Сделали ровно как обещали, в обещанный день и час.»</p>
+      </article>
+      <article class="hp-rev-card">
+        <div class="head">
+          <div class="av">Е</div>
+          <div>
+            <div class="n">Елена Г.</div>
+            <div class="meta">Мытищи · Я.Карты · 18 мар 2026</div>
+          </div>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p class="text">«Чистка крыши. Приехали ровно в обещанное время, сделали акт, прислали фото до и после. Никто не пытался впарить дополнительные услуги.»</p>
+      </article>
+      <article class="hp-rev-card">
+        <div class="head">
+          <div class="av">Д</div>
+          <div>
+            <div class="n">Дмитрий К.</div>
+            <div class="meta">Химки · УК · 2ГИС · 15 мар 2026</div>
+          </div>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p class="text">«Восемь домов под управлением. Четвёртый сезон с Обиходом. Один договор, один менеджер, понятный отчёт. По вывозу мусора закрыли вопрос с ОАТИ полностью.»</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §13 · B2B-FULL ═════════ -->
+<section class="hp-b2b">
+  <div class="wrap">
+    <div class="eyebrow">§ 13 · B2B · контракт под ключ</div>
+    <h2 style="max-width: 22ch;">Берём посёлок, дом, объект — на сезон или год</h2>
+    <p class="lead">Один договор вместо четырёх подрядчиков. Штрафы ГЖИ / ОАТИ — на нас по SLA. Закрытие 44/223-ФЗ, ЭДО, отчётность по форме заказчика.</p>
+
+    <div class="hp-b2b-grid">
+      <div class="hp-b2b-card">
+        <div class="seg">Коттеджный посёлок</div>
+        <h3 class="t">Полный сервис на год</h3>
+        <div class="price">360 000 — 1 800 000 ₽ / год</div>
+        <ul>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Все 4 услуги в одном договоре</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>SLA 2 часа на аварию · 24/7</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Закреплённый менеджер + бригада</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Штрафы ГЖИ / ОАТИ — на нас</li>
+        </ul>
+        <a class="btn" style="background: var(--c-accent); color: var(--c-ink); margin-top: auto;" href="/b2b/koteg">Запросить КП →</a>
+      </div>
+
+      <div class="hp-b2b-card">
+        <div class="seg">Застройщик</div>
+        <h3 class="t">Объекты в работе</h3>
+        <div class="price">−18 % от 5 объектов</div>
+        <ul>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Расчистка участков под застройку</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Демонтаж + вывоз в одном договоре</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>ЭДО · отчёт по форме застройщика</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Сезонные акции для постоянных</li>
+        </ul>
+        <a class="btn" style="background: var(--c-accent); color: var(--c-ink); margin-top: auto;" href="/b2b/stroitel">Стать партнёром →</a>
+      </div>
+
+      <div class="hp-b2b-card">
+        <div class="seg">УК / ТСЖ / FM / Госзакупки</div>
+        <h3 class="t">Сегментированные условия</h3>
+        <div class="price">по договору</div>
+        <ul>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>УК / ТСЖ — обслуживание МКД</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>FM — субподряд по 4 направлениям</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Госзакупки — 44/223-ФЗ, ЕИС</li>
+          <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Штрафы ГЖИ / ОАТИ — на нас</li>
+        </ul>
+        <a class="btn" style="background: var(--c-accent); color: var(--c-ink); margin-top: auto;" href="/b2b">Перейти к B2B →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §14 · TEAM ═════════ -->
+<section class="hp-section">
+  <div class="wrap">
+    <div class="eyebrow">§ 14 · Команда · кто работает на объекте</div>
+    <h2 style="max-width: 22ch;">Знакомьтесь — те, кто приедет к вам</h2>
+
+    <div class="hp-team">
+      <div class="hp-team-card">
+        <div class="hp-team-photo">
+          <div class="lbl">ПОРТРЕТ 3:4 · Иван в фирменной куртке хвойного цвета на объекте · документальный репортаж · природный свет</div>
+        </div>
+        <h4 class="n">Иван Б.</h4>
+        <p class="r">Бригадир · арбо</p>
+        <p class="b">14 лет в арбористике. Альпинист 3 разряда. Приезжает на сложные объекты с автовышкой и каблингом.</p>
+      </div>
+      <div class="hp-team-card">
+        <div class="hp-team-photo">
+          <div class="lbl">ПОРТРЕТ 3:4 · Алексей с измерительным инструментом на участке</div>
+        </div>
+        <h4 class="n">Алексей П.</h4>
+        <p class="r">Замерщик</p>
+        <p class="b">Приезжает на бесплатный замер. Считает смету в фирменном калькуляторе на месте, объясняет каждую цифру.</p>
+      </div>
+      <div class="hp-team-card">
+        <div class="hp-team-photo">
+          <div class="lbl">ПОРТРЕТ 3:4 · Дмитрий перед демонтажными работами</div>
+        </div>
+        <h4 class="n">Дмитрий К.</h4>
+        <p class="r">Бригадир · демонтаж</p>
+        <p class="b">9 лет в демонтаже. От бани и сарая до полного сноса дома. Работает с экскаватором и ручной техникой.</p>
+      </div>
+      <div class="hp-team-card">
+        <div class="hp-team-photo">
+          <div class="lbl">ПОРТРЕТ 3:4 · Анна за рабочим столом с гарнитурой</div>
+        </div>
+        <h4 class="n">Анна М.</h4>
+        <p class="r">Диспетчер</p>
+        <p class="b">Берёт первый звонок, рассматривает фото, согласовывает смету и время выезда. Всё лидирует в WhatsApp / Telegram.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §15 · FAQ (использует .accordion 1-в-1 из brand-guide) ═════════ -->
+<section class="hp-section alt">
+  <div class="wrap">
+    <div class="eyebrow" style="text-align: center;">§ 15 · Частые вопросы</div>
+    <h2 style="text-align: center; max-width: 22ch; margin-left: auto; margin-right: auto;">Вопросы, которые задают чаще всего</h2>
+
+    <div class="accordion" style="max-width: 880px; margin: 32px auto 0;">
+      <details class="item" open>
+        <summary>Как работает «фото → смета за 10 минут»?</summary>
+        <div class="body">Загрузите фото объекта в форму или пришлите в WhatsApp / Telegram / MAX. AI распознаёт тип, размеры, состояние; диспетчер уточняет вручную. В течение 10 минут возвращается диапазон цены, зафиксированный на 14 дней. Точная смета — после бесплатного замера на объекте.</div>
+      </details>
+      <details class="item">
+        <summary>Какая гарантия на работы?</summary>
+        <div class="body">12 месяцев по сертификату. Если в течение года всплывёт что-то связанное с нашей работой — приедем и переделаем. Дополнительно — страхование ответственности на 5 млн ₽ в Ингосстрахе по каждому объекту.</div>
+      </details>
+      <details class="item">
+        <summary>Какие документы передаём заказчику?</summary>
+        <div class="body">Договор, смета, акт выполненных работ, сертификат с номером, копия страхового полиса. Для B2B — ЭДО, счёт-фактура, форма КС-2/КС-3 по запросу.</div>
+      </details>
+      <details class="item">
+        <summary>Работаете в выходные и праздники?</summary>
+        <div class="body">Да. Плановые работы — по согласованию (выходной с надбавкой 20%). Аварийный выезд — 24/7 без надбавок: дерево упало на крышу, прорвало кровлю снегом, аварийный демонтаж. SLA в МО — 2 часа.</div>
+      </details>
+      <details class="item">
+        <summary>Что входит в фикс-цену, что считается дополнительно?</summary>
+        <div class="body">В смете указаны все работы, материалы, расходники, погрузка и вывоз отходов. Дополнительно — только услуги, которых не было в смете и которые согласованы новым договором. «Доплата за непредвиденное» — не наша история.</div>
+      </details>
+      <details class="item">
+        <summary>Кто выезжает — штатные или подрядчики?</summary>
+        <div class="body">Штатная бригада в фирменной одежде хвойного цвета. У бригадира — сертификаты СРО, у альпинистов — корочки 3-й категории. Договор подписывается с ООО «Обиход», не с физлицом.</div>
+      </details>
+      <details class="item">
+        <summary>Как с уборкой после работы?</summary>
+        <div class="body">После арбо — выносим ветки, режем на чурки, вывозим щепу. После демонтажа — собираем отходы в контейнер, вывозим на полигон с актом. После чистки крыш — снег и наледь сбрасываем туда, где не помешают, вывозим если в договоре.</div>
+      </details>
+      <details class="item">
+        <summary>Принимаете ли оплату по безналу?</summary>
+        <div class="body">Да. Физлица — наличными, картой через терминал, СБП по QR. Юрлица — безнал по счёту с НДС. Аванс — обычно 30%, окончательный — после подписания акта. Без аванса — для постоянных B2B-клиентов.</div>
+      </details>
+    </div>
+
+    <div class="callout" style="margin-top: 32px; max-width: 880px; margin-left: auto; margin-right: auto; text-align: center;">
+      Не нашли ответ? <a href="https://t.me/obihod_bot"><strong>Telegram @obihod_bot</strong></a> · ответим за 15 минут.
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §16 · CTA FOOTER (canonical pre-footer §33.4.1 + dual-mode) ═════════ -->
+<section class="hp-section" id="cta" style="background: var(--c-bg-alt); padding-top: 72px;">
+  <div class="wrap">
+    <div class="eyebrow" style="text-align: center;">§ 16 · Получить смету · 2 способа</div>
+    <h2 style="text-align: center; max-width: 22ch; margin-left: auto; margin-right: auto;">Сфотографируйте или позвоните — ответим за 10 минут</h2>
+
+    <div class="hp-cta-dual">
+      <div class="hp-cta-block">
+        <div class="eyebrow" style="margin-bottom: 8px;">Способ 1 · Быстро</div>
+        <h3>Прислать фото</h3>
+        <p style="margin-bottom: 16px;">AI распознает объект, диспетчер пришлёт ориентир в WhatsApp за 10 минут.</p>
+        <div class="hp-dropzone" style="min-height: 180px; padding: 28px 20px;">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 36px; height: 36px;"><path d="M3 7h3l2-3h8l2 3h3v12H3z"/><circle cx="12" cy="13" r="4"/></svg>
+          <div class="t">Загрузить фото</div>
+          <div class="h">До 8 фото · ответ за 10 мин</div>
+        </div>
+      </div>
+
+      <div class="hp-cta-divider">или</div>
+
+      <div class="hp-cta-block">
+        <div class="eyebrow" style="margin-bottom: 8px;">Способ 2 · Если фото нет</div>
+        <h3>Заполнить форму</h3>
+        <p style="margin-bottom: 16px;">Расскажите коротко задачу — диспетчер перезвонит и уточнит.</p>
+        <form onsubmit="event.preventDefault(); alert('Демо-макет: форма не подключена');">
+          <div class="field">
+            <input class="input" type="text" placeholder="Имя" autocomplete="name" />
+          </div>
+          <div class="field">
+            <input class="input" type="tel" placeholder="+7 (___) ___-__-__" autocomplete="tel" required />
+          </div>
+          <div class="field">
+            <input class="input" type="text" placeholder="Что нужно сделать (коротко)" />
+          </div>
+          <button class="btn btn-primary" type="submit" style="width: 100%; margin-top: 4px;">
+            Отправить заявку →
+          </button>
+          <p class="muted" style="font-size: 11px; margin: 10px 0 0; line-height: 1.55; font-family: var(--font-mono);">Нажимая «Отправить», вы соглашаетесь с обработкой персональных данных согласно политике конфиденциальности.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ FOOTER · canonical §33.4.2 (1-в-1 из brand-guide) ═════════ -->
+<div class="site-footer-mock">
+  <div class="cols">
+    <div class="brand-col">
+      <div class="mark-row">
+        <span class="mark">О</span>
+        <div>
+          <div class="name">ОБИХОД</div>
+          <div class="tagline">Хозяйство в надёжных руках</div>
+        </div>
+      </div>
+      <p>Комплексный подрядчик 4-в-1 для Москвы и МО: арбористика, чистка крыш, вывоз мусора, демонтаж. Плюс магазин саженцев и дизайн ландшафта. С 2020 года.</p>
+      <div class="contacts">
+        <a href="tel:+74950000000">+7 (495) 000-00-00</a>
+        <a href="mailto:hi@obikhod.ru">hi@obikhod.ru</a>
+        <span style="opacity: 0.7;">МО, Раменский р-н, ул. Питомниковая, 3</span>
+        <span style="opacity: 0.7; font-size: 12px;">пн-сб 8:00–22:00, вс 10:00–18:00 · 24/7 на аварии</span>
+      </div>
+    </div>
+
+    <div>
+      <h5>Услуги</h5>
+      <ul>
+        <li><a href="/arboristika">Арбористика</a></li>
+        <li><a href="/chistka-krysh">Чистка крыш</a></li>
+        <li><a href="/vyvoz-musora">Вывоз мусора</a></li>
+        <li><a href="/demontazh">Демонтаж</a></li>
+        <li><a href="/dizain-landshafta">Дизайн ландшафта</a></li>
+        <li><a href="/foto-smeta" style="opacity: 0.65;">Фото → смета →</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h5>Районы</h5>
+      <ul>
+        <li><a href="/raiony/odintsovo">Одинцово</a></li>
+        <li><a href="/raiony/krasnogorsk">Красногорск</a></li>
+        <li><a href="/raiony/mytishchi">Мытищи</a></li>
+        <li><a href="/raiony/khimki">Химки</a></li>
+        <li><a href="/raiony/istra">Истра</a></li>
+        <li><a href="/raiony" style="opacity: 0.65;">Все 12 районов →</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h5>B2B и ресурсы</h5>
+      <ul>
+        <li><a href="/b2b/uk-tszh">УК / ТСЖ</a></li>
+        <li><a href="/b2b/fm">Facility Management</a></li>
+        <li><a href="/b2b/zastroyshchik">Застройщикам</a></li>
+        <li><a href="/b2b/gostorgi">Госзакупки</a></li>
+        <li><a href="/kejsy">Кейсы</a></li>
+        <li><a href="/blog">Блог</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="legal">
+    <span class="copy">© 2026 ООО «Обиход»</span>
+    <span class="sep">·</span>
+    <span>ИНН 1111111111</span>
+    <span class="sep">·</span>
+    <span>ОГРН 1111111111111</span>
+    <span class="sep">·</span>
+    <a href="/politika">Политика конфиденциальности</a>
+    <span class="sep">·</span>
+    <a href="/oferta">Публичная оферта</a>
+  </div>
+</div>
+
+<!-- Подсказка для презентации макета -->
+<div class="hp-note">
+  <strong>МАКЕТ · НЕ ПРОДАКШН</strong><br>
+  Direction 1 «Фотосмета» · 16 секций<br>
+  CSS 1-в-1 из <a href="../design-system/brand-guide.html">brand-guide.html</a> v2.2<br>
+  Источник: <a href="../specs/US-13-homepage-redesign-art/art-brief.md">art-brief.md</a>
+</div>
+
+<!-- Минимальный JS — calc-tabs + mobile mega-menu toggle.
+     На desktop mega-menu работает на pure CSS :hover из brand-guide §nav. -->
+<script>
+  document.querySelectorAll('.hp-calc-tab').forEach(function(t){
+    t.addEventListener('click', function(){
+      document.querySelectorAll('.hp-calc-tab').forEach(function(x){ x.classList.remove('is-active'); });
+      t.classList.add('is-active');
+    });
+  });
+  function isMobile(){ return window.matchMedia('(max-width: 900px)').matches; }
+  document.querySelectorAll('header.site-mm .mm-has-drop > .mm-trigger').forEach(function(t){
+    t.addEventListener('click', function(e){
+      if (!isMobile()) return;
+      e.preventDefault();
+      var parent = t.closest('.mm-has-drop');
+      var wasOpen = parent.classList.contains('is-open');
+      document.querySelectorAll('.mm-has-drop.is-open').forEach(function(p){ p.classList.remove('is-open'); });
+      if (!wasOpen) parent.classList.add('is-open');
+    });
+  });
+  document.addEventListener('click', function(e){
+    if (!isMobile()) return;
+    if (!e.target.closest('.mm-has-drop')) {
+      document.querySelectorAll('.mm-has-drop.is-open').forEach(function(p){ p.classList.remove('is-open'); });
+    }
+  });
+</script>
+
+</body>
+</html>

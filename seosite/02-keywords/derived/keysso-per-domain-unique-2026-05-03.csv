@@ -1,0 +1,918 @@
+domain,keyword,ws,wsk,superwsk,domains_count,domains_list,domains_top10_count,our_status,our_intent,our_cluster,min_competitor_pos,top_competitor_url,tier_freq,intent_marker,cluster_hint,multi_cluster
+alpbond.org,установка снегозадержателей,8988,398,398,1,alpbond.org,0,not_planned,,,31,/montazh-snegozaderzhatelej,СЧ,общий,uborka-snega,False
+alpbond.org,крыша из профнастила,13296,347,347,1,alpbond.org,0,not_planned,,,12,/montazh-krovlya-iz-profnastila,СЧ,общий,,False
+alpbond.org,гидроизоляция балкона,2608,272,272,1,alpbond.org,1,not_planned,,,5,/gidroizolyaciya-balkona,СЧ,общий,,False
+alpbond.org,огнезащитная обработка деревянных конструкций,3738,270,270,1,alpbond.org,0,not_planned,,,29,/ognezashchita-derevyannyh-konstrukcij,СЧ,общий,arboristika,False
+alpbond.org,обшить сайдингом дом цена,2610,224,12,1,alpbond.org,0,not_planned,,,33,/montazh-sajdinga,СЧ,коммерческий,,False
+alpbond.org,крыша из металлопрофиля,2371,185,185,1,alpbond.org,0,not_planned,,,26,/montazh-krovlya-iz-profnastila,СЧ,общий,,False
+alpbond.org,огнезащита воздуховодов,2632,155,155,1,alpbond.org,0,not_planned,,,40,/ognezashchita-vozduhovodov,СЧ,общий,,False
+alpbond.org,покраска крыши дома,1923,151,151,1,alpbond.org,0,not_planned,,,11,/pokraska-krovli,СЧ,общий,,False
+alpbond.org,сколько стоит покраска стен за квадратный метр,522,143,137,1,alpbond.org,0,not_planned,,,38,/pokraska-fasadov-ceny-za-m2,СЧ,коммерческий,,False
+alpbond.org,облицовка кирпичом дома,4107,129,16,1,alpbond.org,0,not_planned,,,43,/oblicovka-kirpichom,СЧ,общий,,False
+alpbond.org,демонтаж кровли,7189,119,119,1,alpbond.org,0,not_planned,,,22,/demontazh-i-zamena-krovli,СЧ,общий,demontazh-b2c,False
+alpbond.org,монтаж водостоков для крыши,1292,113,113,1,alpbond.org,0,not_planned,,,38,/montazh-vodostokov,СЧ,общий,,False
+alpbond.org,монтаж профлиста,10718,112,112,1,alpbond.org,1,not_planned,,,2,/montazh-krovlya-iz-profnastila,СЧ,общий,,False
+alpbond.org,установка снегозадержателей на крыше из металлочерепицы,254,108,108,1,alpbond.org,0,not_planned,,,29,/montazh-snegozaderzhatelej,СЧ,общий,uborka-snega,False
+alpbond.org,купить греющий кабель для кровли и водостоков,191,107,87,1,alpbond.org,0,not_planned,,,39,/montazh-obogreva-krovli-i-vodostokov,СЧ,коммерческий,,False
+alpbond.org,монтаж профлиста на крышу,1016,103,103,1,alpbond.org,1,not_planned,,,10,/montazh-krovlya-iz-profnastila,СЧ,общий,,False
+alpbond.org,греющий кабель для кровли и водостоков цена,135,102,102,1,alpbond.org,0,not_planned,,,28,/montazh-obogreva-krovli-i-vodostokov,СЧ,коммерческий,,False
+alpbond.org,обшивка дома сайдингом цена за квадратный метр,469,100,100,1,alpbond.org,0,not_planned,,,28,/montazh-sajdinga,СЧ,коммерческий,,False
+alpbond.org,установка снегозадержатели на крышу,1856,99,3,1,alpbond.org,0,not_planned,,,21,/montazh-snegozaderzhatelej,НЧ,общий,uborka-snega,False
+alpbond.org,кровельные работы цена,2681,98,98,1,alpbond.org,0,not_planned,,,42,/krovelnye-raboty-cena-za-m2,НЧ,коммерческий,,False
+alpbond.org,кровля из профнастила,7211,92,92,1,alpbond.org,0,not_planned,,,14,/montazh-krovlya-iz-profnastila,НЧ,общий,,False
+alpbond.org,ремонт наружных пожарных лестниц в москве,89,89,89,1,alpbond.org,0,not_planned,,,28,/pokraska-pozharnyh-lestnic,НЧ,локальный,,False
+alpbond.org,гидроизоляция жидкой резиной,3720,87,87,1,alpbond.org,0,not_planned,,,33,/gidroizolyaciya-zhidkoj-rezinoj,НЧ,общий,,False
+alpbond.org,крыша на балкон,8054,84,83,1,alpbond.org,0,not_planned,,,21,/krysha-na-balkon-poslednego-etazha,НЧ,общий,,False
+alpbond.org,снегозадержатели на крышу установка,1132,84,77,1,alpbond.org,0,not_planned,,,16,/montazh-snegozaderzhatelej,НЧ,общий,uborka-snega,False
+alpbond.org,огнезащита металлических конструкций,1158,80,80,1,alpbond.org,0,not_planned,,,27,/ognezashchita-metallokonstrukcij,НЧ,общий,,False
+alpbond.org,ремонт крыши балкона на последнем этаже,304,79,79,1,alpbond.org,0,not_planned,,,11,/remont-kryshi-balkona,НЧ,общий,,False
+alpbond.org,ремонт печных труб на крыше,315,73,73,1,alpbond.org,0,not_planned,,,31,/remont-i-demontazh-dymovyx-trub,НЧ,общий,,False
+alpbond.org,альпы компания,495,72,17,1,alpbond.org,0,not_planned,,,45,/,НЧ,коммерческий,,False
+alpbond.org,монтаж водосточной системы цена,628,71,68,1,alpbond.org,1,not_planned,,,7,/montazh-vodostokov,НЧ,коммерческий,,False
+alpme.ru,мойка окон спб,793,241,238,1,alpme.ru,0,not_planned,,,42,/our-services/cleaning/mojkaokon,СЧ,общий,,False
+alpme.ru,мытье окон спб цена за окно,164,126,126,1,alpme.ru,0,not_planned,,,31,/our-services/cleaning/mojkaokon,СЧ,коммерческий,,False
+alpme.ru,мытье окон в спб,968,73,73,1,alpme.ru,0,not_planned,,,39,/our-services/cleaning/mojkaokon,НЧ,общий,,False
+alpme.ru,сетка зус,463,50,33,1,alpme.ru,0,not_planned,,,34,/catalogue/zus,НЧ,общий,,False
+alpme.ru,день промышленного альпиниста,157,46,45,1,alpme.ru,0,not_planned,,,29,/,НЧ,общий,,False
+alpme.ru,вакансии промышленный альпинист спб,47,41,9,1,alpme.ru,0,not_planned,,,36,/vakansii,НЧ,общий,,False
+alpme.ru,зус это,424,39,39,1,alpme.ru,0,not_planned,,,22,/our-services/montazh/zus,НЧ,общий,,False
+alpme.ru,зус монтаж,215,38,3,1,alpme.ru,0,not_planned,,,11,/msk/montazh/zus,НЧ,общий,,False
+alpme.ru,монтаж зус,184,37,34,1,alpme.ru,1,not_planned,,,7,/msk/montazh/zus,НЧ,общий,,False
+alpme.ru,кабель греющий расценка в смете,623,37,6,1,alpme.ru,0,not_planned,,,46,/our-services/montazh/greyushii_kabel,НЧ,коммерческий,,False
+alpme.ru,прокладка греющего кабеля расценка в смете,91,37,37,1,alpme.ru,0,not_planned,,,46,/our-services/montazh/greyushii_kabel,НЧ,коммерческий,,False
+alpme.ru,спил деревьев в ленинградской области цена,62,30,30,1,alpme.ru,0,not_planned,,,31,/our-services/visotnie_raboti/udalenie_derevjev,НЧ,коммерческий,arboristika,False
+alpme.ru,промышленный альпинист спб вакансии,40,29,3,1,alpme.ru,0,not_planned,,,35,/vakansii,НЧ,общий,,False
+alpme.ru,промышленный альпинист вакансии спб,40,29,19,1,alpme.ru,0,not_planned,,,36,/vakansii,НЧ,общий,,False
+alpme.ru,что такое зус,75,27,27,1,alpme.ru,0,not_planned,,,21,/our-services/montazh/zus,НЧ,информационный,,False
+alpme.ru,промышленный альпинизм спб,178,25,25,1,alpme.ru,0,not_planned,,,12,/,НЧ,общий,,False
+alpme.ru,сетка улавливающая,1483,24,15,1,alpme.ru,0,not_planned,,,39,/catalogue/zus,НЧ,общий,,False
+alpme.ru,трамплин в токсово,83,22,22,1,alpme.ru,0,not_planned,,,11,/objects/tramplin_toksovo,НЧ,общий,,False
+alpme.ru,греющий кабель расценка в смете,524,22,15,1,alpme.ru,0,not_planned,,,37,/our-services/montazh/greyushii_kabel,НЧ,коммерческий,,False
+alpme.ru,зус что это,114,21,14,1,alpme.ru,0,not_planned,,,20,/our-services/montazh/zus,НЧ,общий,,False
+alpme.ru,молниезащита и заземление цена за монтаж,25,17,17,1,alpme.ru,0,not_planned,,,39,/our-services/lightning_protection,НЧ,коммерческий,,False
+alpme.ru,монтаж молниеприемника расценка в смете,55,16,16,1,alpme.ru,0,not_planned,,,34,/our-services/lightning_protection,НЧ,коммерческий,,False
+alpme.ru,мойка фасадов зданий спб,56,16,16,1,alpme.ru,0,not_planned,,,24,/our-services/cleaning/mojkafasadov,НЧ,общий,,False
+alpme.ru,кронштейн зус система т,18,15,15,1,alpme.ru,0,not_planned,,,37,/catalogue/zus/komplekt,НЧ,общий,,False
+alpme.ru,спилить дерево частями в ленобласти цена,15,15,15,1,alpme.ru,0,not_planned,,,37,/our-services/visotnie_raboti/udalenie_derevjev,НЧ,коммерческий,arboristika,False
+alpme.ru,установка зус,161,15,8,1,alpme.ru,1,not_planned,,,9,/msk/montazh/zus,НЧ,общий,,False
+alpme.ru,токсово трамплин,179,14,5,1,alpme.ru,0,not_planned,,,12,/objects/tramplin_toksovo,НЧ,общий,,False
+alpme.ru,трамплин токсово,179,14,8,1,alpme.ru,0,not_planned,,,14,/objects/tramplin_toksovo,НЧ,общий,,False
+alpme.ru,альпинисты северной столицы,33,12,12,1,alpme.ru,0,not_planned,,,46,/,НЧ,общий,,False
+alpme.ru,что такое зус на стройке,12,12,12,1,alpme.ru,0,not_planned,,,27,/catalogue/zus,НЧ,информационный,,False
+arbogarden.ru,обработка участка от клещей,51696,5184,4695,1,arbogarden.ru,0,not_planned,,,12,/uslugi/opryskivanie/ot-komarov,ВЧ,общий,,False
+arbogarden.ru,обработка от клещей участка,51696,5184,292,1,arbogarden.ru,0,not_planned,,,26,/uslugi/opryskivanie/ot-komarov,СЧ,общий,,False
+arbogarden.ru,от клещей обработка участка,52133,5157,197,1,arbogarden.ru,0,not_planned,,,15,/uslugi/opryskivanie/ot-komarov,СЧ,общий,,False
+arbogarden.ru,от клещей средство,119317,4231,94,1,arbogarden.ru,0,not_planned,,,35,/stati/sredstva-ot-kleshhej,СЧ,общий,,False
+arbogarden.ru,жук короед,13466,3045,1452,1,arbogarden.ru,0,not_planned,,,20,/stati/obrabotka-dereva-ot-koroeda,СЧ,общий,,False
+arbogarden.ru,от клещей на участке средство,6614,837,157,1,arbogarden.ru,0,not_planned,,,25,/stati/sredstva-ot-kleshhej,СЧ,общий,,False
+arbogarden.ru,караед,1267,800,800,1,arbogarden.ru,0,not_planned,,,16,/stati/obrabotka-dereva-ot-koroeda,СЧ,общий,,False
+arbogarden.ru,обработка территории от клещей,8014,781,729,1,arbogarden.ru,0,not_planned,,,11,/uslugi/opryskivanie/ot-komarov,СЧ,общий,,False
+arbogarden.ru,обработка от клещей территории,8014,781,43,1,arbogarden.ru,0,not_planned,,,27,/uslugi/opryskivanie/ot-komarov,СЧ,общий,,False
+arbogarden.ru,обработать участок от клещей,31996,546,407,1,arbogarden.ru,0,not_planned,,,21,/uslugi/opryskivanie/ot-komarov,СЧ,общий,,False
+arbogarden.ru,что такое годичные кольца,3720,534,531,1,arbogarden.ru,0,not_planned,,,17,/stati/kak-opredelit-vozrast-dereva,СЧ,информационный,,False
+arbogarden.ru,короед фото,8576,472,437,1,arbogarden.ru,0,not_planned,,,37,/stati/obrabotka-dereva-ot-koroeda,СЧ,общий,,False
+arbogarden.ru,жуки короеды,13466,424,207,1,arbogarden.ru,0,not_planned,,,14,/stati/obrabotka-dereva-ot-koroeda,СЧ,общий,,False
+arbogarden.ru,что такое годичные кольца что можно определить по годичным кольцам,1168,397,394,1,arbogarden.ru,0,not_planned,,,16,/stati/kak-opredelit-vozrast-dereva,СЧ,информационный,,False
+arbogarden.ru,от клещей препарат,42070,395,58,1,arbogarden.ru,0,not_planned,,,20,/stati/sredstva-ot-kleshhej,СЧ,общий,,False
+arbogarden.ru,годичные кольца,9778,352,350,1,arbogarden.ru,0,not_planned,,,13,/stati/kak-opredelit-vozrast-dereva,СЧ,общий,,False
+arbogarden.ru,препараты от клещей,41388,344,326,1,arbogarden.ru,0,not_planned,,,34,/stati/sredstva-ot-kleshhej,СЧ,общий,,False
+arbogarden.ru,древесный жук,1574,343,305,1,arbogarden.ru,0,not_planned,,,37,/stati/obrabotka-dereva-ot-koroeda,СЧ,общий,,False
+arbogarden.ru,обработка сада от клещей,2839,299,296,1,arbogarden.ru,0,not_planned,,,24,/stati/sredstva-ot-kleshhej,СЧ,общий,,False
+arbogarden.ru,обработка участка от комаров,6169,298,289,1,arbogarden.ru,0,not_planned,,,15,/uslugi/opryskivanie/ot-komarov,СЧ,общий,,False
+arbogarden.ru,что такое годичное кольцо,3720,252,249,1,arbogarden.ru,0,not_planned,,,20,/stati/kak-opredelit-vozrast-dereva,СЧ,информационный,,False
+arbogarden.ru,жук типограф,918,233,163,1,arbogarden.ru,0,not_planned,,,38,/stati/obrabotka-dereva-ot-koroeda,СЧ,общий,,False
+arbogarden.ru,личинка короеда,5042,229,229,1,arbogarden.ru,0,not_planned,,,29,/stati/obrabotka-dereva-ot-koroeda,СЧ,общий,,False
+arbogarden.ru,отрава от клещей,2628,227,225,1,arbogarden.ru,0,not_planned,,,29,/stati/sredstva-ot-kleshhej,СЧ,общий,,False
+arbogarden.ru,что можно определить по годичным кольцам,1645,188,186,1,arbogarden.ru,0,not_planned,,,11,/stati/kak-opredelit-vozrast-dereva,СЧ,общий,,False
+arbogarden.ru,короед насекомое,1610,180,169,1,arbogarden.ru,0,not_planned,,,16,/stati/obrabotka-dereva-ot-koroeda,СЧ,общий,,False
+arbogarden.ru,как определить возраст дерева,924,163,163,1,arbogarden.ru,1,not_planned,,,8,/stati/kak-opredelit-vozrast-dereva,СЧ,информационный,arboristika,False
+arbogarden.ru,годичные кольца это,1137,145,145,1,arbogarden.ru,0,not_planned,,,16,/stati/kak-opredelit-vozrast-dereva,СЧ,общий,,False
+arbogarden.ru,что такое годичные кольца что можно определить по годичным кольцам кратко,276,143,142,1,arbogarden.ru,0,not_planned,,,20,/stati/kak-opredelit-vozrast-dereva,СЧ,информационный,,False
+arbogarden.ru,как защитить участок от клещей,264,127,127,1,arbogarden.ru,0,not_planned,,,43,/stati/sredstva-ot-kleshhej,СЧ,информационный,,False
+arborist.su,омела,44379,7268,7268,1,arborist.su,0,not_planned,,,27,/articles/nashi-stati/omela-na-derevyakh-chto-eto-takoe-i-kak-s-ney-borotsya,ВЧ,общий,,False
+arborist.su,кодекс лесной,27786,3641,4,1,arborist.su,0,not_planned,,,18,/upload/iblock/1dd/6g95igokekhq6o42c982lxnnslwk5m6l.pdf,СЧ,общий,,False
+arborist.su,лесной кодекс,26450,3475,3469,1,arborist.su,0,not_planned,,,20,/upload/iblock/1dd/6g95igokekhq6o42c982lxnnslwk5m6l.pdf,ВЧ,общий,,False
+arborist.su,лесной кодекс рф,8430,1658,1658,1,arborist.su,0,not_planned,,,20,/upload/iblock/1dd/6g95igokekhq6o42c982lxnnslwk5m6l.pdf,ВЧ,общий,,False
+arborist.su,лк рф,15749,992,992,1,arborist.su,0,not_planned,,,26,/upload/iblock/1dd/6g95igokekhq6o42c982lxnnslwk5m6l.pdf,СЧ,общий,,False
+arborist.su,омела это что,3100,885,96,1,arborist.su,0,not_planned,,,32,/articles/nashi-stati/omela-na-derevyakh-chto-eto-takoe-i-kak-s-ney-borotsya,СЧ,общий,,False
+arborist.su,омела что это,3100,885,788,1,arborist.su,0,not_planned,,,24,/articles/nashi-stati/omela-na-derevyakh-chto-eto-takoe-i-kak-s-ney-borotsya,СЧ,общий,,False
+arborist.su,омела это что за растение,707,587,3,1,arborist.su,0,not_planned,,,32,/articles/nashi-stati/omela-na-derevyakh-chto-eto-takoe-i-kak-s-ney-borotsya,СЧ,общий,,False
+arborist.su,омела что это за растение,707,587,582,1,arborist.su,0,not_planned,,,29,/articles/nashi-stati/omela-na-derevyakh-chto-eto-takoe-i-kak-s-ney-borotsya,СЧ,общий,,False
+arborist.su,амела,4118,580,580,1,arborist.su,0,not_planned,,,23,/articles/nashi-stati/omela-na-derevyakh-chto-eto-takoe-i-kak-s-ney-borotsya,СЧ,общий,,False
+arborist.su,златка изумрудная,2548,579,109,1,arborist.su,0,not_planned,,,23,/articles/nashi-stati/prichina-usykhaniya-yaseney-zlatka-yasenevaya-izumrudnaya,СЧ,общий,,False
+arborist.su,омела это,4252,544,544,1,arborist.su,0,not_planned,,,23,/articles/nashi-stati/omela-na-derevyakh-chto-eto-takoe-i-kak-s-ney-borotsya,СЧ,общий,,False
+arborist.su,проект освоения лесов,8392,537,537,1,arborist.su,1,not_planned,,,6,/services/uslugi-arendatoram-lesnykh-uchastkov/proekt-osvoeniya-lesov-sostav-razrabotka-ekspertiza,СЧ,общий,,False
+arborist.su,омела что такое,1380,505,27,1,arborist.su,0,not_planned,,,15,/articles/nashi-stati/omela-na-derevyakh-chto-eto-takoe-i-kak-s-ney-borotsya,СЧ,информационный,,False
+arborist.su,лесной кодекс российской федерации последняя редакция,519,486,486,1,arborist.su,0,not_planned,,,21,/upload/iblock/1dd/6g95igokekhq6o42c982lxnnslwk5m6l.pdf,СЧ,общий,,False
+arborist.su,лесная декларация,7310,443,433,1,arborist.su,1,not_planned,,,5,/services/uslugi-arendatoram-lesnykh-uchastkov/lesnaya-deklaratsiya,СЧ,общий,,False
+arborist.su,коап москвы,6369,430,430,1,arborist.su,0,not_planned,,,12,/upload/iblock/2c6/pw7lwmrl3bs9w2g1asrzji427gniu53s.pdf,СЧ,общий,,False
+arborist.su,декларация лесная,6838,383,9,1,arborist.su,1,not_planned,,,7,/services/uslugi-arendatoram-lesnykh-uchastkov/lesnaya-deklaratsiya,СЧ,общий,,False
+arborist.su,290 пп,3046,356,138,1,arborist.su,0,not_planned,,,11,/upload/iblock/450/vubwb3dvd5b3i15p8j72sowu6p8y0lja.pdf,СЧ,общий,,False
+arborist.su,пп 743,1615,318,47,1,arborist.su,0,not_planned,,,19,/upload/iblock/eb9/daeie737cguvdltheb0dzsunz7aeco2q.pdf,СЧ,общий,,False
+arborist.su,москва портал поставщиков,14631,299,4,1,arborist.su,0,not_planned,,,32,/news/my-zaregistrirovany-na-portale-postavshchikov,СЧ,локальный,,False
+arborist.su,лесной кодекс российской федерации,4301,294,294,1,arborist.su,0,not_planned,,,22,/upload/iblock/1dd/6g95igokekhq6o42c982lxnnslwk5m6l.pdf,СЧ,общий,,False
+arborist.su,изумрудная ясеневая златка,1106,271,23,1,arborist.su,0,not_planned,,,27,/articles/nashi-stati/prichina-usykhaniya-yaseney-zlatka-yasenevaya-izumrudnaya,СЧ,общий,,False
+arborist.su,лесной кодекс рф последняя редакция,1027,261,261,1,arborist.su,0,not_planned,,,13,/upload/iblock/1dd/6g95igokekhq6o42c982lxnnslwk5m6l.pdf,СЧ,общий,,False
+arborist.su,743 пп,1202,261,222,1,arborist.su,0,not_planned,,,13,/upload/iblock/eb9/daeie737cguvdltheb0dzsunz7aeco2q.pdf,СЧ,общий,,False
+arborist.su,кодекс об административных правонарушениях города москвы,1221,200,17,1,arborist.su,1,not_planned,,,9,/upload/iblock/2c6/pw7lwmrl3bs9w2g1asrzji427gniu53s.pdf,СЧ,общий,,False
+arborist.su,кодекс города москвы об административных правонарушениях,1221,200,182,1,arborist.su,1,not_planned,,,7,/upload/iblock/2c6/pw7lwmrl3bs9w2g1asrzji427gniu53s.pdf,СЧ,общий,,False
+arborist.su,департамент природопользования и охраны окружающей среды,4311,198,182,1,arborist.su,0,not_planned,,,37,/upload/iblock/450/vubwb3dvd5b3i15p8j72sowu6p8y0lja.pdf,СЧ,общий,,False
+arborist.su,департамент охраны окружающей среды и природопользования,4311,198,16,1,arborist.su,0,not_planned,,,37,/upload/iblock/450/vubwb3dvd5b3i15p8j72sowu6p8y0lja.pdf,СЧ,общий,,False
+arborist.su,омела растение паразит,836,189,147,1,arborist.su,0,not_planned,,,29,/articles/nashi-stati/omela-na-derevyakh-chto-eto-takoe-i-kak-s-ney-borotsya,СЧ,общий,,False
+arboristik.ru,растение амела,408,268,6,1,arboristik.ru,0,not_planned,,,43,/omela-na-derevyah-i-ee-posledstviya,СЧ,общий,,False
+arboristik.ru,дендрология это,649,267,267,1,arboristik.ru,0,not_planned,,,34,/nauka-dendrologiya,СЧ,общий,,False
+arboristik.ru,покос травы фото,848,230,144,1,arboristik.ru,0,not_planned,,,35,/pokos-travy,СЧ,общий,,False
+arboristik.ru,т2х2 обрезки,340,228,71,1,arboristik.ru,0,not_planned,,,38,/tsenyi,СЧ,коммерческий,,False
+arboristik.ru,прореживание,7371,142,142,1,arboristik.ru,0,not_planned,,,18,/prorezhivanie-lesnogo-massiva,СЧ,общий,,False
+arboristik.ru,покос травы цена,4874,137,135,1,arboristik.ru,0,not_planned,,,33,/pokos-travy,СЧ,коммерческий,,False
+arboristik.ru,дендрология это наука изучающая,177,136,136,1,arboristik.ru,0,not_planned,,,34,/nauka-dendrologiya,СЧ,общий,,False
+arboristik.ru,фитопатология,2480,131,131,1,arboristik.ru,0,not_planned,,,41,/chto-takoe-fitopatologiya,СЧ,общий,,False
+arboristik.ru,дендрология что изучает,686,127,31,1,arboristik.ru,0,not_planned,,,28,/nauka-dendrologiya,СЧ,общий,,False
+arboristik.ru,спил деревьев в ростове на дону,167,111,111,1,arboristik.ru,0,not_planned,,,27,/tsenyi,СЧ,коммерческий,arboristika,False
+arboristik.ru,покос травы цены,4874,108,108,1,arboristik.ru,0,not_planned,,,39,/pokos-travy,СЧ,коммерческий,,False
+arboristik.ru,сколько стоит выровнять участок,836,80,77,1,arboristik.ru,0,planned,информационный,localFALLBACK-WITHFREQ-20260425T151607Z:51,14,/vyravnivanie-uchastka,НЧ,коммерческий,,False
+arboristik.ru,фитопатология это,198,71,71,1,arboristik.ru,0,not_planned,,,37,/chto-takoe-fitopatologiya,НЧ,общий,,False
+arboristik.ru,выкорчевка,1129,71,71,1,arboristik.ru,1,not_planned,,,6,/korchevanie-pney,НЧ,общий,arboristika,False
+arboristik.ru,наука о деревьях,486,54,54,1,arboristik.ru,0,not_planned,,,28,/nauka-dendrologiya,НЧ,общий,arboristika,False
+arboristik.ru,покос травы цена за сотку московская область,78,52,52,1,arboristik.ru,0,planned,коммерческий+локальный,localFALLBACK-WITHFREQ-20260425T151607Z:23,37,/pokos-travy,НЧ,коммерческий+локальный,,False
+arboristik.ru,корчеватель пней ручной,92,48,43,1,arboristik.ru,0,not_planned,,,18,/korchevanie-pney,НЧ,коммерческий,arboristika,False
+arboristik.ru,дендрология это наука,236,48,48,1,arboristik.ru,0,not_planned,,,21,/nauka-dendrologiya,НЧ,общий,,False
+arboristik.ru,прореживание это,519,47,47,1,arboristik.ru,0,not_planned,,,38,/prorezhivanie-lesnogo-massiva,НЧ,общий,,False
+arboristik.ru,земля для выравнивания участка,616,43,42,1,arboristik.ru,0,not_planned,,,33,/vyravnivanie-uchastka,НЧ,общий,,False
+arboristik.ru,как пересадить березу,255,43,41,1,arboristik.ru,0,not_planned,,,21,/kak-uhazhivat-za-berezoy,НЧ,информационный,,False
+arboristik.ru,разравнять участок,313,42,42,1,arboristik.ru,1,not_planned,,,9,/vyravnivanie-uchastka,НЧ,общий,,False
+arboristik.ru,спилится дуб,92,42,2,1,arboristik.ru,1,not_planned,,,9,/tsenyi,НЧ,коммерческий,arboristika,False
+arboristik.ru,машина для выравнивания земли,320,39,39,1,arboristik.ru,1,not_planned,,,5,/vyravnivanie-uchastka,НЧ,общий,,False
+arboristik.ru,покосить траву на участке цена,157,38,37,1,arboristik.ru,0,not_planned,,,39,/pokos-travy,НЧ,коммерческий,,False
+arboristik.ru,сколько стоит куб березы,524,37,28,1,arboristik.ru,0,not_planned,,,22,/tsenyi,НЧ,коммерческий,,False
+arboristik.ru,гидроклин для валки леса,71,36,36,1,arboristik.ru,0,not_planned,,,36,/instrumentyi-dlya-valki-derevev,НЧ,общий,,False
+arboristik.ru,вывоз мусора троицк,144,36,36,1,arboristik.ru,0,not_planned,,,21,/uborka-dachnyh-uchastkov,НЧ,коммерческий,vyvoz-musora,False
+arboristik.ru,разровнять участок трактором цена,96,36,36,1,arboristik.ru,1,not_planned,,,8,/vyravnivanie-uchastka,НЧ,коммерческий,,False
+arboristik.ru,снт просвещенец,208,35,34,1,arboristik.ru,0,not_planned,,,43,/raschistka-uchastka-ot-derevev,НЧ,общий,,False
+cleaning-moscow.ru,цены клининг,20820,7757,5,1,cleaning-moscow.ru,0,not_planned,,,11,/price,СЧ,коммерческий,,False
+cleaning-moscow.ru,уборка,1878148,5140,5140,1,cleaning-moscow.ru,0,not_planned,,,11,/uborka-kvartir,ВЧ,общий,,False
+cleaning-moscow.ru,химчистка дивана,21134,4531,4530,1,cleaning-moscow.ru,0,not_planned,,,25,/himchistka/divanov,ВЧ,общий,,False
+cleaning-moscow.ru,уборка клининг,17325,3232,69,1,cleaning-moscow.ru,0,not_planned,,,31,/,СЧ,общий,,False
+cleaning-moscow.ru,почистить утюг как,22110,2168,0,1,cleaning-moscow.ru,0,not_planned,,,41,/5-sovetov-kak-operativno-pochistit-utyug,ВЧ,коммерческий,,False
+cleaning-moscow.ru,как почистить утюг от пригара на подошве в домашних условиях,1835,1390,1360,1,cleaning-moscow.ru,0,not_planned,,,40,/5-sovetov-kak-operativno-pochistit-utyug,ВЧ,коммерческий,,False
+cleaning-moscow.ru,мытье окон,143859,1231,1230,1,cleaning-moscow.ru,0,not_planned,,,12,/mojka-okon-i-lodzhij,ВЧ,общий,,False
+cleaning-moscow.ru,как почистить утюг от нагара,4293,1130,1116,1,cleaning-moscow.ru,0,not_planned,,,44,/5-sovetov-kak-operativno-pochistit-utyug,ВЧ,коммерческий,,False
+cleaning-moscow.ru,как утюг почистить от нагара,4277,1113,4,1,cleaning-moscow.ru,0,not_planned,,,37,/5-sovetov-kak-operativno-pochistit-utyug,СЧ,коммерческий,,False
+cleaning-moscow.ru,это клининг,4333,974,1,1,cleaning-moscow.ru,0,not_planned,,,20,/chto-takoe-klining,СЧ,общий,,False
+cleaning-moscow.ru,чем почистить утюг от нагара на подошве в домашних условиях,1396,879,728,1,cleaning-moscow.ru,0,not_planned,,,41,/5-sovetov-kak-operativno-pochistit-utyug,СЧ,коммерческий,,False
+cleaning-moscow.ru,озонирование,19342,776,776,1,cleaning-moscow.ru,1,not_planned,,,8,/uborka-pomeshhenij/ozonirovanie,СЧ,общий,,False
+cleaning-moscow.ru,как почистить утюг от пригара,2684,769,769,1,cleaning-moscow.ru,0,not_planned,,,31,/5-sovetov-kak-operativno-pochistit-utyug,СЧ,коммерческий,,False
+cleaning-moscow.ru,клининг что такое,2001,680,33,1,cleaning-moscow.ru,0,not_planned,,,22,/chto-takoe-klining,СЧ,информационный,,False
+cleaning-moscow.ru,что такое клининг,2021,614,575,1,cleaning-moscow.ru,0,not_planned,,,24,/chto-takoe-klining,СЧ,информационный,,False
+cleaning-moscow.ru,как почистить утюг от пригара на подошве в домашних,2435,579,579,1,cleaning-moscow.ru,0,not_planned,,,48,/5-sovetov-kak-operativno-pochistit-utyug,СЧ,коммерческий,,False
+cleaning-moscow.ru,уборка после ремонта,5432,552,543,1,cleaning-moscow.ru,1,not_planned,,,10,/uborka-posle-remonta,СЧ,общий,,False
+cleaning-moscow.ru,средство от плесени на стенах,4737,546,367,1,cleaning-moscow.ru,0,not_planned,,,26,/4-dejstvennyh-sposoba-kak-otmyt-plesen,СЧ,общий,,False
+cleaning-moscow.ru,чем очистить утюг,5259,531,526,1,cleaning-moscow.ru,0,not_planned,,,41,/5-sovetov-kak-operativno-pochistit-utyug,СЧ,информационный,,False
+cleaning-moscow.ru,чем утюг очистить,5259,531,3,1,cleaning-moscow.ru,0,not_planned,,,38,/5-sovetov-kak-operativno-pochistit-utyug,СЧ,информационный,,False
+cleaning-moscow.ru,уборка территории проводится,5316,510,510,1,cleaning-moscow.ru,0,not_planned,,,25,/uborka-territorii,СЧ,общий,,False
+cleaning-moscow.ru,ру клин,6672,504,39,1,cleaning-moscow.ru,0,not_planned,,,36,/,СЧ,локальный,,False
+cleaning-moscow.ru,клинер это,2258,498,498,1,cleaning-moscow.ru,0,not_planned,,,35,/kto-takoi-kliner,СЧ,общий,,False
+cleaning-moscow.ru,пароочиститель что им можно делать,555,473,472,1,cleaning-moscow.ru,0,not_planned,,,32,/pravda-pro-uborku-paroochistitelem,СЧ,общий,,False
+cleaning-moscow.ru,шлифовка бетона,6257,464,464,1,cleaning-moscow.ru,0,not_planned,,,25,/shlifovka-pola/polirovka-betona,СЧ,общий,,False
+cleaning-moscow.ru,клининг что это простыми словами такое,510,454,8,1,cleaning-moscow.ru,0,not_planned,,,22,/chto-takoe-klining,СЧ,общий,,False
+cleaning-moscow.ru,клининг что это такое простыми словами,510,454,381,1,cleaning-moscow.ru,0,not_planned,,,20,/chto-takoe-klining,СЧ,общий,,False
+cleaning-moscow.ru,клининг это простыми словами что такое,510,454,28,1,cleaning-moscow.ru,0,not_planned,,,24,/chto-takoe-klining,СЧ,информационный,,False
+cleaning-moscow.ru,клининг это что такое простыми словами,510,454,23,1,cleaning-moscow.ru,0,not_planned,,,18,/chto-takoe-klining,СЧ,информационный,,False
+cleaning-moscow.ru,химчистка дивана на дому,4838,447,447,1,cleaning-moscow.ru,0,not_planned,,,34,/himchistka/divanov,СЧ,общий,,False
+demontazhmsk.ru,демонтаж натяжного потолка,3240,343,329,1,demontazhmsk.ru,0,not_planned,,,41,/services/demontazh-natyazhnogo-potolka,СЧ,общий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж потолка натяжного,3240,343,13,1,demontazhmsk.ru,0,not_planned,,,25,/services/demontazh-natyazhnogo-potolka,СЧ,общий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж плитки,11448,277,277,1,demontazhmsk.ru,0,not_planned,,,40,/services/demontazh-plitki-i-keramogranita,СЧ,общий,demontazh-b2c,False
+demontazhmsk.ru,натяжной потолок снять,23789,273,1,1,demontazhmsk.ru,0,not_planned,,,37,/services/demontazh-natyazhnogo-potolka,СЧ,общий,,False
+demontazhmsk.ru,демонтаж стяжки пола цена за м2,274,181,181,1,demontazhmsk.ru,0,not_planned,,,25,/services/demontazh-czementnoj-styazhki,СЧ,коммерческий,demontazh-b2c,False
+demontazhmsk.ru,цена демонтаж плитки за м2,992,175,4,1,demontazhmsk.ru,0,not_planned,,,24,/services/demontazh-plitki-i-keramogranita,СЧ,коммерческий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж унитаза,2827,142,142,1,demontazhmsk.ru,0,not_planned,,,30,/services/demontazh-unitazov-i-bide,СЧ,общий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж перегородок,5768,120,120,1,demontazhmsk.ru,0,not_planned,,,36,/services/demontazh-peregorodok,СЧ,общий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж балкона,2357,112,112,1,demontazhmsk.ru,0,not_planned,,,14,/services/demontazh-balkonov-i-lodzhij,СЧ,общий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж пола,10949,102,102,1,demontazhmsk.ru,0,not_planned,,,27,/services/demontazh-derevyannogo-pola,СЧ,общий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж кирпичной кладки,1502,93,93,1,demontazhmsk.ru,0,not_planned,,,36,/services/demontazh-kirpichnyh-sten,НЧ,общий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж квартиры под ключ,161,91,91,1,demontazhmsk.ru,0,planned,общий,localFALLBACK-WITHFREQ-20260425T151607Z:9,21,/services/demontazh-kvartiry,НЧ,общий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж плитки в ванной цена за м2,148,91,91,1,demontazhmsk.ru,0,not_planned,,,24,/services/demontazh-plitki-i-keramogranita,НЧ,коммерческий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж пола цена за 1м2 деревянного,178,85,7,1,demontazhmsk.ru,0,not_planned,,,13,/services/demontazh-derevyannogo-pola,НЧ,коммерческий,arboristika;demontazh-b2c,True
+demontazhmsk.ru,демонтаж линолеума,1511,84,84,1,demontazhmsk.ru,0,not_planned,,,22,/services/demontazh-linoleuma-i-kovrolina,НЧ,общий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж помещений,1433,82,82,1,demontazhmsk.ru,0,not_planned,,,29,/services/demontazh-pomeshhenij,НЧ,общий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж линолеума расценка в смете,183,82,81,1,demontazhmsk.ru,0,not_planned,,,12,/services/demontazh-linoleuma-i-kovrolina,НЧ,коммерческий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж потолка,9329,78,78,1,demontazhmsk.ru,0,not_planned,,,23,/services/demontazh-potolka-iz-gipsokartona,НЧ,общий,demontazh-b2c,False
+demontazhmsk.ru,демонтажный,21486,73,73,1,demontazhmsk.ru,0,not_planned,,,34,/,НЧ,общий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж квартир,6933,70,70,1,demontazhmsk.ru,0,not_planned,,,27,/services/demontazh-kvartiry,НЧ,общий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж квартиры цена,1187,70,67,1,demontazhmsk.ru,0,not_planned,,,22,/services/demontazh-kvartiry,НЧ,коммерческий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж кухни,1661,61,61,1,demontazhmsk.ru,0,not_planned,,,20,/services/kuhni,НЧ,общий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж штукатурки цена,965,61,58,1,demontazhmsk.ru,0,not_planned,,,31,/services/demontazh-shtukaturki,НЧ,коммерческий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж полов деревянных цена за м2 за работу,75,61,42,1,demontazhmsk.ru,0,not_planned,,,11,/services/demontazh-derevyannogo-pola,НЧ,коммерческий,arboristika;demontazh-b2c,True
+demontazhmsk.ru,демонтаж деревянного пола,2158,60,55,1,demontazhmsk.ru,0,not_planned,,,29,/services/demontazh-derevyannogo-pola,НЧ,общий,arboristika;demontazh-b2c,True
+demontazhmsk.ru,демонтаж потолка натяжного цена,337,60,10,1,demontazhmsk.ru,0,not_planned,,,22,/services/demontazh-natyazhnogo-potolka,НЧ,коммерческий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж натяжного потолка цена,337,60,48,1,demontazhmsk.ru,0,not_planned,,,17,/services/demontazh-natyazhnogo-potolka,НЧ,коммерческий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж пола деревянного,2158,60,4,1,demontazhmsk.ru,0,not_planned,,,12,/services/demontazh-derevyannogo-pola,НЧ,общий,arboristika;demontazh-b2c,True
+demontazhmsk.ru,демонтаж старой квартиры,459,58,58,1,demontazhmsk.ru,0,not_planned,,,29,/services/demontazh-kvartiry,НЧ,общий,demontazh-b2c,False
+demontazhmsk.ru,демонтаж кирпичной стены цена м2,134,57,57,1,demontazhmsk.ru,0,not_planned,,,21,/services/demontazh-kirpichnyh-sten,НЧ,коммерческий,demontazh-b2c,False
+demonti.ru,демонтаж домов,7328,202,202,1,demonti.ru,0,planned,общий,localFALLBACK-WITHFREQ-20260425T151607Z:14,17,/razobrat-dom,СЧ,общий,demontazh-b2c,False
+demonti.ru,снести,297335,107,107,1,demonti.ru,0,not_planned,,,34,/,СЧ,общий,,False
+demonti.ru,демонтажник,3969,97,97,1,demonti.ru,0,not_planned,,,41,/,НЧ,общий,demontazh-b2c,False
+demonti.ru,снос зданий,18591,96,96,1,demonti.ru,0,not_planned,,,26,/demontazh-zdanij,НЧ,коммерческий,demontazh-b2c,False
+demonti.ru,старая баня,24029,63,44,1,demonti.ru,0,not_planned,,,32,/demontazh-bani,НЧ,общий,,False
+demonti.ru,купить дом под разбор в московской области,67,63,63,1,demonti.ru,0,not_planned,,,37,/razobrat-dom,НЧ,коммерческий+локальный,,False
+demonti.ru,снесли,297370,62,62,1,demonti.ru,0,not_planned,,,38,/,НЧ,общий,,False
+demonti.ru,демонтаж сколько стоит,10372,60,6,1,demonti.ru,0,not_planned,,,22,/demontazh-zdanij,НЧ,коммерческий,demontazh-b2c,False
+demonti.ru,разбор старых домов и вывоз мусора,122,48,48,1,demonti.ru,0,not_planned,,,22,/razobrat-dom,НЧ,коммерческий,vyvoz-musora,False
+demonti.ru,как удалить дом,19853,45,45,1,demonti.ru,0,not_planned,,,22,/,НЧ,коммерческий,,False
+demonti.ru,демонтаж металлического ограждения расценка в смете,127,40,35,1,demonti.ru,0,not_planned,,,30,/demontazh-ograzhdeniya,НЧ,коммерческий,demontazh-b2c,False
+demonti.ru,демонтаж ограждения металлического расценка в смете,127,40,3,1,demonti.ru,0,not_planned,,,26,/demontazh-ograzhdeniya,НЧ,коммерческий,demontazh-b2c,False
+demonti.ru,демонтаж ограждения расценка в смете,449,35,32,1,demonti.ru,0,not_planned,,,20,/demontazh-ograzhdeniya,НЧ,коммерческий,demontazh-b2c,False
+demonti.ru,сломанный дом,15165,34,32,1,demonti.ru,0,not_planned,,,24,/,НЧ,общий,,False
+demonti.ru,сломанный сарай,740,32,25,1,demonti.ru,0,not_planned,,,11,/demontazh-saraya-1,НЧ,общий,,False
+demonti.ru,демонтируют,55331,30,30,1,demonti.ru,0,not_planned,,,41,/,НЧ,коммерческий,demontazh-b2c,False
+demonti.ru,галилео снос дома,31,28,26,1,demonti.ru,0,not_planned,,,31,/,НЧ,коммерческий,demontazh-b2c,False
+demonti.ru,дома в можайске,4993,28,28,1,demonti.ru,0,not_planned,,,22,/demontazh-doma-v-mozhajskom-rajone,НЧ,общий,,False
+demonti.ru,дом после пожара,7471,25,25,1,demonti.ru,0,not_planned,,,37,/demontazh-doma-posle-pozhara,НЧ,общий,,False
+demonti.ru,сколько стоит снести старый дом,266,25,24,1,demonti.ru,0,not_planned,,,23,/razobrat-dom,НЧ,коммерческий,,False
+demonti.ru,авито дом на разбор,198,24,8,1,demonti.ru,0,not_planned,,,12,/razobrat-dom,НЧ,общий,,False
+demonti.ru,сколько стоит сломать дом,308,19,19,1,demonti.ru,0,not_planned,,,20,/razobrat-dom,НЧ,коммерческий,,False
+demonti.ru,дом в ступино,3276,17,17,1,demonti.ru,0,not_planned,,,24,/demontazh-doma-v-stupinskom-rajone,НЧ,общий,,False
+demonti.ru,можно ли разобрать дом из бруса и собрать в другом месте,16,16,12,1,demonti.ru,0,not_planned,,,43,/demontazh-doma-iz-brusa,НЧ,коммерческий,,False
+demonti.ru,слом дома и вывоз мусора цена,20,16,16,1,demonti.ru,0,not_planned,,,15,/razobrat-dom,НЧ,коммерческий,vyvoz-musora,False
+demonti.ru,как убрать фундамент с участка,62,16,16,1,demonti.ru,0,not_planned,,,23,/blog/kak-ubrat-lentochnyj-fundament,НЧ,информационный,,False
+demonti.ru,демонтаж перил,310,16,16,1,demonti.ru,0,not_planned,,,17,/demontazh-ograzhdeniya,НЧ,общий,demontazh-b2c,False
+demonti.ru,дом под разбор купить московская область,34,15,3,1,demonti.ru,0,not_planned,,,37,/razobrat-dom,НЧ,коммерческий+локальный,,False
+demonti.ru,реноватор биоцид 2 цена,17,15,15,1,demonti.ru,0,not_planned,,,26,/,НЧ,коммерческий,,False
+demonti.ru,снос старых домов,2740,15,15,1,demonti.ru,0,not_planned,,,19,/,НЧ,коммерческий,demontazh-b2c,False
+drovosek-mo.ru,садовник на дом,19399,18411,18411,1,drovosek-mo.ru,1,not_planned,,,9,/uslugi-sadovnika,ВЧ,общий,,False
+drovosek-mo.ru,колка дров цена за 1 куб,180,108,108,1,drovosek-mo.ru,0,not_planned,,,12,/raschistka-uchastka-ot-porosli-i-derevev/raspilka-derevev-na-drova-tsena-stoimost,СЧ,коммерческий,,False
+drovosek-mo.ru,обрезка ели,2976,108,108,1,drovosek-mo.ru,0,not_planned,,,29,/articles/obrezka-i-formirovanie-krony-eli,СЧ,коммерческий,,False
+drovosek-mo.ru,подрезка яблони,2033,73,73,1,drovosek-mo.ru,0,not_planned,,,41,/uslugi-sadovnika/obrezka-yablon-i-plodovykh-derevev,НЧ,общий,,False
+drovosek-mo.ru,как обрезать ель,1375,61,59,1,drovosek-mo.ru,0,not_planned,,,26,/articles/obrezka-i-formirovanie-krony-eli,НЧ,коммерческий,,False
+drovosek-mo.ru,сколько стоит расколоть 1 куб дров вручную цена,70,59,59,1,drovosek-mo.ru,1,not_planned,,,9,/raschistka-uchastka-ot-porosli-i-derevev/raspilka-derevev-na-drova-tsena-stoimost,НЧ,коммерческий,,False
+drovosek-mo.ru,помощь на даче услуги,156,59,59,1,drovosek-mo.ru,0,not_planned,,,12,/uslugi-sadovnika,НЧ,коммерческий,,False
+drovosek-mo.ru,когда обрезать ель,1112,58,57,1,drovosek-mo.ru,0,not_planned,,,37,/articles/obrezka-i-formirovanie-krony-eli,НЧ,коммерческий,,False
+drovosek-mo.ru,как правильно обрезать сосну,439,56,53,1,drovosek-mo.ru,0,not_planned,,,17,/articles/obrezka-sosny-obyknovennoj,НЧ,коммерческий,,False
+drovosek-mo.ru,как сформировать тую,458,54,54,1,drovosek-mo.ru,0,not_planned,,,42,/uslugi-sadovnika/obrezka-tuj-i-zhivoj-izgorodi,НЧ,информационный,,False
+drovosek-mo.ru,сколько стоит расколоть 1 куб дров,235,53,49,1,drovosek-mo.ru,0,not_planned,,,11,/raschistka-uchastka-ot-porosli-i-derevev/raspilka-derevev-na-drova-tsena-stoimost,НЧ,коммерческий,,False
+drovosek-mo.ru,услуги садовника,470,53,53,1,drovosek-mo.ru,0,not_planned,,,16,/uslugi-sadovnika,НЧ,коммерческий,,False
+drovosek-mo.ru,обрезка елки для пушистости,56,45,45,1,drovosek-mo.ru,0,not_planned,,,29,/articles/obrezka-i-formirovanie-krony-eli,НЧ,коммерческий,,False
+drovosek-mo.ru,колка дров цена,510,44,44,1,drovosek-mo.ru,1,not_planned,,,9,/raschistka-uchastka-ot-porosli-i-derevev/raspilka-derevev-na-drova-tsena-stoimost,НЧ,коммерческий,,False
+drovosek-mo.ru,что такое дровосек,271,43,39,1,drovosek-mo.ru,0,not_planned,,,40,/,НЧ,информационный,,False
+drovosek-mo.ru,сколько стоит колка дров вручную за 1 куб,55,41,21,1,drovosek-mo.ru,0,not_planned,,,21,/raschistka-uchastka-ot-porosli-i-derevev/raspilka-derevev-na-drova-tsena-stoimost,НЧ,коммерческий,,False
+drovosek-mo.ru,сколько стоит колка дров за 1 куб вручную,55,41,19,1,drovosek-mo.ru,0,not_planned,,,11,/raschistka-uchastka-ot-porosli-i-derevev/raspilka-derevev-na-drova-tsena-stoimost,НЧ,коммерческий,,False
+drovosek-mo.ru,дробилка для пней,153,37,37,1,drovosek-mo.ru,0,not_planned,,,35,/udalenie-pnej/droblenie-izmelchenie-pnej,НЧ,общий,arboristika,False
+drovosek-mo.ru,пилим дрова,18810,37,36,1,drovosek-mo.ru,0,not_planned,,,23,/raschistka-uchastka-ot-porosli-i-derevev/raspilka-derevev-na-drova-tsena-stoimost,НЧ,общий,,False
+drovosek-mo.ru,сколько стоит колка дров,247,35,28,1,drovosek-mo.ru,0,not_planned,,,13,/raschistka-uchastka-ot-porosli-i-derevev/raspilka-derevev-na-drova-tsena-stoimost,НЧ,коммерческий,,False
+drovosek-mo.ru,тсц дровосек,76,35,35,1,drovosek-mo.ru,0,not_planned,,,44,/,НЧ,общий,,False
+drovosek-mo.ru,береза на дрова купить кругляк,313,35,10,1,drovosek-mo.ru,0,not_planned,,,29,/raschistka-uchastka-ot-porosli-i-derevev/raspilka-derevev-na-drova-tsena-stoimost,НЧ,коммерческий,,False
+drovosek-mo.ru,распиловка дров,2036,35,35,1,drovosek-mo.ru,1,not_planned,,,10,/raschistka-uchastka-ot-porosli-i-derevev/raspilka-derevev-na-drova-tsena-stoimost,НЧ,общий,,False
+drovosek-mo.ru,сколько стоит распилить 1 куб дров бензопилой,76,32,32,1,drovosek-mo.ru,1,not_planned,,,4,/raschistka-uchastka-ot-porosli-i-derevev/raspilka-derevev-na-drova-tsena-stoimost,НЧ,коммерческий,,False
+drovosek-mo.ru,фото спил деревьев,765,31,9,1,drovosek-mo.ru,0,not_planned,,,32,/photo/fotografii-raboty-s-derevyami,НЧ,коммерческий,arboristika,False
+drovosek-mo.ru,кто ухаживает за садом,176,31,23,1,drovosek-mo.ru,0,not_planned,,,45,/uslugi-sadovnika,НЧ,общий,,False
+drovosek-mo.ru,распиловка дров цена за куб бензопилой,82,30,5,1,drovosek-mo.ru,1,not_planned,,,8,/raschistka-uchastka-ot-porosli-i-derevev/raspilka-derevev-na-drova-tsena-stoimost,НЧ,коммерческий,,False
+drovosek-mo.ru,когда обрезать елки,644,30,28,1,drovosek-mo.ru,0,not_planned,,,36,/articles/obrezka-i-formirovanie-krony-eli,НЧ,коммерческий,,False
+drovosek-mo.ru,как подстричь ель обыкновенную,63,30,30,1,drovosek-mo.ru,0,not_planned,,,22,/articles/obrezka-i-formirovanie-krony-eli,НЧ,информационный,,False
+drovosek-mo.ru,распиловка дров бензопилой цена за куб,82,30,25,1,drovosek-mo.ru,1,not_planned,,,7,/raschistka-uchastka-ot-porosli-i-derevev/raspilka-derevev-na-drova-tsena-stoimost,НЧ,коммерческий,,False
+fasadrf.ru,герметизация,82391,850,850,1,fasadrf.ru,0,not_planned,,,21,/fasadnye-raboty/germetizacia-shvov,СЧ,общий,,False
+fasadrf.ru,монтаж сайдинга,18562,833,833,1,fasadrf.ru,0,not_planned,,,43,/montazh-fasada/saiding,СЧ,общий,,False
+fasadrf.ru,обшивка дома сайдингом,18881,793,772,1,fasadrf.ru,0,not_planned,,,38,/montazh-fasada/saiding,СЧ,общий,,False
+fasadrf.ru,сколько стоит дом обшить сайдингом,2604,526,9,1,fasadrf.ru,0,not_planned,,,44,/montazh-fasada/saiding,СЧ,коммерческий,,False
+fasadrf.ru,сколько стоит обшить сайдингом дом,2604,526,45,1,fasadrf.ru,0,not_planned,,,34,/montazh-fasada/saiding,СЧ,коммерческий,,False
+fasadrf.ru,остекление витражное,3427,462,3,1,fasadrf.ru,0,not_planned,,,30,/montazh-fasada/steklianyi-fasad/osteklenie/vitrazhnoe,СЧ,общий,,False
+fasadrf.ru,краспан,3208,446,446,1,fasadrf.ru,0,not_planned,,,11,/montazh-fasada/ventiliruemy-fasad/navesnoi-ventiliruemyi-fasad/proizvoditeli/kraspan,СЧ,общий,,False
+fasadrf.ru,утепление пенополиуретаном,7388,433,422,1,fasadrf.ru,0,not_planned,,,11,/fasadnye-raboty/uteplenie/penopoliuretan,СЧ,общий,,False
+fasadrf.ru,вентилируемый фасад для частного дома,631,276,264,1,fasadrf.ru,0,not_planned,,,15,/blog/ventiliruemye-fasady-dlya-chastnogo-doma-nadyezhnost-ekonomiya-i-arkhitektura-v-odnom-reshenii,СЧ,общий,,False
+fasadrf.ru,утепление фасада дома,7207,268,267,1,fasadrf.ru,0,not_planned,,,13,/fasadnye-raboty/uteplenie/penoplast,СЧ,общий,,False
+fasadrf.ru,межэтажный,20385,252,252,1,fasadrf.ru,0,not_planned,,,42,/blog/chto-takoe-mezhetazhka-,СЧ,общий,,False
+fasadrf.ru,краспан официальный сайт,381,251,251,1,fasadrf.ru,0,not_planned,,,34,/montazh-fasada/ventiliruemy-fasad/navesnoi-ventiliruemyi-fasad/proizvoditeli/kraspan,СЧ,общий,,False
+fasadrf.ru,обшить дом сайдингом цена,2610,224,188,1,fasadrf.ru,0,not_planned,,,19,/montazh-fasada/saiding,СЧ,коммерческий,,False
+fasadrf.ru,обрешетка для сайдинга,2135,198,198,1,fasadrf.ru,0,not_planned,,,35,/blog/nuzhna-li-obreshetka-dlya-fasada-pod-sayding,СЧ,общий,,False
+fasadrf.ru,олма,11504,194,194,1,fasadrf.ru,0,not_planned,,,44,/montazh-fasada/ventiliruemy-fasad/navesnoi-ventiliruemyi-fasad/proizvoditeli/olma,СЧ,общий,,False
+fasadrf.ru,шпаклевка фасадная,2427,190,91,1,fasadrf.ru,0,not_planned,,,39,/blog/fasadnaya-shpaklevka-i-s-chem-eye-edyat,СЧ,общий,,False
+fasadrf.ru,фасадная шпаклевка,2363,190,94,1,fasadrf.ru,0,not_planned,,,43,/blog/fasadnaya-shpaklevka-i-s-chem-eye-edyat,СЧ,общий,,False
+fasadrf.ru,сколько стоит подшить шторы,707,184,178,1,fasadrf.ru,0,not_planned,,,27,/,СЧ,коммерческий,,False
+fasadrf.ru,диат,1917,179,179,1,fasadrf.ru,0,not_planned,,,11,/montazh-fasada/ventiliruemy-fasad/navesnoi-ventiliruemyi-fasad/proizvoditeli/diat,СЧ,общий,,False
+fasadrf.ru,дом обшить сайдингом цена,1877,174,0,1,fasadrf.ru,0,not_planned,,,41,/montazh-fasada/saiding,СЧ,коммерческий,,False
+fasadrf.ru,стеклокомпозит,1283,167,167,1,fasadrf.ru,0,not_planned,,,26,/blog/steklokompozit-i-steklofibrobeton-negoryuchaya-oblitsovka-i-ideya-dlya-dizaynerov,СЧ,общий,,False
+fasadrf.ru,фасадные панели японские,646,165,7,1,fasadrf.ru,0,not_planned,,,14,/blog/oblitsovka-rodom-iz-yaponii-chem-khoroshi-samoochishchayushchiesya-fasadnye-paneli-ikh-vida-i-tonkos,СЧ,общий,,False
+fasadrf.ru,фасадные японские панели,646,165,7,1,fasadrf.ru,0,not_planned,,,23,/blog/oblitsovka-rodom-iz-yaponii-chem-khoroshi-samoochishchayushchiesya-fasadnye-paneli-ikh-vida-i-tonkos,СЧ,общий,,False
+fasadrf.ru,монтаж фиброцементного сайдинга,996,158,156,1,fasadrf.ru,0,not_planned,,,34,/montazh-fasada/saiding/fibrocementnyi,СЧ,общий,,False
+fasadrf.ru,алюком,3054,153,153,1,fasadrf.ru,1,not_planned,,,5,/montazh-fasada/ventiliruemy-fasad/navesnoi-ventiliruemyi-fasad/proizvoditeli/alucom,СЧ,общий,,False
+fasadrf.ru,японские фасадные панели,617,147,127,1,fasadrf.ru,0,not_planned,,,27,/blog/oblitsovka-rodom-iz-yaponii-chem-khoroshi-samoochishchayushchiesya-fasadnye-paneli-ikh-vida-i-tonkos,СЧ,общий,,False
+fasadrf.ru,покрасить дом рф,169,144,144,1,fasadrf.ru,0,not_planned,,,18,/fasadnye-raboty/pokraska/derevo,СЧ,общий,,False
+fasadrf.ru,обрешетка под фасадные панели,1118,142,142,1,fasadrf.ru,0,not_planned,,,40,/blog/nuzhna-li-obreshetka-dlya-fasada-pod-sayding,СЧ,общий,,False
+fasadrf.ru,ппу утепление цена,1079,138,102,1,fasadrf.ru,0,not_planned,,,20,/fasadnye-raboty/uteplenie/penopoliuretan,СЧ,коммерческий,,False
+fasadrf.ru,отделка камнем фасада,2599,127,3,1,fasadrf.ru,0,not_planned,,,22,/montazh-fasada/ventiliruemy-fasad/iskustvennyi-kamen,СЧ,общий,,False
+forest-service.ru,расчистка,46260,349,349,1,forest-service.ru,0,not_planned,,,43,/,СЧ,общий,,False
+forest-service.ru,лессервис,714,98,98,1,forest-service.ru,0,not_planned,,,42,/,НЧ,общий,,False
+forest-service.ru,сервис лес,1510,81,28,1,forest-service.ru,0,not_planned,,,20,/,НЧ,общий,,False
+forest-service.ru,ооо лессервис,238,57,54,1,forest-service.ru,0,not_planned,,,41,/,НЧ,общий,,False
+forest-service.ru,лес сервис ооо,207,46,1,1,forest-service.ru,0,not_planned,,,18,/,НЧ,общий,,False
+forest-service.ru,ооо лес сервис,191,38,23,1,forest-service.ru,0,not_planned,,,18,/,НЧ,общий,,False
+forest-service.ru,форест лес,798,34,24,1,forest-service.ru,0,not_planned,,,33,/,НЧ,общий,,False
+forest-service.ru,срезка березовая,183,11,4,1,forest-service.ru,0,not_planned,,,31,/,НЧ,общий,,False
+forest-service.ru,форест москва,1063,11,11,1,forest-service.ru,0,not_planned,,,41,/,НЧ,локальный,,False
+forest-service.ru,форс сервис,97,9,9,1,forest-service.ru,0,not_planned,,,41,/,НЧ,общий,,False
+forest-service.ru,сейсас,944,7,7,1,forest-service.ru,0,not_planned,,,37,/,НЧ,общий,,False
+forest-service.ru,лес строй сервис,10,5,5,1,forest-service.ru,0,not_planned,,,37,/,НЧ,общий,,False
+forest-service.ru,forest service,466,3,3,1,forest-service.ru,1,not_planned,,,1,/,НЧ,общий,,False
+forest-service.ru,услуги по мульчированию,12,3,3,1,forest-service.ru,0,not_planned,,,14,/,НЧ,коммерческий,,False
+forest-service.ru,форест строй,681,3,3,1,forest-service.ru,0,not_planned,,,36,/,НЧ,общий,,False
+forest-service.ru,форест сокол,63,3,2,1,forest-service.ru,0,not_planned,,,38,/,НЧ,общий,,False
+forest-service.ru,услуги лесопилки,11,2,2,1,forest-service.ru,0,not_planned,,,39,/,НЧ,коммерческий,,False
+forest-service.ru,очистка территории от деревьев и кустарников,48,1,1,1,forest-service.ru,0,not_planned,,,20,/,НЧ,общий,arboristika,False
+forest-service.ru,спил деревьев в рязани и области цена за работу,1,1,1,1,forest-service.ru,0,not_planned,,,27,/price,НЧ,коммерческий,arboristika,False
+forest-service.ru,расчистка дачного участка от кустарников и мелколесья,1,1,1,1,forest-service.ru,0,not_planned,,,41,/,НЧ,общий,,False
+forest-service.ru,удалить дерево на участке цена,4,1,1,1,forest-service.ru,1,not_planned,,,9,/price,НЧ,коммерческий,arboristika,False
+forest-service.ru,спиливание деревьев расценка в смете,4,1,1,1,forest-service.ru,0,not_planned,,,28,/price,НЧ,коммерческий,arboristika,False
+formula-v.ru,ооо формула,8924,309,288,1,formula-v.ru,0,not_planned,,,39,/,СЧ,общий,,False
+formula-v.ru,монтаж демонтаж,38918,222,106,1,formula-v.ru,1,not_planned,,,7,/uslugi/montazhnye-raboty,СЧ,общий,demontazh-b2c,False
+formula-v.ru,демонтаж монтаж,32798,202,100,1,formula-v.ru,0,not_planned,,,11,/uslugi/montazhnye-raboty,СЧ,общий,demontazh-b2c,False
+formula-v.ru,монтаж и демонтаж это,642,128,92,1,formula-v.ru,0,not_planned,,,39,/uslugi/montazhnye-raboty,СЧ,общий,demontazh-b2c,False
+formula-v.ru,монтаж и демонтаж,22423,121,67,1,formula-v.ru,0,not_planned,,,13,/uslugi/montazhnye-raboty,СЧ,общий,demontazh-b2c,False
+formula-v.ru,демонтаж и монтаж,18464,99,41,1,formula-v.ru,0,not_planned,,,16,/uslugi/montazhnye-raboty,НЧ,общий,demontazh-b2c,False
+formula-v.ru,при какой температуре можно красить металл на улице,229,95,76,1,formula-v.ru,0,not_planned,,,18,/uslugi/pokraska-metallokonstruktsij/pmz,НЧ,информационный,,False
+formula-v.ru,монтажники высотники,3618,92,89,1,formula-v.ru,0,not_planned,,,19,/uslugi/montazhnye-raboty,НЧ,общий,,False
+formula-v.ru,подсветка фасада дома снаружи,188,90,53,1,formula-v.ru,0,not_planned,,,36,/uslugi/montazhnye-raboty/dekorativnoe-oformlenie-fasadov/podsvetka-fasada-zagorodnogo-doma,НЧ,общий,,False
+formula-v.ru,герметизация швов расценка в смете,490,85,81,1,formula-v.ru,1,not_planned,,,3,/smety/na-germetizatsiyu-mezhpanelnykh-shvov,НЧ,коммерческий,,False
+formula-v.ru,заделка отверстий монтажной пеной расценка в смете,99,82,8,1,formula-v.ru,0,not_planned,,,11,/smety/na-germetizatsiyu-mezhpanelnykh-shvov,НЧ,коммерческий,,False
+formula-v.ru,ремонт штукатурки,8730,79,79,1,formula-v.ru,0,not_planned,,,30,/uslugi/remont-fasadov/remont-shtukatur,НЧ,общий,,False
+formula-v.ru,можно ли красить металл при минусовой температуре на улице,81,76,76,1,formula-v.ru,0,not_planned,,,29,/uslugi/pokraska-metallokonstruktsij/pmz,НЧ,общий,,False
+formula-v.ru,ферм08 02 148 02,129,74,4,1,formula-v.ru,0,not_planned,,,40,/smety/na-germetizatsiyu-mezhpanelnykh-shvov,НЧ,общий,,False
+formula-v.ru,ремонт металлической кровли,709,69,67,1,formula-v.ru,0,not_planned,,,24,/uslugi/krovelnye-raboty/remont-krovli/met,НЧ,общий,,False
+formula-v.ru,при какой температуре можно красить металл,414,68,65,1,formula-v.ru,0,not_planned,,,25,/uslugi/pokraska-metallokonstruktsij/pmz,НЧ,информационный,,False
+formula-v.ru,заделка отверстий расценка в смете,1108,63,61,1,formula-v.ru,0,not_planned,,,36,/smety/na-germetizatsiyu-mezhpanelnykh-shvov,НЧ,коммерческий,,False
+formula-v.ru,ферр53 21 21,66,59,10,1,formula-v.ru,0,not_planned,,,32,/smety/na-germetizatsiyu-mezhpanelnykh-shvov,НЧ,общий,,False
+formula-v.ru,ремонт штукатурки расценка в смете,1073,55,52,1,formula-v.ru,0,not_planned,,,11,/uslugi/remont-fasadov/remont-shtukatur,НЧ,коммерческий,,False
+formula-v.ru,ремонт штукатурки стен расценка в смете,339,55,48,1,formula-v.ru,0,not_planned,,,14,/uslugi/remont-fasadov/remont-shtukatur,НЧ,коммерческий,,False
+formula-v.ru,помыть окна в москве,1782,51,49,1,formula-v.ru,0,not_planned,,,47,/uslugi/kliningovye-raboty/mojka-ostekleniya,НЧ,локальный,,False
+formula-v.ru,обезжиривание поверхности расценка в смете,191,51,50,1,formula-v.ru,0,not_planned,,,43,/smety/na-germetizatsiyu-mezhpanelnykh-shvov,НЧ,коммерческий,,False
+formula-v.ru,наружное утепление стен многоквартирного дома цена,82,49,49,1,formula-v.ru,0,not_planned,,,31,/uslugi/remont-fasadov/uteplenie-fasadov/uteplenie-panel,НЧ,коммерческий,,False
+formula-v.ru,подъем на этаж сколько стоит,876,48,8,1,formula-v.ru,0,not_planned,,,31,/uslugi/montazhnye-raboty/pod-em-gruzov,НЧ,коммерческий,,False
+formula-v.ru,утепление стен многоквартирного дома снаружи,279,46,4,1,formula-v.ru,0,not_planned,,,29,/uslugi/remont-fasadov/uteplenie-fasadov/uteplenie-panel,НЧ,общий,,False
+formula-v.ru,сколько стоит подъем на этаж,849,44,36,1,formula-v.ru,1,not_planned,,,9,/uslugi/montazhnye-raboty/pod-em-gruzov,НЧ,коммерческий,,False
+formula-v.ru,устройство пароизоляции расценка в смете,266,43,41,1,formula-v.ru,0,not_planned,,,30,/smety/na-germetizatsiyu-mezhpanelnykh-shvov,НЧ,коммерческий,,False
+formula-v.ru,гидроизоляция стен расценка в смете,226,43,43,1,formula-v.ru,0,not_planned,,,40,/smety/na-germetizatsiyu-mezhpanelnykh-shvov,НЧ,коммерческий,,False
+formula-v.ru,расшивка швов расценка в смете,334,43,41,1,formula-v.ru,0,not_planned,,,25,/smety/na-germetizatsiyu-mezhpanelnykh-shvov,НЧ,коммерческий,,False
+formula-v.ru,сколько стоит утеплить стену снаружи в панельном доме цена,52,42,42,1,formula-v.ru,1,not_planned,,,9,/uslugi/remont-fasadov/uteplenie-fasadov/uteplenie-panel,НЧ,коммерческий,,False
+gsvm.ru,фз 89,26601,3707,1412,1,gsvm.ru,0,not_planned,,,32,/documentation/fz89,СЧ,общий,,False
+gsvm.ru,вывоз мусора заказать,7180,1405,15,1,gsvm.ru,0,not_planned,,,28,/,СЧ,коммерческий,vyvoz-musora,False
+gsvm.ru,прием вторсырья,10791,346,346,1,gsvm.ru,0,not_planned,,,18,/pokupka-vtorsyrya/recycling,СЧ,общий,,False
+gsvm.ru,ооо гск,2415,277,254,1,gsvm.ru,0,not_planned,,,48,/,СЧ,общий,,False
+gsvm.ru,no 89 фз,9085,212,121,1,gsvm.ru,0,not_planned,,,20,/documentation/fz89,СЧ,общий,,False
+gsvm.ru,об отходах производства и потребления федеральный закон,7818,210,16,1,gsvm.ru,0,not_planned,,,33,/documentation/fz89,СЧ,общий,vyvoz-musora,False
+gsvm.ru,макулатура сдать,33632,203,203,1,gsvm.ru,1,not_planned,,,9,/pokupka-vtorsyrya/pokupka-makulatury,СЧ,общий,,False
+gsvm.ru,мультилифт это что за машина,200,194,194,1,gsvm.ru,0,not_planned,,,20,/news/o-sisteme-multilift,СЧ,общий,,False
+gsvm.ru,об отходах фз,17202,193,1,1,gsvm.ru,0,not_planned,,,40,/documentation/fz89,СЧ,общий,vyvoz-musora,False
+gsvm.ru,фз no 89,9323,187,73,1,gsvm.ru,0,not_planned,,,31,/documentation/fz89,СЧ,общий,,False
+gsvm.ru,пресс для мусора,1244,185,185,1,gsvm.ru,0,planned,общий,localFALLBACK-WITHFREQ-20260425T151607Z:183,33,/pickup/compactors,СЧ,общий,vyvoz-musora,False
+gsvm.ru,приемка макулатуры,1226,142,141,1,gsvm.ru,1,not_planned,,,10,/pokupka-vtorsyrya/pokupka-makulatury,СЧ,общий,,False
+gsvm.ru,recycle map,195,133,133,1,gsvm.ru,0,not_planned,,,44,/news/greenpeace-zapustil-v-rossii-obnovlennuyu-kartu-punktov-sdachi-vtorsyrya-recyclemap,СЧ,общий,,False
+gsvm.ru,заказать контейнер для вывоза мусора в москве,218,115,99,1,gsvm.ru,0,not_planned,,,26,/,СЧ,коммерческий+локальный,vyvoz-musora,False
+gsvm.ru,как утилизировать градусник ртутный не разбитый,219,112,70,1,gsvm.ru,0,not_planned,,,16,/news/kak-utilizirovat-gradusnik,СЧ,информационный,,False
+gsvm.ru,макулатура прием,39671,102,84,1,gsvm.ru,0,not_planned,,,14,/pokupka-vtorsyrya/pokupka-makulatury,СЧ,общий,,False
+gsvm.ru,ap 89,201,101,28,1,gsvm.ru,0,not_planned,,,21,/documentation/fz89,СЧ,общий,,False
+gsvm.ru,89 ap,229,99,76,1,gsvm.ru,0,not_planned,,,34,/documentation/fz89,НЧ,общий,,False
+gsvm.ru,снеготаялка,964,98,98,1,gsvm.ru,0,not_planned,,,44,/news/snegotayalki-v-moskve,НЧ,общий,uborka-snega,False
+gsvm.ru,прием строительного мусора,762,90,89,1,gsvm.ru,0,not_planned,,,24,/pickup/priem-musora,НЧ,общий,vyvoz-musora,False
+gsvm.ru,как часто нужно мыть и дезинфицировать многоразовые контейнеры для транспортировки отходов класса а,101,89,89,1,gsvm.ru,0,not_planned,,,23,/files/sanpin-2.1.7.2790-10.pdf,НЧ,информационный,vyvoz-musora,False
+gsvm.ru,федеральный закон 89 фз об отходах производства и потребления,5253,86,84,1,gsvm.ru,0,not_planned,,,29,/documentation/fz89,НЧ,общий,vyvoz-musora,False
+gsvm.ru,закон 89 ф3 об отходах,149,84,84,1,gsvm.ru,0,not_planned,,,27,/documentation/fz89,НЧ,общий,vyvoz-musora,False
+gsvm.ru,закон фз 89,12809,78,1,1,gsvm.ru,0,not_planned,,,40,/documentation/fz89,НЧ,общий,,False
+gsvm.ru,89 закон фз,10015,77,8,1,gsvm.ru,0,not_planned,,,36,/documentation/fz89,НЧ,общий,,False
+gsvm.ru,ооо дгс,238,77,69,1,gsvm.ru,0,not_planned,,,44,/,НЧ,общий,,False
+gsvm.ru,дгс ооо,188,67,2,1,gsvm.ru,0,not_planned,,,49,/,НЧ,общий,,False
+gsvm.ru,свалочный газ,538,66,66,1,gsvm.ru,0,not_planned,,,26,/news/svalochnyj-gaz,НЧ,общий,,False
+gsvm.ru,федеральный закон no 89 фз,5900,63,63,1,gsvm.ru,0,not_planned,,,39,/documentation/fz89,НЧ,общий,,False
+gsvm.ru,закон о мусоре,1981,63,63,1,gsvm.ru,0,not_planned,,,32,/documentation/fz89,НЧ,общий,vyvoz-musora,False
+kronotech.ru,сотка,634711,39823,39823,1,kronotech.ru,0,not_planned,,,41,/publications/skolko-m2-v-sotke,ВЧ,общий,,False
+kronotech.ru,2 2 сколько это,704810,13402,13,1,kronotech.ru,0,not_planned,,,28,/publications/skolko-m2-v-sotke,СЧ,информационный,,False
+kronotech.ru,квадратный метр,1296895,12605,6110,1,kronotech.ru,0,not_planned,,,27,/publications/poschitat-kolichestvo-kvadratnyh-metrov,СЧ,общий,,False
+kronotech.ru,метр квадратный,1323960,12488,6434,1,kronotech.ru,0,not_planned,,,36,/publications/poschitat-kolichestvo-kvadratnyh-metrov,ВЧ,общий,,False
+kronotech.ru,2 2 м,3982443,10074,5,1,kronotech.ru,1,not_planned,,,8,/publications/poschitat-kolichestvo-kvadratnyh-metrov,СЧ,общий,,False
+kronotech.ru,размер кирпича,99974,9977,9975,1,kronotech.ru,1,not_planned,,,6,/publications/razmery-kirpicha,ВЧ,общий,,False
+kronotech.ru,капремонт,467621,7572,7572,1,kronotech.ru,0,not_planned,,,31,/publications/kapitalnyy-remont-zhilogo-doma,ВЧ,общий,,False
+kronotech.ru,росы точка,59893,6528,0,1,kronotech.ru,0,not_planned,,,13,/publications/chto-takoe-tochka-rosy,ВЧ,общий,,False
+kronotech.ru,точка росы,56399,6198,6198,1,kronotech.ru,0,not_planned,,,11,/publications/chto-takoe-tochka-rosy,ВЧ,общий,,False
+kronotech.ru,короед штукатурка,37342,5813,3497,1,kronotech.ru,0,not_planned,,,32,/publications/nanosit-dekorativnuyu-shtukaturku-koroed,ВЧ,общий,,False
+kronotech.ru,стекловата,43835,5787,5787,1,kronotech.ru,0,not_planned,,,38,/publications/kakaya-mineralnaya-vata,ВЧ,общий,,False
+kronotech.ru,кирпича размеры,95027,4874,5,1,kronotech.ru,1,not_planned,,,8,/publications/razmery-kirpicha,СЧ,общий,,False
+kronotech.ru,фасад,1170333,4528,4528,1,kronotech.ru,0,not_planned,,,29,/publications/fasad-doma-vidy-oblicovki,ВЧ,общий,,False
+kronotech.ru,уборка снега,645697,4508,4501,1,kronotech.ru,0,planned,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1,22,/vysotnye-raboty/ochistka-krovli-ot-snega,ВЧ,общий,uborka-snega,False
+kronotech.ru,цоколь,446234,4423,4423,1,kronotech.ru,0,not_planned,,,29,/publications/otdelka-cokolya-doma,ВЧ,общий,,False
+kronotech.ru,1 га м2 сколько,6454,4413,4,1,kronotech.ru,0,not_planned,,,43,/publications/skolko-m2-v-sotke,СЧ,информационный,,False
+kronotech.ru,1 м2 сколько га,6454,4413,15,1,kronotech.ru,0,not_planned,,,42,/publications/skolko-m2-v-sotke,СЧ,информационный,,False
+kronotech.ru,капитальный ремонт,719720,4286,4278,1,kronotech.ru,0,not_planned,,,35,/publications/kapitalnyy-remont-zhilogo-doma,ВЧ,общий,,False
+kronotech.ru,утеплитель,496609,4150,4150,1,kronotech.ru,0,not_planned,,,34,/publications/utepliteli-naruzhnoy-teploizolyacii,ВЧ,общий,,False
+kronotech.ru,перевести в метры в квадратные,35013,4013,0,1,kronotech.ru,0,not_planned,,,41,/publications/poschitat-kolichestvo-kvadratnyh-metrov,ВЧ,общий,,False
+kronotech.ru,фасадные термопанели,28659,3826,2115,1,kronotech.ru,0,not_planned,,,34,/publications/otdelka-doma-termopanelyami,ВЧ,общий,,False
+kronotech.ru,штукатурка стен,206497,3818,3818,1,kronotech.ru,0,not_planned,,,20,/prays-shtukaturka-sten,ВЧ,общий,,False
+kronotech.ru,квадратный метр м2,21015,3683,12,1,kronotech.ru,0,not_planned,,,19,/publications/poschitat-kolichestvo-kvadratnyh-metrov,СЧ,общий,,False
+kronotech.ru,м2 метр квадратный,22376,3576,304,1,kronotech.ru,0,not_planned,,,17,/publications/poschitat-kolichestvo-kvadratnyh-metrov,СЧ,общий,,False
+kronotech.ru,метр квадратный м2,22376,3576,2996,1,kronotech.ru,0,not_planned,,,28,/publications/poschitat-kolichestvo-kvadratnyh-metrov,ВЧ,общий,,False
+kronotech.ru,м2 квадратный метр,22376,3576,263,1,kronotech.ru,0,not_planned,,,13,/publications/poschitat-kolichestvo-kvadratnyh-metrov,СЧ,общий,,False
+kronotech.ru,1 сотка сколько м2,5504,3447,3444,1,kronotech.ru,0,not_planned,,,12,/publications/skolko-m2-v-sotke,ВЧ,информационный,,False
+kronotech.ru,штукатурка короед,20702,3346,1583,1,kronotech.ru,0,not_planned,,,31,/publications/nanosit-dekorativnuyu-shtukaturku-koroed,СЧ,общий,,False
+kronotech.ru,размер стандарт кирпича,11176,3274,8,1,kronotech.ru,1,not_planned,,,7,/publications/razmery-kirpicha,СЧ,общий,,False
+kronotech.ru,размер кирпича стандарт,11176,3274,3243,1,kronotech.ru,1,not_planned,,,7,/publications/razmery-kirpicha,ВЧ,общий,,False
+lesoruby.com,лесоруб,39525,784,784,1,lesoruby.com,0,not_planned,,,32,/,СЧ,общий,,False
+lesoruby.com,спелеологи,15453,319,319,1,lesoruby.com,0,not_planned,,,40,/about/obraz-zhizni-speleologiya,СЧ,общий,,False
+lesoruby.com,спил что такое,816,155,3,1,lesoruby.com,0,not_planned,,,29,/articles/chto-takoe-spil-dereva-s-zaveshivaniem-i-kogda-eto-trebuetsya-28-08-2016,СЧ,коммерческий,arboristika,False
+lesoruby.com,что такое спил,773,139,134,1,lesoruby.com,0,not_planned,,,33,/articles/chto-takoe-spil-dereva-s-zaveshivaniem-i-kogda-eto-trebuetsya-28-08-2016,СЧ,коммерческий,arboristika,False
+lesoruby.com,лесорубы,39525,138,138,1,lesoruby.com,0,not_planned,,,37,/,СЧ,общий,,False
+lesoruby.com,бани лесоруб,533,132,14,1,lesoruby.com,0,not_planned,,,32,/,СЧ,общий,,False
+lesoruby.com,корчевка это,243,85,85,1,lesoruby.com,0,not_planned,,,47,/korchevanie-i-udalenie-pnej,НЧ,коммерческий,arboristika,False
+lesoruby.com,корчевка пней расценка в смете,180,54,53,1,lesoruby.com,0,not_planned,,,17,/korchevanie-i-udalenie-pnej,НЧ,коммерческий,arboristika,False
+lesoruby.com,гнездо на дереве,33599,54,53,1,lesoruby.com,0,not_planned,,,29,/articles/spil-derevev-ptichku-zhalko-10-06-2016,НЧ,общий,arboristika,False
+lesoruby.com,вакансии лесоруб,116,41,12,1,lesoruby.com,0,not_planned,,,24,/job,НЧ,общий,,False
+lesoruby.com,лесоруб вакансии,126,36,32,1,lesoruby.com,0,not_planned,,,15,/job,НЧ,общий,,False
+lesoruby.com,822 пп,232,34,9,1,lesoruby.com,0,not_planned,,,43,/articles/avarijnye-derevya-11-03-2016,НЧ,общий,,False
+lesoruby.com,кто исследует пещеры,83,31,31,1,lesoruby.com,0,not_planned,,,42,/about/obraz-zhizni-speleologiya,НЧ,общий,,False
+lesoruby.com,лесобор,81,27,27,1,lesoruby.com,0,not_planned,,,39,/,НЧ,общий,,False
+lesoruby.com,ооо лесоруб,161,23,14,1,lesoruby.com,0,not_planned,,,26,/,НЧ,общий,,False
+lesoruby.com,ствол ели,12860,22,22,1,lesoruby.com,0,not_planned,,,38,/articles/kak-pravilno-spilit-el-21-04-2017,НЧ,общий,,False
+lesoruby.com,лесоруб работа,1082,22,15,1,lesoruby.com,0,not_planned,,,37,/job,НЧ,общий,,False
+lesoruby.com,лесоруб рф,41,21,21,1,lesoruby.com,0,not_planned,,,25,/,НЧ,общий,,False
+lesoruby.com,как пилить дерево правильно,364,21,1,1,lesoruby.com,0,not_planned,,,17,/articles/kak-akkuratno-spilit-derevo-po-chastyam-24-12-2016,НЧ,информационный,arboristika,False
+lesoruby.com,верхушка дерева спилится как пишется,20,20,20,1,lesoruby.com,0,not_planned,,,21,/articles/osobennosti-spilivaniya-vysokih-derevev-13-06-2017,НЧ,коммерческий,arboristika,False
+lesoruby.com,пилить деревья,17724,20,13,1,lesoruby.com,0,not_planned,,,35,/articles/kak-akkuratno-spilit-derevo-po-chastyam-24-12-2016,НЧ,общий,arboristika,False
+lesoruby.com,ведомость перечета деревьев назначенных в рубку,78,19,19,1,lesoruby.com,0,not_planned,,,19,/u/2016/03/Perechetnaya_vedomost_zelenyh_nasazhdenij_podlezhashhih_vyrubke_i_ili_obrezke_zaverennaya_podpisyu_i_pechatyu_balansoderzhatelya_territorii.docx,НЧ,общий,arboristika,False
+lesoruby.com,как спиливать деревья бензопилой правильно,381,16,3,1,lesoruby.com,0,not_planned,,,37,/articles/kak-akkuratno-spilit-derevo-po-chastyam-24-12-2016,НЧ,коммерческий,arboristika,False
+lesoruby.com,наиболее надежные диагностические признаки усыхающего хвойного дерева,17,16,16,1,lesoruby.com,1,not_planned,,,4,/kategorii-sostoyaniya-derevev,НЧ,общий,arboristika,False
+lesoruby.com,ведомость перечета деревьев назначенных в рубку бланк скачать,19,15,15,1,lesoruby.com,0,not_planned,,,17,/u/2016/03/Perechetnaya_vedomost_zelenyh_nasazhdenij_podlezhashhih_vyrubke_i_ili_obrezke_zaverennaya_podpisyu_i_pechatyu_balansoderzhatelya_territorii.docx,НЧ,общий,arboristika,False
+lesoruby.com,перечетная ведомость деревьев образец скачать,17,15,15,1,lesoruby.com,0,not_planned,,,16,/u/2016/03/Perechetnaya_vedomost_zelenyh_nasazhdenij_podlezhashhih_vyrubke_i_ili_obrezke_zaverennaya_podpisyu_i_pechatyu_balansoderzhatelya_territorii.docx,НЧ,общий,arboristika,False
+lesoruby.com,перечетная ведомость деревьев бланк скачать,16,14,14,1,lesoruby.com,0,not_planned,,,13,/u/2016/03/Perechetnaya_vedomost_zelenyh_nasazhdenij_podlezhashhih_vyrubke_i_ili_obrezke_zaverennaya_podpisyu_i_pechatyu_balansoderzhatelya_territorii.docx,НЧ,общий,arboristika,False
+lesoruby.com,как избавиться от ивы на участке,90,14,14,1,lesoruby.com,0,not_planned,,,21,/projects/udalenie-ispolinskoj-vetly-v-rajone-domodedovo,НЧ,информационный,,False
+lesoruby.com,как свалить большое дерево,29,13,13,1,lesoruby.com,0,not_planned,,,21,/articles/osobennosti-spilivaniya-vysokih-derevev-13-06-2017,НЧ,информационный,arboristika,False
+lesoruby.com,высокоствольные деревья,134,13,13,1,lesoruby.com,0,not_planned,,,21,/articles/osobennosti-spilivaniya-vysokih-derevev-13-06-2017,НЧ,общий,arboristika,False
+lesovod.su,лесовод,14563,151,151,1,lesovod.su,0,not_planned,,,24,/,СЧ,общий,,False
+lesovod.su,пенькогрыз,95,41,41,1,lesovod.su,1,not_planned,,,5,/services/udalenie-pney,НЧ,общий,,False
+lesovod.su,измельчитель дерева в щепу,84,39,39,1,lesovod.su,0,not_planned,,,27,/services/arenda-izmelchitelya-vetok-i-drevesiny,НЧ,общий,arboristika,False
+lesovod.su,спилены,53113,25,25,1,lesovod.su,0,not_planned,,,46,/services/spil-derevev,НЧ,коммерческий,arboristika,False
+lesovod.su,работа с деревом вакансии,97,20,14,1,lesovod.su,0,not_planned,,,37,/articles/vakansiya-arborist,НЧ,общий,arboristika,False
+lesovod.su,дробилка дерева в щепу,35,16,16,1,lesovod.su,0,not_planned,,,35,/services/arenda-izmelchitelya-vetok-i-drevesiny,НЧ,общий,arboristika,False
+lesovod.su,чистка мягкой кровли,367,16,16,1,lesovod.su,0,not_planned,,,41,/services/snow,НЧ,общий,,False
+lesovod.su,аренда шредера,514,16,16,1,lesovod.su,0,not_planned,,,21,/services/arenda-izmelchitelya-vetok-i-drevesiny,НЧ,общий,,False
+lesovod.su,ооо лесовод,76,13,13,1,lesovod.su,1,not_planned,,,5,/,НЧ,общий,,False
+lesovod.su,машина для корчевания пней,45,12,12,1,lesovod.su,0,not_planned,,,37,/services/udalenie-pney,НЧ,коммерческий,arboristika,False
+lesovod.su,измельчитель пней laski,75,12,5,1,lesovod.su,0,not_planned,,,42,/services/udalenie-pney,НЧ,общий,,False
+lesovod.su,щепорезы измельчители древесины,390,12,11,1,lesovod.su,0,not_planned,,,25,/services/arenda-izmelchitelya-vetok-i-drevesiny,НЧ,общий,arboristika,False
+lesovod.su,переработка веток в щепу оборудование для дачи купить,12,12,12,1,lesovod.su,0,planned,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:11,16,/services/arenda-izmelchitelya-vetok-i-drevesiny,НЧ,коммерческий,,False
+lesovod.su,измельчитель пней видео,22,9,9,1,lesovod.su,0,not_planned,,,22,/services/udalenie-pney,НЧ,общий,,False
+lesovod.su,измельчитель веток аренда уфа,18,8,3,1,lesovod.su,0,not_planned,,,44,/services/arenda-izmelchitelya-vetok-i-drevesiny,НЧ,общий,,False
+lesovod.su,машина для веток переработки в опилки,6,6,3,1,lesovod.su,0,not_planned,,,33,/services/arenda-izmelchitelya-vetok-i-drevesiny,НЧ,общий,,False
+lesovod.su,измельчитель бревен в щепу,11,6,6,1,lesovod.su,0,not_planned,,,18,/services/arenda-izmelchitelya-vetok-i-drevesiny,НЧ,общий,,False
+lesovod.su,scorpion 250 sdt,12,5,5,1,lesovod.su,1,not_planned,,,5,/services/arenda-izmelchitelya-vetok-i-drevesiny,НЧ,общий,,False
+lesovod.su,лесодробилка,21,5,5,1,lesovod.su,0,not_planned,,,17,/services/arenda-izmelchitelya-vetok-i-drevesiny,НЧ,общий,,False
+lesovod.su,дробилка скорпион 250,38,4,2,1,lesovod.su,1,not_planned,,,10,/services/arenda-izmelchitelya-vetok-i-drevesiny,НЧ,общий,arboristika,False
+lesovod.su,машина для переработки дерева в щепу,4,4,4,1,lesovod.su,0,not_planned,,,34,/services/arenda-izmelchitelya-vetok-i-drevesiny,НЧ,общий,arboristika,False
+lesovod.su,спиленных,53036,4,4,1,lesovod.su,0,not_planned,,,24,/services/spil-derevev,НЧ,коммерческий,arboristika,False
+lesovod.su,измельчитель веток в аренду белгород,3,3,2,1,lesovod.su,0,not_planned,,,31,/services/arenda-izmelchitelya-vetok-i-drevesiny,НЧ,общий,,False
+lesovod.su,измельчитель веток в аренду во владимире,5,3,2,1,lesovod.su,0,not_planned,,,32,/services/arenda-izmelchitelya-vetok-i-drevesiny,НЧ,общий,,False
+lesovod.su,аренда измельчителя древесины в москве,5,3,3,1,lesovod.su,1,not_planned,,,6,/services/arenda-izmelchitelya-vetok-i-drevesiny,НЧ,локальный,,False
+lesovod.su,дерево измельчитель,2418,3,3,1,lesovod.su,0,not_planned,,,43,/services/arenda-izmelchitelya-vetok-i-drevesiny,НЧ,общий,arboristika,False
+lesovod.su,измельчитель древесины щепорез id 250,3,3,3,1,lesovod.su,0,not_planned,,,43,/services/arenda-izmelchitelya-vetok-i-drevesiny,НЧ,общий,,False
+lesovod.su,устройство для удаления пней,17,3,3,1,lesovod.su,0,not_planned,,,44,/services/udalenie-pney,НЧ,коммерческий,,False
+lesovod.su,профессия пилить деревья,100,3,3,1,lesovod.su,1,not_planned,,,7,/articles/vakansiya-arborist,НЧ,общий,arboristika,False
+lesovod.su,щеподробилки,542,2,2,1,lesovod.su,0,not_planned,,,17,/services/arenda-izmelchitelya-vetok-i-drevesiny,НЧ,общий,,False
+liwood.ru,обрезка яблони весной,31238,5457,5375,1,liwood.ru,0,not_planned,,,25,/info/articles/obrezka-yablon-vesnoy,ВЧ,коммерческий,,False
+liwood.ru,весенняя обработка сада,31159,4894,4861,1,liwood.ru,0,not_planned,,,33,/info/articles/opryskivanie-plodovykh-derevev-vesnoy,ВЧ,общий,,False
+liwood.ru,весенняя обработка сада от болезней и вредителей,11246,3661,3596,1,liwood.ru,0,not_planned,,,35,/info/articles/opryskivanie-plodovykh-derevev-vesnoy,ВЧ,общий,,False
+liwood.ru,обрезка груши весной,11516,3176,3134,1,liwood.ru,0,not_planned,,,17,/info/articles/obrezka-molodoy-grushi-vesnoy,ВЧ,коммерческий,,False
+liwood.ru,обработка сада ранней весной,29528,2916,2836,1,liwood.ru,0,not_planned,,,33,/info/articles/opryskivanie-plodovykh-derevev-vesnoy,ВЧ,общий,,False
+liwood.ru,весной чем обработать сад,38042,2586,37,1,liwood.ru,0,not_planned,,,28,/info/articles/opryskivanie-plodovykh-derevev-vesnoy,СЧ,информационный,,False
+liwood.ru,как обрезать яблоню весной,21578,2309,2078,1,liwood.ru,0,not_planned,,,19,/info/articles/obrezka-yablon-vesnoy,ВЧ,коммерческий,,False
+liwood.ru,как обрезать яблоню,38687,2122,2106,1,liwood.ru,0,not_planned,,,33,/info/articles/obrezka-yablon-vesnoy,ВЧ,коммерческий,,False
+liwood.ru,обрезка сливы весной,6359,1948,1925,1,liwood.ru,0,planned,общий,localFALLBACK-WITHFREQ-20260425T151607Z:6,24,/info/articles/kak-sdelat-obrezku-slivy,ВЧ,коммерческий,,False
+liwood.ru,как обрезать яблоню правильно,14676,1932,11,1,liwood.ru,0,not_planned,,,32,/info/articles/obrezka-yablon-vesnoy,СЧ,коммерческий,,False
+liwood.ru,как правильно обрезать яблоню,14676,1932,1887,1,liwood.ru,0,not_planned,,,36,/info/articles/obrezka-yablon-vesnoy,ВЧ,коммерческий,,False
+liwood.ru,как обрезать правильно яблоню,14676,1932,30,1,liwood.ru,0,not_planned,,,30,/info/articles/obrezka-yablon-vesnoy,СЧ,коммерческий,,False
+liwood.ru,покос травы,42487,1867,1867,1,liwood.ru,0,planned,общий,localFALLBACK-WITHFREQ-20260425T151607Z:23,22,/services/uborka-territorii/pokos-travy,ВЧ,общий,,False
+liwood.ru,груши обрезка,24498,1790,6,1,liwood.ru,0,not_planned,,,17,/info/articles/obrezka-vzrosloy-grushi,СЧ,коммерческий,,False
+liwood.ru,подкормка яблони весной,6589,1530,1388,1,liwood.ru,0,not_planned,,,21,/info/articles/podkormka-plodovykh-derevev,ВЧ,общий,,False
+liwood.ru,когда обрезать деревья весной,8330,1524,1214,1,liwood.ru,0,planned,информационный,localFALLBACK-WITHFREQ-20260425T151607Z:3,36,/info/articles/obrezka-derevev-vesnoy,ВЧ,коммерческий,arboristika,False
+liwood.ru,дупло,126341,1511,1511,1,liwood.ru,0,not_planned,,,19,/info/articles/kak-zadelat-duplo-v-plodovom-dereve,ВЧ,общий,,False
+liwood.ru,иллюминация,13386,1423,1423,1,liwood.ru,0,not_planned,,,30,/info/articles/vidy-novogodney-illyuminatsii,ВЧ,общий,,False
+liwood.ru,как обрезать грушу весной,9869,1417,1259,1,liwood.ru,0,planned,информационный,localFALLBACK-WITHFREQ-20260425T151607Z:66,15,/info/articles/obrezka-molodoy-grushi-vesnoy,ВЧ,коммерческий,,False
+liwood.ru,весенняя обработка плодовых деревьев и кустарников ранней весной,2338,1382,1382,1,liwood.ru,0,planned,общий,localFALLBACK-WITHFREQ-20260425T151607Z:3,17,/info/articles/opryskivanie-plodovykh-derevev-vesnoy,ВЧ,общий,arboristika,False
+liwood.ru,обрезка деревьев весной,16905,1360,1343,1,liwood.ru,0,planned,общий,localFALLBACK-WITHFREQ-20260425T151607Z:6,30,/info/articles/obrezka-derevev-vesnoy,ВЧ,коммерческий,arboristika,False
+liwood.ru,обрезка груши,21165,1321,1316,1,liwood.ru,0,not_planned,,,25,/info/articles/obrezka-vzrosloy-grushi,ВЧ,коммерческий,,False
+liwood.ru,как обрезать сливу весной,5200,1261,1163,1,liwood.ru,0,planned,информационный,localFALLBACK-WITHFREQ-20260425T151607Z:66,12,/info/articles/kak-sdelat-obrezku-slivy,ВЧ,коммерческий,,False
+liwood.ru,подкормка плодовых деревьев весной,6717,1249,1062,1,liwood.ru,1,not_planned,,,7,/info/articles/podkormka-plodovykh-derevev,ВЧ,общий,arboristika,False
+liwood.ru,прививка деревьев,38946,1067,1067,1,liwood.ru,0,not_planned,,,30,/info/articles/osennyaya-privivka-derevev,ВЧ,общий,arboristika,False
+liwood.ru,обрезка плодовых деревьев,18651,1064,862,1,liwood.ru,0,planned,общий,localFALLBACK-WITHFREQ-20260425T151607Z:6,38,/info/articles/sroki-obrezki-plodovykh-derevev,ВЧ,коммерческий,arboristika,False
+liwood.ru,побелка деревьев,69300,1043,1043,1,liwood.ru,0,planned,общий,localFALLBACK-WITHFREQ-20260425T151607Z:3,39,/info/articles/pobelka-derevev-osenyu,ВЧ,общий,arboristika,False
+liwood.ru,обрезка сливы,12138,1027,1027,1,liwood.ru,0,planned,общий,localFALLBACK-WITHFREQ-20260425T151607Z:6,24,/info/articles/kak-sdelat-obrezku-slivy,ВЧ,коммерческий,,False
+liwood.ru,обрезка плодовых деревьев весной,6111,990,911,1,liwood.ru,0,planned,общий,localFALLBACK-WITHFREQ-20260425T151607Z:6,29,/info/articles/obrezka-derevev-vesnoy,СЧ,коммерческий,arboristika,False
+liwood.ru,крона дерева,47646,986,986,1,liwood.ru,0,not_planned,,,38,/info/articles/kronirovanie-derevev-vidy-tsel-sposoby,СЧ,общий,arboristika,False
+mmusor.ru,снегоплавильная станция,3911,634,633,1,mmusor.ru,0,planned,общий,localFALLBACK-WITHFREQ-20260425T151607Z:1,25,/articles/kak-proishodit-utilizatsiya-snega-na-snegoplavilnyh-stantsiyah,СЧ,общий,uborka-snega,False
+mmusor.ru,пушкино вывоз мусора,986,477,3,1,mmusor.ru,1,not_planned,,,6,/geo/vyvoz-musora-v-pushkino,СЧ,коммерческий+локальный,vyvoz-musora,False
+mmusor.ru,газель вывоз мусора,2372,227,36,1,mmusor.ru,1,not_planned,,,3,/,СЧ,коммерческий,vyvoz-musora,False
+mmusor.ru,м ресурс,29827,193,10,1,mmusor.ru,0,not_planned,,,36,/,СЧ,общий,,False
+mmusor.ru,куда сдать шины,10984,182,180,1,mmusor.ru,0,not_planned,,,33,/service/vyvoz-shin-na-utilizatsiyu,СЧ,общий,,False
+mmusor.ru,бункер для мусора,2811,154,154,1,mmusor.ru,0,not_planned,,,29,/service/vyvoz-musora-bunkerom,СЧ,общий,vyvoz-musora,False
+mmusor.ru,вывоз мусора тко,2601,148,43,1,mmusor.ru,0,not_planned,,,33,/service/vyvoz-tko,СЧ,коммерческий,vyvoz-musora,False
+mmusor.ru,вынос мусора,7098,143,143,1,mmusor.ru,0,not_planned,,,31,/service/vyvoz-musora-iz-kvartiry,СЧ,общий,vyvoz-musora,False
+mmusor.ru,мусорный бункер,1244,143,95,1,mmusor.ru,0,not_planned,,,33,/service/vyvoz-musora-bunkerom,СЧ,общий,vyvoz-musora,False
+mmusor.ru,мусоре ру,1229,116,116,1,mmusor.ru,0,not_planned,,,15,/,СЧ,общий,vyvoz-musora,False
+mmusor.ru,ногинск вывоз мусора,666,116,7,1,mmusor.ru,0,not_planned,,,13,/geo/vyvoz-musora-v-noginske,СЧ,коммерческий+локальный,vyvoz-musora,False
+mmusor.ru,вывоз мусора пушкино,393,109,108,1,mmusor.ru,0,not_planned,,,14,/geo/vyvoz-musora-v-pushkino,СЧ,коммерческий+локальный,vyvoz-musora,False
+mmusor.ru,ммт ооо,392,104,8,1,mmusor.ru,0,not_planned,,,45,/,СЧ,общий,,False
+mmusor.ru,контейнер 20 кубов,3677,103,88,1,mmusor.ru,0,not_planned,,,22,/service/vyvoz-musora-konteinerom-20-m3,СЧ,общий,vyvoz-musora,False
+mmusor.ru,кгм машина,650,103,64,1,mmusor.ru,0,not_planned,,,21,/,СЧ,общий,vyvoz-musora,False
+mmusor.ru,вывоз мусора строительного цена,1638,97,5,1,mmusor.ru,1,not_planned,,,5,/,НЧ,коммерческий,vyvoz-musora,False
+mmusor.ru,заказать контейнер,16318,96,71,1,mmusor.ru,1,not_planned,,,5,/,НЧ,коммерческий,vyvoz-musora,False
+mmusor.ru,петрович вывоз мусора,213,92,70,1,mmusor.ru,0,not_planned,,,38,/,НЧ,коммерческий,vyvoz-musora,False
+mmusor.ru,вывоз мусора химки,450,84,84,1,mmusor.ru,0,not_planned,,,18,/geo/vyvoz-musora-v-himkah,НЧ,коммерческий+локальный,vyvoz-musora,False
+mmusor.ru,авито вывоз строительного мусора,230,81,63,1,mmusor.ru,0,not_planned,,,34,/service/vyvoz-stroitelnogo-musora,НЧ,коммерческий,vyvoz-musora,False
+mmusor.ru,куда выбросить шины в москве,156,67,67,1,mmusor.ru,0,not_planned,,,20,/service/vyvoz-shin-na-utilizatsiyu,НЧ,локальный,,False
+mmusor.ru,прием шин на утилизацию цена,175,67,67,1,mmusor.ru,0,not_planned,,,26,/service/vyvoz-shin-na-utilizatsiyu,НЧ,коммерческий,,False
+mmusor.ru,мусора картинки,16421,65,1,1,mmusor.ru,0,not_planned,,,32,/photo,НЧ,общий,vyvoz-musora,False
+mmusor.ru,мусорные контейнеры вывоз мусора,1624,63,63,1,mmusor.ru,0,not_planned,,,11,/,НЧ,коммерческий,vyvoz-musora,False
+mmusor.ru,прием битого стекла,575,60,60,1,mmusor.ru,1,not_planned,,,8,/articles/vyvoz-bitogo-stekla-na-utilizatsiyu,НЧ,общий,,False
+mmusor.ru,вывоз мусора петрович,162,58,16,1,mmusor.ru,0,not_planned,,,14,/,НЧ,коммерческий,vyvoz-musora,False
+mmusor.ru,вывоз мусора из квартиры в москве с грузчиками,334,54,9,1,mmusor.ru,0,not_planned,,,25,/service/vyvoz-musora-iz-kvartiry,НЧ,коммерческий+локальный,vyvoz-musora,False
+mmusor.ru,услуга вывоз мусора,18398,52,48,1,mmusor.ru,1,not_planned,,,2,/service,НЧ,коммерческий,vyvoz-musora,False
+mmusor.ru,м со,613257,52,11,1,mmusor.ru,0,not_planned,,,28,/,НЧ,общий,,False
+mmusor.ru,вывоз строительного мусора из квартиры,752,51,44,1,mmusor.ru,0,not_planned,,,14,/,НЧ,коммерческий,vyvoz-musora,False
+moscleaning24.ru,услуги уборки,34731,14706,14706,1,moscleaning24.ru,0,not_planned,,,29,/,ВЧ,коммерческий,,False
+moscleaning24.ru,уборка квартир,78802,12893,12893,1,moscleaning24.ru,0,not_planned,,,29,/uborka-kvartir,ВЧ,общий,,False
+moscleaning24.ru,клининг уборка,30112,9580,9497,1,moscleaning24.ru,1,not_planned,,,9,/,ВЧ,общий,,False
+moscleaning24.ru,уборка дома,109517,7735,7735,1,moscleaning24.ru,1,not_planned,,,10,/,ВЧ,общий,,False
+moscleaning24.ru,уборка помещений,98733,6561,6561,1,moscleaning24.ru,0,not_planned,,,13,/,ВЧ,общий,,False
+moscleaning24.ru,компания клининговая,76906,3241,1,1,moscleaning24.ru,0,not_planned,,,24,/,СЧ,коммерческий,,False
+moscleaning24.ru,уборка генеральная,92233,2313,22,1,moscleaning24.ru,0,not_planned,,,15,/uborka-kvartir/generalnaya,СЧ,общий,,False
+moscleaning24.ru,химчистка мебели,27653,2159,2156,1,moscleaning24.ru,1,not_planned,,,10,/himchistka/myagkoj-mebeli,ВЧ,общий,,False
+moscleaning24.ru,мойка окон,67379,2119,2119,1,moscleaning24.ru,1,not_planned,,,6,/vse-uslugi/mojka-okon,ВЧ,общий,,False
+moscleaning24.ru,химчистка на дому,12159,1981,1979,1,moscleaning24.ru,1,not_planned,,,1,/himchistka,ВЧ,общий,,False
+moscleaning24.ru,пятно,2784913,1667,1667,1,moscleaning24.ru,0,not_planned,,,27,/information/pyatna-i-ikh-raspoznavaniye,ВЧ,общий,,False
+moscleaning24.ru,уборка квартир в москве клининг,2092,1555,4,1,moscleaning24.ru,0,not_planned,,,19,/,СЧ,локальный,,False
+moscleaning24.ru,пыль откуда берется,2114,832,23,1,moscleaning24.ru,0,not_planned,,,40,/information/otkuda-beretsya-pyl-v-kvartire,СЧ,общий,,False
+moscleaning24.ru,откуда берется пыль,2138,812,769,1,moscleaning24.ru,0,not_planned,,,44,/information/otkuda-beretsya-pyl-v-kvartire,СЧ,общий,,False
+moscleaning24.ru,откуда пыль берется,2138,812,18,1,moscleaning24.ru,0,not_planned,,,36,/information/otkuda-beretsya-pyl-v-kvartire,СЧ,общий,,False
+moscleaning24.ru,после ремонта уборка,7042,772,3,1,moscleaning24.ru,0,not_planned,,,26,/uborka-kvartir/posle-remonta,СЧ,общий,,False
+moscleaning24.ru,клининг в москве,7535,754,754,1,moscleaning24.ru,1,not_planned,,,5,/,СЧ,локальный,,False
+moscleaning24.ru,духовку как отмыть,6352,728,0,1,moscleaning24.ru,0,not_planned,,,41,/information/kak-otmyt-duhovku-ot-zhira-i-nagara,СЧ,информационный,,False
+moscleaning24.ru,клининговые услуги,14476,690,690,1,moscleaning24.ru,1,not_planned,,,10,/,СЧ,коммерческий,,False
+moscleaning24.ru,клининг квартиры,24940,678,678,1,moscleaning24.ru,0,not_planned,,,34,/,СЧ,общий,,False
+moscleaning24.ru,заказать клининг,3466,671,331,1,moscleaning24.ru,0,not_planned,,,30,/,СЧ,коммерческий,,False
+moscleaning24.ru,химчистка мягкой мебели,4504,601,601,1,moscleaning24.ru,0,not_planned,,,17,/himchistka/myagkoj-mebeli,СЧ,общий,,False
+moscleaning24.ru,уборка квартир в москве,5735,569,569,1,moscleaning24.ru,0,not_planned,,,23,/,СЧ,локальный,,False
+moscleaning24.ru,график уборки,25090,557,557,1,moscleaning24.ru,0,not_planned,,,11,/information/grafik-uborki-ofisa,СЧ,общий,,False
+moscleaning24.ru,уборка квартиры,78802,533,533,1,moscleaning24.ru,0,not_planned,,,23,/,СЧ,общий,,False
+moscleaning24.ru,как почистить духовку,6502,532,530,1,moscleaning24.ru,0,not_planned,,,44,/information/kak-otmyt-duhovku-ot-zhira-i-nagara,СЧ,коммерческий,,False
+moscleaning24.ru,мытье окон в москве цены на услуги,610,483,483,1,moscleaning24.ru,1,not_planned,,,8,/vse-uslugi/mojka-okon,СЧ,коммерческий+локальный,,False
+moscleaning24.ru,клининг помещения,3248,462,461,1,moscleaning24.ru,0,not_planned,,,22,/,СЧ,общий,,False
+moscleaning24.ru,клининг производственных помещений,806,418,418,1,moscleaning24.ru,1,not_planned,,,1,/uborka-pomeshhenij/proizvodstvennykh,СЧ,общий,,False
+moscleaning24.ru,химчистка ковра,28863,413,413,1,moscleaning24.ru,1,not_planned,,,6,/himchistka/kovrov,СЧ,общий,,False
+musor.moscow,3 м 3,3192729,8977,8,1,musor.moscow,0,not_planned,,,39,/blog/ves-stroitelnogo-musora,СЧ,общий,,False
+musor.moscow,роп,50977,5173,5173,1,musor.moscow,0,not_planned,,,41,/blog/rop,ВЧ,общий,,False
+musor.moscow,фкко,81908,4476,4476,1,musor.moscow,0,not_planned,,,22,/blog/fkko-othody,ВЧ,общий,,False
+musor.moscow,ветошь это,7216,3780,3777,1,musor.moscow,0,not_planned,,,14,/blog/othody-vetoshi,ВЧ,общий,,False
+musor.moscow,это ветошь,7617,3720,0,1,musor.moscow,0,not_planned,,,17,/blog/othody-vetoshi,ВЧ,общий,,False
+musor.moscow,расшифровка тко,5720,3335,99,1,musor.moscow,0,not_planned,,,38,/blog/chto-takoe-tko,СЧ,общий,vyvoz-musora,False
+musor.moscow,в квитанции обращение с тко что это,5135,3258,29,1,musor.moscow,0,not_planned,,,39,/blog/obrashhenie-s-tko,СЧ,общий,vyvoz-musora,False
+musor.moscow,телевизор старый,84525,2646,285,1,musor.moscow,0,not_planned,,,35,/blog/utilizacija-televizorov,СЧ,общий,,False
+musor.moscow,старый телевизор,85488,2638,2338,1,musor.moscow,0,not_planned,,,32,/blog/utilizacija-televizorov,ВЧ,общий,,False
+musor.moscow,фэо фгуп,7217,2227,143,1,musor.moscow,0,not_planned,,,21,/blog/fjeo,СЧ,общий,,False
+musor.moscow,фгуп фэо,7217,2227,2083,1,musor.moscow,0,not_planned,,,27,/blog/fjeo,ВЧ,общий,,False
+musor.moscow,рэо,77751,2068,2068,1,musor.moscow,1,not_planned,,,9,/blog/rjeo,ВЧ,общий,,False
+musor.moscow,свалка,235954,2026,2026,1,musor.moscow,0,not_planned,,,32,/blog/likvidacija-svalok,ВЧ,общий,,False
+musor.moscow,снегоплавильная установка,8314,1999,1997,1,musor.moscow,0,not_planned,,,43,/blog/snegoplavilnyj-punkt,ВЧ,общий,uborka-snega,False
+musor.moscow,рэо ппк,6899,1946,63,1,musor.moscow,0,not_planned,,,20,/blog/rjeo,СЧ,общий,,False
+musor.moscow,ппк рэо,6290,1797,1736,1,musor.moscow,0,not_planned,,,19,/blog/rjeo,ВЧ,общий,,False
+musor.moscow,фэо,19015,1721,1721,1,musor.moscow,0,not_planned,,,16,/blog/fjeo,ВЧ,общий,,False
+musor.moscow,мусора,1905721,1680,1680,1,musor.moscow,0,not_planned,,,33,/,ВЧ,общий,vyvoz-musora,False
+musor.moscow,размер площадки для сбора отходов,10839,1536,1536,1,musor.moscow,0,not_planned,,,22,/blog/kontejnernaja-ploshhadka,ВЧ,общий,vyvoz-musora,False
+musor.moscow,бобкат,16879,1530,1530,1,musor.moscow,0,not_planned,,,35,/park-spectehniki/pogruzchik-bobcat,ВЧ,общий,,False
+musor.moscow,пухто,9633,1517,1517,1,musor.moscow,1,not_planned,,,9,/vyvoz-musora-puhto,ВЧ,общий,,False
+musor.moscow,классы отходов,248399,1500,1499,1,musor.moscow,0,not_planned,,,19,/blog/klassy-opasnosti-othodov,ВЧ,общий,vyvoz-musora,False
+musor.moscow,медицинские отходы,102924,1429,1225,1,musor.moscow,0,not_planned,,,39,/blog/utilizacija-medicinskih-othodov,ВЧ,общий,vyvoz-musora,False
+musor.moscow,классы отходов в медицине,8129,1300,1292,1,musor.moscow,0,not_planned,,,31,/blog/utilizacija-medicinskih-othodov,ВЧ,общий,vyvoz-musora,False
+musor.moscow,классы в медицине отходов,8129,1300,7,1,musor.moscow,0,not_planned,,,38,/blog/utilizacija-medicinskih-othodov,СЧ,общий,vyvoz-musora,False
+musor.moscow,отходы,1353727,1191,1191,1,musor.moscow,0,not_planned,,,17,/blog/klassy-opasnosti-othodov,ВЧ,общий,vyvoz-musora,False
+musor.moscow,рециклинг,11428,1137,1137,1,musor.moscow,0,not_planned,,,17,/blog/recikling,ВЧ,общий,,False
+musor.moscow,кпо,31864,1044,1044,1,musor.moscow,1,not_planned,,,7,/blog/kpo,ВЧ,общий,,False
+musor.moscow,переработка,612508,1034,1034,1,musor.moscow,0,not_planned,,,33,/blog/pererabotka-musora,ВЧ,общий,,False
+musor.moscow,класс опасности 3 класс,23443,1013,1,1,musor.moscow,0,not_planned,,,16,/blog/klassy-opasnosti-othodov,СЧ,общий,,False
+promalper.ru,авеню фитнес,1905,697,47,1,promalper.ru,0,not_planned,,,27,/fitnes-klub-fitness-avenue.html,СЧ,общий,,False
+promalper.ru,высотные работы,39580,361,360,1,promalper.ru,0,not_planned,,,37,/,СЧ,общий,,False
+promalper.ru,промышленная покраска,1532,176,167,1,promalper.ru,0,not_planned,,,21,/pokraska-promyshlennyh-obektov.html,СЧ,общий,,False
+promalper.ru,крашеный забор,1873,129,128,1,promalper.ru,1,not_planned,,,4,/pokraska-zaborov.html,СЧ,общий,,False
+promalper.ru,покраска металлочерепицы,727,128,128,1,promalper.ru,0,not_planned,,,17,/pokraska-krovli.html,СЧ,общий,,False
+promalper.ru,высотник,9753,122,122,1,promalper.ru,1,not_planned,,,8,/,СЧ,общий,,False
+promalper.ru,покрасьте забор,52212,106,2,1,promalper.ru,0,not_planned,,,27,/pokraska-zaborov.html,СЧ,общий,,False
+promalper.ru,покраска ангара,203,96,96,1,promalper.ru,1,not_planned,,,8,/pokraska-angara-iz-sendvich-panelej.html,НЧ,общий,,False
+promalper.ru,fitness avenue,265,81,77,1,promalper.ru,0,not_planned,,,30,/fitnes-klub-fitness-avenue.html,НЧ,общий,,False
+promalper.ru,пояс монолитный,1912,80,1,1,promalper.ru,0,not_planned,,,41,/monolitnyie-poyasa-i-ix-ustrojstvo.html,НЧ,общий,,False
+promalper.ru,межпанельные швы в панельном доме кто должен делать ремонт,85,79,79,1,promalper.ru,0,not_planned,,,16,/tech-mezhpanelnyix-shvov-chto-delat-i-kuda-obrashhatsya.html,НЧ,общий,,False
+promalper.ru,ракушечник фото,513,79,78,1,promalper.ru,0,not_planned,,,42,/fasadyi-iz-rakushechnika-plyusyi-i-minusyi.html,НЧ,общий,,False
+promalper.ru,крашенный забор,38348,73,64,1,promalper.ru,1,not_planned,,,8,/pokraska-zaborov.html,НЧ,общий,,False
+promalper.ru,гидроструйная очистка,726,73,73,1,promalper.ru,1,not_planned,,,10,/gidrostrujnaya-ochistka-poverxnostej.html,НЧ,общий,,False
+promalper.ru,покраска забора цена за м2,156,69,69,1,promalper.ru,1,not_planned,,,4,/pokraska-zaborov.html,НЧ,коммерческий,,False
+promalper.ru,ремонт цоколя,2244,67,67,1,promalper.ru,0,not_planned,,,16,/remont-czokolya-mkd.html,НЧ,общий,,False
+promalper.ru,покраска заборов,24213,65,65,1,promalper.ru,1,not_planned,,,10,/pokraska-zaborov.html,НЧ,общий,,False
+promalper.ru,ооо высотник,336,56,47,1,promalper.ru,1,not_planned,,,7,/,НЧ,общий,,False
+promalper.ru,покраска забора из профлиста,213,53,53,1,promalper.ru,0,not_planned,,,15,/pokraska-zaborov.html,НЧ,общий,,False
+promalper.ru,покрашенный забор,52210,52,45,1,promalper.ru,1,not_planned,,,5,/pokraska-zaborov.html,НЧ,общий,,False
+promalper.ru,ремонт цоколя здания,265,52,52,1,promalper.ru,0,not_planned,,,13,/remont-czokolya-mkd.html,НЧ,общий,,False
+promalper.ru,мойка окон сколько стоит,519,50,8,1,promalper.ru,0,not_planned,,,20,/mojka-okon.html,НЧ,коммерческий,,False
+promalper.ru,ремонт трещин в кирпичной кладке,207,50,50,1,promalper.ru,0,not_planned,,,39,/remont-kirpichnoj-kladki.html,НЧ,общий,,False
+promalper.ru,мытье окон стоимость,1180,46,46,1,promalper.ru,0,not_planned,,,32,/mojka-okon.html,НЧ,коммерческий,,False
+promalper.ru,помыть окно,54269,45,41,1,promalper.ru,0,not_planned,,,30,/mojka-okon.html,НЧ,общий,,False
+promalper.ru,распиловка древесины,2092,45,45,1,promalper.ru,0,not_planned,,,14,/raspil-derevev.html,НЧ,общий,,False
+promalper.ru,покраска фасада здания,729,44,44,1,promalper.ru,1,not_planned,,,8,/pokraska-fasada.html,НЧ,общий,,False
+promalper.ru,забор покрасить,45479,43,13,1,promalper.ru,0,not_planned,,,28,/pokraska-zaborov.html,НЧ,общий,,False
+promalper.ru,гидроструйная очистка бетонных поверхностей,85,43,43,1,promalper.ru,1,not_planned,,,2,/gidrostrujnaya-ochistka-poverxnostej.html,НЧ,общий,,False
+promalper.ru,можно ли самостоятельно утеплить фасад многоквартирного дома,45,41,13,1,promalper.ru,0,not_planned,,,34,/uteplenie-mkd-kto-dolzhen-uteplyat-fasad-mnogokvartirnogo-doma.html,НЧ,информационный,,False
+promtehalp.ru,акз металлоконструкций,1277,255,255,1,promtehalp.ru,0,not_planned,,,29,/service/antikorrozijnaya-zashchita,СЧ,общий,,False
+promtehalp.ru,амс это,1602,179,179,1,promtehalp.ru,0,not_planned,,,22,/article/stroitelstvovyshekmontazhvyshekdemontazhvyshekams_antenno_machtovyesooruzheniya,СЧ,общий,,False
+promtehalp.ru,антенно мачтовое сооружение,5352,116,115,1,promtehalp.ru,1,not_planned,,,8,/article/stroitelstvovyshekmontazhvyshekdemontazhvyshekams_antenno_machtovyesooruzheniya,СЧ,общий,,False
+promtehalp.ru,промышленный альпинист зарплата,421,99,95,1,promtehalp.ru,0,not_planned,,,22,/vacancy,НЧ,общий,,False
+promtehalp.ru,что такое амс,783,98,93,1,promtehalp.ru,0,not_planned,,,14,/article/stroitelstvovyshekmontazhvyshekdemontazhvyshekams_antenno_machtovyesooruzheniya,НЧ,информационный,,False
+promtehalp.ru,промышленный альпинизм вакансии,214,92,77,1,promtehalp.ru,0,planned,общий,localFALLBACK-WITHFREQ-20260425T151607Z:13,17,/vacancy,НЧ,общий,,False
+promtehalp.ru,антенно мачтовые сооружения,5352,76,76,1,promtehalp.ru,1,not_planned,,,8,/article/stroitelstvovyshekmontazhvyshekdemontazhvyshekams_antenno_machtovyesooruzheniya,НЧ,общий,,False
+promtehalp.ru,фальш фасад,803,65,65,1,promtehalp.ru,0,not_planned,,,25,/service/izgotovlenie-i-montazh-falsh-fasadov,НЧ,общий,,False
+promtehalp.ru,расшифровка амс,234,54,11,1,promtehalp.ru,0,not_planned,,,36,/article/stroitelstvovyshekmontazhvyshekdemontazhvyshekams_antenno_machtovyesooruzheniya,НЧ,общий,,False
+promtehalp.ru,амс что это,591,46,32,1,promtehalp.ru,0,not_planned,,,22,/article/stroitelstvovyshekmontazhvyshekdemontazhvyshekams_antenno_machtovyesooruzheniya,НЧ,общий,,False
+promtehalp.ru,промышленные альпинисты стоимость работ,78,43,43,1,promtehalp.ru,0,not_planned,,,36,/page/price,НЧ,коммерческий,,False
+promtehalp.ru,монтаж спк,368,41,29,1,promtehalp.ru,0,not_planned,,,17,/article/stroitelstvovyshekmontazhvyshekdemontazhvyshekams_antenno_machtovyesooruzheniya,НЧ,общий,,False
+promtehalp.ru,ремонт кровли и фасада,514,40,0,1,promtehalp.ru,0,not_planned,,,12,/service/remont-i-okraska-fasadov,НЧ,общий,,False
+promtehalp.ru,монтажные компании,8833,37,37,1,promtehalp.ru,0,not_planned,,,38,/,НЧ,коммерческий,,False
+promtehalp.ru,промальп вакансии,203,37,27,1,promtehalp.ru,0,not_planned,,,14,/vacancy,НЧ,общий,,False
+promtehalp.ru,промышленный альпинизм работа,544,34,25,1,promtehalp.ru,0,not_planned,,,31,/vacancy,НЧ,общий,,False
+promtehalp.ru,сборка строительных лесов цена за м2,56,33,13,1,promtehalp.ru,0,not_planned,,,29,/page/price,НЧ,коммерческий,,False
+promtehalp.ru,амс расшифровка в связи,33,33,33,1,promtehalp.ru,0,not_planned,,,14,/article/stroitelstvovyshekmontazhvyshekdemontazhvyshekams_antenno_machtovyesooruzheniya,НЧ,общий,,False
+promtehalp.ru,промышленный альпинист вакансии москва,157,31,19,1,promtehalp.ru,0,not_planned,,,13,/vacancy,НЧ,локальный,,False
+promtehalp.ru,альпинист вакансии,1975,31,19,1,promtehalp.ru,0,not_planned,,,19,/vacancy,НЧ,общий,,False
+promtehalp.ru,промышленный альпинист москва вакансии,157,31,8,1,promtehalp.ru,0,planned,локальный,localFALLBACK-WITHFREQ-20260425T151607Z:13,16,/vacancy,НЧ,локальный,,False
+promtehalp.ru,монтажник высотник вакансии,109,31,26,1,promtehalp.ru,0,not_planned,,,14,/vacancy,НЧ,общий,,False
+promtehalp.ru,вакансии монтажник высотник,108,28,6,1,promtehalp.ru,0,not_planned,,,12,/vacancy,НЧ,общий,,False
+promtehalp.ru,амс панели,120,27,24,1,promtehalp.ru,0,not_planned,,,31,/article/stroitelstvovyshekmontazhvyshekdemontazhvyshekams_antenno_machtovyesooruzheniya,НЧ,общий,,False
+promtehalp.ru,как расшифровывается амс,56,26,9,1,promtehalp.ru,0,not_planned,,,30,/article/stroitelstvovyshekmontazhvyshekdemontazhvyshekams_antenno_machtovyesooruzheniya,НЧ,информационный,,False
+promtehalp.ru,амс как расшифровывается,55,24,8,1,promtehalp.ru,0,not_planned,,,35,/article/stroitelstvovyshekmontazhvyshekdemontazhvyshekams_antenno_machtovyesooruzheniya,НЧ,информационный,,False
+promtehalp.ru,сборка строительных лесов цена,216,24,15,1,promtehalp.ru,0,not_planned,,,33,/page/price,НЧ,коммерческий,,False
+promtehalp.ru,монтажная компания,8833,22,22,1,promtehalp.ru,0,not_planned,,,17,/,НЧ,коммерческий,,False
+promtehalp.ru,монтаж строительных лесов цена за м2 за работу,30,22,10,1,promtehalp.ru,0,not_planned,,,27,/page/price,НЧ,коммерческий,,False
+promtehalp.ru,работы по акз,315,21,21,1,promtehalp.ru,1,not_planned,,,6,/service/antikorrozijnaya-zashchita,НЧ,общий,,False
+rusarbo.ru,дерево,9786397,14661,14661,1,rusarbo.ru,0,not_planned,,,39,/chto-takoe-derevo,ВЧ,общий,arboristika,False
+rusarbo.ru,деревьев виды,128403,1726,0,1,rusarbo.ru,0,not_planned,,,42,/klassifikatsiya-derevev,ВЧ,общий,arboristika,False
+rusarbo.ru,дерева,9786534,779,779,1,rusarbo.ru,0,not_planned,,,42,/chto-takoe-derevo,СЧ,общий,arboristika,False
+rusarbo.ru,что такое дерево,42012,483,476,1,rusarbo.ru,0,not_planned,,,28,/chto-takoe-derevo,СЧ,информационный,arboristika,False
+rusarbo.ru,короед типограф,1801,431,416,1,rusarbo.ru,0,not_planned,,,35,/opasneishii-lesnoi-vreditel-koroed-tipograf,СЧ,общий,,False
+rusarbo.ru,дерево что такое,54218,410,1,1,rusarbo.ru,0,not_planned,,,24,/chto-takoe-derevo,СЧ,информационный,arboristika,False
+rusarbo.ru,растение это дерево,33760,378,10,1,rusarbo.ru,0,not_planned,,,29,/chto-takoe-derevo,СЧ,общий,arboristika,False
+rusarbo.ru,виды деревья,129971,372,20,1,rusarbo.ru,0,not_planned,,,39,/klassifikatsiya-derevev,СЧ,общий,arboristika,False
+rusarbo.ru,это дерево,422454,333,17,1,rusarbo.ru,0,not_planned,,,22,/chto-takoe-derevo,СЧ,общий,arboristika,False
+rusarbo.ru,дерево это,471550,325,308,1,rusarbo.ru,0,not_planned,,,22,/chto-takoe-derevo,СЧ,общий,arboristika,False
+rusarbo.ru,дереве,9786338,289,289,1,rusarbo.ru,0,not_planned,,,31,/chto-takoe-derevo,СЧ,общий,arboristika,False
+rusarbo.ru,типограф короед,1924,285,7,1,rusarbo.ru,0,not_planned,,,40,/opasneishii-lesnoi-vreditel-koroed-tipograf,СЧ,общий,,False
+rusarbo.ru,береза железная,1491,275,44,1,rusarbo.ru,0,not_planned,,,17,/zheleznaya-bereza,СЧ,общий,,False
+rusarbo.ru,дерев,9788207,260,260,1,rusarbo.ru,0,not_planned,,,45,/chto-takoe-derevo,СЧ,общий,,False
+rusarbo.ru,дерево это растение,26056,236,220,1,rusarbo.ru,0,not_planned,,,27,/chto-takoe-derevo,СЧ,общий,arboristika,False
+rusarbo.ru,корни дерева,111864,206,206,1,rusarbo.ru,0,not_planned,,,31,/kornevaya-sistema-dereva,СЧ,общий,arboristika,False
+rusarbo.ru,железная береза,1443,184,143,1,rusarbo.ru,0,not_planned,,,14,/zheleznaya-bereza,СЧ,общий,,False
+rusarbo.ru,корень дерева это,14232,176,174,1,rusarbo.ru,0,not_planned,,,18,/kornevaya-sistema-dereva,СЧ,общий,arboristika,False
+rusarbo.ru,дерево это растение или нет,419,166,165,1,rusarbo.ru,0,not_planned,,,20,/chto-takoe-derevo,СЧ,общий,arboristika,False
+rusarbo.ru,деревья это растения,26079,138,129,1,rusarbo.ru,0,not_planned,,,26,/chto-takoe-derevo,СЧ,общий,arboristika,False
+rusarbo.ru,динамитное дерево,232,116,116,1,rusarbo.ru,0,not_planned,,,14,/vzryvayushcheesya-derevo-dinamit,СЧ,общий,arboristika,False
+rusarbo.ru,все виды деревьев,13294,110,106,1,rusarbo.ru,0,not_planned,,,40,/klassifikatsiya-derevev,СЧ,общий,arboristika,False
+rusarbo.ru,деревья это,471827,108,107,1,rusarbo.ru,0,not_planned,,,15,/chto-takoe-derevo,СЧ,общий,arboristika,False
+rusarbo.ru,деревом,9786640,102,102,1,rusarbo.ru,0,not_planned,,,32,/chto-takoe-derevo,СЧ,общий,arboristika,False
+rusarbo.ru,почему дерево называется дерево,2509,100,0,1,rusarbo.ru,0,not_planned,,,38,/chto-takoe-derevo,СЧ,информационный,arboristika,False
+rusarbo.ru,корни деревьев,111856,95,95,1,rusarbo.ru,0,not_planned,,,23,/kornevaya-sistema-dereva,НЧ,общий,arboristika,False
+rusarbo.ru,дерево виды,128409,90,85,1,rusarbo.ru,0,not_planned,,,38,/klassifikatsiya-derevev,НЧ,общий,arboristika,False
+rusarbo.ru,дереву,9846743,90,90,1,rusarbo.ru,0,not_planned,,,32,/chto-takoe-derevo,НЧ,общий,arboristika,False
+rusarbo.ru,деревья доноры,267,60,60,1,rusarbo.ru,0,not_planned,,,42,/derevya-s-tochki-zreniya-ezoteriki,НЧ,общий,arboristika,False
+rusarbo.ru,что такое деревья,42021,55,51,1,rusarbo.ru,0,not_planned,,,15,/chto-takoe-derevo,НЧ,информационный,arboristika,False
+snos24.ru,под снос дома,72582,227,15,1,snos24.ru,0,not_planned,,,33,/,СЧ,коммерческий,demontazh-b2c,False
+snos24.ru,купить дом под разбор,711,141,34,1,snos24.ru,0,not_planned,,,34,/uslugi/razborka-derevyannogo-doma,СЧ,коммерческий,,False
+snos24.ru,снос москва,15511,61,56,1,snos24.ru,0,not_planned,,,42,/,НЧ,коммерческий+локальный,demontazh-b2c,False
+snos24.ru,snos,19584,59,59,1,snos24.ru,0,not_planned,,,39,/,НЧ,общий,,False
+snos24.ru,снес дома,39925,41,41,1,snos24.ru,0,not_planned,,,31,/,НЧ,общий,,False
+snos24.ru,снос форум,2927,33,30,1,snos24.ru,0,not_planned,,,17,/,НЧ,коммерческий,demontazh-b2c,False
+snos24.ru,разрешение на снос дома на собственном участке,62,33,33,1,snos24.ru,0,not_planned,,,38,/stati/kakie-neobkhodimy-dokumenty-dlya-snosa-chastnogo-doma,НЧ,коммерческий,demontazh-b2c,False
+snos24.ru,дом сломанный,14682,32,3,1,snos24.ru,0,not_planned,,,23,/,НЧ,общий,,False
+snos24.ru,снос ру,1663,28,28,1,snos24.ru,0,not_planned,,,23,/,НЧ,коммерческий,demontazh-b2c,False
+snos24.ru,могут ли снести снт,146,19,17,1,snos24.ru,0,not_planned,,,20,/stati/zakon-o-snose-dachnogo-doma,НЧ,общий,,False
+snos24.ru,как разобрать старый дом,325,19,19,1,snos24.ru,0,not_planned,,,18,/stati/kak-razobrat-staryj-derevyannyj-dom-i-skolko-eto-budet-stoit,НЧ,коммерческий,,False
+snos24.ru,можно ли снести свою половину дома если дом на два хозяина,23,18,10,1,snos24.ru,0,not_planned,,,39,/stati/razreshenie-na-snos-chasti-doma,НЧ,общий,,False
+snos24.ru,снести дом на участке цена в подмосковье,19,17,17,1,snos24.ru,0,not_planned,,,23,/,НЧ,коммерческий+локальный,,False
+snos24.ru,демонтаж старых домов,772,16,16,1,snos24.ru,0,not_planned,,,18,/,НЧ,общий,demontazh-b2c,False
+snos24.ru,сноса,322580,16,16,1,snos24.ru,0,not_planned,,,36,/,НЧ,коммерческий,demontazh-b2c,False
+snos24.ru,компенсация за снос дома с земельным участком,22,13,13,1,snos24.ru,0,not_planned,,,34,/stati/kompensatsiya-za-snos-chastnogo-doma,НЧ,коммерческий,demontazh-b2c,False
+snos24.ru,купить дом в ступино ступинском районе,71,13,13,1,snos24.ru,0,not_planned,,,34,/portfolio/stupino,НЧ,коммерческий,,False
+snos24.ru,дома на разбор на авито,231,10,9,1,snos24.ru,0,not_planned,,,27,/uslugi/razborka-derevyannogo-doma,НЧ,общий,,False
+snos24.ru,купить дом на разбор в московской области,17,10,8,1,snos24.ru,0,not_planned,,,32,/uslugi/razborka-derevyannogo-doma,НЧ,коммерческий+локальный,,False
+snos24.ru,могут ли снести дом в снт,42,10,10,1,snos24.ru,0,not_planned,,,28,/stati/zakon-o-snose-dachnogo-doma,НЧ,общий,,False
+snos24.ru,как разобрать дом,4639,10,10,1,snos24.ru,0,not_planned,,,33,/stati/kak-razobrat-staryj-derevyannyj-dom-i-skolko-eto-budet-stoit,НЧ,коммерческий,,False
+snos24.ru,демонтаж и снос зданий,451,9,5,1,snos24.ru,0,not_planned,,,34,/,НЧ,коммерческий,demontazh-b2c,False
+snos24.ru,разрешение на снос дома,688,9,9,1,snos24.ru,0,not_planned,,,30,/stati/razreshenie-na-snos-chastnogo-doma,НЧ,коммерческий,demontazh-b2c,False
+snos24.ru,как разобрать старый дом из бревна самому,9,9,9,1,snos24.ru,0,not_planned,,,20,/stati/kak-razobrat-staryj-derevyannyj-dom-i-skolko-eto-budet-stoit,НЧ,коммерческий,,False
+snos24.ru,снос домов в московской области,361,8,8,1,snos24.ru,0,not_planned,,,44,/,НЧ,коммерческий+локальный,demontazh-b2c,False
+snos24.ru,как разобрать сарай,400,8,8,1,snos24.ru,0,not_planned,,,25,/stati/snesti-saraj,НЧ,коммерческий,,False
+snos24.ru,как разобрать каркасный дом,72,8,8,1,snos24.ru,0,not_planned,,,40,/uslugi/demontazh-karkasnogo-doma,НЧ,коммерческий,,False
+snos24.ru,разбор дома из бревна цена,12,7,7,1,snos24.ru,0,not_planned,,,24,/uslugi/razborka-derevyannogo-doma,НЧ,коммерческий,,False
+snos24.ru,компенсация за снос дома,460,7,7,1,snos24.ru,0,not_planned,,,34,/stati/kompensatsiya-za-snos-chastnogo-doma,НЧ,коммерческий,demontazh-b2c,False
+snos24.ru,купить дом на разборку недорого,11,7,7,1,snos24.ru,0,not_planned,,,26,/uslugi/razborka-derevyannogo-doma,НЧ,коммерческий,demontazh-b2c,False
+snosim.com,снос,322564,464,464,1,snosim.com,0,not_planned,,,39,/,СЧ,коммерческий,demontazh-b2c,False
+snosim.com,редевелопмент,2791,380,380,1,snosim.com,0,not_planned,,,15,/services/redevelopment,СЧ,общий,,False
+snosim.com,мероприятия по охране труда,39832,356,356,1,snosim.com,0,not_planned,,,36,/blog/meropriyatiya-po-okhrane-truda?ELEMENT_CODE=meropriyatiya-po-okhrane-truda,СЧ,общий,,False
+snosim.com,дробильщик,7498,271,271,1,snosim.com,0,not_planned,,,29,/blog/tekhnika-bezopasnosti-pri-rabote-drobilshchika?ELEMENT_CODE=tekhnika-bezopasnosti-pri-rabote-drobilshchika,СЧ,общий,,False
+snosim.com,демонтаж металлоконструкций,2753,130,130,1,snosim.com,0,not_planned,,,20,/services/demontazh-metallokonstruktsiy,СЧ,общий,demontazh-b2c,False
+snosim.com,подготовительные работы,55919,116,116,1,snosim.com,0,not_planned,,,39,/blog/podgotovitelnye-raboty-do-nachala-rabot-demontazha?ELEMENT_CODE=podgotovitelnye-raboty-do-nachala-rabot-demontazha,СЧ,общий,,False
+snosim.com,требования к сиз,5507,110,110,1,snosim.com,0,not_planned,,,46,/blog/trebovaniya-k-primeneniyu-sredstv-individualnoy-zashchity?ELEMENT_CODE=trebovaniya-k-primeneniyu-sredstv-individualnoy-zashchity,СЧ,общий,,False
+snosim.com,требования охраны труда при вскрытии и разборке строительных конструкций,190,94,94,1,snosim.com,0,not_planned,,,31,/blog/trebovaniya-tekhniki-bezopasnosti-pri-vypolnenii-rabot-po-demontazhu-stroitelnykh-konstruktsiy?ELEMENT_CODE=trebovaniya-tekhniki-bezopasnosti-pri-vypolnenii-rabot-po-demontazhu-stroitelnykh-konstruktsiy,НЧ,общий,demontazh-b2c,False
+snosim.com,цена демонтаж металлоконструкций,328,76,2,1,snosim.com,0,not_planned,,,14,/services/demontazh-metallokonstruktsiy,НЧ,коммерческий,demontazh-b2c,False
+snosim.com,мероприятия по охране труда на предприятии,1008,76,76,1,snosim.com,0,not_planned,,,20,/blog/meropriyatiya-po-okhrane-truda?ELEMENT_CODE=meropriyatiya-po-okhrane-truda,НЧ,общий,,False
+snosim.com,сколько стоит снести стену в квартире,139,66,63,1,snosim.com,0,not_planned,,,33,/price,НЧ,коммерческий,,False
+snosim.com,какие требования предъявляются к средствам индивидуальной защиты,511,66,66,1,snosim.com,0,not_planned,,,37,/blog/trebovaniya-k-primeneniyu-sredstv-individualnoy-zashchity?ELEMENT_CODE=trebovaniya-k-primeneniyu-sredstv-individualnoy-zashchity,НЧ,информационный,,False
+snosim.com,прайс лист на демонтажные работы,447,60,60,1,snosim.com,0,not_planned,,,27,/price,НЧ,коммерческий,demontazh-b2c,False
+snosim.com,на каком минимальном расстоянии разрешено находиться работникам при работе экскаватора,73,58,58,1,snosim.com,0,not_planned,,,29,/blog/tekhnika-bezopasnosti-mashinista-ekskavatora?ELEMENT_CODE=tekhnika-bezopasnosti-mashinista-ekskavatora,НЧ,общий,,False
+snosim.com,строительство дробление щебенки,54,54,54,1,snosim.com,0,not_planned,,,11,/services/retsikling-fragmentov-demontazha,НЧ,общий,,False
+snosim.com,редевелопмент это что,250,49,2,1,snosim.com,0,not_planned,,,29,/services/redevelopment,НЧ,общий,,False
+snosim.com,демонтаж металлоконструкций в москве,65,37,37,1,snosim.com,0,not_planned,,,11,/services/demontazh-metallokonstruktsiy,НЧ,локальный,demontazh-b2c,False
+snosim.com,меры безопасности при погрузочно разгрузочных работах,432,37,37,1,snosim.com,0,not_planned,,,37,/blog/tekhnika-bezopasnosti-pri-pogruzochno-razgruzochnykh-i-podgotovitelnykh-rabotakh?ELEMENT_CODE=tekhnika-bezopasnosti-pri-pogruzochno-razgruzochnykh-i-podgotovitelnykh-rabotakh,НЧ,общий,,False
+snosim.com,фото демонтажных работ,146,34,34,1,snosim.com,0,not_planned,,,11,/nashi-rabotyi,НЧ,общий,demontazh-b2c,False
+snosim.com,смета на демонтажные работы,357,32,32,1,snosim.com,0,not_planned,,,41,/price,НЧ,коммерческий,demontazh-b2c,False
+snosim.com,демонтажные работы фото,138,32,27,1,snosim.com,0,not_planned,,,19,/nashi-rabotyi,НЧ,общий,demontazh-b2c,False
+snosim.com,демонтаж ангара,427,31,31,1,snosim.com,0,not_planned,,,12,/services/demontazh-angarov,НЧ,общий,demontazh-b2c,False
+snosim.com,техника безопасности при погрузочно разгрузочных работах,213,30,30,1,snosim.com,0,not_planned,,,38,/blog/tekhnika-bezopasnosti-pri-pogruzochno-razgruzochnykh-i-podgotovitelnykh-rabotakh?ELEMENT_CODE=tekhnika-bezopasnosti-pri-pogruzochno-razgruzochnykh-i-podgotovitelnykh-rabotakh,НЧ,общий,,False
+snosim.com,меры безопасности при проведении погрузочно разгрузочных работ,61,28,28,1,snosim.com,0,not_planned,,,36,/blog/tekhnika-bezopasnosti-pri-pogruzochno-razgruzochnykh-i-podgotovitelnykh-rabotakh?ELEMENT_CODE=tekhnika-bezopasnosti-pri-pogruzochno-razgruzochnykh-i-podgotovitelnykh-rabotakh,НЧ,общий,,False
+snosim.com,демонтажные работы прайс лист,676,27,21,1,snosim.com,0,not_planned,,,20,/price,НЧ,коммерческий,demontazh-b2c,False
+snosim.com,на какую высоту над землей рекомендуется опустить груз перед дальнейшим перемещением при погрузке,42,27,27,1,snosim.com,0,not_planned,,,39,/blog/tekhnika-bezopasnosti-pri-pogruzochno-razgruzochnykh-i-podgotovitelnykh-rabotakh?ELEMENT_CODE=tekhnika-bezopasnosti-pri-pogruzochno-razgruzochnykh-i-podgotovitelnykh-rabotakh,НЧ,общий,,False
+snosim.com,охрана труда мероприятия,54568,25,22,1,snosim.com,0,not_planned,,,32,/blog/meropriyatiya-po-okhrane-truda?ELEMENT_CODE=meropriyatiya-po-okhrane-truda,НЧ,общий,,False
+snosim.com,как запрещается осуществлять разборку строений демонтаж конструкций,36,24,24,1,snosim.com,0,not_planned,,,41,/blog/trebovaniya-tekhniki-bezopasnosti-pri-vypolnenii-rabot-po-demontazhu-stroitelnykh-konstruktsiy?ELEMENT_CODE=trebovaniya-tekhniki-bezopasnosti-pri-vypolnenii-rabot-po-demontazhu-stroitelnykh-konstruktsiy,НЧ,информационный,demontazh-b2c,False
+snosim.com,бомбоубежище щелково,118,24,24,1,snosim.com,1,not_planned,,,6,/nashi-rabotyi/more/121,НЧ,локальный,,False
+snosim.com,демонтаж металлоконструкций расценка,715,23,20,1,snosim.com,0,not_planned,,,21,/services/demontazh-metallokonstruktsiy,НЧ,коммерческий,demontazh-b2c,False
+spilservis.ru,сухое дерево,40736,115,102,1,spilservis.ru,0,not_planned,,,30,/blog/izbavlenie-ot-vysoxshix-i-suxostojnyx-derevev,СЧ,общий,arboristika,False
+spilservis.ru,спил деревьев новосибирск,208,72,72,1,spilservis.ru,0,not_planned,,,28,/price,НЧ,коммерческий,arboristika,False
+spilservis.ru,крона березы,3491,50,50,1,spilservis.ru,1,not_planned,,,10,/blog/kak-pravilno-obrezat-berezu-i-formirovat-kronu,НЧ,общий,,False
+spilservis.ru,сухостойные деревья это,104,33,33,1,spilservis.ru,0,not_planned,,,31,/blog/izbavlenie-ot-vysoxshix-i-suxostojnyx-derevev,НЧ,общий,arboristika,False
+spilservis.ru,распил древесины,1021,31,31,1,spilservis.ru,0,not_planned,,,35,/services/udalenie-dereviev/raspil-derevev,НЧ,общий,,False
+spilservis.ru,можно ли черенковать липу,32,27,22,1,spilservis.ru,0,not_planned,,,44,/blog/obrezka-vetvej-lipy-i-formirovanie-krony,НЧ,общий,,False
+spilservis.ru,spil,698,22,22,1,spilservis.ru,0,not_planned,,,44,/,НЧ,общий,,False
+spilservis.ru,обрезка старых деревьев,564,20,20,1,spilservis.ru,0,not_planned,,,42,/services/obrezka-dereviev/omolazhivayushhaya-obrezka,НЧ,коммерческий,arboristika,False
+spilservis.ru,расчистка участка под строительство коттеджа,19,19,19,1,spilservis.ru,0,not_planned,,,25,/services/raschistka-uchastkov,НЧ,общий,,False
+spilservis.ru,обрезка старых деревьев на омоложение,19,18,18,1,spilservis.ru,0,not_planned,,,16,/services/obrezka-dereviev/omolazhivayushhaya-obrezka,НЧ,коммерческий,arboristika,False
+spilservis.ru,спилить дерево курск,27,15,15,1,spilservis.ru,1,not_planned,,,10,/price,НЧ,коммерческий,arboristika,False
+spilservis.ru,как убрать дерево,11687,14,14,1,spilservis.ru,0,not_planned,,,31,/blog/kak-ubrat-vysokoe-derevo-nichego-ne-razrushiv-vokrug,НЧ,информационный,arboristika,False
+spilservis.ru,ярославль спил деревьев,37,11,2,1,spilservis.ru,0,not_planned,,,25,/price,НЧ,коммерческий,arboristika,False
+spilservis.ru,сухостойное дерево,1380,11,11,1,spilservis.ru,0,not_planned,,,31,/blog/izbavlenie-ot-vysoxshix-i-suxostojnyx-derevev,НЧ,общий,arboristika,False
+spilservis.ru,крона у березы,585,9,9,1,spilservis.ru,0,not_planned,,,13,/blog/kak-pravilno-obrezat-berezu-i-formirovat-kronu,НЧ,общий,,False
+spilservis.ru,аренда садового измельчителя веток,215,8,8,1,spilservis.ru,0,not_planned,,,18,/services/utilizatsiya-dereviev/arenda-izmelchitelya-vetok,НЧ,общий,,False
+spilservis.ru,как спилить ветку на большой высоте без лестницы,8,8,8,1,spilservis.ru,0,not_planned,,,36,/blog/kak-ubrat-vysokoe-derevo-nichego-ne-razrushiv-vokrug,НЧ,коммерческий,arboristika,False
+spilservis.ru,веточка липы,1642,7,7,1,spilservis.ru,0,not_planned,,,21,/blog/obrezka-vetvej-lipy-i-formirovanie-krony,НЧ,общий,,False
+spilservis.ru,омолаживающая обрезка кустарников,90,7,7,1,spilservis.ru,1,not_planned,,,1,/services/obrezka-dereviev/omolazhivayushhaya-obrezka,НЧ,коммерческий,arboristika,False
+spilservis.ru,можно ли обрезать макушку у березы,11,6,6,1,spilservis.ru,0,not_planned,,,13,/blog/kak-pravilno-obrezat-berezu-i-formirovat-kronu,НЧ,коммерческий,,False
+spilservis.ru,техника для удаления деревьев и кустарников,9,6,6,1,spilservis.ru,0,not_planned,,,33,/services/udalenie-dereviev/udalenie-derevev-chastyami,НЧ,коммерческий,arboristika,False
+spilservis.ru,липа спил,250,5,5,1,spilservis.ru,0,not_planned,,,40,/blog/obrezka-vetvej-lipy-i-formirovanie-krony,НЧ,коммерческий,arboristika,False
+spilservis.ru,вырубка деревьев под лэп,27,5,5,1,spilservis.ru,1,not_planned,,,9,/services/udalenie-dereviev/vyrubka-derevev-pod-lep,НЧ,общий,arboristika,False
+spilservis.ru,спил деревьев минск,24,4,4,1,spilservis.ru,0,not_planned,,,30,/price,НЧ,коммерческий,arboristika,False
+spilservis.ru,как завалить дерево в нужном направлении,23,4,2,1,spilservis.ru,0,not_planned,,,39,/blog/kak-ubrat-vysokoe-derevo-nichego-ne-razrushiv-vokrug,НЧ,информационный,arboristika,False
+spilservis.ru,как спиливают высокие деревья,426,3,3,1,spilservis.ru,1,not_planned,,,10,/blog/kak-ubrat-vysokoe-derevo-nichego-ne-razrushiv-vokrug,НЧ,коммерческий,arboristika,False
+spilservis.ru,как избавиться от деревьев на участке навсегда,12,3,3,1,spilservis.ru,0,not_planned,,,45,/blog/izbavlenie-ot-vysoxshix-i-suxostojnyx-derevev,НЧ,информационный,arboristika,False
+spilservis.ru,спил деревьев в ярославле недорого цена,3,3,3,1,spilservis.ru,0,planned,коммерческий,localFALLBACK-WITHFREQ-20260425T151607Z:5,44,/price,НЧ,коммерческий,arboristika,False
+spilservis.ru,омолаживающая обрезка деревьев это,24,3,3,1,spilservis.ru,0,planned,общий,localFALLBACK-WITHFREQ-20260425T151607Z:47,38,/services/obrezka-dereviev/omolazhivayushhaya-obrezka,НЧ,коммерческий,arboristika,False
+spilservis.ru,спил бревна,456,3,3,1,spilservis.ru,0,not_planned,,,30,/price,НЧ,коммерческий,arboristika,False
+stroj-musor.moscow,кодекс жилищный,95088,5327,20,1,stroj-musor.moscow,0,not_planned,,,43,/wp-content/uploads/2023/04/zhilishhnyj-kodeks-rossijskoj-federacii.pdf,СЧ,общий,,False
+stroj-musor.moscow,обращение в тко в квитанции что это,6864,3890,9,1,stroj-musor.moscow,0,not_planned,,,14,/stati/tko-v-kvitancii,СЧ,общий,vyvoz-musora,False
+stroj-musor.moscow,обращение с тко что это в квитанции,6531,3793,3539,1,stroj-musor.moscow,0,not_planned,,,25,/stati/tko-v-kvitancii,ВЧ,общий,vyvoz-musora,False
+stroj-musor.moscow,смарт мос ру,3361,2842,2840,1,stroj-musor.moscow,0,not_planned,,,12,/stati/ossig,ВЧ,общий,,False
+stroj-musor.moscow,тко расшифровка,5385,2631,2544,1,stroj-musor.moscow,0,not_planned,,,29,/stati/tko,ВЧ,общий,vyvoz-musora,False
+stroj-musor.moscow,обращение с тко,40691,2327,2327,1,stroj-musor.moscow,0,not_planned,,,32,/stati/tko-v-kvitancii,ВЧ,общий,vyvoz-musora,False
+stroj-musor.moscow,обращение с тко что это,7771,2219,2029,1,stroj-musor.moscow,0,not_planned,,,25,/stati/tko-v-kvitancii,ВЧ,общий,vyvoz-musora,False
+stroj-musor.moscow,тко что это в квитанции,9847,1571,732,1,stroj-musor.moscow,0,not_planned,,,18,/stati/tko-v-kvitancii,СЧ,общий,vyvoz-musora,False
+stroj-musor.moscow,тко в квитанции это что,9847,1571,2,1,stroj-musor.moscow,0,not_planned,,,20,/stati/tko-v-kvitancii,СЧ,общий,vyvoz-musora,False
+stroj-musor.moscow,утилизация,379226,1507,1507,1,stroj-musor.moscow,0,not_planned,,,36,/stati/utilizacija-othodov,ВЧ,общий,,False
+stroj-musor.moscow,вывоз мусора с грузчиками,6564,1482,1482,1,stroj-musor.moscow,0,not_planned,,,16,/vyvoz-musora-s-gruzchikami,ВЧ,коммерческий,vyvoz-musora,False
+stroj-musor.moscow,в квитанции тко что это,7583,1303,6,1,stroj-musor.moscow,0,not_planned,,,15,/stati/tko-v-kvitancii,СЧ,общий,vyvoz-musora,False
+stroj-musor.moscow,грунт рм,1909,1145,1142,1,stroj-musor.moscow,0,not_planned,,,15,/stati/jelektronnyj-talon-ossig,ВЧ,общий,,False
+stroj-musor.moscow,обращение с тко что это такое в квитанции,1470,953,493,1,stroj-musor.moscow,0,not_planned,,,19,/stati/tko-v-kvitancii,СЧ,общий,vyvoz-musora,False
+stroj-musor.moscow,обращение с тко в квитанции что это такое,1470,953,414,1,stroj-musor.moscow,0,not_planned,,,17,/stati/tko-v-kvitancii,СЧ,общий,vyvoz-musora,False
+stroj-musor.moscow,что такое обращение с тко,5058,865,850,1,stroj-musor.moscow,0,not_planned,,,19,/stati/tko-v-kvitancii,СЧ,информационный,vyvoz-musora,False
+stroj-musor.moscow,переработка мусора,28509,858,858,1,stroj-musor.moscow,0,not_planned,,,36,/stati/pererabotka-othodov,СЧ,общий,vyvoz-musora,False
+stroj-musor.moscow,мешки для мусора строительного,9013,837,8,1,stroj-musor.moscow,0,not_planned,,,33,/stati/meshki-dlja-stroitelnogo-musora,СЧ,общий,vyvoz-musora,False
+stroj-musor.moscow,тко вывоз,39646,805,17,1,stroj-musor.moscow,0,not_planned,,,29,/stati/tko-v-kvitancii,СЧ,коммерческий,vyvoz-musora,False
+stroj-musor.moscow,бочка для сжигания мусора,6328,701,697,1,stroj-musor.moscow,0,not_planned,,,45,/stati/szhiganie-musora,СЧ,общий,vyvoz-musora,False
+stroj-musor.moscow,тко в квитанции что такое,5999,692,1,1,stroj-musor.moscow,0,not_planned,,,15,/stati/tko-v-kvitancii,СЧ,информационный,vyvoz-musora,False
+stroj-musor.moscow,что такое тко в квитанции,6010,690,667,1,stroj-musor.moscow,0,not_planned,,,14,/stati/tko-v-kvitancii,СЧ,информационный,vyvoz-musora,False
+stroj-musor.moscow,что такое в квитанции тко,6010,690,12,1,stroj-musor.moscow,0,not_planned,,,27,/stati/tko-v-kvitancii,СЧ,информационный,vyvoz-musora,False
+stroj-musor.moscow,грунт это,43191,660,660,1,stroj-musor.moscow,0,not_planned,,,39,/stati/grunt-stroitelnyj,СЧ,общий,,False
+stroj-musor.moscow,что такое тко в коммунальных платежах,752,649,647,1,stroj-musor.moscow,0,not_planned,,,17,/stati/tko-v-kvitancii,СЧ,информационный,vyvoz-musora,False
+stroj-musor.moscow,оз строй,2258,643,9,1,stroj-musor.moscow,0,not_planned,,,27,/,СЧ,общий,,False
+stroj-musor.moscow,тбо и тко в чем разница,699,601,242,1,stroj-musor.moscow,0,not_planned,,,33,/stati/tbo,СЧ,информационный,vyvoz-musora,False
+stroj-musor.moscow,что такое обращение с тко в квитанции,3024,588,465,1,stroj-musor.moscow,0,not_planned,,,16,/stati/tko-v-kvitancii,СЧ,информационный,vyvoz-musora,False
+stroj-musor.moscow,что такое в квитанции обращение с тко,3024,588,105,1,stroj-musor.moscow,0,not_planned,,,19,/stati/tko-v-kvitancii,СЧ,информационный,vyvoz-musora,False
+stroj-musor.moscow,как перевести кубы в тонны мусора калькулятор тко,567,550,474,1,stroj-musor.moscow,0,not_planned,,,39,/stati/ves-stroitelnogo-musora,СЧ,информационный,vyvoz-musora,False
+treeworkers.ru,перевод arbor,255,114,0,1,treeworkers.ru,0,not_planned,,,45,/blog/arborist,СЧ,общий,,False
+treeworkers.ru,день древонасаждения,523,55,55,1,treeworkers.ru,0,not_planned,,,43,/blog/arborist,НЧ,общий,,False
+treeworkers.ru,ботаник занимающийся деревьями 9 букв,71,35,35,1,treeworkers.ru,0,not_planned,,,36,/blog/arborist,НЧ,общий,arboristika,False
+treeworkers.ru,кто сажает деревья профессия,17,10,10,1,treeworkers.ru,0,not_planned,,,30,/blog/arborist,НЧ,общий,arboristika,False
+treeworkers.ru,профессии с деревом,1154,10,10,1,treeworkers.ru,0,not_planned,,,41,/blog/arborist,НЧ,общий,arboristika,False
+treeworkers.ru,ботаник занимающийся деревьями,115,8,8,1,treeworkers.ru,0,not_planned,,,36,/blog/arborist,НЧ,общий,arboristika,False
+treeworkers.ru,любители деревьев как называются,6,5,5,1,treeworkers.ru,0,not_planned,,,31,/blog/arborist,НЧ,информационный,arboristika,False
+treeworkers.ru,кто стрижёт кусты,50,5,5,1,treeworkers.ru,0,not_planned,,,14,/blog/arborist,НЧ,общий,,False
+treeworkers.ru,кто лечит растения,53,4,4,1,treeworkers.ru,0,not_planned,,,35,/blog/arborist,НЧ,общий,,False
+treeworkers.ru,ухажер за деревьями,8,3,3,1,treeworkers.ru,0,not_planned,,,20,/blog/arborist,НЧ,общий,arboristika,False
+treeworkers.ru,как называют людей которые рубят деревья,7,3,3,1,treeworkers.ru,0,not_planned,,,43,/blog/arborist,НЧ,информационный,arboristika,False
+treeworkers.ru,кто занимается посадкой деревьев,38,3,3,1,treeworkers.ru,0,not_planned,,,18,/blog/arborist,НЧ,коммерческий,arboristika;landshaft,True
+treeworkers.ru,доктор деревьев,2789,2,2,1,treeworkers.ru,0,not_planned,,,25,/blog/arborist,НЧ,общий,arboristika,False
+treeworkers.ru,кто стрижет деревья профессия,5,2,2,1,treeworkers.ru,0,not_planned,,,21,/blog/arborist,НЧ,общий,arboristika,False
+treeworkers.ru,как называется человек занимающийся деревьями,71,2,2,1,treeworkers.ru,0,not_planned,,,17,/blog/arborist,НЧ,информационный,arboristika,False
+treeworkers.ru,как называется человек который стрижет кусты,7,2,2,1,treeworkers.ru,0,not_planned,,,13,/blog/arborist,НЧ,информационный,,False
+treeworkers.ru,как называется человек который сажает деревья,18,2,2,1,treeworkers.ru,0,not_planned,,,38,/blog/arborist,НЧ,информационный,arboristika,False
+treeworkers.ru,кто разбирается в деревьях,90,1,1,1,treeworkers.ru,0,not_planned,,,20,/blog/arborist,НЧ,общий,arboristika,False
+treeworkers.ru,арбористо,83,1,1,1,treeworkers.ru,0,not_planned,,,17,/blog/arborist,НЧ,общий,arboristika,False
+treeworkers.ru,человек ухаживающий за деревьями,209,1,1,1,treeworkers.ru,0,not_planned,,,17,/blog/arborist,НЧ,общий,arboristika,False
+treeworkers.ru,кто занимается деревьями профессия,45,1,1,1,treeworkers.ru,0,not_planned,,,21,/blog/arborist,НЧ,общий,arboristika,False
+treeworkers.ru,кто выращивает деревья профессия,3,1,1,1,treeworkers.ru,0,not_planned,,,29,/blog/arborist,НЧ,общий,arboristika,False
+treeworkers.ru,кто занимается рубкой деревьев,4,0,0,1,treeworkers.ru,0,not_planned,,,42,/blog/arborist,НЧ,общий,arboristika,False
+tvoi-sad.com,твой сад ландшафтная компания,45,39,32,1,tvoi-sad.com,1,not_planned,,,5,/topiary,НЧ,коммерческий,landshaft,False
+tvoi-sad.com,сергей янченко ландшафтный дизайн,3,3,3,1,tvoi-sad.com,1,not_planned,,,4,/,НЧ,общий,landshaft,False
+udalenie-dereviev.moscow,щепа,65771,783,783,1,udalenie-dereviev.moscow,0,not_planned,,,38,/poleznye-stati/primenenie-drevesnoj-shhepy-10-luchshih-idej,СЧ,общий,arboristika,False
+udalenie-dereviev.moscow,пне,312280,330,330,1,udalenie-dereviev.moscow,0,not_planned,,,14,/poleznye-stati/kak-ubrat-pen-bez-korchevaniya-3-vernyh-sposoba,СЧ,общий,,False
+udalenie-dereviev.moscow,дипиос,441,209,209,1,udalenie-dereviev.moscow,0,not_planned,,,23,/vidy-rabot/porubochnyy-bilet-moskva,СЧ,общий,,False
+udalenie-dereviev.moscow,древесная щепа,3277,180,89,1,udalenie-dereviev.moscow,0,not_planned,,,13,/poleznye-stati/primenenie-drevesnoj-shhepy-10-luchshih-idej,СЧ,общий,arboristika,False
+udalenie-dereviev.moscow,как выкорчевать пень,1595,174,173,1,udalenie-dereviev.moscow,0,not_planned,,,36,/poleznye-stati/kak-ubrat-pen-bez-korchevaniya-3-vernyh-sposoba,СЧ,информационный,arboristika,False
+udalenie-dereviev.moscow,щепа это,1279,165,165,1,udalenie-dereviev.moscow,0,not_planned,,,16,/poleznye-stati/primenenie-drevesnoj-shhepy-10-luchshih-idej,СЧ,общий,arboristika,False
+udalenie-dereviev.moscow,как уничтожить дерево,3144,161,160,1,udalenie-dereviev.moscow,0,not_planned,,,29,/poleznye-stati/kak-ubrat-pen-bez-korchevaniya-3-vernyh-sposoba,СЧ,информационный,arboristika,False
+udalenie-dereviev.moscow,как убить дерево,1820,152,149,1,udalenie-dereviev.moscow,0,not_planned,,,36,/poleznye-stati/kak-ubrat-pen-bez-korchevaniya-3-vernyh-sposoba,СЧ,информационный,arboristika,False
+udalenie-dereviev.moscow,как уничтожить пень от спиленного дерева без выкорчевки быстро,253,148,148,1,udalenie-dereviev.moscow,0,planned,информационный,localFALLBACK-WITHFREQ-20260425T151607Z:5,23,/poleznye-stati/kak-ubrat-pen-bez-korchevaniya-3-vernyh-sposoba,СЧ,коммерческий,arboristika,False
+udalenie-dereviev.moscow,авто вышка,1150,140,125,1,udalenie-dereviev.moscow,0,not_planned,,,22,/vidy-rabot/arenda-avtomobilnoj-vyshki,СЧ,общий,,False
+udalenie-dereviev.moscow,вышка аренда,5487,103,98,1,udalenie-dereviev.moscow,0,not_planned,,,27,/vidy-rabot/arenda-avtomobilnoj-vyshki,СЧ,общий,,False
+udalenie-dereviev.moscow,как снять кота с дерева,344,93,88,1,udalenie-dereviev.moscow,0,not_planned,,,38,/poleznye-stati/snyat-kota-s-dereva,НЧ,информационный,arboristika,False
+udalenie-dereviev.moscow,как выкорчевать деревья на участке,898,93,93,1,udalenie-dereviev.moscow,0,not_planned,,,28,/poleznye-stati/kak-udalit-pen-na-uchastke,НЧ,информационный,arboristika,False
+udalenie-dereviev.moscow,обрезка сосны обыкновенной,484,86,86,1,udalenie-dereviev.moscow,1,not_planned,,,5,/poleznye-stati/obrezka-sosny,НЧ,коммерческий,,False
+udalenie-dereviev.moscow,что такое щепа,333,86,77,1,udalenie-dereviev.moscow,0,not_planned,,,15,/poleznye-stati/primenenie-drevesnoj-shhepy-10-luchshih-idej,НЧ,информационный,arboristika,False
+udalenie-dereviev.moscow,дробилка пней,477,82,82,1,udalenie-dereviev.moscow,0,not_planned,,,22,/vidy-rabot/arenda-izmelchitelya-pnej,НЧ,общий,arboristika,False
+udalenie-dereviev.moscow,щеп,65891,81,81,1,udalenie-dereviev.moscow,0,not_planned,,,16,/poleznye-stati/primenenie-drevesnoj-shhepy-10-luchshih-idej,НЧ,общий,,False
+udalenie-dereviev.moscow,щипа,4817,80,80,1,udalenie-dereviev.moscow,0,not_planned,,,21,/poleznye-stati/primenenie-drevesnoj-shhepy-10-luchshih-idej,НЧ,общий,,False
+udalenie-dereviev.moscow,корчеватель ручной,631,79,65,1,udalenie-dereviev.moscow,0,not_planned,,,27,/vidy-rabot/korchevanie-pney,НЧ,коммерческий,arboristika,False
+udalenie-dereviev.moscow,как формировать сосну,872,76,73,1,udalenie-dereviev.moscow,1,not_planned,,,10,/poleznye-stati/obrezka-sosny,НЧ,информационный,,False
+udalenie-dereviev.moscow,измельчитель древесины в щепу,320,70,70,1,udalenie-dereviev.moscow,0,not_planned,,,32,/vidy-rabot/izmelchenie-vetok-v-shchepu,НЧ,общий,,False
+udalenie-dereviev.moscow,labarice,132,66,66,1,udalenie-dereviev.moscow,0,not_planned,,,15,/poleznye-stati/kak-ubrat-pen-bez-korchevaniya-3-vernyh-sposoba,НЧ,общий,,False
+udalenie-dereviev.moscow,как снять кошку с высокого дерева,93,61,61,1,udalenie-dereviev.moscow,0,not_planned,,,31,/poleznye-stati/snyat-kota-s-dereva,НЧ,информационный,arboristika,False
+udalenie-dereviev.moscow,как снять кошку с дерева,261,58,57,1,udalenie-dereviev.moscow,0,not_planned,,,27,/poleznye-stati/snyat-kota-s-dereva,НЧ,информационный,arboristika,False
+udalenie-dereviev.moscow,как выкорчевать дерево,1835,58,57,1,udalenie-dereviev.moscow,0,not_planned,,,33,/poleznye-stati/kak-ubrat-pen-bez-korchevaniya-3-vernyh-sposoba,НЧ,информационный,arboristika,False
+udalenie-dereviev.moscow,щепка что такое,292,57,10,1,udalenie-dereviev.moscow,0,not_planned,,,26,/poleznye-stati/primenenie-drevesnoj-shhepy-10-luchshih-idej,НЧ,информационный,,False
+udalenie-dereviev.moscow,когда обрезать сосну,1237,55,55,1,udalenie-dereviev.moscow,1,not_planned,,,3,/poleznye-stati/obrezka-sosny,НЧ,коммерческий,,False
+udalenie-dereviev.moscow,для щепы дробилка,411,54,0,1,udalenie-dereviev.moscow,0,not_planned,,,33,/vidy-rabot/arenda-izmelchitelya-vetok,НЧ,общий,arboristika,False
+udalenie-dereviev.moscow,как удалить корни кустарника без корчевания,68,50,50,1,udalenie-dereviev.moscow,1,not_planned,,,10,/poleznye-stati/kak-ubrat-pen-bez-korchevaniya-3-vernyh-sposoba,НЧ,коммерческий,arboristika,False
+udalenie-dereviev.moscow,прищипывание сосны,178,50,50,1,udalenie-dereviev.moscow,0,not_planned,,,21,/poleznye-stati/obrezka-sosny,НЧ,общий,,False
+umisky.ru,снип 12 03 2001,10138,2597,2595,1,umisky.ru,0,not_planned,,,34,/about/docs/41,ВЧ,общий,,False
+umisky.ru,работы на высоте,613857,2426,2425,1,umisky.ru,0,not_planned,,,41,/about/docs/797,ВЧ,общий,,False
+umisky.ru,работа на высоте,613861,2363,2361,1,umisky.ru,0,planned,общий,localFALLBACK-WITHFREQ-20260425T151607Z:61,40,/about/docs/797,ВЧ,общий,,False
+umisky.ru,какие работы относятся к работам на высоте,12170,2221,2219,1,umisky.ru,0,not_planned,,,34,/about/docs/797,ВЧ,информационный,,False
+umisky.ru,снип 12 03 2001 статус,3338,1648,1610,1,umisky.ru,0,not_planned,,,35,/about/docs/41,ВЧ,общий,,False
+umisky.ru,статус снип 12 03 2001,3338,1648,38,1,umisky.ru,0,not_planned,,,41,/about/docs/41,СЧ,общий,,False
+umisky.ru,правила по охране труда по работе на высоте,26026,1324,3,1,umisky.ru,0,not_planned,,,25,/about/docs/797,СЧ,общий,,False
+umisky.ru,правила по охране труда на работе на высоте,26026,1324,0,1,umisky.ru,0,not_planned,,,42,/about/docs/797,ВЧ,общий,,False
+umisky.ru,правила при охране труда при работе на высоте,24808,1320,3,1,umisky.ru,0,not_planned,,,32,/about/docs/797,СЧ,общий,,False
+umisky.ru,правила при работе на высоте по охране труда,23747,1315,5,1,umisky.ru,0,not_planned,,,35,/about/docs/797,СЧ,общий,,False
+umisky.ru,снип 12 04 2002,4860,1224,1214,1,umisky.ru,0,not_planned,,,23,/about/docs/42,ВЧ,общий,,False
+umisky.ru,782н об утверждении правил по охране труда при работе на высоте,2976,1105,1105,1,umisky.ru,0,not_planned,,,23,/about/docs/797,ВЧ,общий,,False
+umisky.ru,статус снип 12 04 2002,1822,1033,32,1,umisky.ru,0,not_planned,,,28,/about/docs/42,СЧ,общий,,False
+umisky.ru,приказ 782н,19447,965,843,1,umisky.ru,0,not_planned,,,43,/about/docs/797,СЧ,общий,,False
+umisky.ru,кем выполняется подготовка рабочего места для выполнения строительно монтажных работ,1909,921,921,1,umisky.ru,0,not_planned,,,23,/about/docs/41,СЧ,общий,,False
+umisky.ru,в каком документе отражают порядок принятия решений об остановке и невозобновлении работ,1143,742,742,1,umisky.ru,0,not_planned,,,15,/about/docs/797,СЧ,общий,,False
+umisky.ru,снаряжение альпинистское,5825,679,9,1,umisky.ru,0,not_planned,,,36,/about/articles/podbiraem-bazovyj-komplekt-snaryazheniya-alpinista,СЧ,общий,,False
+umisky.ru,782н приказ,16832,596,66,1,umisky.ru,0,not_planned,,,38,/about/docs/797,СЧ,общий,,False
+umisky.ru,работа на высоте с какой высоты начинается,903,448,364,1,umisky.ru,0,planned,общий,localFALLBACK-WITHFREQ-20260425T151607Z:100,35,/about/docs/797,СЧ,информационный,,False
+umisky.ru,с какой высоты начинается работа на высоте,871,431,72,1,umisky.ru,0,not_planned,,,31,/about/docs/797,СЧ,информационный,,False
+umisky.ru,на какой срок выдается наряд допуск на производство работ на высоте,589,413,405,1,umisky.ru,0,not_planned,,,24,/about/docs/797,СЧ,информационный,,False
+umisky.ru,правила по охране труда при работе на высоте 782 н,590,386,1,1,umisky.ru,0,not_planned,,,34,/about/docs/797,СЧ,общий,,False
+umisky.ru,как оформляется завершение работ на высоте по наряду допуску после осмотра места работы,648,374,374,1,umisky.ru,0,not_planned,,,26,/about/docs/797,СЧ,информационный,,False
+umisky.ru,782 н правила по охране труда при работе на высоте,500,349,349,1,umisky.ru,0,not_planned,,,30,/about/docs/797,СЧ,общий,,False
+umisky.ru,782н правила по охране труда при работе на высоте,12644,339,308,1,umisky.ru,0,not_planned,,,30,/about/docs/797,СЧ,общий,,False
+umisky.ru,на какие виды делятся системы обеспечения безопасности работ на высоте,488,335,330,1,umisky.ru,0,not_planned,,,30,/about/docs/797,СЧ,информационный,,False
+umisky.ru,правила по охране труда работы на высоте,26026,316,6,1,umisky.ru,0,not_planned,,,46,/about/docs/797,СЧ,общий,,False
+umisky.ru,правила работы на высоте по охране труда,26026,316,63,1,umisky.ru,0,not_planned,,,33,/about/docs/797,СЧ,общий,,False
+umisky.ru,ано мдто,736,311,295,1,umisky.ru,0,not_planned,,,38,/reviews/795,СЧ,общий,,False
+umisky.ru,снип 12 03 2001 безопасность труда в строительстве,2067,307,298,1,umisky.ru,0,not_planned,,,28,/about/docs/41,СЧ,общий,,False
+virubka-dereva.ru,измельчитель веток как называется,176,69,25,1,virubka-dereva.ru,0,not_planned,,,31,/advice/ukhod-za-uchastkom/professionalnye-izmelchiteli-vetok,НЧ,информационный,,False
+virubka-dereva.ru,сжигание порубочных остатков,542,59,59,1,virubka-dereva.ru,0,not_planned,,,29,/advice/vyrubka/effektivnye-metody-utilizatsii-porubochnykh-ostatkov,НЧ,общий,,False
+virubka-dereva.ru,санитарная вырубка леса это,194,37,37,1,virubka-dereva.ru,0,not_planned,,,32,/services/udalenie-derevev/sanitarnaya-vyrubka-derevev,НЧ,общий,arboristika,False
+virubka-dereva.ru,порубочный билет ижевск,80,32,30,1,virubka-dereva.ru,0,not_planned,,,37,/services/porubochnyy-bilet,НЧ,общий,,False
+virubka-dereva.ru,как правильно спиливать деревья,2345,31,30,1,virubka-dereva.ru,0,not_planned,,,22,/advice/vyrubka/4-sposoba-pravilno-spilit-derevo,НЧ,коммерческий,arboristika,False
+virubka-dereva.ru,8 28 коап,484,30,7,1,virubka-dereva.ru,0,not_planned,,,40,/advice/zakony/statya-8-28-koap-rf-nezakonnaya-rubka-povrezhdenie-samovolnoe-vykapyvanie,НЧ,общий,,False
+virubka-dereva.ru,кто такой короед,112,29,27,1,virubka-dereva.ru,0,not_planned,,,29,/advice/ukhod-za-uchastkom/kto-takoy-koroed,НЧ,общий,,False
+virubka-dereva.ru,санитарная рубка деревьев это,151,26,26,1,virubka-dereva.ru,0,not_planned,,,31,/services/udalenie-derevev/sanitarnaya-vyrubka-derevev,НЧ,общий,arboristika,False
+virubka-dereva.ru,утилизация древесных отходов,306,24,24,1,virubka-dereva.ru,0,not_planned,,,37,/advice/vyrubka/utilizatsiya-derevev,НЧ,общий,vyvoz-musora,False
+virubka-dereva.ru,оборудование для спила деревьев,67,22,22,1,virubka-dereva.ru,0,not_planned,,,31,/services/obrezka-derevev/spil-i-obrezka-derevev-s-avtovyshki,НЧ,коммерческий,arboristika,False
+virubka-dereva.ru,как корчевать пни,184,20,19,1,virubka-dereva.ru,0,not_planned,,,36,/advice/ukhod-za-uchastkom/preimushchestva-i-nedostatki-razlichnykh-metodov-drobleniya-pney,НЧ,коммерческий,arboristika,False
+virubka-dereva.ru,опрыскивание высоких деревьев,449,20,20,1,virubka-dereva.ru,0,not_planned,,,14,/services/opryskivanie-derevev-ot-vrediteley,НЧ,общий,arboristika,False
+virubka-dereva.ru,дерево в аренду,1149,16,16,1,virubka-dereva.ru,0,not_planned,,,40,/services/utilizatsiya/arenda-izmelchitelya-vetok,НЧ,общий,arboristika,False
+virubka-dereva.ru,порубочный билет ульяновск,47,16,16,1,virubka-dereva.ru,0,not_planned,,,33,/services/porubochnyy-bilet,НЧ,общий,,False
+virubka-dereva.ru,как называется измельчитель веток деревьев и кустарников,16,15,15,1,virubka-dereva.ru,0,not_planned,,,40,/advice/ukhod-za-uchastkom/professionalnye-izmelchiteli-vetok,НЧ,информационный,arboristika,False
+virubka-dereva.ru,пансионат юрикс 2000,25,15,15,1,virubka-dereva.ru,0,not_planned,,,46,/projects/udalenie-pney/udalenie-pney-pansionat-yuriks,НЧ,общий,,False
+virubka-dereva.ru,что такое санитарная вырубка леса,17,15,15,1,virubka-dereva.ru,0,not_planned,,,34,/services/udalenie-derevev/sanitarnaya-vyrubka-derevev,НЧ,информационный,arboristika,False
+virubka-dereva.ru,заявление на порубочный билет,256,15,15,1,virubka-dereva.ru,0,not_planned,,,40,/advice/zakony/oformlenie-porubochnogo-bileta,НЧ,общий,,False
+virubka-dereva.ru,123 пп,572,14,8,1,virubka-dereva.ru,0,not_planned,,,28,/advice/zakony/oformlenie-porubochnogo-bileta,НЧ,общий,,False
+virubka-dereva.ru,короед это кто,119,14,3,1,virubka-dereva.ru,0,not_planned,,,22,/advice/ukhod-za-uchastkom/kto-takoy-koroed,НЧ,общий,,False
+virubka-dereva.ru,какие деревья ест короед,45,14,9,1,virubka-dereva.ru,0,not_planned,,,30,/services/opryskivanie-derevev-ot-vrediteley/zashchita-derevev-ot-koroeda,НЧ,информационный,arboristika,False
+virubka-dereva.ru,лечение хвойных деревьев,248,13,13,1,virubka-dereva.ru,0,not_planned,,,36,/services/lechenie-derevev/lechenie-khvoynykh-derevev,НЧ,общий,arboristika,False
+virubka-dereva.ru,утилизация древесины,245,12,12,1,virubka-dereva.ru,0,not_planned,,,40,/advice/vyrubka/utilizatsiya-derevev,НЧ,общий,,False
+virubka-dereva.ru,валка леса это,96,12,12,1,virubka-dereva.ru,0,not_planned,,,40,/advice/vyrubka/valka-derevev-v-gorodskikh-usloviyakh,НЧ,общий,,False
+virubka-dereva.ru,прайс лист на работы по дереву,149,10,10,1,virubka-dereva.ru,0,not_planned,,,33,/price,НЧ,коммерческий,arboristika,False
+virubka-dereva.ru,санитарная рубка леса,793,10,10,1,virubka-dereva.ru,0,not_planned,,,29,/services/udalenie-derevev/sanitarnaya-vyrubka-derevev,НЧ,общий,,False
+virubka-dereva.ru,ветки инструмент,1276,10,10,1,virubka-dereva.ru,0,not_planned,,,33,/advice/ukhod-za-uchastkom/professionalnye-izmelchiteli-vetok,НЧ,общий,,False
+virubka-dereva.ru,могу ли я на своем участке срубить дерево,20,10,3,1,virubka-dereva.ru,0,not_planned,,,39,/advice/vyrubka/mozhet-li-vladelets-uchastka-samostoyatelno-vyrubat-na-nem-derevya,НЧ,общий,arboristika,False
+virubka-dereva.ru,санитарная рубка это,230,10,10,1,virubka-dereva.ru,0,not_planned,,,35,/services/udalenie-derevev/sanitarnaya-vyrubka-derevev,НЧ,общий,,False
+virubka-dereva.ru,незаконная вырубка деревьев статья коап рф,10,10,10,1,virubka-dereva.ru,0,not_planned,,,44,/advice/zakony/statya-8-28-koap-rf-nezakonnaya-rubka-povrezhdenie-samovolnoe-vykapyvanie,НЧ,общий,arboristika,False

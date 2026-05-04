@@ -26,6 +26,12 @@ screen/
 # Playwright MCP — auto-snapshots от browser tools, не коммитить
 .playwright-mcp/
 
+# Chat logs — curated session summaries, локальные, не коммитить
+chat/
+
+# Scheduled tasks lock — runtime artifact
+.claude/scheduled_tasks.lock
+
 # Heavy media assets — не коммитим исходники, только мета и README
 assets/photos/
 assets/videos/
