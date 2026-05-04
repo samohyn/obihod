@@ -76,8 +76,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Прямой Payload-вызов (без unstable_cache wrapper) — чтобы избежать
   // проблем с serialization payloadClient внутри cached scope.
   // Кеширование sitemap делает сам Next 16 через revalidate=3600.
-  const [services, districts, cases, blogPosts, b2bPages, authors, subServices] =
-    await Promise.all([
+  const [services, districts, cases, blogPosts, b2bPages, authors, subServices] = await Promise.all(
+    [
       fetchServices(),
       fetchDistricts(),
       fetchCases(),
@@ -85,7 +85,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       fetchPublishedB2B(),
       fetchPublishedAuthors(),
       getAllSubServiceParams().catch(() => [] as Array<{ service: string; sub: string }>),
-    ])
+    ],
+  )
 
   const serviceEntries: Entry[] = services.map((slug) => ({
     url: `${SITE_URL}/${slug}/`,
@@ -102,7 +103,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.6,
     }))
-
 
   const caseEntries: Entry[] = cases
     .filter((c): c is SlugDoc & { slug: string } => typeof c.slug === 'string')
@@ -193,7 +193,6 @@ async function fetchDistricts(): Promise<SlugDoc[]> {
     return []
   }
 }
-
 
 async function fetchCases(): Promise<SlugDoc[]> {
   try {
