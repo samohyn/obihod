@@ -1,6 +1,53 @@
 'use client'
 
+import { useState } from 'react'
+
+type State = 'idle' | 'loading' | 'success' | 'error'
+
 export function HeroForm() {
+  const [state, setState] = useState<State>('idle')
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    if (state === 'loading') return
+    setState('loading')
+
+    const fd = new FormData(e.currentTarget)
+    try {
+      const res = await fetch('/api/leads/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: fd.get('name') ?? undefined,
+          phone: fd.get('phone') ?? '',
+          service: fd.get('service') ?? undefined,
+          district: fd.get('district') ?? undefined,
+          sourcePage: '/',
+          source: 'hero-form',
+        }),
+      })
+      if (res.status === 201 || res.status === 200) {
+        setState('success')
+      } else {
+        setState('error')
+      }
+    } catch {
+      setState('error')
+    }
+  }
+
+  if (state === 'success') {
+    return (
+      <div className="hpc-form-card">
+        <div className="head">
+          <div className="eyebrow">§ Заявка · отправлена</div>
+          <h3 className="t">Спасибо!</h3>
+          <p className="s">Менеджер пришлёт смету в WhatsApp / Telegram в течение 10 минут.</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="hpc-form-card">
       <div className="head">
@@ -8,48 +55,73 @@ export function HeroForm() {
         <h3 className="t">Рассчитать стоимость</h3>
         <p className="s">Менеджер пришлёт смету в WhatsApp / Telegram</p>
       </div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault()
-          alert('Демо-макет: форма не подключена')
-        }}
-      >
+      <form onSubmit={handleSubmit}>
+        {/* honeypot */}
+        <input name="email_url" type="text" style={{ display: 'none' }} tabIndex={-1} />
+
         <div className="field">
-          <label>Имя</label>
-          <input type="text" placeholder="Как к вам обращаться" autoComplete="name" />
+          <label htmlFor="hf-name">Имя</label>
+          <input
+            id="hf-name"
+            name="name"
+            type="text"
+            placeholder="Как к вам обращаться"
+            autoComplete="name"
+          />
         </div>
         <div className="field">
-          <label>Телефон</label>
-          <input type="tel" placeholder="+7 (___) ___-__-__" autoComplete="tel" required />
+          <label htmlFor="hf-phone">Телефон</label>
+          <input
+            id="hf-phone"
+            name="phone"
+            type="tel"
+            placeholder="+7 (___) ___-__-__"
+            autoComplete="tel"
+            required
+          />
         </div>
         <div className="field">
-          <label>Услуга</label>
-          <select required defaultValue="">
+          <label htmlFor="hf-service">Услуга</label>
+          <select id="hf-service" name="service" required defaultValue="">
             <option value="" disabled>
               Выберите услугу
             </option>
-            <option>Арбористика — спил, обрезка, удаление</option>
-            <option>Чистка крыш — снег, наледь, водостоки</option>
-            <option>Вывоз мусора — контейнеры, газель</option>
-            <option>Демонтаж — сараи, бани, дома</option>
-            <option>Не уверен — нужна консультация</option>
+            <option value="arboristika">Арбористика — спил, обрезка, удаление</option>
+            <option value="chistka-krysh">Чистка крыш — снег, наледь, водостоки</option>
+            <option value="vyvoz-musora">Вывоз мусора — контейнеры, газель</option>
+            <option value="demontazh">Демонтаж — сараи, бани, дома</option>
+            <option value="consultation">Не уверен — нужна консультация</option>
           </select>
         </div>
         <div className="field">
-          <label>
+          <label htmlFor="hf-district">
             Адрес или район{' '}
             <span className="muted" style={{ fontWeight: 400 }}>
               (опционально)
             </span>
           </label>
-          <input type="text" placeholder="Истра, ул. Лесная, СНТ Берёзовая роща" />
+          <input
+            id="hf-district"
+            name="district"
+            type="text"
+            placeholder="Истра, ул. Лесная, СНТ Берёзовая роща"
+          />
         </div>
+
+        {state === 'error' && (
+          <p style={{ color: 'var(--c-error, #c0392b)', fontSize: 13, margin: '0 0 8px' }}>
+            Ошибка отправки. Позвоните нам напрямую.
+          </p>
+        )}
+
         <button
           className="btn btn-primary"
           type="submit"
+          disabled={state === 'loading'}
           style={{ width: '100%', justifyContent: 'center', marginTop: '4px' }}
+          aria-label="Получить смету"
         >
-          Получить смету →
+          {state === 'loading' ? 'Отправляем…' : 'Получить смету →'}
         </button>
         <div className="or">или</div>
         <a className="photo-cta" href="#foto-smeta">

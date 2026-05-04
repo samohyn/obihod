@@ -46,7 +46,10 @@ export async function Hero() {
             <a className="btn btn-primary" href="#cta">
               Получить смету за 10 минут
             </a>
-            <a className="btn btn-secondary" href={phoneE164 ? `tel:${phoneE164}` : 'tel:+74950000000'}>
+            <a
+              className="btn btn-secondary"
+              href={phoneE164 ? `tel:${phoneE164}` : 'tel:+74950000000'}
+            >
               <svg
                 width="16"
                 height="16"

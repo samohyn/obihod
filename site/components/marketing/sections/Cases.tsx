@@ -5,8 +5,8 @@ export function Cases() {
         <div className="eyebrow">§ 06 · Кейсы · 14 объектов в портфолио</div>
         <h2 style={{ maxWidth: '22ch' }}>Что мы сделали в этом сезоне</h2>
         <p className="lead">
-          Все суммы — фактические, со сметы и подписанного акта. Фото — из чата с заказчиком,
-          после согласования на публикацию.
+          Все суммы — фактические, со сметы и подписанного акта. Фото — из чата с заказчиком, после
+          согласования на публикацию.
         </p>
 
         <div className="hp-cases">
@@ -173,9 +173,7 @@ export function Cases() {
             <div className="photo">
               <span className="tag b2c">B2C</span>
               <span className="divider"></span>
-              <span className="lbl">
-                ДО / ПОСЛЕ · кронирование 4 деревьев · Пушкино · 14 мар
-              </span>
+              <span className="lbl">ДО / ПОСЛЕ · кронирование 4 деревьев · Пушкино · 14 мар</span>
             </div>
             <div className="body">
               <h3 className="t">Кронирование старого сада</h3>

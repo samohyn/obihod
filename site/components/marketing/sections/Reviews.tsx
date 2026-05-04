@@ -30,7 +30,10 @@ export function Reviews() {
           <div className="stat-tile">
             <div className="lbl">NPS</div>
             <div className="val">
-              98 <span className="muted" style={{ fontSize: '14px' }}>/100</span>
+              98{' '}
+              <span className="muted" style={{ fontSize: '14px' }}>
+                /100
+              </span>
             </div>
             <div className="delta">внутренний опрос Q1 2026</div>
           </div>
@@ -47,8 +50,8 @@ export function Reviews() {
             </div>
             <div className="stars">★★★★★</div>
             <p className="text">
-              «Сфоткала упавшую берёзу — через 8 минут пришёл ответ в WhatsApp. Приехали через
-              день, всё убрали за 3 часа, увезли пенёк. Цена точно как в смете.»
+              «Сфоткала упавшую берёзу — через 8 минут пришёл ответ в WhatsApp. Приехали через день,
+              всё убрали за 3 часа, увезли пенёк. Цена точно как в смете.»
             </p>
           </article>
 
