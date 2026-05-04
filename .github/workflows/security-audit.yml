@@ -55,7 +55,7 @@ jobs:
 
       - name: Create/update issue on failure
         if: failure() && steps.audit.outputs.rc != '0' && github.event_name == 'schedule'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const title = '⚠️ pnpm audit: high/critical CVE'
