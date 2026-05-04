@@ -25,22 +25,22 @@ test.describe('Главная страница', () => {
     await expect(form.getByRole('button', { name: /смету/i })).toBeVisible()
   })
 
-  test('все 11 секций Direction 2 отрендерены', async ({ page }) => {
-    // Проверяем ключевые тексты каждой секции
-    const markers = [
-      /арбористика/i, // §02 pillars
-      /5 шагов/i, // §03 how
-      /прозрачные цены/i, // §04 pricing
-      /пришлите фото/i, // §05 photo-smeta
-      /кейсы/i, // §06 cases
-      /яндекс\.карты|авито/i, // §07 reviews
-      /каждому договору/i, // §08 eeat
-      /12 районов/i, // §09 coverage
-      /частые вопросы/i, // §10 faq
-      /сфотографируйте или позвоните/i, // §11 cta
+  test('все 11 секций Direction 2 отрендерены — проверяем h2 заголовки', async ({ page }) => {
+    // Проверяем h2 секций — они всегда видимы (не внутри accordion)
+    const headings = [
+      'Один подрядчик', // §02 pillars
+      '5 шагов', // §03 how
+      'без «по запросу»', // §04 pricing
+      'Пришлите фото', // §05 photo-smeta
+      'этом сезоне', // §06 cases
+      'Что пишут', // §07 reviews
+      'каждому договору', // §08 eeat
+      'активной работе', // §09 coverage
+      'чаще всего', // §10 faq
+      'позвоните', // §11 cta
     ]
-    for (const marker of markers) {
-      await expect(page.getByText(marker).first()).toBeVisible()
+    for (const text of headings) {
+      await expect(page.getByRole('heading').filter({ hasText: text }).first()).toBeVisible()
     }
   })
 
@@ -68,12 +68,11 @@ test.describe('FAQ', () => {
     const items = page.locator('.accordion .item')
     await expect(items).toHaveCount(8)
 
-    // Первый пункт закрыт по умолчанию
     const firstSummary = items.first().locator('summary')
     await expect(firstSummary).toBeVisible()
 
-    // Клик открывает
+    // Компонент использует data-open (React state, не native <details>)
     await firstSummary.click()
-    await expect(items.first()).toHaveAttribute('open', '')
+    await expect(items.first()).toHaveAttribute('data-open', 'true')
   })
 })
