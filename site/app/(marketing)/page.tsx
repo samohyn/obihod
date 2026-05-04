@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
 
-import { SeasonCalendar } from '@/components/marketing/_shared/graphics'
-import { B2B } from '@/components/marketing/sections/B2B'
 import { canonicalFor } from '@/lib/seo/canonical'
 
 // US-7 audit fix: главная без canonical — добавляем self-canonical
@@ -9,51 +7,31 @@ import { canonicalFor } from '@/lib/seo/canonical'
 export const metadata: Metadata = {
   alternates: { canonical: canonicalFor('/') },
 }
-import { Calculator } from '@/components/marketing/sections/Calculator'
+
 import { Cases } from '@/components/marketing/sections/Cases'
+import { Coverage } from '@/components/marketing/sections/Coverage'
 import { CtaFooter } from '@/components/marketing/sections/CtaFooter'
 import { FAQ } from '@/components/marketing/sections/FAQ'
 import { Guarantees } from '@/components/marketing/sections/Guarantees'
 import { Hero } from '@/components/marketing/sections/Hero'
 import { How } from '@/components/marketing/sections/How'
+import { PhotoSmeta } from '@/components/marketing/sections/PhotoSmeta'
+import { PricingTable } from '@/components/marketing/sections/PricingTable'
 import { Reviews } from '@/components/marketing/sections/Reviews'
 import { Services } from '@/components/marketing/sections/Services'
-import { Subscription } from '@/components/marketing/sections/Subscription'
-import { Team } from '@/components/marketing/sections/Team'
 
 export default function Home() {
   return (
     <>
       <Hero />
       <Services />
-      <section id="calendar" className="band-alt">
-        <div className="wrap">
-          <div className="section-head">
-            <div>
-              <span className="eyebrow">§&nbsp;02 · Круглый год</span>
-              <h2 className="h-xl">
-                Сезонная карта
-                <br />
-                услуг.
-              </h2>
-            </div>
-            <p className="section-sub">
-              Каждая услуга — в свой сезон. Абонемент «Обиход.Участок» закрывает все&nbsp;четыре
-              без&nbsp;дополнительных звонков: весной — обрезка, летом — демонтаж, осенью — вывоз,
-              зимой — снег.
-            </p>
-          </div>
-          <SeasonCalendar />
-        </div>
-      </section>
-      <Calculator />
       <How />
-      <Guarantees />
+      <PricingTable />
+      <PhotoSmeta />
       <Cases />
-      <Subscription />
       <Reviews />
-      <Team />
-      <B2B />
+      <Guarantees />
+      <Coverage />
       <FAQ />
       <CtaFooter />
     </>
