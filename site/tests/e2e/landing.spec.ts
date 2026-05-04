@@ -1,10 +1,8 @@
 import { expect, test } from '@playwright/test'
 
 /**
- * Smoke-тесты главной страницы после переноса прототипа в Next.js.
- * Покрывают что сайт вообще запускается и ключевые секции видимы.
- * Детальные сценарии калькулятора / формы / deep-link в мессенджер —
- * отдельные спеки, когда подключим backend-интеграции.
+ * Smoke-тесты главной страницы Direction 2 «Конверсионный».
+ * Обновлены под feat/homepage-classic-launch (PR #164).
  */
 test.describe('Главная страница', () => {
   test.beforeEach(async ({ page }) => {
@@ -15,82 +13,66 @@ test.describe('Главная страница', () => {
     await expect(page).toHaveTitle(/Обиход/)
   })
 
-  test('Hero с брендовым слоганом виден', async ({ page }) => {
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Участок')
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('в порядке')
+  test('Hero — H1 содержит ключевой оффер', async ({ page }) => {
+    const h1 = page.getByRole('heading', { level: 1 })
+    await expect(h1).toContainText('Москве и Подмосковье')
   })
 
-  test('все 12 ключевых секций лендинга отрендерены', async ({ page }) => {
-    const ids = [
-      'services',
-      'calendar',
-      'calc',
-      'how',
-      'guarantees',
-      'cases',
-      'subscription',
-      'reviews',
-      'team',
-      'b2b',
-      'faq',
-      'contact',
-    ] as const
+  test('Hero — форма заявки с обязательным полем телефон', async ({ page }) => {
+    const form = page.locator('.hpc-form-card form')
+    await expect(form).toBeVisible()
+    await expect(form.locator('#hf-phone')).toBeVisible()
+    await expect(form.getByRole('button', { name: /смету/i })).toBeVisible()
+  })
 
-    for (const id of ids) {
-      await expect(page.locator(`#${id}`)).toBeVisible()
+  test('все 11 секций Direction 2 отрендерены — проверяем h2 заголовки', async ({ page }) => {
+    // Проверяем h2 секций — они всегда видимы (не внутри accordion)
+    const headings = [
+      'Один подрядчик', // §02 pillars
+      '5 шагов', // §03 how
+      'без «по запросу»', // §04 pricing
+      'Пришлите фото', // §05 photo-smeta
+      'этом сезоне', // §06 cases
+      'Что пишут', // §07 reviews
+      'каждому договору', // §08 eeat
+      'активной работе', // §09 coverage
+      'чаще всего', // §10 faq
+      'позвоните', // §11 cta
+    ]
+    for (const text of headings) {
+      await expect(page.getByRole('heading').filter({ hasText: text }).first()).toBeVisible()
     }
   })
 
-  test('шапка содержит навигационные ссылки и CTA', async ({ page }) => {
-    // Новый header (feat/marketing-header-with-dropdowns): <header><nav aria-label="Основное меню">…
-    // CTA рендерится в slot 'right' внутри <header>, не внутри <nav>.
+  test('шапка содержит навигацию и CTA', async ({ page }) => {
     const header = page.getByRole('banner')
     await expect(header).toBeVisible()
     await expect(header.getByRole('link', { name: /Получить смету/ })).toBeVisible()
   })
 
-  test('форма заявки в контакт-секции содержит обязательные поля', async ({ page }) => {
-    const form = page.locator('form[aria-label="Заявка на замер"]')
-    await expect(form.getByPlaceholder('Ваше имя')).toBeVisible()
-    await expect(form.getByPlaceholder(/\+7/)).toBeVisible()
-    await expect(form.getByRole('button', { name: /Отправить заявку/ })).toBeVisible()
-  })
-})
-
-test.describe('Калькулятор', () => {
-  test('переключение услуги меняет активный таб', async ({ page }) => {
-    await page.goto('/#calc')
-    const tablist = page.getByRole('tablist', { name: 'Выбор услуги' })
-    await expect(tablist).toBeVisible()
-
-    const snowTab = tablist.getByRole('tab', { name: 'Уборка снега' })
-    await snowTab.click()
-    await expect(snowTab).toHaveAttribute('aria-selected', 'true')
+  test('Pricing table — 7 строк с ценами', async ({ page }) => {
+    const rows = page.locator('.hpc-price-row')
+    await expect(rows).toHaveCount(7)
+    await expect(rows.first()).toContainText('₽')
   })
 
-  test('итоговая цена > 0 и показывается вилка', async ({ page }) => {
-    await page.goto('/#calc')
-    const price = page.locator('.calc-price')
-    await expect(price).toBeVisible()
-    const text = (await price.textContent()) ?? ''
-    // "X.X тыс ₽" — проверяем что число > 0
-    const num = parseFloat(text.replace(/[^\d.,]/g, '').replace(',', '.'))
-    expect(num).toBeGreaterThan(0)
-
-    await expect(page.locator('.calc-range')).toContainText('вилка:')
+  test('Coverage — 12 районов', async ({ page }) => {
+    const chips = page.locator('.hp-cov-chip')
+    await expect(chips).toHaveCount(12)
   })
 })
 
 test.describe('FAQ', () => {
-  test('первый вопрос открыт по умолчанию, клик переключает', async ({ page }) => {
+  test('пункты открываются по клику', async ({ page }) => {
     await page.goto('/#faq')
-    const items = page.locator('.faq-item')
-    await expect(items.first()).toHaveClass(/is-open/)
+    const items = page.locator('.accordion .item')
+    await expect(items).toHaveCount(8)
 
-    // Клик по второму — первый закрывается, второй открывается
-    const secondBtn = items.nth(1).getByRole('button')
-    await secondBtn.click()
-    await expect(items.nth(1)).toHaveClass(/is-open/)
-    await expect(items.first()).not.toHaveClass(/is-open/)
+    const firstSummary = items.first().locator('summary')
+    await expect(firstSummary).toBeVisible()
+
+    // Компонент использует data-open (React state, не native <details>)
+    await firstSummary.click()
+    await expect(items.first()).toHaveAttribute('data-open', 'true')
   })
 })

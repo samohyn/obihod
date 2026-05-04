@@ -1,97 +1,146 @@
-import { AmberSeal } from '../_shared/graphics'
-
-type Seal = { c: string; l: string }
-type Guarantee = {
-  big: string
-  unit: string
-  t: string
-  d: string
-  foot: string
-  seal?: Seal
-}
-
-const GUARS: Guarantee[] = [
-  {
-    big: '5',
-    unit: 'млн ₽',
-    t: 'Страхование ответственности',
-    d: 'Полис на каждый выезд. Если бригада что-то повредит — компенсация через страховую, без нервов и судов.',
-    foot: 'ПОЛИС · ИНГОССТРАХ',
-    seal: { c: '5\nмлн ₽', l: 'СТРАХОВКА · ИНГОССТРАХ · ' },
-  },
-  {
-    big: '12',
-    unit: 'мес',
-    t: 'Гарантия на работу',
-    d: 'Санитарная обрезка — 12 мес. Фрезеровка пня — 3 года на отсутствие прорастания. Сертификат на руки в день работы.',
-    foot: 'СЕРТИФИКАТ · A5 · ПЕЧАТЬ',
-    seal: { c: '12\nмес', l: 'ГАРАНТИЯ · ОБИХОД · ' },
-  },
-  {
-    big: '−10',
-    unit: '%',
-    t: 'Опоздали — скидка',
-    d: 'Назвали время — держим. Опоздание больше 30 минут — автоматически снижаем цену на 10%. Без звонков и напоминаний.',
-    foot: 'АВТО · В ДОГОВОРЕ',
-  },
-  {
-    big: '0',
-    unit: '₽',
-    t: 'Замер и выезд',
-    d: 'Замерщик приезжает бесплатно в любой район МО в радиусе 120 км от МКАД. Не понравилась смета — не платите ничего.',
-    foot: 'ВСЯ МО · 120 КМ ОТ МКАД',
-  },
-  {
-    big: '100',
-    unit: '%',
-    t: 'Цена в договоре = в калькуляторе',
-    d: 'Любое отклонение от сметы — только с вашего письменного согласия в мессенджере. Никаких «открылось на месте».',
-    foot: 'ФИКС · В ПИСЬМЕННОМ ВИДЕ',
-  },
-  {
-    big: '24',
-    unit: '/7',
-    t: 'Аварийный телефон',
-    d: 'Упавшее дерево ночью, сугроб заблокировал ворота, срочный демонтаж после пожара — выезжаем в любое время.',
-    foot: 'КРУГЛОСУТОЧНО',
-  },
-]
-
 export function Guarantees() {
   return (
-    <section id="guarantees" className="band-alt">
+    <section className="hp-section alt">
       <div className="wrap">
-        <div className="section-head">
-          <div>
-            <span className="eyebrow">§&nbsp;04 · Гарантии и SLA</span>
-            <h2 className="h-xl">
-              Мы продаём не&nbsp;услугу,
-              <br />
-              а&nbsp;спокойствие.
-            </h2>
-          </div>
-          <p className="section-sub">
-            Шесть обязательств, которые прописаны в&nbsp;договоре и&nbsp;в&nbsp;сертификате.
-            Не&nbsp;маркетинг — операционный стандарт каждого выезда.
-          </p>
-        </div>
-        <div className="guar-grid">
-          {GUARS.map((g, i) => (
-            <div key={i} className="guar-card">
-              {g.seal && (
-                <div className="amber-seal-inline">
-                  <AmberSeal size={72} label={g.seal.l} center={g.seal.c} />
-                </div>
-              )}
-              <div className="guar-big tnum">
-                {g.big}
-                <span className="sm">&nbsp;{g.unit}</span>
-              </div>
-              <div className="guar-title">{g.t}</div>
-              <div className="guar-desc">{g.d}</div>
-              <div className="guar-foot">{g.foot}</div>
+        <div className="eyebrow">§ 08 · Доверие · лицензии · СРО · парк техники</div>
+        <h2 style={{ maxWidth: '22ch' }}>Документы, которые мы прикрепляем к каждому договору</h2>
+        <p className="lead">
+          У клиента всегда есть основание спросить «а кто вы?». Ниже — формальные ответы. Все
+          документы — в актуальной редакции, по запросу присылаем PDF до подписания договора.
+        </p>
+
+        <div className="hpc-trust">
+          <div className="hpc-trust-card">
+            <div className="doc">
+              <span className="badge-ok">✓</span>
+              <span>
+                СВИДЕТЕЛЬСТВО
+                <br />
+                СРО · ИНГ-РЕГИОН
+                <br />
+                № 0042-2026
+                <br />
+                действует до 2027
+              </span>
             </div>
-          ))}
+            <h3 className="t">СРО · Свидетельство о допуске</h3>
+            <p className="meta">Актуально · ИНГ-РЕГИОН · 1 млрд ₽</p>
+          </div>
+
+          <div className="hpc-trust-card">
+            <div className="doc">
+              <span className="badge-ok">✓</span>
+              <span>
+                ПОЛИС СТРАХОВАНИЯ
+                <br />
+                ОТВЕТСТВЕННОСТИ
+                <br />
+                ИНГОССТРАХ · 5 МЛН ₽
+                <br />
+                действует до 2027
+              </span>
+            </div>
+            <h3 className="t">Страховка ответственности</h3>
+            <p className="meta">Актуально · Ингосстрах · 5 млн ₽</p>
+          </div>
+
+          <div className="hpc-trust-card">
+            <div className="doc">
+              <span className="badge-ok">✓</span>
+              <span>
+                СЕРТИФИКАТ
+                <br />
+                АРБОРИСТ-АЛЬПИНИСТ
+                <br />
+                3 РАЗРЯД
+                <br />
+                выдан 2024 · действует
+              </span>
+            </div>
+            <h3 className="t">Сертификаты бригадиров</h3>
+            <p className="meta">8 человек · альп. 2-3 разряд</p>
+          </div>
+
+          <div className="hpc-trust-card">
+            <div className="doc">
+              <span className="badge-ok">✓</span>
+              <span>
+                ВЫПИСКА ЕГРЮЛ
+                <br />
+                ООО ОБИХОД
+                <br />
+                ИНН 1111111111
+                <br />с 2020 года
+              </span>
+            </div>
+            <h3 className="t">ЕГРЮЛ · ООО «Обиход»</h3>
+            <p className="meta">с 2020 · 12 лет на рынке</p>
+          </div>
+
+          <div className="hpc-trust-card">
+            <div className="doc">
+              <span className="badge-ok">✓</span>
+              <span>
+                ПАСПОРТ ТЕХНИКИ
+                <br />
+                АВТОВЫШКА АГП-22
+                <br />
+                ОТВ. ПОДЪЁМА 22 М
+                <br />
+                осмотр 2026
+              </span>
+            </div>
+            <h3 className="t">Парк техники</h3>
+            <p className="meta">2× автовышки · 4× газели · дробилка</p>
+          </div>
+
+          <div className="hpc-trust-card">
+            <div className="doc">
+              <span className="badge-ok">✓</span>
+              <span>
+                СВИДЕТЕЛЬСТВО
+                <br />
+                ОВ-152 ФЗ
+                <br />
+                оператор перс. данных
+                <br />с 2024
+              </span>
+            </div>
+            <h3 className="t">152-ФЗ · Оператор ПД</h3>
+            <p className="meta">Реестр Роскомнадзора · с 2024</p>
+          </div>
+
+          <div className="hpc-trust-card">
+            <div className="doc">
+              <span className="badge-ok">✓</span>
+              <span>
+                ДОГОВОР НА УТИЛИЗАЦИЮ
+                <br />
+                ПОЛИГОН ТКО
+                <br />
+                «ВТОРРЕСУРС»
+                <br />с актами на каждый вывоз
+              </span>
+            </div>
+            <h3 className="t">Утилизация по 89-ФЗ</h3>
+            <p className="meta">Лицензированный полигон · акты</p>
+          </div>
+
+          <div className="hpc-trust-card">
+            <div className="doc">
+              <span className="badge-ok">✓</span>
+              <span>
+                АККРЕДИТАЦИЯ
+                <br />
+                ЕИС ЗАКУПКИ
+                <br />
+                44/223-ФЗ
+                <br />с 2025
+              </span>
+            </div>
+            <h3 className="t">44/223-ФЗ · Госзакупки</h3>
+            <p className="meta">Аккредитация ЕИС · с 2025</p>
+          </div>
         </div>
       </div>
     </section>
