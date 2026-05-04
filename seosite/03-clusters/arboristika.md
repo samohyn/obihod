@@ -826,3 +826,7 @@ _…и ещё 38 ключей в normalized.csv (cluster=`localFALLBACK-WITHFREQ
 | Запрос | wsfreq (МСК+МО) | "фраза" | "!фраза" | intent |
 |---|---:|---:|---:|---|
 | обрезка садовых деревьев | 0 | 0 | 0 | общий |
+
+---
+
+> **Wave 3 update (2026-05-03):** см. [`_wave3-update-2026-05-03.md`](_wave3-update-2026-05-03.md) (Wave 3 multi-domain intersect 32 services-конкурентов; whitespace + actionable действия в `seosite/strategy/per-direction/*.md`).
