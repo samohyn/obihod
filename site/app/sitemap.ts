@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 
 import { payloadClient } from '@/lib/payload'
-import { getAllSubLevelSdParams, getAllSubServiceParams } from '@/lib/seo/queries'
+import { getAllSubServiceParams } from '@/lib/seo/queries'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -40,13 +40,6 @@ const PILLAR_PRIORITY: Record<string, number> = {
 const DEFAULT_SERVICE_PRIORITY = 0.7
 
 type SlugDoc = { slug?: string; updatedAt?: string | Date }
-type SDDoc = {
-  service?: { slug?: string } | string | null
-  district?: { slug?: string } | string | null
-  miniCase?: unknown
-  noindexUntilCase?: boolean
-  updatedAt?: string | Date
-}
 
 /**
  * Sitemap.xml для obikhod.ru. Генерируется на каждый запрос (dynamic),
@@ -83,31 +76,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Прямой Payload-вызов (без unstable_cache wrapper) — чтобы избежать
   // проблем с serialization payloadClient внутри cached scope.
   // Кеширование sitemap делает сам Next 16 через revalidate=3600.
-  const [
-    services,
-    districts,
-    serviceDistricts,
-    cases,
-    blogPosts,
-    b2bPages,
-    authors,
-    subServices,
-    subLevelSds,
-  ] = await Promise.all([
-    fetchServices(),
-    fetchDistricts(),
-    fetchPublishedServiceDistricts(),
-    fetchCases(),
-    fetchPublishedBlog(),
-    fetchPublishedB2B(),
-    fetchPublishedAuthors(),
-    // US-6 wave 2B: sub-services с заполненным контентом (intro/body)
-    getAllSubServiceParams().catch(() => [] as Array<{ service: string; sub: string }>),
-    // US-3 Wave 0.1: 4-уровневые SD URLs `/<service>/<sub>/<district>/`
-    getAllSubLevelSdParams().catch(
-      () => [] as Array<{ service: string; sub: string; district: string }>,
-    ),
-  ])
+  const [services, districts, cases, blogPosts, b2bPages, authors, subServices] =
+    await Promise.all([
+      fetchServices(),
+      fetchDistricts(),
+      fetchCases(),
+      fetchPublishedBlog(),
+      fetchPublishedB2B(),
+      fetchPublishedAuthors(),
+      getAllSubServiceParams().catch(() => [] as Array<{ service: string; sub: string }>),
+    ])
 
   const serviceEntries: Entry[] = services.map((slug) => ({
     url: `${SITE_URL}/${slug}/`,
@@ -125,27 +103,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     }))
 
-  // Programmatic /<service>/<district>/ URL'ы.
-  // Фильтр: publishStatus=published + noindexUntilCase !== true.
-  // miniCase НЕ обязателен — индексацию контролирует только
-  // noindexUntilCase, который редактор явно снимает в админке.
-  // См. OBI-12.
-  const programmaticEntries: Entry[] = serviceDistricts.flatMap((sd): Entry[] => {
-    const serviceSlug =
-      typeof sd.service === 'object' && sd.service !== null ? sd.service.slug : undefined
-    const districtSlug =
-      typeof sd.district === 'object' && sd.district !== null ? sd.district.slug : undefined
-    if (!serviceSlug || !districtSlug) return []
-    if (sd.noindexUntilCase) return []
-    return [
-      {
-        url: `${SITE_URL}/${serviceSlug}/${districtSlug}/`,
-        lastModified: sd.updatedAt ? new Date(sd.updatedAt) : undefined,
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      },
-    ]
-  })
 
   const caseEntries: Entry[] = cases
     .filter((c): c is SlugDoc & { slug: string } => typeof c.slug === 'string')
@@ -183,10 +140,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.4,
     }))
 
-  // US-6 wave 2B: sub-service URLs `/<service>/<sub>/`. priority 0.85 —
-  // выше programmatic district (0.7), ниже pillar (0.9-1.0). Это
-  // высокочастотный длинный хвост без географического риска
-  // duplicate-content.
   const subServiceEntries: Entry[] = subServices.map((s) => ({
     url: `${SITE_URL}/${s.service}/${s.sub}/`,
     lastModified: now,
@@ -194,28 +147,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.85,
   }))
 
-  // US-3 Wave 0.1: 4-уровневые SD URLs `/<service>/<sub>/<district>/`.
-  // Priority 0.75 — выше programmatic district (0.7), ниже sub-service (0.85),
-  // потому что комбинированный длинный хвост с гео-фокусом уже несёт
-  // конкретный transactional intent.
-  const subLevelSdEntries: Entry[] = subLevelSds.map((s) => ({
-    url: `${SITE_URL}/${s.service}/${s.sub}/${s.district}/`,
-    lastModified: now,
-    changeFrequency: 'weekly' as const,
-    priority: 0.75,
-  }))
-
   return [
     ...staticEntries,
     ...serviceEntries,
     ...districtEntries,
-    ...programmaticEntries,
     ...caseEntries,
     ...blogEntries,
     ...b2bEntries,
     ...authorEntries,
     ...subServiceEntries,
-    ...subLevelSdEntries,
   ]
 }
 
@@ -254,22 +194,6 @@ async function fetchDistricts(): Promise<SlugDoc[]> {
   }
 }
 
-async function fetchPublishedServiceDistricts(): Promise<SDDoc[]> {
-  try {
-    const payload = await payloadClient()
-    const r = await payload.find({
-      collection: 'service-districts',
-      where: { publishStatus: { equals: 'published' } },
-      limit: 1000,
-      pagination: false,
-      depth: 1,
-    })
-    return r.docs as unknown as SDDoc[]
-  } catch (e) {
-    console.error('[sitemap] fetchPublishedServiceDistricts failed:', e)
-    return []
-  }
-}
 
 async function fetchCases(): Promise<SlugDoc[]> {
   try {
