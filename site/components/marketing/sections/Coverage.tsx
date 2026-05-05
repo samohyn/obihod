@@ -1,5 +1,9 @@
 import Link from 'next/link'
-
+/**
+ * Coverage — секция §09
+ * Note: 12 districts
+ * Source: newui/homepage-classic.html (Phase 1: hardcoded; Phase 2: read from Payload Homepage global)
+ */
 export function Coverage() {
   return (
     <section className="hp-section hp-cov-section">
@@ -36,7 +40,6 @@ export function Coverage() {
           <rect width="100%" height="100%" fill="url(#topo-c)" />
         </svg>
       </div>
-
       <div className="wrap">
         <div className="eyebrow">§ 09 · География · Москва и МО</div>
         <h2 style={{ maxWidth: '22ch' }}>12 районов в активной работе · до 120 км от МКАД</h2>

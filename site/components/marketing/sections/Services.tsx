@@ -1,5 +1,9 @@
 import Link from 'next/link'
-
+/**
+ * Services — секция §02
+ * Note: 4 pillars, hardcoded Phase 1
+ * Source: newui/homepage-classic.html (Phase 1: hardcoded; Phase 2: read from Payload Homepage global)
+ */
 export function Services() {
   return (
     <section className="hp-section alt">
@@ -34,7 +38,7 @@ export function Services() {
                 <div className="from">от</div>
                 <div className="num">
                   700 ₽{' '}
-                  <span className="muted" style={{ fontSize: '11px', fontWeight: 500 }}>
+                  <span className="muted" style={{ fontSize: '11px', fontWeight: '500' }}>
                     / дерево
                   </span>
                 </div>
@@ -64,7 +68,7 @@ export function Services() {
                 <div className="from">от</div>
                 <div className="num">
                   25 ₽{' '}
-                  <span className="muted" style={{ fontSize: '11px', fontWeight: 500 }}>
+                  <span className="muted" style={{ fontSize: '11px', fontWeight: '500' }}>
                     / м²
                   </span>
                 </div>
@@ -95,7 +99,7 @@ export function Services() {
                 <div className="from">от</div>
                 <div className="num">
                   5 500 ₽{' '}
-                  <span className="muted" style={{ fontSize: '11px', fontWeight: 500 }}>
+                  <span className="muted" style={{ fontSize: '11px', fontWeight: '500' }}>
                     / объект
                   </span>
                 </div>
@@ -126,7 +130,7 @@ export function Services() {
                 <div className="from">от</div>
                 <div className="num">
                   25 000 ₽{' '}
-                  <span className="muted" style={{ fontSize: '11px', fontWeight: 500 }}>
+                  <span className="muted" style={{ fontSize: '11px', fontWeight: '500' }}>
                     / объект
                   </span>
                 </div>

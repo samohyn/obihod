@@ -1,3 +1,8 @@
+/**
+ * Reviews — секция §07
+ * Note: sources + 6 reviews
+ * Source: newui/homepage-classic.html (Phase 1: hardcoded; Phase 2: read from Payload Homepage global)
+ */
 export function Reviews() {
   return (
     <section className="hp-section">
@@ -54,7 +59,6 @@ export function Reviews() {
               всё убрали за 3 часа, увезли пенёк. Цена точно как в смете.»
             </p>
           </article>
-
           <article className="hp-rev-card">
             <div className="head">
               <div className="av">В</div>
@@ -69,7 +73,6 @@ export function Reviews() {
               Сертификат с печатью отдали вместе с актом.»
             </p>
           </article>
-
           <article className="hp-rev-card">
             <div className="head">
               <div className="av">А</div>
@@ -84,7 +87,6 @@ export function Reviews() {
               забрали в свой риск, а это — главное для нас.»
             </p>
           </article>
-
           <article className="hp-rev-card">
             <div className="head">
               <div className="av">Н</div>
@@ -99,7 +101,6 @@ export function Reviews() {
               ответили. Сделали ровно как обещали.»
             </p>
           </article>
-
           <article className="hp-rev-card">
             <div className="head">
               <div className="av">Е</div>
@@ -114,7 +115,6 @@ export function Reviews() {
               после. Никто не пытался впарить дополнительные услуги.»
             </p>
           </article>
-
           <article className="hp-rev-card">
             <div className="head">
               <div className="av">Д</div>

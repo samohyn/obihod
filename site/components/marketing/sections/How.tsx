@@ -1,3 +1,8 @@
+/**
+ * How — секция §03
+ * Note: 5 steps
+ * Source: newui/homepage-classic.html (Phase 1: hardcoded; Phase 2: read from Payload Homepage global)
+ */
 export function How() {
   return (
     <section className="hp-section">
@@ -24,7 +29,6 @@ export function How() {
               Отвечаем на звонок или сообщение в WhatsApp / Telegram. Уточняем задачу, район.
             </p>
           </div>
-
           <div className="hp-how-card">
             <svg
               className="ic"
@@ -49,7 +53,6 @@ export function How() {
               обязательств.
             </p>
           </div>
-
           <div className="hp-how-card">
             <svg
               className="ic"
@@ -69,7 +72,6 @@ export function How() {
               Письменная смета с разбивкой работ. Цена в смете = цена в договоре. Доплат не бывает.
             </p>
           </div>
-
           <div className="hp-how-card">
             <svg
               className="ic"
@@ -88,7 +90,6 @@ export function How() {
               Бригада в фирменной одежде, со страховкой и сертификатами. В день работы — фото в чат.
             </p>
           </div>
-
           <div className="hp-how-card">
             <svg
               className="ic"

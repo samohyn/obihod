@@ -1,3 +1,8 @@
+/**
+ * Cases — секция §06
+ * Note: 6 case cards
+ * Source: newui/homepage-classic.html (Phase 1: hardcoded; Phase 2: read from Payload Homepage global)
+ */
 export function Cases() {
   return (
     <section className="hp-section alt">
@@ -11,7 +16,14 @@ export function Cases() {
 
         <div className="hp-cases">
           <article className="hp-case">
-            <div className="photo">
+            <div
+              className="photo"
+              style={{
+                backgroundImage: "url('/img-generated/case-01-birch.jpg')",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center top',
+              }}
+            >
               <span className="tag b2c">B2C</span>
               <span className="divider"></span>
               <span className="lbl">ДО / ПОСЛЕ · аварийная берёза 18 м · Истра · 11 апр</span>
@@ -41,9 +53,15 @@ export function Cases() {
               </div>
             </div>
           </article>
-
           <article className="hp-case">
-            <div className="photo">
+            <div
+              className="photo"
+              style={{
+                backgroundImage: "url('/img-generated/case-02-banya-before.jpg')",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center top',
+              }}
+            >
               <span className="tag b2c">B2C</span>
               <span className="divider"></span>
               <span className="lbl">ДО / ПОСЛЕ · старая баня 4×5 м · Одинцово · 2 апр</span>
@@ -73,9 +91,15 @@ export function Cases() {
               </div>
             </div>
           </article>
-
           <article className="hp-case">
-            <div className="photo">
+            <div
+              className="photo"
+              style={{
+                backgroundImage: "url('/img-generated/case-03-roof-snow.jpg')",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center top',
+              }}
+            >
               <span className="tag b2b">B2B</span>
               <span className="divider"></span>
               <span className="lbl">ДО / ПОСЛЕ · крыша 850 м² · посёлок Мытищи · сезон</span>
@@ -105,9 +129,15 @@ export function Cases() {
               </div>
             </div>
           </article>
-
           <article className="hp-case">
-            <div className="photo">
+            <div
+              className="photo"
+              style={{
+                backgroundImage: "url('/img-generated/case-04-clearing.jpg')",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center top',
+              }}
+            >
               <span className="tag b2c">B2C</span>
               <span className="divider"></span>
               <span className="lbl">ДО / ПОСЛЕ · контейнер 30 м³ · Раменское · 28 мар</span>
@@ -137,9 +167,15 @@ export function Cases() {
               </div>
             </div>
           </article>
-
           <article className="hp-case">
-            <div className="photo">
+            <div
+              className="photo"
+              style={{
+                backgroundImage: "url('/img-generated/case-05-b2b-complex.jpg')",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center top',
+              }}
+            >
               <span className="tag b2b">B2B</span>
               <span className="divider"></span>
               <span className="lbl">ДО / ПОСЛЕ · 12 объектов · УК Жилищник · сезон</span>
@@ -168,9 +204,15 @@ export function Cases() {
               </div>
             </div>
           </article>
-
           <article className="hp-case">
-            <div className="photo">
+            <div
+              className="photo"
+              style={{
+                backgroundImage: "url('/img-generated/case-06-pruning.jpg')",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center top',
+              }}
+            >
               <span className="tag b2c">B2C</span>
               <span className="divider"></span>
               <span className="lbl">ДО / ПОСЛЕ · кронирование 4 деревьев · Пушкино · 14 мар</span>

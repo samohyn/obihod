@@ -1,3 +1,8 @@
+/**
+ * PhotoSmeta — секция §05
+ * Note: drop-zone + output card
+ * Source: newui/homepage-classic.html (Phase 1: hardcoded; Phase 2: read from Payload Homepage global)
+ */
 export function PhotoSmeta() {
   return (
     <section className="hp-section" id="foto-smeta">
@@ -66,10 +71,17 @@ export function PhotoSmeta() {
               <span>Ориентир № 0044</span>
               <span>10:08 МСК</span>
             </div>
-            <div className="photo" style={{ aspectRatio: '1/1' }}>
+            <div
+              className="photo"
+              style={{
+                aspectRatio: '1/1',
+                backgroundImage: "url('/img-generated/smeta-birch-emergency.jpg')",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center top',
+              }}
+            >
               <span>
-                ФОТО · Аварийная берёза 18 м
-                <br />
+                ФОТО · Аварийная берёза 18 м<br />
                 СНТ Берёзовая роща, Истра
               </span>
             </div>
