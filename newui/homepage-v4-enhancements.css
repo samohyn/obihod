@@ -1,0 +1,1108 @@
+/* ══════════════════════════════════════════════════════════════
+   HOMEPAGE v4 — Visual Enhancement Layer
+   Подключается после brand-guide-styles.css + homepage-shared.css
+   Не меняет токены и семантику — только визуальный слой.
+
+   Структура:
+     §A  Hero — атмосфера + типографика
+     §B  Кнопки CTA
+     §C  Trust bullets
+     §D  Pillars (4 направления)
+     §E  How-it-works (5 шагов)
+     §F  §05 Фото→смета — dark spotlight
+     §G  Cases (кейсы)
+     §H  Reviews
+     §I  Trust-cards (документы)
+     §J  Coverage chips
+     §K  Form card
+     §L  §11 Pre-footer CTA — dark
+     §M  Section rhythm
+     §N  Micro-polish
+   ══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────
+   §A · HERO — атмосферный фон + крупная типографика
+   ───────────────────────────────────────────────────────────── */
+
+.hpc-hero {
+  background-image: url('img-generated/hero-arborist-v1.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  padding: 96px 0 96px;
+  min-height: 720px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dark green gradient overlay — обеспечивает 4.5:1 контраст белого текста слева */
+.hpc-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    linear-gradient(95deg,
+      rgba(20,40,28,0.88) 0%,
+      rgba(20,40,28,0.76) 30%,
+      rgba(20,40,28,0.42) 55%,
+      rgba(20,40,28,0.18) 80%,
+      transparent 100%),
+    linear-gradient(180deg,
+      rgba(20,40,28,0.30) 0%,
+      transparent 30%,
+      transparent 70%,
+      rgba(20,40,28,0.55) 100%);
+}
+
+/* Топо-текстура — brand signature, тонкая поверх */
+.hpc-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.10;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cpath d='M0 70c23-12 47-12 70 0s47 12 70 0' fill='none' stroke='%23f7f5f0' stroke-width='1.2'/%3E%3Cpath d='M0 35c23-12 47-12 70 0s47 12 70 0' fill='none' stroke='%23f7f5f0' stroke-width='0.8'/%3E%3Cpath d='M0 105c23-12 47-12 70 0s47 12 70 0' fill='none' stroke='%23f7f5f0' stroke-width='0.8'/%3E%3C/svg%3E");
+}
+
+/* Прячем старый glow и инлайн-фото, теперь bg на самой секции */
+.hpc-hero .hpc-hero-bg { display: none; }
+.hpc-hero .hpc-hero-img { display: none; }
+.hpc-hero-right { display: contents; } /* распускаем wrapper, форма снова прямо в grid-cell */
+
+.hpc-hero .wrap,
+.hpc-hero-grid {
+  position: relative;
+  z-index: 2;
+}
+
+/* Eyebrow — amber, mono, заметный на тёмном */
+.hpc-hero .eyebrow {
+  color: var(--c-accent);
+  font-weight: 500;
+}
+
+/* H1 — editorial, белый */
+.hpc-hero h1 {
+  font-size: clamp(40px, 6.2vw, 80px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  margin-top: 12px;
+  margin-bottom: 22px;
+  color: var(--c-on-primary);
+}
+
+.hpc-hero h1 .accent {
+  color: var(--c-accent);
+  position: relative;
+}
+
+.hpc-hero h1 .accent::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 3px;
+  background: var(--c-accent);
+  border-radius: 2px;
+  opacity: 0.85;
+}
+
+/* Subhead под H1 — раскрывает scope без перегруза заголовка */
+.hpc-hero .hpc-hero-subhead {
+  font-size: 22px;
+  line-height: 1.35;
+  font-weight: 500;
+  color: rgba(247,245,240,0.92);
+  margin: 0 0 24px;
+  max-width: 52ch;
+  letter-spacing: -0.01em;
+}
+
+/* Lead text — приглушённый белый */
+.hpc-hero p.lead {
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(247,245,240,0.78);
+  max-width: 52ch;
+}
+
+/* Trust bullets на тёмном — границы светлые, цифры amber */
+.hpc-hero .hpc-trust-bullets {
+  border-top-color: rgba(247,245,240,0.18);
+  border-bottom-color: rgba(247,245,240,0.18);
+}
+
+/* Hero CTA-кнопки — жёстко идентичная геометрия */
+.hpc-hero .row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hpc-hero .btn,
+.hpc-hero a.btn {
+  /* размер — одинаковый */
+  height: 52px;
+  min-height: 52px;
+  max-height: 52px;
+  padding: 0 24px;
+  /* типографика — одинаковая */
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.005em;
+  /* layout — flex по центру */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  /* геометрия */
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  box-sizing: border-box;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.hpc-hero .btn-primary,
+.hpc-hero a.btn-primary {
+  background: var(--c-primary);
+  border-color: var(--c-primary);
+  color: var(--c-on-primary);
+}
+
+.hpc-hero .btn-secondary,
+.hpc-hero a.btn-secondary {
+  background: rgba(247,245,240,0.08);
+  border-color: rgba(247,245,240,0.35);
+  color: var(--c-on-primary);
+  backdrop-filter: blur(6px);
+}
+.hpc-hero .btn-secondary:hover {
+  background: rgba(247,245,240,0.18);
+  border-color: rgba(247,245,240,0.65);
+}
+
+/* SVG иконка — единый размер, не растягивает */
+.hpc-hero .btn svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+}
+
+/* Mobile: уменьшаем min-height, упрощаем */
+@media (max-width: 1023px) {
+  .hpc-hero {
+    min-height: 0;
+    padding: 56px 0 64px;
+    background-position: center 25%;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   §B · КНОПКИ — glow + lift
+   ───────────────────────────────────────────────────────────── */
+
+.btn.btn-primary,
+button.btn-primary {
+  box-shadow: 0 4px 18px -6px rgba(45,90,61,0.5);
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.18s ease,
+              background-color 0.15s ease;
+}
+
+.btn.btn-primary:hover,
+button.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px -6px rgba(45,90,61,0.58);
+}
+
+.btn.btn-primary:active,
+button.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px -4px rgba(45,90,61,0.4);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   §C · TRUST BULLETS в Hero
+   ───────────────────────────────────────────────────────────── */
+
+.hpc-trust-bullets {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin: 28px 0 32px;
+  padding: 22px 0;
+  border-top: 1px solid var(--c-line);
+  border-bottom: 1px solid var(--c-line);
+}
+
+.hpc-trust-bullet {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hpc-trust-bullet .v {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--c-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.hpc-trust-bullet .l {
+  font-size: 12px;
+  line-height: 1.45;
+  color: rgba(247,245,240,0.78);
+  max-width: 16ch;
+  margin: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   §D · PILLARS — 4 направления
+   ───────────────────────────────────────────────────────────── */
+
+.hp-pillar {
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.hp-pillar:hover {
+  background: linear-gradient(150deg, #f2faf4 0%, #ffffff 100%);
+  border-color: var(--c-primary);
+  box-shadow: 0 14px 44px -12px rgba(45,90,61,0.22);
+  transform: translateY(-5px);
+}
+
+.hp-pillar .ic {
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hp-pillar:hover .ic {
+  transform: scale(1.18) rotate(-3deg);
+  color: var(--c-primary-ink);
+}
+
+/* Цветная левая метка при hover */
+.hp-pillar::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 3px;
+  background: var(--c-primary);
+  border-radius: 0 3px 3px 0;
+  opacity: 0;
+  transform: scaleY(0.5);
+  transition: opacity 0.2s, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.hp-pillar { position: relative; }
+.hp-pillar:hover::before {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   §E · HOW-IT-WORKS — крупные ghost-номера
+   ───────────────────────────────────────────────────────────── */
+
+.hp-how-card {
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+/* Переопределяем ::before (сейчас там counter) — добавляем ghost-число */
+.hp-how-card::after {
+  content: '0' counter(hp-how);
+  counter-increment: none;
+  position: absolute;
+  right: -4px;
+  bottom: -18px;
+  font-family: var(--font-mono);
+  font-size: 100px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: rgba(45,90,61,0.05);
+  pointer-events: none;
+  z-index: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Поднимаем контент над ghost-числом */
+.hp-how-card > * { position: relative; z-index: 1; }
+
+.hp-how-card:hover {
+  box-shadow: 0 8px 28px -8px rgba(45,90,61,0.14);
+  transform: translateY(-2px);
+  border-color: rgba(45,90,61,0.25);
+}
+
+/* SLA строчка — акцент на amber */
+.hp-how-card .sla {
+  color: var(--c-accent-ink);
+  background: rgba(230,162,60,0.1);
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 10.5px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   §F · §05 ФОТО→СМЕТА — DARK GREEN SPOTLIGHT
+   Наш главный USP — выделяем тёмно-зелёным, как product moment
+   ───────────────────────────────────────────────────────────── */
+
+section#foto-smeta {
+  background: var(--c-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Топо-текстура на зелёном фоне */
+section#foto-smeta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.10;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cpath d='M0 70c23-12 47-12 70 0s47 12 70 0' fill='none' stroke='%23f7f5f0' stroke-width='1.4'/%3E%3Cpath d='M0 35c23-12 47-12 70 0s47 12 70 0' fill='none' stroke='%23f7f5f0' stroke-width='0.9'/%3E%3Cpath d='M0 105c23-12 47-12 70 0s47 12 70 0' fill='none' stroke='%23f7f5f0' stroke-width='0.9'/%3E%3C/svg%3E");
+  z-index: 0;
+}
+
+section#foto-smeta > .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+section#foto-smeta .eyebrow { color: var(--c-accent); }
+section#foto-smeta h2 { color: var(--c-on-primary); }
+section#foto-smeta p.lead { color: rgba(247,245,240,0.8); }
+
+/* Drop-zone на тёмном фоне */
+section#foto-smeta .hp-dropzone {
+  background: rgba(247,245,240,0.07);
+  border-color: rgba(247,245,240,0.28);
+}
+section#foto-smeta .hp-dropzone:hover {
+  background: rgba(247,245,240,0.13);
+  border-color: rgba(247,245,240,0.45);
+}
+section#foto-smeta .hp-dropzone .ic { color: var(--c-accent); }
+section#foto-smeta .hp-dropzone .t { color: var(--c-on-primary); }
+section#foto-smeta .hp-dropzone .h { color: rgba(247,245,240,0.55); }
+
+/* Steps на тёмном фоне */
+section#foto-smeta .hp-step {
+  background: rgba(247,245,240,0.09);
+  border-color: rgba(247,245,240,0.14);
+}
+section#foto-smeta .hp-step .t { color: var(--c-on-primary); font-weight: 600; }
+section#foto-smeta .hp-step .d { color: rgba(247,245,240,0.7); }
+section#foto-smeta .hp-step .n {
+  color: rgba(247,245,240,0.18);
+  font-size: 44px;
+}
+
+/* Output-карточка на тёмном — светлая (как мессенджер-скрин) */
+section#foto-smeta .hp-output {
+  background: rgba(247,245,240,0.96);
+  box-shadow: 0 24px 64px -20px rgba(0,0,0,0.3), 0 0 0 1px rgba(247,245,240,0.15);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   §G · CASES — более живые placeholder'ы
+   ───────────────────────────────────────────────────────────── */
+
+.hp-case .photo {
+  background: linear-gradient(135deg, #c8dece 0%, #dde9df 50%, #cfe4d4 100%);
+}
+
+/* Левая треть темнее = «до», правая = «после» */
+.hp-case .photo::before {
+  background-image:
+    linear-gradient(to right,
+      rgba(28,28,28,0.18) 0%,
+      rgba(28,28,28,0.05) 48%,
+      rgba(255,255,255,0.0) 50%,
+      rgba(255,255,255,0.0) 100%),
+    repeating-linear-gradient(45deg,
+      transparent 0 14px,
+      rgba(45,90,61,0.05) 14px 15px);
+}
+
+.hp-case .photo .divider {
+  background: rgba(247,245,240,0.7);
+  width: 2px;
+}
+
+.hp-case {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hp-case:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px -10px rgba(45,90,61,0.16);
+  border-color: rgba(45,90,61,0.2);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   §H · REVIEWS — аватары, звёзды, hover
+   ───────────────────────────────────────────────────────────── */
+
+.hp-rev-card .av {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 50%;
+  background: var(--c-primary);
+  color: var(--c-on-primary);
+  font-weight: 700;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hp-rev-card .stars {
+  color: var(--c-accent);
+  font-size: 16px;
+  letter-spacing: 0.05em;
+}
+
+.hp-rev-card {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.hp-rev-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px -8px rgba(45,90,61,0.14);
+  border-color: rgba(45,90,61,0.2);
+}
+
+/* Source stats тайлы — крупнее, с amber числом */
+.hp-rev-sources .stat-tile .val {
+  font-size: 32px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.hp-rev-sources .stat-tile {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.hp-rev-sources .stat-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -6px rgba(45,90,61,0.12);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   §I · TRUST CARDS — документы
+   ───────────────────────────────────────────────────────────── */
+
+.hpc-trust-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hpc-trust-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px -8px rgba(45,90,61,0.15);
+  border-color: rgba(45,90,61,0.2);
+}
+
+.hpc-trust-card .doc {
+  border: 1px solid rgba(45,90,61,0.12);
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  min-height: 130px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* Тёмный градиент снизу — текст читаем поверх фото */
+.hpc-trust-card .doc::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(28,28,28,0.0) 0%,
+    rgba(28,28,28,0.55) 60%,
+    rgba(28,28,28,0.82) 100%);
+  border-radius: var(--radius);
+}
+
+/* Текст и badge поверх overlay */
+.hpc-trust-card .doc > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hpc-trust-card .doc span:not(.badge-ok) {
+  color: rgba(247,245,240,0.92);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+  padding: 10px 12px;
+  display: block;
+}
+
+.hpc-trust-card .doc .badge-ok {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 22px;
+  height: 22px;
+  background: var(--c-primary);
+  color: var(--c-on-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  z-index: 2;
+}
+
+.hpc-trust-card .badge-ok {
+  color: var(--c-primary);
+  font-size: 20px;
+  font-weight: 700;
+  margin-right: 6px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   §J · COVERAGE CHIPS — география
+   ───────────────────────────────────────────────────────────── */
+
+.hp-cov-chip.pilot {
+  background: linear-gradient(140deg, #f3faf5 0%, #ffffff 100%);
+  border-color: rgba(45,90,61,0.18);
+}
+
+.hp-cov-chip.pilot:hover {
+  background: linear-gradient(140deg, #e8f5ec 0%, #f3faf5 100%);
+  border-color: var(--c-primary);
+}
+
+.hp-cov-chip {
+  transition: all 0.18s ease;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   §K · HERO FORM CARD — тень + grasp
+   ───────────────────────────────────────────────────────────── */
+
+.hpc-form-card {
+  background: var(--c-card);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-lg);
+  box-shadow:
+    0 24px 64px -20px rgba(28,28,28,0.18),
+    0 0 0 1px rgba(45,90,61,0.06),
+    0 2px 4px rgba(28,28,28,0.04);
+}
+
+/* Photo-CTA внутри формы */
+.hpc-form-card .photo-cta {
+  border: 1.5px dashed rgba(45,90,61,0.35);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  transition: background 0.15s, border-color 0.15s;
+}
+.hpc-form-card .photo-cta:hover {
+  background: rgba(45,90,61,0.04);
+  border-color: var(--c-primary);
+}
+.hpc-form-card .photo-cta .ic {
+  width: 22px;
+  height: 22px;
+  color: var(--c-primary);
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   §L · §11 PRE-FOOTER CTA — INK DARK (ритм страницы)
+   ───────────────────────────────────────────────────────────── */
+
+section#cta {
+  background: var(--c-ink) !important;
+  padding-top: 72px;
+}
+
+section#cta .eyebrow { color: rgba(230,162,60,0.85); }
+section#cta h2 { color: var(--c-on-primary); }
+section#cta h3 { color: var(--c-on-primary); }
+section#cta p { color: rgba(247,245,240,0.72); }
+
+section#cta .hp-cta-divider {
+  color: rgba(247,245,240,0.35);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+section#cta .hp-dropzone {
+  background: rgba(247,245,240,0.06);
+  border-color: rgba(247,245,240,0.22);
+}
+section#cta .hp-dropzone:hover {
+  background: rgba(247,245,240,0.11);
+  border-color: rgba(247,245,240,0.4);
+}
+section#cta .hp-dropzone .ic { color: var(--c-accent); }
+section#cta .hp-dropzone .t { color: var(--c-on-primary); }
+section#cta .hp-dropzone .h { color: rgba(247,245,240,0.5); }
+
+section#cta .input,
+section#cta input {
+  background: rgba(247,245,240,0.09);
+  border-color: rgba(247,245,240,0.2);
+  color: var(--c-on-primary);
+}
+section#cta .input:focus,
+section#cta input:focus {
+  border-color: rgba(247,245,240,0.5);
+  outline: none;
+  background: rgba(247,245,240,0.13);
+}
+section#cta .input::placeholder,
+section#cta input::placeholder {
+  color: rgba(247,245,240,0.38);
+}
+
+section#cta .muted { color: rgba(247,245,240,0.38); }
+
+/* Белые карточки внутри тёмного CTA — восстанавливаем тёмный текст */
+section#cta .hp-cta-block {
+  background: var(--c-card);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  border: 1px solid var(--c-line);
+}
+
+section#cta .hp-cta-block h3 { color: var(--c-ink); }
+section#cta .hp-cta-block p  { color: var(--c-muted); }
+section#cta .hp-cta-block .eyebrow { color: var(--c-muted); }
+
+section#cta .hp-cta-block input,
+section#cta .hp-cta-block .input {
+  background: var(--c-bg);
+  border-color: var(--c-line);
+  color: var(--c-ink);
+}
+section#cta .hp-cta-block input::placeholder { color: var(--c-muted); }
+section#cta .hp-cta-block input:focus { border-color: var(--c-primary); outline: none; }
+
+section#cta .hp-cta-block .hp-dropzone {
+  background: var(--c-card);
+  border-color: var(--c-primary);
+}
+section#cta .hp-cta-block .hp-dropzone:hover { background: var(--c-bg-alt); }
+section#cta .hp-cta-block .hp-dropzone .ic  { color: var(--c-primary); }
+section#cta .hp-cta-block .hp-dropzone .t   { color: var(--c-ink); }
+section#cta .hp-cta-block .hp-dropzone .h   { color: var(--c-muted); }
+
+/* ─────────────────────────────────────────────────────────────
+   §M · SECTION RHYTHM — контраст между секциями
+   ───────────────────────────────────────────────────────────── */
+
+/* alt-секции чуть темнее для чёткого ритма */
+.hp-section.alt {
+  background: #eae5d8;
+}
+
+/* Eyebrow everywhere — small amber § */
+.eyebrow {
+  letter-spacing: 0.1em;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  color: var(--c-muted);
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   §N · MICRO-POLISH
+   ───────────────────────────────────────────────────────────── */
+
+/* Pricerow — иконка + hover */
+.hpc-price-row {
+  transition: background 0.15s, transform 0.15s;
+}
+.hpc-price-row:hover {
+  background: rgba(45,90,61,0.04);
+  transform: translateX(3px);
+}
+@media (min-width: 768px) {
+  .hpc-price-row {
+    grid-template-columns: 44px 180px 1fr auto;
+    gap: 0 20px;
+  }
+}
+
+.hpc-price-ic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
+  background: rgba(45,90,61,0.08);
+  color: var(--c-primary);
+  flex-shrink: 0;
+}
+.hpc-price-ic svg {
+  width: 20px;
+  height: 20px;
+}
+.hpc-price-row:hover .hpc-price-ic {
+  background: rgba(45,90,61,0.14);
+}
+
+/* На мобиле — иконка скрыта, возвращаемся к 2-column */
+@media (max-width: 720px) {
+  .hpc-price-row {
+    grid-template-columns: 1fr auto;
+  }
+  .hpc-price-ic { display: none; }
+}
+
+/* FAQ details hover */
+.accordion .item summary {
+  transition: color 0.15s;
+}
+.accordion .item[open] summary {
+  color: var(--c-primary);
+}
+
+/* Mega-menu panel shadow */
+.mm-panel {
+  box-shadow: 0 20px 60px -15px rgba(28,28,28,0.2), 0 0 0 1px rgba(28,28,28,0.06);
+}
+
+/* Footer mock — тёмный */
+.site-footer-mock {
+  background: var(--c-ink-soft);
+}
+.site-footer-mock a { color: rgba(247,245,240,0.7); }
+.site-footer-mock a:hover { color: var(--c-on-primary); }
+.site-footer-mock p { color: rgba(247,245,240,0.6); }
+.site-footer-mock h5 { color: var(--c-on-primary); }
+
+/* Mobile: hero padding */
+@media (max-width: 768px) {
+  .hpc-hero {
+    padding: 52px 0 64px;
+  }
+  .hpc-hero h1 {
+    font-size: clamp(36px, 9vw, 52px);
+  }
+  .hpc-trust-bullets {
+    gap: 20px;
+  }
+  .hpc-trust-bullet .v {
+    font-size: 28px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   §O · GALLERY — горизонтальный скролл-слайдер
+   ───────────────────────────────────────────────────────────── */
+
+.hp-gallery-section {
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+.hp-gallery-wrap {
+  position: relative;
+  margin-top: 0;
+}
+
+.hp-gallery-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 0 max(28px, calc((100vw - 1180px) / 2)) 32px;
+  cursor: grab;
+}
+.hp-gallery-track:active { cursor: grabbing; }
+.hp-gallery-track::-webkit-scrollbar { display: none; }
+
+.hp-gallery-item {
+  flex: 0 0 400px;
+  scroll-snap-align: start;
+  margin: 0;
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 8px 28px -8px rgba(28,28,28,0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hp-gallery-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 16px 48px -12px rgba(28,28,28,0.26);
+}
+
+.hp-gallery-item img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+}
+
+.hp-gallery-item figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px 16px 14px;
+  background: linear-gradient(to top, rgba(28,28,28,0.75) 0%, transparent 100%);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: rgba(247,245,240,0.92);
+  line-height: 1.4;
+}
+
+/* Кнопки prev/next */
+.hp-gallery-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(calc(-50% - 20px));
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--c-card);
+  border: 1px solid var(--c-line);
+  box-shadow: 0 4px 16px -4px rgba(28,28,28,0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--c-ink);
+  transition: background 0.15s, box-shadow 0.15s, transform 0.15s;
+  z-index: 10;
+}
+.hp-gallery-btn:hover {
+  background: var(--c-primary);
+  color: var(--c-on-primary);
+  box-shadow: 0 6px 20px -4px rgba(45,90,61,0.35);
+  transform: translateY(calc(-50% - 20px)) scale(1.08);
+}
+.hp-gallery-prev { left: 16px; }
+.hp-gallery-next { right: 16px; }
+
+/* Точки-индикаторы */
+.hp-gallery-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 0 36px;
+}
+.hp-gallery-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-line);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.hp-gallery-dot.active {
+  background: var(--c-primary);
+  transform: scale(1.5);
+}
+
+@media (max-width: 768px) {
+  .hp-gallery-item { flex: 0 0 85vw; }
+  .hp-gallery-item img { height: 220px; }
+  .hp-gallery-btn { display: none; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   §P · CALCULATOR — a11y + hit-areas (WCAG 2.2 AA)
+   ───────────────────────────────────────────────────────────── */
+
+/* hidden field-sets — переопределяем display: grid из shared */
+.hp-calc-fields[hidden] { display: none !important; }
+
+/* Табы — hit area ≥ 44px (Apple HIG) */
+.hp-calc-tab {
+  min-height: 44px;
+  padding: 11px 18px;
+}
+.hp-calc-tab:focus-visible {
+  outline: 2px solid var(--c-primary);
+  outline-offset: 2px;
+}
+
+/* Slider — кастомный thumb 24px (WCAG Target Size) */
+.hpc-range {
+  width: 100%;
+  height: 24px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  margin: 6px 0;
+}
+.hpc-range:focus { outline: none; }
+/* Focus показываем на thumb, не на всём треке */
+.hpc-range:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px rgba(45,90,61,0.25), 0 2px 8px -2px rgba(45,90,61,0.4);
+  transform: scale(1.1);
+}
+.hpc-range:focus-visible::-moz-range-thumb {
+  box-shadow: 0 0 0 4px rgba(45,90,61,0.25), 0 2px 8px -2px rgba(45,90,61,0.4);
+}
+
+/* Track */
+.hpc-range::-webkit-slider-runnable-track {
+  height: 4px;
+  background: var(--c-line);
+  border-radius: 999px;
+}
+.hpc-range::-moz-range-track {
+  height: 4px;
+  background: var(--c-line);
+  border-radius: 999px;
+}
+
+/* Filled-up portion (Webkit gradient trick) */
+.hpc-range {
+  background: linear-gradient(to right, var(--c-primary) 0%, var(--c-primary) var(--fill, 50%), var(--c-line) var(--fill, 50%));
+  background-size: 100% 4px;
+  background-position: 0 50%;
+  background-repeat: no-repeat;
+}
+
+/* Thumb — 24px touch-target */
+.hpc-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background: var(--c-card);
+  border: 2px solid var(--c-primary);
+  border-radius: 50%;
+  cursor: grab;
+  margin-top: -10px;
+  box-shadow: 0 2px 8px -2px rgba(45,90,61,0.3);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.hpc-range::-webkit-slider-thumb:hover { transform: scale(1.1); }
+.hpc-range::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.15); }
+
+.hpc-range::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  background: var(--c-card);
+  border: 2px solid var(--c-primary);
+  border-radius: 50%;
+  cursor: grab;
+  box-shadow: 0 2px 8px -2px rgba(45,90,61,0.3);
+}
+
+/* Скрываем нативный disabled outline */
+.hpc-range::-webkit-slider-runnable-track { background: transparent; }
+
+/* Чекбоксы калькулятора — нативный input скрыт, custom .box работает */
+.hp-calc-opt {
+  position: relative;
+  min-height: 44px;
+  padding: 12px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+}
+.hp-calc-opt:hover { background: rgba(45,90,61,0.04); }
+.hp-calc-opt:focus-within {
+  outline: 2px solid var(--c-primary);
+  outline-offset: 2px;
+}
+
+.hp-calc-opt-input {
+  /* Visually hidden but focusable */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hp-calc-opt .box {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--c-primary);
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-on-primary);
+  background: transparent;
+  transition: background 0.12s;
+}
+.hp-calc-opt .box svg { opacity: 0; transition: opacity 0.12s; }
+
+.hp-calc-opt-input:checked + .box {
+  background: var(--c-primary);
+}
+.hp-calc-opt-input:checked + .box svg {
+  opacity: 1;
+}
+
+.hp-calc-opt-text {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Disclaimer внутри dark карточки результата — крупнее, заметнее */
+.hp-calc-result .hp-calc-disclaimer {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  color: rgba(247,245,240,0.6);
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(247,245,240,0.12);
+}
+
+/* Focus states (accessibility) */
+.btn:focus-visible,
+input:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--c-primary);
+  outline-offset: 3px;
+}

@@ -3,16 +3,153 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Обиход — главная (макет v3 «Конверсионный», на base brand-guide.html)</title>
+
+<!-- ═════════ SEO META · primary ═════════ -->
+<title>Удаление деревьев в Москве и МО · Обиход</title>
+<meta name="description" content="Арбористика, чистка крыш от снега, вывоз мусора, демонтаж в Москве и МО. Фикс-цена за объект, страховка 5 млн ₽. Смета за 10 минут по фото." />
+<meta name="keywords" content="удаление деревьев, спил деревьев, арбористика, чистка крыш, вывоз мусора, демонтаж, Москва, Подмосковье, аварийное удаление" />
+<meta name="author" content="ООО «Обиход»" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+<meta name="yandex-verification" content="" />
+<meta name="google-site-verification" content="" />
+<link rel="canonical" href="https://obikhod.ru/" />
+
+<!-- Favicon -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<!-- ═════════ Open Graph · соцсети ═════════ -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Обиход" />
+<meta property="og:locale" content="ru_RU" />
+<meta property="og:url" content="https://obikhod.ru/" />
+<meta property="og:title" content="Удаление деревьев и хозяйственные работы в Москве и МО · Обиход" />
+<meta property="og:description" content="4 направления в одном договоре: арбористика, чистка крыш, вывоз мусора, демонтаж. Фикс-цена за объект. Смета за 10 минут по фото. С 2014 года." />
+<meta property="og:image" content="https://obikhod.ru/og-cover.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Бригада Обихода спиливает аварийную берёзу с автовышки" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Удаление деревьев в Москве и МО · Обиход" />
+<meta name="twitter:description" content="Арбористика, чистка крыш, вывоз мусора, демонтаж. Фикс-цена за объект, страховка 5 млн ₽." />
+<meta name="twitter:image" content="https://obikhod.ru/og-cover.jpg" />
+
+<!-- Theme color (для мобильного браузера) -->
+<meta name="theme-color" content="#2d5a3d" />
+
+<!-- ═════════ JSON-LD · Schema.org ═════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://obikhod.ru/#organization",
+      "name": "Обиход",
+      "alternateName": "ООО «Обиход»",
+      "url": "https://obikhod.ru/",
+      "logo": "https://obikhod.ru/logo.svg",
+      "telephone": "+7-495-000-00-00",
+      "email": "hi@obikhod.ru",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ул. Питомниковая, 3",
+        "addressLocality": "Раменское",
+        "addressRegion": "Московская область",
+        "postalCode": "140100",
+        "addressCountry": "RU"
+      },
+      "sameAs": []
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://obikhod.ru/#localbusiness",
+      "name": "Обиход — хозяйственные работы",
+      "image": "https://obikhod.ru/og-cover.jpg",
+      "url": "https://obikhod.ru/",
+      "telephone": "+7-495-000-00-00",
+      "priceRange": "₽₽",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ул. Питомниковая, 3",
+        "addressLocality": "Раменское",
+        "addressRegion": "Московская область",
+        "postalCode": "140100",
+        "addressCountry": "RU"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "55.5708",
+        "longitude": "38.2299"
+      },
+      "areaServed": [
+        {"@type":"City","name":"Москва"},
+        {"@type":"AdministrativeArea","name":"Московская область"}
+      ],
+      "openingHoursSpecification": [
+        {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"22:00"},
+        {"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"10:00","closes":"18:00"}
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.87",
+        "reviewCount": "201",
+        "bestRating": "5"
+      },
+      "makesOffer": [
+        {"@type":"Offer","name":"Удаление деревьев","price":"4500","priceCurrency":"RUB","priceSpecification":{"@type":"UnitPriceSpecification","price":"4500","priceCurrency":"RUB","unitText":"за дерево"}},
+        {"@type":"Offer","name":"Чистка крыш от снега","price":"25","priceCurrency":"RUB","priceSpecification":{"@type":"UnitPriceSpecification","price":"25","priceCurrency":"RUB","unitText":"за м²"}},
+        {"@type":"Offer","name":"Вывоз мусора","price":"5500","priceCurrency":"RUB","priceSpecification":{"@type":"UnitPriceSpecification","price":"5500","priceCurrency":"RUB","unitText":"за объект"}},
+        {"@type":"Offer","name":"Демонтаж","price":"25000","priceCurrency":"RUB","priceSpecification":{"@type":"UnitPriceSpecification","price":"25000","priceCurrency":"RUB","unitText":"за объект"}}
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://obikhod.ru/#website",
+      "url": "https://obikhod.ru/",
+      "name": "Обиход",
+      "publisher": {"@id":"https://obikhod.ru/#organization"},
+      "inLanguage": "ru-RU"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://obikhod.ru/#faq",
+      "mainEntity": [
+        {"@type":"Question","name":"Какая гарантия на работы?","acceptedAnswer":{"@type":"Answer","text":"12 месяцев по сертификату. Если в течение года всплывёт что-то связанное с нашей работой — приедем и переделаем. Дополнительно — страхование ответственности на 5 млн ₽ в Ингосстрахе по каждому объекту."}},
+        {"@type":"Question","name":"Что входит в фикс-цену, что считается дополнительно?","acceptedAnswer":{"@type":"Answer","text":"В смете указаны все работы, материалы, расходники, погрузка и вывоз отходов. Дополнительно — только услуги, которых не было в смете и которые согласованы новым договором."}},
+        {"@type":"Question","name":"Какие документы передаём заказчику?","acceptedAnswer":{"@type":"Answer","text":"Договор, смета, акт выполненных работ, сертификат с номером, копия страхового полиса. Для B2B — ЭДО, счёт-фактура, форма КС-2/КС-3 по запросу."}},
+        {"@type":"Question","name":"Как работает «фото → смета за 10 минут»?","acceptedAnswer":{"@type":"Answer","text":"Загрузите фото объекта или пришлите в WhatsApp / Telegram / MAX. AI распознаёт тип, размеры, состояние; диспетчер уточняет вручную. В течение 10 минут возвращается диапазон цены, зафиксированный на 14 дней."}},
+        {"@type":"Question","name":"Работаете в выходные и праздники?","acceptedAnswer":{"@type":"Answer","text":"Да. Плановые работы — по согласованию (выходной с надбавкой 20%). Аварийный выезд — 24/7 без надбавок. SLA в МО — 2 часа."}},
+        {"@type":"Question","name":"Кто выезжает — штатные или подрядчики?","acceptedAnswer":{"@type":"Answer","text":"Штатная бригада в фирменной одежде хвойного цвета. У бригадира — сертификаты СРО, у альпинистов — корочки 3-й категории. Договор подписывается с ООО «Обиход»."}},
+        {"@type":"Question","name":"Принимаете ли оплату по безналу?","acceptedAnswer":{"@type":"Answer","text":"Да. Физлица — наличными, картой через терминал, СБП по QR. Юрлица — безнал по счёту с НДС. Аванс — обычно 30%, окончательный — после подписания акта."}},
+        {"@type":"Question","name":"Что если смета не подойдёт?","acceptedAnswer":{"@type":"Answer","text":"Замер бесплатный. Если посчитаем смету и она вам не подойдёт — за выезд ничего не платите. Никаких «штрафов за вызов»."}}
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://obikhod.ru/#service-arboristika",
+      "serviceType": "Удаление деревьев и арбористика",
+      "provider": {"@id":"https://obikhod.ru/#organization"},
+      "areaServed": [{"@type":"City","name":"Москва"},{"@type":"AdministrativeArea","name":"Московская область"}],
+      "offers": {"@type":"Offer","priceCurrency":"RUB","price":"4500","availability":"https://schema.org/InStock"}
+    }
+  ]
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
+<!-- Preload hero LCP image -->
+<link rel="preload" as="image" href="img-generated/hero-arborist-v1.jpg" fetchpriority="high" />
+
 <!-- Дизайн-система — 1-в-1 из design-system/brand-guide.html -->
 <link rel="stylesheet" href="brand-guide-styles.css" />
-<!-- Shared homepage extensions (.hp-* + .hpc-*) — те же что у homepage.html -->
 <link rel="stylesheet" href="homepage-shared.css?v=3" />
+<link rel="stylesheet" href="homepage-v4-enhancements.css?v=9" />
 </head>
 
 <body>
@@ -177,14 +314,17 @@
   </div>
 </header>
 
+<main id="main">
+
 <!-- ═════════ §01 · HERO — H1 + 3 trust + form-card ═════════ -->
 <section class="hpc-hero hp-section">
   <div class="hpc-hero-bg"></div>
   <div class="wrap hpc-hero-grid">
     <div>
       <div class="eyebrow">§ 01 · Хозяйственные работы · Москва и МО</div>
-      <h1>Удаление деревьев<br>и хозяйственные работы<br>в <span class="accent">Москве и Подмосковье</span></h1>
-      <p class="lead">4 направления в одном договоре: арбористика, чистка крыш, вывоз мусора, демонтаж. Фикс-цена за объект, страховка 5 млн ₽, штрафы ГЖИ берём на себя по договору.</p>
+      <h1>Удаление деревьев <br>в <span class="accent">Москве и МО</span></h1>
+      <p class="hpc-hero-subhead">И ещё 3 направления: чистка крыш, вывоз мусора, демонтаж</p>
+      <p class="lead">Фикс-цена за объект, страховка 5 млн ₽, штрафы ГЖИ берём на себя по договору.</p>
 
       <div class="hpc-trust-bullets">
         <div class="hpc-trust-bullet">
@@ -210,7 +350,7 @@
       </div>
     </div>
 
-    <!-- Hero form-card · конверсионный фокус -->
+    <!-- Hero form-card · конверсионный фокус (bg фото — на секции .hpc-hero) -->
     <div class="hpc-form-card">
       <div class="head">
         <div class="eyebrow">§ Заявка · ответ за 10 минут</div>
@@ -368,6 +508,7 @@
 
     <div class="hpc-prices">
       <div class="hpc-price-row">
+        <div class="hpc-price-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M8 7c-2 2-2 5 0 7"/><path d="M16 7c2 2 2 5 0 7"/><path d="M6 14c-1 1-1 2.5 0 3.5"/><path d="M18 14c1 1 1 2.5 0 3.5"/></svg></div>
         <div class="name">Спил дерева до 10 м</div>
         <div class="desc">С автовышки или альпинистом, со страховкой 5 млн ₽. С удалением пня — отдельно.</div>
         <div class="hpc-price-cta">
@@ -376,6 +517,7 @@
         </div>
       </div>
       <div class="hpc-price-row">
+        <div class="hpc-price-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13.5H12L11 22l8.5-11.5H12.5z"/></svg></div>
         <div class="name">Аварийное удаление 10-25 м</div>
         <div class="desc">Дерево упало или висит — приедем в течение 4 часов в МО, 2 часов в Москве. Каблинг при необходимости.</div>
         <div class="hpc-price-cta">
@@ -384,6 +526,7 @@
         </div>
       </div>
       <div class="hpc-price-row">
+        <div class="hpc-price-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9M5 10v10h14V10"/><path d="M8 4.5L8 2.5M12 3.5L12 1.5M16 4.5L16 2.5"/></svg></div>
         <div class="name">Чистка крыши от снега</div>
         <div class="desc">Со снеговалом и сосульками. С автовышки или промальпом — выбираем по геометрии и доступу.</div>
         <div class="hpc-price-cta">
@@ -392,6 +535,7 @@
         </div>
       </div>
       <div class="hpc-price-row">
+        <div class="hpc-price-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="11" rx="1"/><path d="M3 12h18M7 8V5h10v3"/></svg></div>
         <div class="name">Контейнер 7-8 м³</div>
         <div class="desc">Привезём, оставим на 2-7 дней, вывезем с актом на полигон. Бытовой / строительный / смешанный мусор.</div>
         <div class="hpc-price-cta">
@@ -400,6 +544,7 @@
         </div>
       </div>
       <div class="hpc-price-row">
+        <div class="hpc-price-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 4v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
         <div class="name">Газель + грузчики 2 чел.</div>
         <div class="desc">3 часа работы. Старая мебель, бытовая техника, садовый мусор, крупногабарит.</div>
         <div class="hpc-price-cta">
@@ -408,6 +553,7 @@
         </div>
       </div>
       <div class="hpc-price-row">
+        <div class="hpc-price-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V9l7-6 7 6v12"/><path d="M3 5l2 2M21 5l-2 2M12 3V1M7 13l2-2 2 2"/></svg></div>
         <div class="name">Демонтаж бани, сарая</div>
         <div class="desc">Каркасное / брусовое / щитовое строение. С вывозом отходов в одном договоре.</div>
         <div class="hpc-price-cta">
@@ -416,6 +562,7 @@
         </div>
       </div>
       <div class="hpc-price-row">
+        <div class="hpc-price-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V9l7-6 7 6v12M9 21v-6h6v6"/><line x1="4" y1="5" x2="7" y2="8" stroke-width="2"/><line x1="5" y1="3" x2="9" y2="7" stroke-width="2"/></svg></div>
         <div class="name">Снос дома до 100 м²</div>
         <div class="desc">Деревянный или каркасный одноэтажный. С разрешительными документами и вывозом.</div>
         <div class="hpc-price-cta">
@@ -430,6 +577,232 @@
     </p>
   </div>
 </section>
+
+<!-- ═════════ §04.5 · КАЛЬКУЛЯТОР · слайдеры ═════════ -->
+<section class="hp-section" id="calc">
+  <div class="wrap">
+    <div class="eyebrow">§ 04.5 · Калькулятор · быстрый расчёт</div>
+    <h2 style="max-width: 20ch;">Знаете параметры — посчитайте сами</h2>
+    <p class="lead">Для тех, кто знает высоту дерева, объём контейнера или площадь крыши. <a class="hp-cross" href="#foto-smeta" style="margin-left: 6px;">Не знаете объём? → Пришлите фото →</a></p>
+
+    <div style="margin-top: 28px;">
+      <div class="hp-calc-tabs" role="tablist" aria-label="Выбор калькулятора услуги">
+        <button class="hp-calc-tab is-active" role="tab" aria-selected="true" data-tab="arbo" onclick="hpcCalcSwitch(this,'arbo')">Арбористика</button>
+        <button class="hp-calc-tab" role="tab" aria-selected="false" data-tab="kryshi" onclick="hpcCalcSwitch(this,'kryshi')">Чистка крыш</button>
+        <button class="hp-calc-tab" role="tab" aria-selected="false" data-tab="musor" onclick="hpcCalcSwitch(this,'musor')">Вывоз мусора</button>
+        <button class="hp-calc-tab" role="tab" aria-selected="false" data-tab="demo" onclick="hpcCalcSwitch(this,'demo')">Демонтаж</button>
+      </div>
+
+      <div class="hp-calc">
+
+        <!-- ARBO -->
+        <div class="hp-calc-fields" data-tab="arbo">
+          <div class="hp-calc-row">
+            <label class="lbl"><span>Высота дерева</span><span data-out="v">18 м</span></label>
+            <input type="range" min="3" max="40" value="18" step="1" class="hpc-range" data-key="height" data-unit="м"
+                   aria-label="Высота дерева в метрах">
+          </div>
+          <div class="hp-calc-row">
+            <label class="lbl"><span>Диаметр ствола</span><span data-out="v">40 см</span></label>
+            <input type="range" min="10" max="120" value="40" step="1" class="hpc-range" data-key="diameter" data-unit="см"
+                   aria-label="Диаметр ствола в сантиметрах">
+          </div>
+          <div class="hp-calc-row">
+            <label class="lbl"><span>Количество деревьев</span><span data-out="v">1</span></label>
+            <input type="range" min="1" max="10" value="1" step="1" class="hpc-range" data-key="count" data-unit=""
+                   aria-label="Количество деревьев">
+          </div>
+          <div class="hp-calc-options" role="group" aria-label="Дополнительные опции">
+            <label class="hp-calc-opt"><input type="checkbox" class="hp-calc-opt-input" data-add="3200" checked><span class="box" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="hp-calc-opt-text">Удаление пня (фрезой, +3 200 ₽)</span></label>
+            <label class="hp-calc-opt"><input type="checkbox" class="hp-calc-opt-input" data-add="1800" checked><span class="box" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="hp-calc-opt-text">Вывоз веток и щепы (+1 800 ₽)</span></label>
+            <label class="hp-calc-opt"><input type="checkbox" class="hp-calc-opt-input" data-mult="1.4"><span class="box" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="hp-calc-opt-text">Аварийное дерево — коэффициент ×1.4</span></label>
+          </div>
+        </div>
+
+        <!-- KRYSHI -->
+        <div class="hp-calc-fields" data-tab="kryshi" hidden>
+          <div class="hp-calc-row">
+            <label class="lbl"><span>Площадь крыши</span><span data-out="v">350 м²</span></label>
+            <input type="range" min="50" max="2000" value="350" step="10" class="hpc-range" data-key="area" data-unit="м²"
+                   aria-label="Площадь крыши в квадратных метрах">
+          </div>
+          <div class="hp-calc-row">
+            <label class="lbl"><span>Толщина снега</span><span data-out="v">25 см</span></label>
+            <input type="range" min="5" max="80" value="25" step="1" class="hpc-range" data-key="snow" data-unit="см"
+                   aria-label="Толщина снежного покрова">
+          </div>
+          <div class="hp-calc-row">
+            <label class="lbl"><span>Уклон крыши</span><span data-out="v">25°</span></label>
+            <input type="range" min="10" max="60" value="25" step="1" class="hpc-range" data-key="slope" data-unit="°"
+                   aria-label="Уклон крыши в градусах">
+          </div>
+          <div class="hp-calc-options" role="group" aria-label="Дополнительные опции">
+            <label class="hp-calc-opt"><input type="checkbox" class="hp-calc-opt-input" data-add="800" checked><span class="box" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="hp-calc-opt-text">Сбивание сосулек (+800 ₽)</span></label>
+            <label class="hp-calc-opt"><input type="checkbox" class="hp-calc-opt-input" data-add="1500"><span class="box" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="hp-calc-opt-text">Удаление наледи (+1 500 ₽)</span></label>
+            <label class="hp-calc-opt"><input type="checkbox" class="hp-calc-opt-input" data-mult="1.3"><span class="box" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="hp-calc-opt-text">Промальп (вместо автовышки) ×1.3</span></label>
+          </div>
+        </div>
+
+        <!-- MUSOR -->
+        <div class="hp-calc-fields" data-tab="musor" hidden>
+          <div class="hp-calc-row">
+            <label class="lbl"><span>Объём контейнера</span><span data-out="v">8 м³</span></label>
+            <input type="range" min="1" max="30" value="8" step="1" class="hpc-range" data-key="volume" data-unit="м³"
+                   aria-label="Объём в кубических метрах">
+          </div>
+          <div class="hp-calc-row">
+            <label class="lbl"><span>Расстояние от МКАД</span><span data-out="v">25 км</span></label>
+            <input type="range" min="0" max="120" value="25" step="5" class="hpc-range" data-key="distance" data-unit="км"
+                   aria-label="Расстояние от МКАД в километрах">
+          </div>
+          <div class="hp-calc-row">
+            <label class="lbl"><span>Количество ходок</span><span data-out="v">1</span></label>
+            <input type="range" min="1" max="6" value="1" step="1" class="hpc-range" data-key="trips" data-unit=""
+                   aria-label="Количество ходок">
+          </div>
+          <div class="hp-calc-options" role="group" aria-label="Дополнительные опции">
+            <label class="hp-calc-opt"><input type="checkbox" class="hp-calc-opt-input" data-add="4800"><span class="box" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="hp-calc-opt-text">Грузчики 2 чел. (+4 800 ₽)</span></label>
+            <label class="hp-calc-opt"><input type="checkbox" class="hp-calc-opt-input" data-add="2200"><span class="box" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="hp-calc-opt-text">Сортировка (+2 200 ₽)</span></label>
+            <label class="hp-calc-opt"><input type="checkbox" class="hp-calc-opt-input" data-mult="1.3"><span class="box" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="hp-calc-opt-text">Срочно (в день обращения) ×1.3</span></label>
+          </div>
+        </div>
+
+        <!-- DEMO -->
+        <div class="hp-calc-fields" data-tab="demo" hidden>
+          <div class="hp-calc-row">
+            <label class="lbl"><span>Площадь строения</span><span data-out="v">60 м²</span></label>
+            <input type="range" min="10" max="300" value="60" step="5" class="hpc-range" data-key="area" data-unit="м²"
+                   aria-label="Площадь строения в квадратных метрах">
+          </div>
+          <div class="hp-calc-row">
+            <label class="lbl"><span>Этажность</span><span data-out="v">1</span></label>
+            <input type="range" min="1" max="3" value="1" step="1" class="hpc-range" data-key="floors" data-unit=""
+                   aria-label="Количество этажей">
+          </div>
+          <div class="hp-calc-row">
+            <label class="lbl"><span>Толщина стен</span><span data-out="v">20 см</span></label>
+            <input type="range" min="10" max="60" value="20" step="2" class="hpc-range" data-key="wall" data-unit="см"
+                   aria-label="Толщина стен в сантиметрах">
+          </div>
+          <div class="hp-calc-options" role="group" aria-label="Дополнительные опции">
+            <label class="hp-calc-opt"><input type="checkbox" class="hp-calc-opt-input" data-add="15000"><span class="box" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="hp-calc-opt-text">Снос фундамента (+15 000 ₽)</span></label>
+            <label class="hp-calc-opt"><input type="checkbox" class="hp-calc-opt-input" data-add="8000" checked><span class="box" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="hp-calc-opt-text">Вывоз отходов (+8 000 ₽)</span></label>
+            <label class="hp-calc-opt"><input type="checkbox" class="hp-calc-opt-input" data-add="5000"><span class="box" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="hp-calc-opt-text">Разрешительные документы (+5 000 ₽)</span></label>
+          </div>
+        </div>
+
+        <div class="hp-calc-result" aria-live="polite" aria-atomic="true">
+          <div>
+            <div class="lbl">Стоимость</div>
+            <div class="num" id="hpc-price">14 200<span class="currency"> ₽</span></div>
+            <div class="meta" id="hpc-meta">СПИЛ + ПЕНЬ + ВЫВОЗ<br>~3 ЧАСА · 2 ЧЕЛОВЕКА<br>СТРАХОВКА 5 МЛН ₽</div>
+          </div>
+          <div class="hp-calc-disclaimer">
+            Ориентировочная цена. Точная — в смете после бесплатного замера.
+          </div>
+          <a class="btn btn-primary" href="#cta" style="margin-top:16px;justify-content:center;display:flex;">Заказать бесплатный замер →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  // Формулы по табам
+  var META = {
+    arbo:   'СПИЛ + ПЕНЬ + ВЫВОЗ<br>~{hrs} ЧАС{hrsEnd} · 2 ЧЕЛОВЕКА<br>СТРАХОВКА 5 МЛН ₽',
+    kryshi: 'СНЕГ + НАЛЕДЬ + СОСУЛЬКИ<br>С АВТОВЫШКИ ИЛИ АЛЬП.<br>АКТ ПО ФОРМЕ',
+    musor:  'КОНТЕЙНЕР · 2–7 ДНЕЙ<br>С АКТОМ НА ПОЛИГОН<br>ТКО / СТРОИТЕЛЬНЫЙ',
+    demo:   'СНОС + ВЫВОЗ ОТХОДОВ<br>С РАЗРЕШ. ДОКУМЕНТАМИ<br>ВСЁ В ОДНОМ ДОГОВОРЕ'
+  };
+
+  function calc(tab, vals, opts) {
+    var base;
+    if (tab === 'arbo')   base = (2200 + vals.height * 380 + vals.diameter * 60) * vals.count;
+    else if (tab === 'kryshi') base = vals.area * (25 + vals.snow * 0.6) + vals.slope * 40;
+    else if (tab === 'musor')  base = 2400 + vals.volume * 320 + vals.distance * 80 + vals.trips * 1800;
+    else if (tab === 'demo')   base = vals.area * (320 + vals.wall * 8) * vals.floors;
+    else return 0;
+
+    opts.forEach(function(o){
+      if (o.add) base += o.add;
+      if (o.mult) base *= o.mult;
+    });
+    return Math.round(base / 100) * 100;
+  }
+
+  function metaFor(tab, vals) {
+    var t = META[tab];
+    if (tab === 'arbo') {
+      var hrs = Math.max(1, Math.round(vals.height * vals.count / 6));
+      return t.replace('{hrs}', hrs).replace('{hrsEnd}', hrs > 1 ? 'А' : '');
+    }
+    return t;
+  }
+
+  function update(tab) {
+    var fields = document.querySelector('.hp-calc-fields[data-tab="' + tab + '"]');
+    if (!fields) return;
+
+    var vals = {};
+    fields.querySelectorAll('.hpc-range').forEach(function(r){
+      vals[r.dataset.key] = +r.value;
+      r.setAttribute('aria-valuenow', r.value);
+      // Прогресс-заливка трека (CSS var --fill) — синхрон с thumb position
+      var pct = ((+r.value - +r.min) / (+r.max - +r.min)) * 100;
+      r.style.setProperty('--fill', pct + '%');
+      var out = r.parentElement.querySelector('[data-out="v"]');
+      if (out) out.textContent = r.value + (r.dataset.unit ? ' ' + r.dataset.unit : '');
+    });
+
+    var opts = [];
+    fields.querySelectorAll('.hp-calc-opt-input').forEach(function(c){
+      if (!c.checked) return;
+      if (c.dataset.add) opts.push({add: +c.dataset.add});
+      if (c.dataset.mult) opts.push({mult: +c.dataset.mult});
+    });
+
+    var price = calc(tab, vals, opts);
+    document.getElementById('hpc-price').innerHTML = price.toLocaleString('ru') + '<span class="currency"> ₽</span>';
+    document.getElementById('hpc-meta').innerHTML = metaFor(tab, vals);
+  }
+
+  function activeTab() {
+    var btn = document.querySelector('.hp-calc-tab.is-active');
+    return btn ? btn.dataset.tab : 'arbo';
+  }
+
+  // Подвешиваем listeners на ВСЕ ranges и checkboxes
+  document.querySelectorAll('.hp-calc-fields .hpc-range').forEach(function(r){
+    r.addEventListener('input', function(){ update(activeTab()); });
+  });
+  document.querySelectorAll('.hp-calc-fields .hp-calc-opt-input').forEach(function(c){
+    c.addEventListener('change', function(){ update(activeTab()); });
+  });
+
+  // Переключение табов
+  window.hpcCalcSwitch = function(btn, tab) {
+    document.querySelectorAll('.hp-calc-tab').forEach(function(b){
+      b.classList.remove('is-active');
+      b.setAttribute('aria-selected', 'false');
+    });
+    btn.classList.add('is-active');
+    btn.setAttribute('aria-selected', 'true');
+    document.querySelectorAll('.hp-calc-fields').forEach(function(f){
+      f.hidden = (f.dataset.tab !== tab);
+    });
+    update(tab);
+  };
+
+  // Initial: --fill на ВСЕ слайдеры (включая скрытые табы, чтобы при переключении было правильно)
+  document.querySelectorAll('.hp-calc-fields .hpc-range').forEach(function(r){
+    var pct = ((+r.value - +r.min) / (+r.max - +r.min)) * 100;
+    r.style.setProperty('--fill', pct + '%');
+  });
+  update('arbo');
+})();
+</script>
 
 <!-- ═════════ §05 · ФОТО → СМЕТА (наш USP) ═════════ -->
 <section class="hp-section" id="foto-smeta">
@@ -476,7 +849,7 @@
           <span>Ориентир № 0044</span>
           <span>10:08 МСК</span>
         </div>
-        <div class="photo" style="aspect-ratio: 1/1;">
+        <div class="photo" style="aspect-ratio:1/1;background-image:url('img-generated/smeta-birch-emergency.jpg');background-size:cover;background-position:center top;">
           <span>ФОТО · Аварийная берёза 18 м<br>СНТ Берёзовая роща, Истра</span>
         </div>
         <div class="recognized">
@@ -504,7 +877,7 @@
 
     <div class="hp-cases">
       <article class="hp-case">
-        <div class="photo">
+        <div class="photo" style="background-image:url('img-generated/case-01-birch.jpg');background-size:cover;background-position:center top;">
           <span class="tag b2c">B2C</span>
           <span class="divider"></span>
           <span class="lbl">ДО / ПОСЛЕ · аварийная берёза 18 м · Истра · 11 апр</span>
@@ -520,7 +893,7 @@
         </div>
       </article>
       <article class="hp-case">
-        <div class="photo">
+        <div class="photo" style="background-image:url('img-generated/case-02-banya-before.jpg');background-size:cover;background-position:center top;">
           <span class="tag b2c">B2C</span>
           <span class="divider"></span>
           <span class="lbl">ДО / ПОСЛЕ · старая баня 4×5 м · Одинцово · 2 апр</span>
@@ -536,7 +909,7 @@
         </div>
       </article>
       <article class="hp-case">
-        <div class="photo">
+        <div class="photo" style="background-image:url('img-generated/case-03-roof-snow.jpg');background-size:cover;background-position:center top;">
           <span class="tag b2b">B2B</span>
           <span class="divider"></span>
           <span class="lbl">ДО / ПОСЛЕ · крыша 850 м² · посёлок Мытищи · сезон</span>
@@ -552,7 +925,7 @@
         </div>
       </article>
       <article class="hp-case">
-        <div class="photo">
+        <div class="photo" style="background-image:url('img-generated/case-04-clearing.jpg');background-size:cover;background-position:center top;">
           <span class="tag b2c">B2C</span>
           <span class="divider"></span>
           <span class="lbl">ДО / ПОСЛЕ · контейнер 30 м³ · Раменское · 28 мар</span>
@@ -568,7 +941,7 @@
         </div>
       </article>
       <article class="hp-case">
-        <div class="photo">
+        <div class="photo" style="background-image:url('img-generated/case-05-b2b-complex.jpg');background-size:cover;background-position:center top;">
           <span class="tag b2b">B2B</span>
           <span class="divider"></span>
           <span class="lbl">ДО / ПОСЛЕ · 12 объектов · УК Жилищник · сезон</span>
@@ -584,7 +957,7 @@
         </div>
       </article>
       <article class="hp-case">
-        <div class="photo">
+        <div class="photo" style="background-image:url('img-generated/case-06-pruning.jpg');background-size:cover;background-position:center top;">
           <span class="tag b2c">B2C</span>
           <span class="divider"></span>
           <span class="lbl">ДО / ПОСЛЕ · кронирование 4 деревьев · Пушкино · 14 мар</span>
@@ -712,7 +1085,7 @@
 
     <div class="hpc-trust">
       <div class="hpc-trust-card">
-        <div class="doc">
+        <div class="doc" style="background-image:url('img-generated/doc-sro.jpg');background-size:cover;background-position:center top;min-height:120px;position:relative;">
           <span class="badge-ok">✓</span>
           <span>СВИДЕТЕЛЬСТВО<br>СРО · ИНГ-РЕГИОН<br>№ 0042-2026<br>действует до 2027</span>
         </div>
@@ -720,7 +1093,7 @@
         <p class="meta">Актуально · ИНГ-РЕГИОН · 1 млрд ₽</p>
       </div>
       <div class="hpc-trust-card">
-        <div class="doc">
+        <div class="doc" style="background-image:url('img-generated/doc-insurance.jpg');background-size:cover;background-position:center top;min-height:120px;position:relative;">
           <span class="badge-ok">✓</span>
           <span>ПОЛИС СТРАХОВАНИЯ<br>ОТВЕТСТВЕННОСТИ<br>ИНГОССТРАХ · 5 МЛН ₽<br>действует до 2027</span>
         </div>
@@ -728,7 +1101,7 @@
         <p class="meta">Актуально · Ингосстрах · 5 млн ₽</p>
       </div>
       <div class="hpc-trust-card">
-        <div class="doc">
+        <div class="doc" style="background-image:url('img-generated/doc-cert-arborist.jpg');background-size:cover;background-position:center top;min-height:120px;position:relative;">
           <span class="badge-ok">✓</span>
           <span>СЕРТИФИКАТ<br>АРБОРИСТ-АЛЬПИНИСТ<br>3 РАЗРЯД<br>выдан 2024 · действует</span>
         </div>
@@ -736,7 +1109,7 @@
         <p class="meta">8 человек · альп. 2-3 разряд</p>
       </div>
       <div class="hpc-trust-card">
-        <div class="doc">
+        <div class="doc" style="background-image:url('img-generated/doc-egryl.jpg');background-size:cover;background-position:center top;min-height:120px;position:relative;">
           <span class="badge-ok">✓</span>
           <span>ВЫПИСКА ЕГРЮЛ<br>ООО ОБИХОД<br>ИНН 1111111111<br>с 2020 года</span>
         </div>
@@ -744,7 +1117,7 @@
         <p class="meta">с 2020 · 12 лет на рынке</p>
       </div>
       <div class="hpc-trust-card">
-        <div class="doc">
+        <div class="doc" style="background-image:url('img-generated/doc-equipment.jpg');background-size:cover;background-position:center top;min-height:120px;position:relative;">
           <span class="badge-ok">✓</span>
           <span>ПАСПОРТ ТЕХНИКИ<br>АВТОВЫШКА АГП-22<br>ОТВ. ПОДЪЁМА 22 М<br>осмотр 2026</span>
         </div>
@@ -752,7 +1125,7 @@
         <p class="meta">2× автовышки · 4× газели · дробилка</p>
       </div>
       <div class="hpc-trust-card">
-        <div class="doc">
+        <div class="doc" style="background-image:url('img-generated/doc-152fz.jpg');background-size:cover;background-position:center top;min-height:120px;position:relative;">
           <span class="badge-ok">✓</span>
           <span>СВИДЕТЕЛЬСТВО<br>ОВ-152 ФЗ<br>оператор перс. данных<br>с 2024</span>
         </div>
@@ -760,7 +1133,7 @@
         <p class="meta">Реестр Роскомнадзора · с 2024</p>
       </div>
       <div class="hpc-trust-card">
-        <div class="doc">
+        <div class="doc" style="background-image:url('img-generated/doc-waste.jpg');background-size:cover;background-position:center top;min-height:120px;position:relative;">
           <span class="badge-ok">✓</span>
           <span>ДОГОВОР НА УТИЛИЗАЦИЮ<br>ПОЛИГОН ТКО<br>«ВТОРРЕСУРС»<br>с актами на каждый вывоз</span>
         </div>
@@ -768,7 +1141,7 @@
         <p class="meta">Лицензированный полигон · акты</p>
       </div>
       <div class="hpc-trust-card">
-        <div class="doc">
+        <div class="doc" style="background-image:url('img-generated/doc-eis.jpg');background-size:cover;background-position:center top;min-height:120px;position:relative;">
           <span class="badge-ok">✓</span>
           <span>АККРЕДИТАЦИЯ<br>ЕИС ЗАКУПКИ<br>44/223-ФЗ<br>с 2025</span>
         </div>
@@ -818,6 +1191,92 @@
     </div>
   </div>
 </section>
+
+<!-- ═════════ §09.5 · ГАЛЕРЕЯ · фото с объектов ═════════ -->
+<section class="hp-section hp-gallery-section">
+  <div class="wrap">
+    <div class="eyebrow">§ 09.5 · Фото с объектов · реальные работы</div>
+    <h2 style="max-width: 22ch;">Что происходит на объекте</h2>
+    <p class="lead" style="margin-bottom: 28px;">Фото наших бригад в работе — арбористика, чистка крыш, вывоз мусора, демонтаж. Без постановок.</p>
+  </div>
+
+  <div class="hp-gallery-wrap">
+    <div class="hp-gallery-track" id="hp-gallery-track">
+      <figure class="hp-gallery-item">
+        <img src="img-generated/gal-01-spil-alpinist.jpg" alt="Арборист-альпинист на высоте 20 м" loading="lazy" />
+        <figcaption>Альпинизм · спил берёзы 20 м · Истра</figcaption>
+      </figure>
+      <figure class="hp-gallery-item">
+        <img src="img-generated/gal-02-avtowyshka.jpg" alt="Автовышка на спиле дерева" loading="lazy" />
+        <figcaption>Автовышка АГП-22 · кронирование сосны · Одинцово</figcaption>
+      </figure>
+      <figure class="hp-gallery-item">
+        <img src="img-generated/gal-03-pyen-frezer.jpg" alt="Фрезерование пня" loading="lazy" />
+        <figcaption>Корчевание пня фрезой · дуб 80 см · Раменское</figcaption>
+      </figure>
+      <figure class="hp-gallery-item">
+        <img src="img-generated/gal-04-roof-winter.jpg" alt="Чистка крыши от снега" loading="lazy" />
+        <figcaption>Чистка крыши · снег + наледь · посёлок Мытищи</figcaption>
+      </figure>
+      <figure class="hp-gallery-item">
+        <img src="img-generated/gal-05-container-musor.jpg" alt="Контейнер вывоз мусора" loading="lazy" />
+        <figcaption>Контейнер 8 м³ · строительный мусор · Химки</figcaption>
+      </figure>
+      <figure class="hp-gallery-item">
+        <img src="img-generated/gal-06-demolition-saray.jpg" alt="Демонтаж сарая" loading="lazy" />
+        <figcaption>Снос деревянного сарая · вывоз в одном договоре · Пушкино</figcaption>
+      </figure>
+      <figure class="hp-gallery-item">
+        <img src="img-generated/gal-07-kronirovanie-sad.jpg" alt="Кронирование яблоневого сада" loading="lazy" />
+        <figcaption>Кронирование сада · яблони 20 лет · Жуковский</figcaption>
+      </figure>
+      <figure class="hp-gallery-item">
+        <img src="img-generated/gal-08-brigada-work.jpg" alt="Бригада Обихода за работой" loading="lazy" />
+        <figcaption>Бригада 4 человека · уборка после спила · Красногорск</figcaption>
+      </figure>
+    </div>
+    <button class="hp-gallery-btn hp-gallery-prev" aria-label="Назад" onclick="hpGalleryScroll(-1)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="hp-gallery-btn hp-gallery-next" aria-label="Вперёд" onclick="hpGalleryScroll(1)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <div class="hp-gallery-dots" id="hp-gallery-dots">
+    <span class="hp-gallery-dot active"></span>
+    <span class="hp-gallery-dot"></span>
+    <span class="hp-gallery-dot"></span>
+    <span class="hp-gallery-dot"></span>
+    <span class="hp-gallery-dot"></span>
+    <span class="hp-gallery-dot"></span>
+    <span class="hp-gallery-dot"></span>
+    <span class="hp-gallery-dot"></span>
+  </div>
+</section>
+<script>
+(function(){
+  var track = document.getElementById('hp-gallery-track');
+  var dots  = document.querySelectorAll('.hp-gallery-dot');
+  if (!track) return;
+  function itemW() {
+    var el = track.querySelector('.hp-gallery-item');
+    return el ? el.offsetWidth + 20 : 420;
+  }
+  window.hpGalleryScroll = function(dir) {
+    track.scrollBy({ left: dir * itemW() * 2, behavior: 'smooth' });
+  };
+  track.addEventListener('scroll', function() {
+    var idx = Math.round(track.scrollLeft / itemW());
+    dots.forEach(function(d,i){ d.classList.toggle('active', i===idx); });
+  }, { passive: true });
+  dots.forEach(function(dot,i){
+    dot.addEventListener('click', function(){
+      track.scrollTo({ left: i * itemW(), behavior: 'smooth' });
+    });
+  });
+})();
+</script>
 
 <!-- ═════════ §10 · FAQ · accordion ═════════ -->
 <section class="hp-section alt">
@@ -900,7 +1359,10 @@
     </div>
   </div>
 </section>
-<div class="site-footer-mock">
+
+</main>
+
+<footer class="site-footer-mock">
   <div class="cols">
     <div class="brand-col">
       <div class="mark-row">
@@ -963,7 +1425,7 @@
     <span class="sep">·</span>
     <a href="/oferta">Публичная оферта</a>
   </div>
-</div>
+</footer>
 
 
 <!-- Подсказка для презентации макета -->
