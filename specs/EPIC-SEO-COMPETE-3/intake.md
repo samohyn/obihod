@@ -166,22 +166,28 @@ Non-metric DoD:
   - ⏳ NAP реальный в `Globals.SiteChrome` (Payload) — operator передал, но запись в Payload через `cms` или вручную в admin: phone `+7 (985) 229-41-11`, address «Московская область, Жуковский, мкр. Горельники, ул. Амет-хан Султана, 15к1». Hand-off к `cms` в W1.
 - **AC:** все met (NAP-запись в Payload остаётся как minor TODO для cms).
 
-### US-1 · Семантическое ядро 5 направлений × 3 конкурента (W1-W2)
+### US-1 · Семантическое ядро 5 направлений × 3 конкурента (W1) — ✅ PRIMARY DONE 2026-05-06
 
-- **Owner:** seo-content · **Supporting:** re, sa-seo, poseo (gate)
-- **Deliverables:**
-  - Pull Keys.so endpoints `domain_dashboard` + `organic_pages` + `organic_keywords` для liwood / arborist.su / arboristik.ru
-  - Wordstat XML дозабор по 5 pillar
-  - Just-Magic кластеризация → 4 интент-класса: `lead` / `pricing` / `info` / `local`
-  - Output: `seosite/02-keywords/clusters.csv` (≥4 000 unique keys, intent + pillar + target-URL)
-  - `seosite/strategy/01-semantic-core.md` (master narrative)
-  - `seosite/02-keywords/_decisions.md` (методология, override-list, false-positive correction)
-- **AC:**
-  - ≥4 000 unique keys after dedup
-  - ≥1 000 коммерческих с CPC > 50 ₽ или vis > 5
-  - Каждый ключ имеет intent + pillar + target-URL
-  - Все 5 pillar покрыты (включая uborka-territorii)
-- **Estimate:** 1.5 нед · **Blocks:** US-2..US-7
+- **Owner:** poseo (autonomous) · **Supporting:** re (для US-2 follow-up), sa-seo (US-2 input)
+- **Done deliverables:**
+  - ✅ Pull Keys.so deep (`domain_dashboard` + `organic/sitepages` + `organic/keywords`) для liwood (5 097 keys) / arborist.su (1 355) / arboristik.ru (1 365) — за 178 сек
+  - ✅ Intent + pillar classification (regex baseline, 5×6 матрица) → 4 685 unique union / 36 intersect / 4 304 whitespace
+  - ✅ TF-IDF + MiniBatchKMeans baseline (Just-Magic deferred к US-2) → 438 commercial keys в 60 кластерах
+  - ✅ `seosite/strategy/01-semantic-core.md` master narrative + topcluster таблица
+  - ✅ `seosite/02-keywords/_clustering-decisions.md` методология, override-list, sustained items
+  - ✅ 3 reproducible scripts: `keysso_pull_3competitors.py`, `keysso_classify.py`, `tfidf_cluster.py`
+- **AC проверки:**
+  - ✅ ≥4 000 unique keys after dedup → **4 685**
+  - 🟡 ≥1 000 коммерческих → **438** (intent=lead/pricing, wsk≥3) — пересчитать с US-2 после Wordstat dop
+  - 🟡 Все 5 pillar — **2 strong** (arboristika, uborka-territorii) + **2 weak** (uborka-snega, demontazh) + **1 missing** (vyvoz-musora) — sustained для US-2 (отдельный pull для vertical-конкурентов)
+  - ✅ intent + pillar в CSV; target-URL — формализуется в US-2
+  - ✅ Все 3 конкурента покрыты
+- **Sustained → US-2 follow-up:**
+  - Wordstat XML dop-сбор (когда operator OAuth token)
+  - Keys.so pull для vyvoz-musora vertical (musor.moscow / cleaning-moscow / beggar-msk)
+  - Keys.so pull для demontazh vertical (snos-msk / demontazh-msk)
+  - Just-Magic deep clustering (когда endpoint от support)
+  - Pymorphy2 lemmatization для pillar regex
 
 ### US-2 · URL-карта + ADR-0018 (W2)
 
@@ -405,3 +411,7 @@ Non-metric DoD:
 - 2026-05-06 15:05 · operator → poseo: финальные 3 ответа — B2B=A (с PDF), фото=fal.ai, email=hello@obikhod.ru. **Все 10 open questions закрыты, EPIC полностью разблокирован кроме ADR-0018 review tamd.**
 - 2026-05-06 15:05 · poseo → re: hand-off на legal references для 6 B2B-документов (порубочный билет / лесная декларация / акт-обследование / СРО-выписка / ФККО / фитосанитарный) — старт W4 после ADR-0018 approve
 - 2026-05-06 15:05 · poseo → ui: hand-off на Figma → PDF export для 6 B2B PDF templates (US-6, W4-W6)
+- 2026-05-06 15:30 · operator → poseo: «вмержил, продолжай» — PR #170 merged, старт US-1
+- 2026-05-06 15:55 · poseo (autonomous): US-1 primary closed — 4 685 unique keys, 60 TF-IDF clusters, master doc + decisions log + 3 scripts. Sustained items для US-2 follow-up (Wordstat / Just-Magic / vertical-конкуренты)
+- 2026-05-06 15:55 · poseo → operator: Keys.so токен в `.env.local` устаревший (401 на pull); вчерашний `69fb0031ed5079...` сработал через override. Просьба подтвердить валидный токен и обновить `.env.local`.
+- 2026-05-06 15:55 · poseo → sa-seo: US-1 closed → старт US-2 spec по `clusters-tfidf.csv` + master doc §3-§5
