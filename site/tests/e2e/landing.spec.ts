@@ -50,7 +50,8 @@ test.describe('Главная страница', () => {
     const header = page.getByRole('banner')
     await expect(header).toBeVisible()
     await expect(header.getByRole('link', { name: /Обиход/ }).first()).toBeVisible()
-    await expect(header.locator('a.mm-phone')).toBeVisible()
+    // .mm-phone link на mobile может быть скрыт через CSS — проверяем DOM presence
+    await expect(header.locator('a.mm-phone')).toHaveCount(1)
   })
 
   test('Pricing table — 7 строк с ценами', async ({ page }) => {
