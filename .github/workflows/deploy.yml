@@ -250,7 +250,7 @@ jobs:
             "mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/releases/${REL} && \
              mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/shared"
 
-      - name: Ensure PAYLOAD_PREVIEW_SECRET + upsert REVALIDATE_SECRET in shared/.env
+      - name: Ensure PAYLOAD_PREVIEW_SECRET + upsert REVALIDATE_SECRET / NEXT_PUBLIC_SITE_URL in shared/.env
         # preview-sign (/api/preview-sign) — API route, читает process.env в рантайме.
         # Источник истины — shared/.env на VPS (его симлинкает релиз в .env).
         #
@@ -258,9 +258,15 @@ jobs:
         # REVALIDATE_SECRET — upsert: всегда заменяем значение в shared/.env на
         #   актуальное из GitHub Actions secret. Нужно для ротаций (если старый
         #   секрет утёк — ротация в GH подхватится на ближайшем deploy).
+        # NEXT_PUBLIC_SITE_URL — upsert: server-side `payload.config.ts` читает
+        #   `process.env.NEXT_PUBLIC_SITE_URL` в рантайме для `serverURL`. Без
+        #   этого Payload после login редиректит на fallback `localhost:3000`.
+        #   `NEXT_PUBLIC_*` инлайнится в client-bundle на build-time, но в env
+        #   PM2-процесса не попадает — его нужно положить в shared/.env явно.
         env:
           PPS: ${{ secrets.PAYLOAD_PREVIEW_SECRET }}
           RVS: ${{ secrets.REVALIDATE_SECRET }}
+          NPSU: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
         run: |
           if [ -z "$PPS" ]; then
             echo "::error::secret PAYLOAD_PREVIEW_SECRET пуст в GitHub"
@@ -268,6 +274,10 @@ jobs:
           fi
           if [ -z "$RVS" ]; then
             echo "::error::secret REVALIDATE_SECRET пуст в GitHub"
+            exit 1
+          fi
+          if [ -z "$NPSU" ]; then
+            echo "::error::secret NEXT_PUBLIC_SITE_URL пуст в GitHub"
             exit 1
           fi
           ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
@@ -287,7 +297,11 @@ jobs:
              # REVALIDATE_SECRET — upsert (drop старый, append актуальный)
              sed -i '/^REVALIDATE_SECRET=/d' \"\$ENV_FILE\"
              echo \"REVALIDATE_SECRET=$RVS\" >> \"\$ENV_FILE\"
-             echo 'REVALIDATE_SECRET upsert выполнен в shared/.env'"
+             echo 'REVALIDATE_SECRET upsert выполнен в shared/.env'
+             # NEXT_PUBLIC_SITE_URL — upsert (нужен payload.config.ts serverURL в runtime)
+             sed -i '/^NEXT_PUBLIC_SITE_URL=/d' \"\$ENV_FILE\"
+             echo \"NEXT_PUBLIC_SITE_URL=$NPSU\" >> \"\$ENV_FILE\"
+             echo 'NEXT_PUBLIC_SITE_URL upsert выполнен в shared/.env'"
 
       - name: Resolve GitHub Release asset URL
         # Используем apiUrl ассета (https://api.github.com/.../assets/<id>):
