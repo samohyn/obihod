@@ -11,9 +11,7 @@ role: poseo
 status: active
 blocks: []
 blocked_by:
-  - tamd ADR-0018 url-map (uborka-territorii как 5-й pillar)
-  - operator decision на B2B PDF templates content source (см. §Open questions, не блокирует start US-1)
-  - operator photo для 5 авторов (имена операторм approved «рандомные русские», нужны фото — stock или AI-gen TBD)
+  - tamd ADR-0018 url-map (uborka-territorii как 5-й pillar) — единственный live блокер
 related:
   - ADR-0018-url-map-compete-3 (in draft)
   - team/seo/topvisor-project-setup.md (creds готовы к передаче)
@@ -235,11 +233,15 @@ Non-metric DoD:
 - **AC:** 30 статей опубликованы, slug-каноничны, ≥1 200 слов, ≥3 H2, FAQ ≥4 вопроса, TL;DR ≤150 слов в первом экране, Author + Person schema, ≥3 internal links per article (1 pillar + 2 info + 1 case)
 - **Estimate:** 10 нед rolling
 
-### US-6 · B2B-нормативка `/b2b/<doc-type>/` (W4-W6)
+### US-6 · B2B-нормативка `/b2b/<doc-type>/` + PDF templates (W4-W6) — Track A confirmed 2026-05-06
 
-- **Owner:** seo-content · **Supporting:** cw, cms, seo-tech, re (legal references)
-- **Deliverables:** 6 B2B-pages в B2BPages collection: `porubochnyi-bilet`, `lesnaya-deklaratsiya`, `akt-obsledovaniya-derevev`, `sro-vypiska-shablony`, `fkko-klassifikatsiya-othodov`, `fitosanitarnyi-sertifikat` + 6 PDF templates в Media с download-tracking
-- **AC:** 6 страниц + 6 PDF, ≥800 слов each, JSON-LD LegalService + HowTo, Topvisor топ-20 за 6 нед по ключам `<doc-type> мо`, PDF download event в Я.Метрика
+- **Owner:** seo-content · **Supporting:** re (legal refs из Гарант / КонсультантПлюс / Минприроды), cw (body content), ui (Figma → PDF export), cms (publish в Media с download-tracking), seo-tech (HowTo schema + LegalService)
+- **Deliverables:**
+  - 6 B2B-pages в B2BPages collection: `porubochnyi-bilet`, `lesnaya-deklaratsiya`, `akt-obsledovaniya-derevev`, `sro-vypiska-shablony`, `fkko-klassifikatsiya-othodov`, `fitosanitarnyi-sertifikat`
+  - 6 PDF templates (заполненные образцы 5-10 страниц each) в Media collection с метаданными `kind=b2b-template`
+  - `b2b_pdf_download` event → Я.Метрика goal (US-10 monitoring)
+  - JSON-LD `LegalService` + `HowTo` (как получить документ) + ссылка на PDF в `mainEntity.contentUrl`
+- **AC:** 6 страниц + 6 PDF, ≥800 слов each, Topvisor топ-20 за 6 нед по ключам `<doc-type> мо`, PDF download event в Я.Метрика, ≥10 PDF downloads/нед к W12
 - **Estimate:** 2 нед
 
 ### US-7 · Programmatic `<service> × <city>` (W3-W5)
@@ -288,16 +290,19 @@ Non-metric DoD:
 - **AC:** Topvisor visibility >0 на нашем домене + тренд up к W12, weekly snapshot 8 нед подряд, 12 целей конфигурированы, dashboard обновляется, smoke-alert сработал
 - **Estimate:** 1 нед setup + rolling
 
-### US-11 · E-E-A-T: 3-5 авторов + 12 кейсов + СРО (W8-W10)
+### US-11 · E-E-A-T: 5 авторов (имена random RU + fal.ai photos) + 12 кейсов + СРО (W8-W10)
 
-- **Owner:** seo-content · **Supporting:** cw, cms, art, re, оператор (real-name approval)
+- **Owner:** seo-content · **Supporting:** cw (bio + рандомные ФИО), cms (publish), art (fal.ai prompt + photo curation), re (СРО reference), seo-tech (Person schema)
 - **Deliverables:**
-  - 3-5 реальных авторов в Authors collection: фото, bio, sameAs (LinkedIn / VK / Дзен / Telegram), Person schema
+  - 5 авторов в Authors collection с рандомными русскими ФИО (operator approved 2026-05-06)
+  - 5 AI-сгенерированных портретов через **fal.ai** (skill `fal-ai-media`) — Nano Banana / Seedream, 1024×1024 round avatar, neutral background, бизнес-кэжуал. Прозрачность через `data-llm-disclosure="ai-generated portrait"` метку
+  - bio 200-300 слов each (опыт / квалификация / зона ответственности), sameAs[] (фейк не делаем — только релевантные real org pages: `/avtory/<slug>/`, `/komanda/`)
+  - Person schema на каждом author-page
   - Расширение `/sro-licenzii/` фактическими реестровыми номерами + страховой полис
   - 12 новых cases с фото before/after (≥4 фото на кейс), привязка автор + service + district
-  - Trust-блок в Globals.SiteChrome footer (СРО, страховка, телефон, часы)
-- **AC:** ≥3 author-страниц с реальными именами + Person schema, 12 cases с ≥4 фото каждый, /sro-licenzii/ валидируется в Я.Вебмастер E-E-A-T, trust-footer на 100% страниц
-- **Estimate:** 2 нед · **Blocked by:** оператор real-name + фото approval
+  - Trust-блок в Globals.SiteChrome footer (СРО, страховка, телефон, email `hello@obikhod.ru`, часы)
+- **AC:** 5 author-страниц с фото + Person schema + AI-disclosure, 12 cases с ≥4 фото каждый, /sro-licenzii/ валидируется в Я.Вебмастер E-E-A-T, trust-footer на 100% страниц
+- **Estimate:** 2 нед
 
 ### US-12 · Final EPIC verify + retro (W13-W14)
 
@@ -366,15 +371,15 @@ Non-metric DoD:
 | 6 | B2B PDF templates | 🟡 needs explanation | Operator не знаком с концептом — объяснение в чате 2026-05-06 |
 | 7 | 5-й pillar slug | ✅ closed (default) | `/uborka-territorii/` (sustained, без changes) |
 
-**Новые open questions (после answers):**
+**Новые open questions (после answers) — все answered 2026-05-06:**
 
-8. **Авторские фото** — для US-11 нужны 5 фото (для рандомных русских имён). Источники:
-   - (a) AI-сгенерированные через fal-ai (Nano Banana / Seedream / FLUX) — быстро, бесплатно, но `Person` schema с фейк-фото это GDPR / Я.Webmaster грey area
-   - (b) Stock photos (unsplash/pexels с лицензией) — реалистичнее, но not unique
-   - (c) Бренд-pseudonym + abstract avatar — без фото, slabit E-E-A-T
-   - **Рекомендация poseo:** (a) AI-gen + явная пометка «образ» (как делает habr-обложки), либо (c) — это safer для долгосрочного trust. Operator decision.
-9. **Email для NAP** — у нас есть phone + address, но email не передан. Нужен ли в footer (например, `info@obikhod.ru`)?
-10. **B2B-track go/no-go** — после объяснения концепта (см. сообщение poseo 2026-05-06) operator решает: оставляем 6 PDF templates в US-6 или скоупа сжимается до 6 лендингов без PDF (минус -50% B2B-конверсия, но -1 неделя effort)
+| # | Вопрос | Статус | Ответ оператора |
+|---|---|---|---|
+| 8 | Авторские фото | ✅ closed | **fal.ai AI-gen** (Nano Banana / Seedream). Activation: skill `fal-ai-media`. Размер 1024×1024 round avatar, neutral background, бизнес-кэжуал. Each photo с metadata `data-llm-disclosure="ai-generated portrait"` для прозрачности |
+| 9 | Email для NAP | ✅ closed | `hello@obikhod.ru` (operator typo `hello@@` corrected by poseo) — добавить в `Globals.SiteChrome.contacts.email` + footer + B2B-страницы |
+| 10 | B2B-track go/no-go | ✅ closed | **Вариант A** — делаем 6 PDF templates. Activation: `re` (legal references из Гарант / КонсультантПлюс / Минприроды) → `cw` (body content) → `ui` (Figma → PDF export) → `cms` (publish в Media collection с `download-tracking`) |
+
+**Все 10 open questions закрыты на 2026-05-06.** EPIC полностью разблокирован для start US-1, остаётся только tamd ADR-0018 review (W2 deadline).
 
 ---
 
@@ -397,3 +402,6 @@ Non-metric DoD:
 - 2026-05-06 14:36 · operator → poseo: PR #169 approved + merged (squash), Topvisor + Just-Magic + NAP + real-names + Я.Бизнес owner answered
 - 2026-05-06 14:40 · poseo: follow-up PR — intake update with operator answers, US-0 closed, US-9 unblocked, 3 new open questions (photo source, email, B2B-track go/no-go)
 - 2026-05-06 14:40 · poseo → cms: hand-off для записи NAP в Globals.SiteChrome через Payload admin (W1 task)
+- 2026-05-06 15:05 · operator → poseo: финальные 3 ответа — B2B=A (с PDF), фото=fal.ai, email=hello@obikhod.ru. **Все 10 open questions закрыты, EPIC полностью разблокирован кроме ADR-0018 review tamd.**
+- 2026-05-06 15:05 · poseo → re: hand-off на legal references для 6 B2B-документов (порубочный билет / лесная декларация / акт-обследование / СРО-выписка / ФККО / фитосанитарный) — старт W4 после ADR-0018 approve
+- 2026-05-06 15:05 · poseo → ui: hand-off на Figma → PDF export для 6 B2B PDF templates (US-6, W4-W6)

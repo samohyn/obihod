@@ -72,6 +72,25 @@ Follow-up PR создан с обновлениями intake.md + .env.example t
 
 Hand-off к `cms` — записать NAP в Globals.SiteChrome через Payload admin (W1 минор-задача).
 
+### 2026-05-06 15:05 — все open questions closed, EPIC полностью разблокирован
+
+Operator финал-ответы:
+- Авторские фото: **fal.ai** (skill `fal-ai-media`)
+- Email: **hello@obikhod.ru** (operator typo `hello@@` corrected)
+- B2B-track: **Вариант A** (с 6 PDF templates)
+
+**Единственный live блокер EPIC:** tamd ADR-0018 review (W2 deadline = 2026-05-13).
+
+PR #170 close-out applied (intake обновлён + B2B PDF в US-6 + US-11 fal.ai авторы + email в US-11 footer).
+
+**Hand-offs пущены:**
+- `re` — legal references для 6 B2B-документов (старт W4)
+- `ui` — Figma → PDF export для 6 B2B templates (W4-W6)
+- `cms` — NAP запись в Globals.SiteChrome (W1)
+- `tamd` — ADR-0018 review (W2)
+
+**Старт US-1** возможен немедленно после merge PR #170 — `seo-content` + `re` начинают pull Keys.so deep + Wordstat dop-сбор по 5 pillar.
+
 ---
 
 ## Где мы сейчас (2026-04-29)
