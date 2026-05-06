@@ -51,6 +51,22 @@ const FALLBACK_DOCS = [
   },
 ]
 
+// Overlay-текст внутри `.doc` — по позиции 0-7, 1:1 из макета
+// newui/homepage-classic.html. Стилизация — `.hpc-trust-card .doc
+// span:not(.badge-ok)` в `app/homepage-classic.css`. Реквизиты
+// (СРО номер, ИНН, страховые суммы) — placeholder-данные до W15
+// регистрации юрлица; обновляются здесь, не из admin.
+const DOC_OVERLAYS: ReadonlyArray<ReadonlyArray<string>> = [
+  ['СВИДЕТЕЛЬСТВО', 'СРО · ИНГ-РЕГИОН', '№ 0042-2026', 'действует до 2027'],
+  ['ПОЛИС СТРАХОВАНИЯ', 'ОТВЕТСТВЕННОСТИ', 'ИНГОССТРАХ · 5 МЛН ₽', 'действует до 2027'],
+  ['СЕРТИФИКАТ', 'АРБОРИСТ-АЛЬПИНИСТ', '3 РАЗРЯД', 'выдан 2024 · действует'],
+  ['ВЫПИСКА ЕГРЮЛ', 'ООО ОБИХОД', 'ИНН 1111111111', 'с 2020 года'],
+  ['ПАСПОРТ ТЕХНИКИ', 'АВТОВЫШКА АГП-22', 'ОТВ. ПОДЪЁМА 22 М', 'осмотр 2026'],
+  ['СВИДЕТЕЛЬСТВО', 'ОВ-152 ФЗ', 'оператор перс. данных', 'с 2024'],
+  ['ДОГОВОР НА УТИЛИЗАЦИЮ', 'ПОЛИГОН ТКО', '«ВТОРРЕСУРС»', 'с актами на каждый вывоз'],
+  ['АККРЕДИТАЦИЯ', 'ЕИС ЗАКУПКИ', '44/223-ФЗ', 'с 2025'],
+]
+
 const photoUrl = (
   photo: { url?: string; alt?: string } | string | number | null | undefined,
   fallback: string,
@@ -96,6 +112,11 @@ export function Documents({ data }: { data?: HomepageGlobal }) {
                 }}
               >
                 <span className="badge-ok">✓</span>
+                <span>
+                  {(DOC_OVERLAYS[i] ?? DOC_OVERLAYS[0]).flatMap((line, j, arr) =>
+                    j < arr.length - 1 ? [line, <br key={`br-${j}`} />] : [line],
+                  )}
+                </span>
               </div>
               <h3 className="t">{d.title}</h3>
               <p className="meta">{d.meta}</p>
