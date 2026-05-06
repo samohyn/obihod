@@ -91,6 +91,45 @@ PR #170 close-out applied (intake обновлён + B2B PDF в US-6 + US-11 fal
 
 **Старт US-1** возможен немедленно после merge PR #170 — `seo-content` + `re` начинают pull Keys.so deep + Wordstat dop-сбор по 5 pillar.
 
+### 2026-05-06 15:55 — US-1 primary closed (poseo autonomous)
+
+PR #170 merged. Старт US-1 в новой ветке `seo/epic-compete-3-us-1-semantic-core`.
+
+**Done:**
+- Pull Keys.so deep (3 домена / 178 сек):
+  - liwood.ru: 5 097 keys + 155 pages = 3 058 KB JSON
+  - arborist.su: 1 355 keys + 74 pages = 820 KB JSON
+  - arboristik.ru: 1 365 keys + 65 pages = 785 KB JSON
+- Classification (intent + pillar regex baseline):
+  - Union: 4 685 unique keys
+  - Intersect 3-way: 36
+  - Whitespace 1-domain: 4 304
+- TF-IDF + MiniBatchKMeans (Just-Magic API недоступен без ticket в support → deferred к US-2):
+  - 438 commercial keys (intent=lead/pricing, wsk≥3) → 60 кластеров
+- Master doc + decisions log + 3 reproducible scripts
+
+**Top-15 кластеры выделили P0 страницы:**
+1. C12 wsk=913 «покос травы» → `/uborka-territorii/pokos-travy/` US-7
+2. C56+C34+C21 wsk=2387 «уборка снега» → `/uborka-snega-i-chistka-krysh/cena/` US-7
+3. C7+C55 wsk=1361 «сколько стоит спил» → `/uslugi/tseny/arboristika/` US-4
+4. C5 wsk=473 «онлайн калькулятор» → `/kalkulyator/foto-smeta/` US-8
+5. C36 wsk=201 «штраф за спил» → info-blog + B2B cross-link US-5+US-6
+
+**3 конкурента не покрывают: vyvoz-musora / demontazh.** Sustained для US-2 follow-up — отдельный Keys.so pull для musor.moscow / cleaning-moscow / snos-msk / demontazh-msk.
+
+**Live блокер:**
+- 🔐 Keys.so токен в `.env.local` устаревший (401). Вчерашний `69fb0031ed5079...` использовал через ENV override. Operator: подтвердить валидный токен.
+
+**Hand-offs:**
+- poseo → sa-seo: US-1 closed, входной материал для US-2 (URL-карта)
+- poseo → tamd: ADR-0018 review (sustained, W2 deadline 2026-05-13)
+- poseo → operator: Keys.so token verify
+
+**Следующее:**
+1. PR #171 (US-1) → operator merge
+2. tamd ADR-0018 review → approved → sa-seo пишет US-2 spec
+3. Параллельно — operator передаёт Wordstat OAuth для US-2 follow-up
+
 ---
 
 ## Где мы сейчас (2026-04-29)
