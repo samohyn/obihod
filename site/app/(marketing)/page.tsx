@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 
+import { getHomepage } from '@/lib/homepage'
 import { canonicalFor } from '@/lib/seo/canonical'
 import { JsonLdGraph } from '@/components/marketing/_shared/JsonLdGraph'
 import { Cases } from '@/components/marketing/sections/Cases'
@@ -15,6 +16,11 @@ import { PricingCalculator } from '@/components/marketing/sections/PricingCalcul
 import { PricingTable } from '@/components/marketing/sections/PricingTable'
 import { Reviews } from '@/components/marketing/sections/Reviews'
 import { Services } from '@/components/marketing/sections/Services'
+
+// Phase 2 (ADR-0017): re-render каждые 10 минут когда global обновляется через
+// admin. Webhook `/api/revalidate` после `afterChange` hook на Homepage global
+// — ещё не реализован (Phase 2 backlog), пока ISR.
+export const revalidate = 600
 
 /**
  * EPIC-HOMEPAGE-MIGRATION — Phase 1 visual 1:1 port from newui/homepage-classic.html.
@@ -60,11 +66,13 @@ export const metadata: Metadata = {
   },
 }
 
-export default function Home() {
+export default async function Home() {
+  // Phase 2: контент из Payload Homepage global (graceful fallback в каждой section)
+  const hp = await getHomepage()
   return (
     <>
       <JsonLdGraph />
-      <Hero />
+      <Hero data={hp} />
       <Services />
       <How />
       <PricingTable />
@@ -75,7 +83,7 @@ export default function Home() {
       <Documents />
       <Coverage />
       <Gallery />
-      <FAQ />
+      <FAQ data={hp} />
       <CtaFooter />
     </>
   )

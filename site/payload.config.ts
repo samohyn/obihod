@@ -18,6 +18,7 @@ import { Blog } from './collections/Blog'
 import { B2BPages } from './collections/B2BPages'
 import { Leads } from './collections/Leads'
 import { Redirects } from './collections/Redirects'
+import { Homepage } from './globals/Homepage'
 import { SeoSettings } from './globals/SeoSettings'
 import { SiteChrome } from './globals/SiteChrome'
 
@@ -157,7 +158,7 @@ export default buildConfig({
     // 09 · Система
     Users,
   ],
-  globals: [SeoSettings, SiteChrome],
+  globals: [Homepage, SeoSettings, SiteChrome],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },

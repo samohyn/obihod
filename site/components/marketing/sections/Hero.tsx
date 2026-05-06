@@ -1,43 +1,62 @@
+import type { HomepageGlobal } from '@/lib/homepage'
+
 import { HeroLeadForm } from './HeroLeadForm'
 
 /**
  * Hero — секция §01
  * Note: next/image priority for LCP, hero-фото — background-image на .hpc-hero (CSS).
- * Source: newui/homepage-classic.html (Phase 1: hardcoded; Phase 2: read from Payload Homepage global)
+ * Source: newui/homepage-classic.html. Phase 2: контент из Payload Homepage global
+ * (graceful fallback на захардкоженные значения если global ещё не seed'нут).
  */
-export function Hero() {
+
+const FALLBACK = {
+  eyebrow: '§ 01 · Хозяйственные работы · Москва и МО',
+  titleMain: 'Удаление деревьев',
+  titleAccent: 'в Москве и МО',
+  subhead: 'И ещё 3 направления: чистка крыш, вывоз мусора, демонтаж',
+  lead: 'Фикс-цена за объект, страховка 5 млн ₽, штрафы ГЖИ берём на себя по договору.',
+  trustBullets: [
+    { value: '12 лет', label: 'на рынке хозяйственных работ в Москве и МО' },
+    { value: '5 млн ₽', label: 'страхование ответственности в Ингосстрахе' },
+    { value: '1 200+', label: 'объектов в портфолио\nс актами и фото-отчётами' },
+  ],
+}
+
+export function Hero({ data }: { data?: HomepageGlobal }) {
+  const hero = data?.hero
+  const eyebrow = hero?.eyebrow ?? FALLBACK.eyebrow
+  const titleMain = hero?.titleMain ?? FALLBACK.titleMain
+  const titleAccent = hero?.titleAccent ?? FALLBACK.titleAccent
+  const subhead = hero?.subhead ?? FALLBACK.subhead
+  const lead = hero?.lead ?? FALLBACK.lead
+  const bullets = hero?.trustBullets ?? FALLBACK.trustBullets
+
   return (
     <section className="hpc-hero hp-section">
       <div className="hpc-hero-bg"></div>
       <div className="wrap hpc-hero-grid">
         <div>
-          <div className="eyebrow">§ 01 · Хозяйственные работы · Москва и МО</div>
+          <div className="eyebrow">{eyebrow}</div>
           <h1>
-            Удаление деревьев <br />в <span className="accent">Москве и МО</span>
+            {titleMain} <br />в <span className="accent">{titleAccent}</span>
           </h1>
-          <p className="hpc-hero-subhead">
-            И ещё 3 направления: чистка крыш, вывоз мусора, демонтаж
-          </p>
-          <p className="lead">
-            Фикс-цена за объект, страховка 5 млн ₽, штрафы ГЖИ берём на себя по договору.
-          </p>
+          <p className="hpc-hero-subhead">{subhead}</p>
+          <p className="lead">{lead}</p>
 
           <div className="hpc-trust-bullets">
-            <div className="hpc-trust-bullet">
-              <span className="v">12 лет</span>
-              <p className="l">на рынке хозяйственных работ в Москве и МО</p>
-            </div>
-            <div className="hpc-trust-bullet">
-              <span className="v">5 млн ₽</span>
-              <p className="l">страхование ответственности в Ингосстрахе</p>
-            </div>
-            <div className="hpc-trust-bullet">
-              <span className="v">1 200+</span>
-              <p className="l">
-                объектов в портфолио
-                <br />с актами и фото-отчётами
-              </p>
-            </div>
+            {bullets.map((b, i) => (
+              <div className="hpc-trust-bullet" key={i}>
+                <span className="v">{b.value}</span>
+                <p className="l">
+                  {b.label.split('\n').map((line, j, arr) => (
+                    <span key={j}>
+                      {line}
+                      {j < arr.length - 1 ? <br /> : null}
+                    </span>
+                  ))}
+                </p>
+              </div>
+            ))}
           </div>
 
           <div className="row" style={{ gap: '12px', flexWrap: 'wrap' }}>
