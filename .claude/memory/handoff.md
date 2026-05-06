@@ -2,34 +2,56 @@
 
 _Обновляется в конце сессии. Короткий срез: что сделано, что в работе, что следующее. Цель — дать следующей сессии контекст за 30 секунд._
 
-## Где мы сейчас (2026-05-04) — poseo сессия
+## Где мы сейчас (2026-05-06) — poseo сессия
 
-### Эпик в работе: EPIC-SEO-OUTRANK (`specs/EPIC-SEO-OUTRANK/intake.md`)
+### Эпик в работе: **EPIC-SEO-COMPETE-3** (`specs/EPIC-SEO-COMPETE-3/intake.md`)
 
-**Что сделано в этой сессии:**
-- Анализ реальных URL-структур liwood/arborist/arboristik через Keys.so данные
-- Создан `seosite/01-competitors/url-structure-top3.md`
-- Создана коммерческая семантика: 29 CSV по типам услуг в `seosite/03-clusters/services-commercial/`
-- Создана семантика для блога: `seosite/05-content-plan/blog-semantic-clusters.md`
-- Создана gap-матрица: **`seosite/strategy/service-gap-matrix.md`** — главный артефакт
-- Cleanup seosite/: удалены дубликаты, заархивированы устаревшие скрипты
+Старый EPIC-SEO-OUTRANK **удалён 2026-05-06** по mandate оператора («clean start, новый EPIC с нуля»). Все `seosite/strategy/`, `seosite/02-keywords/`, `seosite/03-clusters/`, `seosite/05-content-plan/`, `seosite/scripts/` тоже удалены. Осталось только `seosite/01-competitors/keysso-snapshot-2026-05-06.json` как baseline.
 
-**Ключевой инсайт:** конкуренты не строят geographic programmatic. Их трафик — на service-type страницах. Наши 105 sub×district страниц (3-й уровень) — заморозить. Нужно создавать страницы по типам работ.
+**Что сделано в этой сессии (2026-05-06):**
+- Live Keys.so refresh 3 конкурентов: liwood 155 / arborist.su 74 / arboristik.ru 65 pagesInIndex
+- Phase 1 explore (3 parallel agents): site code map (Next.js 16 + Payload, 11 collections, 14 blocks, lib/seo готов) + Keys.so deep dive (5 ключевых insights, intent-split top-100 per домен) + services audit (Topvisor / Just-Magic / Я.Метрика / Я.Вебмастер)
+- Phase 2 plan agent: 11 US декомпозиция black-box review
+- 4 AskUserQuestion закрыты: uborka-territorii=новый pillar, real-names=3-5 imen+фото, services=Topvisor+Just-Magic есть+NAP placeholder, OUTRANK=удалить
+- Bootstrap PR: DELETE EPIC-SEO-OUTRANK + CREATE EPIC-SEO-COMPETE-3/intake.md + ADR-0018-url-map skeleton + backlog update
 
-**P0 — что создавать (из gap-матрицы):**
-1. `/arboristika/obrezka-derevev/` + 4 sub (wsk 44k, конкуренты ранжируются)
-2. `/uborka-territorii/vyravnivanie-uchastka/` (arboristik — 73 ключа)
-3. `/uborka-territorii/raschistka-uchastka/` (arboristik — 99 ключей)
-4. `/uborka-territorii/pokos-travy/`
-5. Расширение `/arboristika/udalenie-derevev/` (225 whitespace ключей)
+**EPIC-SEO-COMPETE-3 цели (12 нед, DoD W14):**
+- pagesInIndex ≥160 (паритет с liwood 155)
+- Topvisor visibility ≥15
+- Organic sessions ≥800/нед
+- Lead submissions ≥15/нед
+- AI-citation ≥4/10 prompts
 
-**Блокер:** `tamd` должен ответить — `/uborka-territorii/` как новый 5-й pillar или sub arboristika?
-Без ADR нельзя стартовать спеки у `sa-seo` и роутинг у `podev`.
+**12 US:**
+- US-0 pre-flight (cleanup + creds setup) — W1
+- US-1 семантическое ядро — W1-W2
+- US-2 URL-карта + ADR-0018 — W2
+- US-3 нейро-SEO каркас (jsonld/citation/llms-full.txt/IndexNow auto) — W2-W3
+- US-4 mega-прайс /uslugi/tseny/ — W4-W5
+- US-5 30 info-articles /blog/ — W3-W12 rolling
+- US-6 6 B2B-нормативки /b2b/<doc>/ — W4-W6
+- US-7 programmatic <service>×<city> — W3-W5
+- US-8 /kontakty/ + /kalkulyator/foto-smeta/ + 5 LeadForm-вариантов — W6-W7
+- US-9 Reviews + /otzyvy/ + Я.Карты (last blocked owner) — W8
+- US-10 Topvisor + Я.Метрика + weekly snapshot — W7-W12
+- US-11 3-5 авторов + 12 кейсов + СРО — W8-W10
+- US-12 final verify + retro — W13-W14
 
-**Следующий шаг для poseo в новой сессии:**
-1. Передать `@tamd` вопрос ADR про uborka-territorii
-2. Как только ADR готов — `sa-seo` пишет 5 спек по gap-матрице
-3. Параллельно: `seo-tech` Topvisor baseline (100+ коммерческих ключей)
+**Блокеры (open questions для оператора):**
+1. Topvisor token — когда передать (US-0 W1)
+2. Just-Magic creds — когда передать
+3. NAP реальный (телефон/адрес) — нужен к US-9 W8
+4. Real-name + фото 3-5 авторов — нужен к US-11 W8
+5. Я.Бизнес owner-доступ — отложен до получения
+6. B2B PDF templates — operator пишет / re из открытых источников
+7. Slug `/uborka-territorii/` подтверждение
+
+**Следующий шаг для poseo:**
+1. Smoke local + push bootstrap PR + open `gh pr create`
+2. Operator merge → handoff к tamd (ADR-0018 review W2)
+3. Параллельно — operator готовит креды Topvisor + Just-Magic
+4. После ADR-0018 approve → sa-seo стартует US-2 spec
+5. seo-content + re стартуют US-1 pull Keys.so deep + Wordstat dop-сбор
 
 ---
 
