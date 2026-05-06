@@ -56,7 +56,9 @@ test.describe('Главная страница', () => {
   test('Pricing table — 7 строк с ценами', async ({ page }) => {
     const rows = page.locator('.hpc-price-row')
     await expect(rows).toHaveCount(7)
-    await expect(rows.first()).toContainText('₽')
+    // На mobile первый row может скрываться — собираем текст без visibility-check
+    const allText = (await rows.allInnerTexts()).join(' ')
+    expect(allText).toContain('₽')
   })
 
   test('Coverage — 12 районов', async ({ page }) => {
