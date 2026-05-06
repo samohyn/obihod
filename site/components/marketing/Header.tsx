@@ -1,4 +1,6 @@
 import Link from 'next/link'
+
+import { DEFAULT_SITE_CHROME, getSiteChrome } from '@/lib/chrome'
 /**
  * Header — главная навигация, mega-menu (Услуги / Районы / Магазин), auth CTA.
  * Source-of-truth: newui/_header.html (canonical mockup).
@@ -7,7 +9,11 @@ import Link from 'next/link'
  * При изменении: правка в newui/_header.html → копировать сюда заново.
  * См. EPIC-HOMEPAGE-MIGRATION (team/product/podev).
  */
-export function Header() {
+export async function Header() {
+  const chrome = await getSiteChrome()
+  const phoneE164 = chrome?.contacts?.phoneE164 ?? DEFAULT_SITE_CHROME.contacts?.phoneE164 ?? ''
+  const phoneDisplay =
+    chrome?.contacts?.phoneDisplay ?? DEFAULT_SITE_CHROME.contacts?.phoneDisplay ?? ''
   return (
     <header className="mm-demo site-mm" aria-label="Главное меню Обихода">
       <div className="mm-header">
@@ -899,8 +905,8 @@ export function Header() {
           </Link>
         </div>
         <div className="mm-right">
-          <a className="mm-phone" href="tel:+74950000000">
-            +7 (495) 000-00-00
+          <a className="mm-phone" href={`tel:${phoneE164}`}>
+            {phoneDisplay}
           </a>
           <div className="auth-cta">
             <button className="btn-login" type="button">

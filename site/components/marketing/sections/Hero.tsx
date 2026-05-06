@@ -1,3 +1,4 @@
+import { DEFAULT_SITE_CHROME, getSiteChrome } from '@/lib/chrome'
 import type { HomepageGlobal } from '@/lib/homepage'
 
 import { HeroLeadForm } from './HeroLeadForm'
@@ -12,7 +13,7 @@ import { HeroLeadForm } from './HeroLeadForm'
 const FALLBACK = {
   eyebrow: '§ 01 · Хозяйственные работы · Москва и МО',
   titleMain: 'Удаление деревьев',
-  titleAccent: 'в Москве и МО',
+  titleAccent: 'Москве и МО',
   subhead: 'И ещё 3 направления: чистка крыш, вывоз мусора, демонтаж',
   lead: 'Фикс-цена за объект, страховка 5 млн ₽, штрафы ГЖИ берём на себя по договору.',
   trustBullets: [
@@ -22,7 +23,7 @@ const FALLBACK = {
   ],
 }
 
-export function Hero({ data }: { data?: HomepageGlobal }) {
+export async function Hero({ data }: { data?: HomepageGlobal }) {
   const hero = data?.hero
   const eyebrow = hero?.eyebrow ?? FALLBACK.eyebrow
   const titleMain = hero?.titleMain ?? FALLBACK.titleMain
@@ -30,6 +31,10 @@ export function Hero({ data }: { data?: HomepageGlobal }) {
   const subhead = hero?.subhead ?? FALLBACK.subhead
   const lead = hero?.lead ?? FALLBACK.lead
   const bullets = hero?.trustBullets ?? FALLBACK.trustBullets
+  const chrome = await getSiteChrome()
+  const phoneE164 = chrome?.contacts?.phoneE164 ?? DEFAULT_SITE_CHROME.contacts?.phoneE164 ?? ''
+  const phoneDisplay =
+    chrome?.contacts?.phoneDisplay ?? DEFAULT_SITE_CHROME.contacts?.phoneDisplay ?? ''
 
   return (
     <section className="hpc-hero hp-section">
@@ -63,7 +68,7 @@ export function Hero({ data }: { data?: HomepageGlobal }) {
             <a className="btn btn-primary" href="#cta">
               Получить смету за 10 минут
             </a>
-            <a className="btn btn-secondary" href="tel:+74950000000">
+            <a className="btn btn-secondary" href={`tel:${phoneE164}`}>
               <svg
                 width="16"
                 height="16"
@@ -76,7 +81,7 @@ export function Hero({ data }: { data?: HomepageGlobal }) {
               >
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2.03Z" />
               </svg>
-              +7 (495) 000-00-00
+              {phoneDisplay}
             </a>
           </div>
         </div>
