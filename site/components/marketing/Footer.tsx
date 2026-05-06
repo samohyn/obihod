@@ -1,4 +1,6 @@
 import Link from 'next/link'
+
+import { DEFAULT_SITE_CHROME, getSiteChrome } from '@/lib/chrome'
 /**
  * Footer — нижняя навигация, контакты, юр.инфа.
  * Source-of-truth: newui/homepage-classic.html (footer block).
@@ -7,7 +9,11 @@ import Link from 'next/link'
  * Phase 2 follow-up: вытащить ИНН/ОГРН из SiteChrome.requisites,
  * списки услуг/районов из Services/Districts коллекций.
  */
-export function Footer() {
+export async function Footer() {
+  const chrome = await getSiteChrome()
+  const phoneE164 = chrome?.contacts?.phoneE164 ?? DEFAULT_SITE_CHROME.contacts?.phoneE164 ?? ''
+  const phoneDisplay =
+    chrome?.contacts?.phoneDisplay ?? DEFAULT_SITE_CHROME.contacts?.phoneDisplay ?? ''
   return (
     <footer className="site-footer-mock">
       <div className="cols">
@@ -85,7 +91,7 @@ export function Footer() {
             демонтаж. Плюс магазин саженцев и дизайн ландшафта. С 2020 года.
           </p>
           <div className="contacts">
-            <a href="tel:+74950000000">+7 (495) 000-00-00</a>
+            <a href={`tel:${phoneE164}`}>{phoneDisplay}</a>
             <a href="mailto:hi@obikhod.ru">hi@obikhod.ru</a>
             <span style={{ opacity: '0.7' }}>МО, Раменский р-н, ул. Питомниковая, 3</span>
             <span style={{ opacity: '0.7', fontSize: '12px' }}>
