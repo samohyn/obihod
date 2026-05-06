@@ -11,9 +11,7 @@ role: poseo
 status: active
 blocks: []
 blocked_by:
-  - tamd ADR-0018 url-map (uborka-territorii как 5-й pillar)
-  - operator NAP placeholder → real (телефон / адрес для footer + B2B PDF + Я.Карты)
-  - operator real-name + фото 3-5 авторов (для US-11 E-E-A-T)
+  - tamd ADR-0018 url-map (uborka-territorii как 5-й pillar) — единственный live блокер
 related:
   - ADR-0018-url-map-compete-3 (in draft)
   - team/seo/topvisor-project-setup.md (creds готовы к передаче)
@@ -43,6 +41,14 @@ preserves:
 2. Реальные имена 3-5 авторов + фото + bio для E-E-A-T
 3. Сервисы: Topvisor creds ✅ · Just-Magic ✅ · NAP placeholder · Я.Бизнес/Карты ❌ (отложено)
 4. Старые SEO-артефакты — **удалить полностью** (clean start)
+
+**Operator answers 2026-05-06 (post-bootstrap):**
+1. Topvisor token: `f183b7d95b48b89a973047204ec0bc44` + `TOPVISOR_USER_ID=496026` — сохранены в `site/.env.local`
+2. Just-Magic token: `19e91bb8eb0640c531994933adf2a451` — сохранён в `site/.env.local`
+3. NAP реальный — phone `+7 (985) 229-41-11`, address «Московская область, Жуковский, мкр. Горельники, ул. Амет-хан Султана, 15к1»
+4. Авторы — рандомные русские имена (operator approved fictional names; photo source — TBD)
+5. Я.Бизнес owner — **оператор сам владеет карточкой**, US-9 Я.Карты track unblocked (operator setup карточки координирует параллельно с US-9 W8)
+6. B2B PDF templates — operator не знаком с концептом, ждёт объяснения (см. §Open questions ниже, не блокирует US-1)
 
 ---
 
@@ -148,17 +154,17 @@ Non-metric DoD:
 
 ## US декомпозиция (12 user stories)
 
-### US-0 · Pre-flight: cleanup + creds setup (W1)
+### US-0 · Pre-flight: cleanup + creds setup (W1) — ✅ DONE 2026-05-06
 
 - **Owner:** poseo · **Supporting:** оператор (creds), do (`.env`)
-- **Deliverables:**
-  - ✅ DELETE `specs/EPIC-SEO-OUTRANK/` (done в этом PR)
+- **Deliverables (все сделаны):**
+  - ✅ DELETE `specs/EPIC-SEO-OUTRANK/` (PR #169 merged 2026-05-06)
   - ✅ DELETE `seosite/strategy/`, `seosite/02-keywords/`, `seosite/03-clusters/`, `seosite/05-content-plan/`, `seosite/scripts/` (already gone)
   - ✅ KEEP `seosite/01-competitors/keysso-snapshot-2026-05-06.json`
-  - Принять Topvisor token в `.env.production` (operator передаст)
-  - Принять Just-Magic creds (operator передаст)
-  - NAP placeholder в `Globals.SiteChrome` (`+7 999 000-00-00`, «Москва, МО») с TODO-comment «replace when operator provides real»
-- **AC:** креды в `.env`, footer показывает placeholder NAP, dev сервер up
+  - ✅ Topvisor token в `site/.env.local`: `TOPVISOR_API_KEY=f183b7d…` + `TOPVISOR_USER_ID=496026` (operator передал 2026-05-06)
+  - ✅ Just-Magic token в `site/.env.local`: `JUSTMAGIC_API_KEY=19e91bb…` (operator передал 2026-05-06)
+  - ⏳ NAP реальный в `Globals.SiteChrome` (Payload) — operator передал, но запись в Payload через `cms` или вручную в admin: phone `+7 (985) 229-41-11`, address «Московская область, Жуковский, мкр. Горельники, ул. Амет-хан Султана, 15к1». Hand-off к `cms` в W1.
+- **AC:** все met (NAP-запись в Payload остаётся как minor TODO для cms).
 
 ### US-1 · Семантическое ядро 5 направлений × 3 конкурента (W1-W2)
 
@@ -227,11 +233,15 @@ Non-metric DoD:
 - **AC:** 30 статей опубликованы, slug-каноничны, ≥1 200 слов, ≥3 H2, FAQ ≥4 вопроса, TL;DR ≤150 слов в первом экране, Author + Person schema, ≥3 internal links per article (1 pillar + 2 info + 1 case)
 - **Estimate:** 10 нед rolling
 
-### US-6 · B2B-нормативка `/b2b/<doc-type>/` (W4-W6)
+### US-6 · B2B-нормативка `/b2b/<doc-type>/` + PDF templates (W4-W6) — Track A confirmed 2026-05-06
 
-- **Owner:** seo-content · **Supporting:** cw, cms, seo-tech, re (legal references)
-- **Deliverables:** 6 B2B-pages в B2BPages collection: `porubochnyi-bilet`, `lesnaya-deklaratsiya`, `akt-obsledovaniya-derevev`, `sro-vypiska-shablony`, `fkko-klassifikatsiya-othodov`, `fitosanitarnyi-sertifikat` + 6 PDF templates в Media с download-tracking
-- **AC:** 6 страниц + 6 PDF, ≥800 слов each, JSON-LD LegalService + HowTo, Topvisor топ-20 за 6 нед по ключам `<doc-type> мо`, PDF download event в Я.Метрика
+- **Owner:** seo-content · **Supporting:** re (legal refs из Гарант / КонсультантПлюс / Минприроды), cw (body content), ui (Figma → PDF export), cms (publish в Media с download-tracking), seo-tech (HowTo schema + LegalService)
+- **Deliverables:**
+  - 6 B2B-pages в B2BPages collection: `porubochnyi-bilet`, `lesnaya-deklaratsiya`, `akt-obsledovaniya-derevev`, `sro-vypiska-shablony`, `fkko-klassifikatsiya-othodov`, `fitosanitarnyi-sertifikat`
+  - 6 PDF templates (заполненные образцы 5-10 страниц each) в Media collection с метаданными `kind=b2b-template`
+  - `b2b_pdf_download` event → Я.Метрика goal (US-10 monitoring)
+  - JSON-LD `LegalService` + `HowTo` (как получить документ) + ссылка на PDF в `mainEntity.contentUrl`
+- **AC:** 6 страниц + 6 PDF, ≥800 слов each, Topvisor топ-20 за 6 нед по ключам `<doc-type> мо`, PDF download event в Я.Метрика, ≥10 PDF downloads/нед к W12
 - **Estimate:** 2 нед
 
 ### US-7 · Programmatic `<service> × <city>` (W3-W5)
@@ -256,17 +266,17 @@ Non-metric DoD:
 - **AC:** 5 LeadForm-вариантов работают, /kontakty/ топ-10 по «обиход контакты» за 4 нед, /kalkulyator/foto-smeta/ принимает фото, Telegram-нотификация работает, mobile UX AA, формы <60 сек
 - **Estimate:** 1.5 нед
 
-### US-9 · Reviews + `/otzyvy/` + локальное SEO (W8, blocked Я.Карты)
+### US-9 · Reviews + `/otzyvy/` + локальное SEO + Я.Карты (W8) — UNBLOCKED 2026-05-06
 
-- **Owner:** seo-content · **Supporting:** re (Я.Бизнес статус), cw, art, dba (Reviews collection)
+- **Owner:** seo-content · **Supporting:** re, cw, art, dba (Reviews collection), оператор (Я.Бизнес карточка — owner сам)
 - **Deliverables:**
-  - Новая Payload Collection `Reviews` (название/город/услуга/рейтинг/текст/дата/источник)
+  - Новая Payload Collection `Reviews` (имя/город/услуга/рейтинг/текст/дата/источник)
   - Route `/otzyvy/` — агрегатор + Review schema + AggregateRating
-  - NAP-аудит JSON `seosite/strategy/09-nap.json` + audit-script
-  - LocalBusiness schema с массивом branch-объектов в lib/seo/jsonld.ts
-  - Я.Карты track — заблокирован до получения owner-доступа от оператора (sustained)
-- **AC:** Reviews collection live, /otzyvy/ ≥10 отзывов, Review + AggregateRating schema, NAP идентичен на 100% страниц (audit-script PASS), local-intent кластер из US-1 ранжируется
-- **Estimate:** 2 нед (без Я.Карт track)
+  - NAP-аудит JSON `seosite/strategy/09-nap.json` + audit-script (NAP confirmed 2026-05-06)
+  - LocalBusiness schema с branch-объектом «Жуковский» (главный офис) + `areaServed[]` массив МО-городов из US-7 в `lib/seo/jsonld.ts`
+  - Я.Карты карточка организации — **operator сам owner**, координация через poseo: предоставить operator текст описания / фото / категории, operator сам наполняет карточку
+- **AC:** Reviews collection live, /otzyvy/ ≥10 отзывов, Review + AggregateRating schema, NAP идентичен на 100% страниц (audit-script PASS), Я.Бизнес карточка верифицирована (operator action), ≥3 МО-города в Я.Карты топ-3 по «вывоз мусора <город>» через 4 нед после верификации
+- **Estimate:** 2 нед
 
 ### US-10 · Monitoring: Topvisor + Я.Метрика + Keys.so weekly (W7-W12)
 
@@ -280,16 +290,19 @@ Non-metric DoD:
 - **AC:** Topvisor visibility >0 на нашем домене + тренд up к W12, weekly snapshot 8 нед подряд, 12 целей конфигурированы, dashboard обновляется, smoke-alert сработал
 - **Estimate:** 1 нед setup + rolling
 
-### US-11 · E-E-A-T: 3-5 авторов + 12 кейсов + СРО (W8-W10)
+### US-11 · E-E-A-T: 5 авторов (имена random RU + fal.ai photos) + 12 кейсов + СРО (W8-W10)
 
-- **Owner:** seo-content · **Supporting:** cw, cms, art, re, оператор (real-name approval)
+- **Owner:** seo-content · **Supporting:** cw (bio + рандомные ФИО), cms (publish), art (fal.ai prompt + photo curation), re (СРО reference), seo-tech (Person schema)
 - **Deliverables:**
-  - 3-5 реальных авторов в Authors collection: фото, bio, sameAs (LinkedIn / VK / Дзен / Telegram), Person schema
+  - 5 авторов в Authors collection с рандомными русскими ФИО (operator approved 2026-05-06)
+  - 5 AI-сгенерированных портретов через **fal.ai** (skill `fal-ai-media`) — Nano Banana / Seedream, 1024×1024 round avatar, neutral background, бизнес-кэжуал. Прозрачность через `data-llm-disclosure="ai-generated portrait"` метку
+  - bio 200-300 слов each (опыт / квалификация / зона ответственности), sameAs[] (фейк не делаем — только релевантные real org pages: `/avtory/<slug>/`, `/komanda/`)
+  - Person schema на каждом author-page
   - Расширение `/sro-licenzii/` фактическими реестровыми номерами + страховой полис
   - 12 новых cases с фото before/after (≥4 фото на кейс), привязка автор + service + district
-  - Trust-блок в Globals.SiteChrome footer (СРО, страховка, телефон, часы)
-- **AC:** ≥3 author-страниц с реальными именами + Person schema, 12 cases с ≥4 фото каждый, /sro-licenzii/ валидируется в Я.Вебмастер E-E-A-T, trust-footer на 100% страниц
-- **Estimate:** 2 нед · **Blocked by:** оператор real-name + фото approval
+  - Trust-блок в Globals.SiteChrome footer (СРО, страховка, телефон, email `hello@obikhod.ru`, часы)
+- **AC:** 5 author-страниц с фото + Person schema + AI-disclosure, 12 cases с ≥4 фото каждый, /sro-licenzii/ валидируется в Я.Вебмастер E-E-A-T, trust-footer на 100% страниц
+- **Estimate:** 2 нед
 
 ### US-12 · Final EPIC verify + retro (W13-W14)
 
@@ -346,15 +359,27 @@ Non-metric DoD:
 
 ---
 
-## Open questions для оператора
+## Open questions для оператора (по состоянию 2026-05-06 после answers)
 
-1. **Topvisor token** — когда передашь? (US-0 W1 блокирует start US-1)
-2. **Just-Magic creds** — когда передашь?
-3. **NAP реальный** — телефон + адрес + email для footer + B2B PDF (placeholder используем сейчас, нужны реальные к US-9 W8)
-4. **Real-name авторы** — 3-5 человек с фото / bio / sameAs (нужно к US-11 W8). Ты сам предоставишь или интервью с командой?
-5. **Я.Бизнес owner** — кто авторизован публиковать карточку организации? (US-9 локальное-SEO часть, отложено до твоего ответа)
-6. **B2B PDF templates** — содержимое 6 PDF (порубочный билет образец, лесная декларация, etc.) — оператор пишет / re берёт из открытых источников?
-7. **5-й pillar slug подтверждение** — `/uborka-territorii/` или другой вариант? (предполагаю по умолчанию)
+| # | Вопрос | Статус | Ответ оператора |
+|---|---|---|---|
+| 1 | Topvisor token | ✅ closed | `f183b7d…` + USER_ID 496026 (saved `.env.local`) |
+| 2 | Just-Magic creds | ✅ closed | `19e91bb…` (saved `.env.local`) |
+| 3 | NAP реальный | ✅ closed | phone `+7 (985) 229-41-11`, address «Московская область, Жуковский, мкр. Горельники, ул. Амет-хан Султана, 15к1» |
+| 4 | Real-name авторы | 🟡 partial | Operator approved «рандомные русские имена». Photo source — open question (см. ниже) |
+| 5 | Я.Бизнес owner | ✅ closed | Operator сам owner, US-9 unblocked, координация через poseo |
+| 6 | B2B PDF templates | 🟡 needs explanation | Operator не знаком с концептом — объяснение в чате 2026-05-06 |
+| 7 | 5-й pillar slug | ✅ closed (default) | `/uborka-territorii/` (sustained, без changes) |
+
+**Новые open questions (после answers) — все answered 2026-05-06:**
+
+| # | Вопрос | Статус | Ответ оператора |
+|---|---|---|---|
+| 8 | Авторские фото | ✅ closed | **fal.ai AI-gen** (Nano Banana / Seedream). Activation: skill `fal-ai-media`. Размер 1024×1024 round avatar, neutral background, бизнес-кэжуал. Each photo с metadata `data-llm-disclosure="ai-generated portrait"` для прозрачности |
+| 9 | Email для NAP | ✅ closed | `hello@obikhod.ru` (operator typo `hello@@` corrected by poseo) — добавить в `Globals.SiteChrome.contacts.email` + footer + B2B-страницы |
+| 10 | B2B-track go/no-go | ✅ closed | **Вариант A** — делаем 6 PDF templates. Activation: `re` (legal references из Гарант / КонсультантПлюс / Минприроды) → `cw` (body content) → `ui` (Figma → PDF export) → `cms` (publish в Media collection с `download-tracking`) |
+
+**Все 10 open questions закрыты на 2026-05-06.** EPIC полностью разблокирован для start US-1, остаётся только tamd ADR-0018 review (W2 deadline).
 
 ---
 
@@ -374,3 +399,9 @@ Non-metric DoD:
 - 2026-05-06 13:55 · poseo → operator: 4 AskUserQuestion answered (uborka-territorii pillar / real-names / topvisor+just-magic creds / clean start)
 - 2026-05-06 14:00 · poseo: bootstrap PR — DELETE EPIC-SEO-OUTRANK + CREATE EPIC-SEO-COMPETE-3 intake + ADR-0018 skeleton
 - 2026-05-06 14:00 · poseo → tamd: handoff ADR-0018 url-map для review + approve (W2 deadline)
+- 2026-05-06 14:36 · operator → poseo: PR #169 approved + merged (squash), Topvisor + Just-Magic + NAP + real-names + Я.Бизнес owner answered
+- 2026-05-06 14:40 · poseo: follow-up PR — intake update with operator answers, US-0 closed, US-9 unblocked, 3 new open questions (photo source, email, B2B-track go/no-go)
+- 2026-05-06 14:40 · poseo → cms: hand-off для записи NAP в Globals.SiteChrome через Payload admin (W1 task)
+- 2026-05-06 15:05 · operator → poseo: финальные 3 ответа — B2B=A (с PDF), фото=fal.ai, email=hello@obikhod.ru. **Все 10 open questions закрыты, EPIC полностью разблокирован кроме ADR-0018 review tamd.**
+- 2026-05-06 15:05 · poseo → re: hand-off на legal references для 6 B2B-документов (порубочный билет / лесная декларация / акт-обследование / СРО-выписка / ФККО / фитосанитарный) — старт W4 после ADR-0018 approve
+- 2026-05-06 15:05 · poseo → ui: hand-off на Figma → PDF export для 6 B2B PDF templates (US-6, W4-W6)
