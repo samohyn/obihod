@@ -1,9 +1,28 @@
+import type { HomepageGlobal } from '@/lib/homepage'
+
 /**
- * PhotoSmeta — секция §05
- * Note: drop-zone + output card
- * Source: newui/homepage-classic.html (Phase 1: hardcoded; Phase 2: read from Payload Homepage global)
+ * PhotoSmeta — секция §05 (фото → смета USP).
+ * Source: newui/homepage-classic.html.
+ * Phase 3: example-card данные (id, caption, recognized, range) из Homepage.photoSmeta
+ * с graceful fallback. Drop-zone и 3 шага хардкоднуты (статичный mockup).
  */
-export function PhotoSmeta() {
+
+const FALLBACK_SMETA = {
+  exampleId: '№ 0044',
+  exampleCaption: 'ФОТО · Аварийная берёза 18 м\nСНТ Берёзовая роща, Истра',
+  exampleRecognized: 'берёза, ~18 м, аварийный наклон 25°',
+  exampleRangeMin: 12800,
+  exampleRangeMax: 16400,
+}
+
+export function PhotoSmeta({ data }: { data?: HomepageGlobal }) {
+  const smeta = data?.photoSmeta
+  const exampleId = smeta?.exampleId ?? FALLBACK_SMETA.exampleId
+  const caption = smeta?.exampleCaption ?? FALLBACK_SMETA.exampleCaption
+  const recognized = smeta?.exampleRecognized ?? FALLBACK_SMETA.exampleRecognized
+  const rangeMin = smeta?.exampleRangeMin ?? FALLBACK_SMETA.exampleRangeMin
+  const rangeMax = smeta?.exampleRangeMax ?? FALLBACK_SMETA.exampleRangeMax
+
   return (
     <section className="hp-section" id="foto-smeta">
       <div className="wrap">
@@ -68,7 +87,7 @@ export function PhotoSmeta() {
 
           <div className="hp-output">
             <div className="head">
-              <span>Ориентир № 0044</span>
+              <span>Ориентир {exampleId}</span>
               <span>10:08 МСК</span>
             </div>
             <div
@@ -81,13 +100,17 @@ export function PhotoSmeta() {
               }}
             >
               <span>
-                ФОТО · Аварийная берёза 18 м<br />
-                СНТ Берёзовая роща, Истра
+                {caption.split('\n').map((line, i, arr) => (
+                  <span key={i}>
+                    {line}
+                    {i < arr.length - 1 ? <br /> : null}
+                  </span>
+                ))}
               </span>
             </div>
             <div className="recognized">
               <span className="dot"></span>
-              Распознали: берёза, ~18 м, аварийный наклон 25°
+              Распознали: {recognized}
             </div>
             <div className="price">
               <div>
@@ -95,7 +118,8 @@ export function PhotoSmeta() {
                   Ориентир
                 </div>
                 <div className="num">
-                  12 800 — 16 400<span className="currency">₽</span>
+                  {rangeMin.toLocaleString('ru-RU')} — {rangeMax.toLocaleString('ru-RU')}
+                  <span className="currency">₽</span>
                 </div>
               </div>
               <div className="meta">ФИКС НА 14 ДНЕЙ</div>

@@ -3,12 +3,15 @@
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 
+import type { HomepageGlobal } from '@/lib/homepage'
+
 /**
  * Gallery — секция §09.5 (горизонтальный скроллер с фото объектов).
  * Source: newui/homepage-classic.html · 8 photos + scroll-snap + dots + prev/next.
+ * Phase 3: фото из Homepage.gallery[] с graceful fallback.
  */
 
-const PHOTOS: Array<{ src: string; alt: string; caption: string }> = [
+const FALLBACK_PHOTOS: Array<{ src: string; alt: string; caption: string }> = [
   {
     src: '/img-generated/gal-01-spil-alpinist.jpg',
     alt: 'Арборист-альпинист на высоте 20 м',
@@ -51,7 +54,26 @@ const PHOTOS: Array<{ src: string; alt: string; caption: string }> = [
   },
 ]
 
-export function Gallery() {
+const photoUrl = (
+  photo: { url?: string; alt?: string } | string | number | null | undefined,
+): string | null => {
+  if (!photo) return null
+  if (typeof photo === 'string') return photo
+  if (typeof photo === 'object' && photo.url) return photo.url
+  return null
+}
+
+export function Gallery({ data }: { data?: HomepageGlobal }) {
+  const galleryItems = data?.gallery
+  const PHOTOS =
+    galleryItems && galleryItems.length > 0
+      ? galleryItems.map((g, i) => ({
+          src: photoUrl(g.photo) ?? FALLBACK_PHOTOS[i]?.src ?? FALLBACK_PHOTOS[0]!.src,
+          alt: g.alt,
+          caption: g.caption,
+        }))
+      : FALLBACK_PHOTOS
+
   const trackRef = useRef<HTMLDivElement>(null)
   const [activeIdx, setActiveIdx] = useState(0)
 

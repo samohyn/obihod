@@ -22,6 +22,8 @@
     "lint:schema": "tsx scripts/lint-schema.ts",
     "seed:authors": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/seed-authors.ts",
     "seed:authors:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/seed-authors.ts",
+    "seed:homepage": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/seed-homepage.ts",
+    "seed:homepage:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/seed-homepage.ts",
     "seed:etalons": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/seed-content-etalons.ts",
     "seed:etalons:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/seed-content-etalons.ts",
     "seed:stage1-content": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/seed-content-stage1.ts",

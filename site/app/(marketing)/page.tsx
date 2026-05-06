@@ -74,15 +74,15 @@ export default async function Home() {
       <JsonLdGraph />
       <Hero data={hp} />
       <Services />
-      <How />
-      <PricingTable />
+      <How data={hp} />
+      <PricingTable data={hp} />
       <PricingCalculator />
-      <PhotoSmeta />
+      <PhotoSmeta data={hp} />
       <Cases />
-      <Reviews />
-      <Documents />
+      <Reviews data={hp} />
+      <Documents data={hp} />
       <Coverage />
-      <Gallery />
+      <Gallery data={hp} />
       <FAQ data={hp} />
       <CtaFooter />
     </>
