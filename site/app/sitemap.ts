@@ -151,6 +151,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.85,
   }))
 
+  // EPIC-SEO-COMPETE-3 US-4 — mega-pricing хаб /uslugi/tseny/ + per-pillar.
+  // Priority 0.8 per ADR-0018 (justified pricing-intent против pillar lead-intent).
+  const pricingHubEntries: Entry[] = [
+    {
+      url: `${SITE_URL}/uslugi/tseny/`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    ...services.map((slug) => ({
+      url: `${SITE_URL}/uslugi/tseny/${slug}/`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    })),
+  ]
+
   return [
     ...staticEntries,
     ...serviceEntries,
@@ -160,6 +177,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...b2bEntries,
     ...authorEntries,
     ...subServiceEntries,
+    ...pricingHubEntries,
   ]
 }
 

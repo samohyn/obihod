@@ -180,6 +180,34 @@ PR #173 merged (US-2). Старт US-3 в новой ветке `seo/epic-compet
 2. После merge — sa-seo может писать US-4..US-9 sub-specs параллельно (все нужные jsonld helpers + citation.ts готовы)
 3. EPIC progress: 3/12 US closed (US-0 + US-1 + US-2 + US-3), W2 begin
 
+### 2026-05-06 19:30 — US-4 primary closed (poseo autonomous, mega-pricing хаб)
+
+PR #174 merged. Старт US-4 в новой ветке `seo/epic-compete-3-us-4-mega-pricing`.
+
+**Done:**
+- `site/app/(marketing)/uslugi/tseny/page.tsx` (~180 строк) — root pricing hub с 5 pillar cards
+- `site/app/(marketing)/uslugi/tseny/[pillar]/page.tsx` (~250 строк) — per-pillar deep matrix с table + FAQ
+- `site/lib/seo/queries.ts`: `getAllPillarsForPricing()` + `PricingPillar` type
+- `site/app/sitemap.ts`: 6 tseny entries priority 0.8
+- AggregateOffer + BreadcrumbList JSON-LD (US-3 sustained helpers)
+- UTM tracking `source=tseny&medium=root|<pillar>` в lead-form CTAs
+- H1 pricing-intent vs pillar lead-intent (правило #13 ADR-0018) — снимает каннибализацию
+
+**Verified:** type-check ✅, lint 0 errors ✅, prettier ✅.
+
+**Sustained для leadqa post-merge:**
+- Lighthouse SEO ≥95 + LCP <2.5s real-browser smoke
+- Mobile AA contrast (brand-guide §5)
+- Конверсия (`/foto-smeta/?utm_source=tseny`) → leadqa monitoring W14
+
+**Следующее:**
+1. PR #175 (US-4) → operator merge
+2. После merge — параллельные пути возможны:
+   - **US-5** (info-articles 30 шт, контент-машина) — owner cw
+   - **US-7** (programmatic SD расширение + uborka-territorii pillar seed) — owner cw + cms
+   - **US-6** (B2B 6 страниц + PDF templates) — owner re + cw + ui
+3. EPIC progress: 4/12 US closed (US-0 + US-1 + US-2 + US-3 + US-4), 33% за 2 сессии (план 12 нед)
+
 ---
 
 ## Где мы сейчас (2026-04-29)

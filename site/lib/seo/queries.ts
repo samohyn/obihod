@@ -293,6 +293,94 @@ export const getSubServiceBySlug = cache(async (serviceSlug: string, subSlug: st
   }
 })
 
+// ───────── Mega-pricing (US-4 EPIC-SEO-COMPETE-3) ─────────
+
+export type PricingPillar = {
+  slug: string
+  title: string
+  h1: string
+  intro?: string | null
+  priceFrom?: number | null
+  priceTo?: number | null
+  priceUnit?: string | null
+  faqGlobal?: Array<{ question: string; answer: unknown }> | null
+  subServices: Array<{
+    slug: string
+    title: string
+    priceFrom?: number | null
+    priceTo?: number | null
+    priceUnit?: string | null
+    intro?: string | null
+  }>
+}
+
+/**
+ * Получить все 5 pillars + их subServices для mega-pricing хаба
+ * `/uslugi/tseny/` (US-4). Sustained подключение к payload через cache().
+ *
+ * Возвращает только published Services — sustained pattern OBI-16.
+ * При отсутствии БД (build runner без VPN) — пустой массив, dynamic
+ * route рендерится on-demand на VPS.
+ */
+export const getAllPillarsForPricing = cache(async (): Promise<PricingPillar[]> => {
+  try {
+    const payload = await payloadClient()
+    const r = await payload.find({
+      collection: 'services',
+      where: { _status: { equals: 'published' } },
+      limit: 100,
+      pagination: false,
+      depth: 1,
+      sort: '-priceTo', // pillars с большими диапазонами выше
+    })
+    return r.docs.map((doc) => {
+      const s = doc as unknown as {
+        slug: string
+        title: string
+        h1?: string
+        intro?: string | null
+        priceFrom?: number | null
+        priceTo?: number | null
+        priceUnit?: string | null
+        faqGlobal?: Array<{ question: string; answer: unknown }> | null
+        subServices?: Array<{
+          slug?: string
+          title?: string
+          priceFrom?: number | null
+          priceTo?: number | null
+          priceUnit?: string | null
+          intro?: string | null
+        }> | null
+      }
+      return {
+        slug: s.slug,
+        title: s.title,
+        h1: s.h1 ?? s.title,
+        intro: s.intro ?? null,
+        priceFrom: s.priceFrom ?? null,
+        priceTo: s.priceTo ?? null,
+        priceUnit: s.priceUnit ?? null,
+        faqGlobal: s.faqGlobal ?? null,
+        subServices: (s.subServices ?? [])
+          .filter((sub): sub is { slug: string; title: string } & typeof sub =>
+            Boolean(sub.slug && sub.title),
+          )
+          .map((sub) => ({
+            slug: sub.slug!,
+            title: sub.title!,
+            priceFrom: sub.priceFrom ?? null,
+            priceTo: sub.priceTo ?? null,
+            priceUnit: sub.priceUnit ?? null,
+            intro: sub.intro ?? null,
+          })),
+      }
+    })
+  } catch (e) {
+    console.error('[queries.getAllPillarsForPricing] failed:', e)
+    return []
+  }
+})
+
 // ───────── Authors (US-6 wave 2A — /avtory/) ─────────
 
 export const getPublishedAuthors = cache(async () => {
