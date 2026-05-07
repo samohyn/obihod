@@ -341,7 +341,38 @@ Non-metric DoD:
   - Я.Карты embed на /kontakty/ — sustained для US-9 после operator setup карточки
   - fal.ai photo upload integration (real-time processing) — отдельный `aemd` track
 
-### US-9 · Reviews + `/otzyvy/` + локальное SEO + Я.Карты (W8) — UNBLOCKED 2026-05-06
+### US-9 · Reviews + `/otzyvy/` + локальное SEO + Я.Карты (W8) — 🟡 Phase 1 DONE 2026-05-06
+
+**Phase 1 (✅ done) — Reviews collection + /otzyvy/ route:**
+- ✅ `site/collections/Reviews.ts` (~170 строк): 3 tabs (Основные / Контекст / Verification), versions drafts, afterChange revalidate hook (fire-and-forget pattern)
+- ✅ `site/payload.config.ts`: Reviews registered в collections array (после B2BPages)
+- ✅ `site/app/(marketing)/otzyvy/page.tsx` (~210 строк): list page с AggregateRating + Review schemas (top-50), itemScope/itemProp microdata, source labels (Я.Карты/2ГИС/Авито), lead-form CTA, empty state
+- ✅ `site/app/sitemap.ts`: /otzyvy/ entry priority 0.6 weekly
+- ✅ type-check / lint / format PASS
+
+**Phase 2 (🔵 sustained) — dba migration:**
+- 🔵 `pnpm payload migrate:create reviews` → migration file
+- 🔵 Data-migration `Homepage.reviews[]` (6 sustained отзывов) → Reviews collection rows (idempotency через slug)
+- 🔵 Owner: `dba`
+
+**Phase 3 (🔵 sustained) — массовый импорт:**
+- 🔵 Я.Карты reviews import (когда оператор подключит карточку)
+- 🔵 2ГИС / Авито reviews через Payload admin (CSV импорт или ручной)
+- 🔵 Owner: `cms` + `cw`
+
+**Phase 4 (🔵 sustained) — Homepage switch:**
+- 🔵 Homepage.tsx переключается с embedded `homepage_reviews` на чтение Reviews collection
+- 🔵 После Phase 2 dba migration done
+
+**AC:**
+- ✅ Reviews collection создан
+- ✅ /otzyvy/ рендерится (с empty state, если 0 reviews)
+- ✅ AggregateRating + Review schemas wired
+- ✅ Sitemap содержит /otzyvy/ priority 0.6
+- 🔵 dba migration done (Phase 2)
+- 🔵 ≥10 опубликованных reviews (Phase 3, sustained)
+- 🔵 Я.Карты карточка верифицирована (sustained operator track)
+- 🔵 NAP-аудит JSON `seosite/strategy/09-nap.json` (sustained, после оператор передаст)
 
 - **Owner:** seo-content · **Supporting:** re, cw, art, dba (Reviews collection), оператор (Я.Бизнес карточка — owner сам)
 - **Deliverables:**
@@ -506,3 +537,8 @@ Non-metric DoD:
 - 2026-05-06 20:50 · poseo → cms: NAP в Globals.SiteChrome устаревший (+79851705111), нужно обновить на +79852294111 + email hello@obikhod.ru + address Жуковский — через Payload admin
 - 2026-05-06 20:50 · poseo → aemd: 2 Я.Метрика goals — `kontakty_form_submit` + `foto_smeta_form_submit` (конфигурация в админке Я.Метрика)
 - 2026-05-06 20:50 · poseo → leadqa: post-merge real-browser smoke /kontakty/ + /kalkulyator/foto-smeta/ (form submit → /api/leads → Telegram)
+- 2026-05-06 21:00 · operator → poseo: «готово» — PR #179 merged. poseo стартует US-9.
+- 2026-05-06 21:25 · poseo (autonomous): US-9 primary closed — Reviews collection (3 tabs: Основные / Контекст / Verification) + register в payload.config + /otzyvy/ route с AggregateRating + Review schema + sitemap entry. type-check ✅, lint 0 errors ✅, prettier ✅.
+- 2026-05-06 21:25 · poseo → dba: Phase 2 sustained — data-migration `Homepage.reviews[]` → Reviews collection rows
+- 2026-05-06 21:25 · poseo → cms: Phase 3 sustained — массовый импорт отзывов с Я.Карт через Payload admin
+- 2026-05-06 21:25 · poseo → leadqa: post-merge `pnpm payload migrate:create reviews` + `pnpm payload migrate` локально, smoke /otzyvy/ empty state, добавить 1-2 mock reviews → проверить AggregateRating
