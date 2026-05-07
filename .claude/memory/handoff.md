@@ -208,6 +208,31 @@ PR #174 merged. Старт US-4 в новой ветке `seo/epic-compete-3-us-
    - **US-6** (B2B 6 страниц + PDF templates) — owner re + cw + ui
 3. EPIC progress: 4/12 US closed (US-0 + US-1 + US-2 + US-3 + US-4), 33% за 2 сессии (план 12 нед)
 
+### 2026-05-06 20:15 — US-7 Phase A closed (poseo autonomous, pillar seed)
+
+PR #176 (US-4) merged. Старт US-7 в новой ветке `seo/epic-compete-3-us-7-uborka-territorii-seed`.
+
+**Done — Phase A: uborka-territorii pillar seed:**
+- `site/scripts/seed.ts` extended:
+  - ServiceSeed type: `'uborka-territorii'` в slug union, `'sotka'` в priceUnit union
+  - SERVICES array: 5-й pillar entry (intro 280 символов + 3 FAQ + leadTemplate + 4 sub)
+- 4 sub-services с priceFrom defaults из ADR-0018:
+  - vyravnivanie-uchastka — 250 ₽/сот
+  - raschistka-uchastka — 800 ₽/сот
+  - pokos-travy — 80 ₽/сот (cluster C12 wsk=913)
+  - vyvoz-porubochnyh-ostatkov — 1 800 ₽/м³
+
+**Verified:** type-check ✅, lint 0 errors ✅, prettier ✅.
+
+**Sustained Phase B+C для US-7 follow-up:**
+- Phase B: 150-250 ServiceDistricts bulk-seed (через sustained `scripts/generate-sd-batch.ts`)
+- Phase C: 17 new sub-pages под sustained 4 pillars (cw spread review)
+
+**Следующее:**
+1. PR #177 (US-7 Phase A) → operator merge
+2. После merge — `pnpm seed` локально для leadqa smoke /uborka-territorii/
+3. EPIC progress: 5/12 US с partials (US-7 Phase A done, B+C sustained)
+
 ---
 
 ## Где мы сейчас (2026-04-29)
