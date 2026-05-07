@@ -202,6 +202,45 @@ art/ux/ui) — автор; при правке делаю PR в `design/integrat
 - Форма «фото → смета» — accessible file uploader, клавиатурой + screen reader.
 - Калькулятор услуги — live region для результата (aria-live="polite").
 
+### 7. Mobile-first UX (mandate 2026-05-03)
+
+Operator закрепил 2026-05-03: все макеты `newui/` и любые UI-deliverable
+обязательно адаптируются под мобилу — это не «потом», а на каждой итерации.
+См. memory `feedback_newui_mobile_first.md`.
+
+**Обязательные breakpoints в каждом UX-deliverable** (CJM step / wireframe / usability-чеклист):
+
+| Breakpoint | Устройство-целевик | Что проверяю |
+|---|---|---|
+| **375 px** | iPhone SE / small Android | hero читается без скролла; CTA в thumb-zone; форма — single column |
+| **414 px** | iPhone Pro Max / большинство Android | то же + проверка density (не «потеряли» воздух) |
+| **768 px** | iPad portrait | переход single-column → two-column; mega-menu vs accordion |
+| **1024 px** | iPad landscape / small laptop | desktop-grid, но без overflow в калькуляторах |
+
+**Обязательные UX-инварианты mobile-first:**
+
+- **Thumb-zone reachability** — primary CTA в нижней трети экрана на 375/414 px (одна рука, большой палец). Не «висит» в hero на extra-large hero-blocks.
+- **Touch targets ≥ 44×44 px** — кнопки, ссылки, чекбоксы, radio, иконки. Никаких 32×32 «потому что в desktop помещается».
+- **One-hand reachability** — формы заявки / калькулятор → label сверху input, не сбоку; шаги вертикально, не horizontal carousel.
+- **Hover-only patterns запрещены** — любая инфа из `:hover` дублируется через tap / focus / always-visible (на mobile нет hover).
+- **Mobile accordion** для navigation §10 brand-guide — основной паттерн, не «выкинутая desktop-копия».
+- **Калькуляторы 4 услуг** — single-column шаги, sticky CTA внизу, прогресс сверху; horizontal scroll = bug, не feature.
+- **«Фото → смета»** — uploader с large tap-area, multiple selection через native picker, preview в grid 2-col на 375 px.
+- **Programmatic LP service × district** — hero + калькулятор + форма должны работать на 375 px без horizontal scroll и без 5+ скроллов до CTA.
+
+**В каждом `specs/US-<N>-<slug>/ux.md`** обязателен раздел:
+
+```markdown
+## Mobile-first
+- Breakpoints проверены: 375 / 414 / 768 / 1024 ✅
+- Thumb-zone CTA: <где, на каком breakpoint>
+- Touch targets ≥ 44 px: <да / список исключений с обоснованием>
+- One-hand reachability: <pass / отклонения>
+- Hover-only patterns: <нет / перечислить дубли>
+```
+
+**Если deliverable не покрывает mobile-first** — возврат на доработку, в `fe` не передаю.
+
 ## Рабочий процесс
 
 ```
@@ -263,6 +302,7 @@ agents/ux/
 - [ ] IA и URL-структура синхронизированы с `seo1/seo2`.
 - [ ] Usability-чеклист пройден.
 - [ ] A11y-требования зафиксированы в `ux.md` для `ui` и `fe`.
+- [ ] **Mobile-first checklist пройден** (breakpoints 375 / 414 / 768 / 1024, thumb-zone CTA, touch targets ≥ 44 px, no hover-only) — раздел `## Mobile-first` в `specs/US-<N>-<slug>/ux.md` заполнен.
 - [ ] `art` дал approval.
 
 ## Инварианты проекта
