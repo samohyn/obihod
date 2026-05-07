@@ -165,6 +165,7 @@ art/ux/ui) — автор; при правке делаю PR в `design/integrat
 - [ ] Ветка `feat/US-<N>-<slug>` выгружена.
 - [ ] Есть доступ к `ui-spec.md` (чтобы сверять визуал).
 - [ ] Есть контакт `aemd` (чтобы проверить события).
+- [ ] **Mobile breakpoints в плане теста** — 375 / 414 / 768 / 1024 запланированы как обязательные (mandate 2026-05-03, см. §2 ниже).
 
 ### 2. Уровни тестирования
 
@@ -174,10 +175,12 @@ art/ux/ui) — автор; при правке делаю PR в `design/integrat
 - Навигация работает.
 - Форма заявки не падает.
 - Критичные страницы отвечают 200.
+- **Mobile breakpoints smoke** — главная + страница услуги + форма проверяются на 375 / 414 / 768 / 1024 (Playwright `page.setViewportSize` или native breakpoints `mobile-chrome`/`tablet`/`desktop`). Скриншоты складываю в `screen/us-<N>-<bp>.png`.
 
 **Функциональные E2E** по AC:
 - Для каждого `AC-N.K` — один или несколько Playwright-тестов в `site/tests/us-<N>-<slug>.spec.ts`.
 - Тесты запускаю на `chromium` + `mobile-chrome` (из `site/playwright.config.ts`, актуальный CI).
+- **Mobile-first verify (mandate 2026-05-03):** для UI-задач обязателен прогон ключевых AC на 4 viewports (375 × 667, 414 × 896, 768 × 1024, 1024 × 768). Provoke и регрессирую: thumb-zone CTA (нижняя треть на mobile), touch targets ≥ 44 × 44, отсутствие horizontal scroll, hover-only элементы дублированы через tap/focus. Провал любого breakpoint = bug-report, не «потом» (см. memory `feedback_newui_mobile_first.md`).
 
 **Регрессия:**
 - Существующий suite должен оставаться зелёным.
@@ -248,6 +251,14 @@ art/ux/ui) — автор; при правке делаю PR в `design/integrat
 - Клавиатура: pass/fail
 - SR smoke: pass/fail
 
+## Mobile breakpoints (mandate 2026-05-03)
+| Viewport | Status | Скриншот | Заметка |
+|----------|--------|----------|---------|
+| 375 × 667 | pass/fail | screen/us-<N>-375.png | thumb-zone CTA / horizontal scroll / touch targets |
+| 414 × 896 | pass/fail | screen/us-<N>-414.png | density / hover-only |
+| 768 × 1024 | pass/fail | screen/us-<N>-768.png | single→two-col переход / mega-menu vs accordion |
+| 1024 × 768 | pass/fail | screen/us-<N>-1024.png | desktop-grid / overflow в калькуляторах |
+
 ## Трекинг (aemd)
 - <событие> — приходит / не приходит / поля OK/NOT
 
@@ -317,6 +328,7 @@ Smoke → чтение PR → функциональные E2E
 - [ ] E2E-тесты добавлены в suite и зелёные.
 - [ ] Smoke / регрессия прошли.
 - [ ] A11y-проверка пройдена.
+- [ ] **Mobile breakpoints (375 / 414 / 768 / 1024) проверены** для UI-задач: скриншоты в `screen/us-<N>-<bp>.png`, провал любого breakpoint = bug-report.
 - [ ] События `aemd` проверены.
 - [ ] Visual regression snapshots обновлены (при необходимости).
 - [ ] `qa.md` написан.
