@@ -384,17 +384,38 @@ Non-metric DoD:
 - **AC:** Reviews collection live, /otzyvy/ ≥10 отзывов, Review + AggregateRating schema, NAP идентичен на 100% страниц (audit-script PASS), Я.Бизнес карточка верифицирована (operator action), ≥3 МО-города в Я.Карты топ-3 по «вывоз мусора <город>» через 4 нед после верификации
 - **Estimate:** 2 нед
 
-### US-10 · Monitoring: Topvisor + Я.Метрика + Keys.so weekly (W7-W12)
+### US-10 · Monitoring: Topvisor + Я.Метрика + Keys.so weekly (W7-W12) — 🟡 Phase 1 DONE 2026-05-07
 
-- **Owner:** seo-tech · **Supporting:** aemd, da, pa, re
-- **Deliverables:**
-  - Topvisor проект с ≥2 300 ключей (1 601 baseline + 200 csv + ≥500 новых из US-1)
-  - Скрипт `scripts/seo-weekly-snapshot.ts` — pull Keys.so для нашего + 3 конкурентов, save в `seosite/04-monitoring/<date>/`
-  - Дашборд `seosite/04-monitoring/dashboard.md` (markdown weekly)
-  - 12 Я.Метрика целей (5 lead-variants + 6 PDF-download + 1 calc)
-  - Telegram-bot алерт при дроп позиции > 5 пунктов или index-удаление
-- **AC:** Topvisor visibility >0 на нашем домене + тренд up к W12, weekly snapshot 8 нед подряд, 12 целей конфигурированы, dashboard обновляется, smoke-alert сработал
-- **Estimate:** 1 нед setup + rolling
+**Phase 1 (✅ done) — infrastructure scripts + docs:**
+- ✅ `seosite/scripts/seo-weekly-snapshot.py` (~150 строк): Keys.so pull для 4 доменов (obikhod + 3 конкурентов), сохранение JSON + summary CSV в `seosite/04-monitoring/<YYYY-MM-DD>/`
+- ✅ `seosite/04-monitoring/README.md` — weekly cycle runbook (5 шагов monday 09:00 MSK)
+- ✅ `seosite/04-monitoring/dashboard.md` — template + initial baseline 2026-05-07
+- ✅ `seosite/04-monitoring/yandex-metrika-goals.md` — 12 целей spec для aemd (5 lead-variants + 6 PDF-download + 1 calc)
+- ✅ `seosite/04-monitoring/topvisor-setup.md` — manual UI runbook для cms (5 шагов)
+- ✅ Initial baseline `seosite/04-monitoring/2026-05-07/`:
+  - obikhod.ru: 0/0/0/0 DR=0 (новый сайт, ничего не индексировано)
+  - liwood.ru: 155/5050/733/34 DR=21 (vis -3 vs 2026-05-06)
+  - arborist.su: 75/1329/378/18 DR=24 (+1 pageInIndex)
+  - arboristik.ru: 65/1336/476/64 DR=26 (vis +7)
+
+**Phase 2 (🔵 sustained — manual setups):**
+- 🔵 Topvisor проект `obikhod-services` создан в UI (cms через topvisor-setup.md)
+- 🔵 12 Я.Метрика goals настроены (aemd через yandex-metrika-goals.md)
+
+**Phase 3 (🔵 sustained — automation):**
+- 🔵 GitHub Actions cron weekly snapshot (`0 6 * * 1` UTC)
+- 🔵 Topvisor API automation (когда docs/SDK доступны)
+- 🔵 Telegram-bot алерт при дроп позиции > 5 пунктов
+
+**AC:**
+- ✅ weekly-snapshot.py работает + первый baseline saved
+- ✅ dashboard.md + 3 docs готовы
+- 🔵 Topvisor проект создан (Phase 2 cms)
+- 🔵 12 Я.Метрика goals настроены (Phase 2 aemd)
+- 🔵 Weekly snapshot 8 нед подряд (sustained — но manual run каждую неделю работает)
+- 🔵 Smoke-alert сработал (Phase 3 automation)
+
+- **Estimate:** Phase 1 ✅ done в 1 сессии; Phase 2 ~1 нед manual; Phase 3 sustained при необходимости
 
 ### US-11 · E-E-A-T: 5 авторов (имена random RU + fal.ai photos) + 12 кейсов + СРО (W8-W10)
 
@@ -542,3 +563,8 @@ Non-metric DoD:
 - 2026-05-06 21:25 · poseo → dba: Phase 2 sustained — data-migration `Homepage.reviews[]` → Reviews collection rows
 - 2026-05-06 21:25 · poseo → cms: Phase 3 sustained — массовый импорт отзывов с Я.Карт через Payload admin
 - 2026-05-06 21:25 · poseo → leadqa: post-merge `pnpm payload migrate:create reviews` + `pnpm payload migrate` локально, smoke /otzyvy/ empty state, добавить 1-2 mock reviews → проверить AggregateRating
+- 2026-05-07 00:30 · operator → poseo: «влил» — PR #180 merged. poseo стартует US-10.
+- 2026-05-07 00:50 · poseo (autonomous): US-10 primary done — seo-weekly-snapshot.py + dashboard.md + yandex-metrika-goals.md + topvisor-setup.md + README + initial baseline 2026-05-07 (Keys.so live: obikhod 0/0/0, liwood 155/5050/733, arborist.su 75/1329/378, arboristik 65/1336/476).
+- 2026-05-07 00:50 · poseo → cms: Topvisor manual setup per topvisor-setup.md (5 шагов в UI)
+- 2026-05-07 00:50 · poseo → aemd: 12 Я.Метрика goals per yandex-metrika-goals.md
+- 2026-05-07 00:50 · poseo → seo-tech: weekly snapshot cron автоматизация (US-10 follow-up через GitHub Actions)
