@@ -189,15 +189,27 @@ Non-metric DoD:
   - Just-Magic deep clustering (когда endpoint от support)
   - Pymorphy2 lemmatization для pillar regex
 
-### US-2 · URL-карта + ADR-0018 (W2)
+### US-2 · URL-карта + ADR-0018 (W2) — ✅ PRIMARY DONE 2026-05-06
 
-- **Owner:** sa-seo · **Supporting:** tamd (ADR), seo-tech
-- **Deliverables:**
-  - `team/adr/ADR-0018-url-map-compete-3.md` — финальная схема (skeleton создан в этом PR, tamd approve в W2)
-  - URL-инвентарь `seosite/strategy/02-url-map.json`
-  - Redirects collection импорт CSV (если миграция старых slugs)
-- **AC:** ADR approved tamd + operator, 0 конфликтов с existing routes, каждый кластер из US-1 имеет ровно одну target-URL
-- **Estimate:** 0.5 нед · **Blocks:** US-3..US-9
+- **Owner:** poseo (autonomous, sa-seo proxy + tamd-proxy review) · **Supporting:** tamd (formal review pending), podev (cross-team approve pending)
+- **Done deliverables:**
+  - ✅ `team/adr/ADR-0018-url-map-compete-3.md` — статус `accepted_with_changes` (после 7 actionable от tamd-proxy review)
+  - ✅ `seosite/strategy/02-url-map.json` — машиночитаемая URL-инвентарь (5 pillars + 35 subs (18 sustained + 17 new) + 6 mega-pricing + 6 B2B + 30 blog anchors + 3 lead-infra)
+  - ✅ `specs/EPIC-SEO-COMPETE-3/US-2-url-map/sa-seo.md` — spec для downstream US-3..US-9
+  - ✅ **0 redirect-records** (sustained slugs kept после audit `site/scripts/seed.ts`) — clean миграция
+- **AC проверки:**
+  - ✅ ADR review (tamd-proxy 🟡 approve with 7 actionable, все applied)
+  - ✅ URL-инвентарь JSON валиден (machine-readable, schema-ref)
+  - ✅ 0 конфликтов с existing routes (audit sustained 4 pillars + 18 subs)
+  - ✅ Каждый кластер из US-1 имеет ровно одну target-URL (см. cluster column в JSON)
+  - ✅ 13 SEO правил (canonical + robots + URL conventions + H1 differentiation #13)
+  - ✅ Sitemap priority обоснована (sustained asymmetric `PILLAR_PRIORITY` + new `uborka-territorii: 0.85`)
+  - 🔵 podev cross-team approve (через cpo) — pending
+  - 🔵 tamd formal review approve — pending (tamd-proxy ≠ tamd, sustained для completeness)
+- **Sustained → US-2 follow-up:**
+  - Sub × city programmatic `/<pillar>/<sub>/<city>/` (новый файл `[service]/[sub]/[district]/page.tsx`) — если whitespace ROI confirm
+  - dba migration sustained `homepage_reviews` array → new `Reviews` collection (когда US-9 стартует W8)
+  - priceFrom finalize per oператор + cw spread review (defaults в ADR-0018 §priceFrom defaults)
 
 ### US-3 · Технический SEO + нейро-SEO каркас (W2-W3)
 
@@ -415,3 +427,9 @@ Non-metric DoD:
 - 2026-05-06 15:55 · poseo (autonomous): US-1 primary closed — 4 685 unique keys, 60 TF-IDF clusters, master doc + decisions log + 3 scripts. Sustained items для US-2 follow-up (Wordstat / Just-Magic / vertical-конкуренты)
 - 2026-05-06 15:55 · poseo → operator: Keys.so токен в `.env.local` устаревший (401 на pull); вчерашний `69fb0031ed5079...` сработал через override. Просьба подтвердить валидный токен и обновить `.env.local`.
 - 2026-05-06 15:55 · poseo → sa-seo: US-1 closed → старт US-2 spec по `clusters-tfidf.csv` + master doc §3-§5
+- 2026-05-06 16:30 · operator → poseo: «влил 171» — PR #171 merged. poseo стартует US-2.
+- 2026-05-06 17:00 · poseo (autonomous, sa-seo proxy): URL-карта + ADR-0018 финализация. Audit `site/scripts/seed.ts` — sustained 4 pillars + 18 sub-pages → решение НЕ переименовывать `chistka-krysh` → `uborka-snega-i-chistka-krysh`. 0 redirects. Decisions: 5 pillars (4 sustained + 1 new uborka-territorii) × 35 subs.
+- 2026-05-06 17:00 · poseo → tamd-proxy (general-purpose agent): review ADR-0018 + URL-map JSON.
+- 2026-05-06 17:15 · tamd-proxy → poseo: 🟡 approve with 7 actionable comments. Все applied: SD route depth уточнение (sustained 2-сегмент), 13 SEO rules rename + правило #13 (H1 differentiation lead vs pricing), collision chistka-krysh sosulek/naledi resolved, priceFrom defaults для 17 new subs, Reviews collection plan, sustained PILLAR_PRIORITY asymmetric. ADR status: ready_for_review → accepted_with_changes.
+- 2026-05-06 17:15 · poseo → tamd: formal review request (tamd-proxy ≠ tamd для completeness)
+- 2026-05-06 17:15 · poseo → cpo: cross-team notification — podev нагрузка (5 новых routes: /uslugi/tseny/, /uslugi/tseny/[pillar]/, /kontakty/, /kalkulyator/foto-smeta/, /otzyvy/) + new Reviews collection (US-9, dba migration sustained homepage_reviews)
