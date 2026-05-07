@@ -1,0 +1,671 @@
+- generic [active] [ref=e1]:
+  - banner "Главное меню Обихода" [ref=e2]:
+    - generic [ref=e3]:
+      - link "Обиход — на главную" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "Обиход" [ref=e5]:
+          - generic [ref=e36]: ОБИХОД
+      - generic [ref=e37]:
+        - button "Услуги ▼" [ref=e39] [cursor=pointer]:
+          - text: Услуги
+          - generic [ref=e40]: ▼
+        - button "Районы ▼" [ref=e42] [cursor=pointer]:
+          - text: Районы
+          - generic [ref=e43]: ▼
+        - link "Дизайн ландшафта" [ref=e44] [cursor=pointer]:
+          - /url: /dizain-landshafta/
+        - button "Магазин ▼" [ref=e46] [cursor=pointer]:
+          - text: Магазин
+          - generic [ref=e47]: ▼
+        - link "Контакты" [ref=e48] [cursor=pointer]:
+          - /url: /kontakty/
+      - generic [ref=e49]:
+        - link "+7 (985) 170-51-11" [ref=e50] [cursor=pointer]:
+          - /url: tel:+79851705111
+        - generic [ref=e51]:
+          - button "Войти" [ref=e52] [cursor=pointer]
+          - button "Регистрация" [ref=e53] [cursor=pointer]
+  - main [ref=e54]:
+    - generic [ref=e56]:
+      - generic [ref=e57]:
+        - generic [ref=e58]: § 01 · Хозяйственные работы · Москва и МО
+        - heading "Удаление деревьев в в Москве и МО" [level=1] [ref=e59]:
+          - text: Удаление деревьев
+          - text: в в Москве и МО
+        - paragraph [ref=e60]: "И ещё 3 направления: чистка крыш, вывоз мусора, демонтаж"
+        - paragraph [ref=e61]: Фикс-цена за объект, страховка 5 млн ₽, штрафы ГЖИ берём на себя по договору.
+        - generic [ref=e62]:
+          - generic [ref=e63]:
+            - generic [ref=e64]: 12 лет
+            - paragraph [ref=e65]: на рынке хозяйственных работ в Москве и МО
+          - generic [ref=e66]:
+            - generic [ref=e67]: 5 млн ₽
+            - paragraph [ref=e68]: страхование ответственности в Ингосстрахе
+          - generic [ref=e69]:
+            - generic [ref=e70]: 1 200+
+            - paragraph [ref=e71]: объектов в портфолио с актами и фото-отчётами
+        - generic [ref=e72]:
+          - link "Получить смету за 10 минут" [ref=e73] [cursor=pointer]:
+            - /url: "#cta"
+          - link "+7 (985) 170-51-11" [ref=e74] [cursor=pointer]:
+            - /url: tel:+79851705111
+            - img [ref=e75]
+            - text: +7 (985) 170-51-11
+      - generic [ref=e77]:
+        - generic [ref=e78]:
+          - generic [ref=e79]: § Заявка · ответ за 10 минут
+          - heading "Рассчитать стоимость" [level=3] [ref=e80]
+          - paragraph [ref=e81]: Менеджер пришлёт смету в WhatsApp / Telegram
+        - generic [ref=e82]:
+          - generic [ref=e83]:
+            - generic [ref=e84]: Имя
+            - textbox "Имя" [ref=e85]:
+              - /placeholder: Как к вам обращаться
+          - generic [ref=e86]:
+            - generic [ref=e87]: Телефон
+            - textbox "Телефон" [ref=e88]:
+              - /placeholder: +7 (___) ___-__-__
+          - generic [ref=e89]:
+            - generic [ref=e90]: Услуга
+            - combobox "Услуга" [ref=e91]
+          - generic [ref=e92]:
+            - generic [ref=e93]: Адрес или район (опционально)
+            - textbox "Адрес или район (опционально)" [ref=e94]:
+              - /placeholder: Истра, ул. Лесная, СНТ Берёзовая роща
+          - textbox [ref=e95]
+          - button "Получить смету →" [ref=e96] [cursor=pointer]
+          - generic [ref=e97]: или
+          - link "Прислать фото → расчёт за 10 минут по фото объекта" [ref=e98] [cursor=pointer]:
+            - /url: "#foto-smeta"
+            - img [ref=e99]
+            - generic [ref=e102]
+          - paragraph [ref=e104]: Нажимая «Получить смету», вы соглашаетесь с обработкой персональных данных согласно политике конфиденциальности (152-ФЗ).
+    - generic [ref=e106]:
+      - generic [ref=e107]: § 02 · Что мы делаем · 4 направления
+      - heading "Один подрядчик — все хозяйственные работы на участке" [level=2] [ref=e108]
+      - paragraph [ref=e109]: Не нужно искать арбориста, кровельщика, мусоровоз и демонтажника по отдельности. Бригада, техника, смета и договор — у одного оператора.
+      - generic [ref=e110]:
+        - link "Арбористика Спил, валка, аварийное удаление, кронирование, каблинг, удаление пней, расчистка участка. Альпинизм и автовышка. от 700 ₽ / дерево Подробнее →" [ref=e111] [cursor=pointer]:
+          - /url: /arboristika/
+          - img [ref=e112]
+          - heading "Арбористика" [level=3] [ref=e114]
+          - paragraph [ref=e115]: Спил, валка, аварийное удаление, кронирование, каблинг, удаление пней, расчистка участка. Альпинизм и автовышка.
+          - generic [ref=e116]:
+            - generic [ref=e117]
+            - generic [ref=e120]: Подробнее →
+        - link "Чистка крыш От снега и наледи, сбивание сосулек, промальп, автовышка. С оформлением акта по форме. от 25 ₽ / м² Подробнее →" [ref=e121] [cursor=pointer]:
+          - /url: /chistka-krysh/
+          - img [ref=e122]
+          - heading "Чистка крыш" [level=3] [ref=e124]
+          - paragraph [ref=e125]: От снега и наледи, сбивание сосулек, промальп, автовышка. С оформлением акта по форме.
+          - generic [ref=e126]:
+            - generic [ref=e127]
+            - generic [ref=e130]: Подробнее →
+        - link "Вывоз мусора Контейнеры 7-30 м³, газель, старая мебель, строительный мусор, садовый, крупногабарит. от 5 500 ₽ / объект Подробнее →" [ref=e131] [cursor=pointer]:
+          - /url: /vyvoz-musora/
+          - img [ref=e132]
+          - heading "Вывоз мусора" [level=3] [ref=e135]
+          - paragraph [ref=e136]: Контейнеры 7-30 м³, газель, старая мебель, строительный мусор, садовый, крупногабарит.
+          - generic [ref=e137]:
+            - generic [ref=e138]
+            - generic [ref=e141]: Подробнее →
+        - link "Демонтаж Снос дома, бани, сарая, внутренний демонтаж под ремонт. Утилизация и вывоз отходов в одном договоре. от 25 000 ₽ / объект Подробнее →" [ref=e142] [cursor=pointer]:
+          - /url: /demontazh/
+          - img [ref=e143]
+          - heading "Демонтаж" [level=3] [ref=e145]
+          - paragraph [ref=e146]: Снос дома, бани, сарая, внутренний демонтаж под ремонт. Утилизация и вывоз отходов в одном договоре.
+          - generic [ref=e147]:
+            - generic [ref=e148]
+            - generic [ref=e151]: Подробнее →
+    - generic [ref=e153]:
+      - generic [ref=e154]: § 03 · Как мы работаем · от заявки до акта
+      - heading "5 шагов · фикс-цена · без сюрпризов" [level=2] [ref=e155]
+      - generic [ref=e156]:
+        - generic [ref=e157]:
+          - img [ref=e158]
+          - heading "Заявка" [level=4] [ref=e160]
+          - paragraph [ref=e161]: 15 мин · диспетчер
+          - paragraph [ref=e162]: Отвечаем на звонок или сообщение в WhatsApp / Telegram. Уточняем задачу, район.
+        - generic [ref=e163]:
+          - img [ref=e164]
+          - heading "Выезд" [level=4] [ref=e171]
+          - paragraph [ref=e172]: бесплатно · в день обращения
+          - paragraph [ref=e173]: Замерщик приезжает на объект по согласованному времени. Без предоплаты, без обязательств.
+        - generic [ref=e174]:
+          - img [ref=e175]
+          - heading "Смета" [level=4] [ref=e179]
+          - paragraph [ref=e180]: фикс на 14 дней
+          - paragraph [ref=e181]: Письменная смета с разбивкой работ. Цена в смете = цена в договоре. Доплат не бывает.
+        - generic [ref=e182]:
+          - img [ref=e183]
+          - heading "Работа" [level=4] [ref=e185]
+          - paragraph [ref=e186]: по графику · с фото-отчётом
+          - paragraph [ref=e187]: Бригада в фирменной одежде, со страховкой и сертификатами. В день работы — фото в чат.
+        - generic [ref=e188]:
+          - img [ref=e189]
+          - heading "Оплата + гарантия" [level=4] [ref=e193]
+          - paragraph [ref=e194]: после акта · 12 мес
+          - paragraph [ref=e195]: Оплата налом / картой / СБП / счёт юрлицу. Сертификат с печатью и страховым полисом.
+    - generic [ref=e197]:
+      - generic [ref=e198]: § 04 · Цены · открытый прайс
+      - heading "Прозрачные цены · без «по запросу»" [level=2] [ref=e199]
+      - paragraph [ref=e200]: "Конкретные суммы за конкретные работы. Финальная цена — после бесплатного замера: учитываем доступ, объём и сложность. Точная цифра — в договоре, не выше сметы."
+      - generic [ref=e201]:
+        - generic [ref=e202]:
+          - img [ref=e204]
+          - generic [ref=e210]: Спил дерева до 10 м
+          - generic [ref=e211]: С автовышки или альпинистом, со страховкой 5 млн ₽. С удалением пня — отдельно.
+          - generic [ref=e212]:
+            - generic [ref=e213]: от4 500 ₽/ дерево
+            - link "Подробнее →" [ref=e214] [cursor=pointer]:
+              - /url: /arboristika/spil-derevev/
+        - generic [ref=e215]:
+          - img [ref=e217]
+          - generic [ref=e219]: Аварийное удаление 10-25 м
+          - generic [ref=e220]: Дерево упало или висит — приедем в течение 4 часов в МО, 2 часов в Москве. Каблинг при необходимости.
+          - generic [ref=e221]:
+            - generic [ref=e222]: от12 000 ₽/ дерево
+            - link "Подробнее →" [ref=e223] [cursor=pointer]:
+              - /url: /arboristika/avarijnoe/
+        - generic [ref=e224]:
+          - img [ref=e226]
+          - generic [ref=e230]: Чистка крыши от снега
+          - generic [ref=e231]: Со снеговалом и сосульками. С автовышки или промальпом — выбираем по геометрии и доступу.
+          - generic [ref=e232]:
+            - generic [ref=e233]: от25 ₽/ м²
+            - link "Подробнее →" [ref=e234] [cursor=pointer]:
+              - /url: /chistka-krysh/ot-snega/
+        - generic [ref=e235]:
+          - img [ref=e237]
+          - generic [ref=e241]: Контейнер 7-8 м³
+          - generic [ref=e242]: Привезём, оставим на 2-7 дней, вывезем с актом на полигон. Бытовой / строительный / смешанный мусор.
+          - generic [ref=e243]:
+            - generic [ref=e244]: от5 500 ₽/ объект
+            - link "Подробнее →" [ref=e245] [cursor=pointer]:
+              - /url: /vyvoz-musora/kontejner/
+        - generic [ref=e246]:
+          - img [ref=e248]
+          - generic [ref=e254]: Газель + грузчики 2 чел.
+          - generic [ref=e255]: 3 часа работы. Старая мебель, бытовая техника, садовый мусор, крупногабарит.
+          - generic [ref=e256]:
+            - generic [ref=e257]: от4 800 ₽/ ходка
+            - link "Подробнее →" [ref=e258] [cursor=pointer]:
+              - /url: /vyvoz-musora/gazel/
+        - generic [ref=e259]:
+          - img [ref=e261]
+          - generic [ref=e265]: Демонтаж бани, сарая
+          - generic [ref=e266]: Каркасное / брусовое / щитовое строение. С вывозом отходов в одном договоре.
+          - generic [ref=e267]:
+            - generic [ref=e268]: от25 000 ₽/ объект
+            - link "Подробнее →" [ref=e269] [cursor=pointer]:
+              - /url: /demontazh/saraj/
+        - generic [ref=e270]:
+          - img [ref=e272]
+          - generic [ref=e277]: Снос дома до 100 м²
+          - generic [ref=e278]: Деревянный или каркасный одноэтажный. С разрешительными документами и вывозом.
+          - generic [ref=e279]:
+            - generic [ref=e280]: от85 000 ₽/ объект
+            - link "Подробнее →" [ref=e281] [cursor=pointer]:
+              - /url: /demontazh/dom/
+      - paragraph [ref=e282]:
+        - text: Указаны минимальные цены за стандартные работы. Финальная стоимость — в смете после бесплатного замера. Выезд замерщика — 0 ₽ при любом исходе. Полный прайс по 47 подуслугам — на странице
+        - link "«Цены»" [ref=e283] [cursor=pointer]:
+          - /url: /ceny/
+        - text: .
+    - generic [ref=e285]:
+      - generic [ref=e286]: § 04.5 · Калькулятор · быстрый расчёт
+      - heading "Знаете параметры — посчитайте сами" [level=2] [ref=e287]
+      - paragraph [ref=e288]:
+        - text: Для тех, кто знает высоту дерева, объём контейнера или площадь крыши.
+        - link "Не знаете объём? → Пришлите фото →" [ref=e289] [cursor=pointer]:
+          - /url: "#foto-smeta"
+      - generic [ref=e290]:
+        - tablist "Выбор калькулятора услуги" [ref=e291]:
+          - tab "Арбористика" [selected] [ref=e292] [cursor=pointer]
+          - tab "Чистка крыш" [ref=e293] [cursor=pointer]
+          - tab "Вывоз мусора" [ref=e294] [cursor=pointer]
+          - tab "Демонтаж" [ref=e295] [cursor=pointer]
+        - generic [ref=e296]:
+          - generic [ref=e297]:
+            - generic [ref=e298]
+            - generic [ref=e303]
+            - generic [ref=e308]
+            - group "Дополнительные опции" [ref=e313]
+          - generic [ref=e332]:
+            - generic [ref=e333]
+            - generic [ref=e337]: Ориентировочная цена. Точная — в смете после бесплатного замера.
+            - link "Заказать бесплатный замер →" [ref=e338] [cursor=pointer]:
+              - /url: "#cta"
+    - generic [ref=e340]:
+      - generic [ref=e341]: § 05 · Фото → смета · 10 минут
+      - heading "Не знаете объём? Пришлите фото" [level=2] [ref=e342]
+      - paragraph [ref=e343]: Главная фишка, которой нет ни у одного конкурента из 17 проверенных. AI распознаёт объект на фото, диспетчер уточняет — диапазон цены приходит в WhatsApp за 10 минут. Зафиксирован на 14 дней.
+      - generic [ref=e344]:
+        - generic [ref=e345]:
+          - generic [ref=e346]:
+            - img [ref=e347]
+            - generic [ref=e350]: Перетащите фото или нажмите
+            - generic [ref=e351]: JPG · PNG · HEIC · до 8 фото · до 10 МБ
+          - generic [ref=e352]:
+            - generic [ref=e353]
+            - generic [ref=e358]
+            - generic [ref=e363]
+        - generic [ref=e368]:
+          - generic [ref=e369]:
+            - generic [ref=e370]: Ориентир № 0044
+            - generic [ref=e371]: 10:08 МСК
+          - generic [ref=e373]:
+            - generic [ref=e374]: ФОТО · Аварийная берёза 18 м
+            - text: СНТ Берёзовая роща, Истра
+          - generic [ref=e375]: "Распознали: берёза, ~18 м, аварийный наклон 25°"
+          - generic [ref=e377]:
+            - generic [ref=e378]
+            - generic [ref=e381]: ФИКС НА 14 ДНЕЙ
+    - generic [ref=e383]:
+      - generic [ref=e384]: § 06 · Кейсы · 14 объектов в портфолио
+      - heading "Что мы сделали в этом сезоне" [level=2] [ref=e385]
+      - paragraph [ref=e386]: Все суммы — фактические, со сметы и подписанного акта. Фото — из чата с заказчиком, после согласования на публикацию.
+      - generic [ref=e387]:
+        - article [ref=e388]:
+          - generic [ref=e389]:
+            - generic [ref=e390]: B2C
+            - generic [ref=e392]: ДО / ПОСЛЕ · аварийная берёза 18 м · Истра · 11 апр
+          - generic [ref=e393]:
+            - heading "Аварийные берёзы у дома, 18 м" [level=3] [ref=e394]
+            - generic [ref=e395]
+            - generic [ref=e400]
+        - article [ref=e410]:
+          - generic [ref=e411]:
+            - generic [ref=e412]: B2C
+            - generic [ref=e414]: ДО / ПОСЛЕ · старая баня 4×5 м · Одинцово · 2 апр
+          - generic [ref=e415]:
+            - heading "Старая баня под новую террасу" [level=3] [ref=e416]
+            - generic [ref=e417]
+            - generic [ref=e422]
+        - article [ref=e432]:
+          - generic [ref=e433]:
+            - generic [ref=e434]: B2B
+            - generic [ref=e436]: ДО / ПОСЛЕ · крыша 850 м² · посёлок Мытищи · сезон
+          - generic [ref=e437]:
+            - heading "Сезон уборки снега 2025-2026" [level=3] [ref=e438]
+            - generic [ref=e439]
+            - generic [ref=e444]
+        - article [ref=e454]:
+          - generic [ref=e455]:
+            - generic [ref=e456]: B2C
+            - generic [ref=e458]: ДО / ПОСЛЕ · контейнер 30 м³ · Раменское · 28 мар
+          - generic [ref=e459]:
+            - heading "Расчистка участка после бури" [level=3] [ref=e460]
+            - generic [ref=e461]
+            - generic [ref=e466]
+        - article [ref=e476]:
+          - generic [ref=e477]:
+            - generic [ref=e478]: B2B
+            - generic [ref=e480]: ДО / ПОСЛЕ · 12 объектов · УК Жилищник · сезон
+          - generic [ref=e481]:
+            - heading "УК Жилищник — годовой контракт" [level=3] [ref=e482]
+            - generic [ref=e483]
+            - generic [ref=e487]
+        - article [ref=e497]:
+          - generic [ref=e498]:
+            - generic [ref=e499]: B2C
+            - generic [ref=e501]: ДО / ПОСЛЕ · кронирование 4 деревьев · Пушкино · 14 мар
+          - generic [ref=e502]:
+            - heading "Кронирование старого сада" [level=3] [ref=e503]
+            - generic [ref=e504]
+            - generic [ref=e509]
+    - generic [ref=e520]:
+      - generic [ref=e521]: § 07 · Отзывы · независимые источники
+      - heading "Что пишут заказчики на Я.Картах, 2ГИС, Авито" [level=2] [ref=e522]
+      - generic [ref=e523]:
+        - generic [ref=e524]:
+          - generic [ref=e525]: Я.Карты
+          - generic [ref=e526]: ★ 4.9
+          - generic [ref=e527]: 128 отзывов
+        - generic [ref=e528]:
+          - generic [ref=e529]: 2ГИС
+          - generic [ref=e530]: ★ 4.8
+          - generic [ref=e531]: 42 отзыва
+        - generic [ref=e532]:
+          - generic [ref=e533]: Авито
+          - generic [ref=e534]: ★ 4.9
+          - generic [ref=e535]: 31 отзыв
+        - generic [ref=e536]:
+          - generic [ref=e537]: NPS
+          - generic [ref=e538]:
+            - text: "98"
+            - generic [ref=e539]: /100
+          - generic [ref=e540]: внутренний опрос Q1 2026
+      - generic [ref=e541]:
+        - article [ref=e542]:
+          - generic [ref=e543]:
+            - generic [ref=e544]: М
+            - generic [ref=e545]
+          - generic [ref=e548]: ★★★★★
+          - paragraph [ref=e549]: «Сфоткала упавшую берёзу — через 8 минут пришёл ответ в WhatsApp. Приехали через день, всё убрали за 3 часа, увезли пенёк. Цена точно как в смете.»
+        - article [ref=e550]:
+          - generic [ref=e551]:
+            - generic [ref=e552]: В
+            - generic [ref=e553]
+          - generic [ref=e556]: ★★★★★
+          - paragraph [ref=e557]: «Демонтаж старой бани с вывозом. Бригада в форме, договор на месте, страховка. Сертификат с печатью отдали вместе с актом.»
+        - article [ref=e558]:
+          - generic [ref=e559]:
+            - generic [ref=e560]: А
+            - generic [ref=e561]
+          - generic [ref=e564]: ★★★★★
+          - paragraph [ref=e565]: «Заключили годовой договор на крыши и арбо. Один менеджер на всё, штрафы ГЖИ они забрали в свой риск, а это — главное для нас.»
+        - article [ref=e566]:
+          - generic [ref=e567]:
+            - generic [ref=e568]: Н
+            - generic [ref=e569]
+          - generic [ref=e572]: ★★★★★
+          - paragraph [ref=e573]: «Пять лет искал нормального арбориста. Тут — фото отправил в чат, через 10 минут ответили. Сделали ровно как обещали.»
+        - article [ref=e574]:
+          - generic [ref=e575]:
+            - generic [ref=e576]: Е
+            - generic [ref=e577]
+          - generic [ref=e580]: ★★★★★
+          - paragraph [ref=e581]: «Чистка крыши. Приехали ровно в обещанное время, сделали акт, прислали фото до и после. Никто не пытался впарить дополнительные услуги.»
+        - article [ref=e582]:
+          - generic [ref=e583]:
+            - generic [ref=e584]: Д
+            - generic [ref=e585]
+          - generic [ref=e588]: ★★★★★
+          - paragraph [ref=e589]: «Восемь домов под управлением. Четвёртый сезон с Обиходом. По вывозу мусора закрыли вопрос с ОАТИ полностью.»
+    - generic [ref=e591]:
+      - generic [ref=e592]: § 08 · Доверие · лицензии · СРО · парк техники
+      - heading "Документы, которые мы прикрепляем к каждому договору" [level=2] [ref=e593]
+      - paragraph [ref=e594]: У клиента всегда есть основание спросить «а кто вы?». Ниже — формальные ответы. Все документы — в актуальной редакции, по запросу присылаем PDF до подписания договора.
+      - generic [ref=e595]:
+        - generic [ref=e596] [cursor=pointer]:
+          - generic [ref=e597]:
+            - generic [ref=e598]: ✓
+            - generic [ref=e599]
+          - heading "СРО · Свидетельство о допуске" [level=3] [ref=e600]
+          - paragraph [ref=e601]: Актуально · ИНГ-РЕГИОН · 1 млрд ₽
+        - generic [ref=e602] [cursor=pointer]:
+          - generic [ref=e603]:
+            - generic [ref=e604]: ✓
+            - generic [ref=e605]
+          - heading "Страховка ответственности" [level=3] [ref=e606]
+          - paragraph [ref=e607]: Актуально · Ингосстрах · 5 млн ₽
+        - generic [ref=e608] [cursor=pointer]:
+          - generic [ref=e609]:
+            - generic [ref=e610]: ✓
+            - generic [ref=e611]
+          - heading "Сертификаты бригадиров" [level=3] [ref=e612]
+          - paragraph [ref=e613]: 8 человек · альп. 2-3 разряд
+        - generic [ref=e614] [cursor=pointer]:
+          - generic [ref=e615]:
+            - generic [ref=e616]: ✓
+            - generic [ref=e617]
+          - heading "ЕГРЮЛ · ООО «Обиход»" [level=3] [ref=e618]
+          - paragraph [ref=e619]: с 2020 · 12 лет на рынке
+        - generic [ref=e620] [cursor=pointer]:
+          - generic [ref=e621]:
+            - generic [ref=e622]: ✓
+            - generic [ref=e623]
+          - heading "Парк техники" [level=3] [ref=e624]
+          - paragraph [ref=e625]: 2× автовышки · 4× газели · дробилка
+        - generic [ref=e626] [cursor=pointer]:
+          - generic [ref=e627]:
+            - generic [ref=e628]: ✓
+            - generic [ref=e629]
+          - heading "152-ФЗ · Оператор ПД" [level=3] [ref=e630]
+          - paragraph [ref=e631]: Реестр Роскомнадзора · с 2024
+        - generic [ref=e632] [cursor=pointer]:
+          - generic [ref=e633]:
+            - generic [ref=e634]: ✓
+            - generic [ref=e635]
+          - heading "Утилизация по 89-ФЗ" [level=3] [ref=e636]
+          - paragraph [ref=e637]: Лицензированный полигон · акты
+        - generic [ref=e638] [cursor=pointer]:
+          - generic [ref=e639]:
+            - generic [ref=e640]: ✓
+            - generic [ref=e641]
+          - heading "44/223-ФЗ · Госзакупки" [level=3] [ref=e642]
+          - paragraph [ref=e643]: Аккредитация ЕИС · с 2025
+    - generic [ref=e644]:
+      - generic:
+        - img
+      - generic [ref=e645]:
+        - generic [ref=e646]: § 09 · География · Москва и МО
+        - heading "12 районов в активной работе · до 120 км от МКАД" [level=2] [ref=e647]
+        - paragraph [ref=e648]: Литера A — приоритет, есть закреплённая бригада. Остальные — выезд по согласованию (SLA 6 ч).
+        - generic [ref=e649]:
+          - link "A Одинцово 14 КМ ОТ МКАД 8 кейсов" [ref=e650] [cursor=pointer]:
+            - /url: /raiony/odintsovo/
+            - text: A
+            - generic [ref=e651]: Одинцово
+            - generic [ref=e652]
+          - link "A Красногорск 9 КМ ОТ МКАД 6 кейсов" [ref=e655] [cursor=pointer]:
+            - /url: /raiony/krasnogorsk/
+            - text: A
+            - generic [ref=e656]: Красногорск
+            - generic [ref=e657]
+          - link "A Мытищи 8 КМ ОТ МКАД 7 кейсов" [ref=e660] [cursor=pointer]:
+            - /url: /raiony/mytishchi/
+            - text: A
+            - generic [ref=e661]: Мытищи
+            - generic [ref=e662]
+          - link "A Химки 7 КМ ОТ МКАД SLA 4 ч" [ref=e665] [cursor=pointer]:
+            - /url: /raiony/khimki/
+            - text: A
+            - generic [ref=e666]: Химки
+            - generic [ref=e667]
+          - link "A Истра 28 КМ ОТ МКАД 4 кейса" [ref=e670] [cursor=pointer]:
+            - /url: /raiony/istra/
+            - text: A
+            - generic [ref=e671]: Истра
+            - generic [ref=e672]
+          - link "A Пушкино 15 КМ ОТ МКАД 5 кейсов" [ref=e675] [cursor=pointer]:
+            - /url: /raiony/pushkino/
+            - text: A
+            - generic [ref=e676]: Пушкино
+            - generic [ref=e677]
+          - link "A Раменское 25 КМ ОТ МКАД 6 кейсов" [ref=e680] [cursor=pointer]:
+            - /url: /raiony/ramenskoe/
+            - text: A
+            - generic [ref=e681]: Раменское
+            - generic [ref=e682]
+          - link "Жуковский 25 КМ ОТ МКАД SLA 6 ч" [ref=e685] [cursor=pointer]:
+            - /url: /raiony/zhukovskij/
+            - generic [ref=e686]: Жуковский
+            - generic [ref=e687]
+          - link "Домодедово 22 КМ ОТ МКАД SLA 6 ч" [ref=e690] [cursor=pointer]:
+            - /url: /raiony/domodedovo/
+            - generic [ref=e691]: Домодедово
+            - generic [ref=e692]
+          - link "Подольск 15 КМ ОТ МКАД SLA 6 ч" [ref=e695] [cursor=pointer]:
+            - /url: /raiony/podolsk/
+            - generic [ref=e696]: Подольск
+            - generic [ref=e697]
+          - link "Королёв 12 КМ ОТ МКАД SLA 6 ч" [ref=e700] [cursor=pointer]:
+            - /url: /raiony/korolev/
+            - generic [ref=e701]: Королёв
+            - generic [ref=e702]
+          - link "Балашиха 5 КМ ОТ МКАД SLA 6 ч" [ref=e705] [cursor=pointer]:
+            - /url: /raiony/balashikha/
+            - generic [ref=e706]: Балашиха
+            - generic [ref=e707]
+        - link "+ ещё 62 района по запросу → /raiony/" [ref=e711] [cursor=pointer]:
+          - /url: /raiony/
+    - generic [ref=e712]:
+      - generic [ref=e713]:
+        - generic [ref=e714]: § 09.5 · Фото с объектов · реальные работы
+        - heading "Что происходит на объекте" [level=2] [ref=e715]
+        - paragraph [ref=e716]: Фото наших бригад в работе — арбористика, чистка крыш, вывоз мусора, демонтаж. Без постановок.
+      - generic [ref=e717]:
+        - generic [ref=e718]:
+          - figure "Альпинизм · спил берёзы 20 м · Истра" [ref=e719]:
+            - img "Арборист-альпинист на высоте 20 м" [ref=e720]
+            - generic [ref=e721]: Альпинизм · спил берёзы 20 м · Истра
+          - figure "Автовышка АГП-22 · кронирование сосны · Одинцово" [ref=e722]:
+            - img "Автовышка на спиле дерева" [ref=e723]
+            - generic [ref=e724]: Автовышка АГП-22 · кронирование сосны · Одинцово
+          - figure "Корчевание пня фрезой · дуб 80 см · Раменское" [ref=e725]:
+            - img "Фрезерование пня" [ref=e726]
+            - generic [ref=e727]: Корчевание пня фрезой · дуб 80 см · Раменское
+          - figure "Чистка крыши · снег + наледь · посёлок Мытищи" [ref=e728]:
+            - img "Чистка крыши от снега" [ref=e729]
+            - generic [ref=e730]: Чистка крыши · снег + наледь · посёлок Мытищи
+          - figure "Контейнер 8 м³ · строительный мусор · Химки" [ref=e731]:
+            - img "Контейнер вывоз мусора" [ref=e732]
+            - generic [ref=e733]: Контейнер 8 м³ · строительный мусор · Химки
+          - figure "Снос деревянного сарая · вывоз в одном договоре · Пушкино" [ref=e734]:
+            - img "Демонтаж сарая" [ref=e735]
+            - generic [ref=e736]: Снос деревянного сарая · вывоз в одном договоре · Пушкино
+          - figure "Кронирование сада · яблони 20 лет · Жуковский" [ref=e737]:
+            - img "Кронирование яблоневого сада" [ref=e738]
+            - generic [ref=e739]: Кронирование сада · яблони 20 лет · Жуковский
+          - figure "Бригада 4 человека · уборка после спила · Красногорск" [ref=e740]:
+            - img "Бригада Обихода за работой" [ref=e741]
+            - generic [ref=e742]: Бригада 4 человека · уборка после спила · Красногорск
+        - button "Назад" [ref=e743] [cursor=pointer]:
+          - img [ref=e744]
+        - button "Вперёд" [ref=e746] [cursor=pointer]:
+          - img [ref=e747]
+      - generic [ref=e749]:
+        - button "Перейти к фото 1" [ref=e750] [cursor=pointer]
+        - button "Перейти к фото 2" [ref=e751] [cursor=pointer]
+        - button "Перейти к фото 3" [ref=e752] [cursor=pointer]
+        - button "Перейти к фото 4" [ref=e753] [cursor=pointer]
+        - button "Перейти к фото 5" [ref=e754] [cursor=pointer]
+        - button "Перейти к фото 6" [ref=e755] [cursor=pointer]
+        - button "Перейти к фото 7" [ref=e756] [cursor=pointer]
+        - button "Перейти к фото 8" [ref=e757] [cursor=pointer]
+    - generic [ref=e759]:
+      - generic [ref=e760]: § 10 · Частые вопросы
+      - heading "Вопросы, которые задают чаще всего" [level=2] [ref=e761]
+      - generic [ref=e762]:
+        - group [ref=e763]:
+          - generic "Какая гарантия на работы?" [ref=e764] [cursor=pointer]
+        - group [ref=e765]:
+          - generic "Что входит в фикс-цену, что считается дополнительно?" [ref=e766] [cursor=pointer]
+        - group [ref=e767]:
+          - generic "Какие документы передаём заказчику?" [ref=e768] [cursor=pointer]
+        - group [ref=e769]:
+          - generic "Как работает «фото → смета за 10 минут»?" [ref=e770] [cursor=pointer]
+        - group [ref=e771]:
+          - generic "Работаете в выходные и праздники?" [ref=e772] [cursor=pointer]
+        - group [ref=e773]:
+          - generic "Кто выезжает — штатные или подрядчики?" [ref=e774] [cursor=pointer]
+        - group [ref=e775]:
+          - generic "Принимаете ли оплату по безналу?" [ref=e776] [cursor=pointer]
+        - group [ref=e777]:
+          - generic "Что если смета не подойдёт?" [ref=e778] [cursor=pointer]
+    - generic [ref=e780]:
+      - generic [ref=e781]: § 11 · Получить смету · 2 способа
+      - heading "Сфотографируйте или позвоните — ответим за 10 минут" [level=2] [ref=e782]
+      - generic [ref=e783]:
+        - generic [ref=e784]:
+          - generic [ref=e785]: Способ 1 · Быстро
+          - heading "Прислать фото" [level=3] [ref=e786]
+          - paragraph [ref=e787]: AI распознаёт объект, диспетчер пришлёт ориентир в течение 10 минут.
+          - link "Загрузить фото До 8 фото · ответ за 10 мин" [ref=e788] [cursor=pointer]:
+            - /url: "#foto-smeta"
+            - img [ref=e789]
+            - generic [ref=e792]: Загрузить фото
+            - generic [ref=e793]: До 8 фото · ответ за 10 мин
+        - generic [ref=e794]: или
+        - generic [ref=e795]:
+          - generic [ref=e796]: Способ 2 · Если фото нет
+          - heading "Заполнить форму" [level=3] [ref=e797]
+          - paragraph [ref=e798]: Расскажите коротко задачу — диспетчер перезвонит и уточнит.
+          - generic [ref=e799]:
+            - textbox "Имя" [ref=e801]
+            - textbox "+7 (___) ___-__-__" [ref=e803]
+            - 'textbox "Например: спил 3 берёз, Раменское, аварийно" [ref=e805]'
+            - textbox [ref=e806]
+            - button "Отправить заявку →" [ref=e807] [cursor=pointer]
+            - paragraph [ref=e808]: "152-ФЗ: согласие на обработку персональных данных при отправке формы."
+  - contentinfo [ref=e809]:
+    - generic [ref=e810]:
+      - generic [ref=e811]:
+        - img "Обиход" [ref=e813]:
+          - generic [ref=e844]: ОБИХОД
+        - paragraph [ref=e845]: "Комплексный подрядчик 4-в-1 для Москвы и МО: арбористика, чистка крыш, вывоз мусора, демонтаж. Плюс магазин саженцев и дизайн ландшафта. С 2020 года."
+        - generic [ref=e846]:
+          - link "+7 (985) 170-51-11" [ref=e847] [cursor=pointer]:
+            - /url: tel:+79851705111
+          - link "hi@obikhod.ru" [ref=e848] [cursor=pointer]:
+            - /url: mailto:hi@obikhod.ru
+          - generic [ref=e849]: МО, Раменский р-н, ул. Питомниковая, 3
+          - generic [ref=e850]: пн-сб 8:00–22:00, вс 10:00–18:00 · 24/7 на аварии
+      - generic [ref=e851]:
+        - heading "Услуги" [level=5] [ref=e852]
+        - list [ref=e853]:
+          - listitem [ref=e854]:
+            - link "Арбористика" [ref=e855] [cursor=pointer]:
+              - /url: /arboristika/
+          - listitem [ref=e856]:
+            - link "Чистка крыш" [ref=e857] [cursor=pointer]:
+              - /url: /chistka-krysh/
+          - listitem [ref=e858]:
+            - link "Вывоз мусора" [ref=e859] [cursor=pointer]:
+              - /url: /vyvoz-musora/
+          - listitem [ref=e860]:
+            - link "Демонтаж" [ref=e861] [cursor=pointer]:
+              - /url: /demontazh/
+          - listitem [ref=e862]:
+            - link "Дизайн ландшафта" [ref=e863] [cursor=pointer]:
+              - /url: /dizain-landshafta/
+          - listitem [ref=e864]:
+            - link "Фото → смета →" [ref=e865] [cursor=pointer]:
+              - /url: /foto-smeta/
+      - generic [ref=e866]:
+        - heading "Районы" [level=5] [ref=e867]
+        - list [ref=e868]:
+          - listitem [ref=e869]:
+            - link "Одинцово" [ref=e870] [cursor=pointer]:
+              - /url: /raiony/odintsovo/
+          - listitem [ref=e871]:
+            - link "Красногорск" [ref=e872] [cursor=pointer]:
+              - /url: /raiony/krasnogorsk/
+          - listitem [ref=e873]:
+            - link "Мытищи" [ref=e874] [cursor=pointer]:
+              - /url: /raiony/mytishchi/
+          - listitem [ref=e875]:
+            - link "Химки" [ref=e876] [cursor=pointer]:
+              - /url: /raiony/khimki/
+          - listitem [ref=e877]:
+            - link "Истра" [ref=e878] [cursor=pointer]:
+              - /url: /raiony/istra/
+          - listitem [ref=e879]:
+            - link "Все 12 районов →" [ref=e880] [cursor=pointer]:
+              - /url: /raiony/
+      - generic [ref=e881]:
+        - heading "B2B и ресурсы" [level=5] [ref=e882]
+        - list [ref=e883]:
+          - listitem [ref=e884]:
+            - link "УК / ТСЖ" [ref=e885] [cursor=pointer]:
+              - /url: /b2b/uk-tszh/
+          - listitem [ref=e886]:
+            - link "Facility Management" [ref=e887] [cursor=pointer]:
+              - /url: /b2b/fm/
+          - listitem [ref=e888]:
+            - link "Застройщикам" [ref=e889] [cursor=pointer]:
+              - /url: /b2b/zastroyshchik/
+          - listitem [ref=e890]:
+            - link "Госзакупки" [ref=e891] [cursor=pointer]:
+              - /url: /b2b/gostorgi/
+          - listitem [ref=e892]:
+            - link "Кейсы" [ref=e893] [cursor=pointer]:
+              - /url: /kejsy/
+          - listitem [ref=e894]:
+            - link "Блог" [ref=e895] [cursor=pointer]:
+              - /url: /blog/
+    - generic [ref=e896]:
+      - generic [ref=e897]: © 2026 ООО «Обиход»
+      - generic [ref=e898]: ·
+      - generic [ref=e899]: ИНН 1111111111
+      - generic [ref=e900]: ·
+      - generic [ref=e901]: ОГРН 1111111111111
+      - generic [ref=e902]: ·
+      - link "Политика конфиденциальности" [ref=e903] [cursor=pointer]:
+        - /url: /politika/
+      - generic [ref=e904]: ·
+      - link "Публичная оферта" [ref=e905] [cursor=pointer]:
+        - /url: /oferta/
+  - alert [ref=e906]
