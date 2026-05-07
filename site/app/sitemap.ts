@@ -168,6 +168,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ]
 
+  // EPIC-SEO-COMPETE-3 US-8 — lead-инфраструктура (NAP + USP).
+  // Priority 0.6: статичные страницы, не основной трафик-канал, но важны
+  // для конверсии (cross-link target из всех pillar/sub/blog/B2B).
+  const leadInfraEntries: Entry[] = [
+    {
+      url: `${SITE_URL}/kontakty/`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.6,
+    },
+    {
+      url: `${SITE_URL}/kalkulyator/foto-smeta/`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.6,
+    },
+  ]
+
   return [
     ...staticEntries,
     ...serviceEntries,
@@ -178,6 +196,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...authorEntries,
     ...subServiceEntries,
     ...pricingHubEntries,
+    ...leadInfraEntries,
   ]
 }
 
