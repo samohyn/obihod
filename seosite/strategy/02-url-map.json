@@ -1,0 +1,224 @@
+{
+  "$schema": "https://github.com/samohyn/obihod/seosite/strategy/url-map.schema.json",
+  "meta": {
+    "epic": "EPIC-SEO-COMPETE-3",
+    "us": "US-2",
+    "po": "poseo",
+    "decided": "2026-05-06",
+    "based_on": "seosite/02-keywords/derived/clusters-tfidf.csv (60 clusters) + site/scripts/seed.ts (sustained slugs)",
+    "adr": "team/adr/ADR-0018-url-map-compete-3.md",
+    "domain": "https://obikhod.ru",
+    "canonical_strategy": "self_per_route_no_cross_canonical_for_pricing_and_pillar",
+    "sustained_pillar_slugs_kept_unchanged": ["arboristika", "chistka-krysh", "vyvoz-musora", "demontazh"]
+  },
+  "pillars": [
+    {
+      "slug": "vyvoz-musora",
+      "title": "Вывоз мусора",
+      "url": "/vyvoz-musora/",
+      "priority": 0.9,
+      "changefreq": "weekly",
+      "sustained_subs": [
+        {"slug": "vyvoz-stroymusora", "url": "/vyvoz-musora/vyvoz-stroymusora/", "status": "sustained"},
+        {"slug": "vyvoz-sadovogo-musora", "url": "/vyvoz-musora/vyvoz-sadovogo-musora/", "status": "sustained"},
+        {"slug": "uborka-uchastka", "url": "/vyvoz-musora/uborka-uchastka/", "status": "sustained", "cross_link": "/uborka-territorii/raschistka-uchastka/"},
+        {"slug": "staraya-mebel", "url": "/vyvoz-musora/staraya-mebel/", "status": "sustained"}
+      ],
+      "new_subs": [
+        {"slug": "tbo", "title": "Вывоз ТБО", "url": "/vyvoz-musora/tbo/", "wsk_baseline": "sustained_us4_1_topic"},
+        {"slug": "kgm", "title": "Вывоз КГМ (крупногабаритный)", "url": "/vyvoz-musora/kgm/", "wsk_baseline": "sustained_us4_1_topic"},
+        {"slug": "konteyner", "title": "Контейнер для мусора", "url": "/vyvoz-musora/konteyner/", "wsk_baseline": "sustained_us4_1_topic"},
+        {"slug": "vyvoz-snega", "title": "Вывоз снега", "url": "/vyvoz-musora/vyvoz-snega/", "wsk_baseline": "C1=139", "cluster": "C1"}
+      ],
+      "intent_focus": ["lead", "pricing"]
+    },
+    {
+      "slug": "arboristika",
+      "title": "Арбористика",
+      "url": "/arboristika/",
+      "priority": 0.9,
+      "changefreq": "weekly",
+      "sustained_subs": [
+        {"slug": "spil-dereviev", "url": "/arboristika/spil-dereviev/", "status": "sustained_NOT_renamed", "rationale": "existing seed slug — переименование требует 301 redirects, нет потерь без замены"},
+        {"slug": "kronirovanie", "url": "/arboristika/kronirovanie/", "status": "sustained"},
+        {"slug": "udalenie-pnya", "url": "/arboristika/udalenie-pnya/", "status": "sustained"},
+        {"slug": "avariynyy-spil", "url": "/arboristika/avariynyy-spil/", "status": "sustained"},
+        {"slug": "sanitarnaya-obrezka", "url": "/arboristika/sanitarnaya-obrezka/", "status": "sustained"}
+      ],
+      "new_subs": [
+        {"slug": "obrabotka-ot-koroeda", "title": "Обработка от короеда", "url": "/arboristika/obrabotka-ot-koroeda/", "wsk_baseline": "high_sustained_topic"},
+        {"slug": "vykorchevanie-pney", "title": "Выкорчёвывание пней", "url": "/arboristika/vykorchevanie-pney/", "wsk_baseline": "C42_part", "cluster": "C42"},
+        {"slug": "izmelchenie-vetok", "title": "Измельчение веток в щепу", "url": "/arboristika/izmelchenie-vetok/", "wsk_baseline": "C42+C45", "cluster": "C42+C45_part"},
+        {"slug": "obrezka-derevev", "title": "Обрезка плодовых деревьев", "url": "/arboristika/obrezka-derevev/", "wsk_baseline": "C4_part", "cluster": "C4"}
+      ],
+      "intent_focus": ["lead", "pricing", "info"]
+    },
+    {
+      "slug": "demontazh",
+      "title": "Демонтаж в частном секторе",
+      "url": "/demontazh/",
+      "priority": 0.9,
+      "changefreq": "weekly",
+      "sustained_subs": [
+        {"slug": "demontazh-dachi", "url": "/demontazh/demontazh-dachi/", "status": "sustained"},
+        {"slug": "demontazh-bani", "url": "/demontazh/demontazh-bani/", "status": "sustained"},
+        {"slug": "demontazh-saraya", "url": "/demontazh/demontazh-saraya/", "status": "sustained"}
+      ],
+      "new_subs": [
+        {"slug": "snos-zdaniy", "title": "Снос зданий и капитальных построек", "url": "/demontazh/snos-zdaniy/", "wsk_baseline": "C31=98", "cluster": "C31"},
+        {"slug": "demontazh-zaborov", "title": "Демонтаж заборов", "url": "/demontazh/demontazh-zaborov/", "wsk_baseline": "sustained_us2_followup"},
+        {"slug": "demontazh-betona", "title": "Демонтаж бетонных конструкций", "url": "/demontazh/demontazh-betona/", "wsk_baseline": "sustained_us2_followup"},
+        {"slug": "uborka-stroitelnogo-musora", "title": "Уборка строительного мусора (после демонтажа)", "url": "/demontazh/uborka-stroitelnogo-musora/", "wsk_baseline": "sustained_us2_followup", "cross_link": "/vyvoz-musora/vyvoz-stroymusora/"}
+      ],
+      "intent_focus": ["lead", "pricing"],
+      "follow_up": "vertical_pull_snos_msk_demontazh_msk_in_us2_followup"
+    },
+    {
+      "slug": "chistka-krysh",
+      "title": "Чистка крыш и уборка снега",
+      "url": "/chistka-krysh/",
+      "priority": 0.9,
+      "changefreq": "weekly",
+      "naming_decision_2026_05_06": "sustained_pillar_slug_kept_NOT_renamed_to_uborka-snega-i-chistka-krysh — incoming SEO + Я.Метрика baseline preserved",
+      "extended_topic_coverage": "pillar охватывает оба интента: чистка крыш + уборка снега (cluster C34+C56+C21 wsk=2387 покрывается через new sub-pages)",
+      "sustained_subs": [
+        {"slug": "chistka-krysh-chastnyy-dom", "url": "/chistka-krysh/chistka-krysh-chastnyy-dom/", "status": "sustained"},
+        {"slug": "chistka-krysh-mkd", "url": "/chistka-krysh/chistka-krysh-mkd/", "status": "sustained"},
+        {"slug": "sbivanie-sosulek", "url": "/chistka-krysh/sbivanie-sosulek/", "status": "sustained"},
+        {"slug": "chistka-krysh-ot-snega", "url": "/chistka-krysh/chistka-krysh-ot-snega/", "status": "sustained"},
+        {"slug": "chistka-krysh-uborka-territorii-zima", "url": "/chistka-krysh/chistka-krysh-uborka-territorii-zima/", "status": "sustained"},
+        {"slug": "chistka-krysh-dogovor-na-sezon", "url": "/chistka-krysh/chistka-krysh-dogovor-na-sezon/", "status": "sustained"}
+      ],
+      "new_subs": [
+        {"slug": "cena", "title": "Чистка крыш и уборка снега — цена", "url": "/chistka-krysh/cena/", "wsk_baseline": "C34=823", "cluster": "C34"},
+        {"slug": "krysha-ot-naledi", "title": "Очистка крыши от наледи и сосулек", "url": "/chistka-krysh/krysha-ot-naledi/", "wsk_baseline": "C56=850", "cluster": "C56", "cross_link": "/chistka-krysh/sbivanie-sosulek/"},
+        {"slug": "v-moskve", "title": "Уборка снега в Москве и МО", "url": "/chistka-krysh/v-moskve/", "wsk_baseline": "C21=714", "cluster": "C21"},
+        {"slug": "uborka-snega-uchastok", "title": "Уборка снега на участке", "url": "/chistka-krysh/uborka-snega-uchastok/", "wsk_baseline": "sustained"}
+      ],
+      "intent_focus": ["lead", "pricing", "local"]
+    },
+    {
+      "slug": "uborka-territorii",
+      "title": "Уборка территории",
+      "url": "/uborka-territorii/",
+      "priority": 0.9,
+      "changefreq": "weekly",
+      "decided_2026_05_06": "operator_approve_5th_pillar_via_ADR_0018",
+      "sustained_subs": [],
+      "new_subs": [
+        {"slug": "vyravnivanie-uchastka", "title": "Выравнивание участка", "url": "/uborka-territorii/vyravnivanie-uchastka/", "wsk_baseline": "C43+C6+C9=745", "cluster": "C43+C6+C9"},
+        {"slug": "raschistka-uchastka", "title": "Расчистка участка от деревьев и кустарников", "url": "/uborka-territorii/raschistka-uchastka/", "wsk_baseline": "C15=168", "cluster": "C15", "cross_link_to": "/vyvoz-musora/uborka-uchastka/"},
+        {"slug": "pokos-travy", "title": "Покос травы", "url": "/uborka-territorii/pokos-travy/", "wsk_baseline": "C12=913", "cluster": "C12"},
+        {"slug": "vyvoz-porubochnyh-ostatkov", "title": "Вывоз порубочных остатков", "url": "/uborka-territorii/vyvoz-porubochnyh-ostatkov/", "wsk_baseline": "C45_part", "cross_link_to": "/vyvoz-musora/vyvoz-sadovogo-musora/"}
+      ],
+      "intent_focus": ["lead", "pricing"]
+    }
+  ],
+  "programmatic_service_districts": {
+    "url_pattern": "/<pillar>/<sub>/<city>/",
+    "priority": 0.8,
+    "changefreq": "monthly",
+    "sustained_pattern": "ServiceDistricts collection (sustained programmatic SD pattern с draft/published gating)",
+    "sustained_us7_target_count": 150,
+    "sustained_us7_target_cities": "30-50_МО_priority_by_wsfreq_population_distance",
+    "canonical_rule": "self_per_route_NOT_pillar_NOT_pricing",
+    "publish_gating": "noindex if !miniCase || localFaq.length < 2 — sustained protection from thin-content"
+  },
+  "mega_pricing_hub": {
+    "root_url": "/uslugi/tseny/",
+    "priority": 0.8,
+    "changefreq": "weekly",
+    "deep_pages": [
+      {"url": "/uslugi/tseny/arboristika/", "wsk_baseline": "C7+C55+C42+C36+C4=2061"},
+      {"url": "/uslugi/tseny/uborka-territorii/", "wsk_baseline": "C12+C43+C15=1459"},
+      {"url": "/uslugi/tseny/chistka-krysh/", "wsk_baseline": "C34+C56+C21=2387", "rename_note": "не uborka-snega-i-chistka-krysh — sustained pillar slug"},
+      {"url": "/uslugi/tseny/vyvoz-musora/", "wsk_baseline": "sustained"},
+      {"url": "/uslugi/tseny/demontazh/", "wsk_baseline": "sustained"}
+    ],
+    "canonical_rule": "DIFFERENT_INTENT_from_pillar_subs_NO_cross_canonical",
+    "rationale": "pillar/sub URL = lead intent (заказать спил), tseny/pillar URL = pricing intent (сколько стоит)"
+  },
+  "b2b_legal_documents": {
+    "root_url": "/b2b/",
+    "priority": 0.75,
+    "changefreq": "monthly",
+    "track_a_with_pdf_templates": true,
+    "sustained_pages_pattern": "B2BPages collection (sustained route /b2b/<slug>/)",
+    "deep_pages": [
+      {"slug": "porubochnyi-bilet", "url": "/b2b/porubochnyi-bilet/", "wsk_baseline": "C23+C39=242", "primary_cluster": "C23"},
+      {"slug": "lesnaya-deklaratsiya", "url": "/b2b/lesnaya-deklaratsiya/", "wsk_baseline": "arborist_su_top1_keys"},
+      {"slug": "akt-obsledovaniya-derevev", "url": "/b2b/akt-obsledovaniya-derevev/", "wsk_baseline": "sustained"},
+      {"slug": "sro-vypiska-shablony", "url": "/b2b/sro-vypiska-shablony/", "wsk_baseline": "sustained"},
+      {"slug": "fkko-klassifikatsiya-othodov", "url": "/b2b/fkko-klassifikatsiya-othodov/", "wsk_baseline": "sustained"},
+      {"slug": "fitosanitarnyi-sertifikat", "url": "/b2b/fitosanitarnyi-sertifikat/", "wsk_baseline": "sustained"}
+    ]
+  },
+  "blog_info_articles": {
+    "root_url": "/blog/",
+    "priority": 0.7,
+    "changefreq": "weekly",
+    "us5_target_count": 30,
+    "vis_champions_to_mirror": [
+      {"competitor": "liwood/info/articles/sposoby-zashchity-ot-koroeda", "our_slug": "sposoby-zashchity-ot-koroeda", "it50_their": 344, "cross_link_pillar": "/arboristika/obrabotka-ot-koroeda/"},
+      {"competitor": "liwood/info/articles/otvetstvennost-za-nezakonnuyu-vyrubku-derevev", "our_slug": "otvetstvennost-za-nezakonnuyu-vyrubku-derevev", "it50_their": 283, "cross_link_b2b": "/b2b/porubochnyi-bilet/"},
+      {"competitor": "liwood/info/articles/udalenie-pney-s-pomoshchyu-selitry", "our_slug": "udalenie-pney-selitra-instruktsiya", "it50_their": 277, "cross_link_pillar": "/arboristika/udalenie-pnya/"},
+      {"competitor": "liwood/info/articles/letnyaya-privivka-derevev", "our_slug": "letnyaya-privivka-plodovyh-derevev", "it50_their": 184},
+      {"competitor": "liwood/info/articles/obrezka-yablon-vesnoy", "our_slug": "obrezka-yablon-vesnoy-shemy", "it50_their": 181, "cross_link_pillar": "/arboristika/obrezka-derevev/"},
+      {"competitor": "liwood/info/articles/podkormka-plodovykh-derevev", "our_slug": "podkormka-plodovyh-derevev-vesnoy", "it50_their": 166},
+      {"competitor": "liwood/info/articles/kak-sdelat-obrezku-slivy", "our_slug": "obrezka-slivy-vesnoy-osen", "it50_their": 130, "cross_link_pillar": "/arboristika/obrezka-derevev/"},
+      {"competitor": "liwood/info/articles/opryskivanie-plodovykh-derevev-vesnoy", "our_slug": "opryskivanie-plodovyh-derevev-vesnoy", "it50_their": 115},
+      {"slug": "shtraf-za-spil-dereva", "anchor_cluster": "C36", "wsk_baseline": "201", "cross_link_b2b": "/b2b/porubochnyi-bilet/"},
+      {"slug": "kak-poluchit-porubochnyi-bilet-msk", "anchor_cluster": "C23", "wsk_baseline": "132", "cross_link_b2b": "/b2b/porubochnyi-bilet/"}
+    ],
+    "remaining_22_titles_us5": "to_be_drafted_in_seo-content_us5_briefs"
+  },
+  "lead_infrastructure": [
+    {"url": "/kontakty/", "us": "US-8", "priority": 0.6, "changefreq": "yearly", "schema": ["LocalBusiness", "ContactPoint"]},
+    {"url": "/kalkulyator/foto-smeta/", "us": "US-8", "priority": 0.6, "changefreq": "yearly", "wsk_baseline": "C5=473", "primary_cluster": "C5", "schema": ["WebApplication", "HowTo"]},
+    {"url": "/otzyvy/", "us": "US-9", "priority": 0.6, "changefreq": "weekly", "schema": ["AggregateRating", "Review"]}
+  ],
+  "trust_pages_sustained": [
+    {"url": "/o-kompanii/", "priority": 0.5, "status": "sustained"},
+    {"url": "/garantii/", "priority": 0.5, "status": "sustained"},
+    {"url": "/kak-my-rabotaem/", "priority": 0.5, "status": "sustained"},
+    {"url": "/komanda/", "priority": 0.5, "status": "sustained"},
+    {"url": "/sro-licenzii/", "priority": 0.5, "us_11_extension": true},
+    {"url": "/park-tehniki/", "priority": 0.5, "status": "sustained"},
+    {"url": "/raiony/", "priority": 0.5, "status": "sustained"},
+    {"url": "/avtory/", "priority": 0.6, "us_11_seed": "5_random_RU_names_with_fal_ai_photos"},
+    {"url": "/avtory/<slug>/", "priority": 0.6, "us_11_extension": true},
+    {"url": "/kejsy/", "priority": 0.5, "status": "sustained"},
+    {"url": "/kejsy/<slug>/", "priority": 0.65, "us_11_target_count": 12}
+  ],
+  "redirects_required": [],
+  "redirects_NOT_required_after_sustained_decision": [
+    {"from": "/uborka-snega-i-chistka-krysh/", "to": "/chistka-krysh/", "reason": "sustained slug kept, no rename → no redirect needed"},
+    {"from": "/arboristika/spil-derevev/", "to": "/arboristika/spil-dereviev/", "reason": "sustained spelling kept (с 'и'), no rename → no redirect needed"}
+  ],
+  "exclude_clusters_out_of_vertical": [
+    {"cluster": "C18", "reason": "калькулятор расхода dексdomitor / профильной трубы / кварцвинила — out of services scope"},
+    {"cluster": "C22", "reason": "сабвуфер сабвуфера — out of vertical"},
+    {"cluster": "C45_part_alpinizm", "reason": "промышленные альпинисты — отдельная вертикаль"}
+  ],
+  "neuro_seo_directives": {
+    "robots_allowed_bots": ["GPTBot", "ClaudeBot", "PerplexityBot", "YandexGPT", "OAI-SearchBot", "Applebot-Extended"],
+    "llms_txt_route": "/llms.txt",
+    "llms_full_txt_route": "/llms-full.txt",
+    "speakable_required_on": ["pillar", "sub", "blog", "b2b"],
+    "citation_summary_block": "<aside data-llm-citation> в первом экране info-страниц",
+    "indexnow_auto_trigger": "afterChange Services / ServiceDistricts / Cases / Blog / B2BPages / Authors → /api/revalidate"
+  },
+  "totals": {
+    "pillars": 5,
+    "sustained_subs": 18,
+    "new_subs": 17,
+    "total_subs": 35,
+    "programmatic_sd_target": 150,
+    "mega_pricing_pages": 6,
+    "b2b_pages_with_pdf": 6,
+    "blog_articles": 30,
+    "lead_infra_routes": 3,
+    "trust_pages_extension": 4,
+    "total_new_routes_or_pages_to_create": "~63 unique URL paths + ~150 SD = ~213 new pages by W12 (минус 18 sustained subs)"
+  }
+}

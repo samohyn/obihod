@@ -130,6 +130,32 @@ PR #170 merged. Старт US-1 в новой ветке `seo/epic-compete-3-us-
 2. tamd ADR-0018 review → approved → sa-seo пишет US-2 spec
 3. Параллельно — operator передаёт Wordstat OAuth для US-2 follow-up
 
+### 2026-05-06 17:15 — US-2 primary closed (poseo autonomous + tamd-proxy review)
+
+PR #171 merged. Старт US-2 в новой ветке `seo/epic-compete-3-us-2-url-map`.
+
+**Done:**
+- Audit `site/scripts/seed.ts` → sustained 4 pillars (`arboristika`, `chistka-krysh`, `vyvoz-musora`, `demontazh`) + 18 sub-pages → НЕ переименовываем (0 redirects, sustained SEO baseline)
+- 5 pillars: 4 sustained + 1 new `/uborka-territorii/` (operator approved)
+- 35 sub-pages = 18 sustained + 17 new (mapped к US-1 TF-IDF cluster)
+- ADR-0018 финализирован — 13 SEO правил, sitemap priority, redirect-карта (0 records), priceFrom defaults для 17 new subs
+- URL-инвентарь JSON `seosite/strategy/02-url-map.json` (machine-readable для seed-скриптов)
+- US-2 sa-seo spec
+- tamd-proxy review (general-purpose agent в роли tamd) → 🟡 approve with 7 actionable, все applied:
+  1. SD route depth уточнено — sustained 2-сегмент `/<pillar>/<city>/`, 3-сегмент out-of-scope
+  2. «12 canonical» → «13 SEO» rename + #13 H1 differentiation
+  3. chistka-krysh/sosulek vs krysha-ot-naledi collision resolved
+  4. priceFrom defaults для 17 new subs
+  5. Reviews collection plan (dba migrate sustained homepage_reviews)
+  6. PILLAR_PRIORITY asymmetric sustained
+  7. uborka-territorii: 0.85 в US-3 sitemap.ts
+
+**Следующее:**
+1. PR #172 (US-2) → operator merge
+2. tamd formal review (tamd-proxy ≠ tamd для completeness)
+3. cpo notify podev cross-team load
+4. После approves → sa-seo стартует US-3..US-9 sub-specs параллельно
+
 ---
 
 ## Где мы сейчас (2026-04-29)
