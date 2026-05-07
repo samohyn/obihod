@@ -186,6 +186,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
+  // EPIC-SEO-COMPETE-3 US-9 — отзывы + AggregateRating.
+  // Priority 0.6 weekly: trust-сигнал, контент обновляется регулярно
+  // через afterChange Reviews collection.
+  const otzyvyEntry: Entry = {
+    url: `${SITE_URL}/otzyvy/`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.6,
+  }
+
   return [
     ...staticEntries,
     ...serviceEntries,
@@ -197,6 +207,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...subServiceEntries,
     ...pricingHubEntries,
     ...leadInfraEntries,
+    otzyvyEntry,
   ]
 }
 

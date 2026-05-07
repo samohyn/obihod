@@ -18,6 +18,7 @@ import { Blog } from './collections/Blog'
 import { B2BPages } from './collections/B2BPages'
 import { Leads } from './collections/Leads'
 import { Redirects } from './collections/Redirects'
+import { Reviews } from './collections/Reviews'
 import { Homepage } from './globals/Homepage'
 import { SeoSettings } from './globals/SeoSettings'
 import { SiteChrome } from './globals/SiteChrome'
@@ -151,6 +152,7 @@ export default buildConfig({
     Blog,
     Authors,
     B2BPages,
+    Reviews,
     // 03 · Медиа
     Media,
     // 04 · SEO
