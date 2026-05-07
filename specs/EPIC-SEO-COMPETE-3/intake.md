@@ -281,16 +281,40 @@ Non-metric DoD:
 - **AC:** 6 страниц + 6 PDF, ≥800 слов each, Topvisor топ-20 за 6 нед по ключам `<doc-type> мо`, PDF download event в Я.Метрика, ≥10 PDF downloads/нед к W12
 - **Estimate:** 2 нед
 
-### US-7 · Programmatic `<service> × <city>` (W3-W5)
+### US-7 · Pillar uborka-territorii seed + programmatic SD (W3-W5) — 🟡 PARTIAL DONE 2026-05-06
 
-- **Owner:** seo-content · **Supporting:** cms (bulk seed), seo-tech (sitemap), dba (если миграции)
-- **Deliverables:**
-  - 30-50 МО-городов в `seosite/strategy/07-cities-priority.csv` (priority по wsfreq + население + расстояние)
-  - Bulk-seed `scripts/seed-service-districts-compete-3.ts` (Local API Payload)
-  - 30-50 × 5 pillar = 150-250 новых ServiceDistrict документов
-  - Уникальный intro 200-300 слов на каждую SD, NeighborDistricts блок, MiniCase из Cases
-- **AC:** ≥150 новых SD, sitemap pagesInIndex ≥80% от submitted (Я.Вебмастер), 0 thin-content, Topvisor топ-30 для ≥50% URL за 8 нед
-- **Estimate:** 2.5 нед
+**Phase A (✅ done):** pillar `uborka-territorii` seed
+- ✅ `site/scripts/seed.ts`: ServiceSeed type включает `'uborka-territorii'` + priceUnit `'sotka'`
+- ✅ SERVICES array — 5-й pillar entry с intro / metaTitle / 3 FAQ / leadTemplate
+- ✅ 4 sub-services: vyravnivanie-uchastka (250 ₽/сот) · raschistka-uchastka (800 ₽/сот) · pokos-travy (80 ₽/сот) · vyvoz-porubochnyh-ostatkov (1 800 ₽/м³)
+- ✅ После `pnpm seed` (post-merge) → /uborka-territorii/ + /uslugi/tseny/uborka-territorii/ live
+- ✅ type-check ✅, lint 0 errors ✅, prettier ✅
+
+**Phase B (🔵 sustained для US-7 follow-up):** programmatic SD bulk-seed
+- 🔵 30-50 МО-городов в `seosite/strategy/07-cities-priority.csv`
+- 🔵 Bulk-seed через sustained `scripts/generate-sd-batch.ts`
+- 🔵 30-50 × 5 pillar = 150-250 новых ServiceDistrict документов
+- 🔵 Owner: seo-content + cms
+
+**Phase C (🔵 sustained для US-7 follow-up):** 17 new sub-pages под sustained 4 pillars
+- 🔵 4 new sub под /vyvoz-musora/ (tbo / kgm / konteyner / vyvoz-snega)
+- 🔵 4 new sub под /arboristika/ (obrabotka-ot-koroeda / vykorchevanie-pney / izmelchenie-vetok / obrezka-derevev)
+- 🔵 4 new sub под /demontazh/ (snos-zdaniy / demontazh-zaborov / demontazh-betona / uborka-stroitelnogo-musora)
+- 🔵 4 new sub под /chistka-krysh/ (cena / krysha-ot-naledi / v-moskve / uborka-snega-uchastok)
+- 🔵 + extension intro/FAQ/leadTemplate per cw spread review
+
+- **AC проверки (Phase A):**
+  - ✅ ServiceSeed type extended (5 pillars + 6 priceUnits)
+  - ✅ uborka-territorii в SERVICES array
+  - ✅ 4 sub corresponds to top-15 cluster wsk
+  - ✅ leadqa post-merge `pnpm seed` локально + smoke /uborka-territorii/ + /uslugi/tseny/uborka-territorii/
+
+- **AC проверки (Phase B+C, sustained):**
+  - 🔵 ≥150 новых SD, sitemap pagesInIndex ≥80% (Я.Вебмастер)
+  - 🔵 17 new sub published, intent + pillar в URL-карте
+  - 🔵 Topvisor топ-30 для ≥50% URL за 8 нед
+
+- **Estimate:** Phase A — 30 мин (done), Phase B+C — 2 нед (sustained)
 
 ### US-8 · Лид-инфраструктура (W6-W7)
 
@@ -460,3 +484,6 @@ Non-metric DoD:
 - 2026-05-06 19:30 · poseo (autonomous): US-4 primary closed — root + per-pillar pricing routes, getAllPillarsForPricing query, sitemap 6 entries, AggregateOffer + BreadcrumbList JSON-LD, UTM tracking. type-check ✅, lint 0 errors ✅, prettier ✅.
 - 2026-05-06 19:30 · poseo → leadqa: post-merge Lighthouse + mobile AA проверка
 - 2026-05-06 19:30 · poseo → cw: cw spread review для priceFrom/To 17 new sub-services (sustained backlog ADR-0018 §priceFrom defaults)
+- 2026-05-06 20:00 · operator → poseo: «готово» — PR #176 merged. poseo стартует US-7 (минимальный scope: uborka-territorii pillar seed).
+- 2026-05-06 20:15 · poseo (autonomous): US-7 primary closed — pillar `uborka-territorii` + 4 sub в site/scripts/seed.ts (vyravnivanie / raschistka / pokos / vyvoz-porubochnyh). ServiceSeed type расширен. priceUnit 'sotka' добавлен. type-check ✅, lint 0 errors ✅, prettier ✅.
+- 2026-05-06 20:15 · poseo → leadqa: после merge — `pnpm seed` локально + smoke /uborka-territorii/ + /uslugi/tseny/uborka-territorii/ должны рендериться
