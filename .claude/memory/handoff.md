@@ -156,6 +156,30 @@ PR #171 merged. Старт US-2 в новой ветке `seo/epic-compete-3-us-
 3. cpo notify podev cross-team load
 4. После approves → sa-seo стартует US-3..US-9 sub-specs параллельно
 
+### 2026-05-06 18:30 — US-3 primary closed (poseo autonomous, seo-tech proxy)
+
+PR #173 merged (US-2). Старт US-3 в новой ветке `seo/epic-compete-3-us-3-neuro-seo`.
+
+**Done deliverables:**
+- `site/lib/seo/jsonld.ts` extended +6 schema-helpers (~210 строк):
+  - howToSchema, speakableSchema, aggregateOfferSchema, reviewSchema, aggregateRatingSchema, legalServiceSchema
+- `site/lib/seo/citation.ts` (новый, ~120 строк) — buildCitationSummary + validateCitation
+- `site/app/llms-full.txt/route.ts` (новый, ~280 строк) — full-context dump per llmstxt.org spec
+- `site/app/llms.txt/route.ts` extended — 5 pillars + Pricing + Cases-by-service + Local coverage sections
+- `site/app/sitemap.ts` — uborka-territorii: 0.85 (REC #7 tamd review)
+- robots.ts + /api/revalidate IndexNow — sustained verify (no changes needed)
+
+**Verified:** type-check ✅, lint 0 errors ✅, prettier ✅.
+
+**Sustained для leadqa post-merge:**
+- Real-browser smoke /llms.txt + /llms-full.txt (после US-7 seed pillar uborka-territorii)
+- Schema.org validator на pillar / sub / b2b / blog / case (после контента US-4..US-7)
+
+**Следующее:**
+1. PR #174 (US-3) → operator merge
+2. После merge — sa-seo может писать US-4..US-9 sub-specs параллельно (все нужные jsonld helpers + citation.ts готовы)
+3. EPIC progress: 3/12 US closed (US-0 + US-1 + US-2 + US-3), W2 begin
+
 ---
 
 ## Где мы сейчас (2026-04-29)

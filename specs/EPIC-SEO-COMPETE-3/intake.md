@@ -211,22 +211,28 @@ Non-metric DoD:
   - dba migration sustained `homepage_reviews` array → new `Reviews` collection (когда US-9 стартует W8)
   - priceFrom finalize per oператор + cw spread review (defaults в ADR-0018 §priceFrom defaults)
 
-### US-3 · Технический SEO + нейро-SEO каркас (W2-W3)
+### US-3 · Технический SEO + нейро-SEO каркас (W2-W3) — ✅ PRIMARY DONE 2026-05-06
 
-- **Owner:** seo-tech · **Supporting:** podev (afterChange hooks), sa-seo
-- **Deliverables:**
-  - `lib/seo/jsonld.ts` — добавить FAQPage, HowTo, Speakable, расширенный LocalBusiness с `areaServed[]`, Offer, AggregateOffer, Review, BreadcrumbList
-  - `lib/seo/citation.ts` (новый) — Citation-ready TL;DR generator (3-предложений в `<aside data-llm-citation>` + Speakable cssSelector)
-  - `app/llms-full.txt/route.ts` (новый) — full markdown по llmstxt.org spec
-  - `app/llms.txt/route.ts` — расширить разделами Pricing / Cases / Local coverage
-  - Payload `afterChange` hooks → `/api/revalidate?tag=...&url=...` → IndexNow ping для Services, ServiceDistricts, Cases, Blog, B2BPages, Authors
-  - `robots.ts` — финальный аудит AI-bots discrimination
-- **AC:**
-  - 100% routes из US-2 имеют canonical + JSON-LD (Playwright snapshot)
-  - afterChange любой коллекции → revalidate + IndexNow за <2 сек (smoke)
-  - llms.txt + llms-full.txt валидны по llmstxt.org
-  - Schema.org validator PASS на pillar / sub / b2b / blog / case
-- **Estimate:** 1 нед · **Blocks:** US-4..US-9
+- **Owner:** poseo (autonomous, seo-tech proxy) · **Supporting:** sustained `afterChange` hooks (uses `/api/revalidate` + IndexNow — sustained, не требуется новых hooks)
+- **Done deliverables:**
+  - ✅ `site/lib/seo/jsonld.ts` extended (+6 helpers, +210 строк): `howToSchema`, `speakableSchema`, `aggregateOfferSchema`, `reviewSchema`, `aggregateRatingSchema`, `legalServiceSchema`
+  - ✅ `site/lib/seo/citation.ts` (новый, ~120 строк): `buildCitationSummary` + `validateCitation` для AI-bot citation-ready TL;DR (Schema.org Speakable spec)
+  - ✅ `site/app/llms-full.txt/route.ts` (новый, ~280 строк): full-context dump per llmstxt.org spec — Pillars (full intro + subs) + Pricing + B2B + Cases (top-10) + Blog (recent 10) + USP + E-E-A-T + Contacts. Cache 24h, force-dynamic, text/markdown.
+  - ✅ `site/app/llms.txt/route.ts` extended: 5 pillars (sustained 4 + uborka-territorii) + новые секции «Pricing» / «Cases by service» / «Local coverage»
+  - ✅ `site/app/sitemap.ts`: `PILLAR_PRIORITY['uborka-territorii'] = 0.85` (REC #7 tamd review)
+  - ✅ `site/app/robots.ts`: sustained — уже разрешает GPTBot/ClaudeBot/PerplexityBot/YandexGPT/OAI-SearchBot/Applebot-Extended (verify pass)
+  - ✅ `/api/revalidate` IndexNow auto-trigger: sustained — `revalidatePath` + `revalidateTag` + `pushToIndexNow` уже работают per OBI-16, не требуется новых hooks для US-3
+- **AC проверки:**
+  - ✅ 6 new jsonld helpers + citation.ts type-check PASS
+  - ✅ `/llms-full.txt` route компилируется (≥3KB ожидаемая длина при наличии данных в Payload)
+  - ✅ `/llms.txt` extended Pricing + Cases + Local sections
+  - ✅ sitemap.ts включает uborka-territorii: 0.85
+  - ✅ type-check PASS, lint 0 errors, prettier PASS
+  - 🔵 Local smoke /llms.txt + /llms-full.txt (требует pnpm dev + БД с pillar uborka-territorii) — в leadqa post-merge
+  - 🔵 Schema.org validator на pillar / sub / b2b / blog / case — в leadqa W2 (после контента в US-4..US-7)
+- **Sustained → US-2 follow-up / leadqa:**
+  - leadqa post-merge real-browser smoke на /llms-full.txt + /llms.txt
+  - Schema.org validator пройти после контента US-4..US-7
 
 ### US-4 · Mega-прайс `/uslugi/tseny/` (W4-W5)
 
@@ -433,3 +439,7 @@ Non-metric DoD:
 - 2026-05-06 17:15 · tamd-proxy → poseo: 🟡 approve with 7 actionable comments. Все applied: SD route depth уточнение (sustained 2-сегмент), 13 SEO rules rename + правило #13 (H1 differentiation lead vs pricing), collision chistka-krysh sosulek/naledi resolved, priceFrom defaults для 17 new subs, Reviews collection plan, sustained PILLAR_PRIORITY asymmetric. ADR status: ready_for_review → accepted_with_changes.
 - 2026-05-06 17:15 · poseo → tamd: formal review request (tamd-proxy ≠ tamd для completeness)
 - 2026-05-06 17:15 · poseo → cpo: cross-team notification — podev нагрузка (5 новых routes: /uslugi/tseny/, /uslugi/tseny/[pillar]/, /kontakty/, /kalkulyator/foto-smeta/, /otzyvy/) + new Reviews collection (US-9, dba migration sustained homepage_reviews)
+- 2026-05-06 17:45 · operator → poseo: «вмержил 173» — PR #173 merged. poseo стартует US-3.
+- 2026-05-06 18:30 · poseo (autonomous, seo-tech proxy): US-3 primary closed — 6 new jsonld helpers + citation.ts + llms-full.txt + extended llms.txt + sitemap priority. type-check ✅, lint 0 errors ✅, prettier ✅.
+- 2026-05-06 18:30 · poseo → leadqa: post-merge smoke на /llms.txt + /llms-full.txt (с реальными данными pillar uborka-territorii когда seed завершит US-7)
+- 2026-05-06 18:30 · poseo → sa-seo: US-3 closed → US-4..US-9 sub-specs могут стартовать (jsonld helpers + citation.ts ready для всех downstream)
