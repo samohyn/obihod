@@ -1,0 +1,930 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Команда — Обиход (макет, на base brand-guide.html)</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<!-- ВСЯ дизайн-система — 1-в-1 из design-system/brand-guide.html (extracted) -->
+<link rel="stylesheet" href="brand-guide-styles.css" />
+
+<link rel="stylesheet" href="homepage-shared.css?v=2" />
+
+<!-- Локальные расширения только для страницы Команды (нечего из homepage-shared переиспользовать) -->
+<style>
+  /* Breadcrumbs canonical для marketing-страниц */
+  .km-crumbs {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--c-muted);
+    letter-spacing: 0.04em;
+    padding: 14px 0 0;
+  }
+  .km-crumbs a { color: var(--c-muted); text-decoration: none; }
+  .km-crumbs a:hover { color: var(--c-primary); }
+  .km-crumbs .sep { padding: 0 8px; opacity: 0.5; }
+  .km-crumbs .cur { color: var(--c-ink-soft); }
+
+  /* Hero для страницы команды — текстово-ориентированный, без output-card справа */
+  .km-hero { padding: 56px 0 64px; position: relative; }
+  .km-hero h1.display { font-size: clamp(40px, 6.5vw, 80px); margin-bottom: 20px; line-height: 1.02; }
+  .km-hero h1 .accent { color: var(--c-primary); }
+  .km-hero .lead { max-width: 62ch; }
+
+  /* Stats row под hero (4 цифры) */
+  .km-stats {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 36px;
+    padding: 24px 0 0;
+    border-top: 1px solid var(--c-line);
+  }
+  @media (min-width: 720px) { .km-stats { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
+  .km-stat .v {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: clamp(28px, 3.6vw, 36px);
+    line-height: 1;
+    color: var(--c-primary);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+  .km-stat .l {
+    font-size: 12.5px;
+    color: var(--c-ink-soft);
+    margin: 8px 0 0;
+    line-height: 1.45;
+  }
+
+  /* Roles grid — 5 ролей, auto-fit, более лаконичная карточка чем .hp-pillar */
+  .km-roles {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: 1fr;
+    margin-top: 28px;
+  }
+  @media (min-width: 640px) { .km-roles { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .km-roles { grid-template-columns: repeat(3, 1fr); } }
+  .km-role {
+    background: var(--c-card);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .km-role:hover { border-color: var(--c-primary); transform: translateY(-1px); }
+  .km-role .ic { width: 32px; height: 32px; color: var(--c-primary); }
+  .km-role h3 { margin: 0; font-size: 18px; font-weight: 700; color: var(--c-ink); }
+  .km-role p { margin: 0; font-size: 14px; color: var(--c-muted); line-height: 1.55; flex: 1; }
+  .km-role .km-meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 12px;
+    border-top: 1px solid var(--c-line);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--c-accent-ink);
+  }
+  .km-role .km-meta .pip { color: var(--c-primary); }
+
+  /* Team portrait extension — placeholder photo с инициалами (override .hp-team-photo) */
+  .km-team-card .hp-team-photo {
+    background:
+      linear-gradient(135deg, rgba(45,90,61,0.08) 0%, rgba(230,162,60,0.08) 100%),
+      var(--c-bg-alt);
+    display: grid;
+    place-items: center;
+  }
+  .km-team-card .km-initials {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(48px, 7vw, 64px);
+    color: var(--c-primary);
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .km-team-card .km-quote {
+    border-left: 2px solid var(--c-accent);
+    padding: 4px 0 4px 12px;
+    margin: 6px 0 0;
+    font-size: 13px;
+    color: var(--c-ink-soft);
+    line-height: 1.55;
+    font-style: italic;
+  }
+  .km-team-card .km-experience {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 4px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+  }
+  .km-team-card .km-experience strong { color: var(--c-ink); font-weight: 500; }
+  .km-team-card .km-experience .dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--c-line);
+    flex-shrink: 0;
+  }
+
+  /* Process — 3 шага в одной строке (под grid-2 на desktop, 1col на mobile) */
+  .km-process { display: grid; gap: 12px; margin-top: 8px; }
+  .km-process-step {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 16px;
+    align-items: start;
+    padding: 18px 20px;
+    background: var(--c-card);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+  }
+  .km-process-step .n {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1;
+    color: var(--c-line);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .km-process-step .t {
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--c-ink);
+    margin: 0 0 4px;
+    line-height: 1.3;
+  }
+  .km-process-step .d {
+    font-size: 13.5px;
+    color: var(--c-muted);
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* Equipment grid — 4 карточки парка техники с иконками */
+  .km-equipment {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: 1fr;
+    margin-top: 28px;
+  }
+  @media (min-width: 640px) { .km-equipment { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .km-equipment { grid-template-columns: repeat(4, 1fr); } }
+  .km-equipment-card {
+    background: var(--c-card);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .km-equipment-card:hover { border-color: var(--c-primary); transform: translateY(-1px); }
+  .km-equipment-card .ic { width: 32px; height: 32px; color: var(--c-primary); margin-bottom: 4px; }
+  .km-equipment-card h4 { margin: 0; font-size: 16px; font-weight: 700; color: var(--c-ink); line-height: 1.3; }
+  .km-equipment-card .spec {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--c-accent-ink);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .km-equipment-card p { font-size: 13.5px; color: var(--c-muted); margin: 0; line-height: 1.55; }
+
+  /* «Подробнее →» link канон */
+  .km-section-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 24px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--c-primary);
+    border-bottom: 1px dashed var(--c-primary);
+    padding-bottom: 1px;
+    text-decoration: none;
+  }
+  .km-section-cta:hover { color: var(--c-primary-ink); border-color: var(--c-primary-ink); }
+
+  /* Документы — заменяем placeholder pattern в .hpc-trust-card .doc на реальные jpg */
+  .km-doc-photo {
+    aspect-ratio: 4/5;
+    background: var(--c-bg-alt);
+    border-radius: var(--radius-sm);
+    position: relative;
+    overflow: hidden;
+  }
+  .km-doc-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .km-doc-photo .badge-ok {
+    position: absolute; top: 8px; right: 8px;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--c-success); color: var(--c-on-primary);
+    display: grid; place-items: center; font-size: 13px; font-weight: 700;
+    z-index: 2;
+  }
+
+  /* Mobile overrides */
+  @media (max-width: 900px) {
+    .km-hero { padding: 36px 0 48px; }
+    .km-hero h1.display { font-size: clamp(32px, 8.5vw, 48px); }
+    .km-stats { padding-top: 20px; gap: 14px; }
+    .km-roles { gap: 10px; }
+    .km-role { padding: 20px 18px; }
+    .km-role h3 { font-size: 17px; }
+    .km-process-step { padding: 14px 16px; grid-template-columns: 36px 1fr; gap: 12px; }
+    .km-process-step .n { font-size: 24px; }
+  }
+  @media (max-width: 600px) {
+    .km-hero { padding: 24px 0 36px; }
+    .km-hero h1.display { font-size: clamp(28px, 9vw, 38px); letter-spacing: -0.02em; }
+    .km-stats { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .km-stat .v { font-size: clamp(22px, 7vw, 28px); }
+    .km-stat .l { font-size: 11.5px; }
+    .km-equipment { gap: 10px; }
+    .km-equipment-card { padding: 18px 16px; }
+  }
+  @media (max-width: 414px) {
+    .km-stats { padding-top: 16px; }
+    .km-process-step { padding: 12px 14px; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ═════════ HEADER · canonical из _header.html (sticky-вариант) ═════════ -->
+<header class="mm-demo site-mm" aria-label="Главное меню Обихода">
+  <div class="mm-header">
+    <a class="mm-brand" href="/" aria-label="Обиход — на главную">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 480" class="mm-logo-svg" role="img" aria-label="Обиход"><title>Обиход</title><defs><style>.stroke-main{fill:none;stroke:currentColor;stroke-width:5.8;stroke-linecap:round;stroke-linejoin:round}.stroke-soft{fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;opacity:.75}.stroke-thick{fill:none;stroke:currentColor;stroke-width:7.8;stroke-linecap:round;stroke-linejoin:round}.fill-ink{fill:currentColor}.label-wordmark{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:160px;font-weight:800;letter-spacing:-4px;fill:currentColor}</style></defs><g color="#2d5a3d"><g transform="translate(240 240) scale(0.36)"><circle cx="0" cy="0" r="560" class="stroke-thick"/><circle cx="0" cy="0" r="435" class="stroke-soft"/><line x1="-560" y1="0" x2="560" y2="0" class="stroke-soft"/><line x1="0" y1="-560" x2="0" y2="560" class="stroke-soft"/><g transform="translate(-300 -270)"><line x1="0" y1="-150" x2="0" y2="150" class="stroke-main"/><g class="stroke-main"><line x1="0" y1="-20" x2="-60" y2="12"/><line x1="0" y1="-20" x2="60" y2="12"/><line x1="0" y1="30" x2="-72" y2="64"/><line x1="0" y1="30" x2="72" y2="64"/><line x1="0" y1="78" x2="-72" y2="112"/><line x1="0" y1="78" x2="72" y2="112"/><line x1="0" y1="122" x2="-52" y2="150"/><line x1="0" y1="122" x2="52" y2="150"/></g></g><g transform="translate(300 -270)"><g class="stroke-main"><line x1="0" y1="-130" x2="0" y2="130"/><line x1="-130" y1="0" x2="130" y2="0"/><line x1="-92" y1="-92" x2="92" y2="92"/><line x1="92" y1="-92" x2="-92" y2="92"/><polyline points="-10,-118 0,-130 10,-118"/><polyline points="-10,118 0,130 10,118"/><polyline points="-118,-10 -130,0 -118,10"/><polyline points="118,-10 130,0 118,10"/></g><circle cx="0" cy="0" r="9" class="stroke-main"/><circle cx="0" cy="0" r="2.6" class="fill-ink"/></g><g transform="translate(-300 300)"><rect x="-115" y="-70" width="230" height="140" class="stroke-main"/><line x1="-115" y1="-4" x2="115" y2="-4" class="stroke-main"/><line x1="18" y1="-70" x2="18" y2="-4" class="stroke-main"/><line x1="-42" y1="-4" x2="-42" y2="70" class="stroke-main"/></g><g transform="translate(300 300)"><polyline points="-100,60 -100,-60 100,-60 100,60" class="stroke-main"/><line x1="-118" y1="-60" x2="118" y2="-60" class="stroke-main"/><g class="stroke-main"><line x1="-48" y1="50" x2="-48" y2="-20"/><line x1="0" y1="50" x2="0" y2="-36"/><polyline points="-14,-20 0,-36 14,-20"/><line x1="48" y1="50" x2="48" y2="-20"/></g></g></g><text x="520" y="295" class="label-wordmark">ОБИХОД</text></g></svg>
+    </a>
+    <div class="mm-nav">
+
+      <div class="mm-has-drop">
+        <button class="mm-trigger" type="button" aria-haspopup="true">Услуги <span class="mm-chevron">▼</span></button>
+        <div class="mm-panel" role="menu">
+          <div class="mm-panel-cols">
+
+            <div class="mm-col">
+              <h4>Арбористика</h4>
+              <ul>
+                <li><a href="/arboristika/spil-derevev"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L12 14"/><path d="M9 6 L12 3 L15 6"/><path d="M8 9 L12 6 L16 9"/><path d="M7 12 L12 9 L17 12"/><path d="M6 15 L18 15" stroke-dasharray="2 1.5"/><path d="M12 15 L12 21"/><path d="M9 21 L15 21"/></svg>Спил деревьев<span class="mm-arrow">→</span></a></li>
+                <li><a href="/arboristika/valka"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 L20 20"/><g transform="rotate(35 10 18)"><path d="M10 9 L10 18"/><path d="M8 11 L10 9 L12 11"/><path d="M7.5 13 L10 11 L12.5 13"/><path d="M7 15 L10 13 L13 15"/></g><path d="M16 14 L20 14 L20 10"/><path d="M20 14 L17 17"/></svg>Валка<span class="mm-arrow">→</span></a></li>
+                <li><a href="/arboristika/udalenie-pnej"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="10" rx="5" ry="1.5"/><path d="M7 10 L7 13"/><path d="M17 10 L17 13"/><path d="M7 13 C 9 14, 15 14, 17 13"/><circle cx="12" cy="10" r="1.6"/><path d="M6 16 C 5 17, 4 18, 3 19"/><path d="M9 16 L8 20"/><path d="M15 16 L16 20"/><path d="M18 16 C 19 17, 20 18, 21 19"/></svg>Корчевание пней<span class="mm-arrow">→</span></a></li>
+                <li><a href="/arboristika/kronirovanie"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11 L12 21"/><path d="M9 21 L15 21"/><path d="M5 11 C 5 6, 19 6, 19 11"/><path d="M8 11 L8 13"/><path d="M12 11 L12 8"/><path d="M16 11 L16 13"/><path d="M3 4 L6 7"/><path d="M4 4 L6 4 L6 6"/></svg>Обрезка, кронирование<span class="mm-arrow">→</span></a></li>
+                <li><a href="/arboristika/kabling"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3 L6 21"/><path d="M18 3 L18 21"/><path d="M6 10 C 9 9, 15 9, 18 10" stroke-dasharray="2 1.5"/><circle cx="6" cy="10" r="1.2" fill="currentColor"/><circle cx="18" cy="10" r="1.2" fill="currentColor"/><path d="M4 21 L8 21"/><path d="M16 21 L20 21"/></svg>Каблинг, брейсинг<span class="mm-arrow">→</span></a></li>
+                <li><a href="/arboristika/opryskivanie"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14 L14 14 L14 20 L10 20 Z"/><path d="M12 14 L12 10"/><path d="M10 10 L14 10 L14 8 L10 8 Z"/><path d="M6 6 L8 7"/><path d="M6 10 L8 10"/><path d="M6 14 L8 13"/><circle cx="4" cy="6" r="0.8"/><circle cx="4" cy="10" r="0.8"/><circle cx="4" cy="14" r="0.8"/></svg>Опрыскивание<span class="mm-arrow">→</span></a></li>
+                <li><a href="/arboristika/izmelchenie"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 6 L17 6 L14 13 L10 13 Z"/><path d="M10 13 L10 18 L14 18 L14 13"/><path d="M5 3 L7 6"/><path d="M3 5 L7 6"/><path d="M17 18 L20 18"/><path d="M19 17 L21 17"/><path d="M19 19 L21 20"/><circle cx="11" cy="20.5" r="1"/><circle cx="13" cy="20.5" r="1"/></svg>Измельчение веток<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/arboristika" class="mm-all">Все услуги арбористики →</a>
+            </div>
+
+            <div class="mm-col">
+              <h4>Крыши и территория</h4>
+              <ul>
+                <li><a href="/chistka-krysh/ot-snega"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14 L12 6 L21 14"/><path d="M5 14 L5 20 L19 20 L19 14"/><circle cx="8" cy="4" r="0.8" fill="currentColor"/><path d="M8 3 L8 5"/><path d="M7 4 L9 4"/><circle cx="16" cy="4" r="0.8" fill="currentColor"/><path d="M16 3 L16 5"/><path d="M15 4 L17 4"/></svg>Уборка снега с крыш<span class="mm-arrow">→</span></a></li>
+                <li><a href="/chistka-krysh/vodostoki"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3 L18 3 L18 6 L6 6 Z"/><path d="M10 6 L10 18"/><path d="M14 6 L14 18"/><path d="M10 18 C 10 20, 14 20, 14 18"/><path d="M10 9 L14 9" stroke-dasharray="1.5 1.5"/><path d="M10 13 L14 13" stroke-dasharray="1.5 1.5"/><path d="M12 20 L12 22"/><path d="M11 21 L13 21"/></svg>Чистка водостоков<span class="mm-arrow">→</span></a></li>
+                <li><a href="/chistka-krysh/promalp"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3 L20 3"/><path d="M12 3 L12 18"/><circle cx="12" cy="10" r="2"/><path d="M10 13 L12 12 L14 13"/><path d="M10 16 L12 14 L14 16"/><path d="M9 19 L15 19"/><path d="M12 19 L12 21"/></svg>Промышленный альпинизм<span class="mm-arrow">→</span></a></li>
+                <li><a href="/chistka-krysh/avtovyshka"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20 L22 20"/><path d="M4 20 L4 16 L10 16 L10 20"/><circle cx="6" cy="20" r="1.2"/><circle cx="8" cy="20" r="1.2"/><path d="M10 18 L15 13"/><path d="M15 13 L18 10" stroke-dasharray="1.8 1.2"/><path d="M17 8 L21 8 L21 12 L17 12 Z"/><path d="M19 10 L19 8"/></svg>Автовышка<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/chistka-krysh" class="mm-all">Все услуги по крышам →</a>
+            </div>
+
+            <div class="mm-col">
+              <h4>Мусор и демонтаж</h4>
+              <ul>
+                <li><a href="/vyvoz-musora"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8 L21 8"/><path d="M5 8 L5 19 L19 19 L19 8"/><circle cx="7.5" cy="20.5" r="1.4"/><circle cx="16.5" cy="20.5" r="1.4"/><path d="M9 14 L9 11"/><path d="M7.5 12.5 L9 11 L10.5 12.5"/><path d="M12 14 L12 11"/><path d="M10.5 12.5 L12 11 L13.5 12.5"/><path d="M15 14 L15 11"/><path d="M13.5 12.5 L15 11 L16.5 12.5"/></svg>Вывоз мусора<span class="mm-arrow">→</span></a></li>
+                <li><a href="/vyvoz-musora/kontejner">Контейнеры 7 / 20 / 30 м³<span class="mm-arrow">→</span></a></li>
+                <li><a href="/demontazh/saraj"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 L12 5 L20 11"/><path d="M6 11 L6 20 L18 20 L18 11"/><path d="M10 20 L10 14 L14 14 L14 20"/><path d="M3 4 L7 8" stroke-width="2"/><path d="M5 2 L9 6" stroke-width="2"/><path d="M6 7 L2 11 L5 14 L9 10"/></svg>Демонтаж сараев<span class="mm-arrow">→</span></a></li>
+                <li><a href="/demontazh/raschistka">Расчистка участка<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/demontazh" class="mm-all">Все услуги по мусору и демонтажу →</a>
+            </div>
+          </div>
+
+          <div class="mm-featured">
+            <strong>Раменское · зима-2026</strong>
+            <span class="muted" style="font-size: 13px;">фикс <span class="mm-price">12 800 ₽</span> за объект · смета за 10 минут по фото</span>
+            <a href="/foto-smeta" class="mm-btn">Прислать фото</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mm-has-drop">
+        <button class="mm-trigger" type="button" aria-haspopup="true">Районы <span class="mm-chevron">▼</span></button>
+        <div class="mm-panel" role="menu">
+          <div class="mm-panel-cols">
+
+            <div class="mm-col">
+              <h4>Запад МО</h4>
+              <ul>
+                <li><a href="/raiony/odintsovo"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4 L20 20"/><path d="M20 4 L4 20"/><circle cx="12" cy="12" r="2.4" fill="currentColor"/></svg>Одинцово<span class="mm-arrow">→</span></a></li>
+                <li><a href="/raiony/krasnogorsk"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18 L9 12 L13 15 L21 18"/><path d="M9 12 L9 8 L11 7 L11 9"/><path d="M9 8 L11 8"/></svg>Красногорск<span class="mm-arrow">→</span></a></li>
+                <li><a href="/raiony/istra"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 C 7 10, 12 16, 17 12 C 19 11, 21 12, 22 13"/><path d="M9 8 C 9 5, 15 5, 15 8"/><path d="M9 8 L15 8"/><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="11" y1="3.5" x2="13" y2="3.5"/><path d="M9 8 L9 18 L15 18 L15 8"/></svg>Истра<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/raiony#zapad" class="mm-all">Все районы запада →</a>
+            </div>
+
+            <div class="mm-col">
+              <h4>Север МО</h4>
+              <ul>
+                <li><a href="/raiony/khimki"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12 L8 11 L11 4 L13 4 L12 11 L20 10 L21 12 L20 14 L12 13 L13 20 L15 22 L9 22 L11 20 L12 13 L8 13 L2 12 Z"/></svg>Химки<span class="mm-arrow">→</span></a></li>
+                <li><a href="/raiony/mytishchi"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6 L18 6"/><path d="M8 6 L8 9 L16 9 L16 6"/><path d="M9 9 L9 20 L15 20 L15 9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="11" y1="20" x2="11" y2="22"/><line x1="13" y1="20" x2="13" y2="22"/></svg>Мытищи<span class="mm-arrow">→</span></a></li>
+                <li><a href="/raiony/pushkino"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L8 9 L10 9 L7 14 L9 14 L7 18 L17 18 L15 14 L17 14 L14 9 L16 9 Z"/><line x1="3" y1="20" x2="21" y2="20"/><line x1="6" y1="19" x2="6" y2="21"/><line x1="12" y1="19" x2="12" y2="21"/><line x1="18" y1="19" x2="18" y2="21"/></svg>Пушкино<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/raiony#sever" class="mm-all">Все районы севера →</a>
+            </div>
+
+            <div class="mm-col">
+              <h4>Юго-Восток МО</h4>
+              <ul>
+                <li><a href="/raiony/ramenskoe"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 C 8 7, 16 7, 21 13"/><line x1="3" y1="13" x2="21" y2="13"/><line x1="6" y1="13" x2="6" y2="18"/><line x1="18" y1="13" x2="18" y2="18"/><path d="M3 18 L21 18" stroke-dasharray="2 1.5"/><path d="M3 21 L21 21" stroke-dasharray="2 1.5"/></svg>Раменское<span class="mm-arrow">→</span></a></li>
+                <li><a href="/raiony/zhukovskij"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L13 11 L21 13 L21 14 L13 13 L13 19 L15 21 L15 22 L9 22 L9 21 L11 19 L11 13 L3 14 L3 13 L11 11 Z"/></svg>Жуковский<span class="mm-arrow">→</span></a></li>
+                <li><a href="/raiony/moskva"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3 L12 21"/><path d="M3 12 L21 12"/><circle cx="12" cy="12" r="2.4" fill="currentColor"/></svg>Москва — все округа<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/raiony" class="mm-all">Карта всех 12 районов →</a>
+            </div>
+          </div>
+
+          <div class="mm-featured">
+            <strong>Не нашли свой район?</strong>
+            <span class="muted" style="font-size: 13px;">Возим технику и бригаду до 120 км от МКАД · фикс-цена за объект</span>
+            <a href="#cta" class="mm-btn">Запросить выезд</a>
+          </div>
+        </div>
+      </div>
+
+      <a class="mm-trigger" href="/dizain-landshafta">Дизайн ландшафта</a>
+
+      <div class="mm-has-drop">
+        <button class="mm-trigger" type="button" aria-haspopup="true">Магазин <span class="mm-chevron">▼</span></button>
+        <div class="mm-panel" role="menu">
+          <div class="mm-panel-cols">
+
+            <div class="mm-col">
+              <h4>Деревья</h4>
+              <ul>
+                <li><a href="/shop/plodovye-derevya">Плодовые деревья<span class="mm-arrow">→</span></a></li>
+                <li><a href="/shop/kolonovidnye">Колоновидные<span class="mm-arrow">→</span></a></li>
+                <li><a href="/shop/listvennye">Лиственные<span class="mm-arrow">→</span></a></li>
+                <li><a href="/shop/khvojnye">Хвойные<span class="mm-arrow">→</span></a></li>
+                <li><a href="/shop/krupnomery">Крупномеры<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/shop/derevya" class="mm-all">Все деревья →</a>
+            </div>
+
+            <div class="mm-col">
+              <h4>Кустарники</h4>
+              <ul>
+                <li><a href="/shop/plodovye-kustarniki">Плодовые кустарники<span class="mm-arrow">→</span></a></li>
+                <li><a href="/shop/dekorativnye-kustarniki">Декоративные кустарники<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/shop/kustarniki" class="mm-all">Все кустарники →</a>
+            </div>
+
+            <div class="mm-col">
+              <h4>Цветы</h4>
+              <ul>
+                <li><a href="/shop/cvety">Цветы<span class="mm-arrow">→</span></a></li>
+                <li><a href="/shop/rozy">Розы<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/shop/cvety-i-rozy" class="mm-all">Весь каталог цветов →</a>
+            </div>
+          </div>
+
+          <div class="mm-featured">
+            <strong>Сезон посадки 2026</strong>
+            <span class="muted" style="font-size: 13px;">доставка по МО · посадка с гарантией приживаемости <span class="mm-price">1 год</span> · смета за день</span>
+            <a href="/shop" class="mm-btn">В каталог</a>
+          </div>
+        </div>
+      </div>
+
+      <a class="mm-trigger" href="/kontakty">Контакты</a>
+    </div>
+    <div class="mm-right">
+      <a class="mm-phone" href="tel:+74950000000">+7 (495) 000-00-00</a>
+      <div class="auth-cta">
+        <button class="btn-login" type="button">Войти</button>
+        <button class="btn-register" type="button">Регистрация</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═════════ BREADCRUMBS ═════════ -->
+<div class="wrap">
+  <nav class="km-crumbs" aria-label="Хлебные крошки">
+    <a href="/">Главная</a>
+    <span class="sep">›</span>
+    <a href="/o-kompanii">О компании</a>
+    <span class="sep">›</span>
+    <span class="cur">Команда</span>
+  </nav>
+</div>
+
+<!-- ═════════ HERO ═════════ -->
+<section class="km-hero">
+  <div class="wrap">
+    <div class="eyebrow">Команда</div>
+    <h1 class="display">Бригада, <span class="accent">а не диспетчер</span></h1>
+    <p class="lead">
+      На объект приезжает не оператор колл-центра и не «менеджер по продажам».
+      Старший бригадир принимает решения на месте, согласует объём в чате с фото
+      и подписывает акт — это и есть «порядок под ключ», без посредников.
+    </p>
+
+    <div class="km-stats">
+      <div class="km-stat">
+        <div class="v">6 лет</div>
+        <p class="l">на рынке Москвы и МО — с 2020</p>
+      </div>
+      <div class="km-stat">
+        <div class="v">4-в-1</div>
+        <p class="l">арбористика, крыши, мусор, демонтаж — одной бригадой</p>
+      </div>
+      <div class="km-stat">
+        <div class="v">120 км</div>
+        <p class="l">радиус выезда от МКАД с собственной техникой</p>
+      </div>
+      <div class="km-stat">
+        <div class="v">24 / 7</div>
+        <p class="l">аварийная бригада на бурелом, наледь, сосульки</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ § 01 · Из кого состоит бригада ═════════ -->
+<section class="hp-section alt">
+  <div class="wrap">
+    <div class="eyebrow">§ 01 · Состав</div>
+    <h2 style="max-width: 24ch;">Кто приедет на объект</h2>
+    <p class="lead" style="max-width: 62ch;">Один заказ — одна бригада. Без передачи между подрядчиками, без «извините, это другой отдел». Каждая роль — со своими допусками и зоной ответственности.</p>
+
+    <div class="km-roles">
+      <div class="km-role">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11a3 3 0 1 0 6 0 3 3 0 1 0-6 0"/><path d="M5 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/><path d="M16 6l1.5 1.5L20 5"/></svg>
+        <h3>Старший бригадир</h3>
+        <p>Принимает решения по объёму на месте, ведёт чат с клиентом, подписывает акт. Если объём вырос против сметы — клиент видит это до подписания, не после.</p>
+        <div class="km-meta">
+          <span class="pip">●</span> 5+ лет опыта
+          <span class="pip">●</span> Допуск к ТБ
+        </div>
+      </div>
+
+      <div class="km-role">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L12 14"/><path d="M9 6 L12 3 L15 6"/><path d="M8 9 L12 6 L16 9"/><path d="M7 12 L12 9 L17 12"/><path d="M6 15 L18 15" stroke-dasharray="2 1.5"/><path d="M12 15 L12 21"/><path d="M9 21 L15 21"/></svg>
+        <h3>Арбористы с допуском на высоту</h3>
+        <p>Спил частями с альпснаряжением, кронирование, удаление аварийных деревьев. Удостоверения и СИЗ — комплект на каждого, сертификаты публикуются в разделе СРО.</p>
+        <div class="km-meta">
+          <span class="pip">●</span> 7-я группа
+          <span class="pip">●</span> ISA-практика
+        </div>
+      </div>
+
+      <div class="km-role">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14 L12 6 L21 14"/><path d="M5 14 L5 20 L19 20 L19 14"/><circle cx="8" cy="4" r="0.8" fill="currentColor"/><path d="M8 3 L8 5"/><path d="M7 4 L9 4"/><circle cx="16" cy="4" r="0.8" fill="currentColor"/><path d="M16 3 L16 5"/><path d="M15 4 L17 4"/></svg>
+        <h3>Кровельщики-промальпы</h3>
+        <p>Чистка снега, наледи и сосулек на МКД и частных домах. Стопперы, обвязка, страховочные системы. Работа в зоне с ограждением и присутствием прораба.</p>
+        <div class="km-meta">
+          <span class="pip">●</span> ПОТ Р-016
+          <span class="pip">●</span> Промальп
+        </div>
+      </div>
+
+      <div class="km-role">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20 L22 20"/><path d="M4 20 L4 16 L10 16 L10 20"/><circle cx="6" cy="20" r="1.2"/><circle cx="8" cy="20" r="1.2"/><path d="M10 18 L15 13"/><path d="M15 13 L18 10" stroke-dasharray="1.8 1.2"/><path d="M17 8 L21 8 L21 12 L17 12 Z"/><path d="M19 10 L19 8"/></svg>
+        <h3>Операторы спецтехники</h3>
+        <p>Автовышка 22 м, манипулятор 7 т, мини-экскаватор для расчистки и демонтажа, контейнеровозы 8–27 м³. Своя техника — без посредников и наценок субподряда.</p>
+        <div class="km-meta">
+          <span class="pip">●</span> Кат. C, E
+          <span class="pip">●</span> 8+ лет
+        </div>
+      </div>
+
+      <div class="km-role">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8 L21 8"/><path d="M5 8 L5 19 L19 19 L19 8"/><circle cx="7.5" cy="20.5" r="1.4"/><circle cx="16.5" cy="20.5" r="1.4"/><path d="M9 14 L9 11"/><path d="M7.5 12.5 L9 11 L10.5 12.5"/><path d="M12 14 L12 11"/><path d="M10.5 12.5 L12 11 L13.5 12.5"/><path d="M15 14 L15 11"/><path d="M13.5 12.5 L15 11 L16.5 12.5"/></svg>
+        <h3>Грузчики и подсобники</h3>
+        <p>Ручной демонтаж, сортировка строймусора по фракциям, погрузка КГМ и веток в контейнер. Полный комплект СИЗ — каска, перчатки, защитные очки.</p>
+        <div class="km-meta">
+          <span class="pip">●</span> ИОТ-инструктаж
+          <span class="pip">●</span> СИЗ
+        </div>
+      </div>
+
+      <div class="km-role" style="background: var(--c-ink); color: var(--c-on-primary); border-color: var(--c-ink);">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--c-accent);"><circle cx="12" cy="12" r="9"/><path d="M12 7 L12 12 L15 14"/></svg>
+        <h3 style="color: var(--c-on-primary);">Аварийная бригада 24/7</h3>
+        <p style="color: rgba(247,245,240,0.78);">Бурелом, упавшее дерево, наледь над входом — выезжаем в течение 2 часов от заявки. Работаем по согласованию с УК и ГЖИ, после выезда даём акт и фото.</p>
+        <div class="km-meta" style="border-color: rgba(247,245,240,0.15); color: var(--c-accent);">
+          <span style="color: var(--c-accent);">●</span> SLA 2 часа
+          <span style="color: var(--c-accent);">●</span> УК / ГЖИ
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ § 02 · Реальные люди (4 портрета) ═════════ -->
+<section class="hp-section">
+  <div class="wrap">
+    <div class="eyebrow">§ 02 · Лица бригады</div>
+    <h2 style="max-width: 26ch;">Это не «команда специалистов» в кавычках — это конкретные люди</h2>
+    <p class="lead" style="max-width: 62ch;">Когда вы звоните утром в среду, к вам приедет один из них. С именем, опытом и зоной ответственности — без подмены на «свободного исполнителя».</p>
+
+    <div class="hp-team">
+      <div class="hp-team-card km-team-card">
+        <div class="hp-team-photo">
+          <span class="km-initials">СК</span>
+          <span class="lbl">Фото · Сергей за работой: спил с автовышки, Раменское, зима 2026</span>
+        </div>
+        <p class="n">Сергей К.</p>
+        <p class="r">Старший бригадир · Арбористика</p>
+        <p class="b">Удалил 200+ аварийных деревьев в МО. Спокойно решает спорные ситуации с соседями и УК — клиенту в чат прилетает фото и согласование, не «скандал».</p>
+        <p class="km-experience">
+          <strong>12 лет</strong> <span class="dot"></span> 200+ объектов <span class="dot"></span> Раменское
+        </p>
+        <p class="km-quote">«Если дерево упирается в провода — это не ваша проблема. Это наша задача и наша ответственность по 152-ФЗ.»</p>
+      </div>
+
+      <div class="hp-team-card km-team-card">
+        <div class="hp-team-photo">
+          <span class="km-initials">АМ</span>
+          <span class="lbl">Фото · Алексей на крыше: чистка от наледи, ЖК Одинцово, январь 2026</span>
+        </div>
+        <p class="n">Алексей М.</p>
+        <p class="r">Кровельщик-промальп</p>
+        <p class="b">Работа на высоте до 30 м, 7-я группа допуска по ПОТ Р-016. Чистит крыши МКД и частных домов от снега и наледи без повреждения кровли — есть фото-акты до и после.</p>
+        <p class="km-experience">
+          <strong>8 лет</strong> <span class="dot"></span> 70+ МКД <span class="dot"></span> Север МО
+        </p>
+        <p class="km-quote">«Сосульки — это не косметика, это безопасность. Зона под крышей — обязательно ограждение и наблюдатель.»</p>
+      </div>
+
+      <div class="hp-team-card km-team-card">
+        <div class="hp-team-photo">
+          <span class="km-initials">ДВ</span>
+          <span class="lbl">Фото · Дмитрий за рулём манипулятора 7 т: вывоз веток, посёлок Истра</span>
+        </div>
+        <p class="n">Дмитрий В.</p>
+        <p class="r">Оператор спецтехники</p>
+        <p class="b">Свой автопарк — манипулятор 7 т, автовышка 22 м, мини-экскаватор. Знает как заехать на узкий двор СНТ и не повредить грядки соседа.</p>
+        <p class="km-experience">
+          <strong>10 лет</strong> <span class="dot"></span> Кат. C, E <span class="dot"></span> 4 единицы техники
+        </p>
+        <p class="km-quote">«Полтора часа на согласование заезда — лучше, чем потом полдня на ремонт чужого забора.»</p>
+      </div>
+
+      <div class="hp-team-card km-team-card">
+        <div class="hp-team-photo">
+          <span class="km-initials">ИП</span>
+          <span class="lbl">Фото · Игорь с командой: демонтаж сарая, частный сектор Жуковский</span>
+        </div>
+        <p class="n">Игорь П.</p>
+        <p class="r">Бригадир · Демонтаж и вывоз</p>
+        <p class="b">Расчистка участка, демонтаж сараев и старых построек, сортировка строймусора по фракциям. Сдаёт стройотходы по 89-ФЗ — есть талоны полигона на каждый рейс.</p>
+        <p class="km-experience">
+          <strong>6 лет</strong> <span class="dot"></span> 89-ФЗ <span class="dot"></span> Юго-Восток МО
+        </p>
+        <p class="km-quote">«Хороший демонтаж — когда после нас остаётся ровный участок и подписанный акт, а не куча на дороге.»</p>
+      </div>
+    </div>
+
+    <p class="muted" style="margin-top: 28px; font-size: 13px; max-width: 62ch;">
+      На объект может приехать другая бригада с теми же допусками и опытом — старшего бригадира всегда называем за день до выезда, чтобы клиент знал имя и контакт заранее.
+    </p>
+  </div>
+</section>
+
+<!-- ═════════ § 03 · Как мы решаем нештатное ═════════ -->
+<section class="hp-section alt">
+  <div class="wrap">
+    <div class="eyebrow">§ 03 · Прозрачность</div>
+    <h2 style="max-width: 26ch;">Как мы решаем «нештатное» — без сюрпризов в счёте</h2>
+
+    <div class="grid-2" style="margin-top: 32px; align-items: start;">
+      <div>
+        <p class="lead" style="margin-bottom: 16px;">
+          На сложных объектах — авария, осложнённый спил, договор на сезон с УК — выезжает бригадир
+          с расширенным допуском. Согласование решений идёт <strong>через мессенджер с фото в реальном
+          времени</strong>: клиент видит, что происходит на месте, до того как подписывать акт.
+        </p>
+        <p style="color: var(--c-ink-soft); margin-bottom: 16px; line-height: 1.65;">
+          Если объём вырос против сметы — это видно в чате до подписания. Не «вы должны ещё», а
+          «вот фото причины, вот варианты, что выбираете». На этом этапе клиент может остановить
+          работу — и заплатит только за выполненный объём по факту.
+        </p>
+        <p style="color: var(--c-ink-soft); line-height: 1.65;">
+          У нас есть страхование ответственности до 5 млн ₽ — если в процессе работ что-то ломается
+          (забор соседа, плитка во дворе, провода), это не «договоримся как-нибудь», а
+          фиксированная процедура с актом и компенсацией.
+        </p>
+      </div>
+
+      <div class="km-process">
+        <div class="km-process-step">
+          <div class="n">01</div>
+          <div>
+            <h4 class="t">Зафиксировали в чате</h4>
+            <p class="d">Бригадир делает фото проблемы, отправляет в WhatsApp / Telegram с короткой формулировкой. Клиент видит в течение 5 минут.</p>
+          </div>
+        </div>
+        <div class="km-process-step">
+          <div class="n">02</div>
+          <div>
+            <h4 class="t">Согласовали 2-3 варианта</h4>
+            <p class="d">Бригадир предлагает варианты с ценой за каждый. Клиент выбирает. Никаких «давайте я там сделаю, потом разберёмся».</p>
+          </div>
+        </div>
+        <div class="km-process-step">
+          <div class="n">03</div>
+          <div>
+            <h4 class="t">Выполнили по согласованию</h4>
+            <p class="d">После выполнения — фото-акт, подпись прораба и клиента. Документы уходят в кабинет, чек — на email.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ § 04 · Документы и допуски ═════════ -->
+<section class="hp-section">
+  <div class="wrap">
+    <div class="eyebrow">§ 04 · Допуски</div>
+    <h2 style="max-width: 24ch;">Бумаги — на месте, не «потом пришлём»</h2>
+    <p class="lead" style="max-width: 60ch;">СРО, страховка ответственности, удостоверения арбористов и операторов техники — всё в публичном доступе на странице «СРО и лицензии». Бригадир показывает копии перед началом работ.</p>
+
+    <div class="hpc-trust">
+      <div class="hpc-trust-card">
+        <div class="km-doc-photo">
+          <img src="img-generated/doc-sro.jpg" alt="Свидетельство СРО" loading="lazy" />
+          <span class="badge-ok">✓</span>
+        </div>
+        <h4 class="t">Свидетельство СРО</h4>
+        <p class="meta">Допуск на работы повышенной опасности</p>
+      </div>
+
+      <div class="hpc-trust-card">
+        <div class="km-doc-photo">
+          <img src="img-generated/doc-cert-arborist.jpg" alt="Удостоверение арбориста" loading="lazy" />
+          <span class="badge-ok">✓</span>
+        </div>
+        <h4 class="t">Удостоверения арбористов</h4>
+        <p class="meta">Допуск на высоту 7-й группы · ISA-практика</p>
+      </div>
+
+      <div class="hpc-trust-card">
+        <div class="km-doc-photo">
+          <img src="img-generated/doc-insurance.jpg" alt="Страховка ответственности" loading="lazy" />
+          <span class="badge-ok">✓</span>
+        </div>
+        <h4 class="t">Страхование ответственности</h4>
+        <p class="meta">До 5 млн ₽ на каждый случай</p>
+      </div>
+
+      <div class="hpc-trust-card">
+        <div class="km-doc-photo">
+          <img src="img-generated/doc-equipment.jpg" alt="Документы на спецтехнику" loading="lazy" />
+          <span class="badge-ok">✓</span>
+        </div>
+        <h4 class="t">Спецтехника · ПТС и ОСАГО</h4>
+        <p class="meta">Автовышка · манипулятор · экскаватор</p>
+      </div>
+    </div>
+
+    <a href="/sro-licenzii" class="km-section-cta">Все документы и лицензии →</a>
+  </div>
+</section>
+
+<!-- ═════════ § 05 · Парк техники ═════════ -->
+<section class="hp-section alt">
+  <div class="wrap">
+    <div class="eyebrow">§ 05 · Техника</div>
+    <h2 style="max-width: 24ch;">Своя техника — без посредников и наценки</h2>
+    <p class="lead" style="max-width: 62ch;">4 единицы — наш парк, не аренда. Это значит фиксированный график, никакой зависимости от свободных слотов у субподрядчика и никакой наценки сверху.</p>
+
+    <div class="km-equipment">
+      <div class="km-equipment-card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20 L22 20"/><path d="M4 20 L4 16 L10 16 L10 20"/><circle cx="6" cy="20" r="1.2"/><circle cx="8" cy="20" r="1.2"/><path d="M10 18 L15 13"/><path d="M15 13 L18 10" stroke-dasharray="1.8 1.2"/><path d="M17 8 L21 8 L21 12 L17 12 Z"/><path d="M19 10 L19 8"/></svg>
+        <h4>Автовышка 22 м</h4>
+        <p class="spec">Высота · 22 м</p>
+        <p>Спил частями, кронирование высоких деревьев, чистка водостоков на МКД до 7 этажа.</p>
+      </div>
+
+      <div class="km-equipment-card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20 L22 20"/><path d="M3 20 L3 14 L11 14 L11 20"/><circle cx="5.5" cy="20" r="1.4"/><circle cx="8.5" cy="20" r="1.4"/><path d="M11 17 L18 12"/><path d="M16 8 L20 8 L20 12 L16 12 Z"/><path d="M18 8 L18 12"/></svg>
+        <h4>Манипулятор 7 т</h4>
+        <p class="spec">Грузоподъёмность · 7 т</p>
+        <p>Перемещение крупных стволов и веток, погрузка строймусора в контейнер без ручного труда.</p>
+      </div>
+
+      <div class="km-equipment-card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8 L21 8"/><path d="M5 8 L5 19 L19 19 L19 8"/><circle cx="7.5" cy="20.5" r="1.4"/><circle cx="16.5" cy="20.5" r="1.4"/><line x1="9" y1="11" x2="9" y2="16"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="15" y1="11" x2="15" y2="16"/></svg>
+        <h4>Контейнеры 8/20/27 м³</h4>
+        <p class="spec">Под бытовой и стройотход</p>
+        <p>Подача за 24 часа, вывоз с талоном полигона по 89-ФЗ для отчётности УК.</p>
+      </div>
+
+      <div class="km-equipment-card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="10" rx="5" ry="1.5"/><path d="M7 10 L7 13"/><path d="M17 10 L17 13"/><path d="M7 13 C 9 14, 15 14, 17 13"/><path d="M9 16 L8 20"/><path d="M15 16 L16 20"/><path d="M6 16 C 5 17, 4 18, 3 19"/><path d="M18 16 C 19 17, 20 18, 21 19"/></svg>
+        <h4>Мини-экскаватор</h4>
+        <p class="spec">Корчевание · расчистка</p>
+        <p>Удаление пней с корнем, расчистка зарослей, выравнивание участка после демонтажа.</p>
+      </div>
+    </div>
+
+    <a href="/park-tehniki" class="km-section-cta">Полный парк техники →</a>
+  </div>
+</section>
+
+<!-- ═════════ § 06 · Что говорят клиенты про бригаду ═════════ -->
+<section class="hp-section">
+  <div class="wrap">
+    <div class="eyebrow">§ 06 · Отзывы про команду</div>
+    <h2 style="max-width: 26ch;">Клиенты называют бригадиров по имени — это и есть лучший знак</h2>
+
+    <div class="hp-revs" style="margin-top: 28px;">
+      <div class="hp-rev-card">
+        <div class="head">
+          <div class="av">М</div>
+          <div>
+            <div class="n">Марина Г.</div>
+            <div class="meta">Раменское · 03.2026</div>
+          </div>
+        </div>
+        <div class="stars">★ ★ ★ ★ ★</div>
+        <p class="text">«Сергей приехал в субботу утром, посмотрел три берёзы, прямо в чат прислал смету и фото, какие части пойдут на спил. Никакого „ну там посмотрим“. Цена не выросла ни на рубль.»</p>
+      </div>
+
+      <div class="hp-rev-card">
+        <div class="head">
+          <div class="av">Е</div>
+          <div>
+            <div class="n">Елена С., УК «Мытищи-3»</div>
+            <div class="meta">Мытищи · 02.2026</div>
+          </div>
+        </div>
+        <div class="stars">★ ★ ★ ★ ★</div>
+        <p class="text">«У нас 14 МКД. Алексей и его кровельщики чистят снег с октября — ни одного претензионного звонка от жильцов, ни одного штрафа от ГЖИ. Акт-фото в кабинете УК через 2 часа после работы.»</p>
+      </div>
+
+      <div class="hp-rev-card">
+        <div class="head">
+          <div class="av">А</div>
+          <div>
+            <div class="n">Андрей К.</div>
+            <div class="meta">Истра, частный дом · 11.2025</div>
+          </div>
+        </div>
+        <div class="stars">★ ★ ★ ★ ★</div>
+        <p class="text">«Игорь демонтировал старую баню за день. Вывезли 4 контейнера, талоны полигона показал, участок выровнен. Соседи спросили телефон — это лучшая рекомендация какая может быть.»</p>
+      </div>
+    </div>
+
+    <a href="/otzyvy" class="km-section-cta">Все отзывы клиентов →</a>
+  </div>
+</section>
+
+<!-- ═════════ § 07 · CTA — pre-footer ═════════ -->
+<div class="pre-footer">
+  <div class="row">
+    <div class="ttl">
+      <h3>Хотите посмотреть на работу бригады?</h3>
+      <p>Закажите выезд бригадира — он приедет с замером, фото-сметой и образцами документов. Бесплатно в пределах МКАД + 30 км.</p>
+    </div>
+    <div class="ctas">
+      <a href="/foto-smeta" class="btn-on-dark">Прислать фото объекта →</a>
+      <a href="tel:+74950000000" class="btn-on-dark ghost">+7 (495) 000-00-00</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ FOOTER · canonical §33.4.2 ═════════ -->
+<div class="site-footer-mock">
+  <div class="cols">
+    <div class="brand-col">
+      <div class="mark-row">
+        <span class="mark">О</span>
+        <div>
+          <div class="name">ОБИХОД</div>
+          <div class="tagline">Хозяйство в надёжных руках</div>
+        </div>
+      </div>
+      <p>Комплексный подрядчик 4-в-1 для Москвы и МО: арбористика, чистка крыш, вывоз мусора, демонтаж. Плюс магазин саженцев и дизайн ландшафта. С 2020 года.</p>
+      <div class="contacts">
+        <a href="tel:+74950000000">+7 (495) 000-00-00</a>
+        <a href="mailto:hi@obikhod.ru">hi@obikhod.ru</a>
+        <span style="opacity: 0.7;">МО, Раменский р-н, ул. Питомниковая, 3</span>
+        <span style="opacity: 0.7; font-size: 12px;">пн-сб 8:00–22:00, вс 10:00–18:00 · 24/7 на аварии</span>
+      </div>
+    </div>
+
+    <div>
+      <h5>Услуги</h5>
+      <ul>
+        <li><a href="/arboristika">Арбористика</a></li>
+        <li><a href="/chistka-krysh">Чистка крыш</a></li>
+        <li><a href="/vyvoz-musora">Вывоз мусора</a></li>
+        <li><a href="/demontazh">Демонтаж</a></li>
+        <li><a href="/dizain-landshafta">Дизайн ландшафта</a></li>
+        <li><a href="/foto-smeta" style="opacity: 0.65;">Фото → смета →</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h5>О компании</h5>
+      <ul>
+        <li><a href="/o-kompanii">О компании</a></li>
+        <li><a href="/komanda">Команда</a></li>
+        <li><a href="/sro-licenzii">СРО и лицензии</a></li>
+        <li><a href="/park-tehniki">Парк техники</a></li>
+        <li><a href="/garantii">Гарантии</a></li>
+        <li><a href="/otzyvy">Отзывы</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h5>B2B и ресурсы</h5>
+      <ul>
+        <li><a href="/b2b/uk-tszh">УК / ТСЖ</a></li>
+        <li><a href="/b2b/fm">Facility Management</a></li>
+        <li><a href="/b2b/zastroyshchik">Застройщикам</a></li>
+        <li><a href="/b2b/gostorgi">Госзакупки</a></li>
+        <li><a href="/kejsy">Кейсы</a></li>
+        <li><a href="/blog">Блог</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="legal">
+    <span class="copy">© 2026 ООО «Обиход»</span>
+    <span class="sep">·</span>
+    <span>ИНН 1111111111</span>
+    <span class="sep">·</span>
+    <span>ОГРН 1111111111111</span>
+    <span class="sep">·</span>
+    <a href="/politika">Политика конфиденциальности</a>
+    <span class="sep">·</span>
+    <a href="/oferta">Публичная оферта</a>
+  </div>
+</div>
+
+<!-- Подсказка для презентации макета -->
+<div class="hp-note">
+  <strong>МАКЕТ · НЕ ПРОДАКШН</strong><br>
+  Команда v1 · 7 секций (E-E-A-T)<br>
+  CSS 1-в-1 из <a href="../design-system/brand-guide.html">brand-guide.html</a> v2.2<br>
+  Имена/цитаты — placeholder, оператор подменит на реальных бригадиров (EPIC-COMPETE-3 US-9 mandate).
+</div>
+
+<!-- Минимальный JS — только mobile mega-menu toggle (desktop работает на pure CSS :hover) -->
+<script>
+  function isMobile(){ return window.matchMedia('(max-width: 900px)').matches; }
+  document.querySelectorAll('header.site-mm .mm-has-drop > .mm-trigger').forEach(function(t){
+    t.addEventListener('click', function(e){
+      if (!isMobile()) return;
+      e.preventDefault();
+      var parent = t.closest('.mm-has-drop');
+      var wasOpen = parent.classList.contains('is-open');
+      document.querySelectorAll('.mm-has-drop.is-open').forEach(function(p){ p.classList.remove('is-open'); });
+      if (!wasOpen) parent.classList.add('is-open');
+    });
+  });
+  document.addEventListener('click', function(e){
+    if (!isMobile()) return;
+    if (!e.target.closest('.mm-has-drop')) {
+      document.querySelectorAll('.mm-has-drop.is-open').forEach(function(p){ p.classList.remove('is-open'); });
+    }
+  });
+</script>
+
+</body>
+</html>
