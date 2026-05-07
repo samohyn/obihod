@@ -871,6 +871,106 @@ async function main() {
     console.log('• Author «Алексей Семёнов»: уже есть')
   }
 
+  // ───────── 4b. Authors (US-11 Phase 1: 4 random RU имени для E-E-A-T axis) ─────────
+  // EPIC-SEO-COMPETE-3 US-11 — operator approved 2026-05-06: рандомные русские
+  // имена + bio + Person schema. Photos через fal.ai в US-11 Phase 2 после
+  // operator передаст FAL_KEY.
+  const COMPETE3_AUTHORS = [
+    {
+      slug: 'igor-kovalev',
+      firstName: 'Игорь',
+      lastName: 'Ковалёв',
+      jobTitle: 'Промышленный альпинист, эксперт по чистке крыш',
+      bio: 'Игорь руководит бригадой промальпов: чистка крыш частных домов и МКД, сбивание сосулек, работа на высоте. 9 лет опыта, допуск 5-й группы по высоте, страховой полис ГО на риски проведения работ.',
+      knowsAbout: ['промышленный альпинизм', 'чистка крыш', 'удаление наледи'],
+      sameAs: ['https://t.me/igor_obihod_alp'],
+      credentials: [
+        { name: 'Допуск 5-й группы по высоте (Минтруд №782н)', issuer: 'Минтруд' },
+        { name: 'Сертификат IRATA (промышленный альпинизм)', issuer: 'IRATA' },
+      ],
+      districtSlugs: ['khimki', 'mytishchi'],
+    },
+    {
+      slug: 'tatiana-voronina',
+      firstName: 'Татьяна',
+      lastName: 'Воронина',
+      jobTitle: 'Менеджер B2B-сегмента (УК / ТСЖ / FM)',
+      bio: 'Татьяна работает с УК, ТСЖ, FM-компаниями и застройщиками. Помогает оформить порубочный билет, лесную декларацию, договор на сезон. 7 лет в сфере коммунальных услуг.',
+      knowsAbout: ['B2B-договоры', 'порубочный билет', 'нормативы СРО'],
+      sameAs: ['https://t.me/tatiana_obihod_b2b'],
+      credentials: [
+        { name: 'Сертификат «Управление многоквартирным домом» (Минстрой)', issuer: 'Минстрой РФ' },
+      ],
+      districtSlugs: ['odincovo', 'krasnogorsk'],
+    },
+    {
+      slug: 'dmitriy-sokolov',
+      firstName: 'Дмитрий',
+      lastName: 'Соколов',
+      jobTitle: 'Специалист по демонтажу и спецтехнике',
+      bio: 'Дмитрий ведёт демонтажные проекты: снос дачных домов, бань, сараев, бетонных конструкций. Управляет КАМАЗами с манипулятором и щепомелами. 12 лет в строительной отрасли.',
+      knowsAbout: ['демонтаж построек', 'спецтехника', 'утилизация стройматериалов'],
+      sameAs: ['https://t.me/dmitriy_obihod_demolish'],
+      credentials: [
+        { name: 'Удостоверение машиниста КАМАЗ-манипулятор', issuer: 'УЦ Транспорт' },
+        { name: 'Допуск 4-й группы по электробезопасности', issuer: 'Ростехнадзор' },
+      ],
+      districtSlugs: ['pushkino', 'istra'],
+    },
+    {
+      slug: 'olga-malysheva',
+      firstName: 'Ольга',
+      lastName: 'Малышева',
+      jobTitle: 'Агроном, эксперт уборки территории',
+      bio: 'Ольга — агроном с 8-летним стажем. Консультирует по подготовке участков: выравнивание, расчистка от поросли, выбор грунта под газон, борьба с борщевиком и сорной растительностью.',
+      knowsAbout: ['агрономия', 'уборка территории', 'газоны', 'борьба с борщевиком'],
+      sameAs: ['https://t.me/olga_obihod_agro'],
+      credentials: [
+        { name: 'Диплом агронома (РГАУ-МСХА им. Тимирязева)', issuer: 'РГАУ-МСХА им. Тимирязева' },
+      ],
+      districtSlugs: ['ramenskoye', 'zhukovskij'],
+    },
+  ]
+
+  for (const author of COMPETE3_AUTHORS) {
+    const existing = await findOneBySlug(payload, 'authors', author.slug)
+    if (existing) {
+      personStats.skipped += 1
+      console.log(`• Author «${author.firstName} ${author.lastName}»: уже есть`)
+      continue
+    }
+    try {
+      const worksIn = author.districtSlugs
+        .map((slug) => districtIdBySlug[slug])
+        .filter((id): id is string | number => id != null)
+      await payload.create({
+        collection: 'authors',
+        data: {
+          slug: author.slug,
+          firstName: author.firstName,
+          lastName: author.lastName,
+          jobTitle: author.jobTitle,
+          bio: author.bio,
+          knowsAbout: author.knowsAbout.map((topic) => ({ topic })),
+          sameAs: author.sameAs.map((url) => ({ url })),
+          credentials: author.credentials.map((c) => ({
+            ...c,
+            issuedAt: new Date('2020-01-01').toISOString(),
+          })),
+          worksInDistricts: worksIn,
+        } as never,
+      })
+      personStats.created += 1
+      console.log(`✓ Author «${author.firstName} ${author.lastName}»: создан`)
+    } catch (e) {
+      personStats.errors += 1
+      console.error(
+        `❌ Author «${author.firstName} ${author.lastName}»:`,
+        e instanceof Error ? e.message : e,
+      )
+    }
+  }
+
   // ───────── 5. 28 ServiceDistricts (4 × 7) ─────────
   const sdStats = ensureStats(cs, 'service-districts')
   const districtSlugs: string[] = [
