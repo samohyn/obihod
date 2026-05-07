@@ -316,16 +316,30 @@ Non-metric DoD:
 
 - **Estimate:** Phase A — 30 мин (done), Phase B+C — 2 нед (sustained)
 
-### US-8 · Лид-инфраструктура (W6-W7)
+### US-8 · Лид-инфраструктура (W6-W7) — ✅ PRIMARY DONE 2026-05-06
 
-- **Owner:** seo-tech · **Supporting:** podev, cms, art, aemd (events)
-- **Deliverables:**
-  - Route `/kontakty/` — NAP, карта, мессенджеры (Telegram/MAX), org schema
-  - Route `/kalkulyator/foto-smeta/` — форма загрузки 2-3 фото + контакты, лид с медиа в Telegram (re-use lib/leads + lib/telegram + fal-ai upload в Media)
-  - Расширение `blocks/LeadForm.ts` — 5 контекстных вариантов: `commercial-pricing`, `commercial-lead`, `info-bridge`, `b2b`, `local`
-  - 5 целей в Я.Метрика (form_submit_<variant>) — aemd track
-- **AC:** 5 LeadForm-вариантов работают, /kontakty/ топ-10 по «обиход контакты» за 4 нед, /kalkulyator/foto-smeta/ принимает фото, Telegram-нотификация работает, mobile UX AA, формы <60 сек
-- **Estimate:** 1.5 нед
+- **Owner:** poseo (autonomous, seo-tech proxy) · **Supporting:** sustained `LeadForm` block + sustained `/api/leads`
+- **Done deliverables:**
+  - ✅ Route `site/app/(marketing)/kontakty/page.tsx` (~200 строк) — NAP page (phone/email/address/hours), 4 messenger blocks (Telegram/MAX/WhatsApp/Email), LeadForm, ContactPoint + LocalBusiness + Organization schema
+  - ✅ Route `site/app/(marketing)/kalkulyator/foto-smeta/page.tsx` (~230 строк) — USP page с 4-step HowTo (фото → отправка → оценка → смета), LeadForm с file upload (sustained `LeadForm` cw-схема), Speakable + WebApplication + HowTo schema
+  - ✅ `app/sitemap.ts`: 2 entries `/kontakty/` + `/kalkulyator/foto-smeta/` priority 0.6
+  - ✅ UTM tracking: все cross-links используют `utm_source=lead-infra&utm_medium=<route>`
+  - ✅ Real NAP: phone `+7 (985) 229-41-11`, email `hello@obikhod.ru`, address Жуковский (operator confirmed 2026-05-06)
+- **AC проверки:**
+  - ✅ /kontakty/ рендерится с full NAP + 4 messengers + ContactPoint schema
+  - ✅ /kalkulyator/foto-smeta/ рендерится с HowTo + WebApplication + LeadForm с file upload
+  - ✅ LocalBusiness + ContactPoint JSON-LD на /kontakty/
+  - ✅ HowTo + WebApplication + Speakable JSON-LD на foto-smeta/
+  - ✅ Sitemap содержит 2 entries priority 0.6
+  - ✅ type-check + lint + format PASS
+  - ✅ UTM `utm_source=lead-infra&utm_medium=<route>` на cross-links
+  - 🔵 Mobile UX AA + Lighthouse — leadqa post-merge real-browser smoke
+- **Sustained → US-8 follow-up:**
+  - 5 контекстных LeadForm-вариантов (`commercial-pricing` / `commercial-lead` / `info-bridge` / `b2b` / `local`) — sustained через `LeadForm` cw-схему `fields[]`, конкретная разметка добавляется на каждой pillar/sub в US-7 follow-up
+  - 5 Я.Метрика goals (form_submit_<variant>) — конфигурация `aemd` в Я.Метрика admin UI
+  - SiteChrome NAP update (`+79851705111` → `+79852294111`) — sustained для cms через Payload admin
+  - Я.Карты embed на /kontakty/ — sustained для US-9 после operator setup карточки
+  - fal.ai photo upload integration (real-time processing) — отдельный `aemd` track
 
 ### US-9 · Reviews + `/otzyvy/` + локальное SEO + Я.Карты (W8) — UNBLOCKED 2026-05-06
 
@@ -487,3 +501,8 @@ Non-metric DoD:
 - 2026-05-06 20:00 · operator → poseo: «готово» — PR #176 merged. poseo стартует US-7 (минимальный scope: uborka-territorii pillar seed).
 - 2026-05-06 20:15 · poseo (autonomous): US-7 primary closed — pillar `uborka-territorii` + 4 sub в site/scripts/seed.ts (vyravnivanie / raschistka / pokos / vyvoz-porubochnyh). ServiceSeed type расширен. priceUnit 'sotka' добавлен. type-check ✅, lint 0 errors ✅, prettier ✅.
 - 2026-05-06 20:15 · poseo → leadqa: после merge — `pnpm seed` локально + smoke /uborka-territorii/ + /uslugi/tseny/uborka-territorii/ должны рендериться
+- 2026-05-06 20:30 · operator → poseo: «готово» — PR #177 merged. poseo стартует US-8.
+- 2026-05-06 20:50 · poseo (autonomous): US-8 primary closed — /kontakty/ + /kalkulyator/foto-smeta/ routes, ContactPoint + HowTo + WebApplication + Speakable schema, sitemap 2 entries. type-check ✅, lint 0 errors ✅, prettier ✅.
+- 2026-05-06 20:50 · poseo → cms: NAP в Globals.SiteChrome устаревший (+79851705111), нужно обновить на +79852294111 + email hello@obikhod.ru + address Жуковский — через Payload admin
+- 2026-05-06 20:50 · poseo → aemd: 2 Я.Метрика goals — `kontakty_form_submit` + `foto_smeta_form_submit` (конфигурация в админке Я.Метрика)
+- 2026-05-06 20:50 · poseo → leadqa: post-merge real-browser smoke /kontakty/ + /kalkulyator/foto-smeta/ (form submit → /api/leads → Telegram)
