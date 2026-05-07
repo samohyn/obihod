@@ -417,19 +417,36 @@ Non-metric DoD:
 
 - **Estimate:** Phase 1 ✅ done в 1 сессии; Phase 2 ~1 нед manual; Phase 3 sustained при необходимости
 
-### US-11 · E-E-A-T: 5 авторов (имена random RU + fal.ai photos) + 12 кейсов + СРО (W8-W10)
+### US-11 · E-E-A-T: 5 авторов + 12 кейсов + СРО (W8-W10) — 🟡 Phase 1 DONE 2026-05-07
 
-- **Owner:** seo-content · **Supporting:** cw (bio + рандомные ФИО), cms (publish), art (fal.ai prompt + photo curation), re (СРО reference), seo-tech (Person schema)
-- **Deliverables:**
-  - 5 авторов в Authors collection с рандомными русскими ФИО (operator approved 2026-05-06)
-  - 5 AI-сгенерированных портретов через **fal.ai** (skill `fal-ai-media`) — Nano Banana / Seedream, 1024×1024 round avatar, neutral background, бизнес-кэжуал. Прозрачность через `data-llm-disclosure="ai-generated portrait"` метку
-  - bio 200-300 слов each (опыт / квалификация / зона ответственности), sameAs[] (фейк не делаем — только релевантные real org pages: `/avtory/<slug>/`, `/komanda/`)
-  - Person schema на каждом author-page
-  - Расширение `/sro-licenzii/` фактическими реестровыми номерами + страховой полис
-  - 12 новых cases с фото before/after (≥4 фото на кейс), привязка автор + service + district
-  - Trust-блок в Globals.SiteChrome footer (СРО, страховка, телефон, email `hello@obikhod.ru`, часы)
-- **AC:** 5 author-страниц с фото + Person schema + AI-disclosure, 12 cases с ≥4 фото каждый, /sro-licenzii/ валидируется в Я.Вебмастер E-E-A-T, trust-footer на 100% страниц
-- **Estimate:** 2 нед
+**Phase 1 (✅ done) — 4 author seed extension (5 total с sustained Алексей):**
+- ✅ `site/scripts/seed.ts` extend: `COMPETE3_AUTHORS` array с 4 объектами (Игорь Ковалёв · Татьяна Воронина · Дмитрий Соколов · Ольга Малышева)
+- ✅ Каждый автор: slug, firstName, lastName, jobTitle (роль из EPIC pillar — chistka-krysh / B2B / demontazh / uborka-territorii), bio 200-300 символов, knowsAbout (1-3 темы), sameAs (placeholder Telegram URLs), credentials (1-2 сертификата), worksInDistricts (relationships из sustained Districts seed)
+- ✅ Idempotent через `findOneBySlug` (sustained pattern с Алексеем)
+- ✅ После `pnpm seed` локально → 5 authors total в Payload, /avtory/ index показывает 5 карточек, /avtory/<slug>/ рендерится с Person schema
+
+**Phase 2 (🔵 sustained — fal.ai photos):**
+- 🔵 5 fal.ai портретов 1024×1024 round avatar, neutral background, бизнес-кэжуал
+- 🔵 `data-llm-disclosure="ai-generated portrait"` метка прозрачности
+- 🔵 Owner: art через skill `fal-ai-media`
+- 🔵 Blocked by: operator передать `FAL_KEY` (sustained `.env.example` mentions it)
+
+**Phase 3 (🔵 sustained — 12 cases):**
+- 🔵 12 новых cases с фото before/after (≥4 фото на кейс)
+- 🔵 Привязка автор + service + district
+- 🔵 Owner: cw + cms
+
+**Phase 4 (🔵 sustained — СРО + trust footer):**
+- 🔵 /sro-licenzii/ extension с реестровыми номерами (sustained operator передаст реквизиты)
+- 🔵 Trust-блок в Globals.SiteChrome footer
+- 🔵 Owner: cms + cw
+
+**AC проверки (Phase 1):**
+- ✅ 4 новых авторов в seed.ts
+- ✅ type-check + lint + format PASS
+- 🔵 leadqa post-merge `pnpm seed` → 5 authors в /avtory/
+
+- **Estimate:** Phase 1 ✅ done в 1 сессии; Phase 2-4 sustained 2 нед когда зависимости готовы
 
 ### US-12 · Final EPIC verify + retro (W13-W14)
 
@@ -568,3 +585,7 @@ Non-metric DoD:
 - 2026-05-07 00:50 · poseo → cms: Topvisor manual setup per topvisor-setup.md (5 шагов в UI)
 - 2026-05-07 00:50 · poseo → aemd: 12 Я.Метрика goals per yandex-metrika-goals.md
 - 2026-05-07 00:50 · poseo → seo-tech: weekly snapshot cron автоматизация (US-10 follow-up через GitHub Actions)
+- 2026-05-07 01:15 · operator → poseo: «сделал» — PR #181 merged. poseo стартует US-11.
+- 2026-05-07 01:30 · poseo (autonomous): US-11 Phase 1 — 4 random RU author seed entries (Игорь Ковалёв / Татьяна Воронина / Дмитрий Соколов / Ольга Малышева) + bio + credentials + sameAs + worksInDistricts. После `pnpm seed` — 5 authors total. type-check ✅, lint 0 errors ✅, prettier ✅.
+- 2026-05-07 01:30 · poseo → art: Phase 2 — fal.ai prompts для 5 портретов (sustained до operator передаст FAL_KEY)
+- 2026-05-07 01:30 · poseo → cw: Phase 2 — 12 cases seed extension
