@@ -103,12 +103,12 @@ export function Reviews({ data }: { data?: HomepageGlobal }) {
               <div className="head">
                 <div className="av">{initial(r.author)}</div>
                 <div>
-                  <div className="name">{r.author}</div>
+                  <div className="n">{r.author}</div>
                   <div className="meta">{r.meta}</div>
                 </div>
               </div>
               <div className="stars">★★★★★</div>
-              <p>{r.text}</p>
+              <p className="text">{r.text}</p>
             </article>
           ))}
         </div>

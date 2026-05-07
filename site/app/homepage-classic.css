@@ -4873,6 +4873,7 @@
     color: var(--c-primary);
     font-family: var(--font-mono);
     font-size: 14px;
+    white-space: nowrap;
   }
 
   /* Calculator (упрощённо) */

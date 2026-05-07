@@ -27,7 +27,10 @@ export async function Hero({ data }: { data?: HomepageGlobal }) {
   const hero = data?.hero
   const eyebrow = hero?.eyebrow ?? FALLBACK.eyebrow
   const titleMain = hero?.titleMain ?? FALLBACK.titleMain
-  const titleAccent = hero?.titleAccent ?? FALLBACK.titleAccent
+  // Normalize: страйп предлога "в " если он включён в data — JSX уже добавляет
+  // "в " между titleMain и accent. Без strip получали "в в Москве и МО"
+  // (incident 2026-05-07: prod Payload titleAccent сохранён с включённым "в").
+  const titleAccent = (hero?.titleAccent ?? FALLBACK.titleAccent).replace(/^в\s+/i, '')
   const subhead = hero?.subhead ?? FALLBACK.subhead
   const lead = hero?.lead ?? FALLBACK.lead
   const bullets = hero?.trustBullets ?? FALLBACK.trustBullets
