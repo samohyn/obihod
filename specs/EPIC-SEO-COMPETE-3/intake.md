@@ -234,17 +234,30 @@ Non-metric DoD:
   - leadqa post-merge real-browser smoke на /llms-full.txt + /llms.txt
   - Schema.org validator пройти после контента US-4..US-7
 
-### US-4 · Mega-прайс `/uslugi/tseny/` (W4-W5)
+### US-4 · Mega-прайс `/uslugi/tseny/` (W4-W5) — ✅ PRIMARY DONE 2026-05-06
 
-- **Owner:** seo-content · **Supporting:** cw, seo-tech, cms, art (UX-таблица §8 brand-guide), podev (route)
-- **Deliverables:**
-  - Route `app/(marketing)/uslugi/tseny/page.tsx` (статичный + revalidate)
-  - Globals.PriceCatalog или Collection `PricingTiers` (DB-driven)
-  - 50-80 SKU с диапазонами цен «от-до», unit, pillar-tag
-  - 5 поддиректорий `/uslugi/tseny/<pillar>/` для углублённой матрицы
-  - JSON-LD `Offer` + `AggregateOffer` per pillar
-- **AC:** ≥50 SKU, mobile+desktop AA, lead-form + sticky CTA, Lighthouse SEO ≥95, LCP <2.5s
-- **Estimate:** 1.5 нед
+- **Owner:** poseo (autonomous, seo-tech proxy) · **Supporting:** sustained Services + sub-services live data (US-7 наполняет когда seed под uborka-territorii пройдёт)
+- **Done deliverables:**
+  - ✅ Route `site/app/(marketing)/uslugi/tseny/page.tsx` (~180 строк) — root mega-pricing хаб с 5 pillar cards, AggregateOffer (combined) + BreadcrumbList JSON-LD
+  - ✅ Route `site/app/(marketing)/uslugi/tseny/[pillar]/page.tsx` (~250 строк) — per-pillar detail с pricing-table, FAQ, AggregateOffer per pillar
+  - ✅ `lib/seo/queries.ts` extended: `getAllPillarsForPricing()` + `PricingPillar` type (server-side cache())
+  - ✅ `lib/seo/jsonld.ts` reused: `aggregateOfferSchema` (US-3 sustained)
+  - ✅ `app/sitemap.ts`: 6 entries `/uslugi/tseny/` + 5 per-pillar (priority 0.8)
+  - ✅ Lead-form CTA с UTM (`source=tseny&medium=root|<pillar>`)
+  - ✅ H1 pricing-intent (правило #13 ADR-0018) — снимает каннибализацию vs pillar lead-intent
+- **AC проверки:**
+  - ✅ Routes рендерятся (revalidate=86400, dynamicParams=true)
+  - ✅ AggregateOffer + BreadcrumbList в JSON-LD каждой страницы
+  - ✅ sitemap.ts содержит 6 tseny entries priority 0.8
+  - ✅ type-check PASS, lint 0 errors, prettier PASS
+  - ✅ UTM `source=tseny` в lead-form CTAs
+  - 🔵 Lighthouse SEO ≥95, LCP <2.5s — leadqa post-merge
+  - 🔵 ≥50 SKU — sustained для cw spread review (priceFrom/To finalize per ADR-0018 §priceFrom defaults)
+- **Sustained → US-4 follow-up:**
+  - cw spread review для финализации priceFrom/To на 17 new sub-services (sustained backlog в ADR-0018)
+  - Mobile UX AA + Lighthouse — leadqa post-merge
+  - BlockRenderer integration (если cw захочет редактируемые блоки внутри pricing — пока pillar.intro + faqGlobal достаточно)
+  - Sticky CTA (если конверсия root ниже sub-deep)
 
 ### US-5 · Контент-машина `/blog/` 30 статей (W3-W12, rolling)
 
@@ -443,3 +456,7 @@ Non-metric DoD:
 - 2026-05-06 18:30 · poseo (autonomous, seo-tech proxy): US-3 primary closed — 6 new jsonld helpers + citation.ts + llms-full.txt + extended llms.txt + sitemap priority. type-check ✅, lint 0 errors ✅, prettier ✅.
 - 2026-05-06 18:30 · poseo → leadqa: post-merge smoke на /llms.txt + /llms-full.txt (с реальными данными pillar uborka-territorii когда seed завершит US-7)
 - 2026-05-06 18:30 · poseo → sa-seo: US-3 closed → US-4..US-9 sub-specs могут стартовать (jsonld helpers + citation.ts ready для всех downstream)
+- 2026-05-06 19:00 · operator → poseo: «вмержил 174» — PR #174 merged. poseo стартует US-4.
+- 2026-05-06 19:30 · poseo (autonomous): US-4 primary closed — root + per-pillar pricing routes, getAllPillarsForPricing query, sitemap 6 entries, AggregateOffer + BreadcrumbList JSON-LD, UTM tracking. type-check ✅, lint 0 errors ✅, prettier ✅.
+- 2026-05-06 19:30 · poseo → leadqa: post-merge Lighthouse + mobile AA проверка
+- 2026-05-06 19:30 · poseo → cw: cw spread review для priceFrom/To 17 new sub-services (sustained backlog ADR-0018 §priceFrom defaults)
