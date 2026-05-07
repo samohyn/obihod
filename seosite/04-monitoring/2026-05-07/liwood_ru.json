@@ -1,0 +1,567 @@
+{
+  "id": 30400450,
+  "parentid": 0,
+  "parentName": "",
+  "concs": [
+    {
+      "did": 30378030,
+      "name": "antonovsad.ru",
+      "cnt": 1755,
+      "it50": 248907,
+      "vis": 18042,
+      "perc": 0.7050826212199737
+    },
+    {
+      "did": 29961599,
+      "name": "землечист.рф",
+      "cnt": 1619,
+      "it50": 22208,
+      "vis": 658,
+      "perc": 7.290165706051873
+    },
+    {
+      "did": 30660000,
+      "name": "udalenie-dereviev.moscow",
+      "cnt": 1008,
+      "it50": 2436,
+      "vis": 12,
+      "perc": 41.37931034482759
+    },
+    {
+      "did": 53819908,
+      "name": "дачныйуют.рф",
+      "cnt": 979,
+      "it50": 9817,
+      "vis": 412,
+      "perc": 9.97249668941632
+    },
+    {
+      "did": 29929470,
+      "name": "floristics.info",
+      "cnt": 962,
+      "it50": 150651,
+      "vis": 387,
+      "perc": 0.6385619743645911
+    },
+    {
+      "did": 33519810,
+      "name": "cl-forest.ru",
+      "cnt": 886,
+      "it50": 2074,
+      "vis": 5,
+      "perc": 42.71938283510126
+    },
+    {
+      "did": 130661026,
+      "name": "pitomnik-zr.ru",
+      "cnt": 872,
+      "it50": 37033,
+      "vis": 2093,
+      "perc": 2.354656657575676
+    },
+    {
+      "did": 29985255,
+      "name": "sad-i-ogorod.ru",
+      "cnt": 841,
+      "it50": 141518,
+      "vis": 19875,
+      "perc": 0.594270693480688
+    },
+    {
+      "did": 241456996,
+      "name": "spilkursk.pro",
+      "cnt": 818,
+      "it50": 1527,
+      "vis": 3,
+      "perc": 53.5690897184021
+    },
+    {
+      "did": 29941284,
+      "name": "sibsad-pitomnik.ru",
+      "cnt": 782,
+      "it50": 23731,
+      "vis": 352,
+      "perc": 3.295267793181914
+    }
+  ],
+  "it1": 21,
+  "it3": 100,
+  "it5": 215,
+  "it10": 733,
+  "it50": 5050,
+  "childsCount": 0,
+  "keys": [
+    {
+      "word": "когда можно обрезать абрикос",
+      "ws": 203,
+      "wsk": 49,
+      "pos": 1
+    },
+    {
+      "word": "аммиачная селитра для удаления пней",
+      "ws": 83,
+      "wsk": 49,
+      "pos": 1
+    },
+    {
+      "word": "брейсинг",
+      "ws": 142,
+      "wsk": 37,
+      "pos": 1
+    },
+    {
+      "word": "кранирование",
+      "ws": 131,
+      "wsk": 23,
+      "pos": 1
+    },
+    {
+      "word": "какую селитру засыпать в пень чтобы он разложился",
+      "ws": 14,
+      "wsk": 14,
+      "pos": 1
+    },
+    {
+      "word": "селитра для пней удаления и корней",
+      "ws": 160,
+      "wsk": 13,
+      "pos": 1
+    },
+    {
+      "word": "селитра в пень",
+      "ws": 209,
+      "wsk": 11,
+      "pos": 1
+    },
+    {
+      "word": "селитра для удаления пней и корней какая нужна",
+      "ws": 10,
+      "wsk": 10,
+      "pos": 1
+    },
+    {
+      "word": "чем замазать спилы на плодовых деревьях",
+      "ws": 52,
+      "wsk": 7,
+      "pos": 1
+    },
+    {
+      "word": "расчет вырубки деревьев и кустарников калькулятор",
+      "ws": 9,
+      "wsk": 6,
+      "pos": 1
+    }
+  ],
+  "topkeys": 71802,
+  "pages": [
+    {
+      "url": "/info/articles/sposoby-zashchity-ot-koroeda",
+      "it50": 344
+    },
+    {
+      "url": "/info/articles/otvetstvennost-za-nezakonnuyu-vyrubku-derevev",
+      "it50": 279
+    },
+    {
+      "url": "/info/articles/udalenie-pney-s-pomoshchyu-selitry",
+      "it50": 271
+    },
+    {
+      "url": "/info/articles/mozhno-li-vyrubat-derevya-na-sobstvennom-uchastke",
+      "it50": 194
+    },
+    {
+      "url": "/info/articles/letnyaya-privivka-derevev",
+      "it50": 183
+    },
+    {
+      "url": "/info/articles/obrezka-yablon-vesnoy",
+      "it50": 177
+    },
+    {
+      "url": "/info/articles/podkormka-plodovykh-derevev",
+      "it50": 166
+    },
+    {
+      "url": "/info/calculator",
+      "it50": 137
+    },
+    {
+      "url": "/info/articles/kak-sdelat-obrezku-slivy",
+      "it50": 125
+    },
+    {
+      "url": "/info/articles/opryskivanie-plodovykh-derevev-vesnoy",
+      "it50": 122
+    }
+  ],
+  "pagesinindex": 155,
+  "vis": 34,
+  "topvis": 149533,
+  "adconcs": [],
+  "adkeys": [],
+  "adkeyscnt": 0,
+  "ads": [],
+  "adscnt": 0,
+  "adtraf": 0,
+  "adcost": 0,
+  "restop5": 4,
+  "history": {
+    "2024.12": {
+      "it1": 78,
+      "it3": 230,
+      "it5": 478,
+      "it10": 1205,
+      "it50": 3867,
+      "pagesInIndex": 143,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 153,
+      "aiCnt": 0
+    },
+    "2025.01": {
+      "it1": 61,
+      "it3": 217,
+      "it5": 464,
+      "it10": 1142,
+      "it50": 3850,
+      "pagesInIndex": 149,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 125,
+      "aiCnt": 0
+    },
+    "2025.02": {
+      "it1": 63,
+      "it3": 223,
+      "it5": 475,
+      "it10": 1180,
+      "it50": 3836,
+      "pagesInIndex": 149,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 140,
+      "aiCnt": 0
+    },
+    "2025.03": {
+      "it1": 56,
+      "it3": 187,
+      "it5": 385,
+      "it10": 1011,
+      "it50": 3374,
+      "pagesInIndex": 146,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 106,
+      "aiCnt": 0
+    },
+    "2025.04": {
+      "it1": 54,
+      "it3": 186,
+      "it5": 383,
+      "it10": 999,
+      "it50": 3332,
+      "pagesInIndex": 146,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 106,
+      "aiCnt": 0
+    },
+    "2025.05": {
+      "it1": 54,
+      "it3": 188,
+      "it5": 385,
+      "it10": 1044,
+      "it50": 3619,
+      "pagesInIndex": 150,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 150,
+      "aiCnt": 0
+    },
+    "2025.06": {
+      "it1": 43,
+      "it3": 158,
+      "it5": 358,
+      "it10": 994,
+      "it50": 3781,
+      "pagesInIndex": 150,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 96,
+      "aiCnt": 0
+    },
+    "2025.07": {
+      "it1": 50,
+      "it3": 164,
+      "it5": 376,
+      "it10": 1118,
+      "it50": 4499,
+      "pagesInIndex": 146,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 105,
+      "aiCnt": 0
+    },
+    "2025.08": {
+      "it1": 45,
+      "it3": 175,
+      "it5": 348,
+      "it10": 1097,
+      "it50": 5091,
+      "pagesInIndex": 158,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 83,
+      "aiCnt": 33
+    },
+    "2025.09": {
+      "it1": 47,
+      "it3": 171,
+      "it5": 329,
+      "it10": 1072,
+      "it50": 5081,
+      "pagesInIndex": 157,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 82,
+      "aiCnt": 551
+    },
+    "2025.10": {
+      "it1": 47,
+      "it3": 173,
+      "it5": 332,
+      "it10": 1074,
+      "it50": 5084,
+      "pagesInIndex": 158,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 106,
+      "aiCnt": 577
+    },
+    "2025.11": {
+      "it1": 61,
+      "it3": 259,
+      "it5": 454,
+      "it10": 1229,
+      "it50": 5259,
+      "pagesInIndex": 157,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 158,
+      "aiCnt": 549
+    },
+    "2025.12": {
+      "it1": 62,
+      "it3": 275,
+      "it5": 484,
+      "it10": 1197,
+      "it50": 5750,
+      "pagesInIndex": 165,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 180,
+      "aiCnt": 726
+    },
+    "2026.01": {
+      "it1": 46,
+      "it3": 188,
+      "it5": 377,
+      "it10": 1062,
+      "it50": 5245,
+      "pagesInIndex": 165,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 137,
+      "aiCnt": 778
+    },
+    "2026.02": {
+      "it1": 39,
+      "it3": 148,
+      "it5": 334,
+      "it10": 1005,
+      "it50": 5123,
+      "pagesInIndex": 166,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 31,
+      "aiCnt": 222
+    },
+    "2026.03": {
+      "it1": 29,
+      "it3": 110,
+      "it5": 273,
+      "it10": 836,
+      "it50": 4369,
+      "pagesInIndex": 163,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 29,
+      "aiCnt": 112
+    },
+    "2026.04": {
+      "it1": 19,
+      "it3": 101,
+      "it5": 218,
+      "it10": 738,
+      "it50": 4985,
+      "pagesInIndex": 157,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 35,
+      "aiCnt": 1516
+    },
+    "2026.05": {
+      "it1": 21,
+      "it3": 100,
+      "it5": 215,
+      "it10": 733,
+      "it50": 5050,
+      "pagesInIndex": 155,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 34,
+      "aiCnt": 803
+    }
+  },
+  "linksHistory": {
+    "2024.11": [
+      97,
+      441,
+      70,
+      7,
+      59
+    ],
+    "2024.12": [
+      91,
+      355,
+      67,
+      7,
+      58
+    ],
+    "2025.01": [
+      96,
+      391,
+      68,
+      7,
+      64
+    ],
+    "2025.02": [
+      106,
+      391,
+      71,
+      7,
+      72
+    ],
+    "2025.03": [
+      102,
+      429,
+      69,
+      7,
+      68
+    ],
+    "2025.04": [
+      102,
+      430,
+      67,
+      7,
+      68
+    ],
+    "2025.05": [
+      99,
+      418,
+      69,
+      7,
+      70
+    ],
+    "2025.06": [
+      92,
+      393,
+      64,
+      7,
+      66
+    ],
+    "2025.07": [
+      95,
+      404,
+      67,
+      7,
+      68
+    ],
+    "2025.08": [
+      98,
+      416,
+      66,
+      8,
+      69
+    ],
+    "2025.09": [
+      119,
+      377,
+      69,
+      8,
+      90
+    ],
+    "2025.10": [
+      134,
+      363,
+      78,
+      8,
+      35
+    ],
+    "2025.11": [
+      129,
+      392,
+      71,
+      8,
+      51
+    ],
+    "2025.12": [
+      133,
+      375,
+      71,
+      8,
+      46
+    ],
+    "2026.01": [
+      129,
+      407,
+      72,
+      8,
+      39
+    ],
+    "2026.02": [
+      131,
+      389,
+      71,
+      8,
+      39
+    ],
+    "2026.03": [
+      131,
+      377,
+      71,
+      8,
+      39
+    ],
+    "2026.04": [
+      136,
+      369,
+      74,
+      8,
+      100
+    ],
+    "2026.05": [
+      136,
+      389,
+      73,
+      8,
+      101
+    ]
+  },
+  "aiAnswersCnt": 803,
+  "aiState": 0,
+  "dr": 21,
+  "iconUrl": "https://keys-so-domain-icons.keys.so/domain-icons/dfb529f3673afda731973e8306983e4adf0a1bb6ab99a770ba71bd0ead0dc44a.png",
+  "name": "liwood.ru"
+}

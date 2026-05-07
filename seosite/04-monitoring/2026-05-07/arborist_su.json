@@ -1,0 +1,560 @@
+{
+  "id": 30400470,
+  "parentid": 0,
+  "parentName": "",
+  "concs": [
+    {
+      "did": 80395880,
+      "name": "udalenie-derevev-msk.ru",
+      "cnt": 322,
+      "it50": 1251,
+      "vis": 7,
+      "perc": 25.739408473221424
+    },
+    {
+      "did": 30400450,
+      "name": "liwood.ru",
+      "cnt": 321,
+      "it50": 5050,
+      "vis": 34,
+      "perc": 6.356435643564357
+    },
+    {
+      "did": 30660000,
+      "name": "udalenie-dereviev.moscow",
+      "cnt": 296,
+      "it50": 2436,
+      "vis": 12,
+      "perc": 12.151067323481117
+    },
+    {
+      "did": 30659995,
+      "name": "virubka-dereva.ru",
+      "cnt": 262,
+      "it50": 771,
+      "vis": 3,
+      "perc": 33.98184176394293
+    },
+    {
+      "did": 233908778,
+      "name": "lesobor.ru",
+      "cnt": 258,
+      "it50": 873,
+      "vis": 87,
+      "perc": 29.553264604810995
+    },
+    {
+      "did": 33519810,
+      "name": "cl-forest.ru",
+      "cnt": 256,
+      "it50": 2074,
+      "vis": 5,
+      "perc": 12.343297974927676
+    },
+    {
+      "did": 29961599,
+      "name": "землечист.рф",
+      "cnt": 248,
+      "it50": 22208,
+      "vis": 658,
+      "perc": 1.11671469740634
+    },
+    {
+      "did": 30659981,
+      "name": "arboristik.ru",
+      "cnt": 248,
+      "it50": 1336,
+      "vis": 64,
+      "perc": 18.562874251497007
+    },
+    {
+      "did": 30660001,
+      "name": "dendroplan.ru",
+      "cnt": 216,
+      "it50": 2242,
+      "vis": 9,
+      "perc": 9.634255129348794
+    },
+    {
+      "did": 30400451,
+      "name": "drovosek-mo.ru",
+      "cnt": 207,
+      "it50": 1266,
+      "vis": 11,
+      "perc": 16.350710900473935
+    }
+  ],
+  "it1": 13,
+  "it3": 71,
+  "it5": 139,
+  "it10": 378,
+  "it50": 1329,
+  "childsCount": 0,
+  "keys": [
+    {
+      "word": "проект освоения лесов это",
+      "ws": 287,
+      "wsk": 97,
+      "pos": 1
+    },
+    {
+      "word": "паспорт благоустройства территории",
+      "ws": 579,
+      "wsk": 54,
+      "pos": 1
+    },
+    {
+      "word": "arborist",
+      "ws": 921,
+      "wsk": 40,
+      "pos": 1
+    },
+    {
+      "word": "для чего нужен проект освоения лесов",
+      "ws": 29,
+      "wsk": 16,
+      "pos": 1
+    },
+    {
+      "word": "паспорт озеленения территории",
+      "ws": 80,
+      "wsk": 8,
+      "pos": 1
+    },
+    {
+      "word": "перечетная ведомость это",
+      "ws": 46,
+      "wsk": 8,
+      "pos": 1
+    },
+    {
+      "word": "план вырубки деревьев",
+      "ws": 120,
+      "wsk": 7,
+      "pos": 1
+    },
+    {
+      "word": "паспорт благоустройства территории это",
+      "ws": 2,
+      "wsk": 2,
+      "pos": 1
+    },
+    {
+      "word": "перечетная ведомость деревьев и кустарников",
+      "ws": 28,
+      "wsk": 2,
+      "pos": 1
+    },
+    {
+      "word": "проект леса",
+      "ws": 22286,
+      "wsk": 2,
+      "pos": 1
+    }
+  ],
+  "topkeys": 196667,
+  "pages": [
+    {
+      "url": "/price",
+      "it50": 124
+    },
+    {
+      "url": "/upload/iblock/1dd/6g95igokekhq6o42c982lxnnslwk5m6l.pdf",
+      "it50": 102
+    },
+    {
+      "url": "/articles/nashi-stati/omela-na-derevyakh-chto-eto-takoe-i-kak-s-ney-borotsya",
+      "it50": 80
+    },
+    {
+      "url": "/upload/iblock/6fc/34ztd3unmie26wfzqympztdkqbm8d8dp.pdf",
+      "it50": 74
+    },
+    {
+      "url": "/upload/iblock/2c6/pw7lwmrl3bs9w2g1asrzji427gniu53s.pdf",
+      "it50": 72
+    },
+    {
+      "url": "/services/oformlenie-dokumentatsii/oformlenie-porubochnogo-bileta-v-moskovskoy-oblasti",
+      "it50": 66
+    },
+    {
+      "url": "/upload/iblock/450/vubwb3dvd5b3i15p8j72sowu6p8y0lja.pdf",
+      "it50": 60
+    },
+    {
+      "url": "/services/uslugi-arendatoram-lesnykh-uchastkov/lesnaya-deklaratsiya",
+      "it50": 55
+    },
+    {
+      "url": "/services/oformlenie-dokumentatsii/oformlenie-porubochnogo-bileta",
+      "it50": 48
+    },
+    {
+      "url": "/services/uslugi-arendatoram-lesnykh-uchastkov/proekt-osvoeniya-lesov-sostav-razrabotka-ekspertiza",
+      "it50": 45
+    }
+  ],
+  "pagesinindex": 75,
+  "vis": 18,
+  "topvis": 214075,
+  "adconcs": [],
+  "adkeys": [],
+  "adkeyscnt": 0,
+  "ads": [],
+  "adscnt": 0,
+  "adtraf": 0,
+  "adcost": 0,
+  "restop5": 10,
+  "history": {
+    "2024.12": {
+      "it1": 7,
+      "it3": 43,
+      "it5": 82,
+      "it10": 195,
+      "it50": 807,
+      "pagesInIndex": 63,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 26,
+      "aiCnt": 0
+    },
+    "2025.01": {
+      "it1": 6,
+      "it3": 39,
+      "it5": 86,
+      "it10": 178,
+      "it50": 885,
+      "pagesInIndex": 71,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 23,
+      "aiCnt": 0
+    },
+    "2025.02": {
+      "it1": 6,
+      "it3": 41,
+      "it5": 85,
+      "it10": 180,
+      "it50": 868,
+      "pagesInIndex": 70,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 20,
+      "aiCnt": 0
+    },
+    "2025.03": {
+      "it1": 6,
+      "it3": 45,
+      "it5": 79,
+      "it10": 185,
+      "it50": 847,
+      "pagesInIndex": 62,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 20,
+      "aiCnt": 0
+    },
+    "2025.04": {
+      "it1": 6,
+      "it3": 44,
+      "it5": 78,
+      "it10": 177,
+      "it50": 811,
+      "pagesInIndex": 62,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 19,
+      "aiCnt": 0
+    },
+    "2025.05": {
+      "it1": 4,
+      "it3": 39,
+      "it5": 69,
+      "it10": 156,
+      "it50": 746,
+      "pagesInIndex": 62,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 14,
+      "aiCnt": 0
+    },
+    "2025.06": {
+      "it1": 2,
+      "it3": 38,
+      "it5": 72,
+      "it10": 161,
+      "it50": 753,
+      "pagesInIndex": 61,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 13,
+      "aiCnt": 0
+    },
+    "2025.07": {
+      "it1": 4,
+      "it3": 49,
+      "it5": 78,
+      "it10": 190,
+      "it50": 852,
+      "pagesInIndex": 64,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 15,
+      "aiCnt": 0
+    },
+    "2025.08": {
+      "it1": 5,
+      "it3": 53,
+      "it5": 92,
+      "it10": 207,
+      "it50": 914,
+      "pagesInIndex": 62,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 14,
+      "aiCnt": 0
+    },
+    "2025.09": {
+      "it1": 5,
+      "it3": 56,
+      "it5": 92,
+      "it10": 212,
+      "it50": 924,
+      "pagesInIndex": 63,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 16,
+      "aiCnt": 62
+    },
+    "2025.10": {
+      "it1": 5,
+      "it3": 58,
+      "it5": 97,
+      "it10": 213,
+      "it50": 935,
+      "pagesInIndex": 63,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 17,
+      "aiCnt": 93
+    },
+    "2025.11": {
+      "it1": 9,
+      "it3": 68,
+      "it5": 118,
+      "it10": 258,
+      "it50": 1068,
+      "pagesInIndex": 70,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 20,
+      "aiCnt": 90
+    },
+    "2025.12": {
+      "it1": 13,
+      "it3": 59,
+      "it5": 134,
+      "it10": 291,
+      "it50": 1224,
+      "pagesInIndex": 70,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 18,
+      "aiCnt": 149
+    },
+    "2026.01": {
+      "it1": 7,
+      "it3": 44,
+      "it5": 114,
+      "it10": 283,
+      "it50": 1187,
+      "pagesInIndex": 68,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 14,
+      "aiCnt": 154
+    },
+    "2026.02": {
+      "it1": 7,
+      "it3": 51,
+      "it5": 109,
+      "it10": 293,
+      "it50": 1196,
+      "pagesInIndex": 68,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 14,
+      "aiCnt": 88
+    },
+    "2026.03": {
+      "it1": 9,
+      "it3": 51,
+      "it5": 112,
+      "it10": 303,
+      "it50": 1184,
+      "pagesInIndex": 68,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 14,
+      "aiCnt": 54
+    },
+    "2026.04": {
+      "it1": 11,
+      "it3": 72,
+      "it5": 140,
+      "it10": 365,
+      "it50": 1336,
+      "pagesInIndex": 74,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 17,
+      "aiCnt": 261
+    },
+    "2026.05": {
+      "it1": 13,
+      "it3": 71,
+      "it5": 139,
+      "it10": 378,
+      "it50": 1329,
+      "pagesInIndex": 75,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 18,
+      "aiCnt": 210
+    }
+  },
+  "linksHistory": {
+    "2024.11": [
+      106,
+      374,
+      26,
+      7,
+      19
+    ],
+    "2024.12": [
+      104,
+      368,
+      26,
+      7,
+      25
+    ],
+    "2025.01": [
+      108,
+      374,
+      27,
+      7,
+      30
+    ],
+    "2025.02": [
+      102,
+      368,
+      28,
+      7,
+      26
+    ],
+    "2025.03": [
+      110,
+      368,
+      28,
+      7,
+      35
+    ],
+    "2025.04": [
+      104,
+      344,
+      29,
+      7,
+      32
+    ],
+    "2025.05": [
+      103,
+      381,
+      28,
+      8,
+      31
+    ],
+    "2025.06": [
+      110,
+      342,
+      28,
+      7,
+      34
+    ],
+    "2025.07": [
+      114,
+      362,
+      28,
+      7,
+      33
+    ],
+    "2025.08": [
+      113,
+      393,
+      29,
+      7,
+      33
+    ],
+    "2025.09": [
+      140,
+      448,
+      42,
+      7,
+      56
+    ],
+    "2025.10": [
+      146,
+      354,
+      38,
+      7,
+      14
+    ],
+    "2025.11": [
+      156,
+      418,
+      37,
+      7,
+      12
+    ],
+    "2025.12": [
+      136,
+      446,
+      38,
+      8,
+      10
+    ],
+    "2026.01": [
+      114,
+      472,
+      35,
+      7,
+      8
+    ],
+    "2026.02": [
+      112,
+      456,
+      36,
+      7,
+      10
+    ],
+    "2026.04": [
+      112,
+      411,
+      37,
+      9,
+      54
+    ],
+    "2026.05": [
+      117,
+      400,
+      37,
+      8,
+      57
+    ]
+  },
+  "aiAnswersCnt": 210,
+  "aiState": 0,
+  "dr": 24,
+  "iconUrl": "https://keys-so-domain-icons.keys.so/domain-icons/2b46f9848f4167df93b607f3c2d695c03b334e492a148673a882189b449d2513.png",
+  "name": "arborist.su"
+}

@@ -1,0 +1,546 @@
+{
+  "id": 30659981,
+  "parentid": 0,
+  "parentName": "",
+  "concs": [
+    {
+      "did": 29961599,
+      "name": "землечист.рф",
+      "cnt": 857,
+      "it50": 22208,
+      "vis": 658,
+      "perc": 3.8589697406340053
+    },
+    {
+      "did": 53819908,
+      "name": "дачныйуют.рф",
+      "cnt": 611,
+      "it50": 9817,
+      "vis": 412,
+      "perc": 6.223897320973821
+    },
+    {
+      "did": 277100463,
+      "name": "чистая-дача.рф",
+      "cnt": 586,
+      "it50": 1433,
+      "vis": 3,
+      "perc": 40.893230983949756
+    },
+    {
+      "did": 30400451,
+      "name": "drovosek-mo.ru",
+      "cnt": 573,
+      "it50": 1266,
+      "vis": 11,
+      "perc": 45.260663507109
+    },
+    {
+      "did": 30400450,
+      "name": "liwood.ru",
+      "cnt": 548,
+      "it50": 5050,
+      "vis": 34,
+      "perc": 10.851485148514852
+    },
+    {
+      "did": 233908778,
+      "name": "lesobor.ru",
+      "cnt": 546,
+      "it50": 873,
+      "vis": 87,
+      "perc": 62.54295532646048
+    },
+    {
+      "did": 30660000,
+      "name": "udalenie-dereviev.moscow",
+      "cnt": 522,
+      "it50": 2436,
+      "vis": 12,
+      "perc": 21.42857142857143
+    },
+    {
+      "did": 311828763,
+      "name": "geo-uslugi.ru",
+      "cnt": 511,
+      "it50": 5889,
+      "vis": 52,
+      "perc": 8.677194769910002
+    },
+    {
+      "did": 119589607,
+      "name": "spilservis.ru",
+      "cnt": 507,
+      "it50": 756,
+      "vis": 8,
+      "perc": 67.06349206349206
+    },
+    {
+      "did": 33519810,
+      "name": "cl-forest.ru",
+      "cnt": 474,
+      "it50": 2074,
+      "vis": 5,
+      "perc": 22.854387656702027
+    }
+  ],
+  "it1": 20,
+  "it3": 112,
+  "it5": 234,
+  "it10": 476,
+  "it50": 1336,
+  "childsCount": 0,
+  "keys": [
+    {
+      "word": "сколько стоит спил дерева",
+      "ws": 673,
+      "wsk": 40,
+      "pos": 1
+    },
+    {
+      "word": "спил деревьев сколько стоит",
+      "ws": 676,
+      "wsk": 39,
+      "pos": 1
+    },
+    {
+      "word": "заказать вышку для спила дерева",
+      "ws": 35,
+      "wsk": 18,
+      "pos": 1
+    },
+    {
+      "word": "стоимость спила дерева",
+      "ws": 540,
+      "wsk": 16,
+      "pos": 1
+    },
+    {
+      "word": "опилить деревья",
+      "ws": 1709,
+      "wsk": 15,
+      "pos": 1
+    },
+    {
+      "word": "спилить березу на дачном участке",
+      "ws": 109,
+      "wsk": 14,
+      "pos": 1
+    },
+    {
+      "word": "спил сухих деревьев",
+      "ws": 564,
+      "wsk": 11,
+      "pos": 1
+    },
+    {
+      "word": "сколько стоит завалить дерево",
+      "ws": 28,
+      "wsk": 6,
+      "pos": 1
+    },
+    {
+      "word": "спилить высокое дерево на участке",
+      "ws": 173,
+      "wsk": 5,
+      "pos": 1
+    },
+    {
+      "word": "сколько стоит спилить большое дерево на участке",
+      "ws": 16,
+      "wsk": 5,
+      "pos": 1
+    }
+  ],
+  "topkeys": 195961,
+  "pages": [
+    {
+      "url": "/tsenyi",
+      "it50": 445
+    },
+    {
+      "url": "/raschistka-uchastka-ot-derevev",
+      "it50": 113
+    },
+    {
+      "url": "/vyravnivanie-uchastka",
+      "it50": 101
+    },
+    {
+      "url": "/uborka-dachnyh-uchastkov",
+      "it50": 94
+    },
+    {
+      "url": "/korchevanie-pney",
+      "it50": 84
+    },
+    {
+      "url": "/izmelchenie-vetok",
+      "it50": 56
+    },
+    {
+      "url": "/pokos-travy",
+      "it50": 47
+    },
+    {
+      "url": "/demontazh-derevyannyh-postroek",
+      "it50": 43
+    },
+    {
+      "url": "/vyivoz-porubochnyih-ostatkov",
+      "it50": 37
+    },
+    {
+      "url": "/kabling-derevev",
+      "it50": 20
+    }
+  ],
+  "pagesinindex": 65,
+  "vis": 64,
+  "topvis": 100528,
+  "adconcs": [],
+  "adkeys": [],
+  "adkeyscnt": 0,
+  "ads": [],
+  "adscnt": 0,
+  "adtraf": 0,
+  "adcost": 0,
+  "restop5": 18,
+  "history": {
+    "2024.12": {
+      "it1": 12,
+      "it3": 85,
+      "it5": 226,
+      "it10": 478,
+      "it50": 1354,
+      "pagesInIndex": 69,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 38,
+      "aiCnt": 0
+    },
+    "2025.01": {
+      "it1": 8,
+      "it3": 89,
+      "it5": 257,
+      "it10": 537,
+      "it50": 1308,
+      "pagesInIndex": 63,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 39,
+      "aiCnt": 0
+    },
+    "2025.02": {
+      "it1": 8,
+      "it3": 89,
+      "it5": 260,
+      "it10": 536,
+      "it50": 1315,
+      "pagesInIndex": 64,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 45,
+      "aiCnt": 0
+    },
+    "2025.03": {
+      "it1": 11,
+      "it3": 77,
+      "it5": 235,
+      "it10": 459,
+      "it50": 1231,
+      "pagesInIndex": 71,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 34,
+      "aiCnt": 0
+    },
+    "2025.04": {
+      "it1": 11,
+      "it3": 77,
+      "it5": 231,
+      "it10": 449,
+      "it50": 1200,
+      "pagesInIndex": 69,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 59,
+      "aiCnt": 0
+    },
+    "2025.05": {
+      "it1": 14,
+      "it3": 89,
+      "it5": 246,
+      "it10": 467,
+      "it50": 1231,
+      "pagesInIndex": 68,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 62,
+      "aiCnt": 0
+    },
+    "2025.06": {
+      "it1": 10,
+      "it3": 87,
+      "it5": 227,
+      "it10": 445,
+      "it50": 1218,
+      "pagesInIndex": 65,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 62,
+      "aiCnt": 0
+    },
+    "2025.07": {
+      "it1": 5,
+      "it3": 100,
+      "it5": 235,
+      "it10": 511,
+      "it50": 1455,
+      "pagesInIndex": 68,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 107,
+      "aiCnt": 0
+    },
+    "2025.08": {
+      "it1": 6,
+      "it3": 81,
+      "it5": 207,
+      "it10": 506,
+      "it50": 1582,
+      "pagesInIndex": 78,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 53,
+      "aiCnt": 17
+    },
+    "2025.09": {
+      "it1": 6,
+      "it3": 74,
+      "it5": 197,
+      "it10": 513,
+      "it50": 1586,
+      "pagesInIndex": 77,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 44,
+      "aiCnt": 267
+    },
+    "2025.10": {
+      "it1": 6,
+      "it3": 73,
+      "it5": 201,
+      "it10": 517,
+      "it50": 1581,
+      "pagesInIndex": 78,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 38,
+      "aiCnt": 226
+    },
+    "2025.11": {
+      "it1": 6,
+      "it3": 69,
+      "it5": 209,
+      "it10": 562,
+      "it50": 1656,
+      "pagesInIndex": 82,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 26,
+      "aiCnt": 138
+    },
+    "2025.12": {
+      "it1": 7,
+      "it3": 64,
+      "it5": 206,
+      "it10": 547,
+      "it50": 1716,
+      "pagesInIndex": 84,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 26,
+      "aiCnt": 497
+    },
+    "2026.01": {
+      "it1": 5,
+      "it3": 48,
+      "it5": 189,
+      "it10": 513,
+      "it50": 1579,
+      "pagesInIndex": 76,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 29,
+      "aiCnt": 253
+    },
+    "2026.02": {
+      "it1": 3,
+      "it3": 42,
+      "it5": 189,
+      "it10": 501,
+      "it50": 1470,
+      "pagesInIndex": 79,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 9,
+      "aiCnt": 328
+    },
+    "2026.03": {
+      "it1": 6,
+      "it3": 42,
+      "it5": 183,
+      "it10": 465,
+      "it50": 1328,
+      "pagesInIndex": 75,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 10,
+      "aiCnt": 146
+    },
+    "2026.04": {
+      "it1": 23,
+      "it3": 100,
+      "it5": 234,
+      "it10": 493,
+      "it50": 1379,
+      "pagesInIndex": 68,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 21,
+      "aiCnt": 369
+    },
+    "2026.05": {
+      "it1": 20,
+      "it3": 112,
+      "it5": 234,
+      "it10": 476,
+      "it50": 1336,
+      "pagesInIndex": 65,
+      "adsCount": 0,
+      "adKeysCount": 0,
+      "visAvg": 64,
+      "aiCnt": 364
+    }
+  },
+  "linksHistory": {
+    "2024.11": [
+      43,
+      298,
+      16,
+      6,
+      14
+    ],
+    "2024.12": [
+      35,
+      298,
+      14,
+      6,
+      12
+    ],
+    "2025.01": [
+      38,
+      298,
+      16,
+      6,
+      14
+    ],
+    "2025.02": [
+      37,
+      298,
+      16,
+      6,
+      14
+    ],
+    "2025.03": [
+      38,
+      298,
+      17,
+      6,
+      15
+    ],
+    "2025.04": [
+      38,
+      298,
+      17,
+      6,
+      13
+    ],
+    "2025.05": [
+      38,
+      298,
+      17,
+      6,
+      15
+    ],
+    "2025.06": [
+      38,
+      298,
+      17,
+      6,
+      15
+    ],
+    "2025.07": [
+      37,
+      298,
+      16,
+      6,
+      14
+    ],
+    "2025.08": [
+      39,
+      298,
+      17,
+      6,
+      15
+    ],
+    "2025.09": [
+      51,
+      298,
+      25,
+      6,
+      28
+    ],
+    "2025.10": [
+      57,
+      298,
+      25,
+      6,
+      25
+    ],
+    "2025.11": [
+      59,
+      298,
+      26,
+      6,
+      11
+    ],
+    "2025.12": [
+      78,
+      298,
+      31,
+      6,
+      13
+    ],
+    "2026.01": [
+      78,
+      298,
+      32,
+      6,
+      12
+    ],
+    "2026.05": [
+      78,
+      298,
+      32,
+      6,
+      12
+    ]
+  },
+  "aiAnswersCnt": 364,
+  "aiState": 0,
+  "dr": 26,
+  "iconUrl": "https://keys-so-domain-icons.keys.so/domain-icons/093c4be2db93b00cb89fe3ea5147ae9d01b09e85cdc39eae216c98476cac132d.png",
+  "name": "arboristik.ru"
+}
