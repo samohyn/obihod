@@ -14,21 +14,25 @@ export const dynamic = 'force-dynamic'
 type Entry = MetadataRoute.Sitemap[number]
 
 /**
- * Priority pillar-страниц по wsfreq Wave 2 US-4 (sitemap-tree v0.4 ADR-uМ-14).
+ * Priority pillar-страниц по wsfreq Wave 2 US-4 (sitemap-tree v0.4 ADR-uМ-14)
+ * + EPIC-SEO-COMPETE-3 ADR-0018 (новый pillar uborka-territorii).
+ *
  * Чем выше wsfreq → тем выше priority в sitemap → тем приоритетнее crawl.
  *
- * Источник: seosite/03-clusters/_summary.json
- *   vyvoz-musora 161 781 → 1.0   (главный денежный, 74% всего wsfreq)
- *   arboristika   27 589 → 0.9
- *   chistka-krysh    888 → 0.7
- *   demontazh        225 → 0.6
+ * Источник: seosite/03-clusters/_summary.json + US-1 TF-IDF cluster baseline
+ *   vyvoz-musora       161 781 → 1.0   (главный денежный, 74% всего wsfreq)
+ *   arboristika         27 589 → 0.9
+ *   uborka-territorii  ~22 000 → 0.85  (US-1 cluster wsk: C12+C43+C15+C6 ≈ 1979 + extrapolation)
+ *   chistka-krysh          888 → 0.7
+ *   demontazh              225 → 0.6
  *
- * Pillar-страницы вне 4 услуг (USP, conversion):
+ * Pillar-страницы вне 5 услуг (USP, conversion):
  *   foto-smeta, raschet-stoimosti → 0.8 (low-volume но high-intent)
  */
 const PILLAR_PRIORITY: Record<string, number> = {
   'vyvoz-musora': 1.0,
   arboristika: 0.9,
+  'uborka-territorii': 0.85,
   'chistka-krysh': 0.7,
   // ochistka-krysh — legacy slug, в БД уже мигрирован на chistka-krysh
   // (US-5 REQ-5.3, ADR-uМ-13). Оставлен для безопасности на случай rollback.

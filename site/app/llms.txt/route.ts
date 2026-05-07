@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 
+import { payloadClient } from '@/lib/payload'
 import { getServiceBySlug, getPublishedB2BPages, getPublishedAuthors } from '@/lib/seo/queries'
 
 /**
@@ -26,7 +27,13 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 export const revalidate = 86400
 
-const PILLAR_SLUGS = ['vyvoz-musora', 'arboristika', 'chistka-krysh', 'demontazh'] as const
+const PILLAR_SLUGS = [
+  'vyvoz-musora',
+  'arboristika',
+  'chistka-krysh',
+  'demontazh',
+  'uborka-territorii',
+] as const
 
 interface PillarRef {
   slug: string
@@ -47,13 +54,18 @@ const PILLAR_FALLBACKS: Record<(typeof PILLAR_SLUGS)[number], PillarRef> = {
   },
   'chistka-krysh': {
     slug: 'chistka-krysh',
-    title: 'Чистка крыш',
-    shortDescription: 'Снег и сосульки, частные дома + B2B',
+    title: 'Чистка крыш и уборка снега',
+    shortDescription: 'Снег и сосульки, чистка крыш частных домов и МКД, наледь',
   },
   demontazh: {
     slug: 'demontazh',
     title: 'Демонтаж',
     shortDescription: 'Сараи, заборы, мелкие постройки + спец-демонтаж',
+  },
+  'uborka-territorii': {
+    slug: 'uborka-territorii',
+    title: 'Уборка территории',
+    shortDescription: 'Выравнивание участка, расчистка, покос травы, вывоз порубочных остатков',
   },
 }
 
@@ -110,6 +122,66 @@ async function buildB2B(): Promise<B2BRef[]> {
   }
 }
 
+interface CaseByService {
+  service: string
+  slug: string
+  title: string
+}
+
+interface DistrictRef {
+  slug: string
+  name: string
+}
+
+async function buildCasesByService(): Promise<Record<string, CaseByService[]>> {
+  try {
+    const payload = await payloadClient()
+    const r = await payload.find({
+      collection: 'cases',
+      limit: 100,
+      sort: '-dateCompleted',
+      pagination: false,
+    })
+    const grouped: Record<string, CaseByService[]> = {}
+    for (const c of r.docs as Array<{
+      slug?: string
+      title?: string
+      service?: string | { slug?: string }
+    }>) {
+      if (!c.slug) continue
+      const svcSlug = typeof c.service === 'object' ? c.service?.slug : c.service
+      if (!svcSlug) continue
+      const list = grouped[svcSlug] ?? (grouped[svcSlug] = [])
+      if (list.length >= 5) continue // top-5 на pillar
+      list.push({ service: svcSlug, slug: c.slug, title: c.title ?? c.slug })
+    }
+    return grouped
+  } catch {
+    return {}
+  }
+}
+
+async function buildDistricts(): Promise<DistrictRef[]> {
+  try {
+    const payload = await payloadClient()
+    const r = await payload.find({
+      collection: 'districts',
+      limit: 100,
+      pagination: false,
+    })
+    return (
+      r.docs as Array<{
+        slug?: string
+        nameNominative?: string
+      }>
+    )
+      .filter((d) => d.slug)
+      .map((d) => ({ slug: d.slug!, name: d.nameNominative ?? d.slug! }))
+  } catch {
+    return []
+  }
+}
+
 interface AuthorRef {
   slug: string
   fullName: string
@@ -138,10 +210,12 @@ async function buildAuthors(): Promise<AuthorRef[]> {
 }
 
 export async function GET(): Promise<NextResponse> {
-  const [pillars, b2bPages, authors] = await Promise.all([
+  const [pillars, b2bPages, authors, casesByService, districts] = await Promise.all([
     buildPillars(),
     buildB2B(),
     buildAuthors(),
+    buildCasesByService(),
+    buildDistricts(),
   ])
 
   const lastmod = new Date().toISOString().split('T')[0]
@@ -179,6 +253,37 @@ export async function GET(): Promise<NextResponse> {
       const desc = b.shortDescription ? `: ${b.shortDescription}` : ''
       sections.push(`- [${b.title}](${url})${desc}`)
     }
+    sections.push('')
+  }
+
+  // ─── Pricing hub ────────────────────────────────────────────────────────
+  sections.push('## Pricing')
+  sections.push(`- [Все услуги — единый прайс](${SITE_URL}/uslugi/tseny/)`)
+  for (const p of pillars) {
+    sections.push(`- [Цены: ${p.title}](${SITE_URL}/uslugi/tseny/${p.slug}/)`)
+  }
+  sections.push('')
+
+  // ─── Cases by service ───────────────────────────────────────────────────
+  if (Object.keys(casesByService).length > 0) {
+    sections.push('## Cases by service')
+    for (const p of pillars) {
+      const list = casesByService[p.slug] ?? []
+      if (list.length === 0) continue
+      sections.push(`- **${p.title}:**`)
+      for (const c of list) {
+        sections.push(`  - [${c.title}](${SITE_URL}/kejsy/${c.slug}/)`)
+      }
+    }
+    sections.push('')
+  }
+
+  // ─── Local coverage (Districts) ────────────────────────────────────────
+  if (districts.length > 0) {
+    sections.push('## Local coverage')
+    sections.push(`Москва + ${districts.length} районов МО:`)
+    const districtLinks = districts.map((d) => `[${d.name}](${SITE_URL}/raiony/${d.slug}/)`)
+    sections.push(districtLinks.join(' · '))
     sections.push('')
   }
 

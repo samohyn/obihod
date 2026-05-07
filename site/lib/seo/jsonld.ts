@@ -386,3 +386,213 @@ export function articleSchema(post: BlogPost) {
     mainEntityOfPage: `${SITE_URL}/blog/${post.slug}/`,
   }
 }
+
+// ─── EPIC-SEO-COMPETE-3 US-3: нейро-SEO schema-helpers ──────────────────────
+
+export type HowToStep = {
+  /** Заголовок шага (1-2 слова) */
+  name: string
+  /** Текстовое описание — что делать */
+  text: string
+  /** Опциональная картинка-иллюстрация */
+  imageUrl?: string
+  /** Опциональный URL-якорь на странице */
+  url?: string
+}
+
+/**
+ * HowTo schema для info-страниц с пошаговыми инструкциями
+ * (как получить порубочный билет, как удалить пень селитрой, и т.п.).
+ *
+ * `totalTime` — ISO 8601 duration (`PT30M`, `PT2H`).
+ * Используется на `/b2b/<doc>/` и `/blog/<how-to>/` (US-5, US-6).
+ */
+export function howToSchema(args: {
+  name: string
+  steps: HowToStep[]
+  totalTime?: string
+  estimatedCost?: { value: number; currency?: string }
+  description?: string
+}): Record<string, unknown> {
+  return stripUndefined({
+    '@type': 'HowTo',
+    name: args.name,
+    description: nonEmpty(args.description),
+    totalTime: nonEmpty(args.totalTime),
+    estimatedCost: args.estimatedCost
+      ? {
+          '@type': 'MonetaryAmount',
+          currency: args.estimatedCost.currency ?? 'RUB',
+          value: args.estimatedCost.value,
+        }
+      : undefined,
+    step: args.steps.map((s, i) =>
+      stripUndefined({
+        '@type': 'HowToStep',
+        position: i + 1,
+        name: s.name,
+        text: s.text,
+        image: nonEmpty(s.imageUrl),
+        url: nonEmpty(s.url),
+      }),
+    ),
+  })
+}
+
+/**
+ * Speakable schema marker — для AI-ботов которые читают вслух
+ * первый параграф / TL;DR. Применяется ВНУТРИ другой schema
+ * (BlogPosting, FAQPage, Article) как `speakable: speakableSchema(...)`.
+ *
+ * `cssSelectors` — список CSS-селекторов с озвучиваемым текстом.
+ * Recommended pattern для US-5 blog:
+ *   speakable: speakableSchema(['[data-llm-citation] [itemprop="answer"]', '.tldr'])
+ */
+export function speakableSchema(cssSelectors: string[]): Record<string, unknown> {
+  return {
+    '@type': 'SpeakableSpecification',
+    cssSelector: cssSelectors,
+  }
+}
+
+export type OfferItem = {
+  /** Название услуги/SKU */
+  name: string
+  /** Минимальная цена */
+  priceFrom: number
+  /** Максимальная цена (опц.) */
+  priceTo?: number
+  /** Единица измерения (за сотку, за дерево и т.п.) */
+  unit?: string
+  /** Каноничный URL услуги */
+  url?: string
+}
+
+/**
+ * AggregateOffer для `/uslugi/tseny/<pillar>/` (US-4).
+ * Собирает массив offers + общий low/high price для pillar.
+ *
+ * `priceCurrency` всегда RUB (sustained проект).
+ */
+export function aggregateOfferSchema(args: {
+  offers: OfferItem[]
+  priceCurrency?: string
+}): Record<string, unknown> {
+  if (args.offers.length === 0) {
+    return { '@type': 'AggregateOffer', offerCount: 0 }
+  }
+  const lows = args.offers.map((o) => o.priceFrom)
+  const highs = args.offers.map((o) => o.priceTo ?? o.priceFrom)
+  return stripUndefined({
+    '@type': 'AggregateOffer',
+    offerCount: args.offers.length,
+    lowPrice: Math.min(...lows),
+    highPrice: Math.max(...highs),
+    priceCurrency: args.priceCurrency ?? 'RUB',
+    offers: args.offers.map((o) =>
+      stripUndefined({
+        '@type': 'Offer',
+        name: o.name,
+        url: nonEmpty(o.url),
+        priceSpecification: {
+          '@type': 'PriceSpecification',
+          minPrice: o.priceFrom,
+          maxPrice: o.priceTo ?? o.priceFrom,
+          priceCurrency: args.priceCurrency ?? 'RUB',
+          unitText: nonEmpty(o.unit),
+        },
+      }),
+    ),
+  })
+}
+
+export type ReviewItem = {
+  /** Имя автора */
+  authorName: string
+  /** Текст отзыва */
+  body: string
+  /** Рейтинг 1-5 */
+  rating: number
+  /** ISO date */
+  datePublished: string
+  /** Опциональная привязка к услуге */
+  serviceSlug?: string
+  /** Опциональная привязка к городу */
+  districtSlug?: string
+}
+
+/**
+ * Review schema для отдельного отзыва.
+ * Используется на `/otzyvy/<slug>/` либо как массив на `/otzyvy/` index (US-9).
+ */
+export function reviewSchema(item: ReviewItem): Record<string, unknown> {
+  return stripUndefined({
+    '@type': 'Review',
+    itemReviewed: { '@id': ORG_ID },
+    author: { '@type': 'Person', name: item.authorName },
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: item.rating,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    reviewBody: item.body,
+    datePublished: item.datePublished,
+  })
+}
+
+/**
+ * AggregateRating — итоговая оценка организации (sustained Я.Бизнес-style).
+ * Используется в Organization schema или на `/otzyvy/` index (US-9).
+ */
+export function aggregateRatingSchema(args: {
+  ratingValue: number
+  reviewCount: number
+  bestRating?: number
+}): Record<string, unknown> {
+  return {
+    '@type': 'AggregateRating',
+    ratingValue: args.ratingValue,
+    reviewCount: args.reviewCount,
+    bestRating: args.bestRating ?? 5,
+    worstRating: 1,
+  }
+}
+
+/**
+ * LegalService schema для `/b2b/<doc>/` страниц (US-6).
+ * Юридические нормативы: порубочный билет, ФККО-классификация, etc.
+ *
+ * `serviceType` — название услуги/документа («Оформление порубочного билета»).
+ */
+export function legalServiceSchema(args: {
+  serviceType: string
+  description?: string
+  url: string
+  areaServed?: string[]
+  hasOfferCatalog?: { name: string; itemListElement: string[] }
+}): Record<string, unknown> {
+  return stripUndefined({
+    '@type': 'LegalService',
+    name: args.serviceType,
+    serviceType: args.serviceType,
+    description: nonEmpty(args.description),
+    url: args.url,
+    provider: { '@id': ORG_ID },
+    areaServed: (args.areaServed ?? ['Москва', 'Московская область']).map((name) => ({
+      '@type': 'AdministrativeArea',
+      name,
+    })),
+    hasOfferCatalog: args.hasOfferCatalog
+      ? {
+          '@type': 'OfferCatalog',
+          name: args.hasOfferCatalog.name,
+          itemListElement: args.hasOfferCatalog.itemListElement.map((item, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            name: item,
+          })),
+        }
+      : undefined,
+  })
+}
