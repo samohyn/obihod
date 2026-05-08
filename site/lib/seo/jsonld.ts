@@ -559,6 +559,60 @@ export function aggregateRatingSchema(args: {
   }
 }
 
+// ─── EPIC-SEO-USLUGI US-4: T1 hub + T2 service-with-rating ──────────────────
+
+export type ServiceLite = {
+  slug: string
+  title: string
+  priceFrom?: number | null
+}
+
+/**
+ * ItemList для T1 `/uslugi/` hub — 5 pillars.
+ * Position-based ordering, item.url canonical.
+ */
+export function t1HubItemListSchema(pillars: ServiceLite[]): Record<string, unknown> {
+  return {
+    '@type': 'ItemList',
+    name: 'Услуги Обиход',
+    numberOfItems: pillars.length,
+    itemListElement: pillars.map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: p.title,
+      url: `${SITE_URL}/${p.slug}/`,
+    })),
+  }
+}
+
+/**
+ * Service schema с inline AggregateRating — расширение sustained
+ * `serviceSchema()` для T2/T4. AggregateRating nested внутрь Service node,
+ * не отдельный graph-узел: rich-snippet «Service ★4.9 (247)» в SERP.
+ *
+ * `rating === undefined` → возвращает обычный `serviceSchema()`. Параметр
+ * вводится US-5 reviews — сейчас pillar pages могут пробросить агрегат
+ * из global rating, либо оставить undefined.
+ */
+export function serviceWithRatingSchema(
+  service: Service,
+  district?: District,
+  rating?: { value: number; count: number; bestRating?: number },
+): Record<string, unknown> {
+  const base = serviceSchema(service, district) as Record<string, unknown>
+  if (!rating) return base
+  return {
+    ...base,
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: rating.value,
+      reviewCount: rating.count,
+      bestRating: rating.bestRating ?? 5,
+      worstRating: 1,
+    },
+  }
+}
+
 /**
  * LegalService schema для `/b2b/<doc>/` страниц (US-6).
  * Юридические нормативы: порубочный билет, ФККО-классификация, etc.

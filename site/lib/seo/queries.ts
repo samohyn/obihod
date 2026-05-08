@@ -114,6 +114,139 @@ export const getServiceDistrict = cache(async (serviceSlug: string, districtSlug
   }
 })
 
+/**
+ * US-4 EPIC-SEO-USLUGI: bundled lookup для slug-resolver.
+ * Возвращает service + district + sd в одной структуре, либо null если
+ * любой из трёх не найден. sd попадает в bundle только если sub_service_slug
+ * пустой (это T4 SD, не sub-level триплет US-3 wave 0.1).
+ */
+export const getServiceDistrictBundle = cache(
+  async (
+    serviceSlug: string,
+    districtSlug: string,
+  ): Promise<{
+    service: Record<string, unknown>
+    district: Record<string, unknown>
+    sd: Record<string, unknown>
+  } | null> => {
+    const sd = await getServiceDistrict(serviceSlug, districtSlug)
+    if (!sd) return null
+    const sdRaw = sd as unknown as {
+      service?: unknown
+      district?: unknown
+      subServiceSlug?: string | null
+    }
+    // T4 = pillar × city без sub-уровня. Если subServiceSlug заполнен — это
+    // sub-level триплет (US-3 wave 0.1), он рендерится через другой роут.
+    if (sdRaw.subServiceSlug) return null
+    const service =
+      typeof sdRaw.service === 'object' && sdRaw.service !== null
+        ? (sdRaw.service as Record<string, unknown>)
+        : null
+    const district =
+      typeof sdRaw.district === 'object' && sdRaw.district !== null
+        ? (sdRaw.district as Record<string, unknown>)
+        : null
+    if (!service || !district) return null
+    return { service, district, sd: sd as unknown as Record<string, unknown> }
+  },
+)
+
+/**
+ * US-4 EPIC-SEO-USLUGI: все пары (service, district) для T4 generateStaticParams.
+ * Только опубликованные SD без sub_service_slug — pillar × city, не triple.
+ * Возвращает {service, slug} (slug = districtSlug в URL pattern [service]/[slug]/).
+ */
+export const getAllServiceDistrictParams = cache(
+  async (): Promise<Array<{ service: string; slug: string }>> => {
+    try {
+      const payload = await payloadClient()
+      const r = await payload.find({
+        collection: 'service-districts',
+        where: { publishStatus: { equals: 'published' } },
+        limit: 1000,
+        pagination: false,
+        depth: 1,
+      })
+      const out: Array<{ service: string; slug: string }> = []
+      for (const sd of r.docs) {
+        const sdRaw = sd as unknown as {
+          service?: { slug?: string } | string | null
+          district?: { slug?: string } | string | null
+          subServiceSlug?: string | null
+        }
+        if (sdRaw.subServiceSlug) continue // только pillar × city — T4
+        const service =
+          typeof sdRaw.service === 'object' && sdRaw.service !== null
+            ? (sdRaw.service.slug ?? '')
+            : ''
+        const slug =
+          typeof sdRaw.district === 'object' && sdRaw.district !== null
+            ? (sdRaw.district.slug ?? '')
+            : ''
+        if (service && slug) out.push({ service, slug })
+      }
+      return out
+    } catch (e) {
+      console.error('[queries.getAllServiceDistrictParams] failed:', e)
+      return []
+    }
+  },
+)
+
+/**
+ * US-4 EPIC-SEO-USLUGI: все опубликованные Districts для city-list block
+ * на T2 pillar pages. Возвращает sorted by priority (A first, then B, C).
+ */
+export const getAllDistrictsForCityList = cache(
+  async (): Promise<
+    Array<{
+      slug: string
+      nameNominative: string
+      namePrepositional: string
+      priority?: string
+      distanceFromMkad?: number
+    }>
+  > => {
+    try {
+      const payload = await payloadClient()
+      const r = await payload.find({
+        collection: 'districts',
+        limit: 100,
+        pagination: false,
+        depth: 0,
+      })
+      const docs = r.docs.map((d) => {
+        const x = d as unknown as {
+          slug?: string
+          nameNominative?: string
+          namePrepositional?: string
+          priority?: string
+          distanceFromMkad?: number
+        }
+        return {
+          slug: x.slug ?? '',
+          nameNominative: x.nameNominative ?? '',
+          namePrepositional: x.namePrepositional ?? '',
+          priority: x.priority,
+          distanceFromMkad: x.distanceFromMkad,
+        }
+      })
+      const order = { A: 0, B: 1, C: 2 } as const
+      docs.sort((a, b) => {
+        const pa = (order[a.priority as 'A' | 'B' | 'C'] ?? 1) as number
+        const pb = (order[b.priority as 'A' | 'B' | 'C'] ?? 1) as number
+        if (pa !== pb) return pa - pb
+        return (a.distanceFromMkad ?? 999) - (b.distanceFromMkad ?? 999)
+      })
+      return docs.filter((d) => d.slug)
+    } catch (e) {
+      console.error('[queries.getAllDistrictsForCityList] failed:', e)
+      return []
+    }
+  },
+)
+
 export const getPublishedServiceDistricts = cache(async () => {
   try {
     const payload = await payloadClient()

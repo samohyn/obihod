@@ -112,6 +112,68 @@ export function buildProgrammaticMetadata(args: {
   }
 }
 
+/**
+ * US-4 EPIC-SEO-USLUGI: T4 service-district metadata.
+ * Используется slug-resolver page.tsx когда second-level slug совпадает
+ * с city.slug (а не с sub.slug).
+ */
+export function buildServiceDistrictMetadata(args: {
+  service: {
+    slug: string
+    title: string
+    h1?: string | null
+    priceFrom: number
+    metaDescription?: string | null
+  }
+  district: {
+    slug: string
+    nameNominative: string
+    namePrepositional: string
+    localPriceAdjustment?: number | null
+  }
+  sd: {
+    seoTitle?: string | null
+    seoDescription?: string | null
+  } | null
+}): Metadata {
+  const { service: s, district: d, sd } = args
+  const adj = d.localPriceAdjustment ?? 0
+  const adjustedPriceFrom = Math.round(s.priceFrom * (1 + adj / 100))
+  const responseTime = '2 часа'
+  const title =
+    sd?.seoTitle?.trim() ||
+    `${s.title} ${d.namePrepositional} — от ${adjustedPriceFrom.toLocaleString('ru-RU')} ₽ | Обиход`
+  const description =
+    sd?.seoDescription?.trim() ||
+    `${s.title} ${d.namePrepositional} от ${adjustedPriceFrom.toLocaleString('ru-RU')} ₽. Выезд за ${responseTime}, фикс-цена за объект, 25+ микрорайонов района. Договор + талоны ТКО, документы для УК и ТСЖ.`
+
+  return {
+    metadataBase,
+    title: { absolute: title },
+    description: truncateMeta(description, 158),
+    alternates: { canonical: `/${s.slug}/${d.slug}/` },
+    openGraph: {
+      type: 'website',
+      locale: 'ru_RU',
+      url: `/${s.slug}/${d.slug}/`,
+      siteName: 'Обиход',
+      title,
+      description: truncateMeta(description, 200),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description: truncateMeta(description, 158),
+    },
+    robots: {
+      index: true,
+      follow: true,
+      'max-snippet': -1,
+      'max-image-preview': 'large',
+    },
+  }
+}
+
 export function buildDistrictHubMetadata(d: District): Metadata {
   const title = `Обиход ${d.namePrepositional} — арбо, снег, мусор, демонтаж`
   const description = `Все услуги Обихода ${d.namePrepositional}: спил деревьев, чистка крыш, вывоз мусора, демонтаж. Фикс-цена, смета за 10 минут.`
