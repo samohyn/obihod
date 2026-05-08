@@ -29,7 +29,15 @@ const lex = (text: string) => ({
         version: 1,
         textFormat: 0,
         children: [
-          { type: 'text', detail: 0, format: 0, mode: 'normal' as const, style: '', text, version: 1 },
+          {
+            type: 'text',
+            detail: 0,
+            format: 0,
+            mode: 'normal' as const,
+            style: '',
+            text,
+            version: 1,
+          },
         ],
       },
     ],
@@ -80,10 +88,25 @@ async function main() {
         },
       ],
       subServices: [
-        { slug: 'vyravnivanie-uchastka', title: 'Выравнивание участка', h1: 'Выравнивание участка', priceFrom: 250 },
-        { slug: 'raschistka-uchastka', title: 'Расчистка участка', h1: 'Расчистка участка', priceFrom: 800 },
+        {
+          slug: 'vyravnivanie-uchastka',
+          title: 'Выравнивание участка',
+          h1: 'Выравнивание участка',
+          priceFrom: 250,
+        },
+        {
+          slug: 'raschistka-uchastka',
+          title: 'Расчистка участка',
+          h1: 'Расчистка участка',
+          priceFrom: 800,
+        },
         { slug: 'pokos-travy', title: 'Покос травы', h1: 'Покос травы', priceFrom: 80 },
-        { slug: 'vyvoz-porubochnyh-ostatkov', title: 'Вывоз порубочных остатков', h1: 'Вывоз порубочных остатков', priceFrom: 1800 },
+        {
+          slug: 'vyvoz-porubochnyh-ostatkov',
+          title: 'Вывоз порубочных остатков',
+          h1: 'Вывоз порубочных остатков',
+          priceFrom: 1800,
+        },
       ],
     } as never,
   })
