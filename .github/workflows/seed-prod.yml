@@ -105,8 +105,9 @@ jobs:
           #   lib/ + blocks/ — TS path aliases @/lib/* + @/blocks/* used by tsx
           #   tsconfig.json — paths resolution (НЕ в deploy.yml filelist; sustained backlog)
           #   seosite/strategy/ — inventory.json для EPIC-SEO-USLUGI seed-cities/sd-bulk/sd-class-a
-          #     seed-cities.ts резолвит path.resolve(cwd(),'..','seosite','strategy','03-uslugi-url-inventory.json')
-          #     cwd() = $BP/current → ищет $BP/seosite/strategy/03-uslugi-url-inventory.json
+          #     seed-cities.ts резолвит path.resolve(cwd(),'..','seosite','strategy','...')
+          #     cwd() через getcwd() = физический $BP/releases/<ts>/, поэтому ../seosite
+          #     = $BP/releases/seosite/strategy/ (НЕ $BP/seosite/ — symlink resolve!)
           # migrations/ убраны — schema apply делает deploy.yml (single source).
           ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
             ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
@@ -114,7 +115,7 @@ jobs:
                       ${{ secrets.BEGET_DEPLOY_PATH }}/current/content \
                       ${{ secrets.BEGET_DEPLOY_PATH }}/current/lib \
                       ${{ secrets.BEGET_DEPLOY_PATH }}/current/blocks \
-                      ${{ secrets.BEGET_DEPLOY_PATH }}/seosite/strategy"
+                      ${{ secrets.BEGET_DEPLOY_PATH }}/releases/seosite/strategy"
           for dir in scripts content lib blocks; do
             rsync -avz --delete \
               -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o StrictHostKeyChecking=no" \
@@ -125,11 +126,11 @@ jobs:
             -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o StrictHostKeyChecking=no" \
             site/tsconfig.json \
             ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/tsconfig.json
-          # EPIC-SEO-USLUGI inventory — рядом с releases/ (persistent вне releases)
+          # EPIC-SEO-USLUGI inventory — $BP/releases/seosite/ (getcwd() symlink-resolve fix)
           rsync -avz \
             -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o StrictHostKeyChecking=no" \
             seosite/strategy/03-uslugi-url-inventory.json \
-            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/seosite/strategy/03-uslugi-url-inventory.json
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/releases/seosite/strategy/03-uslugi-url-inventory.json
 
       - name: "Verify schema present (ADR-0016 Phase 1: deploy.yml owns schema lifecycle)"
         run: |
