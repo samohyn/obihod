@@ -5,7 +5,9 @@ import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { LicenseBadge } from '@/components/marketing/LicenseBadge'
 import { RichTextRenderer } from '@/components/marketing/RichTextRenderer'
-import { breadcrumbListSchema, serviceSchema, type Service } from '@/lib/seo/jsonld'
+import { type Service } from '@/lib/seo/jsonld'
+import { buildJsonLdForTemplate } from '@/lib/seo/composer'
+import { getSiteChrome } from '@/lib/chrome'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -42,14 +44,34 @@ type Props = {
  * Schema.org Service для конкретной sub — использует существующий
  * `serviceSchema()` без district (areaServed остаётся МО по умолчанию).
  */
-export function SubServiceView({ service, sub }: Props) {
+export async function SubServiceView({ service, sub }: Props) {
   const breadcrumbs = [
     { name: 'Главная', href: '/' },
+    { name: 'Услуги', href: '/uslugi/' },
     { name: service.title, href: `/${service.slug}/` },
     { name: sub.title, href: `/${service.slug}/${sub.slug}/` },
   ]
 
   const priceFrom = sub.priceFrom ?? service.priceFrom
+
+  const chrome = await getSiteChrome()
+
+  // T3 schema через composer (4 узла на странице, +Org/WS/LB на layout).
+  const subAsService: Service = {
+    slug: sub.slug,
+    title: sub.title,
+    h1: sub.h1,
+    priceFrom,
+    priceTo: priceFrom,
+    priceUnit: service.priceUnit,
+  }
+  const t3Schema = buildJsonLdForTemplate('T3_SUB', {
+    chrome,
+    skipChrome: true,
+    service,
+    sub: subAsService,
+    breadcrumbs: breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
+  })
 
   return (
     <>
@@ -109,30 +131,7 @@ export function SubServiceView({ service, sub }: Props) {
         </nav>
       </article>
 
-      <JsonLd
-        schema={[
-          // Service schema без district — areaServed = МО (default из serviceSchema)
-          {
-            ...serviceSchema(service),
-            name: sub.h1,
-            description: sub.intro ?? sub.metaDescription ?? service.metaDescription,
-            offers: {
-              '@type': 'Offer',
-              price: priceFrom,
-              priceCurrency: 'RUB',
-              priceSpecification: {
-                '@type': 'UnitPriceSpecification',
-                price: priceFrom,
-                priceCurrency: 'RUB',
-                unitText: 'за объект',
-              },
-            },
-          },
-          breadcrumbListSchema(
-            breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
-          ),
-        ]}
-      />
+      <JsonLd schema={t3Schema} />
     </>
   )
 }
