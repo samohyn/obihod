@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 
 import { payloadClient } from '@/lib/payload'
-import { getAllSubServiceParams } from '@/lib/seo/queries'
+import { getAllServiceDistrictParams, getAllSubServiceParams } from '@/lib/seo/queries'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -80,8 +80,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Прямой Payload-вызов (без unstable_cache wrapper) — чтобы избежать
   // проблем с serialization payloadClient внутри cached scope.
   // Кеширование sitemap делает сам Next 16 через revalidate=3600.
-  const [services, districts, cases, blogPosts, b2bPages, authors, subServices] = await Promise.all(
-    [
+  const [services, districts, cases, blogPosts, b2bPages, authors, subServices, sdParams] =
+    await Promise.all([
       fetchServices(),
       fetchDistricts(),
       fetchCases(),
@@ -89,8 +89,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       fetchPublishedB2B(),
       fetchPublishedAuthors(),
       getAllSubServiceParams().catch(() => [] as Array<{ service: string; sub: string }>),
-    ],
-  )
+      getAllServiceDistrictParams().catch(() => [] as Array<{ service: string; slug: string }>),
+    ])
 
   const serviceEntries: Entry[] = services.map((slug) => ({
     url: `${SITE_URL}/${slug}/`,
@@ -151,6 +151,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.85,
   }))
 
+  // EPIC-SEO-USLUGI US-7: T4 pillar × city SD pages (/{service}/{district}/).
+  // Priority 0.75 — mid-funnel local-intent, выше /raiony/ (0.6) но ниже T2 pillar.
+  const sdEntries: Entry[] = sdParams.map((s) => ({
+    url: `${SITE_URL}/${s.service}/${s.slug}/`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.75,
+  }))
+
   // EPIC-SEO-COMPETE-3 US-4 — mega-pricing хаб /uslugi/tseny/ + per-pillar.
   // Priority 0.8 per ADR-0018 (justified pricing-intent против pillar lead-intent).
   const pricingHubEntries: Entry[] = [
@@ -205,6 +214,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...b2bEntries,
     ...authorEntries,
     ...subServiceEntries,
+    ...sdEntries,
     ...pricingHubEntries,
     ...leadInfraEntries,
     otzyvyEntry,
