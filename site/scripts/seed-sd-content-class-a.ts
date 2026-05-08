@@ -93,94 +93,17 @@ const CITY_MICRODISTRICTS: Record<string, string[]> = {
     'Никольско-Архангельский',
     'Салтыковка',
   ],
-  mytishchi: [
-    'Центр',
-    'Перловка',
-    'Дружба',
-    'Тайнинская',
-    'Пирогово',
-    'Челобитьево',
-  ],
-  ramenskoye: [
-    'Центр',
-    'Холодово',
-    'Кратово',
-    'Удельная',
-    'Хрипань',
-    'Дергаевский',
-  ],
-  odincovo: [
-    'Центр',
-    'Барвиха',
-    'Лесной городок',
-    'Жаворонки',
-    'Внуково',
-    'Трёхгорка',
-  ],
-  krasnogorsk: [
-    'Центр',
-    'Опалиха',
-    'Павшинская пойма',
-    'Нахабино',
-    'Путилково',
-    'Архангельское',
-  ],
-  podolsk: [
-    'Центр',
-    'Климовск',
-    'Кузнечики',
-    'Силикатная',
-    'Кутузово',
-    'Парковый',
-  ],
-  khimki: [
-    'Центр',
-    'Левобережный',
-    'Сходня',
-    'Подрезково',
-    'Куркино',
-    'Новогорск',
-  ],
-  korolyov: [
-    'Центр',
-    'Болшево',
-    'Первомайский',
-    'Костино',
-    'Подлипки',
-    'Валентиновка',
-  ],
-  lyubertsy: [
-    'Центр',
-    'Красково',
-    'Малаховка',
-    'Томилино',
-    'Октябрьский',
-    'Жилгородок',
-  ],
-  elektrostal: [
-    'Центр',
-    'Восточный',
-    'Северный',
-    'Южный',
-    'Фрязево',
-    'Затишье',
-  ],
-  reutov: [
-    'Центр',
-    'Восточный',
-    'Заводской',
-    'Никольский',
-    'Полевой',
-    'Новокосино',
-  ],
-  dolgoprudnyj: [
-    'Центр',
-    'Хлебниково',
-    'Шереметьевский',
-    'Павельцево',
-    'Котово',
-    'Северный',
-  ],
+  mytishchi: ['Центр', 'Перловка', 'Дружба', 'Тайнинская', 'Пирогово', 'Челобитьево'],
+  ramenskoye: ['Центр', 'Холодово', 'Кратово', 'Удельная', 'Хрипань', 'Дергаевский'],
+  odincovo: ['Центр', 'Барвиха', 'Лесной городок', 'Жаворонки', 'Внуково', 'Трёхгорка'],
+  krasnogorsk: ['Центр', 'Опалиха', 'Павшинская пойма', 'Нахабино', 'Путилково', 'Архангельское'],
+  podolsk: ['Центр', 'Климовск', 'Кузнечики', 'Силикатная', 'Кутузово', 'Парковый'],
+  khimki: ['Центр', 'Левобережный', 'Сходня', 'Подрезково', 'Куркино', 'Новогорск'],
+  korolyov: ['Центр', 'Болшево', 'Первомайский', 'Костино', 'Подлипки', 'Валентиновка'],
+  lyubertsy: ['Центр', 'Красково', 'Малаховка', 'Томилино', 'Октябрьский', 'Жилгородок'],
+  elektrostal: ['Центр', 'Восточный', 'Северный', 'Южный', 'Фрязево', 'Затишье'],
+  reutov: ['Центр', 'Восточный', 'Заводской', 'Никольский', 'Полевой', 'Новокосино'],
+  dolgoprudnyj: ['Центр', 'Хлебниково', 'Шереметьевский', 'Павельцево', 'Котово', 'Северный'],
 }
 
 // ────────────────────────── lexical helpers ──────────────────────────
@@ -529,11 +452,7 @@ async function pgUpdateServiceDistrict(
                reviewed_by_id = COALESCE($2, reviewed_by_id),
                updated_at = now()
            WHERE id = $3`,
-          [
-            `${payload.lastReviewedAt}T00:00:00.000Z`,
-            payload.reviewedById,
-            sdId,
-          ],
+          [`${payload.lastReviewedAt}T00:00:00.000Z`, payload.reviewedById, sdId],
         )
       } else {
         await conn.query(
@@ -568,10 +487,9 @@ async function pgUpdateServiceDistrict(
       }
 
       if (!payload.skipLandmarksInsert) {
-        await conn.query(
-          'DELETE FROM service_districts_local_landmarks WHERE _parent_id = $1',
-          [sdId],
-        )
+        await conn.query('DELETE FROM service_districts_local_landmarks WHERE _parent_id = $1', [
+          sdId,
+        ])
         order = 1
         for (const name of payload.landmarks) {
           await conn.query(
@@ -753,8 +671,17 @@ async function main() {
               [sdData.id],
             )
             return (
-              (r as { rows: Array<{ faq_n: number; lm_n: number; has_review: boolean; has_author: boolean }> }).rows[0]
-            ) ?? { faq_n: 0, lm_n: 0, has_review: false, has_author: false }
+              (
+                r as {
+                  rows: Array<{
+                    faq_n: number
+                    lm_n: number
+                    has_review: boolean
+                    has_author: boolean
+                  }>
+                }
+              ).rows[0] ?? { faq_n: 0, lm_n: 0, has_review: false, has_author: false }
+            )
           } finally {
             if (cn.release) cn.release()
           }
