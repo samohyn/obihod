@@ -102,6 +102,10 @@ export const getServiceDistrict = cache(async (serviceSlug: string, districtSlug
         and: [
           { 'service.slug': { equals: serviceSlug } },
           { 'district.slug': { equals: districtSlug } },
+          // T4 pillar-level only: exclude sub-service triples (T3).
+          // Without this, sub-level SDs (subServiceSlug != null) shadow pillar SDs
+          // when both exist for the same service × district pair.
+          { subServiceSlug: { exists: false } },
         ],
       },
       limit: 1,
