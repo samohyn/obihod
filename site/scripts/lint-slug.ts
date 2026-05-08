@@ -19,6 +19,16 @@
 import { getPayload } from 'payload'
 import config from '../payload.config.js'
 
+// Incident 2026-05-08: getPayload() в prebuild context может зависнуть если
+// Payload init triggers hanging async hook (аналог audit_log incident 2026-05-01).
+// 60s process-level timeout гарантирует, что build не блокируется навсегда.
+// Graceful exit(0) — lint:slug defensive guard, не должен блокировать релиз.
+const _hangGuard = setTimeout(() => {
+  console.warn('[lint:slug] 60s process timeout — skip (Payload init hung, ADR-0019 app-level hooks active)')
+  process.exit(0)
+}, 60_000)
+if (typeof _hangGuard.unref === 'function') _hangGuard.unref()
+
 type Collision = {
   subSlug: string
   serviceSlug: string

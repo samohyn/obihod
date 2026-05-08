@@ -183,6 +183,11 @@ jobs:
           tail -30 /tmp/dev.log || true
 
       - name: Build
+        # Incident 2026-05-08: prebuild lint:slug:prod → getPayload() зависал
+        # без таймаута (аналог audit_log incident 2026-05-01). Fix в lint-slug.ts
+        # добавил 60s process timeout. CI timeout-minutes: 8 как дополнительный
+        # safeguard — не даёт runner'у висеть 6 часов по умолчанию.
+        timeout-minutes: 8
         run: pnpm run build
 
       - name: Start Next.js
