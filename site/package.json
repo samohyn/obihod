@@ -26,7 +26,7 @@
     "seed:cities:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/seed-cities.ts",
     "seed:sd-bulk": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/seed-sd-bulk.ts",
     "seed:sd-bulk:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/seed-sd-bulk.ts",
-    "prebuild": "pnpm lint:slug",
+    "prebuild": "pnpm lint:slug:prod",
     "seed:authors": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/seed-authors.ts",
     "seed:authors:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/seed-authors.ts",
     "seed:homepage": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/seed-homepage.ts",
