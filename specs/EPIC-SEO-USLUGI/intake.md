@@ -104,4 +104,5 @@ plan_file: /Users/a36/.claude/plans/team-seo-poseo-md-joyful-globe.md
 2026-05-07 · operator → poseo: дано добро, scope полный (191 URL), 30 cities × 5 pillar, 4 шаблона с нуля
 2026-05-07 · operator → poseo: правило per-US release (leadqa local-verify → operator approve → do push → следующий US). poseo управляет, без параллели US.
 2026-05-07 · poseo: skill seo активирован, plan записан в /Users/a36/.claude/plans/team-seo-poseo-md-joyful-globe.md, US-1 dispatch
+2026-05-08 · US-1 closed: 9 deliverables + 1 modified, leadqa PASS 8/8 + RC ready 10/10, PR #183 → main `acef7311` merged operator. phase: done. → готов dispatch US-2 (newui/ макеты × 4 шаблона T1/T2/T3/T4 под brand-guide v2.2 mobile-first)
 ```

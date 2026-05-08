@@ -1,0 +1,2069 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!--
+  Template: T3 Sub-service (под-услуга)
+  URL pattern: /<pillar>/<sub>/
+  Demo URL:    /vyvoz-musora/vyvoz-stroymusora/
+  H1:          «Вывоз строительного мусора в Москве»
+  Title:       «Вывоз строительного мусора в Москве и МО — фикс-цена, выезд за 2 часа | ОБИХОД»
+  JSON-LD:     Organization · Service(sub-scoped, parent=vyvoz-musora) · FAQPage · BreadcrumbList
+  Цель:        конкретный intent. 1800-2000 слов (placeholder ok).
+  Уникальный T3-блок: Methods (5 методов выполнения).
+  T2 vs T3:    нет city-ссылок, нет «10 причин» content-marketing блока.
+  Owner:       art → ux → ui (через poseo) под TASK-NEWUI-TEMPLATES-W1
+  Created:     2026-05-08 (sa-seo.md US-2 §«T3 Sub»)
+  Source of truth: design-system/brand-guide.html v2.2 §1-14, §33 chrome canonical
+  Shared CSS:  brand-guide-styles.css + homepage-shared.css
+-->
+
+<title>Вывоз строительного мусора в Москве и МО — фикс-цена, выезд за 2 часа | ОБИХОД</title>
+<meta name="description" content="Вывоз строительного мусора в Москве и МО за 2 часа. Бой бетона, кирпич, штукатурка, гипсокартон. Газель 1,5 м³ или контейнер 8/20 м³. Фикс-цена в смете от 3 500 ₽." />
+<link rel="canonical" href="https://obikhod.ru/vyvoz-musora/vyvoz-stroymusora/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Вывоз строительного мусора в Москве и МО — фикс-цена, выезд за 2 часа | ОБИХОД" />
+<meta property="og:description" content="Бой бетона, кирпич, штукатурка, гипсокартон. Газель, ЗИЛ, контейнер 8/20 м³. От 3 500 ₽. Лицензия, договор, эко-полигон. Расчёт по фото за 2 минуты." />
+<meta property="og:url" content="https://obikhod.ru/vyvoz-musora/vyvoz-stroymusora/" />
+<meta property="og:image" content="https://obikhod.ru/og/vyvoz-stroymusora.jpg" />
+<meta property="og:locale" content="ru_RU" />
+<meta property="og:site_name" content="ОБИХОД" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Вывоз строительного мусора в Москве — фикс-цена, выезд за 2 часа" />
+<meta name="twitter:description" content="Бой бетона, кирпич, штукатурка, гипсокартон. Газель, контейнер 8/20 м³. Лицензия, договор. От 3 500 ₽." />
+<meta name="twitter:image" content="https://obikhod.ru/og/vyvoz-stroymusora.jpg" />
+
+<!-- JSON-LD #1 · Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Обиход",
+  "alternateName": "ОБИХОД",
+  "url": "https://obikhod.ru/",
+  "logo": "https://obikhod.ru/logo.svg",
+  "telephone": "+7 (495) 000-00-00",
+  "email": "hi@obikhod.ru",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "RU",
+    "addressRegion": "Московская область",
+    "addressLocality": "Раменский район",
+    "streetAddress": "ул. Питомниковая, 3"
+  },
+  "sameAs": [
+    "https://vk.com/obikhod",
+    "https://t.me/obikhod",
+    "https://max.ru/obikhod"
+  ]
+}
+</script>
+
+<!-- JSON-LD #2 · Service (sub-scoped, parent = Вывоз мусора) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Вывоз строительного мусора",
+  "name": "Вывоз строительного мусора в Москве и МО",
+  "description": "Вывоз строительного мусора после ремонта, демонтажа и стройки: бой бетона, кирпич, штукатурка, гипсокартон, старые окна и двери, плитка. Газель 1,5 м³, ЗИЛ 5 м³, контейнеры 8 и 20 м³, самосвал 30 м³. Лицензия на отходы IV-V класса, договор и закрывающие документы.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Обиход",
+    "url": "https://obikhod.ru/"
+  },
+  "isRelatedTo": {
+    "@type": "Service",
+    "name": "Вывоз мусора",
+    "url": "https://obikhod.ru/vyvoz-musora/"
+  },
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Москва и Московская область"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "RUB",
+    "lowPrice": "3500",
+    "highPrice": "38000",
+    "availability": "https://schema.org/InStock"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "247",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+}
+</script>
+
+<!-- JSON-LD #3 · FAQPage (4 вопроса из аккордеона) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Сколько стоит вывоз строительного мусора?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Газель 1,5 м³ — от 4 500 ₽. ЗИЛ до 5 м³ — от 8 800 ₽. Контейнер 8 м³ с заменой — от 8 000 ₽. Контейнер 20 м³ — от 14 000 ₽. Самосвал 30 м³ — от 24 000 ₽. Точную сумму зафиксируем в смете после фото или замера, цена в договоре не меняется."}
+    },
+    {
+      "@type": "Question",
+      "name": "Можно ли заказать вывоз с грузчиками?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Да. Бригада из 2 грузчиков выходит за 1 500 ₽/час. Загружают мешки, выносят бой бетона из квартиры, спускают плиты с этажа, помогают на стройке коттеджа. Если объект на 5-7 этаже без лифта — добавляется надбавка за подъём."}
+    },
+    {
+      "@type": "Question",
+      "name": "Что вы делаете с вывезенным строительным мусором?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Везём на лицензированные полигоны и МПК Московской области, с которыми у нас прямые договоры — Тимохово, Алексинский карьер. На каждый рейс — талон взвешивания и акт приёма. Лицензия N… на работу с отходами IV-V класса прилагается к договору."}
+    },
+    {
+      "@type": "Question",
+      "name": "Принимаете ли заказы от УК, ТСЖ и застройщиков?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Да. Юрлицам — безналичный расчёт по счёту с НДС, договор, акт выполненных работ, счёт-фактура, ЭДО через Диадок или СБИС. Постоянным клиентам — пост-оплата, годовой договор с фиксированными расценками. Аванс по умолчанию 30%, по договорённости — без аванса."}
+    }
+  ]
+}
+</script>
+
+<!-- JSON-LD #4 · BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://obikhod.ru/"},
+    {"@type": "ListItem", "position": 2, "name": "Услуги", "item": "https://obikhod.ru/uslugi/"},
+    {"@type": "ListItem", "position": 3, "name": "Вывоз мусора", "item": "https://obikhod.ru/vyvoz-musora/"},
+    {"@type": "ListItem", "position": 4, "name": "Вывоз строительного мусора", "item": "https://obikhod.ru/vyvoz-musora/vyvoz-stroymusora/"}
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<!-- Дизайн-система — extracted из design-system/brand-guide.html -->
+<link rel="stylesheet" href="brand-guide-styles.css" />
+<!-- Shared chrome (header/footer) с homepage.html -->
+<link rel="stylesheet" href="homepage-shared.css?v=2" />
+
+<!-- Локальные T3-стили (только то, чего нет в shared) — префикс t3- -->
+<style>
+  /* Breadcrumbs canonical */
+  .t3-crumbs {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--c-muted);
+    letter-spacing: 0.04em;
+    padding: 14px 0 0;
+  }
+  .t3-crumbs a { color: var(--c-muted); text-decoration: none; }
+  .t3-crumbs a:hover { color: var(--c-primary); }
+  .t3-crumbs .sep { padding: 0 8px; opacity: 0.5; }
+  .t3-crumbs .cur { color: var(--c-ink-soft); }
+
+  /* Hero */
+  .t3-hero { padding: 40px 0 56px; position: relative; overflow: hidden; }
+  .t3-hero-bg { position: absolute; inset: 0; opacity: 0.05; pointer-events: none; }
+  .t3-hero-grid {
+    display: grid;
+    gap: 32px;
+    grid-template-columns: 1fr;
+    position: relative;
+  }
+  @media (min-width: 1024px) {
+    .t3-hero-grid { grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: start; }
+  }
+  .t3-hero h1 {
+    font-size: clamp(32px, 5.2vw, 56px);
+    line-height: 1.05;
+    margin: 12px 0 18px;
+    letter-spacing: -0.02em;
+  }
+  .t3-hero h1 .accent { color: var(--c-primary); }
+  .t3-hero .lead {
+    max-width: 60ch;
+    font-size: clamp(15px, 1.4vw, 17px);
+    line-height: 1.65;
+    color: var(--c-ink-soft);
+  }
+  .t3-hero .lead p { margin: 0 0 12px; }
+  .t3-hero .lead p:last-child { margin: 0; }
+  .t3-hero .lead strong { color: var(--c-ink); font-weight: 600; }
+
+  .t3-hero-cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+
+  .t3-hero-meta {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--c-muted);
+  }
+  .t3-hero-meta .mt-item { display: inline-flex; gap: 6px; align-items: center; }
+  .t3-hero-meta .mt-item::before {
+    content: '';
+    width: 5px; height: 5px;
+    background: var(--c-primary);
+    border-radius: 50%;
+  }
+
+  /* Hero photo placeholder */
+  .t3-hero-photo {
+    background:
+      linear-gradient(135deg, rgba(45,90,61,0.12) 0%, rgba(230,162,60,0.10) 100%),
+      var(--c-bg-alt);
+    border-radius: var(--radius-lg);
+    aspect-ratio: 4 / 5;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 24px;
+    border: 1px solid var(--c-line);
+    position: relative;
+    overflow: hidden;
+  }
+  .t3-hero-photo::before {
+    content: '';
+    position: absolute; inset: 14px;
+    border: 1px dashed rgba(45,90,61,0.22);
+    border-radius: calc(var(--radius-lg) - 6px);
+    pointer-events: none;
+  }
+  .t3-hero-photo .ph-lbl {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--c-ink-soft);
+    line-height: 1.55;
+    max-width: 28ch;
+  }
+  .t3-hero-photo .ph-lbl strong { display: block; color: var(--c-primary); font-size: 13px; margin-bottom: 4px; }
+  .t3-hero-photo .ph-tag {
+    position: absolute;
+    top: 16px; left: 16px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(45,90,61,0.92);
+    color: var(--c-on-primary);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Generic section wrapper */
+  .t3-section { padding: 64px 0; border-bottom: 1px solid var(--c-line); }
+  .t3-section.alt { background: var(--c-bg-alt); border-bottom: none; }
+  .t3-section h2 {
+    font-size: clamp(26px, 3.4vw, 36px);
+    line-height: 1.15;
+    margin: 0 0 14px;
+    max-width: 26ch;
+    letter-spacing: -0.015em;
+  }
+  .t3-section h2 .accent { color: var(--c-primary); }
+  .t3-section .t3-section-lead {
+    max-width: 64ch;
+    color: var(--c-ink-soft);
+    font-size: 15.5px;
+    line-height: 1.65;
+    margin: 0 0 24px;
+  }
+
+  /* §02 — Зачем нужен · 4 ситуации */
+  .t3-when {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: 1fr;
+    margin-top: 26px;
+  }
+  @media (min-width: 640px) { .t3-when { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .t3-when { grid-template-columns: repeat(4, 1fr); } }
+  .t3-when-card {
+    background: var(--c-card);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .t3-when-card .ic {
+    width: 36px; height: 36px;
+    color: var(--c-primary);
+  }
+  .t3-when-card h3 { margin: 0; font-size: 15.5px; font-weight: 700; color: var(--c-ink); line-height: 1.3; }
+  .t3-when-card p { margin: 0; font-size: 13.5px; color: var(--c-muted); line-height: 1.55; }
+
+  /* §03 — Прайс таблица */
+  .t3-price-wrap {
+    margin-top: 24px;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--c-card);
+  }
+  .t3-price-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .t3-price-table th,
+  .t3-price-table td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--c-line);
+    vertical-align: middle;
+  }
+  .t3-price-table thead th {
+    background: var(--c-bg-alt);
+    font-weight: 600;
+    color: var(--c-ink);
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+  }
+  .t3-price-table tbody tr:last-child td { border-bottom: none; }
+  .t3-price-table tbody tr:hover { background: rgba(45,90,61,0.03); }
+  .t3-price-table .price-cell {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--c-ink);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .t3-price-table .vol-cell, .t3-price-table .time-cell {
+    color: var(--c-ink-soft);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .t3-price-note {
+    margin: 14px 0 0;
+    font-size: 13px;
+    color: var(--c-muted);
+    line-height: 1.6;
+  }
+  .t3-price-mobile-note {
+    display: none;
+    margin-top: 12px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--c-muted);
+    text-align: center;
+  }
+  @media (max-width: 640px) {
+    .t3-price-wrap { overflow-x: auto; }
+    .t3-price-table { min-width: 580px; }
+    .t3-price-mobile-note { display: block; }
+  }
+
+  /* §04 — Фото→смета встроенный калькулятор */
+  .t3-calc {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr;
+    margin-top: 24px;
+    background: var(--c-card);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+  }
+  @media (min-width: 900px) { .t3-calc { grid-template-columns: 1.05fr 1fr; gap: 36px; padding: 36px; } }
+  .t3-dropzone {
+    border: 2px dashed var(--c-line);
+    background: var(--c-bg-alt);
+    border-radius: var(--radius-lg);
+    padding: 36px 24px;
+    text-align: center;
+    transition: border-color .15s ease, background-color .15s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+  }
+  .t3-dropzone:hover { border-color: var(--c-primary); background: rgba(45,90,61,0.03); }
+  .t3-dropzone .ic { width: 40px; height: 40px; color: var(--c-primary); }
+  .t3-dropzone .t { font-weight: 600; font-size: 16px; color: var(--c-ink); }
+  .t3-dropzone .h { font-family: var(--font-mono); font-size: 12px; color: var(--c-muted); }
+  .t3-dropzone .browse { color: var(--c-primary); font-weight: 600; }
+  .t3-calc-q { display: grid; gap: 14px; }
+  .t3-calc-q h4 { margin: 0 0 6px; font-size: 14px; font-weight: 600; color: var(--c-ink); }
+  .t3-checkrow { display: flex; flex-direction: column; gap: 8px; }
+  .t3-checkrow label {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 14px;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    background: var(--c-card);
+    font-size: 14px;
+    color: var(--c-ink-soft);
+    transition: border-color .15s ease, background-color .15s ease;
+  }
+  .t3-checkrow label:hover { border-color: var(--c-primary); background: rgba(45,90,61,0.03); }
+  .t3-checkrow input[type="checkbox"] {
+    accent-color: var(--c-primary);
+    width: 16px; height: 16px;
+  }
+  .t3-calc-contact { display: flex; gap: 8px; flex-direction: column; margin-top: 12px; }
+  .t3-calc-contact .input-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .t3-calc-contact .input-row select,
+  .t3-calc-contact .input-row input {
+    padding: 11px 14px;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-sm);
+    background: var(--c-card);
+    font: inherit;
+    font-size: 14px;
+    color: var(--c-ink);
+  }
+  .t3-calc-contact .input-row select { flex: 0 0 130px; max-width: 100%; }
+  .t3-calc-contact .input-row input { flex: 1 1 200px; min-width: 0; }
+  .t3-calc-note {
+    margin-top: 10px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--c-muted);
+    line-height: 1.55;
+    letter-spacing: 0.02em;
+  }
+  .t3-calc-note strong { color: var(--c-accent-ink); font-weight: 600; }
+
+  /* §05 — Methods (T3 unique block · 5 методов) */
+  .t3-methods {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr;
+    margin-top: 28px;
+  }
+  @media (min-width: 768px) { .t3-methods { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1100px) { .t3-methods { grid-template-columns: repeat(5, 1fr); gap: 14px; } }
+  .t3-method {
+    background: var(--c-card);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+  }
+  .t3-method:hover {
+    border-color: var(--c-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px -8px rgba(45,90,61,0.18);
+  }
+  .t3-method .num {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 11.5px;
+    color: var(--c-accent-ink);
+    background: rgba(230,162,60,0.16);
+    padding: 4px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    align-self: flex-start;
+  }
+  .t3-method .ic { width: 34px; height: 34px; color: var(--c-primary); margin-top: 4px; }
+  .t3-method h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--c-ink);
+    line-height: 1.25;
+  }
+  .t3-method p {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--c-muted);
+    line-height: 1.6;
+    flex: 1;
+  }
+  .t3-method ul {
+    list-style: none;
+    padding: 0;
+    margin: 6px 0 0;
+    display: grid;
+    gap: 6px;
+    border-top: 1px solid var(--c-line);
+    padding-top: 12px;
+  }
+  .t3-method li {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    font-size: 12.5px;
+    color: var(--c-ink-soft);
+    line-height: 1.4;
+  }
+  .t3-method li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 4px; height: 4px;
+    background: var(--c-primary);
+    border-radius: 50%;
+    margin-top: 7px;
+  }
+  .t3-method .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding-top: 10px;
+    border-top: 1px solid var(--c-line);
+    margin-top: 4px;
+  }
+  .t3-method .price-row .from {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--c-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .t3-method .price-row .num-price {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--c-ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* §06 — Process steps (4-5 шагов) */
+  .t3-steps {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr;
+    margin-top: 28px;
+    counter-reset: t3-step;
+  }
+  @media (min-width: 768px) { .t3-steps { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1100px) { .t3-steps { grid-template-columns: repeat(5, 1fr); gap: 14px; } }
+  .t3-step {
+    background: var(--c-card);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    counter-increment: t3-step;
+  }
+  .t3-step::before {
+    content: counter(t3-step, decimal-leading-zero);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--c-accent-ink);
+    background: rgba(230,162,60,0.16);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    letter-spacing: -0.02em;
+  }
+  .t3-step h4 { margin: 0; font-size: 15px; font-weight: 700; color: var(--c-ink); line-height: 1.3; }
+  .t3-step p { margin: 0; font-size: 13.5px; color: var(--c-muted); line-height: 1.55; flex: 1; }
+  .t3-step .meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--c-primary);
+    margin-top: 4px;
+  }
+
+  /* §07 — Why us · 6 trust-карточек */
+  .t3-why {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr;
+    margin-top: 28px;
+  }
+  @media (min-width: 640px) { .t3-why { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .t3-why { grid-template-columns: repeat(3, 1fr); } }
+  .t3-why-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .t3-why-item .ic {
+    flex-shrink: 0;
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: rgba(45,90,61,0.08);
+    color: var(--c-primary);
+    display: grid;
+    place-items: center;
+  }
+  .t3-why-item .ic svg { width: 24px; height: 24px; }
+  .t3-why-item h4 { margin: 0 0 6px; font-size: 15.5px; font-weight: 700; color: var(--c-ink); line-height: 1.3; }
+  .t3-why-item p { margin: 0; font-size: 13.5px; color: var(--c-muted); line-height: 1.6; }
+
+  /* §08 — Cases · 6 фото-карточек */
+  .t3-cases {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr;
+    margin-top: 28px;
+  }
+  @media (min-width: 640px) { .t3-cases { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .t3-cases { grid-template-columns: repeat(3, 1fr); } }
+  .t3-case {
+    background: var(--c-card);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .t3-case:hover { border-color: var(--c-primary); transform: translateY(-2px); }
+  .t3-case-photo {
+    aspect-ratio: 16 / 10;
+    background:
+      linear-gradient(135deg, rgba(45,90,61,0.10) 0%, rgba(230,162,60,0.08) 100%),
+      var(--c-bg-alt);
+    display: grid;
+    place-items: center;
+    color: var(--c-primary);
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    text-align: center;
+    padding: 12px;
+    position: relative;
+  }
+  .t3-case-tag {
+    position: absolute;
+    top: 12px; left: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--c-card);
+    color: var(--c-primary);
+    border: 1px solid var(--c-line);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .t3-case-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .t3-case h3 { margin: 0; font-size: 15.5px; font-weight: 700; color: var(--c-ink); line-height: 1.3; }
+  .t3-case p { margin: 0; font-size: 13.5px; color: var(--c-muted); line-height: 1.55; flex: 1; }
+  .t3-case .meta {
+    margin-top: 6px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--c-ink-soft);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .t3-case .meta strong { color: var(--c-primary); font-weight: 600; }
+
+  /* §09 — FAQ аккордеон */
+  .t3-faq { max-width: 880px; margin-top: 28px; }
+  .t3-faq details {
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    background: var(--c-card);
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .t3-faq summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 22px;
+    font-weight: 600;
+    color: var(--c-ink);
+    font-size: 15.5px;
+    line-height: 1.4;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+  }
+  .t3-faq summary::-webkit-details-marker { display: none; }
+  .t3-faq summary::after {
+    content: '+';
+    font-family: var(--font-mono);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--c-primary);
+    flex-shrink: 0;
+    line-height: 1;
+    transition: transform .2s ease;
+  }
+  .t3-faq details[open] summary::after { content: '−'; }
+  .t3-faq details[open] { border-color: var(--c-primary); }
+  .t3-faq .body {
+    padding: 0 22px 20px;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--c-ink-soft);
+  }
+  .t3-faq .body p { margin: 0 0 10px; }
+  .t3-faq .body p:last-child { margin: 0; }
+
+  /* §10 — AggregateRating + 2 review-cards */
+  .t3-rating-wrap {
+    display: grid;
+    gap: 28px;
+    grid-template-columns: 1fr;
+    margin-top: 24px;
+    align-items: start;
+  }
+  @media (min-width: 1024px) { .t3-rating-wrap { grid-template-columns: 0.8fr 2fr; gap: 36px; } }
+  .t3-rating-summary {
+    background: var(--c-card);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  .t3-rating-summary .num {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 56px;
+    color: var(--c-ink);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .t3-rating-summary .stars {
+    color: var(--c-accent);
+    font-size: 22px;
+    letter-spacing: 0.08em;
+  }
+  .t3-rating-summary .lbl {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--c-muted);
+    letter-spacing: 0.04em;
+    line-height: 1.55;
+  }
+  .t3-rating-summary .lbl strong { color: var(--c-ink); font-weight: 600; }
+  .t3-rating-summary a {
+    color: var(--c-primary);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 6px;
+    border-bottom: 1px dashed var(--c-primary);
+    padding-bottom: 1px;
+  }
+  .t3-rating-summary a:hover { color: var(--c-primary-ink); }
+
+  .t3-reviews {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 768px) { .t3-reviews { grid-template-columns: repeat(2, 1fr); } }
+  .t3-review {
+    background: var(--c-card);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .t3-review-head { display: flex; gap: 12px; align-items: center; }
+  .t3-review .av {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: rgba(45,90,61,0.10);
+    color: var(--c-primary);
+    display: grid; place-items: center;
+    font-weight: 700;
+    font-size: 17px;
+    flex-shrink: 0;
+  }
+  .t3-review .n { font-weight: 600; font-size: 14.5px; color: var(--c-ink); }
+  .t3-review .meta {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--c-muted);
+    margin-top: 2px;
+  }
+  .t3-review .stars {
+    color: var(--c-accent);
+    font-size: 13.5px;
+    letter-spacing: 0.04em;
+  }
+  .t3-review .text {
+    margin: 0;
+    font-size: 14px;
+    color: var(--c-ink-soft);
+    line-height: 1.6;
+    flex: 1;
+  }
+  .t3-review .verified {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--c-success);
+    border-top: 1px solid var(--c-line);
+    padding-top: 10px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .t3-review .verified::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--c-success);
+  }
+
+  /* §11 — Related sub-services · 3 карточки */
+  .t3-related {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr;
+    margin-top: 26px;
+  }
+  @media (min-width: 768px) { .t3-related { grid-template-columns: repeat(3, 1fr); } }
+  .t3-related-card {
+    background: var(--c-card);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    padding: 22px 20px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color .15s ease, transform .15s ease, box-shadow .15s ease;
+  }
+  .t3-related-card:hover {
+    border-color: var(--c-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px -4px rgba(45,90,61,0.12);
+  }
+  .t3-related-card .from {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+  }
+  .t3-related-card h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--c-ink);
+    line-height: 1.3;
+  }
+  .t3-related-card p {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--c-muted);
+    line-height: 1.55;
+    flex: 1;
+  }
+  .t3-related-card .arrow-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid var(--c-line);
+    margin-top: 4px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+  .t3-related-card .arrow-row .price {
+    color: var(--c-ink);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .t3-related-card .arrow-row .arrow {
+    color: var(--c-primary);
+    font-weight: 600;
+  }
+
+  /* §12 — Author block (E-E-A-T) */
+  .t3-author {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr;
+    margin-top: 26px;
+    background: var(--c-card);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+  }
+  @media (min-width: 768px) { .t3-author { grid-template-columns: 200px 1fr; gap: 32px; padding: 32px; align-items: center; } }
+  .t3-author-photo {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background:
+      linear-gradient(135deg, rgba(45,90,61,0.18) 0%, rgba(230,162,60,0.12) 100%),
+      var(--c-bg-alt);
+    border: 1px solid var(--c-line);
+    display: grid;
+    place-items: center;
+    color: var(--c-primary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-align: center;
+    padding: 16px;
+    margin: 0 auto;
+  }
+  @media (min-width: 768px) { .t3-author-photo { margin: 0; } }
+  .t3-author-photo strong {
+    display: block;
+    color: var(--c-primary);
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+  .t3-author-body { display: flex; flex-direction: column; gap: 8px; }
+  .t3-author-body .role {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--c-primary);
+  }
+  .t3-author-body h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--c-ink);
+    line-height: 1.2;
+  }
+  .t3-author-body .pos {
+    font-size: 14px;
+    color: var(--c-ink-soft);
+    margin: 0;
+  }
+  .t3-author-body p {
+    margin: 6px 0 0;
+    font-size: 14px;
+    color: var(--c-muted);
+    line-height: 1.6;
+  }
+  .t3-author-body .reviewed {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--c-line);
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--c-muted);
+    line-height: 1.55;
+  }
+  .t3-author-body .reviewed strong { color: var(--c-ink); font-weight: 600; }
+
+  /* §13 — Final CTA */
+  .t3-final {
+    background: var(--c-card);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    margin-top: 28px;
+    max-width: 720px;
+  }
+  @media (min-width: 768px) { .t3-final { padding: 40px; } }
+  .t3-final h2 { margin: 0 0 12px; max-width: 24ch; }
+  .t3-final .t3-section-lead { margin: 0 0 24px; }
+  .t3-form { display: grid; gap: 14px; }
+  .t3-form .field { display: flex; flex-direction: column; gap: 6px; }
+  .t3-form label {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+  }
+  .t3-form label .req { color: var(--c-error); }
+  .t3-form input,
+  .t3-form textarea {
+    padding: 12px 14px;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-sm);
+    background: var(--c-bg);
+    font: inherit;
+    font-size: 15px;
+    color: var(--c-ink);
+    transition: border-color .15s ease, background-color .15s ease;
+  }
+  .t3-form input:focus,
+  .t3-form textarea:focus {
+    outline: none;
+    border-color: var(--c-primary);
+    background: var(--c-card);
+  }
+  .t3-form textarea { min-height: 90px; resize: vertical; font-family: var(--font-sans); }
+  .t3-form .agree {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 12.5px;
+    color: var(--c-muted);
+    line-height: 1.55;
+    font-family: var(--font-mono);
+    letter-spacing: 0.01em;
+  }
+  .t3-form .agree input {
+    accent-color: var(--c-primary);
+    width: 16px; height: 16px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .t3-form .agree a { color: var(--c-primary); text-decoration: underline; }
+  .t3-form button[type="submit"] {
+    padding: 14px 22px;
+    background: var(--c-primary);
+    color: var(--c-on-primary);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color .15s ease;
+  }
+  .t3-form button[type="submit"]:hover { background: var(--c-primary-ink); }
+
+  /* Sticky mobile CTA bar */
+  .t3-sticky-cta {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 50;
+    background: var(--c-card);
+    border-top: 1px solid var(--c-line);
+    padding: 10px 12px;
+    gap: 8px;
+    box-shadow: 0 -6px 20px -8px rgba(28,28,28,0.18);
+  }
+  @media (max-width: 640px) {
+    .t3-sticky-cta { display: flex; }
+    body { padding-bottom: 78px; }
+  }
+  .t3-sticky-cta a {
+    flex: 1;
+    padding: 12px 10px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 13.5px;
+    text-decoration: none;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .t3-sticky-cta .primary {
+    background: var(--c-primary);
+    color: var(--c-on-primary);
+  }
+  .t3-sticky-cta .secondary {
+    background: var(--c-bg-alt);
+    color: var(--c-ink);
+    border: 1px solid var(--c-line);
+  }
+
+  /* Tighter mobile padding for sections */
+  @media (max-width: 640px) {
+    .t3-section { padding: 48px 0; }
+    .t3-hero { padding: 28px 0 40px; }
+    .t3-section h2 { font-size: 26px; }
+    .t3-calc, .t3-final, .t3-author { padding: 22px 18px; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ═════════ HEADER · canonical §33 chrome (1-в-1 из homepage.html) ═════════ -->
+<header class="mm-demo site-mm" aria-label="Главное меню Обихода">
+  <div class="mm-header">
+    <a class="mm-brand" href="/" aria-label="Обиход — на главную">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 480" class="mm-logo-svg" role="img" aria-label="Обиход"><title>Обиход</title><defs><style>.stroke-main{fill:none;stroke:currentColor;stroke-width:5.8;stroke-linecap:round;stroke-linejoin:round}.stroke-soft{fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;opacity:.75}.stroke-thick{fill:none;stroke:currentColor;stroke-width:7.8;stroke-linecap:round;stroke-linejoin:round}.fill-ink{fill:currentColor}.label-wordmark{font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:160px;font-weight:800;letter-spacing:-4px;fill:currentColor}</style></defs><g color="#2d5a3d"><g transform="translate(240 240) scale(0.36)"><circle cx="0" cy="0" r="560" class="stroke-thick"/><circle cx="0" cy="0" r="435" class="stroke-soft"/><line x1="-560" y1="0" x2="560" y2="0" class="stroke-soft"/><line x1="0" y1="-560" x2="0" y2="560" class="stroke-soft"/></g><text x="520" y="295" class="label-wordmark">ОБИХОД</text></g></svg>
+    </a>
+    <div class="mm-nav">
+      <div class="mm-has-drop">
+        <button class="mm-trigger" type="button" aria-haspopup="true">Услуги <span class="mm-chevron">▼</span></button>
+        <div class="mm-panel" role="menu">
+          <div class="mm-panel-cols">
+            <div class="mm-col">
+              <h4>Мусор и демонтаж</h4>
+              <ul>
+                <li><a href="/vyvoz-musora/"><strong>Вывоз мусора</strong><span class="mm-arrow">→</span></a></li>
+                <li><a href="/vyvoz-musora/vyvoz-stroymusora/" aria-current="page"><strong>Строительный мусор</strong><span class="mm-arrow">→</span></a></li>
+                <li><a href="/vyvoz-musora/kontejner/">Контейнеры 8 / 20 / 30 м³<span class="mm-arrow">→</span></a></li>
+                <li><a href="/vyvoz-musora/staraya-mebel/">Старая мебель и КГМ<span class="mm-arrow">→</span></a></li>
+                <li><a href="/demontazh/">Демонтаж зданий<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/vyvoz-musora/" class="mm-all">Все услуги по мусору и демонтажу →</a>
+            </div>
+            <div class="mm-col">
+              <h4>Арбористика</h4>
+              <ul>
+                <li><a href="/arboristika/">Удаление деревьев<span class="mm-arrow">→</span></a></li>
+                <li><a href="/arboristika/spil/">Спил<span class="mm-arrow">→</span></a></li>
+                <li><a href="/arboristika/kronirovanie/">Кронирование<span class="mm-arrow">→</span></a></li>
+                <li><a href="/arboristika/udalenie-pnej/">Корчевание пней<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/arboristika/" class="mm-all">Все услуги арбористики →</a>
+            </div>
+            <div class="mm-col">
+              <h4>Крыши и территория</h4>
+              <ul>
+                <li><a href="/chistka-krysh/">Чистка крыш от снега<span class="mm-arrow">→</span></a></li>
+                <li><a href="/chistka-krysh/vodostoki/">Чистка водостоков<span class="mm-arrow">→</span></a></li>
+                <li><a href="/chistka-krysh/promalp/">Промышленный альпинизм<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/chistka-krysh/" class="mm-all">Все услуги по крышам →</a>
+            </div>
+          </div>
+          <div class="mm-featured">
+            <strong>Строительный мусор · сегодня</strong>
+            <span class="muted" style="font-size: 13px;">фикс <span class="mm-price">от 3 500 ₽</span> · смета по фото за 2 минуты · выезд за 2 часа</span>
+            <a href="#foto-smeta" class="mm-btn">Прислать фото</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mm-has-drop">
+        <button class="mm-trigger" type="button" aria-haspopup="true">Районы <span class="mm-chevron">▼</span></button>
+        <div class="mm-panel" role="menu">
+          <div class="mm-panel-cols">
+            <div class="mm-col">
+              <h4>Юго-Восток МО</h4>
+              <ul>
+                <li><a href="/vyvoz-musora/ramenskoe/">Раменское<span class="mm-arrow">→</span></a></li>
+                <li><a href="/vyvoz-musora/zhukovskij/">Жуковский<span class="mm-arrow">→</span></a></li>
+                <li><a href="/vyvoz-musora/bronnitsy/">Бронницы<span class="mm-arrow">→</span></a></li>
+                <li><a href="/vyvoz-musora/lytkarino/">Лыткарино<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/raiony/yugo-vostok" class="mm-all">Все районы юго-востока →</a>
+            </div>
+            <div class="mm-col">
+              <h4>Запад МО</h4>
+              <ul>
+                <li><a href="/vyvoz-musora/odintsovo/">Одинцово<span class="mm-arrow">→</span></a></li>
+                <li><a href="/vyvoz-musora/krasnogorsk/">Красногорск<span class="mm-arrow">→</span></a></li>
+                <li><a href="/vyvoz-musora/istra/">Истра<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/raiony/zapad" class="mm-all">Все районы запада →</a>
+            </div>
+            <div class="mm-col">
+              <h4>Север МО</h4>
+              <ul>
+                <li><a href="/vyvoz-musora/khimki/">Химки<span class="mm-arrow">→</span></a></li>
+                <li><a href="/vyvoz-musora/mytishchi/">Мытищи<span class="mm-arrow">→</span></a></li>
+                <li><a href="/vyvoz-musora/pushkino/">Пушкино<span class="mm-arrow">→</span></a></li>
+              </ul>
+              <a href="/raiony/sever" class="mm-all">Все районы севера →</a>
+            </div>
+          </div>
+          <div class="mm-featured">
+            <strong>Не нашли свой район?</strong>
+            <span class="muted" style="font-size: 13px;">Возим технику до 120 км от МКАД · фикс-цена за объект</span>
+            <a href="#final-form" class="mm-btn">Запросить выезд</a>
+          </div>
+        </div>
+      </div>
+
+      <a class="mm-trigger" href="/dizain-landshafta">Дизайн ландшафта</a>
+      <a class="mm-trigger" href="/shop">Магазин</a>
+      <a class="mm-trigger" href="/kontakty">Контакты</a>
+    </div>
+    <div class="mm-right">
+      <a class="mm-phone" href="tel:+74950000000">+7 (495) 000-00-00</a>
+      <div class="auth-cta">
+        <button class="btn-login" type="button">Войти</button>
+        <button class="btn-register" type="button">Заказать звонок</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═════════ §00 · BREADCRUMBS ═════════ -->
+<div class="wrap">
+  <nav class="t3-crumbs" aria-label="Хлебные крошки">
+    <a href="/">Главная</a>
+    <span class="sep">›</span>
+    <a href="/uslugi/">Услуги</a>
+    <span class="sep">›</span>
+    <a href="/vyvoz-musora/">Вывоз мусора</a>
+    <span class="sep">›</span>
+    <span class="cur" aria-current="page">Вывоз строительного мусора</span>
+  </nav>
+</div>
+
+<!-- ═════════ §01 · HERO ═════════ -->
+<section class="t3-hero">
+  <div class="t3-hero-bg" aria-hidden="true">
+    <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 1280 600">
+      <defs>
+        <pattern id="rings" x="0" y="0" width="220" height="220" patternUnits="userSpaceOnUse">
+          <circle cx="110" cy="110" r="40" fill="none" stroke="#2d5a3d" stroke-width="0.6"/>
+          <circle cx="110" cy="110" r="65" fill="none" stroke="#2d5a3d" stroke-width="0.6"/>
+          <circle cx="110" cy="110" r="90" fill="none" stroke="#2d5a3d" stroke-width="0.6"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#rings)"/>
+    </svg>
+  </div>
+  <div class="wrap t3-hero-grid">
+    <div>
+      <div class="eyebrow">§ 01 · Под-услуга · Вывоз мусора → Строительный</div>
+      <h1>Вывоз строительного мусора <span class="accent">в Москве и&nbsp;МО</span></h1>
+
+      <div class="lead">
+        <p>Бой бетона, кирпич, штукатурка и плитка после ремонта или демонтажа — это не «обычный мусор». Везти его на районный контейнер нельзя, на полигон ТКО не пустят, а лицензия на отходы IV-V класса есть не у каждого перевозчика.</p>
+        <p>Мы возим строительный мусор <strong>с 2020 года</strong>: квартирный ремонт, стройку коттеджа, объекты УК, площадки застройщика. Газель 1,5 м³ или контейнер 20 м³ — выбор по фото и объёму. Везём на лицензированные полигоны Тимохово и Алексинский карьер, на каждый рейс — талон взвешивания. Цена в смете не меняется.</p>
+      </div>
+
+      <div class="t3-hero-cta">
+        <a class="btn btn-primary" href="#foto-smeta">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h3l2-3h8l2 3h3v12H3z"/><circle cx="12" cy="13" r="4"/></svg>
+          Рассчитать стоимость по фото
+        </a>
+        <a class="btn btn-secondary" href="#final-form">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2.03Z"/></svg>
+          Заказать звонок
+        </a>
+      </div>
+
+      <div class="t3-hero-meta">
+        <span class="mt-item">от 3 500 ₽</span>
+        <span class="mt-item">выезд за 2 часа</span>
+        <span class="mt-item">лицензия IV-V класса</span>
+        <span class="mt-item">договор и закрывашки</span>
+      </div>
+    </div>
+
+    <div>
+      <figure class="t3-hero-photo" role="img" aria-label="Вывоз строительного мусора — погрузка боя бетона в контейнер 8 м³">
+        <span class="ph-tag">stroymusor · 2026</span>
+        <span class="ph-lbl">
+          <strong>ФОТО 4:5</strong>
+          Бригада ОБИХОД грузит бой бетона и плитку в контейнер 8 м³ · документальный репортаж · alt="Вывоз строительного мусора"
+        </span>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §02 · «ЗАЧЕМ НУЖЕН» — 4 СИТУАЦИИ ═════════ -->
+<section class="t3-section">
+  <div class="wrap">
+    <div class="eyebrow">§ 02 · Когда вызывать</div>
+    <h2>Когда нужен вывоз строительного мусора отдельной услугой</h2>
+    <p class="t3-section-lead">Строительный мусор отличается от бытового по двум вещам: вес (бой бетона тяжелее картона в 30 раз) и класс отходов (нельзя на полигон ТКО, нужна лицензия IV-V класса). Поэтому собирать его в общий контейнер УК — нарушение, а самовольно везти на свалку — штраф до 100 000 ₽ для физлица. Ниже — четыре типичные ситуации, когда заказывают именно эту под-услугу.</p>
+
+    <div class="t3-when">
+      <div class="t3-when-card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21 L21 21"/><path d="M5 21 L5 8 L9 4 L9 8 L21 8 L21 21"/><path d="M11 13 L13 13"/><path d="M15 13 L17 13"/><path d="M11 17 L13 17"/><path d="M15 17 L17 17"/></svg>
+        <h3>Ремонт в квартире</h3>
+        <p>Сняли старую плитку, демонтировали стены, заменили окна. Накопилось 20-40 мешков боя — Газель с грузчиками заберёт за один заход.</p>
+      </div>
+
+      <div class="t3-when-card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 19 L21 19"/><path d="M5 19 L5 11 L12 5 L19 11 L19 19"/><path d="M9 19 L9 14 L15 14 L15 19"/></svg>
+        <h3>Стройка коттеджа</h3>
+        <p>Идёт стройка дома или бани — каждые 2-4 недели нужен контейнер 8 или 20 м³. Подвозим и забираем по графику, фикс-цена за вывоз.</p>
+      </div>
+
+      <div class="t3-when-card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5 L4 19 L12 19 L12 5 Z"/><path d="M14 9 L14 19 L20 19 L20 9 Z"/><path d="M4 5 L8 3 L12 5"/><path d="M14 9 L17 7 L20 9"/></svg>
+        <h3>Демонтаж бани или сарая</h3>
+        <p>Снос старой постройки на участке: брёвна, шифер, гнилые доски, осколки фундамента. Самосвал 30 м³ или контейнер 20 м³ с заменой.</p>
+      </div>
+
+      <div class="t3-when-card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21 L21 21"/><path d="M5 21 L5 7"/><path d="M19 21 L19 7"/><path d="M5 7 L19 7"/><path d="M3 7 L21 7 L21 4 L3 4 Z"/><path d="M9 11 L9 17"/><path d="M15 11 L15 17"/><path d="M9 14 L15 14"/></svg>
+        <h3>УК, ТСЖ, застройщик</h3>
+        <p>Капремонт фасада, замена кровли, подвал после потопа. Договор на год, ЭДО, безнал, талоны взвешивания на каждый рейс.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §03 · ПРАЙС ═════════ -->
+<section class="t3-section alt">
+  <div class="wrap">
+    <div class="eyebrow">§ 03 · Прайс · фикс-цены</div>
+    <h2>Сколько стоит вывоз строительного&nbsp;мусора</h2>
+    <p class="t3-section-lead">Цены ниже — диапазоны от минимального заказа до полностью загруженной техники. Финальная сумма фиксируется в смете после фото или замера на объекте, в договоре цифра не меняется. К базовым расценкам могут добавляться надбавки: подъём с этажа без лифта, грузчики (1 500 ₽/час за двух человек), срочный выезд в течение часа, ночные работы с 22:00 до 6:00.</p>
+
+    <div class="t3-price-wrap">
+      <table class="t3-price-table">
+        <thead>
+          <tr>
+            <th>Тип материала и техника</th>
+            <th>Объём / условия</th>
+            <th>Цена</th>
+            <th>Срок выезда</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Бой бетона, кирпич, плитка — Газель</td>
+            <td class="vol-cell">до 1,5 м³ / до 1,5 т</td>
+            <td class="price-cell">3 500 — 5 200 ₽</td>
+            <td class="time-cell">2 часа</td>
+          </tr>
+          <tr>
+            <td>Штукатурка, гипсокартон, утеплитель — Газель</td>
+            <td class="vol-cell">до 1,5 м³</td>
+            <td class="price-cell">3 800 — 5 500 ₽</td>
+            <td class="time-cell">2 часа</td>
+          </tr>
+          <tr>
+            <td>Смешанный стройМ, ЗИЛ</td>
+            <td class="vol-cell">до 5 м³ / до 5 т</td>
+            <td class="price-cell">8 800 — 13 200 ₽</td>
+            <td class="time-cell">2-3 часа</td>
+          </tr>
+          <tr>
+            <td>Контейнер 8 м³ с заменой</td>
+            <td class="vol-cell">до 5 т, до 7 дней на объекте</td>
+            <td class="price-cell">8 000 — 11 200 ₽</td>
+            <td class="time-cell">3-4 часа</td>
+          </tr>
+          <tr>
+            <td>Контейнер 20 м³ с заменой</td>
+            <td class="vol-cell">до 14 т, до 14 дней</td>
+            <td class="price-cell">14 000 — 19 800 ₽</td>
+            <td class="time-cell">в день обращения</td>
+          </tr>
+          <tr>
+            <td>Самосвал 30 м³ — после демонтажа</td>
+            <td class="vol-cell">до 25 т, выезд за 1 рейс</td>
+            <td class="price-cell">24 000 — 32 000 ₽</td>
+            <td class="time-cell">по согласованию</td>
+          </tr>
+          <tr>
+            <td>Грунт, песок, кафельная крошка — самосвал</td>
+            <td class="vol-cell">до 10 м³</td>
+            <td class="price-cell">12 500 — 17 000 ₽</td>
+            <td class="time-cell">3 часа</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="t3-price-mobile-note">↔ листайте таблицу вбок</p>
+    <p class="t3-price-note">
+      Фикс-цена в смете действует <strong>14 дней</strong>. Если за это время вы изменили объём или вид мусора — пересчитаем по новому фото без потери условий по сроку выезда. Для УК и ТСЖ — годовые расценки с понижающим коэффициентом 7-12% от прайса.
+    </p>
+  </div>
+</section>
+
+<!-- ═════════ §04 · ФОТО → СМЕТА ═════════ -->
+<section class="t3-section" id="foto-smeta">
+  <div class="wrap">
+    <div class="eyebrow">§ 04 · USP · фото → смета за 2 минуты</div>
+    <h2>Сфотографируйте — посчитаем за&nbsp;2&nbsp;минуты</h2>
+    <p class="t3-section-lead">Не нужно мерить кубы или взвешивать на глаз. Загрузите 3-5 фото с разных ракурсов: общий план кучи, ближний кадр для оценки фракции, фото подъезда к объекту. AI-расчёт распознаёт тип строительного мусора, прикидывает объём и присылает диапазон цены прямо в WhatsApp или Telegram. Диспетчер перепроверит и зафиксирует финальную сумму в смете.</p>
+
+    <form class="t3-calc" onsubmit="event.preventDefault(); alert('Демо-макет: форма не подключена. В production — отправка фото в Claude API через Payload Leads.');">
+      <div>
+        <h4 style="margin: 0 0 8px; font-size: 13px; font-family: var(--font-mono); color: var(--c-muted); letter-spacing: 0.06em; text-transform: uppercase;">1 / Загрузите 3-5 фото объекта</h4>
+        <label class="t3-dropzone" for="t3-photo-upload">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h3l2-3h8l2 3h3v12H3z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span class="t">Перетащите фото или <span class="browse">выберите</span></span>
+          <span class="h">JPG · PNG · HEIC · до 5 фото · до 10 МБ</span>
+        </label>
+        <input id="t3-photo-upload" type="file" accept="image/*" multiple style="display: none;" />
+      </div>
+
+      <div class="t3-calc-q">
+        <div>
+          <h4>2 / Несколько уточнений</h4>
+          <div class="t3-checkrow">
+            <label><input type="checkbox" name="t3-floor" /> Подъём с этажа выше 2-го (без лифта)</label>
+            <label><input type="checkbox" name="t3-mover" /> Нужны грузчики (+1 500 ₽/час, 2 человека)</label>
+            <label><input type="checkbox" name="t3-bags" /> Мусор уже расфасован в строительные мешки</label>
+            <label><input type="checkbox" name="t3-urgent" /> Срочно — выезд сегодня</label>
+          </div>
+        </div>
+
+        <div class="t3-calc-contact">
+          <h4 style="margin: 0 0 6px; font-size: 14px; font-weight: 600; color: var(--c-ink);">3 / Куда прислать смету</h4>
+          <div class="input-row">
+            <select name="t3-channel" aria-label="Канал связи">
+              <option value="whatsapp">WhatsApp</option>
+              <option value="telegram">Telegram</option>
+              <option value="phone">Звонок</option>
+              <option value="max">MAX</option>
+            </select>
+            <input type="tel" name="t3-phone" placeholder="+7 (___) ___-__-__" autocomplete="tel" required />
+          </div>
+          <button class="btn btn-primary" type="submit" style="margin-top: 12px; width: 100%; padding: 14px 22px; font-size: 15px;">
+            Получить смету за 2 минуты →
+          </button>
+          <p class="t3-calc-note">
+            <strong>2 минуты:</strong> AI обработает фото и пришлёт первый диапазон. Диспетчер перепроверит и зафиксирует цену в смете на <strong>14 дней</strong>.
+            Услуга бесплатна. Согласие с обработкой данных — <a href="/politika" style="color: var(--c-primary);">152-ФЗ</a>.
+          </p>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ═════════ §05 · METHODS · 5 МЕТОДОВ ВЫПОЛНЕНИЯ (T3 unique) ═════════ -->
+<section class="t3-section alt">
+  <div class="wrap">
+    <div class="eyebrow">§ 05 · Способы вывоза · T3-unique block</div>
+    <h2>5 способов вывезти строительный&nbsp;мусор</h2>
+    <p class="t3-section-lead">Один и тот же объём — например, 8 м³ боя после ремонта двушки — можно вывезти пятью разными способами. Цена и сроки отличаются в 2-3 раза. Ниже разница. Если не понимаете, какой подойдёт — пришлите фото, диспетчер подскажет дешевле и быстрее.</p>
+
+    <div class="t3-methods">
+      <article class="t3-method">
+        <span class="num">01 / Сами</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="6" r="2.5"/><path d="M9.5 9 L9.5 15 L11 15 L11 21"/><path d="M14.5 9 L14.5 15 L13 15 L13 21"/><path d="M9.5 11 L7 13"/><path d="M14.5 11 L17 13"/></svg>
+        <h3>Самостоятельная погрузка</h3>
+        <p>Вы сами выносите мешки и грузите в кузов. Подходит, если мусор уже расфасован и есть силы.</p>
+        <ul>
+          <li>Только подача техники</li>
+          <li>Срок — 2 часа</li>
+          <li>Без надбавок за подъём</li>
+        </ul>
+        <div class="price-row">
+          <span class="from">Базовая</span>
+          <span class="num-price">от 3 500 ₽</span>
+        </div>
+      </article>
+
+      <article class="t3-method">
+        <span class="num">02 / +Грузчики</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="5" r="2"/><circle cx="16" cy="5" r="2"/><path d="M5 11 L11 11"/><path d="M13 11 L19 11"/><path d="M5 11 L5 18 L7 18 L7 22"/><path d="M11 11 L11 18 L9 18 L9 22"/><path d="M13 11 L13 18 L15 18 L15 22"/><path d="M19 11 L19 18 L17 18 L17 22"/></svg>
+        <h3>Грузчики Обиход</h3>
+        <p>Бригада из 2-4 человек выносит мешки, разбирает крупные блоки на месте, выносит из квартиры с любого этажа.</p>
+        <ul>
+          <li>Грузчики 1 500 ₽/час за двоих</li>
+          <li>Подъём с этажа +500 ₽</li>
+          <li>Удобно для квартирного ремонта</li>
+        </ul>
+        <div class="price-row">
+          <span class="from">Базовая + 1 час</span>
+          <span class="num-price">от 5 000 ₽</span>
+        </div>
+      </article>
+
+      <article class="t3-method">
+        <span class="num">03 / Контейнер 8 м³</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8 L21 8 L21 18 L3 18 Z"/><path d="M3 8 L6 5 L18 5 L21 8"/><line x1="8" y1="13" x2="16" y2="13"/></svg>
+        <h3>Контейнер 8 м³ с заменой</h3>
+        <p>Привезём, оставим на участке или у подъезда на 1-7 дней, заберём заполненный. Удобно на квартирный ремонт или дачу.</p>
+        <ul>
+          <li>До 5 т, до 7 дней простоя</li>
+          <li>Замена пустым по запросу</li>
+          <li>Согласование с УК на 1 час</li>
+        </ul>
+        <div class="price-row">
+          <span class="from">За контейнер</span>
+          <span class="num-price">от 8 000 ₽</span>
+        </div>
+      </article>
+
+      <article class="t3-method">
+        <span class="num">04 / Контейнер 20 м³</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8 L22 8 L22 18 L2 18 Z"/><path d="M2 8 L5 4 L19 4 L22 8"/><line x1="6" y1="13" x2="18" y2="13"/><line x1="8" y1="11" x2="8" y2="15"/><line x1="12" y1="11" x2="12" y2="15"/><line x1="16" y1="11" x2="16" y2="15"/></svg>
+        <h3>Контейнер 20 м³ · стройка</h3>
+        <p>Большой объём после демонтажа дома, бани, гаража. Для УК — годовой график замен по чётному календарю.</p>
+        <ul>
+          <li>До 14 т, до 14 дней</li>
+          <li>Доставка до 70 км от МКАД</li>
+          <li>График замен для УК и застройщиков</li>
+        </ul>
+        <div class="price-row">
+          <span class="from">За контейнер</span>
+          <span class="num-price">от 14 000 ₽</span>
+        </div>
+      </article>
+
+      <article class="t3-method">
+        <span class="num">05 / Самосвал 30 м³</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 18 L14 18"/><path d="M2 18 L2 12 L9 8 L14 8 L14 18"/><path d="M14 11 L18 11 L22 14 L22 18 L14 18"/><circle cx="6" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+        <h3>Самосвал 30 м³</h3>
+        <p>Один рейс — весь снос дома, гаража или баньки. С техникой по согласованию: экскаватор, мини-погрузчик.</p>
+        <ul>
+          <li>До 25 т, выгрузка опрокидыванием</li>
+          <li>С техникой и без — по выбору</li>
+          <li>Только за городом и на стройке</li>
+        </ul>
+        <div class="price-row">
+          <span class="from">За рейс</span>
+          <span class="num-price">от 24 000 ₽</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §06 · ПРОЦЕСС · 5 ШАГОВ ═════════ -->
+<section class="t3-section">
+  <div class="wrap">
+    <div class="eyebrow">§ 06 · Как мы работаем</div>
+    <h2>5 шагов от заявки до акта</h2>
+    <p class="t3-section-lead">Без сюрпризов. На каждом шаге у вас есть точка отказа без потерь — мы не берём предоплату до согласования сметы и не начинаем работу без подписанного договора.</p>
+
+    <div class="t3-steps">
+      <article class="t3-step">
+        <h4>Заявка по фото или звонком</h4>
+        <p>Отправляете 3-5 фото в WhatsApp, Telegram, MAX или звоните диспетчеру. Ответ — за 15 минут в дневное время.</p>
+        <span class="meta">15 минут</span>
+      </article>
+      <article class="t3-step">
+        <h4>Расчёт сметы</h4>
+        <p>AI прикидывает объём и тип материала, диспетчер перепроверяет и присылает диапазон цены с разбивкой по работам.</p>
+        <span class="meta">2 минуты</span>
+      </article>
+      <article class="t3-step">
+        <h4>Договор и согласование</h4>
+        <p>Подписываем договор онлайн (физлицам — оферта, юрлицам — двусторонний с ЭДО). Цена в договоре фикс на 14 дней.</p>
+        <span class="meta">10 минут</span>
+      </article>
+      <article class="t3-step">
+        <h4>Выезд и работа</h4>
+        <p>Машина на объекте за 2 часа. Бригада в фирменной куртке, погрузка, вывоз на лицензированный полигон с талоном.</p>
+        <span class="meta">2 часа</span>
+      </article>
+      <article class="t3-step">
+        <h4>Закрывающие документы</h4>
+        <p>Акт выполненных работ, талон взвешивания, копия лицензии. Юрлицам — счёт-фактура и УПД через Диадок или СБИС.</p>
+        <span class="meta">в день вывоза</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §07 · WHY US · 6 trust-карточек ═════════ -->
+<section class="t3-section alt">
+  <div class="wrap">
+    <div class="eyebrow">§ 07 · Почему мы</div>
+    <h2>Шесть причин выбрать ОБИХОД</h2>
+    <p class="t3-section-lead">Не «мы лучшие на рынке» — мы перечисляем то, что можно проверить документами в день заявки.</p>
+
+    <div class="t3-why">
+      <div class="t3-why-item">
+        <span class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 L20 5 L20 11 C 20 16, 16 20, 12 22 C 8 20, 4 16, 4 11 L 4 5 Z"/><path d="M9 12 L11 14 L15 10"/></svg>
+        </span>
+        <div>
+          <h4>Лицензия IV-V класса</h4>
+          <p>Лицензия Росприроднадзора N… на работу с отходами IV-V класса. Копия — в каждом договоре, оригинал — на запрос.</p>
+        </div>
+      </div>
+
+      <div class="t3-why-item">
+        <span class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4 L19 4 L19 20 L5 20 Z"/><path d="M9 9 L15 9"/><path d="M9 13 L15 13"/><path d="M9 17 L13 17"/></svg>
+        </span>
+        <div>
+          <h4>Договор и закрывашки</h4>
+          <p>Физлицам — оферта в WhatsApp за 2 минуты. Юрлицам — договор с НДС, акт, счёт-фактура, УПД через ЭДО.</p>
+        </div>
+      </div>
+
+      <div class="t3-why-item">
+        <span class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7 L12 12 L15 14"/></svg>
+        </span>
+        <div>
+          <h4>Выезд за 2 часа</h4>
+          <p>В Москве и ближнем МО — 2 часа в дневное время. На аварии (потоп, обрушение) — 24/7 без надбавок к базовой цене.</p>
+        </div>
+      </div>
+
+      <div class="t3-why-item">
+        <span class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="1.5"/><path d="M3 10 L21 10"/><path d="M8 14 L16 14"/></svg>
+        </span>
+        <div>
+          <h4>Фикс-цена в смете</h4>
+          <p>Согласовали — записали в договор — везём по этой цене. Никаких «плюс ещё 2 000 за подъём» по факту.</p>
+        </div>
+      </div>
+
+      <div class="t3-why-item">
+        <span class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17 L9 11 L13 15 L21 7"/><path d="M15 7 L21 7 L21 13"/></svg>
+        </span>
+        <div>
+          <h4>Полигоны Тимохово и Алексинский</h4>
+          <p>Прямые договоры с лицензированными полигонами и МПК. Талон взвешивания на каждый рейс — для отчёта в УК или ГЖИ.</p>
+        </div>
+      </div>
+
+      <div class="t3-why-item">
+        <span class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 L15 8 L22 9 L17 14 L18 21 L12 18 L6 21 L7 14 L2 9 L9 8 Z"/></svg>
+        </span>
+        <div>
+          <h4>4.9 / 5 на 247 отзывах</h4>
+          <p>За 4 года в Москве и МО. Отзывы на Яндекс.Картах, 2ГИС и в нашей публичной странице /otzyvy/, проверяем подлинность каждого.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §08 · КЕЙСЫ · 6 ФОТО-КАРТОЧЕК ═════════ -->
+<section class="t3-section">
+  <div class="wrap">
+    <div class="eyebrow">§ 08 · Реальные объекты</div>
+    <h2>Шесть последних объектов по&nbsp;строймусору</h2>
+    <p class="t3-section-lead">Все объекты — в Москве и МО, фото с разрешения клиента. Цены и сроки — фактические из договоров. Имя клиента не публикуется по 152-ФЗ, район указан с точностью до округа или городского округа.</p>
+
+    <div class="t3-cases">
+      <a class="t3-case" href="/kejsy/stroymusor-remont-yasenevo/">
+        <div class="t3-case-photo">
+          <span class="t3-case-tag">Москва · ЮЗАО</span>
+          <span>Фото 16:10 — мешки боя в подъезде, Газель внизу</span>
+        </div>
+        <div class="t3-case-body">
+          <h3>Ремонт двушки в Ясенево</h3>
+          <p>Снос плитки в санузле, демонтаж лоджии. 22 мешка боя бетона и кафеля. Газель + 2 грузчика, подъём с 7 этажа без лифта.</p>
+          <div class="meta">
+            <span><strong>4 800 ₽</strong></span>
+            <span>2,5 часа</span>
+            <span>март 2026</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="t3-case" href="/kejsy/stroymusor-kottedzh-istra/">
+        <div class="t3-case-photo">
+          <span class="t3-case-tag">МО · Истра</span>
+          <span>Фото 16:10 — контейнер 20 м³ на стройплощадке</span>
+        </div>
+        <div class="t3-case-body">
+          <h3>Стройка коттеджа · Истринский р-н</h3>
+          <p>График замен контейнера 20 м³ каждые 12 дней на 4 месяца стройки. Опалубка, обрезки бруса, штукатурка, бетон.</p>
+          <div class="meta">
+            <span><strong>16 800 ₽ × 8</strong></span>
+            <span>4 месяца</span>
+            <span>фев — май 2026</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="t3-case" href="/kejsy/stroymusor-bania-snos/">
+        <div class="t3-case-photo">
+          <span class="t3-case-tag">МО · Раменское</span>
+          <span>Фото 16:10 — самосвал на участке СНТ</span>
+        </div>
+        <div class="t3-case-body">
+          <h3>Снос старой бани в СНТ</h3>
+          <p>Демонтаж сруба 4×5 м, разбор фундамента, вывоз шифера и брёвен. Самосвал 30 м³, 1 рейс. Спил берёзы у бани — отдельная позиция.</p>
+          <div class="meta">
+            <span><strong>28 500 ₽</strong></span>
+            <span>1 день</span>
+            <span>апрель 2026</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="t3-case" href="/kejsy/stroymusor-uk-kapremont/">
+        <div class="t3-case-photo">
+          <span class="t3-case-tag">Москва · СВАО</span>
+          <span>Фото 16:10 — погрузка кровельного шифера в ЗИЛ</span>
+        </div>
+        <div class="t3-case-body">
+          <h3>Капремонт кровли · УК «Северная»</h3>
+          <p>Замена шиферной кровли на 9-этажном доме. 6 рейсов ЗИЛа за 4 дня по графику УК. ЭДО, акт ГЖИ, талоны взвешивания.</p>
+          <div class="meta">
+            <span><strong>74 200 ₽</strong></span>
+            <span>4 дня</span>
+            <span>февраль 2026</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="t3-case" href="/kejsy/stroymusor-podval-potop/">
+        <div class="t3-case-photo">
+          <span class="t3-case-tag">Москва · ЦАО · авария</span>
+          <span>Фото 16:10 — выгрузка размокшей штукатурки ночью</span>
+        </div>
+        <div class="t3-case-body">
+          <h3>Подвал после потопа · ТСЖ</h3>
+          <p>Прорыв стояка ночью, размокла штукатурка и старая опалубка. Выезд за 90 минут, грузчики, Газель. SLA на аварию 2 часа.</p>
+          <div class="meta">
+            <span><strong>6 200 ₽</strong></span>
+            <span>2 часа</span>
+            <span>январь 2026</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="t3-case" href="/kejsy/stroymusor-novostroika-zhk/">
+        <div class="t3-case-photo">
+          <span class="t3-case-tag">МО · Красногорск</span>
+          <span>Фото 16:10 — контейнер 8 м³ на въезде в ЖК</span>
+        </div>
+        <div class="t3-case-body">
+          <h3>Отделка квартир в новостройке</h3>
+          <p>Контейнер 8 м³ на год для застройщика на сдаче ЖК. Замена 1-2 раза в неделю по запросу прорабов. Прямой договор, акты.</p>
+          <div class="meta">
+            <span><strong>9 500 ₽ × N</strong></span>
+            <span>годовой</span>
+            <span>с янв 2026</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §09 · FAQ · 4 ВОПРОСА АККОРДЕОН ═════════ -->
+<section class="t3-section alt">
+  <div class="wrap">
+    <div class="eyebrow">§ 09 · Частые вопросы</div>
+    <h2>Что обычно спрашивают про вывоз&nbsp;строймусора</h2>
+    <p class="t3-section-lead">Если вашего вопроса здесь нет — задайте его в WhatsApp или Telegram, диспетчер ответит за 15 минут.</p>
+
+    <div class="t3-faq">
+      <details>
+        <summary>Сколько стоит вывоз строительного мусора?</summary>
+        <div class="body">
+          <p>Газель 1,5 м³ — от <strong>4 500 ₽</strong>. ЗИЛ до 5 м³ — от <strong>8 800 ₽</strong>. Контейнер 8 м³ с заменой — от <strong>8 000 ₽</strong>. Контейнер 20 м³ — от <strong>14 000 ₽</strong>. Самосвал 30 м³ — от <strong>24 000 ₽</strong>.</p>
+          <p>Точную сумму зафиксируем в смете после фото или замера. Цена в договоре не меняется — то, что согласовали, и есть финал. Смета действует 14 дней.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Можно ли заказать вывоз с грузчиками?</summary>
+        <div class="body">
+          <p>Да. Бригада из 2 грузчиков выходит за <strong>1 500 ₽/час</strong>, минимальный заказ — 2 часа. Грузчики загружают мешки, выносят бой бетона из квартиры, спускают плиты с этажа, помогают на стройке коттеджа.</p>
+          <p>Если объект на 5-7 этаже без лифта — добавляется надбавка за подъём 500 ₽ за этаж. На грузовом лифте — без надбавки. На первом этаже или с участка — без надбавки.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Что вы делаете с вывезенным мусором — везёте на свалку?</summary>
+        <div class="body">
+          <p>Везём на лицензированные полигоны и МПК Московской области, с которыми у нас прямые договоры — Тимохово, Алексинский карьер, Сабурово. На каждый рейс — талон взвешивания и акт приёма.</p>
+          <p>Лицензия N… на работу с отходами IV-V класса прилагается к каждому договору. По требованию УК или ГЖИ предоставляем оригиналы документов и журнал учёта отходов.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Принимаете ли заказы от УК, ТСЖ и застройщиков?</summary>
+        <div class="body">
+          <p>Да. Юрлицам — безналичный расчёт по счёту с НДС, договор, акт выполненных работ, счёт-фактура, ЭДО через Диадок или СБИС. Постоянным клиентам — пост-оплата по итогам месяца.</p>
+          <p>Для УК и ТСЖ — годовые договоры с фиксированными расценками и графиком замен контейнеров. Для застройщиков — длинные договоры с понижающим коэффициентом 7-12% от прайса. Аванс по умолчанию 30%, по договорённости — без аванса.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §10 · AGGREGATE RATING + 2 REVIEWS ═════════ -->
+<section class="t3-section">
+  <div class="wrap">
+    <div class="eyebrow">§ 10 · Отзывы</div>
+    <h2>Что говорят о нас клиенты</h2>
+    <p class="t3-section-lead">Сводный рейтинг — на основе отзывов на Яндекс.Картах, 2ГИС и /otzyvy/. Проверяем подлинность каждого.</p>
+
+    <div class="t3-rating-wrap">
+      <div class="t3-rating-summary" itemscope itemtype="https://schema.org/AggregateRating">
+        <span class="num" itemprop="ratingValue">4.9</span>
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <span class="lbl">
+          <strong itemprop="reviewCount">247</strong> проверенных отзывов<br>
+          с 2022 года
+        </span>
+        <a href="/otzyvy/">Читать все отзывы →</a>
+        <meta itemprop="bestRating" content="5">
+        <meta itemprop="worstRating" content="1">
+      </div>
+
+      <div class="t3-reviews">
+        <article class="t3-review">
+          <div class="t3-review-head">
+            <span class="av" aria-hidden="true">М</span>
+            <div>
+              <div class="n">Михаил Т.</div>
+              <div class="meta">Ремонт квартиры · Москва</div>
+            </div>
+          </div>
+          <span class="stars" aria-label="Оценка 5 из 5">★★★★★</span>
+          <p class="text">«Снесли плитку в двух санузлах, накопилось 20 мешков боя. Прислал фото в WhatsApp в 9 утра, в 11:30 уже стояла Газель у подъезда. Двое грузчиков сами вынесли всё с 6 этажа. Сумма не выросла на ровном месте — 4 800 ₽, как в смете и было.»</p>
+          <span class="verified">Подтверждённый клиент</span>
+        </article>
+
+        <article class="t3-review">
+          <div class="t3-review-head">
+            <span class="av" aria-hidden="true">Е</span>
+            <div>
+              <div class="n">Елена С.</div>
+              <div class="meta">УК «Северная» · Москва, СВАО</div>
+            </div>
+          </div>
+          <span class="stars" aria-label="Оценка 5 из 5">★★★★★</span>
+          <p class="text">«Делали капремонт кровли, ОБИХОД возил шифер 4 дня по графику. Главное — никаких сюрпризов: каждый рейс с талоном взвешивания, документы для ГЖИ под ключ, ЭДО через Диадок. Договорились о годовом обслуживании на следующий ремонт.»</p>
+          <span class="verified">Подтверждённый клиент</span>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §11 · RELATED SUB-SERVICES · 3 КАРТОЧКИ ═════════ -->
+<section class="t3-section alt">
+  <div class="wrap">
+    <div class="eyebrow">§ 11 · Связанные под-услуги · из «Вывоз мусора»</div>
+    <h2>Часто заказывают вместе со&nbsp;строймусором</h2>
+    <p class="t3-section-lead">После ремонта или сноса часто остаётся не только бой бетона. Если вывоз связан с уборкой участка или старой мебелью — предлагаем совмещённый заказ с одной заявки и одного выезда. Цена ниже, чем на две отдельные.</p>
+
+    <div class="t3-related">
+      <a class="t3-related-card" href="/vyvoz-musora/vyvoz-sadovogo-musora/">
+        <span class="from">Вывоз мусора →</span>
+        <h3>Вывоз садового мусора</h3>
+        <p>Ветки, листва, обрезки кустарников после уборки участка или работы арбориста. Газель или ЗИЛ, можем совместить с расчисткой.</p>
+        <div class="arrow-row">
+          <span class="price">от 4 200 ₽</span>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+
+      <a class="t3-related-card" href="/vyvoz-musora/uborka-uchastka/">
+        <span class="from">Вывоз мусора →</span>
+        <h3>Уборка участка под ключ</h3>
+        <p>Расчистка территории СНТ или дома: старые постройки, кучи строймусора, бытовой хлам, бурелом. Бригада + техника на день.</p>
+        <div class="arrow-row">
+          <span class="price">от 12 000 ₽</span>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+
+      <a class="t3-related-card" href="/vyvoz-musora/staraya-mebel/">
+        <span class="from">Вывоз мусора →</span>
+        <h3>Вывоз старой мебели и КГМ</h3>
+        <p>Холодильник, диван, шкаф, ванна, унитаз, котёл. С разборкой на месте, с подъёмом из квартиры или с участка.</p>
+        <div class="arrow-row">
+          <span class="price">от 2 500 ₽ / ед.</span>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §12 · AUTHOR BLOCK · E-E-A-T ═════════ -->
+<section class="t3-section">
+  <div class="wrap">
+    <div class="eyebrow">§ 12 · Автор материала · E-E-A-T</div>
+    <h2>Кто отвечает за этот раздел</h2>
+    <p class="t3-section-lead">Контент про вывоз строительного мусора готовит и обновляет диспетчер, который сам ездит на объекты. Не редактор и не маркетолог.</p>
+
+    <div class="t3-author">
+      <div class="t3-author-photo" role="img" aria-label="Алексей Семёнов — фото">
+        <span>
+          <strong>ФОТО 1:1</strong>
+          Алексей Семёнов · диспетчер ОБИХОД · документальный портрет
+        </span>
+      </div>
+      <div class="t3-author-body">
+        <span class="role">Диспетчер · 6 лет в логистике отходов</span>
+        <h3>Алексей Семёнов</h3>
+        <p class="pos">Старший диспетчер ОБИХОД, отвечает за маршруты и сметы по строительному мусору в Москве и МО.</p>
+        <p>До прихода в ОБИХОД работал начальником смены на МПК «Тимохово» — лицензированном полигоне для отходов IV-V класса. Знает отрасль изнутри: как взвешивают, как принимают талоны, что считается строймусором, а что — нет. Все цены в смете и текст этой страницы согласованы с Алексеем.</p>
+        <p class="reviewed">
+          <strong>Текст подготовлен:</strong> 2026-03-20 · Алексей Семёнов<br>
+          <strong>Последнее обновление:</strong> 2026-05-08<br>
+          <strong>Следующая проверка:</strong> 2026-08-08
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ §13 · FINAL CTA ═════════ -->
+<section class="t3-section alt" id="final-form">
+  <div class="wrap">
+    <div class="eyebrow">§ 13 · Заявка на вывоз</div>
+    <h2>Оставьте заявку — диспетчер перезвонит за&nbsp;15&nbsp;минут</h2>
+    <p class="t3-section-lead">Предпочитаете не загружать фото? Заполните короткую форму — диспетчер перезвонит, уточнит детали и пришлёт смету в WhatsApp или Telegram.</p>
+
+    <div class="t3-final">
+      <form class="t3-form" onsubmit="event.preventDefault(); alert('Демо-макет: форма не подключена. В production — отправка в Payload Leads + Telegram.');">
+        <div class="field">
+          <label for="t3-name">Как к вам обращаться <span class="req">*</span></label>
+          <input id="t3-name" type="text" name="t3-name" placeholder="Иван" autocomplete="given-name" required />
+        </div>
+        <div class="field">
+          <label for="t3-final-phone">Телефон или мессенджер <span class="req">*</span></label>
+          <input id="t3-final-phone" type="tel" name="t3-final-phone" placeholder="+7 (___) ___-__-__" autocomplete="tel" required />
+        </div>
+        <div class="field">
+          <label for="t3-msg">Что нужно вывезти (по желанию)</label>
+          <textarea id="t3-msg" name="t3-msg" placeholder="Например: бой плитки и штукатурки после ремонта санузла, около 12 мешков, 5 этаж без лифта"></textarea>
+        </div>
+        <label class="agree">
+          <input type="checkbox" required />
+          <span>Согласен на обработку персональных данных по&nbsp;<a href="/politika">152-ФЗ</a> и принимаю условия <a href="/oferta">оферты</a>.</span>
+        </label>
+        <button type="submit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12 L19 12"/><path d="M13 5 L20 12 L13 19"/></svg>
+          Отправить заявку
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ FOOTER · canonical §33.4.2 (1-в-1 из homepage.html) ═════════ -->
+<div class="site-footer-mock">
+  <div class="cols">
+    <div class="brand-col">
+      <div class="mark-row">
+        <span class="mark">О</span>
+        <div>
+          <div class="name">ОБИХОД</div>
+          <div class="tagline">Хозяйство в надёжных руках</div>
+        </div>
+      </div>
+      <p>Комплексный подрядчик 4-в-1 для Москвы и МО: арбористика, чистка крыш, вывоз мусора, демонтаж. Плюс магазин саженцев и дизайн ландшафта. С 2020 года.</p>
+      <div class="contacts">
+        <a href="tel:+74950000000">+7 (495) 000-00-00</a>
+        <a href="tel:+79260000000">+7 (926) 000-00-00 · МО</a>
+        <a href="mailto:hi@obikhod.ru">hi@obikhod.ru</a>
+        <span style="opacity: 0.7;">МО, Раменский р-н, ул. Питомниковая, 3</span>
+        <span style="opacity: 0.7; font-size: 12px;">пн-сб 8:00–22:00, вс 10:00–18:00 · 24/7 на аварии</span>
+      </div>
+    </div>
+
+    <div>
+      <h5>Услуги</h5>
+      <ul>
+        <li><a href="/vyvoz-musora/">Вывоз мусора</a></li>
+        <li><a href="/vyvoz-musora/vyvoz-stroymusora/" aria-current="page">Строительный мусор</a></li>
+        <li><a href="/vyvoz-musora/staraya-mebel/">Старая мебель и КГМ</a></li>
+        <li><a href="/arboristika/">Арбористика</a></li>
+        <li><a href="/chistka-krysh/">Чистка крыш</a></li>
+        <li><a href="/demontazh/">Демонтаж</a></li>
+        <li><a href="/foto-smeta" style="opacity: 0.65;">Фото → смета →</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h5>Районы</h5>
+      <ul>
+        <li><a href="/vyvoz-musora/ramenskoe/">Раменское</a></li>
+        <li><a href="/vyvoz-musora/zhukovskij/">Жуковский</a></li>
+        <li><a href="/vyvoz-musora/odintsovo/">Одинцово</a></li>
+        <li><a href="/vyvoz-musora/krasnogorsk/">Красногорск</a></li>
+        <li><a href="/vyvoz-musora/khimki/">Химки</a></li>
+        <li><a href="/raiony" style="opacity: 0.65;">Все 30 районов →</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h5>B2B и ресурсы</h5>
+      <ul>
+        <li><a href="/b2b/uk-tszh">УК / ТСЖ</a></li>
+        <li><a href="/b2b/fm">Facility Management</a></li>
+        <li><a href="/b2b/zastroyshchik">Застройщикам</a></li>
+        <li><a href="/b2b/gostorgi">Госзакупки</a></li>
+        <li><a href="/kejsy">Кейсы</a></li>
+        <li><a href="/blog">Блог</a></li>
+        <li><a href="/otzyvy/">Отзывы</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="legal">
+    <span class="copy">© 2026 ООО «Обиход»</span>
+    <span class="sep">·</span>
+    <span>ИНН 1111111111</span>
+    <span class="sep">·</span>
+    <span>ОГРН 1111111111111</span>
+    <span class="sep">·</span>
+    <span>Лицензия N… на отходы IV-V класса</span>
+    <span class="sep">·</span>
+    <a href="/politika">Политика конфиденциальности</a>
+    <span class="sep">·</span>
+    <a href="/oferta">Публичная оферта</a>
+  </div>
+</div>
+
+<!-- Sticky CTA bar только для mobile (≤640px) -->
+<div class="t3-sticky-cta" role="region" aria-label="Быстрые действия">
+  <a class="primary" href="#foto-smeta">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h3l2-3h8l2 3h3v12H3z"/><circle cx="12" cy="13" r="4"/></svg>
+    Прислать фото
+  </a>
+  <a class="secondary" href="tel:+74950000000">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2.03Z"/></svg>
+    Позвонить
+  </a>
+</div>
+
+<!-- Подсказка для презентации макета -->
+<div class="hp-note">
+  <strong>МАКЕТ · НЕ ПРОДАКШН</strong><br>
+  Template T3 «Sub-service» · 13 секций (без city-ссылок)<br>
+  Пример: «Вывоз строительного мусора» · /vyvoz-musora/vyvoz-stroymusora/<br>
+  CSS из <a href="../design-system/brand-guide.html">brand-guide.html</a> v2.2 + локальные T3-стили<br>
+  Контракт: <a href="../specs/EPIC-SEO-USLUGI/US-2-newui-templates/sa-seo.md">sa-seo.md §«T3 Sub»</a>
+</div>
+
+<!-- Mobile mega-menu toggle (как в homepage.html) -->
+<script>
+  function isMobile(){ return window.matchMedia('(max-width: 900px)').matches; }
+  document.querySelectorAll('header.site-mm .mm-has-drop > .mm-trigger').forEach(function(t){
+    t.addEventListener('click', function(e){
+      if (!isMobile()) return;
+      e.preventDefault();
+      var parent = t.closest('.mm-has-drop');
+      var wasOpen = parent.classList.contains('is-open');
+      document.querySelectorAll('.mm-has-drop.is-open').forEach(function(p){ p.classList.remove('is-open'); });
+      if (!wasOpen) parent.classList.add('is-open');
+    });
+  });
+  document.addEventListener('click', function(e){
+    if (!isMobile()) return;
+    if (!e.target.closest('.mm-has-drop')) {
+      document.querySelectorAll('.mm-has-drop.is-open').forEach(function(p){ p.classList.remove('is-open'); });
+    }
+  });
+</script>
+
+</body>
+</html>
