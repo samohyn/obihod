@@ -3175,6 +3175,20 @@
     color: var(--c-muted);
     margin: 0 0 12px;
   }
+  .mm-subheader {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+    margin: 14px 0 6px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--c-line);
+  }
+  .mm-subheader:first-child {
+    margin-top: 0;
+  }
   .mm-col ul {
     list-style: none;
     padding: 0;
