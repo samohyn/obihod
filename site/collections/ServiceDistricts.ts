@@ -87,9 +87,7 @@ const computeUniquenessScore: CollectionBeforeValidateHook = async ({ data, orig
       limit: 50,
       depth: 0,
       pagination: false,
-      where: currentId
-        ? { id: { not_equals: currentId } }
-        : {},
+      where: currentId ? { id: { not_equals: currentId } } : {},
     })
     for (const doc of others.docs) {
       const d = doc as {

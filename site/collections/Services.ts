@@ -29,9 +29,7 @@ const validateSubServiceSlug = async (value: unknown, args: unknown): Promise<tr
     return 'Slug должен быть kebab-case (a-z, 0-9, -)'
   }
   const req = (args as { req?: { payload?: unknown } }).req
-  const payload = req?.payload as
-    | { find: (a: unknown) => Promise<{ docs: unknown[] }> }
-    | undefined
+  const payload = req?.payload as { find: (a: unknown) => Promise<{ docs: unknown[] }> } | undefined
   if (!payload) return true
   try {
     const collision = await payload.find({

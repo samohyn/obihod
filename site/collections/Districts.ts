@@ -25,9 +25,7 @@ const validateDistrictSlug = async (value: unknown, args: unknown): Promise<true
   const req = (args as { req?: { payload?: unknown } }).req
   const payload = req?.payload as
     | {
-        find: (
-          a: unknown,
-        ) => Promise<{
+        find: (a: unknown) => Promise<{
           docs: { slug?: string; subServices?: { slug?: string }[] | null }[]
         }>
       }
