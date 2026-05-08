@@ -6,6 +6,7 @@ import { LeadForm } from '@/blocks/LeadForm'
 import { CtaBanner } from '@/blocks/CtaBanner'
 import { Faq } from '@/blocks/Faq'
 import { buildPublishGate } from '@/lib/admin/publish-gate'
+import { tfIdfUniqueness, lexicalToPlainText } from '@/lib/seo/uniqueness'
 
 /**
  * ServiceDistricts-специфичный publish-gate (legacy-правила из R&D M1):
@@ -26,6 +27,92 @@ const requireGatesForPublish: CollectionBeforeValidateHook = async ({ data }) =>
       throw new Error('Минимум 2 локальных FAQ для публикации.')
     }
   }
+  return data
+}
+
+/**
+ * US-3 §контракт — TF-IDF uniqueness scoring против шаблонного ядра.
+ *
+ * Локальный текст SD (leadParagraph + localFaq + landmarks) сравниваем с
+ * baseline корпусом — другие SD того же pillar с заполненным leadParagraph.
+ * Получаем 0..100, пишем в `data.uniquenessScore` (read-only sidebar field).
+ *
+ * Запускается ВТОРЫМ в beforeValidate (после requireGatesForPublish и до
+ * buildPublishGate), чтобы downstream-gates могли читать свежий score.
+ *
+ * Failure-mode: при ошибке payload.find или пустом локальном тексте — score=0,
+ * не throw'аем (uniqueness — soft gate, не блокирует save для draft).
+ */
+const computeUniquenessScore: CollectionBeforeValidateHook = async ({ data, originalDoc, req }) => {
+  if (!data) return data
+  const localTextParts: string[] = []
+  // leadParagraph (richText / Lexical)
+  if (data.leadParagraph) {
+    const root = (data.leadParagraph as { root?: unknown }).root
+    if (root) localTextParts.push(lexicalToPlainText(root))
+  }
+  // localFaq[]
+  if (Array.isArray(data.localFaq)) {
+    for (const f of data.localFaq) {
+      if (f && typeof f === 'object') {
+        const item = f as { question?: string; answer?: { root?: unknown } }
+        if (item.question) localTextParts.push(item.question)
+        if (item.answer?.root) localTextParts.push(lexicalToPlainText(item.answer.root))
+      }
+    }
+  }
+  // localLandmarks[]
+  if (Array.isArray(data.localLandmarks)) {
+    for (const l of data.localLandmarks) {
+      if (l && typeof l === 'object') {
+        const lm = (l as { landmarkName?: string }).landmarkName
+        if (lm) localTextParts.push(lm)
+      }
+    }
+  }
+  if (data.localPriceNote) localTextParts.push(String(data.localPriceNote))
+
+  const localText = localTextParts.join(' ').trim()
+  if (!localText) {
+    data.uniquenessScore = 0
+    return data
+  }
+
+  // Загружаем baseline: до 50 других SD с заполненным leadParagraph.
+  let baseline: string[] = []
+  try {
+    const currentId = (originalDoc as { id?: number | string } | null | undefined)?.id
+    const others = await req.payload.find({
+      collection: 'service-districts',
+      limit: 50,
+      depth: 0,
+      pagination: false,
+      where: currentId
+        ? { id: { not_equals: currentId } }
+        : {},
+    })
+    for (const doc of others.docs) {
+      const d = doc as {
+        leadParagraph?: { root?: unknown } | null
+        localFaq?: { question?: string; answer?: { root?: unknown } | null }[] | null
+      }
+      const parts: string[] = []
+      if (d.leadParagraph?.root) parts.push(lexicalToPlainText(d.leadParagraph.root))
+      if (Array.isArray(d.localFaq)) {
+        for (const f of d.localFaq) {
+          if (f?.question) parts.push(f.question)
+          if (f?.answer?.root) parts.push(lexicalToPlainText(f.answer.root))
+        }
+      }
+      const txt = parts.join(' ').trim()
+      if (txt) baseline.push(txt)
+    }
+  } catch (e) {
+    console.warn('[service-districts.computeUniqueness] baseline load failed:', e)
+    baseline = []
+  }
+
+  data.uniquenessScore = tfIdfUniqueness(localText, baseline)
   return data
 }
 
@@ -318,7 +405,7 @@ export const ServiceDistricts: CollectionConfig = {
     },
   ],
   hooks: {
-    beforeValidate: [requireGatesForPublish, buildPublishGate()],
+    beforeValidate: [requireGatesForPublish, computeUniquenessScore, buildPublishGate()],
     beforeChange: [
       async ({ data, req }) => {
         if (!data) return data
