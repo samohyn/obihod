@@ -10,6 +10,50 @@ import {
   Breadcrumbs,
 } from '@/blocks'
 
+/**
+ * US-3 ADR-0019 namespace-disjoint guard (зеркало Services.subServices[].slug).
+ *
+ * Districts.slug должен быть disjoint от любого published Service.subServices[].slug.
+ * Иначе resolver `[service]/[slug]/page.tsx` не сможет однозначно решить T3↔T4
+ * для одной и той же `(pillar, slug)` пары.
+ */
+const validateDistrictSlug = async (value: unknown, args: unknown): Promise<true | string> => {
+  if (typeof value !== 'string' || value === '') return true
+  if (!/^[a-z0-9-]+$/.test(value)) {
+    return 'Slug должен быть kebab-case (a-z, 0-9, -)'
+  }
+  const req = (args as { req?: { payload?: unknown } }).req
+  const payload = req?.payload as
+    | {
+        find: (
+          a: unknown,
+        ) => Promise<{
+          docs: { slug?: string; subServices?: { slug?: string }[] | null }[]
+        }>
+      }
+    | undefined
+  if (!payload) return true
+  try {
+    const all = await payload.find({
+      collection: 'services',
+      limit: 100,
+      pagination: false,
+      depth: 0,
+    })
+    for (const svc of all.docs) {
+      const subs = Array.isArray(svc.subServices) ? svc.subServices : []
+      for (const s of subs) {
+        if (s?.slug === value) {
+          return `Slug «${value}» уже используется в Services.${svc.slug ?? '?'}.subServices. District slugs должны быть disjoint от sub-service slugs (ADR-0019).`
+        }
+      }
+    }
+  } catch {
+    // pre-bootstrap (миграции, seed) — fall through.
+  }
+  return true
+}
+
 export const Districts: CollectionConfig = {
   slug: 'districts',
   labels: { singular: 'Район', plural: 'Районы' },
@@ -30,7 +74,18 @@ export const Districts: CollectionConfig = {
           label: 'Основные',
           description: 'Slug, падежи названия, приоритет покрытия.',
           fields: [
-            { name: 'slug', type: 'text', required: true, unique: true, index: true },
+            {
+              name: 'slug',
+              type: 'text',
+              required: true,
+              unique: true,
+              index: true,
+              validate: validateDistrictSlug,
+              admin: {
+                description:
+                  'Часть URL: /<service>/<slug>/. Должен быть disjoint от services.subServices[].slug (ADR-0019).',
+              },
+            },
             {
               name: 'nameNominative',
               type: 'text',

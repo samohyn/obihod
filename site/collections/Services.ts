@@ -13,6 +13,42 @@ import {
   Calculator,
 } from '@/blocks'
 
+/**
+ * US-3 ADR-0019 namespace-disjoint guard.
+ *
+ * Sub-service slug должен:
+ *   1) быть kebab-case [a-z0-9-]+
+ *   2) НЕ совпадать ни с одним districts.slug (иначе collision T3↔T4 в
+ *      `[service]/[slug]/page.tsx` resolver).
+ *
+ * Проверка выполняется на app-level (validate-hook) + CI-level (lint:slug).
+ */
+const validateSubServiceSlug = async (value: unknown, args: unknown): Promise<true | string> => {
+  if (typeof value !== 'string' || value === '') return true
+  if (!/^[a-z0-9-]+$/.test(value)) {
+    return 'Slug должен быть kebab-case (a-z, 0-9, -)'
+  }
+  const req = (args as { req?: { payload?: unknown } }).req
+  const payload = req?.payload as
+    | { find: (a: unknown) => Promise<{ docs: unknown[] }> }
+    | undefined
+  if (!payload) return true
+  try {
+    const collision = await payload.find({
+      collection: 'districts',
+      where: { slug: { equals: value } },
+      limit: 1,
+      depth: 0,
+    })
+    if (collision.docs.length > 0) {
+      return `Slug «${value}» уже используется в Districts. Sub-service slugs должны быть disjoint от city slugs (ADR-0019).`
+    }
+  } catch {
+    // payload.find недоступен (миграции/seed без полного req) — gracefully пропускаем.
+  }
+  return true
+}
+
 export const Services: CollectionConfig = {
   slug: 'services',
   labels: { singular: 'Услуга', plural: 'Услуги' },
@@ -165,7 +201,11 @@ export const Services: CollectionConfig = {
                   name: 'slug',
                   type: 'text',
                   required: true,
-                  admin: { description: 'Часть URL: /<service>/<slug>/.' },
+                  validate: validateSubServiceSlug,
+                  admin: {
+                    description:
+                      'Часть URL: /<service>/<slug>/. Должен быть disjoint от districts.slug (ADR-0019).',
+                  },
                 },
                 {
                   name: 'title',
@@ -321,6 +361,18 @@ export const Services: CollectionConfig = {
     // ─── SEO override поля (US-5 REQ-5.7) — в sidebar, вне tabs ───
     // Используются точечно когда автогенерируемые metaTitle/metaDescription
     // или canonical нуждаются в корректировке без изменения main-полей.
+    // US-3: reviewedBy — E-E-A-T leverage для T2/T3 (sa-seo §контракт).
+    {
+      name: 'reviewedBy',
+      type: 'relationship',
+      relationTo: 'authors',
+      hasMany: false,
+      admin: {
+        position: 'sidebar',
+        description:
+          'Автор-эксперт, проверивший контент (E-E-A-T). Попадает в Article.author / reviewedBy для schema.org.',
+      },
+    },
     {
       name: 'canonicalOverride',
       type: 'text',
