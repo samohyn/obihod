@@ -253,12 +253,12 @@ jobs:
              pnpm dlx tsx --require=\$SHIM scripts/seed-sd-content-class-a.ts || echo '(seed-sd-class-a skip)'
 
              echo '=== Revalidate sitemap + service-districts (EPIC-SEO-USLUGI) ==='
-             if [ -n "\${REVALIDATE_SECRET:-}" ] && [ -n "\${SITE_URL:-}" ]; then
-               curl -fsS -X POST "\${SITE_URL}/api/revalidate?tag=sitemap" -H "x-revalidate-secret: \${REVALIDATE_SECRET}" || echo '(sitemap revalidate skip)'
-               curl -fsS -X POST "\${SITE_URL}/api/revalidate?tag=service-districts" -H "x-revalidate-secret: \${REVALIDATE_SECRET}" || echo '(SD revalidate skip)'
-               echo "  sitemap + service-districts cache revalidated"
+             if [ -n \"\${REVALIDATE_SECRET:-}\" ] && [ -n \"\${SITE_URL:-}\" ]; then
+               curl -fsS -X POST \"\${SITE_URL}/api/revalidate?tag=sitemap\" -H \"x-revalidate-secret: \${REVALIDATE_SECRET}\" || echo '(sitemap revalidate skip)'
+               curl -fsS -X POST \"\${SITE_URL}/api/revalidate?tag=service-districts\" -H \"x-revalidate-secret: \${REVALIDATE_SECRET}\" || echo '(SD revalidate skip)'
+               echo \"  sitemap + service-districts cache revalidated\"
              else
-               echo "  (revalidate skip — REVALIDATE_SECRET/SITE_URL not set)"
+               echo \"  (revalidate skip — REVALIDATE_SECRET/SITE_URL not set)\"
              fi
 
              echo '=== DONE ==='
