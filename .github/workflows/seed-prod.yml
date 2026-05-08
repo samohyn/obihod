@@ -95,7 +95,7 @@ jobs:
              rm -f \$ENV_FILE.bak
              echo 'TELEGRAM env vars injected.'"
 
-      - name: "Upload scripts/ + content/ + lib/ + blocks/ + tsconfig.json to VPS (ADR-0016 Phase 1)"
+      - name: "Upload scripts/ + content/ + lib/ + blocks/ + tsconfig.json + seosite/strategy/ to VPS"
         run: |
           set -eo pipefail
           # ADR-0016 Phase 1: schema lifecycle moved to deploy.yml — здесь
@@ -104,13 +104,17 @@ jobs:
           #   content/ — Stage 0/1/2/3 fixtures (НЕ в deploy.yml filelist)
           #   lib/ + blocks/ — TS path aliases @/lib/* + @/blocks/* used by tsx
           #   tsconfig.json — paths resolution (НЕ в deploy.yml filelist; sustained backlog)
+          #   seosite/strategy/ — inventory.json для EPIC-SEO-USLUGI seed-cities/sd-bulk/sd-class-a
+          #     seed-cities.ts резолвит path.resolve(cwd(),'..','seosite','strategy','03-uslugi-url-inventory.json')
+          #     cwd() = $BP/current → ищет $BP/seosite/strategy/03-uslugi-url-inventory.json
           # migrations/ убраны — schema apply делает deploy.yml (single source).
           ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
             ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
             "mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/current/scripts \
                       ${{ secrets.BEGET_DEPLOY_PATH }}/current/content \
                       ${{ secrets.BEGET_DEPLOY_PATH }}/current/lib \
-                      ${{ secrets.BEGET_DEPLOY_PATH }}/current/blocks"
+                      ${{ secrets.BEGET_DEPLOY_PATH }}/current/blocks \
+                      ${{ secrets.BEGET_DEPLOY_PATH }}/seosite/strategy"
           for dir in scripts content lib blocks; do
             rsync -avz --delete \
               -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o StrictHostKeyChecking=no" \
@@ -121,6 +125,11 @@ jobs:
             -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o StrictHostKeyChecking=no" \
             site/tsconfig.json \
             ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/tsconfig.json
+          # EPIC-SEO-USLUGI inventory — рядом с releases/ (persistent вне releases)
+          rsync -avz \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o StrictHostKeyChecking=no" \
+            seosite/strategy/03-uslugi-url-inventory.json \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/seosite/strategy/03-uslugi-url-inventory.json
 
       - name: "Verify schema present (ADR-0016 Phase 1: deploy.yml owns schema lifecycle)"
         run: |
@@ -232,6 +241,24 @@ jobs:
                echo \"  sitemap + service-districts cache revalidated\"
              else
                echo \"  (revalidate skip — REVALIDATE_SECRET/SITE_URL not set)\"
+             fi
+
+             echo '=== EPIC-SEO-USLUGI US-3: seed-cities (+23 приоритетных города → итого 30) ==='
+             pnpm dlx tsx --require=\$SHIM scripts/seed-cities.ts || echo '(seed-cities skip)'
+
+             echo '=== EPIC-SEO-USLUGI US-3: seed-sd-bulk (5 pillar × 30 cities = 150 ServiceDistricts) ==='
+             pnpm dlx tsx --require=\$SHIM scripts/seed-sd-bulk.ts || echo '(seed-sd-bulk skip)'
+
+             echo '=== EPIC-SEO-USLUGI US-5 Phase A: seed-sd-class-a (60 Class-A SD content) ==='
+             pnpm dlx tsx --require=\$SHIM scripts/seed-sd-content-class-a.ts || echo '(seed-sd-class-a skip)'
+
+             echo '=== Revalidate sitemap + service-districts (EPIC-SEO-USLUGI) ==='
+             if [ -n "\${REVALIDATE_SECRET:-}" ] && [ -n "\${SITE_URL:-}" ]; then
+               curl -fsS -X POST "\${SITE_URL}/api/revalidate?tag=sitemap" -H "x-revalidate-secret: \${REVALIDATE_SECRET}" || echo '(sitemap revalidate skip)'
+               curl -fsS -X POST "\${SITE_URL}/api/revalidate?tag=service-districts" -H "x-revalidate-secret: \${REVALIDATE_SECRET}" || echo '(SD revalidate skip)'
+               echo "  sitemap + service-districts cache revalidated"
+             else
+               echo "  (revalidate skip — REVALIDATE_SECRET/SITE_URL not set)"
              fi
 
              echo '=== DONE ==='
