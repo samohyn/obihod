@@ -1,0 +1,110 @@
+{
+  "$schema": "https://obikhod.ru/schemas/uslugi-url-inventory.v1.json",
+  "version": "1.0",
+  "generated": "2026-05-08",
+  "owner": "poseo",
+  "epic": "EPIC-SEO-USLUGI",
+  "totalUrls": 191,
+  "breakdown": {
+    "T1_HUB": 1,
+    "T2_PILLAR": 5,
+    "T3_SUB": 35,
+    "T4_SD": 150
+  },
+  "deferred": {
+    "comment": "3 sub-slugs из ADR-0018 sustained как live URL, но out-of-scope EPIC-SEO-USLUGI — не редизайнятся в этом эпике, останутся как Stage 1-3 templates",
+    "urls": [
+      "/chistka-krysh/cena/",
+      "/chistka-krysh/v-moskve/",
+      "/chistka-krysh/uborka-snega-uchastok/"
+    ]
+  },
+  "cities30": [
+    { "slug": "balashikha", "nominative": "Балашиха", "prepositional": "Балашихе", "class": "A", "rank": 1, "sustained": false },
+    { "slug": "mytishchi", "nominative": "Мытищи", "prepositional": "Мытищах", "class": "A", "rank": 2, "sustained": true },
+    { "slug": "ramenskoye", "nominative": "Раменское", "prepositional": "Раменском", "class": "A", "rank": 3, "sustained": true },
+    { "slug": "odincovo", "nominative": "Одинцово", "prepositional": "Одинцово", "class": "A", "rank": 4, "sustained": true },
+    { "slug": "krasnogorsk", "nominative": "Красногорск", "prepositional": "Красногорске", "class": "A", "rank": 5, "sustained": true },
+    { "slug": "podolsk", "nominative": "Подольск", "prepositional": "Подольске", "class": "A", "rank": 6, "sustained": false },
+    { "slug": "khimki", "nominative": "Химки", "prepositional": "Химках", "class": "A", "rank": 7, "sustained": true },
+    { "slug": "korolyov", "nominative": "Королёв", "prepositional": "Королёве", "class": "A", "rank": 8, "sustained": false },
+    { "slug": "lyubertsy", "nominative": "Люберцы", "prepositional": "Люберцах", "class": "A", "rank": 9, "sustained": false },
+    { "slug": "elektrostal", "nominative": "Электросталь", "prepositional": "Электростали", "class": "A", "rank": 10, "sustained": false },
+    { "slug": "reutov", "nominative": "Реутов", "prepositional": "Реутове", "class": "A", "rank": 11, "sustained": false },
+    { "slug": "dolgoprudnyj", "nominative": "Долгопрудный", "prepositional": "Долгопрудном", "class": "A", "rank": 12, "sustained": false },
+    { "slug": "istra", "nominative": "Истра", "prepositional": "Истре", "class": "B", "rank": 13, "sustained": true },
+    { "slug": "pushkino", "nominative": "Пушкино", "prepositional": "Пушкино", "class": "B", "rank": 14, "sustained": true },
+    { "slug": "zhukovskij", "nominative": "Жуковский", "prepositional": "Жуковском", "class": "B", "rank": 15, "sustained": true },
+    { "slug": "serpukhov", "nominative": "Серпухов", "prepositional": "Серпухове", "class": "B", "rank": 16, "sustained": false },
+    { "slug": "sergiev-posad", "nominative": "Сергиев Посад", "prepositional": "Сергиевом Посаде", "class": "B", "rank": 17, "sustained": false },
+    { "slug": "noginsk", "nominative": "Ногинск", "prepositional": "Ногинске", "class": "B", "rank": 18, "sustained": false },
+    { "slug": "orekhovo-zuevo", "nominative": "Орехово-Зуево", "prepositional": "Орехово-Зуево", "class": "B", "rank": 19, "sustained": false },
+    { "slug": "dmitrov", "nominative": "Дмитров", "prepositional": "Дмитрове", "class": "B", "rank": 20, "sustained": false },
+    { "slug": "chekhov", "nominative": "Чехов", "prepositional": "Чехове", "class": "B", "rank": 21, "sustained": false },
+    { "slug": "vidnoe", "nominative": "Видное", "prepositional": "Видном", "class": "B", "rank": 22, "sustained": false },
+    { "slug": "domodedovo", "nominative": "Домодедово", "prepositional": "Домодедово", "class": "B", "rank": 23, "sustained": false },
+    { "slug": "voskresensk", "nominative": "Воскресенск", "prepositional": "Воскресенске", "class": "B", "rank": 24, "sustained": false },
+    { "slug": "klin", "nominative": "Клин", "prepositional": "Клину", "class": "B", "rank": 25, "sustained": false },
+    { "slug": "shchelkovo", "nominative": "Щёлково", "prepositional": "Щёлково", "class": "B", "rank": 26, "sustained": false },
+    { "slug": "lobnya", "nominative": "Лобня", "prepositional": "Лобне", "class": "B", "rank": 27, "sustained": false },
+    { "slug": "kotelniki", "nominative": "Котельники", "prepositional": "Котельниках", "class": "B", "rank": 28, "sustained": false },
+    { "slug": "fryazino", "nominative": "Фрязино", "prepositional": "Фрязино", "class": "B", "rank": 29, "sustained": false },
+    { "slug": "krasnoznamensk", "nominative": "Краснознаменск", "prepositional": "Краснознаменске", "class": "B", "rank": 30, "sustained": false }
+  ],
+  "urls": [
+    { "url": "/uslugi/", "pattern": "T1_HUB", "pillar": null, "subOrCity": null, "cluster": "uslugi-hub", "sitemapPriority": 0.9, "sitemapChangefreq": "weekly", "expectedTemplate": "T1_HUB" },
+
+    { "url": "/vyvoz-musora/", "pattern": "T2_PILLAR", "pillar": "vyvoz-musora", "subOrCity": null, "cluster": "C-vyvoz-musora-pillar", "sitemapPriority": 0.9, "sitemapChangefreq": "weekly", "expectedTemplate": "T2_PILLAR" },
+    { "url": "/arboristika/", "pattern": "T2_PILLAR", "pillar": "arboristika", "subOrCity": null, "cluster": "C-arboristika-pillar", "sitemapPriority": 0.9, "sitemapChangefreq": "weekly", "expectedTemplate": "T2_PILLAR" },
+    { "url": "/demontazh/", "pattern": "T2_PILLAR", "pillar": "demontazh", "subOrCity": null, "cluster": "C-demontazh-pillar", "sitemapPriority": 0.9, "sitemapChangefreq": "weekly", "expectedTemplate": "T2_PILLAR" },
+    { "url": "/chistka-krysh/", "pattern": "T2_PILLAR", "pillar": "chistka-krysh", "subOrCity": null, "cluster": "C-chistka-krysh-pillar", "sitemapPriority": 0.9, "sitemapChangefreq": "weekly", "expectedTemplate": "T2_PILLAR" },
+    { "url": "/uborka-territorii/", "pattern": "T2_PILLAR", "pillar": "uborka-territorii", "subOrCity": null, "cluster": "C-uborka-territorii-pillar", "sitemapPriority": 0.9, "sitemapChangefreq": "weekly", "expectedTemplate": "T2_PILLAR" },
+
+    { "url": "/vyvoz-musora/vyvoz-stroymusora/", "pattern": "T3_SUB", "pillar": "vyvoz-musora", "subOrCity": "vyvoz-stroymusora", "cluster": "C-vyvoz-stroymusora", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": true },
+    { "url": "/vyvoz-musora/vyvoz-sadovogo-musora/", "pattern": "T3_SUB", "pillar": "vyvoz-musora", "subOrCity": "vyvoz-sadovogo-musora", "cluster": "C-vyvoz-sadovogo-musora", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": true },
+    { "url": "/vyvoz-musora/uborka-uchastka/", "pattern": "T3_SUB", "pillar": "vyvoz-musora", "subOrCity": "uborka-uchastka", "cluster": "C-uborka-uchastka-vm", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": true },
+    { "url": "/vyvoz-musora/staraya-mebel/", "pattern": "T3_SUB", "pillar": "vyvoz-musora", "subOrCity": "staraya-mebel", "cluster": "C-staraya-mebel", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": true },
+    { "url": "/vyvoz-musora/tbo/", "pattern": "T3_SUB", "pillar": "vyvoz-musora", "subOrCity": "tbo", "cluster": "C-vyvoz-musora-new-1", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": false },
+    { "url": "/vyvoz-musora/kgm/", "pattern": "T3_SUB", "pillar": "vyvoz-musora", "subOrCity": "kgm", "cluster": "C-vyvoz-musora-new-1", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": false },
+    { "url": "/vyvoz-musora/konteyner/", "pattern": "T3_SUB", "pillar": "vyvoz-musora", "subOrCity": "konteyner", "cluster": "C-vyvoz-musora-new-1", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": false },
+    { "url": "/vyvoz-musora/vyvoz-snega/", "pattern": "T3_SUB", "pillar": "vyvoz-musora", "subOrCity": "vyvoz-snega", "cluster": "C1", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": false },
+
+    { "url": "/arboristika/spil-dereviev/", "pattern": "T3_SUB", "pillar": "arboristika", "subOrCity": "spil-dereviev", "cluster": "C-spil-dereviev", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": true },
+    { "url": "/arboristika/kronirovanie/", "pattern": "T3_SUB", "pillar": "arboristika", "subOrCity": "kronirovanie", "cluster": "C4_part", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": true },
+    { "url": "/arboristika/udalenie-pnya/", "pattern": "T3_SUB", "pillar": "arboristika", "subOrCity": "udalenie-pnya", "cluster": "C-udalenie-pnya", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": true },
+    { "url": "/arboristika/avariynyy-spil/", "pattern": "T3_SUB", "pillar": "arboristika", "subOrCity": "avariynyy-spil", "cluster": "C-avariynyy-spil", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": true },
+    { "url": "/arboristika/sanitarnaya-obrezka/", "pattern": "T3_SUB", "pillar": "arboristika", "subOrCity": "sanitarnaya-obrezka", "cluster": "C-sanitarnaya-obrezka", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": true },
+    { "url": "/arboristika/obrabotka-ot-koroeda/", "pattern": "T3_SUB", "pillar": "arboristika", "subOrCity": "obrabotka-ot-koroeda", "cluster": "C-arb-new-1", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": false },
+    { "url": "/arboristika/vykorchevanie-pney/", "pattern": "T3_SUB", "pillar": "arboristika", "subOrCity": "vykorchevanie-pney", "cluster": "C42_part", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": false },
+    { "url": "/arboristika/izmelchenie-vetok/", "pattern": "T3_SUB", "pillar": "arboristika", "subOrCity": "izmelchenie-vetok", "cluster": "C42+C45", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": false },
+    { "url": "/arboristika/obrezka-derevev/", "pattern": "T3_SUB", "pillar": "arboristika", "subOrCity": "obrezka-derevev", "cluster": "C4", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": false },
+
+    { "url": "/demontazh/demontazh-dachi/", "pattern": "T3_SUB", "pillar": "demontazh", "subOrCity": "demontazh-dachi", "cluster": "C-demontazh-dachi", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": true },
+    { "url": "/demontazh/demontazh-bani/", "pattern": "T3_SUB", "pillar": "demontazh", "subOrCity": "demontazh-bani", "cluster": "C-demontazh-bani", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": true },
+    { "url": "/demontazh/demontazh-saraya/", "pattern": "T3_SUB", "pillar": "demontazh", "subOrCity": "demontazh-saraya", "cluster": "C-demontazh-saraya", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": true },
+    { "url": "/demontazh/snos-zdaniy/", "pattern": "T3_SUB", "pillar": "demontazh", "subOrCity": "snos-zdaniy", "cluster": "C31", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": false },
+    { "url": "/demontazh/demontazh-zaborov/", "pattern": "T3_SUB", "pillar": "demontazh", "subOrCity": "demontazh-zaborov", "cluster": "C-demontazh-new-1", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": false },
+    { "url": "/demontazh/demontazh-betona/", "pattern": "T3_SUB", "pillar": "demontazh", "subOrCity": "demontazh-betona", "cluster": "C-demontazh-new-1", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": false },
+    { "url": "/demontazh/uborka-stroitelnogo-musora/", "pattern": "T3_SUB", "pillar": "demontazh", "subOrCity": "uborka-stroitelnogo-musora", "cluster": "C-demontazh-new-1", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": false },
+
+    { "url": "/chistka-krysh/chistka-krysh-chastnyy-dom/", "pattern": "T3_SUB", "pillar": "chistka-krysh", "subOrCity": "chistka-krysh-chastnyy-dom", "cluster": "C-chistka-chastnyy-dom", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": true },
+    { "url": "/chistka-krysh/chistka-krysh-mkd/", "pattern": "T3_SUB", "pillar": "chistka-krysh", "subOrCity": "chistka-krysh-mkd", "cluster": "C-chistka-mkd", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": true },
+    { "url": "/chistka-krysh/sbivanie-sosulek/", "pattern": "T3_SUB", "pillar": "chistka-krysh", "subOrCity": "sbivanie-sosulek", "cluster": "C-sbivanie-sosulek", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": true },
+    { "url": "/chistka-krysh/chistka-krysh-ot-snega/", "pattern": "T3_SUB", "pillar": "chistka-krysh", "subOrCity": "chistka-krysh-ot-snega", "cluster": "C-chistka-ot-snega", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": true },
+    { "url": "/chistka-krysh/chistka-krysh-uborka-territorii-zima/", "pattern": "T3_SUB", "pillar": "chistka-krysh", "subOrCity": "chistka-krysh-uborka-territorii-zima", "cluster": "C-chistka-uborka-zima", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": true },
+    { "url": "/chistka-krysh/chistka-krysh-dogovor-na-sezon/", "pattern": "T3_SUB", "pillar": "chistka-krysh", "subOrCity": "chistka-krysh-dogovor-na-sezon", "cluster": "C-chistka-dogovor", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": true },
+    { "url": "/chistka-krysh/krysha-ot-naledi/", "pattern": "T3_SUB", "pillar": "chistka-krysh", "subOrCity": "krysha-ot-naledi", "cluster": "C56", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": false },
+
+    { "url": "/uborka-territorii/vyravnivanie-uchastka/", "pattern": "T3_SUB", "pillar": "uborka-territorii", "subOrCity": "vyravnivanie-uchastka", "cluster": "C43+C6+C9", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": false },
+    { "url": "/uborka-territorii/raschistka-uchastka/", "pattern": "T3_SUB", "pillar": "uborka-territorii", "subOrCity": "raschistka-uchastka", "cluster": "C15", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": false },
+    { "url": "/uborka-territorii/pokos-travy/", "pattern": "T3_SUB", "pillar": "uborka-territorii", "subOrCity": "pokos-travy", "cluster": "C12", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": false },
+    { "url": "/uborka-territorii/vyvoz-porubochnyh-ostatkov/", "pattern": "T3_SUB", "pillar": "uborka-territorii", "subOrCity": "vyvoz-porubochnyh-ostatkov", "cluster": "C-uborka-new-4", "sitemapPriority": 0.85, "sitemapChangefreq": "monthly", "expectedTemplate": "T3_SUB", "sustained": false }
+  ],
+  "_t4_sd_generation_note": "150 T4 SD URL — 5 pillar × 30 cities = 150. НЕ enumerate в этом JSON (раздут до 5000+ строк). Generation rule: для каждого pillar in {vyvoz-musora,arboristika,demontazh,chistka-krysh,uborka-territorii} × city in cities30 → URL '/<pillar>/<citySlug>/' с pattern=T4_SD, sitemapPriority=0.8, sitemapChangefreq=monthly, cluster='C-<pillar>-<citySlug>', expectedTemplate=T4_SD. Bulk-enumeration делается US-3 seed-script `seed-sd-bulk.ts` с источником этого inventory.",
+  "_validation": {
+    "totalListedUrls": 41,
+    "t4SdGeneratedRule": "5 × 30 = 150 (не listed inline)",
+    "totalAfterT4Generation": 191,
+    "matchesDoD": true
+  }
+}
