@@ -24,7 +24,9 @@ import config from '../payload.config.js'
 // 60s process-level timeout гарантирует, что build не блокируется навсегда.
 // Graceful exit(0) — lint:slug defensive guard, не должен блокировать релиз.
 const _hangGuard = setTimeout(() => {
-  console.warn('[lint:slug] 60s process timeout — skip (Payload init hung, ADR-0019 app-level hooks active)')
+  console.warn(
+    '[lint:slug] 60s process timeout — skip (Payload init hung, ADR-0019 app-level hooks active)',
+  )
   process.exit(0)
 }, 60_000)
 if (typeof _hangGuard.unref === 'function') _hangGuard.unref()
