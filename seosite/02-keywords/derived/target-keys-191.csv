@@ -1,0 +1,192 @@
+url,primaryKey,wsfreq,wsk,intent,currentTopvisorPos,cluster,classConfidence
+/uslugi/,услуги для дома и дачи москва,8900,72,navigational,,uslugi-hub,B
+/vyvoz-musora/,вывоз мусора москва,12000,89,commercial,,C-vyvoz-musora-pillar,A
+/arboristika/,арбористика москва,1200,65,commercial,,C-arboristika-pillar,A
+/demontazh/,демонтаж москва,8500,75,commercial,,C-demontazh-pillar,A
+/chistka-krysh/,чистка крыш от снега москва,4500,70,commercial,,C-chistka-krysh-pillar,A
+/uborka-territorii/,уборка территории москва,3800,68,commercial,,C-uborka-territorii-pillar,A
+/vyvoz-musora/vyvoz-stroymusora/,вывоз строительного мусора москва,5400,68,commercial,,C-vyvoz-stroymusora,A
+/vyvoz-musora/vyvoz-sadovogo-musora/,вывоз садового мусора москва,1100,45,commercial,,C-vyvoz-sadovogo-musora,A
+/vyvoz-musora/uborka-uchastka/,уборка участка москва,2200,52,commercial,,C-uborka-uchastka-vm,A
+/vyvoz-musora/staraya-mebel/,вывоз старой мебели москва,980,38,commercial,,C-staraya-mebel,B
+/vyvoz-musora/tbo/,вывоз тбо москва,740,34,commercial,,C-vyvoz-musora-new-1,B
+/vyvoz-musora/kgm/,вывоз кгм москва,290,22,commercial,,C-vyvoz-musora-new-1,B
+/vyvoz-musora/konteyner/,контейнер для мусора москва,8100,71,commercial,,C-vyvoz-musora-new-1,A
+/vyvoz-musora/vyvoz-snega/,вывоз снега москва,3200,56,commercial,,C1,A
+/arboristika/spil-dereviev/,спил деревьев москва,6700,72,commercial,,C-spil-dereviev,A
+/arboristika/kronirovanie/,кронирование деревьев москва,1400,48,commercial,,C4_part,A
+/arboristika/udalenie-pnya/,удаление пней москва,2100,51,commercial,,C-udalenie-pnya,A
+/arboristika/avariynyy-spil/,аварийный спил деревьев москва,480,28,commercial,,C-avariynyy-spil,B
+/arboristika/sanitarnaya-obrezka/,санитарная обрезка деревьев москва,350,25,commercial,,C-sanitarnaya-obrezka,B
+/arboristika/obrabotka-ot-koroeda/,обработка от короеда москва,880,41,commercial,,C-arb-new-1,B
+/arboristika/vykorchevanie-pney/,выкорчёвка пней москва,590,35,commercial,,C42_part,B
+/arboristika/izmelchenie-vetok/,измельчение веток москва,270,21,commercial,,C42+C45,B
+/arboristika/obrezka-derevev/,обрезка деревьев москва,4900,67,commercial,,C4,A
+/demontazh/demontazh-dachi/,демонтаж дачи москва,1300,47,commercial,,C-demontazh-dachi,A
+/demontazh/demontazh-bani/,демонтаж бани москва,740,38,commercial,,C-demontazh-bani,B
+/demontazh/demontazh-saraya/,демонтаж сарая москва,380,26,commercial,,C-demontazh-saraya,B
+/demontazh/snos-zdaniy/,снос зданий москва,2800,55,commercial,,C31,A
+/demontazh/demontazh-zaborov/,демонтаж забора москва,990,42,commercial,,C-demontazh-new-1,B
+/demontazh/demontazh-betona/,демонтаж бетона москва,1600,49,commercial,,C-demontazh-new-1,A
+/demontazh/uborka-stroitelnogo-musora/,уборка строительного мусора москва,720,36,commercial,,C-demontazh-new-1,B
+/chistka-krysh/chistka-krysh-chastnyy-dom/,чистка крыши частного дома москва,590,34,commercial,,C-chistka-chastnyy-dom,B
+/chistka-krysh/chistka-krysh-mkd/,чистка крыш мкд москва,410,29,commercial,,C-chistka-mkd,B
+/chistka-krysh/sbivanie-sosulek/,сбивание сосулек москва,720,36,commercial,,C-sbivanie-sosulek,B
+/chistka-krysh/chistka-krysh-ot-snega/,чистка крыши от снега москва,4100,64,commercial,,C-chistka-ot-snega,A
+/chistka-krysh/chistka-krysh-uborka-territorii-zima/,уборка территории зимой москва,320,24,commercial,,C-chistka-uborka-zima,B
+/chistka-krysh/chistka-krysh-dogovor-na-sezon/,договор на чистку крыш на сезон москва,180,18,commercial,,C-chistka-dogovor,B
+/chistka-krysh/krysha-ot-naledi/,удаление наледи с крыши москва,1500,50,commercial,,C56,A
+/uborka-territorii/vyravnivanie-uchastka/,выравнивание участка москва,2400,53,commercial,,C43+C6+C9,A
+/uborka-territorii/raschistka-uchastka/,расчистка участка москва,1100,44,commercial,,C15,A
+/uborka-territorii/pokos-travy/,покос травы москва,6800,73,commercial,,C12,A
+/uborka-territorii/vyvoz-porubochnyh-ostatkov/,вывоз порубочных остатков москва,460,31,commercial,,C-uborka-new-4,B
+/vyvoz-musora/balashikha/,вывоз мусора балашихе,1200,49,commercial,,C-vyvoz-musora-balashikha,B
+/vyvoz-musora/mytishchi/,вывоз мусора мытищах,1200,49,commercial,,C-vyvoz-musora-mytishchi,B
+/vyvoz-musora/ramenskoye/,вывоз мусора раменском,1200,49,commercial,,C-vyvoz-musora-ramenskoye,B
+/vyvoz-musora/odincovo/,вывоз мусора одинцово,1200,49,commercial,,C-vyvoz-musora-odincovo,B
+/vyvoz-musora/krasnogorsk/,вывоз мусора красногорске,1200,49,commercial,,C-vyvoz-musora-krasnogorsk,B
+/vyvoz-musora/podolsk/,вывоз мусора подольске,1200,49,commercial,,C-vyvoz-musora-podolsk,B
+/vyvoz-musora/khimki/,вывоз мусора химках,1200,49,commercial,,C-vyvoz-musora-khimki,B
+/vyvoz-musora/korolyov/,вывоз мусора королёве,1200,49,commercial,,C-vyvoz-musora-korolyov,B
+/vyvoz-musora/lyubertsy/,вывоз мусора люберцах,1200,49,commercial,,C-vyvoz-musora-lyubertsy,B
+/vyvoz-musora/elektrostal/,вывоз мусора электростали,1200,49,commercial,,C-vyvoz-musora-elektrostal,B
+/vyvoz-musora/reutov/,вывоз мусора реутове,1200,49,commercial,,C-vyvoz-musora-reutov,B
+/vyvoz-musora/dolgoprudnyj/,вывоз мусора долгопрудном,1200,49,commercial,,C-vyvoz-musora-dolgoprudnyj,B
+/vyvoz-musora/istra/,вывоз мусора истре,480,49,commercial,,C-vyvoz-musora-istra,C
+/vyvoz-musora/pushkino/,вывоз мусора пушкино,480,49,commercial,,C-vyvoz-musora-pushkino,C
+/vyvoz-musora/zhukovskij/,вывоз мусора жуковском,480,49,commercial,,C-vyvoz-musora-zhukovskij,C
+/vyvoz-musora/serpukhov/,вывоз мусора серпухове,480,49,commercial,,C-vyvoz-musora-serpukhov,C
+/vyvoz-musora/sergiev-posad/,вывоз мусора сергиевом посаде,480,49,commercial,,C-vyvoz-musora-sergiev-posad,C
+/vyvoz-musora/noginsk/,вывоз мусора ногинске,480,49,commercial,,C-vyvoz-musora-noginsk,C
+/vyvoz-musora/orekhovo-zuevo/,вывоз мусора орехово-зуево,480,49,commercial,,C-vyvoz-musora-orekhovo-zuevo,C
+/vyvoz-musora/dmitrov/,вывоз мусора дмитрове,480,49,commercial,,C-vyvoz-musora-dmitrov,C
+/vyvoz-musora/chekhov/,вывоз мусора чехове,480,49,commercial,,C-vyvoz-musora-chekhov,C
+/vyvoz-musora/vidnoe/,вывоз мусора видном,480,49,commercial,,C-vyvoz-musora-vidnoe,C
+/vyvoz-musora/domodedovo/,вывоз мусора домодедово,480,49,commercial,,C-vyvoz-musora-domodedovo,C
+/vyvoz-musora/voskresensk/,вывоз мусора воскресенске,480,49,commercial,,C-vyvoz-musora-voskresensk,C
+/vyvoz-musora/klin/,вывоз мусора клину,480,49,commercial,,C-vyvoz-musora-klin,C
+/vyvoz-musora/shchelkovo/,вывоз мусора щёлково,480,49,commercial,,C-vyvoz-musora-shchelkovo,C
+/vyvoz-musora/lobnya/,вывоз мусора лобне,480,49,commercial,,C-vyvoz-musora-lobnya,C
+/vyvoz-musora/kotelniki/,вывоз мусора котельниках,480,49,commercial,,C-vyvoz-musora-kotelniki,C
+/vyvoz-musora/fryazino/,вывоз мусора фрязино,480,49,commercial,,C-vyvoz-musora-fryazino,C
+/vyvoz-musora/krasnoznamensk/,вывоз мусора краснознаменске,480,49,commercial,,C-vyvoz-musora-krasnoznamensk,C
+/arboristika/balashikha/,арбористика балашихе,120,36,commercial,,C-arboristika-balashikha,B
+/arboristika/mytishchi/,арбористика мытищах,120,36,commercial,,C-arboristika-mytishchi,B
+/arboristika/ramenskoye/,арбористика раменском,120,36,commercial,,C-arboristika-ramenskoye,B
+/arboristika/odincovo/,арбористика одинцово,120,36,commercial,,C-arboristika-odincovo,B
+/arboristika/krasnogorsk/,арбористика красногорске,120,36,commercial,,C-arboristika-krasnogorsk,B
+/arboristika/podolsk/,арбористика подольске,120,36,commercial,,C-arboristika-podolsk,B
+/arboristika/khimki/,арбористика химках,120,36,commercial,,C-arboristika-khimki,B
+/arboristika/korolyov/,арбористика королёве,120,36,commercial,,C-arboristika-korolyov,B
+/arboristika/lyubertsy/,арбористика люберцах,120,36,commercial,,C-arboristika-lyubertsy,B
+/arboristika/elektrostal/,арбористика электростали,120,36,commercial,,C-arboristika-elektrostal,B
+/arboristika/reutov/,арбористика реутове,120,36,commercial,,C-arboristika-reutov,B
+/arboristika/dolgoprudnyj/,арбористика долгопрудном,120,36,commercial,,C-arboristika-dolgoprudnyj,B
+/arboristika/istra/,арбористика истре,48,36,commercial,,C-arboristika-istra,C
+/arboristika/pushkino/,арбористика пушкино,48,36,commercial,,C-arboristika-pushkino,C
+/arboristika/zhukovskij/,арбористика жуковском,48,36,commercial,,C-arboristika-zhukovskij,C
+/arboristika/serpukhov/,арбористика серпухове,48,36,commercial,,C-arboristika-serpukhov,C
+/arboristika/sergiev-posad/,арбористика сергиевом посаде,48,36,commercial,,C-arboristika-sergiev-posad,C
+/arboristika/noginsk/,арбористика ногинске,48,36,commercial,,C-arboristika-noginsk,C
+/arboristika/orekhovo-zuevo/,арбористика орехово-зуево,48,36,commercial,,C-arboristika-orekhovo-zuevo,C
+/arboristika/dmitrov/,арбористика дмитрове,48,36,commercial,,C-arboristika-dmitrov,C
+/arboristika/chekhov/,арбористика чехове,48,36,commercial,,C-arboristika-chekhov,C
+/arboristika/vidnoe/,арбористика видном,48,36,commercial,,C-arboristika-vidnoe,C
+/arboristika/domodedovo/,арбористика домодедово,48,36,commercial,,C-arboristika-domodedovo,C
+/arboristika/voskresensk/,арбористика воскресенске,48,36,commercial,,C-arboristika-voskresensk,C
+/arboristika/klin/,арбористика клину,48,36,commercial,,C-arboristika-klin,C
+/arboristika/shchelkovo/,арбористика щёлково,48,36,commercial,,C-arboristika-shchelkovo,C
+/arboristika/lobnya/,арбористика лобне,48,36,commercial,,C-arboristika-lobnya,C
+/arboristika/kotelniki/,арбористика котельниках,48,36,commercial,,C-arboristika-kotelniki,C
+/arboristika/fryazino/,арбористика фрязино,48,36,commercial,,C-arboristika-fryazino,C
+/arboristika/krasnoznamensk/,арбористика краснознаменске,48,36,commercial,,C-arboristika-krasnoznamensk,C
+/demontazh/balashikha/,демонтаж балашихе,850,41,commercial,,C-demontazh-balashikha,B
+/demontazh/mytishchi/,демонтаж мытищах,850,41,commercial,,C-demontazh-mytishchi,B
+/demontazh/ramenskoye/,демонтаж раменском,850,41,commercial,,C-demontazh-ramenskoye,B
+/demontazh/odincovo/,демонтаж одинцово,850,41,commercial,,C-demontazh-odincovo,B
+/demontazh/krasnogorsk/,демонтаж красногорске,850,41,commercial,,C-demontazh-krasnogorsk,B
+/demontazh/podolsk/,демонтаж подольске,850,41,commercial,,C-demontazh-podolsk,B
+/demontazh/khimki/,демонтаж химках,850,41,commercial,,C-demontazh-khimki,B
+/demontazh/korolyov/,демонтаж королёве,850,41,commercial,,C-demontazh-korolyov,B
+/demontazh/lyubertsy/,демонтаж люберцах,850,41,commercial,,C-demontazh-lyubertsy,B
+/demontazh/elektrostal/,демонтаж электростали,850,41,commercial,,C-demontazh-elektrostal,B
+/demontazh/reutov/,демонтаж реутове,850,41,commercial,,C-demontazh-reutov,B
+/demontazh/dolgoprudnyj/,демонтаж долгопрудном,850,41,commercial,,C-demontazh-dolgoprudnyj,B
+/demontazh/istra/,демонтаж истре,340,41,commercial,,C-demontazh-istra,C
+/demontazh/pushkino/,демонтаж пушкино,340,41,commercial,,C-demontazh-pushkino,C
+/demontazh/zhukovskij/,демонтаж жуковском,340,41,commercial,,C-demontazh-zhukovskij,C
+/demontazh/serpukhov/,демонтаж серпухове,340,41,commercial,,C-demontazh-serpukhov,C
+/demontazh/sergiev-posad/,демонтаж сергиевом посаде,340,41,commercial,,C-demontazh-sergiev-posad,C
+/demontazh/noginsk/,демонтаж ногинске,340,41,commercial,,C-demontazh-noginsk,C
+/demontazh/orekhovo-zuevo/,демонтаж орехово-зуево,340,41,commercial,,C-demontazh-orekhovo-zuevo,C
+/demontazh/dmitrov/,демонтаж дмитрове,340,41,commercial,,C-demontazh-dmitrov,C
+/demontazh/chekhov/,демонтаж чехове,340,41,commercial,,C-demontazh-chekhov,C
+/demontazh/vidnoe/,демонтаж видном,340,41,commercial,,C-demontazh-vidnoe,C
+/demontazh/domodedovo/,демонтаж домодедово,340,41,commercial,,C-demontazh-domodedovo,C
+/demontazh/voskresensk/,демонтаж воскресенске,340,41,commercial,,C-demontazh-voskresensk,C
+/demontazh/klin/,демонтаж клину,340,41,commercial,,C-demontazh-klin,C
+/demontazh/shchelkovo/,демонтаж щёлково,340,41,commercial,,C-demontazh-shchelkovo,C
+/demontazh/lobnya/,демонтаж лобне,340,41,commercial,,C-demontazh-lobnya,C
+/demontazh/kotelniki/,демонтаж котельниках,340,41,commercial,,C-demontazh-kotelniki,C
+/demontazh/fryazino/,демонтаж фрязино,340,41,commercial,,C-demontazh-fryazino,C
+/demontazh/krasnoznamensk/,демонтаж краснознаменске,340,41,commercial,,C-demontazh-krasnoznamensk,C
+/chistka-krysh/balashikha/,чистка крыш от снега балашихе,450,39,commercial,,C-chistka-krysh-balashikha,B
+/chistka-krysh/mytishchi/,чистка крыш от снега мытищах,450,39,commercial,,C-chistka-krysh-mytishchi,B
+/chistka-krysh/ramenskoye/,чистка крыш от снега раменском,450,39,commercial,,C-chistka-krysh-ramenskoye,B
+/chistka-krysh/odincovo/,чистка крыш от снега одинцово,450,39,commercial,,C-chistka-krysh-odincovo,B
+/chistka-krysh/krasnogorsk/,чистка крыш от снега красногорске,450,39,commercial,,C-chistka-krysh-krasnogorsk,B
+/chistka-krysh/podolsk/,чистка крыш от снега подольске,450,39,commercial,,C-chistka-krysh-podolsk,B
+/chistka-krysh/khimki/,чистка крыш от снега химках,450,39,commercial,,C-chistka-krysh-khimki,B
+/chistka-krysh/korolyov/,чистка крыш от снега королёве,450,39,commercial,,C-chistka-krysh-korolyov,B
+/chistka-krysh/lyubertsy/,чистка крыш от снега люберцах,450,39,commercial,,C-chistka-krysh-lyubertsy,B
+/chistka-krysh/elektrostal/,чистка крыш от снега электростали,450,39,commercial,,C-chistka-krysh-elektrostal,B
+/chistka-krysh/reutov/,чистка крыш от снега реутове,450,39,commercial,,C-chistka-krysh-reutov,B
+/chistka-krysh/dolgoprudnyj/,чистка крыш от снега долгопрудном,450,39,commercial,,C-chistka-krysh-dolgoprudnyj,B
+/chistka-krysh/istra/,чистка крыш от снега истре,180,39,commercial,,C-chistka-krysh-istra,C
+/chistka-krysh/pushkino/,чистка крыш от снега пушкино,180,39,commercial,,C-chistka-krysh-pushkino,C
+/chistka-krysh/zhukovskij/,чистка крыш от снега жуковском,180,39,commercial,,C-chistka-krysh-zhukovskij,C
+/chistka-krysh/serpukhov/,чистка крыш от снега серпухове,180,39,commercial,,C-chistka-krysh-serpukhov,C
+/chistka-krysh/sergiev-posad/,чистка крыш от снега сергиевом посаде,180,39,commercial,,C-chistka-krysh-sergiev-posad,C
+/chistka-krysh/noginsk/,чистка крыш от снега ногинске,180,39,commercial,,C-chistka-krysh-noginsk,C
+/chistka-krysh/orekhovo-zuevo/,чистка крыш от снега орехово-зуево,180,39,commercial,,C-chistka-krysh-orekhovo-zuevo,C
+/chistka-krysh/dmitrov/,чистка крыш от снега дмитрове,180,39,commercial,,C-chistka-krysh-dmitrov,C
+/chistka-krysh/chekhov/,чистка крыш от снега чехове,180,39,commercial,,C-chistka-krysh-chekhov,C
+/chistka-krysh/vidnoe/,чистка крыш от снега видном,180,39,commercial,,C-chistka-krysh-vidnoe,C
+/chistka-krysh/domodedovo/,чистка крыш от снега домодедово,180,39,commercial,,C-chistka-krysh-domodedovo,C
+/chistka-krysh/voskresensk/,чистка крыш от снега воскресенске,180,39,commercial,,C-chistka-krysh-voskresensk,C
+/chistka-krysh/klin/,чистка крыш от снега клину,180,39,commercial,,C-chistka-krysh-klin,C
+/chistka-krysh/shchelkovo/,чистка крыш от снега щёлково,180,39,commercial,,C-chistka-krysh-shchelkovo,C
+/chistka-krysh/lobnya/,чистка крыш от снега лобне,180,39,commercial,,C-chistka-krysh-lobnya,C
+/chistka-krysh/kotelniki/,чистка крыш от снега котельниках,180,39,commercial,,C-chistka-krysh-kotelniki,C
+/chistka-krysh/fryazino/,чистка крыш от снега фрязино,180,39,commercial,,C-chistka-krysh-fryazino,C
+/chistka-krysh/krasnoznamensk/,чистка крыш от снега краснознаменске,180,39,commercial,,C-chistka-krysh-krasnoznamensk,C
+/uborka-territorii/balashikha/,уборка территории балашихе,380,37,commercial,,C-uborka-territorii-balashikha,B
+/uborka-territorii/mytishchi/,уборка территории мытищах,380,37,commercial,,C-uborka-territorii-mytishchi,B
+/uborka-territorii/ramenskoye/,уборка территории раменском,380,37,commercial,,C-uborka-territorii-ramenskoye,B
+/uborka-territorii/odincovo/,уборка территории одинцово,380,37,commercial,,C-uborka-territorii-odincovo,B
+/uborka-territorii/krasnogorsk/,уборка территории красногорске,380,37,commercial,,C-uborka-territorii-krasnogorsk,B
+/uborka-territorii/podolsk/,уборка территории подольске,380,37,commercial,,C-uborka-territorii-podolsk,B
+/uborka-territorii/khimki/,уборка территории химках,380,37,commercial,,C-uborka-territorii-khimki,B
+/uborka-territorii/korolyov/,уборка территории королёве,380,37,commercial,,C-uborka-territorii-korolyov,B
+/uborka-territorii/lyubertsy/,уборка территории люберцах,380,37,commercial,,C-uborka-territorii-lyubertsy,B
+/uborka-territorii/elektrostal/,уборка территории электростали,380,37,commercial,,C-uborka-territorii-elektrostal,B
+/uborka-territorii/reutov/,уборка территории реутове,380,37,commercial,,C-uborka-territorii-reutov,B
+/uborka-territorii/dolgoprudnyj/,уборка территории долгопрудном,380,37,commercial,,C-uborka-territorii-dolgoprudnyj,B
+/uborka-territorii/istra/,уборка территории истре,152,37,commercial,,C-uborka-territorii-istra,C
+/uborka-territorii/pushkino/,уборка территории пушкино,152,37,commercial,,C-uborka-territorii-pushkino,C
+/uborka-territorii/zhukovskij/,уборка территории жуковском,152,37,commercial,,C-uborka-territorii-zhukovskij,C
+/uborka-territorii/serpukhov/,уборка территории серпухове,152,37,commercial,,C-uborka-territorii-serpukhov,C
+/uborka-territorii/sergiev-posad/,уборка территории сергиевом посаде,152,37,commercial,,C-uborka-territorii-sergiev-posad,C
+/uborka-territorii/noginsk/,уборка территории ногинске,152,37,commercial,,C-uborka-territorii-noginsk,C
+/uborka-territorii/orekhovo-zuevo/,уборка территории орехово-зуево,152,37,commercial,,C-uborka-territorii-orekhovo-zuevo,C
+/uborka-territorii/dmitrov/,уборка территории дмитрове,152,37,commercial,,C-uborka-territorii-dmitrov,C
+/uborka-territorii/chekhov/,уборка территории чехове,152,37,commercial,,C-uborka-territorii-chekhov,C
+/uborka-territorii/vidnoe/,уборка территории видном,152,37,commercial,,C-uborka-territorii-vidnoe,C
+/uborka-territorii/domodedovo/,уборка территории домодедово,152,37,commercial,,C-uborka-territorii-domodedovo,C
+/uborka-territorii/voskresensk/,уборка территории воскресенске,152,37,commercial,,C-uborka-territorii-voskresensk,C
+/uborka-territorii/klin/,уборка территории клину,152,37,commercial,,C-uborka-territorii-klin,C
+/uborka-territorii/shchelkovo/,уборка территории щёлково,152,37,commercial,,C-uborka-territorii-shchelkovo,C
+/uborka-territorii/lobnya/,уборка территории лобне,152,37,commercial,,C-uborka-territorii-lobnya,C
+/uborka-territorii/kotelniki/,уборка территории котельниках,152,37,commercial,,C-uborka-territorii-kotelniki,C
+/uborka-territorii/fryazino/,уборка территории фрязино,152,37,commercial,,C-uborka-territorii-fryazino,C
+/uborka-territorii/krasnoznamensk/,уборка территории краснознаменске,152,37,commercial,,C-uborka-territorii-krasnoznamensk,C
