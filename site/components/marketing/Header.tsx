@@ -96,7 +96,7 @@ export async function Header() {
                   <h4>Арбористика</h4>
                   <ul>
                     <li>
-                      <Link href="/arboristika/spil-dereviev">
+                      <Link href="/arboristika/spil-derevev">
                         <svg
                           className="mm-icon"
                           viewBox="0 0 24 24"
@@ -282,7 +282,7 @@ export async function Header() {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/chistka-krysh/chistka-krysh-ot-snega">
+                      <Link href="/chistka-krysh/ot-snega">
                         <svg
                           className="mm-icon"
                           viewBox="0 0 24 24"
@@ -304,7 +304,7 @@ export async function Header() {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/chistka-krysh/chistka-krysh-dogovor-na-sezon">
+                      <Link href="/chistka-krysh/dogovor-na-sezon">
                         <svg
                           className="mm-icon"
                           viewBox="0 0 24 24"
@@ -331,49 +331,10 @@ export async function Header() {
                 </div>
 
                 <div className="mm-col">
-                  <h5 className="mm-subheader">Уборка территории</h5>
+                  <h4>Уборка и вывоз</h4>
                   <ul>
                     <li>
-                      <Link href="/uborka-territorii/raschistka-uchastka">
-                        <svg
-                          className="mm-icon"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M3 20 L21 20" />
-                          <path d="M6 20 L6 13" />
-                          <path d="M6 13 L10 8 L14 13" />
-                          <path d="M14 13 L14 20" />
-                          <path d="M3 16 L6 14" />
-                          <path d="M14 11 L18 14 L21 14" />
-                        </svg>
-                        Расчистка участка<span className="mm-arrow">→</span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/uborka-territorii/vyravnivanie-uchastka">
-                        <svg
-                          className="mm-icon"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M3 15 L21 15" />
-                          <path d="M3 11 L7 9 L12 11 L17 9 L21 11" />
-                          <path d="M3 19 L21 19" strokeDasharray="2 1.5" />
-                        </svg>
-                        Выравнивание участка<span className="mm-arrow">→</span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/uborka-territorii/pokos-travy">
+                      <Link href="/uborka-territorii">
                         <svg
                           className="mm-icon"
                           viewBox="0 0 24 24"
@@ -389,27 +350,7 @@ export async function Header() {
                           <path d="M14 18 C 14 15, 13 13, 14 10" />
                           <path d="M2 16 L8 16 L16 13 L22 15" />
                         </svg>
-                        Покос травы<span className="mm-arrow">→</span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/uborka-territorii/vyvoz-porubochnyh-ostatkov">
-                        <svg
-                          className="mm-icon"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M5 8 L19 8 L17 18 L7 18 Z" />
-                          <path d="M3 8 L21 8" />
-                          <path d="M9 5 L15 5 L14 8 L10 8 Z" />
-                          <path d="M10 11 L10 15" />
-                          <path d="M14 11 L14 15" />
-                        </svg>
-                        Вывоз порубочных остатков<span className="mm-arrow">→</span>
+                        Уборка территории<span className="mm-arrow">→</span>
                       </Link>
                     </li>
                   </ul>
