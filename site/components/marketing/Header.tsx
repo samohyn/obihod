@@ -118,54 +118,6 @@ export async function Header() {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/arboristika/valka">
-                        <svg
-                          className="mm-icon"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M4 20 L20 20" />
-                          <g transform="rotate(35 10 18)">
-                            <path d="M10 9 L10 18" />
-                            <path d="M8 11 L10 9 L12 11" />
-                            <path d="M7.5 13 L10 11 L12.5 13" />
-                            <path d="M7 15 L10 13 L13 15" />
-                          </g>
-                          <path d="M16 14 L20 14 L20 10" />
-                          <path d="M20 14 L17 17" />
-                        </svg>
-                        Валка<span className="mm-arrow">→</span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/arboristika/udalenie-pnej">
-                        <svg
-                          className="mm-icon"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <ellipse cx="12" cy="10" rx="5" ry="1.5" />
-                          <path d="M7 10 L7 13" />
-                          <path d="M17 10 L17 13" />
-                          <path d="M7 13 C 9 14, 15 14, 17 13" />
-                          <circle cx="12" cy="10" r="1.6" />
-                          <path d="M6 16 C 5 17, 4 18, 3 19" />
-                          <path d="M9 16 L8 20" />
-                          <path d="M15 16 L16 20" />
-                          <path d="M18 16 C 19 17, 20 18, 21 19" />
-                        </svg>
-                        Корчевание пней<span className="mm-arrow">→</span>
-                      </Link>
-                    </li>
-                    <li>
                       <Link href="/arboristika/kronirovanie">
                         <svg
                           className="mm-icon"
@@ -185,11 +137,11 @@ export async function Header() {
                           <path d="M3 4 L6 7" />
                           <path d="M4 4 L6 4 L6 6" />
                         </svg>
-                        Обрезка, кронирование<span className="mm-arrow">→</span>
+                        Кронирование<span className="mm-arrow">→</span>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/arboristika/kabling">
+                      <Link href="/arboristika/sanitarnaya-obrezka">
                         <svg
                           className="mm-icon"
                           viewBox="0 0 24 24"
@@ -199,19 +151,17 @@ export async function Header() {
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         >
-                          <path d="M6 3 L6 21" />
-                          <path d="M18 3 L18 21" />
-                          <path d="M6 10 C 9 9, 15 9, 18 10" strokeDasharray="2 1.5" />
-                          <circle cx="6" cy="10" r="1.2" fill="currentColor" />
-                          <circle cx="18" cy="10" r="1.2" fill="currentColor" />
-                          <path d="M4 21 L8 21" />
-                          <path d="M16 21 L20 21" />
+                          <circle cx="6" cy="6" r="2.5" />
+                          <circle cx="6" cy="18" r="2.5" />
+                          <path d="M8.5 8.5 L20 20" />
+                          <path d="M8.5 15.5 L14 10" />
+                          <path d="M5 12 L8 12" />
                         </svg>
-                        Каблинг, брейсинг<span className="mm-arrow">→</span>
+                        Санитарная обрезка<span className="mm-arrow">→</span>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/arboristika/opryskivanie">
+                      <Link href="/arboristika/udalenie-pnya">
                         <svg
                           className="mm-icon"
                           viewBox="0 0 24 24"
@@ -221,21 +171,21 @@ export async function Header() {
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         >
-                          <path d="M10 14 L14 14 L14 20 L10 20 Z" />
-                          <path d="M12 14 L12 10" />
-                          <path d="M10 10 L14 10 L14 8 L10 8 Z" />
-                          <path d="M6 6 L8 7" />
-                          <path d="M6 10 L8 10" />
-                          <path d="M6 14 L8 13" />
-                          <circle cx="4" cy="6" r="0.8" />
-                          <circle cx="4" cy="10" r="0.8" />
-                          <circle cx="4" cy="14" r="0.8" />
+                          <ellipse cx="12" cy="10" rx="5" ry="1.5" />
+                          <path d="M7 10 L7 13" />
+                          <path d="M17 10 L17 13" />
+                          <path d="M7 13 C 9 14, 15 14, 17 13" />
+                          <circle cx="12" cy="10" r="1.6" />
+                          <path d="M6 16 C 5 17, 4 18, 3 19" />
+                          <path d="M9 16 L8 20" />
+                          <path d="M15 16 L16 20" />
+                          <path d="M18 16 C 19 17, 20 18, 21 19" />
                         </svg>
-                        Опрыскивание<span className="mm-arrow">→</span>
+                        Удаление пня<span className="mm-arrow">→</span>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/arboristika/izmelchenie">
+                      <Link href="/arboristika/avariynyy-spil">
                         <svg
                           className="mm-icon"
                           viewBox="0 0 24 24"
@@ -245,17 +195,17 @@ export async function Header() {
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         >
-                          <path d="M7 6 L17 6 L14 13 L10 13 Z" />
-                          <path d="M10 13 L10 18 L14 18 L14 13" />
-                          <path d="M5 3 L7 6" />
-                          <path d="M3 5 L7 6" />
-                          <path d="M17 18 L20 18" />
-                          <path d="M19 17 L21 17" />
-                          <path d="M19 19 L21 20" />
-                          <circle cx="11" cy="20.5" r="1" />
-                          <circle cx="13" cy="20.5" r="1" />
+                          <path d="M4 20 L20 20" />
+                          <g transform="rotate(35 10 18)">
+                            <path d="M10 9 L10 18" />
+                            <path d="M8 11 L10 9 L12 11" />
+                            <path d="M7.5 13 L10 11 L12.5 13" />
+                            <path d="M7 15 L10 13 L13 15" />
+                          </g>
+                          <path d="M18 3 L18 9" strokeWidth="2" />
+                          <circle cx="18" cy="11.5" r="0.8" fill="currentColor" />
                         </svg>
-                        Измельчение веток<span className="mm-arrow">→</span>
+                        Аварийный спил 24/7<span className="mm-arrow">→</span>
                       </Link>
                     </li>
                   </ul>
@@ -265,10 +215,10 @@ export async function Header() {
                 </div>
 
                 <div className="mm-col">
-                  <h4>Крыши и территория</h4>
+                  <h4>Чистка крыш</h4>
                   <ul>
                     <li>
-                      <Link href="/chistka-krysh/ot-snega">
+                      <Link href="/chistka-krysh/chistka-krysh-chastnyy-dom">
                         <svg
                           className="mm-icon"
                           viewBox="0 0 24 24"
@@ -287,11 +237,11 @@ export async function Header() {
                           <path d="M16 3 L16 5" />
                           <path d="M15 4 L17 4" />
                         </svg>
-                        Уборка снега с крыш<span className="mm-arrow">→</span>
+                        Чистка крыши частного дома<span className="mm-arrow">→</span>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/chistka-krysh/vodostoki">
+                      <Link href="/chistka-krysh/chistka-krysh-mkd">
                         <svg
                           className="mm-icon"
                           viewBox="0 0 24 24"
@@ -301,20 +251,16 @@ export async function Header() {
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         >
-                          <path d="M6 3 L18 3 L18 6 L6 6 Z" />
-                          <path d="M10 6 L10 18" />
-                          <path d="M14 6 L14 18" />
-                          <path d="M10 18 C 10 20, 14 20, 14 18" />
-                          <path d="M10 9 L14 9" strokeDasharray="1.5 1.5" />
-                          <path d="M10 13 L14 13" strokeDasharray="1.5 1.5" />
-                          <path d="M12 20 L12 22" />
-                          <path d="M11 21 L13 21" />
+                          <path d="M3 11 L12 5 L21 11" />
+                          <path d="M5 11 L5 20 L19 20 L19 11" />
+                          <path d="M8 20 L8 15 L11 15 L11 20" />
+                          <path d="M14 15 L16 15 L16 18 L14 18 Z" />
                         </svg>
-                        Чистка водостоков<span className="mm-arrow">→</span>
+                        Чистка кровли МКД<span className="mm-arrow">→</span>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/chistka-krysh/promalp">
+                      <Link href="/chistka-krysh/sbivanie-sosulek">
                         <svg
                           className="mm-icon"
                           viewBox="0 0 24 24"
@@ -332,11 +278,11 @@ export async function Header() {
                           <path d="M9 19 L15 19" />
                           <path d="M12 19 L12 21" />
                         </svg>
-                        Промышленный альпинизм<span className="mm-arrow">→</span>
+                        Сбивание сосулек<span className="mm-arrow">→</span>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/chistka-krysh/avtovyshka">
+                      <Link href="/chistka-krysh/ot-snega">
                         <svg
                           className="mm-icon"
                           viewBox="0 0 24 24"
@@ -346,16 +292,36 @@ export async function Header() {
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         >
-                          <path d="M2 20 L22 20" />
-                          <path d="M4 20 L4 16 L10 16 L10 20" />
-                          <circle cx="6" cy="20" r="1.2" />
-                          <circle cx="8" cy="20" r="1.2" />
-                          <path d="M10 18 L15 13" />
-                          <path d="M15 13 L18 10" strokeDasharray="1.8 1.2" />
-                          <path d="M17 8 L21 8 L21 12 L17 12 Z" />
-                          <path d="M19 10 L19 8" />
+                          <path d="M3 16 L12 8 L21 16" />
+                          <path d="M5 16 L5 21 L19 21 L19 16" />
+                          <circle cx="6" cy="5" r="0.7" fill="currentColor" />
+                          <circle cx="12" cy="3" r="0.7" fill="currentColor" />
+                          <circle cx="18" cy="5" r="0.7" fill="currentColor" />
+                          <path d="M7 11 L9 13" />
+                          <path d="M15 11 L17 13" />
                         </svg>
-                        Автовышка<span className="mm-arrow">→</span>
+                        Чистка крыш от снега<span className="mm-arrow">→</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/chistka-krysh/dogovor-na-sezon">
+                        <svg
+                          className="mm-icon"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <rect x="4" y="4" width="16" height="17" rx="1.5" />
+                          <path d="M8 4 L8 2" />
+                          <path d="M16 4 L16 2" />
+                          <path d="M4 9 L20 9" />
+                          <path d="M8 13 L16 13" />
+                          <path d="M8 16 L13 16" />
+                        </svg>
+                        Договор на сезон<span className="mm-arrow">→</span>
                       </Link>
                     </li>
                   </ul>
@@ -365,10 +331,33 @@ export async function Header() {
                 </div>
 
                 <div className="mm-col">
-                  <h4>Мусор и демонтаж</h4>
+                  <h4>Уборка и вывоз</h4>
                   <ul>
                     <li>
-                      <Link href="/vyvoz-musora">
+                      <Link href="/uborka-territorii">
+                        <svg
+                          className="mm-icon"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M3 18 L21 18" />
+                          <path d="M6 18 C 6 15, 5 13, 6 10" />
+                          <path d="M10 18 C 10 14, 9 12, 10 9" />
+                          <path d="M14 18 C 14 15, 13 13, 14 10" />
+                          <path d="M2 16 L8 16 L16 13 L22 15" />
+                        </svg>
+                        Уборка территории<span className="mm-arrow">→</span>
+                      </Link>
+                    </li>
+                  </ul>
+                  <h5 className="mm-subheader">Вывоз и демонтаж</h5>
+                  <ul>
+                    <li>
+                      <Link href="/vyvoz-musora/vyvoz-stroymusora">
                         <svg
                           className="mm-icon"
                           viewBox="0 0 24 24"
@@ -383,22 +372,33 @@ export async function Header() {
                           <circle cx="7.5" cy="20.5" r="1.4" />
                           <circle cx="16.5" cy="20.5" r="1.4" />
                           <path d="M9 14 L9 11" />
-                          <path d="M7.5 12.5 L9 11 L10.5 12.5" />
                           <path d="M12 14 L12 11" />
-                          <path d="M10.5 12.5 L12 11 L13.5 12.5" />
                           <path d="M15 14 L15 11" />
-                          <path d="M13.5 12.5 L15 11 L16.5 12.5" />
                         </svg>
-                        Вывоз мусора<span className="mm-arrow">→</span>
+                        Вывоз строительного мусора<span className="mm-arrow">→</span>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/vyvoz-musora/kontejner">
-                        Контейнеры 7 / 20 / 30 м³<span className="mm-arrow">→</span>
+                      <Link href="/vyvoz-musora/vyvoz-sadovogo-musora">
+                        <svg
+                          className="mm-icon"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M3 10 L21 10" />
+                          <path d="M5 10 L6 19 L18 19 L19 10" />
+                          <path d="M8 6 C 8 3, 12 3, 12 6 C 12 9, 16 9, 16 6" />
+                          <path d="M12 6 L12 10" />
+                        </svg>
+                        Вывоз садового мусора<span className="mm-arrow">→</span>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/demontazh/saraj">
+                      <Link href="/demontazh/demontazh-dachi">
                         <svg
                           className="mm-icon"
                           viewBox="0 0 24 24"
@@ -415,17 +415,34 @@ export async function Header() {
                           <path d="M5 2 L9 6" strokeWidth="2" />
                           <path d="M6 7 L2 11 L5 14 L9 10" />
                         </svg>
-                        Демонтаж сараев<span className="mm-arrow">→</span>
+                        Снос дачного дома<span className="mm-arrow">→</span>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/demontazh/raschistka">
-                        Расчистка участка<span className="mm-arrow">→</span>
+                      <Link href="/demontazh/demontazh-bani">
+                        <svg
+                          className="mm-icon"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M5 12 L12 7 L19 12" />
+                          <path d="M7 12 L7 20 L17 20 L17 12" />
+                          <path d="M10 20 L10 16 L14 16 L14 20" />
+                          <path d="M12 7 L12 4" />
+                          <path d="M10 5 C 10 3, 14 3, 14 5" />
+                          <path d="M4 9 L6 11" strokeWidth="1.8" />
+                          <path d="M3 11 L5 9" strokeWidth="1.8" />
+                        </svg>
+                        Снос бани<span className="mm-arrow">→</span>
                       </Link>
                     </li>
                   </ul>
-                  <Link href="/demontazh" className="mm-all">
-                    Все услуги по мусору и демонтажу →
+                  <Link href="/uslugi" className="mm-all">
+                    Все услуги →
                   </Link>
                 </div>
               </div>
