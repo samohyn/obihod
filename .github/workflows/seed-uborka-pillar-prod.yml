@@ -1,0 +1,101 @@
+name: Seed uborka-territorii pillar on prod (one-shot)
+
+# 2026-05-09: uborka-territorii pillar (5-й pillar EPIC-SEO-COMPETE-3) есть в
+# local seed.ts, но не сидится на prod (seed-prod.yml не включает
+# seed-uborka-pillar.ts). publish-services показал в проде только 9 services.
+#
+# Этот workflow один раз создаёт pillar через идемпотентный
+# `scripts/seed-uborka-pillar.ts` (skip если уже есть).
+#
+# Триггер: workflow_dispatch с confirm.
+# После seed → запустить publish-services.yml чтобы published.
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Введи "seed-uborka" для подтверждения'
+        required: true
+        default: ''
+
+concurrency:
+  group: seed-uborka-pillar
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    name: Preflight
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate confirm
+        run: |
+          if [ "${{ inputs.confirm }}" != "seed-uborka" ]; then
+            echo "::error::confirm != seed-uborka"
+            exit 1
+          fi
+      - name: Validate SSH secrets
+        env:
+          HOST: ${{ secrets.BEGET_SSH_HOST }}
+          USER: ${{ secrets.BEGET_SSH_USER }}
+          KEY: ${{ secrets.BEGET_SSH_KEY }}
+          PATH_: ${{ secrets.BEGET_DEPLOY_PATH }}
+        run: |
+          if [ -z "$HOST" ] || [ -z "$USER" ] || [ -z "$KEY" ] || [ -z "$PATH_" ]; then
+            echo "::error::BEGET_SSH_* secrets отсутствуют"
+            exit 1
+          fi
+
+  seed:
+    name: SSH + tsx scripts/seed-uborka-pillar.ts
+    needs: preflight
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.BEGET_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p ${{ secrets.BEGET_SSH_PORT || '22' }} -H ${{ secrets.BEGET_SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Upload seed-uborka-pillar.ts + tsconfig + shim to VPS
+        run: |
+          set -eo pipefail
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
+            "mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/current/scripts"
+          scp -i ~/.ssh/deploy_key -P ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            -o StrictHostKeyChecking=no \
+            site/scripts/seed-uborka-pillar.ts \
+            site/scripts/_payload-cjs-shim.cjs \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/scripts/
+          scp -i ~/.ssh/deploy_key -P ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            -o StrictHostKeyChecking=no \
+            site/tsconfig.json \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/tsconfig.json
+
+      - name: Run seed-uborka-pillar via SSH
+        run: |
+          set -eo pipefail
+          LOG_DIR=seed-logs
+          mkdir -p "$LOG_DIR"
+          LOG_FILE="$LOG_DIR/seed-uborka-$(date -u +%Y%m%dT%H%M%SZ).log"
+
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            -o ServerAliveInterval=15 \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
+            "set -eux
+             cd ${{ secrets.BEGET_DEPLOY_PATH }}/current
+             set -a; . ./.env; set +a
+             pnpm dlx tsx --require=./scripts/_payload-cjs-shim.cjs scripts/seed-uborka-pillar.ts" \
+            2>&1 | tee "$LOG_FILE"
+
+      - name: Upload seed log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seed-uborka-log
+          path: seed-logs/
+          retention-days: 30
