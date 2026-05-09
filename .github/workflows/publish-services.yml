@@ -87,7 +87,7 @@ jobs:
             "set -eux
              cd ${{ secrets.BEGET_DEPLOY_PATH }}/current
              set -a; . ./.env; set +a
-             pnpm dlx tsx scripts/publish-services.ts" \
+             pnpm dlx tsx --require=./scripts/_payload-cjs-shim.cjs scripts/publish-services.ts" \
             2>&1 | tee "$LOG_FILE"
 
       - name: Revalidate ISR
