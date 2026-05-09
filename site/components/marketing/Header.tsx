@@ -331,10 +331,30 @@ export async function Header() {
                 </div>
 
                 <div className="mm-col">
-                  {/* uborka-territorii pillar временно скрыт до ADR-0020 + CONTENT-UBORKA-SUBS:
-                      prod-БД отстаёт по миграциям (publish-services workflow blocked) +
-                      sub-services без контента. Вернуть после фикса payload migrate + cw. */}
-                  <h4>Вывоз и демонтаж</h4>
+                  <h4>Уборка и вывоз</h4>
+                  <ul>
+                    <li>
+                      <Link href="/uborka-territorii">
+                        <svg
+                          className="mm-icon"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M3 18 L21 18" />
+                          <path d="M6 18 C 6 15, 5 13, 6 10" />
+                          <path d="M10 18 C 10 14, 9 12, 10 9" />
+                          <path d="M14 18 C 14 15, 13 13, 14 10" />
+                          <path d="M2 16 L8 16 L16 13 L22 15" />
+                        </svg>
+                        Уборка территории<span className="mm-arrow">→</span>
+                      </Link>
+                    </li>
+                  </ul>
+                  <h5 className="mm-subheader">Вывоз и демонтаж</h5>
                   <ul>
                     <li>
                       <Link href="/vyvoz-musora/vyvoz-stroymusora">
