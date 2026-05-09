@@ -1,0 +1,115 @@
+name: Apply Payload migrations on prod
+
+# 2026-05-09: prod БД отстала по миграциям после серии PR (US-12 PANEL-AUTH-2FA,
+# AUDIT-LOG, PERSONS→AUTHORS merge, EPIC-SEO-USLUGI US-3 namespace_index +
+# services_reviewed_by). publish-services и любая запись через Payload Local API
+# падают на «column does not exist» из-за устаревшей schema.
+#
+# Workflow применяет ВСЕ pending миграции из site/migrations/ через
+# Payload migrate runner. Идемпотентен — Payload отслеживает применённые
+# миграции в `payload_migrations` таблице.
+#
+# Триггер: workflow_dispatch с confirm + рекомендация запустить prod-backup.yml ДО.
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Введи "migrate" для подтверждения'
+        required: true
+        default: ''
+      backup_done:
+        description: 'Backup сделан? (yes/no) — настоятельно рекомендуется'
+        required: true
+        default: 'no'
+
+concurrency:
+  group: migrate-prod
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    name: Preflight — confirm + secrets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate confirm
+        run: |
+          if [ "${{ inputs.confirm }}" != "migrate" ]; then
+            echo "::error::confirm != migrate"
+            exit 1
+          fi
+      - name: Warn if no backup
+        run: |
+          if [ "${{ inputs.backup_done }}" != "yes" ]; then
+            echo "::warning::backup_done=no — рекомендую запустить prod-backup.yml ДО миграций"
+          fi
+      - name: Validate SSH secrets
+        env:
+          HOST: ${{ secrets.BEGET_SSH_HOST }}
+          USER: ${{ secrets.BEGET_SSH_USER }}
+          KEY: ${{ secrets.BEGET_SSH_KEY }}
+          PATH_: ${{ secrets.BEGET_DEPLOY_PATH }}
+        run: |
+          if [ -z "$HOST" ] || [ -z "$USER" ] || [ -z "$KEY" ] || [ -z "$PATH_" ]; then
+            echo "::error::BEGET_SSH_* secrets отсутствуют"
+            exit 1
+          fi
+
+  migrate:
+    name: SSH + pnpm payload migrate
+    needs: preflight
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.BEGET_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p ${{ secrets.BEGET_SSH_PORT || '22' }} -H ${{ secrets.BEGET_SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Upload migrations/ + tsconfig.json + shim to VPS
+        run: |
+          set -eo pipefail
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
+            "mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/current/migrations \
+                     ${{ secrets.BEGET_DEPLOY_PATH }}/current/scripts"
+          # rsync всего migrations/ (sql + ts)
+          rsync -az -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o StrictHostKeyChecking=no" \
+            site/migrations/ \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/migrations/
+          # tsconfig + shim
+          scp -i ~/.ssh/deploy_key -P ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            -o StrictHostKeyChecking=no \
+            site/tsconfig.json \
+            site/scripts/_payload-cjs-shim.cjs \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }}:${{ secrets.BEGET_DEPLOY_PATH }}/current/
+
+      - name: Run migrations via SSH
+        id: run-migrate
+        run: |
+          set -eo pipefail
+          LOG_DIR=migrate-logs
+          mkdir -p "$LOG_DIR"
+          LOG_FILE="$LOG_DIR/migrate-$(date -u +%Y%m%dT%H%M%SZ).log"
+
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
+            -o ServerAliveInterval=15 \
+            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
+            "set -eux
+             cd ${{ secrets.BEGET_DEPLOY_PATH }}/current
+             set -a; . ./.env; set +a
+             # Payload migrate runner — идемпотентен, читает payload_migrations
+             pnpm dlx tsx --require=./scripts/_payload-cjs-shim.cjs node_modules/payload/dist/bin/index.js migrate" \
+            2>&1 | tee "$LOG_FILE"
+
+      - name: Upload migrate log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: migrate-log
+          path: migrate-logs/
+          retention-days: 30
