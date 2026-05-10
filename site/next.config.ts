@@ -14,6 +14,12 @@ const nextConfig: NextConfig = {
    *
    * - /ochistka-krysh/* → /chistka-krysh/* (US-5 REQ-5.3, ADR-uМ-13).
    *   Wsfreq 888 для «чистка» vs 0 для «очистка» (Wave 2 US-4).
+   * - /arboristika/spil/ → /arboristika/spil-derevev/ (C3 task).
+   *   Короткий «спил» — частая SEO-форма (liwood.ru/services/udalenie-derevev/spil),
+   *   canonical sub-service slug в Payload — `spil-derevev`.
+   * - /<pillar>/ramenskoe/ → /<pillar>/ramenskoye/ (C3 task).
+   *   Транслитерация Раменское — две формы; canonical district slug в Payload —
+   *   `ramenskoye` (по сидам W11/W13). Алиас покрывает все 5 pillar.
    *
    * Дальнейшая стратегия (US-5 REQ-5.3): когда количество таких миграций
    * вырастет — переехать на middleware.ts, читающий коллекцию `Redirects`
@@ -29,6 +35,16 @@ const nextConfig: NextConfig = {
       {
         source: '/ochistka-krysh/:path*',
         destination: '/chistka-krysh/:path*',
+        permanent: true,
+      },
+      {
+        source: '/arboristika/spil/',
+        destination: '/arboristika/spil-derevev/',
+        permanent: true,
+      },
+      {
+        source: '/:pillar(arboristika|chistka-krysh|demontazh|vyvoz-musora|uborka-territorii)/ramenskoe/',
+        destination: '/:pillar/ramenskoye/',
         permanent: true,
       },
     ]

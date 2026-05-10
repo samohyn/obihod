@@ -15,6 +15,7 @@ import { getAllServiceSlugs, getServiceBySlug, getAllDistrictsForCityList } from
 import { getSiteChrome } from '@/lib/chrome'
 import { getBlocksForLayer } from '@/lib/master-template/getBlocksForLayer'
 import { buildResolverOptions } from '@/lib/feature-flags/template-v2'
+import { readAbVariantOverride, AB_PILOT_SLUG } from '@/lib/feature-flags/ab-pilot'
 import type { DocumentBlock } from '@/blocks/master-template'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
@@ -80,7 +81,16 @@ export default async function PillarPage({ params }: { params: Promise<{ service
     // EPIC-SERVICE-PAGES-UX C4 — resolver gate.
     // - useTemplateV2=false (default sustained): identity, render as-is.
     // - useTemplateV2=true:                       reorder + filter + fill placeholders.
+    //
+    // EPIC-SERVICE-PAGES-REDESIGN D5 — A/B pilot cookie override.
+    // На pilot pillar (`vyvoz-musora`) если cookie obikhod_ab_var === 'v2' →
+    // force templateV2=true локально (без write в Payload doc). Не задеваем
+    // sustained pages — для других slugs override === false (no-op).
     const resolverOpts = buildResolverOptions(service as never)
+    const abOverride = await readAbVariantOverride(serviceSlug)
+    if (abOverride) {
+      resolverOpts.templateV2 = true
+    }
     const resolvedBlocks = getBlocksForLayer(
       'T2_PILLAR',
       docBlocks as DocumentBlock[],

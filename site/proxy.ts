@@ -13,10 +13,34 @@ import { NextResponse, type NextRequest } from 'next/server'
  *    Магазин саженцев выведен из проекта (ADR-0020). URL никогда не публиковались
  *    в sitemap, но Я.Вебмастер мог просканировать их по внешним сигналам.
  *    410 Gone signal-ит ботам «навсегда удалено», в отличие от 404 (transient).
+ * 6. EPIC-SERVICE-PAGES-REDESIGN D5 — A/B pilot cookie split.
+ *    На pilot-pillar `/vyvoz-musora/` (T2) присваиваем посетителю cookie
+ *    `obikhod_ab_var=v1|v2` (50/50 random). Cookie persistent (1 year),
+ *    SameSite=Lax, БЕЗ HttpOnly — нужен JS-доступ для Я.Метрика goal +
+ *    RumProvider tag. Pilot scope ТОЛЬКО `/vyvoz-musora/` и его суб-URL —
+ *    остальные pages не трогаем (default sustained rendering).
  *
  * Legacy redirects из коллекции `redirects` Payload — реализуем позже
  * (нужен in-memory snapshot, обновляемый по ISR).
  */
+
+// ─── EPIC-SERVICE-PAGES-REDESIGN D5: A/B pilot cookie split ─────────────────
+const AB_COOKIE = 'obikhod_ab_var'
+const AB_COOKIE_MAX_AGE = 60 * 60 * 24 * 365 // 1 year
+const PILOT_PATH = '/vyvoz-musora'
+
+function isPilotPath(pathname: string): boolean {
+  // Pilot scope: /vyvoz-musora/ + любые суб-маршруты (sub-services, districts).
+  return (
+    pathname === PILOT_PATH ||
+    pathname === `${PILOT_PATH}/` ||
+    pathname.startsWith(`${PILOT_PATH}/`)
+  )
+}
+
+function isValidVariant(value: string | undefined): value is 'v1' | 'v2' {
+  return value === 'v1' || value === 'v2'
+}
 
 const ADMIN_PASS_THROUGH = [
   '/admin/login',
@@ -107,6 +131,42 @@ export function proxy(req: NextRequest) {
       })
       return response
     }
+  }
+
+  // 6. EPIC-SERVICE-PAGES-REDESIGN D5 — A/B pilot cookie split.
+  // На pilot scope (`/vyvoz-musora/*`) — set obikhod_ab_var cookie если её нет.
+  // Pass-through уже existing cookie (sticky per user). Скип всех других путей.
+  if (isPilotPath(pathname)) {
+    const existing = req.cookies.get(AB_COOKIE)?.value
+    if (!isValidVariant(existing)) {
+      const variant: 'v1' | 'v2' = Math.random() < 0.5 ? 'v1' : 'v2'
+      const response = NextResponse.next({
+        // Pass variant в request headers — сервер-сайд код может прочитать
+        // через `headers()` без повторного парсинга cookies (если нужно).
+        request: {
+          headers: new Headers(req.headers),
+        },
+      })
+      response.headers.set('x-ab-variant', variant)
+      response.cookies.set({
+        name: AB_COOKIE,
+        value: variant,
+        maxAge: AB_COOKIE_MAX_AGE,
+        sameSite: 'lax',
+        path: '/',
+        // httpOnly: false — нужен JS-доступ для Я.Метрика reachGoal + RUM tag.
+        secure: process.env.NODE_ENV === 'production',
+      })
+      return response
+    }
+    // Cookie уже set — pass-through с x-ab-variant header для server reads.
+    const response = NextResponse.next({
+      request: {
+        headers: new Headers(req.headers),
+      },
+    })
+    response.headers.set('x-ab-variant', existing)
+    return response
   }
 
   // Trailing slash управляется Next.js через next.config.ts (`trailingSlash: true`)
