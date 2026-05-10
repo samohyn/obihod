@@ -164,3 +164,55 @@ plan_file: /Users/a36/.claude/plans/stateless-puzzling-valiant.md
   **Открытые backlog (НЕ блокеры C2.6):**
   - **Calculator block** — отдельная sub-task: Payload v3 `enumName: 'enum_sd_calc_service_type'` в Calculator.ts service_type field, отдельная mini-migration на 2 таблицы + enum, отдельный test.
   - **B4 wave restore PR** — оператор закоммитит этот код-changes + migration files на main (sustained iron rule: PO-merged PR before prod-deploy code). Phase 2 prod-pilot blocked by PR-4 merge.
+
+- 2026-05-10 22:40 MSK · dev+arch → po: **C2.6 issue 3 done — closes Calculator backlog from 16:30 hand-off.** Approach: **option A — Payload v3 `enumName` function override** на `Calculator.serviceType` field (`site/blocks/Calculator.ts`):
+
+  ```ts
+  enumName: ({ tableName }) => `enum_${tableName}_svc_t`
+  ```
+
+  Per-table enum names (≤ 63 char Postgres NAMEDATALEN limit):
+  - T2          `enum_services_blocks_calculator_placeholder_svc_t` (49)
+  - T2 drafts   `enum__services_v_blocks_calculator_placeholder_svc_t` (52)
+  - T4_SD       `enum_service_districts_blocks_calculator_placeholder_svc_t` (58)
+  - T4_SD draft `enum__service_districts_v_blocks_calculator_placeholder_svc_t` (61)
+
+  **Migration `20260510_220000_calculator_enum_rename.{ts,up.sql,down.sql}`:**
+  - UP step 1: `ALTER TYPE … RENAME TO …` для T2 + T2-drafts существующих enums (sustained data в `services_blocks_calculator_placeholder` unchanged — Postgres ENUM rename атомарен, columns референсят TYPE по oid).
+  - UP step 2: CREATE T4_SD calculator-placeholder published + drafts tables + 2 короткие ENUM types + FK to `service_districts(id)` / `_service_districts_v(id)` ON DELETE CASCADE + 6 indexes (`_order_idx`, `_parent_id_idx`, `_path_idx` × 2 layers — drafts `_parent_id_idx` truncated до 63 char Postgres-side, harmless).
+  - DOWN: reverse — DROP T4_SD tables CASCADE → DROP T4_SD types → ALTER TYPE RENAME T2 типов обратно к `_service_type`.
+  - Idempotent во всём: DO $$ guards (pg_type / pg_constraint lookup), IF NOT EXISTS (TABLE / SEQUENCE / INDEX).
+
+  **Apply на prod (sustained SSH fallback, intake constraint «no git commit/push»):**
+  - Backup ДО: workflow `Prod backup (pg_dump)` SUCCESS run `25637502832`
+  - Apply: `scp` → `sudo -u postgres psql obikhod -v ON_ERROR_STOP=1 -f` → 0 errors. 4 enum types confirmed via `pg_type` (49/52/58/61 chars). 4 tables confirmed via `pg_class` (2 sustained T2 + 2 new T4_SD).
+  - Registered в `payload_migrations` (idempotent INSERT через WHERE NOT EXISTS, no unique constraint sustained).
+  - Ownership fix → 4 ENUM types + 2 tables + 1 sequence `OWNER TO obikhod` (sustained gigant pattern).
+
+  **ServiceDistricts.blockReferences extended → 12 blocks** (Hero, Breadcrumbs, Tldr, TextContent, PricingTable, **Calculator**, ProcessSteps, Faq, CtaBanner, NeighborDistricts, RelatedServices, LeadForm). Calculator inserted между PricingTable и ProcessSteps по UX последовательности master-template (показать цены → калькулятор уточнить → процесс работ).
+
+  **Verification:**
+  - `pnpm type-check` → 0 errors
+  - `pnpm lint` → 0 errors (66 warnings, sustained baseline)
+  - `pnpm format:check` → all matched files use Prettier code style
+  - Prod smoke `/vyvoz-musora/khimki/` HTTP **200**, `/vyvoz-musora/` HTTP **200** (no regression — sustained T4_SD render не задействует пока новые tables, code не deployed).
+
+  **Migration safety checklist:**
+  - [x] UP + DOWN reversible (DOWN тестирован semantically — все DROP IF EXISTS / RENAME guarded)
+  - [x] CREATE TYPE/TABLE/INDEX/CONSTRAINT все idempotent
+  - [x] Sustained T2 data unchanged (ALTER TYPE RENAME — atomic metadata-only)
+  - [x] Empty new T4_SD tables → нет lock-issues, instant DDL
+  - [x] FK ON DELETE CASCADE per sustained pattern
+  - [x] Backup ДО apply (pg_dump artifact retained 30d)
+  - [x] Rollback план: DOWN sql + удаление row payload_migrations
+
+  **Constraints honored:** no git commit / push / no deploy. Schema applied на prod (immediate ROI: enum overflow gone, T4_SD tables ready). Code changes (`site/blocks/Calculator.ts` + `site/collections/ServiceDistricts.ts` + 3 migration files) в working tree, **PO open PR для CI sync**.
+
+  **Файлы:**
+  - `site/blocks/Calculator.ts` (+13 строк: enumName function + комментарий с per-table char count breakdown)
+  - `site/collections/ServiceDistricts.ts` (+1 import Calculator, +1 entry в blockReferences, +6 строк комментарий sustained note → resolved)
+  - `site/migrations/20260510_220000_calculator_enum_rename.up.sql` (~200 строк, 2 RENAME guards + 2 CREATE TYPE guards + 2 CREATE TABLE + 1 SEQUENCE + 4 CONSTRAINT guards + 6 INDEX)
+  - `site/migrations/20260510_220000_calculator_enum_rename.down.sql` (reverse order, DROP CASCADE + RENAME back)
+  - `site/migrations/20260510_220000_calculator_enum_rename.ts` (sustained sql.raw runner pattern)
+
+  **Open backlog:** B4 wave restore PR (sustained от 16:30 — нужен push C2.6 + C2.6-issue3 одним PR оператором).

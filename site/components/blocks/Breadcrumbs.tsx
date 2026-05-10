@@ -88,6 +88,10 @@ export function Breadcrumbs(block: BreadcrumbsBlock) {
                         textDecorationColor:
                           'color-mix(in oklab, var(--c-ink-soft) 30%, transparent)',
                         textUnderlineOffset: '3px',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        minHeight: 44,
+                        padding: '10px 0',
                       }}
                     >
                       {it.name}

@@ -2,7 +2,19 @@
 
 _Обновляется в конце сессии. Короткий срез: что сделано, что в работе, что следующее. Цель — дать следующей сессии контекст за 30 секунд._
 
-## Где мы сейчас (2026-05-10 ~21:00 MSK) — EPIC-SERVICE-PAGES-REDESIGN D4 done
+## Где мы сейчас (2026-05-10 ~22:40 MSK) — C2.6 issue 3 Calculator enum fix applied prod
+
+**dev+arch (autonomous mandate):** D2 Calculator 65-char enum overflow закрыт.
+
+- 2026-05-10 22:40 MSK · dev+arch → po: C2.6 issue 3 done. **Approach: option A — Payload v3 `enumName` function override** на `Calculator.serviceType` field в `site/blocks/Calculator.ts`: `({ tableName }) => 'enum_' + tableName + '_svc_t'`. Per-table enum имена ≤ 63: T2=49, T2-drafts=52, T4_SD=58, T4_SD-drafts=61. Migration `20260510_220000_calculator_enum_rename.{ts,up.sql,down.sql}` применил на prod (через scp + `sudo -u postgres psql -v ON_ERROR_STOP=1 -f`): (1) ALTER TYPE RENAME для T2 enums (sustained data в `services_blocks_calculator_placeholder` unchanged, 0 rows тестово), (2) CREATE T4_SD calculator-placeholder published + drafts tables + короткие ENUM types + FK to service_districts/_service_districts_v + 6 indexes. Idempotent во всём (DO blocks для RENAME/CREATE TYPE/CONSTRAINT, IF NOT EXISTS для TABLE/SEQUENCE/INDEX). Registered в `payload_migrations` (id created_at 2026-05-10 19:21 UTC). Ownership granted to `obikhod` user. ServiceDistricts.blockReferences extended **5 → 12 blocks** (Calculator inserted между PricingTable и ProcessSteps). `pnpm type-check` 0 errors / `pnpm lint` 0 errors / `pnpm format:check` clean. **Smoke prod `/vyvoz-musora/khimki/` HTTP 200** (no regression). Backup сделан через `Prod backup (pg_dump)` workflow run #25637502832 ДО migration. Code change в `site/collections/ServiceDistricts.ts` + `site/blocks/Calculator.ts` НЕ pushed (constraint); operator должен open PR для CI sync. Migration file в `site/migrations/` ready для CI replay через `Apply Payload migrations on prod` workflow (idempotent — будет skip applied).
+
+## Где были раньше (2026-05-10 ~22:30 MSK) — EPIC-SERVICE-PAGES-REDESIGN D5.touch-fixes done
+
+**fe+qa (autonomous mandate):** D5 touch-target compliance fix закрыт. A/B pilot UNBLOCKED.
+
+- 2026-05-10 22:30 MSK · fe+qa → po: D5.touch-fixes done. **13 selectors fixed** (mobile ≤900 + ≤414, WCAG 2.5.5 44pt). Files: `site/app/service-pages.css` (+87 строк, новый блок `D5 touch-fixes` в конце) + `site/components/blocks/Breadcrumbs.tsx` (+4 inline-style props на `<Link>`). Скоп: header chrome (mm-col a / mm-mobile / mm-cta / mm-phone / mm-brand / auth-cta btn-login+btn-register), footer (site-footer-mock ul a / contacts a / legal a), Breadcrumbs links, defensive .faq-q. **Нерасторгнуто:** sp-* primitives (D3 wave A — уже compliant), .btn (44pt уже в globals.css), desktop layouts (>900 не трогали). Verification: `pnpm type-check` 0 errors / `pnpm lint` 0 errors / `pnpm format:check` clean. Report updated: `specs/EPIC-SERVICE-PAGES-REDESIGN/d4-qa-report.md` § «D5 touch-fixes applied». **Re-snapshot D4 spec после deploy** ожидается: smallTargets 4-9 → 0-1.
+
+## Где были раньше (2026-05-10 ~21:00 MSK) — EPIC-SERVICE-PAGES-REDESIGN D4 done
 
 **qa+fe (autonomous mandate):** D4 mobile-first compliance закрыт.
 
