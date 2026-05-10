@@ -2,6 +2,149 @@
 
 _Обновляется в конце сессии. Короткий срез: что сделано, что в работе, что следующее. Цель — дать следующей сессии контекст за 30 секунд._
 
+## Где мы сейчас (2026-05-09 21:35 MSK) — программа «Обиход 2.0» apruved
+
+**План:** `~/.claude/plans/stateless-puzzling-valiant.md`
+
+Оператор apruvil большую программу из 4 эпиков на 12 нед. Старт W1.
+
+**4 эпика:**
+1. **EPIC-SHOP-REMOVAL** — выводим магазин саженцев из проекта (archive, не hard-delete). Landshaft = 5-й pillar услуг (НЕ drop). 6 wave (W1 Decisions/ADR-0020 → W2 Docs → W3 Design ‖ W4 Code ‖ W5 CI → W6 Verify).
+2. **EPIC-LIWOOD-OVERTAKE** — gap analysis по 8 осям (Keys.so + WebFetch + PageSpeed) → 5+ новых US с RICE → roadmap. Параллельно с A.W3-W6.
+3. **EPIC-SERVICE-PAGES-UX** — UX/UI-driven master template (НЕ SEO-driven). Brand-guide v2.2 inventory + визуальный бенчмарк liwood. Каждая service-страница: LeadForm + Calculator (фото→смета US-8) + click-path-audit + breadcrumbs + SEO+нейровыдача-text.
+4. **EPIC-SERVICE-PAGES-REDESIGN** — pixel-perfect редизайн с brand-guide-first reuse (0 ad-hoc UI). 30 URL/нед × 8 нед, pilot /vyvoz-musora/ A/B 7 дней.
+
+**Iron rule brand-guide-first:** UI компоненты только из `design-system/brand-guide.html` v2.2 (§components/notifications/errors/pagination/nav/icons/color/contrast/type/shape — всё уже есть для services). Если нет — design расширяет brand-guide, потом fe верстает.
+
+**fal.ai hybrid policy** (skill `fal-ai-media`, FAL_KEY есть): иконки gap-fill (Nano Banana Pro), hero/cases/district photos (Nano Banana Pro по brand-guide §photography), черновики layout (Nano Banana 2). Все assets — design review. UI-элементы НЕЛЬЗЯ генерить.
+
+**Apruved decisions для EPIC-A.W1 (фиксируются в ADR-0020):**
+- Shop disposal = archive (team/shop.md → archive/, specs/EPIC-SEO-SHOP/ → _archived/, brand-guide §15-29 удалить, design-system/tov/shop.md удалить)
+- landshaft = 5-й pillar услуг (паритет с liwood `/services/landshaftniy-dizayn-uchastka/`)
+- US-11 9 shop-иконок archive
+- Roll-out волнами 30 URL/нед
+
+**Что СУПЕРСЕЖЕНО shop-removal:**
+- `apps/shop` scaffolding plan
+- shop роль в team (10→9 ролей)
+- design-system §15-29 + tov/shop.md
+- specs/EPIC-SEO-SHOP/, specs/EPIC-SEO-LANDSHAFT/ (landshaft переподшивается в EPIC-C)
+- shop секции в team/backlog.md
+
+**Текущее состояние сессии (2026-05-09 22:32 MSK)**
+
+### ✅ EPIC-SHOP-REMOVAL — все 5 wave closed
+
+| Wave | Результат |
+|---|---|
+| W1 — ADR-0020 | apruved (archive ✅, landshaft = 5-й pillar ✅, US-11 archive ✅) |
+| W2 — docs/specs/team | mv 4 dirs → `specs/_archived/`, `team/shop.md` → archive, CLAUDE.md/PROJECT_CONTEXT.md/backlog.md cleaned, learnings + handoff updated |
+| W3 — design-system | brand-guide v2.2 → v2.3 (5754→4299, -1455 строк), `tov/shop.md` deleted, ToC clean, §32 cabinet rewrite без cross-ref на shop |
+| W4 — site code | Header.tsx -237 строк (мега-меню «Магазин» вырезан), Footer.tsx line 91, types.ts IconLine clean, type-check/lint/format clean |
+| W5 — CI/seo-tech | proxy.ts 410 Gone для `/shop*` (Next 16 переименовал middleware→proxy), llms.txt clean, Payload richText audit 281 docs → 9 hits → cleanup blog/26+blog/23 (5 SQL replacements + 1 row deleted) |
+| W6 — verification | PASS_WITH_FOLLOWUPS · proxy 410 verified live (`/shop/`→410, `/`→200), sitemap 165 URL 0 shop, brand-guide 4299 lines balanced, functional code 0 hits, 168 grep hits semantic-acceptable. Pre-existing fails (`scripts/lint-schema.ts:332` TS2393 + master-template.ts format) — НЕ регрессия EPIC. `specs/EPIC-SHOP-REMOVAL/qa-report.md` |
+
+### ✅ EPIC-LIWOOD-OVERTAKE — B1-B5 ALL CLOSED (technically COMPLETE)
+
+- **B1 snapshot** (`seosite/01-competitors/liwood-snapshot-2026-05-09.json`) — 13 URL × 200, 5 × 404 slug-drift, JSON-LD 3/13, meta-description 2/13, calculator interactive без AI.
+- **B2 benchmark** (`seosite/01-competitors/liwood-vs-obikhod-2026-05-W.md`) — **5 LEAD / 1 PARITY / 2 LAG**: LEAD (Content depth, On-page SEO, Schema/JSON-LD ⭐, E-E-A-T, CRO/lead-flow ⭐), PARITY (URL/IA), LAG (B2B/local, CWV likely LEAD pending PSI).
+- **B3 classification** — добавлено в B2 файл: 5 LEAD → marketing-angle, PARITY → monitoring + threshold, LAG → US с RICE.
+- **B4 US drafts** — `team/backlog.md` подсекция «Liwood overtake roadmap (B5)» с **9 новыми US** (OVT-1..7 + OVT-MONITOR + OVT-MKT).
+- **B5 roadmap** (`seosite/01-competitors/overtake-roadmap-2026-05.md`) — RACI + ASCII Gantt 12 нед (4 wave) + dependencies + 5 operator actions required.
+- **Top-3 priority by RICE:** OVT-MONITOR (6.75) weekly watcher → OVT-3 RUM (6.0) CWV → OVT-4 Я.Карты+Я.Бизнес (4.25).
+- **Covered-by:** OVT-1/2/4/6/7 partially covered existing US (escalation ETA), 4 принципиально новых: OVT-3 RUM, OVT-5 video, OVT-MONITOR, OVT-MKT.
+- **Главный insight:** Schema-gap у liwood катастрофический — самый дешёвый защитный ров. Photo→quote AI USP подтверждён.
+
+### ✅ EPIC-SERVICE-PAGES-UX — C1.a + C1.b + C2 closed
+
+- **C1.a inventory** (`design-system/inventory-services-2026-05.md`) — 15 готовых компонентов из brand-guide v2.2 для services-периметра; **13 gaps**: 4 critical + 4 high + 5 medium.
+- **C1.b anatomy** (`seosite/01-competitors/liwood-page-anatomy-2026-05.md` + `screen/EPIC-C/liwood-*.png` 10 шт) — UX/UI бенчмарк 5 URL × desktop+mobile, top-5 recommendations (sticky 56px CTA, photo-upload hero, AggregateRating, 10-12 секций, comparison-table copy).
+- **C2 master template** (`team/adr/ADR-0021-service-page-master-template.md` + `site/blocks/master-template.ts`) — 13 секций × per-layer (T2 11req+0opt+2hidden / T3 10req+2opt+1hidden / T4 10req+2opt+1hidden), mapping 2 ready + 11 requires-extension в C2.5 wave.
+
+### ⏳ Финальное состояние сессии (2026-05-09 23:35 MSK)
+
+**Закрыто автономно (PO mandate):**
+- ADR-0020 + ADR-0021 ACCEPTED
+- Overtake roadmap ACCEPTED (9 OVT US, 5 covered-by existing programs)
+- C2.5 wave (11 brand-guide extensions, v2.6 = 7459 строк)
+- C3 Payload validators (3 collections wired, 20 tests)
+- C4 migration plan (resolver + feature flag + 5 placeholders + migration ready, 49 tests)
+- OVT-3 RUM CWV instrumentation
+- OVT-MONITOR weekly watcher
+- D1 design briefs (9 art-briefs T2/T3/T4 × brief/ui/ux)
+- Tech-debt sweep (orphan regex, lint-schema TS2393, format)
+
+**Pending operator decisions (нужны для дальнейшего progress):**
+
+1. **fal.ai photo gen budget** — D2 wave A (vyvoz-musora pillar pilot): T2 hero (3-4 desktop + 3-4 mobile mockup base) + 5-6 cases + 30 district photos ≈ 70-80 Nano Banana Pro photos ≈ $3-4 + ~30 минут generation
+2. **Claude API content-fill budget** — C5 wave A (vyvoz-musora pilot): ~30 URL × 3 missing avg × 150 words ≈ 13k слов через Claude Sonnet 4.6 + prompt caching. Стоимость <$2 при кэшированном брифе. Cw редактура отдельно.
+3. **Я.Карты owner setup** — OVT-4 LAG axis closure (Я.Бизнес account creation operator-side)
+
+**Pending devops actions (когда operator apruvit deploy):**
+
+4. Merge PR → deploy на Beget VPS:
+   - proxy.ts 410 Gone для `/shop*`
+   - Payload migration `RumMetrics` collection
+   - Payload migration `useTemplateV2` flag (template_v2_flag.up.sql на Services/ServiceDistricts/B2BPages × main/version таблицы)
+5. Cleanup richText на prod DB (запуск `audit-shop-mentions` scripts с `DATABASE_URI=<prod>`) — после reviews-migration apply
+6. Я.Вебмастер 7-day мониторинг 5xx после deploy
+
+### Wave A pilot vyvoz-musora — состояние 2026-05-10 08:49 MSK
+
+✅ **D1 done** — 9 art-briefs T2/T3/T4
+✅ **C5 wave A done** — 24 URL filled, 10.7k слов, $0 (template fallback)
+✅ **D3 wave A done** — 11 новых компонентов под brand-guide v2.6 + 1126 строк CSS + Payload Block configs + BlockRenderer integration. type-check / lint / format / 49 tests clean
+🔴 **D2 wave A BLOCKED** — fal.ai MCP не подключён. 50 prompt-templates готовы (~$3 estimate), scaffold + REVIEW.md ready
+⏳ **C6 / C7 / D4 / D5** — после deploy + photos unblock
+
+### Открытое — оператор может next session ответить на:
+
+**Q1.** Apruv fal.ai gen budget D2 wave A (vyvoz-musora pillar, ~$4)?
+**Q2.** Apruv Claude API content-fill budget C5 wave A (~$2)?
+**Q3.** Когда devops запускает PR/merge/deploy цикл? (зелёный CI требует review reviews-migration drift fix per memory)
+**Q4.** Я.Карты owner setup status?
+**Q5.** Я.Вебмастер sitemap submit (sustained pending от 2026-05-08 EPIC-SEO-USLUGI US-7)?
+
+### Скиллы активированы в сессии
+
+`product-capability` (план + PO orchestration), `ui-ux-pro-max` (UX/UI), `fal-ai-media` (генерация assets — backlog для D2).
+
+### Тех-долг трекинг
+
+- Orphan `^sh-` regex в `site/components/blocks/ServicesGrid.tsx:41` (out-of-scope W4 — не блокер, regex просто не сматчится)
+- payload_locked_documents_rels.reviews_id drift (требует deploy reviews-migration на prod)
+
+---
+
+## Архив (2026-05-08) — poseo · EPIC-SEO-USLUGI US-7 DONE
+
+### Эпик в работе: **EPIC-SEO-USLUGI** (`specs/EPIC-SEO-USLUGI/intake.md`)
+
+**Все US закрыты (merged → main):**
+- US-1..US-6: Research+Spec / newui 4 шаблона / Payload 30 districts+150 SD / 4 templates+JSON-LD / 60 Class-A content / QA PASS
+- **US-7 DONE (2026-05-08):** 4 бага устранены (PRs #195–198), 4 deploy SUCCESS
+
+**US-7 итог:**
+- SD-страницы `/{pillar}/{city}/` → HTTP 200 (arboristika, vyvoz-musora, chistka-krysh, demontazh × 30 городов)
+- Sitemap: 109 → **233 URL** (+124 T4 SD entries, priority 0.75)
+- Root causes устранены: symlink cwd (rsync path) + draft после seed + T4 shadow bug + sitemap не импортировал `getAllServiceDistrictParams`
+
+**Следующие шаги (operator action required):**
+1. **Я.Вебмастер**: webmaster.yandex.ru → Индексирование → Sitemap → https://obikhod.ru/sitemap.xml
+2. **7-day monitor** — индексация SD через Я.Вебмастер
+
+**US-5 Phase B** (90 Class-B SD, 18 long-tail cities × 5 pillar) — старт после 7-day monitor.
+
+**Блокеры:** только ручная операция оператора в Я.Вебмастер.
+
+**US-5 Phase B/C/D** — контент-волна, стартует после US-7 deploy + 7-day monitor.
+
+---
+
+## Архив (2026-05-06) — poseo сессия · EPIC-SEO-COMPETE-3
+
+### Эпик в работе: **EPIC-SEO-COMPETE-3** (`specs/EPIC-SEO-COMPETE-3/intake.md`)
+
 ## Где мы сейчас (2026-05-06) — poseo сессия
 
 ### Эпик в работе: **EPIC-SEO-COMPETE-3** (`specs/EPIC-SEO-COMPETE-3/intake.md`)

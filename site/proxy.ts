@@ -9,6 +9,10 @@ import { NextResponse, type NextRequest } from 'next/server'
  *    если есть payload-token cookie И НЕТ obihod_2fa_passed cookie → redirect
  *    на /admin/login/2fa (страница сама решает: totpEnabled=false → set passed
  *    cookie + redirect /admin; иначе рендерит OTP/recovery форму).
+ * 5. EPIC-SHOP-REMOVAL W5 — pre-emptive 410 Gone для `/shop` и `/shop/*`.
+ *    Магазин саженцев выведен из проекта (ADR-0020). URL никогда не публиковались
+ *    в sitemap, но Я.Вебмастер мог просканировать их по внешним сигналам.
+ *    410 Gone signal-ит ботам «навсегда удалено», в отличие от 404 (transient).
  *
  * Legacy redirects из коллекции `redirects` Payload — реализуем позже
  * (нужен in-memory snapshot, обновляемый по ISR).
@@ -64,6 +68,15 @@ export function proxy(req: NextRequest) {
   if (host.startsWith('www.')) {
     url.host = host.replace(/^www\./, '')
     return NextResponse.redirect(url, 301)
+  }
+
+  // 5. EPIC-SHOP-REMOVAL W5: 410 Gone для /shop и /shop/* (ADR-0020).
+  // Pre-emptive для случая, если Я.Вебмастер просканировал URL извне.
+  if (req.nextUrl.pathname === '/shop' || req.nextUrl.pathname.startsWith('/shop/')) {
+    return new NextResponse(null, {
+      status: 410,
+      headers: { 'Cache-Control': 'public, max-age=86400' },
+    })
   }
 
   // 4. PANEL-AUTH-2FA gate.

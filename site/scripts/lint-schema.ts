@@ -378,3 +378,5 @@ main().catch((e) => {
   console.error('[lint:schema] упал:', e instanceof Error ? e.message : e)
   process.exit(1)
 })
+
+export {}
