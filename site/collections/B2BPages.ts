@@ -10,6 +10,7 @@ import {
   Tldr,
   Breadcrumbs,
 } from '@/blocks'
+import { buildMasterTemplateGate } from '@/lib/admin/master-template-gate'
 
 export const B2BPages: CollectionConfig = {
   slug: 'b2b-pages',
@@ -131,5 +132,31 @@ export const B2BPages: CollectionConfig = {
       maxLength: 40,
       admin: { position: 'sidebar' },
     },
+    {
+      // EPIC-SERVICE-PAGES-UX C4 — feature flag template_v2 per-URL.
+      // Default false → sustained legacy rendering. Per-URL rollout через
+      // Payload admin (specs/EPIC-SERVICE-PAGES-UX/c4-migration-plan.md).
+      // Resolver: lib/master-template/getBlocksForLayer.ts (T2_PILLAR layer).
+      name: 'useTemplateV2',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        description:
+          'Master-template v2 (ADR-0021): reorder + filter + fill placeholders. Default false — legacy. Включать per-URL.',
+      },
+    },
   ],
+  hooks: {
+    // EPIC-SERVICE-PAGES-UX C3 — master-template enforcement (ADR-0021).
+    // B2B-страницы — pillar-уровень landing (T2_PILLAR). UK/ТСЖ/FM/застройщики/
+    // госзакупки получают тот же master-template без T3/T4 доп. секций.
+    // alsoCheckPayloadStatus=true — B2BPages использует Payload drafts.
+    beforeValidate: [
+      buildMasterTemplateGate({
+        layerResolver: () => 'T2_PILLAR',
+        alsoCheckPayloadStatus: true,
+      }),
+    ],
+  },
 }

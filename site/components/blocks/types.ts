@@ -25,11 +25,11 @@ export type SeasonalTheme = 'summer' | 'winter' | 'promo'
 export type CtaAccent = 'primary' | 'warning' | 'success'
 
 /**
- * Иконки из brand-guide §9 — line-art glyph'ы в 4 линейках.
- * Префикс задаёт линейку (`s-` services, `sh-` shop, `d-` districts, `c-` cases).
- * Полный реестр (49 шт.) — в brand-guide.html §9; здесь — только тип-ключ.
+ * Иконки из brand-guide §9 — line-art glyph'ы в 3 линейках.
+ * Префикс задаёт линейку (`s-` services, `d-` districts, `c-` cases).
+ * Полный реестр — в brand-guide.html §9; здесь — только тип-ключ.
  */
-export type IconLine = 'services' | 'shop' | 'districts' | 'cases'
+export type IconLine = 'services' | 'districts' | 'cases'
 
 /**
  * CTA-link в новой cw-схеме — `{ label, href }`.
@@ -433,6 +433,172 @@ export interface CalculatorBlock extends BlockBase {
   ctaHref?: string | null
 }
 
+/* ───────────────── EPIC-SERVICE-PAGES-REDESIGN D3 wave A ─────────────────
+ * 11 новых блоков для T2 pillar redesign per brand-guide v2.6 extensions.
+ * Все типы — additive, не ломают legacy union AnyBlock (включены ниже). */
+
+/* §service-hero (line 4571 brand-guide v2.6) */
+export interface ServiceHeroBlock extends BlockBase {
+  blockType: 'service-hero'
+  /** T2 / T3 / T4 layout variant — controls grid + photo visibility. */
+  variant?: 'T2_PILLAR' | 'T3_SUB' | 'T4_SD' | null
+  eyebrow?: string | null
+  /** H1 — главный заголовок. */
+  h1?: string | null
+  /** Strapline — lead-параграф 2-3 строки. */
+  strapline?: string | null
+  /** USP × 3 — короткие выгоды (нумерованные пилы). */
+  usps?: { num?: string | null; text: string }[] | null
+  /** Primary CTA — «Загрузить фото / получить смету». */
+  ctaPrimary?: CtaLink | null
+  /** Secondary CTA — `tel:` link. */
+  ctaSecondary?: CtaLink | null
+  /** 4 trust-pills под CTA. */
+  trust?: string[] | null
+  /** Hero photo (T2 only). */
+  image?: HeroImage | null
+  /** Photo-tag subtitle (e.g. «реальный объект, Раменское»). */
+  photoTag?: string | null
+}
+
+/* §calculator-shell (line 4757 brand-guide v2.6) */
+export interface CalculatorShellBlock extends BlockBase {
+  blockType: 'calculator-shell'
+  h2?: string | null
+  helper?: string | null
+  /** Тип услуги для presets и default-сметы. */
+  serviceType?: 'spil' | 'musor' | 'krysha' | 'demontazh' | string | null
+  /** API endpoint для photo→quote (по умолчанию /api/quote). */
+  apiEndpoint?: string | null
+  /** Куда вести при success (по умолчанию #lead-form). */
+  successHref?: string | null
+}
+
+/* §lead-form-full (line 4922 brand-guide v2.6) */
+export interface LeadFormFullBlock extends BlockBase {
+  blockType: 'lead-form-full'
+  h2?: string | null
+  helper?: string | null
+  ctaLabel?: string | null
+  successMessage?: string | null
+  serviceHint?: { id?: string; slug?: string; title?: string } | string | null
+  districtHint?: { id?: string; slug?: string; nameNominative?: string } | string | null
+  consentText?: string | null
+  consentHref?: string | null
+}
+
+/* §pricing-table (line 5129 brand-guide v2.6) */
+export interface PricingTier {
+  name: string
+  price: string
+  unit?: string | null
+  tagline?: string | null
+  features?: string[] | null
+  highlighted?: boolean | null
+  badge?: string | null
+  ctaLabel?: string | null
+  ctaHref?: string | null
+}
+
+export interface PricingTableBlock extends BlockBase {
+  blockType: 'pricing-table'
+  h2?: string | null
+  helper?: string | null
+  /** 3-tier OR per-district adjustment OR single-list. */
+  variant?: 'tiers' | 'list' | 'per-district' | null
+  tiers?: PricingTier[] | null
+}
+
+/* §process-steps (line 5278 brand-guide v2.6) */
+export interface ProcessStep {
+  num?: string | number | null
+  title: string
+  description?: string | null
+  eta?: string | null
+}
+
+export interface ProcessStepsBlock extends BlockBase {
+  blockType: 'process-steps'
+  h2?: string | null
+  helper?: string | null
+  /** vertical (mobile-first) или horizontal (desktop ≥1100px). */
+  layout?: 'vertical' | 'horizontal' | null
+  steps?: ProcessStep[] | null
+}
+
+/* §trust-block (line 5452 brand-guide v2.6) */
+export interface TrustItem {
+  icon?: string | null
+  label: string
+  sub?: string | null
+  href?: string | null
+}
+
+export interface TrustBlockBlock extends BlockBase {
+  blockType: 'trust-block'
+  /** bar (4-pill) | cards-4 (hero-adjacent) | cards-6 (pre-footer). */
+  variant?: 'bar' | 'cards-4' | 'cards-6' | null
+  title?: string | null
+  items?: TrustItem[] | null
+}
+
+/* §mini-case v2.6 (line 5815 brand-guide v2.6) */
+export interface MiniCaseV2Block extends BlockBase {
+  blockType: 'mini-case-v2'
+  badge?: string | null
+  meta?: string[] | null
+  title: string
+  imageUrl?: string | null
+  imageAlt?: string | null
+  photoLabel?: string | null
+  kpis?: { k: string; v: string }[] | null
+  thumbs?: string[] | null
+  ctaLabel?: string | null
+  ctaHref?: string | null
+}
+
+/* §faq-accordion (line 5952 brand-guide v2.6) */
+export interface FaqAccordionItem {
+  question: string
+  answer: string
+}
+
+export interface FaqAccordionBlock extends BlockBase {
+  blockType: 'faq-accordion'
+  h2?: string | null
+  items?: FaqAccordionItem[] | null
+  generateFaqPageSchema?: boolean | null
+}
+
+/* §breadcrumbs v2.6 (line 6128 brand-guide v2.6) */
+export interface BreadcrumbsV2Block extends BlockBase {
+  blockType: 'breadcrumbs-v2'
+  items?: BreadcrumbItem[] | null
+  generateSchema?: boolean | null
+}
+
+/* §tldr-block v2.6 (line 6256 brand-guide v2.6) */
+export interface TldrV2Block extends BlockBase {
+  blockType: 'tldr-v2'
+  badge?: string | null
+  title?: string | null
+  bullets?: string[] | null
+}
+
+/* §district-chips (line 6404 brand-guide v2.6) */
+export interface DistrictChip {
+  label: string
+  href: string
+  priority?: boolean | null
+}
+
+export interface DistrictChipsBlock extends BlockBase {
+  blockType: 'district-chips'
+  title?: string | null
+  meta?: string | null
+  items?: DistrictChip[] | null
+}
+
 export type AnyBlock =
   | HeroBlock
   | TextContentBlock
@@ -447,3 +613,15 @@ export type AnyBlock =
   | RelatedPostsBlock
   | NeighborDistrictsBlock
   | CalculatorBlock
+  // EPIC-SERVICE-PAGES-REDESIGN D3 wave A — 11 new blocks
+  | ServiceHeroBlock
+  | CalculatorShellBlock
+  | LeadFormFullBlock
+  | PricingTableBlock
+  | ProcessStepsBlock
+  | TrustBlockBlock
+  | MiniCaseV2Block
+  | FaqAccordionBlock
+  | BreadcrumbsV2Block
+  | TldrV2Block
+  | DistrictChipsBlock

@@ -1,0 +1,122 @@
+name: SEO Monitor (OVT-MONITOR weekly watcher)
+
+# OVT-MONITOR (RICE 6.75) — EPIC-LIWOOD-OVERTAKE B5 roadmap.
+# Закрывает PARITY axis URL/IA + general drift detection vs liwood baseline.
+# Source of truth для baseline: seosite/01-competitors/liwood-snapshot-2026-05-09.json (B1).
+# Roadmap: seosite/01-competitors/overtake-roadmap-2026-05.md
+# Owner: seo + devops (см. RACI matrix B5).
+
+on:
+  schedule:
+    # Каждый понедельник 09:00 UTC = 12:00 MSK.
+    # Window выбран после 9:00 MSK (Я.Метрика отчёты), до 13:00 MSK (PO sync).
+    - cron: "0 9 * * MON"
+  workflow_dispatch:
+    inputs:
+      force_alert:
+        description: "Force-emit test alert (validate issue-creation pipeline)"
+        type: boolean
+        default: false
+      dry_run:
+        description: "Use mock data instead of real HTTP fetch (для отладки)"
+        type: boolean
+        default: false
+
+# Один runner за раз — нечего параллелить + safety против rate-limit liwood.
+concurrency:
+  group: seo-monitor
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  watch:
+    name: Watcher · diff · alert
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: site
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: site/package.json
+          run_install: false
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          cache-dependency-path: site/pnpm-lock.yaml
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Run watcher
+        working-directory: ${{ github.workspace }}
+        env:
+          FORCE_ALERT: ${{ inputs.force_alert }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          ARGS=""
+          if [ "$FORCE_ALERT" = "true" ]; then
+            ARGS="$ARGS --force-alert"
+          fi
+          if [ "$DRY_RUN" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+          echo "[seo-monitor] running watcher with args: $ARGS"
+          ./site/node_modules/.bin/tsx seosite/04-monitoring/watcher.ts $ARGS
+
+      - name: Detect alerts
+        id: alerts
+        working-directory: ${{ github.workspace }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          ALERT_FILES=$(find seosite/04-monitoring/alerts -name "${DATE}-*.md" 2>/dev/null || true)
+          if [ -z "$ALERT_FILES" ]; then
+            echo "has_alerts=false" >> "$GITHUB_OUTPUT"
+            echo "[seo-monitor] no alerts for ${DATE}"
+          else
+            echo "has_alerts=true" >> "$GITHUB_OUTPUT"
+            echo "alert_date=${DATE}" >> "$GITHUB_OUTPUT"
+            echo "[seo-monitor] alerts found for ${DATE}:"
+            echo "$ALERT_FILES"
+            # Сохраним список для следующего step через файл
+            echo "$ALERT_FILES" > /tmp/alert_files.txt
+          fi
+
+      - name: Open GitHub issue per alert
+        if: steps.alerts.outputs.has_alerts == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ALERT_DATE: ${{ steps.alerts.outputs.alert_date }}
+        working-directory: ${{ github.workspace }}
+        run: |
+          while IFS= read -r alert_file; do
+            [ -z "$alert_file" ] && continue
+            # Имя файла: YYYY-MM-DD-{breach-type}.md → breach-type
+            FILENAME=$(basename "$alert_file" .md)
+            BREACH_TYPE=$(echo "$FILENAME" | sed "s/^${ALERT_DATE}-//")
+            TITLE="[seo-monitor] ${ALERT_DATE} · ${BREACH_TYPE}"
+            echo "[seo-monitor] creating issue: $TITLE"
+            gh issue create \
+              --title "$TITLE" \
+              --label "seo-monitor" \
+              --body-file "$alert_file"
+          done < /tmp/alert_files.txt
+
+      - name: Upload snapshot artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-monitor-snapshot-${{ github.run_id }}
+          path: |
+            seosite/04-monitoring/snapshots/
+            seosite/04-monitoring/alerts/
+          retention-days: 90

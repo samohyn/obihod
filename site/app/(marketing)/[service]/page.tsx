@@ -13,6 +13,9 @@ import { breadcrumbListSchema, faqPageSchema, serviceSchema } from '@/lib/seo/js
 import { buildJsonLdForTemplate } from '@/lib/seo/composer'
 import { getAllServiceSlugs, getServiceBySlug, getAllDistrictsForCityList } from '@/lib/seo/queries'
 import { getSiteChrome } from '@/lib/chrome'
+import { getBlocksForLayer } from '@/lib/master-template/getBlocksForLayer'
+import { buildResolverOptions } from '@/lib/feature-flags/template-v2'
+import type { DocumentBlock } from '@/blocks/master-template'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -74,9 +77,18 @@ export default async function PillarPage({ params }: { params: Promise<{ service
   })
 
   if (hasBlocks) {
+    // EPIC-SERVICE-PAGES-UX C4 — resolver gate.
+    // - useTemplateV2=false (default sustained): identity, render as-is.
+    // - useTemplateV2=true:                       reorder + filter + fill placeholders.
+    const resolverOpts = buildResolverOptions(service as never)
+    const resolvedBlocks = getBlocksForLayer(
+      'T2_PILLAR',
+      docBlocks as DocumentBlock[],
+      resolverOpts,
+    )
     return (
       <>
-        <BlockRenderer blocks={docBlocks as never} />
+        <BlockRenderer blocks={resolvedBlocks as never} />
         <JsonLd
           schema={[
             serviceSchema(service as never),

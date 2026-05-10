@@ -19,6 +19,7 @@ import { B2BPages } from './collections/B2BPages'
 import { Leads } from './collections/Leads'
 import { Redirects } from './collections/Redirects'
 import { Reviews } from './collections/Reviews'
+import { RumMetrics } from './collections/RumMetrics'
 import { Homepage } from './globals/Homepage'
 import { SeoSettings } from './globals/SeoSettings'
 import { SiteChrome } from './globals/SiteChrome'
@@ -157,6 +158,7 @@ export default buildConfig({
     Media,
     // 04 · SEO
     Redirects,
+    RumMetrics,
     // 09 · Система
     Users,
   ],

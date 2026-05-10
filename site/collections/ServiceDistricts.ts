@@ -6,6 +6,7 @@ import { LeadForm } from '@/blocks/LeadForm'
 import { CtaBanner } from '@/blocks/CtaBanner'
 import { Faq } from '@/blocks/Faq'
 import { buildPublishGate } from '@/lib/admin/publish-gate'
+import { buildMasterTemplateGate } from '@/lib/admin/master-template-gate'
 import { tfIdfUniqueness, lexicalToPlainText } from '@/lib/seo/uniqueness'
 
 /**
@@ -401,9 +402,32 @@ export const ServiceDistricts: CollectionConfig = {
         },
       ],
     },
+    {
+      // EPIC-SERVICE-PAGES-UX C4 — feature flag template_v2 per-URL.
+      // Default false → sustained legacy rendering. Per-URL rollout через
+      // Payload admin (specs/EPIC-SERVICE-PAGES-UX/c4-migration-plan.md).
+      // Resolver: lib/master-template/getBlocksForLayer.ts (T4_SD layer).
+      name: 'useTemplateV2',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        description:
+          'Master-template v2 (ADR-0021): reorder + filter + fill placeholders. Default false — legacy. Включать per-URL.',
+      },
+    },
   ],
   hooks: {
-    beforeValidate: [requireGatesForPublish, computeUniquenessScore, buildPublishGate()],
+    beforeValidate: [
+      requireGatesForPublish,
+      computeUniquenessScore,
+      buildPublishGate(),
+      // EPIC-SERVICE-PAGES-UX C3 — master-template enforcement (ADR-0021).
+      // SD = T4_SD layer (programmatic /uslugi/<svc>/<district>/). Гейт после
+      // publishGate чтобы базовые правила (Hero / 300 слов / форма) проверялись
+      // первыми — sustained UX для редакторов.
+      buildMasterTemplateGate({ layerResolver: () => 'T4_SD' }),
+    ],
     beforeChange: [
       async ({ data, req }) => {
         if (!data) return data

@@ -12,6 +12,7 @@ import {
   RelatedServices,
   Calculator,
 } from '@/blocks'
+import { buildMasterTemplateGate } from '@/lib/admin/master-template-gate'
 
 /**
  * US-3 ADR-0019 namespace-disjoint guard.
@@ -408,8 +409,32 @@ export const Services: CollectionConfig = {
         description: 'Короткий label для breadcrumbs если H1 длинный. Опционально.',
       },
     },
+    {
+      // EPIC-SERVICE-PAGES-UX C4 — feature flag template_v2 per-URL.
+      // Default false → sustained legacy rendering. Per-URL rollout через
+      // Payload admin (specs/EPIC-SERVICE-PAGES-UX/c4-migration-plan.md).
+      // Resolver: lib/master-template/getBlocksForLayer.ts.
+      name: 'useTemplateV2',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        description:
+          'Master-template v2 (ADR-0021): reorder + filter + fill placeholders. Default false — legacy. Включать per-URL.',
+      },
+    },
   ],
   hooks: {
+    // EPIC-SERVICE-PAGES-UX C3 — master-template enforcement (ADR-0021).
+    // Services коллекция содержит pillar-страницы (T2_PILLAR layer).
+    // alsoCheckPayloadStatus=true — Services использует Payload drafts API
+    // (`versions.drafts.autosave`), нет custom publishStatus поля.
+    beforeValidate: [
+      buildMasterTemplateGate({
+        layerResolver: () => 'T2_PILLAR',
+        alsoCheckPayloadStatus: true,
+      }),
+    ],
     afterChange: [
       async ({ doc }) => {
         const url = process.env.SITE_URL

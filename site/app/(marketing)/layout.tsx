@@ -2,10 +2,12 @@ import type { Metadata } from 'next'
 import { Golos_Text, JetBrains_Mono } from 'next/font/google'
 import '../globals.css'
 import '../homepage-classic.css'
+import '../service-pages.css'
 
 import { Header } from '@/components/marketing/Header'
 import { Footer } from '@/components/marketing/Footer'
 import { YandexMetrika } from '@/components/analytics/YandexMetrika'
+import { RumProvider } from '@/components/analytics/RumProvider'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { getSiteChrome } from '@/lib/chrome'
 import { localBusinessSchema, organizationSchema, websiteSchema } from '@/lib/seo/jsonld'
@@ -89,6 +91,7 @@ export default async function MarketingLayout({
           ]}
         />
         <YandexMetrika />
+        <RumProvider />
         <Header />
         <main className="min-h-[60vh] flex-1">{children}</main>
         <Footer />

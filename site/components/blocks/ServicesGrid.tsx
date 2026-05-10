@@ -38,7 +38,7 @@ function normalizeItem(it: ServicesGridItem): NormalizedItem | null {
 function IconPlaceholder({ icon }: { icon?: string | null }) {
   const symbol =
     (icon ?? '')
-      .replace(/^s-|^sh-|^d-|^c-|^vyvoz-|^arboristika|^chistka-|^demontazh/, '')
+      .replace(/^s-|^d-|^c-|^vyvoz-|^arboristika|^chistka-|^demontazh/, '')
       .slice(0, 1)
       .toUpperCase() || '·'
   return (

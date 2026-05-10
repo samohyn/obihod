@@ -79,6 +79,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "test:unit": "tsx --test blocks/__tests__/master-template.test.ts lib/master-template/__tests__/getBlocksForLayer.test.ts",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:report": "playwright show-report",
