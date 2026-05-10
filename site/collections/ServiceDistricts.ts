@@ -5,23 +5,17 @@ import { TextContent } from '@/blocks/TextContent'
 import { LeadForm } from '@/blocks/LeadForm'
 import { CtaBanner } from '@/blocks/CtaBanner'
 import { Faq } from '@/blocks/Faq'
-// Amendment 1 ADR-0021 (2026-05-10): unblock 6 non-fillable required sections
-// на T4_SD (C5 wave A backlog issue 2). 6 sustained Payload blocks из
-// site/blocks/, schema-side добавок не требуется (schema persists JSON в
-// blocks_array column, ALTER TABLE не нужен).
+// Hotfix 2026-05-10 (PR #209 deploy): REVERTED ADR-0021 Amendment 1
+// (extended blockReferences 5 → 12). Payload schema требует `service_districts_blocks_<X>`
+// tables для каждого block reference. Schema sync wasn't applied (PAYLOAD_DISABLE_PUSH=1)
+// → prod queries fail with `relation "service_districts_blocks_breadcrumbs" does not exist`
+// → /vyvoz-musora/khimki/ + 30 SD pages → 404.
 //
-// Hotfix 2026-05-10: Calculator (slug=calculator-placeholder) НЕ в blockReferences
-// для T4_SD — Postgres 63-char identifier limit на enum
-// `enum_service_districts_blocks_calculator_placeholder_service_type` (65 chars).
-// Calculator section на T4_SD остаётся MISSING_REQUIRED — fillable через C5+
-// после shorten enum migration. На T2/T3 Calculator работает (table prefix
-// `services_blocks_*` короче, fits в 63).
-import { Tldr } from '@/blocks/Tldr'
-import { Breadcrumbs } from '@/blocks/Breadcrumbs'
-import { PricingTable } from '@/blocks/PricingTable'
-import { ProcessSteps } from '@/blocks/ProcessSteps'
-import { NeighborDistricts } from '@/blocks/NeighborDistricts'
-import { RelatedServices } from '@/blocks/RelatedServices'
+// Original 5 blocks (Hero, TextContent, LeadForm, CtaBanner, Faq) sustained.
+// Calculator (slug=calculator-placeholder) excluded earlier — Postgres 63-char enum limit.
+//
+// 7 non-fillable T4_SD sections (breadcrumbs/tldr/pricing/process/calculator/neighbor/related)
+// → backlog C2.6 wave B+: requires CREATE TABLE migrations + enum length workaround.
 import { buildPublishGate } from '@/lib/admin/publish-gate'
 import { buildMasterTemplateGate } from '@/lib/admin/master-template-gate'
 import { tfIdfUniqueness, lexicalToPlainText } from '@/lib/seo/uniqueness'
@@ -210,19 +204,7 @@ export const ServiceDistricts: CollectionConfig = {
               // hidden на T4 в master-template — gate выкинет PRESENT_HIDDEN
               // если редактор добавит его на T4_SD при publish. Sustained
               // draft без публикации остаётся валидным.
-              blockReferences: [
-                Hero,
-                Breadcrumbs,
-                Tldr,
-                TextContent,
-                PricingTable,
-                ProcessSteps,
-                Faq,
-                CtaBanner,
-                NeighborDistricts,
-                RelatedServices,
-                LeadForm,
-              ],
+              blockReferences: [Hero, TextContent, LeadForm, CtaBanner, Faq],
               blocks: [],
               admin: {
                 initCollapsed: true,
