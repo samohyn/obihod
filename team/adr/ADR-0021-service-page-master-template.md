@@ -342,8 +342,40 @@ Signed-off:
 - po — operator-mandated approve (sustained autonomous mandate EPIC-SERVICE-PAGES-UX)
 - operator — pending business apruv (через intake hand-off)
 
+## Amendment 1 (2026-05-10): text-content section + D3 slug aliases
+
+**Status:** accepted (sustained autonomous mandate, additive only — без reorder и без новых required).
+
+**Context:** C5 wave A audit (vyvoz-musora pillar fill-missing) выявил 2 sustained блокера для master-template-gate:
+1. T2 pillar `text-content` (sustained legacy long-form richText body) триггерил `UNKNOWN_BLOCK` → `valid=false` → publish-fail. Block sustained в `site/blocks/TextContent.ts` и присутствует в Services / B2BPages / ServiceDistricts blockReferences.
+2. EPIC-SERVICE-PAGES-REDESIGN D3 wave A добавил блоки `PricingTable` (slug `pricing-table`) и `ProcessSteps` (slug `process-steps`), которые не совпадают с master-template ожиданием slug'ов `pricing-block` и `process` → drift между Payload blocks library и SLUG_TO_SECTION map.
+
+**Решение:**
+- **Section `text-content` (order=4, новая):** добавлена между `tldr` (3) и `services-grid` (5). Per-layer presence: T2_PILLAR=`optional`, T3_SUB=`optional`, T4_SD=`hidden`. Long-form richText body (`#components` brand-guide §). Journey step=2 (Comprehension). Не required нигде → sustained pillar/sub без text-content остаются валидными. Hidden на T4_SD — programmatic SD имеет leadParagraph + localFaq + landmarks для locale-content.
+- **Slug aliases:** `pricing-table` → `pricing-block`, `process-steps` → `process` в SLUG_TO_SECTION. Sustained `pricing-block` и `process` slugs остаются (для C3 future blocks).
+- **Total sections: 13 → 14.** Order monotonic 1..14 sustained. Reorder не было: text-content вставлен по journey-логике, остальные order'ы сдвинуты +1.
+
+**Mapping table delta (только text-content):**
+
+| # | Section            | T2_PILLAR | T3_SUB | T4_SD | brand_guide   | Обоснование                                               |
+|---|--------------------|-----------|--------|-------|---------------|-----------------------------------------------------------|
+| 04 | text-content      | optional  | optional | hidden | `#components` (ready) | Long-form SEO-копия pillar/sub. Sustained legacy unblock. |
+
+**Альтернативы (rejected):**
+- Alias `text-content` → `tldr` (PO recommendation в task brief): rejected — semantically не равны (tldr = 3-5 bullets scan-friendly; text-content = long-form richText). Mixing их в одну section ломает selfValidate (две secций с одним slug-mapping → SLUG_TO_SECTION orphan check).
+- Сделать `UNKNOWN_BLOCK` warning-only (не ошибка): rejected — ослабляет gate и пропустит реально неизвестные блоки в prod. Лучше явно зарегистрировать sustained legacy block.
+- Добавить `text-content` в blocks blacklist (запрет на T2 при publish): rejected — текущие prod-страницы используют его, миграция блокирует deploy.
+
+**Consequences:**
+- **Positive:** vyvoz-musora T2 pillar publish unblocked. C5 wave A backlog issue 1 закрыт. ServiceDistricts.blockReferences расширен — 7 ранее non-fillable required sections (pricing-block / process / breadcrumbs / tldr / calculator / neighbor-districts / related-services) теперь fillable через D3 blocks (PricingTable / ProcessSteps / etc) или sustained blocks (Tldr / Breadcrumbs / Calculator / etc).
+- **Negative:** master-template growth 13 → 14 (минор; order — invariant сохранён).
+- **Risks:** новый `text-content` order=4 сместил все order ≥5 на +1 — потребители `getOrderIndex(section)` получают новые числа. Sustained C4 resolver (`getBlocksForLayer`) использует order для sort'а — re-tested 59/59 passed.
+
+**C5 wave A backlog item 3** (28/31 SD без miniCase + 7 localFaq<2) — НЕ покрыт этим Amendment. Это soft publish-gate (`requireGatesForPublish`) по content-fill, не code/schema. Остаётся в backlog для cw next wave.
+
 ## Hand-off log
 
 ```
 2026-05-09 22:17 MSK · arch+design+fe → po: ADR-0021 final draft. master-template.ts schema written. 11 brand-guide расширений в C2.5 backlog (4 critical / 4 high / 3 medium). Operator apruv pending.
+2026-05-10 09:15 MSK · arch+dev → po: Amendment 1 accepted. C5 wave A backlog issue 1+2 closed. text-content section добавлена (order=4, optional T2/T3, hidden T4); pricing-table + process-steps slug aliases в SLUG_TO_SECTION; ServiceDistricts.blockReferences расширен с 5 → 12 (Hero, Breadcrumbs, Tldr, TextContent, PricingTable, Calculator, ProcessSteps, Faq, CtaBanner, NeighborDistricts, RelatedServices, LeadForm). Tests: 59/59 passing (sustained 49 + 4 новых RED→GREEN). Type-check 0 errors. NO migration (Payload blocks JSON, ALTER TABLE не нужен). Issue 3 (28/31 SD без miniCase) — soft publish-gate, content backlog.
 ```

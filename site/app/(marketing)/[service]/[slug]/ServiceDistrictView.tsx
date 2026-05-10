@@ -13,6 +13,7 @@
 import Link from 'next/link'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { LicenseBadge } from '@/components/marketing/LicenseBadge'
@@ -20,6 +21,9 @@ import { RichTextRenderer } from '@/components/marketing/RichTextRenderer'
 import { buildJsonLdForTemplate } from '@/lib/seo/composer'
 import type { Author, District as JsonLdDistrict, Service as JsonLdService } from '@/lib/seo/jsonld'
 import { getSiteChrome } from '@/lib/chrome'
+import { getBlocksForLayer } from '@/lib/master-template/getBlocksForLayer'
+import { buildResolverOptions } from '@/lib/feature-flags/template-v2'
+import type { DocumentBlock } from '@/blocks/master-template'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -64,6 +68,9 @@ type ServiceDistrictDoc = {
   localPriceNote?: string | null
   lastReviewedAt?: string | null
   reviewedBy?: ServiceDoc['reviewedBy']
+  /** EPIC-SERVICE-PAGES-UX C4.T3T4 — master-template feature flag + blocks[]. */
+  blocks?: unknown[] | null
+  useTemplateV2?: boolean | null
 }
 
 type Props = {
@@ -94,6 +101,16 @@ function plainTextLexical(node: unknown): string {
 
 export default async function ServiceDistrictView({ service, district, sd }: Props) {
   const chrome = await getSiteChrome()
+
+  // EPIC-SERVICE-PAGES-UX C4.T3T4 — master-template integration для T4_SD.
+  //
+  // Flag-источник: per-SD `useTemplateV2` (sustained на ServiceDistricts).
+  // Default false → sustained legacy custom JSX rendering.
+  //
+  // Когда flag=true: resolver `getBlocksForLayer('T4_SD', ...)` reorder +
+  // filter hidden (services-grid hidden для T4) + fill placeholders.
+  const sdBlocks = (Array.isArray(sd.blocks) ? sd.blocks : []) as DocumentBlock[]
+  const resolverOpts = buildResolverOptions(sd as never)
 
   // Token-replace локально (sa-seo §5)
   const adj = district.localPriceAdjustment ?? 0
@@ -193,6 +210,18 @@ export default async function ServiceDistrictView({ service, district, sd }: Pro
     breadcrumbs: breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
     author: jsonLdAuthor,
   })
+
+  // C4.T3T4 — early return на master-template branch (только при useV2=true).
+  // Legacy путь сохранён ниже — additive integration без regression.
+  if (resolverOpts.templateV2) {
+    const resolvedBlocks = getBlocksForLayer('T4_SD', sdBlocks, resolverOpts)
+    return (
+      <>
+        <BlockRenderer blocks={resolvedBlocks as never} />
+        <JsonLd schema={schema} />
+      </>
+    )
+  }
 
   return (
     <>

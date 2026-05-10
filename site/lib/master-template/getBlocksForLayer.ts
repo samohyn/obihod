@@ -61,6 +61,8 @@ const SLUG_TO_SECTION: Record<string, MasterTemplateSection> = {
   'related-services': 'related-services',
   'neighbor-districts': 'neighbor-districts',
   'lead-form': 'lead-form',
+  // Amendment 1 ADR-0021 (2026-05-10) — sustained legacy text-content section.
+  'text-content': 'text-content',
 }
 
 /**
@@ -83,6 +85,8 @@ const SECTION_TO_PLACEHOLDER_SLUG: Record<MasterTemplateSection, string> = {
   'related-services': 'related-services',
   'neighbor-districts': 'neighbor-districts',
   'lead-form': 'lead-form',
+  // Amendment 1 ADR-0021 (2026-05-10) — text-content optional на T2/T3.
+  'text-content': 'text-content',
 }
 
 export interface GetBlocksForLayerOptions {

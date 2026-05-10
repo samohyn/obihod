@@ -73,6 +73,30 @@ const T4_FULL_ORDERED: DocumentBlock[] = [
   { blockType: 'lead-form' },
 ]
 
+/**
+ * T3_SUB набор (required + optional, без hidden services-grid).
+ *
+ * T3_SUB presence matrix (см. master-template.ts):
+ *   - required: hero, breadcrumbs, tldr, pricing-block, calculator, process,
+ *     faq, related-services, neighbor-districts, lead-form
+ *   - optional: mini-case, cta-banner
+ *   - hidden:   services-grid
+ */
+const T3_FULL_ORDERED: DocumentBlock[] = [
+  { blockType: 'hero' },
+  { blockType: 'breadcrumbs' },
+  { blockType: 'tldr' },
+  { blockType: 'pricing-block' },
+  { blockType: 'calculator-placeholder' },
+  { blockType: 'process' },
+  { blockType: 'mini-case' }, // optional but kept
+  { blockType: 'faq' },
+  { blockType: 'cta-banner' }, // optional but kept
+  { blockType: 'related-services' },
+  { blockType: 'neighbor-districts' },
+  { blockType: 'lead-form' },
+]
+
 const V2_OPTS = { templateV2: true, fillMissingWithPlaceholder: true } as const
 const V2_NO_FILL = { templateV2: true, fillMissingWithPlaceholder: false } as const
 
@@ -262,6 +286,122 @@ describe('getBlocksForLayer · templateV2=true · T4_SD', () => {
 })
 
 // ────────────────────────────────────────────────────────────────────────────
+// templateV2 = true: T3_SUB (C4.T3T4 integration smoke)
+// ────────────────────────────────────────────────────────────────────────────
+
+describe('getBlocksForLayer · templateV2=true · T3_SUB', () => {
+  it('full T3 set → output identical по order', () => {
+    const out = getBlocksForLayer('T3_SUB', T3_FULL_ORDERED, V2_OPTS)
+    const actual = out.map((b) => b.blockType)
+    const expected = T3_FULL_ORDERED.map((b) => b.blockType)
+    assert.deepEqual(actual, expected)
+    // Sustained блоки не помечены _placeholder.
+    for (const block of out) {
+      assert.equal((block as ResolvedBlock)._placeholder ?? false, false)
+    }
+  })
+
+  it('services-grid в T3 input → filtered out (hidden для T3_SUB)', () => {
+    const withHidden: DocumentBlock[] = [
+      { blockType: 'hero' },
+      { blockType: 'breadcrumbs' },
+      { blockType: 'tldr' },
+      { blockType: 'services-grid' }, // hidden для T3
+      { blockType: 'pricing-block' },
+      { blockType: 'calculator-placeholder' },
+      { blockType: 'process' },
+      { blockType: 'faq' },
+      { blockType: 'related-services' },
+      { blockType: 'neighbor-districts' },
+      { blockType: 'lead-form' },
+    ]
+    const out = getBlocksForLayer('T3_SUB', withHidden, V2_OPTS)
+    const found = out.find((b) => b.blockType === 'services-grid')
+    assert.equal(found, undefined, 'services-grid должен быть hidden на T3')
+  })
+
+  it('empty blocks → all required-sections заполняются placeholders', () => {
+    const out = getBlocksForLayer('T3_SUB', [], V2_OPTS)
+    // Все required для T3 должны быть заполнены placeholders (mini-case и
+    // cta-banner — optional, missing → не filled).
+    const requiredForT3: ReadonlyArray<string> = [
+      'hero',
+      'breadcrumbs',
+      'tldr',
+      'pricing-block',
+      'calculator-placeholder',
+      'process',
+      'faq',
+      'related-services',
+      'neighbor-districts',
+      'lead-form',
+    ]
+    for (const blockType of requiredForT3) {
+      const found = out.find((b) => b.blockType === blockType)
+      assert.ok(found, `required '${blockType}' должен быть filled placeholder для T3`)
+      assert.equal((found as ResolvedBlock)._placeholder, true)
+    }
+    // Optional sections не filled → отсутствуют в output.
+    assert.equal(
+      out.find((b) => b.blockType === 'mini-case'),
+      undefined,
+      'optional mini-case не filled placeholder',
+    )
+    // services-grid hidden → отсутствует.
+    assert.equal(
+      out.find((b) => b.blockType === 'services-grid'),
+      undefined,
+      'hidden services-grid не появляется',
+    )
+    // Order-преserved: hero первый, lead-form последний.
+    assert.equal(out[0].blockType, 'hero')
+    assert.equal(out[out.length - 1].blockType, 'lead-form')
+  })
+
+  it('reordered T3 blocks → reorder под template order', () => {
+    // Перемешан: lead-form в начале, hero в конце.
+    const reordered: DocumentBlock[] = [
+      { blockType: 'lead-form' },
+      { blockType: 'neighbor-districts' },
+      { blockType: 'related-services' },
+      { blockType: 'faq' },
+      { blockType: 'process' },
+      { blockType: 'calculator-placeholder' },
+      { blockType: 'pricing-block' },
+      { blockType: 'tldr' },
+      { blockType: 'breadcrumbs' },
+      { blockType: 'hero' },
+    ]
+    const out = getBlocksForLayer('T3_SUB', reordered, V2_OPTS)
+    const actual = out.map((b) => b.blockType)
+    // hero первый, lead-form последний, без duplicate placeholders для
+    // присутствующих блоков.
+    assert.equal(actual[0], 'hero')
+    assert.equal(actual[actual.length - 1], 'lead-form')
+    // Все исходные required блоки → present без placeholder.
+    for (const block of out) {
+      const isOriginal = reordered.some((r) => r.blockType === block.blockType)
+      if (isOriginal) {
+        assert.equal(
+          (block as ResolvedBlock)._placeholder ?? false,
+          false,
+          `${block.blockType} должен быть исходным, не placeholder`,
+        )
+      }
+    }
+  })
+
+  it('missing required (lead-form) + fill=true → placeholder inserted', () => {
+    const partial = T3_FULL_ORDERED.filter((b) => b.blockType !== 'lead-form')
+    const out = getBlocksForLayer('T3_SUB', partial, V2_OPTS)
+    const leadForm = out.find((b) => b.blockType === 'lead-form')
+    assert.ok(leadForm, 'lead-form должен быть filled placeholder')
+    assert.equal((leadForm as ResolvedBlock)._placeholder, true)
+    assert.equal(out[out.length - 1].blockType, 'lead-form')
+  })
+})
+
+// ────────────────────────────────────────────────────────────────────────────
 // onMissingRequired modes (fillMissingWithPlaceholder=false)
 // ────────────────────────────────────────────────────────────────────────────
 
@@ -320,6 +460,17 @@ describe('getMissingRequiredSections', () => {
     assert.equal(missing.includes('services-grid'), false)
     // Но neighbor-districts required для T4.
     assert.equal(missing.includes('neighbor-districts'), true)
+  })
+
+  it('T3: services-grid не считается missing (hidden для T3); neighbor-districts required', () => {
+    const empty: DocumentBlock[] = []
+    const missing = getMissingRequiredSections('T3_SUB', empty)
+    assert.equal(missing.includes('services-grid'), false)
+    assert.equal(missing.includes('neighbor-districts'), true)
+    assert.equal(missing.includes('related-services'), true)
+    // mini-case и cta-banner — optional для T3, не должны быть в missing.
+    assert.equal(missing.includes('mini-case'), false)
+    assert.equal(missing.includes('cta-banner'), false)
   })
 })
 
