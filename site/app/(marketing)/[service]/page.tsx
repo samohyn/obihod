@@ -20,9 +20,12 @@ import type { DocumentBlock } from '@/blocks/master-template'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
-export const revalidate = 86400
+// HOTFIX 2026-05-10: cookies() для A/B pilot override триггерит DYNAMIC_SERVER_USAGE
+// при revalidate=ISR. Force-dynamic — query cache (unstable_cache в queries) сохраняется.
+// После pilot end (D5 closes) → revert на revalidate=86400.
+export const dynamic = 'force-dynamic'
 // dynamicParams = true: разрешаем рендер любых service-slug на runtime.
-// Если в БД появилась новая услуга после build — она доступна через ISR.
+// Если в БД появилась новая услуга после build — она рендерится.
 // Если slug несуществующий — getServiceBySlug вернёт null → notFound().
 export const dynamicParams = true
 
