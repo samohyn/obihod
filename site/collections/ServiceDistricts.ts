@@ -5,17 +5,21 @@ import { TextContent } from '@/blocks/TextContent'
 import { LeadForm } from '@/blocks/LeadForm'
 import { CtaBanner } from '@/blocks/CtaBanner'
 import { Faq } from '@/blocks/Faq'
-// Hotfix 2026-05-10 (PR #209 deploy): REVERTED ADR-0021 Amendment 1
-// (extended blockReferences 5 → 12). Payload schema требует `service_districts_blocks_<X>`
-// tables для каждого block reference. Schema sync wasn't applied (PAYLOAD_DISABLE_PUSH=1)
-// → prod queries fail with `relation "service_districts_blocks_breadcrumbs" does not exist`
-// → /vyvoz-musora/khimki/ + 30 SD pages → 404.
+// C2.6 (2026-05-10): re-add 6 SD blocks после CREATE TABLE migration
+// `20260510_161708_sd_blocks_extension`. Закрывает sustained note из incident
+// PR #209 / hotfix #210 — теперь schema sync применён proper migration runner,
+// queries вида SELECT * FROM service_districts_blocks_breadcrumbs не падают.
 //
-// Original 5 blocks (Hero, TextContent, LeadForm, CtaBanner, Faq) sustained.
-// Calculator (slug=calculator-placeholder) excluded earlier — Postgres 63-char enum limit.
-//
-// 7 non-fillable T4_SD sections (breadcrumbs/tldr/pricing/process/calculator/neighbor/related)
-// → backlog C2.6 wave B+: requires CREATE TABLE migrations + enum length workaround.
+// Calculator (slug=calculator-placeholder) НЕ добавлен — sustained Postgres
+// 63-char enum limit (`enum_service_districts_blocks_calculator_placeholder_
+// service_type` = 65 chars). Backlog: separate fix через Payload v3 enumName
+// override field option.
+import { Breadcrumbs } from '@/blocks/Breadcrumbs'
+import { Tldr } from '@/blocks/Tldr'
+import { PricingTable } from '@/blocks/PricingTable'
+import { ProcessSteps } from '@/blocks/ProcessSteps'
+import { NeighborDistricts } from '@/blocks/NeighborDistricts'
+import { RelatedServices } from '@/blocks/RelatedServices'
 import { buildPublishGate } from '@/lib/admin/publish-gate'
 import { buildMasterTemplateGate } from '@/lib/admin/master-template-gate'
 import { tfIdfUniqueness, lexicalToPlainText } from '@/lib/seo/uniqueness'
@@ -204,7 +208,19 @@ export const ServiceDistricts: CollectionConfig = {
               // hidden на T4 в master-template — gate выкинет PRESENT_HIDDEN
               // если редактор добавит его на T4_SD при publish. Sustained
               // draft без публикации остаётся валидным.
-              blockReferences: [Hero, TextContent, LeadForm, CtaBanner, Faq],
+              blockReferences: [
+                Hero,
+                Breadcrumbs,
+                Tldr,
+                TextContent,
+                PricingTable,
+                ProcessSteps,
+                Faq,
+                CtaBanner,
+                NeighborDistricts,
+                RelatedServices,
+                LeadForm,
+              ],
               blocks: [],
               admin: {
                 initCollapsed: true,

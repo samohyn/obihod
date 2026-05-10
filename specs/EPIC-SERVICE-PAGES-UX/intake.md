@@ -125,3 +125,42 @@ plan_file: /Users/a36/.claude/plans/stateless-puzzling-valiant.md
   **Constraints honored:** no git commit / push / deploy. additive only, master-template.ts schema sealed (только resolver mapping туллinging update).
 
   **Open follow-ups (НЕ блокеры):** (1) schema extension `Services.subServices[].blocks[]` + per-sub `useTemplateV2` — backlog если когда-нибудь нужен per-sub override (сейчас все sub в pillar шарят flag); (2) T3_SUB rollout требует sub doc seed (sustained C5 wave A coverage только T2/T4); (3) PR-3 deploy следующий — этот intake T3T4 integration patch блокирует Phase 2 prod pilot пока не merged.
+
+- 2026-05-10 16:30 MSK · dev+arch → po: **C2.6 done — closes sustained note из incident PR #209/#210.** Migration `20260510_161708_sd_blocks_extension.{ts,up.sql,down.sql}` создаёт 24 новые таблицы для 6 SD blocks (Breadcrumbs / Tldr / PricingTable / ProcessSteps / NeighborDistricts / RelatedServices) — published + drafts + array sub-tables. **Calculator (slug=calculator-placeholder) НЕ включён** — sustained 65-char enum issue (`enum_service_districts_blocks_calculator_placeholder_service_type` > Postgres NAMEDATALEN 63). Backlog: Payload v3 enumName override field option.
+
+  **Apply на prod (sustained SSH fallback, intake constraint «no git commit/push»):**
+  - Backup ДО: workflow `Prod backup (pg_dump)` SUCCESS run `25633714178`
+  - Apply: `scp` → `sudo -u postgres psql obikhod -v ON_ERROR_STOP=1 -f` → COMMIT 0 errors
+  - Registered в `payload_migrations` (idempotent INSERT через DO $$ NOT EXISTS guard)
+  - Ownership fix → все 24 новые таблицы + 12 sequences `OWNER TO obikhod` (sustained gigant pattern)
+  - Verify: `\dt service_districts_blocks_*` → 18 published / `\dt _service_districts_v_blocks_*` → 18 drafts (=12 sustained + 24 new)
+
+  **ServiceDistricts.blockReferences extended → 11 blocks** (Hero, Breadcrumbs, Tldr, TextContent, PricingTable, ProcessSteps, Faq, CtaBanner, NeighborDistricts, RelatedServices, LeadForm). Restored B4 work без regression; Calculator оставлен на backlog.
+
+  **Verification:**
+  - `pnpm type-check` → 0 errors
+  - `pnpm test:unit` → **59/59 passing** (sustained C4 + integration tests intact)
+  - `pnpm prettier --check migrations/20260510_*.ts collections/ServiceDistricts.ts` → all matched files use Prettier code style
+  - Local apply на Docker Postgres → 0 errors, idempotent (повторный run без ошибок), DOWN тестирован в transaction-with-rollback
+  - Prod smoke: `https://obikhod.ru/vyvoz-musora/khimki/` → 200, `/vyvoz-musora/odincovo/` → 200 (sustained 200 не сломаны schema sync). 3-й check 404 — sustained отсутствие data (не наша regression).
+
+  **Migration safety checklist:**
+  - [x] UP + DOWN reversible
+  - [x] CREATE TYPE/TABLE/INDEX/CONSTRAINT все idempotent (pg_type / IF NOT EXISTS / pg_constraint guards)
+  - [x] Empty new tables → нет lock-issues, instant DDL
+  - [x] FK ON DELETE CASCADE per sustained pattern us_3_blocks_and_seo
+  - [x] Tested против Docker Postgres (same baseline 6→18) ДО prod
+  - [x] Backup ДО apply (pg_dump artifact retained 30d)
+  - [x] Rollback план: DOWN sql + удаление row payload_migrations
+
+  **Constraints honored:** no git commit / push / no deploy code (PR-4 finalize на оператора). Schema ready на prod, code изменения localfiles only — оператор закоммитит ServiceDistricts.ts + migration files в финальном PR-4. **No Calculator** — backlog для отдельной wave с enumName override.
+
+  **Файлы:**
+  - `site/migrations/20260510_161708_sd_blocks_extension.up.sql` (660 строк, 24 CREATE TABLE + 4 ENUM + 12 sequences + 24 PK + 24 FK + ~50 indexes, all guarded)
+  - `site/migrations/20260510_161708_sd_blocks_extension.down.sql` (DROP cascade reverse order)
+  - `site/migrations/20260510_161708_sd_blocks_extension.ts` (Payload runner wrapper, sustained sql.raw pattern)
+  - `site/collections/ServiceDistricts.ts` (6 imports + blockReferences 5→11)
+
+  **Открытые backlog (НЕ блокеры C2.6):**
+  - **Calculator block** — отдельная sub-task: Payload v3 `enumName: 'enum_sd_calc_service_type'` в Calculator.ts service_type field, отдельная mini-migration на 2 таблицы + enum, отдельный test.
+  - **B4 wave restore PR** — оператор закоммитит этот код-changes + migration files на main (sustained iron rule: PO-merged PR before prod-deploy code). Phase 2 prod-pilot blocked by PR-4 merge.

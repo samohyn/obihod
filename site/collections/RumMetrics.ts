@@ -107,6 +107,20 @@ export const RumMetrics: CollectionConfig = {
         description: 'PerformanceNavigationTiming.type — фильтр bf-cache от первого визита.',
       },
     },
+    {
+      name: 'abVariant',
+      type: 'select',
+      options: [
+        { label: 'v1 — control (sustained legacy)', value: 'v1' },
+        { label: 'v2 — pilot (master-template)', value: 'v2' },
+      ],
+      index: true,
+      admin: {
+        description:
+          'EPIC-SERVICE-PAGES-REDESIGN D5 — A/B pilot variant. Set ТОЛЬКО на сэмплах с pilot URL ' +
+          '(/vyvoz-musora/*). Aggregation: GROUP BY abVariant для conv/perf comparison.',
+      },
+    },
   ],
   timestamps: true,
 }

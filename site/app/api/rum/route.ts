@@ -72,6 +72,8 @@ const VALID_NAV_TYPES = new Set([
   'back-forward-cache',
   'prerender',
 ])
+// EPIC-SERVICE-PAGES-REDESIGN D5 — A/B pilot variant tag.
+const VALID_AB_VARIANTS = new Set(['v1', 'v2'])
 
 interface ValidatedSample {
   name: 'LCP' | 'CLS' | 'INP' | 'FID' | 'TTFB' | 'FCP'
@@ -81,6 +83,7 @@ interface ValidatedSample {
   userAgent?: string
   viewportWidth?: number
   navigationType?: 'navigate' | 'reload' | 'back-forward' | 'back-forward-cache' | 'prerender'
+  abVariant?: 'v1' | 'v2'
 }
 
 function validate(raw: unknown): ValidatedSample | null {
@@ -109,6 +112,9 @@ function validate(raw: unknown): ValidatedSample | null {
   }
   if (typeof o.navigationType === 'string' && VALID_NAV_TYPES.has(o.navigationType)) {
     out.navigationType = o.navigationType as ValidatedSample['navigationType']
+  }
+  if (typeof o.abVariant === 'string' && VALID_AB_VARIANTS.has(o.abVariant)) {
+    out.abVariant = o.abVariant as ValidatedSample['abVariant']
   }
 
   return out

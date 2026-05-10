@@ -34,6 +34,28 @@ interface BeaconPayload {
   userAgent: string
   viewportWidth: number
   navigationType?: string
+  // EPIC-SERVICE-PAGES-REDESIGN D5 — A/B pilot variant tag (`v1`|`v2`),
+  // присутствует только на pilot URL (`/vyvoz-musora/*`). На остальных
+  // страницах не отправляется (свой undefined → JSON отбрасывает поле).
+  abVariant?: string
+}
+
+const PILOT_PATH_PREFIX = '/vyvoz-musora'
+
+/**
+ * Читает A/B variant cookie на client-side. Cookie set proxy.ts при первом
+ * визите pilot page и persistent на 1 year. httpOnly:false → доступен для
+ * `document.cookie`.
+ */
+function readAbVariant(): 'v1' | 'v2' | null {
+  if (typeof document === 'undefined') return null
+  // sustained простой парсинг — у нас нет cookies с равными префиксами.
+  const match = document.cookie.match(/(?:^|;\s*)obikhod_ab_var=(v1|v2)\b/)
+  return match ? (match[1] as 'v1' | 'v2') : null
+}
+
+function isPilotPath(pathname: string): boolean {
+  return pathname === PILOT_PATH_PREFIX || pathname.startsWith(`${PILOT_PATH_PREFIX}/`)
 }
 
 function send(payload: BeaconPayload): void {
@@ -88,6 +110,14 @@ export function RumProvider() {
 
     if (typeof metric.navigationType === 'string') {
       payload.navigationType = metric.navigationType
+    }
+
+    // EPIC-SERVICE-PAGES-REDESIGN D5 — отправляем variant ТОЛЬКО для pilot
+    // path. Это даёт чистую aggregation в RumMetrics: filter(abVariant != null)
+    // → pilot only, остальные сэмплы как и были.
+    if (isPilotPath(pageUrl)) {
+      const variant = readAbVariant()
+      if (variant) payload.abVariant = variant
     }
 
     send(payload)
