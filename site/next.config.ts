@@ -43,7 +43,8 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/:pillar(arboristika|chistka-krysh|demontazh|vyvoz-musora|uborka-territorii)/ramenskoe/',
+        source:
+          '/:pillar(arboristika|chistka-krysh|demontazh|vyvoz-musora|uborka-territorii)/ramenskoe/',
         destination: '/:pillar/ramenskoye/',
         permanent: true,
       },
