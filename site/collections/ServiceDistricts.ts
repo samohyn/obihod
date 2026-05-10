@@ -5,15 +5,21 @@ import { TextContent } from '@/blocks/TextContent'
 import { LeadForm } from '@/blocks/LeadForm'
 import { CtaBanner } from '@/blocks/CtaBanner'
 import { Faq } from '@/blocks/Faq'
-// Amendment 1 ADR-0021 (2026-05-10): unblock 7 non-fillable required sections
-// на T4_SD (C5 wave A backlog issue 2). Все 7 — sustained Payload blocks из
+// Amendment 1 ADR-0021 (2026-05-10): unblock 6 non-fillable required sections
+// на T4_SD (C5 wave A backlog issue 2). 6 sustained Payload blocks из
 // site/blocks/, schema-side добавок не требуется (schema persists JSON в
 // blocks_array column, ALTER TABLE не нужен).
+//
+// Hotfix 2026-05-10: Calculator (slug=calculator-placeholder) НЕ в blockReferences
+// для T4_SD — Postgres 63-char identifier limit на enum
+// `enum_service_districts_blocks_calculator_placeholder_service_type` (65 chars).
+// Calculator section на T4_SD остаётся MISSING_REQUIRED — fillable через C5+
+// после shorten enum migration. На T2/T3 Calculator работает (table prefix
+// `services_blocks_*` короче, fits в 63).
 import { Tldr } from '@/blocks/Tldr'
 import { Breadcrumbs } from '@/blocks/Breadcrumbs'
 import { PricingTable } from '@/blocks/PricingTable'
 import { ProcessSteps } from '@/blocks/ProcessSteps'
-import { Calculator } from '@/blocks/Calculator'
 import { NeighborDistricts } from '@/blocks/NeighborDistricts'
 import { RelatedServices } from '@/blocks/RelatedServices'
 import { buildPublishGate } from '@/lib/admin/publish-gate'
@@ -210,7 +216,6 @@ export const ServiceDistricts: CollectionConfig = {
                 Tldr,
                 TextContent,
                 PricingTable,
-                Calculator,
                 ProcessSteps,
                 Faq,
                 CtaBanner,
