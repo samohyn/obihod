@@ -37,6 +37,7 @@ import {
   NeighborDistricts,
   RelatedServices,
   ServicesGrid,
+  TextContent,
   Tldr,
 } from './index'
 
@@ -55,13 +56,22 @@ import {
 export type MasterTemplateLayer = 'T2_PILLAR' | 'T3_SUB' | 'T4_SD'
 
 /**
- * 13 секций master-template в фиксированном порядке (ADR-0021 §«Структура»).
+ * 14 секций master-template в фиксированном порядке.
+ *
+ * Базовый набор 13 — ADR-0021 §«Структура».
+ * Section `text-content` (order=4, optional на T2/T3, hidden на T4) — Amendment 1
+ * к ADR-0021 (2026-05-10). Long-form richText body для extended SEO-копий
+ * на pillar/sub URL. Не required — sustained pillar/sub без text-content
+ * остаются валидными. Hidden на T4_SD — для programmatic SD есть
+ * leadParagraph + localFaq + landmarks, long-form text-content там избыточен.
+ *
  * Order — invariant: reorder только через новый ADR.
  */
 export type MasterTemplateSection =
   | 'hero'
   | 'breadcrumbs'
   | 'tldr'
+  | 'text-content'
   | 'services-grid'
   | 'pricing-block'
   | 'calculator'
@@ -197,8 +207,24 @@ export const masterTemplate: MasterTemplate = [
     payload_block: Tldr,
   },
   {
-    section: 'services-grid',
+    // Amendment 1 ADR-0021 (2026-05-10): legacy long-form richText body.
+    // Optional на T2/T3 (extended SEO-копии под intent-кластеры pillar/sub).
+    // Hidden на T4_SD (programmatic SD имеет leadParagraph + localFaq +
+    // landmarks для locale-content; long-form там избыточен).
+    section: 'text-content',
     order: 4,
+    presence: { T2_PILLAR: 'optional', T3_SUB: 'optional', T4_SD: 'hidden' },
+    brand_guide: {
+      status: 'ready',
+      brand_guide_anchor: '#components',
+      extension_spec: null,
+      journey_step: 2,
+    },
+    payload_block: TextContent,
+  },
+  {
+    section: 'services-grid',
+    order: 5,
     presence: { T2_PILLAR: 'required', T3_SUB: 'hidden', T4_SD: 'hidden' },
     brand_guide: {
       status: 'requires-extension',
@@ -211,7 +237,7 @@ export const masterTemplate: MasterTemplate = [
   },
   {
     section: 'pricing-block',
-    order: 5,
+    order: 6,
     presence: { T2_PILLAR: 'required', T3_SUB: 'required', T4_SD: 'required' },
     brand_guide: {
       status: 'requires-extension',
@@ -224,7 +250,7 @@ export const masterTemplate: MasterTemplate = [
   },
   {
     section: 'calculator',
-    order: 6,
+    order: 7,
     presence: { T2_PILLAR: 'required', T3_SUB: 'required', T4_SD: 'required' },
     brand_guide: {
       status: 'requires-extension',
@@ -237,7 +263,7 @@ export const masterTemplate: MasterTemplate = [
   },
   {
     section: 'process',
-    order: 7,
+    order: 8,
     presence: { T2_PILLAR: 'required', T3_SUB: 'required', T4_SD: 'required' },
     brand_guide: {
       status: 'requires-extension',
@@ -250,7 +276,7 @@ export const masterTemplate: MasterTemplate = [
   },
   {
     section: 'mini-case',
-    order: 8,
+    order: 9,
     presence: { T2_PILLAR: 'required', T3_SUB: 'optional', T4_SD: 'required' },
     brand_guide: {
       status: 'requires-extension',
@@ -263,7 +289,7 @@ export const masterTemplate: MasterTemplate = [
   },
   {
     section: 'faq',
-    order: 9,
+    order: 10,
     presence: { T2_PILLAR: 'required', T3_SUB: 'required', T4_SD: 'required' },
     brand_guide: {
       status: 'requires-extension',
@@ -276,7 +302,7 @@ export const masterTemplate: MasterTemplate = [
   },
   {
     section: 'cta-banner',
-    order: 10,
+    order: 11,
     presence: { T2_PILLAR: 'required', T3_SUB: 'optional', T4_SD: 'required' },
     brand_guide: {
       status: 'ready',
@@ -289,7 +315,7 @@ export const masterTemplate: MasterTemplate = [
   },
   {
     section: 'related-services',
-    order: 11,
+    order: 12,
     presence: { T2_PILLAR: 'required', T3_SUB: 'required', T4_SD: 'optional' },
     brand_guide: {
       status: 'ready',
@@ -301,7 +327,7 @@ export const masterTemplate: MasterTemplate = [
   },
   {
     section: 'neighbor-districts',
-    order: 12,
+    order: 13,
     presence: { T2_PILLAR: 'hidden', T3_SUB: 'required', T4_SD: 'required' },
     brand_guide: {
       status: 'requires-extension',
@@ -314,7 +340,7 @@ export const masterTemplate: MasterTemplate = [
   },
   {
     section: 'lead-form',
-    order: 13,
+    order: 14,
     presence: { T2_PILLAR: 'required', T3_SUB: 'required', T4_SD: 'required' },
     brand_guide: {
       status: 'requires-extension',
@@ -363,12 +389,21 @@ const SLUG_TO_SECTION: Record<string, MasterTemplateSection> = {
   hero: 'hero',
   breadcrumbs: 'breadcrumbs',
   tldr: 'tldr',
+  // Amendment 1 ADR-0021 (2026-05-10): text-content — long-form richText
+  // body, optional на T2/T3, hidden на T4 (см. masterTemplate const выше).
+  'text-content': 'text-content',
   'services-grid': 'services-grid',
   'pricing-block': 'pricing-block', // C3 future block
+  // D3 wave A blockReferences: PricingTable.slug = 'pricing-table'.
+  // Master-template section name = 'pricing-block' (ADR-0021). Alias.
+  'pricing-table': 'pricing-block',
   // Sustained Payload block slug = 'calculator-placeholder' (см. blocks/Calculator.ts).
   // Master-template section name = 'calculator' (ADR-0021). Mapping fixes drift.
   'calculator-placeholder': 'calculator',
   process: 'process', // C3 future block
+  // D3 wave A blockReferences: ProcessSteps.slug = 'process-steps'.
+  // Master-template section name = 'process' (ADR-0021). Alias.
+  'process-steps': 'process',
   'mini-case': 'mini-case',
   faq: 'faq',
   'cta-banner': 'cta-banner',
@@ -551,10 +586,11 @@ export function getOrderIndex(
 export function selfValidate(): ValidationResult {
   const errors: ValidationError[] = []
 
-  if (masterTemplate.length !== 13) {
+  // Amendment 1 (2026-05-10): 13 → 14 (+text-content optional на T2/T3).
+  if (masterTemplate.length !== 14) {
     errors.push({
       code: 'MISSING_REQUIRED',
-      message: `Master-template должен содержать 13 секций, найдено ${masterTemplate.length} (ADR-0021).`,
+      message: `Master-template должен содержать 14 секций, найдено ${masterTemplate.length} (ADR-0021 + Amendment 1).`,
     })
   }
 

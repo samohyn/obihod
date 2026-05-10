@@ -85,18 +85,26 @@ describe('master-template self-validation', () => {
       `Expected valid=true, got errors: ${result.errors.map((e) => e.message).join('; ')}`,
     )
     assert.equal(result.errors.length, 0)
-    assert.equal(result.found_sections.length, 13)
+    assert.equal(result.found_sections.length, 14)
   })
 
-  it('master-template содержит ровно 13 секций', () => {
-    assert.equal(masterTemplate.length, 13)
+  it('master-template содержит ровно 14 секций (Amendment 1: +text-content)', () => {
+    assert.equal(masterTemplate.length, 14)
   })
 
-  it('order monotonic 1..13 без дыр', () => {
+  it('order monotonic 1..14 без дыр', () => {
     const orders = masterTemplate.map((s) => s.order).sort((a, b) => a - b)
     for (let i = 0; i < orders.length; i++) {
       assert.equal(orders[i], i + 1, `Order at index ${i} expected ${i + 1}, got ${orders[i]}`)
     }
+  })
+
+  it('text-content section: optional на T2/T3, hidden на T4 (Amendment 1)', () => {
+    const tc = masterTemplate.find((s) => s.section === 'text-content')
+    assert.ok(tc, 'Expected text-content section в masterTemplate')
+    assert.equal(tc!.presence.T2_PILLAR, 'optional')
+    assert.equal(tc!.presence.T3_SUB, 'optional')
+    assert.equal(tc!.presence.T4_SD, 'hidden')
   })
 })
 
@@ -142,16 +150,39 @@ describe('createMasterTemplateValidator(T2_PILLAR)', () => {
     assert.ok(dupErr, 'Expected DUPLICATE_SECTION для hero')
   })
 
-  it('unknown block (text-content legacy) → UNKNOWN_BLOCK report но не fail-only', () => {
+  it('text-content (Amendment 1, optional на T2) → не UNKNOWN_BLOCK и не fail', () => {
+    // Amendment 1 ADR-0021: text-content добавлен как optional section на
+    // T2_PILLAR/T3_SUB (long-form richText body, journey_step=2). Sustained
+    // legacy блоки в Payload документах больше не должны триггерить
+    // UNKNOWN_BLOCK error, который раньше делал valid=false и блокировал
+    // публикацию (incident C5 wave A audit, vyvoz-musora T2 pillar).
     const blocks: DocumentBlock[] = [...T2_FULL, { blockType: 'text-content' }]
     const result = validate(blocks)
-    // text-content — legacy блок, не в master-template. Validator репортит для qa,
-    // но не считает его missing required. Все required присутствуют, поэтому
-    // основная проверка — что UNKNOWN_BLOCK error появляется.
     const unknownErr = result.errors.find(
       (e) => e.code === 'UNKNOWN_BLOCK' && e.blockType === 'text-content',
     )
-    assert.ok(unknownErr, 'Expected UNKNOWN_BLOCK для text-content')
+    assert.equal(
+      unknownErr,
+      undefined,
+      'text-content больше НЕ должен триггерить UNKNOWN_BLOCK (Amendment 1).',
+    )
+    assert.equal(
+      result.valid,
+      true,
+      `Ожидался valid=true с text-content (optional на T2). Errors: ${result.errors.map((e) => e.message).join(' | ')}`,
+    )
+  })
+
+  it('реально неизвестный block (foo-bar) → UNKNOWN_BLOCK report', () => {
+    // Контр-пример: validator всё ещё сообщает о реально-неизвестных слагах,
+    // не относящихся к master-template (чтобы Amendment 1 не превратил гейт
+    // в no-op для UNKNOWN_BLOCK).
+    const blocks: DocumentBlock[] = [...T2_FULL, { blockType: 'foo-bar-unknown' }]
+    const result = validate(blocks)
+    const unknownErr = result.errors.find(
+      (e) => e.code === 'UNKNOWN_BLOCK' && e.blockType === 'foo-bar-unknown',
+    )
+    assert.ok(unknownErr, 'Expected UNKNOWN_BLOCK для foo-bar-unknown')
   })
 
   it('empty blocks[] → valid=false с MISSING_REQUIRED для каждой required секции T2', () => {
@@ -207,6 +238,64 @@ describe('createMasterTemplateValidator(T4_SD)', () => {
 // ────────────────────────────────────────────────────────────────────────────
 // T3_SUB validator (smoke — services-grid hidden, остальное близко к T2)
 // ────────────────────────────────────────────────────────────────────────────
+
+describe('Amendment 1: slug aliases (pricing-table, process-steps, calculator alias)', () => {
+  // ServiceDistricts (T4_SD) допускает D3-wave-A блоки PricingTable (slug
+  // `pricing-table`) и ProcessSteps (slug `process-steps`). Master-template
+  // ожидает sections `pricing-block` и `process`. SLUG_TO_SECTION должен
+  // содержать оба alias чтобы blockReferences не ломали publish-gate.
+  const validateT4 = createMasterTemplateValidator('T4_SD')
+
+  it('T4 с pricing-table (D3 alias) → распознаётся как pricing-block', () => {
+    const blocks: DocumentBlock[] = [
+      { blockType: 'hero' },
+      { blockType: 'breadcrumbs' },
+      { blockType: 'tldr' },
+      { blockType: 'pricing-table' }, // alias для pricing-block
+      { blockType: 'calculator-placeholder' },
+      { blockType: 'process-steps' }, // alias для process
+      { blockType: 'mini-case' },
+      { blockType: 'faq' },
+      { blockType: 'cta-banner' },
+      { blockType: 'neighbor-districts' },
+      { blockType: 'lead-form' },
+    ]
+    const result = validateT4(blocks)
+    assert.equal(
+      result.valid,
+      true,
+      `Expected valid с D3 aliases, got: ${result.errors.map((e) => e.message).join(' | ')}`,
+    )
+    assert.ok(result.found_sections.includes('pricing-block'))
+    assert.ok(result.found_sections.includes('process'))
+  })
+
+  it('text-content на T4_SD → hidden (PRESENT_HIDDEN)', () => {
+    // text-content optional на T2/T3 (long-form body), hidden на T4_SD —
+    // SD имеет leadParagraph + localFaq + landmarks для locale-content,
+    // long-form text-content там избыточен и нарушает journey.
+    const T4_FULL: DocumentBlock[] = [
+      { blockType: 'hero' },
+      { blockType: 'breadcrumbs' },
+      { blockType: 'tldr' },
+      { blockType: 'pricing-block' },
+      { blockType: 'calculator-placeholder' },
+      { blockType: 'process' },
+      { blockType: 'mini-case' },
+      { blockType: 'faq' },
+      { blockType: 'cta-banner' },
+      { blockType: 'neighbor-districts' },
+      { blockType: 'lead-form' },
+      { blockType: 'text-content' }, // hidden на T4
+    ]
+    const result = validateT4(T4_FULL)
+    assert.equal(result.valid, false)
+    const hiddenErr = result.errors.find(
+      (e) => e.code === 'PRESENT_HIDDEN' && e.section === 'text-content',
+    )
+    assert.ok(hiddenErr, 'Expected PRESENT_HIDDEN для text-content на T4_SD')
+  })
+})
 
 describe('createMasterTemplateValidator(T3_SUB)', () => {
   const validate = createMasterTemplateValidator('T3_SUB')
@@ -275,7 +364,10 @@ describe('getSectionsForLayer / getRequiredSectionsForLayer / getOrderIndex', ()
 
   it('getOrderIndex возвращает order для visible section, null для hidden', () => {
     assert.equal(getOrderIndex('hero', 'T2_PILLAR'), 1)
-    assert.equal(getOrderIndex('lead-form', 'T2_PILLAR'), 13)
+    // lead-form: order 13→14 после Amendment 1 (text-content вставлен на 4).
+    assert.equal(getOrderIndex('lead-form', 'T2_PILLAR'), 14)
+    assert.equal(getOrderIndex('text-content', 'T2_PILLAR'), 4)
+    assert.equal(getOrderIndex('text-content', 'T4_SD'), null) // hidden
     assert.equal(getOrderIndex('neighbor-districts', 'T2_PILLAR'), null)
     assert.equal(getOrderIndex('services-grid', 'T4_SD'), null)
   })
