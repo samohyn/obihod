@@ -49,6 +49,18 @@ export const Calculator: Block = {
     {
       name: 'serviceType',
       type: 'select',
+      // C2.6 issue 3 (2026-05-10): override auto-generated enum name.
+      // Default `enum_<parent>_service_type` → 65 chars on T4_SD parent
+      // (`service_districts_blocks_calculator_placeholder`), exceeds Postgres
+      // NAMEDATALEN=63 → blocks adding Calculator to ServiceDistricts.
+      // blockReferences. Function form returns per-table short enum:
+      //   • T2          enum_services_blocks_calculator_placeholder_svc_t          (49)
+      //   • T2 drafts   enum__services_v_blocks_calculator_placeholder_svc_t        (52)
+      //   • T4_SD       enum_service_districts_blocks_calculator_placeholder_svc_t  (58)
+      //   • T4_SD draft enum__service_districts_v_blocks_calculator_placeholder_svc_t (61)
+      // Migration `20260510_220000_calculator_enum_rename` renames sustained
+      // T2/T2-drafts enum types in-place (ALTER TYPE … RENAME TO …).
+      enumName: ({ tableName }) => `enum_${tableName}_svc_t`,
       options: [
         { label: 'Спил деревьев', value: 'spil' },
         { label: 'Вывоз мусора', value: 'musor' },

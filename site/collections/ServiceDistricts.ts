@@ -10,16 +10,20 @@ import { Faq } from '@/blocks/Faq'
 // PR #209 / hotfix #210 — теперь schema sync применён proper migration runner,
 // queries вида SELECT * FROM service_districts_blocks_breadcrumbs не падают.
 //
-// Calculator (slug=calculator-placeholder) НЕ добавлен — sustained Postgres
-// 63-char enum limit (`enum_service_districts_blocks_calculator_placeholder_
-// service_type` = 65 chars). Backlog: separate fix через Payload v3 enumName
-// override field option.
+// C2.6 issue 3 (2026-05-10 22:00): Calculator (slug=calculator-placeholder)
+// re-added после migration `20260510_220000_calculator_enum_rename`. Sustained
+// 65-char enum overflow fixed через Payload v3 `enumName` function override
+// в blocks/Calculator.ts (`({ tableName }) => 'enum_' + tableName + '_svc_t'`).
+// T2 enums renamed in-place (ALTER TYPE … RENAME TO …, sustained data
+// unchanged), T4_SD calculator-placeholder tables created с короткими enum
+// именами (≤ 63 chars).
 import { Breadcrumbs } from '@/blocks/Breadcrumbs'
 import { Tldr } from '@/blocks/Tldr'
 import { PricingTable } from '@/blocks/PricingTable'
 import { ProcessSteps } from '@/blocks/ProcessSteps'
 import { NeighborDistricts } from '@/blocks/NeighborDistricts'
 import { RelatedServices } from '@/blocks/RelatedServices'
+import { Calculator } from '@/blocks/Calculator'
 import { buildPublishGate } from '@/lib/admin/publish-gate'
 import { buildMasterTemplateGate } from '@/lib/admin/master-template-gate'
 import { tfIdfUniqueness, lexicalToPlainText } from '@/lib/seo/uniqueness'
@@ -214,6 +218,7 @@ export const ServiceDistricts: CollectionConfig = {
                 Tldr,
                 TextContent,
                 PricingTable,
+                Calculator,
                 ProcessSteps,
                 Faq,
                 CtaBanner,

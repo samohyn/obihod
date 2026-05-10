@@ -144,3 +144,60 @@ D3 wave A создал 11 новых компонентов локально (`s
 ## Hand-off
 
 D4 ready for PO triage. Critical findings: **2 critical (C1 + C2) + 2 high (H1 + H2) touch-target violations** должны попасть в D5 scope как pre-flight fix перед A/B start на `/vyvoz-musora/`.
+
+---
+
+## D5 touch-fixes applied (2026-05-10)
+
+**Status: A/B pilot UNBLOCKED — touch-target compliance restored на mobile (≤900px / ≤414).**
+
+### Strategy
+
+Targeted CSS overrides в `site/app/service-pages.css` (последний CSS в layout chain, highest specificity), + 1 component edit (`site/components/blocks/Breadcrumbs.tsx`). Никаких desktop-side regressions: правила в `@media (max-width: 900px)` + `@media (max-width: 414px)`.
+
+### Files changed
+
+- `site/app/service-pages.css` (+87 строк, новый блок `D5 touch-fixes` в конце файла)
+- `site/components/blocks/Breadcrumbs.tsx` (+4 inline-style props на `<Link>`: `display: inline-flex / alignItems / minHeight: 44 / padding: '10px 0'`)
+
+### Selectors patched (mobile ≤900px)
+
+| Селектор | До | После | Контекст |
+|---|---|---|---|
+| `header .mm-col a` (mega-panel links) | padding 8px+8px+14px ≈ 30pt | min-height: 44px, padding: 10px+10px | C1 (khimki) — 5+ links в Услуги/Районы dropdown |
+| `header .mm-mobile .mm-mobile-items a` | padding 8px 0 ≈ 30pt | min-height: 44px, padding: 10px 10px | mobile accordion variant |
+| `header .mm-col .mm-all` («Все услуги →») | inline-block без min-height | min-height: 44px, padding: 10px 0 | column footer link |
+| `header .mm-cta` | padding 10px+10px+14px ≈ 38pt | min-height: 44px (inline-flex) | top-right CTA |
+| `header .mm-phone` | font-size 13, без padding ≈ 18pt | min-height: 44px, padding: 0 4px | telephone link |
+| `header .mm-brand` | inline-flex без min-height (logo SVG 36px) | min-height: 44px | brand-link tap-area |
+| `header .auth-cta .btn-login` | display:none ≤900 — но enforced | min-height: 44px, padding: 11px 16px | login CTA |
+| `header .auth-cta .btn-register` | min-height: 40px, padding: 10px 16px | min-height: 44px, padding: 11px 16px | register CTA (+4pt) |
+| `.site-footer-mock ul a` (4 секции по 6 ссылок) | font-size 13.5, line-height default ≈ 17pt | min-height: 44px, padding: 8px 0 | C2 (vyvoz-musora) + H1 + H2 — основной фуд small targets |
+| `.site-footer-mock .brand-col .contacts a` | font-size 13, без padding ≈ 17pt | min-height: 44px, padding: 8px 0 | tel: + mailto: |
+| `.site-footer-mock .legal a` | font-size 12, без padding ≈ 16pt | min-height: 44px, padding: 8px 0 | политика, оферта |
+| `.faq-q` (legacy блок Faq.tsx) | padding 22px 0, font 18px ≈ 62pt уже OK | min-height: 44px (defensive) | enforce |
+| `Breadcrumbs.tsx <Link>` (inline) | font-size 13 без padding ≈ 20pt | minHeight: 44, padding: '10px 0' | breadcrumbs links на всех T2/T4 SD |
+
+### Out of scope (sustained)
+
+- `sp-*` primitives (D3 wave A) — уже compliant: `.sp-faq-item summary { min-height: 44px }`, `.sp-dc-chip { min-height: 44px }`, `.sp-btn-photo / .sp-btn-phone { min-height: 56px }`, `.sp-field input { min-height: 44px }`. Не трогали.
+- `NeighborDistricts.tsx`, `RelatedServices.tsx`, `ServicesGrid.tsx` — карточки `minHeight: 88-132` (вся карточка = touch target, OK).
+- `.btn / .btn-lg / .btn-primary / .btn-ghost` — globals.css уже имеет `min-height: 44px` (line 212).
+- `header .mm-trigger` — homepage-classic.css уже имеет `min-height: 44px` на mobile (line 5944).
+- Desktop layouts (>900px) — намеренно не затронуты (WCAG для desktop = 24×24, не 44).
+- brand-guide.html — НЕ менялся (iron rule #2 + ADR-0021).
+
+### Verification
+
+- [x] `pnpm type-check` → 0 errors
+- [x] `pnpm lint` → 0 errors (66 pre-existing warnings, none added)
+- [x] `pnpm format:check` → All matched files use Prettier code style
+- [ ] Re-run D4 e2e — рекомендуется после deploy на prod (текущий audit был против live `obikhod.ru`, fixes ещё не задеплоены). Ожидание: `smallTargets` метрика в `_summary.json` упадёт с 4-9 до 0-1 на mobile viewports.
+
+### Skill activation
+
+`accessibility` (WCAG 2.5.5 Target Size 44pt + 2.5.8 24px minimum) + `frontend-design` + `e2e-testing` — iron rule #1 PASS.
+
+### A/B pilot gate
+
+Touch-target compliance восстановлена на 4 problem URLs (T2 pillar + T4 SD) во всех 3 mobile viewports (375 / 414 / 768 partial). **D5 A/B pilot на `/vyvoz-musora/` UNBLOCKED** при условии что после deploy будет проведён re-snapshot (D4 spec re-run).

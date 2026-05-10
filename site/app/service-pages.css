@@ -1611,3 +1611,92 @@
     transition: none;
   }
 }
+
+/* ═════════════════ D5 touch-fixes (WCAG 2.5.5 / 2.5.8 — 44pt mobile) ═════════════════
+ * Source: specs/EPIC-SERVICE-PAGES-REDESIGN/d4-qa-report.md (Critical C1 + C2, High H1 + H2).
+ *
+ * D4 audit обнаружил 9/13 visible touch targets <44pt на khimki 414×896 (T4 SD)
+ * + 4-5 small на vyvoz-musora / uborka-territorii / dizain-landshafta 375 + 414.
+ * Эти overrides применяются ТОЛЬКО на mobile (≤900px) к legacy chrome
+ * (.mm-* header, .site-footer-mock, .auth-cta) — desktop layouts не затронуты.
+ *
+ * sp-* primitives (D3 wave A) уже compliant: .sp-faq-item summary {min-height: 44px},
+ * .sp-dc-chip {min-height: 44px}, .sp-btn-photo/.sp-btn-phone {min-height: 56px}.
+ * Inline Breadcrumbs.tsx ссылки уже патчены (minHeight: 44).
+ *
+ * EPIC-SERVICE-PAGES-REDESIGN D5 · 2026-05-10 · fe + qa role.
+ */
+@media (max-width: 900px) {
+  /* Header — mega-menu панель ссылок (раскрывается на mobile как accordion) */
+  header.site-mm.mm-demo .mm-col a,
+  header.site-mm.mm-demo .mm-mobile .mm-mobile-items a {
+    min-height: 44px;
+    padding: 10px 10px;
+  }
+  header.site-mm.mm-demo .mm-col .mm-all,
+  header.site-mm.mm-demo .mm-mobile .mm-all {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 0;
+  }
+  header.site-mm.mm-demo .mm-cta {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  header.site-mm.mm-demo .mm-phone {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 4px;
+  }
+
+  /* Auth-CTA buttons — повышаем .btn-register с 40 до 44 + .btn-login до 44 */
+  header.site-mm.mm-demo .auth-cta .btn-login,
+  header.site-mm.mm-demo .auth-cta .btn-register {
+    min-height: 44px;
+    padding: 11px 16px;
+  }
+
+  /* Brand-link — logo wrapper должен быть tap-area */
+  header.site-mm.mm-demo .mm-brand {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Footer — 4 секции ссылок + контакты + legal */
+  .site-footer-mock ul a,
+  .site-footer-mock .brand-col .contacts a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 0;
+  }
+  .site-footer-mock .legal a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 0;
+  }
+
+  /* FAQ кнопка раскрытия — defensive, уже OK на ≥768 (28+28+22) */
+  .faq-q {
+    min-height: 44px;
+  }
+}
+
+/* Mobile narrow (≤414) — гарантируем те же min-heights (CSS specificity) */
+@media (max-width: 414px) {
+  header.site-mm.mm-demo .mm-col a,
+  header.site-mm.mm-demo .mm-mobile .mm-mobile-items a,
+  header.site-mm.mm-demo .auth-cta .btn-login,
+  header.site-mm.mm-demo .auth-cta .btn-register,
+  header.site-mm.mm-demo .mm-brand,
+  .site-footer-mock ul a,
+  .site-footer-mock .brand-col .contacts a,
+  .site-footer-mock .legal a {
+    min-height: 44px;
+  }
+}
