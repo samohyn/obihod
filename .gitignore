@@ -36,3 +36,4 @@ chat/
 assets/photos/
 assets/videos/
 assets/temp/
+assets/services/**/*.png
