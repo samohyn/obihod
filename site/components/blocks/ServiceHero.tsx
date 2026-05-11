@@ -10,7 +10,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import type { ServiceHeroBlock } from './types'
+import { toStringList, type ServiceHeroBlock } from './types'
 
 function pickHref(cta?: { href?: string | null } | null): string | null {
   return cta?.href ?? null
@@ -27,7 +27,7 @@ export function ServiceHero(block: ServiceHeroBlock) {
   const h1 = block.h1 ?? null
   const strapline = block.strapline ?? null
   const usps = block.usps ?? []
-  const trust = block.trust ?? []
+  const trust = toStringList(block.trust)
   const primaryHref = pickHref(block.ctaPrimary) ?? '#calculator'
   const primaryLabel = pickLabel(block.ctaPrimary) ?? 'Загрузить фото — получить смету'
   const secondaryHref = pickHref(block.ctaSecondary) ?? null

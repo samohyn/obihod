@@ -7,7 +7,7 @@
 
 import Link from 'next/link'
 
-import type { PricingTableBlock } from './types'
+import { toStringList, type PricingTableBlock } from './types'
 
 export function PricingTable(block: PricingTableBlock) {
   const tiers = block.tiers ?? []
@@ -36,6 +36,7 @@ export function PricingTable(block: PricingTableBlock) {
         <div className="sp-pricing-tiers" role="list" aria-label={heading ? undefined : 'Тарифы'}>
           {tiers.map((tier, i) => {
             const isHighlighted = Boolean(tier.highlighted)
+            const features = toStringList(tier.features)
             return (
               <article
                 key={`tier-${i}`}
@@ -50,9 +51,9 @@ export function PricingTable(block: PricingTableBlock) {
                   {tier.unit && <span className="unit">/ {tier.unit}</span>}
                 </div>
                 {tier.tagline && <p className="sp-tier-tagline">{tier.tagline}</p>}
-                {tier.features && tier.features.length > 0 && (
+                {features.length > 0 && (
                   <ul className="sp-tier-features">
-                    {tier.features.map((f, fi) => (
+                    {features.map((f, fi) => (
                       <li key={`f-${fi}`}>{f}</li>
                     ))}
                   </ul>

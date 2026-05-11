@@ -25,6 +25,36 @@ export type SeasonalTheme = 'summer' | 'winter' | 'promo'
 export type CtaAccent = 'primary' | 'warning' | 'success'
 
 /**
+ * Нормализует Payload `array`-поле к `string[]`.
+ *
+ * Payload `array` с одним полем (`{ name: 'value' | 'url', type: 'text' }`)
+ * после `afterRead` возвращает `[{ id, value }]` / `[{ id, url }]`, а не
+ * `string[]`. Если рендерер ожидал `string[]` и делает `<li>{item}</li>` —
+ * React падает с «Objects are not valid as a React child (found: object with
+ * keys {id, value})». Эта функция принимает оба shape (legacy `string[]`
+ * fixtures и реальные Payload-данные) и всегда возвращает `string[]`.
+ *
+ * EPIC-SERVICE-PAGES-REDESIGN D3-fix · 2026-05-11.
+ */
+export function toStringList(
+  input: ReadonlyArray<string | Record<string, unknown> | null | undefined> | null | undefined,
+): string[] {
+  if (!input) return []
+  const out: string[] = []
+  for (const item of input) {
+    if (item == null) continue
+    if (typeof item === 'string') {
+      if (item.length > 0) out.push(item)
+      continue
+    }
+    const raw = item.value ?? item.url
+    if (typeof raw === 'string' && raw.length > 0) out.push(raw)
+    else if (typeof raw === 'number') out.push(String(raw))
+  }
+  return out
+}
+
+/**
  * Иконки из brand-guide §9 — line-art glyph'ы в 3 линейках.
  * Префикс задаёт линейку (`s-` services, `d-` districts, `c-` cases).
  * Полный реестр — в brand-guide.html §9; здесь — только тип-ключ.

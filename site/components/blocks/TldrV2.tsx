@@ -4,10 +4,10 @@
 // 3-5 bullets card-style с border-accent left, badge + title + checkmark bullets.
 // Server component. Speakable атрибуты для нейровыдачи (sustained US-3).
 
-import type { TldrV2Block } from './types'
+import { toStringList, type TldrV2Block } from './types'
 
 export function TldrV2(block: TldrV2Block) {
-  const bullets = (block.bullets ?? []).filter(Boolean)
+  const bullets = toStringList(block.bullets)
   if (bullets.length === 0) return null
 
   const badge = block.badge ?? 'Кратко'
