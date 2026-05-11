@@ -336,12 +336,14 @@ If `estimate_cost` MCP returns >$5 — STOP, escalate to PO.
 ## Status block (для D2 wave A run)
 
 - [x] Prompt template authored (this file) — 2026-05-10
-- [ ] FAL_KEY provisioned + fal-ai MCP connected — **BLOCKED, escalated to PO**
-- [ ] Pre-flight cost estimate <$5
-- [ ] Hero batch (8) generated + reviewed
-- [ ] Process / mini-case / calculator batches (14) generated + reviewed
-- [ ] Districts batch (30) generated + reviewed
-- [ ] REVIEW.md filled, hand-off в intake.md
+- [x] FAL_KEY provisioned (operator 2026-05-11) — fal-ai MCP всё ещё не подключён в сессии, использован прямой REST API (`https://queue.fal.run/fal-ai/nano-banana-pro`) через curl/urllib + `SSL_CERT_FILE=certifi` (Python 3.14 SSL fix)
+- [x] Pre-flight cost estimate <$5 — smoke test 1 photo OK, итого ≈$2.75 на 55 generations
+- [x] Hero batch (8) generated + reviewed — все ✅, A/B pick H1d / H1m, backup H4d
+- [x] Process / mini-case / calculator batches (14) generated + reviewed — все ✅ (case2 before/after reroll: первый проход словил людей → regenerated с `no people` negative)
+- [x] Districts batch (30) generated + reviewed — все ✅, cluster mapping визуально подтверждён
+- [x] REVIEW.md filled, hand-off в intake.md + .claude/memory/handoff.md — 2026-05-11
+
+**D2 wave A: DONE 2026-05-11. 52 photos → `assets/services/vyvoz-musora/`. 52/52 ✅ approved. Cost ≈$2.75/$5 cap. Ready for D3 wire-up.**
 
 ## Next-iteration scope (out of wave A)
 

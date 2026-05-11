@@ -63,6 +63,13 @@ const SLUG_TO_SECTION: Record<string, MasterTemplateSection> = {
   'lead-form': 'lead-form',
   // Amendment 1 ADR-0021 (2026-05-10) — sustained legacy text-content section.
   'text-content': 'text-content',
+  // EPIC-SERVICE-PAGES-UX C5 wave B (2026-05-11) — v2.6 blocks aliases.
+  // Совпадает с master-template.ts SLUG_TO_SECTION aliases (D3 wave A blocks).
+  // Без этого resolver в templateV2 дропнет реальный pricing-table / process-steps
+  // как unknown blockType → re-fill placeholder'ом. С alias — рендерим реальный
+  // блок (BlockRenderer кейсы `pricing-table` / `process-steps` уже есть).
+  'pricing-table': 'pricing-block',
+  'process-steps': 'process',
 }
 
 /**

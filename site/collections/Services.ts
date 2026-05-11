@@ -11,6 +11,8 @@ import {
   MiniCase,
   RelatedServices,
   Calculator,
+  PricingTable,
+  ProcessSteps,
 } from '@/blocks'
 import { buildMasterTemplateGate } from '@/lib/admin/master-template-gate'
 
@@ -160,6 +162,9 @@ export const Services: CollectionConfig = {
             // US-0 Track B-2 — blocks[] для pillar/sub Service-страниц.
             // Whitelist: hero, text-content, lead-form, cta-banner, faq, services-grid,
             // mini-case, related-services, tldr, breadcrumbs, calculator-placeholder.
+            // EPIC-SERVICE-PAGES-UX C5 wave B (2026-05-11): +pricing-table +process-steps
+            // (v2.6 blocks для редизайна T2_PILLAR; миграция
+            // 20260511_120000_services_blocks_v26_extension создаёт таблицы).
             // before-after — opt-in в US-3 (sa-spec AC-3.4).
             {
               name: 'blocks',
@@ -176,12 +181,14 @@ export const Services: CollectionConfig = {
                 Tldr,
                 Breadcrumbs,
                 Calculator,
+                PricingTable,
+                ProcessSteps,
               ],
               blocks: [],
               admin: {
                 initCollapsed: true,
                 description:
-                  'Конструктор страницы услуги: hero, текст, FAQ, CTA, сетка sub-услуг, мини-кейс, похожие услуги, TL;DR, breadcrumbs, калькулятор. Legacy intro выше остаётся для обратной совместимости.',
+                  'Конструктор страницы услуги: hero, текст, FAQ, CTA, сетка sub-услуг, мини-кейс, похожие услуги, TL;DR, breadcrumbs, калькулятор, прайс-таблица, шаги процесса. Legacy intro выше остаётся для обратной совместимости.',
               },
             },
           ],
