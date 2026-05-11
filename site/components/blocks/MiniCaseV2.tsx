@@ -8,19 +8,19 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import type { MiniCaseV2Block } from './types'
+import { toStringList, type MiniCaseV2Block } from './types'
 
 export function MiniCaseV2(block: MiniCaseV2Block) {
   const title = block.title
   if (!title) return null
 
   const badge = block.badge ?? 'Кейс'
-  const meta = block.meta ?? []
+  const meta = toStringList(block.meta)
   const photoUrl = block.imageUrl ?? null
   const photoAlt = block.imageAlt ?? title
   const photoLabel = block.photoLabel ?? null
   const kpis = block.kpis ?? []
-  const thumbs = block.thumbs ?? []
+  const thumbs = toStringList(block.thumbs)
   const ctaLabel = block.ctaLabel ?? 'Полный кейс'
   const ctaHref = block.ctaHref ?? null
 
