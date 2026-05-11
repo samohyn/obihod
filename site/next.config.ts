@@ -8,6 +8,14 @@ const nextConfig: NextConfig = {
     deviceSizes: [360, 640, 768, 1024, 1280, 1536],
     imageSizes: [16, 32, 64, 96, 128, 256],
     minimumCacheTTL: 31536000,
+    // Payload отдаёт upload-URL абсолютным (serverURL + /api/media/file/<f>),
+    // поэтому next/image требует remotePatterns для собственного хоста.
+    // Без этого <Image> на Hero/MiniCase падает с 400 «"url" parameter is not allowed».
+    remotePatterns: [
+      { protocol: 'https', hostname: 'obikhod.ru' },
+      { protocol: 'https', hostname: 'www.obikhod.ru' },
+      { protocol: 'http', hostname: 'localhost' },
+    ],
   },
   /**
    * 301-редиректы для миграции canonical slug.
