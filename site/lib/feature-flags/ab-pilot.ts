@@ -52,8 +52,13 @@ export async function readAbVariant(): Promise<AbVariant | null> {
  * Иначе false (default sustained rendering).
  */
 export async function readAbVariantOverride(serviceSlug: string): Promise<boolean> {
-  // Early return ДО cookies() — preserve ISR для всех остальных pillars.
-  if (serviceSlug !== AB_PILOT_SLUG) return false
-  const variant = await readAbVariant()
-  return variant === 'v2'
+  // PAUSED 2026-05-11: A/B pilot отключён до content-fill placeholder-секций
+  // (pricing-block, process на T2 pillar показывают «черновик, в работе» stub cards).
+  // useTemplateV2 override отключён глобально — все visitors получают sustained
+  // legacy rendering. Re-enable: вернуть условие ниже + content-fill ready.
+  //   if (serviceSlug !== AB_PILOT_SLUG) return false
+  //   const variant = await readAbVariant()
+  //   return variant === 'v2'
+  void serviceSlug
+  return false
 }
