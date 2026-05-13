@@ -227,15 +227,21 @@ export interface LeadFormBlock extends BlockBase {
 export interface CtaBannerBlock extends BlockBase {
   blockType: 'cta-banner'
 
-  // cw-схема
-  /** h2 — заголовок (cw-схема). */
+  /**
+   * Заголовок баннера. Payload block config (`blocks/CtaBanner.ts`) хранит его
+   * в поле `title` — это имя в БД (`*_blocks_cta_banner.title`). cw-fixtures
+   * исторически используют `h2`, legacy Track B-1 — `heading`. Renderer читает
+   * `title → h2 → heading`.
+   */
+  title?: string | null
+  /** @see title — cw-fixtures alias. */
   h2?: string | null
   body?: string | null
   /** CTA primary (cw-схема). */
   ctaPrimary?: CtaLink | null
 
   // legacy
-  /** @deprecated → h2 */
+  /** @deprecated → title */
   heading?: string | null
   /** @deprecated → ctaPrimary */
   cta?: CtaLink | null
