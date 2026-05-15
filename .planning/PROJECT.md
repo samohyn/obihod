@@ -15,8 +15,9 @@
 **Target features:**
 - Live decision-grade benchmark arboristik.ru (8 осей × verdict × gap × proposed action)
 - Live decision-grade benchmark arborist.su (8 осей × verdict × gap × proposed action)
-- Cross-competitor roadmap: объединённые leverage-points 3 benchmarks → новые US с RICE, без дублирования existing OVT-1..7 / US-2..11
-- Расширение weekly monitoring 1 → 3 конкурентов (OVT-MONITOR watcher.ts: sitemaps + URL-counts + JSON-LD coverage по arboristik.ru и arborist.su)
+- Cross-competitor roadmap: объединённые leverage-points 3 benchmarks → ≤8 новых US с RICE ≥1.5, без дублирования existing OVT-1..7 / US-2..11; cannibalisation matrix hard gate
+- Расширение weekly monitoring 1 → 3 конкурентов (OVT-MONITOR watcher.ts: sitemaps + URL-counts + JSON-LD coverage по arboristik.ru и arborist.su, per-target config + liveness assertion + dry-run ≥7d)
+- **P1 NEW US (apruved Day-0 2026-05-15):** OVT-8 B2B-абонентка «зима-лето» + OVT-9 «штрафы ГЖИ берём на себя» + LSI «10 причин/сам vs специалист» + лицензии 782н + страховка ГО в hero — закрывает B2B/local LAG + content-depth LAG vs liwood 3500w
 - Завершение open execution: OVT-1..7 + EPIC-SEO-COMPETE-3 US-2..11 до DoD в окне milestone
 
 ## Requirements
@@ -38,8 +39,12 @@
 
 - [ ] **BENCHMARK-ARB-01**: Live decision-grade benchmark arboristik.ru по 8 осям (URL/IA, Content depth, On-page SEO, Schema/JSON-LD, E-E-A-T, CRO/lead-flow, CWV/tech, B2B/local)
 - [ ] **BENCHMARK-ARBSU-01**: Live decision-grade benchmark arborist.su по 8 осям
-- [ ] **ROADMAP-CROSS-01**: Cross-competitor roadmap — объединённые leverage-points 3 benchmarks → новые US с RICE
-- [ ] **MONITOR-3X-01**: Расширить OVT-MONITOR с 1 → 3 конкурентов (sitemaps + URL-counts + JSON-LD)
+- [ ] **ROADMAP-CROSS-01**: Cross-competitor roadmap — объединённые leverage-points 3 benchmarks → ≤8 новых US с RICE ≥1.5 (cannibalisation matrix hard gate)
+- [ ] **MONITOR-3X-01**: Расширить OVT-MONITOR с 1 → 3 конкурентов (sitemaps + URL-counts + JSON-LD + per-target config + liveness assertion + dry-run ≥7d)
+- [ ] **B2B-TRUST-01** (NEW P1 после Day-0 batch 2026-05-15): OVT-8 B2B-абонентка «зима-лето» — 3 тарифа + `/b2b/abonement/` + договор-шаблон + страховка ГО 15 млн
+- [ ] **B2B-TRUST-02** (NEW P1): OVT-9 «Штрафы ГЖИ/ОАТИ берём на себя» — flagship hero на `/b2b/`, first-mover messaging (паттерн alpbond.org)
+- [ ] **B2B-TRUST-03** (NEW P1): Лицензии 782н + страховка ГО 10 млн в hero arborist-related страниц (regulatorный язык по паттерну arborist.su)
+- [ ] **CONTENT-DEPTH-01** (NEW P1): LSI-блоки «10 причин выбрать специалиста» + «Сам vs специалист» в T2 master-template на 5 pillar — закрывает content-depth LAG vs liwood 3500w
 - [ ] **EXEC-COMPLETE-01**: Завершить open OVT-1..7 + US-2..11 (status `now`/`next`) до DoD
 
 ### Out of Scope
@@ -74,6 +79,9 @@
 - **AI: Claude API only for backend AI** (photo→quote calculator); fal.ai — иконки/фото/моки; UI/copy — не AI-generated
 - **Prompt caching обязательно** для Claude API вызовов (skill `claude-api`)
 - **Хуки:** `protect-secrets`, `block-dangerous-bash`, `protect-immutable`, `session-bootstrap` — не обходить
+- **OVT-MKT budget envelope:** до 30k₽ — cw+design+seo решают без operator-gate (Day-0 batch 2026-05-15). Свыше — operator-apruv
+- **Operator decision-gate batching:** 3 sessions в milestone — Day-0 (kickoff) / Wave-mid (продолжаем/меняем) / Final-gate (release + DoD). PO держит accumulator открытых gates, не дёргает оператора чаще
+- **NEW US RICE floor 1.5 + cap-8** для ROADMAP-CROSS-01: дедуп vs 16 sustained OVT-*/US-* обязателен; cannibalisation matrix hard gate перед merge в backlog
 
 ## Key Decisions
 
@@ -88,6 +96,7 @@
 | Brand v2.3 Caregiver+Ruler (без Sage shop) | services-only фокус после ADR-0020 | ✓ Good |
 | `.planning/` как стратегический layer поверх `specs/` (2026-05-15) | оператор apruved для GSD-milestone Overtake-3 | — Pending evaluation |
 | photo→quote Claude API USP | никто из 17 конкурентов в нише не делает; differentiator | ✓ Good — confirmed live |
+| Day-0 batch 2026-05-15: P1 NEW US (OVT-8/9 + LSI + 782н) IN, P3 (OVT-10/11) OUT в v1.1, OVT-MKT 30k₽ envelope | snижает operator overload (P6 pitfall) + сохраняет фокус SEO/B2B/CRO без распыления на marketing-creative | — Pending evaluation post-Phase-4 |
 
 ## Evolution
 
