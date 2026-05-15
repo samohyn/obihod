@@ -100,48 +100,55 @@ Explicitly excluded. Documented to prevent scope creep.
 
 ## Traceability
 
-Which phases cover which requirements. Updated during roadmap creation.
+Which phases cover which requirements. Updated during roadmap creation 2026-05-15.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| BENCH-01 | TBD | Pending |
-| BENCH-02 | TBD | Pending |
-| BENCH-03 | TBD | Pending |
-| BENCH-04 | TBD | Pending |
-| XROAD-01 | TBD | Pending |
-| XROAD-02 | TBD | Pending |
-| XROAD-03 | TBD | Pending |
-| MON-01 | TBD | Pending |
-| MON-02 | TBD | Pending |
-| MON-03 | TBD | Pending |
-| MON-04 | TBD | Pending |
-| MON-05 | TBD | Pending |
-| B2B-01 | TBD | Pending |
-| B2B-02 | TBD | Pending |
-| B2B-03 | TBD | Pending |
-| B2B-04 | TBD | Pending (operator action) |
-| CONT-01 | TBD | Pending |
-| CONT-02 | TBD | Pending |
-| EXEC-01 | TBD | Pending |
-| EXEC-02 | TBD | Pending |
-| EXEC-03 | TBD | Pending (operator action Я.Бизнес) |
-| EXEC-04 | TBD | Pending (operator action footage) |
-| EXEC-05 | TBD | Pending |
-| EXEC-06 | TBD | Pending |
-| EXEC-07 | TBD | Pending |
-| EXEC-08 | TBD | Pending |
-| EXEC-09 | TBD | Pending |
-| EXEC-10 | TBD | Pending |
-| EXEC-11 | TBD | Pending |
-| EXEC-12 | TBD | Pending |
-| EXEC-13 | TBD | Pending |
-| EXEC-14 | TBD | Pending |
+| BENCH-01 | Phase 2 | Pending |
+| BENCH-02 | Phase 2 | Pending |
+| BENCH-03 | Phase 2 | Pending |
+| BENCH-04 | Phase 2 | Pending |
+| XROAD-01 | Phase 3 | Pending |
+| XROAD-02 | Phase 3 | Pending |
+| XROAD-03 | Phase 3 | Pending |
+| MON-01 | Phase 4 | Pending |
+| MON-02 | Phase 4 | Pending |
+| MON-03 | Phase 4 | Pending |
+| MON-04 | Phase 4 | Pending |
+| MON-05 | Phase 4 | Pending |
+| B2B-01 | Phase 5 | Pending |
+| B2B-02 | Phase 5 | Pending |
+| B2B-03 | Phase 5 | Pending |
+| B2B-04 | Phase 5 | Pending (operator action) |
+| CONT-01 | Phase 5 | Pending |
+| CONT-02 | Phase 5 | Pending |
+| EXEC-01 | Phase 5 | Pending |
+| EXEC-02 | Phase 5 | Pending |
+| EXEC-03 | Phase 5 | Pending (operator action Я.Бизнес) |
+| EXEC-04 | Phase 5 | Pending (operator action footage) |
+| EXEC-05 | Phase 5 | Pending |
+| EXEC-06 | Phase 5 | Pending |
+| EXEC-07 | Phase 5 | Pending |
+| EXEC-08 | Phase 5 | Pending |
+| EXEC-09 | Phase 5 | Pending |
+| EXEC-10 | Phase 5 | Pending |
+| EXEC-11 | Phase 5 | Pending |
+| EXEC-12 | Phase 5 | Pending |
+| EXEC-13 | Phase 5 | Pending (supersedes by MON-01..05) |
+| EXEC-14 | Phase 5 | Pending |
 
 **Coverage:**
 - v1 requirements: **32** total
-- Mapped to phases: 0 (filled by roadmapper)
-- Unmapped: 32 ⚠️ (will be 0 after roadmap)
+- Mapped to phases: **32** ✓ (100% coverage)
+- Unmapped: 0 ✓
+
+**Phase distribution:**
+- Phase 1 (SETUP): 0 REQ-IDs (organizational/bootstrap only)
+- Phase 2 (BENCHMARK ARB + ARBSU PARALLEL): 4 REQ-IDs (BENCH-01..04)
+- Phase 3 (CROSS ROADMAP): 3 REQ-IDs (XROAD-01..03)
+- Phase 4 (MONITOR 3X): 5 REQ-IDs (MON-01..05)
+- Phase 5 (EXEC COMPLETE): 20 REQ-IDs (B2B-01..04 + CONT-01..02 + EXEC-01..14)
 
 ---
 *Requirements defined: 2026-05-15*
-*Last updated: 2026-05-15 after Day-0 operator batch + research synthesis*
+*Last updated: 2026-05-15 after roadmap creation — traceability filled, 100% coverage achieved*
