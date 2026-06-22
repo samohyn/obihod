@@ -57,7 +57,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo (для scripts/seed.ts — его нет в prod-артефакте)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup SSH
         run: |
