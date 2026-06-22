@@ -92,7 +92,7 @@ jobs:
       # Я.Метрика OFF на staging (operator decision 2026-05-02 — не загрязнять prod-данные)
       NEXT_PUBLIC_YANDEX_METRIKA_ID: ''
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.event.inputs.ref || github.ref }}
 
