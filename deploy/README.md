@@ -178,6 +178,22 @@ pm2 start 'pnpm start' --name obikhod --cwd /home/deploy/obikhod/current --updat
 pm2 save
 ```
 
+## Ручной деплой из SHA — `manual-deploy.sh` (с 2026-10-18)
+
+Прод переехал на новый VPS `89.111.141.79`; `deploy.yml` выключен (`gh workflow disable deploy.yml`),
+пока secrets `BEGET_SSH_*` указывают на старый сервер и workflow не симлинкает `shared/media`.
+До починки CI деплоим так:
+
+```bash
+deploy/manual-deploy.sh            # origin/main
+deploy/manual-deploy.sh <sha>      # конкретный коммит из origin/main
+```
+
+Код берётся через `git archive <sha> site` — рабочее дерево и незакоммиченные правки на прод не попадают.
+В релизе лежит `REVISION` с SHA. Если `/api/health/` после рестарта не 200 — скрипт сам возвращает `current`
+на предыдущий релиз. **Не деплоить rsync'ом рабочего дерева** (2026-10-18 так на прод уехали незакоммиченные
+правки, а `--exclude media` без `/` отрезал `components/admin/media/`).
+
 ## Ручной деплой — как запускать (пока нет auto-deploy на push main)
 
 1. GitHub → Actions → Deploy to Beget → Run workflow
