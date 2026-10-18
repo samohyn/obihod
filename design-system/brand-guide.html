@@ -462,7 +462,7 @@
   footer.site { padding: 36px 0 60px; color: var(--c-muted); font-family: var(--font-mono); font-size: 12px; }
   footer.site a { color: var(--c-ink-soft); }
 
-  /* Do / Dont matrix (§18) */
+  /* Do / Dont matrix */
   .dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
   @media (max-width: 768px) { .dodont { grid-template-columns: 1fr; } }
   .dodont .col { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 20px; }
@@ -475,116 +475,19 @@
   .dodont li { padding: 8px 0; border-bottom: 1px dashed var(--c-line); font-size: 14px; }
   .dodont li:last-child { border-bottom: none; }
   .dodont li .why { display: block; color: var(--c-muted); font-size: 12px; margin-top: 3px; }
-  /* Pills (§17, §18) */
+  /* Pills */
   .pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
   .pill { padding: 6px 12px; border-radius: 999px; font-size: 13px; background: var(--c-card); border: 1px solid var(--c-line); color: var(--c-ink-soft); font-family: var(--font-mono); }
   .pill.do   { border-color: var(--c-success); color: var(--c-success); background: rgba(74,124,89,0.06); }
   .pill.dont { border-color: var(--c-error); color: var(--c-error); background: rgba(181,72,40,0.06); text-decoration: line-through; text-decoration-color: var(--c-error); text-decoration-thickness: 1px; }
-  /* Voice samples (§19) */
-  .voice-sample { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 24px; margin: 16px 0; position: relative; }
-  .voice-sample::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--c-primary); border-radius: var(--radius) 0 0 var(--radius); }
-  .voice-sample .label { display: block; font-family: var(--font-mono); font-size: 11px; color: var(--c-muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; }
-  .voice-sample .body { font-size: 15px; line-height: 1.65; color: var(--c-ink); }
-  .voice-sample .body p:last-child { margin-bottom: 0; }
-  .voice-sample.muted::before { background: var(--c-muted); }
-  /* Callout (§15-§29) */
+  /* Callout */
   .callout { background: var(--c-bg-alt); border-left: 4px solid var(--c-accent); padding: 16px 20px; border-radius: var(--radius-sm); margin: 24px 0; font-size: 14px; }
   .callout strong { color: var(--c-accent-ink); }
-  /* Compact tables (§17, §22) */
+  /* Compact tables */
   .table-compact { font-size: 13px; }
   .table-compact th, .table-compact td { padding: 6px 8px; }
   .table-compact td.center, .table-compact th.center { text-align: center; }
-  /* Витрина: catalog filters + sort + grid (§20) */
-  .catalog-mock { display: grid; grid-template-columns: 280px 1fr; gap: 24px; margin-top: 16px; }
-  @media (max-width: 900px) { .catalog-mock { grid-template-columns: 1fr; } }
-  .filter-rail { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 18px; }
-  .filter-rail h4 { margin: 0 0 6px; font-size: 12px; font-family: var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-muted); }
-  .filter-rail .filter-group { padding: 14px 0; border-bottom: 1px solid var(--c-line); }
-  .filter-rail .filter-group:last-child { border-bottom: none; }
-  .filter-rail .filter-group > .title { display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 14px; margin-bottom: 10px; }
-  .filter-rail .opt { display: flex; align-items: center; gap: 10px; padding: 4px 0; font-size: 13.5px; color: var(--c-ink-soft); }
-  .filter-rail .opt input[type="checkbox"] { accent-color: var(--c-primary); width: 16px; height: 16px; flex: 0 0 16px; }
-  .filter-rail .opt .count { margin-left: auto; color: var(--c-muted); font-family: var(--font-mono); font-size: 12px; }
-  .price-slider { padding: 8px 0; }
-  .price-slider .track { position: relative; height: 4px; background: var(--c-bg-alt); border-radius: 999px; }
-  .price-slider .range { position: absolute; left: 18%; right: 32%; top: 0; bottom: 0; background: var(--c-primary); border-radius: 999px; }
-  .price-slider .handle { position: absolute; top: -6px; width: 16px; height: 16px; border-radius: 50%; background: var(--c-card); border: 2px solid var(--c-primary); }
-  .price-slider .inputs { display: flex; gap: 8px; margin-top: 14px; font-family: var(--font-mono); font-size: 12px; }
-  .price-slider .inputs span { flex: 1; padding: 6px 10px; background: var(--c-bg-alt); border-radius: var(--radius-sm); }
-  .filter-pill { display: inline-flex; gap: 6px; align-items: center; padding: 4px 10px; border-radius: 999px; background: var(--c-bg-alt); font-size: 12px; color: var(--c-ink-soft); font-family: var(--font-mono); }
-  .filter-pill .x { color: var(--c-muted); cursor: pointer; }
-  .toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 16px; padding: 12px 16px; background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); }
-  .toolbar .count { font-family: var(--font-mono); font-size: 13px; color: var(--c-muted); margin-right: auto; }
-  .toolbar select { padding: 6px 10px; border: 1px solid var(--c-line); border-radius: var(--radius-sm); background: var(--c-card); font-size: 13px; color: var(--c-ink); }
-  .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  @media (max-width: 1100px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 600px)  { .product-grid { grid-template-columns: 1fr; } }
-  /* Product card (§22) */
-  .product-card { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 14px; display: flex; flex-direction: column; position: relative; transition: border-color .15s ease, box-shadow .15s ease; }
-  .product-card:hover { border-color: var(--c-primary); box-shadow: 0 4px 12px -4px rgba(28,28,28,0.08); }
-  .product-card .photo { aspect-ratio: 4 / 5; background: linear-gradient(135deg, #d4d0c4 0%, #efebe0 100%); border-radius: var(--radius-sm); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; color: var(--c-muted); font-family: var(--font-mono); font-size: 11px; position: relative; overflow: hidden; }
-  .product-card .photo .wishlist { position: absolute; top: 8px; right: 8px; width: 32px; height: 32px; border-radius: 50%; background: rgba(247,245,240,0.92); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; cursor: pointer; }
-  .product-card .photo .badges { position: absolute; top: 8px; left: 8px; display: flex; flex-direction: column; gap: 4px; }
-  .product-card .title { font-size: 14.5px; font-weight: 600; line-height: 1.3; margin: 0 0 4px; color: var(--c-ink); }
-  .product-card .meta { font-size: 12px; color: var(--c-muted); font-family: var(--font-mono); margin-bottom: 8px; }
-  .product-card .specs { font-size: 12.5px; color: var(--c-ink-soft); margin-bottom: 10px; line-height: 1.45; }
-  .product-card .price-row { display: flex; align-items: baseline; gap: 8px; margin-top: auto; }
-  .product-card .price { font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .product-card .price-old { font-size: 13px; color: var(--c-muted); text-decoration: line-through; font-variant-numeric: tabular-nums; }
-  .product-card .stock { font-size: 12px; font-family: var(--font-mono); margin-top: 4px; }
-  .product-card .stock.in { color: var(--c-success); }
-  .product-card .stock.preorder { color: var(--c-accent-ink); }
-  .product-card .stock.out { color: var(--c-muted); }
-  .product-card .add-to-cart { margin-top: 10px; padding: 8px 12px; border: 1px solid var(--c-line); background: var(--c-card); border-radius: var(--radius-sm); font-size: 13px; font-weight: 500; cursor: pointer; transition: all .15s ease; color: var(--c-ink); }
-  .product-card .add-to-cart:hover { background: var(--c-primary); color: var(--c-on-primary); border-color: var(--c-primary); }
-  .product-card.preorder .add-to-cart { background: var(--c-card); color: var(--c-accent-ink); border-color: var(--c-accent); }
-  .badge-shop { display: inline-block; padding: 3px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
-  .badge-shop.new       { background: var(--c-primary); color: var(--c-on-primary); }
-  .badge-shop.sale      { background: var(--c-error); color: var(--c-on-primary); }
-  .badge-shop.preorder  { background: var(--c-accent); color: var(--c-ink); }
-  .badge-shop.season    { background: var(--c-bg-alt); color: var(--c-ink-soft); border: 1px solid var(--c-line); }
-  /* Search (§21) */
-  .search-mock { max-width: 720px; margin: 16px 0; }
-  .search-input { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); font-size: 15px; }
-  .search-input.focused { border-color: var(--c-primary); box-shadow: 0 0 0 3px rgba(45,90,61,0.12); }
-  .search-input svg { flex: 0 0 18px; color: var(--c-muted); }
-  .search-input input { flex: 1; border: none; outline: none; background: transparent; font-size: 15px; font-family: var(--font-sans); color: var(--c-ink); }
-  .search-input .kbd { font-family: var(--font-mono); font-size: 11px; color: var(--c-muted); padding: 2px 6px; border: 1px solid var(--c-line); border-radius: 4px; }
-  .search-dropdown { background: var(--c-card); border: 1px solid var(--c-line); border-top: none; border-radius: 0 0 var(--radius) var(--radius); padding: 12px 0; box-shadow: 0 12px 24px -8px rgba(28,28,28,0.12); }
-  .search-dropdown .section-label { padding: 8px 16px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-muted); }
-  .search-dropdown .item { display: flex; align-items: center; gap: 12px; padding: 8px 16px; cursor: pointer; }
-  .search-dropdown .item:hover, .search-dropdown .item.active { background: var(--c-bg-alt); }
-  .search-dropdown .item .thumb { width: 40px; height: 40px; flex: 0 0 40px; background: linear-gradient(135deg, #d4d0c4 0%, #efebe0 100%); border-radius: var(--radius-sm); }
-  .search-dropdown .item .info { flex: 1; min-width: 0; }
-  .search-dropdown .item .info b { font-size: 14px; display: block; }
-  .search-dropdown .item .info .meta { font-size: 12px; color: var(--c-muted); font-family: var(--font-mono); }
-  .search-dropdown .item .price { font-weight: 600; font-variant-numeric: tabular-nums; }
-  /* PDP (§22) */
-  .pdp-mock { display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; margin: 16px 0; }
-  @media (max-width: 900px) { .pdp-mock { grid-template-columns: 1fr; } }
-  .pdp-gallery { }
-  .pdp-gallery .main { aspect-ratio: 4 / 5; background: linear-gradient(135deg, #d4d0c4 0%, #efebe0 100%); border-radius: var(--radius); position: relative; display: flex; align-items: center; justify-content: center; color: var(--c-muted); font-family: var(--font-mono); font-size: 12px; }
-  .pdp-gallery .main .badges { position: absolute; top: 14px; left: 14px; display: flex; gap: 6px; }
-  .pdp-gallery .thumbs { display: flex; gap: 8px; margin-top: 10px; }
-  .pdp-gallery .thumbs .t { flex: 1; aspect-ratio: 1; background: var(--c-bg-alt); border-radius: var(--radius-sm); border: 2px solid transparent; }
-  .pdp-gallery .thumbs .t.active { border-color: var(--c-primary); }
-  .pdp-info h3.t { font-size: 24px; font-weight: 700; line-height: 1.25; margin: 0 0 6px; }
-  .pdp-info .breadcrumbs { font-size: 12px; color: var(--c-muted); font-family: var(--font-mono); margin-bottom: 8px; }
-  .pdp-info .meta-line { font-size: 13px; color: var(--c-muted); font-family: var(--font-mono); margin-bottom: 16px; }
-  .pdp-info .price-block { display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; }
-  .pdp-info .price-block .now { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .pdp-info .price-block .was { font-size: 16px; color: var(--c-muted); text-decoration: line-through; }
-  .pdp-info .price-note { font-size: 12px; color: var(--c-muted); margin-bottom: 16px; }
-  .pdp-info .variant-row { margin-bottom: 14px; }
-  .pdp-info .variant-row .label { font-size: 12px; font-family: var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 6px; }
-  .pdp-info .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-  .pdp-info .chip { padding: 7px 12px; border: 1px solid var(--c-line); border-radius: var(--radius-sm); font-size: 13px; cursor: pointer; background: var(--c-card); }
-  .pdp-info .chip.active { border-color: var(--c-primary); background: var(--c-bg-alt); color: var(--c-primary); }
-  .pdp-info .chip.disabled { opacity: 0.4; text-decoration: line-through; cursor: not-allowed; }
-  .pdp-info .ctas { display: flex; gap: 10px; margin: 18px 0 12px; }
-  .pdp-info .stock-line { font-size: 13px; font-family: var(--font-mono); color: var(--c-success); margin-bottom: 14px; }
-  .pdp-info .delivery-card { background: var(--c-bg-alt); border-radius: var(--radius); padding: 14px 16px; margin: 12px 0; font-size: 13px; }
-  .pdp-info .delivery-card b { display: block; margin-bottom: 4px; }
+  /* Accordion */
   .accordion { border-top: 1px solid var(--c-line); margin-top: 24px; }
   .accordion .item { border-bottom: 1px solid var(--c-line); }
   .accordion .item summary { padding: 16px 0; font-weight: 600; font-size: 15px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
@@ -592,32 +495,7 @@
   .accordion .item summary::after { content: '+'; font-weight: 400; font-size: 22px; color: var(--c-muted); }
   .accordion .item[open] summary::after { content: '−'; }
   .accordion .item .body { padding: 0 0 16px; font-size: 14px; line-height: 1.6; color: var(--c-ink-soft); }
-  /* Cart (§23) */
-  .cart-mock { display: grid; grid-template-columns: 1.6fr 1fr; gap: 24px; }
-  @media (max-width: 900px) { .cart-mock { grid-template-columns: 1fr; } }
-  .cart-list { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); }
-  .cart-line { display: grid; grid-template-columns: 80px 1fr auto auto; gap: 14px; padding: 16px; border-bottom: 1px solid var(--c-line); align-items: center; }
-  .cart-line:last-child { border-bottom: none; }
-  .cart-line .thumb { width: 80px; height: 80px; background: linear-gradient(135deg, #d4d0c4 0%, #efebe0 100%); border-radius: var(--radius-sm); }
-  .cart-line .body { min-width: 0; }
-  .cart-line .body b { display: block; font-size: 14px; line-height: 1.3; margin-bottom: 4px; }
-  .cart-line .body .meta { font-size: 12px; color: var(--c-muted); font-family: var(--font-mono); }
-  .cart-line .qty { display: inline-flex; align-items: center; gap: 0; border: 1px solid var(--c-line); border-radius: var(--radius-sm); }
-  .cart-line .qty button { width: 28px; height: 28px; background: var(--c-card); border: none; cursor: pointer; font-size: 16px; color: var(--c-ink); }
-  .cart-line .qty span { width: 36px; text-align: center; font-family: var(--font-mono); font-size: 13px; }
-  .cart-line .price { font-weight: 600; font-size: 15px; font-variant-numeric: tabular-nums; min-width: 90px; text-align: right; }
-  .cart-line .remove { width: 24px; height: 24px; color: var(--c-muted); cursor: pointer; background: none; border: none; }
-  .cart-summary { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 20px; height: fit-content; position: sticky; top: 80px; }
-  .cart-summary h4 { margin: 0 0 14px; font-size: 16px; }
-  .cart-summary .row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px; }
-  .cart-summary .row.total { font-size: 18px; font-weight: 700; border-top: 1px solid var(--c-line); padding-top: 12px; margin-top: 6px; }
-  .cart-summary .promo { display: flex; gap: 8px; margin: 12px 0; }
-  .cart-summary .promo input { flex: 1; padding: 8px 10px; border: 1px solid var(--c-line); border-radius: var(--radius-sm); font-size: 13px; }
-  .cart-summary .promo button { padding: 8px 14px; border: 1px solid var(--c-line); border-radius: var(--radius-sm); background: var(--c-card); cursor: pointer; font-size: 13px; }
-  /* Checkout (§24) */
-  .checkout-mock { display: grid; grid-template-columns: 1.6fr 1fr; gap: 24px; }
-  @media (max-width: 900px) { .checkout-mock { grid-template-columns: 1fr; } }
-  .step-list { display: flex; flex-direction: column; gap: 12px; }
+  /* Steps */
   .step { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 20px; }
   .step.active   { border-color: var(--c-primary); }
   .step.done     { border-color: var(--c-success); background: rgba(74,124,89,0.04); }
@@ -625,18 +503,7 @@
   .step .step-num { width: 24px; height: 24px; flex: 0 0 24px; border-radius: 50%; background: var(--c-bg-alt); color: var(--c-muted); display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-family: var(--font-mono); font-weight: 600; }
   .step.active .step-num { background: var(--c-primary); color: var(--c-on-primary); }
   .step.done   .step-num { background: var(--c-success); color: var(--c-on-primary); }
-  .step .step-edit { margin-left: auto; font-size: 12px; color: var(--c-primary); cursor: pointer; font-family: var(--font-mono); }
-  .delivery-options { display: flex; flex-direction: column; gap: 8px; }
-  .delivery-option { display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid var(--c-line); border-radius: var(--radius-sm); cursor: pointer; }
-  .delivery-option.active { border-color: var(--c-primary); background: var(--c-bg-alt); }
-  .delivery-option .radio { width: 18px; height: 18px; flex: 0 0 18px; border: 2px solid var(--c-line); border-radius: 50%; position: relative; }
-  .delivery-option.active .radio { border-color: var(--c-primary); }
-  .delivery-option.active .radio::after { content: ''; position: absolute; top: 3px; left: 3px; width: 8px; height: 8px; background: var(--c-primary); border-radius: 50%; }
-  .delivery-option .body { flex: 1; }
-  .delivery-option .body b { display: block; font-size: 14px; }
-  .delivery-option .body .meta { font-size: 12px; color: var(--c-muted); margin-top: 2px; }
-  .delivery-option .price { font-weight: 600; font-size: 14px; font-variant-numeric: tabular-nums; }
-  /* Form fields (§25) */
+  /* Form fields */
   .field { margin-bottom: 14px; }
   .field label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; color: var(--c-ink); }
   .field .help  { font-size: 12px; color: var(--c-muted); margin-top: 4px; }
@@ -647,105 +514,15 @@
   .field.error input:focus { box-shadow: 0 0 0 3px rgba(181,72,40,0.12); }
   .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (max-width: 600px) { .field-row { grid-template-columns: 1fr; } }
-  /* Account (§26) */
-  .order-row { display: grid; grid-template-columns: 100px 1fr auto auto; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--c-line); align-items: center; font-size: 14px; }
-  .order-row:last-child { border-bottom: none; }
-  .order-row .num { font-family: var(--font-mono); font-size: 13px; }
-  .order-status { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; padding: 3px 8px; border-radius: 999px; }
-  .order-status.pending   { background: rgba(230,162,60,0.14); color: var(--c-accent-ink); }
-  .order-status.shipping  { background: rgba(45,90,61,0.10); color: var(--c-primary); }
-  .order-status.delivered { background: rgba(74,124,89,0.12); color: var(--c-success); }
-  .order-status.cancelled { background: rgba(140,131,119,0.16); color: var(--c-muted); }
+  /* Timeline */
   .timeline { display: flex; flex-direction: column; gap: 0; margin: 14px 0; }
-  .timeline .step-tl { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 8px 0; }
-  .timeline .step-tl .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--c-line); margin: 6px 0 0 8px; position: relative; }
-  .timeline .step-tl .dot::after { content: ''; position: absolute; top: 12px; left: 5px; width: 2px; height: 22px; background: var(--c-line); }
-  .timeline .step-tl:last-child .dot::after { display: none; }
-  .timeline .step-tl.done .dot { background: var(--c-success); }
-  .timeline .step-tl.active .dot { background: var(--c-primary); box-shadow: 0 0 0 4px rgba(45,90,61,0.18); }
-  .timeline .step-tl b { font-size: 14px; }
-  .timeline .step-tl .when { font-size: 12px; color: var(--c-muted); font-family: var(--font-mono); }
-  /* States (§27) */
-  .state-card { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 32px; text-align: center; }
-  .state-card .ill { width: 96px; height: 96px; margin: 0 auto 16px; color: var(--c-muted); }
-  .state-card h4 { margin: 0 0 8px; font-size: 18px; }
-  .state-card p { font-size: 14px; color: var(--c-ink-soft); max-width: 360px; margin: 0 auto 16px; }
+  /* States */
   .skel { background: linear-gradient(90deg, var(--c-bg-alt) 0%, #f3eee3 50%, var(--c-bg-alt) 100%); background-size: 200% 100%; animation: skel 1.6s ease-in-out infinite; border-radius: var(--radius-sm); }
   @keyframes skel { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-  /* ═════════════════ ACCOUNT & AUTH · §30-§32 ═════════════════ */
-  /* Header user menu (§30) */
-  .header-mock { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 14px 18px; display: flex; align-items: center; gap: 16px; }
-  .header-mock .logo { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; }
-  .header-mock .logo .mark { width: 28px; height: 28px; border-radius: 6px; background: var(--c-primary); color: var(--c-on-primary); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; }
-  .header-mock .nav-stub { display: flex; gap: 4px; flex: 1; font-size: 13px; color: var(--c-ink-soft); }
-  .header-mock .nav-stub span { padding: 6px 10px; border-radius: 6px; }
-  .header-mock .right { display: flex; gap: 10px; align-items: center; }
-  .auth-cta { display: inline-flex; align-items: center; gap: 8px; }
-  .auth-cta .btn-login { padding: 7px 14px; border: 1px solid var(--c-line); border-radius: var(--radius-sm); font-size: 13px; font-weight: 500; background: var(--c-card); color: var(--c-ink); cursor: pointer; }
-  .auth-cta .btn-login:hover { border-color: var(--c-primary); color: var(--c-primary); }
-  .auth-cta .btn-register { padding: 7px 14px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 500; background: var(--c-primary); color: var(--c-on-primary); border: 1px solid var(--c-primary); cursor: pointer; }
-  .auth-cta .btn-register:hover { background: var(--c-primary-ink); }
-  .user-menu { position: relative; display: inline-block; }
-  .user-menu .trigger { display: inline-flex; align-items: center; gap: 10px; padding: 6px 10px 6px 6px; border: 1px solid var(--c-line); border-radius: 999px; background: var(--c-card); cursor: pointer; }
-  .user-menu .trigger:hover { background: var(--c-bg-alt); }
+  /* Avatar */
   .avatar { width: 32px; height: 32px; flex: 0 0 32px; border-radius: 50%; background: linear-gradient(135deg, var(--c-primary) 0%, var(--c-accent) 100%); color: var(--c-on-primary); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; }
-  .user-menu .name { font-size: 13.5px; font-weight: 500; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .user-menu .chev { width: 10px; height: 10px; opacity: 0.55; }
-  .user-menu .dropdown { position: absolute; right: 0; top: calc(100% + 8px); min-width: 280px; background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 8px; box-shadow: 0 12px 32px -12px rgba(28,28,28,0.18); z-index: 30; }
-  .user-menu .dropdown .header { padding: 10px 12px 12px; border-bottom: 1px solid var(--c-line); margin-bottom: 6px; }
-  .user-menu .dropdown .header b { display: block; font-size: 14px; }
-  .user-menu .dropdown .header .meta { font-size: 12px; color: var(--c-muted); font-family: var(--font-mono); }
-  .user-menu .dropdown a { display: flex; gap: 10px; align-items: center; padding: 9px 12px; border-radius: 6px; color: var(--c-ink-soft); font-size: 14px; text-decoration: none; }
-  .user-menu .dropdown a:hover { background: var(--c-bg-alt); color: var(--c-primary); text-decoration: none; }
-  .user-menu .dropdown a .ic { width: 18px; height: 18px; flex: 0 0 18px; opacity: 0.65; }
-  .user-menu .dropdown a .badge-mini { margin-left: auto; padding: 2px 7px; border-radius: 999px; background: var(--c-primary); color: var(--c-on-primary); font-size: 11px; font-family: var(--font-mono); font-weight: 600; }
-  .user-menu .dropdown hr { margin: 6px 4px; border: none; border-top: 1px solid var(--c-line); }
-  .user-menu .dropdown a.danger { color: var(--c-error); }
-  .guest-pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; background: rgba(45,90,61,0.08); border: 1px solid var(--c-primary); border-radius: 999px; font-size: 12px; font-family: var(--font-mono); color: var(--c-primary); cursor: pointer; }
-  .guest-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c-primary); }
 
-  /* Auth screens (§31) */
-  .auth-card { max-width: 440px; margin: 16px auto; background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 32px; }
-  .auth-card .logo-row { display: flex; justify-content: center; margin-bottom: 24px; }
-  .auth-card .logo-row .mark { width: 48px; height: 48px; border-radius: 10px; background: var(--c-primary); color: var(--c-on-primary); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 24px; }
-  .auth-card h3.t { font-size: 22px; font-weight: 700; margin: 0 0 6px; text-align: center; }
-  .auth-card .lead-text { font-size: 14px; color: var(--c-muted); text-align: center; margin: 0 0 24px; }
-  .auth-tabs { display: flex; background: var(--c-bg-alt); border-radius: var(--radius-sm); padding: 4px; margin-bottom: 20px; }
-  .auth-tabs button { flex: 1; padding: 8px 12px; border: none; background: transparent; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--c-muted); cursor: pointer; font-family: var(--font-sans); }
-  .auth-tabs button.active { background: var(--c-card); color: var(--c-ink); box-shadow: 0 1px 3px rgba(28,28,28,0.08); }
-  .auth-method-tabs { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
-  .auth-method-tabs button { padding: 6px 12px; border-radius: var(--radius-sm); border: 1px solid var(--c-line); background: var(--c-card); font-size: 12px; cursor: pointer; color: var(--c-ink-soft); font-family: var(--font-sans); }
-  .auth-method-tabs button.active { border-color: var(--c-primary); background: var(--c-bg-alt); color: var(--c-primary); }
-  .otp-input { display: flex; gap: 8px; justify-content: center; margin: 8px 0; }
-  .otp-input input { width: 44px; height: 52px; text-align: center; font-family: var(--font-mono); font-size: 22px; font-weight: 600; border: 1px solid var(--c-line); border-radius: var(--radius-sm); background: var(--c-card); }
-  .otp-input input.filled { border-color: var(--c-primary); background: var(--c-bg-alt); color: var(--c-primary); }
-  .otp-input input.error { border-color: var(--c-error); }
-  .otp-input input:focus { outline: none; border-color: var(--c-primary); box-shadow: 0 0 0 3px rgba(45,90,61,0.12); }
-  .otp-resend { text-align: center; font-size: 12px; color: var(--c-muted); margin: 8px 0 16px; }
-  .otp-resend a { color: var(--c-primary); }
-  .consent-row { display: flex; gap: 10px; padding: 12px; background: var(--c-bg-alt); border-radius: var(--radius-sm); font-size: 12px; color: var(--c-ink-soft); margin: 14px 0; line-height: 1.55; }
-  .consent-row input[type="checkbox"] { width: 16px; height: 16px; flex: 0 0 16px; margin-top: 2px; accent-color: var(--c-primary); }
-  .auth-divider { display: flex; align-items: center; gap: 12px; margin: 18px 0; color: var(--c-muted); font-size: 12px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; }
-  .auth-divider::before, .auth-divider::after { content: ''; flex: 1; height: 1px; background: var(--c-line); }
-  .auth-foot { text-align: center; margin-top: 18px; font-size: 13px; color: var(--c-muted); }
-  .auth-foot a { color: var(--c-primary); }
-  .biz-toggle { display: flex; gap: 10px; padding: 12px; background: var(--c-bg-alt); border-radius: var(--radius-sm); font-size: 13px; margin-bottom: 16px; align-items: center; }
-  .biz-toggle input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--c-primary); flex: 0 0 16px; }
-
-  /* Cabinet shell (§32) */
-  .cabinet-shell { display: grid; grid-template-columns: 240px 1fr; gap: 24px; margin: 16px 0; }
-  @media (max-width: 900px) { .cabinet-shell { grid-template-columns: 1fr; } }
-  .cabinet-sidebar { background: var(--c-card); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 14px 8px; height: fit-content; position: sticky; top: 80px; }
-  .cabinet-sidebar .user-block { padding: 10px 12px 14px; border-bottom: 1px solid var(--c-line); margin-bottom: 6px; display: flex; gap: 10px; align-items: center; }
-  .cabinet-sidebar .user-block .info b { display: block; font-size: 14px; }
-  .cabinet-sidebar .user-block .info .meta { font-size: 11px; color: var(--c-muted); font-family: var(--font-mono); }
-  .cabinet-sidebar nav a { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: var(--radius-sm); font-size: 14px; color: var(--c-ink-soft); text-decoration: none; }
-  .cabinet-sidebar nav a:hover { background: var(--c-bg-alt); color: var(--c-primary); text-decoration: none; }
-  .cabinet-sidebar nav a.active { background: var(--c-bg-alt); color: var(--c-primary); font-weight: 500; }
-  .cabinet-sidebar nav a .ic { width: 18px; height: 18px; flex: 0 0 18px; opacity: 0.7; }
-  .cabinet-sidebar nav a .ct { margin-left: auto; padding: 1px 8px; border-radius: 999px; background: var(--c-bg-alt); color: var(--c-muted); font-size: 11px; font-family: var(--font-mono); font-weight: 600; }
-  .cabinet-sidebar nav a.active .ct { background: var(--c-primary); color: var(--c-on-primary); }
-  .cabinet-sidebar nav .group-label { padding: 12px 12px 4px; font-size: 11px; font-family: var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-muted); }
+  /* Stat tiles + lead status badges (§32) */
 
   .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
   @media (max-width: 1100px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -755,11 +532,6 @@
   .stat-tile .delta { font-size: 12px; color: var(--c-muted); margin-top: 4px; font-family: var(--font-mono); }
   .stat-tile.accent { background: linear-gradient(135deg, var(--c-bg-alt) 0%, var(--c-card) 100%); border-color: var(--c-primary); }
 
-  .lead-row { display: grid; grid-template-columns: 110px 1fr auto auto; gap: 14px; padding: 14px 16px; border-bottom: 1px solid var(--c-line); align-items: center; font-size: 14px; }
-  .lead-row:last-child { border-bottom: none; }
-  .lead-row .num { font-family: var(--font-mono); font-size: 12.5px; }
-  .lead-row .body b { display: block; font-size: 14px; line-height: 1.3; margin-bottom: 4px; }
-  .lead-row .body .meta { font-size: 12px; color: var(--c-muted); font-family: var(--font-mono); }
   .lead-status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-family: var(--font-mono); font-size: 11px; font-weight: 600; }
   .lead-status-badge.new       { background: rgba(45,90,61,0.10); color: var(--c-primary); }
   .lead-status-badge.contacted { background: rgba(230,162,60,0.14); color: var(--c-accent-ink); }
@@ -767,29 +539,6 @@
   .lead-status-badge.brigade   { background: rgba(45,90,61,0.18); color: var(--c-primary); }
   .lead-status-badge.done      { background: rgba(74,124,89,0.20); color: var(--c-success); }
   .lead-status-badge.cancelled { background: rgba(140,131,119,0.16); color: var(--c-muted); }
-
-  .timeline-svc { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin: 16px 0; }
-  .timeline-svc .seg { padding: 12px 10px 10px; background: var(--c-bg-alt); border-radius: var(--radius-sm); position: relative; opacity: 0.5; }
-  .timeline-svc .seg.done { opacity: 1; background: rgba(74,124,89,0.12); }
-  .timeline-svc .seg.active { opacity: 1; background: rgba(45,90,61,0.14); border: 1px solid var(--c-primary); }
-  .timeline-svc .seg .num { font-family: var(--font-mono); font-size: 10.5px; color: var(--c-muted); letter-spacing: 0.04em; text-transform: uppercase; }
-  .timeline-svc .seg .ttl { font-size: 13px; font-weight: 600; margin-top: 4px; line-height: 1.25; }
-  .timeline-svc .seg .when { font-size: 11px; color: var(--c-muted); font-family: var(--font-mono); margin-top: 4px; }
-  .timeline-svc .seg.done .num { color: var(--c-success); }
-  .timeline-svc .seg.active .num { color: var(--c-primary); }
-  @media (max-width: 700px) { .timeline-svc { grid-template-columns: 1fr; } }
-
-  /* Activity feed (§32 dashboard) */
-  .activity-feed { display: flex; flex-direction: column; }
-  .activity-row { display: grid; grid-template-columns: 32px 1fr auto; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--c-line); align-items: start; font-size: 13.5px; }
-  .activity-row:last-child { border-bottom: none; }
-  .activity-row .dot { width: 10px; height: 10px; border-radius: 50%; margin: 5px auto 0; }
-  .activity-row .dot.svc   { background: var(--c-primary); }
-  .activity-row .dot.shop  { background: var(--c-accent); }
-  .activity-row .dot.sys   { background: var(--c-muted); }
-  .activity-row .when { font-size: 12px; color: var(--c-muted); font-family: var(--font-mono); white-space: nowrap; }
-  .activity-row .body b { display: block; font-size: 13.5px; }
-  .activity-row .body .meta { font-size: 12px; color: var(--c-muted); margin-top: 2px; }
 
   /* ═════════════════ SITE CHROME · §33 ═════════════════ */
   .chrome-mock { background: var(--c-bg); border: 1px solid var(--c-line); border-radius: var(--radius); padding: 0; overflow: hidden; margin: 16px 0; }
@@ -2126,14 +1875,12 @@
         <li>
           <details class="gh-group">
             <summary aria-haspopup="menu">
-              Аккаунт
+              Заявки и chrome
               <svg class="gh-chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 L5 7 L8.5 3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </summary>
             <div class="gh-panel" role="menu">
               <ul>
-                <li><a role="menuitem" href="#auth-header"><span class="gh-num">30</span>Header · вход</a></li>
-                <li><a role="menuitem" href="#auth-screens"><span class="gh-num">31</span>Auth-экраны</a></li>
-                <li><a role="menuitem" href="#cabinet"><span class="gh-num">32</span>Личный кабинет</a></li>
+                <li><a role="menuitem" href="#lead-status"><span class="gh-num">32</span>Статусы заявки</a></li>
                 <li><a role="menuitem" href="#site-chrome"><span class="gh-num">33</span>Header + Footer · canonical</a></li>
               </ul>
             </div>
@@ -2145,7 +1892,7 @@
       </ul>
     </nav>
 
-    <a class="gh-version" href="#todo" title="Версия документа">v2.6</a>
+    <a class="gh-version" href="#todo" title="Версия документа">v2.7</a>
 
     <label for="gh-burger" class="gh-burger-label" aria-label="Открыть меню" role="button" tabindex="0">
       <span class="gh-burger-icon"><span></span></span>
@@ -2548,8 +2295,8 @@
 <section id="icons">
   <div class="wrap">
     <div class="eyebrow">08 · Иконография</div>
-    <h2>Иконография · 49 line-art glyph'ов</h2>
-    <p class="lead">Domain-специфичные иконки Обихода в эстетике Круга сезонов. Все четыре линейки делят одну спеку (<code>viewBox 0 0 24 24</code>, <code>stroke 1.5</code>, <code>currentColor</code>, <code>round</code> caps/joins, <code>fill: none</code> кроме мелких акцентов): <strong>Service · 22 v0.9</strong> (4 кластера услуг + УТП), <strong>Shop · 9 v0.1</strong> (категории каталога Магазина, 2026-04-27), <strong>District · 9 v0.9</strong> (8 районов МО + Москва, landmark-метафоры), <strong>Case · 9 v0.9</strong> (тематики кейсов). Реестр service-иконок — <a href="icons/services/README.md"><code>icons/services/README.md</code></a> и <a href="icons/services/ServiceIcons.tsx"><code>ServiceIcons.tsx</code></a>. Shop / District / Case — задокументированы ниже на этой странице, экспорт в <code>site/components/icons/{shop,districts,cases}/</code> — задача <code>ui</code>+<code>fe1</code> по <a href="../devteam/specs/US-11-ia-extension/art-brief-ui.md"><code>art-brief-ui.md</code></a>.</p>
+    <h2>Иконография · 40 line-art glyph'ов</h2>
+    <p class="lead">Domain-специфичные иконки Обихода в эстетике Круга сезонов. Все три линейки делят одну спеку (<code>viewBox 0 0 24 24</code>, <code>stroke 1.5</code>, <code>currentColor</code>, <code>round</code> caps/joins, <code>fill: none</code> кроме мелких акцентов): <strong>Service · 22 v0.9</strong> (4 кластера услуг + УТП), <strong>District · 9 v0.9</strong> (8 районов МО + Москва, landmark-метафоры), <strong>Case · 9 v0.9</strong> (тематики кейсов). Реестр service-иконок — <a href="icons/services/README.md"><code>icons/services/README.md</code></a> и <a href="icons/services/ServiceIcons.tsx"><code>ServiceIcons.tsx</code></a>. District / Case — задокументированы ниже на этой странице, экспорт в <code>site/components/icons/{districts,cases}/</code> — задача <code>ui</code>+<code>fe1</code> по <a href="../devteam/specs/US-11-ia-extension/art-brief-ui.md"><code>art-brief-ui.md</code></a>.</p>
 
     <div class="card" style="padding: 24px; background: var(--c-card); margin-top: 24px;">
       <img src="icons/services/_sheet.png" alt="Визуальный реестр 16 service-иконок Обихода — спил, валка, корчевание, обрезка, каблинг, опрыскивание, снег с крыши, водостоки, альпинизм, автовышка, вывоз мусора, демонтаж, измельчение, фикс-цена, отклик 10 минут, штрафы на нас" style="width: 100%; height: auto; display: block; border-radius: var(--radius); border: 1px solid var(--c-line);" />
@@ -2578,78 +2325,8 @@
 
     <p class="muted" style="margin-top: 24px; font-size: 13px;">Приоритет использования: brand-glyphs из Круга сезонов → service-иконки (этот раздел) → <code>lucide-react</code> для общих UI (phone, message, chevron) → custom только по согласованию с art. Полный foundation — <a href="foundations/icons.md"><code>design-system/foundations/icons.md</code></a>.</p>
 
-    <h3 style="margin-top: 48px;">Shop Icons · 9 иконок v0.1 <span class="badge badge-live" style="font-weight: 500;">preliminary 2026-04-27</span></h3>
-    <p class="lead">Иконки категорий каталога Магазина (саженцы и товары для сада). Расширение IA по запросу оператора 2026-04-27 — 6-е направление. Стиль идентичен service-иконкам: <code>viewBox 0 0 24 24</code>, <code>stroke 1.5</code>, <code>currentColor</code>, <code>round</code> caps/joins, <code>fill: none</code> кроме мелких акцентов (плоды, ягоды, шишки) — заливка <code>currentColor</code>. Рендерятся в mega-menu Магазина как <code>mm-icon</code> 20×20.</p>
-
-    <div class="grid-3" style="margin-top: 24px; gap: 16px;">
-      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
-        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M12 15 L12 21"/><path d="M9 21 L15 21"/><circle cx="9.5" cy="8" r="1.1" fill="currentColor"/><circle cx="14" cy="10" r="1.1" fill="currentColor"/><circle cx="11" cy="12" r="1.1" fill="currentColor"/></svg>
-        </span>
-        <div><b>Плодовые деревья</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>fruit-tree</code> · крона + плоды</div></div>
-      </div>
-
-      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
-        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 C 8.5 3, 8.5 16, 12 16 C 15.5 16, 15.5 3, 12 3 Z"/><path d="M12 16 L12 21"/><path d="M9.5 21 L14.5 21"/><circle cx="11" cy="9" r="0.9" fill="currentColor"/><circle cx="13" cy="12" r="0.9" fill="currentColor"/></svg>
-        </span>
-        <div><b>Колоновидные деревья</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>columnar-tree</code> · узкая высокая крона</div></div>
-      </div>
-
-      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
-        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18 C 3 13, 7 12, 8 14 C 8.5 11.5, 15.5 11.5, 16 14 C 17 12, 21 13, 21 18"/><path d="M2 21 L22 21"/><circle cx="7" cy="15" r="1" fill="currentColor"/><circle cx="12" cy="14" r="1" fill="currentColor"/><circle cx="17" cy="15" r="1" fill="currentColor"/></svg>
-        </span>
-        <div><b>Плодовые кустарники</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>fruit-bush</code> · 3 кустика + ягоды</div></div>
-      </div>
-
-      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
-        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="6"/><path d="M6 11 C 9 9, 15 9, 18 11" stroke-dasharray="2 1.5"/><path d="M6 13 C 9 15, 15 15, 18 13" stroke-dasharray="2 1.5"/><path d="M12 17 L12 21"/><path d="M9.5 21 L14.5 21"/></svg>
-        </span>
-        <div><b>Декоративные кустарники</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>decor-bush</code> · топиари-сфера</div></div>
-      </div>
-
-      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
-        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="1.6"/><circle cx="15.5" cy="8.5" r="1.6"/><circle cx="14" cy="11.5" r="1.6"/><circle cx="10" cy="11.5" r="1.6"/><circle cx="8.5" cy="8.5" r="1.6"/><circle cx="12" cy="9" r="0.9" fill="currentColor"/><path d="M12 13 L12 21"/><path d="M9 21 L15 21"/><path d="M12 17 C 10 16.5, 8.5 17.5, 9 19"/></svg>
-        </span>
-        <div><b>Цветы</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>flowers</code> · ромашка 5 лепестков</div></div>
-      </div>
-
-      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
-        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M12 4 C 14 5, 14 9, 12 10"/><path d="M9.5 7 C 10.5 6.5, 13 7, 13.5 8.5"/><path d="M12 11 L12 21"/><path d="M9.5 21 L14.5 21"/><path d="M12 14 C 14 13, 16 14, 15 16"/><path d="M12 17 L10.5 16.5"/><path d="M12 19 L13.5 18.5"/></svg>
-        </span>
-        <div><b>Розы</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>roses</code> · бутон спираль + шипы</div></div>
-      </div>
-
-      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
-        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 C 3 4, 9 2, 12 2 C 15 2, 21 4, 21 11"/><path d="M5 14 C 5 9, 12 8, 19 14"/><path d="M12 11 L12 21"/><path d="M9 21 L15 21"/><path d="M3 21 L3 5"/><path d="M2 6 L3 5 L4 6"/><path d="M2 20 L3 21 L4 20"/></svg>
-        </span>
-        <div><b>Крупномеры</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>large-trees</code> · взрослое дерево + размер</div></div>
-      </div>
-
-      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
-        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="9" r="3"/><circle cx="12" cy="6.5" r="3.2"/><circle cx="17" cy="9" r="3"/><path d="M12 12 L12 21"/><path d="M9 21 L15 21"/></svg>
-        </span>
-        <div><b>Лиственные деревья</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>deciduous-tree</code> · 3 облака-крона</div></div>
-      </div>
-
-      <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
-        <span style="display: inline-flex; flex: 0 0 48px; width: 48px; height: 48px; align-items: center; justify-content: center; background: var(--c-bg-alt); border-radius: var(--radius); color: var(--c-primary);">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L8 9 L10 9 L7 13 L9 13 L6 17 L18 17 L15 13 L17 13 L14 9 L16 9 Z"/><path d="M12 17 L12 21"/><path d="M10 21 L14 21"/><circle cx="9" cy="14" r="0.6" fill="currentColor"/><circle cx="14" cy="11" r="0.6" fill="currentColor"/></svg>
-        </span>
-        <div><b>Хвойные деревья</b><div class="muted" style="font-size: 12px; margin-top: 2px;"><code>coniferous-tree</code> · ёлка + шишки</div></div>
-      </div>
-    </div>
-
-    <p class="muted" style="margin-top: 16px; font-size: 13px;">Каталог категорий — preliminary, утверждается с <code>ba</code>+<code>po</code> отдельным US (артикулы и SKU придут в Payload коллекцию <code>Products</code>). Иконки экспортируются в <code>site/components/icons/shop/</code> аналогично <code>services/</code> по <code>art-brief</code> для <code>ui</code>+<code>fe1</code>.</p>
-
     <h3 style="margin-top: 48px;">District Icons · 9 иконок v0.9 <span class="badge badge-live" style="font-weight: 500;">2026-04-25 · landmark-метафоры</span></h3>
-    <p class="lead">Иконки 8 пилотных районов МО + Москвы. Каждая — географическая landmark-метафора (узел шоссе, холм, монастырь, самолёт, башня, ёлка с рельсами, мост, самолёт-памятник, компас). Используются в mega-menu «Районы», mobile accordion, DistrictCard на programmatic SEO LP. Та же спека что service- и shop-иконок: <code>viewBox 0 0 24 24</code>, <code>stroke 1.5</code>, <code>currentColor</code>, <code>round</code> caps/joins. <strong>Техдолг v1.6:</strong> сейчас живут только как inline SVG в этом файле и в <code>Header.tsx</code> — вынос в <code>site/components/icons/districts/</code> поручён <code>ui</code>+<code>fe1</code> через <a href="../devteam/specs/US-11-ia-extension/art-brief-ui.md"><code>art-brief-ui.md</code></a> (US-11, задача 3).</p>
+    <p class="lead">Иконки 8 пилотных районов МО + Москвы. Каждая — географическая landmark-метафора (узел шоссе, холм, монастырь, самолёт, башня, ёлка с рельсами, мост, самолёт-памятник, компас). Используются в mega-menu «Районы», mobile accordion, DistrictCard на programmatic SEO LP. Та же спека что service-иконок: <code>viewBox 0 0 24 24</code>, <code>stroke 1.5</code>, <code>currentColor</code>, <code>round</code> caps/joins. <strong>Техдолг v1.6:</strong> сейчас живут только как inline SVG в этом файле и в <code>Header.tsx</code> — вынос в <code>site/components/icons/districts/</code> поручён <code>ui</code>+<code>fe1</code> через <a href="../devteam/specs/US-11-ia-extension/art-brief-ui.md"><code>art-brief-ui.md</code></a> (US-11, задача 3).</p>
 
     <div class="grid-3" style="margin-top: 24px; gap: 16px;">
       <div class="card" style="display: flex; align-items: center; gap: 16px; padding: 16px;">
@@ -2786,7 +2463,7 @@
       </div>
     </div>
 
-    <p class="muted" style="margin-top: 16px; font-size: 13px;">Полный комплект иконографики Обихода теперь виден здесь одним местом: <strong>22 service · 9 shop · 9 district · 9 case · 5 error illustrations</strong> = 54 line-art glyph'a в едином стиле. Все из них — domain-специфичные, ни одной stock-иконки. Это и есть «окно возможностей» из <a href="../contex/04_competitor_tech_stacks.md"><code>04_competitor_tech_stacks.md</code></a> — у конкурентов на WP/Bitrix дефолтные FontAwesome или эмодзи.</p>
+    <p class="muted" style="margin-top: 16px; font-size: 13px;">Полный комплект иконографики Обихода теперь виден здесь одним местом: <strong>22 service · 9 district · 9 case · 5 error illustrations</strong> = 45 line-art glyph'ов в едином стиле. Все из них — domain-специфичные, ни одной stock-иконки. Это и есть «окно возможностей» из <a href="../contex/04_competitor_tech_stacks.md"><code>04_competitor_tech_stacks.md</code></a> — у конкурентов на WP/Bitrix дефолтные FontAwesome или эмодзи.</p>
   </div>
 </section>
 
@@ -3197,50 +2874,6 @@
             </div>
           </div>
 
-          <div class="mm-has-drop">
-            <button class="mm-trigger" type="button" aria-haspopup="true">Магазин <span class="mm-chevron">▼</span></button>
-            <div class="mm-panel" role="menu">
-              <div class="mm-panel-cols">
-
-                <div class="mm-col">
-                  <h4>Деревья</h4>
-                  <ul>
-                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M12 15 L12 21"/><path d="M9 21 L15 21"/><circle cx="9.5" cy="8" r="1.1" fill="currentColor"/><circle cx="14" cy="10" r="1.1" fill="currentColor"/><circle cx="11" cy="12" r="1.1" fill="currentColor"/></svg>Плодовые деревья<span class="mm-arrow">→</span></a></li>
-                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 C 8.5 3, 8.5 16, 12 16 C 15.5 16, 15.5 3, 12 3 Z"/><path d="M12 16 L12 21"/><path d="M9.5 21 L14.5 21"/><circle cx="11" cy="9" r="0.9" fill="currentColor"/><circle cx="13" cy="12" r="0.9" fill="currentColor"/></svg>Колоновидные<span class="mm-arrow">→</span></a></li>
-                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="9" r="3"/><circle cx="12" cy="6.5" r="3.2"/><circle cx="17" cy="9" r="3"/><path d="M12 12 L12 21"/><path d="M9 21 L15 21"/></svg>Лиственные<span class="mm-arrow">→</span></a></li>
-                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L8 9 L10 9 L7 13 L9 13 L6 17 L18 17 L15 13 L17 13 L14 9 L16 9 Z"/><path d="M12 17 L12 21"/><path d="M10 21 L14 21"/><circle cx="9" cy="14" r="0.6" fill="currentColor"/><circle cx="14" cy="11" r="0.6" fill="currentColor"/></svg>Хвойные<span class="mm-arrow">→</span></a></li>
-                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 C 3 4, 9 2, 12 2 C 15 2, 21 4, 21 11"/><path d="M5 14 C 5 9, 12 8, 19 14"/><path d="M12 11 L12 21"/><path d="M9 21 L15 21"/><path d="M3 21 L3 5"/><path d="M2 6 L3 5 L4 6"/><path d="M2 20 L3 21 L4 20"/></svg>Крупномеры<span class="mm-arrow">→</span></a></li>
-                  </ul>
-                  <a href="#" class="mm-all">Все деревья →</a>
-                </div>
-
-                <div class="mm-col">
-                  <h4>Кустарники</h4>
-                  <ul>
-                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18 C 3 13, 7 12, 8 14 C 8.5 11.5, 15.5 11.5, 16 14 C 17 12, 21 13, 21 18"/><path d="M2 21 L22 21"/><circle cx="7" cy="15" r="1" fill="currentColor"/><circle cx="12" cy="14" r="1" fill="currentColor"/><circle cx="17" cy="15" r="1" fill="currentColor"/></svg>Плодовые кустарники<span class="mm-arrow">→</span></a></li>
-                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="6"/><path d="M6 11 C 9 9, 15 9, 18 11" stroke-dasharray="2 1.5"/><path d="M6 13 C 9 15, 15 15, 18 13" stroke-dasharray="2 1.5"/><path d="M12 17 L12 21"/><path d="M9.5 21 L14.5 21"/></svg>Декоративные кустарники<span class="mm-arrow">→</span></a></li>
-                  </ul>
-                  <a href="#" class="mm-all">Все кустарники →</a>
-                </div>
-
-                <div class="mm-col">
-                  <h4>Цветы</h4>
-                  <ul>
-                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="1.6"/><circle cx="15.5" cy="8.5" r="1.6"/><circle cx="14" cy="11.5" r="1.6"/><circle cx="10" cy="11.5" r="1.6"/><circle cx="8.5" cy="8.5" r="1.6"/><circle cx="12" cy="9" r="0.9" fill="currentColor"/><path d="M12 13 L12 21"/><path d="M9 21 L15 21"/><path d="M12 17 C 10 16.5, 8.5 17.5, 9 19"/></svg>Цветы<span class="mm-arrow">→</span></a></li>
-                    <li><a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M12 4 C 14 5, 14 9, 12 10"/><path d="M9.5 7 C 10.5 6.5, 13 7, 13.5 8.5"/><path d="M12 11 L12 21"/><path d="M9.5 21 L14.5 21"/><path d="M12 14 C 14 13, 16 14, 15 16"/><path d="M12 17 L10.5 16.5"/><path d="M12 19 L13.5 18.5"/></svg>Розы<span class="mm-arrow">→</span></a></li>
-                  </ul>
-                  <a href="#" class="mm-all">Весь каталог цветов →</a>
-                </div>
-              </div>
-
-              <div class="mm-featured">
-                <strong>Сезон посадки 2026</strong>
-                <span class="muted" style="font-size: 13px;">доставка по МО · посадка с гарантией приживаемости <span class="mm-price">1 год</span> · смета за день</span>
-                <a href="#" class="mm-btn">В каталог</a>
-              </div>
-            </div>
-          </div>
-
           <a class="mm-trigger" href="#">Дизайн ландшафта</a>
           <a class="mm-trigger" href="#">Цены</a>
           <a class="mm-trigger" href="#">Блог</a>
@@ -3295,20 +2928,6 @@
           <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3 L9 12 L13 12 L8 21"/></svg>Спил после бури</a>
           <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="2.2"/><circle cx="6" cy="13" r="2.2"/><line x1="8" y1="9" x2="20" y2="6"/><line x1="8" y1="11" x2="14" y2="11"/></svg>Санобрезка сада</a>
           <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21 L4 6 L13 6 L13 21"/><path d="M13 21 L13 10 L20 10 L20 21"/><path d="M3 21 L21 21"/></svg>Контракт УК</a>
-        </div>
-      </details>
-      <details>
-        <summary>Магазин</summary>
-        <div class="mm-mobile-items">
-          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M12 15 L12 21"/><path d="M9 21 L15 21"/><circle cx="9.5" cy="8" r="1.1" fill="currentColor"/><circle cx="14" cy="10" r="1.1" fill="currentColor"/><circle cx="11" cy="12" r="1.1" fill="currentColor"/></svg>Плодовые деревья</a>
-          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 C 8.5 3, 8.5 16, 12 16 C 15.5 16, 15.5 3, 12 3 Z"/><path d="M12 16 L12 21"/><path d="M9.5 21 L14.5 21"/><circle cx="11" cy="9" r="0.9" fill="currentColor"/><circle cx="13" cy="12" r="0.9" fill="currentColor"/></svg>Колоновидные деревья</a>
-          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="9" r="3"/><circle cx="12" cy="6.5" r="3.2"/><circle cx="17" cy="9" r="3"/><path d="M12 12 L12 21"/><path d="M9 21 L15 21"/></svg>Лиственные деревья</a>
-          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L8 9 L10 9 L7 13 L9 13 L6 17 L18 17 L15 13 L17 13 L14 9 L16 9 Z"/><path d="M12 17 L12 21"/><path d="M10 21 L14 21"/><circle cx="9" cy="14" r="0.6" fill="currentColor"/><circle cx="14" cy="11" r="0.6" fill="currentColor"/></svg>Хвойные деревья</a>
-          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 C 3 4, 9 2, 12 2 C 15 2, 21 4, 21 11"/><path d="M5 14 C 5 9, 12 8, 19 14"/><path d="M12 11 L12 21"/><path d="M9 21 L15 21"/><path d="M3 21 L3 5"/><path d="M2 6 L3 5 L4 6"/><path d="M2 20 L3 21 L4 20"/></svg>Крупномеры</a>
-          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18 C 3 13, 7 12, 8 14 C 8.5 11.5, 15.5 11.5, 16 14 C 17 12, 21 13, 21 18"/><path d="M2 21 L22 21"/><circle cx="7" cy="15" r="1" fill="currentColor"/><circle cx="12" cy="14" r="1" fill="currentColor"/><circle cx="17" cy="15" r="1" fill="currentColor"/></svg>Плодовые кустарники</a>
-          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="6"/><path d="M6 11 C 9 9, 15 9, 18 11" stroke-dasharray="2 1.5"/><path d="M6 13 C 9 15, 15 15, 18 13" stroke-dasharray="2 1.5"/><path d="M12 17 L12 21"/><path d="M9.5 21 L14.5 21"/></svg>Декоративные кустарники</a>
-          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="1.6"/><circle cx="15.5" cy="8.5" r="1.6"/><circle cx="14" cy="11.5" r="1.6"/><circle cx="10" cy="11.5" r="1.6"/><circle cx="8.5" cy="8.5" r="1.6"/><circle cx="12" cy="9" r="0.9" fill="currentColor"/><path d="M12 13 L12 21"/><path d="M9 21 L15 21"/><path d="M12 17 C 10 16.5, 8.5 17.5, 9 19"/></svg>Цветы</a>
-          <a href="#"><svg class="mm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M12 4 C 14 5, 14 9, 12 10"/><path d="M9.5 7 C 10.5 6.5, 13 7, 13.5 8.5"/><path d="M12 11 L12 21"/><path d="M9.5 21 L14.5 21"/><path d="M12 14 C 14 13, 16 14, 15 16"/><path d="M12 17 L10.5 16.5"/><path d="M12 19 L13.5 18.5"/></svg>Розы</a>
         </div>
       </details>
       <details>
@@ -6493,552 +6112,15 @@ T4 SD:      hero → breadcrumbs → <b>tldr</b> → process → pricing-per-dis
   </div>
 </section>
 
-<!-- ═════════ §30 HEADER · ВХОД / ЛК ═════════ -->
-<section id="auth-header">
+<!-- ═════════ §32 СТАТУСЫ ЗАЯВКИ ═════════ -->
+<section id="lead-status">
   <div class="wrap">
-    <div class="eyebrow">30 · Header · вход / личный кабинет</div>
-    <h2>Точка входа в аккаунт прямо из шапки</h2>
-    <p class="lead">Header — <strong>один</strong> компонент для всех 6 направлений (4 услуги + ландшафт + магазин). В нём же — вход в аккаунт. Этот раздел описывает <em>auth-states правой части</em>: logged-out → CTA, guest-with-lead → sticky-pill, logged-in → user-menu. Mega-menu и nav-структура — в <a href="#nav">§09 Навигация</a>. Iron rule «один Header.tsx, без suffix'ов, без shop-special-header'а», matrix где какой chrome применяется и Footer-anatomy — в <a href="#site-chrome">§33 Header & Footer · canonical</a>.</p>
+    <div class="eyebrow">32 · Статусы заявки</div>
+    <h2>Жизненный цикл заявки на услугу</h2>
+    <p class="lead">Канон статусов заявки — общий для админки (<code>Leads.status</code>, <code>site/lib/leads/status.ts</code>, pill <code>.lead-status-badge</code> в inbox) и amoCRM. Личного кабинета и клиентских аккаунтов нет (<a href="../team/adr/ADR-0022-customer-cabinet-sunset.md">ADR-0022</a>): статус клиенту сообщает менеджер — звонком или в мессенджере. Служебный статус <code>spam</code> есть только в админке и клиенту не сообщается.</p>
 
-    <h3 style="margin-top: 24px;">3 состояния header · live preview</h3>
-
-    <p class="muted" style="font-size: 12px; font-family: var(--font-mono); margin-top: 16px;">30.1 · logged-out (default · большинство визитов)</p>
-    <div class="header-mock">
-      <div class="logo"><span class="mark">О</span><span>ОБИХОД</span></div>
-      <div class="nav-stub"><span>Услуги</span><span>Районы</span><span>Магазин</span><span>Кейсы</span><span>Цены</span></div>
-      <div class="right">
-        <span style="font-family: var(--font-mono); font-size: 13px; color: var(--c-ink-soft);">+7 (495) 000-00-00</span>
-        <div class="auth-cta">
-          <button class="btn-login">Войти</button>
-          <button class="btn-register">Регистрация</button>
-        </div>
-      </div>
-    </div>
-
-    <p class="muted" style="font-size: 12px; font-family: var(--font-mono); margin-top: 24px;">30.2 · guest с активной заявкой (отслеживание без логина)</p>
-    <div class="header-mock">
-      <div class="logo"><span class="mark">О</span><span>ОБИХОД</span></div>
-      <div class="nav-stub"><span>Услуги</span><span>Районы</span><span>Магазин</span><span>Кейсы</span><span>Цены</span></div>
-      <div class="right">
-        <span class="guest-pill"><span class="dot"></span>Заявка ОБИ-2026-A-00342 → бригада выехала</span>
-        <button class="btn-login" style="padding: 7px 14px; border: 1px solid var(--c-line); border-radius: var(--radius-sm); font-size: 13px; background: var(--c-card); cursor: pointer;">Войти</button>
-      </div>
-    </div>
-    <p class="muted" style="font-size: 12px; margin-top: 6px;">Pill появляется, если в cookie есть hash от телефона + есть открытая заявка. Клик → страница статуса без логина (по magic-link, отправленному в SMS/Email при создании заявки).</p>
-
-    <p class="muted" style="font-size: 12px; font-family: var(--font-mono); margin-top: 24px;">30.3 · logged-in (после авторизации)</p>
-    <div class="header-mock">
-      <div class="logo"><span class="mark">О</span><span>ОБИХОД</span></div>
-      <div class="nav-stub"><span>Услуги</span><span>Районы</span><span>Магазин</span><span>Кейсы</span><span>Цены</span></div>
-      <div class="right">
-        <span style="font-family: var(--font-mono); font-size: 13px; color: var(--c-ink-soft);">+7 (495) 000-00-00</span>
-        <div class="user-menu">
-          <div class="trigger">
-            <span class="avatar">СИ</span>
-            <span class="name">Сергей Иванов</span>
-            <svg class="chev" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1.5 3.5 L5 7 L8.5 3.5"/></svg>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <h3 style="margin-top: 32px;">User-menu dropdown · raskryt</h3>
-    <div style="max-width: 360px; margin-top: 12px;">
-      <div class="user-menu" style="display: block;">
-        <div class="dropdown" style="position: static; box-shadow: 0 12px 32px -12px rgba(28,28,28,0.18);">
-          <div class="header">
-            <b>Сергей Иванов</b>
-            <div class="meta">+7 916 555-12-34 · sergey@example.ru</div>
-          </div>
-          <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="14" rx="2"/><path d="M4 10 L20 10"/></svg>Кабинет<span class="badge-mini">3</span></a>
-          <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9 L20 9 L18 20 L6 20 Z"/><path d="M9 9 C 9 6, 11 4, 12 4 C 13 4, 15 6, 15 9"/></svg>Заявки на услуги<span class="badge-mini">2</span></a>
-          <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7 L20 7 L19 19 L5 19 Z"/><path d="M9 11 L9 15 M12 11 L12 15 M15 11 L15 15"/></svg>Заказы магазина<span class="badge-mini">1</span></a>
-          <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7 L12 12 L16 14"/></svg>Резервы на сезон 2027</a>
-          <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21 C 12 21, 4 14, 4 9 C 4 6, 6 4, 9 4 C 11 4, 12 5, 12 7 C 12 5, 13 4, 15 4 C 18 4, 20 6, 20 9 C 20 14, 12 21, 12 21 Z"/></svg>Избранное</a>
-          <hr />
-          <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3"/><path d="M5 20 C 5 16, 8 14, 12 14 C 16 14, 19 16, 19 20"/></svg>Профиль</a>
-          <a href="#" class="danger"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4 L20 4 L20 20 L14 20"/><path d="M4 12 L15 12"/><path d="M11 8 L15 12 L11 16"/></svg>Выйти</a>
-        </div>
-      </div>
-    </div>
-    <p class="muted" style="font-size: 13px; margin-top: 12px;">Бейджи-счётчики (3 в «Кабинете», 2 в «Заявках», 1 в «Заказах») — это новые / изменившиеся записи с момента последнего захода. Иконки используют line-art стиль панели §08.</p>
-
-    <h3 style="margin-top: 32px;">30.4 · Mobile-вариант</h3>
-    <p>В mobile хедере «Войти» и «Регистрация» прячутся в burger-меню (две кнопки наверху drawer'а перед навигацией). После логина — avatar справа от лого, при нажатии открывает full-screen drawer вместо desktop-dropdown. Guest-pill (30.2) — отдельная sticky-полоска под header высотой 36 px, не в самом header (на mobile места нет).</p>
-
-    <h3 style="margin-top: 32px;">Состояния пилла «Активная заявка» (для guest и для logged-in)</h3>
     <table class="table-compact">
-      <thead><tr><th>Статус заявки</th><th>Текст пилла</th><th>Цвет</th></tr></thead>
-      <tbody>
-        <tr><td>Принята · ждём звонка менеджера</td><td>«Заявка ОБИ-... → перезвоним до 18:00»</td><td>primary</td></tr>
-        <tr><td>Менеджер позвонил, согласует смету</td><td>«Заявка ОБИ-... → согласуем смету»</td><td>accent (тёплый)</td></tr>
-        <tr><td>Смета согласована, бригада планируется</td><td>«Заявка ОБИ-... → бригада 4 мая, до 11:00»</td><td>primary</td></tr>
-        <tr><td>Бригада в пути / на объекте</td><td>«Заявка ОБИ-... → бригада на объекте»</td><td>primary с пульсом</td></tr>
-        <tr><td>Объект закрыт, ждём фото</td><td>«Заявка ОБИ-... → объект закрыт, фото в течение часа»</td><td>success</td></tr>
-        <tr><td>Заявка завершена</td><td>пилл скрывается через 24 ч после фото</td><td>—</td></tr>
-      </tbody>
-    </table>
-
-    <h3 style="margin-top: 32px;">Iron rules для header-входа</h3>
-    <ul>
-      <li><strong>Гость-чекаут (без регистрации) — обязателен</strong> и для услуг (PhotoQuoteForm), и для shop. Регистрация — опция, не препятствие.</li>
-      <li><strong>Magic-link для гостя</strong> на статус заявки. Не требуем пароль, чтобы посмотреть «бригада выехала или нет».</li>
-      <li><strong>Customer auth ≠ admin auth.</strong> Customers живут в Payload-коллекции <code>Customers</code> (роль <code>customer</code>), а не <code>Users</code> (admin). Namespace разный, нет риска эскалации.</li>
-      <li><strong>Token в localStorage, refresh — httpOnly cookie.</strong> Стандарт.</li>
-      <li><strong>Логаут чистит и localStorage, и cookie</strong>, plus invalidates server-side session.</li>
-    </ul>
-  </div>
-</section>
-
-<!-- ═════════ §31 AUTH SCREENS ═════════ -->
-<section id="auth-screens">
-  <div class="wrap">
-    <div class="eyebrow">31 · Auth-экраны</div>
-    <h2>Login · регистрация · восстановление · 2FA</h2>
-    <p class="lead">Auth — единственная зона с <strong>minimal-chrome</strong> (только лого по центру + ссылка «← на сайт», footer убран целиком). Это deliberate UX-exception, зафиксированный в <a href="#site-chrome">§33.5 Exceptions</a>: любой клик в полный nav со страницы login = abandonment. Card 440 px, по центру, на сером фоне. Три метода входа в одном экране: телефон+SMS (default для РФ) · email+пароль · magic-link. Регистрация B2C / B2B в одной форме с переключателем.</p>
-
-    <h3>31.1 · Login · phone + SMS (default)</h3>
-    <div class="auth-card">
-      <div class="logo-row"><span class="mark">О</span></div>
-      <h3 class="t">Войти в кабинет</h3>
-      <p class="lead-text">Один аккаунт для заявок и заказов</p>
-
-      <div class="auth-tabs">
-        <button class="active">Войти</button>
-        <button>Регистрация</button>
-      </div>
-
-      <div class="auth-method-tabs">
-        <button class="active">По телефону</button>
-        <button>Email + пароль</button>
-        <button>Магия-ссылка</button>
-      </div>
-
-      <div class="field">
-        <label>Телефон</label>
-        <input type="tel" value="+7 (916) 555-12-34" />
-      </div>
-
-      <button class="btn btn-primary" style="width: 100%; justify-content: center;">Получить код в SMS</button>
-
-      <div class="consent-row">
-        <input type="checkbox" checked />
-        <span>Соглашаюсь с <a href="#">обработкой персональных данных</a> по 152-ФЗ. Без галочки SMS не отправим.</span>
-      </div>
-
-      <div class="auth-foot">
-        Нет аккаунта? <a href="#">Создать</a> · <a href="#">Не помню пароль</a>
-      </div>
-    </div>
-
-    <h3 style="margin-top: 32px;">31.2 · OTP-экран · 6 цифр после SMS</h3>
-    <div class="auth-card">
-      <div class="logo-row"><span class="mark">О</span></div>
-      <h3 class="t">Введите код из SMS</h3>
-      <p class="lead-text">Отправили на +7 916 555-12-34 · <a href="#">изменить</a></p>
-
-      <div class="otp-input">
-        <input type="text" value="2" class="filled" maxlength="1" />
-        <input type="text" value="8" class="filled" maxlength="1" />
-        <input type="text" value="3" class="filled" maxlength="1" />
-        <input type="text" value="" maxlength="1" />
-        <input type="text" value="" maxlength="1" />
-        <input type="text" value="" maxlength="1" />
-      </div>
-      <p class="otp-resend">Запросить новый код через 0:42 · <a href="#" style="opacity: 0.5; pointer-events: none;">отправить ещё раз</a></p>
-      <p class="muted" style="font-size: 12px; text-align: center;">Не приходит? Проверьте папку «спам» или <a href="#">позвоните менеджеру</a></p>
-    </div>
-
-    <h3 style="margin-top: 32px;">31.3 · Login · email + пароль (альтернатива)</h3>
-    <div class="auth-card">
-      <div class="logo-row"><span class="mark">О</span></div>
-      <h3 class="t">Войти в кабинет</h3>
-
-      <div class="auth-tabs">
-        <button class="active">Войти</button>
-        <button>Регистрация</button>
-      </div>
-
-      <div class="auth-method-tabs">
-        <button>По телефону</button>
-        <button class="active">Email + пароль</button>
-        <button>Магия-ссылка</button>
-      </div>
-
-      <div class="field">
-        <label>Email</label>
-        <input type="email" value="sergey@example.ru" />
-      </div>
-      <div class="field error">
-        <label>Пароль <a href="#" style="float: right; font-size: 12px; font-weight: 400; color: var(--c-primary);">забыли?</a></label>
-        <input type="password" value="••••••" />
-        <p class="err">⚠ Пароль не совпадает. Попробуйте ещё раз или восстановите.</p>
-      </div>
-
-      <button class="btn btn-primary" style="width: 100%; justify-content: center;">Войти</button>
-
-      <div class="auth-foot">
-        Нет аккаунта? <a href="#">Создать</a>
-      </div>
-    </div>
-
-    <h3 style="margin-top: 32px;">31.4 · Регистрация · B2C / B2B в одной форме</h3>
-    <div class="auth-card">
-      <div class="logo-row"><span class="mark">О</span></div>
-      <h3 class="t">Создать аккаунт</h3>
-      <p class="lead-text">Заявки и заказы будут собираться сюда</p>
-
-      <div class="auth-tabs">
-        <button>Войти</button>
-        <button class="active">Регистрация</button>
-      </div>
-
-      <div class="biz-toggle">
-        <input type="checkbox" />
-        <span>Я представляю организацию (юрлицо / ИП)</span>
-      </div>
-
-      <div class="field-row">
-        <div class="field">
-          <label>Имя</label>
-          <input type="text" placeholder="Сергей" />
-        </div>
-        <div class="field">
-          <label>Фамилия</label>
-          <input type="text" placeholder="Иванов" />
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Телефон</label>
-        <input type="tel" placeholder="+7 (___) ___-__-__" />
-        <p class="help">подтвердим SMS-кодом</p>
-      </div>
-
-      <div class="field">
-        <label>Email <span style="color: var(--c-muted); font-weight: 400;">(опционально)</span></label>
-        <input type="email" placeholder="sergey@example.ru" />
-        <p class="help">для смет, чеков и magic-link'ов</p>
-      </div>
-
-      <div class="consent-row">
-        <input type="checkbox" />
-        <span>Соглашаюсь с <a href="#">обработкой ПДн</a> по 152-ФЗ и <a href="#">правилами магазина</a>. Согласие на маркетинг — отдельной галкой в профиле, не здесь.</span>
-      </div>
-
-      <button class="btn btn-primary" style="width: 100%; justify-content: center;">Создать аккаунт</button>
-
-      <div class="auth-divider">или</div>
-
-      <button class="btn btn-secondary" style="width: 100%; justify-content: center; gap: 10px;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 4 L18 10 L12 16 M5 10 L18 10"/></svg>
-        Регистрация без пароля (magic-link)
-      </button>
-    </div>
-
-    <h3 style="margin-top: 32px;">31.5 · B2B-onboarding · после галки «организация»</h3>
-    <div class="auth-card" style="max-width: 520px;">
-      <h3 class="t" style="margin-bottom: 16px;">Реквизиты организации</h3>
-      <p class="lead-text">Подскажет DaData по ИНН — введите 10 или 12 цифр и выберите организацию из подсказок</p>
-
-      <div class="field">
-        <label>ИНН</label>
-        <input type="text" value="7707083893" />
-        <p class="help">10 цифр для юрлица, 12 для ИП</p>
-      </div>
-
-      <div class="field">
-        <label>Название организации</label>
-        <input type="text" value="ООО «Зелёный двор»" />
-        <p class="help">подставлено из DaData по ИНН</p>
-      </div>
-
-      <div class="field-row">
-        <div class="field">
-          <label>КПП</label>
-          <input type="text" value="770701001" />
-        </div>
-        <div class="field">
-          <label>ОГРН</label>
-          <input type="text" value="1027700132195" />
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Юридический адрес</label>
-        <input type="text" value="г. Москва, ул. Тверская, 7" />
-        <p class="help">DaData autocomplete</p>
-      </div>
-
-      <div class="field">
-        <label>Должность контактного лица</label>
-        <input type="text" placeholder="например, инженер по благоустройству" />
-      </div>
-
-      <div class="field">
-        <label>Email рабочий <span style="color: var(--c-muted); font-weight: 400;">(на домене организации)</span></label>
-        <input type="email" placeholder="ivanov@zelenyidvor.ru" />
-        <p class="help">для счетов, актов и УПД</p>
-      </div>
-
-      <button class="btn btn-primary" style="width: 100%; justify-content: center;">Создать B2B-аккаунт</button>
-      <p class="muted" style="font-size: 12px; margin-top: 12px; text-align: center;">После регистрации откроются опт-цены и шаблоны договоров</p>
-    </div>
-
-    <h3 style="margin-top: 32px;">31.6 · Восстановление пароля · 3 шага</h3>
-    <div class="grid-3" style="gap: 16px;">
-      <div class="card">
-        <span class="badge badge-live">шаг 1</span>
-        <h4 style="margin: 8px 0;">Email или телефон</h4>
-        <p style="font-size: 13px;">Поле + кнопка «Отправить ссылку». Если есть только телефон — отправим SMS с кодом, без пароля.</p>
-      </div>
-      <div class="card">
-        <span class="badge badge-live">шаг 2</span>
-        <h4 style="margin: 8px 0;">Подтверждение</h4>
-        <p style="font-size: 13px;">Email — клик по ссылке (валидна 30 мин). SMS — OTP-экран как §31.2.</p>
-      </div>
-      <div class="card">
-        <span class="badge badge-live">шаг 3</span>
-        <h4 style="margin: 8px 0;">Новый пароль</h4>
-        <p style="font-size: 13px;">2 поля + индикатор силы (минимум 8 символов, без anti-pattern «требуем заглавную и спецсимвол»). После — авто-логин и переход в кабинет.</p>
-      </div>
-    </div>
-
-    <h3 style="margin-top: 32px;">31.7 · 2FA (опциональный, B2B-default)</h3>
-    <p>Включается в Профиле → Безопасность. Default off для B2C, default on для B2B (защита счетов и договоров). Метод — TOTP (Google/Yandex Authenticator), backup-коды (10 шт, генерируются при включении). Не SMS как 2-й фактор: SIM-swap risk в РФ велик. Экран ввода 2FA-кода — после успешного логина, перед редиректом в кабинет.</p>
-
-    <h3 style="margin-top: 32px;">Состояния всех auth-полей</h3>
-    <table class="table-compact">
-      <thead><tr><th>State</th><th>Что меняется</th><th>Когда</th></tr></thead>
-      <tbody>
-        <tr><td>default</td><td>как §25</td><td>при первом открытии</td></tr>
-        <tr><td>filled / focused</td><td>border <code>--c-primary</code> + outline-glow</td><td>пользователь вводит</td></tr>
-        <tr><td>validating</td><td>spinner справа от input</td><td>проверка email-уникальности, ИНН по DaData</td></tr>
-        <tr><td>valid</td><td>зелёная галочка</td><td>email уникален, ИНН существует</td></tr>
-        <tr><td>error · client</td><td>border red + helper</td><td>невалидный формат, недопустимый символ</td></tr>
-        <tr><td>error · server</td><td>border red + сервер-ошибка</td><td>«Email уже зарегистрирован», «Пароль не подошёл»</td></tr>
-        <tr><td>locked (rate-limit)</td><td>disabled + countdown</td><td>5+ попыток подряд: «Попробуйте через 60 секунд»</td></tr>
-        <tr><td>OTP · success</td><td>зелёная заливка → авто-redirect</td><td>код принят, автологин</td></tr>
-      </tbody>
-    </table>
-
-    <div class="callout">
-      <strong>Безопасность paroola:</strong> rate-limit 5 попыток / 5 минут на email. При срабатывании — captcha (hCaptcha, не Google). Hash паролей — Argon2id (не bcrypt). Хранение — в Payload Customers с <code>password</code>-полем PII.
-    </div>
-  </div>
-</section>
-
-<!-- ═════════ §32 ЛИЧНЫЙ КАБИНЕТ ═════════ -->
-<section id="cabinet">
-  <div class="wrap">
-    <div class="eyebrow">32 · Личный кабинет (unified)</div>
-    <h2>Один кабинет для услуг и магазина</h2>
-    <p class="lead">Кабинет — общий для всех 6 направлений. Сверху sidebar с 8 разделами, главная — dashboard с активностью. Заявка на услугу (§32.3 lead-row) и заказ магазина (§26 order-row) — разные сущности, но живут в одном UI. Адреса, профиль, юрлица — shared.</p>
-
-    <h3>32.1 · Layout · cabinet shell</h3>
-    <div class="cabinet-shell">
-      <aside class="cabinet-sidebar">
-        <div class="user-block">
-          <span class="avatar">СИ</span>
-          <div class="info">
-            <b>Сергей Иванов</b>
-            <div class="meta">с 2025-08 · 3 заявки · 2 заказа</div>
-          </div>
-        </div>
-
-        <div class="group-label">Активность</div>
-        <nav>
-          <a class="active" href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>Дашборд</a>
-          <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8 L19 8 L17.5 20 L6.5 20 Z"/><path d="M9 8 C 9 5, 11 4, 12 4 C 13 4, 15 5, 15 8"/></svg>Заявки на услуги <span class="ct">2</span></a>
-          <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7 L19 7 L18 19 L6 19 Z"/><path d="M9 11 L9 15 M12 11 L12 15 M15 11 L15 15"/></svg>Заказы магазина <span class="ct">1</span></a>
-          <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7 L12 12 L16 14"/></svg>Резервы на сезон 2027</a>
-          <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21 C 12 21, 4 14, 4 9 C 4 6, 6 4, 9 4 C 11 4, 12 5, 12 7 C 12 5, 13 4, 15 4 C 18 4, 20 6, 20 9 C 20 14, 12 21, 12 21 Z"/></svg>Избранное</a>
-
-          <div class="group-label">Профиль</div>
-          <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21 C 16 17, 20 13, 20 9 C 20 5, 16 3, 12 3 C 8 3, 4 5, 4 9 C 4 13, 8 17, 12 21 Z"/><circle cx="12" cy="9" r="2.5"/></svg>Адреса <span class="ct">3</span></a>
-          <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3"/><path d="M5 20 C 5 16, 8 14, 12 14 C 16 14, 19 16, 19 20"/></svg>Профиль и пароль</a>
-          <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9 L15 9 M9 13 L15 13 M9 17 L13 17"/></svg>Юрлица (B2B)</a>
-          <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12 C 5 8, 8 4, 12 4 C 16 4, 19 8, 19 12"/><path d="M5 12 L5 18 L8 18 L8 12"/><path d="M16 12 L16 18 L19 18 L19 12"/></svg>Уведомления</a>
-        </nav>
-      </aside>
-
-      <div>
-        <h3 style="margin-top: 0;">Привет, Сергей</h3>
-        <p class="muted" style="font-size: 13px;">Сегодня — 29 апреля. Бригада на объекте, посылка из питомника завтра в Раменское.</p>
-
-        <div class="stat-grid" style="margin-top: 18px;">
-          <div class="stat-tile accent">
-            <div class="lbl">Активные заявки</div>
-            <div class="val">2</div>
-            <div class="delta" style="color: var(--c-primary);">→ одна на объекте</div>
-          </div>
-          <div class="stat-tile">
-            <div class="lbl">Заказы в работе</div>
-            <div class="val">1</div>
-            <div class="delta">доставка завтра</div>
-          </div>
-          <div class="stat-tile">
-            <div class="lbl">Резервы 2027</div>
-            <div class="val">3</div>
-            <div class="delta">сорта зафиксированы</div>
-          </div>
-          <div class="stat-tile">
-            <div class="lbl">Сэкономлено</div>
-            <div class="val">8 600 ₽</div>
-            <div class="delta">за 2025-26 сезон</div>
-          </div>
-        </div>
-
-        <h4 style="margin-top: 24px; margin-bottom: 12px; font-size: 16px;">Лента активности</h4>
-        <div class="card" style="padding: 8px 18px;">
-          <div class="activity-feed">
-            <div class="activity-row">
-              <span class="dot svc"></span>
-              <div class="body"><b>Бригада выехала по заявке ОБИ-2026-A-00342</b><div class="meta">Спил тополя, ул. Садовая 12 · бригадир Алексей +7 916 ...</div></div>
-              <span class="when">12:08</span>
-            </div>
-            <div class="activity-row">
-              <span class="dot shop"></span>
-              <div class="body"><b>Заказ ОБИ-2026-S-00118 в пути</b><div class="meta">3 позиции, 5 722 ₽ · доставка курьером 2 мая, до 14:00</div></div>
-              <span class="when">вчера, 15:14</span>
-            </div>
-            <div class="activity-row">
-              <span class="dot svc"></span>
-              <div class="body"><b>Смета согласована · ОБИ-2026-D-00099</b><div class="meta">Демонтаж сарая · 28 400 ₽ · бригада на 4 мая</div></div>
-              <span class="when">2026-04-27</span>
-            </div>
-            <div class="activity-row">
-              <span class="dot sys"></span>
-              <div class="body"><b>Антоновка обыкновенная снова в наличии</b><div class="meta">Из вашего избранного · партия 2026 · 1 850 ₽</div></div>
-              <span class="when">2026-04-25</span>
-            </div>
-            <div class="activity-row">
-              <span class="dot shop"></span>
-              <div class="body"><b>Заказ ОБИ-2025-S-00876 доставлен</b><div class="meta">Слива Венгерка · посажена 2025-09-22 · гарантия до 2026-09-22</div></div>
-              <span class="when">2025-09-15</span>
-            </div>
-          </div>
-        </div>
-
-        <h4 style="margin-top: 24px; margin-bottom: 8px; font-size: 16px;">Полезное</h4>
-        <div class="grid-3">
-          <div class="card"><b>Гарантия приживаемости</b><p style="font-size: 13px; color: var(--c-ink-soft); margin: 6px 0 0;">3 саженца под гарантией до сентября 2026. Что-то не прижилось — пишите менеджеру.</p></div>
-          <div class="card"><b>Опылитель для Антоновки</b><p style="font-size: 13px; color: var(--c-ink-soft); margin: 6px 0 0;">Заказали Антоновку в 2025 — без опылителя завязь идёт слабо. Подобрать?</p></div>
-          <div class="card"><b>Календарь работ на участке</b><p style="font-size: 13px; color: var(--c-ink-soft); margin: 6px 0 0;">Май — обрезка, июнь — опрыскивание, август — заготовка. Получать SMS-напоминания?</p></div>
-        </div>
-      </div>
-    </div>
-
-    <h3 style="margin-top: 40px;">32.2 · Заявки на услуги · список</h3>
-    <p>Услуги — 4 кластера (арбористика / крыши / мусор / демонтаж) + ландшафт. Каждая заявка — отдельная сущность, со своим жизненным циклом и сметой. Список — фильтры по статусу + кластеру.</p>
-
-    <div class="card" style="padding: 0; margin-top: 12px;">
-      <div style="padding: 14px 16px; border-bottom: 1px solid var(--c-line); display: flex; gap: 10px; flex-wrap: wrap;">
-        <span class="filter-pill">все · 5</span>
-        <span class="filter-pill">в работе · 2</span>
-        <span class="filter-pill">завершены · 3</span>
-        <span style="margin-left: auto;"><select style="padding: 6px 10px; border: 1px solid var(--c-line); border-radius: var(--radius-sm); background: var(--c-card); font-size: 13px;"><option>Все услуги</option><option>Арбористика</option><option>Крыши</option><option>Мусор</option><option>Демонтаж</option></select></span>
-      </div>
-
-      <div style="padding: 0 16px;">
-        <div class="lead-row">
-          <span class="num">ОБИ-2026-A-00342</span>
-          <div class="body"><b>Спил тополя 18 м, автовышка</b><div class="meta">Раменское, ул. Садовая 12 · бригадир Алексей +7 916 ...</div></div>
-          <span class="lead-status-badge brigade">● бригада на объекте</span>
-          <span style="font-weight: 600; font-variant-numeric: tabular-nums; min-width: 90px; text-align: right;">14 800 ₽</span>
-        </div>
-        <div class="lead-row">
-          <span class="num">ОБИ-2026-D-00099</span>
-          <div class="body"><b>Демонтаж кирпичного сарая</b><div class="meta">Истра, СНТ Лесная поляна, уч. 47 · бригада 4 мая</div></div>
-          <span class="lead-status-badge smeta">✓ смета согласована</span>
-          <span style="font-weight: 600; font-variant-numeric: tabular-nums; min-width: 90px; text-align: right;">28 400 ₽</span>
-        </div>
-        <div class="lead-row">
-          <span class="num">ОБИ-2026-R-00078</span>
-          <div class="body"><b>Чистка крыши от снега</b><div class="meta">Химки, мкр Левобережный · альпинист · 240 м²</div></div>
-          <span class="lead-status-badge contacted">● согласуем смету</span>
-          <span style="font-weight: 600; font-variant-numeric: tabular-nums; min-width: 90px; text-align: right;">по запросу</span>
-        </div>
-        <div class="lead-row">
-          <span class="num">ОБИ-2025-A-01218</span>
-          <div class="body"><b>Кронирование 4 яблонь</b><div class="meta">Раменское · март 2025 · санитарная обрезка</div></div>
-          <span class="lead-status-badge done">✓ завершена</span>
-          <span style="font-weight: 600; font-variant-numeric: tabular-nums; min-width: 90px; text-align: right;">8 200 ₽</span>
-        </div>
-        <div class="lead-row">
-          <span class="num">ОБИ-2025-T-00543</span>
-          <div class="body"><b>Вывоз мусора после ремонта · 8 м³</b><div class="meta">Раменское · сентябрь 2025 · контейнер 8 ярдов</div></div>
-          <span class="lead-status-badge done">✓ завершена</span>
-          <span style="font-weight: 600; font-variant-numeric: tabular-nums; min-width: 90px; text-align: right;">12 600 ₽</span>
-        </div>
-      </div>
-    </div>
-
-    <h3 style="margin-top: 32px;">32.3 · Detail заявки · timeline 5 шагов (services-TOV)</h3>
-    <div class="card">
-      <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: baseline; margin-bottom: 10px;">
-        <h4 style="margin: 0;">Заявка ОБИ-2026-A-00342</h4>
-        <span class="lead-status-badge brigade">● бригада на объекте</span>
-      </div>
-      <p class="muted" style="font-size: 13px;">Спил тополя 18 м, автовышка · Раменское, ул. Садовая 12 · 14 800 ₽</p>
-
-      <div class="timeline-svc">
-        <div class="seg done">
-          <div class="num">шаг 1</div>
-          <div class="ttl">Принята</div>
-          <div class="when">29.04 · 09:14</div>
-        </div>
-        <div class="seg done">
-          <div class="num">шаг 2</div>
-          <div class="ttl">Менеджер позвонил</div>
-          <div class="when">29.04 · 09:42</div>
-        </div>
-        <div class="seg done">
-          <div class="num">шаг 3</div>
-          <div class="ttl">Смета согласована</div>
-          <div class="when">29.04 · 10:18 · 14 800 ₽</div>
-        </div>
-        <div class="seg active">
-          <div class="num">шаг 4</div>
-          <div class="ttl">Бригада на объекте</div>
-          <div class="when">29.04 · 12:08 · бригадир Алексей</div>
-        </div>
-        <div class="seg">
-          <div class="num">шаг 5</div>
-          <div class="ttl">Объект закрыт + фото</div>
-          <div class="when">—</div>
-        </div>
-      </div>
-
-      <div class="grid-2" style="margin-top: 16px;">
-        <div>
-          <h4 style="font-size: 14px; margin: 0 0 8px;">Документы</h4>
-          <ul style="margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.8;">
-            <li><a href="#">Смета_ОБИ-2026-A-00342.pdf</a> · 124 КБ</li>
-            <li><a href="#">Договор-оферта</a> (принят 29.04, 10:18)</li>
-            <li><a href="#">Согласие на обработку ПДн</a> (152-ФЗ)</li>
-            <li>Акт выполненных работ — после шага 5</li>
-            <li>Фото до/после — после шага 5</li>
-          </ul>
-        </div>
-        <div>
-          <h4 style="font-size: 14px; margin: 0 0 8px;">Бригадир</h4>
-          <p style="font-size: 13.5px; margin: 0 0 4px;"><strong>Алексей Морозов</strong> · 7 лет в Обиходе</p>
-          <p style="font-size: 13.5px; margin: 0 0 8px;">+7 (916) 123-45-67 · alex.brigade@obihod.ru</p>
-          <p class="muted" style="font-size: 12px;">Прямой контакт пока бригада на объекте. После закрытия — связь через менеджера.</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 8px; margin-top: 18px; flex-wrap: wrap;">
-        <button class="btn btn-secondary">Связаться с менеджером</button>
-        <button class="btn btn-ghost">Скачать смету</button>
-        <button class="btn btn-ghost" style="color: var(--c-error);">Отменить (если ещё на шаге 1-2)</button>
-      </div>
-    </div>
-
-    <h3 style="margin-top: 32px;">32.4 · Бизнес-логика · 5 статусов услуги</h3>
-    <table class="table-compact">
-      <thead><tr><th>Шаг</th><th>Статус</th><th>SLA</th><th>Что видит клиент</th><th>Что в amoCRM (US-13)</th></tr></thead>
+      <thead><tr><th>Шаг</th><th>Статус</th><th>SLA</th><th>Что сообщаем клиенту</th><th>Что в amoCRM (US-13)</th></tr></thead>
       <tbody>
         <tr><td>1</td><td><span class="lead-status-badge new">принята</span></td><td>фиксируем мгновенно</td><td>«Заявка принята · перезвоним до …»</td><td>Lead status = NEW</td></tr>
         <tr><td>2</td><td><span class="lead-status-badge contacted">согласуем смету</span></td><td>10 мин в рабочее время</td><td>«Менеджер связался · уточняем детали и считаем смету»</td><td>NEW → CONTACTED</td></tr>
@@ -7048,45 +6130,6 @@ T4 SD:      hero → breadcrumbs → <b>tldr</b> → process → pricing-per-dis
         <tr><td>—</td><td><span class="lead-status-badge cancelled">отменена</span></td><td>—</td><td>«Заявка отменена · причина: …»</td><td>CLOSED_LOST</td></tr>
       </tbody>
     </table>
-
-    <h3 style="margin-top: 32px;">32.5 · Shared-разделы аккаунта</h3>
-    <table>
-      <thead><tr><th>Раздел</th><th>Что внутри</th><th>TOV</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Адреса</strong></td><td>2 типа: для заявок (адрес объекта) и юридический B2B. Один адрес может быть обоими типами одновременно. DaData-подсказки. Default-адрес для каждого типа.</td><td>нейтральный (системный)</td></tr>
-        <tr><td><strong>Профиль и пароль</strong></td><td>ФИО, телефон (ключ аккаунта), email, пароль, 2FA, согласия (152-ФЗ + маркетинг + cookie-аналитика отдельной галкой)</td><td>нейтральный</td></tr>
-        <tr><td><strong>Юрлица (B2B)</strong></td><td>Список ИНН/КПП с реквизитами, default-юрлицо, документы (УПД/ТТН) централизованно</td><td>нейтральный</td></tr>
-        <tr><td><strong>Уведомления</strong></td><td>Каналы (SMS / Email / Telegram-bot / push) × события (заявка / напоминание / гарантия истекает) — матрица галок</td><td>нейтральный</td></tr>
-        <tr><td><strong>152-ФЗ право на забвение</strong></td><td>Кнопка «Удалить аккаунт» с modal-подтверждением. Удаляет PII через 30 дней (grace), но оставляет обезличенные транзакции для бух-учёта (требование 402-ФЗ)</td><td>прозрачный, без давления</td></tr>
-      </tbody>
-    </table>
-
-    <h3 style="margin-top: 32px;">32.6 · Mobile-вариант кабинета</h3>
-    <p>Sidebar исчезает — вместо него top-tabs (Дашборд / Заявки / Профиль) или bottom-tabs (как mobile-app pattern). Stat-grid 4 → 2 в ряд. Lead-row на мобилке схлопывается: номер + название + статус сверху, цена справа, дата под названием. Timeline услуг — вертикальный (5 шагов сверху вниз), а не горизонтальный.</p>
-
-    <h3 style="margin-top: 32px;">32.7 · TOV-делимитер внутри кабинета</h3>
-    <table class="table-compact">
-      <thead><tr><th>Зона</th><th>Голос</th><th>Источник</th></tr></thead>
-      <tbody>
-        <tr><td>Заявки на услуги (список + detail + timeline)</td><td>services-TOV (Caregiver+Ruler «бригадир»)</td><td><a href="#tov">§13 TOV</a></td></tr>
-        <tr><td>Адреса / профиль / юрлица / уведомления / удаление аккаунта</td><td>нейтральный системный — короткий, без эпитетов</td><td>foundations/microcopy.md</td></tr>
-        <tr><td>Auth-экраны (§31)</td><td>нейтральный системный, ближе к services-TOV</td><td>foundations/microcopy.md + §13</td></tr>
-      </tbody>
-    </table>
-
-    <h3 style="margin-top: 32px;">Iron rules кабинета</h3>
-    <ul>
-      <li><strong>Один кабинет, две истории.</strong> Услуги и магазин не разделены на два аккаунта — у клиента один телефон, одна учётка, две истории под ней.</li>
-      <li><strong>Гость без аккаунта</strong> может видеть статус заявки через magic-link (см. §30.2). Регистрация — для history, не для access.</li>
-      <li><strong>Адреса — shared.</strong> Адрес участка для заявки на спил = адрес доставки саженцев = адрес посадки садовником. Не дублируем поля.</li>
-      <li><strong>B2B-аккаунт</strong> расширяет B2C, не заменяет. Один человек может быть и B2C, и B2B одновременно (физлицо + ИП).</li>
-      <li><strong>Customers ≠ Users.</strong> Клиенты живут в Payload-коллекции <code>Customers</code> с роль <code>customer</code>. Admin-пользователи — в <code>Users</code> (см. §12). Namespace разный, эскалация невозможна.</li>
-      <li><strong>152-ФЗ право на забвение</strong> — обязательная кнопка. Без неё нельзя выпускать в prod.</li>
-    </ul>
-
-    <div class="callout">
-      <strong>Owner кабинета:</strong> dev-команда `panel` (Payload Customers + auth API) + `product` (страницы услуг + статусы) + `shop` (страницы магазина + резервы) + `design` (этот блок §30-§32 + UI компоненты). Cross-team координация — через `cpo`. Spec для каждой подсистемы пишется по `sa-<team>.md` iron rule (CLAUDE.md §2).
-    </div>
   </div>
 </section>
 
@@ -7095,19 +6138,18 @@ T4 SD:      hero → breadcrumbs → <b>tldr</b> → process → pricing-per-dis
   <div class="wrap">
     <div class="eyebrow">33 · Header & Footer · canonical</div>
     <h2>Один Header, один Footer · iron rule единства chrome</h2>
-    <p class="lead">На всём сайте <strong>один</strong> header (`site/components/marketing/Header.tsx`) и <strong>один</strong> footer (`site/components/marketing/Footer.tsx`). Не делаем shop-special-header, не добавляем суффиксы к лого, не урезаем nav для разных разделов. Header и footer — это site-chrome, единый каркас обёртки для всех 6 направлений (4 услуги + ландшафт + магазин) и для кабинета.</p>
+    <p class="lead">На всём сайте <strong>один</strong> header (`site/components/marketing/Header.tsx`) и <strong>один</strong> footer (`site/components/marketing/Footer.tsx`). Не делаем special-header для отдельных разделов, не добавляем суффиксы к лого, не урезаем nav для разных разделов. Header и footer — это site-chrome, единый каркас обёртки для всех 5 направлений услуг (4 услуги + ландшафт).</p>
 
     <div class="callout">
-      <strong>Iron rule:</strong> любая «своя версия» header/footer ломает доверие и навигацию. Если для конкретного экрана нужна <em>минимальная</em> chrome (auth-screens §31, thank-you-page §24, error-pages §11.5) — это deliberate UX exception, явно прописанная в этом разделе. Всё остальное использует canonical chrome из §33.
+      <strong>Iron rule:</strong> любая «своя версия» header/footer ломает доверие и навигацию. Если для конкретного экрана нужна <em>минимальная</em> chrome (thank-you-page, embed-виджет, print — см. §33.5) — это deliberate UX exception, явно прописанная в этом разделе. Всё остальное использует canonical chrome из §33.
     </div>
 
     <h3 style="margin-top: 28px;">33.1 · Где описан header — карта секций</h3>
-    <p>Header — один компонент, разные states. Не три разных гайда, а три фасада одной системы:</p>
+    <p>Header — один компонент. Не два разных гайда, а два фасада одной системы:</p>
     <table>
       <thead><tr><th>Секция</th><th>Что описывает</th><th>Когда читать</th></tr></thead>
       <tbody>
-        <tr><td><a href="#nav">§09 Навигация</a></td><td>Mega-menu каталога услуг + Районы + Кейсы + Магазин · поведение dropdown × keyboard × motion</td><td>работаешь с навигацией / IA / новой колонкой каталога</td></tr>
-        <tr><td><a href="#auth-header">§30 Header · вход / ЛК</a></td><td>Auth-states правой части header'а: logged-out (CTA), guest-with-lead (sticky-pill), logged-in (user-menu dropdown)</td><td>работаешь с auth-flow / счётчиками / уведомлениями в шапке</td></tr>
+        <tr><td><a href="#nav">§09 Навигация</a></td><td>Mega-menu каталога услуг + Районы + Кейсы · поведение dropdown × keyboard × motion</td><td>работаешь с навигацией / IA / новой колонкой каталога</td></tr>
         <tr><td>§33 (тут)</td><td>Iron rule единства · Footer anatomy · matrix где какой chrome применяется · exceptions</td><td>сомневаешься, должен ли header / footer быть на этой странице</td></tr>
       </tbody>
     </table>
@@ -7142,47 +6184,7 @@ T4 SD:      hero → breadcrumbs → <b>tldr</b> → process → pricing-per-dis
           <td>включая 28+ programmatic LP</td>
         </tr>
         <tr>
-          <td>Магазин · витрина / поиск / PDP</td>
-          <td class="center yes">✓</td>
-          <td class="center">—</td>
-          <td class="center yes">✓</td>
-          <td class="center partial">·</td>
-          <td>pre-footer CTA меняется на «Подобрать сорт под зону»</td>
-        </tr>
-        <tr>
-          <td>Магазин · корзина (`/shop/cart`)</td>
-          <td class="center yes">✓</td>
-          <td class="center">—</td>
-          <td class="center yes">✓</td>
-          <td class="center no">—</td>
-          <td>pre-footer убираем (не отвлекаем от чекаута)</td>
-        </tr>
-        <tr>
-          <td>Магазин · чекаут (`/shop/checkout`)</td>
-          <td class="center partial">·</td>
-          <td class="center yes">✓</td>
-          <td class="center partial">·</td>
-          <td class="center no">—</td>
-          <td><strong>Exception:</strong> minimal-header (logo + телефон + «Безопасная оплата»), footer-light (legal только)</td>
-        </tr>
-        <tr>
-          <td>Личный кабинет (`/account/*`)</td>
-          <td class="center yes">✓</td>
-          <td class="center">—</td>
-          <td class="center yes">✓</td>
-          <td class="center no">—</td>
-          <td>тот же header в logged-in state · pre-footer не нужен (внутри кабинета свои CTA)</td>
-        </tr>
-        <tr>
-          <td>Auth-экраны (`/auth/login`, `/auth/register`)</td>
-          <td class="center no">—</td>
-          <td class="center yes">✓</td>
-          <td class="center no">—</td>
-          <td class="center no">—</td>
-          <td><strong>Exception:</strong> логотип по центру + ссылка «← на сайт». Никакого full-chrome — focus на auth (см. §31)</td>
-        </tr>
-        <tr>
-          <td>Thank-you-page (после заявки/заказа)</td>
+          <td>Thank-you-page (после заявки)</td>
           <td class="center partial">·</td>
           <td class="center yes">✓</td>
           <td class="center yes">✓</td>
@@ -7207,21 +6209,21 @@ T4 SD:      hero → breadcrumbs → <b>tldr</b> → process → pricing-per-dis
         </tr>
       </tbody>
     </table>
-    <p class="muted" style="font-size: 12.5px; margin-top: 8px;">Колонка «Header minimal» = только логотип (по центру или слева) + 1 элемент справа (телефон / «← на сайт» / «Безопасная оплата»). Нет nav, нет mega-menu, нет user-menu.</p>
+    <p class="muted" style="font-size: 12.5px; margin-top: 8px;">Колонка «Header minimal» = только логотип (по центру или слева) + 1 элемент справа (телефон / «← на сайт»). Нет nav, нет mega-menu.</p>
 
     <h3 style="margin-top: 32px;">33.3 · Header · что обязательно одинаково везде</h3>
     <ul style="line-height: 1.8;">
-      <li><strong>Логотип:</strong> wordmark «ОБИХОД» (без суффиксов вроде «· магазин» / «· ЛК» / «· admin»). Suffix допустим только в admin <code>/admin</code> (Payload), потому что admin — отдельный визуальный мир.</li>
+      <li><strong>Логотип:</strong> wordmark «ОБИХОД» (без суффиксов вроде «· admin»). Suffix допустим только в admin <code>/admin</code> (Payload), потому что admin — отдельный визуальный мир.</li>
       <li><strong>Телефон:</strong> один номер из SiteChrome-config (Payload). Меняется в одном месте — отображается везде.</li>
-      <li><strong>Mega-menu пунктов:</strong> 6 направлений (Услуги / Районы / Магазин / Дизайн ландшафта / Кейсы / Цены) + 2 ссылки (Блог / Контакты). Состав не меняется по разделам.</li>
-      <li><strong>Auth-блок справа:</strong> logged-out → CTA «Войти + Регистрация»; logged-in → user-menu (см. §30).</li>
+      <li><strong>Mega-menu пунктов:</strong> 5 направлений (Услуги / Районы / Дизайн ландшафта / Кейсы / Цены) + 2 ссылки (Блог / Контакты). Состав не меняется по разделам.</li>
+      <li><strong>CTA справа:</strong> телефон (desktop) + кнопка «Получить смету» (<code>.mm-cta</code>, см. <a href="#nav">§09</a>). Входа и личного кабинета для клиентов нет — <a href="../team/adr/ADR-0022-customer-cabinet-sunset.md">ADR-0022</a>.</li>
       <li><strong>Sticky:</strong> header sticky на всех экранах desktop. Mobile — sticky тоже, но компактнее.</li>
       <li><strong>Skip-link</strong> «Перейти к содержимому» — обязательный (a11y).</li>
       <li><strong>Mobile breakpoint 860 px</strong> — burger-drawer вместо desktop-nav. Поведение идентично на всех страницах.</li>
     </ul>
 
     <h3 style="margin-top: 32px;">33.4 · Footer · полная anatomy + live mockup</h3>
-    <p>Footer — 4 колонки + brand-колонка слева + bottom-row с legal. Тон <strong>нейтральный системный</strong> (не services-TOV «бригадир», не shop-TOV «питомниковод» — общий обёрточный голос).</p>
+    <p>Footer — 3 колонки + brand-колонка слева + bottom-row с legal. Тон <strong>нейтральный системный</strong> (не services-TOV «бригадир» — общий обёрточный голос).</p>
 
     <p class="muted" style="font-size: 12px; font-family: var(--font-mono); margin-top: 12px;">33.4.1 · pre-footer CTA (на главной + страницах услуг + landing pages)</p>
     <div class="chrome-mock">
@@ -7239,11 +6241,11 @@ T4 SD:      hero → breadcrumbs → <b>tldr</b> → process → pricing-per-dis
         </div>
       </div>
     </div>
-    <p class="muted" style="font-size: 12.5px;">На shop-страницах меняется CTA: «Подобрать сорт под зону 4» / «Открыть резервы на сезон 2027». На LP-районах: «Вызвать бригаду в Раменское». В корзине, чекауте, кабинете, error-pages, auth-экранах <strong>pre-footer убираем</strong>.</p>
+    <p class="muted" style="font-size: 12.5px;">На LP-районах CTA меняется: «Вызвать бригаду в Раменское». На error-pages и thank-you-page <strong>pre-footer убираем</strong>.</p>
 
     <p class="muted" style="font-size: 12px; font-family: var(--font-mono); margin-top: 24px;">33.4.2 · footer · live preview</p>
     <div class="chrome-mock">
-      <div class="preview-label">footer · 1280 × auto · все страницы кроме auth/embed</div>
+      <div class="preview-label">footer · 1280 × auto · все страницы кроме embed</div>
       <div class="site-footer-mock">
         <div class="cols">
           <div class="brand-col">
@@ -7254,7 +6256,7 @@ T4 SD:      hero → breadcrumbs → <b>tldr</b> → process → pricing-per-dis
                 <div class="tagline">Хозяйство в надёжных руках</div>
               </div>
             </div>
-            <p>Комплексный подрядчик 4-в-1 для Москвы и МО: арбористика, чистка крыш, вывоз мусора, демонтаж. Плюс магазин саженцев и дизайн ландшафта. С 2020 года.</p>
+            <p>Комплексный подрядчик 4-в-1 для Москвы и МО: арбористика, чистка крыш, вывоз мусора, демонтаж. Плюс дизайн ландшафта. С 2020 года.</p>
             <div class="contacts">
               <a href="tel:+74950000000">+7 (495) 000-00-00</a>
               <a href="mailto:hi@obikhod.ru">hi@obikhod.ru</a>
@@ -7284,18 +6286,6 @@ T4 SD:      hero → breadcrumbs → <b>tldr</b> → process → pricing-per-dis
               <li><a href="#">Химки</a></li>
               <li><a href="#">Жуковский</a></li>
               <li><a href="#" style="opacity: 0.65;">Все 28 районов →</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h5>Магазин</h5>
-            <ul>
-              <li><a href="#">Деревья</a></li>
-              <li><a href="#">Кустарники</a></li>
-              <li><a href="#">Цветы и розы</a></li>
-              <li><a href="#">Крупномеры</a></li>
-              <li><a href="#">Резервы 2027</a></li>
-              <li><a href="#" style="opacity: 0.65;">Каталог целиком →</a></li>
             </ul>
           </div>
 
@@ -7333,31 +6323,28 @@ T4 SD:      hero → breadcrumbs → <b>tldr</b> → process → pricing-per-dis
         <tr><td>Brand (1.4×)</td><td>Logo + tagline · описание 1-2 предложения · телефон · email · адрес · часы</td><td>SiteChrome (Payload global)</td></tr>
         <tr><td>Услуги</td><td>5 верхних услуг + «Все услуги →»</td><td>Services collection (Payload)</td></tr>
         <tr><td>Районы</td><td>5 верхних районов + «Все 28 районов →»</td><td>Districts collection (Payload)</td></tr>
-        <tr><td>Магазин</td><td>5 верхних категорий + «Каталог целиком →»</td><td>Categories collection (apps/shop)</td></tr>
         <tr><td>Помощь</td><td>Кейсы / Блог / Гарантии / FAQ / B2B / Контакты</td><td>SiteChrome links (Payload)</td></tr>
       </tbody>
     </table>
 
     <h3 style="margin-top: 32px;">33.4.4 · Bottom-row legal · обязательные элементы</h3>
     <ul>
-      <li><code>© YYYY ИП/ООО ...</code> · ИНН · ОГРН/ОГРНИП — <strong>обязательно</strong> (требование ПП РФ № 1325 для Yandex Market и общая практика для интернет-торговли)</li>
+      <li><code>© YYYY ИП/ООО ...</code> · ИНН · ОГРН/ОГРНИП — <strong>обязательно</strong></li>
       <li>Политика обработки ПДн (152-ФЗ) — <strong>обязательно</strong></li>
-      <li>Договор-оферта — обязательно для shop, рекомендовано для услуг</li>
+      <li>Договор-оферта — рекомендовано для услуг</li>
       <li>Cookies / privacy — обязательно если есть аналитика</li>
       <li>Соцсети 1-2 (Telegram-канал · MAX) — опционально, не запрещены</li>
     </ul>
 
     <h3 style="margin-top: 32px;">33.4.5 · Mobile footer</h3>
-    <p>На mobile колонки «Услуги / Районы / Магазин / Помощь» схлопываются в accordion (4 раскрывающихся секции). Brand-колонка остаётся развёрнутой первой. Pre-footer CTA сохраняется (kept above accordion). Bottom-row legal — мелким шрифтом 11 px, разрывов между блоками legal — `·` сменяется на enter (вертикальный список).</p>
+    <p>На mobile колонки «Услуги / Районы / Помощь» схлопываются в accordion (3 раскрывающихся секции). Brand-колонка остаётся развёрнутой первой. Pre-footer CTA сохраняется (kept above accordion). Bottom-row legal — мелким шрифтом 11 px, разрывов между блоками legal — `·` сменяется на enter (вертикальный список).</p>
 
     <h3 style="margin-top: 32px;">33.5 · Exceptions · где chrome не canonical</h3>
     <table>
       <thead><tr><th>Экран</th><th>Что меняется</th><th>Зачем</th></tr></thead>
       <tbody>
-        <tr><td>Auth (`/auth/*`)</td><td>Header → только logo по центру + «← на сайт». Footer полностью убираем.</td><td>Focus на login/register. Любой клик в nav/mega-menu = abandonment.</td></tr>
-        <tr><td>Чекаут shop (`/shop/checkout`)</td><td>Header minimal: logo + телефон + «🔒 Безопасная оплата». Footer-light: только legal-row (без 4 колонок и без pre-footer).</td><td>Снижение abandonment на оплате. Доверие через minimal-chrome.</td></tr>
-        <tr><td>Чекаут услуг (PhotoQuoteForm в modal)</td><td>Modal внутри обычной страницы — chrome не убирается.</td><td>Modal накрывает фон, не нужен отдельный layout.</td></tr>
-        <tr><td>Thank-you-page (`/order/thank-you/<id>`)</td><td>Header partial (logo + контакты). Footer полный, pre-footer убираем.</td><td>Покупатель уже совершил действие — не давим конверсией повторно.</td></tr>
+        <tr><td>Заявка на услугу (PhotoQuoteForm в modal)</td><td>Modal внутри обычной страницы — chrome не убирается.</td><td>Modal накрывает фон, не нужен отдельный layout.</td></tr>
+        <tr><td>Thank-you-page (после заявки)</td><td>Header partial (logo + контакты). Footer полный, pre-footer убираем.</td><td>Клиент уже оставил заявку — не давим конверсией повторно.</td></tr>
         <tr><td>Embed widget (`/embed/calculator`)</td><td>Никакого chrome. Только калькулятор + минимальный «obihod.ru →» в углу.</td><td>Виджет встраивается на партнёрские сайты — там их chrome.</td></tr>
         <tr><td>Print-режим (CSS @media print)</td><td>Chrome скрыт через <code>display: none</code>, остаётся только контент.</td><td>Печать сметы / договора — без шапки и подвала сайта.</td></tr>
       </tbody>
@@ -7365,16 +6352,13 @@ T4 SD:      hero → breadcrumbs → <b>tldr</b> → process → pricing-per-dis
 
     <h3 style="margin-top: 32px;">33.6 · Iron rules site-chrome</h3>
     <ol style="line-height: 1.8;">
-      <li><strong>Один Header.tsx, один Footer.tsx</strong> — никаких <code>HeaderShop.tsx</code> / <code>HeaderLanding.tsx</code> / <code>FooterMinimal.tsx</code>. Варианты — пропсы того же компонента (<code>variant="minimal"</code> / <code>showPreFooter={false}</code>), не отдельные файлы.</li>
+      <li><strong>Один Header.tsx, один Footer.tsx</strong> — никаких <code>HeaderLanding.tsx</code> / <code>FooterMinimal.tsx</code>. Варианты — пропсы того же компонента (<code>variant="minimal"</code> / <code>showPreFooter={false}</code>), не отдельные файлы.</li>
       <li><strong>Логотип без суффиксов.</strong> «ОБИХОД» — точка. Suffix только в admin Payload (`/admin`).</li>
-      <li><strong>Все ссылки footer'a из Payload SiteChrome / Services / Districts / Categories</strong> — никакого хардкода. Изменение в одном месте → отображается везде.</li>
-      <li><strong>Pre-footer CTA контекстно-зависим</strong>, но всегда из конечного списка (services / shop / district / cabinet вариантов). Не allowed «придумай CTA для этой страницы» — только из утверждённого пула.</li>
+      <li><strong>Все ссылки footer'a из Payload SiteChrome / Services / Districts</strong> — никакого хардкода. Изменение в одном месте → отображается везде.</li>
+      <li><strong>Pre-footer CTA контекстно-зависим</strong>, но всегда из конечного списка (services / district вариантов). Не allowed «придумай CTA для этой страницы» — только из утверждённого пула.</li>
       <li><strong>Exception-страницы из §33.5 — закрытый список.</strong> Если нужен новый exception — pull request с обоснованием через `art` + `cpo`. Не «художник нарисовал минимальный header для красоты».</li>
       <li><strong>Header / Footer spec'и в коде</strong> — <a href="components/header/header.spec.md"><code>components/header/header.spec.md</code></a> и (новый) <code>components/footer/footer.spec.md</code> синхронизированы с этим разделом. При расхождении — первичен этот раздел, потом spec, потом prod-код.</li>
     </ol>
-
-    <h3 style="margin-top: 32px;">33.7 · Что shop-guide ошибочно делал (для исторической ясности)</h3>
-    <p>До v2.0 (2026-04-29) <code>brand-guide-shop.html</code> рендерил собственный header с suffix <code>· магазин</code> рядом с лого. Это был <strong>документационный артефакт</strong>, чтобы визуально отделить shop-render от services-render <em>в пределах самого гайда</em>. Прод-сайт никогда не имел такого suffix'а — там везде один Header.tsx без вариаций. После merge в v2.0 (см. footer этого файла) suffix исчез: shop-guide → redirect-stub, единый wordmark «ОБИХОД» во всех 35 секциях этого гайда. Если в команде кто-то по памяти продолжает считать, что у shop «свой header» — отправляйте на §33.</p>
 
     <div class="callout">
       <strong>Owner § 33:</strong> `art` (этот раздел) + `ui` (mockups) + `popanel` (SiteChrome global в Payload — реквизиты ИП, телефон, часы, соцсети) + `do` (CSS print + media print). Cross-team валидация — `cpo`. Любое расхождение между этим разделом и production — issue в `team/backlog.md` с тегом `chrome`.
@@ -7394,11 +6378,9 @@ T4 SD:      hero → breadcrumbs → <b>tldr</b> → process → pricing-per-dis
       <li style="opacity: 0.6;"><s><strong>Horizontal-compact lockup для website header</strong></s> — <span class="badge badge-live">✓ 2026-04-25</span> <a href="../agents/brand/logo/horizontal-compact.svg"><code>horizontal-compact.svg</code></a> 1280×480 (mark + wordmark, без tagline). Tagline «КРУГ СЕЗОНОВ» из <code>horizontal.svg</code> при высоте 32–60 px превращался в нечитаемые точки 3–6 px — теперь full-вариант только для marketing-применений ≥ 80 px по высоте.</li>
       <li style="opacity: 0.6;"><s><strong>Mega-menu Районы — dropdown с иконками-landmark</strong></s> — <span class="badge badge-live">✓ 2026-04-25</span> 3 кластера (Запад / Север / Юго-Восток МО), 8 районов + Москва, line-icon 24×24 stroke 1.5 на каждый: узел шоссе (Одинцово), холм с домом (Красногорск), купол монастыря (Истра), самолёт (Химки), водонапорная башня (Мытищи), ёлка с рельсами (Пушкино), мост через воду (Раменское), силуэт самолёта (Жуковский), компас (Москва). Featured: «Возим до 80 км от МКАД, фикс-цена за объект».</li>
       <li style="opacity: 0.6;"><s><strong>Mega-menu Кейсы — dropdown по тематикам</strong></s> — <span class="badge badge-live">✓ 2026-04-25</span> 3 темы: Аварийные / Сезонные / Под ключ для УК и ТСЖ. 9 кейсов с тематическими иконками (молния, ножницы, кувалда, здание, посёлок, FM-портфолио). Featured: «Свежий кейс УК Жилищник, −18% к смете».</li>
-      <li style="opacity: 0.6;"><s><strong>Магазин в навигации · flat-link v1</strong></s> — <span class="badge badge-live">✓ 2026-04-25</span> flat link между Кейсы и Цены — товары для сада и растения. Dropdown добавим позже, когда определимся с категориями каталога. Mobile accordion — заглушка «Скоро».</li>
-      <li style="opacity: 0.6;"><s><strong>Магазин — mega-menu 3 колонки + 9 shop-иконок</strong></s> — <span class="badge badge-live">✓ 2026-04-27</span> по запросу оператора расширили IA из 4 в 6 направлений. Mega-menu Магазина: <strong>Деревья</strong> (Плодовые / Колоновидные / Лиственные / Хвойные / Крупномеры) · <strong>Кустарники</strong> (Плодовые / Декоративные) · <strong>Цветы</strong> (Цветы / Розы). Featured: «Сезон 2026 — посадка с гарантией приживаемости 1 год». 9 line-icon 24×24 stroke 1.5 currentColor в стиле service-иконок: <code>fruit-tree</code>, <code>columnar-tree</code>, <code>fruit-bush</code>, <code>decor-bush</code>, <code>flowers</code>, <code>roses</code>, <code>large-trees</code>, <code>deciduous-tree</code>, <code>coniferous-tree</code>. Mobile accordion раскрыт под 9 категорий. CLAUDE.md immutable обновлён.</li>
-      <li style="opacity: 0.6;"><s><strong>«Дизайн ландшафта» — 5-е направление, flat-link</strong></s> — <span class="badge badge-live">✓ 2026-04-27</span> по запросу оператора. Один flat-link в навигации (после Магазина), отдельная страница «проект участка → посадка → смета». Подменю не нужно — направление монолитное. Иконки нет (flat-link без glyph). Mobile accordion — отдельная секция под 9 shop-категориями.</li>
+      <li style="opacity: 0.6;"><s><strong>«Дизайн ландшафта» — 5-е направление, flat-link</strong></s> — <span class="badge badge-live">✓ 2026-04-27</span> по запросу оператора. Один flat-link в навигации, отдельная страница «проект участка → посадка → смета». Подменю не нужно — направление монолитное. Иконки нет (flat-link без glyph). Mobile accordion — отдельная секция.</li>
       <li style="opacity: 0.6;"><s><strong>Error pages · 5 состояний (404/500/502/503/offline)</strong></s> — <span class="badge badge-live">✓ 2026-04-27</span> новая секция «11.5 · Страницы ошибок». 5 карточек с уникальной line-art иллюстрацией 96×96 (компас / пила-чихалка / разорванная цепь / табличка-перерыв / антенна без сигнала), eyebrow с HTTP-кодом, заголовок-человек, объяснение в TOV «бригадира», 1-2 CTA + fallback-канал. Карта файлов Next.js: <code>app/not-found.tsx</code> (404), <code>app/error.tsx</code> + <code>app/global-error.tsx</code> (500), nginx <code>/errors/502.html</code> + <code>503.html</code>. Принципы копирайта зафиксированы — финал тестов через <code>cw</code>, реализация — <code>ui</code>+<code>fe1</code>+<code>do</code> по art-brief.</li>
-      <li style="opacity: 0.6;"><s><strong>Иконография — единый реестр всех 4 линеек</strong></s> — <span class="badge badge-live">✓ 2026-04-27</span> закрыли пробел: до этого только Service Icons имели визуальный каталог в section #icons, а District (9 landmark-иконок) и Case (9 topic-иконок) жили только в mega-menu Районы / Кейсы как inline SVG — формально иконки были, но без витрины-реестра. Теперь в section «08 · Иконография» все 4 линейки одной плиткой: 22 service + 9 shop + 9 district (Одинцово / Красногорск / Истра / Химки / Мытищи / Пушкино / Раменское / Жуковский / Москва) + 9 case (storm-cleanup / emergency-removal / urgent-roof / pruning-season / winter-prep / post-renovation / uk-contract / cottage-village / fm-contract) = 49 glyph'ов в едином формате. Заголовок секции переписан с «Service Icons» на «Иконография · 49 line-art glyph'ов». Это закрывает учение «расхождение brand-guide ↔ Header.tsx» (см. learnings.md) — теперь дизайн-система и есть полный source of truth.</li>
+      <li style="opacity: 0.6;"><s><strong>Иконография — единый реестр всех 4 линеек</strong></s> — <span class="badge badge-live">✓ 2026-04-27</span> закрыли пробел: до этого только Service Icons имели визуальный каталог в section #icons, а District (9 landmark-иконок) и Case (9 topic-иконок) жили только в mega-menu Районы / Кейсы как inline SVG — формально иконки были, но без витрины-реестра. Теперь в section «08 · Иконография» все 4 линейки одной плиткой: 22 service + 9 district (Одинцово / Красногорск / Истра / Химки / Мытищи / Пушкино / Раменское / Жуковский / Москва) + 9 case (storm-cleanup / emergency-removal / urgent-roof / pruning-season / winter-prep / post-renovation / uk-contract / cottage-village / fm-contract) = 49 glyph'ов в едином формате. Заголовок секции переписан с «Service Icons» на «Иконография · 49 line-art glyph'ов». Это закрывает учение «расхождение brand-guide ↔ Header.tsx» (см. learnings.md) — теперь дизайн-система и есть полный source of truth.</li>
       <li style="opacity: 0.6;"><s><strong>Admin Panel v2 — финальные mockups (US-12)</strong></s> — <span class="badge badge-live">✓ 2026-04-27 (вечер)</span> расширили секцию «12 · Паблик → Payload» 6 живыми mockups: <strong>Login screen</strong> (lockup + карточка-форма, без декоров), <strong>Layout</strong> (sidebar 220 px с группами 01·Заявки / 02·Контент / 03·Медиа / 04·SEO / 05·Рамка / 09·Система + top-bar с breadcrumbs + search + profile), <strong>Dashboard</strong> (greeting + 4 stat-cards + 6 action-tiles + <strong>Page Catalog widget</strong> — таблица 53 опубликованных страниц по разделам, запрос оператора), <strong>Edit view с Tabs</strong> (длинные формы SiteChrome 405 строк / Services 30 полей разбиваются на 4-6 tabs), <strong>Status badges</strong> (Опубликован / Черновик / В архиве / Новая заявка), <strong>Bulk action bar</strong>, <strong>Empty / 500 / 403 states</strong> в стиле error-pages 11.5. v1 art-concept (палитра+токены+группы) сохранён, v2 надстраивает финальный visual layer — реализация <code>fe1</code>+<code>be4</code> ~10 чд по 6 brief'ам в <code>devteam/specs/US-12-admin-redesign/</code>.</li>
       <li style="opacity: 0.6;"><s><strong>Admin v1.8.1 — login lockup (SVG) + sidebar icons + interaction states palette</strong></s> — <span class="badge badge-live">✓ 2026-04-27 (поздний вечер)</span> 3 уточнения по запросу оператора: (1) <strong>Login screen</strong> — сырой текст «ОБИХОД» заменён на реальный SVG <code>horizontal-compact.svg</code> (знак «Круг сезонов» + wordmark) высотой 56 px, admin-tagline сохранена отдельной строкой; (2) <strong>Sidebar 14 пунктов</strong> получили ассоциативные line-icon 14×14 stroke 1.5 currentColor: inbox (Lead'ы) · 4-square (Услуги, метафора 4-в-1) · pin (Районы) · pin+crosshair (SD) · folder (Кейсы) · page (Блог) · person (Авторы) · 2-buildings (B2B) · image (Файлы) · globe+search (SEO) · arrows (Redirects) · frame (SiteChrome) · group (Users); opacity 0.65→0.9→1.0 по states; (3) новая подсекция <strong>«12.4.1 Interaction states palette»</strong> — все 5 групп интерактивных элементов admin (Tabs · Inputs · Buttons primary · Buttons secondary · Sidebar links) с визуальной демонстрацией каждого состояния (default / hover / active / pressed / focus-visible / loading / disabled / error) + token-map для каждого. Это закрывает пробел из первой версии где видны были только default+active+has-error. art-brief-ui.md и art-brief-ux.md обновлены — каждое spec теперь обязано содержать §States с матрицей токенов, ux усилен chek-листом state-walkthrough на каждый экран.</li>
       <li style="opacity: 0.6;"><s><strong>Header / MegaMenu prod-реализация</strong></s> — <span class="badge badge-live">✓ 2026-04-24</span> commits #23 sticky + dropdown nav, #24 меню под эталон brand-guide (плоские ссылки + CTA), #25 mega-menu 1:1 design-system spec — на prod через auto-deploy. Refresh продолжается параллельно (см. <code>site/components/marketing/Header.tsx</code>).</li>
@@ -7413,7 +6395,7 @@ T4 SD:      hero → breadcrumbs → <b>tldr</b> → process → pricing-per-dis
       <li style="opacity: 0.6;"><s><strong>DistrictCard spec</strong></s> — <span class="badge badge-live">✓ v0.9</span> <a href="components/district-card/district-card.spec.md"><code>district-card.spec.md</code></a> для programmatic SEO LP 28 районов.</li>
       <li style="opacity: 0.6;"><s><strong>FileUploader spec</strong></s> — <span class="badge badge-live">✓ v0.9</span> <a href="components/file-uploader/file-uploader.spec.md"><code>file-uploader.spec.md</code></a> для PhotoQuoteForm (drag-n-drop / HEIC конверсия / S3 upload / security).</li>
       <li style="opacity: 0.6;"><s><strong>Ассеты в <code>assets/</code></strong></s> — <span class="badge badge-live">✓ готово</span> папка создана с <code>photos/ brand/ icons-raw/ videos/ temp/</code> + README + <code>.gitignore</code> для тяжёлых медиа.</li>
-      <li style="opacity: 0.6;"><s><strong>Mega-menu · живой интерактивный пример</strong></s> — <span class="badge badge-live">✓ в этом гайде</span> см. раздел «09 · Навигация» выше — 3 работающих hover-dropdown'а (Услуги · Районы · Кейсы) + flat-ссылки (Магазин · Цены · Блог · Контакты) + mobile accordion с 7 секциями.</li>
+      <li style="opacity: 0.6;"><s><strong>Mega-menu · живой интерактивный пример</strong></s> — <span class="badge badge-live">✓ в этом гайде</span> см. раздел «09 · Навигация» выше — 3 работающих hover-dropdown'а (Услуги · Районы · Кейсы) + flat-ссылки (Дизайн ландшафта · Цены · Блог · Контакты) + mobile accordion с 6 секциями.</li>
       <li style="opacity: 0.6;"><s><strong>Pattern programmatic-landing</strong></s> — <span class="badge badge-live">✓ v1.0</span> <a href="patterns/programmatic-landing.md"><code>patterns/programmatic-landing.md</code></a>: секции, heading hierarchy, JSON-LD (Service + LocalBusiness + BreadcrumbList + FAQPage), canonical / noindex, CWV targets, interlinking. Закрывает главный блокер fe2 для 28 LP.</li>
       <li style="opacity: 0.6;"><s><strong>OG-image pattern</strong></s> — <span class="badge badge-live">✓ v1.0</span> <a href="patterns/og-image.md"><code>patterns/og-image.md</code></a>: edge-endpoint <code>/api/og</code>, 5 variants (default / service-district / service-index / blog / case), fonts handling, fallback static.</li>
       <li style="opacity: 0.6;"><s><strong>Breadcrumbs spec + JSON-LD</strong></s> — <span class="badge badge-live">✓ v1.0</span> <a href="components/breadcrumbs/breadcrumbs.spec.md"><code>breadcrumbs.spec.md</code></a> с полной BreadcrumbList-схемой, mobile truncate, TOV для названий.</li>
@@ -7450,7 +6432,7 @@ T4 SD:      hero → breadcrumbs → <b>tldr</b> → process → pricing-per-dis
 
 <footer class="site">
   <div class="wrap">
-    <p>design-system/brand-guide.html · <strong>v2.6</strong> · обновлён 2026-05-09 · единый source of truth (services + account + chrome) · логотип «Круг сезонов» v1.0 · <strong>40 line-art иконок в едином реестре</strong>: 22 service v0.9 + 9 district v0.9 + 9 case v0.9 + 5 error-state иллюстраций v0.1 + 13 admin-sidebar иконок · header-refresh (группы + dropdown + hamburger) · mega-menu live demo: Услуги + Районы + Кейсы dropdowns + flat-link <strong>Дизайн ландшафта</strong> · pagination / notifications / <strong>error pages 404·500·502·503·offline</strong> live demo · foundations: icons / a11y / microcopy / photography / print-materials · patterns: programmatic-landing / og-image / b2b-pitch-deck · 15 component-spec'ов · <strong>Admin Panel v2 mockups</strong>: Login (с реальным SVG-lockup) + Layout (sidebar с иконками) + Dashboard с Page Catalog + Edit-tabs + <strong>Interaction states palette (5 групп × 4-7 состояний)</strong> + Status + Bulk + Empty/500/403 states (US-12) · <strong>v2.1 · ACCOUNT & AUTH (2026-04-29):</strong> §30 Header · вход/ЛК (3 состояния header + user-menu dropdown + guest-pill активной заявки + mobile) + §31 Auth-экраны (login phone+SMS / email+pass / magic-link + OTP-экран + регистрация B2C+B2B + B2B onboarding с DaData + восстановление + 2FA + 8 состояний полей) + §32 Личный кабинет unified (cabinet shell с sidebar + dashboard со stat-grid и activity feed + lead-row для услуг + 5-шаговый timeline услуг + 5 статусов услуги ↔ amoCRM mapping + shared-разделы адреса/профиль/юрлица/уведомления/152-ФЗ право на забвение + 6 iron rules). Customers ≠ Users (Payload namespace). <strong>v2.2 · SITE CHROME UNIFIED (2026-04-29):</strong> §33 Header & Footer canonical — iron rule «один Header.tsx, один Footer.tsx, везде без вариаций» + полная anatomy footer'а (4 колонки + brand-col + bottom legal-row + pre-footer CTA + mobile accordion) + matrix типов страниц × параметров chrome + 6 deliberate exceptions (auth, thank-you, embed, error pages, print) + 7 iron rules. §30 и §31 кросс-залинкованы на §33. <strong>v2.3 · SHOP REMOVAL (2026-05-09):</strong> §15-§29 (Identity shop / TOV shop / Lexicon / Anti-words / Voice samples / Витрина / Поиск / Карточка товара / Корзина / Чекаут / Формы shop / Аккаунт shop / States / Photography / Heritage) удалены вместе с CSS-токенами .shop-section/.shop-eyebrow/.shop-scale и tov/shop.md по ADR-0020 (магазин саженцев → sunset, позиционирование «ландшафтный архитектор»). §32 кабинет упрощён: убраны заказы / избранное / shop-TOV-делимитер. id §1-14 / §30-33 не перенумеровывались — остаются стабильные якоря. Линк-целостность брандгайда восстановлена: 0 hits на `id=\"shop-`, `href=\"#shop-`, `class=\"shop-`. <strong>v2.4 · C2.5.A — 4 critical extensions (2026-05-09):</strong> для EPIC-SERVICE-PAGES-UX добавлены 4 service-page primitive-секции — §service-hero (T2/T3/T4 layer-варианты с photo-CTA primary + phone-CTA secondary + USP-bullets + locality-pill для T4 + mobile snapshot), §calculator-shell (UI-обёртка для US-8 photo→quote: idle / uploading / processing / success / error states + native camera intent на mobile + полный a11y контракт), §lead-form-full (расширение sustained §components/Форма: 8 полей с photo-upload + 152-ФЗ checkbox + 4-state submit flow + field-level error + mobile stacked), §pricing-table (3 варианта: single-list, 3-tier с highlighted middle, per-district adjustment + tabular-nums + mobile accordion fallback). Master-template из ADR-0021 ссылается на эти секции через mapping-table. C2.5.B (4 high) + C2.5.C (3 medium) — следующие waves. <strong>v2.5 · C2.5.B — 4 high extensions (2026-05-09):</strong> добавлены §process-steps (5 pillar-вариантов timeline 5-6 шагов: arboristika 6 / vyvoz-musora 5 / demontazh 6 / chistka-krysh 5 horizontal · ≥1100px / landshaft 6 + step-num pill 56px brand-color + step-eta pill + vertical/horizontal grid + mobile vertical card-list 44px num), §trust-block (3 варианта: hero-adjacent bar 4 pill / pricing-adjacent 4-card grid / pre-footer 6-card auto-fit grid + СРО + Росприроднадзор + ОПО 5 млн ₽ + 12 бригадиров + 4 года + 850+ объектов · click-through на /company/dokumenty/ + mobile 1-col stack &lt;414px / 2-col grid 415-768px), §mini-case (1 кейс на service-page · photo 16:9 + mc-badge + KPI 3-4 bullet'а с цифрами + thumb +N + per-pillar archive CTA · arboristika и landshaft demos · mobile stacked + KPI flex-row + thumb '+5' скрывается), §faq-accordion (native &lt;details&gt;/&lt;summary&gt; · 5-10 вопросов · faq-q-num + chevron rotate 180° + closed-by-default + 44pt touch + focus-visible 2px accent + arboristika 8 Q demo + states palette collapsed/expanded/focus + mobile tighter 16px / 15px summary + composer.ts JSON-LD FAQPage SEO output). Все 4 секции переиспользуют sustained <code>.sp-frame</code> + <code>.dodont</code> + <code>.callout</code> + <code>.eyebrow</code>, никаких inline-styles за пределами демо-data, native HTML+CSS (zero JS). <strong>v2.6 · C2.5.C — 3 medium extensions (2026-05-09):</strong> финальная wave для EPIC-SERVICE-PAGES-UX. §breadcrumbs (линейная навигация 2-4 уровня · <code>&lt;nav aria-label="breadcrumb"&gt;</code> + <code>&lt;ol&gt;</code> + <code>aria-current="page"</code> + chevron <code>›</code> через CSS-pseudo · per-layer T2 2 уровня / T3 3 уровня / T4 SD «Pillar в Районе» 3 уровня · hover dashed underline + focus 2px accent · mobile 11px tighter gap · sync с composer.ts BreadcrumbList JSON-LD US-3 done), §tldr-block («Кратко за 30 секунд» · 3-5 bullets с tabular-nums цифрами · accent-badge label + brand-color-bg subtle + border-left 3px accent · T2 5 bullets / T3 3 bullets variant · position после Hero, перед services-grid T2 / process T3+T4 · iron rule «дублирует claims, не заменяет, без воды»), §district-chips (подвал T2 · 24-36 city-ссылок на T4 SD · auto-fill grid 180px+ · priority districts с accent border + dot-маркер + жирный шрифт · hover translateY(-1px) + arrow translateX(2px) · mobile 2 col → 1 col &lt;414px · SEO checklist: SSR + no-nofollow + no-broken-chip · qa click-path-audit зона). 0 inline-styles вне demo, 0 custom JS, native HTML+CSS only. C2.5 wave полностью закрыт (4 critical + 4 high + 3 medium = 11 extensions). Brand-guide v2.6 готов для C3 Payload validators + EPIC-D вёрстки.</p>
+    <p>design-system/brand-guide.html · <strong>v2.7</strong> · обновлён 2026-10-18 · единый source of truth (services + chrome) · логотип «Круг сезонов» v1.0 · <strong>40 line-art иконок в едином реестре</strong>: 22 service v0.9 + 9 district v0.9 + 9 case v0.9 + 5 error-state иллюстраций v0.1 + 13 admin-sidebar иконок · header-refresh (группы + dropdown + hamburger) · mega-menu live demo: Услуги + Районы + Кейсы dropdowns + flat-link <strong>Дизайн ландшафта</strong> · pagination / notifications / <strong>error pages 404·500·502·503·offline</strong> live demo · foundations: icons / a11y / microcopy / photography / print-materials · patterns: programmatic-landing / og-image / b2b-pitch-deck · 15 component-spec'ов · <strong>Admin Panel v2 mockups</strong>: Login (с реальным SVG-lockup) + Layout (sidebar с иконками) + Dashboard с Page Catalog + Edit-tabs + <strong>Interaction states palette (5 групп × 4-7 состояний)</strong> + Status + Bulk + Empty/500/403 states (US-12) · <strong>v2.1 · ACCOUNT & AUTH (2026-04-29):</strong> §30 Header · вход/ЛК (3 состояния header + user-menu dropdown + guest-pill активной заявки + mobile) + §31 Auth-экраны (login phone+SMS / email+pass / magic-link + OTP-экран + регистрация B2C+B2B + B2B onboarding с DaData + восстановление + 2FA + 8 состояний полей) + §32 Личный кабинет unified (cabinet shell с sidebar + dashboard со stat-grid и activity feed + lead-row для услуг + 5-шаговый timeline услуг + 5 статусов услуги ↔ amoCRM mapping + shared-разделы адреса/профиль/юрлица/уведомления/152-ФЗ право на забвение + 6 iron rules). Customers ≠ Users (Payload namespace). <strong>v2.2 · SITE CHROME UNIFIED (2026-04-29):</strong> §33 Header & Footer canonical — iron rule «один Header.tsx, один Footer.tsx, везде без вариаций» + полная anatomy footer'а (4 колонки + brand-col + bottom legal-row + pre-footer CTA + mobile accordion) + matrix типов страниц × параметров chrome + 6 deliberate exceptions (auth, thank-you, embed, error pages, print) + 7 iron rules. §30 и §31 кросс-залинкованы на §33. <strong>v2.3 · SHOP REMOVAL (2026-05-09):</strong> §15-§29 (Identity shop / TOV shop / Lexicon / Anti-words / Voice samples / Витрина / Поиск / Карточка товара / Корзина / Чекаут / Формы shop / Аккаунт shop / States / Photography / Heritage) удалены вместе с CSS-токенами .shop-section/.shop-eyebrow/.shop-scale и tov/shop.md по ADR-0020 (магазин саженцев → sunset, позиционирование «ландшафтный архитектор»). §32 кабинет упрощён: убраны заказы / избранное / shop-TOV-делимитер. id §1-14 / §30-33 не перенумеровывались — остаются стабильные якоря. Линк-целостность брандгайда восстановлена: 0 hits на `id=\"shop-`, `href=\"#shop-`, `class=\"shop-`. <strong>v2.4 · C2.5.A — 4 critical extensions (2026-05-09):</strong> для EPIC-SERVICE-PAGES-UX добавлены 4 service-page primitive-секции — §service-hero (T2/T3/T4 layer-варианты с photo-CTA primary + phone-CTA secondary + USP-bullets + locality-pill для T4 + mobile snapshot), §calculator-shell (UI-обёртка для US-8 photo→quote: idle / uploading / processing / success / error states + native camera intent на mobile + полный a11y контракт), §lead-form-full (расширение sustained §components/Форма: 8 полей с photo-upload + 152-ФЗ checkbox + 4-state submit flow + field-level error + mobile stacked), §pricing-table (3 варианта: single-list, 3-tier с highlighted middle, per-district adjustment + tabular-nums + mobile accordion fallback). Master-template из ADR-0021 ссылается на эти секции через mapping-table. C2.5.B (4 high) + C2.5.C (3 medium) — следующие waves. <strong>v2.5 · C2.5.B — 4 high extensions (2026-05-09):</strong> добавлены §process-steps (5 pillar-вариантов timeline 5-6 шагов: arboristika 6 / vyvoz-musora 5 / demontazh 6 / chistka-krysh 5 horizontal · ≥1100px / landshaft 6 + step-num pill 56px brand-color + step-eta pill + vertical/horizontal grid + mobile vertical card-list 44px num), §trust-block (3 варианта: hero-adjacent bar 4 pill / pricing-adjacent 4-card grid / pre-footer 6-card auto-fit grid + СРО + Росприроднадзор + ОПО 5 млн ₽ + 12 бригадиров + 4 года + 850+ объектов · click-through на /company/dokumenty/ + mobile 1-col stack &lt;414px / 2-col grid 415-768px), §mini-case (1 кейс на service-page · photo 16:9 + mc-badge + KPI 3-4 bullet'а с цифрами + thumb +N + per-pillar archive CTA · arboristika и landshaft demos · mobile stacked + KPI flex-row + thumb '+5' скрывается), §faq-accordion (native &lt;details&gt;/&lt;summary&gt; · 5-10 вопросов · faq-q-num + chevron rotate 180° + closed-by-default + 44pt touch + focus-visible 2px accent + arboristika 8 Q demo + states palette collapsed/expanded/focus + mobile tighter 16px / 15px summary + composer.ts JSON-LD FAQPage SEO output). Все 4 секции переиспользуют sustained <code>.sp-frame</code> + <code>.dodont</code> + <code>.callout</code> + <code>.eyebrow</code>, никаких inline-styles за пределами демо-data, native HTML+CSS (zero JS). <strong>v2.6 · C2.5.C — 3 medium extensions (2026-05-09):</strong> финальная wave для EPIC-SERVICE-PAGES-UX. §breadcrumbs (линейная навигация 2-4 уровня · <code>&lt;nav aria-label="breadcrumb"&gt;</code> + <code>&lt;ol&gt;</code> + <code>aria-current="page"</code> + chevron <code>›</code> через CSS-pseudo · per-layer T2 2 уровня / T3 3 уровня / T4 SD «Pillar в Районе» 3 уровня · hover dashed underline + focus 2px accent · mobile 11px tighter gap · sync с composer.ts BreadcrumbList JSON-LD US-3 done), §tldr-block («Кратко за 30 секунд» · 3-5 bullets с tabular-nums цифрами · accent-badge label + brand-color-bg subtle + border-left 3px accent · T2 5 bullets / T3 3 bullets variant · position после Hero, перед services-grid T2 / process T3+T4 · iron rule «дублирует claims, не заменяет, без воды»), §district-chips (подвал T2 · 24-36 city-ссылок на T4 SD · auto-fill grid 180px+ · priority districts с accent border + dot-маркер + жирный шрифт · hover translateY(-1px) + arrow translateX(2px) · mobile 2 col → 1 col &lt;414px · SEO checklist: SSR + no-nofollow + no-broken-chip · qa click-path-audit зона). 0 inline-styles вне demo, 0 custom JS, native HTML+CSS only. C2.5 wave полностью закрыт (4 critical + 4 high + 3 medium = 11 extensions). Brand-guide v2.6 готов для C3 Payload validators + EPIC-D вёрстки. <strong>v2.7 · CABINET SUNSET + SHOP REMNANTS (2026-10-18):</strong> по ADR-0022 клиентский аккаунт выведен из проекта — удалены §30 Header · вход/ЛК (auth-states, user-menu, guest-pill) и §31 Auth-экраны; §32 «Личный кабинет» сокращён до §32 «Статусы заявки» (<code>#lead-status</code> — канон <code>Leads.status</code> для админки и amoCRM). Header справа: телефон + «Получить смету» вместо «Войти + Регистрация». Добиты хвосты магазина, пропущенные в v2.3: 9 shop-иконок в §08, «Магазин» в mega-menu §09, колонка «Магазин» в footer-mockup и shop/cabinet/auth-строки §33, §33.7, CSS витрины / карточки товара / корзины / чекаута / кабинета / auth.</p>
     <p>источники: <a href="../contex/03_brand_naming.md">contex/03_brand_naming.md</a> · <a href="../site/app/globals.css">site/app/globals.css</a> · <a href="README.md">design-system/README.md</a> · <a href="../devteam/art.md">devteam/art.md</a> · <a href="../devteam/specs/admin-visual/art-concept.md">admin-visual/art-concept.md</a></p>
   </div>
 </footer>

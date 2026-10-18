@@ -1618,7 +1618,7 @@
  * D4 audit обнаружил 9/13 visible touch targets <44pt на khimki 414×896 (T4 SD)
  * + 4-5 small на vyvoz-musora / uborka-territorii / dizain-landshafta 375 + 414.
  * Эти overrides применяются ТОЛЬКО на mobile (≤900px) к legacy chrome
- * (.mm-* header, .site-footer-mock, .auth-cta) — desktop layouts не затронуты.
+ * (.mm-* header, .site-footer-mock) — desktop layouts не затронуты.
  *
  * sp-* primitives (D3 wave A) уже compliant: .sp-faq-item summary {min-height: 44px},
  * .sp-dc-chip {min-height: 44px}, .sp-btn-photo/.sp-btn-phone {min-height: 56px}.
@@ -1650,13 +1650,6 @@
     display: inline-flex;
     align-items: center;
     padding: 0 4px;
-  }
-
-  /* Auth-CTA buttons — повышаем .btn-register с 40 до 44 + .btn-login до 44 */
-  header.site-mm.mm-demo .auth-cta .btn-login,
-  header.site-mm.mm-demo .auth-cta .btn-register {
-    min-height: 44px;
-    padding: 11px 16px;
   }
 
   /* Brand-link — logo wrapper должен быть tap-area */
@@ -1691,8 +1684,6 @@
 @media (max-width: 414px) {
   header.site-mm.mm-demo .mm-col a,
   header.site-mm.mm-demo .mm-mobile .mm-mobile-items a,
-  header.site-mm.mm-demo .auth-cta .btn-login,
-  header.site-mm.mm-demo .auth-cta .btn-register,
   header.site-mm.mm-demo .mm-brand,
   .site-footer-mock ul a,
   .site-footer-mock .brand-col .contacts a,

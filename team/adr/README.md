@@ -35,7 +35,7 @@ Architecture Decision Records. Владелец — `tamd`. Нумерация �
 - Выбор библиотеки верхнего уровня (ORM, auth, queue, state management).
 - Активация отдельного Go-микросервиса (`be1`/`be2` в резерве — только по ADR).
 - Изменение границ подсистемы (вынесение pipeline фото→смета в отдельный
-  сервис, выделение B2B-кабинета, и т.п.).
+  сервис и т.п.).
 
 Стек зафиксирован в [CLAUDE.md](../../CLAUDE.md) § Technology Stack. Пересмотр
 стека — отдельный ADR с явным обоснованием.
@@ -49,8 +49,9 @@ Architecture Decision Records. Владелец — `tamd`. Нумерация �
 | [0003](ADR-0003-blocks-pattern.md) | Blocks pattern для Payload коллекций | Accepted | 2026-04-25 |
 | [0004](ADR-0004-team-restructure-v2.md) | Team restructure v2 (30 → 42 ролей в 7 командах) | Accepted | 2026-04-28 |
 | [0005](ADR-0005-admin-customization-strategy.md) | Admin Customization Strategy (Payload 3 admin под brand-guide §12) | Accepted (partial supersede by 0007) | 2026-04-28 |
-| [0006](ADR-0006-shop-data-storage.md) | Shop data storage architecture (apps/shop · Drizzle · своя schema · JWT SSO) | Proposed | 2026-04-28 |
+| 0006 | Shop data storage architecture (apps/shop · Drizzle · своя schema · JWT SSO) | Superseded by ADR-0020 (файл удалён) | 2026-04-28 |
 | [0007](ADR-0007-payload-login-customization.md) | Payload 3.84 admin Login UI customization (CSS-only Approach E) | Accepted | 2026-04-29 |
 | [0008](ADR-0008-drop-linear-task-tracker.md) | Drop Linear task tracker (specs/ + team/backlog.md sole source of truth) | Accepted | 2026-04-29 |
 | [0009](ADR-0009-tsx-payload-cjs-shim.md) | tsx + Payload Local API CJS-shim для @next/env default-import | Accepted | 2026-04-29 |
 | [0010](ADR-0010-payload-views-list-customization.md) | Payload 3.84 list-view customization — skip registration, public exports only (W5 part 2 closure) | Accepted | 2026-04-30 |
+| [0022](ADR-0022-customer-cabinet-sunset.md) | Customer cabinet sunset — без личного кабинета и продажи товаров | Accepted | 2026-10-18 |

@@ -11,7 +11,7 @@ skills: [ui-ux-pro-max, design, design-system, frontend-design, accessibility]
 
 ## Мандат
 
-UI/UX для всего проекта: сайт услуг, admin панель, магазин. Макеты, wireframes,
+UI/UX для всего проекта: сайт услуг, admin панель. Макеты, wireframes,
 design tokens, обновление `design-system/brand-guide.html`.
 
 Заменяю: art, ux, ui, ux-shop, ux-panel.
@@ -33,7 +33,7 @@ design tokens, обновление `design-system/brand-guide.html`.
 Секции:
 - §1–14: Services (Caregiver+Ruler) — сайт услуг
 - §12: Payload admin — кастомные компоненты
-- §15–29: Shop (Caregiver+Sage) — магазин
+- §32: Статусы заявки · §33: Header + Footer (site-chrome)
 
 ## Чем НЕ занимаюсь
 

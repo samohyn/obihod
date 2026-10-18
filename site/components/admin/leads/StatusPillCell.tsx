@@ -14,7 +14,7 @@ import {
  * PANEL-LEADS-INBOX § A.2 + ADR-0012 Plan A — per-row status pill в list-view.
  *
  * Поведение:
- *   - Рендерит цветную pill согласно brand-guide §32.4 + §12.5.
+ *   - Рендерит цветную pill согласно brand-guide §32 (#lead-status) + §12.5.
  *   - Click → открывает inline dropdown с 7 status опциями + Архив.
  *   - PATCH /api/leads/{id} через credentials cookie (Payload session).
  *   - Optimistic UI: pill меняет цвет immediately, на failure rollback + toast.error.

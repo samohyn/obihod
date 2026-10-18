@@ -8,7 +8,7 @@
  *   - site/components/admin/leads/LeadsQuickFilters.tsx
  *   - site/components/admin/leads/StatusHistoryField.tsx
  *
- * Канон brand-guide §32.4 (7 опций).
+ * Канон brand-guide §32 «Статусы заявки» (#lead-status, 7 опций).
  */
 
 export const LEAD_STATUSES = [
@@ -35,7 +35,7 @@ export const LEAD_STATUS_LABELS: Record<LeadStatus, string> = {
 
 /**
  * Опции для Payload `select` field. Импортируется в Leads.ts.
- * Stable order = brand-guide §32.4 timeline.
+ * Stable order = brand-guide §32 (#lead-status).
  */
 export const LEAD_STATUS_OPTIONS = LEAD_STATUSES.map((value) => ({
   label: LEAD_STATUS_LABELS[value],
