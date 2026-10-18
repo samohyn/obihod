@@ -2,6 +2,27 @@
 
 _Обновляется в конце сессии. Короткий срез: что сделано, что в работе, что следующее. Цель — дать следующей сессии контекст за 30 секунд._
 
+## Где мы сейчас (2026-10-18 ~23:00 MSK) — личный кабинет и продажа товаров выпилены (ADR-0022)
+
+- Оператор: кабинет / клиентские аккаунты / продажа товаров — не делаем. [ADR-0022](../../team/adr/ADR-0022-customer-cabinet-sunset.md).
+- **Сайт:** `Header.tsx` — мёртвые кнопки «Войти / Регистрация» → `<Link className="mm-cta">Получить смету</Link>` (`/kalkulyator/foto-smeta/`). Цвет текста задан unlayered в `globals.css` (`homepage-classic.css` в `@layer components` проигрывает `a { color: inherit }`). Из `homepage-classic.css` / `service-pages.css` / `public/*.css` удалены правила shop/cabinet/auth (−~1500 строк). Комментарии «brand-guide §32.4» → «§32 (#lead-status)».
+- **brand-guide v2.7:** §30/§31 удалены, §32 → «Статусы заявки» (канон `Leads.status`), добиты shop-хвосты (§08 иконки, §09 «Магазин», §33 строки + §33.7), CSS почищен скриптом.
+- **newui/**: «Магазин» из mega-menu/footer, auth-CTA → `.mm-cta`. Доки: CLAUDE.md, WORKFLOW, design, arch, ONBOARDING, PROJECT_CONTEXT (баннер + roadmap), `.planning/PROJECT.md`, adr/README, backlog (`TASK-CABINET-SUNSET`).
+- Проверки: type-check / lint (0 errors) / format:check зелёные; browser smoke `/`, `/arboristika/`, `/kalkulyator/foto-smeta/` → 200, шапка на 1440/860/390 ок.
+- **Задеплоено на прод** 2026-10-18 ~23:00 по запросу оператора: rsync рабочего дерева → `releases/20261018225319`, сборка на сервере, `current` → он, `pm2 restart`. Откат: `ln -sfn releases/20261018211909 /home/deploy/obikhod/current && sudo -u deploy pm2 restart obikhod`. Smoke: `/`, `/arboristika/`, `/kalkulyator/foto-smeta/`, `/admin/login/`, `/api/health/` → 200, `/shop/` → 410, шапка «Получить смету» (светлый текст), медиа 200.
+- **В git не закоммичено** (ветка `docs/onboarding-guide`, вперемешку с tseny-fix) — прод сейчас впереди репозитория. `graphify update .` падает (`networkx` без `louvain_communities`).
+- Давнее (не трогал): на ≤900 телефон в шапке виден — `service-pages.css` D5 перебивает `display:none` из layered CSS, правый блок переносится под лого.
+
+## Где были раньше (2026-10-18 ~21:45 MSK) — прод переехал на новый VPS 89.111.141.79, поднят с нуля вручную
+
+- Старый Beget VPS `45.153.190.107` недоступен (SSH/HTTP timeout), его БД и media потеряны. DNS `obikhod.ru` + `www` → **`89.111.141.79`** (Ubuntu 24.04, 2 CPU / 4 GB + 4 GB swap). Доступ: `ssh root@89.111.141.79`.
+- Сервер: `deploy/server-bootstrap.sh` (node 22, pnpm 10.33, pm2 под `deploy` + systemd `pm2-deploy`, PostgreSQL 16.15, nginx, ufw), Let's Encrypt через certbot (автопродление).
+- БД = дамп **локальной** dev-БД (Docker `obikhod_postgres`, контент на 2026-05-08) + `seed-landshaft-pillar.ts`. Удалены тестовые leads и dev-юзеры `*@obikhod.local`; пароль `samohingeorgy@gmail.com` сброшен. `payload_migrations` — все 30 миграций помечены applied. Контент, который на старом проде правили direct SQL 05-10…05-11 (master-template v2, pricing/process, фото hero 61-73), **не восстановлен**.
+- Код: рабочее дерево ветки `docs/onboarding-guide` (= main + CtaBanner title fix + uncommitted tseny `intro` fix) залит rsync в `releases/20261018211909`, собран на сервере, `current` → он, `media` → `shared/media`.
+- nginx (вне репо): `client_max_body_size 25m`, `proxy_redirect` (Next за прокси отдавал `Location: https://localhost:3000/...` → ломал 2FA-passthrough после логина), www→apex на уровне nginx (proxy.ts редиректил на `:3000`).
+- **Сайт закрыт от индексации** (запрос оператора 2026-10-18): в nginx `add_header X-Robots-Tag "noindex, nofollow, noarchive" always` + `location = /robots.txt` → `Disallow: /` (перекрывает `app/robots.ts`); в `shared/.env` закомментирован `INDEXNOW_KEY` (иначе `/api/revalidate` пушит URL в Яндекс/Bing). Открыть = удалить блок в `/etc/nginx/sites-available/obikhod.ru`, раскомментировать ключ, reload nginx + `pm2 restart obikhod`.
+- **Следующее:** (1) закоммитить tseny-fix + смержить в main; (2) обновить GitHub Secrets `BEGET_SSH_*` на новый сервер (ключ `/root/.ssh/obikhod_deploy_ed25519`, user `deploy`, path `/home/deploy/obikhod`); (3) в `deploy.yml` добавить `ln -sfn $BP/shared/media media`, иначе первый CI-деплой потеряет картинки; (4) задать `TELEGRAM_OPERATOR_CHAT_ID`, `NEXT_PUBLIC_YANDEX_METRIKA_ID` в `shared/.env`; (5) битые ссылки в chrome: `/politika/`, `/oferta/`, `/ceny/`.
+
 ## Где мы сейчас (2026-05-11 ~17:05 MSK) — EPIC-SERVICE-PAGES-REDESIGN master-template rollout на 4 pillars (arboristika / chistka-krysh / demontazh / dizain-landshafta)
 
 **cw+dev (autonomous mandate от po):** раскатал паттерн pilot /vyvoz-musora/ на 4 оставшихся pillar.
