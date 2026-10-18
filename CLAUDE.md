@@ -10,6 +10,7 @@
 **Главная цель сайта:** приносить квалифицированные заявки (лиды) на услуги.
 
 > Магазин саженцев и растений выведен из проекта 2026-05-09 (ADR-0020).
+> Личного кабинета и клиентских аккаунтов нет, товары не продаём (ADR-0022, 2026-10-18).
 > Landshaft — 5-й pillar услуг, не extension.
 
 ## Immutable: не меняй без явного запроса оператора
@@ -18,7 +19,7 @@
 |---|---|---|
 | Бренд | **ОБИХОД** (кириллица) | [03_brand_naming.md](contex/03_brand_naming.md) |
 | Позиционирование | «Порядок под ключ», архетип Caregiver + Ruler | там же |
-| Source of truth UI/UX + TOV | [design-system/brand-guide.html](design-system/brand-guide.html) v2.3 (после EPIC-SHOP-REMOVAL.W3) — **единственный** файл для всей команды. §1-14 services (Caregiver+Ruler), §30-32 account & auth, §33 site-chrome canonical. §15-29 shop удалены 2026-05-09 (ADR-0020). | оператор 2026-05-09 |
+| Source of truth UI/UX + TOV | [design-system/brand-guide.html](design-system/brand-guide.html) v2.7 — **единственный** файл для всей команды. §1-14 services (Caregiver+Ruler), §32 статусы заявки, §33 site-chrome canonical. §15-29 shop удалены 2026-05-09 (ADR-0020), §30-31 вход/auth и личный кабинет — 2026-10-18 (ADR-0022). | оператор 2026-10-18 |
 | Хостинг | **Beget (VPS/Cloud)** на старте; YC/Selectel при росте B2B-SLA | [04_competitor_tech_stacks.md](contex/04_competitor_tech_stacks.md) |
 | Task tracker | Только [specs/](specs/) + `team/backlog.md`. Linear отключён 2026-04-29 | оператор |
 
@@ -30,7 +31,7 @@
    нужный skill через Skill tool. Нет skill — передаёт `po`.
 2. **Design-system awareness** — перед UI/UX/контентной/TOV-задачей сверка с
    [design-system/brand-guide.html](design-system/brand-guide.html) (один файл для всех:
-   §1-14 services, §30-32 auth, §33 site-chrome). Никаких «дизайнерских импровизаций» вне
+   §1-14 services, §32 статусы заявки, §33 site-chrome). Никаких «дизайнерских импровизаций» вне
    токенов. **Iron rule «brand-guide-first» (2026-05-09):** UI компоненты только из
    brand-guide; если §нет — design сначала PR в brand-guide, потом fe верстает.
 3. **Green CI before merge** — `dev`/`fe` гоняют `type-check + lint + format:check`
@@ -57,7 +58,7 @@ obikhod/
 │   ├── archive/                 # старые роли (42 → 10 2026-05-08, → 9 2026-05-09 после shop sunset)
 │   └── release-notes/           # история релизов
 ├── contex/          # Стратегические артефакты (01_, 02_, … — нумерация по порядку)
-├── design-system/   # brand-guide.html — единый source of truth (§1-14 services, §30-32 account, §33 chrome)
+├── design-system/   # brand-guide.html — единый source of truth (§1-14 services, §32 статусы заявки, §33 chrome)
 ├── site/            # Next.js 16 + Payload 3 (prod-код)
 ├── seosite/         # SEO-артефакты: keyword research, URL-map, decisions
 ├── content/  assets/  graphify-out/  screen/
@@ -175,6 +176,7 @@ dev/fe → PR открыт → qa verify (code review + E2E + browser smoke)
 
 - Менять бренд / TOV / оффер / стек без явного запроса оператора в этой сессии.
 - Предлагать Tilda / WordPress / Bitrix.
+- Возвращать личный кабинет, клиентские аккаунты или продажу товаров без нового ADR (ADR-0022).
 - Финтех-следы в агентах (банк, брокер, ЦБ РФ, KYC, AML).
 - Создавать стратегические доки вне `contex/` (нумерация `05_…`, `06_…` по порядку).
 - `devops` деплоит без трёх зелёных: qa approve + po approve + CI зелёный.

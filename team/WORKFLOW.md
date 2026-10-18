@@ -1,7 +1,7 @@
 # Обиход — Workflow команды (Scrum)
 
-Живой регламент работы **10-ролевой Scrum-команды** над сайтом **Обиход** и сопутствующими
-продуктами (магазин саженцев, admin-панель, SEO-программа).
+Живой регламент работы **9-ролевой Scrum-команды** над сайтом **Обиход** и сопутствующими
+продуктами (admin-панель, SEO-программа).
 
 > Приоритет источников: `CLAUDE.md` → `team/PROJECT_CONTEXT.md` → `contex/*.md` → этот файл.
 
@@ -11,14 +11,14 @@
 
 - **Продукт:** [obikhod.ru](https://obikhod.ru) — подрядчик 4-в-1 для B2C и B2B в Москве и МО
 - **Стек:** Next.js 16 + Payload CMS 3 + PostgreSQL 16 + Beget VPS
-- **Код:** `site/` (основной), `apps/shop/` (магазин — пока не запущен)
+- **Код:** `site/`
 - **CI/CD:** GitHub Actions (`ci.yml` + `deploy.yml`)
 - **Task-tracker:** `team/backlog.md` + `specs/<ID>/spec.md`
 - **Язык:** контент — русский; код, identifiers, commit messages — английский
 
 ---
 
-## 1. Команда — 10 ролей
+## 1. Команда — 9 ролей
 
 | Роль | Файл | Зона |
 |------|------|------|
@@ -31,7 +31,6 @@
 | `qa` | [team/qa.md](qa.md) | E2E тесты, code review, релизный gate |
 | `devops` | [team/devops.md](devops.md) | CI/CD, Beget VPS, merge, деплой |
 | `arch` | [team/arch.md](arch.md) | ADR, архитектура (on-demand) |
-| `shop` | [team/shop.md](shop.md) | Магазин `apps/shop/` (спящий) |
 
 **Sticky sessions:** `@po`, `@dev`, `@fe`, `@seo`, `@cw`, `@design`, `@qa`, `@devops`, `@arch`
 
@@ -166,6 +165,5 @@ Merge = **CI зелёный** + **qa approve** + **po approve**.
 | qa-site, qa-panel, qa-shop, cr-site, cr-panel, cr-shop, release, leadqa | `qa` |
 | do | `devops` |
 | tamd | `arch` |
-| poshop, sa-shop, be-shop, fe-shop | `shop` (когда активен) |
 
 Старые файлы ролей — в `team/archive/`.

@@ -307,7 +307,7 @@ header.site-mm.mm-demo .mm-brand .mm-logo-svg { height: 40px; width: calc(40px *
 @media (max-width: 900px) { header.site-mm.mm-demo .mm-brand .mm-logo-svg { height: 36px; width: calc(36px * 1280 / 480); } }
 @media (max-width: 600px) { header.site-mm.mm-demo .mm-brand .mm-logo-svg { height: 30px; width: calc(30px * 1280 / 480); } }
 
-/* Right-block (phone + auth-cta) — заменяет .mm-cta из demo по §30.1 logged-out */
+/* Right-block (phone + .mm-cta «Получить смету» из §09) */
 header.site-mm.mm-demo .mm-right {
   margin-left: auto;
   display: inline-flex;
@@ -327,21 +327,9 @@ header.site-mm.mm-demo .mm-phone:hover { color: var(--c-primary); text-decoratio
 @media (max-width: 1100px) {
   header.site-mm.mm-demo .mm-phone { display: none; }
 }
-@media (max-width: 900px) {
-  header.site-mm.mm-demo .auth-cta .btn-login { display: none; }
-}
-
-/* Fix: <button> в браузере не наследует font-family от body — auth-кнопки
-   из §30 рендерились системным шрифтом, а .mm-trigger пунктов меню — Golos Text.
-   Унифицируем семейство и приближаем размер к .mm-trigger (15px). */
-header.site-mm.mm-demo .auth-cta .btn-login,
-header.site-mm.mm-demo .auth-cta .btn-register {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: -0.005em;
-  line-height: 1;
-}
+/* demo §09 прячет .mm-cta на ≤900, на сайте это единственный CTA шапки — держим видимым */
+header.site-mm.mm-demo .mm-cta { display: inline-flex; align-items: center; margin-left: 0; font-family: var(--font-sans); line-height: 1; white-space: nowrap; }
+header.site-mm.mm-demo .mm-cta:hover { background: var(--c-primary-ink); }
 
 /* ═══════════════════════════════════════════════════════════════════
    MOBILE OVERRIDES (≤900 / ≤768 / ≤600 / ≤414)
@@ -357,7 +345,7 @@ header.site-mm.mm-demo .auth-cta .btn-register {
     row-gap: 8px;
   }
   header.site-mm.mm-demo .mm-brand img { height: 36px; }
-  /* nav на отдельной строке под logo+auth */
+  /* nav на отдельной строке под logo+CTA */
   header.site-mm.mm-demo .mm-nav {
     width: 100%;
     order: 3;
@@ -373,7 +361,7 @@ header.site-mm.mm-demo .auth-cta .btn-register {
     min-height: 44px; /* touch-target WCAG 2.5.5 */
   }
   header.site-mm.mm-demo .mm-right { gap: 10px; }
-  header.site-mm.mm-demo .auth-cta .btn-register { min-height: 40px; padding: 10px 16px; }
+  header.site-mm.mm-demo .mm-cta { min-height: 40px; padding: 10px 16px; }
 
   /* Hero — ужать выноску на мобиле, фон-pattern глуше */
   .hp-hero { padding: 40px 0 56px; }
@@ -410,8 +398,8 @@ header.site-mm.mm-demo .auth-cta .btn-register {
   :root { --pad: 16px; }
   header.site-mm.mm-demo .mm-brand img { height: 30px; }
   header.site-mm.mm-demo .mm-trigger { font-size: 13px; padding: 10px 10px; }
-  /* phone и login уже скрыты выше; оставляем только Регистрация */
-  header.site-mm.mm-demo .auth-cta .btn-register { font-size: 13px; padding: 8px 12px; }
+  /* phone скрыт выше — в шапке остаётся только CTA */
+  header.site-mm.mm-demo .mm-cta { font-size: 13px; padding: 8px 12px; }
 
   section.hp-section { padding: 40px 0; }
   section.hp-section.alt { padding: 40px 0; }

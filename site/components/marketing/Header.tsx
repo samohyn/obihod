@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { DEFAULT_SITE_CHROME, getSiteChrome } from '@/lib/chrome'
 /**
- * Header — главная навигация, mega-menu (Услуги / Районы), auth CTA.
+ * Header — главная навигация, mega-menu (Услуги / Районы), CTA «Получить смету».
  * Source-of-truth: newui/_header.html (canonical mockup).
  * Stack: Server Component, mega-menu работает на pure CSS :hover (см. .mm-has-drop:hover).
  *
@@ -688,14 +688,9 @@ export async function Header() {
           <a className="mm-phone" href={`tel:${phoneE164}`}>
             {phoneDisplay}
           </a>
-          <div className="auth-cta">
-            <button className="btn-login" type="button">
-              Войти
-            </button>
-            <button className="btn-register" type="button">
-              Регистрация
-            </button>
-          </div>
+          <Link className="mm-cta" href="/kalkulyator/foto-smeta/">
+            Получить смету
+          </Link>
         </div>
       </div>
     </header>

@@ -55,7 +55,7 @@ Hero (с form-card справа) · Услуги pillars · Как мы рабо
 2. Скопировать блок `<header>...</header>` в каждый макет (homepage.html, homepage-classic.html и любые будущие).
 3. Sanity-check всех макетов в браузере на 1024 / 768 / 375.
 
-CSS — только в общих файлах (`brand-guide-styles.css` для `.mm-*` и `.auth-cta`/`.btn-login`/`.btn-register`; `homepage-shared.css` для `.site-mm` overrides). Никаких inline `<style>` для header в индивидуальных макетах.
+CSS — только в общих файлах (`brand-guide-styles.css` для `.mm-*`, включая `.mm-cta`; `homepage-shared.css` для `.site-mm` overrides). Никаких inline `<style>` для header в индивидуальных макетах.
 
 ## Регенерация brand-guide-styles.css
 
@@ -76,7 +76,7 @@ awk '/<style>/{flag=1;next} /<\/style>/{flag=0;next} flag' design-system/brand-g
 - [ ] **768 px (iPad portrait)** — sections читаются, mega-menu mobile-accordion раскрывается
 - [ ] **1024 px (iPad landscape)** — sections в desktop-режиме, mega-menu hover работает
 - [ ] **Touch-target ≥44 px** на всех кнопках и chip-карточках
-- [ ] **Phone hidden на ≤1100, btn-login hidden на ≤900** (по §30.4)
+- [ ] **Phone hidden на ≤1100, `.mm-cta` «Получить смету» виден на всех ширинах** (по §33.3)
 - [ ] **Demo-note (`.hp-note`) скрыт на ≤600** (не мешает на телефоне)
 
 Полный чек-лист — в memory `feedback_newui_mobile_first.md`.
@@ -103,3 +103,4 @@ open /Users/a36/obikhod/newui/homepage-classic.html
 | 2026-05-03 | refactor → shared CSS | Extracted inline-styles → homepage-shared.css |
 | 2026-05-03 | + homepage-classic.html | Direction 2 «Конверсионный» по структуре конкурентов |
 | 2026-05-03 | + _header.html | Canonical partial для синхронизации между макетами |
+| 2026-10-18 | − auth, − магазин | ADR-0022: «Войти + Регистрация» → `.mm-cta` «Получить смету»; убраны «Магазин» из mega-menu и footer |

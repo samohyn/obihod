@@ -46,6 +46,7 @@ update_protocol: каждый PO команды держит свою секци
 | ID | Что | Owner | Effort | RICE | M | Статус |
 |---|---|---|---|---|---|---|
 | **EPIC-SHOP-REMOVAL** | Clean cut магазина саженцев — archive (team/shop.md, specs/EPIC-SEO-SHOP, brand-guide §15-29, tov/shop.md), Header/Footer/types.ts вырезание, 410 Gone /shop*, landshaft = 5-й pillar услуг. ADR-0020. 6 wave | po + arch + dev + fe + design + seo + cw + devops + qa | ~10 чд | 5×4×0.95 / 10 = 1.9 | M | **active 2026-05-09** — operator apruvil decisions (archive / landshaft = 5-й pillar / US-11 archive). [intake](../specs/EPIC-SHOP-REMOVAL/intake.md) |
+| **TASK-CABINET-SUNSET** | ADR-0022: личного кабинета / клиентских аккаунтов / продажи товаров нет. Header «Войти + Регистрация» → `.mm-cta` «Получить смету»; brand-guide v2.7 (§30-31 удалены, §32 → «Статусы заявки»; добиты shop-хвосты §08/§09/§33); −~1500 строк shop/cabinet/auth CSS; newui-макеты и доки почищены. type-check / lint / format зелёные, browser smoke шапки 1440/860/390 ок | po | 1 | — | M | `now` — код+доки готовы, ждёт PR → qa → deploy |
 | **EPIC-LIWOOD-OVERTAKE** | Decision-grade benchmark «Обиход vs liwood» по 8 осям через Keys.so + WebFetch + PageSpeed → 5+ новых US с RICE → roadmap 8-12 нед. Параллельно с EPIC-SHOP-REMOVAL.W3-W6 | po + seo | ~8 чд | 5×5×0.85 / 8 = 2.65 | M | **active 2026-05-09** — параллельно с A. [intake](../specs/EPIC-LIWOOD-OVERTAKE/intake.md) |
 
 ### Next — после EPIC-SHOP-REMOVAL.W1

@@ -33,7 +33,7 @@
 - ✓ Weekly monitoring liwood: watcher.ts + .github/workflows/seo-monitor.yml (OVT-MONITOR shipped 2026-05-09)
 - ✓ E-E-A-T baseline: 4 авторов с Person schema + reviewedBy + lastReviewedAt (US-11)
 - ✓ Service-page master-template v2.3 (T2_PILLAR) + rollout 5 pillar (EPIC-SERVICE-PAGES-REDESIGN D3/D5 2026-05-11)
-- ✓ Brand: design-system/brand-guide.html v2.3 как единый source of truth (§1-14 services + §30-32 auth + §33 chrome)
+- ✓ Brand: design-system/brand-guide.html v2.7 как единый source of truth (§1-14 services + §32 статусы заявки + §33 chrome)
 
 ### Active (Milestone v1.0 — Overtake-3)
 
@@ -50,6 +50,7 @@
 ### Out of Scope
 
 - **Магазин саженцев и растений** — dropped 2026-05-09 (ADR-0020). Landshaft переподшит как 5-й pillar услуг.
+- **Личный кабинет / клиентские аккаунты** — dropped 2026-10-18 (ADR-0022). Статус заявки клиенту сообщает менеджер.
 - **Tilda / WordPress / Bitrix / Astro** — отвергнуто в `contex/04_competitor_tech_stacks.md`; сохраняем Next 16 + Payload 3.
 - **Vercel / Strapi / Directus** — РФ-юрисдикция 152-ФЗ; используем Beget VPS.
 - **Финтех-следы в агентах** — не упоминать банк, брокер, ЦБ РФ, KYC, AML (запрет CLAUDE.md).

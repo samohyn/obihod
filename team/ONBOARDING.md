@@ -255,7 +255,7 @@ claude                                    # запускает сессию, ч�
 Из `CLAUDE.md`:
 
 1. **Skill-check** — перед задачей роль активирует skills из своего `frontmatter.skills` через `Skill` tool (первый tool call)
-2. **Design-system awareness** — UI/UX/TOV/контент сверять с `design-system/brand-guide.html` v2.6 (`§1-14 services`, `§30-33 auth/cabinet/site-chrome`). **Iron rule brand-guide-first**: UI компоненты только из brand-guide; если §нет — design сначала PR в brand-guide, потом fe верстает.
+2. **Design-system awareness** — UI/UX/TOV/контент сверять с `design-system/brand-guide.html` v2.7 (`§1-14 services`, `§32 статусы заявки`, `§33 site-chrome`). **Iron rule brand-guide-first**: UI компоненты только из brand-guide; если §нет — design сначала PR в brand-guide, потом fe верстает.
 3. **Green CI before merge** — `dev/fe` гоняет `type-check + lint + format:check` ДО PR
 4. **Real-browser smoke before merge** — `qa` разворачивает PR локально (`PAYLOAD_DISABLE_PUSH=1 pnpm dev`) и делает browser smoke ДО approve
 5. **Merge = qa approve + po approve + CI green** — `devops` мержит при трёх зелёных. Оператор апрувит только бизнес-решения.

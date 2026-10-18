@@ -224,7 +224,7 @@ export const Leads: CollectionConfig = {
           description: 'Воронка обработки заявки и связь с amoCRM.',
           fields: [
             {
-              // PANEL-LEADS-INBOX § A.1 — canonical 7-status enum (brand-guide §32.4).
+              // PANEL-LEADS-INBOX § A.1 — canonical 7-status enum (brand-guide §32 #lead-status).
               // Old → new mapping выполнен миграцией 20260501_140000.
               // Cell renderer: pill + inline-update dropdown (per ADR-0012 Plan A).
               name: 'status',

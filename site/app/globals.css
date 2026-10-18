@@ -187,6 +187,13 @@ section#cta .eyebrow {
   color: rgba(230, 162, 60, 0.85);
 }
 
+/* Header CTA «Получить смету» — это <a>, и color из .mm-demo .mm-cta (@layer components)
+   проигрывает unlayered `a { color: inherit }` выше → тёмный текст на primary-фоне. ADR-0022. */
+header.site-mm .mm-cta,
+header.site-mm .mm-cta:hover {
+  color: var(--c-on-primary);
+}
+
 .mono {
   font-family: var(--font-mono);
 }
