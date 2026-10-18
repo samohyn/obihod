@@ -1,6 +1,7 @@
 import { cache } from 'react'
 
 import { payloadClient } from '@/lib/payload'
+import { lexicalToPlainText } from '@/lib/seo/uniqueness'
 
 /**
  * Server-side query helpers для Payload коллекций.
@@ -475,7 +476,8 @@ export const getAllPillarsForPricing = cache(async (): Promise<PricingPillar[]> 
         slug: string
         title: string
         h1?: string
-        intro?: string | null
+        // Services.intro — richText (Lexical jsonb), не строка.
+        intro?: { root?: unknown } | null
         priceFrom?: number | null
         priceTo?: number | null
         priceUnit?: string | null
@@ -493,7 +495,7 @@ export const getAllPillarsForPricing = cache(async (): Promise<PricingPillar[]> 
         slug: s.slug,
         title: s.title,
         h1: s.h1 ?? s.title,
-        intro: s.intro ?? null,
+        intro: lexicalToPlainText(s.intro?.root) || null,
         priceFrom: s.priceFrom ?? null,
         priceTo: s.priceTo ?? null,
         priceUnit: s.priceUnit ?? null,
