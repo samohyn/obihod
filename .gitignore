@@ -37,3 +37,12 @@ assets/photos/
 assets/videos/
 assets/temp/
 assets/services/**/*.png
+assets/services/**/*.webp
+assets/services/**/*.jpg
+
+# Локальные эксперименты / внешние скилы (не часть проекта)
+.agents/
+skills-lock.json
+.tmp-*
+__pycache__/
+*.pyc

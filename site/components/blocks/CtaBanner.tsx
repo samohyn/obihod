@@ -7,9 +7,12 @@ import type { CtaAccent, CtaBannerBlock, CtaLink } from './types'
 /**
  * Контрастный CTA-баннер.
  *
- * Поддерживает обе схемы (US-0 W3 Track B-3):
+ * Поддерживает обе схемы (US-0 W3 Track B-3) + Payload block config:
+ *  - Payload:  title (имя колонки в БД), body, ctaLabel/ctaHref, accent
  *  - cw-схема: h2, body, ctaPrimary{label,href}, variant
- *  - legacy:    heading, cta{label,href}, accent, variant, ctaLabel/ctaHref
+ *  - legacy:    heading, cta{label,href}, accent, variant
+ *
+ * Renderer-приоритет заголовка: title → h2 → heading.
  *
  * Server component.
  */
@@ -53,7 +56,7 @@ export function CtaBanner(block: CtaBannerBlock) {
   const accent = resolveAccent(block)
   const tokens = accentMap[accent]
   const isDark = block.variant === 'dark'
-  const heading = block.h2 ?? block.heading ?? null
+  const heading = block.title ?? block.h2 ?? block.heading ?? null
   const cta = pickCta(block)
 
   return (
