@@ -81,7 +81,7 @@ type ServiceLike = {
   slug: string
   title: string
   h1?: string
-  intro?: string | null
+  intro?: unknown
   priceFrom?: number | null
   priceTo?: number | null
   priceUnit?: string | null
@@ -177,9 +177,8 @@ export default async function PillarPricingPage({
         <header className="pricing-pillar-page__hero">
           <h1>Цены: {service.title}</h1>
           <p className="pricing-pillar-page__lead">
-            {service.intro
-              ? service.intro.slice(0, 280)
-              : `Подробный прайс на ${service.title.toLowerCase()} в Москве и МО.`}
+            {extractText(service.intro).slice(0, 280) ||
+              `Подробный прайс на ${service.title.toLowerCase()} в Москве и МО.`}
           </p>
           <p className="pricing-pillar-page__range">
             <strong>Диапазон:</strong>{' '}
