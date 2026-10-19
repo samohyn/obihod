@@ -261,8 +261,8 @@ export default async function ServiceDistrictView({ service, district, sd }: Pro
                   <Link href="/kalkulyator/foto-smeta/" className="sd-btn sd-btn--primary">
                     Загрузить фото — получить смету
                   </Link>
-                  <a href="tel:+74950000000" className="sd-btn sd-btn--ghost">
-                    +7 (495) 000-00-00
+                  <a href={`tel:${contacts.phoneE164}`} className="sd-btn sd-btn--ghost">
+                    {contacts.phoneDisplay}
                   </a>
                 </div>
                 <CtaMessengers className="mt-4" />

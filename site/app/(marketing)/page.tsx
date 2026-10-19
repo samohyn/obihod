@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 
+import { getContacts } from '@/lib/chrome'
 import { getHomepage } from '@/lib/homepage'
 import { canonicalFor } from '@/lib/seo/canonical'
 import { JsonLdGraph } from '@/components/marketing/_shared/JsonLdGraph'
@@ -68,7 +69,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   // Phase 2: контент из Payload Homepage global (graceful fallback в каждой section)
-  const hp = await getHomepage()
+  const [hp, contacts] = await Promise.all([getHomepage(), getContacts()])
   return (
     <>
       <JsonLdGraph faq={faqItems(hp)} />
@@ -84,7 +85,7 @@ export default async function Home() {
       <Coverage />
       <Gallery data={hp} />
       <FAQ data={hp} />
-      <CtaFooter />
+      <CtaFooter phoneDisplay={contacts.phoneDisplay} />
     </>
   )
 }
