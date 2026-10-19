@@ -24,6 +24,9 @@ on:
         required: false
         default: ''
 
+permissions:
+  contents: read
+
 concurrency:
   group: revalidate-${{ inputs.tag }}
   cancel-in-progress: false
