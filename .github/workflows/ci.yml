@@ -1,5 +1,12 @@
 name: CI
 
+# Проверки на каждом PR (план 09, этап 1 — CI-проверки). Одна prod-сборка на чистой БД:
+#   quality — type-check, lint, format, unit-тесты, TOV;
+#   e2e     — схема БД и админ → build → next start → Playwright (формы и /api/leads, axe,
+#             здоровье страниц, главная, шапка/подвал, SEO, админка) → ссылки → JSON-LD → Lighthouse.
+# Шаблоны с контентом (pillar, подуслуга, гео…) проверяются после выкатки на staging — site-checks.yml.
+# Actions закреплены по SHA (версия — в комментарии), обновляет Dependabot.
+
 on:
   push:
     branches: [main]
@@ -20,23 +27,27 @@ env:
   NEXT_PUBLIC_SITE_URL: http://localhost:3000
   REVALIDATE_SECRET: ci-revalidate-secret
   INDEXNOW_KEY: 00000000000000000000000000000000
+  # Админ чистой CI-базы: создаёт scripts/seed-admin.ts, им тесты читают заявки.
+  ADMIN_EMAIL: ci@obikhod.test
+  ADMIN_PASSWORD: ci-test-password-12345
 
 jobs:
   quality:
-    name: Lint · Type-check · Format
+    name: Lint · Type-check · Format · Unit
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     defaults:
       run:
         working-directory: site
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
         with:
           package_json_file: site/package.json
           run_install: false
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
           cache: pnpm
@@ -54,14 +65,11 @@ jobs:
       - name: Format check
         run: pnpm run format:check
 
-      # US-0 Track C, AC-5: TOV-checker как CI gate.
-      # На baseline (W1) запускается на пустом dataset (нет seed-content
-      # с живыми текстами в репо ещё) — exit 0 при отсутствии аргументов
-      # обернётся через find. Когда появятся .md в site/content/ или
-      # seosite/, заменим на shell-expansion list.
+      - name: Unit-тесты
+        run: pnpm run test:unit
+
       - name: TOV-check (anti-patterns)
         run: |
-          # ищем наши markdown в content/seosite, если их пока нет — пропускаем без fail
           files=$(find ../seosite -name '*.md' -not -path '*/node_modules/*' 2>/dev/null | head -50 || true)
           if [ -z "$files" ]; then
             echo "[ci] no .md files to check yet — skipping tov-check"
@@ -70,8 +78,9 @@ jobs:
           pnpm run tov:check $files
 
   e2e:
-    name: Build · Playwright E2E
+    name: Build · E2E · axe · ссылки · JSON-LD · Lighthouse
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     defaults:
       run:
         working-directory: site
@@ -90,14 +99,14 @@ jobs:
           --health-timeout 5s
           --health-retries 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
         with:
           package_json_file: site/package.json
           run_install: false
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
           cache: pnpm
@@ -108,7 +117,7 @@ jobs:
 
       - name: Cache Playwright browsers
         id: pw-cache
-        uses: actions/cache@v5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('site/pnpm-lock.yaml') }}-chromium
@@ -122,7 +131,7 @@ jobs:
         run: pnpm exec playwright install-deps chromium
 
       - name: Cache Next.js build (.next/cache)
-        uses: actions/cache@v5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: site/.next/cache
           key: next-cache-${{ runner.os }}-${{ hashFiles('site/pnpm-lock.yaml') }}-${{ hashFiles('site/**/*.ts', 'site/**/*.tsx', 'site/next.config.ts') }}
@@ -130,126 +139,76 @@ jobs:
             next-cache-${{ runner.os }}-${{ hashFiles('site/pnpm-lock.yaml') }}-
             next-cache-${{ runner.os }}-
 
-      - name: Wait for Postgres
-        run: |
-          for i in {1..30}; do
-            pg_isready -h localhost -p 5432 -U obikhod && break
-            sleep 1
-          done
-
-      - name: "Warmup DB (dev server — push:true в dev/ci создаёт схему по всем коллекциям)"
-        # В dev/ci payload.config.ts использует push:true (см. условный expr).
-        # Это создаёт ephemeral schema с нуля по текущей Payload config.
-        # Миграция US-3 (diff к prod-state) не применяется в CI — и не должна,
-        # потому что push уже создаёт финальную схему.
-        # На проде — push:false (через NODE_ENV=production) + миграция через psql в deploy.yml.
-        # SAFETY: timeout-minutes ограничивает шаг 5 минутами вместо 6 часов GHA default.
-        # Incident 2026-05-01 (PR #133): warmup висел 60min на seed admin из-за audit hook
-        # pool starvation. Лучше fail-fast чем тратить minutes на zombie job.
-        timeout-minutes: 5
-        run: |
-          pnpm dev > /tmp/dev.log 2>&1 &
-          DEV=$!
-          for i in $(seq 1 60); do
-            curl -fsS http://localhost:3000/ -o /dev/null 2>/dev/null && { echo "dev ready after ${i}s"; break; }
-            sleep 2
-          done
-          # Дёргаем эндпоинты-представители каждой коллекции, чтобы Payload
-          # гарантированно push'нул все связанные таблицы.
-          # trailingSlash: true → нужно -L чтобы проследовать по 308 и дёрнуть реальные страницы
-          for path in /sitemap.xml /raiony/ /kejsy/ /arboristika/ /arboristika/ramenskoye/ /raiony/ramenskoye/; do
-            code=$(curl -sL -o /dev/null -w "%{http_code}" "http://localhost:3000${path}" || echo 000)
-            echo "  warmup $path → $code"
-          done
-          # Создаём admin user, иначе /admin/login редиректит на /admin/create-first-user
-          # и Playwright admin-login.spec.ts не находит form.login__form. Idempotent:
-          # при повторном вызове Payload вернёт 403 (already initialised) — это OK.
-          # КРИТИЧНО: trailing slash + -L. trailingSlash:true в next.config.ts
-          # редиректит /api/users/first-register → /api/users/first-register/ (308),
-          # без -L curl остановится на редиректе и тело не дойдёт до handler.
-          echo "  seeding admin user via /api/users/first-register/..."
-          # --max-time 30: отсечка против re-incident 2026-05-01 (audit hook
-          # pool starvation вешал endpoint навсегда). Если что-то опять висит —
-          # лучше fail быстро и видеть dev.log, чем час ждать GHA timeout.
-          seed_resp=$(curl --max-time 30 -sSL -X POST http://localhost:3000/api/users/first-register/ \
-            -H "Content-Type: application/json" \
-            -d '{"email":"ci@obikhod.test","password":"ci-test-password-12345","name":"CI Admin","role":"admin"}' \
-            -w "\nHTTP_CODE:%{http_code}" || echo "CURL_FAILED_OR_TIMEOUT")
-          echo "  first-register response: $seed_resp"
-          # Verify admin создан — /api/users/me на свежем cookie должен 200
-          # (но без login сессии тут просто проверим что users count > 0)
-          users_count=$(curl --max-time 15 -sSL http://localhost:3000/api/users?limit=1 | grep -o '"totalDocs":[0-9]*' | head -1)
-          echo "  users in DB: $users_count"
-          kill $DEV 2>/dev/null || true
-          wait $DEV 2>/dev/null || true
-          echo "--- dev log tail ---"
-          tail -30 /tmp/dev.log || true
+      # Payload на старте создаёт схему по конфигу (push: NODE_ENV ≠ production) — без
+      # прогрева dev-сервером. Переход на «миграции с нуля + нет дрейфа» — задача
+      # «Дрейф схемы» (план 09, этап 1).
+      - name: Схема БД и админ
+        timeout-minutes: 3
+        run: pnpm exec tsx --require=./scripts/_payload-cjs-shim.cjs scripts/seed-admin.ts
 
       - name: Build
-        # Incident 2026-05-08: prebuild lint:slug:prod → getPayload() зависал
-        # без таймаута (аналог audit_log incident 2026-05-01). Fix в lint-slug.ts
-        # добавил 60s process timeout. CI timeout-minutes: 8 как дополнительный
-        # safeguard — не даёт runner'у висеть 6 часов по умолчанию.
         timeout-minutes: 8
         run: pnpm run build
 
       - name: Start Next.js
+        id: start
         run: |
           pnpm run start > server.log 2>&1 &
-          echo "SERVER_PID=$!" >> $GITHUB_ENV
-          # Wait for the server to respond
-          for i in {1..60}; do
-            if curl -fsS http://localhost:3000/ -o /dev/null; then
-              echo "Server up after $i attempts"
-              exit 0
-            fi
+          echo "SERVER_PID=$!" >> "$GITHUB_ENV"
+          for i in $(seq 1 60); do
+            curl -fsS http://localhost:3000/api/health/ -o /dev/null && { echo "server up after ${i}s"; exit 0; }
             sleep 1
           done
-          echo "Server failed to start in 60s"
+          echo "::error::next start не поднялся за 60 с"
           cat server.log
           exit 1
 
-      - name: Run Playwright (desktop + mobile chromium — critical path)
+      # Дальше каждая проверка идёт, даже если предыдущая упала, — видно все проблемы сразу.
+      - name: Playwright — формы, /api/leads, axe, здоровье страниц, SEO, админка
+        if: ${{ !cancelled() && steps.start.outcome == 'success' }}
         env:
           PLAYWRIGHT_BASE_URL: http://localhost:3000
-          PLAYWRIGHT_EXTERNAL_SERVER: "1"
-        # W15: Critical-path = 3 data-independent specs (sustained pattern
-        # seo.spec.ts:74 skip seeded tests). CI uses push:true schema без
-        # реального seed → stage*-capture / leadqa-smoke specs (требующие
-        # seeded priority-B SD / blog / cases) fail на пустой DB.
-        # Heritage 20 specs (etalons-w3, stage1-w7, stage2-w11, stage3-w13,
-        # leadqa-w14, admin-*, panel-*) → Stage 4 backlog: cron nightly full
-        # E2E на seeded DB ИЛИ CI_PLAYWRIGHT_SCOPE=full env-trigger.
-        # leadqa real-browser smoke 16/16 PASS (commit b402bb5) sustained
-        # для current sprint verification.
-        run: |
-          pnpm exec playwright test --project=chromium --project=mobile-chrome \
-            tests/e2e/landing.spec.ts \
-            tests/e2e/seo.spec.ts \
-            tests/e2e/site-chrome.spec.ts
+          PLAYWRIGHT_EXTERNAL_SERVER: '1'
+        run: pnpm exec playwright test
 
-      # US-1 Stage 1 Track C (W7 transition): lint:schema жёсткий gate.
-      # Stage 0 был soft-fail (continue-on-error=true). После W7 Stage 1 имеет
-      # 25 живых страниц с заполненной schema → переключаем в hard gate.
-      # Скрипт сам exit 0 на errors=0 (warns игнорируются — non-blocking).
-      - name: lint:schema (JSON-LD validation)
+      - name: Ссылки — краулер внутренних ссылок
+        if: ${{ !cancelled() && steps.start.outcome == 'success' }}
+        run: pnpm run check:links http://localhost:3000
+
+      - name: JSON-LD
+        if: ${{ !cancelled() && steps.start.outcome == 'success' }}
         run: pnpm run lint:schema --url http://localhost:3000 --sample 10
+
+      # После Playwright, а не параллельно: иначе замеры шумят. 3 прогона, медиана;
+      # LCP/CLS/производительность — пока предупреждения (лабораторный замер на раннере),
+      # SEO — ошибка. Отчёты — в артефакте lighthouse-report.
+      - name: Lighthouse — главная и контакты
+        if: ${{ !cancelled() && steps.start.outcome == 'success' }}
+        run: pnpm dlx @lhci/cli@0.15.1 autorun
 
       - name: Stop Next.js
         if: always()
-        run: kill $SERVER_PID 2>/dev/null || true
+        run: kill "$SERVER_PID" 2>/dev/null || true
 
       - name: Upload Playwright report
-        if: failure()
-        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: playwright-report
           path: site/playwright-report/
           retention-days: 14
 
+      - name: Upload Lighthouse report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: lighthouse-report
+          path: site/.lighthouseci/
+          retention-days: 14
+
       - name: Upload server log
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: server-log
           path: site/server.log

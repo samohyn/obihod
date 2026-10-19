@@ -3,8 +3,9 @@ import { defineConfig, devices } from '@playwright/test'
 /**
  * Playwright config для сайта Обихода.
  *
- * Используется qa-engineer-агентом для E2E-регрессии критических путей:
- * лендинг, 4 калькулятора, форма «фото → смета», deep-link в мессенджер.
+ * E2E-проверки на каждом PR (план 09, этап 1): формы и /api/leads, axe,
+ * здоровье страниц, главная, шапка/подвал, SEO, админка. Шаблоны с контентом —
+ * на staging (workflow site-checks).
  *
  * Запуск:
  *   pnpm test:e2e               # все тесты, все браузеры
@@ -33,8 +34,13 @@ export default defineConfig({
 
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'mobile-chrome', use: { ...devices['Pixel 7'] } },
-    // Safari/Firefox добавим, когда понадобится — см. qa-engineer.md §7
+    {
+      name: 'mobile-chrome',
+      use: { ...devices['Pixel 7'] },
+      // На мобильном — то, что видит клиент, и мобильная админка. API, остальная
+      // админка и pages-health (сама перебирает ширины 360…1440) — только в chromium.
+      testMatch: /(^|[\\/])(forms|a11y|landing|site-chrome|admin-mobile)\.spec\.ts$/,
+    },
   ],
 
   // В CI поднимаем `pnpm run start` в отдельном шаге workflow (после build),
