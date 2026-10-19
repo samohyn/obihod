@@ -7,10 +7,11 @@ _Единственный трекер задач. План — [09_product_plan
 | Этап | Задача | Статус | PR / превью | Заметки |
 |---|---|---|---|---|
 | 0 | План согласован, решения приняты | принята | — | 19.10.2026 |
-| 0 | Карта сайта 08: решения и выравнивание участка | на приёмке | [artifact](https://claude.ai/artifact/TTkyAqRfsGbX4pnJ7ystqs) | `contex/08`, `seosite/strategy/04-target-site-map.json` |
-| 0 | Старый процесс в архив | на приёмке | ветка `chore/process-v2` | `archive/process-v1/` |
-| 0 | CLAUDE.md и хуки под новый процесс | на приёмке | ветка `chore/process-v2` | |
-| 0 | Реквизиты: юрлицо, ИНН/ОГРН, график, срок ответа на заявку | ждём владельца | — | |
+| 0 | Карта сайта 08: решения и выравнивание участка | на приёмке | [PR #234](https://github.com/samohyn/obihod/pull/234), [artifact](https://claude.ai/artifact/TTkyAqRfsGbX4pnJ7ystqs) | `contex/08`, `seosite/strategy/04-target-site-map.json` |
+| 0 | Старый процесс в архив | на приёмке | [PR #234](https://github.com/samohyn/obihod/pull/234) | `archive/process-v1/` |
+| 0 | CLAUDE.md и хуки под новый процесс | на приёмке | [PR #234](https://github.com/samohyn/obihod/pull/234) | |
+| 0 | Реквизиты | принята | — | заглушки, владелец меняет в панели (этап 4) |
+| 0 | Оффер: график, срок ответа, гарантии | на приёмке | [PR #234](https://github.com/samohyn/obihod/pull/234) | `contex/10_offer.md`; ⚑ подтверждает владелец |
 | 1 | Ревью кода и фундамент | не начата | — | |
 | 2 | Блоки, навигация, формы | не начата | — | |
 | 3 | Эталонные шаблоны | не начата | — | первым — «Спил деревьев» |
