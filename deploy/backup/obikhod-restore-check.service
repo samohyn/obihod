@@ -1,0 +1,9 @@
+[Unit]
+Description=Обиход: проверка восстановления из бэкапа
+After=postgresql.service obikhod-backup.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/obikhod-restore-check
+Nice=10
+TimeoutStartSec=30min

@@ -1,0 +1,10 @@
+[Unit]
+Description=Обиход: проверка восстановления по воскресеньям в 05:00
+
+[Timer]
+OnCalendar=Sun *-*-* 05:00:00
+RandomizedDelaySec=10min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

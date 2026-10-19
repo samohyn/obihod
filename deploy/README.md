@@ -1,226 +1,105 @@
-# Deploy — Обиход
+# Deploy и эксплуатация — Обиход
 
-Два workflow в `.github/workflows/`:
+Прод — VPS в РФ `89.111.141.79` (Ubuntu 24.04, 2 CPU / 4 GB + swap), Node 22, pnpm 10, pm2 (процесс
+`obikhod` под пользователем `deploy`), nginx + Let's Encrypt, PostgreSQL 16. Сервер поднят
+`server-bootstrap.sh` (2026-10-18). Сайт закрыт от индексации в nginx — открывает только владелец.
 
-- **[ci.yml](../.github/workflows/ci.yml)** — на каждый PR и push в main:
-  type-check → lint → format:check → build → Playwright E2E с Postgres service container.
-  Работает из коробки, ничего не требует.
-
-- **[deploy.yml](../.github/workflows/deploy.yml)** — выкатка на Beget.
-  Запускается **только вручную** (`workflow_dispatch`), пока не подгружены secrets.
-  После подачи доступов можно включить `on: push: branches: [main]`.
-
-## Что нужно от тебя (доступы)
-
-Подать в Settings → Secrets and variables → Actions (после создания GitHub-репо).
-
-### SSH и хостинг на Beget
-
-| Secret                | Что это                                                        | Пример                            |
-|-----------------------|----------------------------------------------------------------|-----------------------------------|
-| `BEGET_SSH_HOST`      | IP или hostname VPS/Cloud на Beget                             | `185.125.xxx.xxx` или `srv.obihod.ru` |
-| `BEGET_SSH_PORT`      | Порт SSH (опционально, по умолчанию 22)                        | `22`                              |
-| `BEGET_SSH_USER`      | Пользователь SSH (НЕ root — отдельный deploy-юзер)             | `deploy`                          |
-| `BEGET_SSH_KEY`       | Приватный SSH-ключ (RSA/ED25519), публичный — в `~/.ssh/authorized_keys` на Beget | `-----BEGIN OPENSSH PRIVATE KEY-----\n…\n-----END OPENSSH PRIVATE KEY-----` |
-| `BEGET_DEPLOY_PATH`   | Абсолютный путь на сервере, где живёт приложение               | `/home/deploy/obikhod`            |
-| `BEGET_APP_NAME`      | Имя процесса в PM2 (опционально, по умолчанию `obikhod`)       | `obikhod`                         |
-
-### Переменные приложения на проде
-
-| Secret                 | Что это                                                  |
-|------------------------|----------------------------------------------------------|
-| `DATABASE_URI`         | `postgres://user:pass@host:5432/db` — БД на Beget        |
-| `PAYLOAD_SECRET`       | Случайные 32+ байта (`openssl rand -hex 32`)             |
-| `NEXT_PUBLIC_SITE_URL` | `https://obihod.ru` (основной публичный URL)             |
-| `REVALIDATE_SECRET`    | Случайный 32+ байтов для webhook Payload → Next          |
-| `INDEXNOW_KEY`         | 32 hex-символа — ключ IndexNow для Я.Вебмастера/Bing     |
-
-### Инструкция подготовки Beget-сервера (один раз)
-
-Я дам тебе пошаговую инструкцию, когда ты подтвердишь, что VPS заказан. Там будет:
-
-1. Создать deploy-юзера и отключить ему `sudo`, шелл `/bin/bash`
-2. Добавить публичный SSH-ключ в `~/.ssh/authorized_keys`
-3. Установить Node 22 (через nvm или nodesource), pnpm 10 через corepack
-4. Установить PM2 глобально + автостарт (`pm2 startup`)
-5. Установить Postgres 16 (нативно или через Beget managed)
-6. Положить `.env` в `$BEGET_DEPLOY_PATH/shared/.env` (симлинкуется в релиз)
-7. Настроить nginx: `upstream → localhost:3000`, SSL через Let's Encrypt
-8. Прогнать первый деплой вручную, проверить smoke
-
-## Что уже работает локально (проверено)
-
-- `pnpm run type-check` → 0 ошибок
-- `pnpm run lint` → 0 errors, 118 warnings (baseline `no-explicit-any`, убираем постепенно)
-- `pnpm run format:check` → clean
-- `pnpm run build` → ✓ 16 страниц сгенерированы
-- `pnpm run start` + Playwright E2E → 8/8 зелёных (chromium + mobile-chrome в CI)
-
-## Что работает на prod (https://obikhod.ru)
-
-- HTTPS валидный (Let's Encrypt до 2026-07-20, auto-renew)
-- `/` → 200 · `/admin/` → 200 · `/api/health` → 200 · `/api/health?deep=1` → 200 (БД онлайн)
-- 62 таблицы Payload в БД (services, districts, service_districts, cases, blog, leads, media, users, и версионные копии)
-- PM2 autostart на ребуте (systemd unit `pm2-deploy`)
-- PM2 log rotation: 10 MB × 7 файлов, compress, ежедневно 02:00 MSK
-- Daily backup: `/var/backups/obikhod/{daily,weekly}/` — cron 03:00 MSK, retention 7/4
-- UFW: 22/80/443 + fail2ban
-- Swap 2 GB · vm.swappiness=10
-
-## Операционные команды на сервере
-
-```bash
-# pm2
-sudo -u deploy pm2 list
-sudo -u deploy pm2 logs obikhod --lines 50
-sudo -u deploy pm2 restart obikhod --update-env
-sudo -u deploy pm2 monit
-
-# БД
-sudo -u postgres psql obikhod
-sudo -u postgres psql obikhod -c '\dt'
-
-# бэкапы
-ls -lh /var/backups/obikhod/daily/
-/usr/local/bin/obikhod-backup.sh  # вручную прогнать
-tail /var/log/obikhod-backup.log
-
-# восстановление
-sudo -u postgres pg_restore -d obikhod --clean --if-exists /var/backups/obikhod/daily/obikhod-<TS>.dump
+```
+/home/deploy/obikhod/
+  current -> releases/<ts>-<sha7>     # активный релиз
+  releases/                           # последние 5 (старые чистит obikhod-deploy)
+  shared/.env  shared/media/          # симлинкаются в каждый релиз
+/var/backups/obikhod/{daily,weekly,pre-deploy}/   # бэкапы (root, 700)
+/etc/obikhod/backup.env               # S3 и почта для бэкапов (root, 600)
 ```
 
-## Upload release bundle — GitHub Releases CDN transport
+## Выкатка
 
-**Эволюция (2026-04-24):**
+**Обычный путь — автоматически после мержа в `main`** (`.github/workflows/deploy.yml`, если
+изменился `site/**`). Раннер шлёт `git archive <sha> site` по SSH ключом `DEPLOY_SSH_KEY`, который
+в `/root/.ssh/authorized_keys` ограничен forced command — умеет только `deploy <sha>`.
 
-1. `scp` без keepalive → висел час, cancel (#24899732696)
-2. `rsync` + keepalive + timeout → дропал на 36% и 77% с TCP reset
-   (#24902797606, #24904084197). Канал GH Azure US → Beget Москва
-   нестабилен, прямое TCP-соединение даёт ~50 KB/s и регулярные RST.
-3. **Текущий:** GitHub Releases как промежуточный bucket.
-
-**Решение:**
-
-- **Build job:** после `pnpm build` + tar пакуем `deploy.tar.gz` →
-  загружаем как asset к prerelease GitHub Release с tag `deploy-<sha>`.
-  Upload runner → GitHub asset storage внутри Azure infra (50+ MB/s).
-- **Deploy job:** VPS curl'ит этот asset с api.github.com (`Accept:
-  application/octet-stream`) — GitHub редиректит на CDN (Fastly).
-  Edge ноды Fastly есть в Москве/СПб, скорость 5-20 MB/s.
-- **Cleanup:** в конце deploy job (`if: always()`) — `gh release delete
-  --cleanup-tag`. Release был чисто транспортным.
-
-**Permissions:** `contents: write` в workflow root (для `gh release
-create/delete`).
-
-**Sanity check:** размер скачанного файла >= 50 MB (текущие ~173 MB).
-Меньше — `::error::` и job вылетает.
-
-**Прежний keepalive + timeout** оставлен в `prod-backup.yml` →
-`Fetch dump` (scp download dump). Объём dump'а небольшой и стабильнее.
-
-## Миграции Payload
-
-С US-3 Payload работает на proper migrations (`push: false` в `site/payload.config.ts`).
-Источник истины — `site/migrations/*.ts` (+ `.up.sql` / `.down.sql` пары).
-
-### Автоматическое применение через deploy.yml
-
-На каждый prod-деплой pipeline делает:
-
-1. **Build job:** `pnpm payload migrate` на ephemeral Postgres runner (создаёт схему
-   для `generateStaticParams` во время `next build` и для dev-warmup).
-2. **Deploy job:** после unpack и linking `shared/.env`, но **до** flip symlink и pm2 restart —
-   `pnpm payload migrate` на prod DB через SSH. Порядок критичен: миграция
-   применяется на **новом** релизе, но pm2 стартует **после**, чтобы
-   рантайм не читал схему без таблиц.
-
-Идемпотентность — через `payload_migrations` tracker-таблицу. Повторный прогон
-уже применённой миграции — no-op.
-
-### Создание новой миграции (локально)
-
-```bash
-cd site
-pnpm payload migrate:create my_change_slug
-# будет создан site/migrations/<TS>_my_change_slug.ts
-# добавь в него SQL через db.execute(sql.raw(...)) или напиши отдельные .up.sql/.down.sql
-pnpm payload migrate          # apply локально
-pnpm payload migrate:status   # проверка статуса
-```
-
-### Rollback миграции (emergency)
-
-```bash
-ssh deploy@$BEGET_SSH_HOST
-cd $BEGET_DEPLOY_PATH/current/site
-set -a; . ../../shared/.env; set +a
-
-# Вариант A — через Payload CLI (откатывает последнюю применённую):
-pnpm payload migrate:down
-
-# Вариант B — напрямую через SQL (если .down.sql существует):
-psql $DATABASE_URI -f migrations/<TS>_<slug>.down.sql
-psql $DATABASE_URI -c "DELETE FROM payload_migrations WHERE name='<TS>_<slug>'"
-
-# После rollback схемы — переключить symlink на предыдущий релиз (см. раздел Rollback ниже).
-```
-
-## Rollback
-
-```bash
-ssh deploy@45.153.190.107
-cd /home/deploy/obikhod
-ls -1t releases/ | head  # текущий и предыдущие
-ln -sfn releases/<previous-sha> current
-pm2 delete obikhod
-pm2 start 'pnpm start' --name obikhod --cwd /home/deploy/obikhod/current --update-env
-pm2 save
-```
-
-## Ручной деплой из SHA — `manual-deploy.sh` (с 2026-10-18)
-
-Прод переехал на новый VPS `89.111.141.79`; `deploy.yml` выключен (`gh workflow disable deploy.yml`),
-пока secrets `BEGET_SSH_*` указывают на старый сервер и workflow не симлинкает `shared/media`.
-До починки CI деплоим так:
+**Вручную** (сбой CI, hotfix, изменился сам серверный скрипт):
 
 ```bash
 deploy/manual-deploy.sh            # origin/main
-deploy/manual-deploy.sh <sha>      # конкретный коммит из origin/main
+deploy/manual-deploy.sh <sha>      # конкретный коммит из main; ALLOW_NON_MAIN=1 — обход
 ```
 
-Код берётся через `git archive <sha> site` — рабочее дерево и незакоммиченные правки на прод не попадают.
-В релизе лежит `REVISION` с SHA. Если `/api/health/` после рестарта не 200 — скрипт сам возвращает `current`
-на предыдущий релиз. **Не деплоить rsync'ом рабочего дерева** (2026-10-18 так на прод уехали незакоммиченные
-правки, а `--exclude media` без `/` отрезал `components/admin/media/`).
+Оба пути вызывают на сервере `/usr/local/sbin/obikhod-deploy` (`deploy/server/obikhod-deploy.sh`):
+бэкап → распаковка → `pnpm install` + `build` → переключение `current` → `pm2 restart` →
+health-check `/api/health/` (нет 200 за 60 с — откат) → чистка релизов. Ручной скрипт перед
+выкаткой ставит на сервер версию `obikhod-deploy` из того же коммита; ключ CI этого не может —
+изменения `deploy/server/` выкатить один раз вручную.
 
-## Ручной деплой — как запускать (пока нет auto-deploy на push main)
-
-1. GitHub → Actions → Deploy to Beget → Run workflow
-2. В поле confirm ввести `deploy`
-3. Ждать зелёного чек. Smoke-проверка в конце: `curl -I $NEXT_PUBLIC_SITE_URL`
-
-Rollback на предыдущий релиз (вручную на сервере):
+**Миграции БД** (ADR-0016) в выкатку не входят: `.up.sql` применить **до мержа** PR и записать
+в реестр:
 
 ```bash
-ssh deploy@$BEGET_SSH_HOST
-cd $BEGET_DEPLOY_PATH
-ls -1t releases/ | head -2   # текущий и предыдущий
-ln -sfn releases/<previous-sha> current
-pm2 reload obikhod --update-env
+ssh root@89.111.141.79 'sudo -u postgres psql obikhod -v ON_ERROR_STOP=1' < site/migrations/<name>.up.sql
+ssh root@89.111.141.79 "sudo -u postgres psql obikhod -c \"insert into payload_migrations (name, batch, updated_at, created_at) values ('<name>', <n>, now(), now())\""
 ```
 
-## Как перевести deploy в auto-mode на push main
+Миграцию данных сначала прогнать на проде в транзакции с `ROLLBACK` (dry-run).
 
-Когда смоуки стабильны (≥3 успешных manual-деплоя подряд):
+## Откат
 
-```yaml
-# .github/workflows/deploy.yml
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
-    …
+```bash
+ssh root@89.111.141.79 'cd /home/deploy/obikhod && ls -1t releases | head -3'
+ssh root@89.111.141.79 'ln -sfn releases/<prev> /home/deploy/obikhod/current && sudo -u deploy pm2 restart obikhod'
 ```
 
-И снять `confirm` gate в preflight. До тех пор — только manual.
+Данные — из бэкапа `pre-deploy-<sha7>` (см. ниже).
+
+## Бэкапы
+
+Установка/обновление (идемпотентно):
+
+```bash
+COPYFILE_DISABLE=1 tar -C deploy/backup --no-xattrs -cz . | ssh root@89.111.141.79 \
+  'rm -rf /tmp/obikhod-backup-src && mkdir /tmp/obikhod-backup-src && tar -xz -C /tmp/obikhod-backup-src && bash /tmp/obikhod-backup-src/install.sh'
+```
+
+| Что | Когда | Где | Хранение |
+|---|---|---|---|
+| `obikhod-backup` — `pg_dump -Fc` + `media.tgz` | каждый день 03:30 (`obikhod-backup.timer`) | `daily/`, по воскресеньям копия в `weekly/` | 14 дней / 8 недель |
+| то же перед выкаткой | каждая выкатка | `pre-deploy/` | 10 последних |
+| копия в S3 в РФ (restic, шифрование на сервере) | вместе с ежедневным | `RESTIC_REPOSITORY` | 14 д / 8 н / 12 мес |
+| `obikhod-restore-check` — восстановление последнего дампа во временную БД, сверка строк и media; restic check | воскресенье 05:00 | — | — |
+
+Сбой → `obikhod-notify`: письмо через SMTP из `/etc/obikhod/backup.env` (Telegram с сервера
+недоступен), без настроек — только журнал. Состояние:
+
+```bash
+systemctl list-timers 'obikhod-*'
+journalctl -u obikhod-backup -u obikhod-restore-check -n 20 -o cat
+journalctl -t obikhod-notify -n 10 -o cat
+cat /var/lib/obikhod-backup/last-success-daily /var/lib/obikhod-backup/last-restore-check
+```
+
+Пока `RESTIC_REPOSITORY` пуст, бэкапы лежат только на этом сервере и не переживут его потерю.
+Бэкапы содержат ПДн клиентов — только серверы в РФ, локально не копировать.
+
+**Восстановление прода:**
+
+```bash
+ssh root@89.111.141.79
+ls -1t /var/backups/obikhod/daily | head            # или pre-deploy/, weekly/, restic restore latest --target /tmp/r
+sudo -u deploy pm2 stop obikhod
+sudo -u postgres dropdb obikhod && sudo -u postgres createdb -O obikhod obikhod
+sudo -u postgres pg_restore --no-owner --role=obikhod -d obikhod < /var/backups/obikhod/daily/obikhod-<ts>-daily.dump
+tar -xzf /var/backups/obikhod/daily/media-<ts>-daily.tgz -C /home/deploy/obikhod/shared   # при необходимости
+sudo -u deploy pm2 start obikhod
+```
+
+## Операции на сервере
+
+```bash
+sudo -u deploy pm2 status | logs obikhod --lines 100 | restart obikhod
+sudo -u postgres psql obikhod
+cat /home/deploy/obikhod/current/REVISION          # какой коммит на проде
+df -h / && du -sh /home/deploy/obikhod/releases /var/backups/obikhod
+```
+
+nginx: `/etc/nginx/sites-available/obikhod.ru` (вне репо: `client_max_body_size 25m`,
+`proxy_redirect`, www → apex, noindex до команды владельца).

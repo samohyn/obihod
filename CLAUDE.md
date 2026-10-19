@@ -28,7 +28,7 @@ specs, GSD) — в [archive/process-v1/](archive/process-v1/), новые зад
 4. **Автопроверки** — type-check, lint, format, e2e форм, скриншоты 360/768/1280/1440, axe, schema, ссылки.
 5. **Показ владельцу** — превью и скриншоты desktop / laptop / mobile.
 6. **Приёмка владельцем.**
-7. **PR → main → деплой** `deploy/manual-deploy.sh <sha>` → smoke прода.
+7. **PR → main → деплой** — автоматически после мержа (`deploy.yml`), миграции БД — psql до мержа; вручную `deploy/manual-deploy.sh <sha>` → smoke прода.
 
 Definition of Done страницы — в плане 09, раздел 4. Решения фиксируются в журнале плана 09
 (раздел 9); старые ADR в [team/adr/](team/adr/) действуют, пока план их не заменил.
@@ -44,7 +44,7 @@ Definition of Done страницы — в плане 09, раздел 4. Реш
 | Индексация | Открывается **только отдельной командой владельца**. До неё noindex в nginx и выключен IndexNow |
 | Администратор | Один: samohingeorgy@gmail.com |
 | Контакты | Один источник в CMS: **+7 (985) 170-51-11**, **partner@obikhod.ru**, **ул. Амет-хан Султана, 15, к1, Жуковский, МО, 140185** |
-| Хостинг | VPS в РФ `89.111.141.79` (Ubuntu 24.04, pm2 + nginx), деплой `deploy/manual-deploy.sh`; `deploy.yml` выключен до починки secrets и media |
+| Хостинг | VPS в РФ `89.111.141.79` (Ubuntu 24.04, pm2 + nginx); деплой — `deploy.yml` после мержа в main или `deploy/manual-deploy.sh`; бэкапы — systemd-таймеры, [deploy/README.md](deploy/README.md) |
 | Структура сайта | Только по карте 08; изменения — через журнал решений плана 09 |
 
 ## Структура проекта
@@ -57,7 +57,7 @@ obikhod/
 ├── seosite/         # SEO-данные: keywords, конкуренты, strategy/04-target-site-map.json
 ├── team/adr/        # Журнал архитектурных решений (история)
 ├── team/research/   # Исследования
-├── deploy/          # manual-deploy.sh, server-bootstrap.sh
+├── deploy/          # README (эксплуатация), manual-deploy.sh, server/ (obikhod-deploy), backup/, server-bootstrap.sh
 ├── archive/         # Процесс v1 (роли, specs, backlog, GSD)
 └── CLAUDE.md
 ```
