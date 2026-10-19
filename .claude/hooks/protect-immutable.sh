@@ -42,8 +42,19 @@ fi
 FORBIDDEN_STACK='Тильд[аеуы]|Tilda|Битрикс|Bitrix|WordPress|Joomla|\bMODX\b'
 # Anti-TOV vocabulary (per contex/03_brand_naming.md)
 ANTI_TOV='услуги населению|имеем честь|от 1[[:space:]\xa0]*000[[:space:]\xa0]*₽|в кратчайшие сроки|индивидуальный подход'
+# AI must never be mentioned to clients (contex/09_product_plan.md, rule 1).
+# Checked only in client-facing paths; robots.ts / llms.txt / lib keep bot names legitimately.
+AI_WORDS='нейросет|искусственн[а-яё]* интеллект|(^|[^А-Яа-яЁё])ИИ([^А-Яа-яЁё]|$)|ChatGPT|YandexGPT|GigaChat|Claude'
 
 violations=()
+case "$FILE_PATH" in
+  */site/content/*|*/site/components/*|*/site/blocks/*|*"/site/app/(marketing)/"*)
+    if printf '%s' "$CONTENT" | grep -E -q "$AI_WORDS"; then
+      hit="$(printf '%s' "$CONTENT" | grep -E -o "$AI_WORDS" | head -3 | paste -sd', ' -)"
+      violations+=("AI mention in client-facing content: $hit")
+    fi
+    ;;
+esac
 if printf '%s' "$CONTENT" | grep -E -iq "$FORBIDDEN_STACK"; then
   hit="$(printf '%s' "$CONTENT" | grep -E -io "$FORBIDDEN_STACK" | head -3 | paste -sd', ' -)"
   violations+=("forbidden stack/CMS: $hit")

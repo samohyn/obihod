@@ -2,7 +2,16 @@
 
 _Обновляется в конце сессии. Короткий срез: что сделано, что в работе, что следующее. Цель — дать следующей сессии контекст за 30 секунд._
 
-## Где мы сейчас (2026-10-18 ~23:00 MSK) — личный кабинет и продажа товаров выпилены (ADR-0022)
+## Где мы сейчас (2026-10-19) — новый процесс: план 09, этап 0
+
+- **Работаем только по [contex/09_product_plan.md](../../contex/09_product_plan.md)**, статусы — [contex/09_product_plan-status.md](../../contex/09_product_plan-status.md). Процесс v1 (9 ролей, specs, backlog, GSD) — в `archive/process-v1/`. CLAUDE.md переписан; хуки: починен путь `session-bootstrap`, напоминание о цикле задачи, `protect-immutable` блокирует слова про ИИ в контенте, `validate-skills-activated` удалён.
+- **Правила владельца (19.10):** ИИ клиенту не упоминается нигде (смету по фото считает менеджер); фото без реального — fal.ai с подписью «Иллюстрация»; индексация — только отдельной командой; один админ samohingeorgy@gmail.com; контакты +7 (985) 170-51-11, partner@obikhod.ru, ул. Амет-хан Султана, 15, к1, Жуковский, 140185.
+- **Карта сайта 08 утверждена** (artifact https://claude.ai/artifact/TTkyAqRfsGbX4pnJ7ystqs v2): выравнивание и планировка участка — отдельная услуга `/vyravnivanie-uchastka/`; решения по ADR-0018 — в журнале плана 09.
+- **Всё на ветке `chore/process-v2`, не закоммичено.** Следующее: коммит/PR этапа 0 после приёмки → этап 1 (ревью кода и фундамент). Ждём от владельца: юрлицо, ИНН/ОГРН, график, срок ответа на заявку.
+- **Конкуренты:** `/Users/a36/obikhod.ru/структуры/` (вне репо) — 3 xlsx (Arborist.su, LiWood.ru, Arboristik.ru).
+- **Найдено на проде:** sitemap.xml = 165 URL, ещё 157 живых страниц вне него (гео «услуга × город», весь `/dizain-landshafta/`, `/uslugi/`, `/komanda/`, `/park-tehniki/`, `/sro-licenzii/`) — `sitemap.ts` берёт только published services / service-districts. Политика конфиденциальности 404 (`/politika/` в футере). Дубль `/raiony/zhukovskij/` + `/raiony/zhukovsky/`.
+
+## Где были раньше (2026-10-18 ~23:00 MSK) — личный кабинет и продажа товаров выпилены (ADR-0022)
 
 - Оператор: кабинет / клиентские аккаунты / продажа товаров — не делаем. [ADR-0022](../../team/adr/ADR-0022-customer-cabinet-sunset.md).
 - **Сайт:** `Header.tsx` — мёртвые кнопки «Войти / Регистрация» → `<Link className="mm-cta">Получить смету</Link>` (`/kalkulyator/foto-smeta/`). Цвет текста задан unlayered в `globals.css` (`homepage-classic.css` в `@layer components` проигрывает `a { color: inherit }`). Из `homepage-classic.css` / `service-pages.css` / `public/*.css` удалены правила shop/cabinet/auth (−~1500 строк). Комментарии «brand-guide §32.4» → «§32 (#lead-status)».
