@@ -3,8 +3,10 @@ name: CI
 # Проверки на каждом PR (план 09, этап 1 — CI-проверки). Одна prod-сборка на чистой БД:
 #   quality — type-check, lint, format, unit-тесты, TOV;
 #   e2e     — схема БД и админ → build → next start → Playwright (формы и /api/leads, axe,
-#             здоровье страниц, главная, шапка/подвал, SEO, админка) → ссылки → JSON-LD → Lighthouse.
-# Шаблоны с контентом (pillar, подуслуга, гео…) проверяются после выкатки на staging — site-checks.yml.
+#             здоровье страниц, главная, шапка/подвал, SEO, админка) → JSON-LD → Lighthouse.
+# Шаблоны с контентом (pillar, подуслуга, гео…) и краулер ссылок — на живом сайте после выкатки
+# на staging и ночью на проде (site-checks.yml): в чистой CI-базе меню ведёт на несуществующие
+# страницы услуг и районов, краулер здесь бессмыслен.
 # Actions закреплены по SHA (версия — в комментарии), обновляет Dependabot.
 
 on:
@@ -78,7 +80,7 @@ jobs:
           pnpm run tov:check $files
 
   e2e:
-    name: Build · E2E · axe · ссылки · JSON-LD · Lighthouse
+    name: Build · E2E · axe · JSON-LD · Lighthouse
     runs-on: ubuntu-latest
     timeout-minutes: 30
     defaults:
@@ -170,10 +172,6 @@ jobs:
           PLAYWRIGHT_BASE_URL: http://localhost:3000
           PLAYWRIGHT_EXTERNAL_SERVER: '1'
         run: pnpm exec playwright test
-
-      - name: Ссылки — краулер внутренних ссылок
-        if: ${{ !cancelled() && steps.start.outcome == 'success' }}
-        run: pnpm run check:links http://localhost:3000
 
       - name: JSON-LD
         if: ${{ !cancelled() && steps.start.outcome == 'success' }}

@@ -50,3 +50,4 @@ next-env.d.ts
 payload-types.ts
 .tmp/
 /.lighthouseci/
+/playwright-report-site/
