@@ -5,7 +5,7 @@
 //
 // Photo→quote калькулятор: 5 states (idle / uploading / processing / success / error).
 // Native <input type="file" capture="environment"> для mobile-camera + drag-drop area.
-// POST к /api/quote (sustained US-8 endpoint). Fallback — alert + scroll к lead-form.
+// POST к /api/quote — эндпоинта пока нет (этап 2 плана 09): честная ошибка + scroll к lead-form.
 //
 // SSR-safe: use client + useState/useRef. Reduced-motion guard для skel/progress.
 // A11y: keyboard-accessible drop zone (label wraps input), aria-live для state updates.
@@ -92,19 +92,14 @@ export function CalculatorShell(block: CalculatorShellBlock) {
       setState('processing')
 
       if (!res.ok) {
-        // Fallback success — endpoint not deployed yet, scroll к lead-form.
-        setTimeout(() => {
-          if (typeof window !== 'undefined') {
-            const target = document.querySelector(successHref)
-            if (target) target.scrollIntoView({ behavior: 'smooth' })
-          }
-          setState('success')
-          setResult({
-            amount: 0,
-            meta: 'Передадим оператору. Перезвоним за 15 минут.',
-            breakdown: [],
-          })
-        }, 1500)
+        // Приём фото ещё не готов (этап 2 плана 09) — честная ошибка вместо
+        // «передадим оператору», и ведём к форме заявки.
+        setState('error')
+        setErrorMsg('Не удалось отправить фото. Позвоните или оставьте телефон в форме ниже.')
+        if (typeof window !== 'undefined') {
+          const target = document.querySelector(successHref)
+          if (target) target.scrollIntoView({ behavior: 'smooth' })
+        }
         return
       }
 

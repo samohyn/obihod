@@ -12,6 +12,10 @@
  */
 
 const BASE = (process.argv[2] || 'http://localhost:3000').replace(/\/$/, '')
+// Basic auth для staging: SITE_AUTH="логин:пароль" (site-checks.yml).
+const AUTH: Record<string, string> = process.env.SITE_AUTH
+  ? { Authorization: `Basic ${Buffer.from(process.env.SITE_AUTH).toString('base64')}` }
+  : {}
 const CONCURRENCY = 4
 const MAX_PAGES = 3000
 const SKIP =
@@ -37,7 +41,7 @@ function normalize(href: string, from: string): string | null {
 async function fetchPage(path: string): Promise<Page> {
   const res = await fetch(BASE + path, {
     redirect: 'manual',
-    headers: { 'User-Agent': 'obikhod-link-check' },
+    headers: { 'User-Agent': 'obikhod-link-check', ...AUTH },
   })
   const page: Page = { status: res.status, noindex: false, links: [] }
   if (res.status >= 300 && res.status < 400) {
@@ -56,7 +60,7 @@ async function fetchPage(path: string): Promise<Page> {
 }
 
 async function sitemapPaths(): Promise<string[]> {
-  const res = await fetch(`${BASE}/sitemap.xml`)
+  const res = await fetch(`${BASE}/sitemap.xml`, { headers: AUTH })
   const xml = await res.text()
   return [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname)
 }

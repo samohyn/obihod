@@ -12,6 +12,10 @@ updates:
     open-pull-requests-limit: 5
     labels:
       - dependencies
+    # Типы Node держим под рантайм (.nvmrc = 22): мажор выше разрешит API, которых на сервере нет.
+    ignore:
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
     groups:
       # Next.js + Payload апдейтим одной пачкой — у них связанные версии
       next-payload:

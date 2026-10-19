@@ -49,3 +49,5 @@ next-env.d.ts
 /media
 payload-types.ts
 .tmp/
+/.lighthouseci/
+/playwright-report-site/

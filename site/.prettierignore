@@ -14,3 +14,5 @@ app/(payload)/admin/importMap.js
 *.log
 .env*
 !.env.example
+# Пишется тестом (A11Y_UPDATE_BASELINE=1) через JSON.stringify
+tests/e2e/a11y-baseline.json

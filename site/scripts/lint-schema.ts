@@ -52,9 +52,14 @@ function parseArgs(argv: string[]): { url: string; sample: number } {
   return { url: url.replace(/\/$/, ''), sample }
 }
 
+// Basic auth для staging: SITE_AUTH="логин:пароль" (site-checks.yml).
+const AUTH: Record<string, string> = process.env.SITE_AUTH
+  ? { Authorization: `Basic ${Buffer.from(process.env.SITE_AUTH).toString('base64')}` }
+  : {}
+
 async function fetchSitemapUrls(baseUrl: string): Promise<string[]> {
   const sitemapUrl = `${baseUrl}/sitemap.xml`
-  const res = await fetch(sitemapUrl)
+  const res = await fetch(sitemapUrl, { headers: AUTH })
   if (!res.ok) {
     throw new Error(`sitemap.xml: HTTP ${res.status} от ${sitemapUrl}`)
   }
@@ -73,7 +78,7 @@ async function fetchSitemapUrls(baseUrl: string): Promise<string[]> {
     const flat: string[] = []
     for (const childSitemap of allUrls.slice(0, 5)) {
       try {
-        const r = await fetch(childSitemap)
+        const r = await fetch(childSitemap, { headers: AUTH })
         if (!r.ok) continue
         const cx = await r.text()
         const cre = /<loc>([^<]+)<\/loc>/g
@@ -254,7 +259,7 @@ async function checkUrl(url: string): Promise<Issue[]> {
   const issues: Issue[] = []
   let html: string
   try {
-    const res = await fetch(url, { redirect: 'follow' })
+    const res = await fetch(url, { redirect: 'follow', headers: AUTH })
     if (!res.ok) {
       return [
         {

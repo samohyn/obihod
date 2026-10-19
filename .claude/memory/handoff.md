@@ -4,10 +4,18 @@ _Обновляется в конце сессии. Короткий срез: �
 
 ## ▶ Следующий шаг (для новой сессии)
 
-**План 09, этап 1 — «CI-проверки»** (следующая по трекеру): e2e всех форм, скриншоты шаблонов 360/768/1280/1440, axe, schema, `pnpm check:links`, Lighthouse по прод-сборке (сейчас меряет dev-сервер — см. трекер); заодно PR Dependabot: Actions #227–229, npm #216, #217, #226 (мажорные ESLint 10 / TypeScript 6). Потом — дрейф схемы (`pnpm schema:diff`, 113 команд) → этап 2.
+**CI-проверки — на приёмке у владельца** ([PR #247](https://github.com/samohyn/obihod/pull/247), 5 коммитов, staging = ветка `ci/pr-checks`). После приёмки: мерж #247 → закрыть Dependabot #227–229 (actions уже обновлены и закреплены по SHA) → вручную запустить `site-checks.yml` на staging и prod (workflow появится только после мержа в main). Дальше по этапу 1: дрейф схемы (`pnpm schema:diff`, 113 команд; затем CI — миграции с нуля вместо push). На решение владельца: сборка на GitHub вместо VPS; ESLint 10 / TS 6.
 Цикл задачи — CLAUDE.md: Perplexity — **второе мнение со сравнением**; показ этапа **целиком** с рассказом; UI/UX — `ui-ux-pro-max` + `frontend-design` + `frontend-patterns` и MCP `21st` (21st.dev, добавлен 19.10 в user scope). Источники: [план 09](../../contex/09_product_plan.md), [трекер](../../contex/09_product_plan-status.md), эксплуатация — [deploy/README.md](../../deploy/README.md).
 
-## Где мы сейчас (2026-10-19 ~23:30 MSK) — план 09, этап 1: чистка на проде
+## Где мы сейчас (2026-10-20 ~01:00 MSK) — план 09, этап 1: CI-проверки на приёмке
+
+- **PR-CI** (`ci.yml`): схема и админ — `seed-admin.ts` (Payload push) вместо прогрева dev; prod-сборка → Playwright 211 тестов (~4,8 мин на раннере): `leads-api`, `forms` (5 форм), `a11y` (база `a11y-baseline.json`, обновление `A11Y_UPDATE_BASELINE=1`), `pages-health` (скролл на 4 ширинах, `KNOWN_OVERFLOW`), старые landing/seo/site-chrome/admin-*; JSON-LD; Lighthouse 3 прогона (`lighthouserc.json`). Краулер в PR-CI не работает — меню ведёт на страницы CMS, которых нет в чистой БД.
+- **Живой сайт** (`site-checks.yml`, `playwright.site.config.ts`, `tests/site/`): после «Deploy to staging» (workflow_run), ночью 04:00 МСК на проде, вручную. Staging — пользователь `ci` в `/etc/nginx/staging.htpasswd` (копия `.bak-20261020`), секрет `STAGING_BASIC_AUTH`; пароль нигде не записан — при нужде локального прогона ротировать (хеш в htpasswd + `gh secret set`). `/api/rum` в проверках заглушён (иначе 429 и мусор в RUM прода).
+- **Исправлено попутно:** ложный «успех» LeadForm/LeadFormFull/CalculatorShell; IP клиента — `lib/http/clientIp` (X-Real-IP → последний XFF; раньше первый — обход лимита заявок); заголовок «Заявка с /kontakty/».
+- **Находки → этапы:** контраст токена `#8c8377`, LCP главной 8 с (фон CSS), калькулятор главной на 360, чекбокс ПДн, потерянные поля форм — в трекере (этапы 2, 5, 6).
+- `test.fail()` в forms/leads-api = известный дефект с этапом; «неожиданный проход» = дефект починен, снять пометку.
+
+## Где были раньше (2026-10-19 ~23:30 MSK) — план 09, этап 1: чистка на проде
 
 - Владелец принял #243–#245 → смержены, автодеплой: прод = `releases/20261019225903-2f48470` (до него `…225318-1373e6e`). Smoke: 14 страниц 200, удалённые маршруты 404, `/api/leads` 400 на пустое тело, noindex на месте.
 - **Нюанс GitHub:** `gh pr merge --delete-branch` базовой ветки **закрывает** stacked PR, а не переключает его. Лечится так: вернуть ветку по SHA → `gh pr reopen` → `gh pr edit --base main` → снова удалить ветку; `main` в ветку PR — обычным merge (force-push запрещён хуком).
