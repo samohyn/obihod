@@ -4,7 +4,7 @@ import { getContacts } from '@/lib/chrome'
 import { CONSENT_URL, PRIVACY_URL } from '@/lib/legal'
 /**
  * Footer — нижняя навигация, контакты, юр.инфа.
- * Source-of-truth: newui/homepage-classic.html (footer block).
+ * Source-of-truth: archive/newui/homepage-classic.html (footer block).
  * Stack: Server Component. Контакты и реквизиты — getContacts() (SiteChrome),
  * списки услуг/районов пока в коде (план 09, этап 2 — футер из CMS).
  */

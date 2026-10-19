@@ -3,11 +3,10 @@ import Link from 'next/link'
 import { DEFAULT_SITE_CHROME, getSiteChrome } from '@/lib/chrome'
 /**
  * Header — главная навигация, mega-menu (Услуги / Районы), CTA «Получить смету».
- * Source-of-truth: newui/_header.html (canonical mockup).
+ * Исходный макет: archive/newui/_header.html (в архиве, правим здесь).
  * Stack: Server Component, mega-menu работает на pure CSS :hover (см. .mm-has-drop:hover).
  *
- * При изменении: правка в newui/_header.html → копировать сюда заново.
- * См. EPIC-HOMEPAGE-MIGRATION (team/product/podev).
+ * Переделывается на этапе 2 плана 09 (меню из CMS, мобильное меню).
  */
 export async function Header() {
   const chrome = await getSiteChrome()

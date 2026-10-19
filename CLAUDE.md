@@ -22,11 +22,11 @@ specs, GSD) — в [archive/process-v1/](archive/process-v1/), новые зад
 **Роли:** владелец (samohingeorgy@gmail.com) решает и принимает; Claude делает.
 
 **Цикл каждой задачи:**
-1. **Perplexity** — «как лучше в 2026 для РФ и наших клиентов», вывод с источниками в задачу.
+1. **Perplexity — второе мнение** — у Claude своё решение, у Perplexity своё («как лучше в 2026 для РФ и наших клиентов»); сравнение, расхождения и выбор с источниками — в задачу и в показ владельцу.
 2. **Решение по brand-guide**; если в нём чего-то нет — сначала дополняем его.
 3. **Реализация** в отдельной ветке, небольшими PR.
 4. **Автопроверки** — type-check, lint, format, e2e форм, скриншоты 360/768/1280/1440, axe, schema, ссылки.
-5. **Показ владельцу** — ветка на https://staging.obikhod.ru (`deploy/manual-deploy.sh <ветка> staging`) + скриншоты desktop / laptop / mobile.
+5. **Показ владельцу — каждый этап целиком** — ветка на https://staging.obikhod.ru (`deploy/manual-deploy.sh <ветка> staging`) + скриншоты desktop / laptop / mobile + рассказ: что сделано, почему так, где разошлись с Perplexity.
 6. **Приёмка владельцем.**
 7. **PR → main → деплой** — автоматически после мержа (`deploy.yml`), миграции БД — psql до мержа; вручную `deploy/manual-deploy.sh <sha>` → smoke прода.
 
@@ -52,13 +52,13 @@ Definition of Done страницы — в плане 09, раздел 4. Реш
 ```
 obikhod/
 ├── contex/          # Стратегия: 01…09 (08 — карта сайта, 09 — план и статусы)
-├── design-system/   # brand-guide.html — источник UI/UX/TOV; fal-ai-prompts.md — правила фото
+├── design-system/   # brand-guide.html — источник UI/UX/TOV; logo/ — мастер-файлы логотипа; fal-ai-prompts.md — правила фото
 ├── site/            # Next.js + Payload (прод-код); site/content/ — подготовленные тексты страниц
 ├── seosite/         # SEO-данные: keywords, конкуренты, strategy/04-target-site-map.json
 ├── team/adr/        # Журнал архитектурных решений (история)
 ├── team/research/   # Исследования
 ├── deploy/          # README (эксплуатация), manual-deploy.sh, server/ (obikhod-deploy), backup/, server-bootstrap.sh
-├── archive/         # Процесс v1 (роли, specs, backlog, GSD)
+├── archive/         # Процесс v1 (роли, specs, backlog, GSD) и HTML-макеты newui/
 └── CLAUDE.md
 ```
 
@@ -98,7 +98,7 @@ obikhod/
 
 | Контекст | Skills |
 |---|---|
-| Next.js / React / формы | `frontend-patterns`, `frontend-design`, `ui-styling` |
+| UI/UX — любая задача (вёрстка, блоки, формы, навигация) | **обязательно** `ui-ux-pro-max`, `frontend-design`, `frontend-patterns`; готовые элементы — MCP `21st` (21st.dev), если ложатся на brand-guide |
 | Бэкенд / API / БД | `backend-patterns`, `postgres-patterns`, `database-migrations` |
 | SEO / контент | `seo`, `article-writing` |
 | Тесты / деплой | `e2e-testing`, `deployment-patterns` |

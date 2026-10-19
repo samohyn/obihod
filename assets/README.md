@@ -26,4 +26,4 @@ assets/
 
 - [design-system/foundations/photography.md](../design-system/foundations/photography.md) — правила съёмки кейсов
 - [design-system/foundations/print-materials.md](../design-system/foundations/print-materials.md) — CMYK-экспорты для типографии
-- [agents/brand/logo/](../agents/brand/logo/) — мастер-файлы логотипа (SVG), не здесь
+- [design-system/logo/](../design-system/logo/) — мастер-файлы логотипа (SVG), не здесь

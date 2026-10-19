@@ -2,7 +2,7 @@ import Link from 'next/link'
 /**
  * Services — секция §02
  * Note: 4 pillars, hardcoded Phase 1
- * Source: newui/homepage-classic.html (Phase 1: hardcoded; Phase 2: read from Payload Homepage global)
+ * Source: archive/newui/homepage-classic.html (Phase 1: hardcoded; Phase 2: read from Payload Homepage global)
  */
 export function Services() {
   return (

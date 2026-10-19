@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 /**
  * CtaFooter — секция §11 (pre-footer).
- * Source: newui/homepage-classic.html · 2 forms (фото-upload и phone-form).
+ * Source: archive/newui/homepage-classic.html · 2 forms (фото-upload и phone-form).
  * POST → /api/leads (existing endpoint), honeypot (email_url) включён.
  */
 

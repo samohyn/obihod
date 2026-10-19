@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react'
 
 /**
  * PricingCalculator — секция §04.5 (быстрый расчёт стоимости).
- * Source: newui/homepage-classic.html · 4 tabs × 3 sliders × 3 checkboxes + price formula.
+ * Source: archive/newui/homepage-classic.html · 4 tabs × 3 sliders × 3 checkboxes + price formula.
  * Phase 1: hardcoded formulas, identical to mockup. Phase 2: pricing config из Payload.
  */
 

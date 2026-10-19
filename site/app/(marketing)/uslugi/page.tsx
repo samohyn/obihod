@@ -1,6 +1,6 @@
 /**
  * T1 hub `/uslugi/` — entry-point для всего раздела услуг.
- * Source HTML: `newui/uslugi-hub.html` (US-2 deliverable).
+ * Source HTML: `archive/newui/uslugi-hub.html` (US-2 deliverable).
  *
  * Рендерит:
  *   - 5 pillar grid (динамически из getAllPillarsForPricing)

@@ -2,7 +2,7 @@ import type { HomepageGlobal } from '@/lib/homepage'
 
 /**
  * Reviews — секция §07 (плашки площадок + карточки отзывов).
- * Source: newui/homepage-classic.html.
+ * Source: archive/newui/homepage-classic.html.
  * Только настоящие данные из Homepage.reviewSources / Homepage.reviews: выдуманные отзывы и
  * рейтинги из макета убраны (план 09, этап 1; ст. 5 закона «О рекламе»). Пусто — секции нет.
  */

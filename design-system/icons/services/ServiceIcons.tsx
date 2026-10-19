@@ -2,7 +2,7 @@
  * ServiceIcons — domain-специфичные иконки услуг Обихода.
  *
  * Стиль: stroke 1.5, round cap/join, currentColor, viewBox 24×24.
- * DNA: чертёжная эстетика Круга сезонов (agents/brand/logo/master.svg).
+ * DNA: чертёжная эстетика Круга сезонов (design-system/logo/master.svg).
  * Правила: design-system/foundations/icons.md + design-system/icons/services/README.md.
  *
  * Использование:

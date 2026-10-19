@@ -46,3 +46,6 @@ skills-lock.json
 .tmp-*
 __pycache__/
 *.pyc
+
+# Obsidian — локальные настройки хранилища
+.obsidian/

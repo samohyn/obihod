@@ -9,7 +9,7 @@
  *   - site/public/icon-512.png    (512×512, PWA splash)
  *
  * Source SVG = упрощённый mark-simple из §3 brand-guide (master лежит в
- * agents/brand/logo/mark-simple.svg, viewBox 256; этот файл — viewBox 32 для
+ * design-system/logo/mark-simple.svg, viewBox 256; этот файл — viewBox 32 для
  * читаемости @ 16×16 в браузерной вкладке).
  *
  * Запуск (sharp находится в site/node_modules):

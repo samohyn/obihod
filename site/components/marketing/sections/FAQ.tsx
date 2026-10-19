@@ -2,7 +2,7 @@ import type { HomepageGlobal } from '@/lib/homepage'
 
 /**
  * FAQ — секция §10 (8 native <details>).
- * Source: newui/homepage-classic.html. Phase 2: контент из Payload Homepage.faq[]
+ * Source: archive/newui/homepage-classic.html. Phase 2: контент из Payload Homepage.faq[]
  * с graceful fallback на захардкоженные значения.
  */
 

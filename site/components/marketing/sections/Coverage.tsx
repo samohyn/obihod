@@ -2,7 +2,7 @@ import Link from 'next/link'
 /**
  * Coverage — секция §09
  * Note: 12 districts
- * Source: newui/homepage-classic.html (Phase 1: hardcoded; Phase 2: read from Payload Homepage global)
+ * Source: archive/newui/homepage-classic.html (Phase 1: hardcoded; Phase 2: read from Payload Homepage global)
  */
 export function Coverage() {
   return (

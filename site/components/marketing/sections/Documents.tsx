@@ -2,7 +2,7 @@ import type { HomepageGlobal } from '@/lib/homepage'
 
 /**
  * Documents — секция §08 (8 trust-cards с photo-превью).
- * Source: newui/homepage-classic.html.
+ * Source: archive/newui/homepage-classic.html.
  * Phase 3: контент из Homepage.documents[] с graceful fallback.
  * Photo-превью из admin Media (rel→media). Inline overlay-текст в .doc-overlay
  * — захардкожен по позиции для верности (admin меняет title/meta).
@@ -52,7 +52,7 @@ const FALLBACK_DOCS = [
 ]
 
 // Overlay-текст внутри `.doc` — по позиции 0-7, 1:1 из макета
-// newui/homepage-classic.html. Стилизация — `.hpc-trust-card .doc
+// archive/newui/homepage-classic.html. Стилизация — `.hpc-trust-card .doc
 // span:not(.badge-ok)` в `app/homepage-classic.css`. Реквизиты
 // (СРО номер, ИНН, страховые суммы) — placeholder-данные до W15
 // регистрации юрлица; обновляются здесь, не из admin.

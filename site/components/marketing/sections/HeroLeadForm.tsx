@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 /**
  * HeroLeadForm — клиентская форма-карточка в Hero (§01).
- * Source: newui/homepage-classic.html · .hpc-form-card.
+ * Source: archive/newui/homepage-classic.html · .hpc-form-card.
  * POST → /api/leads.
  */
 

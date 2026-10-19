@@ -2,7 +2,7 @@ import type { HomepageGlobal } from '@/lib/homepage'
 
 /**
  * How — секция §03 (5 шагов: заявка → выезд → смета → работа → оплата+гарантия).
- * Source: newui/homepage-classic.html.
+ * Source: archive/newui/homepage-classic.html.
  * Phase 3: контент из Homepage.steps[] с graceful fallback. Иконки остаются inline
  * (по позиции 0-4) — admin может изменить только title/sla/description.
  */

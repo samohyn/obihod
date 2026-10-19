@@ -4,10 +4,18 @@ _Обновляется в конце сессии. Короткий срез: �
 
 ## ▶ Следующий шаг (для новой сессии)
 
-**План 09, этап 1 — «Чистка кода и корня репо».** Владелец 19.10 попросил начать новую сессию с этого места. Цикл задачи — CLAUDE.md (Perplexity → решение → ветка → проверки → показ на staging → приёмка → PR → автодеплой). Источники: [план 09](../../contex/09_product_plan.md), [трекер](../../contex/09_product_plan-status.md), эксплуатация — [deploy/README.md](../../deploy/README.md).
-Дальше по этапу 1: CI-проверки (`pnpm check:links`, Lighthouse по прод-сборке, e2e форм) → дрейф схемы (`pnpm schema:diff`, 113 команд).
+**Чистка — на приёмке у владельца** (PR #243 → #244 → #245, мержить по порядку; #245 стоит на ветке #244 — после мержа #244 переключить базу на `main` и дождаться CI). После мержа: удалить 14 secrets (список в #243), `gh workflow enable security-audit.yml`, убрать `TELEGRAM_WEBHOOK_SECRET` и `OPERATOR_EMAIL` из `shared/.env` прода. Дальше по этапу 1: CI-проверки (`pnpm check:links`, Lighthouse по прод-сборке, e2e форм) → дрейф схемы (`pnpm schema:diff`, 113 команд).
+Цикл задачи — CLAUDE.md: Perplexity — **второе мнение со сравнением**; показ этапа **целиком** с рассказом; UI/UX — `ui-ux-pro-max` + `frontend-design` + `frontend-patterns` и MCP `21st` (21st.dev, добавлен 19.10 в user scope). Источники: [план 09](../../contex/09_product_plan.md), [трекер](../../contex/09_product_plan-status.md), эксплуатация — [deploy/README.md](../../deploy/README.md).
 
-## Где мы сейчас (2026-10-19 ~22:00 MSK) — план 09, этап 1: бэкапы, S3, уведомления, staging
+## Где мы сейчас (2026-10-19 ~23:00 MSK) — план 09, этап 1: чистка на приёмке
+
+- **#243** — 9 мёртвых workflows (BEGET_*, trigger-seed, sync-design, seo-monitor), `permissions: contents: read`, `deploy/branching.md` → архив. CI зелёный.
+- **#244** — удалены `/api/seed`, `/api/fal/generate`, Telegram webhook `/start`. До удаления: на проде `telegram_chat_id` пуст, обращений к webhook в nginx нет; токен бота в `.env.local` отозван (401), на проде `TELEGRAM_BOT_TOKEN` пуст. CI зелёный.
+- **#245** — 52 одноразовых скрипта + 52 npm-команды, 22 мёртвых компонента (knip с явными entry, конфиг — `payload: false`, т.к. плагин Payload падает на алиасах), `newui/` → `archive/newui/`, `agents/brand/logo` → `design-system/logo`, chat/.obsidian/.playwright-mcp вне git. Иконки мега-меню `components/icons/services` оставлены для этапа 2.
+- **Staging** = релиз `20261019224333-f07a7f2` (#244+#245): 16 страниц 200, удалённые маршруты 404, `/api/leads` валидирует; краулер 318 страниц — 0 битых; скриншоты 6 страниц × 360/1440 попиксельно = прод (0%).
+- Замечено, не трогал: 3 индексируемые страницы вне sitemap (политика, согласие, `/sro-licenzii/`) — так же на проде; подуслуги показывают сырой `## ` (этап 3); 23 старые ветки и 8 PR Dependabot (#216–#229) + #189 — предложено владельцу разобрать.
+
+## Где были раньше (2026-10-19 ~22:00 MSK) — план 09, этап 1: бэкапы, S3, уведомления, staging
 
 - **Копия бэкапов в S3 Beget** (restic, `/etc/obikhod/backup.env`; VPS — SpaceWeb, хранилище — другой провайдер). Пароль restic — у владельца и на сервере. Проверено: снимок + восстановление из S3 со сверкой sha256.
 - **Письма:** сбои бэкапа и новые заявки — с `noreply@obikhod.ru` (SMTP Beget) на `partner@obikhod.ru` (PR #240; заявка № 12 — письмо пришло). Telegram с VPS недоступен.
