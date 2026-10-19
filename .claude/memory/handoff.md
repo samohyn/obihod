@@ -2,7 +2,16 @@
 
 _Обновляется в конце сессии. Короткий срез: что сделано, что в работе, что следующее. Цель — дать следующей сессии контекст за 30 секунд._
 
-## Где мы сейчас (2026-10-19 ~18:15 MSK) — план 09, этап 1: SEO-фиксы на проде
+## Где мы сейчас (2026-10-19 ~19:40 MSK) — план 09, этап 1: бэкапы и автодеплой на проде
+
+- **PR #239 на проде** (релиз `20261019193644-900de6c`, выкачен уже автоматически `deploy.yml`).
+- **Бэкапы:** `obikhod-backup.timer` (03:30) и `obikhod-restore-check.timer` (вс 05:00), скрипты в `/usr/local/sbin/obikhod-*`, данные `/var/backups/obikhod/{daily,weekly,pre-deploy}`, настройки `/etc/obikhod/backup.env` (пока пустой: S3 и SMTP не заданы → копия только на сервере, сбои только в журнал). Подробно — `deploy/README.md`.
+- **Деплой:** мерж в main с изменениями `site/**` → `deploy.yml` → `ssh root@… "deploy <sha>"` ключом `DEPLOY_SSH_KEY` (forced command `obikhod-deploy --from-ssh`, restrict). Изменения `deploy/server/obikhod-deploy.sh` — один раз через `deploy/manual-deploy.sh`. Миграции — psql до мержа. Раннеры GitHub достают до VPS (проверено 19.10).
+- **Telegram с VPS недоступен** (api.telegram.org — таймаут), `TELEGRAM_OPERATOR_CHAT_ID` не задан → уведомлений о заявках сейчас нет. Канал — почта (Beget SMTP доступен) или MAX (API доступен).
+- **Ждём от владельца:** S3-бакет в РФ + ключи; ящик `noreply@obikhod.ru` + пароль; DNS A-запись `staging` → 89.111.141.79. После — `RESTIC_*` и `NOTIFY_*` в `/etc/obikhod/backup.env` + `install.sh` (restic init), staging, уведомления о заявках на почту.
+- **Не трогал:** старые workflows с мёртвыми `BEGET_*` secrets (prod-backup, migrate-prod, seed-*, deploy-staging…) — в задачу чистки.
+
+## Где были раньше (2026-10-19 ~18:15 MSK) — план 09, этап 1: SEO-фиксы на проде
 
 - **PR #237 + #238 на проде**, релиз `20261019180134-3d45134` (предыдущий `20261019175011-f635216`, до SEO — `20261019164242-9eaafef`). Бэкап до выкатки: `/root/backups/obikhod-20261019-1749-pre-seo.dump` + `media-…-pre-seo.tgz`. Миграции данных `20261019_200000_seo_quick_fixes_data` (batch 3) и `20261019_210000_site_chrome_tax_id_placeholder` (batch 4) применены psql и записаны в `payload_migrations`; down первой — только из pg_dump.
 - **Результат:** `pnpm check:links https://obikhod.ru` — 0 битых ссылок, 0 ссылок на редиректы, sitemap 173 URL (все 200, без noindex). Гео-черновики (146) → `noindex, follow`; индексируемая гео = published + снят «noindex до кейса» (`isServiceDistrictIndexable`). Политика ПДн и согласие опубликованы. Контакты — один источник `getContacts()` (lib/chrome.ts). Выдуманные отзывы/рейтинги убраны (секция отзывов главной пустая — ждёт настоящих). ИИ клиенту не упоминается. Telegram-уведомление о заявке — без телефона/имени. `zhukovskij` слит в `zhukovsky` (+301). Опубликованы «Дизайн ландшафта» и страница автора georgy-s (решение владельца).

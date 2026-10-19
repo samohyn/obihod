@@ -6,6 +6,7 @@ import {
   buildAfterChangeAuditHook,
   buildAfterDeleteAuditHook,
 } from '@/lib/admin/audit/captureHooks'
+import { emailManagerAboutLead, type LeadEmailDoc } from '@/lib/leads/notifyEmail'
 import { notifyOperatorAboutLead, type LeadDocLike } from '@/lib/telegram/sendMessage'
 
 export const Leads: CollectionConfig = {
@@ -85,6 +86,23 @@ export const Leads: CollectionConfig = {
           ]).catch((e: unknown) => {
             const msg = e instanceof Error ? e.message : String(e)
             console.error('[lead-telegram-notify]', msg)
+          })
+        })
+        return doc
+      },
+      // Письмо менеджеру (план 09, этап 1): Telegram с VPS недоступен — почта основной канал.
+      // Тот же fire-and-forget: заявка сохраняется, даже если SMTP недоступен.
+      ({ doc, operation, req }) => {
+        if (operation !== 'create') return doc
+        setImmediate(() => {
+          Promise.race([
+            emailManagerAboutLead(doc as LeadEmailDoc, req.payload),
+            new Promise<never>((_, reject) =>
+              setTimeout(() => reject(new Error('20s timeout')), 20000),
+            ),
+          ]).catch((e: unknown) => {
+            const msg = e instanceof Error ? e.message : String(e)
+            console.error('[lead-email-notify]', msg)
           })
         })
         return doc
