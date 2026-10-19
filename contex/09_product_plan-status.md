@@ -7,12 +7,19 @@ _Единственный трекер задач. План — [09_product_plan
 | Этап | Задача | Статус | PR / превью | Заметки |
 |---|---|---|---|---|
 | 0 | План согласован, решения приняты | принята | — | 19.10.2026 |
-| 0 | Карта сайта 08: решения и выравнивание участка | на приёмке | [PR #234](https://github.com/samohyn/obihod/pull/234), [artifact](https://claude.ai/artifact/TTkyAqRfsGbX4pnJ7ystqs) | `contex/08`, `seosite/strategy/04-target-site-map.json` |
-| 0 | Старый процесс в архив | на приёмке | [PR #234](https://github.com/samohyn/obihod/pull/234) | `archive/process-v1/` |
-| 0 | CLAUDE.md и хуки под новый процесс | на приёмке | [PR #234](https://github.com/samohyn/obihod/pull/234) | |
+| 0 | Карта сайта 08: решения и выравнивание участка | принята | [PR #234](https://github.com/samohyn/obihod/pull/234), [artifact](https://claude.ai/artifact/TTkyAqRfsGbX4pnJ7ystqs) | `contex/08`, `seosite/strategy/04-target-site-map.json` |
+| 0 | Старый процесс в архив | принята | [PR #234](https://github.com/samohyn/obihod/pull/234) | `archive/process-v1/` |
+| 0 | CLAUDE.md и хуки под новый процесс | принята | [PR #234](https://github.com/samohyn/obihod/pull/234) | |
 | 0 | Реквизиты | принята | — | заглушки, владелец меняет в панели (этап 4) |
 | 0 | Оффер: график, срок ответа, гарантии | на приёмке | [PR #234](https://github.com/samohyn/obihod/pull/234) | `contex/10_offer.md`; ⚑ подтверждает владелец |
-| 1 | Ревью кода и фундамент | не начата | — | |
+| 1 | Обновления безопасности: Next 16.4.2, Payload 3.91, sharp 0.35.5 | на проде | [PR #235](https://github.com/samohyn/obihod/pull/235) | 19.10, релиз `20261019160848-db1f707`; колонка `users.reset_password_requested_at`; `pnpm schema:diff` |
+| 1 | Дрейф схемы конфиг ↔ БД (113 команд) | не начата | — | разобрать по `pnpm schema:diff`, свести в миграции |
+| 1 | Чистка кода и корня репо | не начата | — | V1/V2 блоки — после этапа 3 |
+| 1 | Безопасность админки: права, Users, один админ | на приёмке | PR (см. ниже) | единый `isAdmin` (+проверка 2FA), черновики закрыты от анонимов, GraphQL выкл, заявки/RUM только через свои маршруты, блокировка 5/15 мин, API-ключи выкл, cookie Secure + CSRF; 42/42 локальных проверок |
+| 1 | Telegram-бот: `/start` пишет chat_id любого в запись админа | не начата | — | входа по ссылке нет, вреда сейчас нет; убрать в задаче чистки |
+| 1 | Бэкапы в РФ, staging, CI-деплой | не начата | — | |
+| 1 | Быстрые SEO-фиксы (sitemap, 404, политика, рейтинги, llms-full) | не начата | — | |
+| 1 | CI-проверки (e2e форм, скриншоты, axe, schema, ссылки) | не начата | — | |
 | 2 | Блоки, навигация, формы | не начата | — | |
 | 3 | Эталонные шаблоны | не начата | — | первым — «Спил деревьев» |
 | 4 | Всё редактируется в CMS | не начата | — | |

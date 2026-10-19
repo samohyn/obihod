@@ -1,5 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
+import { isAdmin } from '@/lib/auth/access'
+
 /**
  * RumMetrics — Real User Monitoring sample storage (OVT-3, EPIC-LIWOOD-OVERTAKE).
  *
@@ -13,9 +15,8 @@ import type { CollectionConfig } from 'payload'
  * user_agent (truncated), viewport_width, timestamp. UA храним для быстрого
  * mobile/desktop split (без полного парсинга — этого достаточно для p75).
  *
- * Read access — admin only (raw данные не нужны контент-менеджерам).
- * Create — anonymous (это RUM-собиратель; защита через rate-limit в route.ts).
- * Update / delete — закрыты (immutable telemetry, чистка через TTL job).
+ * Read / delete — админ. Create — только через /api/rum (Local API).
+ * Update — закрыт (immutable telemetry, чистка через TTL job).
  */
 export const RumMetrics: CollectionConfig = {
   slug: 'rum-metrics',
@@ -30,14 +31,12 @@ export const RumMetrics: CollectionConfig = {
       'с реальных посетителей. PII не хранится. См. OVT-3 / EPIC-LIWOOD-OVERTAKE.',
   },
   access: {
-    // Anonymous create — публичный RUM beacon из браузера. Защита через rate-limit
-    // в /api/rum/route.ts (10 req/sec per IP) + payload-validation там же.
-    create: () => true,
-    read: ({ req }) =>
-      Boolean(req.user) &&
-      ['admin', 'manager'].includes((req.user as { role?: string })?.role ?? ''),
+    // Сэмплы пишет только /api/rum/route.ts (rate-limit + валидация) через Local API
+    // без проверки прав — через REST/GraphQL создавать нельзя.
+    create: () => false,
+    read: isAdmin,
     update: () => false,
-    delete: ({ req }) => (req.user as { role?: string } | null)?.role === 'admin',
+    delete: isAdmin,
   },
   fields: [
     {

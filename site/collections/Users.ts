@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
+import { isAdmin } from '@/lib/auth/access'
 import {
   buildAfterChangeAuditHook,
   buildAfterDeleteAuditHook,
@@ -10,23 +11,31 @@ import {
 
 export const Users: CollectionConfig = {
   slug: 'users',
-  // useAPIKey: true — позволяет генерировать API ключи на странице юзера
-  // в /admin/collections/users/<id>. Authorization: users API-Key <key>.
-  // Используется командой (cms ops без участия оператора) до полноценного
-  // bot-user в OBI-17. Audit-trail в Payload versions фиксирует actor по
-  // email юзера-владельца ключа.
-  //
-  // КРИТИЧНО: схема (3 поля + индекс) добавляется через explicit миграцию
-  // 20260426_153500_users_api_key. Любое изменение этого блока требует
-  // соответствующей миграции — НЕ рассчитывать на push:true (на prod
-  // отключён, и был P0 incident 2026-04-26 когда первая попытка без
-  // миграции положила /api/users/login на 10 минут).
+  // План 09, этап 1: один администратор, API-ключи выключены (никто ими не пользуется;
+  // колонки enable_a_p_i_key / api_key / api_key_index остаются пустыми в БД — уберём
+  // в задаче дрейфа схемы, чтобы откат релиза не требовал миграции).
+  // 5 неудачных входов → блокировка на 15 минут (почты для сброса пароля пока нет —
+  // снять раньше можно только на сервере: UPDATE users SET login_attempts=0, lock_until=NULL).
+  // Cookie сессии на проде — только по HTTPS.
   auth: {
-    useAPIKey: true,
+    maxLoginAttempts: 5,
+    lockTime: 15 * 60 * 1000,
+    cookies: {
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'Lax',
+    },
+  },
+  access: {
+    admin: isAdmin,
+    create: isAdmin,
+    read: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
+    unlock: isAdmin,
   },
   admin: {
     useAsTitle: 'email',
-    defaultColumns: ['email', 'name', 'role', 'enableAPIKey'],
+    defaultColumns: ['email', 'name', 'role'],
     group: '09 · Система',
   },
   // PANEL-AUDIT-LOG (ADR-0014): security-event capture.

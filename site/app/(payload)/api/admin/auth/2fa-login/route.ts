@@ -19,10 +19,18 @@ import { setSecondFactorPassed } from '@/lib/auth/totp/secondFactorCookie'
  * Принимает либо OTP (6 digits) либо recovery code. Recovery code — single-use
  * (проставляется consumed_at).
  *
- * SECURITY: rate-limit рекомендуется на уровне reverse-proxy / WAF; этот endpoint
- * сам не реализует rate-limit (см. risks §In-memory setup-session — Redis
- * follow-up). Recovery code consume — атомарно через payload.update.
+ * SECURITY: не больше OTP_MAX_FAILURES неверных кодов за 15 минут на пользователя
+ * (in-memory — pm2 держит один процесс), иначе 429: без лимита 6 цифр перебираются
+ * при известном пароле. Recovery code consume — атомарно через payload.update.
  */
+const OTP_MAX_FAILURES = 5
+const OTP_WINDOW_MS = 15 * 60 * 1000
+const otpFailures = new Map<string, number[]>()
+
+function recentFailures(key: string, now: number): number[] {
+  return (otpFailures.get(key) ?? []).filter((t) => now - t < OTP_WINDOW_MS)
+}
+
 export async function POST(request: Request) {
   try {
     const payload = await payloadClient()
@@ -48,6 +56,19 @@ export async function POST(request: Request) {
       return NextResponse.json(
         { error: { code: 'not_required', message: '2FA не требуется.' } },
         { status: 400 },
+      )
+    }
+
+    const failureKey = String(user.id)
+    if (recentFailures(failureKey, Date.now()).length >= OTP_MAX_FAILURES) {
+      return NextResponse.json(
+        {
+          error: {
+            code: 'too_many_attempts',
+            message: 'Слишком много неверных кодов. Подожди 15 минут.',
+          },
+        },
+        { status: 429 },
       )
     }
 
@@ -109,11 +130,14 @@ export async function POST(request: Request) {
     }
 
     if (!valid) {
+      const now = Date.now()
+      otpFailures.set(failureKey, [...recentFailures(failureKey, now), now])
       return NextResponse.json(
         { error: { code: 'invalid_otp', message: 'Неверный код. Проверь и попробуй ещё раз.' } },
         { status: 401 },
       )
     }
+    otpFailures.delete(failureKey)
 
     // Если использовали recovery — отмечаем consumed_at
     if (usedRecoveryIdx >= 0 && Array.isArray(codes)) {

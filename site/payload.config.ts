@@ -27,8 +27,15 @@ import { SiteChrome } from './globals/SiteChrome'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+const serverURL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+
 export default buildConfig({
-  serverURL: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+  serverURL,
+  // Cookie-сессия админки принимается только с нашего origin.
+  csrf: [serverURL],
+  // Сайт и админка ходят в Payload через Local API и REST; GraphQL не нужен —
+  // открытым он давал анонимный createLead в обход /api/leads (план 09, этап 1).
+  graphQL: { disable: true },
   admin: {
     user: Users.slug,
     importMap: { baseDir: path.resolve(dirname) },

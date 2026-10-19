@@ -1,5 +1,6 @@
 import type { CollectionBeforeDeleteHook, CollectionConfig, Where } from 'payload'
 import { APIError } from 'payload'
+import { isAdmin } from '@/lib/auth/access'
 
 import {
   buildAfterChangeAuditHook,
@@ -85,7 +86,13 @@ export const Media: CollectionConfig = {
       },
     },
   },
-  access: { read: () => true },
+  access: {
+    // Публичное чтение нужно для отдачи файлов /api/media/file/<name>.
+    read: () => true,
+    create: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
+  },
   hooks: {
     beforeDelete: [beforeDeleteRaceGuard],
     // PANEL-AUDIT-LOG (ADR-0014): Media НЕ versioned (большой бинарь, только

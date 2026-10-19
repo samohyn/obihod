@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
+import { isAdmin } from '@/lib/auth/access'
 import { LEAD_STATUS_OPTIONS, isLeadStatus } from '@/lib/leads/status'
 import {
   buildAfterChangeAuditHook,
@@ -26,15 +27,13 @@ export const Leads: CollectionConfig = {
     },
   },
   access: {
-    // US-8 hot-fix: anonymous public POST разрешён для inbound лидов с сайта.
-    // Создание лида = публичный inbound (форма на marketing-странице, без auth);
-    // защита через rate-limit + honeypot в /api/leads/route.ts adapter.
-    create: () => true,
-    read: ({ req }) =>
-      Boolean(req.user) &&
-      ['admin', 'manager'].includes((req.user as { role?: string })?.role ?? ''),
-    update: ({ req }) => Boolean((req.user as { email?: string } | null)?.email),
-    delete: ({ req }) => Boolean((req.user as { email?: string } | null)?.email),
+    // Заявки с сайта идут только через /api/leads/route.ts (rate-limit + honeypot),
+    // он пишет Local API без проверки прав. Публичный create открывал обход через
+    // REST/GraphQL — спам в админку и Telegram. Вручную заявку создаёт админ.
+    create: isAdmin,
+    read: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
   },
   // PANEL-LEADS-INBOX § A.3 — audit log смен status (jsonb backed by migration
   // 20260501_140100_leads_status_history). Hook gar­antirovs invariant

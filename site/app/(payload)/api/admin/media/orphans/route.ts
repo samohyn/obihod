@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { headers as nextHeaders } from 'next/headers'
 import type { Where } from 'payload'
 import { payloadClient } from '@/lib/payload'
+import { isAdminUser } from '@/lib/auth/access'
 
 /**
  * POST /api/admin/media/orphans
@@ -199,8 +200,7 @@ export async function POST(request: Request) {
       { status: 401 },
     )
   }
-  const role = (auth.user as { role?: string }).role
-  if (!role || !['admin', 'manager'].includes(role)) {
+  if (!isAdminUser(auth.user, headersList)) {
     return NextResponse.json(
       { error: { code: 'forbidden', message: 'Нет прав на проверку медиа.' } },
       { status: 403 },

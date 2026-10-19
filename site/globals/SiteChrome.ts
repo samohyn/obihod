@@ -1,4 +1,5 @@
 import type { ArrayField, GlobalConfig, Validate } from 'payload'
+import { isAdmin } from '@/lib/auth/access'
 
 /**
  * SiteChrome — единый global для "рамки сайта": Header, Footer, контакты,
@@ -124,7 +125,7 @@ export const SiteChrome: GlobalConfig = {
   },
   access: {
     read: () => true,
-    update: ({ req: { user } }) => (user as { role?: string } | null)?.role === 'admin',
+    update: isAdmin,
   },
   hooks: {
     afterChange: [

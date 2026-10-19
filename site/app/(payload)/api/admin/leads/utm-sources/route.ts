@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { headers as nextHeaders } from 'next/headers'
 
 import { payloadClient } from '@/lib/payload'
+import { isAdminUser } from '@/lib/auth/access'
 
 /**
  * GET /api/admin/leads/utm-sources
@@ -27,8 +28,7 @@ export async function GET() {
       { status: 401 },
     )
   }
-  const role = (auth.user as { role?: string }).role
-  if (!role || !['admin', 'manager'].includes(role)) {
+  if (!isAdminUser(auth.user, headersList)) {
     return NextResponse.json(
       { error: { code: 'forbidden', message: 'Нет прав на чтение заявок.' } },
       { status: 403 },

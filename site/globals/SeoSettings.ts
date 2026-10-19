@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { isAdmin } from '@/lib/auth/access'
 
 /**
  * SeoSettings — SEO-only global. После ADR-0002 часть полей, которые
@@ -23,7 +24,7 @@ export const SeoSettings: GlobalConfig = {
     description: 'Глобальные SEO-настройки Обихода (verification, credentials, OG)',
     group: '04 · SEO',
   },
-  access: { read: () => true },
+  access: { read: () => true, update: isAdmin },
   fields: [
     {
       name: 'organization',

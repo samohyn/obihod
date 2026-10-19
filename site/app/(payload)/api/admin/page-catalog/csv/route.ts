@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { headers as nextHeaders } from 'next/headers'
 import { payloadClient } from '@/lib/payload'
+import { isAdminUser } from '@/lib/auth/access'
 
 /**
  * GET /api/admin/page-catalog/csv
@@ -8,7 +9,7 @@ import { payloadClient } from '@/lib/payload'
  * CSV export каталога опубликованных страниц 7 коллекций (Wave 3 · PAN-6).
  *
  * Authentication: only admin (через payload.auth с user-headers).
- * 401 без аутентификации, 403 если user без admin/manager role.
+ * 401 без аутентификации, 403 если user не админ.
  *
  * Response:
  * - Content-Type: text/csv; charset=utf-8
@@ -75,10 +76,8 @@ export async function GET() {
       { status: 401 },
     )
   }
-  // Role-check: 403 если role отсутствует (legacy user / новый user до миграции)
-  // ИЛИ не входит в admin/manager. Без `!role` — empty role bypass.
-  const role = (auth.user as { role?: string }).role
-  if (!role || !['admin', 'manager'].includes(role)) {
+  // 403, если не админ (или не прошёл 2FA).
+  if (!isAdminUser(auth.user, headersList)) {
     return NextResponse.json(
       { error: { code: 'forbidden', message: 'Нет прав на экспорт.' } },
       { status: 403 },

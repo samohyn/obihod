@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
 import {
   Hero,
   TextContent,
@@ -60,7 +61,13 @@ export const Services: CollectionConfig = {
     description: 'Четыре направления Обихода: арбористика, крыши, мусор, демонтаж.',
   },
   versions: { drafts: { autosave: { interval: 2000 } } },
-  access: { read: () => true },
+  access: {
+    read: isAdminOrPublished,
+    readVersions: isAdmin,
+    create: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
+  },
   // OBI-30 Wave 4 — UI tabs grouping (art-concept-v2 §5).
   // Unnamed tabs — БД schema не меняется, миграции не требуются.
   fields: [

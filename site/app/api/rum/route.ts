@@ -145,7 +145,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'validation_error' }, { status: 400 })
   }
 
-  // 4. Persist через Payload Local API (overrideAccess не нужен — create:()=>true)
+  // 4. Persist через Payload Local API (overrideAccess по умолчанию — REST/GraphQL create закрыт)
   try {
     const payload = await payloadClient()
     await payload.create({

@@ -4,6 +4,7 @@ import { headers as nextHeaders } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 import { payloadClient } from '@/lib/payload'
+import { isAdminUser } from '@/lib/auth/access'
 import { PageCatalog } from '@/components/admin/PageCatalog'
 
 /**
@@ -88,8 +89,7 @@ export default async function AdminCatalogPage() {
   if (!auth.user) {
     redirect('/admin/login?redirect=/admin/catalog')
   }
-  const role = (auth.user as { role?: string }).role
-  if (!role || !['admin', 'manager'].includes(role)) {
+  if (!isAdminUser(auth.user, headersList)) {
     redirect('/admin/login?redirect=/admin/catalog')
   }
 

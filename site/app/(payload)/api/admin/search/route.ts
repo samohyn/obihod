@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { headers as nextHeaders } from 'next/headers'
 
 import { payloadClient } from '@/lib/payload'
+import { isAdminUser } from '@/lib/auth/access'
 import {
   buildUnionQuery,
   groupRows,
@@ -50,8 +51,7 @@ export async function GET(request: Request) {
       { status: 401 },
     )
   }
-  const role = (auth.user as { role?: string }).role
-  if (!role || !['admin', 'manager'].includes(role)) {
+  if (!isAdminUser(auth.user, headersList)) {
     return NextResponse.json(
       { error: { code: 'forbidden', message: 'Нет прав на поиск.' } },
       { status: 403 },
@@ -124,6 +124,8 @@ export async function GET(request: Request) {
           where: { id: { equals: row.id } },
           overrideAccess: false,
           user: auth.user,
+          // cookie 2FA нужна isAdmin (lib/auth/access.ts) — иначе черновики отфильтруются
+          req: { headers: headersList },
           depth: 0,
           limit: 1,
           pagination: false,

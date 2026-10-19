@@ -1,4 +1,5 @@
 import type { CollectionConfig, CollectionBeforeValidateHook } from 'payload'
+import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
 import { revalidateTag } from 'next/cache'
 import { Hero } from '@/blocks/Hero'
 import { TextContent } from '@/blocks/TextContent'
@@ -153,7 +154,13 @@ export const ServiceDistricts: CollectionConfig = {
   //   • pillar-level (subServiceSlug IS NULL): UNIQUE(service, district)
   //   • sub-level    (subServiceSlug IS NOT NULL): UNIQUE(service, district, subServiceSlug)
   indexes: [{ fields: ['service', 'district', 'subServiceSlug'] }],
-  access: { read: () => true },
+  access: {
+    read: isAdminOrPublished,
+    readVersions: isAdmin,
+    create: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
+  },
   fields: [
     {
       type: 'tabs',
