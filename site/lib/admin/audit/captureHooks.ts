@@ -1,6 +1,9 @@
 import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'payload'
 
+import { clientIp } from '@/lib/http/clientIp'
+
 import { getAuditLogAdapter } from './HybridAuditLogAdapter'
+
 import type { AuditAction, AuditCaptureEvent } from './types'
 
 /**
@@ -68,10 +71,8 @@ function userIdFrom(req: unknown): number | null {
 
 function ipFrom(req: unknown): string | null {
   const headers = (req as { headers?: Headers } | null)?.headers
-  if (!headers) return null
-  const xff = headers.get?.('x-forwarded-for')
-  if (xff) return xff.split(',')[0].trim()
-  return null
+  if (!headers?.get) return null
+  return clientIp(headers)
 }
 
 function userAgentFrom(req: unknown): string | null {

@@ -34,6 +34,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
+import { clientIp } from '@/lib/http/clientIp'
 import { payloadClient } from '@/lib/payload'
 
 export const dynamic = 'force-dynamic'
@@ -59,9 +60,7 @@ function checkRateLimit(ip: string): boolean {
 }
 
 function getIp(req: NextRequest): string {
-  const fwd = req.headers.get('x-forwarded-for')
-  if (fwd) return fwd.split(',')[0].trim()
-  return req.headers.get('x-real-ip') ?? 'unknown'
+  return clientIp(req.headers) ?? 'unknown'
 }
 
 // ─── Slug resolver ────────────────────────────────────────────────────────────

@@ -174,15 +174,13 @@ export function LeadForm(block: LeadFormBlock) {
       if (res.ok) {
         setSuccess(block.successMessage ?? 'Спасибо, перезвоним за 15 минут.')
         form.reset()
-      } else if (res.status === 404) {
-        alert('Заявка отправлена. Перезвоним в течение 15 минут.')
-        form.reset()
+      } else if (res.status === 429) {
+        setError('Слишком частые запросы. Попробуйте через минуту или позвоните.')
       } else {
         setError('Не удалось отправить. Позвоните или напишите в Telegram.')
       }
     } catch {
-      alert('Заявка отправлена. Перезвоним в течение 15 минут.')
-      form.reset()
+      setError('Сеть недоступна. Позвоните или попробуйте ещё раз.')
     } finally {
       setSubmitting(false)
     }

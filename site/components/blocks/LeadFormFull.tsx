@@ -135,11 +135,6 @@ export function LeadFormFull(block: LeadFormFullBlock) {
         setState('success')
         form.reset()
         setPhotoCount(0)
-      } else if (res.status === 404) {
-        // Endpoint not deployed — soft success per US-8 MVP fallback.
-        setState('success')
-        form.reset()
-        setPhotoCount(0)
       } else {
         setState('error')
         setErrors({
