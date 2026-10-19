@@ -1,0 +1,11 @@
+[Unit]
+Description=Обиход: бэкап БД и media
+Wants=network-online.target
+After=network-online.target postgresql.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/obikhod-backup
+Nice=10
+IOSchedulingClass=idle
+TimeoutStartSec=30min

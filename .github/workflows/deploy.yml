@@ -1,598 +1,65 @@
-name: Deploy to Beget
+name: Deploy to prod
 
-# Запускается ТОЛЬКО вручную, пока не подгружены secrets Beget.
-# После подачи доступов (см. deploy/README.md):
-#   1. Заполнить Settings → Secrets and variables → Actions:
-#      BEGET_SSH_HOST, BEGET_SSH_PORT, BEGET_SSH_USER, BEGET_SSH_KEY,
-#      BEGET_DEPLOY_PATH, BEGET_APP_NAME (для pm2)
-#      + env: DATABASE_URI, PAYLOAD_SECRET, NEXT_PUBLIC_SITE_URL,
-#        REVALIDATE_SECRET, INDEXNOW_KEY
-#      NEXT_PUBLIC_YANDEX_METRIKA_ID — пока захардкожен ниже
-#      (публичный ID счётчика, не секрет).
-#   2. Добавить в on: push: branches: [main] — когда готовы к auto-deploy
+# План 09, этап 1: выкатка на VPS 89.111.141.79 после мержа в main.
+#
+# Вся серверная логика — /usr/local/sbin/obikhod-deploy (deploy/server/obikhod-deploy.sh): бэкап,
+# сборка, переключение, health-check с откатом, чистка релизов. Ключ DEPLOY_SSH_KEY в
+# /root/.ssh/authorized_keys ограничен forced command — он умеет только «deploy <sha>».
+# Обновился deploy/server/obikhod-deploy.sh — один раз выкатить вручную (deploy/manual-deploy.sh
+# ставит скрипт на сервер), ключ CI ставить его не может.
+#
+# Миграции БД сюда не входят: применить psql ДО мержа PR (ADR-0016).
 
 on:
   push:
     branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/deploy.yml'
   workflow_dispatch:
-    inputs:
-      confirm:
-        description: 'Напиши "deploy" чтобы подтвердить выкатку'
-        required: false
-        default: 'deploy'
 
 concurrency:
-  group: deploy-beget
+  group: deploy-prod
   cancel-in-progress: false
 
-# contents: write — нужен для gh release create/delete (transport через GH Release).
-# actions: read — для чтения artifact-метаданных, если понадобится.
 permissions:
-  contents: write
-  actions: read
+  contents: read
+
+env:
+  HOST: 89.111.141.79
+  # публичный ключ сервера (ssh-keyscan -t ed25519), не секрет — закреплён от подмены
+  HOST_KEY: '89.111.141.79 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF/PwpJIXiUp6BNluOBsFfp7kpLUOhyET+bp0MH7DlWN'
 
 jobs:
-  preflight:
-    name: Preflight — проверка secrets
+  deploy:
     runs-on: ubuntu-latest
-    outputs:
-      ready: ${{ steps.check.outputs.ready }}
-    steps:
-      - id: check
-        env:
-          HOST: ${{ secrets.BEGET_SSH_HOST }}
-          USER: ${{ secrets.BEGET_SSH_USER }}
-          KEY: ${{ secrets.BEGET_SSH_KEY }}
-          PATH_: ${{ secrets.BEGET_DEPLOY_PATH }}
-        run: |
-          if [ -z "$HOST" ] || [ -z "$USER" ] || [ -z "$KEY" ] || [ -z "$PATH_" ]; then
-            echo "::error::Secrets Beget отсутствуют. См. deploy/README.md"
-            echo "ready=false" >> $GITHUB_OUTPUT
-            exit 1
-          fi
-          # На push main — без подтверждения; на workflow_dispatch — confirm обязателен
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.confirm }}" != "deploy" ]; then
-            echo "::error::Нужно явно подтвердить выкатку словом 'deploy' в input."
-            exit 1
-          fi
-          echo "ready=true" >> $GITHUB_OUTPUT
-
-  build:
-    name: Build production bundle
-    needs: preflight
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: site
-    services:
-      # Временная БД на runner'е — нужна только для generateStaticParams
-      # во время next build. Реальная обработка данных — в runtime на Beget.
-      postgres:
-        image: postgres:16-alpine
-        env:
-          POSTGRES_USER: obikhod
-          POSTGRES_PASSWORD: obikhod_dev
-          POSTGRES_DB: obikhod
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 5s
-          --health-timeout 5s
-          --health-retries 10
-    env:
-      # Ephemeral DATABASE_URI для build (на сервере будет переопределён из shared/.env)
-      DATABASE_URI: postgres://obikhod:obikhod_dev@localhost:5432/obikhod
-      PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
-      PAYLOAD_PREVIEW_SECRET: ${{ secrets.PAYLOAD_PREVIEW_SECRET }}
-      NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
-      REVALIDATE_SECRET: ${{ secrets.REVALIDATE_SECRET }}
-      INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
-      # Public ID — инлайнится в бандл на build. Если нужно переопределить,
-      # добавь secret NEXT_PUBLIC_YANDEX_METRIKA_ID и заменю ${{ ... }}.
-      NEXT_PUBLIC_YANDEX_METRIKA_ID: '108715562'
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
-        with:
-          package_json_file: site/package.json
-          run_install: false
-
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .nvmrc
-          cache: pnpm
-          cache-dependency-path: site/pnpm-lock.yaml
-
-      - run: pnpm install --frozen-lockfile
-
-      - name: Wait for Postgres
-        run: |
-          for i in {1..30}; do
-            pg_isready -h localhost -p 5432 -U obikhod && break
-            sleep 1
-          done
-
-      - name: "Warmup DB (dev server — push:true в dev/ci создаёт схему)"
-        # В dev/ci payload.config.ts использует push:true (условный expr по NODE_ENV).
-        # Ephemeral Postgres ← pnpm dev → create all tables по текущей конфигурации.
-        # На prod VPS — push:false (NODE_ENV=production) + миграция через psql в deploy-job.
-        run: |
-          pnpm dev > /tmp/dev.log 2>&1 &
-          DEV=$!
-          for i in $(seq 1 60); do
-            curl -fsS http://localhost:3000/ -o /dev/null 2>/dev/null && { echo "dev ready after ${i}s"; break; }
-            sleep 2
-          done
-          for path in /sitemap.xml /raiony/ /kejsy/ /arboristika/ /arboristika/ramenskoye/ /raiony/ramenskoye/; do
-            code=$(curl -sL -o /dev/null -w "%{http_code}" "http://localhost:3000${path}" || echo 000)
-            echo "  warmup $path → $code"
-          done
-          kill $DEV 2>/dev/null || true
-          wait $DEV 2>/dev/null || true
-          echo "--- dev log tail ---"
-          tail -30 /tmp/dev.log || true
-
-      - name: Build
-        # importMap.js поддерживается вручную — root cause d2cac65:
-        # `payload generate:importmap` падает на Node 22 с ERR_MODULE_NOT_FOUND
-        # из-за extensionless ESM imports в payload.config.ts
-        # (tsconfig moduleResolution: bundler без allowImportingTsExtensions).
-        # Safety-net — E2E тесты /admin в волне 2. См. learnings.md 2026-04-23.
-        run: pnpm run build
-
-      - name: Install production deps (to be shipped вместо install на сервере)
-        run: |
-          rm -rf node_modules
-          pnpm install --prod --frozen-lockfile --prefer-offline
-
-      - name: Pack artifact (с node_modules — сервер не зовёт pnpm)
-        run: |
-          # Убираем dev-мусор после warmup, чтобы tar не ругался на исчезающие файлы
-          rm -rf .next/dev .next/cache
-          # Список всего что нужно на сервере
-          cat > /tmp/deploy-filelist <<'EOF'
-          .next
-          public
-          node_modules
-          package.json
-          pnpm-lock.yaml
-          pnpm-workspace.yaml
-          next.config.ts
-          payload.config.ts
-          proxy.ts
-          app
-          collections
-          components
-          lib
-          globals
-          blocks
-          migrations
-          scripts
-          EOF
-          # tar exit 1 = "файл изменился" (предупреждение), 2 = фатально.
-          # Принимаем 0 и 1, но не 2.
-          set +e
-          tar --warning=no-file-changed --ignore-failed-read -czf ../deploy.tar.gz -T /tmp/deploy-filelist
-          rc=$?
-          set -e
-          if [ $rc -gt 1 ]; then
-            echo "::error::tar failed with code $rc"
-            exit $rc
-          fi
-          [ $rc -eq 1 ] && echo "tar: non-fatal warnings (rc=1)"
-          ls -lh ../deploy.tar.gz
-          # Sanity: tarball должен содержать .next/server/app/api/health/route.js
-          if ! tar tzf ../deploy.tar.gz | grep -q 'api/health/route.js'; then
-            echo "::error::health route отсутствует в tarball"
-            exit 1
-          fi
-          echo "health route присутствует в tarball ✓"
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: deploy-bundle
-          path: deploy.tar.gz
-          retention-days: 3
-
-      - name: Upload bundle to GitHub Release (temporary CDN transport)
-        # Инцидент 2026-04-24: 3 deploy подряд упали на upload через
-        # scp/rsync (Azure US runner → Beget VPS Москва):
-        #   #24899732696 — scp висел час, cancel
-        #   #24902797606 — rsync на 36%, cancel
-        #   #24904084197 — rsync на 77%, TCP reset, scp-fallback сломан
-        # Bottleneck — прямое TCP-соединение, ~50 KB/s и нестабильно.
-        # Решение: tar.gz → GitHub Release asset (внутри Azure infra,
-        # 50+ MB/s) → VPS curl'ит через GitHub CDN (Fastly edge ноды
-        # в РФ/Европе, обычно 5-20 MB/s в Москве).
-        # Release временный — удаляется в cleanup step deploy job.
-        # working-directory переопределяется на root, потому что tar
-        # пишет в ../deploy.tar.gz относительно site/ (т.е. в workspace root).
+      - name: SSH key
         env:
-          GH_TOKEN: ${{ github.token }}
-          REL: ${{ github.sha }}
-        working-directory: ${{ github.workspace }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
         run: |
-          set -eu
-          TAG="deploy-${REL}"
-          ls -lh deploy.tar.gz
-          SIZE=$(stat -c%s deploy.tar.gz)
-          echo ">> bundle size: $SIZE bytes ($((SIZE / 1024 / 1024)) MB)"
-          echo ">> creating release $TAG with asset"
-          time gh release create "$TAG" \
-            --repo "${{ github.repository }}" \
-            --target "${{ github.sha }}" \
-            --prerelease \
-            --title "Temp deploy bundle $REL" \
-            --notes "Temporary transport bundle for deploy ${REL}. Auto-deleted after successful deploy. If you see this — deploy job либо в процессе, либо упал между upload и cleanup." \
-            deploy.tar.gz
-          echo ">> release created OK"
-
-  deploy:
-    name: Deploy via GitHub Release CDN + reload PM2
-    needs: [preflight, build]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.BEGET_SSH_KEY }}" > ~/.ssh/deploy_key
+          [ -n "$DEPLOY_SSH_KEY" ] || { echo "::error::нет секрета DEPLOY_SSH_KEY"; exit 1; }
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -p ${{ secrets.BEGET_SSH_PORT || '22' }} -H ${{ secrets.BEGET_SSH_HOST }} >> ~/.ssh/known_hosts
+          printf '%s\n' "$HOST_KEY" > ~/.ssh/known_hosts
 
-      - name: Prepare release dir on Beget
-        env:
-          REL: ${{ github.sha }}
+      - name: Deploy
         run: |
-          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
-            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
-            "mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/releases/${REL} && \
-             mkdir -p ${{ secrets.BEGET_DEPLOY_PATH }}/shared"
+          git archive --format=tar.gz "$GITHUB_SHA" site | ssh -i ~/.ssh/deploy_key \
+            -o StrictHostKeyChecking=yes -o ConnectTimeout=20 \
+            -o ServerAliveInterval=15 -o ServerAliveCountMax=4 \
+            "root@$HOST" "deploy $GITHUB_SHA"
 
-      - name: Ensure PAYLOAD_PREVIEW_SECRET + upsert REVALIDATE_SECRET / NEXT_PUBLIC_SITE_URL in shared/.env
-        # preview-sign (/api/preview-sign) — API route, читает process.env в рантайме.
-        # Источник истины — shared/.env на VPS (его симлинкает релиз в .env).
-        #
-        # PAYLOAD_PREVIEW_SECRET — ensure (idempotent): если есть — не трогаем.
-        # REVALIDATE_SECRET — upsert: всегда заменяем значение в shared/.env на
-        #   актуальное из GitHub Actions secret. Нужно для ротаций (если старый
-        #   секрет утёк — ротация в GH подхватится на ближайшем deploy).
-        # NEXT_PUBLIC_SITE_URL — upsert: server-side `payload.config.ts` читает
-        #   `process.env.NEXT_PUBLIC_SITE_URL` в рантайме для `serverURL`. Без
-        #   этого Payload после login редиректит на fallback `localhost:3000`.
-        #   `NEXT_PUBLIC_*` инлайнится в client-bundle на build-time, но в env
-        #   PM2-процесса не попадает — его нужно положить в shared/.env явно.
-        env:
-          PPS: ${{ secrets.PAYLOAD_PREVIEW_SECRET }}
-          RVS: ${{ secrets.REVALIDATE_SECRET }}
-          NPSU: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+      - name: Smoke
         run: |
-          if [ -z "$PPS" ]; then
-            echo "::error::secret PAYLOAD_PREVIEW_SECRET пуст в GitHub"
-            exit 1
-          fi
-          if [ -z "$RVS" ]; then
-            echo "::error::secret REVALIDATE_SECRET пуст в GitHub"
-            exit 1
-          fi
-          if [ -z "$NPSU" ]; then
-            echo "::error::secret NEXT_PUBLIC_SITE_URL пуст в GitHub"
-            exit 1
-          fi
-          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
-            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
-            "set -eu
-             BP='${{ secrets.BEGET_DEPLOY_PATH }}'
-             ENV_FILE=\"\$BP/shared/.env\"
-             touch \"\$ENV_FILE\"
-             chmod 600 \"\$ENV_FILE\"
-             # PAYLOAD_PREVIEW_SECRET — ensure-only (если есть — не трогаем)
-             if grep -q '^PAYLOAD_PREVIEW_SECRET=' \"\$ENV_FILE\"; then
-               echo 'PAYLOAD_PREVIEW_SECRET уже есть в shared/.env — не трогаем'
-             else
-               echo \"PAYLOAD_PREVIEW_SECRET=$PPS\" >> \"\$ENV_FILE\"
-               echo 'PAYLOAD_PREVIEW_SECRET добавлен в shared/.env'
-             fi
-             # REVALIDATE_SECRET — upsert (drop старый, append актуальный)
-             sed -i '/^REVALIDATE_SECRET=/d' \"\$ENV_FILE\"
-             echo \"REVALIDATE_SECRET=$RVS\" >> \"\$ENV_FILE\"
-             echo 'REVALIDATE_SECRET upsert выполнен в shared/.env'
-             # NEXT_PUBLIC_SITE_URL — upsert (нужен payload.config.ts serverURL в runtime)
-             sed -i '/^NEXT_PUBLIC_SITE_URL=/d' \"\$ENV_FILE\"
-             echo \"NEXT_PUBLIC_SITE_URL=$NPSU\" >> \"\$ENV_FILE\"
-             echo 'NEXT_PUBLIC_SITE_URL upsert выполнен в shared/.env'"
-
-      - name: Resolve GitHub Release asset URL
-        # Используем apiUrl ассета (https://api.github.com/.../assets/<id>):
-        # с Accept: application/octet-stream + Authorization: Bearer <token>
-        # GitHub редиректит на CDN URL (Fastly, edge ноды в Москве/СПб).
-        # Token обязателен — без него на api.github.com asset endpoint 404.
-        # browserDownloadUrl тоже работает (public редирект на CDN), но через
-        # apiUrl плюс token надёжнее с rate limit (5000/h vs 60/h).
-        id: asset
-        env:
-          GH_TOKEN: ${{ github.token }}
-          REL: ${{ github.sha }}
-        run: |
-          set -eu
-          TAG="deploy-${REL}"
-          # Ждём до 30 секунд пока asset проиндексируется в GH API
-          for i in $(seq 1 15); do
-            URL=$(gh release view "$TAG" --repo "${{ github.repository }}" \
-                    --json assets --jq '.assets[] | select(.name == "deploy.tar.gz") | .apiUrl' 2>/dev/null || true)
-            if [ -n "$URL" ]; then
-              break
-            fi
-            echo ">> asset not ready yet (attempt $i/15), sleeping 2s"
-            sleep 2
+          fail=0
+          for p in / /arboristika/ /kalkulyator/foto-smeta/ /admin/login/ /api/health/; do
+            code=$(curl -s --max-time 20 -o /dev/null -w '%{http_code}' "https://obikhod.ru$p" || true)
+            printf '%-28s %s\n' "$p" "$code"
+            [ "$code" = 200 ] || fail=1
           done
-          if [ -z "$URL" ]; then
-            echo "::error::could not resolve asset URL for release $TAG"
-            gh release view "$TAG" --repo "${{ github.repository }}" || true
-            exit 1
-          fi
-          echo "asset_url=$URL" >> "$GITHUB_OUTPUT"
-          echo ">> asset url: $URL"
-
-      - name: Download release bundle to VPS via GitHub CDN
-        # Транспорт: VPS → GitHub Release asset через api.github.com
-        # с redirect на Fastly CDN. Edge ноды Fastly есть в Москве/СПб —
-        # ожидаем 5-20 MB/s вместо 50 KB/s с Azure US runner напрямую.
-        # Token нужен для access к private/internal asset URL (даже на public
-        # репо api.github.com asset endpoint требует auth) + для увеличения
-        # rate limit с 60/h до 5000/h. Передаём токен через stdin в bash -s,
-        # не через cmdline, чтобы не светить в `ps aux` на VPS.
-        env:
-          REL: ${{ github.sha }}
-          ASSET_URL: ${{ steps.asset.outputs.asset_url }}
-          GH_PAT: ${{ github.token }}
-          BP: ${{ secrets.BEGET_DEPLOY_PATH }}
-        run: |
-          set -eu
-          echo ">> asset url: $ASSET_URL"
-          # Heredoc БЕЗ кавычек ('REMOTE' vs REMOTE) → runner подставляет
-          # $GH_PAT/$ASSET_URL/$REL/$BP в текст, отдаёт ssh stdin'ом.
-          # Внутри bash -s они уже как литералы (export GH_TOKEN=...).
-          # Так токен не попадает в argv процесса на VPS.
-          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} \
-              -o ServerAliveInterval=30 -o ConnectTimeout=30 -o TCPKeepAlive=yes \
-              ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
-              'bash -s' <<REMOTE
-          set -eu
-          export GH_TOKEN='${GH_PAT}'
-          ASSET_URL='${ASSET_URL}'
-          REL='${REL}'
-          BP='${BP}'
-          cd "\$BP/releases/\$REL"
-          echo '>> download from GitHub Release CDN'
-          time curl -fsSL --retry 3 --retry-delay 5 --max-time 1200 \\
-              -H "Authorization: Bearer \$GH_TOKEN" \\
-              -H "Accept: application/octet-stream" \\
-              -o deploy.tar.gz \\
-              "\$ASSET_URL"
-          ls -lh deploy.tar.gz
-          # Sanity: бандл ожидается > 50 MB (текущие ~173 MB).
-          SIZE=\$(stat -c%s deploy.tar.gz)
-          if [ "\$SIZE" -lt 50000000 ]; then
-            echo "::error::downloaded bundle suspiciously small: \$SIZE bytes"
-            exit 1
-          fi
-          echo ">> download OK: \$SIZE bytes (\$((SIZE / 1024 / 1024)) MB)"
-          REMOTE
-
-      - name: Unpack release + link shared .env
-        env:
-          REL: ${{ github.sha }}
-        run: |
-          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o ServerAliveInterval=15 \
-            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
-            "set -eux
-             BP='${{ secrets.BEGET_DEPLOY_PATH }}'
-             REL='${REL}'
-
-             cd \$BP/releases/\$REL
-             echo '>> extracting tarball'
-             tar xzf deploy.tar.gz && rm deploy.tar.gz
-
-             echo '>> link shared .env'
-             ln -sfn \$BP/shared/.env .env"
-
-      - name: Apply Payload schema to prod DB (raw SQL — ADR-0016 Phase 1)
-        # Sustained ADR-0016 (Option B Pure raw SQL workflow).
-        # Критически важный порядок: schema apply ДО flip symlink и pm2 restart.
-        # Иначе рантайм нового релиза прочитает старую схему и упадёт на
-        # отсутствующих таблицах / колонках.
-        #
-        # Two paths:
-        #   Cold-start (empty DB) → apply 00000000_*_initial_schema_bootstrap.sql,
-        #     mark all *.up.sql as already-applied (bootstrap snapshot includes
-        #     all of them — tracker mirrors that state).
-        #   Warm path (DB has user tables) → apply only new *.up.sql migrations
-        #     not yet tracked, in lexicographic order.
-        #
-        # Empty-DB detection — explicit count of pg_tables in public schema.
-        # Sustained risk mitigation per ADR §«Empty-DB detection misfires»:
-        # detect by SCHEMA presence, not row counts (нельзя путать «schema
-        # пустая» с «collections пустые»).
-        #
-        # Payload CLI обойдён через чистый psql — sustained ADR-0016 §«Root
-        # cause #1». Bootstrap regen — manual через dba.md workflow.
-        env:
-          REL: ${{ github.sha }}
-        run: |
-          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o ServerAliveInterval=15 \
-            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
-            "set -eu
-             BP='${{ secrets.BEGET_DEPLOY_PATH }}'
-             REL='${REL}'
-             # PAN-17: syntax check shared/.env ДО source. reason: incident
-             # 2026-04-28 deploy.yml exit 127 от unquoted SMTP_FROM_NAME=Обиход admin
-             # (без кавычек bash при `set -a; .` парсит как assignment + execute
-             # 'admin' command). bash -n ловит quoting issues заранее.
-             # См. team/ops/incidents/2026-04-28-deploy-env-quoting.md
-             if ! bash -n \"\$BP/shared/.env\" 2>&1; then
-               echo \"::error::shared/.env syntax error (вероятно unquoted value с пробелом или кириллицей). См. site/.env.example для reference.\"
-               exit 1
-             fi
-             set -a; . \$BP/shared/.env; set +a
-             # tar распаковывается прямо в releases/\$REL (без /site prefix),
-             # т.к. build job делает tar с cwd=site. Файлы миграций лежат в
-             # \$BP/releases/\$REL/migrations/
-             cd \$BP/releases/\$REL
-
-             # Empty-DB detection BEFORE any DDL (sustained ADR-0016).
-             # pg_tables view excludes pg_catalog system catalogs; filtering
-             # by schemaname='public' counts only user-application tables.
-             USER_TABLES=\$(psql \"\$DATABASE_URI\" -tA -c \"SELECT count(*) FROM pg_tables WHERE schemaname='public'\")
-             echo \">> public schema user-tables count: \$USER_TABLES\"
-
-             if [ \"\$USER_TABLES\" = \"0\" ]; then
-               echo \">> [cold-start] empty DB detected → applying bootstrap snapshot\"
-               BOOTSTRAP_FILE=\$(ls migrations/00000000_*_initial_schema_bootstrap.sql 2>/dev/null | head -1)
-               if [ -z \"\$BOOTSTRAP_FILE\" ]; then
-                 echo \"::error::bootstrap snapshot не найден (00000000_*_initial_schema_bootstrap.sql)\"
-                 exit 1
-               fi
-               echo \">> applying \$BOOTSTRAP_FILE\"
-               psql \"\$DATABASE_URI\" -v ON_ERROR_STOP=1 -f \"\$BOOTSTRAP_FILE\"
-               echo \">> bootstrap applied. Marking all *.up.sql as already-applied (snapshot includes them)\"
-               for UP_FILE in \$(ls migrations/*.up.sql 2>/dev/null | sort); do
-                 MIGRATION_NAME=\$(basename \"\$UP_FILE\" .up.sql)
-                 psql \"\$DATABASE_URI\" -c \"INSERT INTO payload_migrations (name, batch) SELECT '\$MIGRATION_NAME', 1 WHERE NOT EXISTS (SELECT 1 FROM payload_migrations WHERE name='\$MIGRATION_NAME')\" > /dev/null
-               done
-               TRACKED=\$(psql \"\$DATABASE_URI\" -tA -c \"SELECT count(*) FROM payload_migrations\")
-               echo \">> [cold-start] complete: schema bootstrapped, \$TRACKED migrations tracked\"
-             else
-               echo \">> [warm] DB has \$USER_TABLES user tables → applying new migrations only\"
-               # Ensure tracker exists для legacy DB без bootstrap (pre-ADR-0016).
-               # CREATE IF NOT EXISTS — idempotent guard.
-               psql \"\$DATABASE_URI\" -v ON_ERROR_STOP=1 <<'SQL'
-          CREATE TABLE IF NOT EXISTS \"payload_migrations\" (
-            \"id\" serial PRIMARY KEY,
-            \"name\" varchar,
-            \"batch\" numeric,
-            \"updated_at\" timestamp(3) with time zone DEFAULT now() NOT NULL,
-            \"created_at\" timestamp(3) with time zone DEFAULT now() NOT NULL
-          );
-          SQL
-               for UP_FILE in \$(ls migrations/*.up.sql 2>/dev/null | sort); do
-                 MIGRATION_NAME=\$(basename \"\$UP_FILE\" .up.sql)
-                 ALREADY=\$(psql \"\$DATABASE_URI\" -tA -c \"SELECT count(*) FROM payload_migrations WHERE name='\$MIGRATION_NAME'\")
-                 if [ \"\$ALREADY\" = \"1\" ]; then
-                   echo \">> migration \$MIGRATION_NAME already applied — skipping\"
-                 else
-                   echo \">> applying migration \$MIGRATION_NAME to prod DB\"
-                   psql \"\$DATABASE_URI\" -v ON_ERROR_STOP=1 -f \"\$UP_FILE\"
-                   psql \"\$DATABASE_URI\" -c \"INSERT INTO payload_migrations (name, batch) VALUES ('\$MIGRATION_NAME', 1)\"
-                   echo \">> migration \$MIGRATION_NAME applied successfully\"
-                 fi
-               done
-               echo \">> [warm] complete\"
-             fi"
-
-      - name: Flip symlink + reload PM2
-        env:
-          REL: ${{ github.sha }}
-        run: |
-          ssh -i ~/.ssh/deploy_key -p ${{ secrets.BEGET_SSH_PORT || '22' }} -o ServerAliveInterval=15 \
-            ${{ secrets.BEGET_SSH_USER }}@${{ secrets.BEGET_SSH_HOST }} \
-            "set -eux
-             BP='${{ secrets.BEGET_DEPLOY_PATH }}'
-             APP='${{ secrets.BEGET_APP_NAME || 'obikhod' }}'
-             REL='${REL}'
-
-             echo '>> flip current symlink'
-             cd \$BP
-             ln -sfn releases/\$REL current
-
-             echo '>> pm2 delete + start с явным cwd (reload не меняет cwd → запускается из старого релиза)'
-             pm2 delete \$APP 2>/dev/null || true
-             pm2 start 'pnpm start' --name \$APP --cwd \$BP/current --update-env
-             pm2 save
-
-             echo '>> keep 5 newest releases, delete older'
-             cd \$BP/releases
-             ls -1t | tail -n +6 | xargs -r rm -rf
-             echo '>> done'"
-
-      - name: Smoke check
-        run: |
-          URL=${{ secrets.NEXT_PUBLIC_SITE_URL || format('http://{0}', secrets.BEGET_SSH_HOST) }}
-          echo "Waiting for $URL/api/health..."
-          for i in $(seq 1 30); do
-            body=$(curl -sL -m 5 "$URL/api/health" || echo "")
-            if echo "$body" | grep -q '"status":"ok"'; then
-              echo "healthy after ${i}s: $body"
-              break
-            fi
-            sleep 2
-          done
-          # deep-check — дёргает БД
-          deep=$(curl -sL -m 10 -o /dev/null -w "%{http_code}" "$URL/api/health?deep=1")
-          if [ "$deep" != "200" ]; then
-            echo "::error::deep health check failed: HTTP $deep"
-            curl -sL "$URL/api/health?deep=1"
-            exit 1
-          fi
-          home=$(curl -sL -m 10 -o /dev/null -w "%{http_code}" "$URL/")
-          if [ "$home" != "200" ]; then
-            echo "::error::home page failed: HTTP $home"
-            exit 1
-          fi
-          echo "Deploy OK: home=$home, deep health=$deep"
-
-      - name: Smoke check — admin login UI
-        # Incident 2026-04-28 (RC-1 US-12 Phase B): views.login override отдавал
-        # <div class="template-minimal__wrap"></div> без content. /api/health был
-        # зелёный, но оператор не мог войти в админку. leadqa поймал постфактум,
-        # на проде. См. team/release-notes/leadqa-RC-1-US-12-phase-b.md §9.
-        #
-        # Маркер LoginForm — компонент Payload в RSC Flight payload. Если custom
-        # admin view сломал серверный render — этой строки в HTML не будет.
-        # Дёшево (один curl), статично (SSR, не требует hydration), ловит ровно
-        # тот класс ошибки.
-        #
-        # 2026-05-03 (W15): когда admin user отсутствует (cold-start или
-        # после seed schema reset), Payload рендерит CreateFirstUser вместо
-        # LoginForm на /admin/login. Это валидное состояние «admin не сломан».
-        # Принимаем оба маркера — оба означают рабочий admin RSC render.
-        run: |
-          URL=${{ secrets.NEXT_PUBLIC_SITE_URL || format('http://{0}', secrets.BEGET_SSH_HOST) }}
-          admin_code=$(curl -sL -m 10 -o /dev/null -w "%{http_code}" "$URL/admin/login")
-          if [ "$admin_code" != "200" ]; then
-            echo "::error::admin login HTTP $admin_code (expected 200)"
-            exit 1
-          fi
-          admin_body=$(curl -sL -m 10 "$URL/admin/login" || echo "")
-          if echo "$admin_body" | grep -q "LoginForm"; then
-            echo "Admin login UI smoke OK: HTTP=$admin_code, LoginForm marker present (users exist)"
-          elif echo "$admin_body" | grep -q "CreateFirstUser\|create-first-user"; then
-            echo "Admin login UI smoke OK: HTTP=$admin_code, CreateFirstUser marker present (no users yet — seed needed)"
-          else
-            echo "::error::admin login broken — neither LoginForm nor CreateFirstUser marker in /admin/login HTML"
-            echo "::error::see team/release-notes/leadqa-RC-1-US-12-phase-b.md for context"
-            echo "--- first 800 chars of admin/login body ---"
-            echo "$admin_body" | head -c 800
-            echo ""
-            echo "--- end ---"
-            exit 1
-          fi
-
-      - name: Cleanup temp GitHub Release (delete asset + tag)
-        # Release был только транспортным контейнером, постоянное место —
-        # код в git + relevant tag в repo (если будет). Чистим всегда:
-        # if: always() — даже при failed deploy чтобы не копились orphan tags.
-        # Best-effort: не фейлим job если cleanup упал (release может уже
-        # быть удалён вручную, например).
-        if: always()
-        env:
-          GH_TOKEN: ${{ github.token }}
-          REL: ${{ github.sha }}
-        run: |
-          TAG="deploy-${REL}"
-          echo ">> cleaning up release $TAG"
-          gh release delete "$TAG" \
-              --repo "${{ github.repository }}" \
-              --yes --cleanup-tag 2>&1 \
-            || echo "::warning::cleanup of $TAG failed (already gone or rate-limited) — skipping"
+          exit $fail
