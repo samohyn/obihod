@@ -4,10 +4,17 @@ _Обновляется в конце сессии. Короткий срез: �
 
 ## ▶ Следующий шаг (для новой сессии)
 
-**Чистка — на приёмке у владельца** (PR #243 → #244 → #245, мержить по порядку; #245 стоит на ветке #244 — после мержа #244 переключить базу на `main` и дождаться CI). После мержа: удалить 14 secrets (список в #243), `gh workflow enable security-audit.yml`, убрать `TELEGRAM_WEBHOOK_SECRET` и `OPERATOR_EMAIL` из `shared/.env` прода. Дальше по этапу 1: CI-проверки (`pnpm check:links`, Lighthouse по прод-сборке, e2e форм) → дрейф схемы (`pnpm schema:diff`, 113 команд).
+**План 09, этап 1 — «CI-проверки»** (следующая по трекеру): e2e всех форм, скриншоты шаблонов 360/768/1280/1440, axe, schema, `pnpm check:links`, Lighthouse по прод-сборке (сейчас меряет dev-сервер — см. трекер); заодно PR Dependabot: Actions #227–229, npm #216, #217, #226 (мажорные ESLint 10 / TypeScript 6). Потом — дрейф схемы (`pnpm schema:diff`, 113 команд) → этап 2.
 Цикл задачи — CLAUDE.md: Perplexity — **второе мнение со сравнением**; показ этапа **целиком** с рассказом; UI/UX — `ui-ux-pro-max` + `frontend-design` + `frontend-patterns` и MCP `21st` (21st.dev, добавлен 19.10 в user scope). Источники: [план 09](../../contex/09_product_plan.md), [трекер](../../contex/09_product_plan-status.md), эксплуатация — [deploy/README.md](../../deploy/README.md).
 
-## Где мы сейчас (2026-10-19 ~23:00 MSK) — план 09, этап 1: чистка на приёмке
+## Где мы сейчас (2026-10-19 ~23:30 MSK) — план 09, этап 1: чистка на проде
+
+- Владелец принял #243–#245 → смержены, автодеплой: прод = `releases/20261019225903-2f48470` (до него `…225318-1373e6e`). Smoke: 14 страниц 200, удалённые маршруты 404, `/api/leads` 400 на пустое тело, noindex на месте.
+- **Нюанс GitHub:** `gh pr merge --delete-branch` базовой ветки **закрывает** stacked PR, а не переключает его. Лечится так: вернуть ветку по SHA → `gh pr reopen` → `gh pr edit --base main` → снова удалить ветку; `main` в ветку PR — обычным merge (force-push запрещён хуком).
+- GitHub: secrets 16 → 2 (`DEPLOY_SSH_KEY`, `REVALIDATE_SECRET`), environments нет; `security-audit` включён; закрыты #225, #218 (устарели), #189; удалены 23 старые ветки — SHA в выводе сессии, локальные копии веток остались в репо (`git branch`).
+- Прод `.env`: убраны `TELEGRAM_WEBHOOK_SECRET`, `OPERATOR_EMAIL`; копия `shared/.env.bak-20261019-cleanup` (с секретами, на сервере).
+
+## Где были раньше (2026-10-19 ~23:00 MSK) — план 09, этап 1: чистка на приёмке
 
 - **#243** — 9 мёртвых workflows (BEGET_*, trigger-seed, sync-design, seo-monitor), `permissions: contents: read`, `deploy/branching.md` → архив. CI зелёный.
 - **#244** — удалены `/api/seed`, `/api/fal/generate`, Telegram webhook `/start`. До удаления: на проде `telegram_chat_id` пуст, обращений к webhook в nginx нет; токен бота в `.env.local` отозван (401), на проде `TELEGRAM_BOT_TOKEN` пуст. CI зелёный.
