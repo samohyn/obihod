@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
 
 /**
  * Reviews — отзывы клиентов с привязкой к услуге / району / источнику.
@@ -28,7 +29,13 @@ export const Reviews: CollectionConfig = {
       'Отзывы клиентов для /otzyvy/ + Review schema. Sustained homepage_reviews (Globals.Homepage) останется до dba data-migration.',
   },
   versions: { drafts: true },
-  access: { read: () => true },
+  access: {
+    read: isAdminOrPublished,
+    readVersions: isAdmin,
+    create: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
+  },
   fields: [
     {
       type: 'tabs',

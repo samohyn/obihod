@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { isAdmin } from '@/lib/auth/access'
 
 import {
   buildAfterChangeAuditHook,
@@ -13,7 +14,12 @@ export const Redirects: CollectionConfig = {
     group: '04 · SEO',
     description: 'Редиректы 301/302/410 — переезды URL, устаревшие посадочные.',
   },
-  access: { read: () => true },
+  access: {
+    read: isAdmin,
+    create: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
+  },
   // PANEL-AUDIT-LOG (ADR-0014): Redirects НЕ versioned (простая schema
   // from/to/code), audit через audit_log table. Полные diffs (без PII).
   hooks: {

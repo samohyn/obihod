@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { headers as nextHeaders } from 'next/headers'
 
 import { payloadClient } from '@/lib/payload'
+import { isAdminUser } from '@/lib/auth/access'
 import { getAuditLogAdapter } from '@/lib/admin/audit'
 import type { AuditAction } from '@/lib/admin/audit'
 
@@ -44,8 +45,7 @@ export async function GET(request: Request) {
       { status: 401 },
     )
   }
-  const role = (auth.user as { role?: string }).role
-  if (role !== 'admin') {
+  if (!isAdminUser(auth.user, headersList)) {
     return NextResponse.json(
       { error: { code: 'forbidden', message: 'История доступна только admin-роли.' } },
       { status: 403 },

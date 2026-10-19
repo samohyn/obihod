@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
 import { Hero, TextContent, Faq, CtaBanner, Tldr, Breadcrumbs, RelatedServices } from '@/blocks'
 
 export const Blog: CollectionConfig = {
@@ -31,7 +32,13 @@ export const Blog: CollectionConfig = {
     },
   },
   versions: { drafts: { autosave: true } },
-  access: { read: () => true },
+  access: {
+    read: isAdminOrPublished,
+    readVersions: isAdmin,
+    create: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
+  },
   // OBI-30 Wave 4 — UI tabs grouping (art-concept-v2 §5).
   fields: [
     {

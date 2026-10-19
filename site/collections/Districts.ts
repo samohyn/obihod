@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
 import {
   Hero,
   TextContent,
@@ -62,7 +63,13 @@ export const Districts: CollectionConfig = {
     description: 'Районы Москвы и МО. Падежи заполняем для programmatic-страниц.',
   },
   versions: { drafts: true },
-  access: { read: () => true },
+  access: {
+    read: isAdminOrPublished,
+    readVersions: isAdmin,
+    create: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
+  },
   // OBI-24 admin §12.4 — UI tabs grouping.
   fields: [
     {

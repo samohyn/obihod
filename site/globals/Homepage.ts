@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { isAdmin } from '@/lib/auth/access'
 
 /**
  * Homepage — global для контента главной страницы (`/`).
@@ -29,7 +30,7 @@ export const Homepage: GlobalConfig = {
     description: 'Контент главной страницы / (Hero, FAQ, отзывы, документы, галерея)',
     group: '01 · Контент',
   },
-  access: { read: () => true },
+  access: { read: () => true, update: isAdmin },
   fields: [
     // ─────── §01 Hero ───────
     {

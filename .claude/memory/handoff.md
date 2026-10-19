@@ -2,7 +2,16 @@
 
 _Обновляется в конце сессии. Короткий срез: что сделано, что в работе, что следующее. Цель — дать следующей сессии контекст за 30 секунд._
 
-## Где мы сейчас (2026-10-19) — новый процесс: план 09, этап 0
+## Где мы сейчас (2026-10-19 ~16:15 MSK) — план 09, этап 1: обновления безопасности на проде
+
+- **Этап 0 влит** (PR #234). **PR #235 влит и выкачен:** Next 16.4.2, React 19.2.9, Payload 3.91.0, sharp 0.35.5 (октябрьские RCE/DoS в Next и Payload). Прод = `db1f707` (`releases/20261019160848-db1f707`), предыдущий — `20261018232358-014a630`. Откат: `ln -sfn releases/20261018232358-014a630 /home/deploy/obikhod/current && sudo -u deploy pm2 restart obikhod` (колонку можно не удалять, старый код её не видит).
+- **БД прода:** колонка `users.reset_password_requested_at` накатана psql до переключения, миграция `20261019_160000_…` записана в `payload_migrations` (id 32, batch 2). Бэкап до обновления: `/root/backups/obikhod-20261019-1538-pre-security.dump` + `media-…tgz` (на сервере, локально не копировать — ПДн).
+- **Smoke прода:** 12 страниц 200, вход в админку (401 на неверный пароль, `/api/users/me/` 200), оптимизатор картинок отдаёт AVIF, `X-Robots-Tag: noindex` на месте. Известное: `/llms-full.txt` 500 (`.trim is not a function`), в логах — пробы сканеров «Server Action "x"» (это и есть октябрьская RCE, теперь закрыта).
+- **Инструмент:** `pnpm schema:diff` — SQL-разница конфиг ↔ локальная БД без применения. Дрейф: 113 команд, отдельная задача этапа 1. CLI `payload generate:importmap/migrate` падает на undici «Illegal constructor» (Payload #13290) — не использовать, скрипты через `tsx --require=./scripts/_payload-cjs-shim.cjs`.
+- **Безопасность админки (ветка `fix/admin-access-hardening`, на приёмке):** `site/lib/auth/access.ts` — единый `isAdmin`/`isAdminUser` (role=admin + HMAC-cookie 2FA, если 2FA включена; `proxy.ts` проверял только наличие cookie → пароль + любая cookie обходили 2FA) и `isAdminOrPublished` (аноним видел черновики через `?draft=true`). Явные права на всех коллекциях и глобалах; Leads/RUM create закрыт (пишут только `/api/leads`, `/api/rum` через Local API); GraphQL выключен (давал анонимный createLead → спам в Telegram); Users: 5 попыток / 15 мин, API-ключи выкл (колонки в БД оставлены пустыми — откат без миграции), cookie `Secure` на проде, `csrf: [serverURL]`; лимит 5 неверных OTP / 15 мин. Локально 42/42 проверок + админка в браузере. **CSRF-нюанс:** cookie-запросы без `Origin` принимаются только с `Sec-Fetch-Site` same-origin/same-site/none — curl-тесты админки слать с этим заголовком. Миграций нет.
+- **Следующее по этапу 1:** приёмка и выкатка безопасности админки → быстрые SEO-фиксы → бэкапы/staging/CI-деплой → чистка → CI-проверки. Трекер — `contex/09_product_plan-status.md`.
+
+## Где были раньше (2026-10-19) — новый процесс: план 09, этап 0
 
 - **Работаем только по [contex/09_product_plan.md](../../contex/09_product_plan.md)**, статусы — [contex/09_product_plan-status.md](../../contex/09_product_plan-status.md). Процесс v1 (9 ролей, specs, backlog, GSD) — в `archive/process-v1/`. CLAUDE.md переписан; хуки: починен путь `session-bootstrap`, напоминание о цикле задачи, `protect-immutable` блокирует слова про ИИ в контенте, `validate-skills-activated` удалён.
 - **Правила владельца (19.10):** ИИ клиенту не упоминается нигде (смету по фото считает менеджер); фото без реального — fal.ai с подписью «Иллюстрация»; индексация — только отдельной командой; один админ samohingeorgy@gmail.com; контакты +7 (985) 170-51-11, partner@obikhod.ru, ул. Амет-хан Султана, 15, к1, Жуковский, 140185.

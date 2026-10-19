@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
 import { Hero, TextContent, RelatedServices, CtaBanner, Breadcrumbs } from '@/blocks'
 
 /**
@@ -29,7 +30,13 @@ export const Authors: CollectionConfig = {
       'Авторы статей, эксперты услуг и команда (арбористы, бригадиры, промальпинисты). Person schema на /avtory/<slug>/ — основа E-E-A-T.',
   },
   versions: { drafts: true },
-  access: { read: () => true },
+  access: {
+    read: isAdminOrPublished,
+    readVersions: isAdmin,
+    create: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
+  },
   fields: [
     {
       type: 'tabs',
