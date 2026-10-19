@@ -5,7 +5,6 @@
  * Рендерит:
  *   - 5 pillar grid (динамически из getAllPillarsForPricing)
  *   - Why-us bar
- *   - AggregateRating section (статичные 4.9/247 — реальные данные US-9)
  *   - Photo→смета CTA repeat
  *
  * JSON-LD: T1_HUB через composer — добавляет ItemList + Breadcrumb.
@@ -18,7 +17,7 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { buildJsonLdForTemplate } from '@/lib/seo/composer'
 import { metadataBase } from '@/lib/seo/metadata'
 import { getAllPillarsForPricing } from '@/lib/seo/queries'
-import { getSiteChrome } from '@/lib/chrome'
+import { getContacts, getSiteChrome } from '@/lib/chrome'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -26,7 +25,7 @@ export const revalidate = 3600
 
 const META_TITLE = 'Услуги — Обиход · вывоз мусора, арбористика, демонтаж, чистка крыш'
 const META_DESCRIPTION =
-  'Услуги «Обихода» для дома, дачи и B2B в Москве и МО: вывоз мусора, арбористика, демонтаж, чистка крыш, уборка территории. Лицензия 152-ФЗ, фикс-цена в договоре, выезд за 2 часа.'
+  'Услуги «Обихода» для дома, дачи и B2B в Москве и МО: вывоз мусора, арбористика, демонтаж, чистка крыш, уборка территории. Фикс-цена в договоре, выезд за 2 часа.'
 
 export const metadata: Metadata = {
   metadataBase,
@@ -62,7 +61,11 @@ const PILLAR_DESC: Record<string, string> = {
 }
 
 export default async function UslugiHubPage() {
-  const [pillars, chrome] = await Promise.all([getAllPillarsForPricing(), getSiteChrome()])
+  const [pillars, chrome, contacts] = await Promise.all([
+    getAllPillarsForPricing(),
+    getSiteChrome(),
+    getContacts(),
+  ])
 
   const breadcrumbs = [
     { name: 'Главная', url: `${SITE_URL}/` },
@@ -100,15 +103,15 @@ export default async function UslugiHubPage() {
           <h1>Услуги для дома, дачи и B2B</h1>
           <p className="lead">
             Пять направлений «порядка под ключ»: вывозим мусор, спиливаем деревья, демонтируем
-            постройки, чистим крыши от снега и убираем территорию. Лицензия 152-ФЗ, договор с
-            актами, выезд за 2 часа по МО.
+            постройки, чистим крыши от снега и убираем территорию. Договор с актами, выезд за 2 часа
+            по МО.
           </p>
           <div className="ctas">
             <Link className="btn btn-primary" href="/kalkulyator/foto-smeta/">
               Загрузите фото — получите смету
             </Link>
-            <a className="btn btn-secondary" href="tel:+78000000000">
-              +7 (800) 000-00-00
+            <a className="btn btn-secondary" href={`tel:${contacts.phoneE164}`}>
+              {contacts.phoneDisplay}
             </a>
           </div>
           <p className="meta">
@@ -166,13 +169,6 @@ export default async function UslugiHubPage() {
           </h2>
           <div className="t1-why">
             <div className="t1-why-card">
-              <h3>Лицензия 152-ФЗ</h3>
-              <p>
-                Оператор персональных данных в реестре Роскомнадзора. Договор подписывается с ООО
-                «Обиход», не с физлицом.
-              </p>
-            </div>
-            <div className="t1-why-card">
               <h3>Договор с актами</h3>
               <p>
                 Смета, договор, акт КС-2/КС-3, ЭДО для B2B. Фикс-цена без «доплат за
@@ -197,42 +193,10 @@ export default async function UslugiHubPage() {
         </div>
       </section>
 
-      {/* §04 · AGGREGATE RATING */}
-      <section className="hp-section alt" aria-labelledby="t1-rating-title">
-        <div className="wrap">
-          <div className="eyebrow">§ 04 · Отзывы клиентов</div>
-          <h2 id="t1-rating-title" style={{ maxWidth: '22ch' }}>
-            Оценка «Обихода» — без накруток и фейковых аккаунтов
-          </h2>
-          <div className="t1-rating">
-            <div>
-              <div className="t1-stars" role="img" aria-label="Рейтинг 4.9 из 5 звёзд">
-                ★ ★ ★ ★ ★
-              </div>
-              <div className="num">
-                4.9 <span className="of">/ 5</span>
-              </div>
-            </div>
-            <div>
-              <p className="summary">
-                Средняя оценка <strong>247 отзывов</strong> по всем 5 направлениям — Я.Карты, 2ГИС,
-                Otzovik и личные отзывы клиентов в Telegram.
-              </p>
-              <p className="sources">
-                Я.Карты · 4.9 ★ (184) — 2ГИС · 4.8 ★ (41) — Otzovik · 5.0 ★ (22)
-              </p>
-            </div>
-            <Link href="/otzyvy/" className="all-reviews">
-              Все 247 отзывов →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* §05 · PHOTO → СМЕТА CTA */}
+      {/* §04 · PHOTO → СМЕТА CTA */}
       <section className="hp-section" aria-labelledby="t1-cta-title">
         <div className="wrap">
-          <div className="eyebrow">§ 05 · Получить смету</div>
+          <div className="eyebrow">§ 04 · Получить смету</div>
           <div className="t1-cta-repeat">
             <div className="t1-cta-text">
               <h2 id="t1-cta-title">Сфотографируйте объект — посчитаем за 10 минут</h2>
@@ -244,7 +208,7 @@ export default async function UslugiHubPage() {
                 <Link className="btn btn-primary" href="/kalkulyator/foto-smeta/">
                   Загрузить фото
                 </Link>
-                <a className="btn btn-secondary" href="tel:+78000000000">
+                <a className="btn btn-secondary" href={`tel:${contacts.phoneE164}`}>
                   Позвонить
                 </a>
               </div>

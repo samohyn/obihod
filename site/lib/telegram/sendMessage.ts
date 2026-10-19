@@ -98,11 +98,13 @@ function relationLabel(v: LeadDocLike['service'] | LeadDocLike['district']): str
 /**
  * Формирует Markdown-сообщение оператору о новой заявке.
  * Sustained brand TOV: «Caregiver+Ruler», deferred-тон, без эмодзи-спама.
+ *
+ * 152-ФЗ: серверы Telegram за рубежом, поэтому телефон и имя в сообщение НЕ кладём —
+ * иначе это трансграничная передача ПДн (ст. 12, уведомление РКН). Менеджер открывает
+ * заявку в админке по ссылке. Политика на сайте обещает, что передачи за рубеж нет.
  */
 export function formatLeadMessage(doc: LeadDocLike): string {
-  const lines: string[] = ['*Новая заявка*']
-  if (doc.phone) lines.push(`Тел: \`${doc.phone}\``)
-  if (doc.name) lines.push(`Имя: ${doc.name}`)
+  const lines: string[] = [doc.id ? `*Новая заявка № ${doc.id}*` : '*Новая заявка*']
   const service = relationLabel(doc.service)
   if (service) lines.push(`Услуга: ${service}`)
   const district = relationLabel(doc.district)
@@ -111,6 +113,10 @@ export function formatLeadMessage(doc: LeadDocLike): string {
   if (doc.utmSource) lines.push(`UTM: ${doc.utmSource}`)
   const ts = new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })
   lines.push(`Время: ${ts} (MSK)`)
+  if (doc.id) {
+    const site = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
+    lines.push(`Открыть: ${site}/admin/collections/leads/${doc.id}`)
+  }
   return lines.join('\n')
 }
 

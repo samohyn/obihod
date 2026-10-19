@@ -50,7 +50,8 @@ function formatDate(iso: string): string {
 }
 
 export default async function BlogIndex() {
-  const posts = (await getPublishedBlogPosts()) as unknown as BlogPost[]
+  // без slug у поста нет страницы — иначе ссылка /blog/null/
+  const posts = ((await getPublishedBlogPosts()) as unknown as BlogPost[]).filter((p) => p.slug)
 
   const breadcrumbs = [
     { name: 'Главная', href: '/' },

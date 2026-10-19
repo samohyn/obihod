@@ -36,6 +36,7 @@ type Person = {
   firstName: string
   lastName: string
   jobTitle?: string | null
+  _status?: 'draft' | 'published' | null
 }
 
 type BlogPostDoc = {
@@ -87,7 +88,10 @@ export async function generateMetadata({
       description: truncateMeta(post.intro, 200),
       publishedTime: post.publishedAt,
       modifiedTime: post.modifiedAt,
-      authors: post.author ? [`${SITE_URL}/avtory/${post.author.slug}/`] : undefined,
+      authors:
+        post.author?._status === 'published'
+          ? [`${SITE_URL}/avtory/${post.author.slug}/`]
+          : undefined,
       images: post.heroImage?.url ? [post.heroImage.url] : undefined,
     },
     robots: { index: true, follow: true },
@@ -120,6 +124,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const { slug } = await params
   const post = (await getBlogPostBySlug(slug)) as unknown as BlogPostDoc | null
   if (!post) notFound()
+  // Страница автора есть только у опубликованного автора — иначе ссылка битая (/avtory/georgy-s/).
+  const authorHasPage = post.author?._status === 'published'
 
   const breadcrumbs = [
     { name: 'Главная', href: '/' },
@@ -166,12 +172,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             {post.author && (
               <span>
                 ·{' '}
-                <Link
-                  href={`/avtory/${post.author.slug}/`}
-                  className="hover:text-ink hover:underline"
-                >
-                  {post.author.firstName} {post.author.lastName}
-                </Link>
+                {authorHasPage ? (
+                  <Link
+                    href={`/avtory/${post.author.slug}/`}
+                    className="hover:text-ink hover:underline"
+                  >
+                    {post.author.firstName} {post.author.lastName}
+                  </Link>
+                ) : (
+                  <>
+                    {post.author.firstName} {post.author.lastName}
+                  </>
+                )}
               </span>
             )}
             {post.lastReviewedAt && (
@@ -222,12 +234,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {post.author && (
           <aside className="border-line bg-bg-alt mt-12 rounded-[var(--radius)] border p-5">
             <p className="text-muted text-sm">Об авторе</p>
-            <Link
-              href={`/avtory/${post.author.slug}/`}
-              className="text-ink mt-1 inline-block text-base font-semibold hover:underline"
-            >
-              {post.author.firstName} {post.author.lastName}
-            </Link>
+            {authorHasPage ? (
+              <Link
+                href={`/avtory/${post.author.slug}/`}
+                className="text-ink mt-1 inline-block text-base font-semibold hover:underline"
+              >
+                {post.author.firstName} {post.author.lastName}
+              </Link>
+            ) : (
+              <p className="text-ink mt-1 text-base font-semibold">
+                {post.author.firstName} {post.author.lastName}
+              </p>
+            )}
             {post.author.jobTitle && (
               <p className="text-ink-soft mt-1 text-sm">{post.author.jobTitle}</p>
             )}

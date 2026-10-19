@@ -56,6 +56,18 @@ const nextConfig: NextConfig = {
         destination: '/:pillar/ramenskoye/',
         permanent: true,
       },
+      // Дубль района «Жуковский»: zhukovskij слит в zhukovsky (миграция
+      // 20261019_200000_seo_quick_fixes_data). 301, а не 308 — так надёжнее для Яндекса.
+      {
+        source: '/:section/zhukovskij/',
+        destination: '/:section/zhukovsky/',
+        statusCode: 301,
+      },
+      {
+        source: '/:section/:sub/zhukovskij/',
+        destination: '/:section/:sub/zhukovsky/',
+        statusCode: 301,
+      },
     ]
   },
   async headers() {

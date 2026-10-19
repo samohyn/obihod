@@ -20,7 +20,7 @@ import { LicenseBadge } from '@/components/marketing/LicenseBadge'
 import { RichTextRenderer } from '@/components/marketing/RichTextRenderer'
 import { buildJsonLdForTemplate } from '@/lib/seo/composer'
 import type { Author, District as JsonLdDistrict, Service as JsonLdService } from '@/lib/seo/jsonld'
-import { getSiteChrome } from '@/lib/chrome'
+import { getContacts, getSiteChrome } from '@/lib/chrome'
 import { getBlocksForLayer } from '@/lib/master-template/getBlocksForLayer'
 import { buildResolverOptions } from '@/lib/feature-flags/template-v2'
 import type { DocumentBlock } from '@/blocks/master-template'
@@ -100,7 +100,7 @@ function plainTextLexical(node: unknown): string {
 }
 
 export default async function ServiceDistrictView({ service, district, sd }: Props) {
-  const chrome = await getSiteChrome()
+  const [chrome, contacts] = await Promise.all([getSiteChrome(), getContacts()])
 
   // EPIC-SERVICE-PAGES-UX C4.T3T4 — master-template integration для T4_SD.
   //
@@ -450,8 +450,8 @@ export default async function ServiceDistrictView({ service, district, sd }: Pro
                 >
                   Загрузить фото — получить смету
                 </Link>
-                <a href="tel:+74950000000" className="sd-btn sd-btn--ghost">
-                  +7 (495) 000-00-00
+                <a href={`tel:${contacts.phoneE164}`} className="sd-btn sd-btn--ghost">
+                  {contacts.phoneDisplay}
                 </a>
               </div>
             </div>

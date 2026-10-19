@@ -22,7 +22,7 @@ const FALLBACK_ROWS = [
     desc: 'Дерево упало или висит — приедем в течение 4 часов в МО, 2 часов в Москве. Каблинг при необходимости.',
     priceFrom: 12000,
     unit: '/ дерево',
-    link: '/arboristika/avarijnoe/',
+    link: '/arboristika/avariynyy-spil/',
   },
   {
     name: 'Чистка крыши от снега',
@@ -50,14 +50,14 @@ const FALLBACK_ROWS = [
     desc: 'Каркасное / брусовое / щитовое строение. С вывозом отходов в одном договоре.',
     priceFrom: 25000,
     unit: '/ объект',
-    link: '/demontazh/saraj/',
+    link: '/demontazh/demontazh-saraya/',
   },
   {
     name: 'Снос дома до 100 м²',
     desc: 'Деревянный или каркасный одноэтажный. С разрешительными документами и вывозом.',
     priceFrom: 85000,
     unit: '/ объект',
-    link: '/demontazh/dom/',
+    link: '/demontazh/snos-doma/',
   },
 ]
 
@@ -153,7 +153,7 @@ export function PricingTable({ data }: { data?: HomepageGlobal }) {
           бесплатного замера. Выезд замерщика — 0 ₽ при любом исходе. Полный прайс по 47 подуслугам
           — на странице{' '}
           <Link
-            href="/ceny"
+            href="/uslugi/tseny/"
             style={{ color: 'var(--c-primary)', borderBottom: '1px dashed var(--c-primary)' }}
           >
             «Цены»

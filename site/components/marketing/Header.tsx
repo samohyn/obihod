@@ -470,7 +470,7 @@ export async function Header() {
                   <h4>Запад МО</h4>
                   <ul>
                     <li>
-                      <Link href="/raiony/odintsovo">
+                      <Link href="/raiony/odincovo">
                         <svg
                           className="mm-icon"
                           viewBox="0 0 24 24"
@@ -602,7 +602,7 @@ export async function Header() {
                   <h4>Юго-Восток МО</h4>
                   <ul>
                     <li>
-                      <Link href="/raiony/ramenskoe">
+                      <Link href="/raiony/ramenskoye">
                         <svg
                           className="mm-icon"
                           viewBox="0 0 24 24"
@@ -623,7 +623,7 @@ export async function Header() {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/raiony/zhukovskij">
+                      <Link href="/raiony/zhukovsky">
                         <svg
                           className="mm-icon"
                           viewBox="0 0 24 24"
@@ -639,7 +639,7 @@ export async function Header() {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/raiony/moskva">
+                      <Link href="/raiony/">
                         <svg
                           className="mm-icon"
                           viewBox="0 0 24 24"
@@ -654,7 +654,7 @@ export async function Header() {
                           <path d="M3 12 L21 12" />
                           <circle cx="12" cy="12" r="2.4" fill="currentColor" />
                         </svg>
-                        Москва — все округа<span className="mm-arrow">→</span>
+                        Москва и вся МО<span className="mm-arrow">→</span>
                       </Link>
                     </li>
                   </ul>

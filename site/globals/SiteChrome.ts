@@ -309,6 +309,7 @@ export const SiteChrome: GlobalConfig = {
                 {
                   name: 'email',
                   type: 'email',
+                  defaultValue: 'partner@obikhod.ru',
                   admin: {
                     description: 'Опционально. Если заполнен — рендерится в футере',
                   },
@@ -379,24 +380,28 @@ export const SiteChrome: GlobalConfig = {
                       name: 'addressRegion',
                       type: 'text',
                       maxLength: 80,
+                      defaultValue: 'Московская область',
                       admin: { description: 'Напр. «Московская область»' },
                     },
                     {
                       name: 'addressLocality',
                       type: 'text',
                       maxLength: 80,
+                      defaultValue: 'Жуковский',
                       admin: { description: 'Напр. «Одинцово»' },
                     },
                     {
                       name: 'streetAddress',
                       type: 'text',
                       maxLength: 200,
+                      defaultValue: 'ул. Амет-хан Султана, 15, к1',
                       admin: { description: 'Улица, дом, корпус' },
                     },
                     {
                       name: 'postalCode',
                       type: 'text',
                       maxLength: 10,
+                      defaultValue: '140185',
                     },
                   ],
                 },

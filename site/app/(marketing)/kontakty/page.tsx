@@ -7,77 +7,80 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema, localBusinessSchema, organizationSchema } from '@/lib/seo/jsonld'
 import { metadataBase } from '@/lib/seo/metadata'
 import { getSeoSettings } from '@/lib/seo/queries'
-import { getSiteChrome } from '@/lib/chrome'
+import { getContacts, getSiteChrome } from '@/lib/chrome'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 export const revalidate = 86400
 
 const META_TITLE = 'Контакты Обихода — телефон, адрес, мессенджеры | Москва и МО'
-const META_DESCRIPTION =
-  'Свяжитесь с Обиходом: телефон +7 (985) 229-41-11, hello@obikhod.ru, Telegram, MAX, WhatsApp. Адрес: Московская область, Жуковский, мкр. Горельники, ул. Амет-хан Султана, 15к1.'
 
-export const metadata: Metadata = {
-  metadataBase,
-  title: { absolute: META_TITLE },
-  description: META_DESCRIPTION,
-  alternates: {
-    canonical: '/kontakty/',
-    languages: { 'ru-RU': '/kontakty/' },
-  },
-  openGraph: {
-    type: 'website',
-    locale: 'ru_RU',
-    url: '/kontakty/',
-    siteName: 'Обиход',
-    title: META_TITLE,
-    description: META_DESCRIPTION,
-  },
-  twitter: { card: 'summary', title: META_TITLE, description: META_DESCRIPTION },
-  robots: {
-    index: true,
-    follow: true,
-    'max-snippet': -1,
-    'max-image-preview': 'large',
-  },
+export async function generateMetadata(): Promise<Metadata> {
+  const c = await getContacts()
+  const description = `Свяжитесь с Обиходом: телефон ${c.phoneDisplay}, ${c.email}, Telegram, MAX, WhatsApp. Адрес: ${c.addressLine}.`
+  return {
+    metadataBase,
+    title: { absolute: META_TITLE },
+    description,
+    alternates: {
+      canonical: '/kontakty/',
+      languages: { 'ru-RU': '/kontakty/' },
+    },
+    openGraph: {
+      type: 'website',
+      locale: 'ru_RU',
+      url: '/kontakty/',
+      siteName: 'Обиход',
+      title: META_TITLE,
+      description,
+    },
+    twitter: { card: 'summary', title: META_TITLE, description },
+    robots: {
+      index: true,
+      follow: true,
+      'max-snippet': -1,
+      'max-image-preview': 'large',
+    },
+  }
 }
 
-const NAP = {
-  phone: '+7 (985) 229-41-11',
-  phoneE164: '+79852294111',
-  email: 'hello@obikhod.ru',
-  address: 'Московская область, Жуковский, мкр. Горельники, ул. Амет-хан Султана, 15к1',
-  hours: 'Пн–Вс 08:00–21:00',
-}
-
-const MESSENGERS: Array<{ name: string; href: string; description: string }> = [
-  {
-    name: 'Telegram',
-    href: 'https://t.me/+79852294111',
-    description: 'Самый быстрый канал — оператор отвечает за 10 минут.',
-  },
-  {
-    name: 'MAX',
-    href: `tel:${NAP.phoneE164}`,
-    description: 'Российский мессенджер — пишите на тот же номер.',
-  },
-  {
-    name: 'WhatsApp',
-    href: `https://wa.me/${NAP.phoneE164.replace('+', '')}`,
-    description: 'Удобно для отправки фото и видео объекта.',
-  },
-  {
-    name: 'Email',
-    href: `mailto:${NAP.email}`,
-    description: 'Для договоров, СРО-выписок и B2B-документов.',
-  },
-]
+const HOURS = 'Пн–Вс 08:00–21:00'
 
 export default async function KontaktyPage() {
-  const [chrome, seo] = await Promise.all([
+  const [chrome, seo, c] = await Promise.all([
     getSiteChrome().catch(() => null),
     getSeoSettings().catch(() => null),
+    getContacts(),
   ])
+  const NAP = {
+    phone: c.phoneDisplay,
+    phoneE164: c.phoneE164,
+    email: c.email,
+    address: c.addressLine,
+    hours: HOURS,
+  }
+  const MESSENGERS: Array<{ name: string; href: string; description: string }> = [
+    {
+      name: 'Telegram',
+      href: `https://t.me/${NAP.phoneE164}`,
+      description: 'Самый быстрый канал — оператор отвечает за 10 минут.',
+    },
+    {
+      name: 'MAX',
+      href: `tel:${NAP.phoneE164}`,
+      description: 'Российский мессенджер — пишите на тот же номер.',
+    },
+    {
+      name: 'WhatsApp',
+      href: `https://wa.me/${NAP.phoneE164.replace('+', '')}`,
+      description: 'Удобно для отправки фото и видео объекта.',
+    },
+    {
+      name: 'Email',
+      href: `mailto:${NAP.email}`,
+      description: 'Для договоров, СРО-выписок и B2B-документов.',
+    },
+  ]
 
   const breadcrumbs = [
     { name: 'Главная', href: '/' },

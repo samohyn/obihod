@@ -7,7 +7,7 @@ import { Cases } from '@/components/marketing/sections/Cases'
 import { Coverage } from '@/components/marketing/sections/Coverage'
 import { CtaFooter } from '@/components/marketing/sections/CtaFooter'
 import { Documents } from '@/components/marketing/sections/Documents'
-import { FAQ } from '@/components/marketing/sections/FAQ'
+import { FAQ, faqItems } from '@/components/marketing/sections/FAQ'
 import { Gallery } from '@/components/marketing/sections/Gallery'
 import { Hero } from '@/components/marketing/sections/Hero'
 import { How } from '@/components/marketing/sections/How'
@@ -71,7 +71,7 @@ export default async function Home() {
   const hp = await getHomepage()
   return (
     <>
-      <JsonLdGraph />
+      <JsonLdGraph faq={faqItems(hp)} />
       <Hero data={hp} />
       <Services />
       <How data={hp} />

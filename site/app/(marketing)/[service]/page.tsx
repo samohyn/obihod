@@ -11,7 +11,13 @@ import { RichTextRenderer } from '@/components/marketing/RichTextRenderer'
 import { buildPillarMetadata } from '@/lib/seo/metadata'
 import { breadcrumbListSchema, faqPageSchema, serviceSchema } from '@/lib/seo/jsonld'
 import { buildJsonLdForTemplate } from '@/lib/seo/composer'
-import { getAllServiceSlugs, getServiceBySlug, getAllDistrictsForCityList } from '@/lib/seo/queries'
+import {
+  getAllServiceSlugs,
+  getServiceBySlug,
+  getAllDistrictsForCityList,
+  getServiceDistrictSlugs,
+  hasSubServicePage,
+} from '@/lib/seo/queries'
 import { getSiteChrome } from '@/lib/chrome'
 import { getBlocksForLayer } from '@/lib/master-template/getBlocksForLayer'
 import { buildResolverOptions } from '@/lib/feature-flags/template-v2'
@@ -66,7 +72,11 @@ export default async function PillarPage({ params }: { params: Promise<{ service
   const docBlocks = (service as { blocks?: unknown[] | null }).blocks
   const hasBlocks = Array.isArray(docBlocks) && docBlocks.length > 0
 
-  const [chrome, allDistricts] = await Promise.all([getSiteChrome(), getAllDistrictsForCityList()])
+  const [chrome, allDistricts, geoSlugs] = await Promise.all([
+    getSiteChrome(),
+    getAllDistrictsForCityList(),
+    getServiceDistrictSlugs(serviceSlug),
+  ])
 
   // Composer — sustained AC #6 schema-coverage T2_PILLAR (5 узлов).
   // Org/WebSite/LocalBusiness уже на layout — composer добавляет
@@ -77,7 +87,6 @@ export default async function PillarPage({ params }: { params: Promise<{ service
     service: service as never,
     faqs: richTextFaq,
     breadcrumbs: breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
-    rating: { value: 4.9, count: 247 },
   })
 
   if (hasBlocks) {
@@ -115,8 +124,17 @@ export default async function PillarPage({ params }: { params: Promise<{ service
     )
   }
 
-  // Top-30 cities (priority A first → B → C, sorted by distanceFromMkad).
-  const cities = allDistricts.slice(0, 30)
+  // Top-30 cities (priority A first → B → C, sorted by distanceFromMkad) — только с гео-страницей.
+  const cities = allDistricts.filter((d) => geoSlugs.has(d.slug)).slice(0, 30)
+  const subServices = (
+    (service.subServices ?? []) as Array<{
+      slug: string
+      title: string
+      priceFrom?: number
+      intro?: unknown
+      body?: unknown
+    }>
+  ).filter(hasSubServicePage)
 
   return (
     <>
@@ -138,26 +156,24 @@ export default async function PillarPage({ params }: { params: Promise<{ service
         </section>
 
         {/* §02 · Sub-services grid */}
-        {service.subServices && service.subServices.length > 0 && (
+        {subServices.length > 0 && (
           <section className="mx-auto mt-12 max-w-5xl px-6">
             <h2 className="text-2xl font-semibold text-stone-900">Что входит в раздел</h2>
             <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {service.subServices.map(
-                (sub: { slug: string; title: string; priceFrom?: number }) => (
-                  <Link
-                    key={sub.slug}
-                    href={`/${service.slug}/${sub.slug}/`}
-                    className="block rounded-lg border border-stone-200 bg-white p-4 transition hover:border-orange-300"
-                  >
-                    <div className="font-medium text-stone-900">{sub.title}</div>
-                    {sub.priceFrom ? (
-                      <div className="mt-1 text-sm text-stone-600">
-                        от {sub.priceFrom.toLocaleString('ru-RU')} ₽
-                      </div>
-                    ) : null}
-                  </Link>
-                ),
-              )}
+              {subServices.map((sub) => (
+                <Link
+                  key={sub.slug}
+                  href={`/${service.slug}/${sub.slug}/`}
+                  className="block rounded-lg border border-stone-200 bg-white p-4 transition hover:border-orange-300"
+                >
+                  <div className="font-medium text-stone-900">{sub.title}</div>
+                  {sub.priceFrom ? (
+                    <div className="mt-1 text-sm text-stone-600">
+                      от {sub.priceFrom.toLocaleString('ru-RU')} ₽
+                    </div>
+                  ) : null}
+                </Link>
+              ))}
             </div>
           </section>
         )}

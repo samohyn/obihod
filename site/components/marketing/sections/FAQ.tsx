@@ -25,7 +25,7 @@ const FALLBACK_FAQ = [
   {
     question: 'Как работает «фото → смета за 10 минут»?',
     answer:
-      'Загрузите фото объекта в форму или пришлите в WhatsApp / Telegram / MAX. AI распознаёт тип, размеры, состояние; диспетчер уточняет вручную. В течение 10 минут возвращается диапазон цены, зафиксированный на 14 дней. Точная смета — после бесплатного замера на объекте.',
+      'Загрузите фото объекта в форму или пришлите в WhatsApp / Telegram / MAX. Менеджер оценит тип объекта, размеры и состояние и в течение 10 минут пришлёт диапазон цены, зафиксированный на 14 дней. Точная смета — после бесплатного замера на объекте.',
   },
   {
     question: 'Работаете в выходные и праздники?',
@@ -49,8 +49,13 @@ const FALLBACK_FAQ = [
   },
 ]
 
+/** Вопросы, которые видит клиент, — из них же строится FAQPage в JSON-LD главной. */
+export function faqItems(data?: HomepageGlobal) {
+  return data?.faq ?? FALLBACK_FAQ
+}
+
 export function FAQ({ data }: { data?: HomepageGlobal }) {
-  const items = data?.faq ?? FALLBACK_FAQ
+  const items = faqItems(data)
 
   return (
     <section className="hp-section alt">
