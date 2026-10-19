@@ -68,6 +68,29 @@ function nonEmpty(s: string | null | undefined): string | undefined {
   return trimmed.length > 0 ? trimmed : undefined
 }
 
+/** Реквизит или undefined, если в админке ещё стоит заглушка из единиц. */
+function realRequisite(s: string | null | undefined): string | undefined {
+  const v = nonEmpty(s)
+  return v && !/^1+$/.test(v) ? v : undefined
+}
+
+/** Фактический адрес компании из SiteChrome.requisites — один для Organization и LocalBusiness. */
+function postalAddress(req: SiteChrome['requisites'] | null | undefined) {
+  const addressRegion = nonEmpty(req?.addressRegion)
+  const addressLocality = nonEmpty(req?.addressLocality)
+  const streetAddress = nonEmpty(req?.streetAddress)
+  const postalCode = nonEmpty(req?.postalCode)
+  if (!addressRegion && !addressLocality && !streetAddress && !postalCode) return undefined
+  return {
+    '@type': 'PostalAddress',
+    addressCountry: 'RU',
+    addressRegion,
+    addressLocality,
+    streetAddress,
+    postalCode,
+  }
+}
+
 export type District = {
   slug: string
   nameNominative: string
@@ -126,12 +149,6 @@ export function organizationSchema(
   const contacts = chrome?.contacts ?? null
   const social = chrome?.social ?? []
 
-  const addressRegion = nonEmpty(req?.addressRegion)
-  const addressLocality = nonEmpty(req?.addressLocality)
-  const streetAddress = nonEmpty(req?.streetAddress)
-  const postalCode = nonEmpty(req?.postalCode)
-  const hasAnyAddress = addressRegion || addressLocality || streetAddress || postalCode
-
   const sameAs = social.map((s) => nonEmpty(s?.url)).filter((u): u is string => Boolean(u))
 
   const credentials: Record<string, unknown>[] = []
@@ -154,20 +171,12 @@ export function organizationSchema(
     name: nonEmpty(seo?.organization?.name) ?? 'Обиход',
     legalName: nonEmpty(req?.legalName),
     telephone: nonEmpty(contacts?.phoneE164),
-    taxID: nonEmpty(req?.taxId),
-    vatID: nonEmpty(req?.ogrn),
+    email: nonEmpty(contacts?.email),
+    // заглушки из единиц (реквизиты не заполнены) не публикуем
+    taxID: realRequisite(req?.taxId),
     url: SITE_URL,
     logo: `${SITE_URL}/logo.png`,
-    address: hasAnyAddress
-      ? {
-          '@type': 'PostalAddress',
-          addressCountry: 'RU',
-          addressRegion,
-          addressLocality,
-          streetAddress,
-          postalCode,
-        }
-      : undefined,
+    address: postalAddress(req),
     areaServed: [
       { '@type': 'AdministrativeArea', name: 'Москва' },
       { '@type': 'AdministrativeArea', name: 'Московская область' },
@@ -192,11 +201,6 @@ export function websiteSchema() {
     name: 'Обиход',
     inLanguage: 'ru-RU',
     publisher: { '@id': ORG_ID },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${SITE_URL}/poisk?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
-    },
   }
 }
 
@@ -248,6 +252,8 @@ export function localBusinessSchema(
     parentOrganization: { '@id': ORG_ID },
     image: `${SITE_URL}/og.jpg`,
     telephone: nonEmpty(contacts?.phoneE164),
+    email: nonEmpty(contacts?.email),
+    address: postalAddress(chrome?.requisites),
     priceRange,
     openingHoursSpecification: [
       {

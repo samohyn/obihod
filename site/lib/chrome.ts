@@ -118,13 +118,77 @@ export const DEFAULT_SITE_CHROME: SiteChrome = {
   contacts: {
     phoneDisplay: '+7 (985) 170-51-11',
     phoneE164: '+79851705111',
+    email: 'partner@obikhod.ru',
   },
   requisites: {
     taxId: '1111111111',
     kpp: '111111111',
     ogrn: '1111111111111',
+    addressRegion: 'Московская область',
+    addressLocality: 'Жуковский',
+    streetAddress: 'ул. Амет-хан Султана, 15, к1',
+    postalCode: '140185',
   },
   social: [],
+}
+
+export interface Contacts {
+  phoneDisplay: string
+  phoneE164: string
+  email: string
+  legalName: string
+  /** ИНН / ОГРН / КПП — null, пока в админке стоит заглушка из единиц. */
+  taxId: string | null
+  ogrn: string | null
+  kpp: string | null
+  addressRegion: string
+  addressLocality: string
+  streetAddress: string
+  postalCode: string
+  /** «ул. …, Жуковский, Московская область, 140185» */
+  addressLine: string
+}
+
+function filledRequisite(v: string | null | undefined): string | null {
+  const s = v?.trim()
+  return s && !/^1+$/.test(s) ? s : null
+}
+
+/**
+ * Единый источник контактов и реквизитов для всех страниц, JSON-LD и llms.txt:
+ * значения из SiteChrome (админка), пустые — из DEFAULT_SITE_CHROME.
+ */
+export const getContacts = cache(async (): Promise<Contacts> => {
+  const chrome = await getSiteChrome()
+  const c = { ...DEFAULT_SITE_CHROME.contacts, ...stripEmpty(chrome?.contacts) }
+  const r = { ...DEFAULT_SITE_CHROME.requisites, ...stripEmpty(chrome?.requisites) }
+  const streetAddress = r.streetAddress ?? ''
+  const addressLocality = r.addressLocality ?? ''
+  const addressRegion = r.addressRegion ?? ''
+  const postalCode = r.postalCode ?? ''
+  return {
+    phoneDisplay: c.phoneDisplay ?? '',
+    phoneE164: c.phoneE164 ?? '',
+    email: c.email ?? '',
+    legalName: r.legalName || 'Обиход',
+    taxId: filledRequisite(r.taxId),
+    ogrn: filledRequisite(r.ogrn),
+    kpp: filledRequisite(r.kpp),
+    addressRegion,
+    addressLocality,
+    streetAddress,
+    postalCode,
+    addressLine: [streetAddress, addressLocality, addressRegion, postalCode]
+      .filter(Boolean)
+      .join(', '),
+  }
+})
+
+function stripEmpty<T extends object>(obj: T | null | undefined): Partial<T> {
+  if (!obj) return {}
+  return Object.fromEntries(
+    Object.entries(obj).filter(([, v]) => v !== null && v !== undefined && v !== ''),
+  ) as Partial<T>
 }
 
 /**

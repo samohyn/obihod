@@ -6,7 +6,7 @@ import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { aggregateOfferSchema, breadcrumbListSchema, faqPageSchema } from '@/lib/seo/jsonld'
 import { metadataBase } from '@/lib/seo/metadata'
-import { getAllPillarsForPricing, getServiceBySlug } from '@/lib/seo/queries'
+import { getAllPillarsForPricing, getServiceBySlug, hasSubServicePage } from '@/lib/seo/queries'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -93,6 +93,7 @@ type ServiceLike = {
     priceTo?: number | null
     priceUnit?: string | null
     intro?: string | null
+    body?: unknown
   }> | null
 }
 
@@ -213,7 +214,11 @@ export default async function PillarPricingPage({
                       )}
                     </td>
                     <td>
-                      <Link href={`/${service.slug}/${sub.slug}/`}>Подробнее →</Link>
+                      {hasSubServicePage(sub) ? (
+                        <Link href={`/${service.slug}/${sub.slug}/`}>Подробнее →</Link>
+                      ) : (
+                        '—'
+                      )}
                     </td>
                   </tr>
                 ))}

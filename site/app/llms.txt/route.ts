@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 
 import { payloadClient } from '@/lib/payload'
 import { getServiceBySlug, getPublishedB2BPages, getPublishedAuthors } from '@/lib/seo/queries'
+import { lexicalToPlainText } from '@/lib/seo/uniqueness'
 
 /**
  * GET /llms.txt
@@ -76,13 +77,16 @@ async function buildPillars(): Promise<PillarRef[]> {
       const svc = (await getServiceBySlug(slug)) as {
         slug?: string
         title?: string
-        intro?: string
+        intro?: string | { root?: unknown }
         metaDescription?: string
       } | null
       if (svc) {
         const title = svc.title?.trim() || PILLAR_FALLBACKS[slug].title
         const desc =
-          (svc.intro?.trim() ?? '').slice(0, 140) ||
+          // intro — richText (Lexical): раньше .trim() падал в catch и всегда брался fallback
+          (typeof svc.intro === 'string' ? svc.intro : lexicalToPlainText(svc.intro?.root))
+            .trim()
+            .slice(0, 140) ||
           (svc.metaDescription?.trim() ?? '').slice(0, 140) ||
           PILLAR_FALLBACKS[slug].shortDescription
         out.push({ slug, title, shortDescription: desc })

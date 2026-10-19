@@ -62,7 +62,7 @@ export function Coverage() {
 
         <div className="hp-cov">
           <Link
-            href="/raiony/odintsovo"
+            href="/raiony/odincovo"
             className="hp-cov-chip pilot"
             style={{ textDecoration: 'none' }}
           >
@@ -128,7 +128,7 @@ export function Coverage() {
             </div>
           </Link>
           <Link
-            href="/raiony/ramenskoe"
+            href="/raiony/ramenskoye"
             className="hp-cov-chip pilot"
             style={{ textDecoration: 'none' }}
           >
@@ -138,11 +138,7 @@ export function Coverage() {
               <span className="stat">6 кейсов</span>
             </div>
           </Link>
-          <Link
-            href="/raiony/zhukovskij"
-            className="hp-cov-chip"
-            style={{ textDecoration: 'none' }}
-          >
+          <Link href="/raiony/zhukovsky" className="hp-cov-chip" style={{ textDecoration: 'none' }}>
             <div className="name">Жуковский</div>
             <div className="meta">
               <span className="dist">25 КМ ОТ МКАД</span>
@@ -167,7 +163,7 @@ export function Coverage() {
               <span className="stat">SLA 6 ч</span>
             </div>
           </Link>
-          <Link href="/raiony/korolev" className="hp-cov-chip" style={{ textDecoration: 'none' }}>
+          <Link href="/raiony/korolyov" className="hp-cov-chip" style={{ textDecoration: 'none' }}>
             <div className="name">Королёв</div>
             <div className="meta">
               <span className="dist">12 КМ ОТ МКАД</span>

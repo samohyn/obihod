@@ -6,10 +6,9 @@ import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema, howToSchema, speakableSchema } from '@/lib/seo/jsonld'
 import { metadataBase } from '@/lib/seo/metadata'
+import { getContacts } from '@/lib/chrome'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
-const TELEGRAM_LINK = 'https://t.me/+79852294111'
-const WA_LINK = 'https://wa.me/79852294111'
 
 export const revalidate = 86400
 
@@ -42,14 +41,14 @@ export const metadata: Metadata = {
   },
 }
 
-const HOW_TO_STEPS = [
+const howToSteps = (phoneDisplay: string) => [
   {
     name: 'Сделайте 2-3 фото',
     text: 'Сфотографируйте объект с 2-3 ракурсов: общий план + крупный план проблемного места. Для деревьев — фото от ствола, ракурс снизу-вверх. Для крыш — фото с земли с обзором свеса. Для участка — общий план + точка проблемы.',
   },
   {
     name: 'Отправьте в любой мессенджер',
-    text: 'Telegram, MAX, WhatsApp — на тот номер +7 (985) 229-41-11 (либо через форму на этой странице с загрузкой файлов). Оператор подтвердит получение в течение 1-2 минут.',
+    text: `Telegram, MAX, WhatsApp — на номер ${phoneDisplay} (либо через форму на этой странице с загрузкой файлов). Оператор подтвердит получение в течение 1-2 минут.`,
   },
   {
     name: 'Оператор оценит за 10 минут',
@@ -61,10 +60,13 @@ const HOW_TO_STEPS = [
   },
 ]
 
-export default function FotoSmetaPage() {
+export default async function FotoSmetaPage() {
+  const c = await getContacts()
+  const TELEGRAM_LINK = `https://t.me/${c.phoneE164}`
+  const WA_LINK = `https://wa.me/${c.phoneE164.replace('+', '')}`
+  const HOW_TO_STEPS = howToSteps(c.phoneDisplay)
   const breadcrumbs = [
     { name: 'Главная', href: '/' },
-    { name: 'Калькулятор', href: '/kalkulyator/' },
     { name: 'Фото-смета', href: '/kalkulyator/foto-smeta/' },
   ]
 
@@ -130,7 +132,7 @@ export default function FotoSmetaPage() {
             >
               WhatsApp
             </a>
-            <a className="foto-smeta-page__secondary" href="tel:+79852294111">
+            <a className="foto-smeta-page__secondary" href={`tel:${c.phoneE164}`}>
               Позвонить
             </a>
           </p>

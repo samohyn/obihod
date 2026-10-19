@@ -21,6 +21,7 @@
     "fal:gen:stage3-w13-cases": "tsx --env-file=.env.local scripts/generate-stage3-w13-cases.ts",
     "tov:check": "tsx scripts/tov-checker.ts",
     "lint:schema": "tsx scripts/lint-schema.ts",
+    "check:links": "tsx scripts/check-links.ts",
     "lint:slug": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/lint-slug.ts",
     "lint:slug:prod": "tsx --require=./scripts/_payload-cjs-shim.cjs scripts/lint-slug.ts",
     "seed:cities": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/seed-cities.ts",

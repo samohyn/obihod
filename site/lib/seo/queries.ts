@@ -120,6 +120,43 @@ export const getServiceDistrict = cache(async (serviceSlug: string, districtSlug
 })
 
 /**
+ * Слаги районов, для которых у услуги есть гео-страница /<service>/<district>/ — та же выборка,
+ * что у getServiceDistrict (любой статус, без sub-service триплетов). Нужна, чтобы pillar
+ * не ссылался на города без страницы (было 30 битых ссылок с /dizain-landshafta/).
+ */
+export const getServiceDistrictSlugs = cache(async (serviceSlug: string): Promise<Set<string>> => {
+  try {
+    const payload = await payloadClient()
+    const r = await payload.find({
+      collection: 'service-districts',
+      where: {
+        and: [{ 'service.slug': { equals: serviceSlug } }, { subServiceSlug: { exists: false } }],
+      },
+      limit: 1000,
+      pagination: false,
+      depth: 1,
+      select: { district: true },
+    })
+    const slugs = r.docs
+      .map((d) => (d as { district?: { slug?: string } | number | null }).district)
+      .map((dist) => (typeof dist === 'object' && dist ? dist.slug : undefined))
+      .filter((s): s is string => Boolean(s))
+    return new Set(slugs)
+  } catch (e) {
+    console.error('[queries.getServiceDistrictSlugs] failed:', e)
+    return new Set()
+  }
+})
+
+/**
+ * Есть ли у подуслуги своя страница: маршрут [service]/[slug] отдаёт 404, если нет ни intro,
+ * ни body. Списки подуслуг ссылаются только на такие — иначе ссылка битая.
+ */
+export function hasSubServicePage(sub: { intro?: unknown; body?: unknown }): boolean {
+  return Boolean(sub.intro || sub.body)
+}
+
+/**
  * US-4 EPIC-SEO-USLUGI: bundled lookup для slug-resolver.
  * Возвращает service + district + sd в одной структуре, либо null если
  * любой из трёх не найден. sd попадает в bundle только если sub_service_slug
@@ -158,8 +195,9 @@ export const getServiceDistrictBundle = cache(
 )
 
 /**
- * US-4 EPIC-SEO-USLUGI: все пары (service, district) для T4 generateStaticParams.
- * Только опубликованные SD без sub_service_slug — pillar × city, не triple.
+ * US-4 EPIC-SEO-USLUGI: все пары (service, district) для T4 generateStaticParams и sitemap.
+ * Только индексируемые SD без sub_service_slug — тот же предикат, что robots у страницы
+ * (isServiceDistrictIndexable: published и noindexUntilCase снят).
  * Возвращает {service, slug} (slug = districtSlug в URL pattern [service]/[slug]/).
  */
 export const getAllServiceDistrictParams = cache(
@@ -168,7 +206,12 @@ export const getAllServiceDistrictParams = cache(
       const payload = await payloadClient()
       const r = await payload.find({
         collection: 'service-districts',
-        where: { publishStatus: { equals: 'published' } },
+        where: {
+          and: [
+            { publishStatus: { equals: 'published' } },
+            { noindexUntilCase: { not_equals: true } },
+          ],
+        },
         limit: 1000,
         pagination: false,
         depth: 1,
@@ -489,6 +532,7 @@ export const getAllPillarsForPricing = cache(async (): Promise<PricingPillar[]> 
           priceTo?: number | null
           priceUnit?: string | null
           intro?: string | null
+          body?: unknown
         }> | null
       }
       return {
@@ -501,8 +545,9 @@ export const getAllPillarsForPricing = cache(async (): Promise<PricingPillar[]> 
         priceUnit: s.priceUnit ?? null,
         faqGlobal: s.faqGlobal ?? null,
         subServices: (s.subServices ?? [])
-          .filter((sub): sub is { slug: string; title: string } & typeof sub =>
-            Boolean(sub.slug && sub.title),
+          .filter(
+            (sub): sub is { slug: string; title: string } & typeof sub =>
+              Boolean(sub.slug && sub.title) && hasSubServicePage(sub),
           )
           .map((sub) => ({
             slug: sub.slug!,

@@ -1,7 +1,14 @@
 import { NextResponse } from 'next/server'
 
 import { payloadClient } from '@/lib/payload'
-import { getServiceBySlug, getPublishedB2BPages, getPublishedAuthors } from '@/lib/seo/queries'
+import { getContacts } from '@/lib/chrome'
+import {
+  getServiceBySlug,
+  getPublishedB2BPages,
+  getPublishedAuthors,
+  hasSubServicePage,
+} from '@/lib/seo/queries'
+import { lexicalToPlainText } from '@/lib/seo/uniqueness'
 
 /**
  * GET /llms-full.txt
@@ -19,6 +26,14 @@ import { getServiceBySlug, getPublishedB2BPages, getPublishedAuthors } from '@/l
  */
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
+
+/** intro у услуг и статей — richText (Lexical), у части документов — строка. Было 500: `.trim is not a function`. */
+function plain(v: unknown): string {
+  if (typeof v === 'string') return v.trim()
+  if (v && typeof v === 'object' && 'root' in v)
+    return lexicalToPlainText((v as { root: unknown }).root).trim()
+  return ''
+}
 
 export const revalidate = 86400
 export const dynamic = 'force-dynamic'
@@ -43,7 +58,7 @@ type ServiceLike = {
   slug?: string | null
   title?: string | null
   h1?: string | null
-  intro?: string | null
+  intro?: unknown
   metaDescription?: string | null
   priceFrom?: number | null
   priceTo?: number | null
@@ -51,7 +66,8 @@ type ServiceLike = {
   subServices?: Array<{
     slug?: string | null
     title?: string | null
-    intro?: string | null
+    intro?: unknown
+    body?: unknown
     priceFrom?: number | null
   }> | null
 }
@@ -70,7 +86,7 @@ type BlogDoc = {
   slug?: string | null
   title?: string | null
   h1?: string | null
-  intro?: string | null
+  intro?: unknown
   metaDescription?: string | null
   publishedAt?: string | null
   category?: string | null
@@ -130,7 +146,8 @@ function priceLine(svc: ServiceLike): string {
 }
 
 export async function GET(): Promise<NextResponse> {
-  const [pillars, b2b, authors, cases, blog] = await Promise.all([
+  const [contacts, pillars, b2b, authors, cases, blog] = await Promise.all([
+    getContacts(),
     fetchPillars(),
     getPublishedB2BPages().catch(
       () => [] as Array<{ slug?: string; h1?: string; metaDescription?: string }>,
@@ -147,13 +164,13 @@ export async function GET(): Promise<NextResponse> {
   const sections: string[] = []
 
   // ─── Header ────────────────────────────────────────────────────────────
-  sections.push('# Обиход — Полный контент-дамп для AI-ботов')
+  sections.push('# Обиход — полное описание услуг и материалов сайта')
   sections.push('')
   sections.push(
-    '> Комплексный подрядчик «порядок под ключ» Москва + МО. 5 услуг (вывоз мусора, арбористика, чистка крыш, демонтаж, уборка территории) для B2C (частные дома, дачи, СНТ) и B2B (УК, ТСЖ, FM, застройщики). USP: фото→смета за 10 минут, СРО + страховка ГО 10 млн ₽.',
+    '> Комплексный подрядчик «порядок под ключ» Москва + МО. 5 услуг (вывоз мусора, арбористика, чистка крыш, демонтаж, уборка территории) для B2C (частные дома, дачи, СНТ) и B2B (УК, ТСЖ, FM, застройщики). Смета по фото — за 10 минут.',
   )
   sections.push('')
-  sections.push(`Контакты: hello@obikhod.ru · ${SITE_URL}/kontakty/`)
+  sections.push(`Контакты: ${contacts.phoneDisplay} · ${contacts.email} · ${SITE_URL}/kontakty/`)
   sections.push('')
 
   // ─── Pillars (full intro) ──────────────────────────────────────────────
@@ -163,7 +180,7 @@ export async function GET(): Promise<NextResponse> {
     const slug = pillar.slug ?? '—'
     const title =
       pillar.h1 ?? pillar.title ?? PILLAR_TITLES[slug as (typeof PILLAR_SLUGS)[number]] ?? slug
-    const intro = (pillar.intro ?? pillar.metaDescription ?? '').trim()
+    const intro = plain(pillar.intro) || plain(pillar.metaDescription)
     const price = priceLine(pillar)
 
     sections.push(`### [${title}](${SITE_URL}/${slug}/)${price}`)
@@ -173,14 +190,14 @@ export async function GET(): Promise<NextResponse> {
       sections.push('')
     }
 
-    const subs = pillar.subServices ?? []
+    const subs = (pillar.subServices ?? []).filter(hasSubServicePage)
     if (subs.length > 0) {
       sections.push('**Подкатегории:**')
       sections.push('')
       for (const sub of subs) {
         if (!sub.slug) continue
         const subTitle = sub.title ?? sub.slug
-        const subIntro = (sub.intro ?? '').trim().slice(0, 200)
+        const subIntro = plain(sub.intro).slice(0, 200)
         const subPrice = sub.priceFrom ? ` (от ${sub.priceFrom} ₽)` : ''
         const desc = subIntro ? `: ${subIntro}` : ''
         sections.push(`- [${subTitle}](${SITE_URL}/${slug}/${sub.slug}/)${subPrice}${desc}`)
@@ -218,7 +235,7 @@ export async function GET(): Promise<NextResponse> {
       if (!p.slug) continue
       const slug = p.slug.startsWith('b2b') ? p.slug : `b2b/${p.slug}`
       const title = p.h1 ?? p.slug
-      const desc = (p.metaDescription ?? '').trim().slice(0, 200)
+      const desc = plain(p.metaDescription).slice(0, 200)
       sections.push(`- [${title}](${SITE_URL}/${slug}/)${desc ? `: ${desc}` : ''}`)
     }
     sections.push('')
@@ -228,9 +245,7 @@ export async function GET(): Promise<NextResponse> {
   if (cases.length > 0) {
     sections.push('## Кейсы (фото before/after)')
     sections.push('')
-    sections.push(
-      'Реальные объекты с датами, ценами и фото-результатом. AI-бот может цитировать как social proof.',
-    )
+    sections.push('Реальные объекты с датами, ценами и фото-результатом.')
     sections.push('')
     for (const c of cases) {
       if (!c.slug) continue
@@ -256,14 +271,12 @@ export async function GET(): Promise<NextResponse> {
   if (blog.length > 0) {
     sections.push('## Блог (свежие info-статьи)')
     sections.push('')
-    sections.push(
-      'E-E-A-T контент: пошаговые инструкции, юридические детали, советы агрономов. AI-боты могут процитировать как авторитетный источник.',
-    )
+    sections.push('Пошаговые инструкции, юридические детали, практические советы.')
     sections.push('')
     for (const post of blog) {
       if (!post.slug) continue
       const title = post.h1 ?? post.title ?? post.slug
-      const intro = (post.intro ?? post.metaDescription ?? '').trim().slice(0, 240)
+      const intro = (plain(post.intro) || plain(post.metaDescription)).slice(0, 240)
       const date = post.publishedAt ? ` · ${post.publishedAt.slice(0, 10)}` : ''
       sections.push(`### [${title}](${SITE_URL}/blog/${post.slug}/)${date}`)
       if (intro) {
@@ -317,11 +330,9 @@ export async function GET(): Promise<NextResponse> {
   // ─── Footer ────────────────────────────────────────────────────────────
   sections.push('## Контакты')
   sections.push('')
-  sections.push(`- Телефон: +7 (985) 229-41-11`)
-  sections.push(`- Email: hello@obikhod.ru`)
-  sections.push(
-    `- Адрес: Московская область, Жуковский, мкр. Горельники, ул. Амет-хан Султана, 15к1`,
-  )
+  sections.push(`- Телефон: ${contacts.phoneDisplay}`)
+  sections.push(`- Email: ${contacts.email}`)
+  sections.push(`- Адрес: ${contacts.addressLine}`)
   sections.push(`- Лид-форма: [${SITE_URL}/kontakty/](${SITE_URL}/kontakty/)`)
   sections.push(`- Telegram-бот: ссылка на странице контактов`)
   sections.push('')

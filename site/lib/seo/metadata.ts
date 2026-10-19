@@ -134,9 +134,12 @@ export function buildServiceDistrictMetadata(args: {
   sd: {
     seoTitle?: string | null
     seoDescription?: string | null
+    publishStatus?: string | null
+    noindexUntilCase?: boolean | null
   } | null
 }): Metadata {
   const { service: s, district: d, sd } = args
+  const indexable = isServiceDistrictIndexable(sd)
   const adj = d.localPriceAdjustment ?? 0
   const adjustedPriceFrom = Math.round(s.priceFrom * (1 + adj / 100))
   const responseTime = '2 часа'
@@ -165,13 +168,21 @@ export function buildServiceDistrictMetadata(args: {
       title,
       description: truncateMeta(description, 158),
     },
-    robots: {
-      index: true,
-      follow: true,
-      'max-snippet': -1,
-      'max-image-preview': 'large',
-    },
+    robots: indexable
+      ? { index: true, follow: true, 'max-snippet': -1, 'max-image-preview': 'large' }
+      : { index: false, follow: true },
   }
+}
+
+/**
+ * Гео-страница «услуга × город» индексируется, только если опубликована и снят флаг
+ * «noindex до кейса» (план 09, этап 6: без местной конкретики — noindex и вне sitemap).
+ * Тот же предикат использует sitemap (getAllServiceDistrictParams).
+ */
+export function isServiceDistrictIndexable(
+  sd: { publishStatus?: string | null; noindexUntilCase?: boolean | null } | null,
+): boolean {
+  return sd?.publishStatus === 'published' && sd.noindexUntilCase !== true
 }
 
 export function buildDistrictHubMetadata(d: District): Metadata {

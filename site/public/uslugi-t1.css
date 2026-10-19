@@ -170,7 +170,7 @@
     margin-top: 28px;
   }
   @media (min-width: 768px) { .t1-why { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 1024px) { .t1-why { grid-template-columns: repeat(4, 1fr); } }
+  @media (min-width: 1024px) { .t1-why { grid-template-columns: repeat(3, 1fr); } }
   .t1-why-card {
     background: var(--c-card);
     border: 1px solid var(--c-line);

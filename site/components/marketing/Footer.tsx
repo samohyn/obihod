@@ -1,19 +1,15 @@
 import Link from 'next/link'
 
-import { DEFAULT_SITE_CHROME, getSiteChrome } from '@/lib/chrome'
+import { getContacts } from '@/lib/chrome'
+import { CONSENT_URL, PRIVACY_URL } from '@/lib/legal'
 /**
  * Footer — нижняя навигация, контакты, юр.инфа.
  * Source-of-truth: newui/homepage-classic.html (footer block).
- * Stack: Server Component, контент hardcoded.
- *
- * Phase 2 follow-up: вытащить ИНН/ОГРН из SiteChrome.requisites,
- * списки услуг/районов из Services/Districts коллекций.
+ * Stack: Server Component. Контакты и реквизиты — getContacts() (SiteChrome),
+ * списки услуг/районов пока в коде (план 09, этап 2 — футер из CMS).
  */
 export async function Footer() {
-  const chrome = await getSiteChrome()
-  const phoneE164 = chrome?.contacts?.phoneE164 ?? DEFAULT_SITE_CHROME.contacts?.phoneE164 ?? ''
-  const phoneDisplay =
-    chrome?.contacts?.phoneDisplay ?? DEFAULT_SITE_CHROME.contacts?.phoneDisplay ?? ''
+  const contacts = await getContacts()
   return (
     <footer className="site-footer-mock">
       <div className="cols">
@@ -91,9 +87,9 @@ export async function Footer() {
             демонтаж. Плюс дизайн ландшафта. С 2020 года.
           </p>
           <div className="contacts">
-            <a href={`tel:${phoneE164}`}>{phoneDisplay}</a>
-            <a href="mailto:hi@obikhod.ru">hi@obikhod.ru</a>
-            <span style={{ opacity: '0.7' }}>МО, Раменский р-н, ул. Питомниковая, 3</span>
+            <a href={`tel:${contacts.phoneE164}`}>{contacts.phoneDisplay}</a>
+            <a href={`mailto:${contacts.email}`}>{contacts.email}</a>
+            <span style={{ opacity: '0.7' }}>{contacts.addressLine}</span>
             <span style={{ opacity: '0.7', fontSize: '12px' }}>
               пн-сб 8:00–22:00, вс 10:00–18:00 · 24/7 на аварии
             </span>
@@ -130,7 +126,7 @@ export async function Footer() {
           <h5>Районы</h5>
           <ul>
             <li>
-              <Link href="/raiony/odintsovo">Одинцово</Link>
+              <Link href="/raiony/odincovo">Одинцово</Link>
             </li>
             <li>
               <Link href="/raiony/krasnogorsk">Красногорск</Link>
@@ -146,7 +142,7 @@ export async function Footer() {
             </li>
             <li>
               <Link href="/raiony" style={{ opacity: '0.65' }}>
-                Все 12 районов →
+                Все районы →
               </Link>
             </li>
           </ul>
@@ -159,13 +155,13 @@ export async function Footer() {
               <Link href="/b2b/uk-tszh">УК / ТСЖ</Link>
             </li>
             <li>
-              <Link href="/b2b/fm">Facility Management</Link>
+              <Link href="/b2b/fm-operatoram">Facility Management</Link>
             </li>
             <li>
-              <Link href="/b2b/zastroyshchik">Застройщикам</Link>
+              <Link href="/b2b/zastrojschikam">Застройщикам</Link>
             </li>
             <li>
-              <Link href="/b2b/gostorgi">Госзакупки</Link>
+              <Link href="/b2b/goszakaz">Госзакупки</Link>
             </li>
             <li>
               <Link href="/kejsy">Кейсы</Link>
@@ -178,15 +174,23 @@ export async function Footer() {
       </div>
 
       <div className="legal">
-        <span className="copy">© 2026 ООО «Обиход»</span>
+        <span className="copy">© 2026 {contacts.legalName}</span>
+        {contacts.taxId && (
+          <>
+            <span className="sep">·</span>
+            <span>ИНН {contacts.taxId}</span>
+          </>
+        )}
+        {contacts.ogrn && (
+          <>
+            <span className="sep">·</span>
+            <span>ОГРН {contacts.ogrn}</span>
+          </>
+        )}
         <span className="sep">·</span>
-        <span>ИНН 1111111111</span>
+        <Link href={PRIVACY_URL}>Политика конфиденциальности</Link>
         <span className="sep">·</span>
-        <span>ОГРН 1111111111111</span>
-        <span className="sep">·</span>
-        <Link href="/politika">Политика конфиденциальности</Link>
-        <span className="sep">·</span>
-        <Link href="/oferta">Публичная оферта</Link>
+        <Link href={CONSENT_URL}>Согласие на обработку персональных данных</Link>
       </div>
     </footer>
   )

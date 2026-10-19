@@ -10,6 +10,7 @@
 // A11y: aria-live для banner, focus-управление при error, sup для required.
 // Mobile-first: 1-column, height ≥44pt inputs, error-jump to first invalid.
 
+import { PRIVACY_URL } from '@/lib/legal'
 import { useId, useRef, useState } from 'react'
 
 import type { LeadFormFullBlock } from './types'
@@ -72,7 +73,7 @@ export function LeadFormFull(block: LeadFormFullBlock) {
   const consentText =
     block.consentText ??
     'Нажимая кнопку, я соглашаюсь с обработкой персональных данных в соответствии с'
-  const consentHref = block.consentHref ?? '/policy/'
+  const consentHref = block.consentHref ?? PRIVACY_URL
 
   const defaultService = hintValue(block.serviceHint)
   const defaultDistrict = hintValue(block.districtHint)

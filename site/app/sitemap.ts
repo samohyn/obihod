@@ -55,6 +55,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticEntries: Entry[] = [
     { url: `${SITE_URL}/`, lastModified: now, changeFrequency: 'daily', priority: 1.0 },
+    { url: `${SITE_URL}/uslugi/`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITE_URL}/raiony/`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${SITE_URL}/kejsy/`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     // US-6 wave 2A: разблокированные list-страницы трёх коллекций.
