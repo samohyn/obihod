@@ -7,7 +7,6 @@
  * PAN-9 (Telegram bot setup, podev) этот файл получит реальную имплементацию.
  *
  * Используется:
- * - Wave 2.B (PAN-11) — magic link login через Telegram (через TelegramChannel)
  * - US-8 Leads pipeline — уведомления оператору о новых заявках
  *
  * Контракт: возвращает { ok: true } или throws TelegramSendError.
@@ -15,7 +14,6 @@
  * ENV (заполнить в PAN-9):
  *   TELEGRAM_BOT_TOKEN — токен от @BotFather
  *   TELEGRAM_OPERATOR_CHAT_ID — chat_id оператора (US-8 leads notifications)
- *   (Для magic-link chat_id берётся из Users.telegramChatId)
  */
 
 export class TelegramSendError extends Error {
@@ -29,7 +27,7 @@ export class TelegramSendError extends Error {
 }
 
 export interface SendMessageOptions {
-  /** Chat ID оператора (берётся из Users.telegramChatId) */
+  /** Chat ID оператора (TELEGRAM_OPERATOR_CHAT_ID) */
   chatId: string | number
   /** Текст сообщения. Markdown поддерживается. */
   text: string
