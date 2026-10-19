@@ -104,10 +104,9 @@ obikhod.ru
 │  └─ /admin/login/2fa
 │
 └─ ─── /api/ ───
-   ├─ публичные:  /api/leads   /api/rum   /api/fal/generate   /api/health
-   │              /api/revalidate   /api/preview*   /api/exit-preview   /api/seed
+   ├─ публичные:  /api/leads   /api/rum   /api/health
+   │              /api/revalidate   /api/preview*   /api/exit-preview
    ├─ Payload:    /api/[...slug]   /api/graphql   /api/graphql-playground
-   ├─ Telegram:   /api/telegram/webhook
    └─ /api/admin/: audit/[id]  audit  auth/2fa-*(6)  leads/count  leads/utm-sources
                    media/orphans  page-catalog/csv  search
 ```
