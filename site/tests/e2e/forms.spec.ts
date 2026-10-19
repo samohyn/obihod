@@ -36,7 +36,11 @@ type FormCase = {
 const leadFormBlock = (path: string): FormCase => ({
   id: `LeadForm ${path}`,
   path,
-  scope: (page) => page.locator('section').filter({ has: page.locator('#lf-phone') }),
+  scope: (page) =>
+    page
+      .locator('section')
+      .filter({ has: page.locator('#lf-phone') })
+      .last(),
   name: (s) => s.locator('#lf-name'),
   phone: (s) => s.locator('#lf-phone'),
   lost: {

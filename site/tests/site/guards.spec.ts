@@ -37,7 +37,10 @@ test.describe('Тестовая заявка (staging)', () => {
 
   test('форма контактов принимает заявку', async ({ page }) => {
     await page.goto('/kontakty/')
-    const form = page.locator('section').filter({ has: page.locator('#lf-phone') })
+    const form = page
+      .locator('section')
+      .filter({ has: page.locator('#lf-phone') })
+      .last()
     await form.locator('#lf-name').fill('Проверка staging (CI)')
     await form.locator('#lf-phone').fill(uniquePhone())
     const [res] = await Promise.all([

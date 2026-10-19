@@ -184,7 +184,6 @@ export default async function KontaktyPage() {
           <h2>Или оставьте заявку — перезвоним за 15 минут</h2>
           <LeadForm
             blockType="lead-form"
-            h2="Заявка с /kontakty/"
             helper="Опишите задачу одним предложением — оператор подключится по тому каналу, который вам удобен."
             ctaLabel="Отправить заявку"
             successMessage="Спасибо! Перезвоним в течение 15 минут — на номер из заявки."
