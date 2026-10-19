@@ -172,7 +172,7 @@ img {
    Не вынесено в @layer components специально: глобальные .lead/.eyebrow
    (выше) находятся в unlayered scope и перебивают вложенные правила
    из homepage-classic.css (которые внутри @layer components).
-   Source: newui/homepage-v4-enhancements.css §A (Hero) / §F (PhotoSmeta) / §L (CtaFooter).
+   Source: archive/newui/homepage-v4-enhancements.css §A (Hero) / §F (PhotoSmeta) / §L (CtaFooter).
    Incident 2026-05-07: lead/eyebrow рендерились как dark text на тёмном
    фоне в Hero / PhotoSmeta / CtaFooter — нечитаемо. */
 .hpc-hero .lead,

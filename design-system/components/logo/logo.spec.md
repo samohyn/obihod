@@ -1,7 +1,7 @@
 # Logo · spec
 
 **Статус:** v1.0 · approved 2026-04-24 · роль `ui` · утверждено `art`
-**Мастер-артефакты:** [agents/brand/logo/](../../../agents/brand/logo/) · usage — [usage.md](../../../agents/brand/logo/usage.md)
+**Мастер-артефакты:** [design-system/logo/](../../logo/) · usage — [usage.md](../../logo/usage.md)
 **Brand-гайд:** [brand-guide.html §02 Логотип](../../brand-guide.html)
 
 ## Purpose
@@ -18,12 +18,12 @@
 
 | Вариант | Файл | Применение | Min-размер |
 |---|---|---|---|
-| `master` | [master.svg](../../../agents/brand/logo/master.svg) | Презентации, визитки, бланки, документы | 320 px |
-| `mark` | [mark.svg](../../../agents/brand/logo/mark.svg) | OG-image, marketing-баннеры, большие avatar | 64 px (128 px идеал) |
-| `horizontal` | [horizontal.svg](../../../agents/brand/logo/horizontal.svg) | Website header (desktop), email-подписи | 200 px ширина |
-| `mark-simple` | [mark-simple.svg](../../../agents/brand/logo/mark-simple.svg) | Favicon, apple-touch, admin sidebar, Telegram/MAX avatar | 16 px |
-| `mono` | [mono.svg](../../../agents/brand/logo/mono.svg) | Печать на бумаге, спецодежда, ч/б документы | 32 px |
-| `inverse` | [inverse.svg](../../../agents/brand/logo/inverse.svg) | Тёмная тема, стикеры на тёмной технике | 32 px |
+| `master` | [master.svg](../../logo/master.svg) | Презентации, визитки, бланки, документы | 320 px |
+| `mark` | [mark.svg](../../logo/mark.svg) | OG-image, marketing-баннеры, большие avatar | 64 px (128 px идеал) |
+| `horizontal` | [horizontal.svg](../../logo/horizontal.svg) | Website header (desktop), email-подписи | 200 px ширина |
+| `mark-simple` | [mark-simple.svg](../../logo/mark-simple.svg) | Favicon, apple-touch, admin sidebar, Telegram/MAX avatar | 16 px |
+| `mono` | [mono.svg](../../logo/mono.svg) | Печать на бумаге, спецодежда, ч/б документы | 32 px |
+| `inverse` | [inverse.svg](../../logo/inverse.svg) | Тёмная тема, стикеры на тёмной технике | 32 px |
 
 В коде React-компоненты рендерят **упрощённые inline SVG** оптимизированные под конкретный размер — не пересылают 50 KB мастер-SVG в браузер.
 
@@ -133,7 +133,7 @@ Next.js 16 convention:
 - [x] React-компоненты `LogoMark`, `BrandLogo`, `BrandIcon` существуют и рендерятся.
 - [x] Next.js 16 favicon convention — `icon.png` + `apple-icon.png` сгенерированы.
 - [x] TypeScript type-check проходит.
-- [x] Usage-guide [agents/brand/logo/usage.md](../../../agents/brand/logo/usage.md) закрывает min-размеры, clear-space, запрещённое.
+- [x] Usage-guide [design-system/logo/usage.md](../../logo/usage.md) закрывает min-размеры, clear-space, запрещённое.
 - [x] Brand-гайд [brand-guide.html](../../brand-guide.html) обновлён v0.1 → v1.0.
 - [ ] **TODO (следующая итерация):** OG-image endpoint для landing pages на базе `og-mark.png`.
 - [ ] **TODO:** Storybook story для `LogoMark` / `BrandLogo` / `BrandIcon` (когда Storybook будет установлен — сейчас нет).

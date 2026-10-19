@@ -2,7 +2,7 @@ import type { HomepageGlobal } from '@/lib/homepage'
 
 /**
  * PhotoSmeta — секция §05 (фото → смета USP).
- * Source: newui/homepage-classic.html.
+ * Source: archive/newui/homepage-classic.html.
  * Phase 3: example-card данные (id, caption, recognized, range) из Homepage.photoSmeta
  * с graceful fallback. Drop-zone и 3 шага хардкоднуты (статичный mockup).
  */

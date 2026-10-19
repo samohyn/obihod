@@ -4,7 +4,7 @@ import type { HomepageGlobal } from '@/lib/homepage'
 
 /**
  * PricingTable — секция §04 (7 строк цен с иконками).
- * Source: newui/homepage-classic.html.
+ * Source: archive/newui/homepage-classic.html.
  * Phase 3: контент из Homepage.pricingRows[] с graceful fallback.
  * Иконки остаются inline (по позиции 0-6) — admin меняет только name/desc/price/unit/link.
  */

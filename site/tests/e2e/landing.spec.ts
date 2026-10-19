@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 
 /**
  * Smoke-тесты главной страницы — Phase 1 homepage-classic launch.
- * Selectors и заголовки синхронизированы с newui/homepage-classic.html (commit 4a0a3d4).
+ * Selectors и заголовки синхронизированы с archive/newui/homepage-classic.html (commit 4a0a3d4).
  */
 test.describe('Главная страница', () => {
   test.beforeEach(async ({ page }) => {

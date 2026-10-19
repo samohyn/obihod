@@ -1,7 +1,7 @@
 /**
  * Cases — секция §06
  * Note: 6 case cards
- * Source: newui/homepage-classic.html (Phase 1: hardcoded; Phase 2: read from Payload Homepage global)
+ * Source: archive/newui/homepage-classic.html (Phase 1: hardcoded; Phase 2: read from Payload Homepage global)
  */
 export function Cases() {
   return (

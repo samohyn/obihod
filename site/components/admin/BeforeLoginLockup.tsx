@@ -3,7 +3,7 @@ import type { CSSProperties, FC } from 'react'
 /**
  * BeforeLoginLockup — master brand lockup над native Payload login form.
  *
- * Source: agents/brand/logo/horizontal-compact.svg (детальный 4-квадрант знак
+ * Source: design-system/logo/horizontal-compact.svg (детальный 4-квадрант знак
  * «Круг сезонов» + wordmark «ОБИХОД» внутри одного SVG). PAN-18 / Wave 2.A v2
  * pixel-perfect §12.1.
  *

@@ -1,7 +1,7 @@
 /**
  * T4 ServiceDistrict view — `/<pillar>/<city>/`.
  *
- * Source HTML: `newui/uslugi-service-district.html` (US-2).
+ * Source HTML: `archive/newui/uslugi-service-district.html` (US-2).
  * Token-replace при render — service.title / district.namePrepositional /
  * адаптированная цена (priceFrom × (1 + adjustment/100)) / landmarks /
  * author E-E-A-T блок.

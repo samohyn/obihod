@@ -1,7 +1,7 @@
 # Design System — Обиход
 
 Рабочая дизайн-система `ui`-агента. Разворачивает brand-guide от `art`
-(источник — [agents/brand/](../agents/brand/), бренд-гайд — [brand-guide.html](brand-guide.html))
+(логотип — [logo/](logo/), бренд-гайд — [brand-guide.html](brand-guide.html))
 в реальные компоненты, токены и паттерны, которые берёт в руки `fe1`/`fe2`.
 
 ## Структура
@@ -56,7 +56,7 @@ design-system/
   в системе. Если нужен новый — ставит задачу `ui` через `po`, не рисует сам.
 - **`art` при ревью** — сверяет итерации `ui`/`ux` с brand-guide
   ([brand-guide.html](brand-guide.html)) и
-  [agents/brand/](../agents/brand/). Расхождение → правка spec'а, не код.
+  [logo/](logo/). Расхождение → правка spec'а, не код.
 - **Другие роли** (be, seo2, aemd, cw) — читают spec'и когда их задача касается
   UI (формы сбора данных, SEO-метаданные, копи макетов).
 

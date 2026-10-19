@@ -25,9 +25,8 @@ Playwright fixtures.
 
 ### tsx + Payload preload shim
 
-Все scripts-команды, импортирующие Payload Local API (`pnpm seed`,
-`pnpm seed:admin`, `pnpm seed:prod`, `pnpm publish-services`,
-`pnpm publish-services:prod`), запускаются с
+Все scripts-команды, импортирующие Payload Local API (`pnpm seed:admin`,
+`pnpm schema:diff`, `pnpm lint:slug`, `pnpm audit:prune`), запускаются с
 `tsx --require=./scripts/_payload-cjs-shim.cjs`. Shim патчит CJS default-import
 для `@next/env` — иначе `payload/dist/bin/loadEnv.js` падает с
 `Cannot destructure property 'loadEnvConfig' of 'import_env.default'`.

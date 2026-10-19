@@ -2,14 +2,14 @@
  * Рендерит финальные PNG-экспорты логотипа Обихода из SVG.
  * Запуск: pnpm tsx scripts/render-logo-exports.ts
  *
- * Источники (SVG master-файлы): ../../agents/brand/logo/*.svg
+ * Источники (SVG master-файлы): ../../design-system/logo/*.svg
  * Выходы: превью для ревью + production-ассеты для site/app/.
  */
 import { readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import sharp from 'sharp'
 
-const LOGO_DIR = resolve(__dirname, '../../agents/brand/logo')
+const LOGO_DIR = resolve(__dirname, '../../design-system/logo')
 const SITE_APP = resolve(__dirname, '../app')
 
 type Task = { src: string; out: string; size: number; desc: string }
@@ -60,7 +60,7 @@ async function main() {
   await writeFile(resolve(SITE_APP, 'icon.png'), fav32)
   console.log(`✓ site/app/icon.png (32×32, Next.js favicon convention)`)
 
-  console.log('\n✓ Done. Preview files in /agents/brand/logo/, production assets in site/app/')
+  console.log('\n✓ Done. Preview files in /design-system/logo/, production assets in site/app/')
 }
 
 main().catch((err) => {

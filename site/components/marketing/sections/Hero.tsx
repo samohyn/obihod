@@ -6,7 +6,7 @@ import { HeroLeadForm } from './HeroLeadForm'
 /**
  * Hero — секция §01
  * Note: next/image priority for LCP, hero-фото — background-image на .hpc-hero (CSS).
- * Source: newui/homepage-classic.html. Phase 2: контент из Payload Homepage global
+ * Source: archive/newui/homepage-classic.html. Phase 2: контент из Payload Homepage global
  * (graceful fallback на захардкоженные значения если global ещё не seed'нут).
  */
 

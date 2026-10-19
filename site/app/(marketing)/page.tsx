@@ -24,7 +24,7 @@ import { Services } from '@/components/marketing/sections/Services'
 export const revalidate = 600
 
 /**
- * EPIC-HOMEPAGE-MIGRATION — Phase 1 visual 1:1 port from newui/homepage-classic.html.
+ * EPIC-HOMEPAGE-MIGRATION — Phase 1 visual 1:1 port from archive/newui/homepage-classic.html.
  * 13 sections + JSON-LD @graph (Organization, LocalBusiness, WebSite, FAQPage, Service).
  */
 export const metadata: Metadata = {

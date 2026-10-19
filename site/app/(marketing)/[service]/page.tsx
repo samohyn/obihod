@@ -236,7 +236,7 @@ export default async function PillarPage({ params }: { params: Promise<{ service
           </section>
         )}
 
-        {/* §13 · 30 cities (T2 — newui/uslugi-pillar.html). */}
+        {/* §13 · 30 cities (T2 — archive/newui/uslugi-pillar.html). */}
         {cities.length > 0 && (
           <section className="mx-auto mt-12 max-w-5xl px-6">
             <h2 className="text-2xl font-semibold text-stone-900">

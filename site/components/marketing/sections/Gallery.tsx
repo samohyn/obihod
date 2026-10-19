@@ -7,7 +7,7 @@ import type { HomepageGlobal } from '@/lib/homepage'
 
 /**
  * Gallery — секция §09.5 (горизонтальный скроллер с фото объектов).
- * Source: newui/homepage-classic.html · 8 photos + scroll-snap + dots + prev/next.
+ * Source: archive/newui/homepage-classic.html · 8 photos + scroll-snap + dots + prev/next.
  * Phase 3: фото из Homepage.gallery[] с graceful fallback.
  */
 
