@@ -2,7 +2,15 @@
 
 _Обновляется в конце сессии. Короткий срез: что сделано, что в работе, что следующее. Цель — дать следующей сессии контекст за 30 секунд._
 
-## Где мы сейчас (2026-10-19 ~19:40 MSK) — план 09, этап 1: бэкапы и автодеплой на проде
+## Где мы сейчас (2026-10-19 ~22:00 MSK) — план 09, этап 1: бэкапы, S3, уведомления, staging
+
+- **Копия бэкапов в S3 Beget** (restic, `/etc/obikhod/backup.env`; VPS — SpaceWeb, хранилище — другой провайдер). Пароль restic — у владельца и на сервере. Проверено: снимок + восстановление из S3 со сверкой sha256.
+- **Письма:** сбои бэкапа и новые заявки — с `noreply@obikhod.ru` (SMTP Beget) на `partner@obikhod.ru` (PR #240; заявка № 12 — письмо пришло). Telegram с VPS недоступен.
+- **Staging** https://staging.obikhod.ru (логин `obikhod`, пароль у владельца): `/home/deploy/obikhod-staging`, БД `obikhod_staging`, pm2 `obikhod-staging` :3001, nginx basic auth + noindex, сертификат certbot. Выкатка ветки — `deploy/manual-deploy.sh <ветка> staging` или workflow «Deploy to staging»; данные — `obikhod-staging-refresh`.
+- **blagounit.ru** (другой сайт владельца) — владелец по ошибке добавил ему A-запись нашего сервера, убрал 19.10.
+- Следующее по этапу 1: чистка (старые workflows с `BEGET_*`, Telegram `/start`, мёртвый код) → CI-проверки (`check:links`, Lighthouse по прод-сборке) → дрейф схемы.
+
+## Где были раньше (2026-10-19 ~19:40 MSK) — план 09, этап 1: бэкапы и автодеплой на проде
 
 - **PR #239 на проде** (релиз `20261019193644-900de6c`, выкачен уже автоматически `deploy.yml`).
 - **Бэкапы:** `obikhod-backup.timer` (03:30) и `obikhod-restore-check.timer` (вс 05:00), скрипты в `/usr/local/sbin/obikhod-*`, данные `/var/backups/obikhod/{daily,weekly,pre-deploy}`, настройки `/etc/obikhod/backup.env` (пока пустой: S3 и SMTP не заданы → копия только на сервере, сбои только в журнал). Подробно — `deploy/README.md`.

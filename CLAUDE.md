@@ -26,7 +26,7 @@ specs, GSD) — в [archive/process-v1/](archive/process-v1/), новые зад
 2. **Решение по brand-guide**; если в нём чего-то нет — сначала дополняем его.
 3. **Реализация** в отдельной ветке, небольшими PR.
 4. **Автопроверки** — type-check, lint, format, e2e форм, скриншоты 360/768/1280/1440, axe, schema, ссылки.
-5. **Показ владельцу** — превью и скриншоты desktop / laptop / mobile.
+5. **Показ владельцу** — ветка на https://staging.obikhod.ru (`deploy/manual-deploy.sh <ветка> staging`) + скриншоты desktop / laptop / mobile.
 6. **Приёмка владельцем.**
 7. **PR → main → деплой** — автоматически после мержа (`deploy.yml`), миграции БД — psql до мержа; вручную `deploy/manual-deploy.sh <sha>` → smoke прода.
 

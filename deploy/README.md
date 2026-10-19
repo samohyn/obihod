@@ -42,6 +42,21 @@ ssh root@89.111.141.79 "sudo -u postgres psql obikhod -c \"insert into payload_m
 
 Миграцию данных сначала прогнать на проде в транзакции с `ROLLBACK` (dry-run).
 
+## Staging — https://staging.obikhod.ru
+
+Копия сайта для показа владельцу до мержа: тот же сервер, своя папка `/home/deploy/obikhod-staging`,
+БД `obikhod_staging`, pm2 `obikhod-staging` на :3001, nginx с паролем (`/etc/nginx/staging.htpasswd`,
+логин `obikhod`, пароль у владельца) и `noindex`. Писем, Telegram, Метрики и IndexNow нет — их ключи
+вырезаны из `shared/.env` staging.
+
+```bash
+deploy/manual-deploy.sh <ветка> staging                 # с ноутбука, любая ветка
+gh workflow run deploy-staging.yml -f ref=<ветка>       # из GitHub
+ssh root@89.111.141.79 obikhod-staging-refresh          # данные: свежий бэкап прода, заявки обезличены
+```
+
+Установка (один раз, уже сделано 19.10.2026): `deploy/staging/setup.sh` — см. шапку скрипта.
+
 ## Откат
 
 ```bash
