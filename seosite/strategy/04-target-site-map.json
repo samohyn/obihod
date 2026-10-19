@@ -1,0 +1,3969 @@
+{
+ "meta": {
+  "title": "Целевая карта сайта obikhod.ru",
+  "status": "утверждено владельцем 2026-10-19",
+  "date": "2026-10-19",
+  "page": "contex/08_site_map_target.html",
+  "plan": "contex/09_product_plan.md",
+  "sources": [
+   "obikhod.ru sitemap.xml + краул 2026-10-18",
+   "Keys.so msk 2026-05-06 (seosite/02-keywords/raw)",
+   "Perplexity 2026-10-19",
+   "team/adr/ADR-0018-url-map-compete-3.md (частично заменён решениями 2026-10-19)",
+   "team/adr/ADR-0020-shop-sunset-landshaft-positioning.md"
+  ],
+  "statuses": {
+   "live": "есть и в sitemap.xml",
+   "out": "живая, но вне sitemap.xml",
+   "adr": "одобрено в ADR-0018, не сделано",
+   "new": "новая страница",
+   "block": "блок на указанной странице, без URL",
+   "link": "перекрёстная ссылка",
+   "fix": "исправить"
+  }
+ },
+ "tree": {
+  "title": "ОБИХОД",
+  "url": "/",
+  "st": "live",
+  "prio": null,
+  "note": "",
+  "ppx": "",
+  "kids": [
+   {
+    "title": "Услуги",
+    "url": "/uslugi/",
+    "st": "out",
+    "prio": null,
+    "note": "Хаб всех услуг. Живой, но не в sitemap.xml.",
+    "ppx": "",
+    "kids": [
+     {
+      "title": "Вывоз мусора",
+      "url": "/vyvoz-musora/",
+      "st": "live",
+      "prio": null,
+      "note": "Главный денежный pillar. Ни у одного из трёх конкурентов его нет.",
+      "ppx": "",
+      "kids": [
+       {
+        "title": "По виду мусора",
+        "url": null,
+        "st": null,
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [
+         {
+          "title": "Строительный мусор",
+          "url": "/vyvoz-musora/vyvoz-stroymusora/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Вывоз строительного мусора — 12 800 ₽ за объект до 5 м³, бригада послезавтра",
+          "evidence": {},
+          "depth": 4
+         },
+         {
+          "title": "Крупногабаритный мусор",
+          "url": "/vyvoz-musora/krupnogabarit/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Вывоз КГМ — 12 800 ₽ за объект, забираем то, что не лезет в бак",
+          "evidence": {},
+          "depth": 4
+         },
+         {
+          "title": "Старая мебель",
+          "url": "/vyvoz-musora/staraya-mebel/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Вывоз старой мебели — 12 800 ₽ за объект, разбор включён",
+          "evidence": {},
+          "depth": 4
+         },
+         {
+          "title": "Садовый мусор, листва, трава",
+          "url": "/vyvoz-musora/vyvoz-sadovogo-musora/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Вывоз садового мусора — 14 200 ₽ за объект, ветки и листва за один заезд",
+          "evidence": {},
+          "depth": 4
+         },
+         {
+          "title": "Ветки и порубочные остатки",
+          "url": "/vyvoz-musora/vyvoz-porubochnyh/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Вывоз порубочных остатков — 16 400 ₽ за объект, стволы к щепе",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/vyvoz-porubochnykh-ostatkov/",
+             "url": "https://arborist.su/services/vyvoz-porubochnykh-ostatkov/",
+             "title": "Вывоз порубочных остатков",
+             "it50": 2,
+             "top": "вывоз порубочных остатков в москве (поз. 16, ws 16)"
+            }
+           ],
+           "liwood": [
+            {
+             "path": "/services/udalenie-derevev/vyvoz-spilennyh-derevev/",
+             "url": "https://www.liwood.ru/services/udalenie-derevev/vyvoz-spilennyh-derevev/",
+             "title": "Вывоз спиленных деревьев",
+             "it50": 0,
+             "top": ""
+            }
+           ],
+           "arboristik": [
+            {
+             "path": "/vyivoz-porubochnyih-ostatkov/",
+             "url": "https://arboristik.ru/vyivoz-porubochnyih-ostatkov/",
+             "title": "Вывоз порубочных остатков и мусора",
+             "it50": 36,
+             "top": "порубочные остатки (поз. 11, ws 4 774)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Грунт",
+          "url": "/vyvoz-musora/vyvoz-grunta/",
+          "st": "new",
+          "prio": "Средний",
+          "note": "Нужен после демонтажа и планировки участка; связать с «Демонтажем» и «Выравниванием участка».",
+          "ppx": "У МосГорМусора отдельная страница /vyvoz-grunta.",
+          "kids": [],
+          "kind": "page",
+          "evidence": {},
+          "depth": 4
+         },
+         {
+          "title": "Бытовая техника",
+          "url": "/vyvoz-musora/staraya-mebel/",
+          "st": "block",
+          "prio": "Низкий",
+          "note": "Блок на странице «Старая мебель»: «мебель и техника» — одна задача клиента.",
+          "ppx": "MMusor и МосГорМусор объединяют технику с мебелью и хламом.",
+          "kids": [],
+          "kind": "page",
+          "evidence": {},
+          "depth": 4
+         },
+         {
+          "title": "Бытовой мусор (ТБО)",
+          "url": "/vyvoz-musora/tbo/",
+          "st": "adr",
+          "prio": "Низкий",
+          "note": "В ADR-0018. ТКО в МО вывозит региональный оператор — перед запуском проверить, что можно продавать.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "evidence": {},
+          "depth": 4
+         }
+        ],
+        "kind": "group",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "По объекту",
+        "url": null,
+        "st": null,
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [
+         {
+          "title": "С дачи и из СНТ",
+          "url": "/vyvoz-musora/s-dachi-snt/",
+          "st": "new",
+          "prio": "Высокий",
+          "note": "Ядро B2C Обихода — частные дома и дачи. Сейчас тема есть только статьёй /blog/vyvoz-musora-iz-snt-tszh/.",
+          "ppx": "MMusor: отдельные страницы «частный дом и СНТ» и «дачный участок» с ценами по удалённости от МКАД.",
+          "kids": [],
+          "kind": "page",
+          "evidence": {},
+          "depth": 4
+         },
+         {
+          "title": "Уборка участка с вывозом",
+          "url": "/vyvoz-musora/uborka-uchastka/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Уборка участка от мусора — 13 600 ₽ за объект, бригада за один день",
+          "evidence": {
+           "arboristik": [
+            {
+             "path": "/uborka-dachnyh-uchastkov/",
+             "url": "https://arboristik.ru/uborka-dachnyh-uchastkov/",
+             "title": "Уборка участка от мусора",
+             "it50": 92,
+             "top": "уборка мусора (поз. 27, ws 17 251)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Из квартиры",
+          "url": "/vyvoz-musora/iz-kvartiry/",
+          "st": "new",
+          "prio": "Низкий",
+          "note": "Вне ядра B2C (дома и дачи) — делать, если берёте квартиры.",
+          "ppx": "MMusor: /vyvoz-musora-iz-kvartiry/.",
+          "kids": [],
+          "kind": "page",
+          "evidence": {},
+          "depth": 4
+         },
+         {
+          "title": "Для УК и ТСЖ",
+          "url": "/vyvoz-musora/dlya-uk-tszh/",
+          "st": "live",
+          "prio": null,
+          "note": "Расширить до регулярного вывоза по договору для бизнеса и площадок.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Вывоз мусора для УК и ТСЖ — годовой договор, штрафы ГЖИ берём по своему счёту",
+          "evidence": {},
+          "depth": 4
+         }
+        ],
+        "kind": "group",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Транспорт и объём",
+        "url": null,
+        "st": null,
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [
+         {
+          "title": "Газель",
+          "url": "/vyvoz-musora/gazel/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Газель 5 м³ с грузчиками — 12 800 ₽ за выезд по Москве и МО",
+          "evidence": {},
+          "depth": 4
+         },
+         {
+          "title": "Контейнер",
+          "url": "/vyvoz-musora/kontejner/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Контейнер 8 / 20 / 27 м³ под вывоз — 14 800 ₽ за объект, подача послезавтра",
+          "evidence": {},
+          "depth": 4
+         },
+         {
+          "title": "Контейнеры 8, 20 и 27 м³",
+          "url": "/vyvoz-musora/kontejner/",
+          "st": "block",
+          "prio": "Средний",
+          "note": "Таблица объёмов с ценами на странице «Контейнер»: 8 м³ — ремонт, 20–27 м³ — стройка и снос. Отдельные URL — только если будут разные тарифы и условия.",
+          "ppx": "Связка 8/20/27 м³ повторяется у всех лидеров (MMusor, musor-msk, Экополис).",
+          "kids": [],
+          "kind": "page",
+          "evidence": {},
+          "depth": 4
+         },
+         {
+          "title": "С грузчиками",
+          "url": "/vyvoz-musora/vyvoz-stroymusora/",
+          "st": "block",
+          "prio": "Низкий",
+          "note": "Блок «погрузка и вынос» на страницах строительного мусора и уборки участка.",
+          "ppx": "MMusor: «строительный мусор с грузчиками».",
+          "kids": [],
+          "kind": "page",
+          "evidence": {},
+          "depth": 4
+         }
+        ],
+        "kind": "group",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Вывоз мусора по 30 городам МО",
+        "url": "/vyvoz-musora/{город}/",
+        "st": "out",
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [],
+        "kind": "geo",
+        "geo": {
+         "total": 30,
+         "live": 30,
+         "in_sitemap": 2
+        },
+        "evidence": {},
+        "depth": 3
+       }
+      ],
+      "kind": "page",
+      "h1": "Вывоз мусора в Москве и МО — 12 800 ₽ за объект, бригада послезавтра",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Арбористика: спил и уход за деревьями",
+      "url": "/arboristika/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [
+       {
+        "title": "Спил и удаление",
+        "url": null,
+        "st": null,
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [
+         {
+          "title": "Спил деревьев",
+          "url": "/arboristika/spil-derevev/",
+          "st": "live",
+          "prio": null,
+          "note": "Одна страница на «спил / вырубку / удаление»: синонимы — в тексте, не отдельными URL.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Спил деревьев в Москве и МО — 700 ₽ за ствол до 20 см, выезд послезавтра",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/vyrubka-derevev/vyrubka-derevev/",
+             "url": "https://arborist.su/services/vyrubka-derevev/vyrubka-derevev/",
+             "title": "Вырубка деревьев",
+             "it50": 11,
+             "top": "валка леса (поз. 26, ws 4 546)"
+            }
+           ],
+           "liwood": [
+            {
+             "path": "/services/udalenie-derevev/vyrubka/",
+             "url": "https://www.liwood.ru/services/udalenie-derevev/vyrubka/",
+             "title": "Вырубка деревьев",
+             "it50": 40,
+             "top": "вырубка деревьев (поз. 23, ws 21 848)"
+            }
+           ],
+           "arboristik": [
+            {
+             "path": "/spil-derevev/",
+             "url": "https://arboristik.ru/spil-derevev/",
+             "title": "Спил аварийных деревьев",
+             "it50": 1,
+             "top": "подпил дерева (поз. 30, ws 508)"
+            },
+            {
+             "path": "/vyrubka-derevev/",
+             "url": "https://arboristik.ru/vyrubka-derevev/",
+             "title": "Вырубка деревьев и кустарников",
+             "it50": 1,
+             "top": "вырубка деревьев на частной территории (поз. 44, ws 33)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Аварийный спил",
+          "url": "/arboristika/avariynyy-spil/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Аварийный спил дерева — 12 400 ₽ от ствола до 20 см, бригада за 1–2 часа",
+          "evidence": {
+           "liwood": [
+            {
+             "path": "/services/udalenie-derevev/avariynye-i-sukhostoynye-derevya/",
+             "url": "https://www.liwood.ru/services/udalenie-derevev/avariynye-i-sukhostoynye-derevya/",
+             "title": "Удаление аварийных и сухостойных деревьев",
+             "it50": 9,
+             "top": "спил сухих деревьев (поз. 9, ws 564)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Спил сухих и старых деревьев",
+          "url": "/arboristika/avariynyy-spil/",
+          "st": "block",
+          "prio": "Средний",
+          "note": "Блок на странице аварийного спила: у Arboristik отдельные страницы почти не ранжируются.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "arboristik": [
+            {
+             "path": "/spil-suhih-derevev/",
+             "url": "https://arboristik.ru/spil-suhih-derevev/",
+             "title": "Спил сухих деревьев",
+             "it50": 3,
+             "top": "чистка леса от сухостоя цена (поз. 16, ws 3)"
+            },
+            {
+             "path": "/udalenie-staryh-derevev/",
+             "url": "https://arboristik.ru/udalenie-staryh-derevev/",
+             "title": "Удаление старых деревьев",
+             "it50": 0,
+             "top": ""
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Спил альпинистами (по частям)",
+          "url": "/arboristika/spil-alpinistami/",
+          "st": "live",
+          "prio": null,
+          "note": "Добавить в H1 и текст «удаление частями» — у LiWood это отдельная страница.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Спил деревьев альпинистами — 8 400 ₽ за дерево, без проезда для вышки",
+          "evidence": {
+           "liwood": [
+            {
+             "path": "/services/udalenie-derevev/udalenie-chastyami/",
+             "url": "https://www.liwood.ru/services/udalenie-derevev/udalenie-chastyami/",
+             "title": "Удаление частями",
+             "it50": 3,
+             "top": "демонтаж деревьев (поз. 25, ws 527)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Спил с автовышки",
+          "url": "/arboristika/spil-s-avtovyshki/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Спил деревьев с автовышки 17–21 м — 6 800 ₽ за дерево, открытый участок",
+          "evidence": {
+           "arboristik": [
+            {
+             "path": "/spil-derevev-avtovyshka/",
+             "url": "https://arboristik.ru/spil-derevev-avtovyshka/",
+             "title": "Спил о обрезка с автовышки",
+             "it50": 15,
+             "top": "вышка для обрезки деревьев (поз. 3, ws 50)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Удаление автокраном",
+          "url": "/arboristika/spil-derevev/",
+          "st": "block",
+          "prio": "Низкий",
+          "note": "Способ работы — блок на странице спила.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/vyrubka-derevev/udalenie-derevev-pri-pomoshchi-avtokrana/",
+             "url": "https://arborist.su/services/vyrubka-derevev/udalenie-derevev-pri-pomoshchi-avtokrana/",
+             "title": "Удаление деревьев при помощи автокрана",
+             "it50": 0,
+             "top": ""
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Валка деревьев",
+          "url": "/arboristika/valka-derevev/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Валка деревьев целиком — 2 400 ₽ за ствол до 20 см, в свободную сторону",
+          "evidence": {
+           "liwood": [
+            {
+             "path": "/services/udalenie-derevev/valka/",
+             "url": "https://www.liwood.ru/services/udalenie-derevev/valka/",
+             "title": "Валка деревьев",
+             "it50": 0,
+             "top": ""
+            }
+           ],
+           "arboristik": [
+            {
+             "path": "/valka-derevev-chastyami-i-polnostiyu/",
+             "url": "https://arboristik.ru/valka-derevev-chastyami-i-polnostiyu/",
+             "title": "Валка деревьев",
+             "it50": 3,
+             "top": "валка деревьев это (поз. 30, ws 198)"
+            },
+            {
+             "path": "/valka-derevev-skih-usloviyah/",
+             "url": "https://arboristik.ru/valka-derevev-skih-usloviyah/",
+             "title": "Валка деревьев в городских условиях",
+             "it50": 0,
+             "top": ""
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Вырубка ёлок",
+          "url": "/arboristika/vyrubka-elok/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Вырубка ёлок к Новому году — 4 800 ₽ за ствол, билет в смете",
+          "evidence": {
+           "arboristik": [
+            {
+             "path": "/srubit-elku/",
+             "url": "https://arboristik.ru/srubit-elku/",
+             "title": "Спил елок",
+             "it50": 2,
+             "top": "билет на сруб елки (поз. 34, ws 1)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Удаление деревьев на кладбище",
+          "url": "/arboristika/na-kladbishche/",
+          "st": "new",
+          "prio": "Средний",
+          "note": "Есть у всех трёх конкурентов. Удаление пней на кладбище — блоком на этой же странице.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/vyrubka-derevev/vyrubka-derevev-na-kladbishche/",
+             "url": "https://arborist.su/services/vyrubka-derevev/vyrubka-derevev-na-kladbishche/",
+             "title": "Вырубка деревьев на кладбище",
+             "it50": 12,
+             "top": "спил деревьев на кладбище (поз. 9, ws 940)"
+            },
+            {
+             "path": "/services/udalenie-pney/udalenie-pney-na-kladbishche/",
+             "url": "https://arborist.su/services/udalenie-pney/udalenie-pney-na-kladbishche/",
+             "title": "Удаление пней на кладбище",
+             "it50": 0,
+             "top": ""
+            }
+           ],
+           "liwood": [
+            {
+             "path": "/services/udalenie-derevev/na-kladbishchah/",
+             "url": "https://www.liwood.ru/services/udalenie-derevev/na-kladbishchah/",
+             "title": "Удаление на кладбищах",
+             "it50": 0,
+             "top": ""
+            }
+           ],
+           "arboristik": [
+            {
+             "path": "/udalenie-derevev-na-kladbishhe/",
+             "url": "https://arboristik.ru/udalenie-derevev-na-kladbishhe/",
+             "title": "Удаление деревьев на кладбищах",
+             "it50": 11,
+             "top": "спилить дерево на кладбище цена (поз. 5, ws 182)"
+            },
+            {
+             "path": "/udalenie-yolki-na-novo-derevenskom-kladbishhe-pushkinskij-rajon/",
+             "url": "https://arboristik.ru/udalenie-yolki-na-novo-derevenskom-kladbishhe-pushkinskij-rajon/",
+             "title": "Удаление ёлки на Ново-Деревенском кладбище (Пушкинский район)",
+             "it50": 0,
+             "top": ""
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Расчистка участка от деревьев и кустарников",
+          "url": "/arboristika/raschistka-uchastka/",
+          "st": "live",
+          "prio": null,
+          "note": "Каноническая страница темы. Не создавать дубль /uborka-territorii/raschistka-uchastka/ из ADR-0018.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Расчистка участка — 28 000 ₽ за сотку, подлесок и кустарник под ноль",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/vyrubka-derevev/raschistka-uchastkov-ot-derevev-i-kustarnikov/",
+             "url": "https://arborist.su/services/vyrubka-derevev/raschistka-uchastkov-ot-derevev-i-kustarnikov/",
+             "title": "Расчистка участков от деревьев и кустарников",
+             "it50": 4,
+             "top": "очистка участка от деревьев и кустарников цена (поз. 32, ws 110)"
+            }
+           ],
+           "liwood": [
+            {
+             "path": "/services/uborka-territorii/raschistka-uchastka/",
+             "url": "https://www.liwood.ru/services/uborka-territorii/raschistka-uchastka/",
+             "title": "Расчистка участка",
+             "it50": 96,
+             "top": "очистка участка от деревьев и кустарников цена (поз. 18, ws 110)"
+            },
+            {
+             "path": "/services/udalenie-derevev/vyrubka-kustarnikov/",
+             "url": "https://www.liwood.ru/services/udalenie-derevev/vyrubka-kustarnikov/",
+             "title": "Вырубка кустарников",
+             "it50": 0,
+             "top": ""
+            }
+           ],
+           "arboristik": [
+            {
+             "path": "/raschistka-uchastka-ot-derevev/",
+             "url": "https://arboristik.ru/raschistka-uchastka-ot-derevev/",
+             "title": "Расчистка участков от деревьев",
+             "it50": 117,
+             "top": "раскорчевка (поз. 26, ws 1 487)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Измельчение веток",
+          "url": "/arboristika/izmelchenie-vetok/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Измельчение веток в щепу — 727 ₽ за м³ ветвей, на участке за смену",
+          "evidence": {
+           "liwood": [
+            {
+             "path": "/services/udalenie-derevev/izmelchenie-vetok-v-shchepu/",
+             "url": "https://www.liwood.ru/services/udalenie-derevev/izmelchenie-vetok-v-shchepu/",
+             "title": "Дробление веток в щепу",
+             "it50": 46,
+             "top": "переработка веток (поз. 27, ws 1 791)"
+            }
+           ],
+           "arboristik": [
+            {
+             "path": "/izmelchenie-vetok/",
+             "url": "https://arboristik.ru/izmelchenie-vetok/",
+             "title": "Измельчение веток",
+             "it50": 52,
+             "top": "аренда измельчитель веток (поз. 29, ws 1 494)"
+            }
+           ]
+          },
+          "depth": 4
+         }
+        ],
+        "kind": "group",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Пни",
+        "url": null,
+        "st": null,
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [
+         {
+          "title": "Удаление пней",
+          "url": "/arboristika/udalenie-pnya/",
+          "st": "live",
+          "prio": null,
+          "note": "Хаб темы: корчевание и дробление — отдельными страницами.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Удаление пня — 3 200 ₽ гербицид, 4 800 ₽ фрезеровка, 5 600 ₽ корчевание",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/udalenie-pney/",
+             "url": "https://arborist.su/services/udalenie-pney/",
+             "title": "Удаление пней",
+             "it50": 0,
+             "top": ""
+            }
+           ],
+           "liwood": [
+            {
+             "path": "/services/udalenie-pney/",
+             "url": "https://www.liwood.ru/services/udalenie-pney/",
+             "title": "Удаление пней",
+             "it50": 1,
+             "top": "удаление пней на участке цена (поз. 24, ws 13)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Корчевание пней",
+          "url": "/arboristika/vykorchevanie-pney/",
+          "st": "adr",
+          "prio": "Высокий",
+          "note": "Одобрено в ADR-0018.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/udalenie-pney/korchevanie-pney-ekskavatorom/",
+             "url": "https://arborist.su/services/udalenie-pney/korchevanie-pney-ekskavatorom/",
+             "title": "Корчевание пней экскаватором",
+             "it50": 11,
+             "top": "корчевание пней (поз. 31, ws 5 208)"
+            }
+           ],
+           "liwood": [
+            {
+             "path": "/services/udalenie-pney/korchevanie-pney/",
+             "url": "https://www.liwood.ru/services/udalenie-pney/korchevanie-pney/",
+             "title": "Корчевание пней",
+             "it50": 21,
+             "top": "корчевка пней (поз. 19, ws 1 491)"
+            }
+           ],
+           "arboristik": [
+            {
+             "path": "/korchevanie-pney/",
+             "url": "https://arboristik.ru/korchevanie-pney/",
+             "title": "Выкорчевка пней",
+             "it50": 87,
+             "top": "корчевка (поз. 25, ws 6 146)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Дробление (фрезерование) пней",
+          "url": "/arboristika/udalenie-pnya/",
+          "st": "block",
+          "prio": "Средний",
+          "note": "Блок на хабе «Удаление пней»: у конкурентов отдельные страницы дробления набирают 2–8 запросов.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/udalenie-pney/izmelchenie-droblenie-pney/",
+             "url": "https://arborist.su/services/udalenie-pney/izmelchenie-droblenie-pney/",
+             "title": "Измельчение (дробление) пней",
+             "it50": 2,
+             "top": "дробление пней (поз. 19, ws 326)"
+            }
+           ],
+           "liwood": [
+            {
+             "path": "/services/udalenie-pney/droblenije-pnei/",
+             "url": "https://www.liwood.ru/services/udalenie-pney/droblenije-pnei/",
+             "title": "Дробление пней",
+             "it50": 7,
+             "top": "измельчение пней (поз. 12, ws 233)"
+            }
+           ],
+           "arboristik": [
+            {
+             "path": "/droblenie-pnej/",
+             "url": "https://arboristik.ru/droblenie-pnej/",
+             "title": "Дробление пней",
+             "it50": 8,
+             "top": "дробление пней (поз. 6, ws 326)"
+            }
+           ]
+          },
+          "depth": 4
+         }
+        ],
+        "kind": "group",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Обрезка и кронирование",
+        "url": null,
+        "st": null,
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [
+         {
+          "title": "Обрезка деревьев — хаб",
+          "url": "/arboristika/obrezka-derevev/",
+          "st": "adr",
+          "prio": "Высокий",
+          "note": "Одобрено в ADR-0018. Собирает все виды обрезки.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/obrezka-derevev/",
+             "url": "https://arborist.su/services/obrezka-derevev/",
+             "title": "Обрезка деревьев",
+             "it50": 0,
+             "top": ""
+            }
+           ],
+           "liwood": [
+            {
+             "path": "/services/obrezka-derevev/",
+             "url": "https://www.liwood.ru/services/obrezka-derevev/",
+             "title": "Обрезка деревьев",
+             "it50": 0,
+             "top": ""
+            }
+           ],
+           "arboristik": [
+            {
+             "path": "/obrezka-derevev-i-kustarnikov/",
+             "url": "https://arboristik.ru/obrezka-derevev-i-kustarnikov/",
+             "title": "Обрезка",
+             "it50": 15,
+             "top": "обрезка плодовых деревьев цена (поз. 32, ws 399)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Санитарная обрезка",
+          "url": "/arboristika/sanitarnaya-obrezka/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Санитарная обрезка дерева — 2 600 ₽ за крону до 8 м, без волчков",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/obrezka-derevev/sanitarnaya-obrezka-derevev/",
+             "url": "https://arborist.su/services/obrezka-derevev/sanitarnaya-obrezka-derevev/",
+             "title": "Санитарная обрезка деревьев",
+             "it50": 24,
+             "top": "санитарная обрезка деревьев (поз. 5, ws 1 624)"
+            }
+           ],
+           "liwood": [
+            {
+             "path": "/services/obrezka-derevev/sanitarnaya-obrezka/",
+             "url": "https://www.liwood.ru/services/obrezka-derevev/sanitarnaya-obrezka/",
+             "title": "Санитарная",
+             "it50": 16,
+             "top": "санитарная обрезка деревьев (поз. 12, ws 1 624)"
+            }
+           ],
+           "arboristik": [
+            {
+             "path": "/sanitarnaya-obrezka-derevev-kustarnikov/",
+             "url": "https://arboristik.ru/sanitarnaya-obrezka-derevev-kustarnikov/",
+             "title": "Санитарная обрезка",
+             "it50": 19,
+             "top": "санитарная обрезка деревьев что это такое (поз. 27, ws 35)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Кронирование",
+          "url": "/arboristika/kronirovanie/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Кронирование деревьев — 3 800 ₽ за дерево, формирование без вреда",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/obrezka-derevev/omolazhivayushchaya-obrezka-kronirovanie-topoley/",
+             "url": "https://arborist.su/services/obrezka-derevev/omolazhivayushchaya-obrezka-kronirovanie-topoley/",
+             "title": "Омолаживающая обрезка (кронирование тополей)",
+             "it50": 7,
+             "top": "обрезка тополей (поз. 17, ws 650)"
+            }
+           ],
+           "liwood": [
+            {
+             "path": "/services/kronirovanie-derevev/",
+             "url": "https://www.liwood.ru/services/kronirovanie-derevev/",
+             "title": "Кронирование деревьев",
+             "it50": 8,
+             "top": "кронированию (поз. 13, ws 6 937)"
+            }
+           ],
+           "arboristik": [
+            {
+             "path": "/kronirovanie-derevev/",
+             "url": "https://arboristik.ru/kronirovanie-derevev/",
+             "title": "Кронирование",
+             "it50": 19,
+             "top": "кронирование деревьев (поз. 20, ws 4 749)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Обрезка плодовых деревьев",
+          "url": "/arboristika/obrezka-plodovyh/",
+          "st": "new",
+          "prio": "Высокий",
+          "note": "Сейчас только статьи про грушу и сливу. У LiWood статьи про обрезку яблонь и груш — одни из самых видимых страниц.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/obrezka-derevev/obrezka-plodovykh-derevev/",
+             "url": "https://arborist.su/services/obrezka-derevev/obrezka-plodovykh-derevev/",
+             "title": "Обрезка плодовых деревьев",
+             "it50": 2,
+             "top": "специалист по обрезке плодовых деревьев (поз. 19, ws 49)"
+            }
+           ],
+           "liwood": [
+            {
+             "path": "/info/articles/obrezka-yablon-vesnoy/",
+             "url": "https://www.liwood.ru/info/articles/obrezka-yablon-vesnoy/",
+             "title": "Обрезка яблонь весной",
+             "it50": 181,
+             "top": "как обрезать яблоню весной (поз. 19, ws 21 578)"
+            },
+            {
+             "path": "/info/articles/sroki-obrezki-plodovykh-derevev/",
+             "url": "https://www.liwood.ru/info/articles/sroki-obrezki-plodovykh-derevev/",
+             "title": "Сроки обрезки плодовых деревьев",
+             "it50": 92,
+             "top": "обрезка плодовых деревьев (поз. 38, ws 18 651)"
+            },
+            {
+             "path": "/info/articles/obrezka-molodoy-yabloni-osenyu/",
+             "url": "https://www.liwood.ru/info/articles/obrezka-molodoy-yabloni-osenyu/",
+             "title": "Обрезка молодой яблони осенью",
+             "it50": 45,
+             "top": "как обрезать молодую яблоню (поз. 18, ws 2 097)"
+            },
+            {
+             "path": "/info/articles/obrezka-derevev-vesnoy/",
+             "url": "https://www.liwood.ru/info/articles/obrezka-derevev-vesnoy/",
+             "title": "Обрезка деревьев весной",
+             "it50": 33,
+             "top": "когда обрезать деревья весной (поз. 36, ws 8 330)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Обрезка хвойных и стрижка туй",
+          "url": "/arboristika/obrezka-hvoynyh/",
+          "st": "new",
+          "prio": "Высокий",
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "liwood": [
+            {
+             "path": "/services/obrezka-derevev/strizhka-i-obrezka-tuy/",
+             "url": "https://www.liwood.ru/services/obrezka-derevev/strizhka-i-obrezka-tuy/",
+             "title": "Стрижка и обрезка туй",
+             "it50": 73,
+             "top": "когда стричь туи весной (поз. 37, ws 877)"
+            },
+            {
+             "path": "/services/obrezka-derevev/obrezka-hvojnyh-derevev/",
+             "url": "https://www.liwood.ru/services/obrezka-derevev/obrezka-hvojnyh-derevev/",
+             "title": "Обрезка хвойных",
+             "it50": 9,
+             "top": "обрезка хвойных деревьев (поз. 16, ws 665)"
+            }
+           ],
+           "arboristik": [
+            {
+             "path": "/obrezka-hvoynyih-derevev/",
+             "url": "https://arboristik.ru/obrezka-hvoynyih-derevev/",
+             "title": "Обрезка хвойных деревьев",
+             "it50": 5,
+             "top": "обрезка хвойных деревьев (поз. 27, ws 665)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Стрижка живой изгороди и кустарников",
+          "url": "/arboristika/strizhka-izgorodi/",
+          "st": "new",
+          "prio": "Средний",
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/obrezka-derevev/obrezka-zhivoy-izgorodi/",
+             "url": "https://arborist.su/services/obrezka-derevev/obrezka-zhivoy-izgorodi/",
+             "title": "Обрезка живой изгороди",
+             "it50": 5,
+             "top": "стрижка живой изгороди (поз. 29, ws 610)"
+            }
+           ],
+           "arboristik": [
+            {
+             "path": "/dekorativnaya-obrezka-derevev-kustarnikov/",
+             "url": "https://arboristik.ru/dekorativnaya-obrezka-derevev-kustarnikov/",
+             "title": "Декоративная обрезка",
+             "it50": 11,
+             "top": "стрижка кустарников (поз. 29, ws 1 678)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Формовочная обрезка",
+          "url": "/arboristika/obrezka-derevev/",
+          "st": "block",
+          "prio": "Низкий",
+          "note": "Блок на хабе обрезки.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/obrezka-derevev/formovochnaya-obrezka-derevev/",
+             "url": "https://arborist.su/services/obrezka-derevev/formovochnaya-obrezka-derevev/",
+             "title": "Формовочная обрезка деревьев",
+             "it50": 10,
+             "top": "формовочная обрезка деревьев это (поз. 5, ws 79)"
+            }
+           ],
+           "liwood": [
+            {
+             "path": "/services/obrezka-derevev/formovochnaja-obrezka-dekorativnyh-derevev/",
+             "url": "https://www.liwood.ru/services/obrezka-derevev/formovochnaja-obrezka-dekorativnyh-derevev/",
+             "title": "Формовочная",
+             "it50": 7,
+             "top": "формовочная обрезка деревьев это (поз. 29, ws 79)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Обрезка по породам: яблоня, груша, берёза, сосна",
+          "url": "/arboristika/obrezka-plodovyh/",
+          "st": "block",
+          "prio": "Низкий",
+          "note": "Блоки и FAQ на «Обрезке плодовых» и «Кронировании». У LiWood 21 страница под породы — вместе 40 запросов в ТОП-50, меньше, чем одна их страница про туи (73).",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "liwood": [
+            {
+             "path": "/services/obrezka-derevev/obrezka-sosen/",
+             "url": "https://www.liwood.ru/services/obrezka-derevev/obrezka-sosen/",
+             "title": "Обрезка сосен",
+             "it50": 17,
+             "top": "когда можно обрезать сосну (поз. 38, ws 395)"
+            },
+            {
+             "path": "/services/obrezka-derevev/obrezka-yablon/",
+             "url": "https://www.liwood.ru/services/obrezka-derevev/obrezka-yablon/",
+             "title": "Обрезка яблонь",
+             "it50": 5,
+             "top": "профессиональная обрезка яблонь (поз. 11, ws 38)"
+            },
+            {
+             "path": "/services/obrezka-derevev/obrezka-slivy/",
+             "url": "https://www.liwood.ru/services/obrezka-derevev/obrezka-slivy/",
+             "title": "Обрезка сливы",
+             "it50": 1,
+             "top": "спил сливы (поз. 20, ws 113)"
+            },
+            {
+             "path": "/services/obrezka-derevev/obrezka-vishni/",
+             "url": "https://www.liwood.ru/services/obrezka-derevev/obrezka-vishni/",
+             "title": "Обрезка вишни",
+             "it50": 0,
+             "top": ""
+            }
+           ],
+           "arboristik": [
+            {
+             "path": "/kronirovanie-berezyi/",
+             "url": "https://arboristik.ru/kronirovanie-berezyi/",
+             "title": "Кронирование березы",
+             "it50": 20,
+             "top": "обрезка березы (поз. 32, ws 807)"
+            },
+            {
+             "path": "/kronirovanie-klenov/",
+             "url": "https://arboristik.ru/kronirovanie-klenov/",
+             "title": "Кронирование кленов",
+             "it50": 4,
+             "top": "как обрезать клен (поз. 22, ws 280)"
+            },
+            {
+             "path": "/kronirovanie-topoley/",
+             "url": "https://arboristik.ru/kronirovanie-topoley/",
+             "title": "Кронирование тополей",
+             "it50": 3,
+             "top": "кронирование тополей (поз. 16, ws 200)"
+            }
+           ]
+          },
+          "depth": 4
+         }
+        ],
+        "kind": "group",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Здоровье и защита деревьев",
+        "url": null,
+        "st": null,
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [
+         {
+          "title": "Укрепление деревьев (каблинг, брейсинг)",
+          "url": "/arboristika/kabling/",
+          "st": "live",
+          "prio": null,
+          "note": "Переименовать H1 в «Укрепление деревьев» — брейсинг и «Кобру» описать блоками.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Каблинг — растяжки для дерева, 14 800 ₽ вместо спила за 28 400",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/ukreplenie-derevev/ustayovka-sistemy-stabilizatsii-cobra/",
+             "url": "https://arborist.su/services/ukreplenie-derevev/ustayovka-sistemy-stabilizatsii-cobra/",
+             "title": "Установка системы стабилизации Cobra",
+             "it50": 8,
+             "top": "кобра су (поз. 38, ws 492)"
+            },
+            {
+             "path": "/services/ukreplenie-derevev/",
+             "url": "https://arborist.su/services/ukreplenie-derevev/",
+             "title": "Укрепление деревьев",
+             "it50": 0,
+             "top": ""
+            }
+           ],
+           "liwood": [
+            {
+             "path": "/services/ukreplenie-derevev/ukreplenie-sistemoy-kobra/",
+             "url": "https://www.liwood.ru/services/ukreplenie-derevev/ukreplenie-sistemoy-kobra/",
+             "title": "Укрепление системой \"Кобра\"",
+             "it50": 4,
+             "top": "система кобра для поддержки деревьев (поз. 2, ws 10)"
+            },
+            {
+             "path": "/services/ukreplenie-derevev/breysing-derevev/",
+             "url": "https://www.liwood.ru/services/ukreplenie-derevev/breysing-derevev/",
+             "title": "Брейсинг",
+             "it50": 1,
+             "top": ""
+            },
+            {
+             "path": "/services/ukreplenie-derevev/kabling-derevev/",
+             "url": "https://www.liwood.ru/services/ukreplenie-derevev/kabling-derevev/",
+             "title": "Каблинг",
+             "it50": 1,
+             "top": "каблинг деревьев цена (поз. 6, ws 4)"
+            },
+            {
+             "path": "/services/ukreplenie-derevev/",
+             "url": "https://www.liwood.ru/services/ukreplenie-derevev/",
+             "title": "Укрепление деревьев",
+             "it50": 0,
+             "top": ""
+            }
+           ],
+           "arboristik": [
+            {
+             "path": "/kabling-derevev/",
+             "url": "https://arboristik.ru/kabling-derevev/",
+             "title": "Каблинг деревьев",
+             "it50": 18,
+             "top": "растяжки для деревьев (поз. 21, ws 409)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Обработка от короеда и вредителей",
+          "url": "/arboristika/obrabotka-ot-koroeda/",
+          "st": "adr",
+          "prio": "Высокий",
+          "note": "Одобрено в ADR-0018. Есть у всех трёх конкурентов; у LiWood статья про короеда — самая видимая на сайте.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/zashchita-ot-koroeda/stvolovye-inektsii/",
+             "url": "https://arborist.su/services/zashchita-ot-koroeda/stvolovye-inektsii/",
+             "title": "Стволовые инъекции",
+             "it50": 13,
+             "top": "стволовые инъекции для деревьев (поз. 11, ws 115)"
+            },
+            {
+             "path": "/services/zashchita-ot-koroeda/",
+             "url": "https://arborist.su/services/zashchita-ot-koroeda/",
+             "title": "Защита от короеда",
+             "it50": 0,
+             "top": ""
+            },
+            {
+             "path": "/services/zashchita-ot-koroeda/obrabotka-derevev-ot-koroeda/",
+             "url": "https://arborist.su/services/zashchita-ot-koroeda/obrabotka-derevev-ot-koroeda/",
+             "title": "Обработка деревьев от короеда",
+             "it50": 0,
+             "top": ""
+            }
+           ],
+           "liwood": [
+            {
+             "path": "/info/articles/sposoby-zashchity-ot-koroeda/",
+             "url": "https://www.liwood.ru/info/articles/sposoby-zashchity-ot-koroeda/",
+             "title": "Как бороться с короедом",
+             "it50": 344,
+             "top": "короед жук фото (поз. 40, ws 1 929)"
+            },
+            {
+             "path": "/services/opryskivanie-derevev/unichtozhenie-borshchevika/",
+             "url": "https://www.liwood.ru/services/opryskivanie-derevev/unichtozhenie-borshchevika/",
+             "title": "Уничтожение борщевика",
+             "it50": 11,
+             "top": "борьба с борщевиком в московской области (поз. 21, ws 53)"
+            },
+            {
+             "path": "/services/obrabotka-uchastka-ot-kleshchej/",
+             "url": "https://www.liwood.ru/services/obrabotka-uchastka-ot-kleshchej/",
+             "title": "Обработка участка от клещей",
+             "it50": 4,
+             "top": "обработка участка от клещей цена московская область (поз. 28, ws 26)"
+            },
+            {
+             "path": "/services/opryskivanie-derevev/zashchita-ot-koroeda/",
+             "url": "https://www.liwood.ru/services/opryskivanie-derevev/zashchita-ot-koroeda/",
+             "title": "Защита от короеда",
+             "it50": 1,
+             "top": "обработка от короеда деревьев сроки (поз. 27, ws 6)"
+            }
+           ],
+           "arboristik": [
+            {
+             "path": "/obrabotka-ot-koroeda/",
+             "url": "https://arboristik.ru/obrabotka-ot-koroeda/",
+             "title": "Обработка от короеда",
+             "it50": 4,
+             "top": "короед на иве (поз. 5, ws 6)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Обследование и лечение деревьев",
+          "url": "/arboristika/obsledovanie-derevev/",
+          "st": "new",
+          "prio": "Средний",
+          "note": "Входной продукт для УК и застройщиков: заключение арбориста перед спилом.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/diagnostika-i-obsledovanie-derevev/lesopatologicheskoe-obsledovanie-uchastkov/",
+             "url": "https://arborist.su/services/diagnostika-i-obsledovanie-derevev/lesopatologicheskoe-obsledovanie-uchastkov/",
+             "title": "Лесопатологическое обследование участков",
+             "it50": 15,
+             "top": "лесопатолог (поз. 42, ws 776)"
+            },
+            {
+             "path": "/services/diagnostika-i-obsledovanie-derevev/diagnostika-stvolovykh-gniley/",
+             "url": "https://arborist.su/services/diagnostika-i-obsledovanie-derevev/diagnostika-stvolovykh-gniley/",
+             "title": "Диагностика стволовых гнилей",
+             "it50": 14,
+             "top": "резистограф для диагностики деревьев купить (поз. 12, ws 24)"
+            },
+            {
+             "path": "/services/diagnostika-i-obsledovanie-derevev/",
+             "url": "https://arborist.su/services/diagnostika-i-obsledovanie-derevev/",
+             "title": "Диагностика и обследование деревьев",
+             "it50": 1,
+             "top": ""
+            }
+           ],
+           "liwood": [
+            {
+             "path": "/services/lechenie-derevev/lechenie-suxobochin/",
+             "url": "https://www.liwood.ru/services/lechenie-derevev/lechenie-suxobochin/",
+             "title": "Сухобочины",
+             "it50": 8,
+             "top": "сухобочина (поз. 6, ws 121)"
+            },
+            {
+             "path": "/services/lechenie-derevev/lechenie-serjanki/",
+             "url": "https://www.liwood.ru/services/lechenie-derevev/lechenie-serjanki/",
+             "title": "Смоляной рак",
+             "it50": 5,
+             "top": "смоляной рак сосны (поз. 34, ws 284)"
+            },
+            {
+             "path": "/services/diagnostics/",
+             "url": "https://www.liwood.ru/services/diagnostics/",
+             "title": "Обследование и диагностика деревьев",
+             "it50": 3,
+             "top": "обследование аварийных деревьев (поз. 25, ws 198)"
+            },
+            {
+             "path": "/services/lechenie-derevev/",
+             "url": "https://www.liwood.ru/services/lechenie-derevev/",
+             "title": "Лечение деревьев",
+             "it50": 2,
+             "top": "лечение деревьев (поз. 11, ws 6 202)"
+            }
+           ]
+          },
+          "depth": 4
+         }
+        ],
+        "kind": "group",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Спил и уход за деревьями по 30 городам МО",
+        "url": "/arboristika/{город}/",
+        "st": "out",
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [],
+        "kind": "geo",
+        "geo": {
+         "total": 30,
+         "live": 30,
+         "in_sitemap": 2
+        },
+        "evidence": {},
+        "depth": 3
+       }
+      ],
+      "kind": "page",
+      "h1": "Арбористика и уход за деревьями в Москве и МО — спил, обрезка, удаление пней",
+      "evidence": {
+       "arborist": [
+        {
+         "path": "/services/vyrubka-derevev/",
+         "url": "https://arborist.su/services/vyrubka-derevev/",
+         "title": "Вырубка деревьев",
+         "it50": 7,
+         "top": "рубка деревьев (поз. 13, ws 23 161)"
+        }
+       ],
+       "liwood": [
+        {
+         "path": "/services/udalenie-derevev/",
+         "url": "https://www.liwood.ru/services/udalenie-derevev/",
+         "title": "Удаление деревьев",
+         "it50": 37,
+         "top": "спил деревьев в московской области (поз. 46, ws 517)"
+        }
+       ],
+       "arboristik": [
+        {
+         "path": "/",
+         "url": "https://arboristik.ru/",
+         "title": "Главная",
+         "it50": 19,
+         "top": "арбористы (поз. 23, ws 6 459)"
+        }
+       ]
+      },
+      "depth": 2
+     },
+     {
+      "title": "Чистка крыш и уборка снега",
+      "url": "/chistka-krysh/",
+      "st": "live",
+      "prio": null,
+      "note": "Название pillar — по ADR-0018: URL /chistka-krysh/ не меняем.",
+      "ppx": "",
+      "kids": [
+       {
+        "title": "Крыши",
+        "url": null,
+        "st": null,
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [
+         {
+          "title": "Крыша частного дома",
+          "url": "/chistka-krysh/chistka-krysh-chastnyy-dom/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Чистка крыши частного дома — 1 000 ₽/м², без повреждения покрытия",
+          "evidence": {},
+          "depth": 4
+         },
+         {
+          "title": "Крыши МКД",
+          "url": "/chistka-krysh/chistka-krysh-mkd/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Чистка крыш МКД для УК и ТСЖ — абонемент 95 000 ₽/мес",
+          "evidence": {},
+          "depth": 4
+         },
+         {
+          "title": "Чистка крыши от снега",
+          "url": "/chistka-krysh/ot-snega/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Чистка крыш от снега — 1 000 ₽/м², норма по СП 20.13330",
+          "evidence": {
+           "liwood": [
+            {
+             "path": "/services/promyshlennyy-alpinizm/ochistka-krysh-ot-snega/",
+             "url": "https://www.liwood.ru/services/promyshlennyy-alpinizm/ochistka-krysh-ot-snega/",
+             "title": "Уборка снега с крыш",
+             "it50": 46,
+             "top": "чистка снега с крыши (поз. 28, ws 66 672)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Удаление наледи",
+          "url": "/chistka-krysh/krysha-ot-naledi/",
+          "st": "adr",
+          "prio": "Высокий",
+          "note": "Одобрено в ADR-0018 (wsk 850).",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "evidence": {},
+          "depth": 4
+         },
+         {
+          "title": "Сбивание сосулек",
+          "url": "/chistka-krysh/sbivanie-sosulek/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Сбивание сосулек и наледи — 8 400 ₽ за фасад до 30 м",
+          "evidence": {},
+          "depth": 4
+         },
+         {
+          "title": "Чистка водостоков и желобов",
+          "url": "/chistka-krysh/chistka-vodostokov/",
+          "st": "new",
+          "prio": "Средний",
+          "note": "",
+          "ppx": "«Каскад» и H2O включают водостоки в кровельные страницы.",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "liwood": [
+            {
+             "path": "/services/promyshlennyy-alpinizm/chistka-vodostokov-i-zhelobov/",
+             "url": "https://www.liwood.ru/services/promyshlennyy-alpinizm/chistka-vodostokov-i-zhelobov/",
+             "title": "Чистка водостоков и желобов",
+             "it50": 22,
+             "top": "прочистка ливневки на крыше (поз. 29, ws 12)"
+            },
+            {
+             "path": "/info/articles/kak-pochistit-vodostok-na-kryshe-ot-listvy/",
+             "url": "https://www.liwood.ru/info/articles/kak-pochistit-vodostok-na-kryshe-ot-listvy/",
+             "title": "Как почистить водосток на крыше от листвы",
+             "it50": 9,
+             "top": "как прочистить водосточную трубу от засора (поз. 17, ws 9)"
+            }
+           ]
+          },
+          "depth": 4
+         }
+        ],
+        "kind": "group",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Снег на участке и территории",
+        "url": null,
+        "st": null,
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [
+         {
+          "title": "Уборка снега с участка и территории",
+          "url": "/chistka-krysh/uborka-territorii-zima/",
+          "st": "live",
+          "prio": null,
+          "note": "Расширить эту страницу вместо отдельной uborka-snega-uchastok из ADR-0018: один интент — один URL.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Зимняя уборка территории — 12 800 ₽ за объект",
+          "evidence": {
+           "liwood": [
+            {
+             "path": "/services/uborka-territorii/uborka-snega-vruchnuyu/",
+             "url": "https://www.liwood.ru/services/uborka-territorii/uborka-snega-vruchnuyu/",
+             "title": "Уборка снега вручную",
+             "it50": 41,
+             "top": "уборка снега в москве (поз. 20, ws 10 399)"
+            },
+            {
+             "path": "/services/uborka-territorii/zimnyaya-uborka-territorii/",
+             "url": "https://www.liwood.ru/services/uborka-territorii/zimnyaya-uborka-territorii/",
+             "title": "Зимняя уборка территории",
+             "it50": 2,
+             "top": "подготовка участка к зиме заказать (поз. 37, ws 11)"
+            },
+            {
+             "path": "/services/uborka-territorii/uborka-territorii-ot-snega/",
+             "url": "https://www.liwood.ru/services/uborka-territorii/uborka-territorii-ot-snega/",
+             "title": "Уборка территории от снега",
+             "it50": 0,
+             "top": ""
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Механизированная уборка снега для УК и бизнеса",
+          "url": "/chistka-krysh/mekhanizirovannaya-uborka-snega/",
+          "st": "new",
+          "prio": "Средний",
+          "note": "B2B-оффер: трактор, погрузчик, вывоз, договор. Трактор для частного участка — блок на соседней странице.",
+          "ppx": "H2O и «Каскад»: механизированная уборка территорий и парковок — отдельная страница.",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "liwood": [
+            {
+             "path": "/services/uborka-territorii/mekhanizirovannaya-uborka/",
+             "url": "https://www.liwood.ru/services/uborka-territorii/mekhanizirovannaya-uborka/",
+             "title": "Механизированная уборка",
+             "it50": 6,
+             "top": "механизированная уборка территории от снега (поз. 30, ws 261)"
+            },
+            {
+             "path": "/services/uborka-territorii/uborka-snega-traktorom/",
+             "url": "https://www.liwood.ru/services/uborka-territorii/uborka-snega-traktorom/",
+             "title": "Уборка снега трактором",
+             "it50": 3,
+             "top": "расчистка снега трактором (поз. 24, ws 162)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Вывоз снега",
+          "url": "/vyvoz-musora/vyvoz-snega/",
+          "st": "adr",
+          "prio": "Средний",
+          "note": "Одобрено в ADR-0018 под «Вывозом мусора». В меню показываем в снеговом блоке.",
+          "ppx": "H2O (/vyvoz-snega) и «Каскад» выносят вывоз снега отдельной страницей.",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "liwood": [
+            {
+             "path": "/services/uborka-territorii/vyvoz-snega/",
+             "url": "https://www.liwood.ru/services/uborka-territorii/vyvoz-snega/",
+             "title": "Вывоз снега",
+             "it50": 23,
+             "top": "вывоз снега с территории (поз. 19, ws 2 472)"
+            },
+            {
+             "path": "/info/articles/kuda-vyvozyat-sneg-iz-goroda/",
+             "url": "https://www.liwood.ru/info/articles/kuda-vyvozyat-sneg-iz-goroda/",
+             "title": "Куда вывозят снег из города",
+             "it50": 11,
+             "top": "порядок утилизации снега в москве (поз. 13, ws 6)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Противогололёдная обработка",
+          "url": "/chistka-krysh/dogovor-na-sezon/",
+          "st": "block",
+          "prio": "Низкий",
+          "note": "Блок на странице зимнего договора.",
+          "ppx": "H2O и «Каскад» включают посыпку в зимнее обслуживание.",
+          "kids": [],
+          "kind": "page",
+          "evidence": {},
+          "depth": 4
+         }
+        ],
+        "kind": "group",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Договор",
+        "url": null,
+        "st": null,
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [
+         {
+          "title": "Зимнее обслуживание по договору (УК, ТСЖ)",
+          "url": "/chistka-krysh/dogovor-na-sezon/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "«Каскад»: отдельная страница абонентского зимнего обслуживания.",
+          "kids": [],
+          "kind": "page",
+          "h1": "Договор на сезон для УК — 95 000 ₽/мес со штрафами ГЖИ",
+          "evidence": {
+           "liwood": [
+            {
+             "path": "/info/articles/chto-takoe-abonentskoe-obsluzhivanie-krovli/",
+             "url": "https://www.liwood.ru/info/articles/chto-takoe-abonentskoe-obsluzhivanie-krovli/",
+             "title": "Что такое абонентское обслуживание кровли",
+             "it50": 3,
+             "top": "обслуживание кровли (поз. 13, ws 822)"
+            }
+           ]
+          },
+          "depth": 4
+         }
+        ],
+        "kind": "group",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Чистка крыш по 30 городам МО",
+        "url": "/chistka-krysh/{город}/",
+        "st": "out",
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [],
+        "kind": "geo",
+        "geo": {
+         "total": 30,
+         "live": 30,
+         "in_sitemap": 2
+        },
+        "evidence": {},
+        "depth": 3
+       }
+      ],
+      "kind": "page",
+      "h1": "Чистка крыш от снега, наледи и сосулек в Москве и МО",
+      "evidence": {
+       "arboristik": [
+        {
+         "path": "/uborka-snega-s-kryshi/",
+         "url": "https://arboristik.ru/uborka-snega-s-kryshi/",
+         "title": "Чистка крыши",
+         "it50": 1,
+         "top": "чистка кровли от снега цена за м2 (поз. 34, ws 3)"
+        }
+       ]
+      },
+      "depth": 2
+     },
+     {
+      "title": "Уборка территории",
+      "url": "/uborka-territorii/",
+      "st": "live",
+      "prio": null,
+      "note": "Pillar по ADR-0018: сейчас без подуслуг.",
+      "ppx": "",
+      "kids": [
+       {
+        "title": "Покос травы",
+        "url": "/uborka-territorii/pokos-travy/",
+        "st": "adr",
+        "prio": "Высокий",
+        "note": "Одобрено в ADR-0018 (wsk 913).",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "evidence": {
+         "liwood": [
+          {
+           "path": "/services/uborka-territorii/pokos-travy/",
+           "url": "https://www.liwood.ru/services/uborka-territorii/pokos-travy/",
+           "title": "Покос травы",
+           "it50": 68,
+           "top": "покос (поз. 22, ws 59 965)"
+          }
+         ],
+         "arboristik": [
+          {
+           "path": "/pokos-travy/",
+           "url": "https://arboristik.ru/pokos-travy/",
+           "title": "Покос травы",
+           "it50": 52,
+           "top": "покос травы фото (поз. 35, ws 848)"
+          }
+         ]
+        },
+        "depth": 3
+       },
+       {
+        "title": "Стрижка газона",
+        "url": "/uborka-territorii/strizhka-gazona/",
+        "st": "new",
+        "prio": "Средний",
+        "note": "Регулярный уход за готовым газоном. Покос — запущенная трава и бурьян. Устройство газона — в «Дизайне ландшафта».",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "evidence": {
+         "liwood": [
+          {
+           "path": "/services/uborka-territorii/strizhka-gazona/",
+           "url": "https://www.liwood.ru/services/uborka-territorii/strizhka-gazona/",
+           "title": "Стрижка газона",
+           "it50": 50,
+           "top": "покос травы цена за м2 (поз. 8, ws 494)"
+          }
+         ]
+        },
+        "depth": 3
+       },
+       {
+        "title": "Уборка листвы",
+        "url": "/uborka-territorii/uborka-listvy/",
+        "st": "new",
+        "prio": "Средний",
+        "note": "",
+        "ppx": "H2O, «МосКлининг», «СВ Клининг»: листва — в летнем содержании территории.",
+        "kids": [],
+        "kind": "page",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Расчистка участка",
+        "url": "/arboristika/raschistka-uchastka/",
+        "st": "link",
+        "prio": null,
+        "note": "Ссылка на страницу арбористики, не дубль.",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Уборка участка от мусора",
+        "url": "/vyvoz-musora/uborka-uchastka/",
+        "st": "link",
+        "prio": null,
+        "note": "Ссылка на вывоз мусора, не дубль.",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Уборка снега",
+        "url": "/chistka-krysh/uborka-territorii-zima/",
+        "st": "link",
+        "prio": null,
+        "note": "Ссылка на снеговой блок.",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Уборка территории по 30 городам МО",
+        "url": "/uborka-territorii/{город}/",
+        "st": "out",
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [],
+        "kind": "geo",
+        "geo": {
+         "total": 30,
+         "live": 30,
+         "in_sitemap": 0
+        },
+        "evidence": {},
+        "depth": 3
+       }
+      ],
+      "kind": "page",
+      "h1": "Уборка территории",
+      "evidence": {
+       "liwood": [
+        {
+         "path": "/services/uborka-territorii/",
+         "url": "https://www.liwood.ru/services/uborka-territorii/",
+         "title": "Уборка территории",
+         "it50": 36,
+         "top": "уборка от снега придомовой территории (поз. 38, ws 808)"
+        }
+       ]
+      },
+      "depth": 2
+     },
+     {
+      "title": "Выравнивание и планировка участка",
+      "url": "/vyravnivanie-uchastka/",
+      "st": "new",
+      "prio": "Высокий",
+      "note": "Отдельная услуга (решение 19.10.2026) вместо /uborka-territorii/vyravnivanie-uchastka/ из ADR-0018. Меняет рельеф и готовит основание — это не уборка. Связать с ландшафтом и вывозом грунта.",
+      "ppx": "Отдельная услуга верхнего уровня у Arboristik и «Земледелов»; способы — блоками внутри, отдельные страницы только под заметно другой оффер.",
+      "kids": [
+       {
+        "title": "Выравнивание трактором",
+        "url": "/vyravnivanie-uchastka/",
+        "st": "block",
+        "prio": "Средний",
+        "note": "Блок на странице услуги: способ работы, а не отдельный оффер.",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Подсыпка и завоз грунта",
+        "url": "/vyravnivanie-uchastka/",
+        "st": "block",
+        "prio": "Средний",
+        "note": "Блок: подъём уровня, плодородный грунт.",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Вертикальная планировка под газон и сток воды",
+        "url": "/vyravnivanie-uchastka/",
+        "st": "block",
+        "prio": "Средний",
+        "note": "Блок: уклоны и отметки; связь с дренажем.",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Вывоз лишнего грунта",
+        "url": "/vyvoz-musora/vyvoz-grunta/",
+        "st": "link",
+        "prio": null,
+        "note": "Ссылка на вывоз мусора.",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "evidence": {},
+        "depth": 3
+       }
+      ],
+      "kind": "page",
+      "evidence": {
+       "arboristik": [
+        {
+         "path": "/vyravnivanie-uchastka/",
+         "url": "https://arboristik.ru/vyravnivanie-uchastka/",
+         "title": "Выравнивание участка",
+         "it50": 103,
+         "top": "выровнять участок (поз. 9, ws 8 364)"
+        }
+       ]
+      },
+      "depth": 2
+     },
+     {
+      "title": "Демонтаж и снос",
+      "url": "/demontazh/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [
+       {
+        "title": "Демонтаж дачи",
+        "url": "/demontazh/demontazh-dachi/",
+        "st": "live",
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "h1": "Демонтаж дачи 6×6 м — 78 000 ₽ под ключ с вывозом",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Снос дома",
+        "url": "/demontazh/snos-doma/",
+        "st": "live",
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "h1": "Снос частного дома — 240 000 ₽ за 80 м² деревянный",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Демонтаж бани",
+        "url": "/demontazh/demontazh-bani/",
+        "st": "live",
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "h1": "Демонтаж бани — 35 000 ₽ каркасная или 54 000 ₽ сруб",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Демонтаж сарая",
+        "url": "/demontazh/demontazh-saraya/",
+        "st": "live",
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "h1": "Демонтаж сарая 3×4 м — 32 000 ₽ под ключ с вывозом",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Снос гаража",
+        "url": "/demontazh/snos-garazha/",
+        "st": "live",
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "h1": "Снос гаража — 38 000 ₽ металлический или 64 000 ₽ кирпичный",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Снос забора",
+        "url": "/demontazh/snos-zabora/",
+        "st": "live",
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "h1": "Снос забора — 1 200 ₽/м.п. деревянный или 2 800 ₽/м.п. бетонный",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Демонтаж фундамента и бетона",
+        "url": "/demontazh/demontazh-betona/",
+        "st": "adr",
+        "prio": "Средний",
+        "note": "Одобрено в ADR-0018.",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Вывоз мусора после сноса",
+        "url": "/vyvoz-musora/vyvoz-stroymusora/",
+        "st": "link",
+        "prio": null,
+        "note": "Ссылка, а не отдельная /demontazh/uborka-stroitelnogo-musora/ из ADR-0018: риск дубля со строительным мусором.",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Демонтаж по 30 городам МО",
+        "url": "/demontazh/{город}/",
+        "st": "out",
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [],
+        "kind": "geo",
+        "geo": {
+         "total": 30,
+         "live": 30,
+         "in_sitemap": 2
+        },
+        "evidence": {},
+        "depth": 3
+       }
+      ],
+      "kind": "page",
+      "h1": "Демонтаж дачи, бани, гаража и старых построек в Москве и МО",
+      "evidence": {
+       "arboristik": [
+        {
+         "path": "/demontazh-derevyannyh-postroek/",
+         "url": "https://arboristik.ru/demontazh-derevyannyh-postroek/",
+         "title": "Снос домов и строений",
+         "it50": 44,
+         "top": "снести дом на участке цена (поз. 41, ws 340)"
+        }
+       ]
+      },
+      "depth": 2
+     },
+     {
+      "title": "Дизайн ландшафта",
+      "url": "/dizain-landshafta/",
+      "st": "out",
+      "prio": null,
+      "note": "Весь раздел живой, но выпал из sitemap.xml — вернуть первым делом.",
+      "ppx": "",
+      "kids": [
+       {
+        "title": "Проект участка с 3D",
+        "url": "/dizain-landshafta/proekt-uchastka/",
+        "st": "out",
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "h1": "Проект ландшафтного дизайна с 3D-визуализацией",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Посадка растений и крупномеров",
+        "url": "/dizain-landshafta/posadka-rasteniy/",
+        "st": "out",
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "h1": "Посадка деревьев, кустарников и многолетников",
+        "evidence": {
+         "arborist": [
+          {
+           "path": "/services/landshaftnye-raboty/ozelenenie-territoriy/",
+           "url": "https://arborist.su/services/landshaftnye-raboty/ozelenenie-territoriy/",
+           "title": "Озеленение территорий",
+           "it50": 0,
+           "top": ""
+          }
+         ]
+        },
+        "depth": 3
+       },
+       {
+        "title": "Газон и автополив",
+        "url": "/dizain-landshafta/gazon-i-poliv/",
+        "st": "out",
+        "prio": null,
+        "note": "Оставить про устройство газона, автополив вынести на свою страницу.",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "h1": "Рулонный и посевной газон с системой автополива",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Автополив",
+        "url": "/dizain-landshafta/avtopoliv/",
+        "st": "new",
+        "prio": "Высокий",
+        "note": "Отдельная задача и смета: проект, монтаж, обслуживание.",
+        "ppx": "У «Агава-М», Gried и «Альтфлоры» автополив — отдельная посадочная.",
+        "kids": [],
+        "kind": "page",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Освещение участка",
+        "url": "/dizain-landshafta/osvescheniye-uchastka/",
+        "st": "out",
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "h1": "Архитектурное и декоративное освещение участка",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Мощение и дорожки",
+        "url": "/dizain-landshafta/moshchenie-i-dorozhki/",
+        "st": "out",
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "h1": "Мощение участка тротуарной плиткой и натуральным камнем",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Дренаж и водоотвод",
+        "url": "/dizain-landshafta/drenazh/",
+        "st": "new",
+        "prio": "Высокий",
+        "note": "Входит в обязательный набор страниц у лидеров ниши; связать с выравниванием участка.",
+        "ppx": "«Агава-М» и Gried: дренаж — отдельная посадочная в разделе благоустройства.",
+        "kids": [],
+        "kind": "page",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Озеленение территории для УК и застройщиков",
+        "url": "/dizain-landshafta/ozelenenie-territorii/",
+        "st": "new",
+        "prio": "Средний",
+        "note": "",
+        "ppx": "«Агава-М»: городское озеленение и благоустройство территорий.",
+        "kids": [],
+        "kind": "page",
+        "evidence": {
+         "arborist": [
+          {
+           "path": "/services/landshaftnye-raboty/ozelenenie-territoriy/",
+           "url": "https://arborist.su/services/landshaftnye-raboty/ozelenenie-territoriy/",
+           "title": "Озеленение территорий",
+           "it50": 0,
+           "top": ""
+          }
+         ]
+        },
+        "depth": 3
+       },
+       {
+        "title": "Уход за садом по абонементу",
+        "url": "/dizain-landshafta/uhod-za-sadom/",
+        "st": "new",
+        "prio": "Средний",
+        "note": "Мост между ландшафтом и арбористикой: регулярные выезды.",
+        "ppx": "«Альтфлора» и Gried продают уход месячными пакетами.",
+        "kids": [],
+        "kind": "page",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Водоёмы и пруды",
+        "url": "/dizain-landshafta/vodoemy/",
+        "st": "new",
+        "prio": "Низкий",
+        "note": "",
+        "ppx": "«Агава-М»: отдельная страница водоёмов.",
+        "kids": [],
+        "kind": "page",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Вертикальная планировка",
+        "url": "/vyravnivanie-uchastka/",
+        "st": "link",
+        "prio": null,
+        "note": "Ссылка на «Выравнивание и планировка участка».",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "evidence": {},
+        "depth": 3
+       },
+       {
+        "title": "Дизайн ландшафта по городам МО",
+        "url": "/dizain-landshafta/{город}/",
+        "st": "adr",
+        "prio": null,
+        "note": "План OVT-7 (ADR-0020): гео-страницы ландшафта. Сейчас отдают 404.",
+        "ppx": "",
+        "kids": [],
+        "kind": "geo",
+        "geo": {
+         "total": 30,
+         "live": 0,
+         "in_sitemap": 0
+        },
+        "evidence": {},
+        "depth": 3
+       }
+      ],
+      "kind": "page",
+      "h1": "Дизайн ландшафта участка под ключ",
+      "evidence": {
+       "arborist": [
+        {
+         "path": "/services/landshaftnye-raboty/",
+         "url": "https://arborist.su/services/landshaftnye-raboty/",
+         "title": "Ландшафтные работы",
+         "it50": 0,
+         "top": ""
+        }
+       ]
+      },
+      "depth": 2
+     },
+     {
+      "title": "Дополнительные услуги",
+      "url": null,
+      "st": null,
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [
+       {
+        "title": "Аренда техники",
+        "url": "/arenda-tehniki/",
+        "st": "live",
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [
+         {
+          "title": "Автовышка",
+          "url": "/arenda-tehniki/avtovyshka/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Аренда автовышки 22 м с оператором — 16 800 ₽ за смену по Москве и МО",
+          "evidence": {},
+          "depth": 4
+         },
+         {
+          "title": "Измельчитель веток",
+          "url": "/arenda-tehniki/izmelchitel-vetok/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Аренда измельчителя веток с оператором — 12 400 ₽ за смену, диаметр до 120 мм",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/product/arenda-tekhniki/",
+             "url": "https://arborist.su/product/arenda-tekhniki/",
+             "title": "Измельчители порубочных остатков",
+             "it50": 3,
+             "top": ""
+            },
+            {
+             "path": "/product/arenda-tekhniki/izmelchitel-porubochnykh-ostatkov-morbark-beever-m12r/",
+             "url": "https://arborist.su/product/arenda-tekhniki/izmelchitel-porubochnykh-ostatkov-morbark-beever-m12r/",
+             "title": "Измельчитель порубочных остатков Morbark beever m12r",
+             "it50": 2,
+             "top": ""
+            },
+            {
+             "path": "/product/arenda-tekhniki/izmelchitel-porubochnykh-ostatkov-morbark-beever-m8d/",
+             "url": "https://arborist.su/product/arenda-tekhniki/izmelchitel-porubochnykh-ostatkov-morbark-beever-m8d/",
+             "title": "Измельчитель порубочных остатков Morbark beever m8d",
+             "it50": 0,
+             "top": ""
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Минитрактор",
+          "url": "/arenda-tehniki/minitraktor/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Аренда минитрактора с оператором — 9 600 ₽ за смену, расчистка участка и снег",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/product/minitraktor-avant/minitraktor-avant-635-navesnoe-oborudovanie-trelevochnaya-lebedka/",
+             "url": "https://arborist.su/product/minitraktor-avant/minitraktor-avant-635-navesnoe-oborudovanie-trelevochnaya-lebedka/",
+             "title": "Минитрактор Avant 635 - навесное оборудование: Трелевочная лебедка",
+             "it50": 11,
+             "top": "авант трактор (поз. 5, ws 159)"
+            },
+            {
+             "path": "/product/minitraktor-avant/minitraktor-avant-635-navesnoe-oborudovanie-kovsh/",
+             "url": "https://arborist.su/product/minitraktor-avant/minitraktor-avant-635-navesnoe-oborudovanie-kovsh/",
+             "title": "Минитрактор Avant 750 - навесное оборудование: Ковш",
+             "it50": 6,
+             "top": "аренда минитрактора с ковшом цена (поз. 5, ws 11)"
+            },
+            {
+             "path": "/product/minitraktor-avant/",
+             "url": "https://arborist.su/product/minitraktor-avant/",
+             "title": "Минитрактор Avant",
+             "it50": 5,
+             "top": ""
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Самосвал",
+          "url": "/arenda-tehniki/samosval/",
+          "st": "live",
+          "prio": null,
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "h1": "Аренда самосвала 5 м³ с оператором — 11 200 ₽ за смену по Москве и МО",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/product/samosval-izmelchitel/",
+             "url": "https://arborist.su/product/samosval-izmelchitel/",
+             "title": "Самосвал + измельчитель",
+             "it50": 0,
+             "top": ""
+            },
+            {
+             "path": "/product/samosval-izmelchitel/samosval-gazon-next-izmelchitel-morbark-beever-m8d/",
+             "url": "https://arborist.su/product/samosval-izmelchitel/samosval-gazon-next-izmelchitel-morbark-beever-m8d/",
+             "title": "Самосвал ГАЗон Next + Измельчитель Morbark beever m8d",
+             "it50": 0,
+             "top": ""
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Пнедробилка",
+          "url": "/arenda-tehniki/pnedrobilka/",
+          "st": "new",
+          "prio": "Низкий",
+          "note": "",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/product/izmelchiteli-pney-2/",
+             "url": "https://arborist.su/product/izmelchiteli-pney-2/",
+             "title": "Измельчители пней",
+             "it50": 1,
+             "top": ""
+            }
+           ]
+          },
+          "depth": 4
+         }
+        ],
+        "kind": "page",
+        "h1": "Аренда техники с оператором — автовышка, измельчитель, минитрактор, самосвал",
+        "evidence": {
+         "arborist": [
+          {
+           "path": "/product/",
+           "url": "https://arborist.su/product/",
+           "title": "Аренда техники",
+           "it50": 7,
+           "top": "измельчитель пней в аренду (поз. 14, ws 55)"
+          }
+         ]
+        },
+        "depth": 3
+       },
+       {
+        "title": "Промышленный альпинизм",
+        "url": "/promyshlennyj-alpinizm/",
+        "st": "live",
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [],
+        "kind": "page",
+        "h1": "Промышленный альпинизм — 480 ₽ за м² фасада, без лесов и автовышки",
+        "evidence": {
+         "liwood": [
+          {
+           "path": "/services/promyshlennyy-alpinizm/",
+           "url": "https://www.liwood.ru/services/promyshlennyy-alpinizm/",
+           "title": "Промышленный альпинизм",
+           "it50": 13,
+           "top": "работа в москве альпинистом (поз. 36, ws 222)"
+          }
+         ]
+        },
+        "depth": 3
+       },
+       {
+        "title": "Порубочный билет",
+        "url": "/porubochnyj-bilet/",
+        "st": "live",
+        "prio": null,
+        "note": "",
+        "ppx": "",
+        "kids": [
+         {
+          "title": "Порубочный билет в Московской области",
+          "url": "/porubochnyj-bilet/moskovskaya-oblast/",
+          "st": "new",
+          "prio": "Высокий",
+          "note": "Москва и МО — разные регламенты. У Arborist это вторая по видимости страница.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/oformlenie-dokumentatsii/oformlenie-porubochnogo-bileta-v-moskovskoy-oblasti/",
+             "url": "https://arborist.su/services/oformlenie-dokumentatsii/oformlenie-porubochnogo-bileta-v-moskovskoy-oblasti/",
+             "title": "Оформление порубочного билета в Московской области",
+             "it50": 69,
+             "top": "порубочный билет на вырубку деревьев (поз. 9, ws 363)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Перечётная ведомость и дендроплан",
+          "url": "/porubochnyj-bilet/perechetnaya-vedomost/",
+          "st": "new",
+          "prio": "Средний",
+          "note": "Документы, без которых не выдают билет.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/uslugi-arendatoram-lesnykh-uchastkov/dendroplan-uchastka/",
+             "url": "https://arborist.su/services/uslugi-arendatoram-lesnykh-uchastkov/dendroplan-uchastka/",
+             "title": "Дендроплан участка",
+             "it50": 23,
+             "top": "дендроплан земельного участка (поз. 11, ws 102)"
+            },
+            {
+             "path": "/services/uslugi-arendatoram-lesnykh-uchastkov/perechetnaya-vedomost/",
+             "url": "https://arborist.su/services/uslugi-arendatoram-lesnykh-uchastkov/perechetnaya-vedomost/",
+             "title": "Перечетная ведомость",
+             "it50": 23,
+             "top": "перечетная ведомость деревьев (поз. 5, ws 472)"
+            },
+            {
+             "path": "/services/uslugi-arendatoram-lesnykh-uchastkov/poderevnaya-syemka/",
+             "url": "https://arborist.su/services/uslugi-arendatoram-lesnykh-uchastkov/poderevnaya-syemka/",
+             "title": "Подеревная съёмка",
+             "it50": 9,
+             "top": "подеревка (поз. 15, ws 170)"
+            }
+           ]
+          },
+          "depth": 4
+         },
+         {
+          "title": "Паспорт благоустройства территории",
+          "url": "/porubochnyj-bilet/pasport-blagoustroystva/",
+          "st": "new",
+          "prio": "Средний",
+          "note": "B2B: УК, ТСЖ, застройщики.",
+          "ppx": "",
+          "kids": [],
+          "kind": "page",
+          "evidence": {
+           "arborist": [
+            {
+             "path": "/services/oformlenie-dokumentatsii/pasport-blagoustroystva-territorii/",
+             "url": "https://arborist.su/services/oformlenie-dokumentatsii/pasport-blagoustroystva-territorii/",
+             "title": "Паспорт благоустройства территории",
+             "it50": 21,
+             "top": "паспорт благоустройства территории (поз. 1, ws 579)"
+            }
+           ]
+          },
+          "depth": 4
+         }
+        ],
+        "kind": "page",
+        "h1": "Порубочный билет в Москве и МО — оформляем за 8 600 ₽ за заявку",
+        "evidence": {
+         "arborist": [
+          {
+           "path": "/services/oformlenie-dokumentatsii/oformlenie-porubochnogo-bileta/",
+           "url": "https://arborist.su/services/oformlenie-dokumentatsii/oformlenie-porubochnogo-bileta/",
+           "title": "Оформление порубочного билета в Москве",
+           "it50": 48,
+           "top": "порубочный билет это (поз. 26, ws 504)"
+          }
+         ],
+         "liwood": [
+          {
+           "path": "/services/poluchenie-porubochnogo-bileta/",
+           "url": "https://www.liwood.ru/services/poluchenie-porubochnogo-bileta/",
+           "title": "Порубочный билет",
+           "it50": 106,
+           "top": "порубочный билет что это такое (поз. 20, ws 256)"
+          }
+         ]
+        },
+        "depth": 3
+       }
+      ],
+      "kind": "group",
+      "evidence": {},
+      "depth": 2
+     }
+    ],
+    "kind": "page",
+    "h1": "Услуги для дома, дачи и B2B",
+    "evidence": {},
+    "depth": 1
+   },
+   {
+    "title": "Цены",
+    "url": "/uslugi/tseny/",
+    "st": "live",
+    "prio": null,
+    "note": "У Arboristik страница цен даёт треть всей видимости. Делать прайс по позициям, а не «от ... ₽».",
+    "ppx": "",
+    "kids": [
+     {
+      "title": "Цены на вывоз мусора",
+      "url": "/uslugi/tseny/vyvoz-musora/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Цены: Вывоз мусора",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Цены на спил и уход за деревьями",
+      "url": "/uslugi/tseny/arboristika/",
+      "st": "live",
+      "prio": null,
+      "note": "Расписать по позициям: диаметр, высота, способ спила, пни, обрезка.",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Цены: Спил и уход за деревьями",
+      "evidence": {
+       "arborist": [
+        {
+         "path": "/price/price-obrezka-kronirovanie-dereviev/",
+         "url": "https://arborist.su/price/price-obrezka-kronirovanie-dereviev/",
+         "title": "Обрезка и кронирование деревьев",
+         "it50": 39,
+         "top": "обрезка деревьев авито (поз. 12, ws 778)"
+        },
+        {
+         "path": "/price/price-virubka-dereviev/",
+         "url": "https://arborist.su/price/price-virubka-dereviev/",
+         "title": "Вырубка деревьев",
+         "it50": 1,
+         "top": ""
+        },
+        {
+         "path": "/price/price-udalenie-pney/",
+         "url": "https://arborist.su/price/price-udalenie-pney/",
+         "title": "Удаление пней, измельчение ветвей, вывоз порубочных остатков",
+         "it50": 1,
+         "top": ""
+        }
+       ],
+       "arboristik": [
+        {
+         "path": "/tsenyi/",
+         "url": "https://arboristik.ru/tsenyi/",
+         "title": "Цены",
+         "it50": 455,
+         "top": "спил деревьев (поз. 4, ws 78 316)"
+        }
+       ]
+      },
+      "depth": 2
+     },
+     {
+      "title": "Цены на чистку крыш",
+      "url": "/uslugi/tseny/chistka-krysh/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Цены: Чистка крыш от снега и наледи",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Цены на уборку территории",
+      "url": "/uslugi/tseny/uborka-territorii/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Цены: Уборка территории",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Цены на демонтаж",
+      "url": "/uslugi/tseny/demontazh/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Цены: Демонтаж построек",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Цены на дизайн ландшафта",
+      "url": "/uslugi/tseny/dizain-landshafta/",
+      "st": "out",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Цены: Дизайн ландшафта",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Цены на аренду техники",
+      "url": "/uslugi/tseny/arenda-tehniki/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Цены: Аренда техники",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Цены на промальп",
+      "url": "/uslugi/tseny/promyshlennyj-alpinizm/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Цены: Промышленный альпинизм",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Цены на порубочный билет",
+      "url": "/uslugi/tseny/porubochnyj-bilet/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Цены: Порубочный билет",
+      "evidence": {
+       "arborist": [
+        {
+         "path": "/price/price-porubochniy-bilet/",
+         "url": "https://arborist.su/price/price-porubochniy-bilet/",
+         "title": "Оформление порубочного билета, обследование деревьев и участков",
+         "it50": 7,
+         "top": "стоимость порубочного билета (поз. 12, ws 268)"
+        }
+       ]
+      },
+      "depth": 2
+     },
+     {
+      "title": "Цены «фото-сметы» и «расчёта стоимости»",
+      "url": "/uslugi/tseny/foto-smeta/",
+      "st": "fix",
+      "prio": "Низкий",
+      "note": "Это калькуляторы, а не услуги: /uslugi/tseny/foto-smeta/ и /uslugi/tseny/raschet-stoimosti/ лучше убрать из sitemap.",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "evidence": {},
+      "depth": 2
+     }
+    ],
+    "kind": "page",
+    "h1": "Цены на услуги Обихода в Москве и МО",
+    "evidence": {
+     "arborist": [
+      {
+       "path": "/price/",
+       "url": "https://arborist.su/price/",
+       "title": "Цены",
+       "it50": 127,
+       "top": "спиливание деревьев (поз. 37, ws 4 971)"
+      }
+     ],
+     "liwood": [
+      {
+       "path": "/price/",
+       "url": "https://www.liwood.ru/price/",
+       "title": "Прайс-лист",
+       "it50": 36,
+       "top": "сколько стоит спилить дерево (поз. 22, ws 2 707)"
+      }
+     ],
+     "arboristik": [
+      {
+       "path": "/tsenyi/",
+       "url": "https://arboristik.ru/tsenyi/",
+       "title": "Цены",
+       "it50": 455,
+       "top": "спил деревьев (поз. 4, ws 78 316)"
+      }
+     ]
+    },
+    "depth": 1
+   },
+   {
+    "title": "Калькуляторы",
+    "url": null,
+    "st": null,
+    "prio": null,
+    "note": "",
+    "ppx": "",
+    "kids": [
+     {
+      "title": "Фото → смета",
+      "url": "/kalkulyator/foto-smeta/",
+      "st": "live",
+      "prio": null,
+      "note": "Смету по фото считает менеджер и быстро отвечает. ИИ клиенту не упоминается.",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Фото-смета за 10 минут",
+      "evidence": {
+       "liwood": [
+        {
+         "path": "/info/calculator/",
+         "url": "https://www.liwood.ru/info/calculator/",
+         "title": "Калькулятор",
+         "it50": 137,
+         "top": "калькулятор дексдомитор (поз. 43, ws 190)"
+        }
+       ]
+      },
+      "depth": 2
+     },
+     {
+      "title": "Фото-смета: лендинг",
+      "url": "/foto-smeta/",
+      "st": "live",
+      "prio": null,
+      "note": "Проверить, не конкурирует ли с /kalkulyator/foto-smeta/ за один запрос.",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Смета за 10 минут по фото — без выезда замерщика",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Расчёт стоимости",
+      "url": "/raschet-stoimosti/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Расчёт стоимости работ — 4 калькулятора Обихода и смета по фото за 10 минут",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Калькулятор вывоза мусора",
+      "url": "/vyvoz-musora/",
+      "st": "block",
+      "prio": "Средний",
+      "note": "Инструмент «объём → машина → цена» на странице вывоза и в ценах.",
+      "ppx": "Калькуляторы есть у МосГорМусора, musor-msk и Экополиса.",
+      "kids": [],
+      "kind": "page",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Калькулятор спила дерева",
+      "url": "/arboristika/spil-derevev/",
+      "st": "block",
+      "prio": "Низкий",
+      "note": "Встроить в страницу спила; был в плане 05_site_structure.",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Диаметр дерева по обхвату",
+      "url": "/kalkulyator/diametr-dereva/",
+      "st": "new",
+      "prio": "Низкий",
+      "note": "Маленький инструмент, большой спрос: «диаметр дерева».",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "evidence": {
+       "arborist": [
+        {
+         "path": "/articles/nashi-stati/raschet-diametra-dereva-po-obkhvatu/",
+         "url": "https://arborist.su/articles/nashi-stati/raschet-diametra-dereva-po-obkhvatu/",
+         "title": "Расчет диаметра дерева по обхвату",
+         "it50": 26,
+         "top": "диаметр дерева (поз. 6, ws 23 144)"
+        }
+       ]
+      },
+      "depth": 2
+     }
+    ],
+    "kind": "group",
+    "evidence": {},
+    "depth": 1
+   },
+   {
+    "title": "Районы",
+    "url": "/raiony/",
+    "st": "live",
+    "prio": null,
+    "note": "Страница города собирает все услуги в нём и ближайшие кейсы.",
+    "ppx": "",
+    "kids": [
+     {
+      "title": "30 городов МО",
+      "url": "/raiony/{город}/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "geo",
+      "geo": {
+       "total": 30,
+       "live": 30,
+       "in_sitemap": 30
+      },
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Дубль Жуковского",
+      "url": "/raiony/zhukovsky/",
+      "st": "fix",
+      "prio": "Средний",
+      "note": "Оставить /raiony/zhukovskij/, второй URL — 301.",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Новые города: +10–15",
+      "url": "/raiony/{город}/",
+      "st": "new",
+      "prio": "Средний",
+      "note": "LiWood и Arboristik работают по 50–70 населённым пунктам. Добавлять только города с реальными кейсами.",
+      "ppx": "Perplexity: гео-страницы без местной конкретики Яндекс считает малополезными.",
+      "kids": [],
+      "kind": "page",
+      "evidence": {},
+      "depth": 2
+     }
+    ],
+    "kind": "page",
+    "h1": "Районы, где работает Обиход",
+    "evidence": {},
+    "depth": 1
+   },
+   {
+    "title": "Наши работы",
+    "url": "/kejsy/",
+    "st": "live",
+    "prio": null,
+    "note": "",
+    "ppx": "",
+    "kids": [
+     {
+      "title": "Кейсы",
+      "url": "/kejsy/{кейс}/",
+      "st": "live",
+      "prio": null,
+      "note": "16 кейсов. У Arboristik 46 — с привязкой к посёлкам и СНТ.",
+      "ppx": "",
+      "kids": [],
+      "kind": "geo",
+      "geo": {
+       "total": 16,
+       "live": 16,
+       "in_sitemap": 16
+      },
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Фильтры кейсов по услуге и городу",
+      "url": "/kejsy/",
+      "st": "block",
+      "prio": "Средний",
+      "note": "Навигация, а не отдельные индексируемые страницы.",
+      "ppx": "Gried: портфолио с фильтрами по площади и бюджету.",
+      "kids": [],
+      "kind": "page",
+      "evidence": {
+       "arborist": [
+        {
+         "path": "/projects/vyrubka-derevev/",
+         "url": "https://arborist.su/projects/vyrubka-derevev/",
+         "title": "Вырубка деревьев",
+         "it50": 0,
+         "top": ""
+        },
+        {
+         "path": "/projects/obrezka-derevev/",
+         "url": "https://arborist.su/projects/obrezka-derevev/",
+         "title": "Обрезка деревьев",
+         "it50": 0,
+         "top": ""
+        },
+        {
+         "path": "/projects/ozelenenie/",
+         "url": "https://arborist.su/projects/ozelenenie/",
+         "title": "Озеленение",
+         "it50": 0,
+         "top": ""
+        },
+        {
+         "path": "/projects/raschistka-uchastkov/",
+         "url": "https://arborist.su/projects/raschistka-uchastkov/",
+         "title": "Расчистка участков",
+         "it50": 0,
+         "top": ""
+        }
+       ]
+      },
+      "depth": 2
+     }
+    ],
+    "kind": "page",
+    "h1": "Кейсы Обихода",
+    "evidence": {
+     "arborist": [
+      {
+       "path": "/projects/",
+       "url": "https://arborist.su/projects/",
+       "title": "Наши работы",
+       "it50": 0,
+       "top": ""
+      }
+     ],
+     "arboristik": [
+      {
+       "path": "/category/vyipolnennyie-rabotyi/",
+       "url": "https://arboristik.ru/category/vyipolnennyie-rabotyi/",
+       "title": "Выполненные работы",
+       "it50": 0,
+       "top": ""
+      }
+     ]
+    },
+    "depth": 1
+   },
+   {
+    "title": "B2B",
+    "url": "/b2b/",
+    "st": "live",
+    "prio": null,
+    "note": "",
+    "ppx": "",
+    "kids": [
+     {
+      "title": "УК и ТСЖ",
+      "url": "/b2b/uk-tszh/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Кейсы УК и ТСЖ — реальные объекты в Москве и МО",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Застройщикам",
+      "url": "/b2b/zastrojschikam/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Для застройщиков — расчистка, демонтаж, вывоз стройотходов одной бригадой",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "FM-операторам",
+      "url": "/b2b/fm-operatoram/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Для FM-операторов — субподряд по SLA 1–2 часа 24/7",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Госзаказ",
+      "url": "/b2b/goszakaz/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Госзаказ — 44-ФЗ и 223-ФЗ с полным тендерным пакетом",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Договор",
+      "url": "/b2b/dogovor/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Стандартный B2B-договор Обихода — раздел 4 «Зоны ответственности и штрафы»",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Договор на сезон",
+      "url": "/b2b/dogovor-na-sezon/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Договор на сезон — зимняя или летняя кампания одной бригадой",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Штрафы ГЖИ и ОАТИ",
+      "url": "/b2b/shtrafy-gzhi-oati/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Штрафы ГЖИ и ОАТИ — берём по своему счёту, разбор статей и сумм",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "B2B-кейсы",
+      "url": "/b2b/kejsy/",
+      "st": "fix",
+      "prio": "Низкий",
+      "note": "Слаги /b2b/kejsy/ и /b2b/b2b/ похожи на ошибку в данных — проверить.",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Наши клиенты",
+      "url": "/b2b/klienty/",
+      "st": "new",
+      "prio": "Низкий",
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "evidence": {
+       "liwood": [
+        {
+         "path": "/company/klienty/",
+         "url": "https://www.liwood.ru/company/klienty/",
+         "title": "Наши клиенты",
+         "it50": 0,
+         "top": ""
+        }
+       ]
+      },
+      "depth": 2
+     }
+    ],
+    "kind": "page",
+    "h1": "Обиход для бизнеса — УК, ТСЖ, FM, застройщики, госзаказ",
+    "evidence": {},
+    "depth": 1
+   },
+   {
+    "title": "О компании",
+    "url": "/o-kompanii/",
+    "st": "live",
+    "prio": null,
+    "note": "",
+    "ppx": "",
+    "kids": [
+     {
+      "title": "Команда",
+      "url": "/komanda/",
+      "st": "out",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Команда Обихода",
+      "evidence": {
+       "arborist": [
+        {
+         "path": "/company/staff/",
+         "url": "https://arborist.su/company/staff/",
+         "title": "Сотрудники",
+         "it50": 0,
+         "top": ""
+        }
+       ]
+      },
+      "depth": 2
+     },
+     {
+      "title": "СРО и лицензии",
+      "url": "/sro-licenzii/",
+      "st": "out",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "СРО и лицензии",
+      "evidence": {
+       "arborist": [
+        {
+         "path": "/company/licenses/",
+         "url": "https://arborist.su/company/licenses/",
+         "title": "Дипломы",
+         "it50": 0,
+         "top": ""
+        }
+       ]
+      },
+      "depth": 2
+     },
+     {
+      "title": "Парк техники",
+      "url": "/park-tehniki/",
+      "st": "out",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Парк техники",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Гарантии",
+      "url": "/garantii/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Гарантии Обихода",
+      "evidence": {
+       "liwood": [
+        {
+         "path": "/info/garantii/",
+         "url": "https://www.liwood.ru/info/garantii/",
+         "title": "Гарантии",
+         "it50": 0,
+         "top": ""
+        }
+       ]
+      },
+      "depth": 2
+     },
+     {
+      "title": "Как мы работаем",
+      "url": "/kak-my-rabotaem/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Как мы работаем",
+      "evidence": {
+       "liwood": [
+        {
+         "path": "/info/how-to-order/",
+         "url": "https://www.liwood.ru/info/how-to-order/",
+         "title": "Как заказать",
+         "it50": 0,
+         "top": ""
+        }
+       ]
+      },
+      "depth": 2
+     },
+     {
+      "title": "Отзывы",
+      "url": "/otzyvy/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Отзывы клиентов Обихода",
+      "evidence": {
+       "arborist": [
+        {
+         "path": "/company/reviews/",
+         "url": "https://arborist.su/company/reviews/",
+         "title": "Отзывы",
+         "it50": 0,
+         "top": ""
+        }
+       ],
+       "liwood": [
+        {
+         "path": "/company/reviews/",
+         "url": "https://www.liwood.ru/company/reviews/",
+         "title": "Отзывы",
+         "it50": 0,
+         "top": ""
+        }
+       ]
+      },
+      "depth": 2
+     },
+     {
+      "title": "Авторы",
+      "url": "/avtory/",
+      "st": "live",
+      "prio": null,
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "h1": "Эксперты Обихода",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Реквизиты",
+      "url": "/kontakty/",
+      "st": "block",
+      "prio": "Низкий",
+      "note": "Блок на странице контактов.",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "evidence": {
+       "arborist": [
+        {
+         "path": "/company/requisites/",
+         "url": "https://arborist.su/company/requisites/",
+         "title": "Реквизиты",
+         "it50": 0,
+         "top": ""
+        }
+       ]
+      },
+      "depth": 2
+     },
+     {
+      "title": "Вакансии",
+      "url": "/vakansii/",
+      "st": "new",
+      "prio": "Низкий",
+      "note": "",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "evidence": {
+       "liwood": [
+        {
+         "path": "/company/vacancy/",
+         "url": "https://www.liwood.ru/company/vacancy/",
+         "title": "Вакансии",
+         "it50": 9,
+         "top": "альпинист промышленный вакансии (поз. 33, ws 1 445)"
+        }
+       ]
+      },
+      "depth": 2
+     }
+    ],
+    "kind": "page",
+    "h1": "О компании Обиход",
+    "evidence": {
+     "arborist": [
+      {
+       "path": "/company/",
+       "url": "https://arborist.su/company/",
+       "title": "О нас",
+       "it50": 0,
+       "top": ""
+      }
+     ],
+     "liwood": [
+      {
+       "path": "/company/",
+       "url": "https://www.liwood.ru/company/",
+       "title": "О компании",
+       "it50": 0,
+       "top": ""
+      }
+     ],
+     "arboristik": [
+      {
+       "path": "/o-kompanii/",
+       "url": "https://arboristik.ru/o-kompanii/",
+       "title": "О Компании",
+       "it50": 0,
+       "top": ""
+      }
+     ]
+    },
+    "depth": 1
+   },
+   {
+    "title": "Блог",
+    "url": "/blog/",
+    "st": "live",
+    "prio": null,
+    "note": "",
+    "ppx": "",
+    "kids": [
+     {
+      "title": "Статьи",
+      "url": "/blog/{статья}/",
+      "st": "live",
+      "prio": null,
+      "note": "26 статей против 84 у LiWood и 45 у Arboristik.",
+      "ppx": "",
+      "kids": [],
+      "kind": "geo",
+      "geo": {
+       "total": 26,
+       "live": 26,
+       "in_sitemap": 26
+      },
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Рубрики по услугам",
+      "url": "/blog/category/{рубрика}/",
+      "st": "new",
+      "prio": "Средний",
+      "note": "Были в плане 05_site_structure.",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "Статьи под спрос: короед, яблоня, подкормка, прививка",
+      "url": "/blog/{статья}/",
+      "st": "new",
+      "prio": "Высокий",
+      "note": "Темы, на которых LiWood собирает основную видимость.",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "evidence": {
+       "liwood": [
+        {
+         "path": "/info/articles/sposoby-zashchity-ot-koroeda/",
+         "url": "https://www.liwood.ru/info/articles/sposoby-zashchity-ot-koroeda/",
+         "title": "Как бороться с короедом",
+         "it50": 344,
+         "top": "короед жук фото (поз. 40, ws 1 929)"
+        },
+        {
+         "path": "/info/articles/letnyaya-privivka-derevev/",
+         "url": "https://www.liwood.ru/info/articles/letnyaya-privivka-derevev/",
+         "title": "Летняя прививка деревьев",
+         "it50": 184,
+         "top": "как сделать прививку на яблоне (поз. 29, ws 1 738)"
+        },
+        {
+         "path": "/info/articles/obrezka-yablon-vesnoy/",
+         "url": "https://www.liwood.ru/info/articles/obrezka-yablon-vesnoy/",
+         "title": "Обрезка яблонь весной",
+         "it50": 181,
+         "top": "как обрезать яблоню весной (поз. 19, ws 21 578)"
+        },
+        {
+         "path": "/info/articles/podkormka-plodovykh-derevev/",
+         "url": "https://www.liwood.ru/info/articles/podkormka-plodovykh-derevev/",
+         "title": "Подкормка плодовых деревьев",
+         "it50": 166,
+         "top": "подкормка яблони весной (поз. 21, ws 6 589)"
+        }
+       ]
+      },
+      "depth": 2
+     },
+     {
+      "title": "Вопрос-ответ",
+      "url": "/uslugi/",
+      "st": "block",
+      "prio": "Низкий",
+      "note": "FAQ-блоками на страницах услуг вместо отдельной страницы.",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "evidence": {
+       "arborist": [
+        {
+         "path": "/info/faq/",
+         "url": "https://arborist.su/info/faq/",
+         "title": "Вопросы и ответы",
+         "it50": 0,
+         "top": ""
+        }
+       ],
+       "liwood": [
+        {
+         "path": "/info/faq/",
+         "url": "https://www.liwood.ru/info/faq/",
+         "title": "Вопрос ответ",
+         "it50": 0,
+         "top": ""
+        }
+       ]
+      },
+      "depth": 2
+     }
+    ],
+    "kind": "page",
+    "h1": "Блог Обихода — справочник по 4 услугам",
+    "evidence": {
+     "arborist": [
+      {
+       "path": "/articles/",
+       "url": "https://arborist.su/articles/",
+       "title": "Статьи",
+       "it50": 0,
+       "top": ""
+      }
+     ],
+     "liwood": [
+      {
+       "path": "/info/articles/",
+       "url": "https://www.liwood.ru/info/articles/",
+       "title": "Статьи",
+       "it50": 0,
+       "top": ""
+      }
+     ]
+    },
+    "depth": 1
+   },
+   {
+    "title": "Контакты",
+    "url": "/kontakty/",
+    "st": "live",
+    "prio": null,
+    "note": "",
+    "ppx": "",
+    "kids": [],
+    "kind": "page",
+    "h1": "Контакты Обихода",
+    "evidence": {
+     "arborist": [
+      {
+       "path": "/contacts/",
+       "url": "https://arborist.su/contacts/",
+       "title": "Контакты",
+       "it50": 0,
+       "top": ""
+      }
+     ],
+     "liwood": [
+      {
+       "path": "/contacts/",
+       "url": "https://www.liwood.ru/contacts/",
+       "title": "Контакты",
+       "it50": 0,
+       "top": ""
+      }
+     ],
+     "arboristik": [
+      {
+       "path": "/kontaktyi/",
+       "url": "https://arboristik.ru/kontaktyi/",
+       "title": "Контакты",
+       "it50": 1,
+       "top": ""
+      }
+     ]
+    },
+    "depth": 1
+   },
+   {
+    "title": "Акции",
+    "url": "/akcii/",
+    "st": "new",
+    "prio": "Низкий",
+    "note": "Есть у всех трёх конкурентов; работает на конверсию, не на SEO.",
+    "ppx": "",
+    "kids": [],
+    "kind": "page",
+    "evidence": {
+     "arborist": [
+      {
+       "path": "/sales/",
+       "url": "https://arborist.su/sales/",
+       "title": "Акции",
+       "it50": 0,
+       "top": ""
+      }
+     ],
+     "liwood": [
+      {
+       "path": "/promo/",
+       "url": "https://www.liwood.ru/promo/",
+       "title": "Акции",
+       "it50": 0,
+       "top": ""
+      }
+     ]
+    },
+    "depth": 1
+   },
+   {
+    "title": "Служебные страницы",
+    "url": null,
+    "st": null,
+    "prio": null,
+    "note": "",
+    "ppx": "",
+    "kids": [
+     {
+      "title": "Политика конфиденциальности",
+      "url": "/politika-konfidentsialnosti/",
+      "st": "fix",
+      "prio": "Высокий",
+      "note": "Сейчас 404: ссылка в футере ведёт на /politika/. Обязательна по 152-ФЗ.",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "evidence": {
+       "liwood": [
+        {
+         "path": "/politika-konfidentsialnosti/",
+         "url": "https://www.liwood.ru/politika-konfidentsialnosti/",
+         "title": "Политика конфиденциальности",
+         "it50": 0,
+         "top": ""
+        }
+       ]
+      },
+      "depth": 2
+     },
+     {
+      "title": "Согласие на обработку ПДн",
+      "url": "/soglasie-na-obrabotku-pdn/",
+      "st": "new",
+      "prio": "Высокий",
+      "note": "Для чекбокса в формах заявки. Было в плане 05_site_structure.",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "evidence": {},
+      "depth": 2
+     },
+     {
+      "title": "HTML-карта сайта",
+      "url": "/karta-sajta/",
+      "st": "new",
+      "prio": "Средний",
+      "note": "Как у Arborist и LiWood: помогает людям и роботу.",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "evidence": {
+       "arborist": [
+        {
+         "path": "/sitemap/",
+         "url": "https://arborist.su/sitemap/",
+         "title": "Карта сайта",
+         "it50": 0,
+         "top": ""
+        }
+       ],
+       "liwood": [
+        {
+         "path": "/sitemap/",
+         "url": "https://www.liwood.ru/sitemap/",
+         "title": "Карта сайта",
+         "it50": 0,
+         "top": ""
+        }
+       ]
+      },
+      "depth": 2
+     },
+     {
+      "title": "sitemap.xml",
+      "url": "/sitemap.xml",
+      "st": "fix",
+      "prio": "Высокий",
+      "note": "157 живых страниц не попадают в sitemap: гео-страницы, «Дизайн ландшафта», /uslugi/, /komanda/.",
+      "ppx": "",
+      "kids": [],
+      "kind": "page",
+      "evidence": {},
+      "depth": 2
+     }
+    ],
+    "kind": "group",
+    "evidence": {},
+    "depth": 1
+   }
+  ],
+  "kind": "page",
+  "h1": "Удаление деревьев в Москве и МО",
+  "evidence": {},
+  "depth": 0
+ },
+ "score": [
+  {
+   "dir": "Вывоз мусора",
+   "now": 10,
+   "target": 14,
+   "blocks": 3,
+   "arborist": 0,
+   "liwood": 0,
+   "arboristik": 0,
+   "vis": {
+    "arborist": 0,
+    "liwood": 0,
+    "arboristik": 0
+   }
+  },
+  {
+   "dir": "Спил и уход за деревьями",
+   "now": 13,
+   "target": 21,
+   "blocks": 5,
+   "arborist": 25,
+   "liwood": 65,
+   "arboristik": 27,
+   "vis": {
+    "arborist": 149,
+    "liwood": 541,
+    "arboristik": 464
+   }
+  },
+  {
+   "dir": "Чистка крыш и уборка снега",
+   "now": 7,
+   "target": 11,
+   "blocks": 1,
+   "arborist": 0,
+   "liwood": 2,
+   "arboristik": 1,
+   "vis": {
+    "arborist": 0,
+    "liwood": 68,
+    "arboristik": 1
+   }
+  },
+  {
+   "dir": "Уборка территории",
+   "now": 1,
+   "target": 4,
+   "blocks": 0,
+   "arborist": 0,
+   "liwood": 8,
+   "arboristik": 3,
+   "vis": {
+    "arborist": 0,
+    "liwood": 179,
+    "arboristik": 247
+   }
+  },
+  {
+   "dir": "Демонтаж и снос",
+   "now": 7,
+   "target": 8,
+   "blocks": 0,
+   "arborist": 0,
+   "liwood": 0,
+   "arboristik": 1,
+   "vis": {
+    "arborist": 0,
+    "liwood": 0,
+    "arboristik": 44
+   }
+  },
+  {
+   "dir": "Дизайн ландшафта",
+   "now": 6,
+   "target": 11,
+   "blocks": 0,
+   "arborist": 2,
+   "liwood": 1,
+   "arboristik": 0,
+   "vis": {
+    "arborist": 0,
+    "liwood": 50,
+    "arboristik": 0
+   }
+  },
+  {
+   "dir": "Порубочный билет и документы",
+   "now": 1,
+   "target": 4,
+   "blocks": 0,
+   "arborist": 7,
+   "liwood": 1,
+   "arboristik": 0,
+   "vis": {
+    "arborist": 193,
+    "liwood": 106,
+    "arboristik": 0
+   }
+  },
+  {
+   "dir": "Аренда техники",
+   "now": 5,
+   "target": 6,
+   "blocks": 0,
+   "arborist": 10,
+   "liwood": 0,
+   "arboristik": 0,
+   "vis": {
+    "arborist": 28,
+    "liwood": 0,
+    "arboristik": 0
+   }
+  },
+  {
+   "dir": "Гео-страницы «услуга × город»",
+   "now": 158,
+   "target": 188,
+   "blocks": 0,
+   "arborist": 0,
+   "liwood": 53,
+   "arboristik": 91,
+   "vis": {
+    "arborist": 0,
+    "liwood": 12,
+    "arboristik": 19
+   },
+   "note": "+30 гео-страниц ландшафта (OVT-7)"
+  }
+ ],
+ "stats": {
+  "live": 78,
+  "out": 16,
+  "new": 31,
+  "block": 17,
+  "adr": 9,
+  "link": 6,
+  "fix": 5
+ },
+ "prio": {
+  "Средний": 18,
+  "Низкий": 10,
+  "Высокий": 16
+ },
+ "site": {
+  "sitemap": 165,
+  "live": 322
+ },
+ "keys_date": "06.05.2026"
+}

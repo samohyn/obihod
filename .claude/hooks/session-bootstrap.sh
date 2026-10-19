@@ -6,7 +6,7 @@
 
 set -euo pipefail
 
-PROJECT_ROOT="/Users/a36/obikhod"
+PROJECT_ROOT="${CLAUDE_PROJECT_DIR:-$(cd "$(dirname "$0")/../.." && pwd)}"
 HANDOFF="$PROJECT_ROOT/.claude/memory/handoff.md"
 LEARNINGS="$PROJECT_ROOT/.claude/memory/learnings.md"
 
