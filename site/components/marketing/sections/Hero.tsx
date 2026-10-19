@@ -1,4 +1,4 @@
-import { DEFAULT_SITE_CHROME, getSiteChrome } from '@/lib/chrome'
+import { getContacts } from '@/lib/chrome'
 import type { HomepageGlobal } from '@/lib/homepage'
 
 import { HeroLeadForm } from './HeroLeadForm'
@@ -34,10 +34,7 @@ export async function Hero({ data }: { data?: HomepageGlobal }) {
   const subhead = hero?.subhead ?? FALLBACK.subhead
   const lead = hero?.lead ?? FALLBACK.lead
   const bullets = hero?.trustBullets ?? FALLBACK.trustBullets
-  const chrome = await getSiteChrome()
-  const phoneE164 = chrome?.contacts?.phoneE164 ?? DEFAULT_SITE_CHROME.contacts?.phoneE164 ?? ''
-  const phoneDisplay =
-    chrome?.contacts?.phoneDisplay ?? DEFAULT_SITE_CHROME.contacts?.phoneDisplay ?? ''
+  const { phoneE164, phoneDisplay } = await getContacts()
 
   return (
     <section className="hpc-hero hp-section">
@@ -89,7 +86,7 @@ export async function Hero({ data }: { data?: HomepageGlobal }) {
           </div>
         </div>
 
-        <HeroLeadForm />
+        <HeroLeadForm phoneDisplay={phoneDisplay} />
       </div>
     </section>
   )

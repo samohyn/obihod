@@ -27,7 +27,7 @@ type FormState = {
 
 const empty: FormState = { name: '', phone: '', service: '', address: '', email_url: '' }
 
-export function HeroLeadForm() {
+export function HeroLeadForm({ phoneDisplay }: { phoneDisplay: string }) {
   const [form, setForm] = useState<FormState>(empty)
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const [errMsg, setErrMsg] = useState('')
@@ -60,14 +60,14 @@ export function HeroLeadForm() {
       })
       if (!res.ok) {
         if (res.status === 429) setErrMsg('Слишком частые запросы. Попробуйте через минуту.')
-        else setErrMsg('Не удалось отправить. Позвоните +7 (495) 000-00-00.')
+        else setErrMsg(`Не удалось отправить. Позвоните ${phoneDisplay}.`)
         setStatus('error')
         return
       }
       setStatus('sent')
       setForm(empty)
     } catch {
-      setErrMsg('Сеть недоступна. Позвоните +7 (495) 000-00-00.')
+      setErrMsg(`Сеть недоступна. Позвоните ${phoneDisplay}.`)
       setStatus('error')
     }
   }

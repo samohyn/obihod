@@ -12,7 +12,7 @@ type FormState = { name: string; phone: string; comment: string; email_url: stri
 
 const empty: FormState = { name: '', phone: '', comment: '', email_url: '' }
 
-export function CtaFooter() {
+export function CtaFooter({ phoneDisplay }: { phoneDisplay: string }) {
   const [form, setForm] = useState<FormState>(empty)
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const [errMsg, setErrMsg] = useState<string>('')
@@ -44,14 +44,14 @@ export function CtaFooter() {
       })
       if (!res.ok) {
         if (res.status === 429) setErrMsg('Слишком частые запросы. Попробуйте через минуту.')
-        else setErrMsg('Не удалось отправить. Позвоните +7 (495) 000-00-00.')
+        else setErrMsg(`Не удалось отправить. Позвоните ${phoneDisplay}.`)
         setStatus('error')
         return
       }
       setStatus('sent')
       setForm(empty)
     } catch {
-      setErrMsg('Сеть недоступна. Позвоните +7 (495) 000-00-00.')
+      setErrMsg(`Сеть недоступна. Позвоните ${phoneDisplay}.`)
       setStatus('error')
     }
   }
