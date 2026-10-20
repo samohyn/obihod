@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { trail } from '@/lib/breadcrumbs'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema } from '@/lib/seo/jsonld'
@@ -46,10 +47,7 @@ const STEPS = [
 ]
 
 export default function HowWeWorkPage() {
-  const breadcrumbs = [
-    { name: 'Главная', href: '/' },
-    { name: 'Как мы работаем', href: '/kak-my-rabotaem/' },
-  ]
+  const breadcrumbs = trail('kakMyRabotaem')
 
   const howToSchema = {
     '@type': 'HowTo',
@@ -65,41 +63,43 @@ export default function HowWeWorkPage() {
   }
 
   return (
-    <article className="mx-auto max-w-3xl px-6 py-12">
-      <Breadcrumbs items={breadcrumbs} />
-      <h1 className="text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl">
-        Как мы работаем
-      </h1>
+    <>
+      <Breadcrumbs items={breadcrumbs} schema={false} />
+      <article className="mx-auto max-w-3xl px-6 py-12">
+        <h1 className="text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl">
+          Как мы работаем
+        </h1>
 
-      <p className="mt-6 text-lg leading-relaxed text-stone-700">
-        Цикл от фото до акта — пять шагов. Без авансов, без скрытых наценок, без выезда «на оценку»
-        с переоценкой по факту работы.
-      </p>
+        <p className="mt-6 text-lg leading-relaxed text-stone-700">
+          Цикл от фото до акта — пять шагов. Без авансов, без скрытых наценок, без выезда «на
+          оценку» с переоценкой по факту работы.
+        </p>
 
-      <ol className="mt-12 space-y-8">
-        {STEPS.map((s) => (
-          <li key={s.n} className="border-l-2 border-orange-300 pl-6">
-            <div className="flex items-center gap-3">
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-100 text-sm font-semibold text-orange-700">
-                {s.n}
-              </span>
-              <h2 className="text-xl font-semibold text-stone-900">{s.title}</h2>
-            </div>
-            <p className="mt-3 text-stone-700">{s.text}</p>
-          </li>
-        ))}
-      </ol>
+        <ol className="mt-12 space-y-8">
+          {STEPS.map((s) => (
+            <li key={s.n} className="border-l-2 border-orange-300 pl-6">
+              <div className="flex items-center gap-3">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-100 text-sm font-semibold text-orange-700">
+                  {s.n}
+                </span>
+                <h2 className="text-xl font-semibold text-stone-900">{s.title}</h2>
+              </div>
+              <p className="mt-3 text-stone-700">{s.text}</p>
+            </li>
+          ))}
+        </ol>
 
-      <CtaMessengers className="mt-12" />
+        <CtaMessengers className="mt-12" />
 
-      <JsonLd
-        schema={[
-          howToSchema,
-          breadcrumbListSchema(
-            breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
-          ),
-        ]}
-      />
-    </article>
+        <JsonLd
+          schema={[
+            howToSchema,
+            breadcrumbListSchema(
+              breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
+            ),
+          ]}
+        />
+      </article>
+    </>
   )
 }

@@ -13,6 +13,7 @@
 import Link from 'next/link'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { trail } from '@/lib/breadcrumbs'
 import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { JsonLd } from '@/components/seo/JsonLd'
@@ -167,12 +168,11 @@ export default async function ServiceDistrictView({ service, district, sd }: Pro
     answer: plainTextLexical(f.answer),
   }))
 
-  const breadcrumbs = [
-    { name: 'Главная', href: '/' },
-    { name: 'Услуги', href: '/uslugi/' },
+  const breadcrumbs = trail(
+    'uslugi',
     { name: service.title, href: `/${service.slug}/` },
     { name: district.nameNominative, href: `/${service.slug}/${district.slug}/` },
-  ]
+  )
 
   const jsonLdService: JsonLdService = {
     slug: service.slug,
@@ -217,6 +217,7 @@ export default async function ServiceDistrictView({ service, district, sd }: Pro
     const resolvedBlocks = getBlocksForLayer('T4_SD', sdBlocks, resolverOpts)
     return (
       <>
+        <Breadcrumbs items={breadcrumbs} schema={false} />
         <BlockRenderer blocks={resolvedBlocks as never} />
         <JsonLd schema={schema} />
       </>
@@ -228,13 +229,9 @@ export default async function ServiceDistrictView({ service, district, sd }: Pro
       {/* eslint-disable-next-line @next/next/no-css-tags */}
       <link rel="stylesheet" href="/uslugi-t4.css" />
       <JsonLd schema={schema} />
+      <Breadcrumbs items={breadcrumbs} schema={false} />
 
       <div className="sd-page">
-        {/* Breadcrumbs (стандартная компонента — не sd-crumbs из newui, но семантически 1-в-1) */}
-        <div className="mx-auto max-w-6xl px-6 pt-6">
-          <Breadcrumbs items={breadcrumbs} />
-        </div>
-
         {/* §3 · HERO */}
         <section className="sd-hero">
           <div className="sd-wrap">

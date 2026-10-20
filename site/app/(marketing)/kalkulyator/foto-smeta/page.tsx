@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 
 import { LeadForm } from '@/components/blocks/LeadForm'
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { trail } from '@/lib/breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema, howToSchema, speakableSchema } from '@/lib/seo/jsonld'
 import { metadataBase } from '@/lib/seo/metadata'
@@ -65,10 +66,7 @@ export default async function FotoSmetaPage() {
   const TELEGRAM_LINK = `https://t.me/${c.phoneE164}`
   const WA_LINK = `https://wa.me/${c.phoneE164.replace('+', '')}`
   const HOW_TO_STEPS = howToSteps(c.phoneDisplay)
-  const breadcrumbs = [
-    { name: 'Главная', href: '/' },
-    { name: 'Фото-смета', href: '/kalkulyator/foto-smeta/' },
-  ]
+  const breadcrumbs = trail('fotoSmeta')
 
   const howTo = howToSchema({
     name: 'Как получить фото-смету за 10 минут',
@@ -107,8 +105,8 @@ export default async function FotoSmetaPage() {
           webApp,
         ]}
       />
+      <Breadcrumbs items={breadcrumbs} schema={false} />
       <main className="foto-smeta-page container">
-        <Breadcrumbs items={breadcrumbs} />
         <header className="foto-smeta-page__hero">
           <h1>Фото-смета за 10 минут</h1>
           <p>

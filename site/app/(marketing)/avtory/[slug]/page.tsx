@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { trail } from '@/lib/breadcrumbs'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema, personSchema, type Author as AuthorSchema } from '@/lib/seo/jsonld'
@@ -73,11 +74,7 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
   if (!author) notFound()
 
   const fullName = author.fullName ?? `${author.firstName} ${author.lastName}`
-  const breadcrumbs = [
-    { name: 'Главная', href: '/' },
-    { name: 'Авторы', href: '/avtory/' },
-    { name: fullName, href: `/avtory/${author.slug}/` },
-  ]
+  const breadcrumbs = trail('avtory', { name: fullName, href: `/avtory/${author.slug}/` })
 
   const authorForSchema: AuthorSchema = {
     slug: author.slug,
@@ -92,9 +89,9 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
 
   return (
     <>
+      <Breadcrumbs items={breadcrumbs} schema={false} />
       <section className="bg-bg-alt py-10 sm:py-14">
         <div className="mx-auto max-w-[var(--maxw)] px-[var(--pad)]">
-          <Breadcrumbs items={breadcrumbs} />
           <h1 className="text-ink mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
             {fullName}
           </h1>

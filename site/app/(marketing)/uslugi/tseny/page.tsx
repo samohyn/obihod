@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { trail } from '@/lib/breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { aggregateOfferSchema, breadcrumbListSchema } from '@/lib/seo/jsonld'
 import { metadataBase } from '@/lib/seo/metadata'
@@ -100,10 +101,7 @@ function PillarPricingCard({ pillar }: { pillar: PricingPillar }) {
 export default async function MegaPricingPage() {
   const pillars = await getAllPillarsForPricing()
 
-  const breadcrumbs = [
-    { name: 'Главная', href: '/' },
-    { name: 'Цены', href: '/uslugi/tseny/' },
-  ]
+  const breadcrumbs = trail('tseny')
 
   // Combined AggregateOffer (все pillars + sub-services).
   const allOffers = pillars.flatMap((p) => [
@@ -137,8 +135,8 @@ export default async function MegaPricingPage() {
           ...(aggregateOffer ? [aggregateOffer] : []),
         ]}
       />
+      <Breadcrumbs items={breadcrumbs} schema={false} />
       <main className="pricing-page container">
-        <Breadcrumbs items={breadcrumbs} />
         <header className="pricing-page__hero">
           <h1>Цены на услуги Обихода в Москве и МО</h1>
           <p className="pricing-page__lead">

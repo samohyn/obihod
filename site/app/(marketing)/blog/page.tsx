@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { trail } from '@/lib/breadcrumbs'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema } from '@/lib/seo/jsonld'
@@ -53,16 +54,13 @@ export default async function BlogIndex() {
   // без slug у поста нет страницы — иначе ссылка /blog/null/
   const posts = ((await getPublishedBlogPosts()) as unknown as BlogPost[]).filter((p) => p.slug)
 
-  const breadcrumbs = [
-    { name: 'Главная', href: '/' },
-    { name: 'Блог', href: '/blog/' },
-  ]
+  const breadcrumbs = trail('blog')
 
   return (
     <>
+      <Breadcrumbs items={breadcrumbs} schema={false} />
       <section className="bg-bg-alt py-12 sm:py-16">
         <div className="mx-auto max-w-[var(--maxw)] px-[var(--pad)]">
-          <Breadcrumbs items={breadcrumbs} />
           <h1 className="text-ink mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
             Блог Обихода — справочник по 4 услугам
           </h1>

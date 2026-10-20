@@ -3,6 +3,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { CALCULATOR_SLUGS, trail } from '@/lib/breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
@@ -56,11 +57,11 @@ export default async function PillarPage({ params }: { params: Promise<{ service
   const service = await getServiceBySlug(serviceSlug)
   if (!service) notFound()
 
-  const breadcrumbs = [
-    { name: 'Главная', href: '/' },
-    { name: 'Услуги', href: '/uslugi/' },
-    { name: service.title, href: `/${service.slug}/` },
-  ]
+  // Лендинги смет — в карте 08 не услуги, а калькуляторы: крошки сразу от главной.
+  const leaf = { name: service.title, href: `/${service.slug}/` }
+  const breadcrumbs = CALCULATOR_SLUGS.includes(service.slug)
+    ? trail(null, leaf)
+    : trail('uslugi', leaf)
 
   const richTextFaq = (service.faqGlobal ?? []).map((q: unknown) => {
     const qa = q as { question: string; answer: unknown }
@@ -110,6 +111,7 @@ export default async function PillarPage({ params }: { params: Promise<{ service
     )
     return (
       <>
+        <Breadcrumbs items={breadcrumbs} schema={false} />
         <BlockRenderer blocks={resolvedBlocks as never} />
         <JsonLd
           schema={[
@@ -142,9 +144,9 @@ export default async function PillarPage({ params }: { params: Promise<{ service
       <link rel="stylesheet" href="/uslugi-t2.css" />
       <JsonLd schema={t2Schema} />
 
+      <Breadcrumbs items={breadcrumbs} schema={false} />
       <article>
         <section className="mx-auto max-w-5xl px-6 pt-8">
-          <Breadcrumbs items={breadcrumbs} />
           <h1 className="text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl">
             {service.h1}
           </h1>

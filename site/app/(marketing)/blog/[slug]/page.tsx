@@ -3,6 +3,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { shortTitle, trail } from '@/lib/breadcrumbs'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { RichTextRenderer } from '@/components/marketing/RichTextRenderer'
@@ -127,11 +128,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   // Страница автора есть только у опубликованного автора — иначе ссылка битая (/avtory/georgy-s/).
   const authorHasPage = post.author?._status === 'published'
 
-  const breadcrumbs = [
-    { name: 'Главная', href: '/' },
-    { name: 'Блог', href: '/blog/' },
-    { name: post.title, href: `/blog/${post.slug}/` },
-  ]
+  const breadcrumbs = trail('blog', { name: shortTitle(post.title), href: `/blog/${post.slug}/` })
 
   const blogPostSchema: BlogPostSchema = {
     slug: post.slug,
@@ -158,9 +155,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <>
+      <Breadcrumbs items={breadcrumbs} schema={false} />
       <section className="bg-bg-alt py-10 sm:py-14">
         <div className="mx-auto max-w-[var(--maxw)] px-[var(--pad)]">
-          <Breadcrumbs items={breadcrumbs} />
           <span className="bg-card text-ink-soft mt-4 inline-block rounded-[var(--radius-sm)] px-2.5 py-1 text-xs font-medium">
             {CATEGORY_LABELS[post.category] ?? post.category}
           </span>
