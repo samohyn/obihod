@@ -6,6 +6,7 @@
 import type {
   CalculatorBlock,
   EquipmentItem,
+  IconItem,
   PriceTab,
   V3BlockWithTone,
 } from '@/components/blocks/v3/types'
@@ -14,6 +15,14 @@ import { BASE_DOCS, img, PERMIT_DOC, subServicePage, TILE } from './_template'
 
 const VYVOZ_LINK = { label: 'Все цены на вывоз', href: '/uslugi/tseny/vyvoz-musora/' }
 const ALL_VYVOZ = { label: 'Все услуги по вывозу', href: '/vyvoz-musora/' }
+
+/** Полоса под первым экраном: в общей «Уборка и вывоз — до 5 м³ в цене», а здесь вывоз и есть услуга. */
+const WASTE_STRIP: IconItem[] = [
+  { icon: 'camera', title: 'Смета по фото', text: 'за 30 минут' },
+  { icon: 'cash', title: 'Оплата после', text: 'без предоплаты' },
+  { icon: 'dumpster', title: 'Погрузка бригадой', text: 'в цене' },
+  { icon: 'clock', title: 'Окно подачи 2 часа', text: 'опоздали — скидка 10%' },
+]
 
 const TRANSPORT: EquipmentItem[] = [
   {
@@ -188,12 +197,7 @@ export const vyvozStroymusora = subServicePage({
       text: 'за объект до 5 м³ — Газель, два грузчика, вывоз',
       note: 'Больше 5 м³ — контейнер от 14 800 ₽',
     },
-    strip: [
-      { icon: 'camera', title: 'Смета по фото', text: 'за 30 минут' },
-      { icon: 'cash', title: 'Оплата после', text: 'без предоплаты' },
-      { icon: 'dumpster', title: 'Погрузка бригадой', text: 'в цене' },
-      { icon: 'clock', title: 'Окно подачи 2 часа', text: 'опоздали — скидка 10%' },
-    ],
+    strip: WASTE_STRIP,
   },
   prices: {
     title: 'Цены на вывоз строительного мусора',
@@ -573,6 +577,7 @@ export const krupnogabarit = subServicePage({
       text: 'за объект до 5 м³ — Газель, два грузчика, вывоз',
       note: 'Больше 5 м³ — контейнер от 14 800 ₽',
     },
+    strip: WASTE_STRIP,
   },
   prices: { title: 'Цены на вывоз КГМ', link: VYVOZ_LINK, tabs: [TRANSPORT_TAB(), EXTRAS_TAB] },
   calculator: wasteCalc(12800, 'Посчитайте вывоз КГМ'),
@@ -660,6 +665,7 @@ export const starayaMebel = subServicePage({
       text: 'за объект до 5 м³ — разбор, вынос, вывоз',
       note: 'Пианино — 22 000 ₽',
     },
+    strip: WASTE_STRIP,
   },
   prices: { title: 'Цены на вывоз мебели', link: VYVOZ_LINK, tabs: [TRANSPORT_TAB(), EXTRAS_TAB] },
   calculator: wasteCalc(12800, 'Посчитайте вывоз мебели'),
@@ -745,6 +751,7 @@ export const vyvozSadovogoMusora = subServicePage({
       text: 'за объект до 5 м³ — Газель, два грузчика, вывоз',
       note: 'Контейнер на сутки — от 14 800 ₽',
     },
+    strip: WASTE_STRIP,
   },
   prices: {
     title: 'Цены на вывоз садового мусора',
@@ -836,6 +843,7 @@ export const uborkaUchastka = subServicePage({
       text: 'за объект до 5 м³ — сбор, сортировка, вывоз',
       note: 'Много хлама — контейнер от 14 800 ₽',
     },
+    strip: WASTE_STRIP,
   },
   prices: {
     title: 'Цены на уборку участка',
@@ -948,6 +956,7 @@ export const vyvozPorubochnyh = subServicePage({
       text: 'за объект до 5 м³ — погрузка и вывоз',
       note: 'Если спиливали мы — до 5 м³ уже в смете спила',
     },
+    strip: WASTE_STRIP,
   },
   prices: {
     title: 'Цены на вывоз порубочных остатков',
