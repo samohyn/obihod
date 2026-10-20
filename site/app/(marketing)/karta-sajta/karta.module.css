@@ -26,8 +26,11 @@
     align-items: start;
   }
 }
-.section {
+/* глобальные стили дают каждому section отступы и линию — здесь они не нужны */
+.grid .section {
   margin-bottom: 40px;
+  padding: 0;
+  border: 0;
 }
 .sectionTitle {
   margin: 0 0 14px;
