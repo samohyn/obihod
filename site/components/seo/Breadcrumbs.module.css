@@ -66,3 +66,17 @@
   color: var(--c-ink);
   font-weight: 600;
 }
+
+/* телефон: промежуточные разделы сжимаются первыми, текущая страница остаётся видна */
+@media (max-width: 767px) {
+  .list li:not(:first-child):not(.current) {
+    display: block;
+    flex: 0 1 auto;
+    min-width: 4.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .list .current {
+    flex-shrink: 0.15;
+  }
+}
