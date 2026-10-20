@@ -11,9 +11,14 @@
 # obikhod-staging на :3001, без бэкапа перед выкаткой.
 #
 # Шаги: бэкап (obikhod-backup --tag pre-deploy-<sha7>) → распаковка в releases/<ts>-<sha7> →
-# симлинки .env и media → pnpm install + build под deploy → переключение current → pm2 restart →
-# health-check (не 200 за 60 с — откат на предыдущий релиз) → чистка, остаётся KEEP_RELEASES.
-# Миграции БД сюда не входят: применяются psql до выкатки (ADR-0016).
+# симлинки .env и media → pnpm install + build под deploy → миграции БД (pnpm migrate) →
+# переключение current → pm2 restart → health-check (не 200 за 60 с — откат кода на предыдущий
+# релиз) → чистка, остаётся KEEP_RELEASES.
+#
+# Миграции (план 09, этап 1 — «Дрейф схемы»; заменяет ручной psql из ADR-0016): до переключения,
+# поэтому каждая миграция обязана быть совместима со старым кодом (expand → contract: сначала
+# добавляем, удаляем старое — следующим релизом). Упала миграция — релиз не переключается.
+# Откат кода при провале health-check схему не откатывает; полный откат — pre-deploy бэкап.
 
 set -euo pipefail
 
@@ -68,6 +73,23 @@ sudo -u deploy bash -c '
   pnpm build 2>&1 | tail -5
 ' </dev/null
 
+MIGRATED=0
+if grep -q '"migrate":' package.json; then
+  log "migrate"
+  if ! out=$(sudo -u deploy bash -c '
+    set -eo pipefail
+    set -a; . ./.env; set +a
+    NODE_ENV=production pnpm -s migrate
+  ' </dev/null 2>&1); then
+    echo "$out" | tail -25
+    echo "✗ миграции не применились — релиз не переключён. Упавшая миграция откатилась целиком;" >&2
+    echo "  применённые до неё (если были) остались — см. вывод выше." >&2
+    exit 1
+  fi
+  echo "$out" | grep -vE 'identifiers exceed|^[[:space:]]*$' | tail -8
+  MIGRATED=$(printf '%s\n' "$out" | sed -n 's/^MIGRATIONS_APPLIED=//p' | tail -1)
+fi
+
 log "switch + health-check"
 cd "$BASE"
 PREV=$(readlink current || true)
@@ -90,6 +112,10 @@ if [ "$code" != 200 ]; then
   if [ -n "$PREV" ]; then
     ln -sfn "$PREV" current && chown -h deploy:deploy current
     sudo -u deploy pm2 restart "$APP" >/dev/null 2>&1 </dev/null
+  fi
+  if [ "${MIGRATED:-0}" != 0 ]; then
+    echo "⚠ откатан только код: миграции этого релиза ($MIGRATED) остались в БД." >&2
+    echo "  Старый код с ними совместим (expand → contract); полный откат — pre-deploy бэкап." >&2
   fi
   exit 1
 fi
