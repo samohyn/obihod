@@ -61,6 +61,16 @@ async function serviceIds(payload: Payload) {
 // Ссылки витрины на мессенджеры → почта, пока в настройках сайта нет MAX/Telegram.
 const realHref = (href: string) => (href.startsWith('https://max.ru') ? PHOTO_HREF : href)
 
+// И тексты витрины, которые обещают мессенджеры.
+const MESSENGER_TEXT: [string, string][] = [
+  ['фото в MAX или Telegram', 'фото на почту'],
+  ['Предварительная — в мессенджер', 'Предварительная — по телефону или почтой'],
+  ['ответит в мессенджере', 'перезвонит или ответит на почту'],
+  ['фото в мессенджер или через форму', 'фото на почту или через форму'],
+]
+const realText = (text: string | null | undefined) =>
+  MESSENGER_TEXT.reduce((t, [from, to]) => t.replace(from, to), text ?? '')
+
 async function toLayout(payload: Payload, blocks: V3BlockWithTone[]) {
   const cache = new Map<string, number | string>()
   const m = (img: BlockImage | null | undefined) => mediaId(payload, img, cache)
@@ -191,7 +201,7 @@ async function toLayout(payload: Payload, blocks: V3BlockWithTone[]) {
         })
         break
       case 'steps':
-        layout.push({ ...head, items: b.items })
+        layout.push({ ...head, items: b.items.map((it) => ({ ...it, text: realText(it.text) })) })
         break
       case 'price-tabs':
         layout.push({
@@ -209,7 +219,7 @@ async function toLayout(payload: Payload, blocks: V3BlockWithTone[]) {
       case 'photo-cta':
         layout.push({
           ...head,
-          text: b.text,
+          text: realText(b.text),
           image: await m(b.image),
           primary: { label: b.primary.label, href: PHOTO_HREF, icon: 'upload' },
           secondary: { label: 'Позвонить', href: PHONE_HREF, icon: 'phone' },
@@ -269,7 +279,10 @@ async function toLayout(payload: Payload, blocks: V3BlockWithTone[]) {
         layout.push({ ...head, items: b.items })
         break
       case 'faq-v3':
-        layout.push({ ...head, items: b.items })
+        layout.push({
+          ...head,
+          items: b.items.map((it) => ({ ...it, answer: realText(it.answer) })),
+        })
         break
       case 'final-form':
         layout.push({
