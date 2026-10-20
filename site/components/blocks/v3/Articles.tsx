@@ -18,12 +18,14 @@ export function Articles(block: ArticlesBlock & { tone?: SectionTone | null }) {
         <ul className={s.grid}>
           {items.map((a, i) => (
             <li key={i}>
-              <Link href={a.href} className={s.card}>
-                <Picture
-                  image={a.image}
-                  sizes="(max-width: 1023px) 110px, 33vw"
-                  className={s.photo}
-                />
+              <Link href={a.href} className={[s.card, a.image?.url ? '' : s.noPhoto].join(' ')}>
+                {a.image?.url && (
+                  <Picture
+                    image={a.image}
+                    sizes="(max-width: 1023px) 110px, 33vw"
+                    className={s.photo}
+                  />
+                )}
                 <span className={s.body}>
                   {a.kicker && <span className={s.kicker}>{a.kicker}</span>}
                   <b>{a.title}</b>

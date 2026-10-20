@@ -132,6 +132,16 @@ export const Media: CollectionConfig = {
           fields: [
             { name: 'alt', type: 'text', required: true },
             { name: 'caption', type: 'text' },
+            {
+              name: 'illustration',
+              type: 'checkbox',
+              label: 'Иллюстрация',
+              defaultValue: false,
+              admin: {
+                description:
+                  'Отметьте, если фото не с реального объекта (сгенерировано). На сайте появится подпись «Иллюстрация». Заменили на реальное — снимите галочку.',
+              },
+            },
           ],
         },
         {

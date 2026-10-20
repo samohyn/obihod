@@ -2,6 +2,7 @@ import { StatusPillCell as StatusPillCell_38e368cfc60b59c7b7f113b2e1b3a892 } fro
 import { StatusHistoryField as StatusHistoryField_1197aeb98145ef2f4e5690594886a79e } from '@/components/admin/leads/StatusHistoryField'
 import { RowActionsCell as RowActionsCell_288e0b5b0f64ba8149915c12b4c0e4bc } from '@/components/admin/leads/RowActionsCell'
 import { LeadsQuickFilters as LeadsQuickFilters_8fe47ed0eac39de4c3442748d6768a2b } from '@/components/admin/leads/LeadsQuickFilters'
+import { default as default_62e95d4a500c3de90a4d027ef2b658a0 } from '@/components/admin/PagePreviewPanel'
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { LexicalDiffComponent as LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
@@ -51,6 +52,7 @@ export const importMap = {
   "@/components/admin/leads/StatusHistoryField#StatusHistoryField": StatusHistoryField_1197aeb98145ef2f4e5690594886a79e,
   "@/components/admin/leads/RowActionsCell#RowActionsCell": RowActionsCell_288e0b5b0f64ba8149915c12b4c0e4bc,
   "@/components/admin/leads/LeadsQuickFilters#LeadsQuickFilters": LeadsQuickFilters_8fe47ed0eac39de4c3442748d6768a2b,
+  "@/components/admin/PagePreviewPanel#default": default_62e95d4a500c3de90a4d027ef2b658a0,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#LexicalDiffComponent": LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e,

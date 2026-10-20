@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 
+import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
 import { getContacts } from '@/lib/chrome'
 import { getHomepage } from '@/lib/homepage'
+import { getPage } from '@/lib/pages'
 import { canonicalFor } from '@/lib/seo/canonical'
 import { JsonLdGraph } from '@/components/marketing/_shared/JsonLdGraph'
 import { Cases } from '@/components/marketing/sections/Cases'
@@ -27,7 +29,7 @@ export const revalidate = 600
  * EPIC-HOMEPAGE-MIGRATION — Phase 1 visual 1:1 port from archive/newui/homepage-classic.html.
  * 13 sections + JSON-LD @graph (Organization, LocalBusiness, WebSite, FAQPage, Service).
  */
-export const metadata: Metadata = {
+const LEGACY_METADATA: Metadata = {
   title: 'Удаление деревьев в Москве и МО · Обиход',
   description:
     'Арбористика, чистка крыш от снега, вывоз мусора, демонтаж в Москве и МО. Фикс-цена за объект, страховка 5 млн ₽. Смета за 10 минут по фото.',
@@ -67,9 +69,41 @@ export const metadata: Metadata = {
   },
 }
 
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPage('home')
+  if (!page) return LEGACY_METADATA
+  const title = page.metaTitle ?? LEGACY_METADATA.title
+  const description = page.metaDescription ?? LEGACY_METADATA.description
+  const og = page.ogImage
+  return {
+    ...LEGACY_METADATA,
+    title,
+    description,
+    openGraph: {
+      ...LEGACY_METADATA.openGraph,
+      title: page.metaTitle ?? undefined,
+      description: page.metaDescription ?? undefined,
+      ...(og ? { images: [{ url: og.url, alt: og.alt }] } : {}),
+    },
+  }
+}
+
 export default async function Home() {
-  // Phase 2: контент из Payload Homepage global (graceful fallback в каждой section)
-  const [hp, contacts] = await Promise.all([getHomepage(), getContacts()])
+  // План 09, этап 2: главная из коллекции «Страницы» (slug «home», блоки v3), пока она опубликована.
+  // Нет опубликованной — старая главная из глобала «Главная страница» (expand → switch → contract).
+  const [page, contacts] = await Promise.all([getPage('home'), getContacts()])
+  if (page) {
+    const faq = page.blocks.flatMap((b) =>
+      b.blockType === 'faq-v3' && b.enabled !== false ? b.items : [],
+    )
+    return (
+      <>
+        <JsonLdGraph faq={faq} />
+        <V3BlockRenderer blocks={page.blocks} phoneDisplay={contacts.phoneDisplay} />
+      </>
+    )
+  }
+  const hp = await getHomepage()
   return (
     <>
       <JsonLdGraph faq={faqItems(hp)} />

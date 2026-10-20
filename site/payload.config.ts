@@ -20,6 +20,7 @@ import { Leads } from './collections/Leads'
 import { Redirects } from './collections/Redirects'
 import { Reviews } from './collections/Reviews'
 import { RumMetrics } from './collections/RumMetrics'
+import { Pages } from './collections/Pages'
 import { Homepage } from './globals/Homepage'
 import { SeoSettings } from './globals/SeoSettings'
 import { SiteChrome } from './globals/SiteChrome'
@@ -154,6 +155,7 @@ export default buildConfig({
     // 01 · Заявки
     Leads,
     // 02 · Контент (порядок per brand-guide §12.2 mockup)
+    Pages,
     Services,
     Districts,
     ServiceDistricts,
