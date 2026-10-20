@@ -4,10 +4,15 @@ _Обновляется в конце сессии. Короткий срез: �
 
 ## ▶ Следующий шаг (для новой сессии)
 
-**«Дрейф схемы» — на приёмке у владельца** ([PR #252](https://github.com/samohyn/obihod/pull/252), staging = ветка `db/schema-drift`, на сервере уже стоит новый `obikhod-deploy` с шагом миграций — для main он пропускается, пока в package.json нет `migrate`). После приёмки: мерж → автодеплой прода сам применит синхронизацию (бэкап → install → migrate → build → switch) → проверить на проде `schema:diff --check`, payload_migrations, smoke, site-checks прода. Это последняя задача этапа 1 → показ этапа 1 целиком → этап 2.
+**Этап 1 закрыт и показан владельцу (20.10). План этапа 2 показан — НЕ НАЧИНАТЬ без команды владельца.** План этапа 2 (сверен с Perplexity): фундамент UI + оболочка сайта (шапка/меню/мобильное меню/липкая кнопка/подвал из CMS) + одна система форм целиком (поля, фото в закрытое хранилище, согласие с доказательством, «перезвоним до HH:MM» на сервере) + 8 ключевых блоков + 3 тестовые страницы на /dev/blocks; остальные блоки — на этапе 3. Ждём решения владельца по объёму. Отдельно на решение: сборка на GitHub вместо VPS; ESLint 10 / TS 6 (#248).
 Цикл задачи — CLAUDE.md: Perplexity — **второе мнение со сравнением**; показ этапа **целиком** с рассказом; UI/UX — `ui-ux-pro-max` + `frontend-design` + `frontend-patterns` и MCP `21st` (21st.dev, добавлен 19.10 в user scope). Источники: [план 09](../../contex/09_product_plan.md), [трекер](../../contex/09_product_plan-status.md), эксплуатация — [deploy/README.md](../../deploy/README.md).
 
-## Где мы сейчас (2026-10-20 ~03:40 MSK) — план 09, этап 1: дрейф схемы на приёмке
+## Где мы сейчас (2026-10-20 ~07:00 MSK) — этап 1 закрыт
+
+- «Дрейф схемы» на проде: релиз `6edc294`, автодеплой сам сделал бэкап (S3 ok) → синхронизацию → сборку; на проде `schema:diff --check` = 0, payload_migrations 34 (без `dev`), данные целы (11 услуг, 215 SD, 75 audit_log). Заявок 0 — так было и до выкатки (бэкапы pre-deploy и daily 03:35).
+- site-checks прода с GitHub — зелёные. Ночной запуск 04:00 GitHub пропустил → cron сдвинут на 04:17 МСК (docs/stage1-done).
+
+## Где были раньше (2026-10-20 ~03:40 MSK) — план 09, этап 1: дрейф схемы на приёмке
 
 - Против прода было 120 команд. Конфиг теперь описывает всю БД (`lib/db/schemaHooks.ts`: audit_log + частичные индексы service_districts). Базовая `migrations/20261020_120000_baseline` (+ .up.sql из pg_dump), история → `migrations/legacy/history`, разовая синхронизация `migrations/legacy/sync-to-baseline.sql` (97 команд).
 - `pnpm migrate` (`scripts/migrate.ts`): старая БД (нет baseline, есть users) → в транзакции sync + отметка baseline + удаление `dev`; потом `payload.db.migrate()`; печатает `MIGRATIONS_APPLIED=n`. `pnpm schema:diff --check` — CI-гейт, шум drizzle отфильтрован (имена > 63, numeric DEFAULT).
@@ -18,7 +23,7 @@ _Обновляется в конце сессии. Короткий срез: �
 
 - Владелец принял #247 → смержен, прод = `releases/20261020010345-bea0aa1`; форма контактов при обрыве сети — «Сеть недоступна…», заглушки «Заявка с /kontakty/» нет. Dependabot #227–229 закрыты. С GitHub: `site-checks` прода (вручную) и staging (после `deploy-staging` ref=main, автоматически) — зелёные.
 - **PR-CI** (`ci.yml`): схема и админ — `seed-admin.ts` (Payload push) вместо прогрева dev; prod-сборка → Playwright 211 тестов (~4,8 мин на раннере): `leads-api`, `forms` (5 форм), `a11y` (база `a11y-baseline.json`, обновление `A11Y_UPDATE_BASELINE=1`), `pages-health` (скролл на 4 ширинах, `KNOWN_OVERFLOW`), старые landing/seo/site-chrome/admin-*; JSON-LD; Lighthouse 3 прогона (`lighthouserc.json`). Краулер в PR-CI не работает — меню ведёт на страницы CMS, которых нет в чистой БД.
-- **Живой сайт** (`site-checks.yml`, `playwright.site.config.ts`, `tests/site/`): после «Deploy to staging» (workflow_run), ночью 04:00 МСК на проде, вручную. Staging — пользователь `ci` в `/etc/nginx/staging.htpasswd` (копия `.bak-20261020`), секрет `STAGING_BASIC_AUTH`; пароль нигде не записан — при нужде локального прогона ротировать (хеш в htpasswd + `gh secret set`). `/api/rum` в проверках заглушён (иначе 429 и мусор в RUM прода).
+- **Живой сайт** (`site-checks.yml`, `playwright.site.config.ts`, `tests/site/`): после «Deploy to staging» (workflow_run), ночью 04:17 МСК на проде, вручную. Staging — пользователь `ci` в `/etc/nginx/staging.htpasswd` (копия `.bak-20261020`), секрет `STAGING_BASIC_AUTH`; пароль нигде не записан — при нужде локального прогона ротировать (хеш в htpasswd + `gh secret set`). `/api/rum` в проверках заглушён (иначе 429 и мусор в RUM прода).
 - **Исправлено попутно:** ложный «успех» LeadForm/LeadFormFull/CalculatorShell; IP клиента — `lib/http/clientIp` (X-Real-IP → последний XFF; раньше первый — обход лимита заявок); заголовок «Заявка с /kontakty/».
 - **Находки → этапы:** контраст токена `#8c8377`, LCP главной 8 с (фон CSS), калькулятор главной на 360, чекбокс ПДн, потерянные поля форм — в трекере (этапы 2, 5, 6).
 - `test.fail()` в forms/leads-api = известный дефект с этапом; «неожиданный проход» = дефект починен, снять пометку.
