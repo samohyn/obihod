@@ -49,7 +49,8 @@ const SECTIONS: Record<SectionKey, Section> = {
   avtory: { name: 'Авторы', href: '/avtory/', parent: 'oKompanii' },
   blog: { name: 'Блог', href: '/blog/' },
   kontakty: { name: 'Контакты', href: '/kontakty/' },
-  fotoSmeta: { name: 'Смета по фото', href: '/kalkulyator/foto-smeta/' },
+  // Название из карты 08: «Смета по фото» — это лендинг /foto-smeta/.
+  fotoSmeta: { name: 'Фото → смета', href: '/kalkulyator/foto-smeta/' },
   politika: { name: 'Политика конфиденциальности', href: PRIVACY_URL },
   soglasie: { name: 'Согласие на обработку данных', href: CONSENT_URL },
   kartaSajta: { name: 'Карта сайта', href: '/karta-sajta/' },
@@ -81,7 +82,7 @@ export function shortTitle(title: string): string {
   const t = title.trim()
   const cut = [' — ', ' – ', ': ']
     .map((sep) => t.indexOf(sep))
-    .filter((i) => i >= 8)
+    .filter((i) => i >= 6)
     .sort((a, b) => a - b)[0]
   return cut === undefined ? t : t.slice(0, cut).trim()
 }

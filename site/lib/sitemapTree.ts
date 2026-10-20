@@ -112,7 +112,7 @@ export const getSitemapTree = cache(async (): Promise<SitemapSection[]> => {
     {
       title: 'Сметы и расчёт',
       links: [
-        { name: 'Смета по фото', href: '/kalkulyator/foto-smeta/' },
+        trail('fotoSmeta').at(-1) as Crumb,
         ...calculators.map((s) => ({ name: s.title, href: `/${s.slug}/` })),
       ],
     },

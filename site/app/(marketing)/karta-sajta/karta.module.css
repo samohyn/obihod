@@ -17,21 +17,16 @@
   color: var(--c-muted-text);
 }
 .grid {
-  columns: 1;
-  column-gap: 48px;
+  display: grid;
+  gap: 0 48px;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .grid {
-    columns: 2;
-  }
-}
-@media (min-width: 1200px) {
-  .grid {
-    columns: 3;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
   }
 }
 .section {
-  break-inside: avoid;
   margin-bottom: 40px;
 }
 .sectionTitle {
@@ -76,4 +71,7 @@
 .sub a {
   font-size: 14.5px;
   color: var(--c-ink-soft);
+}
+.col {
+  min-width: 0;
 }
