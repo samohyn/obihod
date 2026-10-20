@@ -75,6 +75,8 @@
   margin-top: 32px;
 }
 .badge {
+  /* цифра подстраивается под ширину плашки: «от 700 ₽» в одну строку, «100%» — как была */
+  container-type: inline-size;
   padding: 24px;
   border-radius: var(--radius-lg);
   background: rgba(15, 25, 18, 0.55);
@@ -84,7 +86,8 @@
 .badge b {
   display: block;
   font-family: var(--font-mono);
-  font-size: 56px;
+  font-size: clamp(40px, 22cqi, 56px);
+  white-space: nowrap;
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1;
