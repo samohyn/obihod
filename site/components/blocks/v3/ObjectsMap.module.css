@@ -1,0 +1,134 @@
+.grid {
+  display: grid;
+  grid-template-columns: 560px 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.map {
+  width: 100%;
+  height: auto;
+  background: var(--c-card);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-lg);
+}
+.ring50 {
+  fill: rgba(45, 90, 61, 0.035);
+  stroke: var(--c-primary);
+  stroke-width: 1.4;
+  stroke-dasharray: 5 6;
+}
+.ring30 {
+  fill: rgba(45, 90, 61, 0.04);
+  stroke: var(--c-primary);
+  stroke-width: 1.2;
+  stroke-dasharray: 3 5;
+}
+.mkad {
+  fill: var(--c-primary);
+}
+.mkadLabel {
+  fill: var(--c-on-primary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.dot {
+  fill: var(--c-primary);
+  stroke: #fff;
+  stroke-width: 1.5;
+  opacity: 0.9;
+}
+.ringLabel {
+  fill: var(--c-muted-text);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+.base {
+  fill: var(--c-accent);
+  stroke: #fff;
+  stroke-width: 3;
+}
+.baseTitle {
+  fill: var(--c-ink);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.legend {
+  margin: 24px 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 4px;
+}
+.legend li {
+  display: grid;
+  grid-template-columns: 14px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--c-line);
+  font-size: 15.5px;
+}
+.legend i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.legend b {
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+.chips {
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chips li {
+  height: 36px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-sm);
+  background: var(--c-card);
+  border: 1px solid var(--c-line);
+  font-size: 14.5px;
+}
+.zones {
+  margin: 24px 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.zones div {
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--c-card);
+  border: 1px solid var(--c-line);
+}
+.zones dt {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--c-primary);
+}
+.zones dd {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--c-ink-soft);
+}
+@media (max-width: 1199px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 767px) {
+  .zones {
+    grid-template-columns: 1fr;
+  }
+}

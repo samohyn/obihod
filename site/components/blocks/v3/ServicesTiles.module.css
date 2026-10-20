@@ -1,0 +1,124 @@
+.grid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 340px;
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  isolation: isolate;
+  color: #fff;
+  text-decoration: none;
+}
+.photo {
+  position: absolute !important;
+  inset: 0;
+  z-index: -2;
+  transition: transform 0.4s ease;
+}
+.tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(20, 32, 24, 0) 35%, rgba(20, 32, 24, 0.86) 100%);
+}
+.tile:hover .photo {
+  transform: scale(1.04);
+}
+.tile:focus-visible {
+  outline: 3px solid var(--c-accent);
+  outline-offset: 3px;
+}
+.price {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--c-bg);
+  color: var(--c-ink);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.body {
+  display: grid;
+  gap: 6px;
+  padding-right: 48px;
+}
+.body b {
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+.text {
+  font-size: 14px;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.84);
+}
+.go {
+  position: absolute;
+  right: 16px;
+  bottom: 18px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(247, 245, 240, 0.18);
+  backdrop-filter: blur(6px);
+}
+@media (max-width: 1199px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .tile {
+    height: 200px;
+    padding: 12px;
+  }
+  .body {
+    padding-right: 0;
+  }
+  .body b {
+    font-size: 16px;
+  }
+  .text,
+  .go {
+    display: none;
+  }
+  .price {
+    top: 10px;
+    left: 10px;
+    padding: 4px 7px;
+    font-size: 11.5px;
+  }
+  /* на узкой плитке цена занимает верх — подпись «Иллюстрация» уходит под неё */
+  .photo > span {
+    top: 40px;
+    right: auto;
+    left: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .photo {
+    transition: none;
+  }
+}

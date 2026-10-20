@@ -1,0 +1,237 @@
+/* Библиотека блоков v3 — общие стили: секция, заголовок, кнопки, картинка. Токены — app/globals.css. */
+
+.section {
+  padding: 64px 0;
+}
+@media (min-width: 768px) {
+  .section {
+    padding: 80px 0;
+  }
+}
+@media (min-width: 1200px) {
+  .section {
+    padding: 112px 0;
+  }
+}
+.tone-default {
+  background: var(--c-bg);
+  color: var(--c-ink);
+}
+.tone-alt {
+  background: var(--c-bg-alt);
+  color: var(--c-ink);
+}
+.tone-green {
+  background: var(--c-primary);
+  color: var(--c-on-primary);
+}
+.tone-dark {
+  background: var(--c-primary-ink);
+  color: var(--c-on-primary);
+}
+
+.wrap {
+  width: 100%;
+  max-width: calc(var(--maxw) + var(--pad) * 2);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+
+/* заголовок секции */
+.head {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 48px;
+  max-width: 820px;
+}
+.headRow {
+  max-width: none;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 24px;
+}
+.headText {
+  display: grid;
+  gap: 16px;
+}
+.eyebrow {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-muted-text);
+}
+.eyebrow::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c-accent);
+  flex: none;
+}
+.onDark .eyebrow,
+.onDarkEyebrow {
+  color: rgba(247, 245, 240, 0.72);
+}
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.headLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--c-primary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.headLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.onDark .headLink {
+  color: var(--c-on-primary);
+}
+@media (max-width: 767px) {
+  .head {
+    margin-bottom: 32px;
+  }
+  .headRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* картинка */
+.picture {
+  position: relative;
+  overflow: hidden;
+  background: var(--c-bg-alt);
+}
+.pictureEmpty {
+  background: repeating-linear-gradient(45deg, var(--c-bg-alt) 0 12px, var(--c-line) 12px 13px);
+}
+.illu {
+  position: absolute;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  padding: 6px 9px;
+  border-radius: var(--radius-sm);
+  background: rgba(28, 28, 28, 0.66);
+  color: #f7f5f0;
+  pointer-events: none;
+}
+.illu-br {
+  right: 12px;
+  bottom: 12px;
+}
+.illu-tr {
+  right: 12px;
+  top: 12px;
+}
+.illu-bl {
+  left: 12px;
+  bottom: 12px;
+}
+@media (max-width: 767px) {
+  .illu {
+    font-size: 9.5px;
+    padding: 4px 6px;
+  }
+  .illu-br {
+    right: 6px;
+    bottom: 6px;
+  }
+  .illu-tr {
+    right: 6px;
+    top: 6px;
+  }
+  .illu-bl {
+    left: 6px;
+    bottom: 6px;
+  }
+}
+
+/* кнопки */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: var(--radius);
+  border: 1.5px solid transparent;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+.btn:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--c-bg),
+    0 0 0 4px var(--c-accent);
+}
+.btnLg {
+  min-height: 58px;
+  padding: 0 28px;
+  font-size: 17px;
+  border-radius: 12px;
+}
+.btn-primary {
+  background: var(--c-primary);
+  color: var(--c-on-primary);
+}
+.btn-primary:hover {
+  background: var(--c-primary-ink);
+}
+.btn-ghost {
+  border-color: var(--c-primary);
+  color: var(--c-primary);
+  background: transparent;
+}
+.btn-ghost:hover {
+  background: rgba(45, 90, 61, 0.06);
+}
+.btn-light {
+  background: var(--c-on-primary);
+  color: var(--c-primary-ink);
+}
+.btn-light:hover {
+  background: #fff;
+}
+.btn-ghostLight {
+  border-color: rgba(247, 245, 240, 0.55);
+  color: var(--c-on-primary);
+  background: transparent;
+}
+.btn-ghostLight:hover {
+  border-color: var(--c-on-primary);
+}
+@media (max-width: 767px) {
+  .btn {
+    white-space: normal;
+    text-align: center;
+  }
+}

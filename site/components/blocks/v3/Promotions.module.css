@@ -1,0 +1,101 @@
+.grid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 230px;
+  padding: 22px;
+  border-radius: var(--radius-lg);
+  background: var(--c-card);
+  border: 1px solid var(--c-line);
+  overflow: hidden;
+}
+.card::after {
+  content: '';
+  position: absolute;
+  right: -36px;
+  top: -36px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 2px dashed rgba(230, 162, 60, 0.45);
+}
+.value {
+  font-family: var(--font-mono);
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--c-accent-text);
+  font-variant-numeric: tabular-nums;
+}
+.card h3 {
+  margin: 0;
+  font-size: 17.5px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.card p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--c-muted-text);
+}
+.cond {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--c-primary);
+  text-decoration: none;
+}
+.cond:hover {
+  text-decoration: underline;
+}
+.dark {
+  /* янтарный мелкий текст читается только на тёмно-зелёном primary-ink (5,3:1), на primary — 3,6:1 */
+  background: var(--c-primary-ink);
+  border-color: var(--c-primary-ink);
+  color: var(--c-on-primary);
+}
+.dark .value,
+.dark .cond {
+  color: var(--c-accent);
+}
+.dark p {
+  color: rgba(247, 245, 240, 0.78);
+}
+@media (max-width: 1199px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 767px) {
+  .grid {
+    gap: 10px;
+  }
+  .card {
+    padding: 14px;
+    min-height: 180px;
+  }
+  .value {
+    font-size: 28px;
+  }
+  .card h3 {
+    font-size: 15px;
+  }
+  .card p {
+    font-size: 12.5px;
+  }
+}
