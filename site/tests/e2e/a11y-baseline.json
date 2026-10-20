@@ -15,7 +15,9 @@
       "color-contrast"
     ],
     "/raiony/": [],
-    "/kejsy/": [],
+    "/kejsy/": [
+      "color-contrast"
+    ],
     "/blog/": [
       "color-contrast"
     ],
@@ -42,7 +44,9 @@
       "color-contrast"
     ],
     "/raiony/": [],
-    "/kejsy/": [],
+    "/kejsy/": [
+      "color-contrast"
+    ],
     "/blog/": [
       "color-contrast"
     ],
