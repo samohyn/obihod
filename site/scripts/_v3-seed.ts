@@ -37,7 +37,7 @@ async function mediaId(
       filePath: path.join(PUBLIC_DIR, image.url),
     })
     id = created.id
-    console.log(`[seed:home] медиа ${filename} → ${id}`)
+    console.log(`[seed] медиа ${filename} → ${id}`)
   }
   cache.set(filename, id)
   return id
