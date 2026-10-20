@@ -5,6 +5,7 @@
 
 import type { BlockImage, V3BlockWithTone } from '@/components/blocks/v3/types'
 
+import { kicker } from './_template'
 import type { SubServiceContent } from './types'
 
 const img = (name: string, alt: string, focus?: string): BlockImage => ({
@@ -19,7 +20,7 @@ const blocks: V3BlockWithTone[] = [
     blockType: 'hero-slider',
     slides: [
       {
-        kicker: 'от 700 ₽ за ствол · Москва и область',
+        kicker: kicker('от 700 ₽ за ствол · Москва и область'),
         title: 'Спил деревьев в Москве и МО',
         lead: 'Спилим целиком, по частям или с автовышки — по твёрдой смете, оплата после приёмки. Ветки и чурки уберём и вывезем: это уже в цене.',
         primary: { label: 'Рассчитать по фото', href: '#zayavka', icon: 'camera' },

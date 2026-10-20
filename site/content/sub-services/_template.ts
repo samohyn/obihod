@@ -26,6 +26,13 @@ export const img = (name: string, alt: string, focus?: string): BlockImage => ({
 
 export const PHONE_HREF = 'tel:+79851705111'
 
+/** Надзаголовок «от 8 400 ₽ за дерево · Москва и область»: части переносятся только целиком. */
+export const kicker = (text: string) =>
+  text
+    .split(' · ')
+    .map((part) => part.replace(/ /g, '\u00a0'))
+    .join(' · ')
+
 /** Обещания оффера (contex/10_offer.md) — полоса под первым экраном по умолчанию. */
 export const OFFER_STRIP: IconItem[] = [
   { icon: 'camera', title: 'Смета по фото', text: 'за 30 минут' },
@@ -166,7 +173,7 @@ export function subServicePage(spec: SubServiceSpec): SubServiceContent {
       blockType: 'hero-slider',
       slides: [
         {
-          kicker: spec.hero.kicker,
+          kicker: kicker(spec.hero.kicker),
           title: spec.hero.title,
           lead: spec.hero.lead,
           primary: { label: 'Рассчитать по фото', href: '#zayavka', icon: 'camera' },
