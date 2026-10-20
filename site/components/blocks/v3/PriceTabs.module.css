@@ -169,7 +169,13 @@
   .table tbody th b {
     font-size: 14.5px;
   }
-  .table tbody th small,
+  /* пояснение к строке оставляем — на страницах услуг в нём условия цены */
+  .table tbody th small {
+    display: block;
+    margin-top: 2px;
+    font-size: 12.5px;
+    line-height: 1.35;
+  }
   .table td i {
     display: none;
   }
