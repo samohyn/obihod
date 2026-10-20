@@ -1,4 +1,6 @@
-import type { ArrayField, GlobalConfig, Validate } from 'payload'
+import type { ArrayField, Field, GlobalConfig, Validate } from 'payload'
+
+import { ICON_NAMES } from '@/components/blocks/v3/iconNames'
 import { isAdmin } from '@/lib/auth/access'
 
 /**
@@ -59,6 +61,27 @@ const validateE164: Validate = (v) =>
 const validateInn: Validate = (v) =>
   typeof v === 'string' && INN_RE.test(v) ? true : 'ИНН — 10 или 12 цифр'
 
+const validateHref: Validate = (v) =>
+  typeof v === 'string' && /^(\/[^\s]*|https?:\/\/\S+|tel:\+?\d+|mailto:\S+)$/.test(v)
+    ? true
+    : 'Адрес на сайте (/uslugi/), https://…, tel: или mailto:'
+
+// Ссылка меню/подвала C4 (этап 2 плана 09): название + адрес в одной строке.
+const navLinkRow: Field = {
+  type: 'row',
+  fields: [
+    { name: 'label', type: 'text', label: 'Название', required: true, admin: { width: '50%' } },
+    {
+      name: 'href',
+      type: 'text',
+      label: 'Адрес',
+      required: true,
+      validate: validateHref,
+      admin: { width: '50%', description: 'Например /uslugi/' },
+    },
+  ],
+}
+
 // ---------- reusable menu item field factory ----------
 // NOTE: возвращаемый объект скопирован в нескольких местах (header.menu,
 // footer.columns[].items), поэтому используется factory, а не shared constant.
@@ -118,7 +141,7 @@ const menuItemArrayField = (name: string): ArrayField => ({
 // ---------- GLOBAL ----------
 export const SiteChrome: GlobalConfig = {
   slug: 'site-chrome',
-  label: 'Site Chrome (Header / Footer)',
+  label: 'Шапка, подвал и контакты',
   admin: {
     description: 'Всё, что про «рамку сайта»: шапка, футер, контакты, реквизиты, соцсети.',
     group: '05 · Рамка сайта',
@@ -150,17 +173,22 @@ export const SiteChrome: GlobalConfig = {
       tabs: [
         // -------- HEADER --------
         {
-          label: 'Header',
+          label: 'Шапка и меню',
           fields: [
             {
               name: 'header',
               type: 'group',
               fields: [
-                menuItemArrayField('menu'),
+                // Старое меню-якоря главной (не выводится с этапа 2) — удалить вместе с колонками.
+                { ...menuItemArrayField('menu'), admin: { hidden: true } },
                 {
                   name: 'cta',
                   type: 'group',
-                  label: 'CTA-кнопка в шапке',
+                  label: 'Главная кнопка в шапке',
+                  admin: {
+                    description:
+                      'Справа от телефона и в нижней панели на телефоне. Например «Смета по фото» → /foto-smeta/',
+                  },
                   fields: [
                     {
                       name: 'label',
@@ -208,6 +236,86 @@ export const SiteChrome: GlobalConfig = {
                     },
                   ],
                 },
+                {
+                  name: 'nav',
+                  type: 'array',
+                  label: 'Меню',
+                  labels: { singular: 'Пункт меню', plural: 'Пункты меню' },
+                  maxRows: 6,
+                  admin: {
+                    description:
+                      'Верхнее меню слева направо, лучше 5 пунктов. Пусто — сайт показывает меню по карте сайта.',
+                  },
+                  fields: [
+                    navLinkRow,
+                    {
+                      name: 'children',
+                      type: 'array',
+                      label: 'Выпадающий список',
+                      labels: { singular: 'Пункт', plural: 'Пункты' },
+                      admin: {
+                        description: 'Заполните — у пункта появится стрелка и список.',
+                        initCollapsed: true,
+                      },
+                      fields: [
+                        navLinkRow,
+                        {
+                          name: 'text',
+                          type: 'text',
+                          label: 'Пояснение',
+                          maxLength: 60,
+                          admin: { description: 'Короткая подпись под названием' },
+                        },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  name: 'mobileExtra',
+                  type: 'array',
+                  label: 'Ещё в мобильном меню',
+                  labels: { singular: 'Ссылка', plural: 'Ссылки' },
+                  admin: {
+                    description:
+                      'Разделы, которых нет в верхнем меню: на телефоне — под основными пунктами.',
+                  },
+                  fields: [navLinkRow],
+                },
+                {
+                  name: 'utility',
+                  type: 'array',
+                  label: 'Полоса над шапкой',
+                  labels: { singular: 'Факт', plural: 'Факты' },
+                  maxRows: 3,
+                  admin: {
+                    description:
+                      'Короткие факты в тёмной полосе. На телефоне — только первый. Справа — мессенджеры и почта.',
+                  },
+                  fields: [
+                    {
+                      type: 'row',
+                      fields: [
+                        {
+                          name: 'icon',
+                          type: 'select',
+                          label: 'Иконка',
+                          required: true,
+                          defaultValue: 'pin',
+                          options: ICON_NAMES.map((n) => ({ label: n, value: n })),
+                          admin: { width: '30%' },
+                        },
+                        {
+                          name: 'text',
+                          type: 'text',
+                          label: 'Текст',
+                          required: true,
+                          maxLength: 60,
+                          admin: { width: '70%' },
+                        },
+                      ],
+                    },
+                  ],
+                },
               ],
             },
           ],
@@ -218,7 +326,7 @@ export const SiteChrome: GlobalConfig = {
         // не меняется (Payload tabs UI-only при unnamed) — все колонки
         // остаются flat `footer_*`, см. migration 20260424_133242.
         {
-          label: 'Footer',
+          label: 'Подвал',
           fields: [
             {
               name: 'footer',
@@ -230,8 +338,42 @@ export const SiteChrome: GlobalConfig = {
                     {
                       label: 'Контент',
                       fields: [
-                        { name: 'slogan', type: 'textarea', maxLength: 200 },
                         {
+                          name: 'slogan',
+                          type: 'textarea',
+                          label: 'Текст под логотипом',
+                          maxLength: 200,
+                        },
+                        {
+                          name: 'nav',
+                          type: 'array',
+                          label: 'Колонки ссылок',
+                          labels: { singular: 'Колонка', plural: 'Колонки' },
+                          maxRows: 3,
+                          admin: {
+                            description:
+                              'До трёх колонок. Колонка «Контакты» добавляется сама. Пусто — колонки по карте сайта.',
+                          },
+                          fields: [
+                            {
+                              name: 'title',
+                              type: 'text',
+                              label: 'Заголовок',
+                              required: true,
+                              maxLength: 24,
+                            },
+                            {
+                              name: 'items',
+                              type: 'array',
+                              label: 'Ссылки',
+                              labels: { singular: 'Ссылка', plural: 'Ссылки' },
+                              fields: [navLinkRow],
+                            },
+                          ],
+                        },
+                        {
+                          // Старые колонки-якоря (не выводятся с этапа 2) — удалить вместе с таблицами.
+                          admin: { hidden: true },
                           name: 'columns',
                           type: 'array',
                           labels: { singular: 'Колонка', plural: 'Колонки' },
@@ -305,6 +447,14 @@ export const SiteChrome: GlobalConfig = {
                     description: 'Для tel: и JSON-LD. Формат E.164: +7XXXXXXXXXX',
                   },
                   validate: validateE164,
+                },
+                {
+                  name: 'hours',
+                  type: 'text',
+                  label: 'Режим работы',
+                  maxLength: 60,
+                  defaultValue: 'Ежедневно 8:00–22:00 · заявки 24/7',
+                  admin: { description: 'Под телефоном в шапке и в подвале' },
                 },
                 {
                   name: 'email',
