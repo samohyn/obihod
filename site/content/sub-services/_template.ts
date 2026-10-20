@@ -154,7 +154,8 @@ export type SubServiceSpec = {
   prices: { title: string; link?: { label: string; href: string }; tabs: PriceTab[] }
   calculator?: Omit<CalculatorBlock, 'blockType'>
   methods?: { eyebrow: string; title: string; items: EquipmentItem[] }
-  photo?: { title?: string; text: string; image?: BlockImage }
+  /** false — без полосы «Пришлите фото» (когда у ключевого блока страницы своя кнопка) */
+  photo?: { title?: string; text: string; image?: BlockImage } | false
   /** Свои секции после «Пришлите фото»: «когда нужно», сравнения и т. п. */
   middle?: V3BlockWithTone[]
   projects?: { eyebrow?: string; title?: string; items: ProjectItem[] }
@@ -197,15 +198,17 @@ export function subServicePage(spec: SubServiceSpec): SubServiceContent {
     blocks.push({ blockType: 'calculator-v3', anchor: 'calc', ...spec.calculator })
   }
   if (spec.methods) blocks.push({ blockType: 'equipment', anchor: 'sposoby', ...spec.methods })
-  blocks.push({
-    blockType: 'photo-cta',
-    eyebrow: 'Смета по фото',
-    title: spec.photo?.title ?? 'Пришлите фото — цена через 30 минут',
-    text: spec.photo?.text,
-    image: spec.photo?.image ?? img('phone-order', 'Фото задачи в телефоне'),
-    primary: { label: 'Отправить фото', href: '#zayavka', icon: 'upload' },
-    secondary: { label: 'Позвонить', href: PHONE_HREF, icon: 'phone' },
-  })
+  const photo = spec.photo || undefined
+  if (spec.photo !== false)
+    blocks.push({
+      blockType: 'photo-cta',
+      eyebrow: 'Смета по фото',
+      title: photo?.title ?? 'Пришлите фото — цена через 30 минут',
+      text: photo?.text,
+      image: photo?.image ?? img('phone-order', 'Фото задачи в телефоне'),
+      primary: { label: 'Отправить фото', href: '#zayavka', icon: 'upload' },
+      secondary: { label: 'Позвонить', href: PHONE_HREF, icon: 'phone' },
+    })
   blocks.push(...(spec.middle ?? []))
   if (spec.projects) {
     blocks.push({
