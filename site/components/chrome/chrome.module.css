@@ -521,12 +521,8 @@
 }
 .mButtons {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 8px;
   margin-top: 10px;
-}
-.mButtons > a {
-  padding: 0 12px;
 }
 .mLinks {
   display: flex;
