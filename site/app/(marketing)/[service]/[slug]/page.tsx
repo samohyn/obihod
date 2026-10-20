@@ -7,6 +7,7 @@
  * только в одном из контекстов.
  *
  * Fallback chain:
+ *   0. опубликованная подуслуга из коллекции «Подуслуги» → блоки v3 (этап 3 плана 09)
  *   1. sub-service найден → T3 SubServiceView
  *   2. service-district (без sub_service_slug) найден → T4 ServiceDistrictView
  *   3. notFound() → 404
@@ -18,6 +19,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 
+import { getSubServicePage } from '@/lib/pages'
 import { canonicalFor } from '@/lib/seo/canonical'
 import {
   getAllServiceDistrictParams,
@@ -29,6 +31,7 @@ import {
 import { buildServiceDistrictMetadata } from '@/lib/seo/metadata'
 
 import ServiceDistrictView from './ServiceDistrictView'
+import { SubServiceBlocksView } from './SubServiceBlocksView'
 import { SubServiceView } from './SubServiceView'
 
 export const revalidate = 43200
@@ -48,6 +51,27 @@ export async function generateMetadata({
   params: Promise<{ service: string; slug: string }>
 }): Promise<Metadata> {
   const { service: serviceSlug, slug } = await params
+
+  // 0. Подуслуга из блоков
+  const blocksPage = await getSubServicePage(serviceSlug, slug)
+  if (blocksPage) {
+    const url = `/${serviceSlug}/${slug}/`
+    const title = blocksPage.metaTitle ?? `${blocksPage.title} — Обиход`
+    return {
+      title: { absolute: title },
+      description: blocksPage.metaDescription ?? undefined,
+      alternates: { canonical: canonicalFor(url) },
+      openGraph: {
+        type: 'website',
+        locale: 'ru_RU',
+        url,
+        title,
+        description: blocksPage.metaDescription ?? undefined,
+        images: blocksPage.ogImage ? [blocksPage.ogImage.url] : undefined,
+      },
+      robots: { index: true, follow: true },
+    }
+  }
 
   // 1. Sub-service (T3)
   const subResult = await getSubServiceBySlug(serviceSlug, slug)
@@ -99,6 +123,14 @@ export default async function ServiceSlugPage({
   params: Promise<{ service: string; slug: string }>
 }) {
   const { service: serviceSlug, slug } = await params
+
+  // 0. Подуслуга из блоков — пока не опубликована, ниже прежняя версия
+  const blocksPage = await getSubServicePage(serviceSlug, slug)
+  if (blocksPage) {
+    const service = await getServiceBySlug(serviceSlug)
+    if (!service) notFound()
+    return <SubServiceBlocksView service={service as never} slug={slug} page={blocksPage} />
+  }
 
   // 1. T3 sub
   const subResult = await getSubServiceBySlug(serviceSlug, slug)

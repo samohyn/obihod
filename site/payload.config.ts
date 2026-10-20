@@ -21,6 +21,7 @@ import { Redirects } from './collections/Redirects'
 import { Reviews } from './collections/Reviews'
 import { RumMetrics } from './collections/RumMetrics'
 import { Pages } from './collections/Pages'
+import { SubServices } from './collections/SubServices'
 import { Homepage } from './globals/Homepage'
 import { SeoSettings } from './globals/SeoSettings'
 import { SiteChrome } from './globals/SiteChrome'
@@ -157,6 +158,7 @@ export default buildConfig({
     // 02 · Контент (порядок per brand-guide §12.2 mockup)
     Pages,
     Services,
+    SubServices,
     Districts,
     ServiceDistricts,
     Cases,

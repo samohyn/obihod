@@ -37,7 +37,7 @@ export function HeroSlider(block: HeroSliderBlock) {
     <section
       id={block.anchor ?? undefined}
       className={s.hero}
-      aria-roledescription="карусель"
+      aria-roledescription={count > 1 ? 'карусель' : undefined}
       aria-label="Главное"
       onMouseEnter={() => (paused.current = true)}
       onMouseLeave={() => (paused.current = false)}

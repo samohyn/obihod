@@ -1,13 +1,13 @@
 'use client'
 
 import type { CSSProperties, FC } from 'react'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useDocumentInfo, useFormFields } from '@payloadcms/ui'
 
 /**
- * Предпросмотр «Страницы» в боковой панели: черновик — по защищённой ссылке (/api/preview-sign,
- * 30 минут), опубликованная версия — прямой ссылкой. Как ServicePreviewPanel, но для любой страницы
- * (slug «home» → «/»).
+ * Предпросмотр «Страницы» и «Подуслуги» в боковой панели: черновик — по защищённой ссылке
+ * (/api/preview-sign, 30 минут), опубликованная версия — прямой ссылкой. Как ServicePreviewPanel,
+ * но для документов из блоков (slug «home» → «/», подуслуга → /направление/адрес/).
  */
 
 const box: CSSProperties = {
@@ -36,10 +36,31 @@ const primary: CSSProperties = { ...btn, background: '#2d5a3d', color: '#f7f5f0'
 const ghost: CSSProperties = { ...btn, background: 'transparent', color: '#2d5a3d' }
 
 const PagePreviewPanel: FC = () => {
-  const { id, hasPublishedDoc } = useDocumentInfo()
+  const { id, hasPublishedDoc, collectionSlug } = useDocumentInfo()
+  const collection = collectionSlug ?? 'pages'
   const slug = useFormFields(([fields]) =>
     typeof fields?.slug?.value === 'string' ? fields.slug.value : '',
   )
+  const serviceId = useFormFields(([fields]) => {
+    const v = fields?.service?.value
+    return typeof v === 'string' || typeof v === 'number' ? String(v) : ''
+  })
+  const [serviceSlug, setServiceSlug] = useState('')
+
+  // У подуслуги адрес начинается с направления — берём его slug по выбранной связи.
+  useEffect(() => {
+    if (collection !== 'sub-services' || !serviceId) return
+    let cancelled = false
+    fetch(`/api/services/${encodeURIComponent(serviceId)}?depth=0`, { credentials: 'include' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d: { slug?: string } | null) => {
+        if (!cancelled) setServiceSlug(d?.slug ?? '')
+      })
+      .catch(() => {})
+    return () => {
+      cancelled = true
+    }
+  }, [collection, serviceId])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -49,7 +70,7 @@ const PagePreviewPanel: FC = () => {
     setError(null)
     try {
       const res = await fetch(
-        `/api/preview-sign?collection=pages&id=${encodeURIComponent(String(id))}`,
+        `/api/preview-sign?collection=${collection}&id=${encodeURIComponent(String(id))}`,
         { credentials: 'include' },
       )
       const data = (await res.json().catch(() => ({}))) as { url?: string; error?: string }
@@ -60,9 +81,18 @@ const PagePreviewPanel: FC = () => {
     } finally {
       setLoading(false)
     }
-  }, [id])
+  }, [id, collection])
 
-  const publicUrl = slug === 'home' ? '/' : slug ? `/${slug}/` : null
+  const publicUrl =
+    collection === 'sub-services'
+      ? serviceSlug && slug
+        ? `/${serviceSlug}/${slug}/`
+        : null
+      : slug === 'home'
+        ? '/'
+        : slug
+          ? `/${slug}/`
+          : null
 
   return (
     <section style={box} aria-label="Предпросмотр">

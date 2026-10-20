@@ -51,6 +51,11 @@ export async function computePreviewUrl(
     case 'pages':
       return doc.slug === 'home' ? '/' : doc.slug ? `/${doc.slug}/` : null
 
+    case 'sub-services': {
+      const serviceSlug = await resolveSlug(doc.service, 'services', payload)
+      return serviceSlug && doc.slug ? `/${serviceSlug}/${doc.slug}/` : null
+    }
+
     default:
       return null
   }
@@ -88,6 +93,7 @@ export const previewableCollections = [
   'blog',
   'b2b-pages',
   'pages',
+  'sub-services',
 ] as const
 
 export type PreviewableCollection = (typeof previewableCollections)[number]

@@ -18,7 +18,40 @@ export type PageData = {
  * версию; в режиме предпросмотра (draftMode) — последний черновик.
  * null — страницы нет / она не опубликована / БД недоступна: вызывающий показывает запасной вариант.
  */
-export const getPage = cache(async (slug: string): Promise<PageData | null> => {
+export const getPage = cache(
+  async (slug: string): Promise<PageData | null> =>
+    loadBlocksDoc('pages', { slug: { equals: slug } }),
+)
+
+/**
+ * Подуслуга из коллекции «Подуслуги» по адресу /направление/подуслуга/ — те же правила, что у getPage.
+ * null — документа нет или он не опубликован: страница показывает прежнюю версию.
+ */
+export const getSubServicePage = cache(
+  async (serviceSlug: string, slug: string): Promise<PageData | null> => {
+    try {
+      const payload = await payloadClient()
+      const service = await payload.find({
+        collection: 'services',
+        where: { slug: { equals: serviceSlug } },
+        limit: 1,
+        depth: 0,
+      })
+      const serviceId = service.docs[0]?.id
+      if (!serviceId) return null
+      return await loadBlocksDoc('sub-services', {
+        and: [{ slug: { equals: slug } }, { service: { equals: serviceId } }],
+      })
+    } catch {
+      return null
+    }
+  },
+)
+
+async function loadBlocksDoc(
+  collection: 'pages' | 'sub-services',
+  where: Record<string, unknown>,
+): Promise<PageData | null> {
   let draft = false
   try {
     draft = (await draftMode()).isEnabled
@@ -28,8 +61,8 @@ export const getPage = cache(async (slug: string): Promise<PageData | null> => {
   try {
     const payload = await payloadClient()
     const res = await payload.find({
-      collection: 'pages',
-      where: { slug: { equals: slug } },
+      collection,
+      where: where as never,
       draft,
       limit: 1,
       depth: 2,
@@ -51,4 +84,4 @@ export const getPage = cache(async (slug: string): Promise<PageData | null> => {
   } catch {
     return null
   }
-})
+}
