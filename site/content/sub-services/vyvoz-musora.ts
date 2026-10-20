@@ -152,7 +152,7 @@ const WASTE_DOCS = {
     {
       icon: 'checkCircle' as const,
       title: 'Акт и закрывающие документы',
-      text: 'Юрлицам — договор, акт, счёт; по ЭДО',
+      text: 'Юрлицам — договор, акт и счёт по ЭДО',
       metaLabel: 'каждому',
       metaValue: 'бесплатно',
     },

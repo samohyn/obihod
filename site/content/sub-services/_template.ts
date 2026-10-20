@@ -376,8 +376,8 @@ export const TILE: Record<string, ServiceTile> = {
     image: img('case2-before', 'Строительный мусор после ремонта'),
   },
   kontejner: {
-    title: 'Контейнер 8, 20, 27 м³',
-    text: 'Сутки на участке — в цене',
+    title: 'Контейнер для мусора',
+    text: '8, 20 и 27 м³, сутки — в цене',
     price: 'от 14 800 ₽',
     href: '/vyvoz-musora/kontejner/',
     image: img('skip-full', 'Заполненный контейнер у дома'),
