@@ -75,7 +75,7 @@
   margin-top: 32px;
 }
 .badge {
-  /* цифра подстраивается под ширину плашки: «от 700 ₽» в одну строку, «100%» — как была */
+  /* цифра подстраивается под ширину плашки и длину значения (--len): всегда в одну строку */
   container-type: inline-size;
   padding: 24px;
   border-radius: var(--radius-lg);
@@ -86,7 +86,8 @@
 .badge b {
   display: block;
   font-family: var(--font-mono);
-  font-size: clamp(40px, 22cqi, 56px);
+  /* моноширинный знак ≈ 0,6 em: 100cqi / (len × 0,6) — ширина плашки на число знаков */
+  font-size: clamp(26px, calc(100cqi / (var(--len, 4) * 0.6)), 56px);
   white-space: nowrap;
   font-weight: 700;
   letter-spacing: -0.04em;
