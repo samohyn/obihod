@@ -42,13 +42,40 @@ export interface SocialLink {
   url: string
 }
 
+export interface NavLink {
+  label: string
+  href: string
+}
+
+export interface NavChild extends NavLink {
+  text?: string | null
+}
+
+export interface NavItem extends NavLink {
+  children?: NavChild[] | null
+}
+
+export interface UtilityItem {
+  icon: string
+  text: string
+}
+
+export interface FooterNavColumn {
+  title: string
+  items?: NavLink[] | null
+}
+
 export interface SiteChrome {
   header?: {
     menu?: MenuItem[] | null
     cta?: HeaderCta | null
+    nav?: NavItem[] | null
+    mobileExtra?: NavLink[] | null
+    utility?: UtilityItem[] | null
   } | null
   footer?: {
     slogan?: string | null
+    nav?: FooterNavColumn[] | null
     columns?: FooterColumn[] | null
     privacyUrl?: string | null
     ofertaUrl?: string | null
@@ -57,6 +84,7 @@ export interface SiteChrome {
   contacts?: {
     phoneDisplay?: string | null
     phoneE164?: string | null
+    hours?: string | null
     email?: string | null
   } | null
   requisites?: {
@@ -131,6 +159,172 @@ export const DEFAULT_SITE_CHROME: SiteChrome = {
   },
   social: [],
 }
+
+/**
+ * Шапка и подвал C4 (план 09, этап 2), пока в админке пусто: меню — по карте 08
+ * (contex/08_site_map_target.html), тексты — по офферу (contex/10_offer.md, раздел 3).
+ */
+export const DEFAULT_CHROME_VIEW = {
+  nav: [
+    {
+      label: 'Услуги',
+      href: '/uslugi/',
+      children: [
+        {
+          label: 'Вывоз мусора',
+          href: '/vyvoz-musora/',
+          text: 'Контейнер, Газель, КГМ — с погрузкой',
+        },
+        {
+          label: 'Спил и уход за деревьями',
+          href: '/arboristika/',
+          text: 'Спил, обрезка, пни, работа альпинистов',
+        },
+        {
+          label: 'Чистка крыш и снег',
+          href: '/chistka-krysh/',
+          text: 'Снег, наледь, сосульки — дома и МКД',
+        },
+        {
+          label: 'Уборка территории',
+          href: '/uborka-territorii/',
+          text: 'Расчистка, покос, вывоз остатков',
+        },
+        {
+          label: 'Демонтаж и снос',
+          href: '/demontazh/',
+          text: 'Дачи, бани, сараи, заборы — с вывозом',
+        },
+        {
+          label: 'Дизайн ландшафта',
+          href: '/dizain-landshafta/',
+          text: 'Проект, посадки, газон, дорожки',
+        },
+        {
+          label: 'Аренда техники',
+          href: '/arenda-tehniki/',
+          text: 'Автовышка, измельчитель, самосвал',
+        },
+        {
+          label: 'Промышленный альпинизм',
+          href: '/promyshlennyj-alpinizm/',
+          text: 'Фасады, кровли, работы на высоте',
+        },
+        {
+          label: 'Порубочный билет',
+          href: '/porubochnyj-bilet/',
+          text: 'Разрешение на вырубку под ключ',
+        },
+      ],
+    },
+    {
+      label: 'Для УК и ТСЖ',
+      href: '/b2b/',
+      children: [
+        { label: 'УК и ТСЖ', href: '/b2b/uk-tszh/', text: 'Кровли, дворы, деревья по графику' },
+        {
+          label: 'Застройщикам',
+          href: '/b2b/zastrojschikam/',
+          text: 'Расчистка, снос, вывоз со стройки',
+        },
+        { label: 'FM-операторам', href: '/b2b/fm-operatoram/', text: 'Подрядчик на весь объект' },
+        { label: 'Госзаказ', href: '/b2b/goszakaz/', text: 'Работа с бюджетными организациями' },
+        {
+          label: 'Договор на сезон',
+          href: '/b2b/dogovor-na-sezon/',
+          text: 'Зима и лето, сроки в договоре',
+        },
+      ],
+    },
+    { label: 'Цены', href: '/uslugi/tseny/' },
+    { label: 'Кейсы', href: '/kejsy/' },
+    { label: 'Контакты', href: '/kontakty/' },
+  ] as NavItem[],
+  mobileExtra: [
+    { label: 'Районы', href: '/raiony/' },
+    { label: 'О компании', href: '/o-kompanii/' },
+    { label: 'Гарантии', href: '/garantii/' },
+    { label: 'Как мы работаем', href: '/kak-my-rabotaem/' },
+    { label: 'Отзывы', href: '/otzyvy/' },
+    { label: 'Блог', href: '/blog/' },
+  ] as NavLink[],
+  utility: [
+    { icon: 'pin', text: 'Москва и область · выезд до 50 км от МКАД' },
+    { icon: 'clock', text: 'Заявки 24/7 · менеджер 8:00–22:00' },
+    { icon: 'shield', text: 'Работаем по договору · физлица и юрлица' },
+  ] as UtilityItem[],
+  cta: { label: 'Смета по фото', href: '/foto-smeta/' } as NavLink,
+  hours: 'Ежедневно 8:00–22:00 · заявки 24/7',
+  footerAbout:
+    'Порядок под ключ на участке и территории. Москва и область, частные дома и организации.',
+  footerNav: [
+    {
+      title: 'Услуги',
+      items: [
+        { label: 'Арбористика', href: '/arboristika/' },
+        { label: 'Вывоз мусора', href: '/vyvoz-musora/' },
+        { label: 'Чистка крыш и снег', href: '/chistka-krysh/' },
+        { label: 'Уборка территории', href: '/uborka-territorii/' },
+        { label: 'Демонтаж и снос', href: '/demontazh/' },
+        { label: 'Дизайн ландшафта', href: '/dizain-landshafta/' },
+      ],
+    },
+    {
+      title: 'Клиентам',
+      items: [
+        { label: 'Цены', href: '/uslugi/tseny/' },
+        { label: 'Гарантии', href: '/garantii/' },
+        { label: 'Как мы работаем', href: '/kak-my-rabotaem/' },
+        { label: 'Кейсы', href: '/kejsy/' },
+        { label: 'Районы', href: '/raiony/' },
+      ],
+    },
+    {
+      title: 'Компания',
+      items: [
+        { label: 'О компании', href: '/o-kompanii/' },
+        { label: 'Для УК и ТСЖ', href: '/b2b/' },
+        { label: 'Блог', href: '/blog/' },
+        { label: 'Контакты', href: '/kontakty/' },
+      ],
+    },
+  ] as FooterNavColumn[],
+}
+
+export interface ChromeView {
+  nav: NavItem[]
+  mobileExtra: NavLink[]
+  utility: UtilityItem[]
+  cta: NavLink
+  hours: string
+  footerAbout: string
+  footerNav: FooterNavColumn[]
+  /** Мессенджеры с заполненной ссылкой (Telegram, MAX, WhatsApp). */
+  messengers: { label: string; href: string }[]
+}
+
+const MESSENGERS: SocialType[] = ['max', 'telegram', 'whatsapp']
+
+/** Шапка и подвал: из админки, пустые поля — по умолчанию (DEFAULT_CHROME_VIEW). */
+export const getChromeView = cache(async (): Promise<ChromeView> => {
+  const chrome = await getSiteChrome()
+  const d = DEFAULT_CHROME_VIEW
+  const h = chrome?.header
+  // Старая кнопка вела на якорь калькулятора старой главной — на других страницах его нет.
+  const cta = h?.cta?.label && h.cta.kind && h.cta.kind !== 'anchor' ? h.cta : null
+  return {
+    nav: h?.nav?.length ? h.nav : d.nav,
+    mobileExtra: h?.mobileExtra?.length ? h.mobileExtra : d.mobileExtra,
+    utility: h?.utility?.length ? h.utility : d.utility,
+    cta: cta ? { label: cta.label as string, href: menuHref(cta) } : d.cta,
+    hours: chrome?.contacts?.hours?.trim() || d.hours,
+    footerAbout: chrome?.footer?.slogan?.trim() || d.footerAbout,
+    footerNav: chrome?.footer?.nav?.length ? chrome.footer.nav : d.footerNav,
+    messengers: (chrome?.social ?? [])
+      .filter((link) => MESSENGERS.includes(link.type) && link.url)
+      .map((link) => ({ label: socialLabel(link.type), href: socialHref(link) })),
+  }
+})
 
 export interface Contacts {
   phoneDisplay: string
