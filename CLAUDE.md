@@ -28,7 +28,7 @@ specs, GSD) — в [archive/process-v1/](archive/process-v1/), новые зад
 4. **Автопроверки** — type-check, lint, format, e2e форм, скриншоты 360/768/1280/1440, axe, schema, ссылки.
 5. **Показ владельцу — каждый этап целиком** — ветка на https://staging.obikhod.ru (`deploy/manual-deploy.sh <ветка> staging`) + скриншоты desktop / laptop / mobile + рассказ: что сделано, почему так, где разошлись с Perplexity.
 6. **Приёмка владельцем.**
-7. **PR → main → деплой** — автоматически после мержа (`deploy.yml`), миграции БД — psql до мержа; вручную `deploy/manual-deploy.sh <sha>` → smoke прода.
+7. **PR → main → деплой** — автоматически после мержа (`deploy.yml`); миграции БД применяет сама выкатка (`pnpm migrate` до сборки, схема меняется только миграциями — `deploy/README.md`); вручную `deploy/manual-deploy.sh <sha>` → smoke прода.
 
 Definition of Done страницы — в плане 09, раздел 4. Решения фиксируются в журнале плана 09
 (раздел 9); старые ADR в [team/adr/](team/adr/) действуют, пока план их не заменил.

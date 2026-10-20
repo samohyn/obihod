@@ -4,10 +4,17 @@ _Обновляется в конце сессии. Короткий срез: �
 
 ## ▶ Следующий шаг (для новой сессии)
 
-**План 09, этап 1 — «Дрейф схемы»** (последняя задача этапа 1): `pnpm schema:diff` — 113 команд между конфигом Payload и БД; свести в миграции, затем в CI строить схему миграциями с нуля и проверять, что дрейфа нет (сейчас — push в `seed-admin.ts`). CI-проверки на проде с 20.10 (#247): PR — `ci.yml`, живой сайт — `site-checks.yml` (после «Deploy to staging» автоматически, ночью 04:00 МСК прод). На решение владельца: сборка на GitHub вместо VPS; ESLint 10 / TS 6 (#226), минорные #216, #217.
+**«Дрейф схемы» — на приёмке у владельца** ([PR #252](https://github.com/samohyn/obihod/pull/252), staging = ветка `db/schema-drift`, на сервере уже стоит новый `obikhod-deploy` с шагом миграций — для main он пропускается, пока в package.json нет `migrate`). После приёмки: мерж → автодеплой прода сам применит синхронизацию (бэкап → install → migrate → build → switch) → проверить на проде `schema:diff --check`, payload_migrations, smoke, site-checks прода. Это последняя задача этапа 1 → показ этапа 1 целиком → этап 2.
 Цикл задачи — CLAUDE.md: Perplexity — **второе мнение со сравнением**; показ этапа **целиком** с рассказом; UI/UX — `ui-ux-pro-max` + `frontend-design` + `frontend-patterns` и MCP `21st` (21st.dev, добавлен 19.10 в user scope). Источники: [план 09](../../contex/09_product_plan.md), [трекер](../../contex/09_product_plan-status.md), эксплуатация — [deploy/README.md](../../deploy/README.md).
 
-## Где мы сейчас (2026-10-20 ~01:30 MSK) — план 09, этап 1: CI-проверки на проде
+## Где мы сейчас (2026-10-20 ~03:40 MSK) — план 09, этап 1: дрейф схемы на приёмке
+
+- Против прода было 120 команд. Конфиг теперь описывает всю БД (`lib/db/schemaHooks.ts`: audit_log + частичные индексы service_districts). Базовая `migrations/20261020_120000_baseline` (+ .up.sql из pg_dump), история → `migrations/legacy/history`, разовая синхронизация `migrations/legacy/sync-to-baseline.sql` (97 команд).
+- `pnpm migrate` (`scripts/migrate.ts`): старая БД (нет baseline, есть users) → в транзакции sync + отметка baseline + удаление `dev`; потом `payload.db.migrate()`; печатает `MIGRATIONS_APPLIED=n`. `pnpm schema:diff --check` — CI-гейт, шум drizzle отфильтрован (имена > 63, numeric DEFAULT).
+- Локальные копии для проверок: `obikhod_prodschema` (схема прода), `obikhod_legacy`, `obikhod_fresh`, `obikhod_ci` в docker `obikhod_postgres`. Моя dev-БД `obikhod` ещё старая — `pnpm migrate` приведёт, останется 1 DEFAULT (ИНН) → проще залить копию staging.
+- Staging: синхронизация прошла на данных прода (34 записи, `dev` нет, дрейф 0, 11 услуг / 215 SD целы), повторная выкатка — 0 миграций, site-checks зелёные. CI #252 зелёный (миграции с нуля + дрейф + 211 тестов).
+
+## Где были раньше (2026-10-20 ~01:30 MSK) — план 09, этап 1: CI-проверки на проде
 
 - Владелец принял #247 → смержен, прод = `releases/20261020010345-bea0aa1`; форма контактов при обрыве сети — «Сеть недоступна…», заглушки «Заявка с /kontakty/» нет. Dependabot #227–229 закрыты. С GitHub: `site-checks` прода (вручную) и staging (после `deploy-staging` ref=main, автоматически) — зелёные.
 - **PR-CI** (`ci.yml`): схема и админ — `seed-admin.ts` (Payload push) вместо прогрева dev; prod-сборка → Playwright 211 тестов (~4,8 мин на раннере): `leads-api`, `forms` (5 форм), `a11y` (база `a11y-baseline.json`, обновление `A11Y_UPDATE_BASELINE=1`), `pages-health` (скролл на 4 ширинах, `KNOWN_OVERFLOW`), старые landing/seo/site-chrome/admin-*; JSON-LD; Lighthouse 3 прогона (`lighthouserc.json`). Краулер в PR-CI не работает — меню ведёт на страницы CMS, которых нет в чистой БД.

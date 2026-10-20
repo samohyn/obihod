@@ -27,20 +27,27 @@ deploy/manual-deploy.sh <sha>      # конкретный коммит из main
 ```
 
 Оба пути вызывают на сервере `/usr/local/sbin/obikhod-deploy` (`deploy/server/obikhod-deploy.sh`):
-бэкап → распаковка → `pnpm install` + `build` → переключение `current` → `pm2 restart` →
-health-check `/api/health/` (нет 200 за 60 с — откат) → чистка релизов. Ручной скрипт перед
+бэкап → распаковка → `pnpm install` → миграции БД (`pnpm migrate`) → `build` → переключение
+`current` → `pm2 restart` → health-check `/api/health/` (нет 200 за 60 с — откат кода) → чистка релизов. Ручной скрипт перед
 выкаткой ставит на сервер версию `obikhod-deploy` из того же коммита; ключ CI этого не может —
 изменения `deploy/server/` выкатить один раз вручную.
 
-**Миграции БД** (ADR-0016) в выкатку не входят: `.up.sql` применить **до мержа** PR и записать
-в реестр:
+**Миграции БД** — шаг выкатки (с 20.10.2026, план 09 «Дрейф схемы»; ручной psql из ADR-0016 больше
+не нужен). Изменили коллекцию/поле → `pnpm schema:diff` (локально, против свежей копии staging/прода)
+→ миграция `site/migrations/<ts>_<имя>.ts` + `.up.sql` + `.down.sql` → `pnpm migrate` локально →
+PR. CI строит схему миграциями с нуля и падает, если код разошёлся с ними (`schema:diff --check`).
+При выкатке `obikhod-deploy` запускает `pnpm migrate` после бэкапа, до сборки и переключения:
 
-```bash
-ssh root@89.111.141.79 'sudo -u postgres psql obikhod -v ON_ERROR_STOP=1' < site/migrations/<name>.up.sql
-ssh root@89.111.141.79 "sudo -u postgres psql obikhod -c \"insert into payload_migrations (name, batch, updated_at, created_at) values ('<name>', <n>, now(), now())\""
-```
+- каждая миграция — в своей транзакции; упала — релиз не переключается;
+- миграция обязана быть **совместима со старым кодом** (expand → contract): сначала добавить,
+  удалить старое — следующим релизом; в начале `.up.sql` — `SET LOCAL lock_timeout = '10s';`;
+- откат кода при провале health-check схему не откатывает; полный откат — pre-deploy бэкап;
+- миграцию данных сначала прогнать на staging (это копия прода).
 
-Миграцию данных сначала прогнать на проде в транзакции с `ROLLBACK` (dry-run).
+Схема до 20.10.2026 жила на dev-push и ручных миграциях (`site/migrations/legacy/history/`, не
+запускаются). Базовая миграция `20261020_120000_baseline` создаёт всю схему с нуля; на старой БД
+`scripts/migrate.ts` один раз применяет `migrations/legacy/sync-to-baseline.sql` и отмечает базовую
+миграцию применённой.
 
 ## Staging — https://staging.obikhod.ru
 

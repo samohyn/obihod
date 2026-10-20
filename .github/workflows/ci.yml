@@ -2,7 +2,8 @@ name: CI
 
 # Проверки на каждом PR (план 09, этап 1 — CI-проверки). Одна prod-сборка на чистой БД:
 #   quality — type-check, lint, format, unit-тесты, TOV;
-#   e2e     — схема БД и админ → build → next start → Playwright (формы и /api/leads, axe,
+#   e2e     — миграции с нуля → дрейф схемы (код = миграции) → админ → build → next start →
+#             Playwright (формы и /api/leads, axe,
 #             здоровье страниц, главная, шапка/подвал, SEO, админка) → JSON-LD → Lighthouse.
 # Шаблоны с контентом (pillar, подуслуга, гео…) и краулер ссылок — на живом сайте после выкатки
 # на staging и ночью на проде (site-checks.yml): в чистой CI-базе меню ведёт на несуществующие
@@ -141,11 +142,19 @@ jobs:
             next-cache-${{ runner.os }}-${{ hashFiles('site/pnpm-lock.yaml') }}-
             next-cache-${{ runner.os }}-
 
-      # Payload на старте создаёт схему по конфигу (push: NODE_ENV ≠ production) — без
-      # прогрева dev-сервером. Переход на «миграции с нуля + нет дрейфа» — задача
-      # «Дрейф схемы» (план 09, этап 1).
-      - name: Схема БД и админ
+      # Схема — тем же путём, что на проде: миграции с нуля (базовая + новые). Затем проверка,
+      # что схема из кода совпадает с получившейся БД: иначе изменили коллекцию/поле и забыли
+      # миграцию (план 09, этап 1 — «Дрейф схемы»).
+      - name: Миграции с нуля
         timeout-minutes: 3
+        run: pnpm run migrate
+
+      - name: Дрейф схемы — код совпадает с миграциями
+        timeout-minutes: 3
+        run: pnpm run schema:diff --check
+
+      - name: Админ для тестов
+        timeout-minutes: 2
         run: pnpm exec tsx --require=./scripts/_payload-cjs-shim.cjs scripts/seed-admin.ts
 
       - name: Build

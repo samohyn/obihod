@@ -23,6 +23,7 @@ import { RumMetrics } from './collections/RumMetrics'
 import { Homepage } from './globals/Homepage'
 import { SeoSettings } from './globals/SeoSettings'
 import { SiteChrome } from './globals/SiteChrome'
+import { auditLogTable, serviceDistrictIndexes } from './lib/db/schemaHooks'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -175,19 +176,15 @@ export default buildConfig({
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
   db: postgresAdapter({
     pool: { connectionString: process.env.DATABASE_URI || '' },
-    // US-3: переход с db.push (интерактивный, опасный) на proper migrations на проде.
-    // В dev/ci оставляем push:true для ephemeral schema bootstrap (иначе миграции,
-    // написанные как diff к prod-state, не применятся на пустой БД).
-    // На проде (NODE_ENV=production) миграции применяются отдельным step в deploy.yml
-    // через psql (Payload CLI сломан на extensionless ESM — root cause d2cac65).
-    //
-    // PAYLOAD_DISABLE_PUSH=1 — local-verify escape hatch (US-3 Wave 0 verify
-    // 2026-05-02): когда в БД есть raw-managed таблицы (audit_log из ADR-0014),
-    // Payload push:true видит их как «orphan» и блокируется на интерактивном
-    // prompt про DROP. Установка ENV даёт чистый non-interactive run против
-    // уже-мигрированной БД. На prod env уже push:false по NODE_ENV.
-    push: process.env.NODE_ENV !== 'production' && process.env.PAYLOAD_DISABLE_PUSH !== '1',
+    // Схема БД меняется только миграциями (план 09, этап 1 — «Дрейф схемы»): `pnpm schema:diff`
+    // показывает разницу конфиг ↔ БД, по ней пишется миграция в migrations/, `pnpm migrate`
+    // применяет (на сервере — шаг выкатки, CI — с нуля + проверка «дрейфа нет»).
+    // push — только для одноразовой локальной БД: PAYLOAD_DEV_PUSH=1.
+    push: process.env.PAYLOAD_DEV_PUSH === '1' && process.env.NODE_ENV !== 'production',
     migrationDir: path.resolve(dirname, 'migrations'),
+    // Объекты вне коллекций (audit_log, частичные индексы service_districts) — чтобы
+    // схема из конфига совпадала с базой целиком.
+    afterSchemaInit: [auditLogTable, serviceDistrictIndexes],
   }),
   sharp,
 })
