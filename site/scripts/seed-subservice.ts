@@ -3,6 +3,7 @@
  *
  *   pnpm seed:subservice spil-derevev              — создать/обновить ЧЕРНОВИК: сайт не меняется
  *   pnpm seed:subservice spil-derevev --publish    — сразу опубликовать (staging)
+ *   pnpm seed:subservice arboristika [--publish]   — партия целиком (SUB_SERVICE_BATCHES)
  *
  * Наполнение — content/sub-services/<ключ>.ts; фото — public/dev-blocks/*.webp → «Медиа»
  * с флагом «Иллюстрация» (повторный запуск их не дублирует). Перезапуск затирает правки
@@ -10,8 +11,10 @@
  */
 import { getPayload } from 'payload'
 
-import { SUB_SERVICE_CONTENT } from '../content/sub-services'
+import { SUB_SERVICE_BATCHES, SUB_SERVICE_CONTENT } from '../content/sub-services'
 import config from '../payload.config.js'
+
+import type { Payload } from 'payload'
 
 import { dropNulls, toLayout } from './_v3-seed'
 
@@ -19,11 +22,20 @@ const PUBLISH = process.argv.includes('--publish')
 const key = process.argv.slice(2).find((a) => !a.startsWith('--')) ?? ''
 
 async function main() {
-  const content = SUB_SERVICE_CONTENT[key]
-  if (!content) {
-    throw new Error(`нет наполнения «${key}». Есть: ${Object.keys(SUB_SERVICE_CONTENT).join(', ')}`)
+  const keys = SUB_SERVICE_BATCHES[key] ?? [key]
+  const missing = keys.filter((k) => !SUB_SERVICE_CONTENT[k])
+  if (missing.length) {
+    throw new Error(
+      `нет наполнения «${missing.join(', ')}». Есть: ${Object.keys(SUB_SERVICE_CONTENT).join(', ')}; партии: ${Object.keys(SUB_SERVICE_BATCHES).join(', ')}`,
+    )
   }
   const payload = await getPayload({ config })
+  for (const k of keys) await seedOne(payload, k)
+  process.exit(0)
+}
+
+async function seedOne(payload: Payload, contentKey: string) {
+  const content = SUB_SERVICE_CONTENT[contentKey]
   const service = await payload.find({
     collection: 'services',
     where: { slug: { equals: content.service } },
@@ -61,7 +73,6 @@ async function main() {
   console.log(
     `[seed:subservice] /${content.service}/${content.slug}/ id=${doc.id}, блоков ${layout.length}, ${PUBLISH ? 'опубликована' : 'черновик'}`,
   )
-  process.exit(0)
 }
 
 main().catch((e) => {

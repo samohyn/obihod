@@ -5,7 +5,7 @@
 // пауза при наведении/фокусе и выключена при prefers-reduced-motion.
 // Первый слайд целиком в HTML — его фото грузится сразу (LCP).
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { type CSSProperties, useCallback, useEffect, useRef, useState } from 'react'
 
 import { ButtonLink, Icon, IllustrationTag, Picture, Wrap } from './shared'
 import type { HeroSliderBlock } from './types'
@@ -84,7 +84,10 @@ export function HeroSlider(block: HeroSliderBlock) {
         </div>
         {block.badge && (
           <aside className={s.badge}>
-            <b>{block.badge.value}</b>
+            {/* длина значения → размер цифры в CSS: «100%» крупно, «от 3 800 ₽» мельче, всегда в плашке */}
+            <b style={{ '--len': block.badge.value.length } as CSSProperties}>
+              {block.badge.value}
+            </b>
             <p>{block.badge.text}</p>
             {block.badge.note && <small>{block.badge.note}</small>}
           </aside>
