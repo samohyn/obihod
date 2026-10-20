@@ -6,13 +6,14 @@ import { breadcrumbListSchema } from '@/lib/seo/jsonld'
 
 import { JsonLd } from './JsonLd'
 import s from './Breadcrumbs.module.css'
+import { CrumbsScroller } from './CrumbsScroller'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 /**
  * Хлебные крошки (brand-guide §breadcrumbs): полоса сразу под шапкой, по её колонке.
  * Цепочка — из lib/breadcrumbs.ts (карта 08). Предыдущие пункты — ссылки, последний —
- * текущая страница. На телефоне — одна строка с прокруткой к текущему пункту.
+ * текущая страница. На телефоне — одна строка, прокрученная к текущему пункту.
  * `schema={false}` — если страница уже кладёт BreadcrumbList в свой JSON-LD.
  */
 export function Breadcrumbs({ items, schema = true }: { items: Crumb[]; schema?: boolean }) {
@@ -21,7 +22,7 @@ export function Breadcrumbs({ items, schema = true }: { items: Crumb[]; schema?:
     <>
       <nav aria-label="Хлебные крошки" className={s.bar}>
         <Wrap>
-          <ol className={s.list}>
+          <CrumbsScroller className={s.list}>
             {items.map((it, i) =>
               i === items.length - 1 ? (
                 <li key={it.href} className={s.current} aria-current="page">
@@ -33,7 +34,7 @@ export function Breadcrumbs({ items, schema = true }: { items: Crumb[]; schema?:
                 </li>
               ),
             )}
-          </ol>
+          </CrumbsScroller>
         </Wrap>
       </nav>
       {schema && (

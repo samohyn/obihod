@@ -55,28 +55,12 @@
   outline-offset: 2px;
   border-radius: 2px;
 }
-/* текущая страница: длинное название обрезается многоточием, ссылки слева остаются целыми */
+/* текущая страница: не шире экрана, длинное название — с многоточием; строка прокручена к ней */
 .list .current {
   display: block;
-  flex: 0 1 auto;
-  min-width: 0;
-  max-width: 60ch;
+  max-width: min(60ch, calc(100vw - 2 * var(--pad) - 24px));
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--c-ink);
   font-weight: 600;
-}
-
-/* телефон: промежуточные разделы сжимаются первыми, текущая страница остаётся видна */
-@media (max-width: 767px) {
-  .list li:not(:first-child):not(.current) {
-    display: block;
-    flex: 0 1 auto;
-    min-width: 4.5em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .list .current {
-    flex-shrink: 0.15;
-  }
 }
