@@ -281,7 +281,7 @@ export const TILE: Record<string, ServiceTile> = {
     text: 'Целиком, по частям, с автовышки',
     price: 'от 700 ₽',
     href: '/arboristika/spil-derevev/',
-    image: img('spil-valka', 'Валка дерева с направляющим тросом'),
+    image: img('spil-before', 'Сухой тополь над дачей'),
   },
   avariya: {
     title: 'Аварийный спил',
