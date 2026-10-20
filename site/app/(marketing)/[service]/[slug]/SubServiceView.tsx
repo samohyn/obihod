@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { shortTitle, trail } from '@/lib/breadcrumbs'
 import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { JsonLd } from '@/components/seo/JsonLd'
@@ -60,12 +61,11 @@ type Props = {
  * `serviceSchema()` без district (areaServed остаётся МО по умолчанию).
  */
 export async function SubServiceView({ service, sub }: Props) {
-  const breadcrumbs = [
-    { name: 'Главная', href: '/' },
-    { name: 'Услуги', href: '/uslugi/' },
+  const breadcrumbs = trail(
+    'uslugi',
     { name: service.title, href: `/${service.slug}/` },
-    { name: sub.title, href: `/${service.slug}/${sub.slug}/` },
-  ]
+    { name: shortTitle(sub.title), href: `/${service.slug}/${sub.slug}/` },
+  )
 
   const priceFrom = sub.priceFrom ?? service.priceFrom
 
@@ -109,6 +109,7 @@ export async function SubServiceView({ service, sub }: Props) {
     const resolvedBlocks = getBlocksForLayer('T3_SUB', subBlocks, resolverOpts)
     return (
       <>
+        <Breadcrumbs items={breadcrumbs} schema={false} />
         <BlockRenderer blocks={resolvedBlocks as never} />
         <JsonLd schema={t3Schema} />
       </>
@@ -117,9 +118,9 @@ export async function SubServiceView({ service, sub }: Props) {
 
   return (
     <>
+      <Breadcrumbs items={breadcrumbs} schema={false} />
       <section className="bg-bg-alt py-10 sm:py-14">
         <div className="mx-auto max-w-[var(--maxw)] px-[var(--pad)]">
-          <Breadcrumbs items={breadcrumbs} />
           <h1 className="text-ink mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
             {sub.h1}
           </h1>

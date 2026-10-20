@@ -3,6 +3,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { trail } from '@/lib/breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
@@ -48,11 +49,10 @@ export default async function DistrictHub({ params }: { params: Promise<{ distri
   ])
   if (!district) notFound()
 
-  const breadcrumbs = [
-    { name: 'Главная', href: '/' },
-    { name: 'Районы', href: '/raiony/' },
-    { name: district.nameNominative, href: `/raiony/${district.slug}/` },
-  ]
+  const breadcrumbs = trail('raiony', {
+    name: district.nameNominative,
+    href: `/raiony/${district.slug}/`,
+  })
 
   // US-0 W3 Track B-3 — приоритет blocks[] из Payload (cw fixture).
   const districtBlocks = (district as { blocks?: unknown[] | null }).blocks
@@ -61,6 +61,7 @@ export default async function DistrictHub({ params }: { params: Promise<{ distri
   if (hasBlocks) {
     return (
       <>
+        <Breadcrumbs items={breadcrumbs} schema={false} />
         {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
         <BlockRenderer blocks={districtBlocks as any} />
         <JsonLd
@@ -76,80 +77,82 @@ export default async function DistrictHub({ params }: { params: Promise<{ distri
   }
 
   return (
-    <section className="mx-auto max-w-5xl px-6 py-12">
-      <Breadcrumbs items={breadcrumbs} />
-      <h1 className="text-4xl font-semibold tracking-tight text-stone-900">
-        Обиход {district.namePrepositional}
-      </h1>
-      <p className="mt-4 max-w-2xl text-lg text-stone-700">
-        Спил, снег, мусор, демонтаж {district.namePrepositional} и Раменском ГО. Расстояние от МКАД
-        — {district.distanceFromMkad} км. Покрытие — радиус {district.coverageRadius} км.
-      </p>
+    <>
+      <Breadcrumbs items={breadcrumbs} schema={false} />
+      <section className="mx-auto max-w-5xl px-6 py-12">
+        <h1 className="text-4xl font-semibold tracking-tight text-stone-900">
+          Обиход {district.namePrepositional}
+        </h1>
+        <p className="mt-4 max-w-2xl text-lg text-stone-700">
+          Спил, снег, мусор, демонтаж {district.namePrepositional} и Раменском ГО. Расстояние от
+          МКАД — {district.distanceFromMkad} км. Покрытие — радиус {district.coverageRadius} км.
+        </p>
 
-      <CtaMessengers className="mt-8 max-w-2xl" />
+        <CtaMessengers className="mt-8 max-w-2xl" />
 
-      <h2 className="mt-12 text-2xl font-semibold text-stone-900">
-        Услуги {district.namePrepositional}
-      </h2>
-      <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {ALL_SERVICES.map((s) => (
-          <Link
-            key={s.slug}
-            href={`/${s.slug}/${district.slug}/`}
-            className="rounded-lg border border-stone-200 bg-white p-4 hover:border-orange-300"
-          >
-            <div className="font-medium text-stone-900">{s.title}</div>
-            <div className="mt-1 text-xs text-stone-500">
-              {s.title} {district.namePrepositional}
+        <h2 className="mt-12 text-2xl font-semibold text-stone-900">
+          Услуги {district.namePrepositional}
+        </h2>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {ALL_SERVICES.map((s) => (
+            <Link
+              key={s.slug}
+              href={`/${s.slug}/${district.slug}/`}
+              className="rounded-lg border border-stone-200 bg-white p-4 hover:border-orange-300"
+            >
+              <div className="font-medium text-stone-900">{s.title}</div>
+              <div className="mt-1 text-xs text-stone-500">
+                {s.title} {district.namePrepositional}
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {(district as any).landmarks && (district as any).landmarks.length > 0 && (
+          <>
+            <h2 className="mt-12 text-2xl font-semibold text-stone-900">Где именно работаем</h2>
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+              {(district as any).landmarks.map((l: any, i: number) => (
+                <li key={i} className="text-stone-700">
+                  · {l.name}{' '}
+                  <span className="text-xs text-stone-500">({labelLandmarkType(l.type)})</span>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+
+        {(district as any).neighborDistricts && (district as any).neighborDistricts.length > 0 && (
+          <>
+            <h2 className="mt-12 text-2xl font-semibold text-stone-900">Соседние районы</h2>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {(district as any).neighborDistricts.map((n: any) => {
+                const slug = typeof n === 'object' ? n.slug : n
+                const name = typeof n === 'object' ? n.nameNominative : n
+                return (
+                  <Link
+                    key={slug}
+                    href={`/raiony/${slug}/`}
+                    className="rounded-full border border-stone-300 px-4 py-1 text-sm text-stone-700 hover:border-orange-300"
+                  >
+                    {name}
+                  </Link>
+                )
+              })}
             </div>
-          </Link>
-        ))}
-      </div>
+          </>
+        )}
 
-      {(district as any).landmarks && (district as any).landmarks.length > 0 && (
-        <>
-          <h2 className="mt-12 text-2xl font-semibold text-stone-900">Где именно работаем</h2>
-          <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-            {(district as any).landmarks.map((l: any, i: number) => (
-              <li key={i} className="text-stone-700">
-                · {l.name}{' '}
-                <span className="text-xs text-stone-500">({labelLandmarkType(l.type)})</span>
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
-
-      {(district as any).neighborDistricts && (district as any).neighborDistricts.length > 0 && (
-        <>
-          <h2 className="mt-12 text-2xl font-semibold text-stone-900">Соседние районы</h2>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {(district as any).neighborDistricts.map((n: any) => {
-              const slug = typeof n === 'object' ? n.slug : n
-              const name = typeof n === 'object' ? n.nameNominative : n
-              return (
-                <Link
-                  key={slug}
-                  href={`/raiony/${slug}/`}
-                  className="rounded-full border border-stone-300 px-4 py-1 text-sm text-stone-700 hover:border-orange-300"
-                >
-                  {name}
-                </Link>
-              )
-            })}
-          </div>
-        </>
-      )}
-
-      <JsonLd
-        schema={[
-          localBusinessSchema(chrome, seo, district as any),
-          breadcrumbListSchema(
-            breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
-          ),
-        ]}
-      />
-    </section>
+        <JsonLd
+          schema={[
+            localBusinessSchema(chrome, seo, district as any),
+            breadcrumbListSchema(
+              breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
+            ),
+          ]}
+        />
+      </section>
+    </>
   )
 }
 

@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 
 import { LeadForm } from '@/components/blocks/LeadForm'
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { trail } from '@/lib/breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { payloadClient } from '@/lib/payload'
 import {
@@ -99,10 +100,7 @@ function formatDate(iso: string): string {
 export default async function OtzyvyPage() {
   const reviews = await fetchReviews()
 
-  const breadcrumbs = [
-    { name: 'Главная', href: '/' },
-    { name: 'Отзывы', href: '/otzyvy/' },
-  ]
+  const breadcrumbs = trail('otzyvy')
 
   // AggregateRating: средний rating + count
   const aggregate = (() => {
@@ -140,8 +138,8 @@ export default async function OtzyvyPage() {
           ...reviewSchemas,
         ]}
       />
+      <Breadcrumbs items={breadcrumbs} schema={false} />
       <main className="otzyvy-page container">
-        <Breadcrumbs items={breadcrumbs} />
         <header className="otzyvy-page__hero">
           <h1>Отзывы клиентов Обихода</h1>
           <p className="otzyvy-page__lead">

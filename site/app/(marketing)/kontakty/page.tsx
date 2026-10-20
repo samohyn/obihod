@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 
 import { LeadForm } from '@/components/blocks/LeadForm'
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { trail } from '@/lib/breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema, localBusinessSchema, organizationSchema } from '@/lib/seo/jsonld'
 import { metadataBase } from '@/lib/seo/metadata'
@@ -82,10 +83,7 @@ export default async function KontaktyPage() {
     },
   ]
 
-  const breadcrumbs = [
-    { name: 'Главная', href: '/' },
-    { name: 'Контакты', href: '/kontakty/' },
-  ]
+  const breadcrumbs = trail('kontakty')
 
   // ContactPoint extension к sustained organization schema
   const contactPoints = [
@@ -126,8 +124,8 @@ export default async function KontaktyPage() {
           ),
         ]}
       />
+      <Breadcrumbs items={breadcrumbs} schema={false} />
       <main className="kontakty-page container">
-        <Breadcrumbs items={breadcrumbs} />
         <header className="kontakty-page__hero">
           <h1>Контакты Обихода</h1>
           <p className="kontakty-page__lead">

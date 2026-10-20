@@ -73,6 +73,8 @@ export async function SiteFooter() {
               <Link href={PRIVACY_URL}>Политика конфиденциальности</Link>
               <span aria-hidden> · </span>
               <Link href={CONSENT_URL}>Согласие на обработку данных</Link>
+              <span aria-hidden> · </span>
+              <Link href="/karta-sajta/">Карта сайта</Link>
             </span>
           </div>
         </Wrap>

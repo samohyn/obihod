@@ -1,5 +1,3 @@
-import { Breadcrumbs } from './Breadcrumbs'
-import { BreadcrumbsV2 } from './BreadcrumbsV2'
 import { Calculator } from './Calculator'
 import { CalculatorShell } from './CalculatorShell'
 import { CtaBanner } from './CtaBanner'
@@ -78,7 +76,9 @@ export function BlockRenderer({ blocks }: { blocks: AnyBlock[] | null | undefine
           case 'faq':
             return <Faq key={block.id ?? i} {...block} />
           case 'breadcrumbs':
-            return <Breadcrumbs key={block.id ?? i} {...block} />
+          case 'breadcrumbs-v2':
+            // Крошки ставит страница из lib/breadcrumbs.ts (карта 08), а не блок с цепочкой вручную.
+            return null
           case 'tldr':
             return <Tldr key={block.id ?? i} {...block} />
           case 'services-grid':
@@ -110,8 +110,6 @@ export function BlockRenderer({ blocks }: { blocks: AnyBlock[] | null | undefine
             return <MiniCaseV2 key={block.id ?? i} {...block} />
           case 'faq-accordion':
             return <FaqAccordion key={block.id ?? i} {...block} />
-          case 'breadcrumbs-v2':
-            return <BreadcrumbsV2 key={block.id ?? i} {...block} />
           case 'tldr-v2':
             return <TldrV2 key={block.id ?? i} {...block} />
           case 'district-chips':

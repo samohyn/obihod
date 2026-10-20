@@ -5761,6 +5761,19 @@
       <strong>Iron rule.</strong> Семантика — <code>&lt;nav aria-label="breadcrumb"&gt;</code> + <code>&lt;ol&gt;</code> + <code>&lt;li&gt;</code> (упорядоченный список — это именно последовательность шагов). Текущая страница: <code>&lt;li aria-current="page"&gt;</code> без <code>&lt;a&gt;</code> (она и так current — никуда не ведёт). Separator <code>›</code> рисуется через CSS-pseudo, в DOM его нет — screen reader не читает шум.
     </div>
 
+    <h3 style="margin-top: 28px;">С 20.10.2026 · цепочки по карте 08, полоса под шапкой</h3>
+    <table>
+      <thead><tr><th>Правило</th><th>Как</th></tr></thead>
+      <tbody>
+        <tr><td>Откуда цепочка</td><td>Только <code>site/lib/breadcrumbs.ts</code> (<code>trail()</code>) — по карте 08, а не по адресу: «Главная › О компании › Команда» при адресе <code>/komanda/</code>. Блоки «breadcrumbs» в админке больше не выводятся. Раздел <code>/b2b/</code> в крошках — «Для бизнеса»; калькуляторы и лендинги смет — сразу под главной</td></tr>
+        <tr><td>Подписи</td><td>Короткие: из SEO-заголовка берётся часть до « — » или «: » (<code>shortTitle()</code>) — «Кронирование деревьев», не «Кронирование деревьев — 3 800 ₽…»</td></tr>
+        <tr><td>Где</td><td>Полоса сразу под шапкой, по колонке шапки (<code>Wrap</code>, 1280 + поля), фон <code>--c-bg</code>, линия снизу <code>--c-line</code>; компонент <code>components/seo/Breadcrumbs.tsx</code></td></tr>
+        <tr><td>Цвет</td><td>Ссылки — <code>--c-muted-text</code> (контраст AA), текущая — <code>--c-ink</code>, 600; разделитель «›» — <code>--c-muted</code>, декоративный</td></tr>
+        <tr><td>Телефон</td><td>Одна строка, без переноса и без сжатия разделов: строка сразу прокручена к концу (видны раздел и текущая страница), начало — прокруткой влево; текущая не шире экрана, длинная — с многоточием</td></tr>
+        <tr><td>Разметка</td><td>Одна <code>BreadcrumbList</code> на страницу с той же цепочкой; если страница собирает JSON-LD сама — <code>schema={false}</code> у компонента</td></tr>
+      </tbody>
+    </table>
+
     <h3 style="margin-top: 32px;">Per layer · что показываем</h3>
     <p class="muted" style="font-size: 13px;">3 layer'а master-template из ADR-0021. Глубже 4 уровня не идём — для T4 SD сжимаем хвост в pillar-в-районе.</p>
 

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { trail } from '@/lib/breadcrumbs'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema } from '@/lib/seo/jsonld'
@@ -63,10 +64,7 @@ const TRUST_PILLARS = [
 export default async function B2BIndex() {
   const pages = (await getPublishedB2BPages()) as unknown as B2BPage[]
 
-  const breadcrumbs = [
-    { name: 'Главная', href: '/' },
-    { name: 'B2B', href: '/b2b/' },
-  ]
+  const breadcrumbs = trail('b2b')
 
   // overview-карточка `b2b-overview` идёт в hero, остальные показываем как audience-cards
   const overview = pages.find((p) => p.slug === 'b2b-overview')
@@ -74,9 +72,9 @@ export default async function B2BIndex() {
 
   return (
     <>
+      <Breadcrumbs items={breadcrumbs} schema={false} />
       <section className="bg-primary py-12 sm:py-16">
         <div className="mx-auto max-w-[var(--maxw)] px-[var(--pad)]">
-          <Breadcrumbs items={breadcrumbs} variant="onPrimary" />
           <h1 className="text-on-primary mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
             {overview?.h1 ?? 'Обиход для бизнеса — УК, ТСЖ, FM, застройщики, госзаказ'}
           </h1>

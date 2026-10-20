@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { trail } from '@/lib/breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { aggregateOfferSchema, breadcrumbListSchema, faqPageSchema } from '@/lib/seo/jsonld'
 import { metadataBase } from '@/lib/seo/metadata'
@@ -129,11 +130,10 @@ export default async function PillarPricingPage({
     (s): s is { slug: string; title: string } & typeof s => Boolean(s.slug && s.title),
   )
 
-  const breadcrumbs = [
-    { name: 'Главная', href: '/' },
-    { name: 'Цены', href: '/uslugi/tseny/' },
-    { name: service.title, href: `/uslugi/tseny/${service.slug}/` },
-  ]
+  const breadcrumbs = trail('tseny', {
+    name: service.title,
+    href: `/uslugi/tseny/${service.slug}/`,
+  })
 
   const offers = [
     {
@@ -173,8 +173,8 @@ export default async function PillarPricingPage({
           ...(richTextFaq.length > 0 ? [faqPageSchema(richTextFaq)] : []),
         ]}
       />
+      <Breadcrumbs items={breadcrumbs} schema={false} />
       <main className="pricing-pillar-page container">
-        <Breadcrumbs items={breadcrumbs} />
         <header className="pricing-pillar-page__hero">
           <h1>Цены: {service.title}</h1>
           <p className="pricing-pillar-page__lead">

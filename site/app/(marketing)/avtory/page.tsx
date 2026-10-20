@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { trail } from '@/lib/breadcrumbs'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema } from '@/lib/seo/jsonld'
@@ -34,16 +35,13 @@ type Author = {
 export default async function AuthorsIndex() {
   const authors = (await getPublishedAuthors()) as unknown as Author[]
 
-  const breadcrumbs = [
-    { name: 'Главная', href: '/' },
-    { name: 'Авторы', href: '/avtory/' },
-  ]
+  const breadcrumbs = trail('avtory')
 
   return (
     <>
+      <Breadcrumbs items={breadcrumbs} schema={false} />
       <section className="bg-bg-alt py-12 sm:py-16">
         <div className="mx-auto max-w-[var(--maxw)] px-[var(--pad)]">
-          <Breadcrumbs items={breadcrumbs} />
           <h1 className="text-ink mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
             Эксперты Обихода
           </h1>

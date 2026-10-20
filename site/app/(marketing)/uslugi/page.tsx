@@ -18,6 +18,8 @@ import { buildJsonLdForTemplate } from '@/lib/seo/composer'
 import { metadataBase } from '@/lib/seo/metadata'
 import { getAllPillarsForPricing } from '@/lib/seo/queries'
 import { getContacts, getSiteChrome } from '@/lib/chrome'
+import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { crumbsToSchema, trail } from '@/lib/breadcrumbs'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -67,10 +69,8 @@ export default async function UslugiHubPage() {
     getContacts(),
   ])
 
-  const breadcrumbs = [
-    { name: 'Главная', url: `${SITE_URL}/` },
-    { name: 'Услуги', url: `${SITE_URL}/uslugi/` },
-  ]
+  const crumbs = trail('uslugi')
+  const breadcrumbs = crumbsToSchema(crumbs, SITE_URL)
 
   const schema = buildJsonLdForTemplate('T1_HUB', {
     chrome,
@@ -84,17 +84,7 @@ export default async function UslugiHubPage() {
       <link rel="stylesheet" href="/uslugi-t1.css" />
       <JsonLd schema={schema} />
 
-      {/* Breadcrumbs */}
-      <nav className="t1-crumbs" aria-label="Хлебные крошки">
-        <div className="wrap">
-          <ol>
-            <li>
-              <Link href="/">Главная</Link>
-            </li>
-            <li aria-current="page">Услуги</li>
-          </ol>
-        </div>
-      </nav>
+      <Breadcrumbs items={crumbs} schema={false} />
 
       {/* §01 · HERO */}
       <section className="hp-section t1-hero">

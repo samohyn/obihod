@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { shortTitle, trail } from '@/lib/breadcrumbs'
 import { BlockRenderer } from '@/components/blocks/BlockRenderer'
 import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { JsonLd } from '@/components/seo/JsonLd'
@@ -73,17 +74,14 @@ export default async function B2BPage({ params }: { params: Promise<{ slug: stri
   const page = (await getB2BPageBySlug(slug)) as unknown as B2BPageDoc | null
   if (!page) notFound()
 
-  const breadcrumbs = [
-    { name: 'Главная', href: '/' },
-    { name: 'B2B', href: '/b2b/' },
-    { name: page.title, href: `/b2b/${page.slug}/` },
-  ]
+  const breadcrumbs = trail('b2b', { name: shortTitle(page.title), href: `/b2b/${page.slug}/` })
 
   // US-0 W3 Track B-3 — приоритет blocks[] (cw fixture).
   const hasBlocks = Array.isArray(page.blocks) && page.blocks.length > 0
   if (hasBlocks) {
     return (
       <>
+        <Breadcrumbs items={breadcrumbs} schema={false} />
         {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
         <BlockRenderer blocks={page.blocks as any} />
         <JsonLd
@@ -99,9 +97,9 @@ export default async function B2BPage({ params }: { params: Promise<{ slug: stri
 
   return (
     <>
+      <Breadcrumbs items={breadcrumbs} schema={false} />
       <section className="bg-bg-alt py-10 sm:py-14">
         <div className="mx-auto max-w-[var(--maxw)] px-[var(--pad)]">
-          <Breadcrumbs items={breadcrumbs} />
           <span className="bg-card text-ink-soft mt-4 inline-block rounded-[var(--radius-sm)] px-2.5 py-1 text-xs font-medium">
             {AUDIENCE_LABELS[page.audience] ?? page.audience}
           </span>
