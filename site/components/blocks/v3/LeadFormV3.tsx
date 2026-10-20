@@ -22,7 +22,7 @@ export function LeadFormV3({
 }: {
   title: string
   source: string
-  photoHref: string
+  photoHref: string | null
   phoneDisplay: string
 }) {
   const uid = useId()
@@ -86,13 +86,15 @@ export function LeadFormV3({
           <Icon name="checkCircle" size={40} />
           <b>Заявка принята</b>
           <p>
-            Перезвоним до <span className={s.mono}>{deadline}</span>. Фото можно прислать в
-            мессенджер — так посчитаем точнее.
+            Перезвоним до <span className={s.mono}>{deadline}</span>.
+            {photoHref && ' Пришлите фото участка — так посчитаем точнее.'}
           </p>
-          <a href={photoHref} className={s.photoLink}>
-            <Icon name="camera" size={20} />
-            Отправить фото
-          </a>
+          {photoHref && (
+            <a href={photoHref} className={s.photoLink}>
+              <Icon name="camera" size={20} />
+              Отправить фото
+            </a>
+          )}
         </div>
       </div>
     )
@@ -118,13 +120,15 @@ export function LeadFormV3({
           aria-describedby={error ? `${uid}-err` : undefined}
         />
       </div>
-      <div className={s.field}>
-        <span className={s.fieldLabel}>Фото участка — по желанию</span>
-        <a href={photoHref} className={s.photoLink}>
-          <Icon name="camera" size={20} />
-          Отправить 2–3 фото в мессенджер
-        </a>
-      </div>
+      {photoHref && (
+        <div className={s.field}>
+          <span className={s.fieldLabel}>Фото участка — по желанию</span>
+          <a href={photoHref} className={s.photoLink}>
+            <Icon name="camera" size={20} />
+            Отправить 2–3 фото
+          </a>
+        </div>
+      )}
       <input
         className={s.hp}
         type="text"
