@@ -8,14 +8,17 @@
     "on-primary": { "value": "#f7f5f0", "description": "Текст и графика поверх primary." },
     "accent": { "value": "#e6a23c", "description": "Янтарный. Бейджи, штамп-акценты. НЕ в логотипе." },
     "accent-ink": { "value": "#c18724", "description": "Текст на accent." },
+    "accent-text": { "value": "#8f5f0d", "description": "Янтарный мелкий текст на светлом фоне (условия акций, метки): ≥ 5,1:1. На primary-ink — accent #e6a23c (5,3:1)." },
     "ink": { "value": "#1c1c1c", "description": "Основной текст, заголовки." },
     "ink-soft": { "value": "#2b2b2b", "description": "Вторичный текст." },
     "muted": { "value": "#8c8377", "description": "Описания, captions, placeholder. Контраст ~3.3:1 — только на large text." },
+    "muted-text": { "value": "#6b6358", "description": "Мелкий вторичный текст на bg / bg-alt / card: ≥ 4,97:1 (WCAG AA)." },
     "line": { "value": "#e6e1d6", "description": "Границы, разделители." },
     "bg": { "value": "#f7f5f0", "description": "Основной фон страницы." },
     "bg-alt": { "value": "#efebe0", "description": "Альтернативный фон (чередование секций, sticky-header таблицы)." },
     "card": { "value": "#ffffff", "description": "Карточка / элевация." },
     "success": { "value": "#4a7c59", "description": "Feedback success." },
+    "success-text": { "value": "#3b6a4a", "description": "Мелкий «успешный» текст на светлом фоне («включено», «смета = акт»): ≥ 5,7:1." },
     "error": { "value": "#b54828", "description": "Validation error, danger action." }
   },
   "logo": {
