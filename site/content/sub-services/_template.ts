@@ -130,7 +130,7 @@ const GUARANTEES: V3BlockWithTone = {
     {
       icon: 'dumpster',
       title: 'Участок сдаём чистым',
-      text: 'Убираем за собой, отходы вывозим и утилизируем.',
+      text: 'Убираем за собой, отходы вывозим на полигон.',
       conditionLabel: 'Уже',
       conditionValue: 'в цене сметы',
     },
@@ -165,7 +165,7 @@ export type SubServiceSpec = {
   form: { title: string; formTitle: string; background?: BlockImage }
 }
 
-const TONED = new Set(['hero-slider', 'photo-cta', 'final-form'])
+const TONED = new Set(['hero-slider', 'photo-cta', 'final-form', 'b2b-plan'])
 
 export function subServicePage(spec: SubServiceSpec): SubServiceContent {
   const blocks: V3BlockWithTone[] = [
