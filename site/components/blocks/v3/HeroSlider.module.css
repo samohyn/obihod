@@ -218,6 +218,25 @@
     display: none;
   }
 }
+/* на планшете четыре пункта в ряд не помещаются («Окно / подачи 2 / часа») — сетка 2 × 2 */
+@media (max-width: 1023px) {
+  .strip ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .strip li,
+  .strip li + li {
+    padding: 14px 8px 14px 0;
+    border-left: 0;
+    gap: 10px;
+  }
+  .strip li:nth-child(even) {
+    padding-left: 12px;
+    border-left: 1px solid var(--c-line);
+  }
+  .strip li:nth-child(n + 3) {
+    border-top: 1px solid var(--c-line);
+  }
+}
 @media (max-width: 767px) {
   .hero {
     min-height: 0;
@@ -243,22 +262,6 @@
   }
   .ctrl {
     padding-bottom: 20px;
-  }
-  .strip ul {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .strip li,
-  .strip li + li {
-    padding: 14px 8px 14px 0;
-    border-left: 0;
-    gap: 10px;
-  }
-  .strip li:nth-child(even) {
-    padding-left: 12px;
-    border-left: 1px solid var(--c-line);
-  }
-  .strip li:nth-child(n + 3) {
-    border-top: 1px solid var(--c-line);
   }
   .strip svg {
     width: 26px;
