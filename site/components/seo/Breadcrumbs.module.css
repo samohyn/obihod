@@ -64,3 +64,6 @@
   color: var(--c-ink);
   font-weight: 600;
 }
+.list[data-cut] {
+  mask-image: linear-gradient(to right, transparent 0, #000 32px);
+}
