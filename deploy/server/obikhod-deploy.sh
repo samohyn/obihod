@@ -11,11 +11,11 @@
 # obikhod-staging на :3001, без бэкапа перед выкаткой.
 #
 # Шаги: бэкап (obikhod-backup --tag pre-deploy-<sha7>) → распаковка в releases/<ts>-<sha7> →
-# симлинки .env и media → pnpm install + build под deploy → миграции БД (pnpm migrate) →
+# симлинки .env и media → pnpm install → миграции БД (pnpm migrate) → build →
 # переключение current → pm2 restart → health-check (не 200 за 60 с — откат кода на предыдущий
 # релиз) → чистка, остаётся KEEP_RELEASES.
 #
-# Миграции (план 09, этап 1 — «Дрейф схемы»; заменяет ручной psql из ADR-0016): до переключения,
+# Миграции (план 09, этап 1 — «Дрейф схемы»; заменяет ручной psql из ADR-0016): до сборки и переключения,
 # поэтому каждая миграция обязана быть совместима со старым кодом (expand → contract: сначала
 # добавляем, удаляем старое — следующим релизом). Упала миграция — релиз не переключается.
 # Откат кода при провале health-check схему не откатывает; полный откат — pre-deploy бэкап.
@@ -63,16 +63,15 @@ ln -sfn "$BASE/shared/.env" .env
 ln -sfn "$BASE/shared/media" media
 chown -R deploy:deploy "$BASE/releases/$REL"
 
-log "build"
+log "install"
 sudo -u deploy bash -c '
   set -eo pipefail
   export COREPACK_ENABLE_DOWNLOAD_PROMPT=0
   env -u NODE_ENV pnpm install --frozen-lockfile 2>&1 | tail -3
-  set -a; . ./.env; set +a
-  export NODE_OPTIONS=--max-old-space-size=3072
-  pnpm build 2>&1 | tail -5
 ' </dev/null
 
+# Миграции — до сборки: next build пререндерит страницы из БД, и новый код может читать
+# новые колонки. Старый релиз в это время продолжает работать (миграции совместимы с ним).
 MIGRATED=0
 if grep -q '"migrate":' package.json; then
   log "migrate"
@@ -88,6 +87,18 @@ if grep -q '"migrate":' package.json; then
   fi
   echo "$out" | grep -vE 'identifiers exceed|^[[:space:]]*$' | tail -8
   MIGRATED=$(printf '%s\n' "$out" | sed -n 's/^MIGRATIONS_APPLIED=//p' | tail -1)
+fi
+
+log "build"
+if ! sudo -u deploy bash -c '
+  set -eo pipefail
+  set -a; . ./.env; set +a
+  export NODE_OPTIONS=--max-old-space-size=3072
+  pnpm build 2>&1 | tail -5
+' </dev/null; then
+  echo "✗ сборка упала — релиз не переключён." >&2
+  [ "${MIGRATED:-0}" != 0 ] && echo "⚠ миграции этого релиза ($MIGRATED) уже в БД; старый код с ними совместим." >&2
+  exit 1
 fi
 
 log "switch + health-check"

@@ -27,7 +27,7 @@ deploy/manual-deploy.sh <sha>      # конкретный коммит из main
 ```
 
 Оба пути вызывают на сервере `/usr/local/sbin/obikhod-deploy` (`deploy/server/obikhod-deploy.sh`):
-бэкап → распаковка → `pnpm install` + `build` → миграции БД (`pnpm migrate`) → переключение
+бэкап → распаковка → `pnpm install` → миграции БД (`pnpm migrate`) → `build` → переключение
 `current` → `pm2 restart` → health-check `/api/health/` (нет 200 за 60 с — откат кода) → чистка релизов. Ручной скрипт перед
 выкаткой ставит на сервер версию `obikhod-deploy` из того же коммита; ключ CI этого не может —
 изменения `deploy/server/` выкатить один раз вручную.
@@ -36,7 +36,7 @@ deploy/manual-deploy.sh <sha>      # конкретный коммит из main
 не нужен). Изменили коллекцию/поле → `pnpm schema:diff` (локально, против свежей копии staging/прода)
 → миграция `site/migrations/<ts>_<имя>.ts` + `.up.sql` + `.down.sql` → `pnpm migrate` локально →
 PR. CI строит схему миграциями с нуля и падает, если код разошёлся с ними (`schema:diff --check`).
-При выкатке `obikhod-deploy` запускает `pnpm migrate` после бэкапа и сборки, до переключения:
+При выкатке `obikhod-deploy` запускает `pnpm migrate` после бэкапа, до сборки и переключения:
 
 - каждая миграция — в своей транзакции; упала — релиз не переключается;
 - миграция обязана быть **совместима со старым кодом** (expand → contract): сначала добавить,
