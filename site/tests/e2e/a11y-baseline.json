@@ -23,9 +23,7 @@
     ],
     "/o-kompanii/": [],
     "/garantii/": [],
-    "/politika-konfidentsialnosti/": [
-      "color-contrast"
-    ],
+    "/politika-konfidentsialnosti/": [],
     "/stranitsa-kotoroy-net/": []
   },
   "mobile-chrome": {
@@ -52,9 +50,7 @@
     ],
     "/o-kompanii/": [],
     "/garantii/": [],
-    "/politika-konfidentsialnosti/": [
-      "color-contrast"
-    ],
+    "/politika-konfidentsialnosti/": [],
     "/stranitsa-kotoroy-net/": []
   }
 }

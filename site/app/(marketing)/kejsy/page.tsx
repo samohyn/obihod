@@ -6,10 +6,15 @@ import { unstable_cache } from 'next/cache'
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { trail } from '@/lib/breadcrumbs'
 import { payloadClient } from '@/lib/payload'
+import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
+import { retone } from '@/lib/blocks/v3/retone'
+import { getContacts } from '@/lib/chrome'
+import { getCasesListBlock, getPage } from '@/lib/pages'
+import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
 
 export const revalidate = 86400
 
-export const metadata: Metadata = {
+const LEGACY_METADATA: Metadata = {
   title: 'Кейсы Обихода — реальные объекты Москвы и МО',
   description:
     'Видео и фото-кейсы Обихода: спил, чистка крыш, вывоз мусора, демонтаж. Реальные объекты по районам с ценой, бригадиром и сроком.',
@@ -31,9 +36,31 @@ const getCases = unstable_cache(
   { revalidate: 86400, tags: ['cases'] },
 )
 
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPage('kejsy')
+  return page ? buildBlocksPageMetadata(page, '/kejsy/') : LEGACY_METADATA
+}
+
 export default async function CasesIndex() {
   const cases = await getCases()
   const breadcrumbs = trail('kejsy')
+
+  // 0. Из блоков: документ «Страницы» kejsy, кейсы — под первым экраном (из коллекции «Кейсы»)
+  const page = await getPage('kejsy')
+  if (page) {
+    const contacts = await getContacts()
+    const [hero, ...rest] = page.blocks
+    const list = await getCasesListBlock()
+    return (
+      <>
+        <Breadcrumbs items={breadcrumbs} />
+        <V3BlockRenderer
+          blocks={retone([hero, ...(list ? [{ ...list, title: 'Все кейсы' }] : []), ...rest])}
+          phoneDisplay={contacts.phoneDisplay}
+        />
+      </>
+    )
+  }
 
   return (
     <>

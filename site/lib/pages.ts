@@ -1,8 +1,14 @@
 import { draftMode } from 'next/headers'
 import { cache } from 'react'
 
-import type { PriceTabsBlock, V3BlockWithTone } from '@/components/blocks/v3/types'
-import { fromPayloadBlocks, mediaPath } from '@/lib/blocks/v3/fromPayload'
+import type {
+  BlockImage,
+  HeroSliderBlock,
+  PriceTabsBlock,
+  V3BlockWithTone,
+} from '@/components/blocks/v3/types'
+import { fromPayloadBlocks, mediaPath, toImage } from '@/lib/blocks/v3/fromPayload'
+import { richToText } from '@/lib/geo-pages'
 import { payloadClient } from '@/lib/payload'
 
 export type PageData = {
@@ -151,3 +157,50 @@ export const getPillarSummaryBlock = cache(
     } as V3BlockWithTone
   },
 )
+
+/**
+ * Кейсы списком (/kejsy/, /b2b/kejsy/) из коллекции «Кейсы»: картинка — фото «после», иначе первый экран
+ * хаба направления. `match` — отбор по названию (кейсы для организаций).
+ */
+export const getCasesListBlock = cache(async (match?: RegExp): Promise<V3BlockWithTone | null> => {
+  try {
+    const payload = await payloadClient()
+    const res = await payload.find({
+      collection: 'cases',
+      limit: 100,
+      sort: '-dateCompleted',
+      depth: 2,
+    })
+    const docs = (res.docs as unknown as Record<string, unknown>[]).filter(
+      (c) => c.slug && (!match || match.test(String(c.title))),
+    )
+    if (docs.length === 0) return null
+    const items = await Promise.all(
+      docs.map(async (c) => {
+        const service = c.service as { slug?: string; title?: string } | null
+        const district = c.district as { nameNominative?: string } | null
+        const text = richToText(c.description)
+        let image: BlockImage | null = toImage(
+          (c.photosAfter as { image?: unknown }[] | undefined)?.[0]?.image,
+        )
+        if (!image && service?.slug) {
+          const pillar = await getPage(service.slug)
+          const hero = pillar?.blocks.find((b) => b.blockType === 'hero-slider') as
+            | HeroSliderBlock
+            | undefined
+          image = hero?.slides?.[0]?.image ?? null
+        }
+        return {
+          kicker: [service?.title, district?.nameNominative].filter(Boolean).join(' · '),
+          title: String(c.title),
+          text: text.length > 150 ? `${text.slice(0, 147).trimEnd()}…` : text,
+          href: `/kejsy/${c.slug}/`,
+          image: image as BlockImage,
+        }
+      }),
+    )
+    return { blockType: 'articles', anchor: 'kejsy', eyebrow: 'Объекты', title: 'Кейсы', items }
+  } catch {
+    return null
+  }
+})

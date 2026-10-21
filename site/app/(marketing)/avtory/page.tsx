@@ -3,11 +3,16 @@ import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { trail } from '@/lib/breadcrumbs'
-import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema } from '@/lib/seo/jsonld'
 import { canonicalFor } from '@/lib/seo/canonical'
 import { getPublishedAuthors } from '@/lib/seo/queries'
+import { PageHeader } from '@/components/blocks/v3/PageHeader'
+import { Section, Wrap } from '@/components/blocks/v3/shared'
+import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
+import { getContacts } from '@/lib/chrome'
+
+import s from './avtory.module.css'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -16,7 +21,7 @@ export const revalidate = 86400
 export const metadata: Metadata = {
   title: 'Эксперты Обихода — арбористы, бригадиры, B2B-эксперты',
   description:
-    'Кто отвечает за качество работ Обихода: старший арборист, координатор photo→quote, эксперт по договорам УК и ТСЖ. Опыт, сертификаты, темы экспертизы.',
+    'Кто отвечает за качество работ Обихода: бригадиры, арбористы и эксперты по договорам с УК и ТСЖ. Опыт и темы экспертизы.',
   alternates: { canonical: canonicalFor('/avtory/') },
 }
 
@@ -33,89 +38,73 @@ type Author = {
 }
 
 export default async function AuthorsIndex() {
-  const authors = (await getPublishedAuthors()) as unknown as Author[]
+  const [authors, contacts] = await Promise.all([
+    getPublishedAuthors() as unknown as Promise<Author[]>,
+    getContacts(),
+  ])
 
   const breadcrumbs = trail('avtory')
 
   return (
     <>
       <Breadcrumbs items={breadcrumbs} schema={false} />
-      <section className="bg-bg-alt py-12 sm:py-16">
-        <div className="mx-auto max-w-[var(--maxw)] px-[var(--pad)]">
-          <h1 className="text-ink mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
-            Эксперты Обихода
-          </h1>
-          <p className="text-muted mt-3 max-w-2xl text-lg">
-            Бригадиры, эксперты по договорам и арбористы — кто отвечает за качество работ на каждом
-            объекте.
-          </p>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-[var(--maxw)] px-[var(--pad)] py-12">
-        {authors.length === 0 ? (
-          <p className="text-muted">Эксперты появятся скоро.</p>
-        ) : (
-          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {authors.map((author) => (
-              <li
-                key={author.id}
-                className="border-line bg-card hover:border-primary/40 rounded-[var(--radius)] border p-6 transition"
-              >
-                <Link
-                  href={`/avtory/${author.slug}/`}
-                  className="focus-visible:outline-accent block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-                >
-                  <div className="flex items-start gap-4">
-                    {author.avatar?.url ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={author.avatar.url}
-                        alt={author.fullName ?? `${author.firstName} ${author.lastName}`}
-                        width={64}
-                        height={64}
-                        className="border-line h-16 w-16 rounded-full border object-cover"
-                      />
-                    ) : (
-                      <div
-                        aria-hidden="true"
-                        className="bg-bg-alt text-primary flex h-16 w-16 items-center justify-center rounded-full text-xl font-semibold"
-                      >
-                        {author.firstName.charAt(0)}
-                        {author.lastName.charAt(0)}
+      <PageHeader
+        eyebrow="Авторы"
+        title="Эксперты Обихода"
+        lead="Бригадиры, эксперты по договорам и арбористы — кто отвечает за качество работ на каждом объекте."
+      />
+      <Section tone="default">
+        <Wrap>
+          <ul className={s.grid}>
+            {authors.map((author) => {
+              const name = author.fullName ?? `${author.firstName} ${author.lastName}`
+              return (
+                <li key={author.id}>
+                  <Link href={`/avtory/${author.slug}/`} className={s.card}>
+                    <div className={s.who}>
+                      <span className={s.avatar} aria-hidden="true">
+                        {author.avatar?.url ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={author.avatar.url} alt="" width={64} height={64} />
+                        ) : (
+                          `${author.firstName.charAt(0)}${author.lastName.charAt(0)}`
+                        )}
+                      </span>
+                      <div>
+                        <h2 className={s.name}>{name}</h2>
+                        {author.jobTitle && <p className={s.job}>{author.jobTitle}</p>}
                       </div>
-                    )}
-                    <div className="flex-1">
-                      <h2 className="text-ink text-lg font-semibold">
-                        {author.fullName ?? `${author.firstName} ${author.lastName}`}
-                      </h2>
-                      {author.jobTitle && (
-                        <p className="text-muted mt-1 text-sm">{author.jobTitle}</p>
-                      )}
                     </div>
-                  </div>
-                  {author.knowsAbout && author.knowsAbout.length > 0 && (
-                    <ul className="mt-4 flex flex-wrap gap-2">
-                      {author.knowsAbout.slice(0, 4).map((item, i) => (
-                        <li
-                          key={item.id ?? `${author.id}-${i}`}
-                          className="bg-bg-alt text-ink-soft rounded-[var(--radius-sm)] px-2.5 py-1 text-xs"
-                        >
-                          {item.topic}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </Link>
-              </li>
-            ))}
+                    {author.knowsAbout && author.knowsAbout.length > 0 && (
+                      <ul className={s.chips}>
+                        {author.knowsAbout.slice(0, 4).map((item, i) => (
+                          <li key={item.id ?? `${author.id}-${i}`}>{item.topic}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </Link>
+                </li>
+              )
+            })}
           </ul>
-        )}
-      </section>
-
-      <section className="mx-auto max-w-[var(--maxw)] px-[var(--pad)] pb-16">
-        <CtaMessengers />
-      </section>
+        </Wrap>
+      </Section>
+      <V3BlockRenderer
+        blocks={[
+          {
+            blockType: 'final-form',
+            tone: 'alt',
+            anchor: 'zayavka',
+            eyebrow: 'Заявка · ответ за 10 минут',
+            title: 'Задайте вопрос — перезвоним за 10 минут',
+            background: null,
+            channels: [],
+            formTitle: 'Заявка',
+            source: 'avtory',
+          },
+        ]}
+        phoneDisplay={contacts.phoneDisplay}
+      />
 
       <JsonLd
         schema={[

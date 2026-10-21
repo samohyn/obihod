@@ -11,6 +11,9 @@ import { getSiteChrome } from '@/lib/chrome'
 import { buildDistrictHubMetadata } from '@/lib/seo/metadata'
 import { breadcrumbListSchema, localBusinessSchema } from '@/lib/seo/jsonld'
 import { getAllDistricts, getDistrictBySlug, getSeoSettings } from '@/lib/seo/queries'
+import { getPage } from '@/lib/pages'
+
+import { DistrictBlocksView } from './DistrictBlocksView'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -37,7 +40,18 @@ export async function generateMetadata({
   const { district: districtSlug } = await params
   const d = await getDistrictBySlug(districtSlug)
   if (!d) return {}
-  return buildDistrictHubMetadata(d as any)
+  const legacy = buildDistrictHubMetadata(d as any)
+  // Из раздела «Услуги» — заголовок по шаблону; robots и canonical — прежние
+  if (!(await getPage('uslugi'))) return legacy
+  const where = (d as unknown as { namePrepositional: string }).namePrepositional
+  const title = `Обиход ${where} — деревья, мусор, крыши, демонтаж`
+  const description = `Спил деревьев, вывоз мусора, чистка крыш и снег, демонтаж и благоустройство ${where}. Смета по фото за 30 минут, оплата после приёмки.`
+  return {
+    ...legacy,
+    title: { absolute: title },
+    description,
+    openGraph: { ...legacy.openGraph, title, description },
+  }
 }
 
 export default async function DistrictHub({ params }: { params: Promise<{ district: string }> }) {
@@ -48,6 +62,10 @@ export default async function DistrictHub({ params }: { params: Promise<{ distri
     getSeoSettings(),
   ])
   if (!district) notFound()
+
+  // 0. Из раздела «Услуги», пока он опубликован
+  const uslugi = await getPage('uslugi')
+  if (uslugi) return <DistrictBlocksView district={district as never} uslugi={uslugi} />
 
   const breadcrumbs = trail('raiony', {
     name: district.nameNominative,

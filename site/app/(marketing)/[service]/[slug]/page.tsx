@@ -19,7 +19,12 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 
-import { getSubServicePage } from '@/lib/pages'
+import { getPage, getSubServicePage } from '@/lib/pages'
+import {
+  buildServiceDistrictBlocks,
+  type DistrictLike,
+  type ServiceDistrictLike,
+} from '@/lib/geo-pages'
 import { canonicalFor } from '@/lib/seo/canonical'
 import {
   getAllServiceDistrictParams,
@@ -32,6 +37,7 @@ import { buildServiceDistrictMetadata } from '@/lib/seo/metadata'
 
 import ServiceDistrictView from './ServiceDistrictView'
 import { SubServiceBlocksView } from './SubServiceBlocksView'
+import { ServiceDistrictBlocksView } from './ServiceDistrictBlocksView'
 import { SubServiceView } from './SubServiceView'
 
 export const revalidate = 43200
@@ -107,11 +113,32 @@ export async function generateMetadata({
   // 2. Service-district (T4)
   const sdBundle = await getServiceDistrictBundle(serviceSlug, slug)
   if (sdBundle) {
-    return buildServiceDistrictMetadata({
+    const legacy = buildServiceDistrictMetadata({
       service: sdBundle.service as never,
       district: sdBundle.district as never,
       sd: sdBundle.sd as never,
     })
+    // 2a. Из хаба направления — заголовок и описание по шаблону; robots и canonical — прежние
+    // (индексацию гео-страниц решает владелец)
+    const pillar = await getPage(serviceSlug)
+    if (!pillar) return legacy
+    const { blocks } = buildServiceDistrictBlocks({
+      pillar,
+      district: sdBundle.district as unknown as DistrictLike,
+      sd: sdBundle.sd as unknown as ServiceDistrictLike,
+      otherServices: [],
+      source: '',
+    })
+    const hero = blocks.find((b) => b.blockType === 'hero-slider')
+    const slide = hero && hero.blockType === 'hero-slider' ? hero.slides[0] : null
+    const title = `${slide?.title ?? pillar.title} — Обиход`
+    const description = (slide?.lead ?? '').slice(0, 158)
+    return {
+      ...legacy,
+      title: { absolute: title },
+      description,
+      openGraph: { ...legacy.openGraph, title, description },
+    }
   }
 
   return { title: 'Не найдено — Обиход' }
@@ -145,6 +172,18 @@ export default async function ServiceSlugPage({
   // 2. T4 SD
   const sdBundle = await getServiceDistrictBundle(serviceSlug, slug)
   if (sdBundle) {
+    // 2a. Из хаба направления, пока он опубликован
+    const pillar = await getPage(serviceSlug)
+    if (pillar) {
+      return (
+        <ServiceDistrictBlocksView
+          service={sdBundle.service as never}
+          district={sdBundle.district as never}
+          sd={sdBundle.sd as never}
+          pillar={pillar}
+        />
+      )
+    }
     return (
       <ServiceDistrictView
         service={sdBundle.service as never}

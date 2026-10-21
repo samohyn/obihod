@@ -13,6 +13,17 @@ import { LicenseBadge } from '@/components/marketing/LicenseBadge'
 import { RichTextRenderer } from '@/components/marketing/RichTextRenderer'
 import { breadcrumbListSchema } from '@/lib/seo/jsonld'
 import { payloadClient } from '@/lib/payload'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import { PageHeader } from '@/components/blocks/v3/PageHeader'
+import { Section, Wrap } from '@/components/blocks/v3/shared'
+import type { HeroSliderBlock, V3BlockWithTone } from '@/components/blocks/v3/types'
+import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
+import a from '@/components/blocks/v3/ArticleBody.module.css'
+import { ArticleSide } from '@/components/blocks/v3/ArticleSide'
+import { retone } from '@/lib/blocks/v3/retone'
+import { toImage } from '@/lib/blocks/v3/fromPayload'
+import { getContacts } from '@/lib/chrome'
+import { getPage } from '@/lib/pages'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -69,6 +80,121 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
   const photoUrl = (m: any) => (typeof m === 'object' && m?.url ? m.url : null)
   const before = (c as any).photosBefore?.[0]
   const after = (c as any).photosAfter?.[0]
+
+  // 0. Шаблон v3: данные кейса из коллекции «Кейсы» + подуслуги направления из хаба
+  const pillar = service?.slug ? await getPage(service.slug) : null
+  if (pillar) {
+    const contacts = await getContacts()
+    const slide = (
+      pillar.blocks.find((b) => b.blockType === 'hero-slider') as HeroSliderBlock | undefined
+    )?.slides?.[0]
+    const beforeImg = toImage(before?.image)
+    const afterImg = toImage(after?.image)
+    const price = Number((c as any).finalPrice) >= 1000 ? Number((c as any).finalPrice) : null
+    const hours = Number((c as any).durationHours) || null
+    const sum = price ? `${price.toLocaleString('ru-RU')} ₽` : null
+    const blocks: V3BlockWithTone[] = []
+    if (beforeImg && afterImg) {
+      blocks.push({
+        blockType: 'projects',
+        eyebrow: 'До и после',
+        title: 'Как было и как стало',
+        items: [
+          {
+            place: district?.nameNominative ?? '',
+            duration: hours ? `${hours} ч` : '',
+            title: c.h1 ?? c.title,
+            sum: sum ?? 'по смете',
+            matched: true,
+            before: beforeImg,
+            after: afterImg,
+          },
+        ],
+      })
+    }
+    blocks.push({
+      blockType: 'about-stats',
+      eyebrow: 'Объект',
+      title: 'Коротко о работе',
+      text: service?.title
+        ? `${service.title}${district ? ` · ${district.nameNominative}` : ''}`
+        : '',
+      stats: [
+        ...(sum ? [{ value: sum, label: 'итог по акту' }] : []),
+        ...(hours ? [{ value: `${hours} ч`, label: 'на объекте' }] : []),
+        ...(district ? [{ value: district.nameNominative, label: 'район' }] : []),
+      ],
+    })
+    const tiles = pillar.blocks.find((b) => b.blockType === 'services-tiles')
+    const after2: V3BlockWithTone[] = []
+    if (tiles) after2.push({ ...tiles, eyebrow: 'Услуги', title: `${pillar.title} — что делаем` })
+    after2.push({
+      blockType: 'final-form',
+      anchor: 'zayavka',
+      eyebrow: 'Заявка · ответ за 10 минут',
+      title: 'Нужно так же — перезвоним за 10 минут',
+      background: afterImg ?? slide?.image ?? null,
+      channels: [],
+      formTitle: 'Заявка',
+      source: `kejs-${c.slug}`,
+    })
+    // Фон чередуется: шапка бежевая → блоки с кремового → описание → услуги и заявка
+    const lastTone = blocks.length % 2 === 1 ? 'default' : 'alt'
+    const descTone = lastTone === 'default' ? 'alt' : 'default'
+    const hasDesc = Boolean((c as any).description)
+    return (
+      <>
+        <Breadcrumbs items={breadcrumbs} schema={false} />
+        <PageHeader
+          eyebrow={service?.title ? `Кейс · ${service.title}` : 'Кейс'}
+          title={c.h1 ?? c.title}
+          meta={
+            <>
+              {district && (
+                <Link href={`/raiony/${district.slug}/`}>{district.nameNominative}</Link>
+              )}
+              {(c as any).dateCompleted && (
+                <span>
+                  {new Date((c as any).dateCompleted).toLocaleDateString('ru-RU', {
+                    year: 'numeric',
+                    month: 'long',
+                  })}
+                </span>
+              )}
+            </>
+          }
+        />
+        <V3BlockRenderer blocks={retone(blocks)} phoneDisplay={contacts.phoneDisplay} />
+        {hasDesc && (
+          <Section tone={descTone}>
+            <Wrap className={a.layout}>
+              <div className={a.body}>
+                <RichText data={(c as any).description} />
+              </div>
+              <ArticleSide
+                phoneDisplay={contacts.phoneDisplay}
+                phoneHref={contacts.phoneE164 ? `tel:${contacts.phoneE164}` : ''}
+                service={
+                  service?.slug ? { title: service.title ?? '', href: `/${service.slug}/` } : null
+                }
+              />
+            </Wrap>
+          </Section>
+        )}
+        <V3BlockRenderer
+          blocks={retone(after2, (hasDesc ? descTone : lastTone) === 'default')}
+          phoneDisplay={contacts.phoneDisplay}
+        />
+        <JsonLd
+          schema={[
+            breadcrumbListSchema(
+              breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
+            ),
+          ]}
+        />
+      </>
+    )
+  }
 
   // US-0 W3 Track B-3 — приоритет blocks[] (cw fixture).
   const caseBlocks = (c as { blocks?: unknown[] | null }).blocks

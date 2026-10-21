@@ -7,18 +7,31 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema } from '@/lib/seo/jsonld'
 import { canonicalFor } from '@/lib/seo/canonical'
 
+import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
+import { getPage } from '@/lib/pages'
+import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 export const revalidate = 86400
 
-export const metadata: Metadata = {
+const LEGACY_METADATA: Metadata = {
   title: 'Гарантии Обихода — фикс-цена и штрафы ГЖИ на нас',
   description:
     'Гарантии Обихода: фиксированная цена за объект (без доплат), страховка ГО до 10 млн ₽, штрафы ГЖИ и ОАТИ берём на себя по договору. Москва и МО.',
   alternates: { canonical: canonicalFor('/garantii/') },
 }
 
-export default function GuaranteesPage() {
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPage('garantii')
+  return page ? buildBlocksPageMetadata(page, '/garantii/') : LEGACY_METADATA
+}
+
+export default async function GuaranteesPage() {
+  // 0. Из блоков: документ «Страницы» garantii
+  const blocksPage = await getPage('garantii')
+  if (blocksPage) return <PageBlocksView page={blocksPage} crumbs={trail('garantii')} />
+
   const breadcrumbs = trail('garantii')
 
   return (

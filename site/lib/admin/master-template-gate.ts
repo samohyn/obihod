@@ -63,8 +63,10 @@ export function buildMasterTemplateGate(
   const blocksField = options.blocksField ?? 'blocks'
   const alsoCheckPayloadStatus = options.alsoCheckPayloadStatus ?? false
 
-  return async ({ data }) => {
+  return async ({ data, context }) => {
     if (!data) return data
+    // Скрипты чистки старых полей (scripts/clean-geo-legacy.ts) не трогают blocks[] — гейт для них лишний
+    if (context?.skipMasterTemplateGate) return data
 
     // Гейт только при публикации (sustained pattern from publish-gate.ts).
     const isPublished =

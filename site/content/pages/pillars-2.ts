@@ -9,7 +9,18 @@ import { otSnega } from '../sub-services/chistka-krysh'
 import { demontazhSaraya } from '../sub-services/demontazh'
 import { spilDerevev } from '../sub-services/spil-derevev'
 import { vyvozStroymusora } from '../sub-services/vyvoz-musora'
-import { BASE_DOCS, img, pillarPage, TILE } from '../sub-services/_template'
+import {
+  BASE_DOCS,
+  img,
+  kicker,
+  OFFER_STRIP,
+  PHONE_HREF,
+  pillarPage,
+  TILE,
+} from '../sub-services/_template'
+import type { PageContent } from '../sub-services/types'
+
+import { retone } from '@/lib/blocks/v3/retone'
 
 import { calcFrom, PILLAR } from './_helpers'
 
@@ -431,7 +442,7 @@ const ALL_CALCS: Omit<CalculatorBlock, 'blockType'> = {
   ],
 }
 
-const FOTO_STEPS = {
+export const FOTO_STEPS = {
   title: 'Как считаем по фото',
   items: [
     { time: '00:00', title: 'Фото', text: '2–3 снимка через форму или на почту' },
@@ -442,7 +453,7 @@ const FOTO_STEPS = {
   ],
 }
 
-const PHOTO_TIPS: V3BlockWithTone = {
+export const PHOTO_TIPS: V3BlockWithTone = {
   blockType: 'about-stats',
   eyebrow: 'Какие фото нужны',
   title: 'Три снимка — и цена готова',
@@ -654,3 +665,46 @@ export const raschetStoimosti = pillarPage({
   },
   form: { title: 'Пришлите фото — смета за 30 минут', formTitle: 'Расчёт стоимости' },
 })
+
+/** /kalkulyator/foto-smeta/ — короткая страница-форма: какие фото нужны, шаги и заявка с фото. */
+export const kalkulyatorFotoSmeta: PageContent = {
+  slug: 'kalkulyator/foto-smeta',
+  title: 'Смета по фото',
+  metaTitle: 'Отправить фото на смету — ответ за 30 минут',
+  metaDescription:
+    'Приложите 2–3 фото объекта к заявке — пришлём смету за 30 минут. Бесплатно и без обязательств: спил, вывоз мусора, крыши, демонтаж.',
+  blocks: retone([
+    {
+      blockType: 'hero-slider',
+      slides: [
+        {
+          kicker: kicker('бесплатно · ответ за 30 минут'),
+          title: 'Отправьте фото — пришлём смету',
+          lead: 'Приложите 2–3 фото к заявке ниже или пришлите на почту. Перезвоним за 10 минут, смету пришлём за 30.',
+          primary: { label: 'Отправить фото', href: '#zayavka', icon: 'camera' },
+          secondary: { label: 'Позвонить', href: PHONE_HREF },
+          image: img('phone-order', 'Фото объекта в телефоне'),
+        },
+      ],
+      badge: { value: '0 ₽', text: 'смета по фото', note: 'Без обязательств' },
+      strip: OFFER_STRIP,
+    },
+    PHOTO_TIPS,
+    {
+      blockType: 'steps',
+      eyebrow: 'Как считаем',
+      title: FOTO_STEPS.title,
+      items: FOTO_STEPS.items,
+    },
+    {
+      blockType: 'final-form',
+      anchor: 'zayavka',
+      eyebrow: 'Заявка · ответ за 10 минут',
+      title: 'Приложите фото — смета за 30 минут',
+      background: img('yard-after', 'Чистый участок после работ'),
+      channels: [],
+      formTitle: 'Смета по фото',
+      source: 'kalkulyator-foto-smeta',
+    },
+  ]),
+}

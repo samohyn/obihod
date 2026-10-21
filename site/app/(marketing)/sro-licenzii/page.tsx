@@ -10,11 +10,15 @@ import { getSiteChrome } from '@/lib/chrome'
 import { getSeoSettings } from '@/lib/seo/queries'
 import { canonicalFor } from '@/lib/seo/canonical'
 
+import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
+import { getPage } from '@/lib/pages'
+import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 export const revalidate = 86400
 
-export const metadata: Metadata = {
+const LEGACY_METADATA: Metadata = {
   title: 'СРО и лицензии Обиход — официальные допуски и реестры',
   description:
     'Допуск СРО, лицензии Обихода для арбористики, чистки крыш, вывоза мусора и демонтажа в Москве и МО. Реестровые номера, страхование ответственности, договор на сезон с УК и ТСЖ.',
@@ -27,7 +31,16 @@ export const metadata: Metadata = {
   },
 }
 
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPage('sro-licenzii')
+  return page ? buildBlocksPageMetadata(page, '/sro-licenzii/') : LEGACY_METADATA
+}
+
 export default async function SroLicenziiPage() {
+  // 0. Из блоков: документ «Страницы» sro-licenzii
+  const blocksPage = await getPage('sro-licenzii')
+  if (blocksPage) return <PageBlocksView page={blocksPage} crumbs={trail('sroLicenzii')} />
+
   const [chrome, seo] = await Promise.all([getSiteChrome(), getSeoSettings()])
 
   const breadcrumbs = trail('sroLicenzii')

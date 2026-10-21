@@ -1,0 +1,191 @@
+/* Текст статьи из админки (Lexical) — типографика по токенам v3. */
+.body {
+  max-width: 760px;
+  font-size: 17.5px;
+  line-height: 1.7;
+  color: var(--c-ink);
+}
+.body > :first-child,
+.body > :first-child > :first-child {
+  margin-top: 0;
+}
+.body :global(h2) {
+  margin: 48px 0 14px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(24px, 2.6vw, 32px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.body :global(h3) {
+  margin: 32px 0 10px;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.body :global(p) {
+  margin: 0 0 16px;
+}
+.body :global(ul),
+.body :global(ol) {
+  margin: 0 0 18px;
+  padding-left: 22px;
+}
+.body :global(ul) {
+  list-style: disc;
+}
+.body :global(ol) {
+  list-style: decimal;
+}
+.body :global(li) {
+  margin: 6px 0;
+}
+.body :global(li::marker) {
+  color: var(--c-primary);
+}
+.body :global(a) {
+  color: var(--c-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.body :global(strong) {
+  font-weight: 600;
+}
+.body :global(blockquote) {
+  margin: 24px 0;
+  padding: 16px 20px;
+  border-left: 3px solid var(--c-accent);
+  background: var(--c-bg-alt);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.body :global(table) {
+  width: 100%;
+  margin: 20px 0 24px;
+  border-collapse: collapse;
+  font-size: 15px;
+  display: block;
+  overflow-x: auto;
+}
+.body :global(th),
+.body :global(td) {
+  padding: 10px 12px;
+  border: 1px solid var(--c-line);
+  text-align: left;
+  vertical-align: top;
+}
+.body :global(th) {
+  background: var(--c-bg-alt);
+  font-weight: 600;
+}
+.lead {
+  margin: 0 0 28px;
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--c-ink-soft);
+}
+.figure {
+  margin: 0 0 32px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.cover {
+  aspect-ratio: 16 / 9;
+}
+
+/* Текст и колонка справа (ArticleSide) */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 760px) 300px;
+  justify-content: space-between;
+  align-items: start;
+  gap: 48px;
+}
+.side {
+  position: sticky;
+  top: 104px;
+  display: grid;
+  gap: 12px;
+}
+.sideCard {
+  display: grid;
+  gap: 12px;
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--c-line);
+  background: var(--c-card);
+}
+.sideEyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-muted-text);
+}
+.sideTitle {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.sideText {
+  margin: 0 0 4px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--c-ink-soft);
+}
+.sideService {
+  display: grid;
+  gap: 2px;
+  padding: 16px 20px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--c-line);
+  background: var(--c-card);
+  color: var(--c-ink);
+  text-decoration: none;
+  font-size: 13px;
+  transition: border-color 0.2s;
+}
+.sideService span {
+  color: var(--c-muted-text);
+}
+.sideService b {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--c-primary);
+}
+.sideService:hover {
+  border-color: var(--c-primary);
+}
+.sideService:focus-visible {
+  outline: 2px solid var(--c-primary);
+  outline-offset: 2px;
+}
+@media (max-width: 1023px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .side {
+    display: none;
+  }
+}
+.author {
+  margin-top: 48px;
+  padding: 20px 22px;
+  border-radius: var(--radius-lg);
+  background: var(--c-bg-alt);
+  border: 1px solid var(--c-line);
+  font-size: 15px;
+}
+.author b {
+  display: block;
+  font-size: 17px;
+}
+@media (max-width: 767px) {
+  .body {
+    font-size: 16.5px;
+  }
+  .lead {
+    font-size: 18px;
+  }
+}

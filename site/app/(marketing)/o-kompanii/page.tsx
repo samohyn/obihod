@@ -10,11 +10,15 @@ import { getSiteChrome } from '@/lib/chrome'
 import { getSeoSettings } from '@/lib/seo/queries'
 import { canonicalFor } from '@/lib/seo/canonical'
 
+import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
+import { getPage } from '@/lib/pages'
+import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 export const revalidate = 86400
 
-export const metadata: Metadata = {
+const LEGACY_METADATA: Metadata = {
   title: 'О компании Обиход — комплексный подрядчик для Москвы и МО',
   description:
     'Обиход — комплексный подрядчик 4-в-1 для Москвы и Московской области. Спил, чистка крыш, вывоз мусора, демонтаж. Фикс-цена за объект, смета за 10 минут по фото.',
@@ -34,7 +38,16 @@ export const metadata: Metadata = {
   },
 }
 
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPage('o-kompanii')
+  return page ? buildBlocksPageMetadata(page, '/o-kompanii/') : LEGACY_METADATA
+}
+
 export default async function AboutPage() {
+  // 0. Из блоков: документ «Страницы» o-kompanii
+  const blocksPage = await getPage('o-kompanii')
+  if (blocksPage) return <PageBlocksView page={blocksPage} crumbs={trail('oKompanii')} />
+
   const [chrome, seo] = await Promise.all([getSiteChrome(), getSeoSettings()])
 
   const breadcrumbs = trail('oKompanii')

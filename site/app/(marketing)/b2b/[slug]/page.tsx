@@ -10,6 +10,10 @@ import { RichTextRenderer } from '@/components/marketing/RichTextRenderer'
 import { breadcrumbListSchema } from '@/lib/seo/jsonld'
 import { canonicalFor } from '@/lib/seo/canonical'
 import { getAllB2BSlugs, getB2BPageBySlug } from '@/lib/seo/queries'
+import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
+import { retone } from '@/lib/blocks/v3/retone'
+import { getCasesListBlock, getPage } from '@/lib/pages'
+import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -50,6 +54,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
+  const blocksPage = await getPage(`b2b/${slug}`)
+  if (blocksPage) return buildBlocksPageMetadata(blocksPage, `/b2b/${slug}/`)
   const page = (await getB2BPageBySlug(slug)) as unknown as B2BPageDoc | null
   if (!page) return {}
   return {
@@ -71,6 +77,22 @@ export async function generateMetadata({
 
 export default async function B2BPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
+
+  // 0. Из блоков: документ «Страницы» b2b/<адрес>
+  const blocksPage = await getPage(`b2b/${slug}`)
+  if (blocksPage) {
+    const crumbs = trail('b2b', { name: blocksPage.title, href: `/b2b/${slug}/` })
+    if (slug !== 'kejsy') return <PageBlocksView page={blocksPage} crumbs={crumbs} />
+    // Кейсы для бизнеса — список объектов организаций под первым экраном
+    const list = await getCasesListBlock(/УК|МКД|ТСЖ|застройщ|склад|ангар|контракт|КП /i)
+    const [hero, ...rest] = blocksPage.blocks
+    return (
+      <PageBlocksView
+        page={{ ...blocksPage, blocks: retone([hero, ...(list ? [list] : []), ...rest]) }}
+        crumbs={crumbs}
+      />
+    )
+  }
   const page = (await getB2BPageBySlug(slug)) as unknown as B2BPageDoc | null
   if (!page) notFound()
 

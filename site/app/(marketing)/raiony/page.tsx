@@ -4,18 +4,53 @@ import type { Metadata } from 'next'
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { trail } from '@/lib/breadcrumbs'
 import { getAllDistricts } from '@/lib/seo/queries'
+import { DistrictGrid } from '@/components/blocks/v3/DistrictGrid'
+import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
+import { retone } from '@/lib/blocks/v3/retone'
+import { getContacts } from '@/lib/chrome'
+import { faqPageSchema } from '@/lib/seo/jsonld'
+import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+import { JsonLd } from '@/components/seo/JsonLd'
+import { getPage } from '@/lib/pages'
 
 export const revalidate = 86400
 
-export const metadata: Metadata = {
+const LEGACY_METADATA: Metadata = {
   title: 'Районы Москвы и МО, где работает Обиход',
   description:
     'География работы Обихода: 20+ районов Москвы и Московской области. Спил, снег, мусор, демонтаж в каждом районе по фикс-цене.',
   alternates: { canonical: '/raiony/' },
 }
 
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPage('raiony')
+  return page ? buildBlocksPageMetadata(page, '/raiony/') : LEGACY_METADATA
+}
+
 export default async function DistrictsHub() {
   const districts = await getAllDistricts()
+
+  // 0. Из блоков: документ «Страницы» raiony, список районов — под первым экраном
+  const page = await getPage('raiony')
+  if (page) {
+    const contacts = await getContacts()
+    const [hero, ...rest] = page.blocks
+    const items = (
+      districts as unknown as { slug: string; nameNominative: string; distanceFromMkad?: number }[]
+    )
+      .map((d) => ({ slug: d.slug, name: d.nameNominative, km: d.distanceFromMkad ?? null }))
+      .sort((a, b) => a.name.localeCompare(b.name, 'ru'))
+    const faqs = rest.flatMap((b) => (b.blockType === 'faq-v3' ? b.items : []))
+    return (
+      <>
+        {faqs.length > 0 && <JsonLd schema={faqPageSchema(faqs)} />}
+        <Breadcrumbs items={trail('raiony')} />
+        <V3BlockRenderer blocks={[hero]} phoneDisplay={contacts.phoneDisplay} />
+        <DistrictGrid eyebrow="Районы" title="Выберите свой район" items={items} tone="alt" />
+        <V3BlockRenderer blocks={retone(rest)} phoneDisplay={contacts.phoneDisplay} />
+      </>
+    )
+  }
 
   const grouped: Record<string, any[]> = { A: [], B: [], C: [] }
   for (const d of districts) {

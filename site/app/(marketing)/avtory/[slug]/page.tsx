@@ -3,12 +3,21 @@ import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { trail } from '@/lib/breadcrumbs'
-import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema, personSchema, type Author as AuthorSchema } from '@/lib/seo/jsonld'
 import { canonicalFor } from '@/lib/seo/canonical'
-import { getAllAuthorSlugs, getAuthorBySlug } from '@/lib/seo/queries'
+import { getAllAuthorSlugs, getAuthorBySlug, getPublishedBlogPosts } from '@/lib/seo/queries'
 import { truncateMeta } from '@/lib/seo/text'
+import { PageHeader } from '@/components/blocks/v3/PageHeader'
+import { Section, Wrap } from '@/components/blocks/v3/shared'
+import type { V3BlockWithTone } from '@/components/blocks/v3/types'
+import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
+import { retone } from '@/lib/blocks/v3/retone'
+import { toImage } from '@/lib/blocks/v3/fromPayload'
+import { BLOG_CATEGORY, blogTopic } from '@/lib/blog-topics'
+import { getContacts } from '@/lib/chrome'
+
+import s from '../avtory.module.css'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -34,6 +43,16 @@ type AuthorDoc = {
     issuedAt?: string | null
     id?: string
   }> | null
+}
+
+type AuthorPost = {
+  slug: string
+  title: string
+  intro: string
+  category: string
+  publishedAt: string
+  heroImage?: unknown
+  author?: { slug?: string } | null
 }
 
 export async function generateStaticParams() {
@@ -76,6 +95,15 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
   const fullName = author.fullName ?? `${author.firstName} ${author.lastName}`
   const breadcrumbs = trail('avtory', { name: fullName, href: `/avtory/${author.slug}/` })
 
+  // Ссылки-заглушки (корень соцсети, «…placeholder») — не профиль: не показываем и не отдаём в разметку
+  const profiles = (author.sameAs ?? []).filter((p) => {
+    try {
+      return new URL(p.url).pathname.replace(/\/$/, '') !== '' && !/placeholder/i.test(p.url)
+    } catch {
+      return false
+    }
+  })
+
   const authorForSchema: AuthorSchema = {
     slug: author.slug,
     firstName: author.firstName,
@@ -83,114 +111,106 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
     jobTitle: author.jobTitle ?? undefined,
     bio: author.bio ?? undefined,
     imageUrl: author.avatar?.url ?? undefined,
-    sameAs: (author.sameAs ?? []).map((s) => s.url).filter(Boolean),
+    sameAs: profiles.map((p) => p.url),
     knowsAbout: (author.knowsAbout ?? []).map((k) => k.topic).filter(Boolean),
   }
+
+  const [posts, contacts] = await Promise.all([
+    getPublishedBlogPosts() as unknown as Promise<AuthorPost[]>,
+    getContacts(),
+  ])
+  const mine = posts.filter((p) => p.slug && p.author?.slug === author.slug)
+  const after: V3BlockWithTone[] = []
+  if (mine.length) {
+    after.push({
+      blockType: 'articles',
+      eyebrow: 'Статьи',
+      title: 'Статьи автора',
+      items: mine.map((p) => ({
+        kicker: `${BLOG_CATEGORY[p.category] ?? 'Статья'} · ${new Date(p.publishedAt).toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' })}`,
+        title: p.title,
+        text: p.intro?.length > 160 ? `${p.intro.slice(0, 157).trimEnd()}…` : p.intro,
+        href: `/blog/${p.slug}/`,
+        image: toImage(p.heroImage) ?? blogTopic(p.slug).image,
+      })),
+    })
+  }
+  after.push({
+    blockType: 'final-form',
+    anchor: 'zayavka',
+    eyebrow: 'Заявка · ответ за 10 минут',
+    title: 'Задайте вопрос — перезвоним за 10 минут',
+    background: null,
+    channels: [],
+    formTitle: 'Заявка',
+    source: `avtor-${author.slug}`,
+  })
 
   return (
     <>
       <Breadcrumbs items={breadcrumbs} schema={false} />
-      <section className="bg-bg-alt py-10 sm:py-14">
-        <div className="mx-auto max-w-[var(--maxw)] px-[var(--pad)]">
-          <h1 className="text-ink mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
-            {fullName}
-          </h1>
-          {author.jobTitle && <p className="text-muted mt-2 text-lg">{author.jobTitle}</p>}
-        </div>
-      </section>
-
-      <article className="mx-auto max-w-[var(--maxw)] px-[var(--pad)] py-12">
-        <div className="grid gap-10 md:grid-cols-[200px_minmax(0,1fr)]">
-          <aside>
-            {author.avatar?.url ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={author.avatar.url}
-                alt={fullName}
-                width={200}
-                height={200}
-                className="border-line aspect-square w-full rounded-[var(--radius)] border object-cover"
-              />
-            ) : (
-              <div
-                aria-hidden="true"
-                className="bg-bg-alt text-primary flex aspect-square w-full items-center justify-center rounded-[var(--radius)] text-5xl font-semibold"
-              >
-                {author.firstName.charAt(0)}
-                {author.lastName.charAt(0)}
-              </div>
-            )}
-            {author.sameAs && author.sameAs.length > 0 && (
-              <ul className="mt-4 space-y-1.5 text-sm">
-                {author.sameAs.map((profile, i) => (
+      <PageHeader eyebrow="Автор" title={fullName} lead={author.jobTitle} />
+      <Section tone="default">
+        <Wrap className={s.profile}>
+          <div>
+            <span className={s.avatar} aria-hidden="true">
+              {author.avatar?.url ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={author.avatar.url} alt="" width={200} height={200} />
+              ) : (
+                `${author.firstName.charAt(0)}${author.lastName.charAt(0)}`
+              )}
+            </span>
+            {profiles.length > 0 && (
+              <ul className={s.links}>
+                {profiles.map((profile, i) => (
                   <li key={profile.id ?? `same-${i}`}>
-                    <a
-                      href={profile.url}
-                      target="_blank"
-                      rel="noopener noreferrer me"
-                      className="text-primary underline-offset-2 hover:underline"
-                    >
+                    <a href={profile.url} target="_blank" rel="noopener noreferrer me">
                       {new URL(profile.url).hostname.replace(/^www\./, '')}
                     </a>
                   </li>
                 ))}
               </ul>
             )}
-          </aside>
-
+          </div>
           <div>
             {author.bio && (
-              <section>
-                <h2 className="text-ink text-xl font-semibold">О специалисте</h2>
-                <p className="text-ink-soft mt-3 leading-relaxed">{author.bio}</p>
-              </section>
+              <>
+                <h2 className={s.h2}>О специалисте</h2>
+                <p className={s.bio}>{author.bio}</p>
+              </>
             )}
-
             {author.knowsAbout && author.knowsAbout.length > 0 && (
-              <section className="mt-8">
-                <h2 className="text-ink text-xl font-semibold">Темы экспертизы</h2>
-                <ul className="mt-3 flex flex-wrap gap-2">
+              <>
+                <h2 className={s.h2}>Темы экспертизы</h2>
+                <ul className={s.chips}>
                   {author.knowsAbout.map((item, i) => (
-                    <li
-                      key={item.id ?? `topic-${i}`}
-                      className="bg-bg-alt text-ink-soft rounded-[var(--radius-sm)] px-3 py-1.5 text-sm"
-                    >
-                      {item.topic}
-                    </li>
+                    <li key={item.id ?? `topic-${i}`}>{item.topic}</li>
                   ))}
                 </ul>
-              </section>
+              </>
             )}
-
             {author.credentials && author.credentials.length > 0 && (
-              <section className="mt-8">
-                <h2 className="text-ink text-xl font-semibold">Сертификаты и образование</h2>
-                <ul className="text-ink-soft mt-3 space-y-2">
+              <>
+                <h2 className={s.h2} style={{ marginTop: 32 }}>
+                  Сертификаты и образование
+                </h2>
+                <ul className={s.creds}>
                   {author.credentials.map((c, i) => (
                     <li key={c.id ?? `cred-${i}`}>
-                      <span className="text-ink font-medium">{c.name}</span>
-                      {c.issuer && <span className="text-muted"> · {c.issuer}</span>}
-                      {c.issuedAt && (
-                        <span className="text-muted">
-                          {' · '}
-                          {new Date(c.issuedAt).toLocaleDateString('ru-RU', {
-                            year: 'numeric',
-                            month: 'long',
-                          })}
-                        </span>
-                      )}
+                      {c.name}
+                      {c.issuer && ` · ${c.issuer}`}
+                      {c.issuedAt &&
+                        ` · ${new Date(c.issuedAt).toLocaleDateString('ru-RU', { year: 'numeric', month: 'long' })}`}
                     </li>
                   ))}
                 </ul>
-              </section>
+              </>
             )}
           </div>
-        </div>
-
-        <div className="mt-12">
-          <CtaMessengers />
-        </div>
-      </article>
+        </Wrap>
+      </Section>
+      <V3BlockRenderer blocks={retone(after, true)} phoneDisplay={contacts.phoneDisplay} />
 
       <JsonLd
         schema={[
