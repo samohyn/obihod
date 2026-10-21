@@ -130,7 +130,7 @@ const GUARANTEES: V3BlockWithTone = {
     {
       icon: 'dumpster',
       title: 'Участок сдаём чистым',
-      text: 'Убираем за собой, отходы вывозим и утилизируем.',
+      text: 'Убираем за собой, отходы вывозим на полигон.',
       conditionLabel: 'Уже',
       conditionValue: 'в цене сметы',
     },
@@ -154,7 +154,8 @@ export type SubServiceSpec = {
   prices: { title: string; link?: { label: string; href: string }; tabs: PriceTab[] }
   calculator?: Omit<CalculatorBlock, 'blockType'>
   methods?: { eyebrow: string; title: string; items: EquipmentItem[] }
-  photo?: { title?: string; text: string; image?: BlockImage }
+  /** false — без полосы «Пришлите фото» (когда у ключевого блока страницы своя кнопка) */
+  photo?: { title?: string; text: string; image?: BlockImage } | false
   /** Свои секции после «Пришлите фото»: «когда нужно», сравнения и т. п. */
   middle?: V3BlockWithTone[]
   projects?: { eyebrow?: string; title?: string; items: ProjectItem[] }
@@ -165,7 +166,7 @@ export type SubServiceSpec = {
   form: { title: string; formTitle: string; background?: BlockImage }
 }
 
-const TONED = new Set(['hero-slider', 'photo-cta', 'final-form'])
+const TONED = new Set(['hero-slider', 'photo-cta', 'final-form', 'b2b-plan'])
 
 export function subServicePage(spec: SubServiceSpec): SubServiceContent {
   const blocks: V3BlockWithTone[] = [
@@ -197,15 +198,17 @@ export function subServicePage(spec: SubServiceSpec): SubServiceContent {
     blocks.push({ blockType: 'calculator-v3', anchor: 'calc', ...spec.calculator })
   }
   if (spec.methods) blocks.push({ blockType: 'equipment', anchor: 'sposoby', ...spec.methods })
-  blocks.push({
-    blockType: 'photo-cta',
-    eyebrow: 'Смета по фото',
-    title: spec.photo?.title ?? 'Пришлите фото — цена через 30 минут',
-    text: spec.photo?.text,
-    image: spec.photo?.image ?? img('phone-order', 'Фото задачи в телефоне'),
-    primary: { label: 'Отправить фото', href: '#zayavka', icon: 'upload' },
-    secondary: { label: 'Позвонить', href: PHONE_HREF, icon: 'phone' },
-  })
+  const photo = spec.photo || undefined
+  if (spec.photo !== false)
+    blocks.push({
+      blockType: 'photo-cta',
+      eyebrow: 'Смета по фото',
+      title: photo?.title ?? 'Пришлите фото — цена через 30 минут',
+      text: photo?.text,
+      image: photo?.image ?? img('phone-order', 'Фото задачи в телефоне'),
+      primary: { label: 'Отправить фото', href: '#zayavka', icon: 'upload' },
+      secondary: { label: 'Позвонить', href: PHONE_HREF, icon: 'phone' },
+    })
   blocks.push(...(spec.middle ?? []))
   if (spec.projects) {
     blocks.push({
@@ -366,6 +369,70 @@ export const TILE: Record<string, ServiceTile> = {
     price: 'от 16 400 ₽',
     href: '/vyvoz-musora/vyvoz-porubochnyh/',
     image: img('truck-out', 'Машина с ветками выезжает с участка'),
+  },
+  // вывоз мусора
+  stroymusor: {
+    title: 'Строительный мусор',
+    text: 'После ремонта и демонтажа',
+    price: 'от 12 800 ₽',
+    href: '/vyvoz-musora/vyvoz-stroymusora/',
+    image: img('case2-before', 'Строительный мусор после ремонта'),
+  },
+  kontejner: {
+    title: 'Контейнер для мусора',
+    text: '8, 20 и 27 м³, сутки — в цене',
+    price: 'от 14 800 ₽',
+    href: '/vyvoz-musora/kontejner/',
+    image: img('skip-full', 'Заполненный контейнер у дома'),
+  },
+  gazel: {
+    title: 'Газель с грузчиками',
+    text: '5 м³, погрузка и вывоз',
+    price: 'от 12 800 ₽',
+    href: '/vyvoz-musora/gazel/',
+    image: img('vyvoz-gazel', 'Грузчики загружают мешки в Газель'),
+  },
+  kgm: {
+    title: 'Крупногабаритный мусор',
+    text: 'Сантехника, окна, двери, техника',
+    price: 'от 12 800 ₽',
+    href: '/vyvoz-musora/krupnogabarit/',
+    image: img('vyvoz-kgm', 'Старая ванна, двери и рамы у машины'),
+  },
+  mebel: {
+    title: 'Старая мебель',
+    text: 'Разберём, вынесем, вывезем',
+    price: 'от 12 800 ₽',
+    href: '/vyvoz-musora/staraya-mebel/',
+    image: img('vyvoz-mebel', 'Грузчики выносят старый диван'),
+  },
+  sadovyi: {
+    title: 'Садовый мусор',
+    text: 'Листва, ветки, трава',
+    price: 'от 14 200 ₽',
+    href: '/vyvoz-musora/vyvoz-sadovogo-musora/',
+    image: img('leaves', 'Мешки с листвой на участке'),
+  },
+  uborka: {
+    title: 'Уборка участка от мусора',
+    text: 'Хлам прежних хозяев за день',
+    price: 'от 13 600 ₽',
+    href: '/vyvoz-musora/uborka-uchastka/',
+    image: img('yard-before', 'Захламлённый участок'),
+  },
+  demontazh: {
+    title: 'Демонтаж и снос',
+    text: 'Сараи, бани, дачи — с вывозом',
+    price: 'от 32 000 ₽',
+    href: '/demontazh/',
+    image: img('demo', 'Разбор старого сарая'),
+  },
+  uk: {
+    title: 'Для УК и ТСЖ',
+    text: 'Вывоз КГМ и стройотходов по договору',
+    price: 'от 14 800 ₽',
+    href: '/vyvoz-musora/dlya-uk-tszh/',
+    image: img('vyvoz-uk', 'Бункер для крупногабаритного мусора во дворе'),
   },
   bilet: {
     title: 'Порубочный билет',

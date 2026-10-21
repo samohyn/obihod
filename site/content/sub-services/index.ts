@@ -15,9 +15,19 @@ import {
 } from './arboristika-2'
 import { spilDerevev } from './spil-derevev'
 import type { SubServiceContent } from './types'
+import {
+  dlyaUkTszh,
+  gazel,
+  kontejner,
+  krupnogabarit,
+  starayaMebel,
+  uborkaUchastka,
+  vyvozPorubochnyh,
+  vyvozSadovogoMusora,
+  vyvozStroymusora,
+} from './vyvoz-musora'
 
-/** Подуслуги с подготовленным наполнением — ключ для `pnpm seed:subservice <ключ>`. */
-export const SUB_SERVICE_CONTENT: Record<string, SubServiceContent> = {
+const ARBORISTIKA: Record<string, SubServiceContent> = {
   'spil-derevev': spilDerevev,
   kronirovanie,
   'udalenie-pnya': udaleniePnya,
@@ -32,7 +42,26 @@ export const SUB_SERVICE_CONTENT: Record<string, SubServiceContent> = {
   'vyrubka-elok': vyrubkaElok,
 }
 
+const VYVOZ_MUSORA: Record<string, SubServiceContent> = {
+  'vyvoz-stroymusora': vyvozStroymusora,
+  kontejner,
+  gazel,
+  krupnogabarit,
+  'staraya-mebel': starayaMebel,
+  'vyvoz-sadovogo-musora': vyvozSadovogoMusora,
+  'uborka-uchastka': uborkaUchastka,
+  'vyvoz-porubochnyh': vyvozPorubochnyh,
+  'dlya-uk-tszh': dlyaUkTszh,
+}
+
+/** Подуслуги с подготовленным наполнением — ключ для `pnpm seed:subservice <ключ>`. */
+export const SUB_SERVICE_CONTENT: Record<string, SubServiceContent> = {
+  ...ARBORISTIKA,
+  ...VYVOZ_MUSORA,
+}
+
 /** Партии для наполнения разом: `pnpm seed:subservice arboristika`. */
 export const SUB_SERVICE_BATCHES: Record<string, string[]> = {
-  arboristika: Object.keys(SUB_SERVICE_CONTENT),
+  arboristika: Object.keys(ARBORISTIKA),
+  'vyvoz-musora': Object.keys(VYVOZ_MUSORA),
 }

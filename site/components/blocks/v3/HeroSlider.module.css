@@ -32,7 +32,8 @@
 .inner {
   flex: 1;
   display: grid;
-  grid-template-columns: 1fr 300px;
+  /* minmax(0, …): длинное слово в заголовке не распирает колонку шире экрана */
+  grid-template-columns: minmax(0, 1fr) 300px;
   gap: 48px;
   align-items: center;
   padding-top: 56px;
@@ -60,6 +61,7 @@
   line-height: 0.98;
   letter-spacing: -0.04em;
   text-wrap: balance;
+  overflow-wrap: break-word;
 }
 .lead {
   margin: 0;
@@ -210,32 +212,14 @@
 
 @media (max-width: 1199px) {
   .inner {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .badge {
     display: none;
   }
 }
-@media (max-width: 767px) {
-  .hero {
-    min-height: 0;
-  }
-  .shade {
-    background: linear-gradient(180deg, rgba(15, 25, 18, 0.6), rgba(15, 25, 18, 0.86));
-  }
-  .inner {
-    padding-top: 48px;
-    padding-bottom: 28px;
-  }
-  .ctas {
-    flex-direction: column;
-  }
-  .ctas a {
-    width: 100%;
-  }
-  .ctrl {
-    padding-bottom: 20px;
-  }
+/* на планшете четыре пункта в ряд не помещаются («Окно / подачи 2 / часа») — сетка 2 × 2 */
+@media (max-width: 1023px) {
   .strip ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -251,6 +235,33 @@
   }
   .strip li:nth-child(n + 3) {
     border-top: 1px solid var(--c-line);
+  }
+}
+@media (max-width: 767px) {
+  .hero {
+    min-height: 0;
+  }
+  .shade {
+    background: linear-gradient(180deg, rgba(15, 25, 18, 0.6), rgba(15, 25, 18, 0.86));
+  }
+  .inner {
+    padding-top: 48px;
+    padding-bottom: 28px;
+  }
+  /* «крупногабаритного» шире телефона — переносим по слогам, только длинные слова */
+  .title {
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    hyphenate-limit-chars: 12 5 5;
+  }
+  .ctas {
+    flex-direction: column;
+  }
+  .ctas a {
+    width: 100%;
+  }
+  .ctrl {
+    padding-bottom: 20px;
   }
   .strip svg {
     width: 26px;

@@ -6,7 +6,8 @@ import s from './B2bPlan.module.css'
 
 export function B2bPlan(block: B2bPlanBlock & { tone?: SectionTone | null }) {
   return (
-    <Section tone={block.tone ?? 'dark'} anchor={block.anchor}>
+    // вёрстка блока — светлый текст: на кремовом/бежевом фоне он не читается
+    <Section tone={block.tone === 'green' ? 'green' : 'dark'} anchor={block.anchor}>
       <Wrap className={s.grid}>
         <div>
           {block.eyebrow && <Eyebrow onDark>{block.eyebrow}</Eyebrow>}

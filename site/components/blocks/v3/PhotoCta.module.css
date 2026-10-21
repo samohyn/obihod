@@ -31,6 +31,7 @@
   font-size: clamp(30px, 4vw, 44px);
   line-height: 1.08;
   letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 .text {
   margin: 14px 0 0;

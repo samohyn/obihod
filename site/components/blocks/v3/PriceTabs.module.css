@@ -201,6 +201,14 @@
   .table tbody tr:last-child {
     border-bottom: 0;
   }
+  /* подсветка второй строки — на всю карточку, а не на занятые ячейки (при одной цене их меньше трёх) */
+  .table tbody tr:nth-child(2) {
+    background: rgba(45, 90, 61, 0.045);
+  }
+  .table tbody tr:nth-child(2) th,
+  .table tbody tr:nth-child(2) td {
+    background: transparent;
+  }
   .table tbody th {
     grid-column: 1 / -1;
     padding: 12px 12px 4px;
