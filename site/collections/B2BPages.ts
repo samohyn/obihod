@@ -15,6 +15,8 @@ import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revali
 
 export const B2BPages: CollectionConfig = {
   slug: 'b2b-pages',
+  // корзина: удалённое можно вернуть (план 09, этап 4.5)
+  trash: true,
   labels: { singular: 'B2B-страница', plural: 'B2B-страницы' },
   admin: {
     useAsTitle: 'title',

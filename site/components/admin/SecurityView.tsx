@@ -1,6 +1,8 @@
 import type { AdminViewServerProps } from 'payload'
 import { redirect } from 'next/navigation'
 import { Gutter } from '@payloadcms/ui'
+
+import { AdminViewTemplate } from './AdminViewTemplate'
 import SecurityPanel from './SecurityPanel'
 
 /**
@@ -15,7 +17,8 @@ import SecurityPanel from './SecurityPanel'
  *
  * Path: '/security' зарегистрирован в payload.config.ts admin.views.security.
  */
-export default function SecurityView({ initPageResult }: AdminViewServerProps) {
+export default function SecurityView(props: AdminViewServerProps) {
+  const { initPageResult } = props
   const user = initPageResult.req.user as
     | { id: string | number; email: string; totpEnabled?: boolean }
     | null
@@ -26,31 +29,37 @@ export default function SecurityView({ initPageResult }: AdminViewServerProps) {
   }
 
   return (
-    <Gutter>
-      <h1
-        style={{
-          fontSize: 24,
-          fontWeight: 600,
-          marginBottom: 8,
-          color: 'var(--brand-obihod-ink, #1c1c1c)',
-        }}
-      >
-        Безопасность
-      </h1>
-      <p
-        style={{
-          fontSize: 14,
-          color: 'var(--brand-obihod-ink-muted, #6b6b6b)',
-          marginTop: 0,
-          marginBottom: 32,
-          lineHeight: 1.5,
-          maxWidth: 560,
-        }}
-      >
-        Двухфакторная аутентификация (TOTP) защищает аккаунт от компрометации пароля. Код
-        генерируется в Google Authenticator, 1Password, Authy или Yandex Key.
-      </p>
-      <SecurityPanel initialEnabled={Boolean(user.totpEnabled)} userEmail={user.email} />
-    </Gutter>
+    <AdminViewTemplate
+      initPageResult={initPageResult}
+      params={props.params}
+      searchParams={props.searchParams}
+    >
+      <Gutter>
+        <h1
+          style={{
+            fontSize: 24,
+            fontWeight: 600,
+            marginBottom: 8,
+            color: 'var(--brand-obihod-ink, #1c1c1c)',
+          }}
+        >
+          Безопасность
+        </h1>
+        <p
+          style={{
+            fontSize: 14,
+            color: 'var(--brand-obihod-ink-muted, #6b6b6b)',
+            marginTop: 0,
+            marginBottom: 32,
+            lineHeight: 1.5,
+            maxWidth: 560,
+          }}
+        >
+          Двухфакторная аутентификация (TOTP) защищает аккаунт от компрометации пароля. Код
+          генерируется в Google Authenticator, 1Password, Authy или Yandex Key.
+        </p>
+        <SecurityPanel initialEnabled={Boolean(user.totpEnabled)} userEmail={user.email} />
+      </Gutter>
+    </AdminViewTemplate>
   )
 }

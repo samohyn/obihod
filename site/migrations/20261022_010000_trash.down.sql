@@ -1,0 +1,21 @@
+-- Откат 20261022_010000_trash.
+ALTER TABLE "services" DROP COLUMN IF EXISTS "deleted_at";
+ALTER TABLE "_services_v" DROP COLUMN IF EXISTS "version_deleted_at";
+ALTER TABLE "_districts_v" DROP COLUMN IF EXISTS "version_deleted_at";
+ALTER TABLE "districts" DROP COLUMN IF EXISTS "deleted_at";
+ALTER TABLE "service_districts" DROP COLUMN IF EXISTS "deleted_at";
+ALTER TABLE "b2b_pages" DROP COLUMN IF EXISTS "deleted_at";
+ALTER TABLE "cases" DROP COLUMN IF EXISTS "deleted_at";
+ALTER TABLE "_cases_v" DROP COLUMN IF EXISTS "version_deleted_at";
+ALTER TABLE "_b2b_pages_v" DROP COLUMN IF EXISTS "version_deleted_at";
+ALTER TABLE "_service_districts_v" DROP COLUMN IF EXISTS "version_deleted_at";
+ALTER TABLE "_blog_v" DROP COLUMN IF EXISTS "version_deleted_at";
+ALTER TABLE "blog" DROP COLUMN IF EXISTS "deleted_at";
+ALTER TABLE "authors" DROP COLUMN IF EXISTS "deleted_at";
+ALTER TABLE "_authors_v" DROP COLUMN IF EXISTS "version_deleted_at";
+ALTER TABLE "reviews" DROP COLUMN IF EXISTS "deleted_at";
+ALTER TABLE "_reviews_v" DROP COLUMN IF EXISTS "version_deleted_at";
+ALTER TABLE "pages" DROP COLUMN IF EXISTS "deleted_at";
+ALTER TABLE "_pages_v" DROP COLUMN IF EXISTS "version_deleted_at";
+ALTER TABLE "sub_services" DROP COLUMN IF EXISTS "deleted_at";
+ALTER TABLE "_sub_services_v" DROP COLUMN IF EXISTS "version_deleted_at";
