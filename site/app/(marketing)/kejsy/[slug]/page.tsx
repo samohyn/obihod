@@ -19,6 +19,7 @@ import { Section, Wrap } from '@/components/blocks/v3/shared'
 import type { HeroSliderBlock, V3BlockWithTone } from '@/components/blocks/v3/types'
 import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
 import a from '@/components/blocks/v3/ArticleBody.module.css'
+import { ArticleSide } from '@/components/blocks/v3/ArticleSide'
 import { retone } from '@/lib/blocks/v3/retone'
 import { toImage } from '@/lib/blocks/v3/fromPayload'
 import { getContacts } from '@/lib/chrome'
@@ -166,10 +167,17 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
         <V3BlockRenderer blocks={retone(blocks)} phoneDisplay={contacts.phoneDisplay} />
         {hasDesc && (
           <Section tone={descTone}>
-            <Wrap>
+            <Wrap className={a.layout}>
               <div className={a.body}>
                 <RichText data={(c as any).description} />
               </div>
+              <ArticleSide
+                phoneDisplay={contacts.phoneDisplay}
+                phoneHref={contacts.phoneE164 ? `tel:${contacts.phoneE164}` : ''}
+                service={
+                  service?.slug ? { title: service.title ?? '', href: `/${service.slug}/` } : null
+                }
+              />
             </Wrap>
           </Section>
         )}

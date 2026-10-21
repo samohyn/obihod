@@ -71,7 +71,8 @@ function replaceText(node: LexNode, from: string, to: string): number {
   return (node.children ?? []).reduce((n, c) => n + replaceText(c, from, to), 0)
 }
 
-const PATH_RE = /(^|[\s(«])(\/[a-z0-9][a-z0-9-]*(?:\/[a-z0-9-]+)*\/)/g
+const PATH_RE = /(^|[\s(«])(\/[a-z0-9][a-z0-9-]*(?:\/[a-z0-9-]+)*\/)(\?[a-z0-9=&_-]+)?/g
+const QUERY_RE = /^\?[a-z0-9=&_-]+/
 const shortTitle = (title: string) => title.split(':')[0].trim()
 const newId = () =>
   Array.from({ length: 24 }, () => Math.floor(Math.random() * 16).toString(16)).join('')
@@ -82,6 +83,15 @@ function linkPaths(node: LexNode, titles: Map<string, string>, missing: Set<stri
   let n = 0
   const out: LexNode[] = []
   for (const child of node.children) {
+    // «/kalkulyator/foto-smeta/?service=…» из прошлого прогона: хвост остался текстом после ссылки
+    const prev = out[out.length - 1] as (LexNode & { fields?: { url?: string } }) | undefined
+    const query = child.type === 'text' && child.text?.match(QUERY_RE)?.[0]
+    if (query && prev?.type === 'link' && prev.fields?.url && !prev.fields.url.includes('?')) {
+      prev.fields.url += query
+      child.text = child.text!.slice(query.length)
+      n++
+      if (!child.text) continue
+    }
     if (child.type !== 'text' || !child.text || !child.text.match(PATH_RE)) {
       n += linkPaths(child, titles, missing)
       out.push(child)
@@ -100,14 +110,14 @@ function linkPaths(node: LexNode, titles: Map<string, string>, missing: Set<stri
       out.push({
         id: newId(),
         type: 'link',
-        fields: { url: path, newTab: false, linkType: 'custom' },
+        fields: { url: path + (m[3] ?? ''), newTab: false, linkType: 'custom' },
         format: '',
         indent: 0,
         version: 3,
         direction: null,
         children: [{ ...child, text: `«${shortTitle(title)}»` }],
       })
-      last = start + path.length
+      last = start + path.length + (m[3]?.length ?? 0)
       n++
     }
     const rest = child.text.slice(last)

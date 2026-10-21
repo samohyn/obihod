@@ -12,6 +12,7 @@ import { Picture, Section, Wrap } from '@/components/blocks/v3/shared'
 import type { ServicesTilesBlock, V3BlockWithTone } from '@/components/blocks/v3/types'
 import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
 import a from '@/components/blocks/v3/ArticleBody.module.css'
+import { ArticleSide } from '@/components/blocks/v3/ArticleSide'
 import { retone } from '@/lib/blocks/v3/retone'
 import { toImage } from '@/lib/blocks/v3/fromPayload'
 import { BLOG_CATEGORY, blogTopic } from '@/lib/blog-topics'
@@ -221,10 +222,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         }
       />
       <Section tone="default">
-        <Wrap>
+        <Wrap className={a.layout}>
           <article className={a.body}>
             <div className={a.figure}>
-              <Picture image={cover} sizes="(max-width: 767px) 100vw, 760px" eager />
+              <Picture
+                image={cover}
+                sizes="(max-width: 767px) 100vw, 760px"
+                eager
+                className={a.cover}
+              />
             </div>
             {post.intro && <p className={a.lead}>{post.intro}</p>}
             <RichText data={post.body as never} />
@@ -242,6 +248,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </aside>
             )}
           </article>
+          <ArticleSide
+            phoneDisplay={contacts.phoneDisplay}
+            phoneHref={contacts.phoneE164 ? `tel:${contacts.phoneE164}` : ''}
+            service={pillar ? { title: pillar.title, href: `/${topic.pillar}/` } : null}
+          />
         </Wrap>
       </Section>
       <V3BlockRenderer blocks={retone(after, true)} phoneDisplay={contacts.phoneDisplay} />
