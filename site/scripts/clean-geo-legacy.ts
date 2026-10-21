@@ -85,6 +85,7 @@ async function main() {
       collection: 'service-districts',
       id: doc.id,
       data: { seoH1: null, leadParagraph: lexical(text), localFaq } as never,
+      context: { skipMasterTemplateGate: true },
     })
     n++
   }
