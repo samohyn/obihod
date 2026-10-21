@@ -24,6 +24,10 @@ import { getBlocksForLayer } from '@/lib/master-template/getBlocksForLayer'
 import { buildResolverOptions } from '@/lib/feature-flags/template-v2'
 import { readAbVariantOverride, AB_PILOT_SLUG } from '@/lib/feature-flags/ab-pilot'
 import type { DocumentBlock } from '@/blocks/master-template'
+import { getPage } from '@/lib/pages'
+import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+
+import { PillarBlocksView } from './PillarBlocksView'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -49,6 +53,9 @@ export async function generateMetadata({
   const { service } = await params
   const s = await getServiceBySlug(service)
   if (!s) return {}
+  // 0. Хаб из блоков — документ «Страницы» с тем же адресом
+  const page = await getPage(service)
+  if (page) return buildBlocksPageMetadata(page, `/${service}/`)
   return buildPillarMetadata(s as never, s.metaTitle, s.metaDescription)
 }
 
@@ -56,6 +63,10 @@ export default async function PillarPage({ params }: { params: Promise<{ service
   const { service: serviceSlug } = await params
   const service = await getServiceBySlug(serviceSlug)
   if (!service) notFound()
+
+  // 0. Хаб из блоков: опубликованный документ «Страницы» с адресом направления
+  const blocksPage = await getPage(serviceSlug)
+  if (blocksPage) return <PillarBlocksView service={service as never} page={blocksPage} />
 
   // Лендинги смет — в карте 08 не услуги, а калькуляторы: крошки сразу от главной.
   const leaf = { name: service.title, href: `/${service.slug}/` }

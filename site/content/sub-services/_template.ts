@@ -15,7 +15,9 @@ import type {
   V3BlockWithTone,
 } from '@/components/blocks/v3/types'
 
-import type { SubServiceContent } from './types'
+import { retone } from '@/lib/blocks/v3/retone'
+
+import type { PageContent, SubServiceContent } from './types'
 
 export const img = (name: string, alt: string, focus?: string): BlockImage => ({
   url: `/dev-blocks/${name}.webp`,
@@ -72,9 +74,9 @@ export const STEPS_DEFAULT: StepItem[] = [
 export const PERMIT_DOC: DocumentItem = {
   icon: 'stamp',
   title: 'Порубочный билет',
-  text: 'Нужен для деревьев на общей территории СНТ, у многоквартирного дома и в зелёных зонах. Оформим сами',
-  metaLabel: 'срок',
-  metaValue: '7–14 рабочих дней',
+  text: 'Нужен для деревьев на общей территории СНТ, у многоквартирного дома и в зелёных зонах. Подготовим документы и подадим за вас',
+  metaLabel: 'срок органа',
+  metaValue: 'до 17–22 рабочих дней',
 }
 
 export const BASE_DOCS: DocumentItem[] = [
@@ -165,8 +167,6 @@ export type SubServiceSpec = {
   related: { title: string; link?: { label: string; href: string }; items: ServiceTile[] }
   form: { title: string; formTitle: string; background?: BlockImage }
 }
-
-const TONED = new Set(['hero-slider', 'photo-cta', 'final-form', 'b2b-plan'])
 
 export function subServicePage(spec: SubServiceSpec): SubServiceContent {
   const blocks: V3BlockWithTone[] = [
@@ -264,22 +264,42 @@ export function subServicePage(spec: SubServiceSpec): SubServiceContent {
     source: spec.slug,
   })
 
-  // Фон чередуется: кремовый / бежевый, кроме секций со своим фоном.
-  let alt = false
-  const toned = blocks.map((b) => {
-    if (TONED.has(b.blockType)) return b
-    const tone = alt ? 'alt' : 'default'
-    alt = !alt
-    return { ...b, tone } as V3BlockWithTone
-  })
-
   return {
     service: spec.service,
     slug: spec.slug,
     title: spec.title,
     metaTitle: spec.metaTitle,
     metaDescription: spec.metaDescription,
-    blocks: toned,
+    blocks: retone(blocks),
+  }
+}
+
+export type PillarSpec = Omit<SubServiceSpec, 'service'> & {
+  /** Подуслуги направления плитками — сразу под первым экраном (якорь #uslugi). */
+  tiles: { title: string; items: ServiceTile[] }
+}
+
+/**
+ * Хаб направления (/arboristika/ и т. п.) — те же секции, что у подуслуги, но подуслуги плитками
+ * идут сразу под первым экраном: хаб ведёт на детальные страницы, а не повторяет их.
+ */
+export function pillarPage(spec: PillarSpec): PageContent {
+  const base = subServicePage({ ...spec, service: spec.slug })
+  const blocks = [...base.blocks]
+  blocks.splice(1, 0, {
+    blockType: 'services-tiles',
+    anchor: 'uslugi',
+    eyebrow: 'Услуги',
+    title: spec.tiles.title,
+    link: null,
+    items: spec.tiles.items,
+  })
+  return {
+    slug: spec.slug,
+    title: spec.title,
+    metaTitle: spec.metaTitle,
+    metaDescription: spec.metaDescription,
+    blocks: retone(blocks),
   }
 }
 
@@ -436,7 +456,7 @@ export const TILE: Record<string, ServiceTile> = {
   },
   bilet: {
     title: 'Порубочный билет',
-    text: 'Оформим за 7–14 рабочих дней',
+    text: 'Документы и подача за вас',
     price: 'от 8 600 ₽',
     href: '/porubochnyj-bilet/',
     image: img('act', 'Документы на столе'),

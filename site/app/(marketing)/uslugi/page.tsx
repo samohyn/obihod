@@ -13,6 +13,10 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
+import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
+import { getPage } from '@/lib/pages'
+import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildJsonLdForTemplate } from '@/lib/seo/composer'
 import { metadataBase } from '@/lib/seo/metadata'
@@ -29,7 +33,7 @@ const META_TITLE = 'Услуги — Обиход · вывоз мусора, а
 const META_DESCRIPTION =
   'Услуги «Обихода» для дома, дачи и B2B в Москве и МО: вывоз мусора, арбористика, демонтаж, чистка крыш, уборка территории. Фикс-цена в договоре, выезд за 2 часа.'
 
-export const metadata: Metadata = {
+const LEGACY_METADATA: Metadata = {
   metadataBase,
   title: { absolute: META_TITLE },
   description: META_DESCRIPTION,
@@ -49,6 +53,11 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true, 'max-snippet': -1, 'max-image-preview': 'large' },
 }
 
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPage('uslugi')
+  return page ? buildBlocksPageMetadata(page, '/uslugi/') : LEGACY_METADATA
+}
+
 const PILLAR_DESC: Record<string, string> = {
   'vyvoz-musora':
     'Контейнеры 7 / 20 / 30 м³, бытовой и строительный, КГМ. Полигон с актом, без штрафов ОАТИ.',
@@ -63,6 +72,10 @@ const PILLAR_DESC: Record<string, string> = {
 }
 
 export default async function UslugiHubPage() {
+  // 0. Раздел из блоков — документ «Страницы» uslugi
+  const blocksPage = await getPage('uslugi')
+  if (blocksPage) return <PageBlocksView page={blocksPage} crumbs={trail('uslugi')} />
+
   const [pillars, chrome, contacts] = await Promise.all([
     getAllPillarsForPricing(),
     getSiteChrome(),

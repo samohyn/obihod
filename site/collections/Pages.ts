@@ -34,6 +34,8 @@ export const Pages: CollectionConfig = {
         try {
           const { revalidatePath } = await import('next/cache')
           revalidatePath(doc.slug === 'home' ? '/' : `/${doc.slug}/`)
+          // Прайс хаба стоит и в сводном прайсе /uslugi/tseny/
+          if (!doc.slug.includes('/')) revalidatePath('/uslugi/tseny/')
         } catch (e) {
           // Вне запроса Next (скрипт seed:home) кеша страниц нет — сбрасывать нечего.
           const msg = (e as Error).message
@@ -61,11 +63,15 @@ export const Pages: CollectionConfig = {
           required: true,
           unique: true,
           index: true,
-          admin: { width: '40%', description: '«home» — главная. Латиница, цифры и дефис.' },
+          admin: {
+            width: '40%',
+            description:
+              '«home» — главная, иначе путь без слэшей по краям: «arboristika», «uslugi/tseny». Латиница, цифры, дефис.',
+          },
           validate: (value: unknown) =>
-            typeof value === 'string' && /^[a-z0-9-]+$/.test(value)
+            typeof value === 'string' && /^[a-z0-9-]+(\/[a-z0-9-]+)*$/.test(value)
               ? true
-              : 'Только латиница, цифры и дефис',
+              : 'Латиница, цифры и дефис; части пути — через «/»',
         },
       ],
     },

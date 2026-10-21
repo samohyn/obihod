@@ -13,6 +13,7 @@
     "seed:admin": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/seed-admin.ts",
     "seed:home": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/seed-home-c4.ts",
     "seed:subservice": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/seed-subservice.ts",
+    "seed:page": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/seed-page.ts",
     "seed:chrome": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/seed-chrome.ts",
     "schema:diff": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/schema-diff.ts",
     "migrate": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/migrate.ts",

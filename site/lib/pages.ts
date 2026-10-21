@@ -1,7 +1,7 @@
 import { draftMode } from 'next/headers'
 import { cache } from 'react'
 
-import type { V3BlockWithTone } from '@/components/blocks/v3/types'
+import type { PriceTabsBlock, V3BlockWithTone } from '@/components/blocks/v3/types'
 import { fromPayloadBlocks, mediaPath } from '@/lib/blocks/v3/fromPayload'
 import { payloadClient } from '@/lib/payload'
 
@@ -85,3 +85,69 @@ async function loadBlocksDoc(
     return null
   }
 }
+
+/**
+ * Цены направления для /uslugi/tseny/<направление>/: блок «Цены» каждой опубликованной подуслуги —
+ * заголовок = название подуслуги, ссылка — на неё. Правите цену в подуслуге — меняется и здесь.
+ */
+export const getPillarPriceBlocks = cache(
+  async (serviceSlug: string): Promise<V3BlockWithTone[]> => {
+    try {
+      const payload = await payloadClient()
+      const service = await payload.find({
+        collection: 'services',
+        where: { slug: { equals: serviceSlug } },
+        limit: 1,
+        depth: 0,
+      })
+      const serviceId = service.docs[0]?.id
+      if (!serviceId) return []
+      const res = await payload.find({
+        collection: 'sub-services',
+        where: { and: [{ service: { equals: serviceId } }, { _status: { equals: 'published' } }] },
+        sort: 'createdAt',
+        limit: 50,
+        depth: 1,
+      })
+      const out: V3BlockWithTone[] = []
+      for (const doc of res.docs as unknown as Record<string, unknown>[]) {
+        const blocks = await fromPayloadBlocks(doc.layout, payload)
+        const prices = blocks.find((b) => b.blockType === 'price-tabs') as
+          | PriceTabsBlock
+          | undefined
+        if (!prices || !prices.tabs?.length) continue
+        out.push({
+          ...prices,
+          anchor: String(doc.slug),
+          eyebrow: 'Цены',
+          title: String(doc.title),
+          link: { label: 'Подробнее об услуге', href: `/${serviceSlug}/${doc.slug}/` },
+        } as V3BlockWithTone)
+      }
+      return out
+    } catch {
+      return []
+    }
+  },
+)
+
+/**
+ * Сводный прайс направления для /uslugi/tseny/: блок «Цены» опубликованного хаба (документ «Страницы»
+ * с адресом направления), ссылка — на подробный прайс направления.
+ */
+export const getPillarSummaryBlock = cache(
+  async (serviceSlug: string, title: string): Promise<V3BlockWithTone | null> => {
+    const page = await getPage(serviceSlug)
+    const prices = page?.blocks.find((b) => b.blockType === 'price-tabs') as
+      | PriceTabsBlock
+      | undefined
+    if (!prices || !prices.tabs?.length) return null
+    return {
+      ...prices,
+      anchor: serviceSlug,
+      eyebrow: 'Цены',
+      title,
+      link: { label: 'Подробный прайс', href: `/uslugi/tseny/${serviceSlug}/` },
+    } as V3BlockWithTone
+  },
+)
