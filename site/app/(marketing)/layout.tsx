@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Golos_Text, JetBrains_Mono } from 'next/font/google'
 import '../globals.css'
 import '../homepage-classic.css'
-import '../service-pages.css'
 
 import { SiteFooter } from '@/components/chrome/SiteFooter'
 import { SiteHeader } from '@/components/chrome/SiteHeader'
