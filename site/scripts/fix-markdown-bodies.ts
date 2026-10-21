@@ -254,7 +254,7 @@ async function main() {
         collection: t.collection,
         id: doc.id as number,
         data: data as never,
-        context: { skipMasterTemplateGate: true },
+        context: { rawOffer: true, keepPublished: true },
       })
     }
   }

@@ -157,6 +157,17 @@ jobs:
         timeout-minutes: 2
         run: pnpm exec tsx --require=./scripts/_payload-cjs-shim.cjs scripts/seed-admin.ts
 
+      # Сайт рисуется только из документов админки (план 09, этап 4.4c): без них публичные страницы
+      # отвечают 404. Наполнение — тем же seed, что и прод: «Шапка», главная, разделы, документы ПДн.
+      - name: Наполнение — «Страницы» и «Шапка»
+        timeout-minutes: 6
+        run: |
+          pnpm run seed:chrome
+          pnpm run seed:home --publish
+          for batch in uslugi geo b2b company legal napravleniya; do
+            pnpm run seed:page "$batch" --publish
+          done
+
       - name: Build
         timeout-minutes: 8
         run: pnpm run build

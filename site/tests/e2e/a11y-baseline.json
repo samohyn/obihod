@@ -1,53 +1,29 @@
 {
   "chromium": {
-    "/": [
-      "color-contrast",
-      "scrollable-region-focusable",
-      "target-size"
-    ],
+    "/": [],
     "/kontakty/": [],
     "/kalkulyator/foto-smeta/": [],
     "/otzyvy/": [],
-    "/uslugi/": [
-      "color-contrast"
-    ],
-    "/b2b/": [
-      "color-contrast"
-    ],
+    "/uslugi/": [],
+    "/b2b/": [],
     "/raiony/": [],
-    "/kejsy/": [
-      "color-contrast"
-    ],
-    "/blog/": [
-      "color-contrast"
-    ],
+    "/kejsy/": [],
+    "/blog/": [],
     "/o-kompanii/": [],
     "/garantii/": [],
     "/politika-konfidentsialnosti/": [],
     "/stranitsa-kotoroy-net/": []
   },
   "mobile-chrome": {
-    "/": [
-      "color-contrast",
-      "scrollable-region-focusable",
-      "target-size"
-    ],
+    "/": [],
     "/kontakty/": [],
     "/kalkulyator/foto-smeta/": [],
     "/otzyvy/": [],
-    "/uslugi/": [
-      "color-contrast"
-    ],
-    "/b2b/": [
-      "color-contrast"
-    ],
+    "/uslugi/": [],
+    "/b2b/": [],
     "/raiony/": [],
-    "/kejsy/": [
-      "color-contrast"
-    ],
-    "/blog/": [
-      "color-contrast"
-    ],
+    "/kejsy/": [],
+    "/blog/": [],
     "/o-kompanii/": [],
     "/garantii/": [],
     "/politika-konfidentsialnosti/": [],

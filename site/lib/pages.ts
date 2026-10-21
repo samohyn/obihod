@@ -22,7 +22,8 @@ export type PageData = {
 /**
  * Страница из коллекции «Страницы» по адресу. Публичный сайт видит только опубликованную
  * версию; в режиме предпросмотра (draftMode) — последний черновик.
- * null — страницы нет / она не опубликована / БД недоступна: вызывающий показывает запасной вариант.
+ * null — страницы нет или она не опубликована: страница отвечает 404. Сбой базы — ошибка, а не
+ * запасной текст: сайт продолжит показывать последнюю удачную версию страницы из кеша (ISR).
  */
 export const getPage = cache(
   async (slug: string): Promise<PageData | null> =>
@@ -31,26 +32,22 @@ export const getPage = cache(
 
 /**
  * Подуслуга из коллекции «Подуслуги» по адресу /направление/подуслуга/ — те же правила, что у getPage.
- * null — документа нет или он не опубликован: страница показывает прежнюю версию.
+ * null — документа нет или он не опубликован.
  */
 export const getSubServicePage = cache(
   async (serviceSlug: string, slug: string): Promise<PageData | null> => {
-    try {
-      const payload = await payloadClient()
-      const service = await payload.find({
-        collection: 'services',
-        where: { slug: { equals: serviceSlug } },
-        limit: 1,
-        depth: 0,
-      })
-      const serviceId = service.docs[0]?.id
-      if (!serviceId) return null
-      return await loadBlocksDoc('sub-services', {
-        and: [{ slug: { equals: slug } }, { service: { equals: serviceId } }],
-      })
-    } catch {
-      return null
-    }
+    const payload = await payloadClient()
+    const service = await payload.find({
+      collection: 'services',
+      where: { slug: { equals: serviceSlug } },
+      limit: 1,
+      depth: 0,
+    })
+    const serviceId = service.docs[0]?.id
+    if (!serviceId) return null
+    return await loadBlocksDoc('sub-services', {
+      and: [{ slug: { equals: slug } }, { service: { equals: serviceId } }],
+    })
   },
 )
 
@@ -59,31 +56,27 @@ async function loadBlocksDoc(
   where: Record<string, unknown>,
 ): Promise<PageData | null> {
   const draft = await isDraftPreview()
-  try {
-    const payload = await payloadClient()
-    const res = await payload.find({
-      collection,
-      where: where as never,
-      draft,
-      limit: 1,
-      depth: 2,
-      overrideAccess: draft,
-    })
-    const doc = res.docs[0] as unknown as Record<string, unknown> | undefined
-    if (!doc) return null
-    if (!draft && doc._status !== 'published') return null
-    const blocks = await fromPayloadBlocks(doc.layout, payload)
-    if (blocks.length === 0) return null
-    const og = doc.ogImage as { url?: string; alt?: string } | null | undefined
-    return {
-      title: String(doc.title ?? ''),
-      metaTitle: (doc.metaTitle as string) || null,
-      metaDescription: (doc.metaDescription as string) || null,
-      ogImage: og?.url ? { url: mediaPath(og.url), alt: og.alt ?? '' } : null,
-      blocks,
-    }
-  } catch {
-    return null
+  const payload = await payloadClient()
+  const res = await payload.find({
+    collection,
+    where: where as never,
+    draft,
+    limit: 1,
+    depth: 2,
+    overrideAccess: draft,
+  })
+  const doc = res.docs[0] as unknown as Record<string, unknown> | undefined
+  if (!doc) return null
+  if (!draft && doc._status !== 'published') return null
+  const blocks = await fromPayloadBlocks(doc.layout, payload)
+  if (blocks.length === 0) return null
+  const og = doc.ogImage as { url?: string; alt?: string } | null | undefined
+  return {
+    title: String(doc.title ?? ''),
+    metaTitle: (doc.metaTitle as string) || null,
+    metaDescription: (doc.metaDescription as string) || null,
+    ogImage: og?.url ? { url: mediaPath(og.url), alt: og.alt ?? '' } : null,
+    blocks,
   }
 }
 
@@ -93,42 +86,36 @@ async function loadBlocksDoc(
  */
 export const getPillarPriceBlocks = cache(
   async (serviceSlug: string): Promise<V3BlockWithTone[]> => {
-    try {
-      const payload = await payloadClient()
-      const service = await payload.find({
-        collection: 'services',
-        where: { slug: { equals: serviceSlug } },
-        limit: 1,
-        depth: 0,
-      })
-      const serviceId = service.docs[0]?.id
-      if (!serviceId) return []
-      const res = await payload.find({
-        collection: 'sub-services',
-        where: { and: [{ service: { equals: serviceId } }, { _status: { equals: 'published' } }] },
-        sort: 'createdAt',
-        limit: 50,
-        depth: 1,
-      })
-      const out: V3BlockWithTone[] = []
-      for (const doc of res.docs as unknown as Record<string, unknown>[]) {
-        const blocks = await fromPayloadBlocks(doc.layout, payload)
-        const prices = blocks.find((b) => b.blockType === 'price-tabs') as
-          | PriceTabsBlock
-          | undefined
-        if (!prices || !prices.tabs?.length) continue
-        out.push({
-          ...prices,
-          anchor: String(doc.slug),
-          eyebrow: 'Цены',
-          title: String(doc.title),
-          link: { label: 'Подробнее об услуге', href: `/${serviceSlug}/${doc.slug}/` },
-        } as V3BlockWithTone)
-      }
-      return out
-    } catch {
-      return []
+    const payload = await payloadClient()
+    const service = await payload.find({
+      collection: 'services',
+      where: { slug: { equals: serviceSlug } },
+      limit: 1,
+      depth: 0,
+    })
+    const serviceId = service.docs[0]?.id
+    if (!serviceId) return []
+    const res = await payload.find({
+      collection: 'sub-services',
+      where: { and: [{ service: { equals: serviceId } }, { _status: { equals: 'published' } }] },
+      sort: 'createdAt',
+      limit: 50,
+      depth: 1,
+    })
+    const out: V3BlockWithTone[] = []
+    for (const doc of res.docs as unknown as Record<string, unknown>[]) {
+      const blocks = await fromPayloadBlocks(doc.layout, payload)
+      const prices = blocks.find((b) => b.blockType === 'price-tabs') as PriceTabsBlock | undefined
+      if (!prices || !prices.tabs?.length) continue
+      out.push({
+        ...prices,
+        anchor: String(doc.slug),
+        eyebrow: 'Цены',
+        title: String(doc.title),
+        link: { label: 'Подробнее об услуге', href: `/${serviceSlug}/${doc.slug}/` },
+      } as V3BlockWithTone)
     }
+    return out
   },
 )
 
@@ -158,47 +145,78 @@ export const getPillarSummaryBlock = cache(
  * хаба направления. `match` — отбор по названию (кейсы для организаций).
  */
 export const getCasesListBlock = cache(async (match?: RegExp): Promise<V3BlockWithTone | null> => {
-  try {
-    const payload = await payloadClient()
-    const draft = await isDraftPreview()
-    const res = await payload.find({
-      collection: 'cases',
-      where: draft ? undefined : { _status: { equals: 'published' } },
-      draft,
-      limit: 100,
-      sort: '-dateCompleted',
-      depth: 2,
-    })
-    const docs = (res.docs as unknown as Record<string, unknown>[]).filter(
-      (c) => c.slug && (!match || match.test(String(c.title))),
-    )
-    if (docs.length === 0) return null
-    const items = await Promise.all(
-      docs.map(async (c) => {
-        const service = c.service as { slug?: string; title?: string } | null
-        const district = c.district as { nameNominative?: string } | null
-        const text = richToText(c.description)
-        let image: BlockImage | null = toImage(
-          (c.photosAfter as { image?: unknown }[] | undefined)?.[0]?.image,
-        )
-        if (!image && service?.slug) {
-          const pillar = await getPage(service.slug)
-          const hero = pillar?.blocks.find((b) => b.blockType === 'hero-slider') as
-            | HeroSliderBlock
-            | undefined
-          image = hero?.slides?.[0]?.image ?? null
-        }
-        return {
-          kicker: [service?.title, district?.nameNominative].filter(Boolean).join(' · '),
-          title: String(c.title),
-          text: text.length > 150 ? `${text.slice(0, 147).trimEnd()}…` : text,
-          href: `/kejsy/${c.slug}/`,
-          image: image as BlockImage,
-        }
-      }),
-    )
-    return { blockType: 'articles', anchor: 'kejsy', eyebrow: 'Объекты', title: 'Кейсы', items }
-  } catch {
-    return null
-  }
+  const payload = await payloadClient()
+  const draft = await isDraftPreview()
+  const res = await payload.find({
+    collection: 'cases',
+    where: draft ? undefined : { _status: { equals: 'published' } },
+    draft,
+    limit: 100,
+    sort: '-dateCompleted',
+    depth: 2,
+  })
+  const docs = (res.docs as unknown as Record<string, unknown>[]).filter(
+    (c) => c.slug && (!match || match.test(String(c.title))),
+  )
+  if (docs.length === 0) return null
+  const items = await Promise.all(
+    docs.map(async (c) => {
+      const service = c.service as { slug?: string; title?: string } | null
+      const district = c.district as { nameNominative?: string } | null
+      const text = richToText(c.description)
+      let image: BlockImage | null = toImage(
+        (c.photosAfter as { image?: unknown }[] | undefined)?.[0]?.image,
+      )
+      if (!image && service?.slug) {
+        const pillar = await getPage(service.slug)
+        const hero = pillar?.blocks.find((b) => b.blockType === 'hero-slider') as
+          | HeroSliderBlock
+          | undefined
+        image = hero?.slides?.[0]?.image ?? null
+      }
+      return {
+        kicker: [service?.title, district?.nameNominative].filter(Boolean).join(' · '),
+        title: String(c.title),
+        text: text.length > 150 ? `${text.slice(0, 147).trimEnd()}…` : text,
+        href: `/kejsy/${c.slug}/`,
+        image: image as BlockImage,
+      }
+    }),
+  )
+  return { blockType: 'articles', anchor: 'kejsy', eyebrow: 'Объекты', title: 'Кейсы', items }
 })
+
+/** Адреса опубликованных «Страниц» под разделом: `b2b` → ['uk-tszh', 'goszakaz', …] (для сборки). */
+export async function getPageSlugsUnder(section: string): Promise<string[]> {
+  const payload = await payloadClient()
+  const res = await payload.find({
+    collection: 'pages',
+    where: {
+      and: [{ slug: { like: `${section}/` } }, { _status: { equals: 'published' } }],
+    },
+    limit: 200,
+    pagination: false,
+    depth: 0,
+    select: { slug: true },
+  })
+  return res.docs
+    .map((d) => String((d as { slug?: string }).slug ?? ''))
+    .filter((s) => s.startsWith(`${section}/`) && !s.slice(section.length + 1).includes('/'))
+    .map((s) => s.slice(section.length + 1))
+}
+
+/** Адреса опубликованных «Подуслуг»: { service, slug } для сборки /направление/подуслуга/. */
+export async function getSubServicePageParams(): Promise<{ service: string; slug: string }[]> {
+  const payload = await payloadClient()
+  const res = await payload.find({
+    collection: 'sub-services',
+    where: { _status: { equals: 'published' } },
+    limit: 500,
+    pagination: false,
+    depth: 1,
+    select: { slug: true, service: true },
+  })
+  return (res.docs as unknown as { slug?: string; service?: { slug?: string } | null }[])
+    .filter((d) => d.slug && d.service?.slug)
+    .map((d) => ({ service: String(d.service!.slug), slug: String(d.slug) }))
+}
