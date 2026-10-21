@@ -2,6 +2,7 @@ import type { ArrayField, Field, GlobalConfig, Validate } from 'payload'
 
 import { ICON_NAMES } from '@/components/blocks/v3/iconNames'
 import { isAdmin } from '@/lib/auth/access'
+import { validateE164, validateInn } from './Company'
 import { revalidateGlobalAfterChange } from '@/lib/admin/revalidateSite'
 
 /**
@@ -17,11 +18,9 @@ import { revalidateGlobalAfterChange } from '@/lib/admin/revalidateSite'
  */
 
 // ---------- shared validators ----------
-const E164_RE = /^\+7\d{10}$/
 const HTTP_RE = /^https?:\/\//i
 const ROUTE_RE = /^\/[^\s]*$/
 const ANCHOR_RE = /^[a-z0-9-]+$/
-const INN_RE = /^\d{10,12}$/
 
 type MenuItemShape = {
   kind?: 'anchor' | 'route' | 'external'
@@ -55,12 +54,6 @@ const validateSocialUrl: Validate = (value, { siblingData }) => {
   if (!HTTP_RE.test(value)) return 'Допустимы только http(s):// URL'
   return true
 }
-
-const validateE164: Validate = (v) =>
-  typeof v === 'string' && E164_RE.test(v) ? true : 'Формат E.164: +7XXXXXXXXXX (11 цифр)'
-
-const validateInn: Validate = (v) =>
-  typeof v === 'string' && INN_RE.test(v) ? true : 'ИНН — 10 или 12 цифр'
 
 const validateHref: Validate = (v) =>
   typeof v === 'string' && /^(\/[^\s]*|https?:\/\/\S+|tel:\+?\d+|mailto:\S+)$/.test(v)
@@ -142,9 +135,9 @@ const menuItemArrayField = (name: string): ArrayField => ({
 // ---------- GLOBAL ----------
 export const SiteChrome: GlobalConfig = {
   slug: 'site-chrome',
-  label: 'Шапка, подвал и контакты',
+  label: 'Шапка и подвал',
   admin: {
-    description: 'Всё, что про «рамку сайта»: шапка, футер, контакты, реквизиты, соцсети.',
+    description: 'Шапка, подвал и соцсети. Контакты, реквизиты и часы — в «Компания и контакты».',
     group: '05 · Рамка сайта',
   },
   access: {
@@ -425,11 +418,13 @@ export const SiteChrome: GlobalConfig = {
         // -------- CONTACTS --------
         {
           label: 'Контакты',
-          description: 'Телефон и e-mail. Инвариант: телефон обязателен.',
+          description:
+            'Телефон, почта, адрес, реквизиты и часы перенесены в «Компания и контакты» (план 09, этап 4.3). Здесь поля скрыты и будут удалены.',
           fields: [
             {
               name: 'contacts',
               type: 'group',
+              admin: { hidden: true },
               fields: [
                 {
                   name: 'phoneDisplay',
@@ -470,20 +465,10 @@ export const SiteChrome: GlobalConfig = {
                 },
               ],
             },
-          ],
-        },
-        // -------- REQUISITES --------
-        // PANEL-SITECHROME-RESTRUCTURE 2026-05-01: collapsible-блоки
-        // «Юридическое лицо» + «Адрес» внутри group `requisites`. Оба
-        // открыты по умолчанию (`initCollapsed: false`). Schema не меняется
-        // — все колонки остаются flat `requisites_*`.
-        {
-          label: 'Реквизиты',
-          description: 'Для B2B и JSON-LD. Заполнить после регистрации юрлица.',
-          fields: [
             {
               name: 'requisites',
               type: 'group',
+              admin: { hidden: true },
               fields: [
                 {
                   type: 'collapsible',

@@ -9,6 +9,7 @@ import {
   hasSubServicePage,
 } from '@/lib/seo/queries'
 import { lexicalToPlainText } from '@/lib/seo/uniqueness'
+import { getCompany, minutes } from '@/lib/company'
 
 /**
  * GET /llms-full.txt
@@ -147,7 +148,7 @@ function priceLine(svc: ServiceLike): string {
 }
 
 export async function GET(): Promise<NextResponse> {
-  const [contacts, pillars, b2b, authors, cases, blog] = await Promise.all([
+  const [contacts, pillars, b2b, authors, cases, blog, company] = await Promise.all([
     getContacts(),
     fetchPillars(),
     getPublishedB2BPages().catch(
@@ -159,6 +160,7 @@ export async function GET(): Promise<NextResponse> {
     ),
     fetchTopCases(10),
     fetchRecentBlog(10),
+    getCompany(),
   ])
 
   const lastmod = new Date().toISOString().split('T')[0]
@@ -292,7 +294,7 @@ export async function GET(): Promise<NextResponse> {
   sections.push('## USP — конкурентные преимущества')
   sections.push('')
   sections.push(
-    `- **Фото→смета за 10 минут:** [${SITE_URL}/foto-smeta/](${SITE_URL}/foto-smeta/) — отправьте 2-3 фото объекта в Telegram/MAX/WhatsApp, оператор пришлёт смету. Никто из конкурентов в Москве не делает.`,
+    `- **Фото→смета за ${minutes(company.photoEstimateMinutes)}:** [${SITE_URL}/foto-smeta/](${SITE_URL}/foto-smeta/) — отправьте 2-3 фото объекта в Telegram/MAX/WhatsApp, оператор пришлёт смету. Никто из конкурентов в Москве не делает.`,
   )
   sections.push(
     `- **Калькулятор онлайн:** [${SITE_URL}/raschet-stoimosti/](${SITE_URL}/raschet-stoimosti/) — расчёт по объёму/классу отходов/плечу выезда.`,

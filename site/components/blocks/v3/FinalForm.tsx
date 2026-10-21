@@ -1,11 +1,14 @@
 // Финальная форма + каналы связи (у всех пяти конкурентов форма внизу; каналы MAX/Telegram — Мастер лес).
 
 import { Eyebrow, Icon, Picture, Wrap } from './shared'
+import { getCompany } from '@/lib/company'
+
 import { LeadFormV3 } from './LeadFormV3'
 import type { FinalFormBlock } from './types'
 import s from './FinalForm.module.css'
 
-export function FinalForm(block: FinalFormBlock & { phoneDisplay?: string }) {
+export async function FinalForm(block: FinalFormBlock & { phoneDisplay?: string }) {
+  const company = await getCompany()
   const onPhoto = Boolean(block.background?.url)
   // Фото принимаем через мессенджер или почту; нет такого канала — строку «фото» в форме не показываем.
   const photoChannel = block.channels.find((c) => c.icon === 'send' || c.icon === 'message')
@@ -43,7 +46,13 @@ export function FinalForm(block: FinalFormBlock & { phoneDisplay?: string }) {
           title={block.formTitle}
           source={block.source}
           photoHref={photoChannel?.href ?? null}
-          phoneDisplay={block.phoneDisplay ?? '+7 (985) 170-51-11'}
+          phoneDisplay={block.phoneDisplay ?? company.phoneDisplay}
+          callback={{
+            opens: company.opens,
+            closes: company.closes,
+            callbackMinutes: company.callbackMinutes,
+            nightCallbackTime: company.nightCallbackTime,
+          }}
         />
       </Wrap>
     </section>

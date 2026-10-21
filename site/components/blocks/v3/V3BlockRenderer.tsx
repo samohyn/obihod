@@ -23,8 +23,9 @@ import { Team } from './Team'
 import { TreeCheck } from './TreeCheck'
 import { VideoGallery } from './VideoGallery'
 import type { V3BlockWithTone } from './types'
+import { getCompany, type Company } from '@/lib/company'
 
-function renderBlock(block: V3BlockWithTone, key: string, phoneDisplay?: string) {
+function renderBlock(block: V3BlockWithTone, key: string, company: Company, phoneDisplay?: string) {
   const tone = block.tone ?? undefined
   switch (block.blockType) {
     case 'hero-slider':
@@ -62,7 +63,14 @@ function renderBlock(block: V3BlockWithTone, key: string, phoneDisplay?: string)
     case 'articles':
       return <Articles key={key} {...block} tone={tone} />
     case 'objects-map':
-      return <ObjectsMap key={key} {...block} tone={tone} />
+      return (
+        <ObjectsMap
+          key={key}
+          {...block}
+          tone={tone}
+          rings={[company.emergencyRadiusKm, company.freeVisitRadiusKm]}
+        />
+      )
     case 'guarantees':
       return <Guarantees key={key} {...block} tone={tone} />
     case 'faq-v3':
@@ -74,7 +82,7 @@ function renderBlock(block: V3BlockWithTone, key: string, phoneDisplay?: string)
   }
 }
 
-export function V3BlockRenderer({
+export async function V3BlockRenderer({
   blocks,
   phoneDisplay,
 }: {
@@ -82,11 +90,12 @@ export function V3BlockRenderer({
   phoneDisplay?: string
 }) {
   if (!blocks?.length) return null
+  const company = await getCompany()
   return (
     <>
       {blocks
         .filter((b) => b && b.enabled !== false)
-        .map((b, i) => renderBlock(b, b.id ?? `${b.blockType}-${i}`, phoneDisplay))}
+        .map((b, i) => renderBlock(b, b.id ?? `${b.blockType}-${i}`, company, phoneDisplay))}
     </>
   )
 }

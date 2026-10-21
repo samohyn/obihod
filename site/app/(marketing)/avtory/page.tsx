@@ -13,6 +13,7 @@ import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
 import { getContacts } from '@/lib/chrome'
 
 import s from './avtory.module.css'
+import { getCompany, minutes } from '@/lib/company'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -38,9 +39,10 @@ type Author = {
 }
 
 export default async function AuthorsIndex() {
-  const [authors, contacts] = await Promise.all([
+  const [authors, contacts, company] = await Promise.all([
     getPublishedAuthors() as unknown as Promise<Author[]>,
     getContacts(),
+    getCompany(),
   ])
 
   const breadcrumbs = trail('avtory')
@@ -95,8 +97,8 @@ export default async function AuthorsIndex() {
             blockType: 'final-form',
             tone: 'alt',
             anchor: 'zayavka',
-            eyebrow: 'Заявка · ответ за 10 минут',
-            title: 'Задайте вопрос — перезвоним за 10 минут',
+            eyebrow: `Заявка · ответ за ${minutes(company.callbackMinutes)}`,
+            title: `Задайте вопрос — перезвоним за ${minutes(company.callbackMinutes)}`,
             background: null,
             channels: [],
             formTitle: 'Заявка',

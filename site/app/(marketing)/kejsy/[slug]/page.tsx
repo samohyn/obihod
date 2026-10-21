@@ -25,6 +25,7 @@ import { toImage } from '@/lib/blocks/v3/fromPayload'
 import { getContacts } from '@/lib/chrome'
 import { getPage } from '@/lib/pages'
 import { isDraftPreview } from '@/lib/preview'
+import { getCompany, minutes } from '@/lib/company'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -139,11 +140,12 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
     const tiles = pillar.blocks.find((b) => b.blockType === 'services-tiles')
     const after2: V3BlockWithTone[] = []
     if (tiles) after2.push({ ...tiles, eyebrow: 'Услуги', title: `${pillar.title} — что делаем` })
+    const company = await getCompany()
     after2.push({
       blockType: 'final-form',
       anchor: 'zayavka',
-      eyebrow: 'Заявка · ответ за 10 минут',
-      title: 'Нужно так же — перезвоним за 10 минут',
+      eyebrow: `Заявка · ответ за ${minutes(company.callbackMinutes)}`,
+      title: `Нужно так же — перезвоним за ${minutes(company.callbackMinutes)}`,
       background: afterImg ?? slide?.image ?? null,
       channels: [],
       formTitle: 'Заявка',

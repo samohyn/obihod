@@ -38,6 +38,7 @@ import { buildServiceDistrictMetadata } from '@/lib/seo/metadata'
 import ServiceDistrictView from './ServiceDistrictView'
 import { SubServiceBlocksView } from './SubServiceBlocksView'
 import { ServiceDistrictBlocksView } from './ServiceDistrictBlocksView'
+import { getCompany } from '@/lib/company'
 import { SubServiceView } from './SubServiceView'
 
 export const revalidate = 43200
@@ -128,6 +129,7 @@ export async function generateMetadata({
       sd: sdBundle.sd as unknown as ServiceDistrictLike,
       otherServices: [],
       source: '',
+      company: await getCompany(),
     })
     const hero = blocks.find((b) => b.blockType === 'hero-slider')
     const slide = hero && hero.blockType === 'hero-slider' ? hero.slides[0] : null

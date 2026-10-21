@@ -6,6 +6,7 @@ import type {
 } from '@/components/blocks/v3/types'
 import { retone } from '@/lib/blocks/v3/retone'
 import type { PageData } from '@/lib/pages'
+import { hours, minutes, type Company } from '@/lib/offer'
 
 /**
  * Гео-страницы (план 09, этап 3) собираются из готовых документов, а не хранят свою копию:
@@ -63,8 +64,9 @@ const places = (district: DistrictLike, sd?: ServiceDistrictLike): string[] => {
   return [...new Set([...local, ...general])].slice(0, 6)
 }
 
-/** Факты района: удалённость, бесплатный выезд оценщика, аварийная зона (оффер: 50 и 30 км). */
+/** Факты района: удалённость, бесплатный выезд оценщика, аварийная зона — цифры из «Компания и контакты». */
 function districtFacts(
+  company: Company,
   district: DistrictLike,
   title: string,
   text: string,
@@ -79,28 +81,36 @@ function districtFacts(
     text,
     checklist: [
       ...(near.length ? [`Работаем по всему округу: ${near.join(', ')}`] : []),
-      km !== null && km <= 50
+      km !== null && km <= company.freeVisitRadiusKm
         ? 'Выезд оценщика бесплатно — сегодня или завтра'
         : 'Выезд оценщика — по согласованию',
-      km !== null && km <= 30
-        ? 'Аварийная бригада — за 2 часа'
+      km !== null && km <= company.emergencyRadiusKm
+        ? `Аварийная бригада — за ${hours(company.emergencyHours)}`
         : 'Аварийный выезд — по согласованию, время назовём при звонке',
-      'Окно приезда 2 часа, опоздали — скидка 10%',
+      `Окно приезда ${hours(company.arrivalWindowHours)}` +
+        (company.lateArrivalDiscountPercent
+          ? `, опоздали — скидка ${company.lateArrivalDiscountPercent}%`
+          : ''),
       ...extra,
     ],
     stats: [
       { value: km !== null ? `${km} км` : '—', label: 'от МКАД' },
-      { value: '30 мин', label: 'смета по фото' },
-      { value: '10 мин', label: 'перезвоним после заявки' },
+      { value: `${company.photoEstimateMinutes} мин`, label: 'смета по фото' },
+      { value: `${company.callbackMinutes} мин`, label: 'перезвоним после заявки' },
       { value: '0 ₽', label: 'выезд оценщика' },
     ],
   }
 }
 
-const form = (title: string, source: string, background?: BlockImage | null): V3BlockWithTone => ({
+const form = (
+  company: Company,
+  title: string,
+  source: string,
+  background?: BlockImage | null,
+): V3BlockWithTone => ({
   blockType: 'final-form',
   anchor: 'zayavka',
-  eyebrow: 'Заявка · ответ за 10 минут',
+  eyebrow: `Заявка · ответ за ${minutes(company.callbackMinutes)}`,
   title,
   background: background ?? {
     url: '/dev-blocks/yard-after.webp',
@@ -120,8 +130,9 @@ export function buildServiceDistrictBlocks(args: {
   sd: ServiceDistrictLike
   otherServices: ServiceTile[]
   source: string
+  company: Company
 }): { title: string; blocks: V3BlockWithTone[] } {
-  const { pillar, district, sd } = args
+  const { pillar, district, sd, company } = args
   const hero = pick(pillar.blocks, 'hero-slider')
   const slide = hero?.slides?.[0]
   const priceKicker = (slide?.kicker ?? '').split(' · ')[0]
@@ -131,11 +142,11 @@ export function buildServiceDistrictBlocks(args: {
     `${slide?.lead ?? ''} Работаем ${district.namePrepositional} и по всему округу.`.trim()
 
   const blocks: V3BlockWithTone[] = []
-  // Дальше 30 км аварийную бригаду за 2 часа не обещаем (оффер, п. 5) — убираем это из плашки
-  const far = (district.distanceFromMkad ?? 0) > 30
+  // За аварийной зоной аварийную бригаду не обещаем (оффер, п. 5) — убираем это из плашки
+  const far = (district.distanceFromMkad ?? 0) > company.emergencyRadiusKm
   const badge =
     hero?.badge && far && /аварийн/i.test(hero.badge.note ?? '')
-      ? { ...hero.badge, note: 'Смета по фото — за 30 минут' }
+      ? { ...hero.badge, note: `Смета по фото — за ${minutes(company.photoEstimateMinutes)}` }
       : hero?.badge
   if (hero && slide) {
     blocks.push({
@@ -168,6 +179,7 @@ export function buildServiceDistrictBlocks(args: {
   if (calc) blocks.push(calc)
   blocks.push(
     districtFacts(
+      company,
       district,
       `Работаем ${district.namePrepositional}`,
       `${district.nameNominative} — ${district.distanceFromMkad ?? '…'} км от МКАД. Бригада приезжает в согласованное окно, смету присылаем по фото до выезда.`,
@@ -201,7 +213,8 @@ export function buildServiceDistrictBlocks(args: {
   const pillarForm = pick(pillar.blocks, 'final-form')
   blocks.push(
     form(
-      `Оставьте заявку ${district.namePrepositional} — перезвоним за 10 минут`,
+      company,
+      `Оставьте заявку ${district.namePrepositional} — перезвоним за ${minutes(company.callbackMinutes)}`,
       args.source,
       pillarForm?.background,
     ),
@@ -214,8 +227,9 @@ export function buildDistrictBlocks(args: {
   uslugi: PageData
   district: DistrictLike
   services: ServiceTile[]
+  company: Company
 }): { title: string; blocks: V3BlockWithTone[] } {
-  const { uslugi, district } = args
+  const { uslugi, district, company } = args
   const hero = pick(uslugi.blocks, 'hero-slider')
   const slide = hero?.slides?.[0]
   const title = `Обиход ${district.namePrepositional}`
@@ -247,6 +261,7 @@ export function buildDistrictBlocks(args: {
   })
   blocks.push(
     districtFacts(
+      company,
       district,
       `Как работаем ${district.namePrepositional}`,
       `${district.nameNominative} — ${district.distanceFromMkad ?? '…'} км от МКАД. Смету присылаем по фото до выезда, бригада приезжает в согласованное окно.`,
@@ -260,7 +275,8 @@ export function buildDistrictBlocks(args: {
   if (faq) blocks.push({ ...faq, title: `Частые вопросы ${district.namePrepositional}` })
   blocks.push(
     form(
-      `Оставьте заявку ${district.namePrepositional} — перезвоним за 10 минут`,
+      company,
+      `Оставьте заявку ${district.namePrepositional} — перезвоним за ${minutes(company.callbackMinutes)}`,
       `raion-${district.slug}`,
     ),
   )

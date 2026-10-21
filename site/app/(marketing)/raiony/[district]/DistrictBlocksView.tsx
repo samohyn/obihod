@@ -7,6 +7,7 @@ import { buildDistrictBlocks, localizeTiles, type DistrictLike } from '@/lib/geo
 import type { PageData } from '@/lib/pages'
 import { faqPageSchema, localBusinessSchema } from '@/lib/seo/jsonld'
 import { getAllServiceDistrictParams, getSeoSettings } from '@/lib/seo/queries'
+import { getCompany } from '@/lib/company'
 
 /** Район (/raiony/ramenskoye/) из раздела «Услуги» и данных района — этап 3 плана 09. */
 export async function DistrictBlocksView({
@@ -16,17 +17,19 @@ export async function DistrictBlocksView({
   district: DistrictLike
   uslugi: PageData
 }) {
-  const [chrome, seo, contacts, params] = await Promise.all([
+  const [chrome, seo, contacts, params, company] = await Promise.all([
     getSiteChrome(),
     getSeoSettings(),
     getContacts(),
     getAllServiceDistrictParams(),
+    getCompany(),
   ])
   const local = new Set(params.map((p) => `${p.service}/${p.slug}`))
   const { blocks } = buildDistrictBlocks({
     uslugi,
     district,
     services: localizeTiles(uslugi, district.slug, local),
+    company,
   })
   const crumbs = trail('raiony', {
     name: district.nameNominative,

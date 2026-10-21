@@ -2,6 +2,7 @@ import { cache } from 'react'
 
 import { payloadClient } from '@/lib/payload'
 import { isDraftPreview } from '@/lib/preview'
+import { getCompany } from '@/lib/company'
 import { lexicalToPlainText } from '@/lib/seo/uniqueness'
 
 /**
@@ -390,7 +391,18 @@ export const getAllSubLevelSdParams = cache(
 export const getSeoSettings = cache(async () => {
   try {
     const payload = await payloadClient()
-    return await payload.findGlobal({ slug: 'seo-settings' })
+    const [seo, company] = await Promise.all([
+      payload.findGlobal({ slug: 'seo-settings' }),
+      getCompany(),
+    ])
+    // Часы работы — из «Компания и контакты» (план 09, этап 4.3), а не из SEO-настроек.
+    return {
+      ...seo,
+      localBusiness: {
+        ...seo.localBusiness,
+        openingHours: { opens: company.opens, closes: company.closes },
+      },
+    }
   } catch (e) {
     console.error('[queries.getSeoSettings] failed:', e)
     return null

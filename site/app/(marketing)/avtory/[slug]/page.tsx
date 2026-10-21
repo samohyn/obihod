@@ -18,6 +18,7 @@ import { BLOG_CATEGORY, blogTopic } from '@/lib/blog-topics'
 import { getContacts } from '@/lib/chrome'
 
 import s from '../avtory.module.css'
+import { getCompany, minutes } from '@/lib/company'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -115,9 +116,10 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
     knowsAbout: (author.knowsAbout ?? []).map((k) => k.topic).filter(Boolean),
   }
 
-  const [posts, contacts] = await Promise.all([
+  const [posts, contacts, company] = await Promise.all([
     getPublishedBlogPosts() as unknown as Promise<AuthorPost[]>,
     getContacts(),
+    getCompany(),
   ])
   const mine = posts.filter((p) => p.slug && p.author?.slug === author.slug)
   const after: V3BlockWithTone[] = []
@@ -138,8 +140,8 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
   after.push({
     blockType: 'final-form',
     anchor: 'zayavka',
-    eyebrow: 'Заявка · ответ за 10 минут',
-    title: 'Задайте вопрос — перезвоним за 10 минут',
+    eyebrow: `Заявка · ответ за ${minutes(company.callbackMinutes)}`,
+    title: `Задайте вопрос — перезвоним за ${minutes(company.callbackMinutes)}`,
     background: null,
     channels: [],
     formTitle: 'Заявка',

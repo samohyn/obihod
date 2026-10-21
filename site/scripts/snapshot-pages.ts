@@ -78,7 +78,8 @@ function parse(html: string): Omit<Snap, 'status'> {
     .sort()
   const body = (html.match(/<body[^>]*>([\s\S]*)<\/body>/i)?.[1] ?? html)
     .replace(/<(script|style|noscript|template|svg)\b[\s\S]*?<\/\1>/gi, ' ')
-    .replace(/<!--[\s\S]*?-->/g, ' ')
+    // <!-- --> — разделитель текстовых узлов React, не пробел
+    .replace(/<!--[\s\S]*?-->/g, '')
   return {
     title: squash(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] ?? ''),
     description: meta(html, 'description'),

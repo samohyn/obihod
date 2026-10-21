@@ -28,11 +28,18 @@ const LEGEND_COLOR: Record<string, string> = {
   accent: 'var(--c-accent)',
 }
 
-export function ObjectsMap(block: ObjectsMapBlock & { tone?: SectionTone | null }) {
+export function ObjectsMap(
+  block: ObjectsMapBlock & {
+    tone?: SectionTone | null
+    /** Кольца — аварийная зона и бесплатный выезд оценщика, км от МКАД («Компания и контакты») */
+    rings?: [number, number]
+  },
+) {
+  const [inner, outer] = block.rings ?? [30, 50]
   // useId даёт «:r0:» — в url(#…) двоеточия ломают ссылку, оставляем только буквы и цифры
   const gridId = `omap-${useId().replace(/[^a-zA-Z0-9]/g, '')}`
-  const r30 = MKAD_R + 30 * PX_PER_KM
-  const r50 = MKAD_R + 50 * PX_PER_KM
+  const r30 = MKAD_R + inner * PX_PER_KM
+  const r50 = MKAD_R + outer * PX_PER_KM
   const base = block.base ? point(block.base.angle, block.base.km) : null
   return (
     <Section tone={block.tone ?? 'default'} anchor={block.anchor}>
@@ -60,8 +67,8 @@ export function ObjectsMap(block: ObjectsMapBlock & { tone?: SectionTone | null 
             return <circle key={i} cx={x} cy={y} r={5} className={s.dot} />
           })}
           {[
-            [r30, '+30 КМ'],
-            [r50, '+50 КМ'],
+            [r30, `+${inner} КМ`],
+            [r50, `+${outer} КМ`],
           ].map(([r, label]) => (
             <g key={label as string}>
               <rect
