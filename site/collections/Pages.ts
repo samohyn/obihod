@@ -61,11 +61,15 @@ export const Pages: CollectionConfig = {
           required: true,
           unique: true,
           index: true,
-          admin: { width: '40%', description: '«home» — главная. Латиница, цифры и дефис.' },
+          admin: {
+            width: '40%',
+            description:
+              '«home» — главная, иначе путь без слэшей по краям: «arboristika», «uslugi/tseny». Латиница, цифры, дефис.',
+          },
           validate: (value: unknown) =>
-            typeof value === 'string' && /^[a-z0-9-]+$/.test(value)
+            typeof value === 'string' && /^[a-z0-9-]+(\/[a-z0-9-]+)*$/.test(value)
               ? true
-              : 'Только латиница, цифры и дефис',
+              : 'Латиница, цифры и дефис; части пути — через «/»',
         },
       ],
     },

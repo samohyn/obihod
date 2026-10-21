@@ -4,6 +4,9 @@
  */
 import type { Metadata } from 'next'
 
+import type { PageData } from '@/lib/pages'
+
+import { canonicalFor } from './canonical'
 import type { District, Service } from './jsonld'
 import { truncateMeta } from './text'
 
@@ -200,6 +203,26 @@ export function buildDistrictHubMetadata(d: District): Metadata {
       siteName: 'Обиход',
       title,
       description,
+    },
+    robots: { index: true, follow: true },
+  }
+}
+
+/** Страница из блоков («Страницы», «Подуслуги»): title/description из вкладки SEO документа. */
+export function buildBlocksPageMetadata(page: PageData, url: string): Metadata {
+  const title = page.metaTitle ?? `${page.title} — Обиход`
+  const description = page.metaDescription ?? undefined
+  return {
+    title: { absolute: title },
+    description,
+    alternates: { canonical: canonicalFor(url) },
+    openGraph: {
+      type: 'website',
+      locale: 'ru_RU',
+      url,
+      title,
+      description,
+      images: page.ogImage ? [page.ogImage.url] : undefined,
     },
     robots: { index: true, follow: true },
   }

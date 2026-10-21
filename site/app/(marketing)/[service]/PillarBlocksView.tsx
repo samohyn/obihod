@@ -1,0 +1,47 @@
+import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
+import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
+import { JsonLd } from '@/components/seo/JsonLd'
+import { CALCULATOR_SLUGS, crumbsToSchema, trail } from '@/lib/breadcrumbs'
+import { getContacts, getSiteChrome } from '@/lib/chrome'
+import type { PageData } from '@/lib/pages'
+import { buildJsonLdForTemplate } from '@/lib/seo/composer'
+import type { Service } from '@/lib/seo/jsonld'
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
+
+/**
+ * Хаб направления из документа «Страницы» с адресом = slug услуги (этап 3 плана 09): крошки по карте 08,
+ * блоки библиотеки v3 и разметка T2 — Service, FAQ из блока «Вопросы», BreadcrumbList.
+ */
+export async function PillarBlocksView({
+  service,
+  page,
+}: {
+  service: Service & { slug: string; title: string }
+  page: PageData
+}) {
+  const leaf = { name: page.title || service.title, href: `/${service.slug}/` }
+  // Лендинги смет — в карте 08 не услуги, а калькуляторы: крошки сразу от главной.
+  const breadcrumbs = CALCULATOR_SLUGS.includes(service.slug)
+    ? trail(null, leaf)
+    : trail('uslugi', leaf)
+  const [chrome, contacts] = await Promise.all([getSiteChrome(), getContacts()])
+  const faqs = page.blocks.flatMap((b) =>
+    b.blockType === 'faq-v3' && b.enabled !== false ? b.items : [],
+  )
+  const schema = buildJsonLdForTemplate('T2_PILLAR', {
+    chrome,
+    skipChrome: true,
+    service,
+    faqs,
+    breadcrumbs: crumbsToSchema(breadcrumbs, SITE_URL),
+  })
+
+  return (
+    <>
+      <JsonLd schema={schema} />
+      <Breadcrumbs items={breadcrumbs} schema={false} />
+      <V3BlockRenderer blocks={page.blocks} phoneDisplay={contacts.phoneDisplay} />
+    </>
+  )
+}
