@@ -13,10 +13,7 @@ const dirname =
   typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url))
 
 async function readSql(suffix: 'up' | 'down'): Promise<string> {
-  return await fs.readFile(
-    path.join(dirname, `20261021_160000_menu_icons.${suffix}.sql`),
-    'utf-8',
-  )
+  return await fs.readFile(path.join(dirname, `20261021_160000_menu_icons.${suffix}.sql`), 'utf-8')
 }
 
 export async function up({ db }: MigrateUpArgs): Promise<void> {
