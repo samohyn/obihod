@@ -20,7 +20,7 @@
  */
 import { useReportWebVitals } from 'next/web-vitals'
 
-const ENDPOINT = '/api/rum'
+const ENDPOINT = '/api/rum/'
 
 // Клиентская валидация имён метрик — Next может в будущих версиях добавить
 // новые типы, нам нужны только sustained 6 W3C-spec метрик.

@@ -2,6 +2,8 @@ import type { AdminViewServerProps } from 'payload'
 import { redirect } from 'next/navigation'
 import { Gutter } from '@payloadcms/ui'
 
+import { AdminViewTemplate } from '../AdminViewTemplate'
+
 import AuditTimeline from './AuditTimeline'
 
 /**
@@ -16,7 +18,8 @@ import AuditTimeline from './AuditTimeline'
  *
  * Path: '/audit' зарегистрирован в payload.config.ts admin.views.audit.
  */
-export default function AuditView({ initPageResult }: AdminViewServerProps) {
+export default function AuditView(props: AdminViewServerProps) {
+  const { initPageResult } = props
   const user = initPageResult.req.user as
     | { id: string | number; email: string; role?: string }
     | null
@@ -27,6 +30,36 @@ export default function AuditView({ initPageResult }: AdminViewServerProps) {
   }
   if (user?.role !== 'admin') {
     return (
+      <AdminViewTemplate
+        initPageResult={initPageResult}
+        params={props.params}
+        searchParams={props.searchParams}
+      >
+        <Gutter>
+          <h1
+            style={{
+              fontSize: 24,
+              fontWeight: 600,
+              marginBottom: 8,
+              color: 'var(--brand-obihod-ink, #1c1c1c)',
+            }}
+          >
+            История изменений
+          </h1>
+          <p style={{ color: 'var(--brand-obihod-ink-muted, #6b6b6b)' }}>
+            Доступно только администраторам.
+          </p>
+        </Gutter>
+      </AdminViewTemplate>
+    )
+  }
+
+  return (
+    <AdminViewTemplate
+      initPageResult={initPageResult}
+      params={props.params}
+      searchParams={props.searchParams}
+    >
       <Gutter>
         <h1
           style={{
@@ -38,39 +71,21 @@ export default function AuditView({ initPageResult }: AdminViewServerProps) {
         >
           История изменений
         </h1>
-        <p style={{ color: 'var(--brand-obihod-ink-muted, #6b6b6b)' }}>
-          Доступно только администраторам.
+        <p
+          style={{
+            fontSize: 14,
+            color: 'var(--brand-obihod-ink-muted, #6b6b6b)',
+            marginTop: 0,
+            marginBottom: 24,
+            lineHeight: 1.5,
+            maxWidth: 720,
+          }}
+        >
+          Кто и когда менял документы. Контентные коллекции — через Payload Versions, заявки и
+          пользователи — через защищённый журнал с маскированием PII (телефон, email).
         </p>
+        <AuditTimeline />
       </Gutter>
-    )
-  }
-
-  return (
-    <Gutter>
-      <h1
-        style={{
-          fontSize: 24,
-          fontWeight: 600,
-          marginBottom: 8,
-          color: 'var(--brand-obihod-ink, #1c1c1c)',
-        }}
-      >
-        История изменений
-      </h1>
-      <p
-        style={{
-          fontSize: 14,
-          color: 'var(--brand-obihod-ink-muted, #6b6b6b)',
-          marginTop: 0,
-          marginBottom: 24,
-          lineHeight: 1.5,
-          maxWidth: 720,
-        }}
-      >
-        Кто и когда менял документы. Контентные коллекции — через Payload Versions, заявки и
-        пользователи — через защищённый журнал с маскированием PII (телефон, email).
-      </p>
-      <AuditTimeline />
-    </Gutter>
+    </AdminViewTemplate>
   )
 }
