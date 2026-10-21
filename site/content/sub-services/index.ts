@@ -21,6 +21,14 @@ import {
   sbivanieSosulek,
   uborkaTerritoriiZima,
 } from './chistka-krysh'
+import {
+  demontazhBani,
+  demontazhDachi,
+  demontazhSaraya,
+  snosDoma,
+  snosGarazha,
+  snosZabora,
+} from './demontazh'
 import { spilDerevev } from './spil-derevev'
 import type { SubServiceContent } from './types'
 import {
@@ -71,11 +79,21 @@ const CHISTKA_KRYSH: Record<string, SubServiceContent> = {
   'dogovor-na-sezon': dogovorNaSezon,
 }
 
+const DEMONTAZH: Record<string, SubServiceContent> = {
+  'demontazh-dachi': demontazhDachi,
+  'demontazh-bani': demontazhBani,
+  'demontazh-saraya': demontazhSaraya,
+  'snos-doma': snosDoma,
+  'snos-garazha': snosGarazha,
+  'snos-zabora': snosZabora,
+}
+
 /** Подуслуги с подготовленным наполнением — ключ для `pnpm seed:subservice <ключ>`. */
 export const SUB_SERVICE_CONTENT: Record<string, SubServiceContent> = {
   ...ARBORISTIKA,
   ...VYVOZ_MUSORA,
   ...CHISTKA_KRYSH,
+  ...DEMONTAZH,
 }
 
 /** Партии для наполнения разом: `pnpm seed:subservice arboristika`. */
@@ -83,4 +101,5 @@ export const SUB_SERVICE_BATCHES: Record<string, string[]> = {
   arboristika: Object.keys(ARBORISTIKA),
   'vyvoz-musora': Object.keys(VYVOZ_MUSORA),
   'chistka-krysh': Object.keys(CHISTKA_KRYSH),
+  demontazh: Object.keys(DEMONTAZH),
 }
