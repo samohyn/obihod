@@ -1069,6 +1069,40 @@ export const FinalFormV3: Block = {
   ],
 }
 
+export const LegalDocV3: Block = {
+  slug: 'legal-doc',
+  labels: { singular: 'Текст документа', plural: 'Тексты документов' },
+  fields: [
+    enabledField,
+    {
+      name: 'eyebrow',
+      type: 'text',
+      label: 'Строка над заголовком',
+      defaultValue: 'Документ',
+    },
+    { name: 'title', type: 'text', label: 'Заголовок (H1)', required: true },
+    {
+      name: 'revision',
+      type: 'text',
+      label: 'Редакция от',
+      admin: {
+        description:
+          'Дата редакции, например «19 октября 2026 г.». Меняете текст — меняйте и дату; прежние редакции остаются во вкладке «Версии» документа.',
+      },
+    },
+    {
+      name: 'body',
+      type: 'richText',
+      label: 'Текст',
+      required: true,
+      admin: {
+        description:
+          'Реквизиты — метками из «Компания и контакты»: {оператор}, {адрес}, {почта}, {телефон}. В адресе ссылки — mailto:{почта} или tel:{телефон-ссылка}.',
+      },
+    },
+  ],
+}
+
 export const v3Blocks: Block[] = [
   HeroSliderV3,
   ServicesTilesV3,
@@ -1091,4 +1125,5 @@ export const v3Blocks: Block[] = [
   GuaranteesV3,
   FaqV3Block,
   FinalFormV3,
+  LegalDocV3,
 ]

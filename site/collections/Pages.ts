@@ -20,7 +20,8 @@ export const Pages: CollectionConfig = {
     description:
       'Страницы из блоков. «home» — главная сайта: соберите блоки, сохраните черновик, проверьте предпросмотр и опубликуйте.',
   },
-  versions: { drafts: { autosave: { interval: 3000 } }, maxPerDoc: 30 },
+  // maxPerDoc: 0 — история всех редакций (политика и согласие ПДн: какая редакция действовала когда)
+  versions: { drafts: { autosave: { interval: 3000 } }, maxPerDoc: 0 },
   access: {
     read: isAdminOrPublished,
     readVersions: isAdmin,

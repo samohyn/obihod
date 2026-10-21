@@ -11,16 +11,24 @@ import { getContacts } from '@/lib/chrome'
 import { CONSENT_URL, LEGAL_REVISION_DATE, PRIVACY_URL } from '@/lib/legal'
 import { breadcrumbListSchema } from '@/lib/seo/jsonld'
 import { canonicalFor } from '@/lib/seo/canonical'
+import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
+import { getPage } from '@/lib/pages'
+import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 export const revalidate = 86400
 
-export const metadata: Metadata = {
+const LEGACY_METADATA: Metadata = {
   title: 'Политика обработки персональных данных — Обиход',
   description:
     'Какие персональные данные собирает сайт obikhod.ru, зачем, на каком основании, сколько хранит и как отозвать согласие. 152-ФЗ.',
   alternates: { canonical: canonicalFor(PRIVACY_URL) },
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPage('politika-konfidentsialnosti')
+  return page ? buildBlocksPageMetadata(page, PRIVACY_URL) : LEGACY_METADATA
 }
 
 const h2 = ''
@@ -34,6 +42,10 @@ const ul = ''
  * Меняешь обработку — меняй текст и LEGAL_REVISION_DATE.
  */
 export default async function PrivacyPolicyPage() {
+  // Документ «Страницы» (план 09, этап 4.4b); вёрстка ниже — запасная, пока не убрана в 4.4c
+  const page = await getPage('politika-konfidentsialnosti')
+  if (page) return <PageBlocksView page={page} crumbs={trail('politika')} />
+
   const c = await getContacts()
   const breadcrumbs = trail('politika')
 
