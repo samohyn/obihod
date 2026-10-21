@@ -1,6 +1,5 @@
 import type { CollectionConfig } from 'payload'
 import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
-import { Hero, TextContent, RelatedServices, CtaBanner, Breadcrumbs } from '@/blocks'
 import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
 import { fillOfferAfterRead, validateOfferTokens } from '@/lib/admin/offerTokens'
 
@@ -208,22 +207,7 @@ export const Authors: CollectionConfig = {
           label: 'Контент страницы',
           description:
             'Блочный конструктор для страницы автора /avtory/<slug>/. Расширенный контент сверх bio.',
-          fields: [
-            // US-0 Track B-2 — blocks[] для author-страниц.
-            // Whitelist: hero, text-content, related-services, cta-banner,
-            // breadcrumbs.
-            {
-              name: 'blocks',
-              type: 'blocks',
-              blockReferences: [Hero, TextContent, RelatedServices, CtaBanner, Breadcrumbs],
-              blocks: [],
-              admin: {
-                initCollapsed: true,
-                description:
-                  'Конструктор страницы автора: hero, текст (статьи / экспертиза), похожие услуги, CTA, breadcrumbs. bio в tab «Био» остаётся для Person.description schema.',
-              },
-            },
-          ],
+          fields: [],
         },
         {
           label: 'SEO',

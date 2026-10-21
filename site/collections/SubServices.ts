@@ -13,6 +13,7 @@ import { fillOfferAfterRead, validateOfferTokens } from '@/lib/admin/offerTokens
  */
 
 // Адрес уникален внутри направления: /arboristika/spil-derevev/ и /demontazh/spil-derevev/ — разные.
+// И не совпадает с адресом района (ADR-0019): иначе /направление/адрес/ — то ли подуслуга, то ли район.
 const validateSlug: Validate = async (value, { req, siblingData, id }) => {
   if (typeof value !== 'string' || !/^[a-z0-9-]+$/.test(value))
     return 'Только латиница, цифры и дефис'
@@ -34,7 +35,17 @@ const validateSlug: Validate = async (value, { req, siblingData, id }) => {
     draft: true,
     overrideAccess: true,
   })
-  return dup.docs.length ? 'В этом направлении уже есть подуслуга с таким адресом' : true
+  if (dup.docs.length) return 'В этом направлении уже есть подуслуга с таким адресом'
+  const district = await req.payload.find({
+    collection: 'districts',
+    where: { slug: { equals: value } },
+    limit: 1,
+    depth: 0,
+    overrideAccess: true,
+  })
+  return district.docs.length
+    ? `Адрес «${value}» занят районом — адреса подуслуг и районов не должны совпадать (ADR-0019)`
+    : true
 }
 
 export const SubServices: CollectionConfig = {

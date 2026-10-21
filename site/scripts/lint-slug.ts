@@ -58,26 +58,17 @@ async function main() {
     process.exit(0)
   }
 
-  // Собираем все sub-service slug'ы по всем services.
-  const services = await payload.find({
-    collection: 'services',
-    limit: 200,
+  // Адреса всех «Подуслуг» (в любом статусе) → направление — для диагностики.
+  const subs = await payload.find({
+    collection: 'sub-services',
+    limit: 1000,
     pagination: false,
-    depth: 0,
+    depth: 1,
   })
-
-  // sub-slug → service-slug (для diagnostics)
   const subSlugMap = new Map<string, string>()
-  for (const svc of services.docs) {
-    const s = svc as { slug?: string; subServices?: { slug?: string }[] | null }
-    if (!Array.isArray(s.subServices)) continue
-    for (const sub of s.subServices) {
-      if (sub?.slug && typeof sub.slug === 'string') {
-        // Если коллизия sub↔sub в одном/разных pillar — отдельный смысл, не наша
-        // забота: ADR-0019 фокус на sub↔city. Перезапись OK для diagnostics.
-        subSlugMap.set(sub.slug, s.slug ?? '?')
-      }
-    }
+  for (const doc of subs.docs) {
+    const sub = doc as { slug?: string; service?: { slug?: string } | null }
+    if (typeof sub.slug === 'string') subSlugMap.set(sub.slug, sub.service?.slug ?? '?')
   }
 
   // Все district slug'ы.
@@ -104,7 +95,7 @@ async function main() {
 
   if (collisions.length === 0) {
     console.log(
-      `lint:slug ✓ 0 collisions (services.subServices[].slug ↔ districts.slug, ${subSlugMap.size} subs × ${districts.docs.length} cities)`,
+      `lint:slug ✓ 0 collisions («Подуслуги».slug ↔ districts.slug, ${subSlugMap.size} subs × ${districts.docs.length} cities)`,
     )
     console.log(
       '  ADR-0019 namespace-disjoint guard PASS — T3 и T4 могут безопасно сосуществовать.',
@@ -113,7 +104,7 @@ async function main() {
   }
 
   console.error(
-    `lint:slug ✗ ${collisions.length} collision(s) — slug совпадает между Services.subServices[] и Districts:`,
+    `lint:slug ✗ ${collisions.length} collision(s) — slug совпадает между «Подуслугами» и «Районами»:`,
   )
   console.error('')
   console.error('  slug                  | service              | district')

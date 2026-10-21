@@ -20,17 +20,26 @@ import { isAdminUser } from '@/lib/auth/access'
  */
 
 interface CollectionQuery {
-  slug: 'services' | 'service-districts' | 'cases' | 'blog' | 'b2b-pages' | 'authors' | 'districts'
+  slug:
+    | 'pages'
+    | 'sub-services'
+    | 'services'
+    | 'service-districts'
+    | 'cases'
+    | 'blog'
+    | 'authors'
+    | 'districts'
   label: string
   urlPrefix: string
 }
 
 const COLLECTIONS: CollectionQuery[] = [
+  { slug: 'pages', label: 'Страницы', urlPrefix: '/' },
+  { slug: 'sub-services', label: 'Подуслуги', urlPrefix: '' },
   { slug: 'services', label: 'Услуги', urlPrefix: '/' },
   { slug: 'service-districts', label: 'Programmatic SD', urlPrefix: '' },
   { slug: 'cases', label: 'Кейсы', urlPrefix: '/kejsy/' },
   { slug: 'blog', label: 'Блог', urlPrefix: '/blog/' },
-  { slug: 'b2b-pages', label: 'B2B', urlPrefix: '/b2b/' },
   { slug: 'authors', label: 'Авторы', urlPrefix: '/avtory/' },
   { slug: 'districts', label: 'Районы', urlPrefix: '/raiony/' },
 ]
@@ -94,7 +103,7 @@ export async function GET() {
           where: { _status: { equals: 'published' } },
           limit: 1000,
           sort: '-updatedAt',
-          depth: q.slug === 'service-districts' ? 1 : 0,
+          depth: q.slug === 'service-districts' || q.slug === 'sub-services' ? 1 : 0,
         })
         .then((res) => ({ q, docs: res.docs }))
         .catch(() => ({ q, docs: [] as Record<string, unknown>[] })),
@@ -113,6 +122,16 @@ export async function GET() {
         slug
 
       let url = `${q.urlPrefix}${slug}/`
+
+      if (q.slug === 'pages' && slug === 'home') url = '/'
+
+      if (q.slug === 'sub-services') {
+        const service = d.service as { slug?: string } | null
+
+        if (!service?.slug) continue
+
+        url = `/${service.slug}/${slug}/`
+      }
       if (q.slug === 'service-districts') {
         const service = d.service as { slug?: string } | null
         const district = d.district as { slug?: string } | null

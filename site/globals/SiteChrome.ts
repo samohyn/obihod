@@ -1,8 +1,7 @@
-import type { ArrayField, Field, GlobalConfig, Validate } from 'payload'
+import type { Field, GlobalConfig, Validate } from 'payload'
 
 import { ICON_NAMES } from '@/components/blocks/v3/iconNames'
 import { isAdmin } from '@/lib/auth/access'
-import { validateE164, validateInn } from './Company'
 import { revalidateGlobalAfterChange } from '@/lib/admin/revalidateSite'
 import { fillOfferGlobalAfterRead, validateOfferTokensGlobal } from '@/lib/admin/offerTokens'
 
@@ -77,62 +76,6 @@ const navLinkRow: Field = {
   ],
 }
 
-// ---------- reusable menu item field factory ----------
-// NOTE: возвращаемый объект скопирован в нескольких местах (header.menu,
-// footer.columns[].items), поэтому используется factory, а не shared constant.
-const menuItemArrayField = (name: string): ArrayField => ({
-  name,
-  type: 'array',
-  labels: { singular: 'Пункт', plural: 'Пункты' },
-  admin: {
-    description: 'anchor → #..., route → <Link>, external → новая вкладка',
-  },
-  fields: [
-    {
-      name: 'kind',
-      type: 'select',
-      required: true,
-      defaultValue: 'anchor',
-      options: [
-        { label: 'Якорь на этой странице (#)', value: 'anchor' },
-        { label: 'Внутренний путь (/)', value: 'route' },
-        { label: 'Внешняя ссылка (https://)', value: 'external' },
-      ],
-    },
-    { name: 'label', type: 'text', required: true, maxLength: 20 },
-    {
-      name: 'anchor',
-      type: 'text',
-      maxLength: 40,
-      admin: {
-        description: 'Без символа #. Только lowercase, цифры, дефис.',
-        condition: (_d, s) => (s as MenuItemShape | undefined)?.kind === 'anchor',
-      },
-      validate: validateMenuItem,
-    },
-    {
-      name: 'route',
-      type: 'text',
-      maxLength: 120,
-      admin: {
-        description: 'Начинается с /. Пример: /uslugi/',
-        condition: (_d, s) => (s as MenuItemShape | undefined)?.kind === 'route',
-      },
-      validate: validateMenuItem,
-    },
-    {
-      name: 'url',
-      type: 'text',
-      maxLength: 500,
-      admin: {
-        description: 'Полный URL со схемой https://',
-        condition: (_d, s) => (s as MenuItemShape | undefined)?.kind === 'external',
-      },
-      validate: validateMenuItem,
-    },
-  ],
-})
-
 // ---------- GLOBAL ----------
 export const SiteChrome: GlobalConfig = {
   slug: 'site-chrome',
@@ -162,8 +105,6 @@ export const SiteChrome: GlobalConfig = {
               name: 'header',
               type: 'group',
               fields: [
-                // Старое меню-якоря главной (не выводится с этапа 2) — удалить вместе с колонками.
-                { ...menuItemArrayField('menu'), admin: { hidden: true } },
                 {
                   name: 'cta',
                   type: 'group',
@@ -373,18 +314,6 @@ export const SiteChrome: GlobalConfig = {
                             },
                           ],
                         },
-                        {
-                          // Старые колонки-якоря (не выводятся с этапа 2) — удалить вместе с таблицами.
-                          admin: { hidden: true },
-                          name: 'columns',
-                          type: 'array',
-                          labels: { singular: 'Колонка', plural: 'Колонки' },
-                          maxRows: 4,
-                          fields: [
-                            { name: 'title', type: 'text', required: true, maxLength: 24 },
-                            menuItemArrayField('items'),
-                          ],
-                        },
                       ],
                     },
                     {
@@ -413,139 +342,6 @@ export const SiteChrome: GlobalConfig = {
                           },
                         },
                       ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        // -------- CONTACTS --------
-        {
-          label: 'Контакты',
-          description:
-            'Телефон, почта, адрес, реквизиты и часы перенесены в «Компания и контакты» (план 09, этап 4.3). Здесь поля скрыты и будут удалены.',
-          fields: [
-            {
-              name: 'contacts',
-              type: 'group',
-              admin: { hidden: true },
-              fields: [
-                {
-                  name: 'phoneDisplay',
-                  type: 'text',
-                  required: true,
-                  maxLength: 20,
-                  defaultValue: '+7 (985) 170-51-11',
-                  admin: {
-                    description: 'Как видит человек, например +7 (985) 170-51-11',
-                  },
-                },
-                {
-                  name: 'phoneE164',
-                  type: 'text',
-                  required: true,
-                  maxLength: 16,
-                  defaultValue: '+79851705111',
-                  admin: {
-                    description: 'Для tel: и JSON-LD. Формат E.164: +7XXXXXXXXXX',
-                  },
-                  validate: validateE164,
-                },
-                {
-                  name: 'hours',
-                  type: 'text',
-                  label: 'Режим работы',
-                  maxLength: 60,
-                  defaultValue: 'Ежедневно 8:00–22:00 · заявки 24/7',
-                  admin: { description: 'Под телефоном в шапке и в подвале' },
-                },
-                {
-                  name: 'email',
-                  type: 'email',
-                  defaultValue: 'partner@obikhod.ru',
-                  admin: {
-                    description: 'Опционально. Если заполнен — рендерится в футере',
-                  },
-                },
-              ],
-            },
-            {
-              name: 'requisites',
-              type: 'group',
-              admin: { hidden: true },
-              fields: [
-                {
-                  type: 'collapsible',
-                  label: 'Юридическое лицо',
-                  admin: { initCollapsed: false },
-                  fields: [
-                    {
-                      name: 'legalName',
-                      type: 'text',
-                      maxLength: 120,
-                      admin: {
-                        description: 'Например «ООО «Обиход-МО»» — заполнить после регистрации',
-                      },
-                    },
-                    {
-                      name: 'taxId',
-                      type: 'text',
-                      required: true,
-                      maxLength: 12,
-                      defaultValue: '1111111111',
-                      admin: {
-                        description: 'Placeholder ИНН — оператор заменит при регистрации юрлица',
-                      },
-                      validate: validateInn,
-                    },
-                    {
-                      name: 'kpp',
-                      type: 'text',
-                      maxLength: 9,
-                      defaultValue: '111111111',
-                      admin: { description: 'Placeholder КПП — оператор заменит при регистрации' },
-                    },
-                    {
-                      name: 'ogrn',
-                      type: 'text',
-                      maxLength: 15,
-                      defaultValue: '1111111111111',
-                      admin: { description: 'Placeholder ОГРН — оператор заменит при регистрации' },
-                    },
-                  ],
-                },
-                {
-                  type: 'collapsible',
-                  label: 'Адрес',
-                  admin: { initCollapsed: false },
-                  fields: [
-                    {
-                      name: 'addressRegion',
-                      type: 'text',
-                      maxLength: 80,
-                      defaultValue: 'Московская область',
-                      admin: { description: 'Напр. «Московская область»' },
-                    },
-                    {
-                      name: 'addressLocality',
-                      type: 'text',
-                      maxLength: 80,
-                      defaultValue: 'Жуковский',
-                      admin: { description: 'Напр. «Одинцово»' },
-                    },
-                    {
-                      name: 'streetAddress',
-                      type: 'text',
-                      maxLength: 200,
-                      defaultValue: 'ул. Амет-хан Султана, 15, к1',
-                      admin: { description: 'Улица, дом, корпус' },
-                    },
-                    {
-                      name: 'postalCode',
-                      type: 'text',
-                      maxLength: 10,
-                      defaultValue: '140185',
                     },
                   ],
                 },

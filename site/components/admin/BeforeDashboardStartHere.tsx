@@ -33,15 +33,7 @@ interface RecentEdit {
 }
 
 const COLLECTIONS_TO_SHOW: Array<{
-  slug:
-    | 'pages'
-    | 'sub-services'
-    | 'services'
-    | 'service-districts'
-    | 'cases'
-    | 'blog'
-    | 'b2b-pages'
-    | 'districts'
+  slug: 'pages' | 'sub-services' | 'services' | 'service-districts' | 'cases' | 'blog' | 'districts'
   label: string
   titleField: string
 }> = [
@@ -51,7 +43,6 @@ const COLLECTIONS_TO_SHOW: Array<{
   { slug: 'service-districts', label: 'Район × услуга', titleField: 'computedTitle' },
   { slug: 'cases', label: 'Кейс', titleField: 'title' },
   { slug: 'blog', label: 'Блог', titleField: 'title' },
-  { slug: 'b2b-pages', label: 'B2B-страница', titleField: 'title' },
   { slug: 'districts', label: 'Район', titleField: 'nameNominative' },
 ]
 
@@ -90,7 +81,6 @@ async function loadStats(): Promise<DashboardStats> {
       'service-districts',
       'cases',
       'blog',
-      'b2b-pages',
       'authors',
       'districts',
     ] as const

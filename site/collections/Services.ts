@@ -1,55 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
-import {
-  Hero,
-  TextContent,
-  LeadForm,
-  CtaBanner,
-  Faq,
-  Breadcrumbs,
-  Tldr,
-  ServicesGrid,
-  MiniCase,
-  RelatedServices,
-  Calculator,
-  PricingTable,
-  ProcessSteps,
-} from '@/blocks'
 import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
-
-/**
- * US-3 ADR-0019 namespace-disjoint guard.
- *
- * Sub-service slug должен:
- *   1) быть kebab-case [a-z0-9-]+
- *   2) НЕ совпадать ни с одним districts.slug (иначе collision T3↔T4 в
- *      `[service]/[slug]/page.tsx` resolver).
- *
- * Проверка выполняется на app-level (validate-hook) + CI-level (lint:slug).
- */
-const validateSubServiceSlug = async (value: unknown, args: unknown): Promise<true | string> => {
-  if (typeof value !== 'string' || value === '') return true
-  if (!/^[a-z0-9-]+$/.test(value)) {
-    return 'Slug должен быть kebab-case (a-z, 0-9, -)'
-  }
-  const req = (args as { req?: { payload?: unknown } }).req
-  const payload = req?.payload as { find: (a: unknown) => Promise<{ docs: unknown[] }> } | undefined
-  if (!payload) return true
-  try {
-    const collision = await payload.find({
-      collection: 'districts',
-      where: { slug: { equals: value } },
-      limit: 1,
-      depth: 0,
-    })
-    if (collision.docs.length > 0) {
-      return `Slug «${value}» уже используется в Districts. Sub-service slugs должны быть disjoint от city slugs (ADR-0019).`
-    }
-  } catch {
-    // payload.find недоступен (миграции/seed без полного req) — gracefully пропускаем.
-  }
-  return true
-}
 
 export const Services: CollectionConfig = {
   slug: 'services',
@@ -168,38 +119,6 @@ export const Services: CollectionConfig = {
               admin: { description: 'Галерея до 12 фото. Реальные кейсы, не stock.' },
               fields: [{ name: 'image', type: 'upload', relationTo: 'media', required: true }],
             },
-            // US-0 Track B-2 — blocks[] для pillar/sub Service-страниц.
-            // Whitelist: hero, text-content, lead-form, cta-banner, faq, services-grid,
-            // mini-case, related-services, tldr, breadcrumbs, calculator-placeholder.
-            // EPIC-SERVICE-PAGES-UX C5 wave B (2026-05-11): +pricing-table +process-steps
-            // (v2.6 blocks для редизайна T2_PILLAR; миграция
-            // 20260511_120000_services_blocks_v26_extension создаёт таблицы).
-            // before-after — opt-in в US-3 (sa-spec AC-3.4).
-            {
-              name: 'blocks',
-              type: 'blocks',
-              blockReferences: [
-                Hero,
-                TextContent,
-                LeadForm,
-                CtaBanner,
-                Faq,
-                ServicesGrid,
-                MiniCase,
-                RelatedServices,
-                Tldr,
-                Breadcrumbs,
-                Calculator,
-                PricingTable,
-                ProcessSteps,
-              ],
-              blocks: [],
-              admin: {
-                initCollapsed: true,
-                description:
-                  'Конструктор страницы услуги: hero, текст, FAQ, CTA, сетка sub-услуг, мини-кейс, похожие услуги, TL;DR, breadcrumbs, калькулятор, прайс-таблица, шаги процесса. Legacy intro выше остаётся для обратной совместимости.',
-              },
-            },
           ],
         },
         {
@@ -207,69 +126,6 @@ export const Services: CollectionConfig = {
           description:
             'Каждая sub-услуга получает публичный URL /<service>/<slug>/. Контент-поля (intro/body/meta) заполняются для отдельной страницы sub. Связанные услуги — для cross-link блока «Похожие» (до 3).',
           fields: [
-            {
-              name: 'subServices',
-              type: 'array',
-              labels: { singular: 'Sub-услуга', plural: 'Sub-услуги' },
-              fields: [
-                {
-                  name: 'slug',
-                  type: 'text',
-                  required: true,
-                  validate: validateSubServiceSlug,
-                  admin: {
-                    description:
-                      'Часть URL: /<service>/<slug>/. Должен быть disjoint от districts.slug (ADR-0019).',
-                  },
-                },
-                {
-                  name: 'title',
-                  type: 'text',
-                  required: true,
-                  admin: { description: 'Название sub-услуги в каталоге внутри pillar.' },
-                },
-                {
-                  name: 'h1',
-                  type: 'text',
-                  required: true,
-                  admin: { description: 'H1 на отдельной странице sub-услуги.' },
-                },
-                {
-                  name: 'priceFrom',
-                  type: 'number',
-                  admin: { description: 'Цена «от» для конкретной sub-услуги.' },
-                },
-                {
-                  name: 'intro',
-                  type: 'textarea',
-                  maxLength: 280,
-                  admin: {
-                    description:
-                      'Answer-first 2-3 предложения для GEO-выдачи. Появляется как lead-параграф на странице sub.',
-                  },
-                },
-                {
-                  name: 'body',
-                  type: 'richText',
-                  admin: {
-                    description:
-                      'Полный контент sub-услуги ~600-800 слов: что включает, цены, документы, для кого, кейсы.',
-                  },
-                },
-                {
-                  name: 'metaTitle',
-                  type: 'text',
-                  maxLength: 60,
-                  admin: { description: 'Title в SERP для sub-страницы. До 60 символов.' },
-                },
-                {
-                  name: 'metaDescription',
-                  type: 'textarea',
-                  maxLength: 160,
-                  admin: { description: 'Description в SERP. 140-160 символов оптимум.' },
-                },
-              ],
-            },
             // PANEL-SERVICES-PREVIEW-TAB · merge tab «Связи» → «Sub-услуги».
             // Field `relatedServices` переехал из бывшего отдельного tab «Связи»,
             // потому что cross-link блок логически принадлежит pillar-группе
@@ -420,20 +276,6 @@ export const Services: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: 'Короткий label для breadcrumbs если H1 длинный. Опционально.',
-      },
-    },
-    {
-      // EPIC-SERVICE-PAGES-UX C4 — feature flag template_v2 per-URL.
-      // Default false → sustained legacy rendering. Per-URL rollout через
-      // Payload admin (specs/EPIC-SERVICE-PAGES-UX/c4-migration-plan.md).
-      // Resolver: lib/master-template/getBlocksForLayer.ts.
-      name: 'useTemplateV2',
-      type: 'checkbox',
-      defaultValue: false,
-      admin: {
-        position: 'sidebar',
-        description:
-          'Master-template v2 (ADR-0021): reorder + filter + fill placeholders. Default false — legacy. Включать per-URL.',
       },
     },
   ],

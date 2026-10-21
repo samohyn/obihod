@@ -1,7 +1,11 @@
 import type { MetadataRoute } from 'next'
 
 import { payloadClient } from '@/lib/payload'
-import { getAllServiceDistrictParams, getAllSubServiceParams } from '@/lib/seo/queries'
+import {
+  getAllServiceDistrictParams,
+  getAllSubServiceParams,
+  getPublishedB2BPages,
+} from '@/lib/seo/queries'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -292,17 +296,10 @@ async function fetchPublishedBlog(): Promise<SlugDoc[]> {
   }
 }
 
+/** Страницы для бизнеса — «Страницы» b2b/… (адрес после «b2b/»). */
 async function fetchPublishedB2B(): Promise<SlugDoc[]> {
   try {
-    const payload = await payloadClient()
-    const r = await payload.find({
-      collection: 'b2b-pages',
-      where: { _status: { equals: 'published' } },
-      limit: 100,
-      pagination: false,
-      select: { slug: true, updatedAt: true },
-    })
-    return r.docs as unknown as SlugDoc[]
+    return (await getPublishedB2BPages()) as SlugDoc[]
   } catch (e) {
     console.error('[sitemap] fetchPublishedB2B failed:', e)
     return []

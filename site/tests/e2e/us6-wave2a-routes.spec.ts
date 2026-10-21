@@ -10,7 +10,7 @@ import { expect, test, type APIRequestContext } from '@playwright/test'
 
 async function hasPublished(
   request: APIRequestContext,
-  collection: 'authors' | 'blog' | 'b2b-pages',
+  collection: 'authors' | 'blog',
 ): Promise<{ ok: boolean; firstSlug?: string }> {
   try {
     const res = await request.get(
@@ -114,16 +114,20 @@ test.describe('Detail routes (seeded DB)', () => {
     expect(hasBreadcrumb, 'BreadcrumbList schema present').toBeTruthy()
   })
 
-  test('B2B page detail → 200 + canonical + krishaShtraf callout', async ({ page, request }) => {
-    const { ok, firstSlug } = await hasPublished(request, 'b2b-pages')
-    test.skip(!ok || !firstSlug, 'no published b2b-pages in DB')
+  test('B2B page detail → 200 + canonical', async ({ page, request }) => {
+    // Страницы для бизнеса — документы «Страниц» b2b/<адрес>
+    const res0 = await request.get(
+      '/api/pages?depth=0&limit=1&where[slug][like]=b2b/&where[_status][equals]=published',
+    )
+    const slug: string | undefined = (await res0.json())?.docs?.[0]?.slug
+    test.skip(!slug, 'no published b2b pages in DB')
 
-    const res = await page.goto(`/b2b/${firstSlug}/`)
+    const res = await page.goto(`/${slug}/`)
     expect(res?.status()).toBe(200)
     await expect(page.locator('h1')).toBeVisible()
 
     const canonical = await page.locator('link[rel="canonical"]').getAttribute('href')
-    expect(canonical).toContain(`/b2b/${firstSlug}/`)
+    expect(canonical).toContain(`/${slug}/`)
   })
 })
 

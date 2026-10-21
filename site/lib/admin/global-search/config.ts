@@ -14,7 +14,6 @@ export interface SearchCollectionConfig {
     | 'service-districts'
     | 'cases'
     | 'blog'
-    | 'b2b-pages'
     | 'authors'
     | 'districts'
     | 'pages'
@@ -98,16 +97,6 @@ export const SEARCH_COLLECTIONS: SearchCollectionConfig[] = [
     subtitleExpr: `slug`,
     matchExpr: `LOWER(COALESCE(title, '') || ' ' || COALESCE(slug, ''))`,
     editUrlPrefix: '/admin/collections/blog/',
-    whereExtra: NOT_TRASHED,
-  },
-  {
-    collectionSlug: 'b2b-pages',
-    table: 'b2b_pages',
-    groupLabel: 'B2B',
-    titleExpr: `COALESCE(title, slug)`,
-    subtitleExpr: `slug`,
-    matchExpr: `LOWER(COALESCE(title, '') || ' ' || COALESCE(slug, ''))`,
-    editUrlPrefix: '/admin/collections/b2b-pages/',
     whereExtra: NOT_TRASHED,
   },
   {

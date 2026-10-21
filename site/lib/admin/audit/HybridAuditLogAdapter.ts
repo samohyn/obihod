@@ -57,7 +57,8 @@ const VERSION_SOURCES: VersionSource[] = [
   { collection: 'cases', versionTable: '_cases_v', titleColumn: 'version_title' },
   { collection: 'blog', versionTable: '_blog_v', titleColumn: 'version_title' },
   { collection: 'services', versionTable: '_services_v', titleColumn: 'version_title' },
-  { collection: 'b2b-pages', versionTable: '_b2b_pages_v', titleColumn: 'version_title' },
+  { collection: 'pages', versionTable: '_pages_v', titleColumn: 'version_title' },
+  { collection: 'sub-services', versionTable: '_sub_services_v', titleColumn: 'version_title' },
   {
     collection: 'service-districts',
     versionTable: '_service_districts_v',

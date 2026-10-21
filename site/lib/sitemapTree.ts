@@ -3,7 +3,11 @@ import { cache } from 'react'
 import { CALCULATOR_SLUGS, shortTitle, trail, type Crumb } from './breadcrumbs'
 import { CONSENT_URL, PRIVACY_URL } from './legal'
 import { payloadClient } from './payload'
-import { getAllServiceDistrictParams, getAllSubServiceParams } from './seo/queries'
+import {
+  getAllServiceDistrictParams,
+  getPublishedB2BPages,
+  getPublishedSubServices,
+} from './seo/queries'
 
 /**
  * HTML-карта сайта /karta-sajta/ — разделы карты 08 и все страницы, которые отдаёт sitemap.xml:
@@ -27,7 +31,7 @@ const SERVICE_ORDER = [
   'porubochnyj-bilet',
 ]
 
-type ServiceDoc = { slug: string; title: string; subServices?: { slug?: string; title?: string }[] }
+type ServiceDoc = { slug: string; title: string }
 type TitledDoc = { slug?: string; title?: string }
 
 const section = (key: Parameters<typeof trail>[0], links: SitemapLink[]): SitemapSection => {
@@ -61,31 +65,31 @@ const titled = (docs: TitledDoc[], base: string): Crumb[] =>
     .map((d) => ({ name: shortTitle(d.title as string), href: `${base}${d.slug}/` }))
 
 export const getSitemapTree = cache(async (): Promise<SitemapSection[]> => {
-  const [services, subParams, sdParams, districts, cases, b2b, posts, authors] = await Promise.all([
-    findAll<ServiceDoc>('services', published),
-    getAllSubServiceParams(),
-    getAllServiceDistrictParams(),
-    findAll<{ slug?: string; nameNominative?: string }>('districts'),
-    findAll<TitledDoc>('cases'),
-    findAll<TitledDoc>('b2b-pages', published),
-    findAll<TitledDoc>('blog', published),
-    findAll<{ slug?: string; fullName?: string; firstName?: string; lastName?: string }>(
-      'authors',
-      published,
-    ),
-  ])
+  const [services, subServices, sdParams, districts, cases, b2b, posts, authors] =
+    await Promise.all([
+      findAll<ServiceDoc>('services', published),
+      getPublishedSubServices(),
+      getAllServiceDistrictParams(),
+      findAll<{ slug?: string; nameNominative?: string }>('districts'),
+      findAll<TitledDoc>('cases'),
+      getPublishedB2BPages() as Promise<TitledDoc[]>,
+      findAll<TitledDoc>('blog', published),
+      findAll<{ slug?: string; fullName?: string; firstName?: string; lastName?: string }>(
+        'authors',
+        published,
+      ),
+    ])
 
   const directions = services.filter((s) => !CALCULATOR_SLUGS.includes(s.slug)).sort(byOrder)
   const calculators = services.filter((s) => CALCULATOR_SLUGS.includes(s.slug))
-  const subPages = new Set(subParams.map((p) => `${p.service}/${p.sub}`))
   const districtName = new Map(districts.map((d) => [d.slug, d.nameNominative ?? d.slug]))
 
   const serviceLinks: SitemapLink[] = directions.map((s) => ({
     name: s.title,
     href: `/${s.slug}/`,
-    children: (s.subServices ?? [])
-      .filter((sub) => sub.slug && sub.title && subPages.has(`${s.slug}/${sub.slug}`))
-      .map((sub) => ({ name: shortTitle(sub.title as string), href: `/${s.slug}/${sub.slug}/` })),
+    children: subServices
+      .filter((sub) => sub.service === s.slug)
+      .map((sub) => ({ name: shortTitle(sub.title), href: `/${s.slug}/${sub.slug}/` })),
   }))
 
   const geoLinks: SitemapLink[] = directions

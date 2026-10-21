@@ -102,18 +102,6 @@ export function BlogIcon(props: IconProps) {
   )
 }
 
-/** B2BPages — офисное здание. */
-export function B2BPagesIcon(props: IconProps) {
-  return (
-    <Svg {...props}>
-      <path d="M4 21V7l8-4 8 4v14" />
-      <path d="M4 21h16" />
-      <path d="M9 21v-4h6v4" />
-      <path d="M9 9h2M13 9h2M9 13h2M13 13h2" />
-    </Svg>
-  )
-}
-
 /** Authors — силуэт человека в каске (бригадир / автор / эксперт).
  *  После PANEL-PERSONS-RENAME (2026-05-01) merged-icon для коллекции `authors`. */
 export function AuthorsIcon(props: IconProps) {
@@ -589,7 +577,6 @@ export const collectionIconMap = {
   'service-districts': ServiceDistrictsIcon,
   cases: CasesIcon,
   blog: BlogIcon,
-  'b2b-pages': B2BPagesIcon,
   authors: AuthorsIcon,
   leads: LeadsIcon,
   redirects: RedirectsIcon,
