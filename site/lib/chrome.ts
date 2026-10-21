@@ -1,6 +1,7 @@
 import { cache } from 'react'
 
 import { payloadClient } from './payload'
+import type { IconName } from '@/components/blocks/v3/shared'
 
 /**
  * Типы SiteChrome.
@@ -49,6 +50,7 @@ export interface NavLink {
 
 export interface NavChild extends NavLink {
   text?: string | null
+  icon?: IconName | null
 }
 
 export interface NavItem extends NavLink {
@@ -305,6 +307,37 @@ export interface ChromeView {
 
 const MESSENGERS: SocialType[] = ['max', 'telegram', 'whatsapp']
 
+/** Иконка пункта выпадающего списка, если в админке не выбрана: по разделу (brand-guide, «Иконография»). */
+const NAV_ICONS: Record<string, IconName> = {
+  '/vyvoz-musora/': 'dumpster',
+  '/arboristika/': 'spil',
+  '/chistka-krysh/': 'roof-snow',
+  '/uborka-territorii/': 'lawn-mower',
+  '/demontazh/': 'demolition',
+  '/dizain-landshafta/': 'plan',
+  '/arenda-tehniki/': 'boomlift',
+  '/promyshlennyj-alpinizm/': 'climber',
+  '/porubochnyj-bilet/': 'legal-shield',
+  '/b2b/uk-tszh/': 'building',
+  '/b2b/zastrojschikam/': 'excavator',
+  '/b2b/fm-operatoram/': 'facade-clean',
+  '/b2b/goszakaz/': 'stamp',
+  '/b2b/dogovor-na-sezon/': 'file',
+}
+
+const withIcons = (nav: NavItem[]): NavItem[] =>
+  nav.map((item) =>
+    item.children?.length
+      ? {
+          ...item,
+          children: item.children.map((c) => ({
+            ...c,
+            icon: c.icon || NAV_ICONS[c.href] || null,
+          })),
+        }
+      : item,
+  )
+
 /** Шапка и подвал: из админки, пустые поля — по умолчанию (DEFAULT_CHROME_VIEW). */
 export const getChromeView = cache(async (): Promise<ChromeView> => {
   const chrome = await getSiteChrome()
@@ -313,7 +346,7 @@ export const getChromeView = cache(async (): Promise<ChromeView> => {
   // Старая кнопка вела на якорь калькулятора старой главной — на других страницах его нет.
   const cta = h?.cta?.label && h.cta.kind && h.cta.kind !== 'anchor' ? h.cta : null
   return {
-    nav: h?.nav?.length ? h.nav : d.nav,
+    nav: withIcons(h?.nav?.length ? h.nav : d.nav),
     mobileExtra: h?.mobileExtra?.length ? h.mobileExtra : d.mobileExtra,
     utility: h?.utility?.length ? h.utility : d.utility,
     cta: cta ? { label: cta.label as string, href: menuHref(cta) } : d.cta,

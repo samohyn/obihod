@@ -100,7 +100,11 @@ export function DesktopNav({ items }: { items: NavItem[] }) {
                 <ul className={s.panelList}>
                   {children.map((child) => (
                     <li key={child.href}>
-                      <Link href={child.href} className={s.panelLink}>
+                      <Link
+                        href={child.href}
+                        className={[s.panelLink, child.icon ? s.panelLinkIcon : ''].join(' ')}
+                      >
+                        {child.icon && <Icon name={child.icon} className={s.panelIcon} />}
                         <b>{child.label}</b>
                         {child.text && <span>{child.text}</span>}
                       </Link>

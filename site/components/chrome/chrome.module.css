@@ -248,7 +248,7 @@
   display: none;
 }
 .panelWide {
-  width: 640px;
+  width: 680px;
 }
 .panelList {
   display: grid;
@@ -278,6 +278,21 @@
 .panelLink span {
   font-size: 13px;
   color: var(--c-muted-text);
+}
+/* иконка услуги слева, по строке названия; пояснение — на оси названия */
+.panelLinkIcon {
+  grid-template-columns: 24px minmax(0, 1fr);
+  column-gap: 12px;
+}
+.panelLinkIcon b,
+.panelLinkIcon span {
+  grid-column: 2;
+}
+.panelIcon {
+  grid-row: 1;
+  grid-column: 1;
+  align-self: center;
+  color: var(--c-primary);
 }
 .panelAll {
   display: flex;

@@ -1,0 +1,3 @@
+-- Иконка у пункта выпадающего списка в шапке. Пусто — сайт берёт иконку по разделу.
+CREATE TYPE "public"."enum_site_chrome_header_nav_children_icon" AS ENUM('phone', 'arrow', 'camera', 'check', 'checkCircle', 'plus', 'chevron', 'clock', 'file', 'pin', 'shield', 'cash', 'image', 'upload', 'message', 'send', 'building', 'alert', 'stamp', 'list', 'leaf', 'play', 'boomlift', 'brush', 'chipper', 'climber', 'demolition', 'dumpster', 'excavator', 'facade-clean', 'fast-response', 'fixed-price', 'gutter', 'kabling', 'lawn-mower', 'legal-shield', 'prune', 'roof-snow', 'snow-truck', 'spil', 'spray', 'stump', 'valka', 'winter-decor', 'plan');
+ALTER TABLE "site_chrome_header_nav_children" ADD COLUMN "icon" "enum_site_chrome_header_nav_children_icon";
