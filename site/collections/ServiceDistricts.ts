@@ -63,8 +63,14 @@ const requireGatesForPublish: CollectionBeforeValidateHook = async ({ data }) =>
  * Failure-mode: при ошибке payload.find или пустом локальном тексте — score=0,
  * не throw'аем (uniqueness — soft gate, не блокирует save для draft).
  */
-const computeUniquenessScore: CollectionBeforeValidateHook = async ({ data, originalDoc, req }) => {
-  if (!data) return data
+const computeUniquenessScore: CollectionBeforeValidateHook = async ({
+  data,
+  originalDoc,
+  req,
+  context,
+}) => {
+  // Скрипт меток оффера (scripts/offer-tokens.ts) меняет только написание цифр — оценку не пересчитываем
+  if (!data || context?.rawOffer) return data
   const localTextParts: string[] = []
   // leadParagraph (richText / Lexical)
   if (data.leadParagraph) {

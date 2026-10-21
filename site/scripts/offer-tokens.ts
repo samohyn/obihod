@@ -175,6 +175,10 @@ function rewrite(node: unknown, c: Company, where: string, report: Report, hint 
   return n
 }
 
+/** Документ без служебных полей, которые отличаются у версии и опубликованного всегда. */
+const comparable = (doc: Record<string, unknown>) =>
+  JSON.stringify(doc, (k, v) => (k === 'updatedAt' || k === 'createdAt' ? undefined : v))
+
 async function main() {
   const payload: Payload = await getPayload({ config })
   const c: Company = {
@@ -211,12 +215,14 @@ async function main() {
       const before = JSON.stringify(data)
       const n = rewrite(data, c, where, report)
       if (!n) continue
-      const draft = latestById.get(d.id as number)
-      const pending =
-        draft &&
-        fields.some((f) => JSON.stringify(draft[f] ?? null) !== JSON.stringify(d[f] ?? null))
-      if (pending) {
-        report.skipped.push(`${where} — есть неопубликованный черновик (${n} замен не сделано)`)
+      // Payload сохраняет поверх ПОСЛЕДНЕЙ версии документа. Если она отличается от того, что на сайте,
+      // хоть в одном поле (черновик, старая версия после ручного отката базы) — запись вернула бы её
+      // целиком: статус, noindex, ориентиры (так было на проде 21.10). Такие документы не трогаем.
+      const latest = latestById.get(d.id as number)
+      if (!latest || comparable(latest) !== comparable(d)) {
+        report.skipped.push(
+          `${where} — последняя версия отличается от опубликованной (${n} замен не сделано)`,
+        )
         continue
       }
       if (JSON.stringify(data) !== before)
