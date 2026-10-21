@@ -3,6 +3,7 @@ import type { CollectionConfig, Validate } from 'payload'
 import { v3Blocks } from '@/blocks/v3'
 import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
 import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
+import { fillOfferAfterRead, validateOfferTokens } from '@/lib/admin/offerTokens'
 
 /**
  * «Подуслуги» — страницы /направление/подуслуга/ из блоков библиотеки v3 (план 09, раздел 5:
@@ -55,6 +56,8 @@ export const SubServices: CollectionConfig = {
     delete: isAdmin,
   },
   hooks: {
+    afterRead: [fillOfferAfterRead],
+    beforeValidate: [validateOfferTokens],
     afterChange: [revalidateAfterChange],
     afterDelete: [revalidateAfterDelete],
   },
@@ -100,7 +103,11 @@ export const SubServices: CollectionConfig = {
               label: 'Блоки',
               labels: { singular: 'Блок', plural: 'Блоки' },
               blocks: v3Blocks,
-              admin: { initCollapsed: true },
+              admin: {
+                initCollapsed: true,
+                description:
+                  'Цифры оффера в текстах — метками: {перезвон}, {смета по фото}, {аварийный выезд}… Сайт подставит значения из «Компания и контакты» → «Оффер» (там же полный список).',
+              },
             },
           ],
         },

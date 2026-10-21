@@ -2,6 +2,7 @@ import type { Field, GlobalConfig, Validate } from 'payload'
 
 import { isAdmin } from '@/lib/auth/access'
 import { revalidateGlobalAfterChange } from '@/lib/admin/revalidateSite'
+import { OFFER_TOKENS } from '@/lib/offer'
 
 /**
  * «Компания и контакты» — единый источник контактов, реквизитов, часов и цифр оффера
@@ -180,8 +181,7 @@ export const Company: GlobalConfig = {
         },
         {
           label: 'Оффер',
-          description:
-            'Цифры обещаний клиентам. Сайт подставляет их в формы, страницы районов, карту выезда и разметку для поисковиков.',
+          description: `Цифры обещаний клиентам. Сайт подставляет их в формы, страницы районов, карту выезда и разметку для поисковиков. В текстах страниц, статей и районов вместо цифр пишите метки — сайт подставит значения отсюда: ${OFFER_TOKENS.map((t) => `${t.token} — ${t.hint}`).join('; ')}.`,
           fields: [
             {
               type: 'row',

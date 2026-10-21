@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
 import { Hero, TextContent, RelatedServices, CtaBanner, Breadcrumbs } from '@/blocks'
 import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
+import { fillOfferAfterRead, validateOfferTokens } from '@/lib/admin/offerTokens'
 
 /**
  * Authors — E-E-A-T авторы и команда (бригадиры, арбористы, промальпинисты).
@@ -39,6 +40,8 @@ export const Authors: CollectionConfig = {
     delete: isAdmin,
   },
   hooks: {
+    afterRead: [fillOfferAfterRead],
+    beforeValidate: [validateOfferTokens],
     afterChange: [revalidateAfterChange],
     afterDelete: [revalidateAfterDelete],
   },

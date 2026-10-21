@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
 import { Hero, TextContent, Faq, CtaBanner, Tldr, Breadcrumbs, RelatedServices } from '@/blocks'
 import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
+import { fillOfferAfterRead, validateOfferTokens } from '@/lib/admin/offerTokens'
 
 export const Blog: CollectionConfig = {
   slug: 'blog',
@@ -41,6 +42,8 @@ export const Blog: CollectionConfig = {
     delete: isAdmin,
   },
   hooks: {
+    afterRead: [fillOfferAfterRead],
+    beforeValidate: [validateOfferTokens],
     afterChange: [revalidateAfterChange],
     afterDelete: [revalidateAfterDelete],
   },

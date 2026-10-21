@@ -80,3 +80,101 @@ export const clock = (hhmm: string) => hhmm.replace(/^0(\d)/, '$1')
 export function hoursLine(c: Company): string {
   return `Ежедневно ${clock(c.opens)}–${clock(c.closes)}${c.leadsAllDay ? ' · заявки 24/7' : ''}`
 }
+
+// ---------- метки в текстах (план 09, этап 4.3b) ----------
+
+const NBSP = ' '
+const unit = (n: number, u: string) => `${n}${NBSP}${u}`
+
+/**
+ * Метки, которые владелец пишет в текстах документов: на сайте вместо них — значения из
+ * «Компания и контакты». Число и единица — через неразрывный пробел, как в текстах.
+ */
+export const OFFER_TOKENS: { token: string; hint: string; value: (c: Company) => string }[] = [
+  {
+    token: '{перезвон}',
+    hint: 'срок перезвона — «10 минут»',
+    value: (c) => minutes(c.callbackMinutes).replace(' ', NBSP),
+  },
+  { token: '{перезвон, мин}', hint: '«10 мин»', value: (c) => unit(c.callbackMinutes, 'мин') },
+  {
+    token: '{смета по фото}',
+    hint: '«30 минут»',
+    value: (c) => minutes(c.photoEstimateMinutes).replace(' ', NBSP),
+  },
+  {
+    token: '{смета по фото, мин}',
+    hint: '«30 мин»',
+    value: (c) => unit(c.photoEstimateMinutes, 'мин'),
+  },
+  {
+    token: '{аварийный выезд}',
+    hint: '«2 часа»',
+    value: (c) => hours(c.emergencyHours).replace(' ', NBSP),
+  },
+  { token: '{аварийный выезд, ч}', hint: '«2 ч»', value: (c) => unit(c.emergencyHours, 'ч') },
+  { token: '{аварийная зона}', hint: '«30 км»', value: (c) => unit(c.emergencyRadiusKm, 'км') },
+  { token: '{бесплатный выезд}', hint: '«50 км»', value: (c) => unit(c.freeVisitRadiusKm, 'км') },
+  {
+    token: '{окно приезда}',
+    hint: '«2 часа»',
+    value: (c) => hours(c.arrivalWindowHours).replace(' ', NBSP),
+  },
+  { token: '{окно приезда, ч}', hint: '«2 ч»', value: (c) => unit(c.arrivalWindowHours, 'ч') },
+  {
+    token: '{скидка за опоздание}',
+    hint: '«10%»',
+    value: (c) => `${c.lateArrivalDiscountPercent}%`,
+  },
+  {
+    token: '{скидка за перезвон}',
+    hint: '«500 ₽»',
+    value: (c) => unit(c.callbackLateDiscountRub, '₽'),
+  },
+  {
+    token: '{снегопад}',
+    hint: '«6 часов»',
+    value: (c) => hours(c.snowReactionHours).replace(' ', NBSP),
+  },
+  { token: '{снегопад, ч}', hint: '«6 ч»', value: (c) => unit(c.snowReactionHours, 'ч') },
+  {
+    token: '{часы работы}',
+    hint: '«8:00–22:00»',
+    value: (c) => `${clock(c.opens)}–${clock(c.closes)}`,
+  },
+  { token: '{телефон}', hint: '«+7 (985) 170-51-11»', value: (c) => c.phoneDisplay },
+]
+
+const TOKEN_RE = /\{[^{}\n]{2,40}\}/g
+const KNOWN = new Map(OFFER_TOKENS.map((t) => [t.token, t]))
+
+/** Строка с метками → строка со значениями; неизвестные метки остаются как есть. */
+export function fillOffer(text: string, c: Company): string {
+  if (!text.includes('{')) return text
+  return text.replace(TOKEN_RE, (m) => KNOWN.get(m)?.value(c) ?? m)
+}
+
+/** То же по всему документу: все строки, включая тексты внутри форматированного текста. */
+export function fillOfferDeep<T>(value: T, c: Company): T {
+  if (typeof value === 'string') return fillOffer(value, c) as T
+  if (Array.isArray(value)) return value.map((v) => fillOfferDeep(v, c)) as T
+  if (value && typeof value === 'object' && !(value instanceof Date)) {
+    const out: Record<string, unknown> = {}
+    for (const [k, v] of Object.entries(value)) out[k] = fillOfferDeep(v, c)
+    return out as T
+  }
+  return value
+}
+
+/** Метки в фигурных скобках, которых нет в списке (опечатка) — для проверки при сохранении. */
+export function unknownOfferTokens(value: unknown): string[] {
+  const found = new Set<string>()
+  const walk = (v: unknown) => {
+    if (typeof v === 'string') {
+      for (const m of v.match(TOKEN_RE) ?? []) if (!KNOWN.has(m)) found.add(m)
+    } else if (Array.isArray(v)) v.forEach(walk)
+    else if (v && typeof v === 'object') Object.values(v).forEach(walk)
+  }
+  walk(value)
+  return [...found]
+}

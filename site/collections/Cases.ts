@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
 import { Hero, TextContent, MiniCase, CtaBanner, RelatedServices, Breadcrumbs } from '@/blocks'
 import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
+import { fillOfferAfterRead, validateOfferTokens } from '@/lib/admin/offerTokens'
 
 export const Cases: CollectionConfig = {
   slug: 'cases',
@@ -41,6 +42,8 @@ export const Cases: CollectionConfig = {
     delete: isAdmin,
   },
   hooks: {
+    afterRead: [fillOfferAfterRead],
+    beforeValidate: [validateOfferTokens],
     afterChange: [revalidateAfterChange],
     afterDelete: [revalidateAfterDelete],
   },

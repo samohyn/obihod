@@ -4,6 +4,7 @@ import { ICON_NAMES } from '@/components/blocks/v3/iconNames'
 import { isAdmin } from '@/lib/auth/access'
 import { validateE164, validateInn } from './Company'
 import { revalidateGlobalAfterChange } from '@/lib/admin/revalidateSite'
+import { fillOfferGlobalAfterRead, validateOfferTokensGlobal } from '@/lib/admin/offerTokens'
 
 /**
  * SiteChrome — единый global для "рамки сайта": Header, Footer, контакты,
@@ -144,7 +145,11 @@ export const SiteChrome: GlobalConfig = {
     read: () => true,
     update: isAdmin,
   },
-  hooks: { afterChange: [revalidateGlobalAfterChange] },
+  hooks: {
+    afterRead: [fillOfferGlobalAfterRead],
+    beforeValidate: [validateOfferTokensGlobal],
+    afterChange: [revalidateGlobalAfterChange],
+  },
   fields: [
     {
       type: 'tabs',
