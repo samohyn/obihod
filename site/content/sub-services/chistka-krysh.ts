@@ -286,7 +286,7 @@ export const chistkaKryshChastnyyDom = subServicePage({
         title: 'С автовышки',
         text: 'Если кровля выше 12 м или на неё нет выхода — работаем из корзины, не наступая на покрытие.',
         price: '+8 400 ₽',
-        image: img('eq-lift', 'Автовышка у дома'),
+        image: img('zima-vyshka', 'Автовышка у дома зимой'),
       },
       {
         title: 'Наледь и сосульки на свесах',
@@ -588,7 +588,7 @@ export const sbivanieSosulek = subServicePage({
         title: 'С автовышки',
         text: 'Для фасадов выше 12 м без выхода на крышу и для витрин, где нельзя работать с верёвки.',
         price: '+8 400 ₽',
-        image: img('eq-lift', 'Автовышка у здания'),
+        image: img('zima-vyshka', 'Автовышка у здания зимой'),
       },
       {
         title: 'Козырьки и свесы',
