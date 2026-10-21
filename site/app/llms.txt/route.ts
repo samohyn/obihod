@@ -172,6 +172,7 @@ async function buildDistricts(): Promise<DistrictRef[]> {
     const payload = await payloadClient()
     const r = await payload.find({
       collection: 'districts',
+      where: { _status: { equals: 'published' } },
       limit: 100,
       pagination: false,
     })

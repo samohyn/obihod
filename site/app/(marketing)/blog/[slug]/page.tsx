@@ -27,7 +27,7 @@ import {
 import { canonicalFor } from '@/lib/seo/canonical'
 import { getAllBlogSlugs, getBlogPostBySlug } from '@/lib/seo/queries'
 import { truncateMeta } from '@/lib/seo/text'
-import { getCompany, minutes } from '@/lib/company'
+import { getPageTemplates } from '@/lib/page-templates-server'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -166,12 +166,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const pillarTiles = pillar?.blocks.find((b) => b.blockType === 'services-tiles')
   const allTiles = uslugi?.blocks.find((b) => b.blockType === 'services-tiles')
   const tiles = (pillarTiles ?? allTiles) as ServicesTilesBlock | undefined
+  const t = await getPageTemplates()
   const after: V3BlockWithTone[] = []
   if (faqForSchema) {
     after.push({
       blockType: 'faq-v3',
       eyebrow: 'Вопросы',
-      title: 'Вопросы и ответы',
+      title: t.articleFaqTitle,
       items: faqForSchema,
     })
   }
@@ -186,12 +187,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }
   const photo = uslugi?.blocks.find((b) => b.blockType === 'photo-cta')
   if (photo) after.push(photo)
-  const company = await getCompany()
   after.push({
     blockType: 'final-form',
     anchor: 'zayavka',
-    eyebrow: `Заявка · ответ за ${minutes(company.callbackMinutes)}`,
-    title: `Остались вопросы — перезвоним за ${minutes(company.callbackMinutes)}`,
+    eyebrow: t.formEyebrow,
+    title: t.articleFormTitle,
     background: null,
     channels: [],
     formTitle: 'Вопрос по статье',

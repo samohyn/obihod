@@ -66,10 +66,14 @@ export const getAllServiceSlugs = cache(async (): Promise<string[]> => {
 export const getDistrictBySlug = cache(async (slug: string) => {
   try {
     const payload = await payloadClient()
+    // Черновик района на сайте не виден; в предпросмотре — последняя версия
+    const draft = await isDraftPreview()
     const r = await payload.find({
       collection: 'districts',
-      where: { slug: { equals: slug } },
-      draft: await isDraftPreview(),
+      where: draft
+        ? { slug: { equals: slug } }
+        : { and: [{ slug: { equals: slug } }, { _status: { equals: 'published' } }] },
+      draft,
       limit: 1,
       depth: 2,
     })
@@ -85,6 +89,7 @@ export const getAllDistricts = cache(async () => {
     const payload = await payloadClient()
     const r = await payload.find({
       collection: 'districts',
+      where: { _status: { equals: 'published' } },
       limit: 100,
       pagination: false,
       depth: 1,
@@ -264,6 +269,7 @@ export const getAllDistrictsForCityList = cache(
       const payload = await payloadClient()
       const r = await payload.find({
         collection: 'districts',
+        where: { _status: { equals: 'published' } },
         limit: 100,
         pagination: false,
         depth: 0,

@@ -16,6 +16,7 @@ import { retone } from '@/lib/blocks/v3/retone'
 import { getPage } from '@/lib/pages'
 import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
 import { getCompany, hoursLine } from '@/lib/company'
+import { getPageTemplates } from '@/lib/page-templates-server'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -61,19 +62,23 @@ export default async function KontaktyPage() {
   const blocksPage = await getPage('kontakty')
   if (blocksPage) {
     // Контакты, часы и цифры оффера — из «Компания и контакты», сразу под первым экраном
-    const [contacts, company] = await Promise.all([getContacts(), getCompany()])
+    const [contacts, company, t] = await Promise.all([
+      getContacts(),
+      getCompany(),
+      getPageTemplates(),
+    ])
     const hours = hoursLine(company)
     const [hero, ...rest] = blocksPage.blocks
     const info: V3BlockWithTone = {
       blockType: 'about-stats',
       eyebrow: 'Связаться',
-      title: 'Телефон, почта, адрес',
+      title: t.contactsTitle,
       text: hours,
       checklist: [
         `Телефон: ${contacts.phoneDisplay}`,
         `Почта: ${contacts.email}`,
         `Адрес: ${contacts.addressLine}`,
-        'Фото объекта — в форме заявки или на почту',
+        t.contactsPhoto,
       ],
       stats: [
         { value: `${company.callbackMinutes} мин`, label: 'перезвоним после заявки' },
