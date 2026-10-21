@@ -246,6 +246,7 @@ async function fetchDistricts(): Promise<SlugDoc[]> {
     const payload = await payloadClient()
     const r = await payload.find({
       collection: 'districts',
+      where: { _status: { equals: 'published' } },
       limit: 100,
       pagination: false,
       select: { slug: true, updatedAt: true },

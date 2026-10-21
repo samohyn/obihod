@@ -13,17 +13,19 @@ import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
 import { getContacts } from '@/lib/chrome'
 
 import s from './avtory.module.css'
-import { getCompany, minutes } from '@/lib/company'
+import { getPageTemplates } from '@/lib/page-templates-server'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 export const revalidate = 86400
 
-export const metadata: Metadata = {
-  title: 'Эксперты Обихода — арбористы, бригадиры, B2B-эксперты',
-  description:
-    'Кто отвечает за качество работ Обихода: бригадиры, арбористы и эксперты по договорам с УК и ТСЖ. Опыт и темы экспертизы.',
-  alternates: { canonical: canonicalFor('/avtory/') },
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getPageTemplates()
+  return {
+    title: t.authorsMetaTitle,
+    description: t.authorsMetaDescription,
+    alternates: { canonical: canonicalFor('/avtory/') },
+  }
 }
 
 type Author = {
@@ -39,10 +41,10 @@ type Author = {
 }
 
 export default async function AuthorsIndex() {
-  const [authors, contacts, company] = await Promise.all([
+  const [authors, contacts, t] = await Promise.all([
     getPublishedAuthors() as unknown as Promise<Author[]>,
     getContacts(),
-    getCompany(),
+    getPageTemplates(),
   ])
 
   const breadcrumbs = trail('avtory')
@@ -50,11 +52,7 @@ export default async function AuthorsIndex() {
   return (
     <>
       <Breadcrumbs items={breadcrumbs} schema={false} />
-      <PageHeader
-        eyebrow="Авторы"
-        title="Эксперты Обихода"
-        lead="Бригадиры, эксперты по договорам и арбористы — кто отвечает за качество работ на каждом объекте."
-      />
+      <PageHeader eyebrow="Авторы" title={t.authorsTitle} lead={t.authorsLead} />
       <Section tone="default">
         <Wrap>
           <ul className={s.grid}>
@@ -97,8 +95,8 @@ export default async function AuthorsIndex() {
             blockType: 'final-form',
             tone: 'alt',
             anchor: 'zayavka',
-            eyebrow: `Заявка · ответ за ${minutes(company.callbackMinutes)}`,
-            title: `Задайте вопрос — перезвоним за ${minutes(company.callbackMinutes)}`,
+            eyebrow: t.formEyebrow,
+            title: t.authorFormTitle,
             background: null,
             channels: [],
             formTitle: 'Заявка',

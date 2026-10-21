@@ -40,6 +40,8 @@ import { SubServiceBlocksView } from './SubServiceBlocksView'
 import { ServiceDistrictBlocksView } from './ServiceDistrictBlocksView'
 import { getCompany } from '@/lib/company'
 import { SubServiceView } from './SubServiceView'
+import { getPageTemplates } from '@/lib/page-templates-server'
+import { fillTemplate } from '@/lib/page-templates'
 
 export const revalidate = 43200
 export const dynamicParams = true
@@ -123,6 +125,7 @@ export async function generateMetadata({
     // (индексацию гео-страниц решает владелец)
     const pillar = await getPage(serviceSlug)
     if (!pillar) return legacy
+    const templates = await getPageTemplates()
     const { blocks } = buildServiceDistrictBlocks({
       pillar,
       district: sdBundle.district as unknown as DistrictLike,
@@ -130,10 +133,11 @@ export async function generateMetadata({
       otherServices: [],
       source: '',
       company: await getCompany(),
+      templates,
     })
     const hero = blocks.find((b) => b.blockType === 'hero-slider')
     const slide = hero && hero.blockType === 'hero-slider' ? hero.slides[0] : null
-    const title = `${slide?.title ?? pillar.title} — Обиход`
+    const title = fillTemplate(templates.geoMetaTitle, { заголовок: slide?.title ?? pillar.title })
     const description = (slide?.lead ?? '').slice(0, 158)
     return {
       ...legacy,

@@ -6,7 +6,8 @@ import type {
 } from '@/components/blocks/v3/types'
 import { retone } from '@/lib/blocks/v3/retone'
 import type { PageData } from '@/lib/pages'
-import { hours, minutes, type Company } from '@/lib/offer'
+import type { Company } from '@/lib/offer'
+import { fillTemplate, type PageTemplates } from '@/lib/page-templates'
 
 /**
  * Гео-страницы (план 09, этап 3) собираются из готовых документов, а не хранят свою копию:
@@ -64,9 +65,23 @@ const places = (district: DistrictLike, sd?: ServiceDistrictLike): string[] => {
   return [...new Set([...local, ...general])].slice(0, 6)
 }
 
-/** Факты района: удалённость, бесплатный выезд оценщика, аварийная зона — цифры из «Компания и контакты». */
+/** Подстановки района для «Шаблонов страниц»: {в районе}, {район}, {км}. */
+function placeVars(district: DistrictLike, extra: Record<string, string> = {}) {
+  return {
+    'в районе': district.namePrepositional,
+    район: district.nameNominative,
+    км: district.distanceFromMkad ?? '…',
+    ...extra,
+  }
+}
+
+/**
+ * Факты района: удалённость, бесплатный выезд оценщика, аварийная зона — цифры из «Компания и
+ * контакты», тексты из «Шаблоны страниц» → «Факты и заявка».
+ */
 function districtFacts(
   company: Company,
+  t: PageTemplates,
   district: DistrictLike,
   title: string,
   text: string,
@@ -80,17 +95,10 @@ function districtFacts(
     title,
     text,
     checklist: [
-      ...(near.length ? [`Работаем по всему округу: ${near.join(', ')}`] : []),
-      km !== null && km <= company.freeVisitRadiusKm
-        ? 'Выезд оценщика бесплатно — сегодня или завтра'
-        : 'Выезд оценщика — по согласованию',
-      km !== null && km <= company.emergencyRadiusKm
-        ? `Аварийная бригада — за ${hours(company.emergencyHours)}`
-        : 'Аварийный выезд — по согласованию, время назовём при звонке',
-      `Окно приезда ${hours(company.arrivalWindowHours)}` +
-        (company.lateArrivalDiscountPercent
-          ? `, опоздали — скидка ${company.lateArrivalDiscountPercent}%`
-          : ''),
+      ...(near.length ? [fillTemplate(t.factsAround, { ориентиры: near.join(', ') })] : []),
+      km !== null && km <= company.freeVisitRadiusKm ? t.factsFreeVisit : t.factsFreeVisitFar,
+      km !== null && km <= company.emergencyRadiusKm ? t.factsEmergency : t.factsEmergencyFar,
+      t.factsWindow,
       ...extra,
     ],
     stats: [
@@ -103,14 +111,14 @@ function districtFacts(
 }
 
 const form = (
-  company: Company,
+  t: PageTemplates,
   title: string,
   source: string,
   background?: BlockImage | null,
 ): V3BlockWithTone => ({
   blockType: 'final-form',
   anchor: 'zayavka',
-  eyebrow: `Заявка · ответ за ${minutes(company.callbackMinutes)}`,
+  eyebrow: t.formEyebrow,
   title,
   background: background ?? {
     url: '/dev-blocks/yard-after.webp',
@@ -131,22 +139,24 @@ export function buildServiceDistrictBlocks(args: {
   otherServices: ServiceTile[]
   source: string
   company: Company
+  templates: PageTemplates
 }): { title: string; blocks: V3BlockWithTone[] } {
-  const { pillar, district, sd, company } = args
+  const { pillar, district, sd, company, templates: t } = args
+  const vars = placeVars(district, { направление: pillar.title })
   const hero = pick(pillar.blocks, 'hero-slider')
   const slide = hero?.slides?.[0]
   const priceKicker = (slide?.kicker ?? '').split(' · ')[0]
-  const title = sd.seoH1?.trim() || `${pillar.title} ${district.namePrepositional}`
+  const title = sd.seoH1?.trim() || fillTemplate(t.geoTitle, vars)
   const lead =
     richToText(sd.leadParagraph) ||
-    `${slide?.lead ?? ''} Работаем ${district.namePrepositional} и по всему округу.`.trim()
+    `${slide?.lead ?? ''} ${fillTemplate(t.geoLeadSuffix, vars)}`.trim()
 
   const blocks: V3BlockWithTone[] = []
   // За аварийной зоной аварийную бригаду не обещаем (оффер, п. 5) — убираем это из плашки
   const far = (district.distanceFromMkad ?? 0) > company.emergencyRadiusKm
   const badge =
     hero?.badge && far && /аварийн/i.test(hero.badge.note ?? '')
-      ? { ...hero.badge, note: `Смета по фото — за ${minutes(company.photoEstimateMinutes)}` }
+      ? { ...hero.badge, note: t.geoFarBadge }
       : hero?.badge
   if (hero && slide) {
     blocks.push({
@@ -169,9 +179,11 @@ export function buildServiceDistrictBlocks(args: {
     const note = sd.localPriceNote?.trim()
     blocks.push({
       ...prices,
-      title: `Цены ${district.namePrepositional}`,
+      title: fillTemplate(t.geoPricesTitle, vars),
       tabs: note
-        ? prices.tabs.map((t, i) => (i === 0 ? { ...t, notes: [...(t.notes ?? []), note] } : t))
+        ? prices.tabs.map((tab, i) =>
+            i === 0 ? { ...tab, notes: [...(tab.notes ?? []), note] } : tab,
+          )
         : prices.tabs,
     })
   }
@@ -180,9 +192,10 @@ export function buildServiceDistrictBlocks(args: {
   blocks.push(
     districtFacts(
       company,
+      t,
       district,
-      `Работаем ${district.namePrepositional}`,
-      `${district.nameNominative} — ${district.distanceFromMkad ?? '…'} км от МКАД. Бригада приезжает в согласованное окно, смету присылаем по фото до выезда.`,
+      fillTemplate(t.geoFactsTitle, vars),
+      fillTemplate(t.geoFactsText, vars),
     ),
   )
   for (const type of ['projects', 'steps', 'guarantees', 'reviews-v3'] as const) {
@@ -197,7 +210,7 @@ export function buildServiceDistrictBlocks(args: {
     blocks.push({
       blockType: 'faq-v3',
       eyebrow: 'Вопросы',
-      title: `Частые вопросы ${district.namePrepositional}`,
+      title: fillTemplate(t.geoFaqTitle, vars),
       items: [...localFaq, ...(faq?.items ?? [])].slice(0, 8),
     })
   }
@@ -205,20 +218,13 @@ export function buildServiceDistrictBlocks(args: {
     blocks.push({
       blockType: 'services-tiles',
       eyebrow: 'Ещё в районе',
-      title: `Что ещё делаем ${district.namePrepositional}`,
-      link: { label: `Всё ${district.namePrepositional}`, href: `/raiony/${district.slug}/` },
+      title: fillTemplate(t.geoOtherTitle, vars),
+      link: { label: fillTemplate(t.geoOtherLink, vars), href: `/raiony/${district.slug}/` },
       items: args.otherServices,
     })
   }
   const pillarForm = pick(pillar.blocks, 'final-form')
-  blocks.push(
-    form(
-      company,
-      `Оставьте заявку ${district.namePrepositional} — перезвоним за ${minutes(company.callbackMinutes)}`,
-      args.source,
-      pillarForm?.background,
-    ),
-  )
+  blocks.push(form(t, fillTemplate(t.geoFormTitle, vars), args.source, pillarForm?.background))
   return { title, blocks: retone(blocks) }
 }
 
@@ -228,11 +234,13 @@ export function buildDistrictBlocks(args: {
   district: DistrictLike
   services: ServiceTile[]
   company: Company
+  templates: PageTemplates
 }): { title: string; blocks: V3BlockWithTone[] } {
-  const { uslugi, district, company } = args
+  const { uslugi, district, company, templates: t } = args
+  const vars = placeVars(district)
   const hero = pick(uslugi.blocks, 'hero-slider')
   const slide = hero?.slides?.[0]
-  const title = `Обиход ${district.namePrepositional}`
+  const title = fillTemplate(t.districtTitle, vars)
   const blocks: V3BlockWithTone[] = []
   if (hero && slide) {
     blocks.push({
@@ -240,13 +248,13 @@ export function buildDistrictBlocks(args: {
       slides: [
         {
           ...slide,
-          kicker:
-            `${district.distanceFromMkad ?? ''} км от МКАД · ${district.nameNominative}`.replace(
-              /^ км от МКАД · /,
-              '',
-            ),
+          // нет удалённости — без «км от МКАД»
+          kicker: fillTemplate(t.districtKicker, {
+            ...vars,
+            км: district.distanceFromMkad ?? '',
+          }).replace(/^\s*км от МКАД · /, ''),
           title,
-          lead: `Деревья, мусор, крыши и снег, демонтаж и благоустройство ${district.namePrepositional} и по всему округу — одна бригада и одна смета. Уборка и вывоз отходов наших работ — в цене.`,
+          lead: fillTemplate(t.districtLead, vars),
         },
       ],
     })
@@ -255,16 +263,17 @@ export function buildDistrictBlocks(args: {
     blockType: 'services-tiles',
     anchor: 'uslugi',
     eyebrow: 'Услуги',
-    title: `Что делаем ${district.namePrepositional}`,
+    title: fillTemplate(t.districtServicesTitle, vars),
     link: { label: 'Все цены', href: '/uslugi/tseny/' },
     items: args.services,
   })
   blocks.push(
     districtFacts(
       company,
+      t,
       district,
-      `Как работаем ${district.namePrepositional}`,
-      `${district.nameNominative} — ${district.distanceFromMkad ?? '…'} км от МКАД. Смету присылаем по фото до выезда, бригада приезжает в согласованное окно.`,
+      fillTemplate(t.districtFactsTitle, vars),
+      fillTemplate(t.districtFactsText, vars),
     ),
   )
   for (const type of ['steps', 'photo-cta', 'reviews-v3'] as const) {
@@ -272,14 +281,8 @@ export function buildDistrictBlocks(args: {
     if (b) blocks.push(b)
   }
   const faq = pick(uslugi.blocks, 'faq-v3')
-  if (faq) blocks.push({ ...faq, title: `Частые вопросы ${district.namePrepositional}` })
-  blocks.push(
-    form(
-      company,
-      `Оставьте заявку ${district.namePrepositional} — перезвоним за ${minutes(company.callbackMinutes)}`,
-      `raion-${district.slug}`,
-    ),
-  )
+  if (faq) blocks.push({ ...faq, title: fillTemplate(t.districtFaqTitle, vars) })
+  blocks.push(form(t, fillTemplate(t.districtFormTitle, vars), `raion-${district.slug}`))
   return { title, blocks: retone(blocks) }
 }
 
