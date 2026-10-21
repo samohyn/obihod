@@ -95,6 +95,15 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
   const fullName = author.fullName ?? `${author.firstName} ${author.lastName}`
   const breadcrumbs = trail('avtory', { name: fullName, href: `/avtory/${author.slug}/` })
 
+  // Ссылки-заглушки (корень соцсети, «…placeholder») — не профиль: не показываем и не отдаём в разметку
+  const profiles = (author.sameAs ?? []).filter((p) => {
+    try {
+      return new URL(p.url).pathname.replace(/\/$/, '') !== '' && !/placeholder/i.test(p.url)
+    } catch {
+      return false
+    }
+  })
+
   const authorForSchema: AuthorSchema = {
     slug: author.slug,
     firstName: author.firstName,
@@ -102,18 +111,10 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
     jobTitle: author.jobTitle ?? undefined,
     bio: author.bio ?? undefined,
     imageUrl: author.avatar?.url ?? undefined,
-    sameAs: (author.sameAs ?? []).map((s) => s.url).filter(Boolean),
+    sameAs: profiles.map((p) => p.url),
     knowsAbout: (author.knowsAbout ?? []).map((k) => k.topic).filter(Boolean),
   }
 
-  // Ссылка на корень соцсети (t.me, vk.com) — заглушка, не профиль
-  const profiles = (author.sameAs ?? []).filter((p) => {
-    try {
-      return new URL(p.url).pathname.replace(/\/$/, '') !== ''
-    } catch {
-      return false
-    }
-  })
   const [posts, contacts] = await Promise.all([
     getPublishedBlogPosts() as unknown as Promise<AuthorPost[]>,
     getContacts(),
