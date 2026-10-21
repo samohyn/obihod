@@ -207,7 +207,12 @@ async function main() {
     const latestById = new Map(
       latest.docs.map((d) => [d.id, d as unknown as Record<string, unknown>]),
     )
-    for (const d of live.docs as unknown as Record<string, unknown>[]) {
+    for (const row of live.docs as unknown as Record<string, unknown>[]) {
+      const latest = latestById.get(row.id as number)
+      // Неопубликованный документ админка показывает по последней версии — её и правим, сохраняя
+      // черновиком: основная строка и сайт не меняются
+      const isDraft = row._status === 'draft' && latest?._status === 'draft'
+      const d = isDraft ? latest : row
       const where = `${collection}/${d.slug ?? d.id}`
       const data: Record<string, unknown> = {}
       for (const f of fields)
@@ -215,11 +220,10 @@ async function main() {
       const before = JSON.stringify(data)
       const n = rewrite(data, c, where, report)
       if (!n) continue
-      // Payload сохраняет поверх ПОСЛЕДНЕЙ версии документа. Если она отличается от того, что на сайте,
-      // хоть в одном поле (черновик, старая версия после ручного отката базы) — запись вернула бы её
-      // целиком: статус, noindex, ориентиры (так было на проде 21.10). Такие документы не трогаем.
-      const latest = latestById.get(d.id as number)
-      if (!latest || comparable(latest) !== comparable(d)) {
+      // Payload сохраняет поверх ПОСЛЕДНЕЙ версии документа. Если у опубликованного она отличается от
+      // того, что на сайте, хоть в одном поле (черновик правок, старая версия после ручного отката базы) —
+      // запись вернула бы её целиком: статус, noindex, ориентиры (так было на проде 21.10). Такие не трогаем.
+      if (!isDraft && (!latest || comparable(latest) !== comparable(d))) {
         report.skipped.push(
           `${where} — последняя версия отличается от опубликованной (${n} замен не сделано)`,
         )
@@ -231,7 +235,7 @@ async function main() {
             collection: collection as 'pages',
             id: d.id as number,
             data: { ...data, _status: d._status } as never,
-            draft: false,
+            draft: isDraft,
             depth: 0,
             context: RAW,
           }),
