@@ -179,10 +179,12 @@ function diff(aPath: string, bPath: string) {
       continue
     }
     const lines: string[] = []
+    // неразрывный пробел вместо обычного — не разница: на экране и для поисковика одно и то же
+    const ws = (v: unknown) => (typeof v === 'string' ? v.replace(/\s+/gu, ' ').trim() : v)
     for (const f of fields)
-      if (x[f] !== y[f]) lines.push(`  ${f}: «${x[f] ?? ''}» → «${y[f] ?? ''}»`)
+      if (ws(x[f]) !== ws(y[f])) lines.push(`  ${f}: «${x[f] ?? ''}» → «${y[f] ?? ''}»`)
     if (x.text !== y.text) lines.push(`  текст:${textDelta(x.text, y.text)}`)
-    if (JSON.stringify(x.jsonld) !== JSON.stringify(y.jsonld)) {
+    if (ws(JSON.stringify(x.jsonld)) !== ws(JSON.stringify(y.jsonld))) {
       const gone = (x.jsonld ?? []).filter((s) => !(y.jsonld ?? []).includes(s))
       const added = (y.jsonld ?? []).filter((s) => !(x.jsonld ?? []).includes(s))
       lines.push(`  JSON-LD:${textDelta(gone.join(' '), added.join(' '))}`)
