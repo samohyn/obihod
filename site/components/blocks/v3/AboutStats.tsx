@@ -1,5 +1,6 @@
 // О компании + цифры + баннер калькулятора (LiWood: счётчики и «Рассчитать стоимость online»).
 
+import type { CSSProperties } from 'react'
 import Link from 'next/link'
 
 import { Eyebrow, Icon, Section, Wrap } from './shared'
@@ -26,7 +27,12 @@ export function AboutStats(block: AboutStatsBlock & { tone?: SectionTone | null 
               </ul>
             )}
           </div>
-          <dl className={s.stats}>
+          <dl
+            className={s.stats}
+            style={
+              { '--len': Math.max(1, ...block.stats.map((st) => st.value.length)) } as CSSProperties
+            }
+          >
             {block.stats.map((st, i) => (
               <div key={i}>
                 <dt>{st.label}</dt>

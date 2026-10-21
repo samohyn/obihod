@@ -307,6 +307,23 @@ export async function toLayout(
 }
 
 /** Payload ждёт у групп объект или отсутствие поля — null в группе роняет хуки валидации. */
+const UNITS = '₽|%|м²|м³|км|см|мм|м|т|ч|мин|мес|сут|дней|дня|часа|часов|минут|лет'
+const THOUSANDS = /(\d) (?=\d{3}(?!\d))/g
+const BEFORE_UNIT = new RegExp(`(\\d) (?=(?:${UNITS})(?![а-яёa-z]))`, 'gi')
+
+/** Неразрывные пробелы в числах: «14 800 ₽», «5 м³», «2 часа» не разрываются переносом строки. */
+export function nbspNumbers<T>(v: T): T {
+  if (typeof v === 'string')
+    return v.replace(THOUSANDS, '$1\u00a0').replace(BEFORE_UNIT, '$1\u00a0') as T
+  if (Array.isArray(v)) return v.map(nbspNumbers) as T
+  if (v && typeof v === 'object') {
+    return Object.fromEntries(
+      Object.entries(v as Record<string, unknown>).map(([k, x]) => [k, nbspNumbers(x)]),
+    ) as T
+  }
+  return v
+}
+
 export function dropNulls<T>(v: T): T {
   if (Array.isArray(v)) return v.map(dropNulls) as T
   if (v && typeof v === 'object') {
