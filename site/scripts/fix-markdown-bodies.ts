@@ -6,7 +6,12 @@
  *   pnpm fix:markdown-bodies --apply    — перевести; в stdout — JSON-копия старых значений
  *
  * Таблиц в редакторе нет: строки markdown-таблиц становятся пунктами списка «Колонка: значение · …».
- * Повторный запуск безопасен: уже размеченные документы (больше одного блока) не трогаются.
+ * Заодно:
+ *  - голые пути в тексте («Подробно — на /vyvoz-musora/krupnogabarit/») → ссылка с названием страницы;
+ *  - поля, обрезанные импортом по maxLength посреди слова (lead статьи, description кейса), →
+ *    до последнего целого предложения.
+ * Повторный запуск безопасен: уже размеченные документы (больше одного блока), ссылки и целые
+ * поля не трогаются.
  */
 import { getPayload } from 'payload'
 import { convertMarkdownToLexical, editorConfigFactory } from '@payloadcms/richtext-lexical'
@@ -20,6 +25,108 @@ const TARGETS = [
 ] as const
 
 type Lexical = { root?: { children?: { children?: { text?: string }[] }[] } }
+type LexNode = {
+  type?: string
+  text?: string
+  children?: LexNode[]
+  root?: LexNode
+  [k: string]: unknown
+}
+
+/** Обрезанные импортом поля: длина упёрлась в maxLength. */
+const CUT_FIELDS = [
+  { collection: 'blog', field: 'intro', max: 280 },
+  { collection: 'cases', field: 'metaDescription', max: 160 },
+] as const
+
+/** Текст, обрезанный посреди слова, → до последнего целого предложения; целый — null. */
+function cutToSentence(value: unknown, max: number): string | null {
+  if (typeof value !== 'string' || value.length < max - 1) return null
+  const text = value.trimEnd()
+  if (/[.!?…»)]$/.test(text)) return null
+  const end = Math.max(...['. ', '! ', '? ', '… '].map((m) => text.lastIndexOf(m)))
+  return end > 0 ? text.slice(0, end + 1) : null
+}
+
+const PATH_RE = /(^|[\s(«])(\/[a-z0-9][a-z0-9-]*(?:\/[a-z0-9-]+)*\/)/g
+const shortTitle = (title: string) => title.split(':')[0].trim()
+const newId = () =>
+  Array.from({ length: 24 }, () => Math.floor(Math.random() * 16).toString(16)).join('')
+
+/** Голые пути в тексте → ссылки «Название страницы»; неизвестные пути — в missing. */
+function linkPaths(node: LexNode, titles: Map<string, string>, missing: Set<string>): number {
+  if (!node.children || node.type === 'link') return 0
+  let n = 0
+  const out: LexNode[] = []
+  for (const child of node.children) {
+    if (child.type !== 'text' || !child.text || !child.text.match(PATH_RE)) {
+      n += linkPaths(child, titles, missing)
+      out.push(child)
+      continue
+    }
+    let last = 0
+    for (const m of child.text.matchAll(PATH_RE)) {
+      const path = m[2]
+      const title = titles.get(path)
+      if (!title) {
+        missing.add(path)
+        continue
+      }
+      const start = (m.index ?? 0) + m[1].length
+      if (start > last) out.push({ ...child, text: child.text.slice(last, start) })
+      out.push({
+        id: newId(),
+        type: 'link',
+        fields: { url: path, newTab: false, linkType: 'custom' },
+        format: '',
+        indent: 0,
+        version: 3,
+        direction: null,
+        children: [{ ...child, text: `«${shortTitle(title)}»` }],
+      })
+      last = start + path.length
+      n++
+    }
+    const rest = child.text.slice(last)
+    if (rest) out.push({ ...child, text: rest })
+  }
+  node.children = out
+  return n
+}
+
+/** Путь страницы → её название: документы «Страницы», направления, подуслуги, услуга×район, статьи, кейсы. */
+type TitleDoc = {
+  slug: string
+  title: string
+  service?: { slug?: string; title?: string } | null
+  district?: { slug?: string; namePrepositional?: string } | null
+}
+
+async function pageTitles(payload: Awaited<ReturnType<typeof getPayload>>) {
+  const titles = new Map<string, string>()
+  const all = async (collection: string, depth = 0) =>
+    (
+      await payload.find({
+        collection: collection as 'pages',
+        limit: 1000,
+        pagination: false,
+        depth,
+      })
+    ).docs as unknown as TitleDoc[]
+  for (const d of await all('services')) titles.set(`/${d.slug}/`, d.title)
+  for (const d of await all('pages')) titles.set(`/${d.slug}/`, d.title)
+  for (const d of await all('sub-services', 1))
+    if (d.service?.slug) titles.set(`/${d.service.slug}/${d.slug}/`, d.title)
+  for (const d of await all('service-districts', 1))
+    if (d.service?.slug && d.district?.slug && d.district.namePrepositional)
+      titles.set(
+        `/${d.service.slug}/${d.district.slug}/`,
+        `${titles.get(`/${d.service.slug}/`) ?? d.service.title} ${d.district.namePrepositional}`,
+      )
+  for (const d of await all('blog')) titles.set(`/blog/${d.slug}/`, d.title)
+  for (const d of await all('cases')) titles.set(`/kejsy/${d.slug}/`, d.title)
+  return titles
+}
 
 /** Один абзац с markdown внутри — признак импорта «как есть». */
 function markdownBlob(value: unknown): string | null {
@@ -66,7 +173,11 @@ async function main() {
   const payload = await getPayload({ config })
   const editorConfig = await editorConfigFactory.default({ config: payload.config })
   const backup: unknown[] = []
+  const titles = await pageTitles(payload)
+  const missing = new Set<string>()
   let n = 0
+  let links = 0
+  let cut = 0
   for (const t of TARGETS) {
     const res = await payload.find({
       collection: t.collection,
@@ -76,22 +187,40 @@ async function main() {
     })
     for (const doc of res.docs as unknown as Record<string, unknown>[]) {
       const md = markdownBlob(doc[t.field])
-      if (!md) continue
-      backup.push({ collection: t.collection, id: doc.id, slug: doc.slug, [t.field]: doc[t.field] })
-      n++
+      const lexical = md
+        ? (convertMarkdownToLexical({ editorConfig, markdown: tablesToLists(md) }) as LexNode)
+        : (structuredClone(doc[t.field]) as LexNode | null)
+      const linked = lexical?.root ? linkPaths(lexical.root as LexNode, titles, missing) : 0
+      const data: Record<string, unknown> = md || linked ? { [t.field]: lexical } : {}
+      for (const c of CUT_FIELDS.filter((f) => f.collection === t.collection)) {
+        const fixed = cutToSentence(doc[c.field], c.max)
+        if (fixed) data[c.field] = fixed
+      }
+      if (!Object.keys(data).length) continue
+      backup.push({
+        collection: t.collection,
+        id: doc.id,
+        slug: doc.slug,
+        ...Object.fromEntries(Object.keys(data).map((k) => [k, doc[k]])),
+      })
+      n += md ? 1 : 0
+      links += linked
+      cut += CUT_FIELDS.filter((c) => c.collection === t.collection && c.field in data).length
       if (!APPLY) continue
-      const lexical = convertMarkdownToLexical({ editorConfig, markdown: tablesToLists(md) })
       await payload.update({
         collection: t.collection,
         id: doc.id as number,
-        data: { [t.field]: lexical } as never,
+        data: data as never,
         context: { skipMasterTemplateGate: true },
       })
     }
   }
+  if (missing.size)
+    console.error(`[fix:markdown-bodies] пути без страницы: ${[...missing].join(' ')}`)
   process.stdout.write(JSON.stringify(backup, null, 2) + '\n')
   console.error(
-    `[fix:markdown-bodies] документов: ${n}${APPLY ? ', переведено' : ' (для записи — --apply)'}`,
+    `[fix:markdown-bodies] markdown: ${n}, ссылок из путей: ${links}, обрезанных полей: ${cut}` +
+      (APPLY ? ' — записано' : ' (для записи — --apply)'),
   )
   process.exit(0)
 }
