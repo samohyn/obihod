@@ -27,11 +27,16 @@ export function AboutStats(block: AboutStatsBlock & { tone?: SectionTone | null 
               </ul>
             )}
           </div>
-          <dl className={s.stats}>
+          <dl
+            className={s.stats}
+            style={
+              { '--len': Math.max(1, ...block.stats.map((st) => st.value.length)) } as CSSProperties
+            }
+          >
             {block.stats.map((st, i) => (
               <div key={i}>
                 <dt>{st.label}</dt>
-                <dd style={{ '--len': st.value.length } as CSSProperties}>{st.value}</dd>
+                <dd>{st.value}</dd>
               </div>
             ))}
           </dl>
