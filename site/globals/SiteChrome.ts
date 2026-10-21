@@ -260,11 +260,30 @@ export const SiteChrome: GlobalConfig = {
                       fields: [
                         navLinkRow,
                         {
-                          name: 'text',
-                          type: 'text',
-                          label: 'Пояснение',
-                          maxLength: 60,
-                          admin: { description: 'Короткая подпись под названием' },
+                          type: 'row',
+                          fields: [
+                            {
+                              name: 'text',
+                              type: 'text',
+                              label: 'Пояснение',
+                              maxLength: 60,
+                              admin: {
+                                description: 'Короткая подпись под названием',
+                                width: '70%',
+                              },
+                            },
+                            {
+                              name: 'icon',
+                              type: 'select',
+                              label: 'Иконка',
+                              options: ICON_NAMES.map((n) => ({ label: n, value: n })),
+                              admin: {
+                                description:
+                                  'Пусто — по разделу (вывоз мусора — контейнер и т. д.)',
+                                width: '30%',
+                              },
+                            },
+                          ],
                         },
                       ],
                     },
