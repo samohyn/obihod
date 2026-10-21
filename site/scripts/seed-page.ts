@@ -1,12 +1,13 @@
 /**
  * Документ коллекции «Страницы» из подготовленного наполнения (план 09, этапы 3–4).
  *
- *   pnpm seed:page arboristika                 — создать/обновить ЧЕРНОВИК: сайт не меняется
+ *   pnpm seed:page arboristika                 — создать ЧЕРНОВИК: сайт не меняется
  *   pnpm seed:page arboristika --publish       — сразу опубликовать (staging)
  *   pnpm seed:page napravleniya [--publish]    — партия целиком (PAGE_BATCHES)
  *
  * Наполнение — content/pages/*.ts; фото — public/dev-blocks/*.webp → «Медиа» с флагом
- * «Иллюстрация». Перезапуск затирает правки в админке — сначала проверьте, что их нет.
+ * «Иллюстрация». Существующий документ не трогает — правки в админке не теряются;
+ * перезаписать — --overwrite (прежнее останется в «Версиях» документа).
  */
 import { getPayload } from 'payload'
 
@@ -19,6 +20,7 @@ import { dropNulls, nbspNumbers, toLayout } from './_v3-seed'
 import { requestSiteRevalidate } from './_site-revalidate'
 
 const PUBLISH = process.argv.includes('--publish')
+const OVERWRITE = process.argv.includes('--overwrite')
 const key = process.argv.slice(2).find((a) => !a.startsWith('--')) ?? ''
 
 async function main() {
@@ -30,8 +32,9 @@ async function main() {
     )
   }
   const payload = await getPayload({ config })
-  for (const k of keys) await seedOne(payload, k)
-  await requestSiteRevalidate('seed:page')
+  let written = 0
+  for (const k of keys) if (await seedOne(payload, k)) written++
+  if (written) await requestSiteRevalidate('seed:page')
   process.exit(0)
 }
 
@@ -53,6 +56,12 @@ async function seedOne(payload: Payload, slug: string) {
     depth: 0,
     draft: true,
   })
+  if (existing.docs[0] && !OVERWRITE) {
+    console.log(
+      `[seed:page] /${content.slug}/ уже есть — пропускаю, правки в админке не трогаю (перезаписать — --overwrite)`,
+    )
+    return false
+  }
   const doc = existing.docs[0]
     ? await payload.update({
         collection: 'pages',
@@ -64,6 +73,7 @@ async function seedOne(payload: Payload, slug: string) {
   console.log(
     `[seed:page] /${content.slug}/ id=${doc.id}, блоков ${layout.length}, ${PUBLISH ? 'опубликована' : 'черновик'}`,
   )
+  return true
 }
 
 main().catch((e) => {

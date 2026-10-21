@@ -1,13 +1,13 @@
 /**
  * Подуслуга в коллекции «Подуслуги» из подготовленного наполнения (план 09, этап 3).
  *
- *   pnpm seed:subservice spil-derevev              — создать/обновить ЧЕРНОВИК: сайт не меняется
+ *   pnpm seed:subservice spil-derevev              — создать ЧЕРНОВИК: сайт не меняется
  *   pnpm seed:subservice spil-derevev --publish    — сразу опубликовать (staging)
  *   pnpm seed:subservice arboristika [--publish]   — партия целиком (SUB_SERVICE_BATCHES)
  *
  * Наполнение — content/sub-services/<ключ>.ts; фото — public/dev-blocks/*.webp → «Медиа»
- * с флагом «Иллюстрация» (повторный запуск их не дублирует). Перезапуск затирает правки
- * в админке — сначала проверьте, что их нет.
+ * с флагом «Иллюстрация» (повторный запуск их не дублирует). Существующий документ не трогает —
+ * правки в админке не теряются; перезаписать — --overwrite (прежнее останется в «Версиях»).
  */
 import { getPayload } from 'payload'
 
@@ -20,6 +20,7 @@ import { dropNulls, nbspNumbers, toLayout } from './_v3-seed'
 import { requestSiteRevalidate } from './_site-revalidate'
 
 const PUBLISH = process.argv.includes('--publish')
+const OVERWRITE = process.argv.includes('--overwrite')
 const key = process.argv.slice(2).find((a) => !a.startsWith('--')) ?? ''
 
 async function main() {
@@ -31,8 +32,9 @@ async function main() {
     )
   }
   const payload = await getPayload({ config })
-  for (const k of keys) await seedOne(payload, k)
-  await requestSiteRevalidate('seed:subservice')
+  let written = 0
+  for (const k of keys) if (await seedOne(payload, k)) written++
+  if (written) await requestSiteRevalidate('seed:subservice')
   process.exit(0)
 }
 
@@ -64,6 +66,12 @@ async function seedOne(payload: Payload, contentKey: string) {
     depth: 0,
     draft: true,
   })
+  if (existing.docs[0] && !OVERWRITE) {
+    console.log(
+      `[seed:subservice] /${content.service}/${content.slug}/ уже есть — пропускаю, правки в админке не трогаю (перезаписать — --overwrite)`,
+    )
+    return false
+  }
   const doc = existing.docs[0]
     ? await payload.update({
         collection: 'sub-services',
@@ -75,6 +83,7 @@ async function seedOne(payload: Payload, contentKey: string) {
   console.log(
     `[seed:subservice] /${content.service}/${content.slug}/ id=${doc.id}, блоков ${layout.length}, ${PUBLISH ? 'опубликована' : 'черновик'}`,
   )
+  return true
 }
 
 main().catch((e) => {
