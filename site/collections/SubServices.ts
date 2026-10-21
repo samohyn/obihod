@@ -50,6 +50,8 @@ const validateSlug: Validate = async (value, { req, siblingData, id }) => {
 
 export const SubServices: CollectionConfig = {
   slug: 'sub-services',
+  // корзина: удалённое можно вернуть (план 09, этап 4.5)
+  trash: true,
   labels: { singular: 'Подуслуга', plural: 'Подуслуги' },
   admin: {
     useAsTitle: 'title',

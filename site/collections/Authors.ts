@@ -22,6 +22,8 @@ import { fillOfferAfterRead, validateOfferTokens } from '@/lib/admin/offerTokens
  */
 export const Authors: CollectionConfig = {
   slug: 'authors',
+  // корзина: удалённое можно вернуть (план 09, этап 4.5)
+  trash: true,
   labels: { singular: 'Автор / Сотрудник', plural: 'Авторы / Команда' },
   admin: {
     useAsTitle: 'fullName',

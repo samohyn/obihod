@@ -5,6 +5,8 @@ import { fillOfferAfterRead, validateOfferTokens } from '@/lib/admin/offerTokens
 
 export const Blog: CollectionConfig = {
   slug: 'blog',
+  // корзина: удалённое можно вернуть (план 09, этап 4.5)
+  trash: true,
   labels: { singular: 'Статья', plural: 'Блог' },
   admin: {
     useAsTitle: 'title',

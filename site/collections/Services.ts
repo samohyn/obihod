@@ -4,6 +4,8 @@ import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revali
 
 export const Services: CollectionConfig = {
   slug: 'services',
+  // корзина: удалённое можно вернуть (план 09, этап 4.5)
+  trash: true,
   labels: { singular: 'Услуга', plural: 'Услуги' },
   admin: {
     useAsTitle: 'title',

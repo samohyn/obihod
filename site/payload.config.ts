@@ -101,6 +101,8 @@ export default buildConfig({
         // PANEL-AUDIT-LOG (ADR-0014): unified `/admin/audit` timeline link.
         // Visible всем — server-side RBAC (admin only) enforced в AuditView.
         '@/components/admin/audit/NavAuditLink',
+        // План 09, этап 4.5: справка «Как сделать…» → /admin/help
+        '@/components/admin/NavHelpLink',
       ],
       // PANEL-HEADER-CHROME-POLISH (W10, 2026-05-01) §C: dark-theme toggle
       // UI-only stub в gear-popup (settingsMenu) рядом с logout. НЕТ реального
@@ -122,6 +124,11 @@ export default buildConfig({
         security: {
           Component: '@/components/admin/SecurityView',
           path: '/security',
+          exact: true,
+        },
+        help: {
+          Component: '@/components/admin/HelpView',
+          path: '/help',
           exact: true,
         },
         // PANEL-AUDIT-LOG (ADR-0014): /admin/audit unified timeline view +
@@ -147,6 +154,8 @@ export default buildConfig({
   i18n: {
     fallbackLanguage: 'ru',
     supportedLanguages: { ru, en },
+    // в русском переводе Payload корзина подписана «Мусор»
+    translations: { ru: { general: { trash: 'Корзина' } } },
   },
   // Wave 8 (US-12, sa-panel-wave8.md §8.1): порядок коллекций определяет
   // порядок групп в sidebar — Payload рендерит группы в порядке первой

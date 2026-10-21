@@ -39,6 +39,8 @@ const validateDistrictSlug = async (value: unknown, args: unknown): Promise<true
 
 export const Districts: CollectionConfig = {
   slug: 'districts',
+  // корзина: удалённое можно вернуть (план 09, этап 4.5)
+  trash: true,
   labels: { singular: 'Район', plural: 'Районы' },
   admin: {
     useAsTitle: 'nameNominative',

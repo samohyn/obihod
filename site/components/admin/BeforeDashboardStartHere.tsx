@@ -1,4 +1,5 @@
 import type { CSSProperties, FC } from 'react'
+import Link from 'next/link'
 
 import { payloadClient } from '@/lib/payload'
 import { DashboardTile } from './DashboardTile'
@@ -32,10 +33,12 @@ interface RecentEdit {
 }
 
 const COLLECTIONS_TO_SHOW: Array<{
-  slug: 'services' | 'service-districts' | 'cases' | 'blog' | 'districts'
+  slug: 'pages' | 'sub-services' | 'services' | 'service-districts' | 'cases' | 'blog' | 'districts'
   label: string
   titleField: string
 }> = [
+  { slug: 'pages', label: 'Страница', titleField: 'title' },
+  { slug: 'sub-services', label: 'Подуслуга', titleField: 'title' },
   { slug: 'services', label: 'Услуга', titleField: 'title' },
   { slug: 'service-districts', label: 'Район × услуга', titleField: 'computedTitle' },
   { slug: 'cases', label: 'Кейс', titleField: 'title' },
@@ -70,8 +73,10 @@ async function loadStats(): Promise<DashboardStats> {
       newLeads = 0
     }
 
-    // Опубликованные страницы — суммарный счёт по 7 коллекциям с _status=published.
+    // Опубликованные страницы — суммарный счёт по коллекциям с _status=published.
     const pageCollections = [
+      'pages',
+      'sub-services',
       'services',
       'service-districts',
       'cases',
@@ -269,8 +274,31 @@ const rowStyle: CSSProperties = {
   borderRadius: 'var(--brand-obihod-radius-sm, 6px)',
 }
 
+/** Документ главной в «Страницах»: первый экран и «Акции» правятся в нём. */
+async function loadHomeHref(): Promise<string> {
+  try {
+    const payload = await payloadClient()
+    const res = await payload.find({
+      collection: 'pages',
+      where: { slug: { equals: 'home' } },
+      limit: 1,
+      depth: 0,
+      draft: true,
+    })
+    const id = res.docs[0]?.id
+    if (id !== undefined) return `/admin/collections/pages/${id}`
+  } catch {
+    // нет базы — список «Страниц»
+  }
+  return '/admin/collections/pages'
+}
+
 export const BeforeDashboardStartHere: FC = async () => {
-  const [recent, stats] = await Promise.all([loadRecentEdits(5), loadStats()])
+  const [recent, stats, homeHref] = await Promise.all([
+    loadRecentEdits(5),
+    loadStats(),
+    loadHomeHref(),
+  ])
   const newLeadsNum = typeof stats.newLeads === 'number' ? stats.newLeads : 0
   const newLeadsHasValue = typeof stats.newLeads === 'number' && newLeadsNum > 0
 
@@ -287,8 +315,11 @@ export const BeforeDashboardStartHere: FC = async () => {
             lineHeight: 1.55,
           }}
         >
-          Шесть сценариев ниже — самые частые задачи. Не знаете, с чего начать — откройте
-          инструкции.
+          Шесть сценариев ниже — самые частые задачи. Не знаете, с чего начать — откройте{' '}
+          <Link href="/admin/help" style={{ color: 'var(--brand-obihod-primary, #2d5a3d)' }}>
+            инструкции
+          </Link>
+          .
         </p>
       </section>
 
@@ -328,7 +359,7 @@ export const BeforeDashboardStartHere: FC = async () => {
             variant="primary"
           />
           <DashboardTile
-            href="/admin/collections/services"
+            href="/admin/collections/pages?where[slug][like]=tseny"
             icon={<UpdatePriceTileIcon width={28} height={28} />}
             title="Обновить цену"
             caption="≈ 2 мин"
@@ -340,20 +371,20 @@ export const BeforeDashboardStartHere: FC = async () => {
             caption="≈ 8 мин"
           />
           <DashboardTile
-            href="/admin/globals/site-chrome"
+            href={homeHref}
             icon={<ReplaceHeroTileIcon width={28} height={28} />}
-            title="Заменить hero-баннер"
+            title="Заменить первый экран"
             caption="≈ 3 мин"
           />
           <DashboardTile
-            href="/admin/collections/service-districts/create"
+            href={homeHref}
             icon={<AddPromotionTileIcon width={28} height={28} />}
             title="Разместить акцию"
             caption="≈ 6 мин"
             variant="accent"
           />
           <DashboardTile
-            href="/admin/collections/service-districts/create"
+            href="/admin/collections/pages/create"
             icon={<BuildPageTileIcon width={28} height={28} />}
             title="Собрать страницу из блоков"
             caption="≈ 10 мин"

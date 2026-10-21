@@ -21,6 +21,8 @@ import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revali
  */
 export const Reviews: CollectionConfig = {
   slug: 'reviews',
+  // корзина: удалённое можно вернуть (план 09, этап 4.5)
+  trash: true,
   labels: { singular: 'Отзыв', plural: 'Отзывы' },
   admin: {
     useAsTitle: 'authorName',

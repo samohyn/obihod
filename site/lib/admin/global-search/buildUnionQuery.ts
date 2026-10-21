@@ -28,9 +28,10 @@ export function buildUnionQuery(
   opts: BuildOptions = { perCollectionLimit: 5 },
 ): string {
   const subqueries = configs.map((c) => {
-    const where = [`${c.matchExpr} % LOWER($1)`, ...(c.whereExtra ? [c.whereExtra] : [])].join(
-      ' AND ',
-    )
+    // `<%` — похожесть по словам: короткий запрос («цены») находит длинное название
+    // («Цены: вывоз мусора»), которое по похожести всей строки (`%`) не проходит порог
+    const match = `(${c.matchExpr} % LOWER($1) OR LOWER($1) <% ${c.matchExpr})`
+    const where = [match, ...(c.whereExtra ? [c.whereExtra] : [])].join(' AND ')
     return `
       (
         SELECT
@@ -38,7 +39,7 @@ export function buildUnionQuery(
           id::text AS id,
           (${c.titleExpr})::varchar AS title,
           (${c.subtitleExpr})::varchar AS subtitle,
-          similarity(${c.matchExpr}, LOWER($1)) AS rank
+          GREATEST(similarity(${c.matchExpr}, LOWER($1)), word_similarity(LOWER($1), ${c.matchExpr})) AS rank
         FROM ${c.table}
         WHERE ${where}
         ORDER BY rank DESC, id DESC

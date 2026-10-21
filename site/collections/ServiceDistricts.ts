@@ -146,6 +146,8 @@ const computeUniquenessScore: CollectionBeforeValidateHook = async ({
 
 export const ServiceDistricts: CollectionConfig = {
   slug: 'service-districts',
+  // корзина: удалённое можно вернуть (план 09, этап 4.5)
+  trash: true,
   labels: { singular: 'Услуга × район', plural: 'Услуги × районы' },
   admin: {
     useAsTitle: 'computedTitle',

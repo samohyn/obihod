@@ -16,6 +16,8 @@ export interface SearchCollectionConfig {
     | 'blog'
     | 'authors'
     | 'districts'
+    | 'pages'
+    | 'sub-services'
   /** Postgres table name. */
   table: string
   /** Русский label для группы в dropdown (brand-guide §13 TOV). */
@@ -34,9 +36,8 @@ export interface SearchCollectionConfig {
    */
   editUrlPrefix: string
   /**
-   * Исключаем soft-deleted (archived_at IS NULL) — пока только для leads.
-   * Остальные коллекции имеют _status, но фильтрация published-only —
-   * нежелательна для admin search (admin ищет и draft).
+   * Исключаем удалённое: заявки в архиве (archived_at), контент в корзине (deleted_at).
+   * Фильтрация published-only нежелательна — admin ищет и черновики.
    */
   whereExtra?: string
 }
@@ -45,6 +46,8 @@ export interface SearchCollectionConfig {
  * Порядок групп в dropdown (UX): сначала «горячие» admin-целевые
  * (Leads, Services), затем контент, в конце справочники.
  */
+const NOT_TRASHED = 'deleted_at IS NULL'
+
 export const SEARCH_COLLECTIONS: SearchCollectionConfig[] = [
   {
     collectionSlug: 'leads',
@@ -64,6 +67,7 @@ export const SEARCH_COLLECTIONS: SearchCollectionConfig[] = [
     subtitleExpr: `slug`,
     matchExpr: `LOWER(COALESCE(title, '') || ' ' || COALESCE(slug, ''))`,
     editUrlPrefix: '/admin/collections/services/',
+    whereExtra: NOT_TRASHED,
   },
   {
     collectionSlug: 'service-districts',
@@ -73,6 +77,7 @@ export const SEARCH_COLLECTIONS: SearchCollectionConfig[] = [
     subtitleExpr: `NULL::varchar`,
     matchExpr: `LOWER(COALESCE(computed_title, ''))`,
     editUrlPrefix: '/admin/collections/service-districts/',
+    whereExtra: NOT_TRASHED,
   },
   {
     collectionSlug: 'cases',
@@ -82,6 +87,7 @@ export const SEARCH_COLLECTIONS: SearchCollectionConfig[] = [
     subtitleExpr: `slug`,
     matchExpr: `LOWER(COALESCE(title, '') || ' ' || COALESCE(slug, ''))`,
     editUrlPrefix: '/admin/collections/cases/',
+    whereExtra: NOT_TRASHED,
   },
   {
     collectionSlug: 'blog',
@@ -91,6 +97,7 @@ export const SEARCH_COLLECTIONS: SearchCollectionConfig[] = [
     subtitleExpr: `slug`,
     matchExpr: `LOWER(COALESCE(title, '') || ' ' || COALESCE(slug, ''))`,
     editUrlPrefix: '/admin/collections/blog/',
+    whereExtra: NOT_TRASHED,
   },
   {
     collectionSlug: 'authors',
@@ -100,6 +107,7 @@ export const SEARCH_COLLECTIONS: SearchCollectionConfig[] = [
     subtitleExpr: `slug`,
     matchExpr: `LOWER(COALESCE(full_name, '') || ' ' || COALESCE(slug, ''))`,
     editUrlPrefix: '/admin/collections/authors/',
+    whereExtra: NOT_TRASHED,
   },
   {
     collectionSlug: 'districts',
@@ -109,5 +117,26 @@ export const SEARCH_COLLECTIONS: SearchCollectionConfig[] = [
     subtitleExpr: `slug`,
     matchExpr: `LOWER(COALESCE(name_nominative, '') || ' ' || COALESCE(slug, ''))`,
     editUrlPrefix: '/admin/collections/districts/',
+    whereExtra: NOT_TRASHED,
+  },
+  {
+    collectionSlug: 'pages',
+    table: 'pages',
+    groupLabel: 'Страницы',
+    titleExpr: `COALESCE(title, slug)`,
+    subtitleExpr: `slug`,
+    matchExpr: `LOWER(COALESCE(title, '') || ' ' || COALESCE(slug, ''))`,
+    editUrlPrefix: '/admin/collections/pages/',
+    whereExtra: NOT_TRASHED,
+  },
+  {
+    collectionSlug: 'sub-services',
+    table: 'sub_services',
+    groupLabel: 'Подуслуги',
+    titleExpr: `COALESCE(title, slug)`,
+    subtitleExpr: `slug`,
+    matchExpr: `LOWER(COALESCE(title, '') || ' ' || COALESCE(slug, ''))`,
+    editUrlPrefix: '/admin/collections/sub-services/',
+    whereExtra: NOT_TRASHED,
   },
 ]

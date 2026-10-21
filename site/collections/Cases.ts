@@ -5,6 +5,8 @@ import { fillOfferAfterRead, validateOfferTokens } from '@/lib/admin/offerTokens
 
 export const Cases: CollectionConfig = {
   slug: 'cases',
+  // корзина: удалённое можно вернуть (план 09, этап 4.5)
+  trash: true,
   labels: { singular: 'Кейс', plural: 'Кейсы' },
   admin: {
     useAsTitle: 'title',

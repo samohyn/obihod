@@ -12,6 +12,8 @@ import { fillOfferAfterRead, validateOfferTokens } from '@/lib/admin/offerTokens
  */
 export const Pages: CollectionConfig = {
   slug: 'pages',
+  // корзина: удалённое можно вернуть (план 09, этап 4.5)
+  trash: true,
   labels: { singular: 'Страница', plural: 'Страницы' },
   admin: {
     useAsTitle: 'title',

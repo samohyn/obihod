@@ -41,6 +41,8 @@ import { default as default_34a40cc685c7df316e31d445e114f485 } from '@/component
 import { default as default_52ccffaeb32b1decd698281bdb4d4c82 } from '@/components/admin/A11yRowCheckboxProvider'
 import { default as default_a9f089bac6756d1335f49860c09bb91c } from '@/components/admin/GlobalSearchProvider'
 import { default as default_9ef388c09eeca65ffd7a9ea7e3838839 } from '@/components/admin/SecurityView'
+import { default as default_b49611ccd828469519fd79e264a9eb51 } from '@/components/admin/HelpView'
+import { default as default_06012d7d860efda43931da1f6b43273b } from '@/components/admin/NavHelpLink'
 import { default as default_c790932fb8bc64daf1223e4d5a57e095 } from '@/components/admin/audit/AuditView'
 import { default as default_0e974c03de5d87e72c00eca605a44d22 } from '@/components/admin/audit/AuditDiffView'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
@@ -90,6 +92,8 @@ export const importMap = {
   "@/components/admin/A11yRowCheckboxProvider#default": default_52ccffaeb32b1decd698281bdb4d4c82,
   "@/components/admin/GlobalSearchProvider#default": default_a9f089bac6756d1335f49860c09bb91c,
   "@/components/admin/SecurityView#default": default_9ef388c09eeca65ffd7a9ea7e3838839,
+  "@/components/admin/HelpView#default": default_b49611ccd828469519fd79e264a9eb51,
+  "@/components/admin/NavHelpLink#default": default_06012d7d860efda43931da1f6b43273b,
   "@/components/admin/audit/AuditView#default": default_c790932fb8bc64daf1223e4d5a57e095,
   "@/components/admin/audit/AuditDiffView#default": default_0e974c03de5d87e72c00eca605a44d22,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
