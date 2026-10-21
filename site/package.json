@@ -14,6 +14,7 @@
     "seed:home": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/seed-home-c4.ts",
     "seed:subservice": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/seed-subservice.ts",
     "seed:page": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/seed-page.ts",
+    "clean:geo-legacy": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/clean-geo-legacy.ts",
     "seed:chrome": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/seed-chrome.ts",
     "schema:diff": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/schema-diff.ts",
     "migrate": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/migrate.ts",

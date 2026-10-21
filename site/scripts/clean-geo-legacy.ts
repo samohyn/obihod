@@ -1,0 +1,107 @@
+/**
+ * Чистка старых текстов «Услуга × район» под шаблон гео-страниц (план 09, этап 3).
+ *
+ *   pnpm clean:geo-legacy            — показать, что изменится (ничего не пишет)
+ *   pnpm clean:geo-legacy --apply    — очистить заголовок, вводный абзац и местные вопросы
+ *
+ * Шаблон собирает страницу из хаба направления и района; эти поля — ручная настройка поверх.
+ * В старых записях они были сгенерированы с ошибками (чужие заголовки, заниженные цены,
+ * «талоны полигона»): заголовок и вопросы очищаются, вводный абзац (обязательное поле)
+ * заменяется фактами района. До записи в stdout печатается JSON-копия старых значений:
+ * `> geo-legacy-backup.json`. Цена-заметка и местные ориентиры не трогаются.
+ */
+import { getPayload } from 'payload'
+
+import config from '../payload.config.js'
+
+const APPLY = process.argv.includes('--apply')
+
+async function main() {
+  const payload = await getPayload({ config })
+  const res = await payload.find({
+    collection: 'service-districts',
+    where: { subServiceSlug: { exists: false } },
+    limit: 1000,
+    pagination: false,
+    depth: 1,
+  })
+  const backup = res.docs.map((d) => {
+    const doc = d as unknown as Record<string, unknown>
+    return {
+      id: doc.id,
+      service: (doc.service as { slug?: string } | null)?.slug,
+      district: (doc.district as { slug?: string } | null)?.slug,
+      seoH1: doc.seoH1 ?? null,
+      leadParagraph: doc.leadParagraph ?? null,
+      localFaq: doc.localFaq ?? [],
+    }
+  })
+  process.stdout.write(JSON.stringify(backup, null, 2) + '\n')
+  if (!APPLY) {
+    console.error(`[clean:geo-legacy] записей: ${backup.length}. Для записи — --apply`)
+    process.exit(0)
+  }
+  const pages = await payload.find({ collection: 'pages', limit: 200, depth: 0 })
+  const pillarTitle = new Map(
+    pages.docs.map((p) => [
+      String((p as { slug?: string }).slug),
+      String((p as { title?: string }).title),
+    ]),
+  )
+  let n = 0
+  for (const d of res.docs) {
+    const doc = d as unknown as {
+      id: number
+      service?: { slug?: string; title?: string } | null
+      district?: { namePrepositional?: string; distanceFromMkad?: number | null } | null
+    }
+    const service = doc.service?.slug ?? ''
+    const where = doc.district?.namePrepositional ?? ''
+    const km = doc.district?.distanceFromMkad ?? null
+    const name = pillarTitle.get(service) ?? doc.service?.title ?? ''
+    const text = [
+      `${name} ${where} и по всему округу${km !== null ? ` — ${km} км от МКАД` : ''}.`,
+      'Смету присылаем по фото за 30 минут,',
+      km !== null && km <= 50 ? 'оценщик выезжает бесплатно,' : 'выезд оценщика — по согласованию,',
+      'оплата после приёмки.',
+    ].join(' ')
+    await payload.update({
+      collection: 'service-districts',
+      id: doc.id,
+      data: { seoH1: null, leadParagraph: lexical(text), localFaq: [] } as never,
+    })
+    n++
+  }
+  console.error(`[clean:geo-legacy] очищено записей: ${n}`)
+  process.exit(0)
+}
+
+function lexical(text: string) {
+  return {
+    root: {
+      type: 'root',
+      format: '',
+      indent: 0,
+      version: 1,
+      direction: 'ltr',
+      children: [
+        {
+          type: 'paragraph',
+          format: '',
+          indent: 0,
+          version: 1,
+          direction: 'ltr',
+          textFormat: 0,
+          children: [
+            { mode: 'normal', text, type: 'text', style: '', detail: 0, format: 0, version: 1 },
+          ],
+        },
+      ],
+    },
+  }
+}
+
+main().catch((e) => {
+  console.error('[clean:geo-legacy] ошибка:', e instanceof Error ? e.message : e)
+  process.exit(1)
+})

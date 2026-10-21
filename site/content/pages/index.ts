@@ -1,5 +1,6 @@
 import type { PageContent } from '../sub-services/types'
 
+import { raiony } from './geo'
 import { PRICES } from './prices'
 import { uslugi } from './uslugi'
 
@@ -40,10 +41,13 @@ const USLUGI: Record<string, PageContent> = Object.fromEntries(
   [uslugi, ...PRICES].map((p) => [p.slug, p]),
 )
 
-export const PAGE_CONTENT: Record<string, PageContent> = { ...PILLARS, ...USLUGI }
+const GEO: Record<string, PageContent> = { raiony }
+
+export const PAGE_CONTENT: Record<string, PageContent> = { ...PILLARS, ...USLUGI, ...GEO }
 
 /** Партии: `pnpm seed:page napravleniya`. */
 export const PAGE_BATCHES: Record<string, string[]> = {
   napravleniya: Object.keys(PILLARS),
   uslugi: Object.keys(USLUGI),
+  geo: Object.keys(GEO),
 }
