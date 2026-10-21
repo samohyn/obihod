@@ -1,7 +1,7 @@
 /**
  * Главная C4 в коллекции «Страницы» (slug «home») — начальное наполнение (план 09, этап 2).
  *
- *   pnpm seed:home              — создать/обновить ЧЕРНОВИК: сайт не меняется, владелец правит в админке
+ *   pnpm seed:home              — создать ЧЕРНОВИК: сайт не меняется, владелец правит в админке
  *   pnpm seed:home --publish    — сразу опубликовать (staging)
  *
  * Фото — public/dev-blocks/*.webp → «Медиа» с флагом «Иллюстрация» (повторный запуск их не дублирует).
@@ -18,6 +18,7 @@ import { dropNulls, toLayout } from './_v3-seed'
 import { requestSiteRevalidate } from './_site-revalidate'
 
 const PUBLISH = process.argv.includes('--publish')
+const OVERWRITE = process.argv.includes('--overwrite')
 
 async function main() {
   const payload = await getPayload({ config })
@@ -38,6 +39,12 @@ async function main() {
     depth: 0,
     draft: true,
   })
+  if (existing.docs[0] && !OVERWRITE) {
+    console.log(
+      '[seed:home] главная уже есть — пропускаю, правки в админке не трогаю (перезаписать — --overwrite)',
+    )
+    process.exit(0)
+  }
   const doc = existing.docs[0]
     ? await payload.update({
         collection: 'pages',
