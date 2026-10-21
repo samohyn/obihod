@@ -23,8 +23,8 @@ const blocks: V3BlockWithTone[] = [
       },
     ],
     badge: {
-      value: '9',
-      text: 'направлений работ в одном договоре',
+      value: 'от 700 ₽',
+      text: 'спил дерева до 20 см — самая простая работа',
       note: 'Смета по фото — за 30 минут',
     },
     strip: OFFER_STRIP,
