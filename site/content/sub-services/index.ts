@@ -13,6 +13,7 @@ import {
   valkaDerevev,
   vyrubkaElok,
 } from './arboristika-2'
+import { avtovyshka, izmelchitelVetok, minitraktor, samosval } from './arenda-tehniki'
 import {
   chistkaKryshChastnyyDom,
   chistkaKryshMkd,
@@ -29,6 +30,13 @@ import {
   snosGarazha,
   snosZabora,
 } from './demontazh'
+import {
+  gazonIPoliv,
+  moshchenieIDorozhki,
+  osveshcheniyeUchastka,
+  posadkaRasteniy,
+  proektUchastka,
+} from './dizain-landshafta'
 import { spilDerevev } from './spil-derevev'
 import type { SubServiceContent } from './types'
 import {
@@ -88,12 +96,29 @@ const DEMONTAZH: Record<string, SubServiceContent> = {
   'snos-zabora': snosZabora,
 }
 
+const DIZAIN_LANDSHAFTA: Record<string, SubServiceContent> = {
+  'proekt-uchastka': proektUchastka,
+  'posadka-rasteniy': posadkaRasteniy,
+  'gazon-i-poliv': gazonIPoliv,
+  'osvescheniye-uchastka': osveshcheniyeUchastka,
+  'moshchenie-i-dorozhki': moshchenieIDorozhki,
+}
+
+const ARENDA_TEHNIKI: Record<string, SubServiceContent> = {
+  avtovyshka,
+  'izmelchitel-vetok': izmelchitelVetok,
+  minitraktor,
+  samosval,
+}
+
 /** Подуслуги с подготовленным наполнением — ключ для `pnpm seed:subservice <ключ>`. */
 export const SUB_SERVICE_CONTENT: Record<string, SubServiceContent> = {
   ...ARBORISTIKA,
   ...VYVOZ_MUSORA,
   ...CHISTKA_KRYSH,
   ...DEMONTAZH,
+  ...DIZAIN_LANDSHAFTA,
+  ...ARENDA_TEHNIKI,
 }
 
 /** Партии для наполнения разом: `pnpm seed:subservice arboristika`. */
@@ -102,4 +127,6 @@ export const SUB_SERVICE_BATCHES: Record<string, string[]> = {
   'vyvoz-musora': Object.keys(VYVOZ_MUSORA),
   'chistka-krysh': Object.keys(CHISTKA_KRYSH),
   demontazh: Object.keys(DEMONTAZH),
+  'dizain-landshafta': Object.keys(DIZAIN_LANDSHAFTA),
+  'arenda-tehniki': Object.keys(ARENDA_TEHNIKI),
 }
