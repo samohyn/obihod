@@ -4,8 +4,8 @@
  * менять то, что видят посетитель и поисковик.
  *
  * Обходит сайт от главной и всех <loc> из /sitemap.xml по внутренним ссылкам и для каждой страницы
- * пишет: статус (и куда редирект), title, description, canonical, robots, H1, видимый текст
- * и JSON-LD.
+ * пишет: статус (и куда редирект), title, description, canonical, robots, og:title, og:description,
+ * H1, видимый текст и JSON-LD.
  *
  *   pnpm snapshot:pages <снимок.json> [baseUrl]     (по умолчанию http://localhost:3000)
  *   pnpm snapshot:diff <до.json> <после.json>       — разница; код выхода 1, если она есть
@@ -19,6 +19,8 @@ type Snap = {
   description?: string
   canonical?: string
   robots?: string
+  ogTitle?: string
+  ogDescription?: string
   h1?: string
   text?: string
   jsonld?: string[]
@@ -46,8 +48,8 @@ const squash = (s: string) =>
     .replace(/\s+/g, ' ')
     .trim()
 
-function meta(html: string, name: string): string | undefined {
-  const tag = html.match(new RegExp(`<meta[^>]+name="${name}"[^>]*>`, 'i'))?.[0]
+function meta(html: string, name: string, attr = 'name'): string | undefined {
+  const tag = html.match(new RegExp(`<meta[^>]+${attr}="${name}"[^>]*>`, 'i'))?.[0]
   const v = tag?.match(/content="([^"]*)"/i)?.[1]
   return v === undefined ? undefined : decode(v)
 }
@@ -82,6 +84,8 @@ function parse(html: string): Omit<Snap, 'status'> {
     description: meta(html, 'description'),
     canonical: html.match(/<link[^>]+rel="canonical"[^>]+href="([^"]*)"/i)?.[1],
     robots: meta(html, 'robots'),
+    ogTitle: meta(html, 'og:title', 'property'),
+    ogDescription: meta(html, 'og:description', 'property'),
     h1: squash(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1] ?? ''),
     text: squash(body),
     jsonld,
@@ -160,6 +164,8 @@ function diff(aPath: string, bPath: string) {
     'description',
     'canonical',
     'robots',
+    'ogTitle',
+    'ogDescription',
     'h1',
   ] as const
   let changes = 0
