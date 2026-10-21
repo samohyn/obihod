@@ -46,11 +46,13 @@
   flex-direction: column-reverse;
   justify-content: flex-end;
   padding: 22px 20px 0 0;
+  container-type: inline-size;
 }
 .stats dd {
   margin: 0;
   font-family: var(--font-mono);
-  font-size: 46px;
+  /* цифра подстраивается под ширину колонки и длину значения (--len): «1 000 ₽» не распирает сетку */
+  font-size: clamp(24px, calc(100cqi / (var(--len, 3) * 0.62)), 46px);
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1;
@@ -119,7 +121,7 @@
     row-gap: 12px;
   }
   .stats dd {
-    font-size: 32px;
+    font-size: clamp(22px, calc(100cqi / (var(--len, 3) * 0.62)), 32px);
   }
   .stats dt {
     font-size: 13.5px;
