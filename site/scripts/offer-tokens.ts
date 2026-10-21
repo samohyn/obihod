@@ -15,7 +15,7 @@ import { DEFAULT_COMPANY, fillOffer, type Company } from '../lib/offer'
 import { requestSiteRevalidate } from './_site-revalidate'
 
 const APPLY = process.argv.includes('--apply')
-const RAW = { rawOffer: true, skipMasterTemplateGate: true }
+const RAW = { rawOffer: true, skipMasterTemplateGate: true, keepPublished: true }
 
 /**
  * Поля, которые выводятся на сайте (старые `blocks` не выводятся — не трогаем). Кейсы — истории
@@ -175,6 +175,10 @@ function rewrite(node: unknown, c: Company, where: string, report: Report, hint 
   return n
 }
 
+/** Документ без служебных полей, которые отличаются у версии и опубликованного всегда. */
+const comparable = (doc: Record<string, unknown>) =>
+  JSON.stringify(doc, (k, v) => (k === 'updatedAt' || k === 'createdAt' ? undefined : v))
+
 async function main() {
   const payload: Payload = await getPayload({ config })
   const c: Company = {
@@ -203,7 +207,12 @@ async function main() {
     const latestById = new Map(
       latest.docs.map((d) => [d.id, d as unknown as Record<string, unknown>]),
     )
-    for (const d of live.docs as unknown as Record<string, unknown>[]) {
+    for (const row of live.docs as unknown as Record<string, unknown>[]) {
+      const latest = latestById.get(row.id as number)
+      // Неопубликованный документ админка показывает по последней версии — её и правим, сохраняя
+      // черновиком: основная строка и сайт не меняются
+      const isDraft = row._status === 'draft' && latest?._status === 'draft'
+      const d = isDraft ? latest : row
       const where = `${collection}/${d.slug ?? d.id}`
       const data: Record<string, unknown> = {}
       for (const f of fields)
@@ -211,12 +220,13 @@ async function main() {
       const before = JSON.stringify(data)
       const n = rewrite(data, c, where, report)
       if (!n) continue
-      const draft = latestById.get(d.id as number)
-      const pending =
-        draft &&
-        fields.some((f) => JSON.stringify(draft[f] ?? null) !== JSON.stringify(d[f] ?? null))
-      if (pending) {
-        report.skipped.push(`${where} — есть неопубликованный черновик (${n} замен не сделано)`)
+      // Payload сохраняет поверх ПОСЛЕДНЕЙ версии документа. Если у опубликованного она отличается от
+      // того, что на сайте, хоть в одном поле (черновик правок, старая версия после ручного отката базы) —
+      // запись вернула бы её целиком: статус, noindex, ориентиры (так было на проде 21.10). Такие не трогаем.
+      if (!isDraft && (!latest || comparable(latest) !== comparable(d))) {
+        report.skipped.push(
+          `${where} — последняя версия отличается от опубликованной (${n} замен не сделано)`,
+        )
         continue
       }
       if (JSON.stringify(data) !== before)
@@ -225,7 +235,7 @@ async function main() {
             collection: collection as 'pages',
             id: d.id as number,
             data: { ...data, _status: d._status } as never,
-            draft: false,
+            draft: isDraft,
             depth: 0,
             context: RAW,
           }),
