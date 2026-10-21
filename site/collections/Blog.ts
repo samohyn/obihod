@@ -47,6 +47,11 @@ export const Blog: CollectionConfig = {
   // OBI-30 Wave 4 — UI tabs grouping (art-concept-v2 §5).
   fields: [
     {
+      name: 'previewPanel',
+      type: 'ui',
+      admin: { position: 'sidebar', components: { Field: '@/components/admin/PagePreviewPanel' } },
+    },
+    {
       type: 'tabs',
       tabs: [
         {

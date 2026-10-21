@@ -40,13 +40,19 @@ export async function computePreviewUrl(
     }
 
     case 'cases':
-      return doc.slug ? `/kejsy/${doc.slug}` : null
+      return doc.slug ? `/kejsy/${doc.slug}/` : null
 
     case 'blog':
-      return doc.slug ? `/blog/${doc.slug}` : null
+      return doc.slug ? `/blog/${doc.slug}/` : null
 
     case 'b2b-pages':
-      return doc.slug ? `/b2b/${doc.slug}` : null
+      return doc.slug ? `/b2b/${doc.slug}/` : null
+
+    case 'authors':
+      return doc.slug ? `/avtory/${doc.slug}/` : null
+
+    case 'districts':
+      return doc.slug ? `/raiony/${doc.slug}/` : null
 
     case 'pages':
       return doc.slug === 'home' ? '/' : doc.slug ? `/${doc.slug}/` : null
@@ -94,6 +100,8 @@ export const previewableCollections = [
   'b2b-pages',
   'pages',
   'sub-services',
+  'authors',
+  'districts',
 ] as const
 
 export type PreviewableCollection = (typeof previewableCollections)[number]

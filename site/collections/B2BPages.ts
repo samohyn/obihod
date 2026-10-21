@@ -11,7 +11,6 @@ import {
   Tldr,
   Breadcrumbs,
 } from '@/blocks'
-import { buildMasterTemplateGate } from '@/lib/admin/master-template-gate'
 import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
 
 export const B2BPages: CollectionConfig = {
@@ -156,16 +155,8 @@ export const B2BPages: CollectionConfig = {
     },
   ],
   hooks: {
-    // EPIC-SERVICE-PAGES-UX C3 — master-template enforcement (ADR-0021).
-    // B2B-страницы — pillar-уровень landing (T2_PILLAR). UK/ТСЖ/FM/застройщики/
-    // госзакупки получают тот же master-template без T3/T4 доп. секций.
-    // alsoCheckPayloadStatus=true — B2BPages использует Payload drafts.
-    beforeValidate: [
-      buildMasterTemplateGate({
-        layerResolver: () => 'T2_PILLAR',
-        alsoCheckPayloadStatus: true,
-      }),
-    ],
+    // Проверки старых `blocks` (ADR-0021) сняты 21.10.2026: страница собирается из «Страниц» —
+    // старые блоки не рисуются, а проверка не давала сохранить документ (план 09, этап 4).
     afterChange: [revalidateAfterChange],
     afterDelete: [revalidateAfterDelete],
   },

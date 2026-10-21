@@ -44,6 +44,11 @@ export const Authors: CollectionConfig = {
   },
   fields: [
     {
+      name: 'previewPanel',
+      type: 'ui',
+      admin: { position: 'sidebar', components: { Field: '@/components/admin/PagePreviewPanel' } },
+    },
+    {
       type: 'tabs',
       tabs: [
         {

@@ -1,6 +1,7 @@
 import { cache } from 'react'
 
 import { payloadClient } from '@/lib/payload'
+import { isDraftPreview } from '@/lib/preview'
 import { lexicalToPlainText } from '@/lib/seo/uniqueness'
 
 /**
@@ -67,6 +68,7 @@ export const getDistrictBySlug = cache(async (slug: string) => {
     const r = await payload.find({
       collection: 'districts',
       where: { slug: { equals: slug } },
+      draft: await isDraftPreview(),
       limit: 1,
       depth: 2,
     })
@@ -109,6 +111,7 @@ export const getServiceDistrict = cache(async (serviceSlug: string, districtSlug
           { subServiceSlug: { exists: false } },
         ],
       },
+      draft: await isDraftPreview(),
       limit: 1,
       depth: 3,
     })
@@ -400,6 +403,7 @@ export const getAllCaseSlugs = cache(
       const payload = await payloadClient()
       const r = await payload.find({
         collection: 'cases',
+        where: { _status: { equals: 'published' } },
         limit: 1000,
         pagination: false,
         select: { slug: true, updatedAt: true },
@@ -588,9 +592,13 @@ export const getPublishedAuthors = cache(async () => {
 export const getAuthorBySlug = cache(async (slug: string) => {
   try {
     const payload = await payloadClient()
+    const draft = await isDraftPreview()
     const r = await payload.find({
       collection: 'authors',
-      where: { and: [{ slug: { equals: slug } }, { _status: { equals: 'published' } }] },
+      where: draft
+        ? { slug: { equals: slug } }
+        : { and: [{ slug: { equals: slug } }, { _status: { equals: 'published' } }] },
+      draft,
       limit: 1,
       depth: 1,
     })
@@ -646,9 +654,13 @@ export const getPublishedBlogPosts = cache(async () => {
 export const getBlogPostBySlug = cache(async (slug: string) => {
   try {
     const payload = await payloadClient()
+    const draft = await isDraftPreview()
     const r = await payload.find({
       collection: 'blog',
-      where: { and: [{ slug: { equals: slug } }, { _status: { equals: 'published' } }] },
+      where: draft
+        ? { slug: { equals: slug } }
+        : { and: [{ slug: { equals: slug } }, { _status: { equals: 'published' } }] },
+      draft,
       limit: 1,
       depth: 2,
     })

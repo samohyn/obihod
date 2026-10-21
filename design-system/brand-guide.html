@@ -3298,6 +3298,13 @@
       </div>
     </div>
 
+    <h3 style="margin-top: 40px;">Плашка предпросмотра — только для редактора</h3>
+    <p class="muted" style="font-size: 14px; max-width: 640px;">Видна, когда владелец открыл черновик кнопкой «Открыть черновик» в админке; посетители её не видят. Полоса во всю ширину над шапкой, в потоке страницы (не фиксированная — не перекрывает шапку и нижнюю панель на телефоне). Подложка — как у бейджа «Черновик», слева полоса accent, как у тоста-предупреждения; текст — ink; кнопка «Выйти из предпросмотра» — контурная primary, высота 44 px. Код — <code>site/components/chrome/PreviewBanner.tsx</code>.</p>
+    <div style="margin-top: 12px; background: rgba(230,162,60,0.16); border-left: 4px solid var(--c-accent); border-bottom: 1px solid var(--c-line); padding: 8px 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px;" role="status">
+      <p style="margin: 0; font-size: 14px; color: var(--c-ink);"><b>Предпросмотр.</b> Вы видите черновики — посетители видят опубликованную версию.</p>
+      <span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1.5px solid var(--c-primary); border-radius: var(--radius); color: var(--c-primary); font-size: 14px; font-weight: 600;">Выйти из предпросмотра</span>
+    </div>
+
     <h3 style="margin-top: 40px;">Empty state · Loading skeleton</h3>
 
     <div class="nf-grid">

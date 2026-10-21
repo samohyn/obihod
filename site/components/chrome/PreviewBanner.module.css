@@ -1,0 +1,45 @@
+/* Плашка предпросмотра — brand-guide «Плашка предпросмотра»: подложка бейджа «Черновик»,
+   полоса accent слева как у тоста-предупреждения, текст ink (контраст > 12:1). */
+.bar {
+  background: rgba(230, 162, 60, 0.16);
+  border-left: 4px solid var(--c-accent);
+  border-bottom: 1px solid var(--c-line);
+  color: var(--c-ink);
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.exit {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1.5px solid var(--c-primary);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--c-primary);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.exit:hover {
+  background: var(--c-primary);
+  color: var(--c-bg);
+}
+.exit:focus-visible {
+  outline: 3px solid var(--c-accent);
+  outline-offset: 2px;
+}

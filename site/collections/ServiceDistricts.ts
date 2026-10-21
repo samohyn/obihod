@@ -24,8 +24,6 @@ import { ProcessSteps } from '@/blocks/ProcessSteps'
 import { NeighborDistricts } from '@/blocks/NeighborDistricts'
 import { RelatedServices } from '@/blocks/RelatedServices'
 import { Calculator } from '@/blocks/Calculator'
-import { buildPublishGate } from '@/lib/admin/publish-gate'
-import { buildMasterTemplateGate } from '@/lib/admin/master-template-gate'
 import { tfIdfUniqueness, lexicalToPlainText } from '@/lib/seo/uniqueness'
 import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
 
@@ -162,6 +160,11 @@ export const ServiceDistricts: CollectionConfig = {
     delete: isAdmin,
   },
   fields: [
+    {
+      name: 'previewPanel',
+      type: 'ui',
+      admin: { position: 'sidebar', components: { Field: '@/components/admin/PagePreviewPanel' } },
+    },
     {
       type: 'tabs',
       tabs: [
@@ -466,12 +469,9 @@ export const ServiceDistricts: CollectionConfig = {
     beforeValidate: [
       requireGatesForPublish,
       computeUniquenessScore,
-      buildPublishGate(),
-      // EPIC-SERVICE-PAGES-UX C3 — master-template enforcement (ADR-0021).
-      // SD = T4_SD layer (programmatic /uslugi/<svc>/<district>/). Гейт после
-      // publishGate чтобы базовые правила (Hero / 300 слов / форма) проверялись
-      // первыми — sustained UX для редакторов.
-      buildMasterTemplateGate({ layerResolver: () => 'T4_SD' }),
+      // Проверки старых `blocks` (Hero / 300 слов / форма, ADR-0021) сняты 21.10.2026: гео-страница
+      // собирается из хаба и местных полей (lib/geo-pages.ts), старые блоки не рисуются, а проверка
+      // не давала сохранить опубликованную запись (план 09, этап 4).
     ],
     beforeChange: [
       async ({ data, req }) => {

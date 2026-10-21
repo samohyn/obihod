@@ -6,6 +6,7 @@ import '../service-pages.css'
 
 import { SiteFooter } from '@/components/chrome/SiteFooter'
 import { SiteHeader } from '@/components/chrome/SiteHeader'
+import { PreviewBanner } from '@/components/chrome/PreviewBanner'
 import { YandexMetrika } from '@/components/analytics/YandexMetrika'
 import { RumProvider } from '@/components/analytics/RumProvider'
 import { JsonLd } from '@/components/seo/JsonLd'
@@ -92,6 +93,7 @@ export default async function MarketingLayout({
         />
         <YandexMetrika />
         <RumProvider />
+        <PreviewBanner />
         <SiteHeader />
         <main className="min-h-[60vh] flex-1">{children}</main>
         <SiteFooter />

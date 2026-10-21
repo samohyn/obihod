@@ -74,6 +74,11 @@ export const Districts: CollectionConfig = {
   // OBI-24 admin §12.4 — UI tabs grouping.
   fields: [
     {
+      name: 'previewPanel',
+      type: 'ui',
+      admin: { position: 'sidebar', components: { Field: '@/components/admin/PagePreviewPanel' } },
+    },
+    {
       type: 'tabs',
       tabs: [
         {
