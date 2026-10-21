@@ -35,8 +35,13 @@ import { fillOfferAfterRead, validateOfferTokens } from '@/lib/admin/offerTokens
  *
  * Запускается ДО общего buildPublishGate (sa.md §5.2 п.5).
  */
-const requireGatesForPublish: CollectionBeforeValidateHook = async ({ data, originalDoc }) => {
-  if (!data) return data
+const requireGatesForPublish: CollectionBeforeValidateHook = async ({
+  data,
+  originalDoc,
+  context,
+}) => {
+  // Скрипты, которые пересохраняют уже опубликованное как есть (sync:latest-versions, offer:tokens)
+  if (!data || context?.keepPublished) return data
   // Правило — для момента публикации. Уже опубликованную запись можно пересохранить и без
   // мини-кейса: иначе записи, опубликованные до правила, нельзя поправить (план 09, 21.10).
   const publishing =

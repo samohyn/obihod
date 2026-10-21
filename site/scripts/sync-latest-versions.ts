@@ -24,7 +24,7 @@ const COLLECTIONS = [
   'districts',
   'service-districts',
 ] as const
-const RAW = { rawOffer: true, skipMasterTemplateGate: true }
+const RAW = { rawOffer: true, skipMasterTemplateGate: true, keepPublished: true }
 const SKIP = new Set(['id', 'createdAt', 'updatedAt'])
 const comparable = (doc: Record<string, unknown>) =>
   JSON.stringify(doc, (k, v) => (k === 'updatedAt' || k === 'createdAt' ? undefined : v))
