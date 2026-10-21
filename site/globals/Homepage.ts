@@ -1,5 +1,6 @@
 import type { GlobalConfig } from 'payload'
 import { isAdmin } from '@/lib/auth/access'
+import { revalidateGlobalAfterChange } from '@/lib/admin/revalidateSite'
 
 /**
  * Homepage — global для контента главной страницы (`/`).
@@ -31,6 +32,7 @@ export const Homepage: GlobalConfig = {
     group: '01 · Контент',
   },
   access: { read: () => true, update: isAdmin },
+  hooks: { afterChange: [revalidateGlobalAfterChange] },
   fields: [
     // ─────── §01 Hero ───────
     {

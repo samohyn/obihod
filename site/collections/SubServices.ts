@@ -2,6 +2,7 @@ import type { CollectionConfig, Validate } from 'payload'
 
 import { v3Blocks } from '@/blocks/v3'
 import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
+import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
 
 /**
  * «Подуслуги» — страницы /направление/подуслуга/ из блоков библиотеки v3 (план 09, раздел 5:
@@ -54,31 +55,8 @@ export const SubServices: CollectionConfig = {
     delete: isAdmin,
   },
   hooks: {
-    afterChange: [
-      async ({ doc, req }) => {
-        // Публикация сразу видна на сайте, без ожидания ISR.
-        if (doc?._status !== 'published') return
-        try {
-          const serviceId = typeof doc.service === 'object' ? doc.service?.id : doc.service
-          const service = await req.payload.findByID({
-            collection: 'services',
-            id: serviceId,
-            depth: 0,
-          })
-          const { revalidatePath } = await import('next/cache')
-          const serviceSlug = (service as { slug?: string }).slug
-          revalidatePath(`/${serviceSlug}/${doc.slug}/`)
-          // Цена подуслуги стоит и в прайсе направления
-          revalidatePath(`/uslugi/tseny/${serviceSlug}/`)
-        } catch (e) {
-          // Вне запроса Next (скрипт наполнения) кеша страниц нет — сбрасывать нечего.
-          const msg = (e as Error).message
-          if (!msg.includes('static generation store missing')) {
-            req.payload.logger.error(`[sub-services] revalidate failed: ${msg}`)
-          }
-        }
-      },
-    ],
+    afterChange: [revalidateAfterChange],
+    afterDelete: [revalidateAfterDelete],
   },
   fields: [
     {

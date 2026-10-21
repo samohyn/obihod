@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
 import { Hero, TextContent, MiniCase, CtaBanner, RelatedServices, Breadcrumbs } from '@/blocks'
+import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
 
 export const Cases: CollectionConfig = {
   slug: 'cases',
@@ -38,6 +39,10 @@ export const Cases: CollectionConfig = {
     create: isAdmin,
     update: isAdmin,
     delete: isAdmin,
+  },
+  hooks: {
+    afterChange: [revalidateAfterChange],
+    afterDelete: [revalidateAfterDelete],
   },
   // OBI-30 Wave 4 — UI tabs grouping (art-concept-v2 §5).
   fields: [

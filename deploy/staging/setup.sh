@@ -23,7 +23,7 @@ import re, secrets, sys
 src, dst = sys.argv[1], sys.argv[2]
 # что staging не должен делать: писать клиентам/менеджеру, слать в поисковики и Метрику
 drop = re.compile(r'^(TELEGRAM_\w*|SMTP_\w*|LEAD_NOTIFY_EMAIL|INDEXNOW_KEY|NEXT_PUBLIC_YANDEX_METRIKA_ID|OPERATOR_EMAIL|'
-                  r'PAYLOAD_SECRET|REVALIDATE_SECRET|PAYLOAD_PREVIEW_SECRET|NEXT_PUBLIC_SITE_URL|SITE_URL|DATABASE_URI)=')
+                  r'PAYLOAD_SECRET|REVALIDATE_SECRET|PAYLOAD_PREVIEW_SECRET|NEXT_PUBLIC_SITE_URL|SITE_URL|DATABASE_URI|PORT)=')
 out, uri = [], None
 for line in open(src, encoding='utf-8'):
     if line.startswith('DATABASE_URI='):
@@ -49,6 +49,8 @@ PY
   chmod 600 "$STAGING/shared/.env"
 fi
 grep -c '^DATABASE_URI=.*obikhod_staging' "$STAGING/shared/.env"
+# порт pm2 obikhod-staging — по нему seed и скрипты данных сбрасывают кеш (site/scripts/_site-revalidate.ts)
+grep -q '^PORT=' "$STAGING/shared/.env" || echo 'PORT=3001' >> "$STAGING/shared/.env"
 
 log "скрипт обновления данных"
 install -m 0750 "$SRC/obikhod-staging-refresh.sh" /usr/local/sbin/obikhod-staging-refresh

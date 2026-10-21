@@ -17,6 +17,7 @@ import config from '../payload.config.js'
 import type { Payload } from 'payload'
 
 import { dropNulls, nbspNumbers, toLayout } from './_v3-seed'
+import { requestSiteRevalidate } from './_site-revalidate'
 
 const PUBLISH = process.argv.includes('--publish')
 const key = process.argv.slice(2).find((a) => !a.startsWith('--')) ?? ''
@@ -31,6 +32,7 @@ async function main() {
   }
   const payload = await getPayload({ config })
   for (const k of keys) await seedOne(payload, k)
+  await requestSiteRevalidate('seed:subservice')
   process.exit(0)
 }
 

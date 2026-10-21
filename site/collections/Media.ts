@@ -6,6 +6,7 @@ import {
   buildAfterChangeAuditHook,
   buildAfterDeleteAuditHook,
 } from '@/lib/admin/audit/captureHooks'
+import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
 
 /**
  * PANEL-MEDIA-LIBRARY · sa-panel.md «Risks #1» (race condition).
@@ -103,11 +104,13 @@ export const Media: CollectionConfig = {
         const alt = typeof doc?.alt === 'string' ? doc.alt : null
         return filename ?? alt
       }),
+      revalidateAfterChange,
     ],
     afterDelete: [
       buildAfterDeleteAuditHook('media', (doc) =>
         typeof doc?.filename === 'string' ? doc.filename : null,
       ),
+      revalidateAfterDelete,
     ],
   },
   upload: {

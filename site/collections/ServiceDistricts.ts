@@ -1,6 +1,5 @@
 import type { CollectionConfig, CollectionBeforeValidateHook } from 'payload'
 import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
-import { revalidateTag } from 'next/cache'
 import { Hero } from '@/blocks/Hero'
 import { TextContent } from '@/blocks/TextContent'
 import { LeadForm } from '@/blocks/LeadForm'
@@ -28,6 +27,7 @@ import { Calculator } from '@/blocks/Calculator'
 import { buildPublishGate } from '@/lib/admin/publish-gate'
 import { buildMasterTemplateGate } from '@/lib/admin/master-template-gate'
 import { tfIdfUniqueness, lexicalToPlainText } from '@/lib/seo/uniqueness'
+import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
 
 /**
  * ServiceDistricts-специфичный publish-gate (legacy-правила из R&D M1):
@@ -492,60 +492,7 @@ export const ServiceDistricts: CollectionConfig = {
         return data
       },
     ],
-    afterChange: [
-      async ({ doc, req }) => {
-        // 1. Прямой in-process revalidateTag — работает без HTTP, без секретов,
-        // в пределах того же Next.js процесса. Инвалидирует sitemap +
-        // service-districts + конкретную пару sd-<svc>-<dst>.
-        try {
-          // Next 16: второй аргумент обязателен. 'max' = stale-while-revalidate.
-          revalidateTag('sitemap', 'max')
-          revalidateTag('service-districts', 'max')
-        } catch (e) {
-          console.warn('[service-districts.afterChange] revalidateTag failed:', e)
-        }
-
-        // 2. HTTP webhook на /api/revalidate — fire-and-forget с 5s timeout
-        // (US-3 Wave 0.5 / sustained reference_payload_hooks_async_fire_and_forget).
-        // Sync await тут вызывал pg pool starvation на bulk publish 100+ SD
-        // (incident audit-payload-hooks Stage 2 W11). НЕ блокируем сохранение
-        // документа на сетевые операции; ошибки логируем, не фейлим transaction.
-        const url = process.env.SITE_URL
-        const secret = process.env.REVALIDATE_SECRET
-        if (url && secret) {
-          setImmediate(() => {
-            void Promise.race([
-              (async () => {
-                const svc = await req.payload.findByID({
-                  collection: 'services',
-                  id: doc.service,
-                })
-                const dst = await req.payload.findByID({
-                  collection: 'districts',
-                  id: doc.district,
-                })
-                const tag = `sd-${svc.slug}-${dst.slug}`
-                revalidateTag(tag, 'max')
-                await fetch(`${url}/api/revalidate?tag=${tag}`, {
-                  headers: { 'x-revalidate-secret': secret },
-                })
-                await fetch(`${url}/api/revalidate?tag=sitemap`, {
-                  headers: { 'x-revalidate-secret': secret },
-                })
-              })(),
-              new Promise((_, reject) =>
-                setTimeout(
-                  () => reject(new Error('service-districts.afterChange timeout 5s')),
-                  5000,
-                ),
-              ),
-            ]).catch((e) => {
-              console.warn('[service-districts.afterChange] fire-forget failed:', e)
-            })
-          })
-        }
-        return doc
-      },
-    ],
+    afterChange: [revalidateAfterChange],
+    afterDelete: [revalidateAfterDelete],
   },
 }

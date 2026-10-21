@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
+import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
 
 /**
  * Reviews — отзывы клиентов с привязкой к услуге / району / источнику.
@@ -147,30 +148,7 @@ export const Reviews: CollectionConfig = {
     },
   ],
   hooks: {
-    afterChange: [
-      async ({ doc, operation, req }) => {
-        // Revalidate /otzyvy/ + sitemap при любом изменении.
-        // Sustained pattern с Cases / Blog hooks — fire-and-forget, не блокируем save.
-        const secret = process.env.REVALIDATE_SECRET
-        const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
-        if (!secret || !siteUrl) return doc
-        const url = `${siteUrl}/api/revalidate?tag=reviews&url=/otzyvy/&url=/sitemap.xml`
-        // fire-and-forget: 5s timeout, no await блока на UI
-        const controller = new AbortController()
-        const timer = setTimeout(() => controller.abort(), 5_000)
-        fetch(url, {
-          method: 'GET',
-          headers: { 'x-revalidate-secret': secret },
-          signal: controller.signal,
-        })
-          .catch((e) => {
-            req.payload.logger.warn(
-              `[reviews.afterChange] revalidate failed (${operation}): ${e instanceof Error ? e.message : 'unknown'}`,
-            )
-          })
-          .finally(() => clearTimeout(timer))
-        return doc
-      },
-    ],
+    afterChange: [revalidateAfterChange],
+    afterDelete: [revalidateAfterDelete],
   },
 }
