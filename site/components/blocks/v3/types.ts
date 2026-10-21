@@ -306,6 +306,16 @@ export interface FinalFormBlock extends BlockBase {
   source: string
 }
 
+// 22 · текст документа (политика ПДн, согласие)
+export interface LegalDocBlock extends BlockBase {
+  blockType: 'legal-doc'
+  title: string
+  /** «19 октября 2026 г.» — в шапке «Редакция от …» */
+  revision?: string | null
+  /** Lexical (форматированный текст из админки) */
+  body: unknown
+}
+
 export type V3Block =
   | HeroSliderBlock
   | ServicesTilesBlock
@@ -328,6 +338,7 @@ export type V3Block =
   | GuaranteesBlock
   | FaqV3Block
   | FinalFormBlock
+  | LegalDocBlock
 
 /** Блок + тон фона секции (чередование задаёт страница). */
 export type V3BlockWithTone = V3Block & { tone?: SectionTone | null }

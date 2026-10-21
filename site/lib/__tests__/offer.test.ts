@@ -55,3 +55,16 @@ test('по всему документу, включая форматирова�
   assert.equal(out.n, 5)
   assert.equal(doc.title, 'А {перезвон}', 'исходный документ не меняется')
 })
+
+test('реквизиты в документах ПДн: заглушки из единиц не выводятся, ссылки собираются из меток', () => {
+  const c = { ...DEFAULT_COMPANY, legalName: '', taxId: '1111111111', ogrn: null }
+  assert.equal(fillOffer('оператор — {оператор}.', c), 'оператор — Обиход.')
+  const filled = { ...c, legalName: 'ООО «Обиход»', taxId: '5040123456', ogrn: '1225000000000' }
+  assert.equal(fillOffer('{оператор}', filled), 'ООО «Обиход», ИНН 5040123456, ОГРН 1225000000000')
+  assert.equal(
+    fillOffer('{адрес}', c),
+    'ул. Амет-хан Султана, 15, к1, Жуковский, Московская область, 140185',
+  )
+  assert.equal(fillOffer('mailto:{почта}', c), 'mailto:partner@obikhod.ru')
+  assert.equal(fillOffer('tel:{телефон-ссылка}', c), 'tel:+79851705111')
+})

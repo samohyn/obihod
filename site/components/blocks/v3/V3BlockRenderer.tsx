@@ -11,6 +11,7 @@ import { FaqV3 } from './FaqV3'
 import { FinalForm } from './FinalForm'
 import { Guarantees } from './Guarantees'
 import { HeroSlider } from './HeroSlider'
+import { LegalDoc } from './LegalDoc'
 import { ObjectsMap } from './ObjectsMap'
 import { PhotoCta } from './PhotoCta'
 import { PriceTabs } from './PriceTabs'
@@ -77,6 +78,8 @@ function renderBlock(block: V3BlockWithTone, key: string, company: Company, phon
       return <FaqV3 key={key} {...block} tone={tone} />
     case 'final-form':
       return <FinalForm key={key} {...block} phoneDisplay={phoneDisplay} />
+    case 'legal-doc':
+      return <LegalDoc key={key} {...block} tone={tone} />
     default:
       return null
   }

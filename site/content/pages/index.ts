@@ -3,6 +3,7 @@ import type { PageContent } from '../sub-services/types'
 import { B2B } from './b2b'
 import { COMPANY } from './company'
 import { raiony } from './geo'
+import { LEGAL } from './legal'
 import { blog, kejsy } from './lists'
 import { PRICES } from './prices'
 import { uslugi } from './uslugi'
@@ -56,6 +57,7 @@ const B2B_PAGES: Record<string, PageContent> = Object.fromEntries(B2B.map((p) =>
 const COMPANY_PAGES: Record<string, PageContent> = Object.fromEntries(
   COMPANY.map((p) => [p.slug, p]),
 )
+const LEGAL_PAGES: Record<string, PageContent> = Object.fromEntries(LEGAL.map((p) => [p.slug, p]))
 
 export const PAGE_CONTENT: Record<string, PageContent> = {
   ...PILLARS,
@@ -63,6 +65,7 @@ export const PAGE_CONTENT: Record<string, PageContent> = {
   ...GEO,
   ...B2B_PAGES,
   ...COMPANY_PAGES,
+  ...LEGAL_PAGES,
 }
 
 /** Партии: `pnpm seed:page napravleniya`. */
@@ -72,4 +75,5 @@ export const PAGE_BATCHES: Record<string, string[]> = {
   geo: Object.keys(GEO),
   b2b: Object.keys(B2B_PAGES),
   company: Object.keys(COMPANY_PAGES),
+  legal: Object.keys(LEGAL_PAGES),
 }

@@ -529,6 +529,15 @@ export async function fromPayloadBlocks(
           source: str(b.source) ?? 'home-final',
         })
         break
+      case 'legal-doc':
+        out.push({
+          ...common,
+          blockType: 'legal-doc',
+          title: str(b.title) ?? '',
+          revision: str(b.revision),
+          body: b.body ?? null,
+        })
+        break
       default:
         break
     }

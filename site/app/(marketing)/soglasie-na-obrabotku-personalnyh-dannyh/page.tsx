@@ -11,16 +11,24 @@ import { getContacts } from '@/lib/chrome'
 import { CONSENT_URL, LEGAL_REVISION_DATE, PRIVACY_URL } from '@/lib/legal'
 import { breadcrumbListSchema } from '@/lib/seo/jsonld'
 import { canonicalFor } from '@/lib/seo/canonical'
+import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
+import { getPage } from '@/lib/pages'
+import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 export const revalidate = 86400
 
-export const metadata: Metadata = {
+const LEGACY_METADATA: Metadata = {
   title: 'Согласие на обработку персональных данных — Обиход',
   description:
     'Текст согласия на обработку персональных данных, которое вы даёте, отправляя заявку на сайте obikhod.ru: какие данные, зачем, на какой срок и как отозвать.',
   alternates: { canonical: canonicalFor(CONSENT_URL) },
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPage('soglasie-na-obrabotku-personalnyh-dannyh')
+  return page ? buildBlocksPageMetadata(page, CONSENT_URL) : LEGACY_METADATA
 }
 
 const p = ''
@@ -32,6 +40,10 @@ const ul = ''
  * план 09, этап 2 (единая система форм).
  */
 export default async function ConsentPage() {
+  // Документ «Страницы» (план 09, этап 4.4b); вёрстка ниже — запасная, пока не убрана в 4.4c
+  const page = await getPage('soglasie-na-obrabotku-personalnyh-dannyh')
+  if (page) return <PageBlocksView page={page} crumbs={trail('soglasie')} />
+
   const c = await getContacts()
   const breadcrumbs = trail('soglasie')
 

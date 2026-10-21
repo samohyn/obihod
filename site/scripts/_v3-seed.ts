@@ -4,6 +4,7 @@
  */
 import path from 'node:path'
 
+import { convertMarkdownToLexical, editorConfigFactory } from '@payloadcms/richtext-lexical'
 import type { Payload } from 'payload'
 
 import type { BlockImage, V3BlockWithTone } from '../components/blocks/v3/types'
@@ -301,9 +302,27 @@ export async function toLayout(
           source: 'home-final',
         })
         break
+      case 'legal-doc':
+        layout.push({
+          blockType: b.blockType,
+          blockName: b.title,
+          enabled: true,
+          eyebrow: b.eyebrow ?? null,
+          title: b.title,
+          revision: b.revision ?? null,
+          // в наполнении текст — Markdown (content/pages/legal.ts)
+          body: typeof b.body === 'string' ? await markdownToLexical(payload, b.body) : b.body,
+        })
+        break
     }
   }
   return layout
+}
+
+let editorConfig: Awaited<ReturnType<typeof editorConfigFactory.default>> | undefined
+async function markdownToLexical(payload: Payload, markdown: string) {
+  editorConfig ??= await editorConfigFactory.default({ config: payload.config })
+  return convertMarkdownToLexical({ editorConfig, markdown })
 }
 
 /** Payload ждёт у групп объект или отсутствие поля — null в группе роняет хуки валидации. */

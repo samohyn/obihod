@@ -81,6 +81,25 @@ export function hoursLine(c: Company): string {
   return `Ежедневно ${clock(c.opens)}–${clock(c.closes)}${c.leadsAllDay ? ' · заявки 24/7' : ''}`
 }
 
+// ---------- реквизиты ----------
+
+/** Реквизит для сайта: заглушки из единиц («1111111111») не выводятся. */
+export function filledRequisite(v: string | null | undefined): string | null {
+  const s = v?.trim()
+  return s && !/^1+$/.test(s) ? s : null
+}
+
+/** «ул. …, Жуковский, Московская область, 140185» */
+export const addressLine = (c: Company) =>
+  [c.streetAddress, c.addressLocality, c.addressRegion, c.postalCode].filter(Boolean).join(', ')
+
+/** Оператор ПДн в документах: «Обиход, ИНН …, ОГРН …» — реквизиты, если заполнены. */
+export function operatorLine(c: Company): string {
+  const inn = filledRequisite(c.taxId)
+  const ogrn = filledRequisite(c.ogrn)
+  return `${c.legalName || 'Обиход'}${inn ? `, ИНН ${inn}` : ''}${ogrn ? `, ОГРН ${ogrn}` : ''}`
+}
+
 // ---------- метки в текстах (план 09, этап 4.3b) ----------
 
 const NBSP = ' '
@@ -143,6 +162,22 @@ export const OFFER_TOKENS: { token: string; hint: string; value: (c: Company) =>
     value: (c) => `${clock(c.opens)}–${clock(c.closes)}`,
   },
   { token: '{телефон}', hint: '«+7 (985) 170-51-11»', value: (c) => c.phoneDisplay },
+  {
+    token: '{телефон-ссылка}',
+    hint: '«+79851705111» — в адрес ссылки: tel:{телефон-ссылка}',
+    value: (c) => c.phoneE164,
+  },
+  {
+    token: '{почта}',
+    hint: '«partner@obikhod.ru»; в адрес ссылки — mailto:{почта}',
+    value: (c) => c.email,
+  },
+  { token: '{адрес}', hint: '«ул. …, Жуковский, Московская область, 140185»', value: addressLine },
+  {
+    token: '{оператор}',
+    hint: 'для документов ПДн: «Обиход, ИНН …, ОГРН …» — реквизиты, если заполнены',
+    value: operatorLine,
+  },
 ]
 
 const TOKEN_RE = /\{[^{}\n]{2,40}\}/g

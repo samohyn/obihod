@@ -1,7 +1,15 @@
 import { cache } from 'react'
 
 import { payloadClient } from './payload'
-import { DEFAULT_COMPANY, clock, getCompany, hoursLine, type Company } from './company'
+import {
+  DEFAULT_COMPANY,
+  addressLine,
+  clock,
+  filledRequisite,
+  getCompany,
+  hoursLine,
+  type Company,
+} from './company'
 import type { IconName } from '@/components/blocks/v3/shared'
 
 /**
@@ -383,11 +391,6 @@ export interface Contacts {
   addressLine: string
 }
 
-function filledRequisite(v: string | null | undefined): string | null {
-  const s = v?.trim()
-  return s && !/^1+$/.test(s) ? s : null
-}
-
 /**
  * Контакты и реквизиты для всех страниц, JSON-LD и llms.txt — из «Компания и контакты»
  * (lib/company.ts); заглушки ИНН/КПП/ОГРН из единиц на сайт не выводятся.
@@ -406,9 +409,7 @@ export const getContacts = cache(async (): Promise<Contacts> => {
     addressLocality: c.addressLocality,
     streetAddress: c.streetAddress,
     postalCode: c.postalCode,
-    addressLine: [c.streetAddress, c.addressLocality, c.addressRegion, c.postalCode]
-      .filter(Boolean)
-      .join(', '),
+    addressLine: addressLine(c),
   }
 })
 
