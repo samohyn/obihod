@@ -57,7 +57,7 @@ Definition of Done страницы — в плане 09, раздел 4. Реш
 
 ```
 obikhod/
-├── contex/          # Стратегия: 01…09 (08 — карта сайта, 09 — план и статусы)
+├── contex/          # Стратегия: 01…11 (08 — карта сайта, 09 — план и статусы, 10 — оффер, 11 — шаблоны страниц)
 ├── design-system/   # brand-guide.html — источник UI/UX/TOV; logo/ — мастер-файлы логотипа; fal-ai-prompts.md — правила фото
 ├── site/            # Next.js + Payload (прод-код); site/content/ — подготовленные тексты страниц
 ├── seosite/         # SEO-данные: keywords, конкуренты, strategy/04-target-site-map.json
@@ -88,7 +88,7 @@ obikhod/
   - Next.js 16 (App Router, RSC), React 19, Payload 3 (встроен в Next), PostgreSQL 16;
   - Tailwind 4 + CSS блоков;
   - Node 22, pnpm 10.
-- **Заявки:** `/api/leads` → коллекция Leads + уведомление в Telegram. Почта и мессенджеры — по плану 09, этап 5.
+- **Заявки:** `/api/leads` → коллекция Leads + письмо менеджеру на partner@obikhod.ru (SMTP Beget). Telegram с VPS недоступен; мессенджеры — по плану 09, этап 5.
 - **Фото:** fal.ai (`site/lib/fal`, правила — `design-system/fal-ai-prompts.md`).
 - **Аналитика (план):** Я.Метрика по согласию, Я.Вебмастер, Я.Бизнес.
 - **Проверки:** `pnpm type-check`, `pnpm lint`, `pnpm format:check`, `pnpm test:e2e` (Playwright).
