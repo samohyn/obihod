@@ -1,10 +1,5 @@
 import { APIError, type CollectionConfig, type CollectionBeforeValidateHook } from 'payload'
 import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
-import { Hero } from '@/blocks/Hero'
-import { TextContent } from '@/blocks/TextContent'
-import { LeadForm } from '@/blocks/LeadForm'
-import { CtaBanner } from '@/blocks/CtaBanner'
-import { Faq } from '@/blocks/Faq'
 // C2.6 (2026-05-10): re-add 6 SD blocks после CREATE TABLE migration
 // `20260510_161708_sd_blocks_extension`. Закрывает sustained note из incident
 // PR #209 / hotfix #210 — теперь schema sync применён proper migration runner,
@@ -17,13 +12,6 @@ import { Faq } from '@/blocks/Faq'
 // T2 enums renamed in-place (ALTER TYPE … RENAME TO …, sustained data
 // unchanged), T4_SD calculator-placeholder tables created с короткими enum
 // именами (≤ 63 chars).
-import { Breadcrumbs } from '@/blocks/Breadcrumbs'
-import { Tldr } from '@/blocks/Tldr'
-import { PricingTable } from '@/blocks/PricingTable'
-import { ProcessSteps } from '@/blocks/ProcessSteps'
-import { NeighborDistricts } from '@/blocks/NeighborDistricts'
-import { RelatedServices } from '@/blocks/RelatedServices'
-import { Calculator } from '@/blocks/Calculator'
 import { tfIdfUniqueness, lexicalToPlainText } from '@/lib/seo/uniqueness'
 import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
 import { fillOfferAfterRead, validateOfferTokens } from '@/lib/admin/offerTokens'
@@ -223,9 +211,7 @@ export const ServiceDistricts: CollectionConfig = {
               index: true,
               admin: {
                 description:
-                  'Sub-service slug для 4-уровневой иерархии URL `/<service>/<sub>/<district>/`. ' +
-                  'Должен совпадать с одним из `services.subServices[].slug` parent-pillar. ' +
-                  'Пусто — pillar-level SD `/<service>/<district>/` (sustained Stage 2 default).',
+                  'Оставьте пустым. Записи с подуслугой (адреса /направление/подуслуга/район/) на сайте пока не показываются — такой страницы нет.',
               },
             },
             {
@@ -234,36 +220,6 @@ export const ServiceDistricts: CollectionConfig = {
               admin: {
                 readOnly: true,
                 description: 'Считается автоматически из услуги и района. Не редактируется.',
-              },
-            },
-            {
-              name: 'blocks',
-              type: 'blocks',
-              // Amendment 1 ADR-0021: T4_SD master-template — fillable
-              // полный набор required + optional. TextContent остаётся для
-              // backward-compat (legacy SD имеют text-content), но он
-              // hidden на T4 в master-template — gate выкинет PRESENT_HIDDEN
-              // если редактор добавит его на T4_SD при publish. Sustained
-              // draft без публикации остаётся валидным.
-              blockReferences: [
-                Hero,
-                Breadcrumbs,
-                Tldr,
-                TextContent,
-                PricingTable,
-                Calculator,
-                ProcessSteps,
-                Faq,
-                CtaBanner,
-                NeighborDistricts,
-                RelatedServices,
-                LeadForm,
-              ],
-              blocks: [],
-              admin: {
-                initCollapsed: true,
-                description:
-                  'Соберите страницу из блоков master-template T4_SD: Hero, breadcrumbs, TL;DR, прайсинг, калькулятор, процесс, FAQ, CTA, соседние районы, форма. Для публикации нужен Hero, форма или CTA, mini-case relationship и ≥2 локальных FAQ.',
               },
             },
             {
@@ -472,20 +428,6 @@ export const ServiceDistricts: CollectionConfig = {
           ],
         },
       ],
-    },
-    {
-      // EPIC-SERVICE-PAGES-UX C4 — feature flag template_v2 per-URL.
-      // Default false → sustained legacy rendering. Per-URL rollout через
-      // Payload admin (specs/EPIC-SERVICE-PAGES-UX/c4-migration-plan.md).
-      // Resolver: lib/master-template/getBlocksForLayer.ts (T4_SD layer).
-      name: 'useTemplateV2',
-      type: 'checkbox',
-      defaultValue: false,
-      admin: {
-        position: 'sidebar',
-        description:
-          'Master-template v2 (ADR-0021): reorder + filter + fill placeholders. Default false — legacy. Включать per-URL.',
-      },
     },
   ],
   hooks: {

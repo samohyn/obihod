@@ -15,14 +15,12 @@ import { ServiceDistricts } from './collections/ServiceDistricts'
 import { Cases } from './collections/Cases'
 import { Authors } from './collections/Authors'
 import { Blog } from './collections/Blog'
-import { B2BPages } from './collections/B2BPages'
 import { Leads } from './collections/Leads'
 import { Redirects } from './collections/Redirects'
 import { Reviews } from './collections/Reviews'
 import { RumMetrics } from './collections/RumMetrics'
 import { Pages } from './collections/Pages'
 import { SubServices } from './collections/SubServices'
-import { Homepage } from './globals/Homepage'
 import { SeoSettings } from './globals/SeoSettings'
 import { SiteChrome } from './globals/SiteChrome'
 import { Company } from './globals/Company'
@@ -166,7 +164,6 @@ export default buildConfig({
     Cases,
     Blog,
     Authors,
-    B2BPages,
     Reviews,
     // 03 · Медиа
     Media,
@@ -176,7 +173,7 @@ export default buildConfig({
     // 09 · Система
     Users,
   ],
-  globals: [Homepage, SeoSettings, SiteChrome, Company, PageTemplates],
+  globals: [SeoSettings, SiteChrome, Company, PageTemplates],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },

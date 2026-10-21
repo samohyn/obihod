@@ -6,7 +6,8 @@ import {
   getServiceBySlug,
   getPublishedB2BPages,
   getPublishedAuthors,
-  hasSubServicePage,
+  getPublishedSubServices,
+  type PublishedSubService,
 } from '@/lib/seo/queries'
 import { lexicalToPlainText } from '@/lib/seo/uniqueness'
 import { getCompany, minutes } from '@/lib/company'
@@ -64,13 +65,6 @@ type ServiceLike = {
   priceFrom?: number | null
   priceTo?: number | null
   priceUnit?: string | null
-  subServices?: Array<{
-    slug?: string | null
-    title?: string | null
-    intro?: unknown
-    body?: unknown
-    priceFrom?: number | null
-  }> | null
 }
 
 type CaseDoc = {
@@ -148,7 +142,7 @@ function priceLine(svc: ServiceLike): string {
 }
 
 export async function GET(): Promise<NextResponse> {
-  const [contacts, pillars, b2b, authors, cases, blog, company] = await Promise.all([
+  const [contacts, pillars, b2b, authors, cases, blog, company, subServices] = await Promise.all([
     getContacts(),
     fetchPillars(),
     getPublishedB2BPages().catch(
@@ -161,6 +155,7 @@ export async function GET(): Promise<NextResponse> {
     fetchTopCases(10),
     fetchRecentBlog(10),
     getCompany(),
+    getPublishedSubServices().catch(() => [] as PublishedSubService[]),
   ])
 
   const lastmod = new Date().toISOString().split('T')[0]
@@ -193,17 +188,15 @@ export async function GET(): Promise<NextResponse> {
       sections.push('')
     }
 
-    const subs = (pillar.subServices ?? []).filter(hasSubServicePage)
+    const subs = subServices.filter((sub) => sub.service === slug)
     if (subs.length > 0) {
       sections.push('**Подкатегории:**')
       sections.push('')
       for (const sub of subs) {
-        if (!sub.slug) continue
-        const subTitle = sub.title ?? sub.slug
-        const subIntro = plain(sub.intro).slice(0, 200)
-        const subPrice = sub.priceFrom ? ` (от ${sub.priceFrom} ₽)` : ''
-        const desc = subIntro ? `: ${subIntro}` : ''
-        sections.push(`- [${subTitle}](${SITE_URL}/${slug}/${sub.slug}/)${subPrice}${desc}`)
+        const desc = (sub.metaDescription ?? '').slice(0, 200)
+        sections.push(
+          `- [${sub.title}](${SITE_URL}/${slug}/${sub.slug}/)${desc ? `: ${desc}` : ''}`,
+        )
       }
       sections.push('')
     }

@@ -147,11 +147,12 @@ async function loadCatalog(): Promise<{ groups: CatalogGroup[]; total: number }>
   try {
     const payload = await payloadClient()
     const queries = [
+      { slug: 'pages' as const, label: 'Страницы', urlPrefix: '/' },
+      { slug: 'sub-services' as const, label: 'Подуслуги', urlPrefix: '' },
       { slug: 'services' as const, label: 'Услуги', urlPrefix: '/' },
       { slug: 'service-districts' as const, label: 'Programmatic SD', urlPrefix: '' },
       { slug: 'cases' as const, label: 'Кейсы', urlPrefix: '/kejsy/' },
       { slug: 'blog' as const, label: 'Блог', urlPrefix: '/blog/' },
-      { slug: 'b2b-pages' as const, label: 'B2B', urlPrefix: '/b2b/' },
       { slug: 'authors' as const, label: 'Авторы', urlPrefix: '/avtory/' },
       { slug: 'districts' as const, label: 'Районы', urlPrefix: '/raiony/' },
     ]
@@ -166,7 +167,7 @@ async function loadCatalog(): Promise<{ groups: CatalogGroup[]; total: number }>
           where: { _status: { equals: 'published' } },
           limit: 50,
           sort: '-updatedAt',
-          depth: q.slug === 'service-districts' ? 1 : 0,
+          depth: q.slug === 'service-districts' || q.slug === 'sub-services' ? 1 : 0,
         })
 
         const items: CatalogItem[] = []
@@ -180,6 +181,16 @@ async function loadCatalog(): Promise<{ groups: CatalogGroup[]; total: number }>
             slug
 
           let url = `${q.urlPrefix}${slug}/`
+
+          if (q.slug === 'pages' && slug === 'home') url = '/'
+
+          if (q.slug === 'sub-services') {
+            const service = d.service as { slug?: string } | null
+
+            if (!service?.slug) continue
+
+            url = `/${service.slug}/${slug}/`
+          }
           if (q.slug === 'service-districts') {
             const service = d.service as { slug?: string } | null
             const district = d.district as { slug?: string } | null

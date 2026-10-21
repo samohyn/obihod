@@ -45,9 +45,6 @@ export async function computePreviewUrl(
     case 'blog':
       return doc.slug ? `/blog/${doc.slug}/` : null
 
-    case 'b2b-pages':
-      return doc.slug ? `/b2b/${doc.slug}/` : null
-
     case 'authors':
       return doc.slug ? `/avtory/${doc.slug}/` : null
 
@@ -97,7 +94,6 @@ export const previewableCollections = [
   'service-districts',
   'cases',
   'blog',
-  'b2b-pages',
   'pages',
   'sub-services',
   'authors',

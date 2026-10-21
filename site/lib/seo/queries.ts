@@ -3,7 +3,6 @@ import { cache } from 'react'
 import { payloadClient } from '@/lib/payload'
 import { isDraftPreview } from '@/lib/preview'
 import { getCompany } from '@/lib/company'
-import { lexicalToPlainText } from '@/lib/seo/uniqueness'
 
 /**
  * Server-side query helpers для Payload коллекций.
@@ -129,14 +128,6 @@ export const getServiceDistrict = cache(async (serviceSlug: string, districtSlug
 })
 
 /**
- * Есть ли у подуслуги своя страница: маршрут [service]/[slug] отдаёт 404, если нет ни intro,
- * ни body. Списки подуслуг ссылаются только на такие — иначе ссылка битая.
- */
-export function hasSubServicePage(sub: { intro?: unknown; body?: unknown }): boolean {
-  return Boolean(sub.intro || sub.body)
-}
-
-/**
  * US-4 EPIC-SEO-USLUGI: bundled lookup для slug-resolver.
  * Возвращает service + district + sd в одной структуре, либо null если
  * любой из трёх не найден. sd попадает в bundle только если sub_service_slug
@@ -248,149 +239,66 @@ export const getSeoSettings = cache(async () => {
 export type SubServiceParam = { service: string; sub: string }
 
 /**
- * Все опубликованные sub-services из всех Services. Используется для
- * generateStaticParams `[service]/[district]/page.tsx` и для расширения
- * sitemap.ts. Возвращает только subs с заполненным intro/body — пустые
- * заглушки не индексируются.
+ * Опубликованные «Подуслуги» — адреса /<направление>/<подуслуга>/ для sitemap и карты сайта.
+ * Сортировка — по порядку создания (как в разделе направления).
  */
 export const getAllSubServiceParams = cache(async (): Promise<SubServiceParam[]> => {
-  try {
-    const payload = await payloadClient()
-    const r = await payload.find({
-      collection: 'services',
-      where: { _status: { equals: 'published' } },
-      limit: 100,
-      pagination: false,
-      depth: 0,
-    })
-    const out: SubServiceParam[] = []
-    for (const svc of r.docs as unknown as Array<{
-      slug?: string
-      subServices?: Array<{ slug?: string; intro?: string | null; body?: unknown }>
-    }>) {
-      const serviceSlug = svc.slug
-      if (!serviceSlug) continue
-      for (const sub of svc.subServices ?? []) {
-        if (!sub.slug) continue
-        // Только sub с реальным контентом — пустые-заглушки не публикуем
-        if (!sub.intro && !sub.body) continue
-        out.push({ service: serviceSlug, sub: sub.slug })
-      }
-    }
-    return out
-  } catch (e) {
-    console.error('[queries.getAllSubServiceParams] failed:', e)
-    return []
-  }
+  const docs = await getPublishedSubServices()
+  return docs.map((d) => ({ service: d.service, sub: d.slug }))
 })
 
-/**
- * Получить sub-service внутри service по slug.
- * Возвращает null если service не найден или sub нет.
- */
-export const getSubServiceBySlug = cache(async (serviceSlug: string, subSlug: string) => {
-  try {
-    const service = await getServiceBySlug(serviceSlug)
-    if (!service) return null
-    const subs = (service as { subServices?: Array<{ slug?: string }> }).subServices ?? []
-    const sub = subs.find((s) => s.slug === subSlug)
-    if (!sub) return null
-    return { service, sub }
-  } catch (e) {
-    console.error('[queries.getSubServiceBySlug] failed:', e)
-    return null
-  }
+export type PublishedSubService = {
+  service: string
+  slug: string
+  title: string
+  metaDescription: string | null
+}
+
+/** Опубликованные «Подуслуги» с направлением — для карты сайта и llms-full.txt. */
+export const getPublishedSubServices = cache(async (): Promise<PublishedSubService[]> => {
+  const payload = await payloadClient()
+  const r = await payload.find({
+    collection: 'sub-services',
+    where: { _status: { equals: 'published' } },
+    limit: 500,
+    pagination: false,
+    depth: 1,
+    sort: 'createdAt',
+    select: { slug: true, title: true, metaDescription: true, service: true },
+  })
+  return (
+    r.docs as unknown as {
+      slug?: string
+      title?: string
+      metaDescription?: string | null
+      service?: { slug?: string } | null
+    }[]
+  )
+    .filter((d) => d.slug && d.title && d.service?.slug)
+    .map((d) => ({
+      service: String(d.service!.slug),
+      slug: String(d.slug),
+      title: String(d.title),
+      metaDescription: d.metaDescription ?? null,
+    }))
 })
 
 // ───────── Mega-pricing (US-4 EPIC-SEO-COMPETE-3) ─────────
 
-export type PricingPillar = {
-  slug: string
-  title: string
-  h1: string
-  intro?: string | null
-  priceFrom?: number | null
-  priceTo?: number | null
-  priceUnit?: string | null
-  faqGlobal?: Array<{ question: string; answer: unknown }> | null
-  subServices: Array<{
-    slug: string
-    title: string
-    priceFrom?: number | null
-    priceTo?: number | null
-    priceUnit?: string | null
-    intro?: string | null
-  }>
-}
+export type PricingPillar = { slug: string; title: string }
 
-/**
- * Получить все 5 pillars + их subServices для mega-pricing хаба
- * `/uslugi/tseny/` (US-4). Sustained подключение к payload через cache().
- *
- * Возвращает только published Services — sustained pattern OBI-16.
- * При отсутствии БД (build runner без VPN) — пустой массив, dynamic
- * route рендерится on-demand на VPS.
- */
+/** Опубликованные направления (адрес и название) — для прайсов /uslugi/tseny/. */
 export const getAllPillarsForPricing = cache(async (): Promise<PricingPillar[]> => {
-  try {
-    const payload = await payloadClient()
-    const r = await payload.find({
-      collection: 'services',
-      where: { _status: { equals: 'published' } },
-      limit: 100,
-      pagination: false,
-      depth: 1,
-      sort: '-priceTo', // pillars с большими диапазонами выше
-    })
-    return r.docs.map((doc) => {
-      const s = doc as unknown as {
-        slug: string
-        title: string
-        h1?: string
-        // Services.intro — richText (Lexical jsonb), не строка.
-        intro?: { root?: unknown } | null
-        priceFrom?: number | null
-        priceTo?: number | null
-        priceUnit?: string | null
-        faqGlobal?: Array<{ question: string; answer: unknown }> | null
-        subServices?: Array<{
-          slug?: string
-          title?: string
-          priceFrom?: number | null
-          priceTo?: number | null
-          priceUnit?: string | null
-          intro?: string | null
-          body?: unknown
-        }> | null
-      }
-      return {
-        slug: s.slug,
-        title: s.title,
-        h1: s.h1 ?? s.title,
-        intro: lexicalToPlainText(s.intro?.root) || null,
-        priceFrom: s.priceFrom ?? null,
-        priceTo: s.priceTo ?? null,
-        priceUnit: s.priceUnit ?? null,
-        faqGlobal: s.faqGlobal ?? null,
-        subServices: (s.subServices ?? [])
-          .filter(
-            (sub): sub is { slug: string; title: string } & typeof sub =>
-              Boolean(sub.slug && sub.title) && hasSubServicePage(sub),
-          )
-          .map((sub) => ({
-            slug: sub.slug!,
-            title: sub.title!,
-            priceFrom: sub.priceFrom ?? null,
-            priceTo: sub.priceTo ?? null,
-            priceUnit: sub.priceUnit ?? null,
-            intro: sub.intro ?? null,
-          })),
-      }
-    })
-  } catch (e) {
-    console.error('[queries.getAllPillarsForPricing] failed:', e)
-    return []
-  }
+  const payload = await payloadClient()
+  const r = await payload.find({
+    collection: 'services',
+    where: { _status: { equals: 'published' } },
+    limit: 100,
+    pagination: false,
+    depth: 0,
+    select: { slug: true, title: true },
+  })
+  return (r.docs as unknown as PricingPillar[]).filter((s) => s.slug && s.title)
 })
 
 // ───────── Authors (US-6 wave 2A — /avtory/) ─────────
@@ -520,22 +428,37 @@ export const getAllBlogSlugs = cache(
   },
 )
 
-// ───────── B2B pages (US-6 wave 2A — /b2b/) ─────────
+// ───────── Страницы для бизнеса (/b2b/…) ─────────
 
+/**
+ * Опубликованные «Страницы» раздела /b2b/: slug — часть адреса после «b2b/» (как было у коллекции
+ * «B2B-страницы»), title и h1 — название документа. Для llms.txt и llms-full.txt.
+ */
 export const getPublishedB2BPages = cache(async () => {
-  try {
-    const payload = await payloadClient()
-    const r = await payload.find({
-      collection: 'b2b-pages',
-      where: { _status: { equals: 'published' } },
-      limit: 50,
-      pagination: false,
-      depth: 1,
-      sort: 'slug',
-    })
-    return r.docs
-  } catch (e) {
-    console.error('[queries.getPublishedB2BPages] failed:', e)
-    return []
-  }
+  const payload = await payloadClient()
+  const r = await payload.find({
+    collection: 'pages',
+    where: { and: [{ slug: { like: 'b2b/' } }, { _status: { equals: 'published' } }] },
+    limit: 100,
+    pagination: false,
+    depth: 0,
+    sort: 'slug',
+    select: { slug: true, title: true, metaDescription: true, updatedAt: true },
+  })
+  return (
+    r.docs as unknown as {
+      slug?: string
+      title?: string
+      metaDescription?: string
+      updatedAt?: string
+    }[]
+  )
+    .filter((d) => d.slug?.startsWith('b2b/'))
+    .map((d) => ({
+      slug: d.slug!.slice('b2b/'.length),
+      title: d.title,
+      h1: d.title,
+      metaDescription: d.metaDescription ?? undefined,
+      updatedAt: d.updatedAt,
+    }))
 })

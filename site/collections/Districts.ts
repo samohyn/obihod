@@ -1,23 +1,10 @@
 import type { CollectionConfig } from 'payload'
 import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
-import {
-  Hero,
-  TextContent,
-  ServicesGrid,
-  LeadForm,
-  MiniCase,
-  NeighborDistricts,
-  Tldr,
-  Breadcrumbs,
-} from '@/blocks'
 import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
 
 /**
- * US-3 ADR-0019 namespace-disjoint guard (зеркало Services.subServices[].slug).
- *
- * Districts.slug должен быть disjoint от любого published Service.subServices[].slug.
- * Иначе resolver `[service]/[slug]/page.tsx` не сможет однозначно решить T3↔T4
- * для одной и той же `(pillar, slug)` пары.
+ * ADR-0019: адрес района не должен совпадать с адресом подуслуги — иначе маршрут
+ * /<направление>/<адрес>/ не поймёт, подуслуга это или «услуга в районе».
  */
 const validateDistrictSlug = async (value: unknown, args: unknown): Promise<true | string> => {
   if (typeof value !== 'string' || value === '') return true
@@ -28,28 +15,24 @@ const validateDistrictSlug = async (value: unknown, args: unknown): Promise<true
   const payload = req?.payload as
     | {
         find: (a: unknown) => Promise<{
-          docs: { slug?: string; subServices?: { slug?: string }[] | null }[]
+          docs: { slug?: string; service?: { slug?: string } | null }[]
         }>
       }
     | undefined
   if (!payload) return true
   try {
-    const all = await payload.find({
-      collection: 'services',
-      limit: 100,
-      pagination: false,
-      depth: 0,
+    const subs = await payload.find({
+      collection: 'sub-services',
+      where: { slug: { equals: value } },
+      limit: 1,
+      depth: 1,
     })
-    for (const svc of all.docs) {
-      const subs = Array.isArray(svc.subServices) ? svc.subServices : []
-      for (const s of subs) {
-        if (s?.slug === value) {
-          return `Slug «${value}» уже используется в Services.${svc.slug ?? '?'}.subServices. District slugs должны быть disjoint от sub-service slugs (ADR-0019).`
-        }
-      }
+    const sub = subs.docs[0]
+    if (sub) {
+      return `Адрес «${value}» уже занят подуслугой «${sub.service?.slug ?? '?'}/${value}». Адреса районов и подуслуг не должны совпадать (ADR-0019).`
     }
   } catch {
-    // pre-bootstrap (миграции, seed) — fall through.
+    // до миграций и наполнения — пропускаем
   }
   return true
 }
@@ -94,7 +77,7 @@ export const Districts: CollectionConfig = {
               validate: validateDistrictSlug,
               admin: {
                 description:
-                  'Часть URL: /<service>/<slug>/. Должен быть disjoint от services.subServices[].slug (ADR-0019).',
+                  'Часть адреса /<направление>/<адрес>/. Не должен совпадать с адресом подуслуги (ADR-0019).',
               },
             },
             {
@@ -214,35 +197,6 @@ export const Districts: CollectionConfig = {
               type: 'upload',
               relationTo: 'media',
               admin: { description: 'Фото с EXIF geo (для schema contentLocation)' },
-            },
-            // US-0 Track B-2 — blocks[] для District Hub /raiony/<district>/.
-            // Whitelist: hero, text-content, services-grid, lead-form, mini-case,
-            // neighbor-districts, tldr, breadcrumbs.
-            //
-            // NOTE по naming: sa-seo (US-0 §AC-3.3) упоминает «relatedDistricts»,
-            // но в текущей schema поле уже называется `neighborDistricts` (выше,
-            // в tab «Программа SEO»). NeighborDistricts блок использует именно
-            // его. Переименование сломает downstream (блок NeighborDistricts
-            // в Track B-1 + sd.md wireframes) — оставляем существующее имя.
-            {
-              name: 'blocks',
-              type: 'blocks',
-              blockReferences: [
-                Hero,
-                TextContent,
-                ServicesGrid,
-                LeadForm,
-                MiniCase,
-                NeighborDistricts,
-                Tldr,
-                Breadcrumbs,
-              ],
-              blocks: [],
-              admin: {
-                initCollapsed: true,
-                description:
-                  'Конструктор District Hub: hero, текст, сетка услуг, форма, мини-кейсы, соседние районы, TL;DR, breadcrumbs. Используется для /raiony/<district>/.',
-              },
             },
           ],
         },

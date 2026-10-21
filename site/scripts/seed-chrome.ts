@@ -24,7 +24,6 @@ async function main() {
   const d = DEFAULT_CHROME_VIEW
   const header: Record<string, unknown> = {}
   const footer: Record<string, unknown> = {}
-  const contacts: Record<string, unknown> = {}
 
   if (!chrome.header?.nav?.length) header.nav = d.nav
   if (!chrome.header?.mobileExtra?.length) header.mobileExtra = d.mobileExtra
@@ -34,14 +33,12 @@ async function main() {
   }
   if (!chrome.footer?.slogan?.trim()) footer.slogan = d.footerAbout
   if (!chrome.footer?.nav?.length) footer.nav = d.footerNav
-  if (!chrome.contacts?.hours?.trim()) contacts.hours = d.hours
 
   const data: Record<string, unknown> = {}
   if (Object.keys(header).length) data.header = { ...chrome.header, ...header }
   if (Object.keys(footer).length) data.footer = { ...chrome.footer, ...footer }
-  if (Object.keys(contacts).length) data.contacts = { ...chrome.contacts, ...contacts }
 
-  const filled = [...Object.keys(header), ...Object.keys(footer), ...Object.keys(contacts)]
+  const filled = [...Object.keys(header), ...Object.keys(footer)]
   if (filled.length === 0) {
     console.log('[seed:chrome] всё уже заполнено — ничего не меняю')
     process.exit(0)

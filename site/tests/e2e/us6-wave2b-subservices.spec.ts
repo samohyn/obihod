@@ -1,32 +1,20 @@
 import { expect, test, type APIRequestContext } from '@playwright/test'
 
 /**
- * US-6 wave 2B1 — E2E на sub-service routes /<service>/<sub>/.
- *
- * Сами sub-services шарят dynamic-segment с districts (`[district]`).
- * Раздел в `[district]/page.tsx` через `getSubServiceBySlug()` детектит
- * sub vs district и рендерит SubServiceView.
- *
- * CI strategy: на ephemeral DB sub-services без intro/body не
- * публикуются (см. queries.getAllSubServiceParams) — список пуст,
- * тесты skip.
+ * Страница подуслуги /<направление>/<подуслуга>/ — документ коллекции «Подуслуги».
+ * В CI подуслуг нет (seed подуслуг не запускается) — тесты пропускаются.
  */
 
 async function findFirstSubWithContent(
   request: APIRequestContext,
 ): Promise<{ service: string; sub: string } | null> {
   try {
-    const res = await request.get('/api/services?depth=0&limit=20&where[_status][equals]=published')
+    const res = await request.get(
+      '/api/sub-services?depth=1&limit=1&where[_status][equals]=published',
+    )
     if (res.status() !== 200) return null
-    const body = await res.json()
-    for (const svc of body?.docs ?? []) {
-      for (const sub of svc.subServices ?? []) {
-        if (sub.intro || sub.body) {
-          return { service: svc.slug, sub: sub.slug }
-        }
-      }
-    }
-    return null
+    const doc = (await res.json())?.docs?.[0]
+    return doc?.slug && doc?.service?.slug ? { service: doc.service.slug, sub: doc.slug } : null
   } catch {
     return null
   }

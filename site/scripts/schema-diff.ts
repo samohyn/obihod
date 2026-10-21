@@ -19,6 +19,10 @@
  * спрашивает в терминале «создана или переименована» — тогда скрипт ждёт ввода. Переименования
  * пишем в миграцию вручную (ALTER TABLE … RENAME), применяем и сравниваем снова.
  */
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
 import { sql } from '@payloadcms/db-postgres/drizzle'
 import { getPayload } from 'payload'
 
@@ -125,10 +129,26 @@ async function main() {
     adapter.drizzle as Executor,
     sql,
   )
-  console.log(JSON.stringify({ hasDataLoss, warnings, statements }, null, 2))
-  if (check && statements.length > 0) {
+  // Expand → contract: удаления, которые ждут миграции следующего релиза (migrations/pending-contract.json)
+  const norm = (q: string) => q.replace(/\s+/g, ' ').trim()
+  // tsx собирает скрипты как CommonJS — там есть __dirname
+  const here =
+    typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url))
+  const pendingFile = path.join(here, '../migrations/pending-contract.json')
+  const pending = new Set(
+    fs.existsSync(pendingFile)
+      ? (
+          JSON.parse(fs.readFileSync(pendingFile, 'utf8')) as { statements: string[] }
+        ).statements.map(norm)
+      : [],
+  )
+  const waiting = statements.filter((q) => pending.has(norm(q)))
+  const diff = statements.filter((q) => !pending.has(norm(q)))
+  console.log(JSON.stringify({ hasDataLoss, warnings, statements: diff }, null, 2))
+  if (waiting.length) console.error(`ожидают удаления (pending-contract.json): ${waiting.length}`)
+  if (check && diff.length > 0) {
     console.error(
-      `\n✗ Схема в коде разошлась с БД (${statements.length} команд выше): нужна миграция в migrations/.`,
+      `\n✗ Схема в коде разошлась с БД (${diff.length} команд выше): нужна миграция в migrations/.`,
     )
     process.exit(1)
   }
