@@ -463,7 +463,7 @@ export const TILE: Record<string, ServiceTile> = {
     image: img('zima-sosulki', 'Альпинист сбивает сосульки с карниза дома'),
   },
   sneg: {
-    title: 'Чистка крыш от снега',
+    title: 'Очистка крыш от снега',
     text: 'Скатные и плоские кровли',
     price: 'от 1 000 ₽/м²',
     href: '/chistka-krysh/ot-snega/',

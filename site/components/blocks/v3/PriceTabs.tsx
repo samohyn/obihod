@@ -8,6 +8,9 @@ import { Icon, Section, SectionHead, Wrap } from './shared'
 import type { PriceTabsBlock, SectionTone } from './types'
 import s from './PriceTabs.module.css'
 
+/** «от … ₽» — только у чисел; «+15%», «договорная» из админки показываем как есть. */
+const isAmount = (v: string) => /^[\d\s\u00a0.,]+$/.test(v)
+
 export function PriceTabs(block: PriceTabsBlock & { tone?: SectionTone | null }) {
   const tabs = block.tabs ?? []
   const [active, setActive] = useState(0)
@@ -74,8 +77,14 @@ export function PriceTabs(block: PriceTabsBlock & { tone?: SectionTone | null })
                   </th>
                   {r.values.map((v, j) => (
                     <td key={j} data-col={tab.columns[j]}>
-                      <i>от</i>
-                      {v} ₽
+                      {isAmount(v) ? (
+                        <>
+                          <i>от</i>
+                          {v} ₽
+                        </>
+                      ) : (
+                        v
+                      )}
                     </td>
                   ))}
                 </tr>

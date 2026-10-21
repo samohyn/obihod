@@ -16,7 +16,7 @@ import config from '../payload.config.js'
 
 import type { Payload } from 'payload'
 
-import { dropNulls, toLayout } from './_v3-seed'
+import { dropNulls, nbspNumbers, toLayout } from './_v3-seed'
 
 const PUBLISH = process.argv.includes('--publish')
 const key = process.argv.slice(2).find((a) => !a.startsWith('--')) ?? ''
@@ -45,7 +45,7 @@ async function seedOne(payload: Payload, contentKey: string) {
   const serviceId = service.docs[0]?.id
   if (!serviceId) throw new Error(`нет направления «${content.service}»`)
 
-  const layout = dropNulls(await toLayout(payload, content.blocks))
+  const layout = nbspNumbers(dropNulls(await toLayout(payload, content.blocks)))
   const data = {
     title: content.title,
     service: serviceId,
