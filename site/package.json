@@ -14,7 +14,6 @@
     "seed:home": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/seed-home-c4.ts",
     "seed:subservice": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/seed-subservice.ts",
     "seed:page": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/seed-page.ts",
-    "clean:geo-legacy": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/clean-geo-legacy.ts",
     "sync:latest-versions": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/sync-latest-versions.ts",
     "offer:tokens": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/offer-tokens.ts",
     "fix:markdown-bodies": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/fix-markdown-bodies.ts",
@@ -41,12 +40,10 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test:unit": "tsx --test blocks/__tests__/master-template.test.ts lib/master-template/__tests__/getBlocksForLayer.test.ts components/blocks/__tests__/array-render-shape.test.tsx lib/leads/__tests__/callbackDeadline.test.ts components/blocks/v3/__tests__/iconNames.test.ts lib/blocks/v3/__tests__/fromPayload.test.ts lib/__tests__/breadcrumbs.test.ts lib/admin/__tests__/revalidateSite.test.ts lib/__tests__/offer.test.ts",
+    "test:unit": "tsx --test lib/leads/__tests__/callbackDeadline.test.ts components/blocks/v3/__tests__/iconNames.test.ts lib/blocks/v3/__tests__/fromPayload.test.ts lib/__tests__/breadcrumbs.test.ts lib/admin/__tests__/revalidateSite.test.ts lib/__tests__/offer.test.ts",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "test:e2e:report": "playwright show-report",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "test:e2e:report": "playwright show-report"
   },
   "dependencies": {
     "@fal-ai/client": "^1.10.0",
@@ -69,9 +66,6 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.11.3",
     "@playwright/test": "^1.59.1",
-    "@storybook/addon-a11y": "^10.3.6",
-    "@storybook/nextjs-vite": "^10.3.6",
-    "@storybook/react": "^10.3.6",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^22.20.5",
     "@types/nodemailer": "^8.0.0",
@@ -83,7 +77,6 @@
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "storybook": "^10.3.6",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "typescript": "^5"

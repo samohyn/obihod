@@ -1,25 +1,13 @@
 /**
- * Slug-resolver `/<service>/<slug>/` (US-4 EPIC-SEO-USLUGI).
- *
- * Динамика: second-segment может быть либо sub-service slug (T3), либо
- * city slug (T4 SD). По ADR-0019 namespace disjoint между sub-services и
- * districts — гарантировано, что при равном `slug` совпадение возможно
- * только в одном из контекстов.
- *
- * Fallback chain:
- *   0. опубликованная подуслуга из коллекции «Подуслуги» → блоки v3 (этап 3 плана 09)
- *   1. sub-service найден → T3 SubServiceView
- *   2. service-district (без sub_service_slug) найден → T4 ServiceDistrictView
- *   3. notFound() → 404
- *
- * generateStaticParams возвращает union: subParams + sdParams (без overlap
- * по ADR-0019).
+ * `/<направление>/<адрес>/` — подуслуга (документ «Подуслуги», блоки v3) или «услуга в районе»
+ * (запись «Услуги × районы» + хаб направления из «Страниц», lib/geo-pages.ts). Адреса подуслуг
+ * и районов не пересекаются (ADR-0019). Нет документа — 404.
  */
 
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 
-import { getPage, getSubServicePage } from '@/lib/pages'
+import { getPage, getSubServicePage, getSubServicePageParams } from '@/lib/pages'
 import {
   buildServiceDistrictBlocks,
   type DistrictLike,
@@ -28,18 +16,14 @@ import {
 import { canonicalFor } from '@/lib/seo/canonical'
 import {
   getAllServiceDistrictParams,
-  getAllSubServiceParams,
   getServiceBySlug,
   getServiceDistrictBundle,
-  getSubServiceBySlug,
 } from '@/lib/seo/queries'
 import { buildServiceDistrictMetadata } from '@/lib/seo/metadata'
 
-import ServiceDistrictView from './ServiceDistrictView'
 import { SubServiceBlocksView } from './SubServiceBlocksView'
 import { ServiceDistrictBlocksView } from './ServiceDistrictBlocksView'
 import { getCompany } from '@/lib/company'
-import { SubServiceView } from './SubServiceView'
 import { getPageTemplates } from '@/lib/page-templates-server'
 import { fillTemplate } from '@/lib/page-templates'
 
@@ -47,11 +31,8 @@ export const revalidate = 43200
 export const dynamicParams = true
 
 export async function generateStaticParams() {
-  const [subs, sds] = await Promise.all([getAllSubServiceParams(), getAllServiceDistrictParams()])
-  return [
-    ...subs.map((s) => ({ service: s.service, slug: s.sub })),
-    ...sds.map((s) => ({ service: s.service, slug: s.slug })),
-  ]
+  const [subs, sds] = await Promise.all([getSubServicePageParams(), getAllServiceDistrictParams()])
+  return [...subs, ...sds.map((s) => ({ service: s.service, slug: s.slug }))]
 }
 
 export async function generateMetadata({
@@ -82,38 +63,7 @@ export async function generateMetadata({
     }
   }
 
-  // 1. Sub-service (T3)
-  const subResult = await getSubServiceBySlug(serviceSlug, slug)
-  if (subResult) {
-    const { service, sub } = subResult as unknown as {
-      service: { slug: string; metaDescription?: string }
-      sub: {
-        slug: string
-        title: string
-        h1: string
-        intro?: string | null
-        body?: unknown
-        metaTitle?: string | null
-        metaDescription?: string | null
-      }
-    }
-    if (!sub.intro && !sub.body) return { title: 'Не найдено — Обиход' }
-    return {
-      title: { absolute: sub.metaTitle ?? sub.h1 },
-      description: sub.metaDescription ?? sub.intro ?? service.metaDescription,
-      alternates: { canonical: canonicalFor(`/${service.slug}/${sub.slug}/`) },
-      openGraph: {
-        type: 'article',
-        locale: 'ru_RU',
-        url: `/${service.slug}/${sub.slug}/`,
-        title: sub.h1,
-        description: sub.intro ?? sub.metaDescription ?? undefined,
-      },
-      robots: { index: true, follow: true },
-    }
-  }
-
-  // 2. Service-district (T4)
+  // Услуга в районе
   const sdBundle = await getServiceDistrictBundle(serviceSlug, slug)
   if (sdBundle) {
     const legacy = buildServiceDistrictMetadata({
@@ -121,10 +71,10 @@ export async function generateMetadata({
       district: sdBundle.district as never,
       sd: sdBundle.sd as never,
     })
-    // 2a. Из хаба направления — заголовок и описание по шаблону; robots и canonical — прежние
+    // Заголовок и описание — по шаблону из хаба; robots и canonical — из записи
     // (индексацию гео-страниц решает владелец)
     const pillar = await getPage(serviceSlug)
-    if (!pillar) return legacy
+    if (!pillar) return {}
     const templates = await getPageTemplates()
     const { blocks } = buildServiceDistrictBlocks({
       pillar,
@@ -147,7 +97,7 @@ export async function generateMetadata({
     }
   }
 
-  return { title: 'Не найдено — Обиход' }
+  return {}
 }
 
 export default async function ServiceSlugPage({
@@ -157,7 +107,6 @@ export default async function ServiceSlugPage({
 }) {
   const { service: serviceSlug, slug } = await params
 
-  // 0. Подуслуга из блоков — пока не опубликована, ниже прежняя версия
   const blocksPage = await getSubServicePage(serviceSlug, slug)
   if (blocksPage) {
     const service = await getServiceBySlug(serviceSlug)
@@ -165,39 +114,15 @@ export default async function ServiceSlugPage({
     return <SubServiceBlocksView service={service as never} slug={slug} page={blocksPage} />
   }
 
-  // 1. T3 sub
-  const subResult = await getSubServiceBySlug(serviceSlug, slug)
-  if (subResult) {
-    const service = await getServiceBySlug(serviceSlug)
-    if (!service) notFound()
-    const { sub } = subResult as { service: unknown; sub: { intro?: unknown; body?: unknown } }
-    if (!sub.intro && !sub.body) notFound()
-    return <SubServiceView service={service as never} sub={sub as never} />
-  }
-
-  // 2. T4 SD
   const sdBundle = await getServiceDistrictBundle(serviceSlug, slug)
-  if (sdBundle) {
-    // 2a. Из хаба направления, пока он опубликован
-    const pillar = await getPage(serviceSlug)
-    if (pillar) {
-      return (
-        <ServiceDistrictBlocksView
-          service={sdBundle.service as never}
-          district={sdBundle.district as never}
-          sd={sdBundle.sd as never}
-          pillar={pillar}
-        />
-      )
-    }
-    return (
-      <ServiceDistrictView
-        service={sdBundle.service as never}
-        district={sdBundle.district as never}
-        sd={sdBundle.sd as never}
-      />
-    )
-  }
-
-  notFound()
+  const pillar = sdBundle ? await getPage(serviceSlug) : null
+  if (!sdBundle || !pillar) notFound()
+  return (
+    <ServiceDistrictBlocksView
+      service={sdBundle.service as never}
+      district={sdBundle.district as never}
+      sd={sdBundle.sd as never}
+      pillar={pillar}
+    />
+  )
 }
