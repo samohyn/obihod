@@ -15,7 +15,12 @@ import { requestSiteRevalidate } from './_site-revalidate'
 
 async function main() {
   const payload = await getPayload({ config })
-  const chrome = (await payload.findGlobal({ slug: 'site-chrome', depth: 0 })) as SiteChrome
+  // метки оффера ({часы работы}) — как есть, иначе запись затрёт их цифрами
+  const chrome = (await payload.findGlobal({
+    slug: 'site-chrome',
+    depth: 0,
+    context: { rawOffer: true },
+  })) as SiteChrome
   const d = DEFAULT_CHROME_VIEW
   const header: Record<string, unknown> = {}
   const footer: Record<string, unknown> = {}

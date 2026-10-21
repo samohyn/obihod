@@ -33,6 +33,8 @@ async function main() {
     limit: 1000,
     pagination: false,
     depth: 1,
+    // метки оффера ({перезвон}) — как есть, иначе запись затрёт их цифрами
+    context: { rawOffer: true },
   })
   // Очищенная запись: без своего заголовка и с двумя нашими местными вопросами
   const cleaned = (d: unknown) => {

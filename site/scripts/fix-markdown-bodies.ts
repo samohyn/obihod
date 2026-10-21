@@ -222,6 +222,8 @@ async function main() {
       limit: 500,
       pagination: false,
       depth: 0,
+      // метки оффера ({перезвон}) — как есть, иначе запись затрёт их цифрами
+      context: { rawOffer: true },
     })
     for (const doc of res.docs as unknown as Record<string, unknown>[]) {
       const md = markdownBlob(doc[t.field])

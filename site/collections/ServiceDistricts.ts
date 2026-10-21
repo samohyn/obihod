@@ -26,6 +26,7 @@ import { RelatedServices } from '@/blocks/RelatedServices'
 import { Calculator } from '@/blocks/Calculator'
 import { tfIdfUniqueness, lexicalToPlainText } from '@/lib/seo/uniqueness'
 import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
+import { fillOfferAfterRead, validateOfferTokens } from '@/lib/admin/offerTokens'
 
 /**
  * ServiceDistricts-специфичный publish-gate (legacy-правила из R&D M1):
@@ -466,7 +467,9 @@ export const ServiceDistricts: CollectionConfig = {
     },
   ],
   hooks: {
+    afterRead: [fillOfferAfterRead],
     beforeValidate: [
+      validateOfferTokens,
       requireGatesForPublish,
       computeUniquenessScore,
       // Проверки старых `blocks` (Hero / 300 слов / форма, ADR-0021) сняты 21.10.2026: гео-страница
