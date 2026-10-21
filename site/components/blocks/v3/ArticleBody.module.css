@@ -5,7 +5,8 @@
   line-height: 1.7;
   color: var(--c-ink);
 }
-.body > :first-child {
+.body > :first-child,
+.body > :first-child > :first-child {
   margin-top: 0;
 }
 .body :global(h2) {
