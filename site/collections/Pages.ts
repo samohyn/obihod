@@ -34,6 +34,8 @@ export const Pages: CollectionConfig = {
         try {
           const { revalidatePath } = await import('next/cache')
           revalidatePath(doc.slug === 'home' ? '/' : `/${doc.slug}/`)
+          // Прайс хаба стоит и в сводном прайсе /uslugi/tseny/
+          if (!doc.slug.includes('/')) revalidatePath('/uslugi/tseny/')
         } catch (e) {
           // Вне запроса Next (скрипт seed:home) кеша страниц нет — сбрасывать нечего.
           const msg = (e as Error).message

@@ -66,7 +66,10 @@ export const SubServices: CollectionConfig = {
             depth: 0,
           })
           const { revalidatePath } = await import('next/cache')
-          revalidatePath(`/${(service as { slug?: string }).slug}/${doc.slug}/`)
+          const serviceSlug = (service as { slug?: string }).slug
+          revalidatePath(`/${serviceSlug}/${doc.slug}/`)
+          // Цена подуслуги стоит и в прайсе направления
+          revalidatePath(`/uslugi/tseny/${serviceSlug}/`)
         } catch (e) {
           // Вне запроса Next (скрипт наполнения) кеша страниц нет — сбрасывать нечего.
           const msg = (e as Error).message

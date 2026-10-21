@@ -1,5 +1,8 @@
 import type { PageContent } from '../sub-services/types'
 
+import { PRICES } from './prices'
+import { uslugi } from './uslugi'
+
 import {
   arboristika,
   arendaTehniki,
@@ -33,9 +36,14 @@ const PILLARS: Record<string, PageContent> = Object.fromEntries(
 )
 
 /** Документы «Страниц» с подготовленным наполнением — ключ = адрес: `pnpm seed:page <адрес>`. */
-export const PAGE_CONTENT: Record<string, PageContent> = { ...PILLARS }
+const USLUGI: Record<string, PageContent> = Object.fromEntries(
+  [uslugi, ...PRICES].map((p) => [p.slug, p]),
+)
+
+export const PAGE_CONTENT: Record<string, PageContent> = { ...PILLARS, ...USLUGI }
 
 /** Партии: `pnpm seed:page napravleniya`. */
 export const PAGE_BATCHES: Record<string, string[]> = {
   napravleniya: Object.keys(PILLARS),
+  uslugi: Object.keys(USLUGI),
 }

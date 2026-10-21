@@ -8,6 +8,10 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { aggregateOfferSchema, breadcrumbListSchema, faqPageSchema } from '@/lib/seo/jsonld'
 import { metadataBase } from '@/lib/seo/metadata'
 import { getAllPillarsForPricing, getServiceBySlug, hasSubServicePage } from '@/lib/seo/queries'
+import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
+import { retone } from '@/lib/blocks/v3/retone'
+import { getPage, getPillarPriceBlocks, getPillarSummaryBlock } from '@/lib/pages'
+import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -48,6 +52,8 @@ export async function generateMetadata({
   const { pillar: pillarSlug } = await params
   const service = await getServiceBySlug(pillarSlug)
   if (!service) return {}
+  const page = await getPage(`uslugi/tseny/${pillarSlug}`)
+  if (page) return buildBlocksPageMetadata(page, `/uslugi/tseny/${pillarSlug}/`)
 
   const title = `Цены: ${(service as { title?: string }).title ?? pillarSlug} в Москве и МО — прайс 2026`
   const description = `Подробный прайс на услуги «${(service as { title?: string }).title ?? pillarSlug}» — диапазоны «от-до» по каждой подуслуге. Расчёт по фото за 10 минут.`
@@ -125,6 +131,21 @@ export default async function PillarPricingPage({
   const { pillar: pillarSlug } = await params
   const service = (await getServiceBySlug(pillarSlug)) as ServiceLike | null
   if (!service) notFound()
+
+  // 0. Прайс из блоков: рамка — документ «Страницы», цены — из подуслуг (или хаба) под первым экраном
+  const blocksPage = await getPage(`uslugi/tseny/${pillarSlug}`)
+  if (blocksPage) {
+    const subPrices = await getPillarPriceBlocks(pillarSlug)
+    const summary = subPrices.length ? null : await getPillarSummaryBlock(pillarSlug, service.title)
+    const prices = subPrices.length ? subPrices : summary ? [summary] : []
+    const [hero, ...rest] = blocksPage.blocks
+    return (
+      <PageBlocksView
+        page={{ ...blocksPage, blocks: retone([hero, ...prices, ...rest]) }}
+        crumbs={trail('tseny', { name: service.title, href: `/uslugi/tseny/${service.slug}/` })}
+      />
+    )
+  }
 
   const subs = (service.subServices ?? []).filter(
     (s): s is { slug: string; title: string } & typeof s => Boolean(s.slug && s.title),

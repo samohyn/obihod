@@ -15,6 +15,8 @@ import type {
   V3BlockWithTone,
 } from '@/components/blocks/v3/types'
 
+import { retone } from '@/lib/blocks/v3/retone'
+
 import type { PageContent, SubServiceContent } from './types'
 
 export const img = (name: string, alt: string, focus?: string): BlockImage => ({
@@ -166,8 +168,6 @@ export type SubServiceSpec = {
   form: { title: string; formTitle: string; background?: BlockImage }
 }
 
-const TONED = new Set(['hero-slider', 'photo-cta', 'final-form', 'b2b-plan'])
-
 export function subServicePage(spec: SubServiceSpec): SubServiceContent {
   const blocks: V3BlockWithTone[] = [
     {
@@ -272,17 +272,6 @@ export function subServicePage(spec: SubServiceSpec): SubServiceContent {
     metaDescription: spec.metaDescription,
     blocks: retone(blocks),
   }
-}
-
-/** Фон чередуется: кремовый / бежевый, кроме секций со своим фоном. */
-export function retone(blocks: V3BlockWithTone[]): V3BlockWithTone[] {
-  let alt = false
-  return blocks.map((b) => {
-    if (TONED.has(b.blockType)) return b
-    const tone = alt ? 'alt' : 'default'
-    alt = !alt
-    return { ...b, tone } as V3BlockWithTone
-  })
 }
 
 export type PillarSpec = Omit<SubServiceSpec, 'service'> & {

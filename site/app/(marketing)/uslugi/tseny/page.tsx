@@ -1,6 +1,11 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
+import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
+import { retone } from '@/lib/blocks/v3/retone'
+import { getPage, getPillarSummaryBlock } from '@/lib/pages'
+import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { trail } from '@/lib/breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
@@ -16,7 +21,7 @@ const META_TITLE = 'Цены на услуги Обихода в Москве и
 const META_DESCRIPTION =
   'Прозрачные цены на 5 групп услуг: вывоз мусора, арбористика, демонтаж, чистка крыш, уборка территории. Диапазоны «от-до» по каждой подуслуге. Москва + МО, расчёт по фото за 10 минут.'
 
-export const metadata: Metadata = {
+const LEGACY_METADATA: Metadata = {
   metadataBase,
   title: { absolute: META_TITLE },
   description: META_DESCRIPTION,
@@ -43,6 +48,11 @@ export const metadata: Metadata = {
     'max-snippet': -1,
     'max-image-preview': 'large',
   },
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPage('uslugi/tseny')
+  return page ? buildBlocksPageMetadata(page, '/uslugi/tseny/') : LEGACY_METADATA
 }
 
 const PRICE_UNIT_LABELS: Record<string, string> = {
@@ -98,8 +108,41 @@ function PillarPricingCard({ pillar }: { pillar: PricingPillar }) {
   )
 }
 
+/** Порядок разделов в сводном прайсе: направления по карте 08, калькуляторы — без своего прайса. */
+const PRICE_ORDER = [
+  'arboristika',
+  'vyvoz-musora',
+  'chistka-krysh',
+  'demontazh',
+  'uborka-territorii',
+  'dizain-landshafta',
+  'arenda-tehniki',
+  'promyshlennyj-alpinizm',
+  'porubochnyj-bilet',
+]
+
 export default async function MegaPricingPage() {
   const pillars = await getAllPillarsForPricing()
+
+  // 0. Прайс из блоков: рамка — документ «Страницы», под первым экраном — сводный прайс каждого хаба
+  const blocksPage = await getPage('uslugi/tseny')
+  if (blocksPage) {
+    const bySlug = new Map(pillars.map((p) => [p.slug, p.title]))
+    const summaries = (
+      await Promise.all(
+        PRICE_ORDER.filter((slug) => bySlug.has(slug)).map((slug) =>
+          getPillarSummaryBlock(slug, bySlug.get(slug) ?? slug),
+        ),
+      )
+    ).filter((b) => b !== null)
+    const [hero, ...rest] = blocksPage.blocks
+    return (
+      <PageBlocksView
+        page={{ ...blocksPage, blocks: retone([hero, ...summaries, ...rest]) }}
+        crumbs={trail('tseny')}
+      />
+    )
+  }
 
   const breadcrumbs = trail('tseny')
 
