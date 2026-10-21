@@ -359,7 +359,7 @@ export const TILE: Record<string, ServiceTile> = {
   raschistka: {
     title: 'Расчистка участка',
     text: 'Подлесок и кустарник под ноль',
-    price: 'от 28 000 ₽ за сотку',
+    price: 'от 28 000 ₽/сотка',
     href: '/arboristika/raschistka-uchastka/',
     image: img('spil-raschistka-before', 'Заросший участок'),
   },
