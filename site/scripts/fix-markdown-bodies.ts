@@ -9,7 +9,8 @@
  * Заодно:
  *  - голые пути в тексте («Подробно — на /vyvoz-musora/krupnogabarit/») → ссылка с названием страницы;
  *  - поля, обрезанные импортом по maxLength посреди слова (lead статьи, description кейса), →
- *    до последнего целого предложения.
+ *    до последнего целого предложения;
+ *  - точечные правки текста из TEXT_FIXES (заглушки импорта вроде «<TODO operator>»).
  * Повторный запуск безопасен: уже размеченные документы (больше одного блока), ссылки и целые
  * поля не трогаются.
  */
@@ -45,7 +46,29 @@ function cutToSentence(value: unknown, max: number): string | null {
   const text = value.trimEnd()
   if (/[.!?…»)]$/.test(text)) return null
   const end = Math.max(...['. ', '! ', '? ', '… '].map((m) => text.lastIndexOf(m)))
-  return end > 0 ? text.slice(0, end + 1) : null
+  if (end > 0) return text.slice(0, end + 1)
+  // Первое предложение — длинное перечисление: оставляем то, что до двоеточия
+  const colon = text.indexOf(': ')
+  return colon > 0 ? `${text.slice(0, colon)}.` : null
+}
+
+/** Точечные правки текста: заглушки импорта и неподтверждённые документами обещания. */
+const TEXT_FIXES: { collection: string; slug: string; from: string; to: string }[] = [
+  {
+    collection: 'blog',
+    slug: 'snos-stareyshego-doma-na-dache',
+    from: 'У Обихода действующее СРО-членство, лицензия Росприроднадзора на классы I–V, страховка ГО 10 млн ₽. Конкретный номер СРО — №<TODO operator> (по запросу через cms admin или на странице /o-nas/).',
+    to: 'Номер СРО и полис страхования ответственности попросите у подрядчика до подписания договора, а номер проверьте в реестре на nostroy.ru.',
+  },
+]
+
+/** Замена текста внутри текстовых узлов; возвращает число замен. */
+function replaceText(node: LexNode, from: string, to: string): number {
+  if (node.type === 'text' && node.text?.includes(from)) {
+    node.text = node.text.replace(from, to)
+    return 1
+  }
+  return (node.children ?? []).reduce((n, c) => n + replaceText(c, from, to), 0)
 }
 
 const PATH_RE = /(^|[\s(«])(\/[a-z0-9][a-z0-9-]*(?:\/[a-z0-9-]+)*\/)/g
@@ -190,8 +213,11 @@ async function main() {
       const lexical = md
         ? (convertMarkdownToLexical({ editorConfig, markdown: tablesToLists(md) }) as LexNode)
         : (structuredClone(doc[t.field]) as LexNode | null)
+      const fixed = TEXT_FIXES.filter(
+        (f) => f.collection === t.collection && f.slug === doc.slug && lexical?.root,
+      ).reduce((n, f) => n + replaceText(lexical!.root as LexNode, f.from, f.to), 0)
       const linked = lexical?.root ? linkPaths(lexical.root as LexNode, titles, missing) : 0
-      const data: Record<string, unknown> = md || linked ? { [t.field]: lexical } : {}
+      const data: Record<string, unknown> = md || linked || fixed ? { [t.field]: lexical } : {}
       for (const c of CUT_FIELDS.filter((f) => f.collection === t.collection)) {
         const fixed = cutToSentence(doc[c.field], c.max)
         if (fixed) data[c.field] = fixed
