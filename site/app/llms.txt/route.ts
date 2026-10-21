@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server'
 import { payloadClient } from '@/lib/payload'
 import { getServiceBySlug, getPublishedB2BPages, getPublishedAuthors } from '@/lib/seo/queries'
 import { lexicalToPlainText } from '@/lib/seo/uniqueness'
+import { getCompany, minutes } from '@/lib/company'
 
 /**
  * GET /llms.txt
@@ -215,12 +216,13 @@ async function buildAuthors(): Promise<AuthorRef[]> {
 }
 
 export async function GET(): Promise<NextResponse> {
-  const [pillars, b2bPages, authors, casesByService, districts] = await Promise.all([
+  const [pillars, b2bPages, authors, casesByService, districts, company] = await Promise.all([
     buildPillars(),
     buildB2B(),
     buildAuthors(),
     buildCasesByService(),
     buildDistricts(),
+    getCompany(),
   ])
 
   const lastmod = new Date().toISOString().split('T')[0]
@@ -306,7 +308,7 @@ export async function GET(): Promise<NextResponse> {
 
   sections.push('## USP')
   sections.push(
-    `- [Фото-смета за 10 минут](${SITE_URL}/foto-smeta/): отправьте 2-3 фото в Telegram/MAX/WhatsApp — оператор пришлёт смету`,
+    `- [Фото-смета за ${minutes(company.photoEstimateMinutes)}](${SITE_URL}/foto-smeta/): отправьте 2-3 фото в Telegram/MAX/WhatsApp — оператор пришлёт смету`,
   )
   sections.push(
     `- [Расчёт стоимости онлайн](${SITE_URL}/raschet-stoimosti/): калькулятор по объёму, классу отходов, плечу выезда`,

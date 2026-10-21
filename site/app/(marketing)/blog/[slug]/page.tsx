@@ -27,6 +27,7 @@ import {
 import { canonicalFor } from '@/lib/seo/canonical'
 import { getAllBlogSlugs, getBlogPostBySlug } from '@/lib/seo/queries'
 import { truncateMeta } from '@/lib/seo/text'
+import { getCompany, minutes } from '@/lib/company'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -185,11 +186,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }
   const photo = uslugi?.blocks.find((b) => b.blockType === 'photo-cta')
   if (photo) after.push(photo)
+  const company = await getCompany()
   after.push({
     blockType: 'final-form',
     anchor: 'zayavka',
-    eyebrow: 'Заявка · ответ за 10 минут',
-    title: 'Остались вопросы — перезвоним за 10 минут',
+    eyebrow: `Заявка · ответ за ${minutes(company.callbackMinutes)}`,
+    title: `Остались вопросы — перезвоним за ${minutes(company.callbackMinutes)}`,
     background: null,
     channels: [],
     formTitle: 'Вопрос по статье',

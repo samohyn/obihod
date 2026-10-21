@@ -1,6 +1,7 @@
 import { cache } from 'react'
 
 import { payloadClient } from './payload'
+import { DEFAULT_COMPANY, clock, getCompany, hoursLine, type Company } from './company'
 import type { IconName } from '@/components/blocks/v3/shared'
 
 /**
@@ -251,12 +252,18 @@ export const DEFAULT_CHROME_VIEW = {
     { label: 'Блог', href: '/blog/' },
   ] as NavLink[],
   utility: [
-    { icon: 'pin', text: 'Москва и область · выезд до 50 км от МКАД' },
-    { icon: 'clock', text: 'Заявки 24/7 · менеджер 8:00–22:00' },
+    {
+      icon: 'pin',
+      text: `Москва и область · выезд до ${DEFAULT_COMPANY.freeVisitRadiusKm} км от МКАД`,
+    },
+    {
+      icon: 'clock',
+      text: `Заявки 24/7 · менеджер ${clock(DEFAULT_COMPANY.opens)}–${clock(DEFAULT_COMPANY.closes)}`,
+    },
     { icon: 'shield', text: 'Работаем по договору · физлица и юрлица' },
   ] as UtilityItem[],
   cta: { label: 'Смета по фото', href: '/foto-smeta/' } as NavLink,
-  hours: 'Ежедневно 8:00–22:00 · заявки 24/7',
+  hours: hoursLine(DEFAULT_COMPANY),
   footerAbout:
     'Порядок под ключ на участке и территории. Москва и область, частные дома и организации.',
   footerNav: [
@@ -340,7 +347,7 @@ const withIcons = (nav: NavItem[]): NavItem[] =>
 
 /** Шапка и подвал: из админки, пустые поля — по умолчанию (DEFAULT_CHROME_VIEW). */
 export const getChromeView = cache(async (): Promise<ChromeView> => {
-  const chrome = await getSiteChrome()
+  const [chrome, company] = await Promise.all([getSiteChrome(), getCompany()])
   const d = DEFAULT_CHROME_VIEW
   const h = chrome?.header
   // Старая кнопка вела на якорь калькулятора старой главной — на других страницах его нет.
@@ -350,7 +357,7 @@ export const getChromeView = cache(async (): Promise<ChromeView> => {
     mobileExtra: h?.mobileExtra?.length ? h.mobileExtra : d.mobileExtra,
     utility: h?.utility?.length ? h.utility : d.utility,
     cta: cta ? { label: cta.label as string, href: menuHref(cta) } : d.cta,
-    hours: chrome?.contacts?.hours?.trim() || d.hours,
+    hours: hoursLine(company),
     footerAbout: chrome?.footer?.slogan?.trim() || d.footerAbout,
     footerNav: chrome?.footer?.nav?.length ? chrome.footer.nav : d.footerNav,
     messengers: (chrome?.social ?? [])
@@ -382,41 +389,28 @@ function filledRequisite(v: string | null | undefined): string | null {
 }
 
 /**
- * Единый источник контактов и реквизитов для всех страниц, JSON-LD и llms.txt:
- * значения из SiteChrome (админка), пустые — из DEFAULT_SITE_CHROME.
+ * Контакты и реквизиты для всех страниц, JSON-LD и llms.txt — из «Компания и контакты»
+ * (lib/company.ts); заглушки ИНН/КПП/ОГРН из единиц на сайт не выводятся.
  */
 export const getContacts = cache(async (): Promise<Contacts> => {
-  const chrome = await getSiteChrome()
-  const c = { ...DEFAULT_SITE_CHROME.contacts, ...stripEmpty(chrome?.contacts) }
-  const r = { ...DEFAULT_SITE_CHROME.requisites, ...stripEmpty(chrome?.requisites) }
-  const streetAddress = r.streetAddress ?? ''
-  const addressLocality = r.addressLocality ?? ''
-  const addressRegion = r.addressRegion ?? ''
-  const postalCode = r.postalCode ?? ''
+  const c = await getCompany()
   return {
-    phoneDisplay: c.phoneDisplay ?? '',
-    phoneE164: c.phoneE164 ?? '',
-    email: c.email ?? '',
-    legalName: r.legalName || 'Обиход',
-    taxId: filledRequisite(r.taxId),
-    ogrn: filledRequisite(r.ogrn),
-    kpp: filledRequisite(r.kpp),
-    addressRegion,
-    addressLocality,
-    streetAddress,
-    postalCode,
-    addressLine: [streetAddress, addressLocality, addressRegion, postalCode]
+    phoneDisplay: c.phoneDisplay,
+    phoneE164: c.phoneE164,
+    email: c.email,
+    legalName: c.legalName || 'Обиход',
+    taxId: filledRequisite(c.taxId),
+    ogrn: filledRequisite(c.ogrn),
+    kpp: filledRequisite(c.kpp),
+    addressRegion: c.addressRegion,
+    addressLocality: c.addressLocality,
+    streetAddress: c.streetAddress,
+    postalCode: c.postalCode,
+    addressLine: [c.streetAddress, c.addressLocality, c.addressRegion, c.postalCode]
       .filter(Boolean)
       .join(', '),
   }
 })
-
-function stripEmpty<T extends object>(obj: T | null | undefined): Partial<T> {
-  if (!obj) return {}
-  return Object.fromEntries(
-    Object.entries(obj).filter(([, v]) => v !== null && v !== undefined && v !== ''),
-  ) as Partial<T>
-}
 
 /**
  * Server-component fetcher. Читает global `site-chrome` из Payload.
@@ -438,16 +432,44 @@ function stripEmpty<T extends object>(obj: T | null | undefined): Partial<T> {
 export const getSiteChrome = cache(async (): Promise<SiteChrome | null> => {
   try {
     const payload = await payloadClient()
-    const chrome = (await payload.findGlobal({
-      slug: 'site-chrome',
-    })) as unknown as SiteChrome | null
-    return chrome
+    const [chrome, company] = await Promise.all([
+      payload.findGlobal({ slug: 'site-chrome' }) as unknown as Promise<SiteChrome | null>,
+      getCompany(),
+    ])
+    return chrome ? withCompany(chrome, company) : null
   } catch {
     // Мягкая деградация: не роняем страницу, возвращаем null — рендерер
     // подставит DEFAULT_SITE_CHROME.
     return null
   }
 })
+
+/**
+ * Контакты и реквизиты «Шапки» перенесены в «Компания и контакты» (план 09, этап 4.3): подставляем
+ * их оттуда, чтобы всё, что читает `chrome.contacts` / `chrome.requisites` (JSON-LD, старые страницы),
+ * брало один источник. Убрать вместе со старыми полями «Шапки» (4.4).
+ */
+function withCompany(chrome: SiteChrome, c: Company): SiteChrome {
+  return {
+    ...chrome,
+    contacts: {
+      phoneDisplay: c.phoneDisplay,
+      phoneE164: c.phoneE164,
+      email: c.email,
+      hours: hoursLine(c),
+    },
+    requisites: {
+      legalName: c.legalName,
+      taxId: c.taxId,
+      kpp: c.kpp,
+      ogrn: c.ogrn,
+      addressRegion: c.addressRegion,
+      addressLocality: c.addressLocality,
+      streetAddress: c.streetAddress,
+      postalCode: c.postalCode,
+    },
+  }
+}
 
 // ---------- URL helpers ----------
 

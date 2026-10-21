@@ -25,6 +25,7 @@ import { SubServices } from './collections/SubServices'
 import { Homepage } from './globals/Homepage'
 import { SeoSettings } from './globals/SeoSettings'
 import { SiteChrome } from './globals/SiteChrome'
+import { Company } from './globals/Company'
 import { auditLogTable, serviceDistrictIndexes } from './lib/db/schemaHooks'
 
 const filename = fileURLToPath(import.meta.url)
@@ -174,7 +175,7 @@ export default buildConfig({
     // 09 · Система
     Users,
   ],
-  globals: [Homepage, SeoSettings, SiteChrome],
+  globals: [Homepage, SeoSettings, SiteChrome, Company],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },

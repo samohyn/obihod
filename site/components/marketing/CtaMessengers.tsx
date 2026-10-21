@@ -1,4 +1,4 @@
-import { getSiteChrome, DEFAULT_SITE_CHROME, socialHref, type SocialLink } from '@/lib/chrome'
+import { getContacts, getSiteChrome, socialHref, type SocialLink } from '@/lib/chrome'
 
 /**
  * Постоянная плашка «Смета за 10 минут в TG / MAX / WhatsApp».
@@ -10,11 +10,8 @@ import { getSiteChrome, DEFAULT_SITE_CHROME, socialHref, type SocialLink } from 
  * поэтому на пустом global рендерим только телефон.
  */
 export async function CtaMessengers({ className }: { className?: string }) {
-  const chrome = await getSiteChrome()
+  const [chrome, { phoneE164, phoneDisplay }] = await Promise.all([getSiteChrome(), getContacts()])
   const social: SocialLink[] = chrome?.social ?? []
-  const phoneE164 = chrome?.contacts?.phoneE164 ?? DEFAULT_SITE_CHROME.contacts?.phoneE164 ?? ''
-  const phoneDisplay =
-    chrome?.contacts?.phoneDisplay ?? DEFAULT_SITE_CHROME.contacts?.phoneDisplay ?? ''
 
   const findSocial = (type: SocialLink['type']) => social.find((s) => s.type === type)
   const telegram = findSocial('telegram')

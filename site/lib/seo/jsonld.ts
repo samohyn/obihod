@@ -15,6 +15,7 @@
  */
 
 import type { SiteChrome } from '@/lib/chrome'
+import { DEFAULT_COMPANY } from '@/lib/offer'
 
 // ---------- SEO settings subset (зеркалит site/globals/SeoSettings.ts) ----------
 // TODO(be3): заменить на `import type { SeoSettings } from '@/payload-types'`,
@@ -205,9 +206,8 @@ export function websiteSchema() {
 }
 
 /**
- * LocalBusiness schema. Читает `telephone` из SiteChrome.contacts.phoneE164,
- * `priceRange` / `openingHours` — из SeoSettings.localBusiness.*
- * (с дефолтами `₽₽` / 08:00 / 21:00, если global не заполнен).
+ * LocalBusiness schema. Телефон, почта, адрес и часы — из «Компания и контакты»
+ * (getSiteChrome / getSeoSettings подставляют их), `priceRange` — из SeoSettings.
  *
  * `district` опциональный: при его наличии строится районный вариант
  * (`/raiony/<slug>/#lb`) с geo-координатами и radius из Districts.
@@ -224,8 +224,8 @@ export function localBusinessSchema(
   const contacts = chrome?.contacts ?? null
   const lb = seo?.localBusiness ?? null
   const geoRadiusKm = lb?.geoRadiusKm ?? 150
-  const opens = nonEmpty(lb?.openingHours?.opens) ?? '08:00'
-  const closes = nonEmpty(lb?.openingHours?.closes) ?? '21:00'
+  const opens = nonEmpty(lb?.openingHours?.opens) ?? DEFAULT_COMPANY.opens
+  const closes = nonEmpty(lb?.openingHours?.closes) ?? DEFAULT_COMPANY.closes
   const priceRange = nonEmpty(lb?.priceRange) ?? '₽₽'
 
   const areaServed = district

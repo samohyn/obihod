@@ -7,7 +7,8 @@
 import Link from 'next/link'
 import { useId, useState, type FormEvent } from 'react'
 
-import { callbackDeadline } from '@/lib/leads/callbackDeadline'
+import { callbackDeadline, type CallbackRule } from '@/lib/leads/callbackDeadline'
+import { DEFAULT_COMPANY } from '@/lib/offer'
 
 import { Icon } from './shared'
 import s from './FinalForm.module.css'
@@ -19,11 +20,14 @@ export function LeadFormV3({
   source,
   photoHref,
   phoneDisplay,
+  callback = DEFAULT_COMPANY,
 }: {
   title: string
   source: string
   photoHref: string | null
   phoneDisplay: string
+  /** Часы и срок перезвона — из «Компания и контакты» */
+  callback?: CallbackRule
 }) {
   const uid = useId()
   const [phone, setPhone] = useState('')
@@ -71,7 +75,7 @@ export function LeadFormV3({
         setStatus('error')
         return
       }
-      setDeadline(callbackDeadline())
+      setDeadline(callbackDeadline(new Date(), callback))
       setStatus('sent')
     } catch {
       setError(`Нет связи с сервером. Позвоните: ${phoneDisplay}`)
@@ -104,7 +108,7 @@ export function LeadFormV3({
     <form className={s.card} onSubmit={onSubmit} noValidate>
       <div className={s.cardHead}>
         <b>{title}</b>
-        <span>ответ за 10 мин</span>
+        <span>ответ за {callback.callbackMinutes} мин</span>
       </div>
       <div className={s.field}>
         <label htmlFor={`${uid}-phone`}>Телефон</label>

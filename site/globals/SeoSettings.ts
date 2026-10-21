@@ -46,8 +46,10 @@ export const SeoSettings: GlobalConfig = {
         { name: 'priceRange', type: 'text', defaultValue: '₽₽' },
         { name: 'geoRadiusKm', type: 'number', defaultValue: 150 },
         {
+          // Часы работы перенесены в «Компания и контакты» (план 09, этап 4.3) — поле скрыто, удалим в 4.4.
           name: 'openingHours',
           type: 'group',
+          admin: { hidden: true },
           fields: [
             { name: 'opens', type: 'text', defaultValue: '08:00' },
             { name: 'closes', type: 'text', defaultValue: '21:00' },

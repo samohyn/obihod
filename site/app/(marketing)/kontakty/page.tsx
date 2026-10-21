@@ -15,6 +15,7 @@ import type { V3BlockWithTone } from '@/components/blocks/v3/types'
 import { retone } from '@/lib/blocks/v3/retone'
 import { getPage } from '@/lib/pages'
 import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+import { getCompany, hoursLine } from '@/lib/company'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -59,9 +60,9 @@ export default async function KontaktyPage() {
   // 0. Из блоков: документ «Страницы» kontakty
   const blocksPage = await getPage('kontakty')
   if (blocksPage) {
-    // Контакты — из «Шапки, подвала и контактов» (один источник), сразу под первым экраном
-    const [contacts, view] = await Promise.all([getContacts(), getSiteChrome().catch(() => null)])
-    const hours = view?.contacts?.hours?.trim() || 'Ежедневно 8:00–22:00 · заявки 24/7'
+    // Контакты, часы и цифры оффера — из «Компания и контакты», сразу под первым экраном
+    const [contacts, company] = await Promise.all([getContacts(), getCompany()])
+    const hours = hoursLine(company)
     const [hero, ...rest] = blocksPage.blocks
     const info: V3BlockWithTone = {
       blockType: 'about-stats',
@@ -75,10 +76,10 @@ export default async function KontaktyPage() {
         'Фото объекта — в форме заявки или на почту',
       ],
       stats: [
-        { value: '10 мин', label: 'перезвоним после заявки' },
-        { value: '30 мин', label: 'смета по фото' },
-        { value: '24/7', label: 'приём заявок' },
-        { value: '2 ч', label: 'аварийный выезд' },
+        { value: `${company.callbackMinutes} мин`, label: 'перезвоним после заявки' },
+        { value: `${company.photoEstimateMinutes} мин`, label: 'смета по фото' },
+        ...(company.leadsAllDay ? [{ value: '24/7', label: 'приём заявок' }] : []),
+        { value: `${company.emergencyHours} ч`, label: 'аварийный выезд' },
       ],
     }
     return (

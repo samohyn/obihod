@@ -14,6 +14,7 @@ import { getAllDistricts, getDistrictBySlug, getSeoSettings } from '@/lib/seo/qu
 import { getPage } from '@/lib/pages'
 
 import { DistrictBlocksView } from './DistrictBlocksView'
+import { getCompany, minutes } from '@/lib/company'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -45,7 +46,7 @@ export async function generateMetadata({
   if (!(await getPage('uslugi'))) return legacy
   const where = (d as unknown as { namePrepositional: string }).namePrepositional
   const title = `Обиход ${where} — деревья, мусор, крыши, демонтаж`
-  const description = `Спил деревьев, вывоз мусора, чистка крыш и снег, демонтаж и благоустройство ${where}. Смета по фото за 30 минут, оплата после приёмки.`
+  const description = `Спил деревьев, вывоз мусора, чистка крыш и снег, демонтаж и благоустройство ${where}. Смета по фото за ${minutes((await getCompany()).photoEstimateMinutes)}, оплата после приёмки.`
   return {
     ...legacy,
     title: { absolute: title },

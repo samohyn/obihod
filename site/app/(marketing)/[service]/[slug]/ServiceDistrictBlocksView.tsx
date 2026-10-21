@@ -9,6 +9,7 @@ import { getPage, type PageData } from '@/lib/pages'
 import { buildJsonLdForTemplate } from '@/lib/seo/composer'
 import type { District, Service } from '@/lib/seo/jsonld'
 import { getAllServiceDistrictParams } from '@/lib/seo/queries'
+import { getCompany } from '@/lib/company'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -27,11 +28,12 @@ export async function ServiceDistrictBlocksView({
   sd: ServiceDistrictLike
   pillar: PageData
 }) {
-  const [chrome, contacts, uslugi, params] = await Promise.all([
+  const [chrome, contacts, uslugi, params, company] = await Promise.all([
     getSiteChrome(),
     getContacts(),
     getPage('uslugi'),
     getAllServiceDistrictParams(),
+    getCompany(),
   ])
   const local = new Set(params.map((p) => `${p.service}/${p.slug}`))
   const { blocks } = buildServiceDistrictBlocks({
@@ -40,6 +42,7 @@ export async function ServiceDistrictBlocksView({
     sd,
     otherServices: localizeTiles(uslugi, district.slug, local, service.slug),
     source: `${service.slug}-${district.slug}`,
+    company,
   })
   const breadcrumbs = trail(
     'uslugi',
