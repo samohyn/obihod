@@ -51,7 +51,7 @@ const PagePreviewPanel: FC = () => {
 
   const sign = useCallback(async () => {
     const res = await fetch(
-      `/api/preview-sign?collection=${collection}&id=${encodeURIComponent(String(id))}`,
+      `/api/preview-sign/?collection=${collection}&id=${encodeURIComponent(String(id))}`,
       { credentials: 'include' },
     )
     const data = (await res.json().catch(() => ({}))) as {
