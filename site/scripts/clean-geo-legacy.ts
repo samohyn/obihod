@@ -9,6 +9,14 @@
  * «талоны полигона»): заголовок очищается, вводный абзац и два местных вопроса (обязательны
  * для опубликованных) заменяются фактами района и обещаниями оффера. До записи в stdout печатается JSON-копия старых значений:
  * `> geo-legacy-backup.json`. Цена-заметка и местные ориентиры не трогаются.
+ *
+ * Уже очищенные записи пропускаются — повторный запуск ничего не пишет.
+ *
+ * ВНИМАНИЕ: Payload `update` при включённых черновиках берёт за основу ПОСЛЕДНЮЮ ВЕРСИЮ записи. Если
+ * она черновик (у части старых записей статус выставлен в базе напрямую, опубликованных версий нет),
+ * опубликованная запись станет черновиком с полями этого черновика (ориентиры, publishStatus,
+ * noindexUntilCase). 21.10.2026 на проде так и вышло — откатано из дампа таблиц перед запуском.
+ * Перед `--apply` на базе с опубликованными записями — дамп `service_districts*` и сверка после.
  */
 import { getPayload } from 'payload'
 
@@ -18,13 +26,23 @@ const APPLY = process.argv.includes('--apply')
 
 async function main() {
   const payload = await getPayload({ config })
-  const res = await payload.find({
+  const found = await payload.find({
     collection: 'service-districts',
     where: { subServiceSlug: { exists: false } },
     limit: 1000,
     pagination: false,
     depth: 1,
   })
+  // Очищенная запись: без своего заголовка и с двумя нашими местными вопросами
+  const cleaned = (d: unknown) => {
+    const doc = d as { seoH1?: string | null; localFaq?: { question?: string }[] | null }
+    return (
+      !doc.seoH1 &&
+      doc.localFaq?.length === 2 &&
+      Boolean(doc.localFaq[0]?.question?.startsWith('Как быстро приедете'))
+    )
+  }
+  const res = { docs: found.docs.filter((d) => !cleaned(d)) }
   const backup = res.docs.map((d) => {
     const doc = d as unknown as Record<string, unknown>
     return {
