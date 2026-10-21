@@ -13,6 +13,14 @@ import {
   valkaDerevev,
   vyrubkaElok,
 } from './arboristika-2'
+import {
+  chistkaKryshChastnyyDom,
+  chistkaKryshMkd,
+  dogovorNaSezon,
+  otSnega,
+  sbivanieSosulek,
+  uborkaTerritoriiZima,
+} from './chistka-krysh'
 import { spilDerevev } from './spil-derevev'
 import type { SubServiceContent } from './types'
 import {
@@ -54,14 +62,25 @@ const VYVOZ_MUSORA: Record<string, SubServiceContent> = {
   'dlya-uk-tszh': dlyaUkTszh,
 }
 
+const CHISTKA_KRYSH: Record<string, SubServiceContent> = {
+  'chistka-krysh-chastnyy-dom': chistkaKryshChastnyyDom,
+  'chistka-krysh-mkd': chistkaKryshMkd,
+  'sbivanie-sosulek': sbivanieSosulek,
+  'ot-snega': otSnega,
+  'uborka-territorii-zima': uborkaTerritoriiZima,
+  'dogovor-na-sezon': dogovorNaSezon,
+}
+
 /** Подуслуги с подготовленным наполнением — ключ для `pnpm seed:subservice <ключ>`. */
 export const SUB_SERVICE_CONTENT: Record<string, SubServiceContent> = {
   ...ARBORISTIKA,
   ...VYVOZ_MUSORA,
+  ...CHISTKA_KRYSH,
 }
 
 /** Партии для наполнения разом: `pnpm seed:subservice arboristika`. */
 export const SUB_SERVICE_BATCHES: Record<string, string[]> = {
   arboristika: Object.keys(ARBORISTIKA),
   'vyvoz-musora': Object.keys(VYVOZ_MUSORA),
+  'chistka-krysh': Object.keys(CHISTKA_KRYSH),
 }
