@@ -55,11 +55,12 @@ const page = (
   blocks: V3BlockWithTone[],
 ): PageContent => ({ slug, title, metaTitle, metaDescription, blocks: retone(blocks) })
 
-/** Все гарантии оффера с условиями (п. 2–11). */
-const ALL_GUARANTEES: V3BlockWithTone = {
+/** Все гарантии оффера с условиями (п. 2–11) — тремя блоками по 4 (больше блок не вмещает). */
+const BASE_G = GUARANTEES.blockType === 'guarantees' ? GUARANTEES.items : []
+const SPEED: V3BlockWithTone = {
   blockType: 'guarantees',
-  eyebrow: 'Гарантии',
-  title: 'Обещания с условиями',
+  eyebrow: 'Скорость',
+  title: 'Быстро и в срок',
   items: [
     {
       icon: 'phone',
@@ -89,7 +90,19 @@ const ALL_GUARANTEES: V3BlockWithTone = {
       conditionLabel: 'Зона',
       conditionValue: 'Москва и до 30 км от МКАД',
     },
-    ...(GUARANTEES.blockType === 'guarantees' ? GUARANTEES.items : []),
+  ],
+}
+const MONEY: V3BlockWithTone = {
+  blockType: 'guarantees',
+  eyebrow: 'Цена и оплата',
+  title: 'Цена не меняется, оплата — после',
+  items: BASE_G.slice(0, 4),
+}
+const RESULT: V3BlockWithTone = {
+  blockType: 'guarantees',
+  eyebrow: 'Результат',
+  title: 'Документы и сохранность',
+  items: [
     {
       icon: 'file',
       title: 'Договор, акт и фото',
@@ -197,7 +210,9 @@ export const garantii = page(
       'Только собственные проверяемые обязательства — у каждого есть условие: когда действует и что будет, если мы его нарушим.',
       img('yard-after', 'Чистый участок после работ'),
     ),
-    ALL_GUARANTEES,
+    SPEED,
+    MONEY,
+    RESULT,
     {
       blockType: 'documents',
       eyebrow: 'Документы',
