@@ -131,9 +131,16 @@ export function buildServiceDistrictBlocks(args: {
     `${slide?.lead ?? ''} Работаем ${district.namePrepositional} и по всему округу.`.trim()
 
   const blocks: V3BlockWithTone[] = []
+  // Дальше 30 км аварийную бригаду за 2 часа не обещаем (оффер, п. 5) — убираем это из плашки
+  const far = (district.distanceFromMkad ?? 0) > 30
+  const badge =
+    hero?.badge && far && /аварийн/i.test(hero.badge.note ?? '')
+      ? { ...hero.badge, note: 'Смета по фото — за 30 минут' }
+      : hero?.badge
   if (hero && slide) {
     blocks.push({
       ...hero,
+      badge,
       slides: [
         {
           ...slide,
