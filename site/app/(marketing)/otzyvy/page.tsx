@@ -14,6 +14,10 @@ import {
 } from '@/lib/seo/jsonld'
 import { metadataBase } from '@/lib/seo/metadata'
 
+import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
+import { getPage } from '@/lib/pages'
+import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 export const revalidate = 86400
@@ -23,7 +27,7 @@ const META_TITLE = 'Отзывы об Обиходе — клиенты Моск
 const META_DESCRIPTION =
   'Отзывы клиентов Обихода: спил деревьев, чистка крыш, вывоз мусора, демонтаж, уборка территории. Реальные истории с Я.Карт, Авито, 2ГИС. Средний рейтинг и AggregateRating schema.'
 
-export const metadata: Metadata = {
+const LEGACY_METADATA: Metadata = {
   metadataBase,
   title: { absolute: META_TITLE },
   description: META_DESCRIPTION,
@@ -97,7 +101,16 @@ function formatDate(iso: string): string {
   }
 }
 
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPage('otzyvy')
+  return page ? buildBlocksPageMetadata(page, '/otzyvy/') : LEGACY_METADATA
+}
+
 export default async function OtzyvyPage() {
+  // 0. Из блоков: документ «Страницы» otzyvy
+  const blocksPage = await getPage('otzyvy')
+  if (blocksPage) return <PageBlocksView page={blocksPage} crumbs={trail('otzyvy')} />
+
   const reviews = await fetchReviews()
 
   const breadcrumbs = trail('otzyvy')

@@ -8,12 +8,20 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema } from '@/lib/seo/jsonld'
 import { canonicalFor } from '@/lib/seo/canonical'
 import { getPublishedBlogPosts } from '@/lib/seo/queries'
+import type { V3BlockWithTone } from '@/components/blocks/v3/types'
+import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
+import { retone } from '@/lib/blocks/v3/retone'
+import { toImage } from '@/lib/blocks/v3/fromPayload'
+import { BLOG_CATEGORY, blogTopic } from '@/lib/blog-topics'
+import { getContacts } from '@/lib/chrome'
+import { getPage } from '@/lib/pages'
+import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 export const revalidate = 86400
 
-export const metadata: Metadata = {
+const LEGACY_METADATA: Metadata = {
   title: 'Блог Обихода — справочник по 4 услугам',
   description:
     'Спил, чистка крыш, вывоз мусора, демонтаж — что делаем, как считаем, что важно знать перед заказом. Гиды от арбористов и B2B-экспертов Обихода.',
@@ -50,11 +58,45 @@ function formatDate(iso: string): string {
   })
 }
 
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPage('blog')
+  return page ? buildBlocksPageMetadata(page, '/blog/') : LEGACY_METADATA
+}
+
 export default async function BlogIndex() {
   // без slug у поста нет страницы — иначе ссылка /blog/null/
   const posts = ((await getPublishedBlogPosts()) as unknown as BlogPost[]).filter((p) => p.slug)
 
   const breadcrumbs = trail('blog')
+
+  // 0. Из блоков: документ «Страницы» blog, статьи — под первым экраном (из коллекции «Блог»)
+  const page = await getPage('blog')
+  if (page) {
+    const contacts = await getContacts()
+    const [hero, ...rest] = page.blocks
+    const list: V3BlockWithTone = {
+      blockType: 'articles',
+      anchor: 'stati',
+      eyebrow: 'Статьи',
+      title: 'Все статьи',
+      items: posts.map((p) => ({
+        kicker: `${BLOG_CATEGORY[p.category] ?? 'Статья'} · ${formatDate(p.publishedAt)}`,
+        title: p.title,
+        text: p.intro?.length > 160 ? `${p.intro.slice(0, 157).trimEnd()}…` : p.intro,
+        href: `/blog/${p.slug}/`,
+        image: toImage(p.heroImage) ?? blogTopic(p.slug).image,
+      })),
+    }
+    return (
+      <>
+        <Breadcrumbs items={breadcrumbs} />
+        <V3BlockRenderer
+          blocks={retone([hero, list, ...rest])}
+          phoneDisplay={contacts.phoneDisplay}
+        />
+      </>
+    )
+  }
 
   return (
     <>

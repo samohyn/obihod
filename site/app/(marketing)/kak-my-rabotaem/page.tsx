@@ -7,11 +7,15 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema } from '@/lib/seo/jsonld'
 import { canonicalFor } from '@/lib/seo/canonical'
 
+import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
+import { getPage } from '@/lib/pages'
+import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 export const revalidate = 86400
 
-export const metadata: Metadata = {
+const LEGACY_METADATA: Metadata = {
   title: 'Как мы работаем — фото → смета → бригада → закрытие',
   description:
     'Цикл работы Обихода: 3 фото в Telegram/MAX/WhatsApp → смета за 10 минут → бригада в день заявки → акт и оплата по факту. Москва и МО, без авансов.',
@@ -46,7 +50,16 @@ const STEPS = [
   },
 ]
 
-export default function HowWeWorkPage() {
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPage('kak-my-rabotaem')
+  return page ? buildBlocksPageMetadata(page, '/kak-my-rabotaem/') : LEGACY_METADATA
+}
+
+export default async function HowWeWorkPage() {
+  // 0. Из блоков: документ «Страницы» kak-my-rabotaem
+  const blocksPage = await getPage('kak-my-rabotaem')
+  if (blocksPage) return <PageBlocksView page={blocksPage} crumbs={trail('kakMyRabotaem')} />
+
   const breadcrumbs = trail('kakMyRabotaem')
 
   const howToSchema = {

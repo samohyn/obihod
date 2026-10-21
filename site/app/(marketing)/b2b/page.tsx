@@ -8,12 +8,15 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema } from '@/lib/seo/jsonld'
 import { canonicalFor } from '@/lib/seo/canonical'
 import { getPublishedB2BPages } from '@/lib/seo/queries'
+import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
+import { getPage } from '@/lib/pages'
+import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 export const revalidate = 86400
 
-export const metadata: Metadata = {
+const LEGACY_METADATA: Metadata = {
   title: 'Обиход для бизнеса — УК, ТСЖ, FM, застройщики, госзаказ',
   description:
     'Сезонные и годовые контракты с УК и ТСЖ, FM-операторами, застройщиками. Штрафы Госжилинспекции и ОАТИ — на нас по договору. Москва и МО.',
@@ -61,7 +64,16 @@ const TRUST_PILLARS = [
   },
 ]
 
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPage('b2b')
+  return page ? buildBlocksPageMetadata(page, '/b2b/') : LEGACY_METADATA
+}
+
 export default async function B2BIndex() {
+  // 0. Из блоков: документ «Страницы» b2b
+  const blocksPage = await getPage('b2b')
+  if (blocksPage) return <PageBlocksView page={blocksPage} crumbs={trail('b2b')} />
+
   const pages = (await getPublishedB2BPages()) as unknown as B2BPage[]
 
   const breadcrumbs = trail('b2b')

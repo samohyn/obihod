@@ -10,11 +10,15 @@ import { getSiteChrome } from '@/lib/chrome'
 import { getSeoSettings } from '@/lib/seo/queries'
 import { canonicalFor } from '@/lib/seo/canonical'
 
+import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
+import { getPage } from '@/lib/pages'
+import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 export const revalidate = 86400
 
-export const metadata: Metadata = {
+const LEGACY_METADATA: Metadata = {
   title: 'Парк техники Обиход — контейнеры, манипуляторы, спецтехника для МО',
   description:
     'Парк техники Обихода: контейнеры 8-27 м³, манипуляторы, мини-экскаваторы, автовышки, бензопилы и альпснаряжение. Свой автопарк — без перекупки в Москве и МО.',
@@ -54,7 +58,16 @@ const techItems = [
   },
 ]
 
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPage('park-tehniki')
+  return page ? buildBlocksPageMetadata(page, '/park-tehniki/') : LEGACY_METADATA
+}
+
 export default async function ParkTehnikiPage() {
+  // 0. Из блоков: документ «Страницы» park-tehniki
+  const blocksPage = await getPage('park-tehniki')
+  if (blocksPage) return <PageBlocksView page={blocksPage} crumbs={trail('parkTehniki')} />
+
   const [chrome, seo] = await Promise.all([getSiteChrome(), getSeoSettings()])
 
   const breadcrumbs = trail('parkTehniki')

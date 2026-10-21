@@ -103,7 +103,7 @@ export const BASE_DOCS: DocumentItem[] = [
   },
 ]
 
-const GUARANTEES: V3BlockWithTone = {
+export const GUARANTEES: V3BlockWithTone = {
   blockType: 'guarantees',
   eyebrow: 'Гарантии',
   title: 'Обещания с условиями',

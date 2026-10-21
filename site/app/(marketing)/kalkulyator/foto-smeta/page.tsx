@@ -8,6 +8,9 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema, howToSchema, speakableSchema } from '@/lib/seo/jsonld'
 import { metadataBase } from '@/lib/seo/metadata'
 import { getContacts } from '@/lib/chrome'
+import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
+import { getPage } from '@/lib/pages'
+import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -17,7 +20,7 @@ const META_TITLE = 'Фото-смета за 10 минут — отправьт�
 const META_DESCRIPTION =
   'Отправьте 2-3 фото объекта в Telegram, MAX или WhatsApp — оператор Обихода пришлёт точную смету за 10 минут с фиксированной ценой и сроком работ. Без выезда на оценку, без скрытых наценок.'
 
-export const metadata: Metadata = {
+const LEGACY_METADATA: Metadata = {
   metadataBase,
   title: { absolute: META_TITLE },
   description: META_DESCRIPTION,
@@ -61,7 +64,16 @@ const howToSteps = (phoneDisplay: string) => [
   },
 ]
 
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPage('kalkulyator/foto-smeta')
+  return page ? buildBlocksPageMetadata(page, '/kalkulyator/foto-smeta/') : LEGACY_METADATA
+}
+
 export default async function FotoSmetaPage() {
+  // 0. Из блоков: документ «Страницы» kalkulyator/foto-smeta
+  const blocksPage = await getPage('kalkulyator/foto-smeta')
+  if (blocksPage) return <PageBlocksView page={blocksPage} crumbs={trail('fotoSmeta')} />
+
   const c = await getContacts()
   const TELEGRAM_LINK = `https://t.me/${c.phoneE164}`
   const WA_LINK = `https://wa.me/${c.phoneE164.replace('+', '')}`

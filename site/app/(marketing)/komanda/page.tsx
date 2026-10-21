@@ -10,11 +10,15 @@ import { getSiteChrome } from '@/lib/chrome'
 import { getSeoSettings } from '@/lib/seo/queries'
 import { canonicalFor } from '@/lib/seo/canonical'
 
+import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
+import { getPage } from '@/lib/pages'
+import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 export const revalidate = 86400
 
-export const metadata: Metadata = {
+const LEGACY_METADATA: Metadata = {
   title: 'Команда Обиход — бригады арбористов, кровельщиков и операторов техники',
   description:
     'Команда Обихода: бригадиры, арбористы с допуском на высоту, кровельщики с СИЗ, операторы спецтехники. Реальные люди на реальных объектах в Москве и МО.',
@@ -27,7 +31,16 @@ export const metadata: Metadata = {
   },
 }
 
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPage('komanda')
+  return page ? buildBlocksPageMetadata(page, '/komanda/') : LEGACY_METADATA
+}
+
 export default async function KomandaPage() {
+  // 0. Из блоков: документ «Страницы» komanda
+  const blocksPage = await getPage('komanda')
+  if (blocksPage) return <PageBlocksView page={blocksPage} crumbs={trail('komanda')} />
+
   const [chrome, seo] = await Promise.all([getSiteChrome(), getSeoSettings()])
 
   const breadcrumbs = trail('komanda')

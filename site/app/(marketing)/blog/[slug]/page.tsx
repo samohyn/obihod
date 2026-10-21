@@ -4,9 +4,19 @@ import type { Metadata } from 'next'
 
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { shortTitle, trail } from '@/lib/breadcrumbs'
-import { CtaMessengers } from '@/components/marketing/CtaMessengers'
 import { JsonLd } from '@/components/seo/JsonLd'
-import { RichTextRenderer } from '@/components/marketing/RichTextRenderer'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+
+import { PageHeader } from '@/components/blocks/v3/PageHeader'
+import { Picture, Section, Wrap } from '@/components/blocks/v3/shared'
+import type { ServicesTilesBlock, V3BlockWithTone } from '@/components/blocks/v3/types'
+import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
+import a from '@/components/blocks/v3/ArticleBody.module.css'
+import { retone } from '@/lib/blocks/v3/retone'
+import { toImage } from '@/lib/blocks/v3/fromPayload'
+import { BLOG_CATEGORY, blogTopic } from '@/lib/blog-topics'
+import { getContacts } from '@/lib/chrome'
+import { getPage } from '@/lib/pages'
 import {
   articleSchema,
   breadcrumbListSchema,
@@ -21,16 +31,6 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 export const revalidate = 86400
 export const dynamicParams = true
-
-const CATEGORY_LABELS: Record<string, string> = {
-  arbo: 'Арбористика',
-  sneg: 'Снегоуборка',
-  musor: 'Вывоз мусора',
-  demontazh: 'Демонтаж',
-  b2b: 'B2B / УК',
-  regulyatorika: 'Регуляторика',
-  evergreen: 'Evergreen',
-}
 
 type Person = {
   slug: string
@@ -49,7 +49,7 @@ type BlogPostDoc = {
   body: unknown
   publishedAt: string
   modifiedAt: string
-  category: keyof typeof CATEGORY_LABELS
+  category: string
   metaTitle?: string | null
   metaDescription?: string | null
   heroImage?: { url?: string; alt?: string } | null
@@ -153,106 +153,98 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         }))
       : null
 
+  const topic = blogTopic(post.slug)
+  const cover = toImage(post.heroImage) ?? topic.image
+  const [contacts, uslugi, pillar] = await Promise.all([
+    getContacts(),
+    getPage('uslugi'),
+    topic.pillar ? getPage(topic.pillar) : Promise.resolve(null),
+  ])
+  // Связанные услуги: подуслуги направления статьи, а если тема общая — все направления
+  const pillarTiles = pillar?.blocks.find((b) => b.blockType === 'services-tiles')
+  const allTiles = uslugi?.blocks.find((b) => b.blockType === 'services-tiles')
+  const tiles = (pillarTiles ?? allTiles) as ServicesTilesBlock | undefined
+  const after: V3BlockWithTone[] = []
+  if (faqForSchema) {
+    after.push({
+      blockType: 'faq-v3',
+      eyebrow: 'Вопросы',
+      title: 'Вопросы и ответы',
+      items: faqForSchema,
+    })
+  }
+  if (tiles?.items?.length) {
+    after.push({
+      blockType: 'services-tiles',
+      eyebrow: 'Услуги',
+      title: pillar ? `${pillar.title} — что делаем` : 'Что делаем',
+      link: { label: 'Все услуги', href: pillar ? `/${topic.pillar}/` : '/uslugi/' },
+      items: tiles.items.slice(0, 6),
+    })
+  }
+  const photo = uslugi?.blocks.find((b) => b.blockType === 'photo-cta')
+  if (photo) after.push(photo)
+  after.push({
+    blockType: 'final-form',
+    anchor: 'zayavka',
+    eyebrow: 'Заявка · ответ за 10 минут',
+    title: 'Остались вопросы — перезвоним за 10 минут',
+    background: null,
+    channels: [],
+    formTitle: 'Вопрос по статье',
+    source: `blog-${post.slug}`,
+  })
+  const author = post.author ? `${post.author.firstName} ${post.author.lastName}` : null
+
   return (
     <>
       <Breadcrumbs items={breadcrumbs} schema={false} />
-      <section className="bg-bg-alt py-10 sm:py-14">
-        <div className="mx-auto max-w-[var(--maxw)] px-[var(--pad)]">
-          <span className="bg-card text-ink-soft mt-4 inline-block rounded-[var(--radius-sm)] px-2.5 py-1 text-xs font-medium">
-            {CATEGORY_LABELS[post.category] ?? post.category}
-          </span>
-          <h1 className="text-ink mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-            {post.h1}
-          </h1>
-          <div className="text-muted mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+      <PageHeader
+        eyebrow={BLOG_CATEGORY[post.category] ?? 'Статья'}
+        title={post.h1}
+        meta={
+          <>
             <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-            {post.author && (
-              <span>
-                ·{' '}
-                {authorHasPage ? (
-                  <Link
-                    href={`/avtory/${post.author.slug}/`}
-                    className="hover:text-ink hover:underline"
-                  >
-                    {post.author.firstName} {post.author.lastName}
-                  </Link>
-                ) : (
-                  <>
-                    {post.author.firstName} {post.author.lastName}
-                  </>
-                )}
-              </span>
-            )}
+            {author &&
+              (authorHasPage ? (
+                <Link href={`/avtory/${post.author!.slug}/`}>{author}</Link>
+              ) : (
+                <span>{author}</span>
+              ))}
             {post.lastReviewedAt && (
               <span>
-                · обновлено{' '}
+                обновлено{' '}
                 <time dateTime={post.lastReviewedAt}>{formatDate(post.lastReviewedAt)}</time>
               </span>
             )}
-          </div>
-        </div>
-      </section>
-
-      <article className="mx-auto max-w-3xl px-[var(--pad)] py-12">
-        {post.heroImage?.url && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={post.heroImage.url}
-            alt={post.heroImage.alt ?? post.title}
-            className="mb-8 aspect-[16/9] w-full rounded-[var(--radius)] object-cover"
-          />
-        )}
-
-        <p className="text-ink-soft text-lg leading-relaxed">{post.intro}</p>
-
-        <div className="prose-content mt-8">
-          <RichTextRenderer data={post.body} className="text-ink-soft leading-relaxed" />
-        </div>
-
-        {post.faqBlock && post.faqBlock.length > 0 && (
-          <section className="mt-12">
-            <h2 className="text-ink text-2xl font-semibold">Вопросы и ответы</h2>
-            <ul className="mt-4 space-y-4">
-              {post.faqBlock.map((item, i) => (
-                <li
-                  key={item.id ?? `faq-${i}`}
-                  className="border-line bg-card rounded-[var(--radius)] border p-5"
-                >
-                  <h3 className="text-ink font-semibold">{item.question}</h3>
-                  <div className="text-ink-soft mt-2 text-sm">
-                    <RichTextRenderer data={item.answer} />
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {post.author && (
-          <aside className="border-line bg-bg-alt mt-12 rounded-[var(--radius)] border p-5">
-            <p className="text-muted text-sm">Об авторе</p>
-            {authorHasPage ? (
-              <Link
-                href={`/avtory/${post.author.slug}/`}
-                className="text-ink mt-1 inline-block text-base font-semibold hover:underline"
-              >
-                {post.author.firstName} {post.author.lastName}
-              </Link>
-            ) : (
-              <p className="text-ink mt-1 text-base font-semibold">
-                {post.author.firstName} {post.author.lastName}
-              </p>
+          </>
+        }
+      />
+      <Section tone="default">
+        <Wrap>
+          <article className={a.body}>
+            <div className={a.figure}>
+              <Picture image={cover} sizes="(max-width: 767px) 100vw, 760px" eager />
+            </div>
+            {post.intro && <p className={a.lead}>{post.intro}</p>}
+            <RichText data={post.body as never} />
+            {author && (
+              <aside className={a.author}>
+                Об авторе
+                {authorHasPage ? (
+                  <Link href={`/avtory/${post.author!.slug}/`}>
+                    <b>{author}</b>
+                  </Link>
+                ) : (
+                  <b>{author}</b>
+                )}
+                {post.author?.jobTitle && <span>{post.author.jobTitle}</span>}
+              </aside>
             )}
-            {post.author.jobTitle && (
-              <p className="text-ink-soft mt-1 text-sm">{post.author.jobTitle}</p>
-            )}
-          </aside>
-        )}
-
-        <div className="mt-12">
-          <CtaMessengers />
-        </div>
-      </article>
+          </article>
+        </Wrap>
+      </Section>
+      <V3BlockRenderer blocks={retone(after, true)} phoneDisplay={contacts.phoneDisplay} />
 
       <JsonLd
         schema={[
