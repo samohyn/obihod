@@ -14,7 +14,8 @@ import { getAllDistricts, getDistrictBySlug, getSeoSettings } from '@/lib/seo/qu
 import { getPage } from '@/lib/pages'
 
 import { DistrictBlocksView } from './DistrictBlocksView'
-import { getCompany, minutes } from '@/lib/company'
+import { getPageTemplates } from '@/lib/page-templates-server'
+import { fillTemplate } from '@/lib/page-templates'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -44,9 +45,10 @@ export async function generateMetadata({
   const legacy = buildDistrictHubMetadata(d as any)
   // Из раздела «Услуги» — заголовок по шаблону; robots и canonical — прежние
   if (!(await getPage('uslugi'))) return legacy
-  const where = (d as unknown as { namePrepositional: string }).namePrepositional
-  const title = `Обиход ${where} — деревья, мусор, крыши, демонтаж`
-  const description = `Спил деревьев, вывоз мусора, чистка крыш и снег, демонтаж и благоустройство ${where}. Смета по фото за ${minutes((await getCompany()).photoEstimateMinutes)}, оплата после приёмки.`
+  const t = await getPageTemplates()
+  const vars = { 'в районе': (d as unknown as { namePrepositional: string }).namePrepositional }
+  const title = fillTemplate(t.districtMetaTitle, vars)
+  const description = fillTemplate(t.districtMetaDescription, vars)
   return {
     ...legacy,
     title: { absolute: title },

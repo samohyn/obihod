@@ -18,7 +18,7 @@ import { BLOG_CATEGORY, blogTopic } from '@/lib/blog-topics'
 import { getContacts } from '@/lib/chrome'
 
 import s from '../avtory.module.css'
-import { getCompany, minutes } from '@/lib/company'
+import { getPageTemplates } from '@/lib/page-templates-server'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -116,10 +116,10 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
     knowsAbout: (author.knowsAbout ?? []).map((k) => k.topic).filter(Boolean),
   }
 
-  const [posts, contacts, company] = await Promise.all([
+  const [posts, contacts, t] = await Promise.all([
     getPublishedBlogPosts() as unknown as Promise<AuthorPost[]>,
     getContacts(),
-    getCompany(),
+    getPageTemplates(),
   ])
   const mine = posts.filter((p) => p.slug && p.author?.slug === author.slug)
   const after: V3BlockWithTone[] = []
@@ -127,7 +127,7 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
     after.push({
       blockType: 'articles',
       eyebrow: 'Статьи',
-      title: 'Статьи автора',
+      title: t.authorPostsTitle,
       items: mine.map((p) => ({
         kicker: `${BLOG_CATEGORY[p.category] ?? 'Статья'} · ${new Date(p.publishedAt).toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' })}`,
         title: p.title,
@@ -140,8 +140,8 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
   after.push({
     blockType: 'final-form',
     anchor: 'zayavka',
-    eyebrow: `Заявка · ответ за ${minutes(company.callbackMinutes)}`,
-    title: `Задайте вопрос — перезвоним за ${minutes(company.callbackMinutes)}`,
+    eyebrow: t.formEyebrow,
+    title: t.authorFormTitle,
     background: null,
     channels: [],
     formTitle: 'Заявка',
@@ -178,13 +178,13 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
           <div>
             {author.bio && (
               <>
-                <h2 className={s.h2}>О специалисте</h2>
+                <h2 className={s.h2}>{t.authorAboutTitle}</h2>
                 <p className={s.bio}>{author.bio}</p>
               </>
             )}
             {author.knowsAbout && author.knowsAbout.length > 0 && (
               <>
-                <h2 className={s.h2}>Темы экспертизы</h2>
+                <h2 className={s.h2}>{t.authorTopicsTitle}</h2>
                 <ul className={s.chips}>
                   {author.knowsAbout.map((item, i) => (
                     <li key={item.id ?? `topic-${i}`}>{item.topic}</li>
