@@ -262,6 +262,7 @@ async function fetchCases(): Promise<SlugDoc[]> {
     const payload = await payloadClient()
     const r = await payload.find({
       collection: 'cases',
+      where: { _status: { equals: 'published' } },
       limit: 1000,
       pagination: false,
       select: { slug: true, updatedAt: true },

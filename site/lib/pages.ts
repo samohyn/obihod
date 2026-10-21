@@ -1,4 +1,3 @@
-import { draftMode } from 'next/headers'
 import { cache } from 'react'
 
 import type {
@@ -10,6 +9,7 @@ import type {
 import { fromPayloadBlocks, mediaPath, toImage } from '@/lib/blocks/v3/fromPayload'
 import { richToText } from '@/lib/geo-pages'
 import { payloadClient } from '@/lib/payload'
+import { isDraftPreview } from '@/lib/preview'
 
 export type PageData = {
   title: string
@@ -58,12 +58,7 @@ async function loadBlocksDoc(
   collection: 'pages' | 'sub-services',
   where: Record<string, unknown>,
 ): Promise<PageData | null> {
-  let draft = false
-  try {
-    draft = (await draftMode()).isEnabled
-  } catch {
-    // вне запроса (сборка) — только опубликованное
-  }
+  const draft = await isDraftPreview()
   try {
     const payload = await payloadClient()
     const res = await payload.find({
@@ -165,8 +160,11 @@ export const getPillarSummaryBlock = cache(
 export const getCasesListBlock = cache(async (match?: RegExp): Promise<V3BlockWithTone | null> => {
   try {
     const payload = await payloadClient()
+    const draft = await isDraftPreview()
     const res = await payload.find({
       collection: 'cases',
+      where: draft ? undefined : { _status: { equals: 'published' } },
+      draft,
       limit: 100,
       sort: '-dateCompleted',
       depth: 2,

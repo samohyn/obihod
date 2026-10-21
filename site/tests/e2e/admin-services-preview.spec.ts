@@ -1,13 +1,12 @@
 import { expect, test } from '@playwright/test'
 
 /**
- * PANEL-SERVICES-PREVIEW-TAB · e2e smoke.
+ * Вкладка «Страница» в «Услугах» (components/admin/PagePreviewPanel): страница направления
+ * собирается в «Страницах» — панель ведёт туда и на сайт (план 09, этап 4.2).
  *
- * Полный flow login → open service → click tab «Превью» → assert button
+ * Полный flow login → open service → click tab «Страница» → assert button
  * требует БД с seed-юзером + минимум 1 service. На CI с ephemeral postgres
  * этих условий нет, поэтому тесты skip-ятся при отсутствии prerequisites.
- *
- * AC5 (sa-panel.md): tab visible, button с правильным href, empty-slug case.
  *
  * Pattern взят из admin-design-compliance.spec.ts + admin-smoke.spec.ts —
  * проверка отвечает ли admin вообще, иначе test.skip(true, '...').
@@ -45,8 +44,8 @@ async function login(page: import('@playwright/test').Page): Promise<boolean> {
   }
 }
 
-test.describe('PANEL-SERVICES-PREVIEW-TAB — Превью tab в Services edit-view', () => {
-  test('tab «Превью» видим в Services edit-view (6-й tab)', async ({ page }) => {
+test.describe('«Услуги» — вкладка «Страница»', () => {
+  test('вкладка «Страница» видна в документе услуги', async ({ page }) => {
     const ok = await login(page)
     if (!ok) test.skip(true, 'Admin auth недоступен (БД/seed) — пропуск')
 
@@ -64,14 +63,12 @@ test.describe('PANEL-SERVICES-PREVIEW-TAB — Превью tab в Services edit-
     await page.waitForLoadState('domcontentloaded')
 
     const previewTab = page.locator('button[role="tab"], .tabs-field__tab-button', {
-      hasText: 'Превью',
+      hasText: 'Страница',
     })
     await expect(previewTab.first()).toBeVisible({ timeout: 10000 })
   })
 
-  test('button «Открыть на сайте» — target=_blank + rel=noopener для published doc', async ({
-    page,
-  }) => {
+  test('«Открыть на сайте» — target=_blank + rel=noopener, адрес /<slug>/', async ({ page }) => {
     const ok = await login(page)
     if (!ok) test.skip(true, 'Admin auth недоступен — пропуск')
 
@@ -88,24 +85,17 @@ test.describe('PANEL-SERVICES-PREVIEW-TAB — Превью tab в Services edit-
     await page.waitForLoadState('domcontentloaded')
 
     const previewTab = page
-      .locator('button[role="tab"], .tabs-field__tab-button', { hasText: 'Превью' })
+      .locator('button[role="tab"], .tabs-field__tab-button', { hasText: 'Страница' })
       .first()
     await previewTab.click()
 
-    // Любая интерактивная primary-button (link или button) внутри section[aria-label="Превью услуги"].
-    const previewSection = page.locator('section[aria-label="Превью услуги"]').first()
+    // Любая интерактивная primary-button (link или button) внутри section[aria-label="Страница направления"].
+    const previewSection = page.locator('section[aria-label="Страница направления"]').first()
     await expect(previewSection).toBeVisible({ timeout: 5000 })
 
     const link = previewSection.locator('a[target="_blank"]').first()
-    if (await link.isVisible().catch(() => false)) {
-      // Published doc → direct link `/<slug>/`.
-      await expect(link).toHaveAttribute('rel', /noopener/)
-      await expect(link).toHaveAttribute('href', /^\/[a-z][a-z0-9-]+\/$/)
-    } else {
-      // Draft case — button (не link), скип link assertions.
-      const button = previewSection.locator('button').first()
-      await expect(button).toBeVisible()
-    }
+    await expect(link).toHaveAttribute('rel', /noopener/)
+    await expect(link).toHaveAttribute('href', /^\/[a-z][a-z0-9-]+\/$/)
   })
 
   test('a11y target-size — primary CTA ≥44×44 (WCAG 2.5.5)', async ({ page }) => {
@@ -125,12 +115,14 @@ test.describe('PANEL-SERVICES-PREVIEW-TAB — Превью tab в Services edit-
     await page.waitForLoadState('domcontentloaded')
 
     const previewTab = page
-      .locator('button[role="tab"], .tabs-field__tab-button', { hasText: 'Превью' })
+      .locator('button[role="tab"], .tabs-field__tab-button', { hasText: 'Страница' })
       .first()
     await previewTab.click()
 
     const cta = page
-      .locator('section[aria-label="Превью услуги"] a, section[aria-label="Превью услуги"] button')
+      .locator(
+        'section[aria-label="Страница направления"] a, section[aria-label="Страница направления"] button',
+      )
       .first()
     await expect(cta).toBeVisible({ timeout: 5000 })
     const box = await cta.boundingBox()

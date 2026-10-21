@@ -15,7 +15,6 @@ import {
   PricingTable,
   ProcessSteps,
 } from '@/blocks'
-import { buildMasterTemplateGate } from '@/lib/admin/master-template-gate'
 import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
 
 /**
@@ -353,18 +352,15 @@ export const Services: CollectionConfig = {
           ],
         },
         {
-          // PANEL-SERVICES-PREVIEW-TAB · brand-guide §12.4 mockup line 3086.
-          // Phase 1: tab-контейнер для card с primary-button «Открыть на сайте».
-          // Phase 2 (отдельный US): inline iframe preview (требует ADR от tamd).
-          label: 'Превью',
-          description: 'Открыть страницу услуги на публичном сайте в новой вкладке.',
+          // Страница направления собирается в «Страницах» — панель ведёт туда и на сайт.
+          label: 'Страница',
           fields: [
             {
               name: 'previewPanel',
               type: 'ui',
               admin: {
                 components: {
-                  Field: '@/components/admin/ServicePreviewPanel',
+                  Field: '@/components/admin/PagePreviewPanel',
                 },
               },
             },
@@ -440,16 +436,8 @@ export const Services: CollectionConfig = {
     },
   ],
   hooks: {
-    // EPIC-SERVICE-PAGES-UX C3 — master-template enforcement (ADR-0021).
-    // Services коллекция содержит pillar-страницы (T2_PILLAR layer).
-    // alsoCheckPayloadStatus=true — Services использует Payload drafts API
-    // (`versions.drafts.autosave`), нет custom publishStatus поля.
-    beforeValidate: [
-      buildMasterTemplateGate({
-        layerResolver: () => 'T2_PILLAR',
-        alsoCheckPayloadStatus: true,
-      }),
-    ],
+    // Проверки старых `blocks` (ADR-0021) сняты 21.10.2026: страница собирается из «Страниц» —
+    // старые блоки не рисуются, а проверка не давала сохранить документ (план 09, этап 4).
     afterChange: [revalidateAfterChange],
     afterDelete: [revalidateAfterDelete],
   },

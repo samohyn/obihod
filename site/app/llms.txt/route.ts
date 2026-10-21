@@ -142,6 +142,7 @@ async function buildCasesByService(): Promise<Record<string, CaseByService[]>> {
     const payload = await payloadClient()
     const r = await payload.find({
       collection: 'cases',
+      where: { _status: { equals: 'published' } },
       limit: 100,
       sort: '-dateCompleted',
       pagination: false,

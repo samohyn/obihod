@@ -110,6 +110,7 @@ async function fetchTopCases(limit = 10): Promise<CaseDoc[]> {
     const payload = await payloadClient()
     const r = await payload.find({
       collection: 'cases',
+      where: { _status: { equals: 'published' } },
       limit,
       sort: '-dateCompleted',
       pagination: false,

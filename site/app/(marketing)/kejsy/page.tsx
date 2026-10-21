@@ -26,6 +26,7 @@ const getCases = unstable_cache(
     const payload = await payloadClient()
     const r = await payload.find({
       collection: 'cases',
+      where: { _status: { equals: 'published' } },
       limit: 50,
       sort: '-dateCompleted',
       depth: 2,

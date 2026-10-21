@@ -24,26 +24,37 @@ import { retone } from '@/lib/blocks/v3/retone'
 import { toImage } from '@/lib/blocks/v3/fromPayload'
 import { getContacts } from '@/lib/chrome'
 import { getPage } from '@/lib/pages'
+import { isDraftPreview } from '@/lib/preview'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 export const revalidate = 86400
 export const dynamicParams = true
 
-const getCaseBySlug = unstable_cache(
-  async (slug: string) => {
-    const payload = await payloadClient()
-    const r = await payload.find({
-      collection: 'cases',
-      where: { slug: { equals: slug } },
-      limit: 1,
-      depth: 2,
-    })
-    return r.docs[0] ?? null
-  },
-  ['case-by-slug'],
+async function loadCase(slug: string, draft: boolean) {
+  const payload = await payloadClient()
+  const r = await payload.find({
+    collection: 'cases',
+    where: draft
+      ? { slug: { equals: slug } }
+      : { and: [{ slug: { equals: slug } }, { _status: { equals: 'published' } }] },
+    draft,
+    limit: 1,
+    depth: 2,
+  })
+  return r.docs[0] ?? null
+}
+
+const getPublishedCase = unstable_cache(
+  (slug: string) => loadCase(slug, false),
+  ['published-case-by-slug'],
   { revalidate: 86400, tags: ['cases'] },
 )
+
+/** Снятый с публикации кейс на сайте не виден; в предпросмотре — последняя версия. */
+async function getCaseBySlug(slug: string) {
+  return (await isDraftPreview()) ? loadCase(slug, true) : getPublishedCase(slug)
+}
 
 export async function generateMetadata({
   params,
