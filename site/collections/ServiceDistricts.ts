@@ -1,4 +1,4 @@
-import type { CollectionConfig, CollectionBeforeValidateHook } from 'payload'
+import { APIError, type CollectionConfig, type CollectionBeforeValidateHook } from 'payload'
 import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
 import { Hero } from '@/blocks/Hero'
 import { TextContent } from '@/blocks/TextContent'
@@ -35,17 +35,28 @@ import { fillOfferAfterRead, validateOfferTokens } from '@/lib/admin/offerTokens
  *
  * Запускается ДО общего buildPublishGate (sa.md §5.2 п.5).
  */
-const requireGatesForPublish: CollectionBeforeValidateHook = async ({ data }) => {
+const requireGatesForPublish: CollectionBeforeValidateHook = async ({ data, originalDoc }) => {
   if (!data) return data
-  if (data.publishStatus === 'published') {
-    if (!data.miniCase) {
-      throw new Error(
-        'Нельзя публиковать programmatic без mini-кейса из района (Scaled Content Abuse risk).',
+  // Правило — для момента публикации. Уже опубликованную запись можно пересохранить и без
+  // мини-кейса: иначе записи, опубликованные до правила, нельзя поправить (план 09, 21.10).
+  const publishing =
+    data.publishStatus === 'published' && originalDoc?.publishStatus !== 'published'
+  if (publishing) {
+    // APIError с data — иначе Payload покажет в админке «unknown error» вместо причины
+    if (!data.miniCase)
+      throw new APIError(
+        'Публикация: нужен мини-кейс из этого района — без него страница «услуга в районе» не публикуется.',
+        400,
+        { field: 'miniCase' },
+        true,
       )
-    }
-    if (!data.localFaq || data.localFaq.length < 2) {
-      throw new Error('Минимум 2 локальных FAQ для публикации.')
-    }
+    if (!data.localFaq || data.localFaq.length < 2)
+      throw new APIError(
+        'Публикация: нужно минимум 2 местных вопроса.',
+        400,
+        { field: 'localFaq' },
+        true,
+      )
   }
   return data
 }
