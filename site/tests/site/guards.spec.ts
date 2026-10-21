@@ -37,12 +37,9 @@ test.describe('Тестовая заявка (staging)', () => {
 
   test('форма контактов принимает заявку', async ({ page }) => {
     await page.goto('/kontakty/')
-    const form = page
-      .locator('section')
-      .filter({ has: page.locator('#lf-phone') })
-      .last()
-    await form.locator('#lf-name').fill('Проверка staging (CI)')
-    await form.locator('#lf-phone').fill(uniquePhone())
+    const form = page.locator('#zayavka')
+    await form.locator('input[type="tel"]').fill(uniquePhone())
+    await form.getByRole('checkbox', { name: /персональных данных/i }).check()
     const [res] = await Promise.all([
       page.waitForResponse(
         (r) => r.request().method() === 'POST' && new URL(r.url()).pathname === '/api/leads/',

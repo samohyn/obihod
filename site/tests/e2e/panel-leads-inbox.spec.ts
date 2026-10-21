@@ -142,7 +142,7 @@ test.describe('PANEL-LEADS-INBOX — list-view UX', () => {
 
     const newChip = page
       .locator('nav.lead-quick-filters button[role="tab"]')
-      .filter({ hasText: /^Новая$/ })
+      .filter({ hasText: /^Новая/ })
       .first()
     if (!(await newChip.isVisible().catch(() => false))) {
       test.skip(true, 'Chip «Новая» не найден — пропуск')

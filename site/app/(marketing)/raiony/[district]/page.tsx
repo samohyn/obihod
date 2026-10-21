@@ -1,30 +1,13 @@
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
 import type { Metadata } from 'next'
 
-import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
-import { trail } from '@/lib/breadcrumbs'
-import { JsonLd } from '@/components/seo/JsonLd'
-import { BlockRenderer } from '@/components/blocks/BlockRenderer'
-import { CtaMessengers } from '@/components/marketing/CtaMessengers'
-import { getSiteChrome } from '@/lib/chrome'
 import { buildDistrictHubMetadata } from '@/lib/seo/metadata'
-import { breadcrumbListSchema, localBusinessSchema } from '@/lib/seo/jsonld'
-import { getAllDistricts, getDistrictBySlug, getSeoSettings } from '@/lib/seo/queries'
+import { getAllDistricts, getDistrictBySlug } from '@/lib/seo/queries'
 import { getPage } from '@/lib/pages'
-
-import { DistrictBlocksView } from './DistrictBlocksView'
 import { getPageTemplates } from '@/lib/page-templates-server'
 import { fillTemplate } from '@/lib/page-templates'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
-
-const ALL_SERVICES = [
-  { slug: 'arboristika', title: 'Спил деревьев' },
-  { slug: 'chistka-krysh', title: 'Чистка крыш' },
-  { slug: 'vyvoz-musora', title: 'Вывоз мусора' },
-  { slug: 'demontazh', title: 'Демонтаж' },
-]
+import { DistrictBlocksView } from './DistrictBlocksView'
 
 export const revalidate = 86400
 export const dynamicParams = true
@@ -40,154 +23,26 @@ export async function generateMetadata({
   params: Promise<{ district: string }>
 }): Promise<Metadata> {
   const { district: districtSlug } = await params
-  const d = await getDistrictBySlug(districtSlug)
-  if (!d) return {}
-  const legacy = buildDistrictHubMetadata(d as any)
-  // Из раздела «Услуги» — заголовок по шаблону; robots и canonical — прежние
-  if (!(await getPage('uslugi'))) return legacy
+  const [d, uslugi] = await Promise.all([getDistrictBySlug(districtSlug), getPage('uslugi')])
+  if (!d || !uslugi) return {}
+  // Заголовок и описание — по шаблону; robots и canonical — из записи района
+  const base = buildDistrictHubMetadata(d as any)
   const t = await getPageTemplates()
   const vars = { 'в районе': (d as unknown as { namePrepositional: string }).namePrepositional }
   const title = fillTemplate(t.districtMetaTitle, vars)
   const description = fillTemplate(t.districtMetaDescription, vars)
   return {
-    ...legacy,
+    ...base,
     title: { absolute: title },
     description,
-    openGraph: { ...legacy.openGraph, title, description },
+    openGraph: { ...base.openGraph, title, description },
   }
 }
 
+/** Район — запись «Районы» + раздел «Услуги» из «Страниц» (lib/geo-pages.ts); нет одного из них — 404. */
 export default async function DistrictHub({ params }: { params: Promise<{ district: string }> }) {
   const { district: districtSlug } = await params
-  const [district, chrome, seo] = await Promise.all([
-    getDistrictBySlug(districtSlug),
-    getSiteChrome(),
-    getSeoSettings(),
-  ])
-  if (!district) notFound()
-
-  // 0. Из раздела «Услуги», пока он опубликован
-  const uslugi = await getPage('uslugi')
-  if (uslugi) return <DistrictBlocksView district={district as never} uslugi={uslugi} />
-
-  const breadcrumbs = trail('raiony', {
-    name: district.nameNominative,
-    href: `/raiony/${district.slug}/`,
-  })
-
-  // US-0 W3 Track B-3 — приоритет blocks[] из Payload (cw fixture).
-  const districtBlocks = (district as { blocks?: unknown[] | null }).blocks
-  const hasBlocks = Array.isArray(districtBlocks) && districtBlocks.length > 0
-
-  if (hasBlocks) {
-    return (
-      <>
-        <Breadcrumbs items={breadcrumbs} schema={false} />
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-        <BlockRenderer blocks={districtBlocks as any} />
-        <JsonLd
-          schema={[
-            localBusinessSchema(chrome, seo, district as any),
-            breadcrumbListSchema(
-              breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
-            ),
-          ]}
-        />
-      </>
-    )
-  }
-
-  return (
-    <>
-      <Breadcrumbs items={breadcrumbs} schema={false} />
-      <section className="mx-auto max-w-5xl px-6 py-12">
-        <h1 className="text-4xl font-semibold tracking-tight text-stone-900">
-          Обиход {district.namePrepositional}
-        </h1>
-        <p className="mt-4 max-w-2xl text-lg text-stone-700">
-          Спил, снег, мусор, демонтаж {district.namePrepositional} и Раменском ГО. Расстояние от
-          МКАД — {district.distanceFromMkad} км. Покрытие — радиус {district.coverageRadius} км.
-        </p>
-
-        <CtaMessengers className="mt-8 max-w-2xl" />
-
-        <h2 className="mt-12 text-2xl font-semibold text-stone-900">
-          Услуги {district.namePrepositional}
-        </h2>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {ALL_SERVICES.map((s) => (
-            <Link
-              key={s.slug}
-              href={`/${s.slug}/${district.slug}/`}
-              className="rounded-lg border border-stone-200 bg-white p-4 hover:border-orange-300"
-            >
-              <div className="font-medium text-stone-900">{s.title}</div>
-              <div className="mt-1 text-xs text-stone-500">
-                {s.title} {district.namePrepositional}
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {(district as any).landmarks && (district as any).landmarks.length > 0 && (
-          <>
-            <h2 className="mt-12 text-2xl font-semibold text-stone-900">Где именно работаем</h2>
-            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-              {(district as any).landmarks.map((l: any, i: number) => (
-                <li key={i} className="text-stone-700">
-                  · {l.name}{' '}
-                  <span className="text-xs text-stone-500">({labelLandmarkType(l.type)})</span>
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
-
-        {(district as any).neighborDistricts && (district as any).neighborDistricts.length > 0 && (
-          <>
-            <h2 className="mt-12 text-2xl font-semibold text-stone-900">Соседние районы</h2>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {(district as any).neighborDistricts.map((n: any) => {
-                const slug = typeof n === 'object' ? n.slug : n
-                const name = typeof n === 'object' ? n.nameNominative : n
-                return (
-                  <Link
-                    key={slug}
-                    href={`/raiony/${slug}/`}
-                    className="rounded-full border border-stone-300 px-4 py-1 text-sm text-stone-700 hover:border-orange-300"
-                  >
-                    {name}
-                  </Link>
-                )
-              })}
-            </div>
-          </>
-        )}
-
-        <JsonLd
-          schema={[
-            localBusinessSchema(chrome, seo, district as any),
-            breadcrumbListSchema(
-              breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
-            ),
-          ]}
-        />
-      </section>
-    </>
-  )
-}
-
-function labelLandmarkType(t: string) {
-  switch (t) {
-    case 'kp':
-      return 'КП'
-    case 'mkr':
-      return 'микрорайон'
-    case 'snt':
-      return 'СНТ'
-    case 'object':
-      return 'объект'
-    default:
-      return t
-  }
+  const [district, uslugi] = await Promise.all([getDistrictBySlug(districtSlug), getPage('uslugi')])
+  if (!district || !uslugi) notFound()
+  return <DistrictBlocksView district={district as never} uslugi={uslugi} />
 }

@@ -15,7 +15,7 @@ import { DEFAULT_COMPANY, fillOffer, type Company } from '../lib/offer'
 import { requestSiteRevalidate } from './_site-revalidate'
 
 const APPLY = process.argv.includes('--apply')
-const RAW = { rawOffer: true, skipMasterTemplateGate: true, keepPublished: true }
+const RAW = { rawOffer: true, keepPublished: true }
 
 /**
  * Поля, которые выводятся на сайте (старые `blocks` не выводятся — не трогаем). Кейсы — истории

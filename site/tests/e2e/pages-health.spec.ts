@@ -28,9 +28,7 @@ const PAGES = [
 const WIDTHS = [360, 768, 1280, 1440]
 
 /** Известный горизонтальный скролл: страница → ширина → где чиним. Починили — тест попросит убрать. */
-const KNOWN_OVERFLOW: Record<string, Record<number, string>> = {
-  '/': { 360: 'этап 2: калькулятор главной (.hp-calc-fields) на 2px шире экрана' },
-}
+const KNOWN_OVERFLOW: Record<string, Record<number, string>> = {}
 
 for (const url of PAGES) {
   test(`${url}: без горизонтального скролла на ${WIDTHS.join('/')}`, async ({ page }) => {
