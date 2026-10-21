@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
 import { Hero, TextContent, RelatedServices, CtaBanner, Breadcrumbs } from '@/blocks'
+import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
 
 /**
  * Authors — E-E-A-T авторы и команда (бригадиры, арбористы, промальпинисты).
@@ -36,6 +37,10 @@ export const Authors: CollectionConfig = {
     create: isAdmin,
     update: isAdmin,
     delete: isAdmin,
+  },
+  hooks: {
+    afterChange: [revalidateAfterChange],
+    afterDelete: [revalidateAfterDelete],
   },
   fields: [
     {

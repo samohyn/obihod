@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { v3Blocks } from '@/blocks/v3'
 import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
+import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
 
 /**
  * «Страницы» — универсальный тип контента из блоков (план 09, раздел 5: один путь рендера).
@@ -27,24 +28,8 @@ export const Pages: CollectionConfig = {
     delete: isAdmin,
   },
   hooks: {
-    afterChange: [
-      async ({ doc, req }) => {
-        // Публикация главной сразу видна на сайте, без ожидания ISR (10 минут).
-        if (doc?._status !== 'published') return
-        try {
-          const { revalidatePath } = await import('next/cache')
-          revalidatePath(doc.slug === 'home' ? '/' : `/${doc.slug}/`)
-          // Прайс хаба стоит и в сводном прайсе /uslugi/tseny/
-          if (!doc.slug.includes('/')) revalidatePath('/uslugi/tseny/')
-        } catch (e) {
-          // Вне запроса Next (скрипт seed:home) кеша страниц нет — сбрасывать нечего.
-          const msg = (e as Error).message
-          if (!msg.includes('static generation store missing')) {
-            req.payload.logger.error(`[pages] revalidate failed: ${msg}`)
-          }
-        }
-      },
-    ],
+    afterChange: [revalidateAfterChange],
+    afterDelete: [revalidateAfterDelete],
   },
   fields: [
     {

@@ -15,6 +15,7 @@ import { C4_DEMO } from '../lib/dev-blocks/c4-demo'
 import config from '../payload.config.js'
 
 import { dropNulls, toLayout } from './_v3-seed'
+import { requestSiteRevalidate } from './_site-revalidate'
 
 const PUBLISH = process.argv.includes('--publish')
 
@@ -48,6 +49,7 @@ async function main() {
   console.log(
     `[seed:home] страница home id=${doc.id}, блоков ${layout.length}, ${PUBLISH ? 'опубликована' : 'черновик'}`,
   )
+  await requestSiteRevalidate('seed:home')
   process.exit(0)
 }
 

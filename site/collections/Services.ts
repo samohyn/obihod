@@ -16,6 +16,7 @@ import {
   ProcessSteps,
 } from '@/blocks'
 import { buildMasterTemplateGate } from '@/lib/admin/master-template-gate'
+import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
 
 /**
  * US-3 ADR-0019 namespace-disjoint guard.
@@ -449,23 +450,7 @@ export const Services: CollectionConfig = {
         alsoCheckPayloadStatus: true,
       }),
     ],
-    afterChange: [
-      async ({ doc }) => {
-        const url = process.env.SITE_URL
-        const secret = process.env.REVALIDATE_SECRET
-        if (!url || !secret) return doc
-        try {
-          await fetch(`${url}/api/revalidate?tag=service-${doc.slug}`, {
-            headers: { 'x-revalidate-secret': secret },
-          })
-          await fetch(`${url}/api/revalidate?tag=sitemap`, {
-            headers: { 'x-revalidate-secret': secret },
-          })
-        } catch (e) {
-          console.warn('[services.afterChange] revalidate failed:', e)
-        }
-        return doc
-      },
-    ],
+    afterChange: [revalidateAfterChange],
+    afterDelete: [revalidateAfterDelete],
   },
 }

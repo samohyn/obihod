@@ -21,6 +21,7 @@
 import { getPayload } from 'payload'
 
 import config from '../payload.config.js'
+import { requestSiteRevalidate } from './_site-revalidate'
 
 const APPLY = process.argv.includes('--apply')
 
@@ -108,6 +109,7 @@ async function main() {
     n++
   }
   console.error(`[clean:geo-legacy] очищено записей: ${n}`)
+  await requestSiteRevalidate('clean:geo-legacy')
   process.exit(0)
 }
 

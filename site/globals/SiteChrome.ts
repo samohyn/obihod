@@ -2,6 +2,7 @@ import type { ArrayField, Field, GlobalConfig, Validate } from 'payload'
 
 import { ICON_NAMES } from '@/components/blocks/v3/iconNames'
 import { isAdmin } from '@/lib/auth/access'
+import { revalidateGlobalAfterChange } from '@/lib/admin/revalidateSite'
 
 /**
  * SiteChrome — единый global для "рамки сайта": Header, Footer, контакты,
@@ -150,23 +151,7 @@ export const SiteChrome: GlobalConfig = {
     read: () => true,
     update: isAdmin,
   },
-  hooks: {
-    afterChange: [
-      async ({ req }) => {
-        // Инвалидируем RSC-кеш по тегу + path-layout для надёжности на первом
-        // запуске. Паттерн параллельный с /api/revalidate?tag=site-chrome,
-        // но работает в том же процессе (PM2 / next dev) — экономит HTTP-hop.
-        try {
-          const { revalidateTag, revalidatePath } = await import('next/cache')
-          revalidateTag('site-chrome', 'max')
-          revalidatePath('/', 'layout')
-          req.payload.logger.info(`[site-chrome] revalidated at ${new Date().toISOString()}`)
-        } catch (e) {
-          req.payload.logger.error(`[site-chrome] revalidate failed: ${(e as Error).message}`)
-        }
-      },
-    ],
-  },
+  hooks: { afterChange: [revalidateGlobalAfterChange] },
   fields: [
     {
       type: 'tabs',

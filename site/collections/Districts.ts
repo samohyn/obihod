@@ -10,6 +10,7 @@ import {
   Tldr,
   Breadcrumbs,
 } from '@/blocks'
+import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
 
 /**
  * US-3 ADR-0019 namespace-disjoint guard (зеркало Services.subServices[].slug).
@@ -277,31 +278,7 @@ export const Districts: CollectionConfig = {
     },
   ],
   hooks: {
-    afterChange: [
-      async ({ doc }) => {
-        const url = process.env.SITE_URL
-        const secret = process.env.REVALIDATE_SECRET
-        if (!url || !secret) return doc
-        const tags = [
-          'sitemap',
-          `district-${doc.slug}`,
-          ...['arboristika', 'chistka-krysh', 'vyvoz-musora', 'demontazh'].map(
-            (s) => `sd-${s}-${doc.slug}`,
-          ),
-        ]
-        try {
-          await Promise.all(
-            tags.map((tag) =>
-              fetch(`${url}/api/revalidate?tag=${tag}`, {
-                headers: { 'x-revalidate-secret': secret },
-              }),
-            ),
-          )
-        } catch (e) {
-          console.warn('[districts.afterChange] revalidate failed:', e)
-        }
-        return doc
-      },
-    ],
+    afterChange: [revalidateAfterChange],
+    afterDelete: [revalidateAfterDelete],
   },
 }

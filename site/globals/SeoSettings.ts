@@ -1,5 +1,6 @@
 import type { GlobalConfig } from 'payload'
 import { isAdmin } from '@/lib/auth/access'
+import { revalidateGlobalAfterChange } from '@/lib/admin/revalidateSite'
 
 /**
  * SeoSettings — SEO-only global. После ADR-0002 часть полей, которые
@@ -25,6 +26,7 @@ export const SeoSettings: GlobalConfig = {
     group: '04 · SEO',
   },
   access: { read: () => true, update: isAdmin },
+  hooks: { afterChange: [revalidateGlobalAfterChange] },
   fields: [
     {
       name: 'organization',

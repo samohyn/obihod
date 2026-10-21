@@ -22,6 +22,7 @@ import { getPayload } from 'payload'
 import { convertMarkdownToLexical, editorConfigFactory } from '@payloadcms/richtext-lexical'
 
 import config from '../payload.config.js'
+import { requestSiteRevalidate } from './_site-revalidate'
 
 const APPLY = process.argv.includes('--apply')
 const TARGETS = [
@@ -262,6 +263,7 @@ async function main() {
     `[fix:markdown-bodies] markdown: ${n}, ссылок из путей: ${links}, обрезанных полей: ${cut}` +
       (APPLY ? ' — записано' : ' (для записи — --apply)'),
   )
+  if (APPLY) await requestSiteRevalidate('fix:markdown-bodies')
   process.exit(0)
 }
 

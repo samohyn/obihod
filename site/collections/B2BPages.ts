@@ -12,6 +12,7 @@ import {
   Breadcrumbs,
 } from '@/blocks'
 import { buildMasterTemplateGate } from '@/lib/admin/master-template-gate'
+import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
 
 export const B2BPages: CollectionConfig = {
   slug: 'b2b-pages',
@@ -165,5 +166,7 @@ export const B2BPages: CollectionConfig = {
         alsoCheckPayloadStatus: true,
       }),
     ],
+    afterChange: [revalidateAfterChange],
+    afterDelete: [revalidateAfterDelete],
   },
 }

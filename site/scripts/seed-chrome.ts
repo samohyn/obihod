@@ -11,6 +11,7 @@ import { getPayload } from 'payload'
 
 import { DEFAULT_CHROME_VIEW, type SiteChrome } from '../lib/chrome'
 import config from '../payload.config.js'
+import { requestSiteRevalidate } from './_site-revalidate'
 
 async function main() {
   const payload = await getPayload({ config })
@@ -42,6 +43,7 @@ async function main() {
   }
   await payload.updateGlobal({ slug: 'site-chrome', data: data as never })
   console.log(`[seed:chrome] заполнено: ${filled.join(', ')}`)
+  await requestSiteRevalidate('seed:chrome')
   process.exit(0)
 }
 
