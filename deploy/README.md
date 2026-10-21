@@ -132,8 +132,8 @@ nginx: `/etc/nginx/sites-available/obikhod.ru` (вне репо: `client_max_bod
 - **правка в админке** — публикация, снятие с публикации, удаление, глобалы, медиа
   (хуки `site/lib/admin/revalidateSite.ts`; сохранение черновика кеш не трогает);
 - **seed и скрипты данных** — в конце сами делают POST `http://127.0.0.1:$PORT/api/revalidate/`
-  (`site/scripts/_site-revalidate.ts`). Порт берётся из `PORT` в `shared/.env`: на staging `PORT=3001`,
-  на проде переменной нет — 3000.
+  (`site/scripts/_site-revalidate.ts`). Порт берётся из `PORT` в `shared/.env`: на проде `PORT=3000`,
+  на staging `PORT=3001` (не копируется из прода — `deploy/staging/setup.sh`).
 
 Вручную (после правки базы через psql): `cd /home/deploy/obikhod/current && sudo -u deploy pnpm revalidate:site`
 (staging — то же в `/home/deploy/obikhod-staging/current`) или workflow «Revalidate ISR».
