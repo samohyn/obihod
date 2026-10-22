@@ -47,6 +47,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!page) return {}
   const district = page.district as unknown as DistrictLike
   const sd = page.sd as unknown as ServiceDistrictLike & {
+    seoDescription?: string | null
     publishStatus?: string | null
     noindexUntilCase?: boolean | null
   }
@@ -64,7 +65,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const hero = blocks.find((b) => b.blockType === 'hero-slider')
   const slide = hero && hero.blockType === 'hero-slider' ? hero.slides[0] : null
   const title = fillTemplate(templates.geoMetaTitle, { заголовок: slide?.title ?? page.sub.title })
-  const description = truncateMeta(slide?.lead ?? '', 158)
+  // своё описание записи (первое предложение лида) — иначе лид, обрезанный по слову
+  const description = sd.seoDescription?.trim() || truncateMeta(slide?.lead ?? '', 158)
   const url = `/${(page.service as { slug: string }).slug}/${page.slug}/${district.slug}/`
   return {
     metadataBase,

@@ -143,7 +143,7 @@ export const Districts: CollectionConfig = {
               type: 'array',
               minRows: 0,
               maxRows: 12,
-              labels: { singular: 'Landmark', plural: 'Landmarks (КП/мкр/СНТ)' },
+              labels: { singular: 'Landmark', plural: 'Landmarks (КП/мкр/СНТ/населённые пункты)' },
               fields: [
                 {
                   name: 'name',
@@ -158,6 +158,7 @@ export const Districts: CollectionConfig = {
                   options: [
                     { label: 'Коттеджный посёлок', value: 'kp' },
                     { label: 'Микрорайон', value: 'mkr' },
+                    { label: 'Населённый пункт', value: 'np' },
                     { label: 'СНТ', value: 'snt' },
                     { label: 'Объект (школа/ТЦ/ЖК)', value: 'object' },
                   ],

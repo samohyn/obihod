@@ -15,6 +15,7 @@ import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
 import { tfIdfUniqueness, lexicalToPlainText } from '@/lib/seo/uniqueness'
 import { revalidateAfterDelete, revalidateAlwaysAfterChange } from '@/lib/admin/revalidateSite'
 import { fillOfferAfterRead, validateOfferTokens } from '@/lib/admin/offerTokens'
+import { iconField } from '@/blocks/v3/fields'
 
 /**
  * ServiceDistricts-специфичный publish-gate (legacy-правила из R&D M1):
@@ -281,6 +282,39 @@ export const ServiceDistricts: CollectionConfig = {
               admin: {
                 description: 'Короткий комментарий по цене в этом районе. 1–2 абзаца. Опционально.',
               },
+            },
+            {
+              name: 'localInfo',
+              type: 'array',
+              label: 'Что важно в районе',
+              maxRows: 6,
+              labels: { singular: 'Карточка', plural: 'Карточки' },
+              admin: {
+                description:
+                  'Проверяемые местные сведения, которые меняют решение клиента: кто отвечает (региональный оператор ТКО, администрация, УК), что проверить на месте (водоохранная зона, место под контейнер), как считается цена в этом районе. Без выдуманных кейсов и обещаний сверх оффера. На странице — карточки после блока «Работаем в …».',
+              },
+              fields: [
+                iconField('icon', 'Иконка', 'pin'),
+                { name: 'title', type: 'text', label: 'Заголовок', required: true },
+                { name: 'text', type: 'textarea', label: 'Текст', required: true },
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'metaLabel',
+                      type: 'text',
+                      label: 'Подпись внизу',
+                      admin: { width: '50%', description: '«оператор», «срок»' },
+                    },
+                    {
+                      name: 'metaValue',
+                      type: 'text',
+                      label: 'Значение внизу',
+                      admin: { width: '50%', description: '«ruzskyro.ru», «до 17 рабочих дней»' },
+                    },
+                  ],
+                },
+              ],
             },
             {
               name: 'leadParagraph',
