@@ -1,5 +1,8 @@
+import { ICON_NAMES } from '@/components/blocks/v3/iconNames'
+import type { IconName } from '@/components/blocks/v3/shared'
 import type {
   BlockImage,
+  DocumentItem,
   FaqV3Block,
   ServiceTile,
   V3BlockWithTone,
@@ -31,6 +34,15 @@ export type ServiceDistrictLike = {
   localFaq?: { question: string; answer: unknown }[] | null
   localLandmarks?: { landmarkName?: string | null }[] | null
   localPriceNote?: string | null
+  localInfo?:
+    | {
+        icon?: string | null
+        title?: string | null
+        text?: string | null
+        metaLabel?: string | null
+        metaValue?: string | null
+      }[]
+    | null
 }
 
 /** Текст из Lexical: абзацы через пробел. */
@@ -179,6 +191,19 @@ function geoHero(
   }
 }
 
+/** Карточки «Что важно в районе» из записи: кто отвечает, что проверить, как считаем цену. */
+function localInfo(sd: ServiceDistrictLike): DocumentItem[] {
+  return (sd.localInfo ?? [])
+    .filter((i) => i.title?.trim() && i.text?.trim())
+    .map((i) => ({
+      icon: (ICON_NAMES as readonly string[]).includes(i.icon ?? '') ? (i.icon as IconName) : 'pin',
+      title: i.title!.trim(),
+      text: i.text!.trim(),
+      metaLabel: i.metaLabel ?? null,
+      metaValue: i.metaValue ?? null,
+    }))
+}
+
 /**
  * Середина гео-страницы: цены с местной заметкой, калькулятор, факты района, кейсы, этапы,
  * гарантии, отзывы и вопросы — местные первыми.
@@ -216,6 +241,14 @@ function geoBody(
       fillTemplate(t.geoFactsText, vars),
     ),
   )
+  const info = localInfo(sd)
+  if (info.length)
+    blocks.push({
+      blockType: 'documents',
+      eyebrow: 'Перед заказом',
+      title: fillTemplate(t.geoInfoTitle, vars),
+      items: info,
+    })
   for (const type of ['projects', 'steps', 'guarantees', 'reviews-v3'] as const) {
     const b = pick(page.blocks, type)
     if (b) blocks.push(b)
