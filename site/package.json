@@ -15,6 +15,7 @@
     "seed:subservice": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/seed-subservice.ts",
     "seed:page": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/seed-page.ts",
     "sync:latest-versions": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/sync-latest-versions.ts",
+    "fix:offer-logic": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/fix-offer-logic.ts",
     "offer:tokens": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/offer-tokens.ts",
     "fix:markdown-bodies": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/fix-markdown-bodies.ts",
     "seed:chrome": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/seed-chrome.ts",
