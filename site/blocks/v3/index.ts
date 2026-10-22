@@ -1066,6 +1066,16 @@ export const FinalFormV3: Block = {
         },
       ],
     },
+    {
+      name: 'openDetails',
+      type: 'checkbox',
+      label: 'Сразу показывать фото и описание задачи',
+      defaultValue: false,
+      admin: {
+        description:
+          'Для страниц «Фото → смета». Иначе поля фото, описания, адреса и имени открываются кнопкой — обязателен только телефон.',
+      },
+    },
   ],
 }
 

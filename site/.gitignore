@@ -47,6 +47,7 @@ next-env.d.ts
 
 # Payload
 /media
+/lead-photos
 payload-types.ts
 .tmp/
 /.lighthouseci/

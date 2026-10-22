@@ -10,8 +10,6 @@ import s from './FinalForm.module.css'
 export async function FinalForm(block: FinalFormBlock & { phoneDisplay?: string }) {
   const company = await getCompany()
   const onPhoto = Boolean(block.background?.url)
-  // Фото принимаем через мессенджер или почту; нет такого канала — строку «фото» в форме не показываем.
-  const photoChannel = block.channels.find((c) => c.icon === 'send' || c.icon === 'message')
   return (
     <section
       id={block.anchor ?? 'zayavka'}
@@ -45,8 +43,9 @@ export async function FinalForm(block: FinalFormBlock & { phoneDisplay?: string 
         <LeadFormV3
           title={block.formTitle}
           source={block.source}
-          photoHref={photoChannel?.href ?? null}
           phoneDisplay={block.phoneDisplay ?? company.phoneDisplay}
+          photoMinutes={company.photoEstimateMinutes}
+          openDetails={block.openDetails ?? false}
           callback={{
             opens: company.opens,
             closes: company.closes,

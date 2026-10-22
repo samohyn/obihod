@@ -52,7 +52,12 @@ pg_restore -l "$DUMP.part" > /dev/null || fail "дамп не читается p
 mv "$DUMP.part" "$DUMP"
 
 # код 1 у GNU tar = «файл изменился во время чтения» (загрузка в админке) — архив при этом годный
-tar -czf "$MEDIA.part" -C "$(dirname "$MEDIA_DIR")" "$(basename "$MEDIA_DIR")" || [ $? -eq 1 ]
+# в архиве media — и закрытые фото заявок (shared/lead-photos), если папка есть
+SHARED=$(dirname "$MEDIA_DIR")
+DIRS=$(basename "$MEDIA_DIR")
+[ -d "$SHARED/lead-photos" ] && DIRS="$DIRS lead-photos"
+# shellcheck disable=SC2086 # список папок — намеренно словами
+tar -czf "$MEDIA.part" -C "$SHARED" $DIRS || [ $? -eq 1 ]
 tar -tzf "$MEDIA.part" > /dev/null || fail "архив media не читается"
 mv "$MEDIA.part" "$MEDIA"
 chmod 600 "$DUMP" "$MEDIA"
