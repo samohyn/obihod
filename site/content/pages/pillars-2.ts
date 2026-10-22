@@ -705,6 +705,8 @@ export const kalkulyatorFotoSmeta: PageContent = {
       channels: [],
       formTitle: 'Смета по фото',
       source: 'kalkulyator-foto-smeta',
+      // страница про фото — поля фото и описания открыты сразу
+      openDetails: true,
     },
   ]),
 }

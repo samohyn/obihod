@@ -178,9 +178,34 @@ export const Leads: CollectionConfig = {
               },
             },
             {
+              name: 'message',
+              type: 'textarea',
+              label: 'Что нужно сделать',
+              admin: { description: 'Описание задачи от клиента из формы заявки.' },
+            },
+            {
+              name: 'address',
+              type: 'text',
+              label: 'Адрес или район',
+              admin: { description: 'Как клиент указал место работ — свободным текстом.' },
+            },
+            {
+              name: 'photoFiles',
+              type: 'upload',
+              relationTo: 'lead-photos',
+              hasMany: true,
+              label: 'Фото объекта',
+              admin: {
+                description:
+                  'Фото, которые клиент прикрепил к заявке (до 5). Метаданные и координаты сняты при загрузке.',
+              },
+            },
+            {
               name: 'photos',
               type: 'array',
               admin: {
+                // прежнее поле под S3 — не заполнялось; удалить вторым релизом (expand → contract)
+                hidden: true,
                 description: 'Фото объекта от клиента — основа для AI-черновика сметы.',
               },
               fields: [
@@ -228,6 +253,42 @@ export const Leads: CollectionConfig = {
               name: 'utmCampaign',
               type: 'text',
               admin: { description: 'UTM campaign — название рекламной кампании.' },
+            },
+            {
+              type: 'collapsible',
+              label: 'Согласие на обработку персональных данных',
+              admin: {
+                initCollapsed: true,
+                description:
+                  'Подтверждение для 152-ФЗ: когда клиент отметил согласие и какую редакцию документа видел.',
+              },
+              fields: [
+                {
+                  name: 'consentAt',
+                  type: 'date',
+                  label: 'Согласие дано',
+                  admin: { readOnly: true, date: { pickerAppearance: 'dayAndTime' } },
+                },
+                {
+                  name: 'consentVersion',
+                  type: 'text',
+                  label: 'Редакция согласия',
+                  admin: {
+                    readOnly: true,
+                    description:
+                      'Документ «Согласие на обработку персональных данных»: редакция и номер версии в «Страницах».',
+                  },
+                },
+                {
+                  name: 'consentTextHash',
+                  type: 'text',
+                  label: 'Отпечаток текста (SHA-256)',
+                  admin: {
+                    readOnly: true,
+                    description: 'По нему видно, что текст согласия с тех пор не менялся.',
+                  },
+                },
+              ],
             },
             {
               name: 'callTrackingId',

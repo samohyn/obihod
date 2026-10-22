@@ -16,6 +16,7 @@ import { Cases } from './collections/Cases'
 import { Authors } from './collections/Authors'
 import { Blog } from './collections/Blog'
 import { Leads } from './collections/Leads'
+import { LeadPhotos } from './collections/LeadPhotos'
 import { Redirects } from './collections/Redirects'
 import { Reviews } from './collections/Reviews'
 import { RumMetrics } from './collections/RumMetrics'
@@ -164,6 +165,7 @@ export default buildConfig({
   collections: [
     // 01 · Заявки
     Leads,
+    LeadPhotos,
     // 02 · Контент (порядок per brand-guide §12.2 mockup)
     Pages,
     Services,

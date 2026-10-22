@@ -304,6 +304,8 @@ export interface FinalFormBlock extends BlockBase {
   channels: { icon: IconName; title: string; text: string; href: string }[]
   formTitle: string
   source: string
+  /** Фото и описание задачи в форме открыты сразу («Фото → смета») */
+  openDetails?: boolean | null
 }
 
 // 22 · текст документа (политика ПДн, согласие)

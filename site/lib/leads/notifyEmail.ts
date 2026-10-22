@@ -3,7 +3,8 @@ import type { Payload } from 'payload'
 import { sendEmail } from '@/lib/messengers/email'
 
 /**
- * Письмо менеджеру о новой заявке — план 09, этап 1.
+ * Письмо менеджеру о новой заявке — план 09, этап 1; с этапа 2 — описание задачи, адрес и число фото
+ * (сами фото — только в админке по ссылке).
  *
  * Telegram с VPS в РФ недоступен (api.telegram.org — таймаут), поэтому основной канал — почта
  * через SMTP Beget (РФ): телефон и имя в письме — не трансграничная передача. Получатель —
@@ -18,7 +19,9 @@ export interface LeadEmailDoc {
   preferredChannel?: string | null
   service?: number | string | { title?: string | null } | null
   district?: number | string | { nameNominative?: string | null } | null
-  photos?: unknown[] | null
+  message?: string | null
+  address?: string | null
+  photoFiles?: unknown[] | null
   sourcePage?: string | null
   utmSource?: string | null
   utmMedium?: string | null
@@ -68,7 +71,10 @@ export async function emailManagerAboutLead(doc: LeadEmailDoc, payload: Payload)
     doc.preferredChannel && `Удобный канал: ${doc.preferredChannel}`,
     service && `Услуга: ${service}`,
     district && `Район: ${district}`,
-    doc.photos?.length ? `Фото: ${doc.photos.length} шт. — в заявке` : null,
+    doc.address && `Адрес или район: ${doc.address}`,
+    doc.message && `Что сделать: ${doc.message.slice(0, 1000)}`,
+    // сами фото в письмо не кладём: снимки участка с адресом — персональные данные, смотреть в админке
+    doc.photoFiles?.length ? `Фото: ${doc.photoFiles.length} шт. — открыть в заявке` : null,
     doc.sourcePage && `Страница: ${doc.sourcePage}`,
     utm && `Реклама (UTM): ${utm}`,
     `Время: ${new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })} (МСК)`,

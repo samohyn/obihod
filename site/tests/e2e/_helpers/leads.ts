@@ -42,16 +42,20 @@ export type LeadDoc = Record<string, unknown> & {
   name?: string
   sourcePage?: string
   service?: unknown
-  photos?: unknown[]
+  message?: string
+  photoFiles?: unknown[]
+  consentAt?: string
+  consentVersion?: string
 }
 
 export async function getLead(
   request: APIRequestContext,
   token: string,
   id: number | string,
+  depth = 0,
 ): Promise<LeadDoc> {
   const read = (t: string) =>
-    request.get(`/api/leads/${id}/?depth=0`, { headers: { Authorization: `JWT ${t}` } })
+    request.get(`/api/leads/${id}/?depth=${depth}`, { headers: { Authorization: `JWT ${t}` } })
   let res = await read(token)
   // Параллельные воркеры логинятся одним админом одновременно, Payload пишет их
   // сессии в одну запись users — одна может потеряться. Тогда входим заново.

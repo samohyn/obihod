@@ -3,7 +3,7 @@
 #
 # 1. Последний ежедневный дамп разворачивается во временную БД obikhod_restore_check, число строк
 #    в ключевых таблицах сверяется с продом (бэкап за сутки может отставать — допускаем рост прода).
-# 2. Архив media читается, число файлов сверяется с shared/media.
+# 2. Архив media читается, число файлов сверяется с shared/media и shared/lead-photos.
 # 3. Если настроен S3 (restic) — `restic check` с чтением 10% данных и восстановление последнего
 #    снимка во временную папку со сверкой контрольных сумм с локальной копией.
 # Временная БД и файлы удаляются в любом случае. Сбой → obikhod-notify, код выхода ≠ 0.
@@ -60,7 +60,7 @@ done
 
 # 2. Media
 in_archive=$(tar -tzf "$MEDIA" | grep -c -v '/$' || true)
-on_disk=$(find "$MEDIA_DIR" -type f | wc -l)
+on_disk=$(find "$MEDIA_DIR" "$(dirname "$MEDIA_DIR")/lead-photos" -type f 2>/dev/null | wc -l)
 [ "$in_archive" -gt 0 ] || fail "архив media пустой"
 [ $((in_archive * 100 / (on_disk > 0 ? on_disk : 1))) -ge 90 ] || fail "media: в архиве $in_archive файлов, на диске $on_disk"
 

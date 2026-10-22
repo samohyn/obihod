@@ -11,7 +11,7 @@
 # obikhod-staging на :3001, без бэкапа перед выкаткой.
 #
 # Шаги: бэкап (obikhod-backup --tag pre-deploy-<sha7>) → распаковка в releases/<ts>-<sha7> →
-# симлинки .env и media → pnpm install → миграции БД (pnpm migrate) → build →
+# симлинки .env, media и lead-photos → pnpm install → миграции БД (pnpm migrate) → build →
 # переключение current → pm2 restart → health-check (не 200 за 60 с — откат кода на предыдущий
 # релиз) → чистка, остаётся KEEP_RELEASES.
 #
@@ -61,6 +61,9 @@ cd "$BASE/releases/$REL"
 echo "$SHA" > REVISION
 ln -sfn "$BASE/shared/.env" .env
 ln -sfn "$BASE/shared/media" media
+# фото заявок — закрытая папка вне media (её отдаёт публичный маршрут медиатеки)
+install -d -o deploy -g deploy -m 0750 "$BASE/shared/lead-photos"
+ln -sfn "$BASE/shared/lead-photos" lead-photos
 chown -R deploy:deploy "$BASE/releases/$REL"
 
 log "install"

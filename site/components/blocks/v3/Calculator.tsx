@@ -6,6 +6,8 @@
 import Link from 'next/link'
 import { useId, useState } from 'react'
 
+import { CALC_EVENT } from '@/lib/leads/calcEvent'
+
 import { Eyebrow, Icon, Section, Wrap } from './shared'
 import type { CalculatorBlock, SectionTone } from './types'
 import s from './Calculator.module.css'
@@ -142,7 +144,17 @@ export function Calculator(block: CalculatorBlock & { tone?: SectionTone | null 
                 </li>
               ))}
             </ul>
-            <Link href="#zayavka" className={s.cta}>
+            <Link
+              href="#zayavka"
+              className={s.cta}
+              onClick={() =>
+                window.dispatchEvent(
+                  new CustomEvent(CALC_EVENT, {
+                    detail: `Расчёт на сайте: ${svc.label} — ${kind.label}, ${vol.label}, ${zone.label}: ${rub(price)}`,
+                  }),
+                )
+              }
+            >
               {block.ctaLabel ?? 'Зафиксировать цену'}
               <Icon name="arrow" size={18} />
             </Link>

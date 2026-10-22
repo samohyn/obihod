@@ -527,6 +527,7 @@ export async function fromPayloadBlocks(
           })),
           formTitle: str(b.formTitle) ?? 'Заявка на смету',
           source: str(b.source) ?? 'home-final',
+          openDetails: b.openDetails === true,
         })
         break
       case 'legal-doc':

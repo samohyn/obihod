@@ -1,6 +1,7 @@
 /**
  * Форма заявки (блок «Заявка», LeadFormV3) в браузере — на страницах из «Страниц», которые CI
- * наполняет seed-скриптами. У формы телефон и отдельный неотмеченный чекбокс согласия на ПДн.
+ * наполняет seed-скриптами. Обязательны телефон и отдельный неотмеченный чекбокс согласия на ПДн;
+ * фото и описание задачи — по кнопке «Фото и описание задачи».
  *
  * Для каждой страницы:
  *   1. без телефона или без согласия — ошибка, запрос не уходит;
@@ -10,6 +11,7 @@
  * Успех — role="status" (карточка вместо формы), ошибка — role="alert" внутри формы.
  */
 import { expect, test, type Locator, type Page, type Response } from '@playwright/test'
+import sharp from 'sharp'
 
 import { adminToken, getLead, uniqueIp, uniquePhone } from './_helpers/leads'
 
@@ -107,3 +109,42 @@ for (const path of FORM_PAGES) {
     })
   })
 }
+
+test.describe('Форма заявки: фото и описание задачи', () => {
+  test('раскрыть «Фото и описание», прикрепить фото — заявка приходит с фото и текстом', async ({
+    page,
+    request,
+  }) => {
+    const scope = await open(page, '/kontakty/')
+    const toggle = scope.getByRole('button', { name: /Фото и описание задачи/ })
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+    await toggle.click()
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true')
+
+    const jpeg = await sharp({
+      create: { width: 1200, height: 900, channels: 3, background: '#4a7c59' },
+    })
+      .jpeg()
+      .toBuffer()
+    await scope.locator('input[type="file"]').setInputFiles({
+      name: 'uchastok.jpg',
+      mimeType: 'image/jpeg',
+      buffer: jpeg,
+    })
+    await expect(scope.getByRole('img', { name: 'Фото 1' })).toBeVisible()
+    await scope.getByLabel('Что нужно сделать').fill('Спилить берёзу у забора')
+
+    const number = uniquePhone()
+    await phone(scope).fill(number)
+    await consent(scope).check()
+    const [res] = await Promise.all([page.waitForResponse(isLeadResponse), submit(scope)])
+    expect(res.status()).toBe(201)
+    await expect(scope.getByRole('status')).toContainText('Фото у менеджера')
+
+    const token = await adminToken(request)
+    test.skip(!token, 'нет ADMIN_EMAIL / ADMIN_PASSWORD — сохранение не проверяем')
+    const lead = await getLead(request, token!, ((await res.json()) as { id: number }).id)
+    expect(lead).toMatchObject({ phone: number, message: 'Спилить берёзу у забора' })
+    expect(lead.photoFiles).toHaveLength(1)
+  })
+})
