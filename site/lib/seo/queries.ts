@@ -1,4 +1,5 @@
 import { cache } from 'react'
+import type { Where } from 'payload'
 
 import { payloadClient } from '@/lib/payload'
 import { isDraftPreview } from '@/lib/preview'
@@ -101,26 +102,45 @@ export const getAllDistricts = cache(async () => {
   }
 })
 
+/**
+ * Запись «Услуга × район» для страницы сайта. Черновик, который ещё не публиковали, сайт показывает
+ * (с noindex) в последней правке из админки: Payload пишет правки черновика только в «Версии», а
+ * основная строка остаётся такой, какой запись создали.
+ */
+async function findServiceDistrict(where: Where) {
+  const payload = await payloadClient()
+  const draft = await isDraftPreview()
+  const r = await payload.find({
+    collection: 'service-districts',
+    where,
+    draft,
+    limit: 1,
+    depth: 3,
+  })
+  const doc = r.docs[0]
+  if (!doc || draft || doc._status !== 'draft') return doc ?? null
+  const latest = await payload.find({
+    collection: 'service-districts',
+    where: { id: { equals: doc.id } },
+    draft: true,
+    limit: 1,
+    depth: 3,
+  })
+  return latest.docs[0] ?? doc
+}
+
 export const getServiceDistrict = cache(async (serviceSlug: string, districtSlug: string) => {
   try {
-    const payload = await payloadClient()
-    const sd = await payload.find({
-      collection: 'service-districts',
-      where: {
-        and: [
-          { 'service.slug': { equals: serviceSlug } },
-          { 'district.slug': { equals: districtSlug } },
-          // T4 pillar-level only: exclude sub-service triples (T3).
-          // Without this, sub-level SDs (subServiceSlug != null) shadow pillar SDs
-          // when both exist for the same service × district pair.
-          { subServiceSlug: { exists: false } },
-        ],
-      },
-      draft: await isDraftPreview(),
-      limit: 1,
-      depth: 3,
+    return await findServiceDistrict({
+      and: [
+        { 'service.slug': { equals: serviceSlug } },
+        { 'district.slug': { equals: districtSlug } },
+        // T4 pillar-level only: exclude sub-service triples (T3).
+        // Without this, sub-level SDs (subServiceSlug != null) shadow pillar SDs
+        // when both exist for the same service × district pair.
+        { subServiceSlug: { exists: false } },
+      ],
     })
-    return sd.docs[0] ?? null
   } catch (e) {
     console.error('[queries.getServiceDistrict] failed:', e)
     return null
@@ -166,52 +186,126 @@ export const getServiceDistrictBundle = cache(
 )
 
 /**
- * US-4 EPIC-SEO-USLUGI: все пары (service, district) для T4 generateStaticParams и sitemap.
- * Только индексируемые SD без sub_service_slug — тот же предикат, что robots у страницы
- * (isServiceDistrictIndexable: published и noindexUntilCase снят).
- * Возвращает {service, slug} (slug = districtSlug в URL pattern [service]/[slug]/).
+ * «Подуслуга в районе» — /<направление>/<подуслуга>/<район>/: запись «Услуга × район» с этой
+ * подуслугой и её направление и район. null — записи нет.
  */
-export const getAllServiceDistrictParams = cache(
-  async (): Promise<Array<{ service: string; slug: string }>> => {
-    try {
-      const payload = await payloadClient()
-      const r = await payload.find({
-        collection: 'service-districts',
-        where: {
-          and: [
-            { publishStatus: { equals: 'published' } },
-            { noindexUntilCase: { not_equals: true } },
-          ],
-        },
-        limit: 1000,
-        pagination: false,
-        depth: 1,
-      })
-      const out: Array<{ service: string; slug: string }> = []
-      for (const sd of r.docs) {
-        const sdRaw = sd as unknown as {
-          service?: { slug?: string } | string | null
-          district?: { slug?: string } | string | null
-          subServiceSlug?: string | null
-        }
-        if (sdRaw.subServiceSlug) continue // только pillar × city — T4
-        const service =
-          typeof sdRaw.service === 'object' && sdRaw.service !== null
-            ? (sdRaw.service.slug ?? '')
-            : ''
-        const slug =
-          typeof sdRaw.district === 'object' && sdRaw.district !== null
-            ? (sdRaw.district.slug ?? '')
-            : ''
-        if (service && slug) out.push({ service, slug })
-      }
-      return out
-    } catch (e) {
-      console.error('[queries.getAllServiceDistrictParams] failed:', e)
-      return []
+export const getSubServiceDistrictBundle = cache(
+  async (
+    serviceSlug: string,
+    subSlug: string,
+    districtSlug: string,
+  ): Promise<{
+    service: Record<string, unknown>
+    district: Record<string, unknown>
+    sd: Record<string, unknown>
+  } | null> => {
+    const sd = (await findServiceDistrict({
+      and: [
+        { 'service.slug': { equals: serviceSlug } },
+        { 'district.slug': { equals: districtSlug } },
+        { subServiceSlug: { equals: subSlug } },
+      ],
+    })) as unknown as Record<string, unknown> | null
+    const service = sd?.service
+    const district = sd?.district
+    if (!sd || typeof service !== 'object' || !service) return null
+    if (typeof district !== 'object' || !district) return null
+    return {
+      service: service as Record<string, unknown>,
+      district: district as Record<string, unknown>,
+      sd,
     }
   },
 )
+
+type IndexableServiceDistrict = { service: string; district: string; sub: string | null }
+
+/**
+ * Индексируемые записи «Услуга × район» — тот же предикат, что robots у страницы
+ * (isServiceDistrictIndexable: published и noindexUntilCase снят).
+ */
+const getIndexableServiceDistricts = cache(async (): Promise<IndexableServiceDistrict[]> => {
+  try {
+    const payload = await payloadClient()
+    const r = await payload.find({
+      collection: 'service-districts',
+      where: {
+        and: [
+          { publishStatus: { equals: 'published' } },
+          { noindexUntilCase: { not_equals: true } },
+        ],
+      },
+      limit: 1000,
+      pagination: false,
+      depth: 1,
+    })
+    const out: IndexableServiceDistrict[] = []
+    for (const sd of r.docs) {
+      const sdRaw = sd as unknown as {
+        service?: { slug?: string } | string | null
+        district?: { slug?: string } | string | null
+        subServiceSlug?: string | null
+      }
+      const service =
+        typeof sdRaw.service === 'object' && sdRaw.service !== null
+          ? (sdRaw.service.slug ?? '')
+          : ''
+      const district =
+        typeof sdRaw.district === 'object' && sdRaw.district !== null
+          ? (sdRaw.district.slug ?? '')
+          : ''
+      if (service && district) out.push({ service, district, sub: sdRaw.subServiceSlug || null })
+    }
+    return out
+  } catch (e) {
+    console.error('[queries.getIndexableServiceDistricts] failed:', e)
+    return []
+  }
+})
+
+/**
+ * «Услуга в районе» (направление × район, без подуслуги) для generateStaticParams и sitemap.
+ * Возвращает {service, slug} (slug = districtSlug в URL pattern [service]/[slug]/).
+ */
+export const getAllServiceDistrictParams = cache(
+  async (): Promise<Array<{ service: string; slug: string }>> =>
+    (await getIndexableServiceDistricts())
+      .filter((p) => !p.sub)
+      .map((p) => ({ service: p.service, slug: p.district })),
+)
+
+export type SubServiceDistrictParam = { service: string; sub: string; district: string }
+
+/**
+ * «Подуслуга в районе» для generateStaticParams и sitemap: индексируемая запись с подуслугой,
+ * у которой опубликована сама подуслуга (иначе страница — 404).
+ */
+export const getAllSubServiceDistrictParams = cache(
+  async (): Promise<SubServiceDistrictParam[]> => {
+    const [sds, subs] = await Promise.all([
+      getIndexableServiceDistricts(),
+      getAllSubServiceParams(),
+    ])
+    const published = new Set(subs.map((s) => `${s.service}/${s.sub}`))
+    return sds.flatMap((p) =>
+      p.sub && published.has(`${p.service}/${p.sub}`)
+        ? [{ service: p.service, sub: p.sub, district: p.district }]
+        : [],
+    )
+  },
+)
+
+/** Адреса местных страниц для ссылок: «направление/район» и «направление/подуслуга/район». */
+export const getLocalGeoPages = cache(async (): Promise<Set<string>> => {
+  const [sds, subs] = await Promise.all([
+    getAllServiceDistrictParams(),
+    getAllSubServiceDistrictParams(),
+  ])
+  return new Set([
+    ...sds.map((p) => `${p.service}/${p.slug}`),
+    ...subs.map((p) => `${p.service}/${p.sub}/${p.district}`),
+  ])
+})
 
 export const getSeoSettings = cache(async () => {
   try {

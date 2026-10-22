@@ -81,6 +81,7 @@ export async function generateMetadata({
       district: sdBundle.district as unknown as DistrictLike,
       sd: sdBundle.sd as unknown as ServiceDistrictLike,
       otherServices: [],
+      localPages: new Set(),
       source: '',
       company: await getCompany(),
       templates,

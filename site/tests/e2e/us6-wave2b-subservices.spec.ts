@@ -82,3 +82,10 @@ test('Sub-service / district routing collision: оба URL отдают 200', as
   // Это programmatic, не sub — должен быть текст-индикатор
   await expect(page.locator('h1')).toBeVisible()
 })
+
+test('Подуслуга в районе: нет записи «Услуга × район» с этой подуслугой — 404', async ({
+  page,
+}) => {
+  const res = await page.goto('/arboristika/spil-derevev/net-takogo-rajona/')
+  expect(res?.status()).toBe(404)
+})

@@ -131,35 +131,40 @@ const form = (
   source,
 })
 
-/** «Услуга в районе» — /arboristika/ramenskoye/. */
-export function buildServiceDistrictBlocks(args: {
-  pillar: PageData
-  district: DistrictLike
-  sd: ServiceDistrictLike
-  otherServices: ServiceTile[]
-  source: string
-  company: Company
-  templates: PageTemplates
-}): { title: string; blocks: V3BlockWithTone[] } {
-  const { pillar, district, sd, company, templates: t } = args
-  const vars = placeVars(district, { направление: pillar.title })
-  const hero = pick(pillar.blocks, 'hero-slider')
+type PlaceVars = ReturnType<typeof placeVars>
+
+/** Ссылка на местную страницу района, если она есть: /arboristika/ → /arboristika/istra/. */
+export function localHref(href: string, districtSlug: string, localPages: Set<string>): string {
+  const path = href.replace(/^\/|\/$/g, '')
+  return localPages.has(`${path}/${districtSlug}`) ? `/${path}/${districtSlug}/` : href
+}
+
+/** Первый экран гео-страницы: цена и район в надзаголовке, H1 и лид записи (нет своих — по шаблону). */
+function geoHero(
+  page: PageData,
+  district: DistrictLike,
+  sd: ServiceDistrictLike,
+  company: Company,
+  t: PageTemplates,
+  vars: PlaceVars,
+): { title: string; hero: V3BlockWithTone | null } {
+  const hero = pick(page.blocks, 'hero-slider')
   const slide = hero?.slides?.[0]
   const priceKicker = (slide?.kicker ?? '').split(' · ')[0]
   const title = sd.seoH1?.trim() || fillTemplate(t.geoTitle, vars)
   const lead =
     richToText(sd.leadParagraph) ||
     `${slide?.lead ?? ''} ${fillTemplate(t.geoLeadSuffix, vars)}`.trim()
-
-  const blocks: V3BlockWithTone[] = []
+  if (!hero || !slide) return { title, hero: null }
   // За аварийной зоной аварийную бригаду не обещаем (оффер, п. 5) — убираем это из плашки
   const far = (district.distanceFromMkad ?? 0) > company.emergencyRadiusKm
   const badge =
-    hero?.badge && far && /аварийн/i.test(hero.badge.note ?? '')
+    hero.badge && far && /аварийн/i.test(hero.badge.note ?? '')
       ? { ...hero.badge, note: t.geoFarBadge }
-      : hero?.badge
-  if (hero && slide) {
-    blocks.push({
+      : hero.badge
+  return {
+    title,
+    hero: {
       ...hero,
       badge,
       slides: [
@@ -170,11 +175,24 @@ export function buildServiceDistrictBlocks(args: {
           lead,
         },
       ],
-    })
+    },
   }
-  const tiles = pick(pillar.blocks, 'services-tiles')
-  if (tiles) blocks.push({ ...tiles, title: `${tiles.title} ${district.namePrepositional}` })
-  const prices = pick(pillar.blocks, 'price-tabs')
+}
+
+/**
+ * Середина гео-страницы: цены с местной заметкой, калькулятор, факты района, кейсы, этапы,
+ * гарантии, отзывы и вопросы — местные первыми.
+ */
+function geoBody(
+  page: PageData,
+  district: DistrictLike,
+  sd: ServiceDistrictLike,
+  company: Company,
+  t: PageTemplates,
+  vars: PlaceVars,
+): V3BlockWithTone[] {
+  const blocks: V3BlockWithTone[] = []
+  const prices = pick(page.blocks, 'price-tabs')
   if (prices) {
     const note = sd.localPriceNote?.trim()
     blocks.push({
@@ -187,7 +205,7 @@ export function buildServiceDistrictBlocks(args: {
         : prices.tabs,
     })
   }
-  const calc = pick(pillar.blocks, 'calculator-v3')
+  const calc = pick(page.blocks, 'calculator-v3')
   if (calc) blocks.push(calc)
   blocks.push(
     districtFacts(
@@ -199,10 +217,10 @@ export function buildServiceDistrictBlocks(args: {
     ),
   )
   for (const type of ['projects', 'steps', 'guarantees', 'reviews-v3'] as const) {
-    const b = pick(pillar.blocks, type)
+    const b = pick(page.blocks, type)
     if (b) blocks.push(b)
   }
-  const faq = pick(pillar.blocks, 'faq-v3')
+  const faq = pick(page.blocks, 'faq-v3')
   const localFaq: FaqV3Block['items'] = (sd.localFaq ?? [])
     .map((q) => ({ question: q.question, answer: richToText(q.answer) }))
     .filter((q) => q.question && q.answer)
@@ -214,6 +232,38 @@ export function buildServiceDistrictBlocks(args: {
       items: [...localFaq, ...(faq?.items ?? [])].slice(0, 8),
     })
   }
+  return blocks
+}
+
+/**
+ * «Услуга в районе» — /arboristika/ramenskoye/. Плитки подуслуг ведут на их страницы в этом районе,
+ * если такие страницы есть (localPages — «направление/район» и «направление/подуслуга/район»).
+ */
+export function buildServiceDistrictBlocks(args: {
+  pillar: PageData
+  district: DistrictLike
+  sd: ServiceDistrictLike
+  otherServices: ServiceTile[]
+  localPages: Set<string>
+  source: string
+  company: Company
+  templates: PageTemplates
+}): { title: string; blocks: V3BlockWithTone[] } {
+  const { pillar, district, sd, company, templates: t } = args
+  const vars = placeVars(district, { направление: pillar.title })
+  const { title, hero } = geoHero(pillar, district, sd, company, t, vars)
+  const blocks: V3BlockWithTone[] = hero ? [hero] : []
+  const tiles = pick(pillar.blocks, 'services-tiles')
+  if (tiles)
+    blocks.push({
+      ...tiles,
+      title: `${tiles.title} ${district.namePrepositional}`,
+      items: tiles.items.map((item) => ({
+        ...item,
+        href: localHref(item.href, district.slug, args.localPages),
+      })),
+    })
+  blocks.push(...geoBody(pillar, district, sd, company, t, vars))
   if (args.otherServices.length) {
     blocks.push({
       blockType: 'services-tiles',
@@ -225,6 +275,39 @@ export function buildServiceDistrictBlocks(args: {
   }
   const pillarForm = pick(pillar.blocks, 'final-form')
   blocks.push(form(t, fillTemplate(t.geoFormTitle, vars), args.source, pillarForm?.background))
+  return { title, blocks: retone(blocks) }
+}
+
+/**
+ * «Подуслуга в районе» — /arboristika/spil-derevev/istra/: та же сборка, но из подуслуги и записи
+ * «Услуга × район» с этой подуслугой. Блок подуслуги «что ещё сделаем» — в конце; его ссылки ведут
+ * на страницы этого района, где они есть.
+ */
+export function buildSubServiceDistrictBlocks(args: {
+  sub: PageData
+  district: DistrictLike
+  sd: ServiceDistrictLike
+  localPages: Set<string>
+  source: string
+  company: Company
+  templates: PageTemplates
+}): { title: string; blocks: V3BlockWithTone[] } {
+  const { sub, district, sd, company, templates: t } = args
+  const vars = placeVars(district, { направление: sub.title })
+  const { title, hero } = geoHero(sub, district, sd, company, t, vars)
+  const blocks: V3BlockWithTone[] = hero ? [hero] : []
+  blocks.push(...geoBody(sub, district, sd, company, t, vars))
+  const tiles = pick(sub.blocks, 'services-tiles')
+  if (tiles) {
+    const local = (href: string) => localHref(href, district.slug, args.localPages)
+    blocks.push({
+      ...tiles,
+      link: tiles.link ? { ...tiles.link, href: local(tiles.link.href) } : tiles.link,
+      items: tiles.items.map((item) => ({ ...item, href: local(item.href) })),
+    })
+  }
+  const subForm = pick(sub.blocks, 'final-form')
+  blocks.push(form(t, fillTemplate(t.geoFormTitle, vars), args.source, subForm?.background))
   return { title, blocks: retone(blocks) }
 }
 
@@ -298,11 +381,6 @@ export function localizeTiles(
 ): ServiceTile[] {
   const tiles = uslugi ? (pick(uslugi.blocks, 'services-tiles')?.items ?? []) : []
   return tiles
-    .map((t) => {
-      const pillar = t.href.replace(/^\/|\/$/g, '')
-      return localPages.has(`${pillar}/${districtSlug}`)
-        ? { ...t, href: `/${pillar}/${districtSlug}/` }
-        : t
-    })
+    .map((t) => ({ ...t, href: localHref(t.href, districtSlug, localPages) }))
     .filter((t) => !exclude || !t.href.startsWith(`/${exclude}/`))
 }

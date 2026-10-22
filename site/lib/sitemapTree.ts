@@ -5,6 +5,7 @@ import { CONSENT_URL, PRIVACY_URL } from './legal'
 import { payloadClient } from './payload'
 import {
   getAllServiceDistrictParams,
+  getAllSubServiceDistrictParams,
   getPublishedB2BPages,
   getPublishedSubServices,
 } from './seo/queries'
@@ -65,11 +66,12 @@ const titled = (docs: TitledDoc[], base: string): Crumb[] =>
     .map((d) => ({ name: shortTitle(d.title as string), href: `${base}${d.slug}/` }))
 
 export const getSitemapTree = cache(async (): Promise<SitemapSection[]> => {
-  const [services, subServices, sdParams, districts, cases, b2b, posts, authors] =
+  const [services, subServices, sdParams, subSdParams, districts, cases, b2b, posts, authors] =
     await Promise.all([
       findAll<ServiceDoc>('services', published),
       getPublishedSubServices(),
       getAllServiceDistrictParams(),
+      getAllSubServiceDistrictParams(),
       findAll<{ slug?: string; nameNominative?: string }>('districts'),
       findAll<TitledDoc>('cases'),
       getPublishedB2BPages() as Promise<TitledDoc[]>,
@@ -83,6 +85,7 @@ export const getSitemapTree = cache(async (): Promise<SitemapSection[]> => {
   const directions = services.filter((s) => !CALCULATOR_SLUGS.includes(s.slug)).sort(byOrder)
   const calculators = services.filter((s) => CALCULATOR_SLUGS.includes(s.slug))
   const districtName = new Map(districts.map((d) => [d.slug, d.nameNominative ?? d.slug]))
+  const subName = new Map(subServices.map((sub) => [`${sub.service}/${sub.slug}`, sub.title]))
 
   const serviceLinks: SitemapLink[] = directions.map((s) => ({
     name: s.title,
@@ -96,10 +99,20 @@ export const getSitemapTree = cache(async (): Promise<SitemapSection[]> => {
     .map((s) => ({
       name: s.title,
       href: `/${s.slug}/`,
-      children: sdParams
-        .filter((p) => p.service === s.slug)
-        .map((p) => ({ name: districtName.get(p.slug) ?? p.slug, href: `/${s.slug}/${p.slug}/` }))
-        .sort((a, b) => a.name.localeCompare(b.name, 'ru')),
+      children: [
+        ...sdParams
+          .filter((p) => p.service === s.slug)
+          .map((p) => ({ name: districtName.get(p.slug) ?? p.slug, href: `/${s.slug}/${p.slug}/` }))
+          .sort((a, b) => a.name.localeCompare(b.name, 'ru')),
+        // подуслуга в районе: «Спил деревьев · Истра»
+        ...subSdParams
+          .filter((p) => p.service === s.slug)
+          .map((p) => ({
+            name: `${shortTitle(subName.get(`${p.service}/${p.sub}`) ?? p.sub)} · ${districtName.get(p.district) ?? p.district}`,
+            href: `/${s.slug}/${p.sub}/${p.district}/`,
+          }))
+          .sort((a, b) => a.name.localeCompare(b.name, 'ru')),
+      ],
     }))
     .filter((l) => l.children.length > 0)
 

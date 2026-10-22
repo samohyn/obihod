@@ -13,7 +13,7 @@ import { isAdmin, isAdminOrPublished } from '@/lib/auth/access'
 // unchanged), T4_SD calculator-placeholder tables created с короткими enum
 // именами (≤ 63 chars).
 import { tfIdfUniqueness, lexicalToPlainText } from '@/lib/seo/uniqueness'
-import { revalidateAfterChange, revalidateAfterDelete } from '@/lib/admin/revalidateSite'
+import { revalidateAfterDelete, revalidateAlwaysAfterChange } from '@/lib/admin/revalidateSite'
 import { fillOfferAfterRead, validateOfferTokens } from '@/lib/admin/offerTokens'
 
 /**
@@ -213,7 +213,7 @@ export const ServiceDistricts: CollectionConfig = {
               index: true,
               admin: {
                 description:
-                  'Оставьте пустым. Записи с подуслугой (адреса /направление/подуслуга/район/) на сайте пока не показываются — такой страницы нет.',
+                  'Пусто — страница направления в районе: /arboristika/istra/. Адрес подуслуги (spil-derevev) — страница подуслуги в районе: /arboristika/spil-derevev/istra/; подуслуга должна быть опубликована.',
               },
             },
             {
@@ -461,7 +461,8 @@ export const ServiceDistricts: CollectionConfig = {
         return data
       },
     ],
-    afterChange: [revalidateAfterChange],
+    // неопубликованные черновики сайт показывает в последней правке (lib/seo/queries.ts)
+    afterChange: [revalidateAlwaysAfterChange],
     afterDelete: [revalidateAfterDelete],
   },
 }

@@ -8,7 +8,7 @@ import { buildServiceDistrictBlocks, localizeTiles } from '@/lib/geo-pages'
 import { getPage, type PageData } from '@/lib/pages'
 import { buildJsonLdForTemplate } from '@/lib/seo/composer'
 import type { District, Service } from '@/lib/seo/jsonld'
-import { getAllServiceDistrictParams } from '@/lib/seo/queries'
+import { getLocalGeoPages } from '@/lib/seo/queries'
 import { getCompany } from '@/lib/company'
 import { getPageTemplates } from '@/lib/page-templates-server'
 
@@ -29,20 +29,20 @@ export async function ServiceDistrictBlocksView({
   sd: ServiceDistrictLike
   pillar: PageData
 }) {
-  const [chrome, contacts, uslugi, params, company, templates] = await Promise.all([
+  const [chrome, contacts, uslugi, local, company, templates] = await Promise.all([
     getSiteChrome(),
     getContacts(),
     getPage('uslugi'),
-    getAllServiceDistrictParams(),
+    getLocalGeoPages(),
     getCompany(),
     getPageTemplates(),
   ])
-  const local = new Set(params.map((p) => `${p.service}/${p.slug}`))
   const { blocks } = buildServiceDistrictBlocks({
     pillar,
     district,
     sd,
     otherServices: localizeTiles(uslugi, district.slug, local, service.slug),
+    localPages: local,
     source: `${service.slug}-${district.slug}`,
     company,
     templates,

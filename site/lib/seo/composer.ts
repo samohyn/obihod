@@ -6,7 +6,8 @@
  *   T1_HUB    → 4 узла (Org, WebSite, ItemList, Breadcrumb)
  *   T2_PILLAR → 5 узлов (Org, Service+Rating, FAQ, Breadcrumb, +1 опц.)
  *   T3_SUB    → 4 узла (Org, Service, FAQ, Breadcrumb)
- *   T4_SD     → 6 узлов (Org, LocalBusiness, Service, FAQ, Breadcrumb, Person)
+ *   T4_SD     → 6 узлов (Org, LocalBusiness, Service, FAQ, Breadcrumb, Person); с `sub` —
+ *               подуслуга в районе
  *
  * caller передаёт уже собранные данные — composer pure (без I/O).
  */
@@ -104,7 +105,11 @@ export function buildJsonLdForTemplate(
       const nodes: Record<string, unknown>[] = [
         organizationSchema(ctx.chrome ?? null, ctx.seo ?? null),
         localBusinessSchema(ctx.chrome ?? null, ctx.seo ?? null, ctx.district),
-        serviceSchema(ctx.service, ctx.district),
+        // подуслуга в районе — Service подуслуги: её адрес, название и цена
+        serviceSchema(
+          ctx.sub ? { ...ctx.sub, slug: `${ctx.service.slug}/${ctx.sub.slug}` } : ctx.service,
+          ctx.district,
+        ),
         ...(faqs.length > 0 ? [faqPageSchema(faqs)] : []),
         breadcrumbListSchema(breadcrumbs),
       ]
