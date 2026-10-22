@@ -10,7 +10,7 @@ import type { Service } from '@/lib/seo/jsonld'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
 /** «от 700 ₽» → 700: цена «от» для разметки Service берётся из плашки первого экрана. */
-function priceFromBadge(blocks: PageData['blocks']): number | null {
+export function priceFromBadge(blocks: PageData['blocks']): number | null {
   const hero = blocks.find((b) => b.blockType === 'hero-slider')
   const value = hero && hero.blockType === 'hero-slider' ? hero.badge?.value : null
   const digits = value?.replace(/[^\d]/g, '')

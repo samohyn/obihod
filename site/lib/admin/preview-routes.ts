@@ -31,12 +31,13 @@ export async function computePreviewUrl(
       return doc.slug ? `/${doc.slug}/` : null
 
     case 'service-districts': {
-      // Реальный route: app/(marketing)/[service]/[district]/page.tsx → `/<service>/<district>/`.
+      // `/<service>/<district>/` или с подуслугой `/<service>/<sub>/<district>/`.
       // Может быть relation в виде ID или populated object.
       const serviceSlug = await resolveSlug(doc.service, 'services', payload)
       const districtSlug = await resolveSlug(doc.district, 'districts', payload)
       if (!serviceSlug || !districtSlug) return null
-      return `/${serviceSlug}/${districtSlug}/`
+      const sub = typeof doc.subServiceSlug === 'string' ? doc.subServiceSlug.trim() : ''
+      return sub ? `/${serviceSlug}/${sub}/${districtSlug}/` : `/${serviceSlug}/${districtSlug}/`
     }
 
     case 'cases':

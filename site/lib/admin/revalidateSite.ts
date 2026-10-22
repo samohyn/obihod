@@ -55,6 +55,19 @@ export const revalidateAfterChange: CollectionAfterChangeHook = async ({
   return doc
 }
 
+/**
+ * Для коллекций, чьи неопубликованные черновики сайт показывает (с noindex) в последней правке, —
+ * «Услуга × район»: сохранение черновика тоже меняет сайт.
+ */
+export const revalidateAlwaysAfterChange: CollectionAfterChangeHook = async ({
+  collection,
+  doc,
+  req,
+}) => {
+  await revalidateSite(req, `${collection.slug} ${doc?.id}`)
+  return doc
+}
+
 export const revalidateAfterDelete: CollectionAfterDeleteHook = async ({
   collection,
   doc,
