@@ -4,9 +4,9 @@
 # Запуск из корня репо:   deploy/manual-deploy.sh [ветка] [staging]   (по умолчанию origin/main)
 #
 # Ставит на сервер obikhod-deploy из того же коммита и запускает сборку в GitHub Actions
-# (.github/workflows/deploy.yml, workflow_dispatch): компиляция там, на сервере — только генерация
-# страниц из базы. Ветка должна быть запушена; выкатывается её последний коммит в origin.
-# Для прода — только main (ALLOW_NON_MAIN=1 работает лишь со сборкой на сервере).
+# («Deploy to staging» с ref=<sha> или «Deploy to prod» для origin/main): компиляция там, на
+# сервере — только генерация страниц из базы. Коммит должен быть в origin. Для прода — только
+# текущий origin/main (ALLOW_NON_MAIN=1 и другие SHA — лишь со сборкой на сервере).
 #
 # BUILD_ON_SERVER=1 — прежний путь (запасной, если GitHub недоступен): `git archive <sha> site`
 # прямо на сервер и полная сборка там; ref тогда — любая ветка или SHA, рабочее дерево не
@@ -46,16 +46,24 @@ if [ "${BUILD_ON_SERVER:-0}" = "1" ]; then
   git archive --format=tar.gz "$SHA" site | $SSH "$HOST" "obikhod-deploy $SHA $TARGET"
 else
   GH=${GH:-$(command -v gh || echo "$HOME/.local/bin/gh")}
-  BRANCH=${REF#origin/}
-  REMOTE=$(git ls-remote origin "refs/heads/$BRANCH" | cut -f1)
-  [ -n "$REMOTE" ] || { echo "✗ $BRANCH нет в origin — запушьте ветку (или BUILD_ON_SERVER=1 для SHA)" >&2; exit 1; }
-  [ "$REMOTE" = "$SHA" ] || { echo "✗ $REF ($SHA) не совпадает с origin/$BRANCH ($REMOTE) — запушьте ветку" >&2; exit 1; }
-  log "build in GitHub Actions: $BRANCH → $TARGET"
+  if [ "$TARGET" = prod ]; then
+    WF=deploy.yml; WF_REF=main; ARGS=()
+  else
+    # ветка из origin — её же версия workflow (так проверяются и правки самой выкатки), иначе — main
+    WF=deploy-staging.yml; BRANCH=${REF#origin/}
+    if [ "$(git ls-remote origin "refs/heads/$BRANCH" | cut -f1)" = "$SHA" ]; then WF_REF=$BRANCH; else WF_REF=main; fi
+    ARGS=(-f "ref=$SHA")
+  fi
+  if [ "$TARGET" = prod ] && [ "$(git rev-parse origin/main)" != "$SHA" ]; then
+    echo "✗ на прод через GitHub выкатывается текущий origin/main; для $SHA — BUILD_ON_SERVER=1" >&2
+    exit 1
+  fi
+  log "build in GitHub Actions: $WF ($WF_REF) → $TARGET"
   SINCE=$(date -u +%Y-%m-%dT%H:%M:%SZ)
-  "$GH" workflow run deploy.yml --ref "$BRANCH" -f target="$TARGET"
+  "$GH" workflow run "$WF" --ref "$WF_REF" "${ARGS[@]}"
   RUN=""
   for _ in $(seq 1 30); do
-    RUN=$("$GH" run list --workflow deploy.yml --branch "$BRANCH" --event workflow_dispatch --limit 5 \
+    RUN=$("$GH" run list --workflow "$WF" --event workflow_dispatch --limit 5 \
       --json databaseId,createdAt --jq "[.[] | select(.createdAt >= \"$SINCE\")][0].databaseId // empty")
     [ -n "$RUN" ] && break
     sleep 4

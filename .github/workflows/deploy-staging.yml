@@ -3,8 +3,10 @@ name: Deploy to staging
 # План 09, этап 1: выкатка любой ветки на https://staging.obikhod.ru (пароль у владельца) —
 # показать владельцу до мержа. Запуск: Actions → Deploy to staging → Run workflow (ref),
 # или `gh workflow run deploy-staging.yml -f ref=<ветка>`.
-# Тот же ключ DEPLOY_SSH_KEY и тот же /usr/local/sbin/obikhod-deploy, цель staging
-# (своя папка, БД obikhod_staging, pm2 obikhod-staging, без писем и Telegram).
+# Сборка — в _build-deploy.yml (компиляция здесь, на сервере только генерация страниц), тот же
+# ключ DEPLOY_SSH_KEY и тот же /usr/local/sbin/obikhod-deploy, цель staging (своя папка,
+# БД obikhod_staging, pm2 obikhod-staging, без писем и Telegram). После выкатки сами запускаются
+# проверки живого сайта (site-checks.yml).
 # Данные staging обновляет `obikhod-staging-refresh` на сервере (копия прода, заявки обезличены).
 
 on:
@@ -22,34 +24,11 @@ concurrency:
 permissions:
   contents: read
 
-env:
-  HOST: 89.111.141.79
-  HOST_KEY: '89.111.141.79 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF/PwpJIXiUp6BNluOBsFfp7kpLUOhyET+bp0MH7DlWN'
-
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-    timeout-minutes: 25
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          ref: ${{ inputs.ref }}
-
-      - name: SSH key
-        env:
-          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
-        run: |
-          [ -n "$DEPLOY_SSH_KEY" ] || { echo "::error::нет секрета DEPLOY_SSH_KEY"; exit 1; }
-          install -m 700 -d ~/.ssh
-          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          printf '%s\n' "$HOST_KEY" > ~/.ssh/known_hosts
-
-      - name: Deploy
-        run: |
-          SHA=$(git rev-parse HEAD)
-          echo "staging ← $SHA (${{ inputs.ref }})"
-          git archive --format=tar.gz "$SHA" site | ssh -i ~/.ssh/deploy_key \
-            -o StrictHostKeyChecking=yes -o ConnectTimeout=20 \
-            -o ServerAliveInterval=15 -o ServerAliveCountMax=4 \
-            "root@$HOST" "deploy $SHA staging"
+    uses: ./.github/workflows/_build-deploy.yml
+    with:
+      target: staging
+      ref: ${{ inputs.ref }}
+    secrets:
+      DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}

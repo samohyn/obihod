@@ -28,8 +28,8 @@
 **Staging и ручная выкатка** — тем же workflow:
 
 ```bash
-deploy/manual-deploy.sh <ветка> staging   # ветка должна быть запушена; ставит obikhod-deploy,
-                                          # запускает deploy.yml (target=staging) и ждёт
+deploy/manual-deploy.sh <ветка|sha> staging   # коммит в origin; ставит obikhod-deploy,
+                                          # запускает «Deploy to staging» и ждёт
 deploy/manual-deploy.sh                   # прод из origin/main тем же путём
 BUILD_ON_SERVER=1 deploy/manual-deploy.sh <sha>   # запасной путь без GitHub: полная сборка на сервере
 ```
