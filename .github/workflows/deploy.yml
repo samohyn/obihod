@@ -1,14 +1,9 @@
 name: Deploy to prod
 
-# План 09, этап 1: выкатка на VPS 89.111.141.79 после мержа в main.
-#
-# Вся серверная логика — /usr/local/sbin/obikhod-deploy (deploy/server/obikhod-deploy.sh): бэкап,
-# сборка, переключение, health-check с откатом, чистка релизов. Ключ DEPLOY_SSH_KEY в
-# /root/.ssh/authorized_keys ограничен forced command — он умеет только «deploy <sha>».
-# Обновился deploy/server/obikhod-deploy.sh — один раз выкатить вручную (deploy/manual-deploy.sh
-# ставит скрипт на сервер), ключ CI ставить его не может.
-#
-# Миграции БД сюда не входят: применить psql ДО мержа PR (ADR-0016).
+# План 09: выкатка на VPS 89.111.141.79 после мержа в main (изменения в site/**) или вручную.
+# Сборка — в _build-deploy.yml: компиляция здесь, на сервере только генерация страниц из базы.
+# Обновился deploy/server/obikhod-deploy.sh — поставить его на сервер (deploy/manual-deploy.sh
+# делает это сам), ключ CI ставить его не может.
 
 on:
   push:
@@ -16,6 +11,7 @@ on:
     paths:
       - 'site/**'
       - '.github/workflows/deploy.yml'
+      - '.github/workflows/_build-deploy.yml'
   workflow_dispatch:
 
 concurrency:
@@ -25,41 +21,21 @@ concurrency:
 permissions:
   contents: read
 
-env:
-  HOST: 89.111.141.79
-  # публичный ключ сервера (ssh-keyscan -t ed25519), не секрет — закреплён от подмены
-  HOST_KEY: '89.111.141.79 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF/PwpJIXiUp6BNluOBsFfp7kpLUOhyET+bp0MH7DlWN'
-
 jobs:
-  deploy:
+  guard:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - name: SSH key
-        env:
-          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+      - name: На прод — только main
+        if: ${{ github.ref != 'refs/heads/main' }}
         run: |
-          [ -n "$DEPLOY_SSH_KEY" ] || { echo "::error::нет секрета DEPLOY_SSH_KEY"; exit 1; }
-          install -m 700 -d ~/.ssh
-          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          printf '%s\n' "$HOST_KEY" > ~/.ssh/known_hosts
+          echo "::error::на прод выкатывается только main (сейчас ${{ github.ref }})"
+          exit 1
+      - run: echo "main → prod"
 
-      - name: Deploy
-        run: |
-          git archive --format=tar.gz "$GITHUB_SHA" site | ssh -i ~/.ssh/deploy_key \
-            -o StrictHostKeyChecking=yes -o ConnectTimeout=20 \
-            -o ServerAliveInterval=15 -o ServerAliveCountMax=4 \
-            "root@$HOST" "deploy $GITHUB_SHA"
-
-      - name: Smoke
-        run: |
-          fail=0
-          for p in / /arboristika/ /kalkulyator/foto-smeta/ /admin/login/ /api/health/; do
-            code=$(curl -s --max-time 20 -o /dev/null -w '%{http_code}' "https://obikhod.ru$p" || true)
-            printf '%-28s %s\n' "$p" "$code"
-            [ "$code" = 200 ] || fail=1
-          done
-          exit $fail
+  deploy:
+    needs: guard
+    uses: ./.github/workflows/_build-deploy.yml
+    with:
+      target: prod
+    secrets:
+      DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}

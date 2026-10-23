@@ -16,21 +16,30 @@
 ## Выкатка
 
 **Обычный путь — автоматически после мержа в `main`** (`.github/workflows/deploy.yml`, если
-изменился `site/**`). Раннер шлёт `git archive <sha> site` по SSH ключом `DEPLOY_SSH_KEY`, который
-в `/root/.ssh/authorized_keys` ограничен forced command — умеет только `deploy <sha>`.
+изменился `site/**`). Сборка разделена (с 23.10.2026): GitHub Actions ставит пакеты и делает
+тяжёлую компиляцию `next build --experimental-build-mode=compile` (без базы), затем шлёт архив
+исходников вместе с `.next` (без кеша) по SSH ключом `DEPLOY_SSH_KEY` — в
+`/root/.ssh/authorized_keys` он ограничен forced command и умеет только `deploy <sha> [prod|staging]`.
+На сервере остаётся генерация страниц из базы прода (`--experimental-build-mode=generate`) —
+секунды CPU и ~0,5 ГБ памяти вместо полной сборки на 2 CPU и до 3 ГБ рядом с работающим продом.
+`NEXT_PUBLIC_SITE_URL` вшивается при компиляции: у прода и staging своё значение; сервер сверяет его
+с `.env` цели и при расхождении собирает целиком сам.
 
-**Вручную** (сбой CI, hotfix, изменился сам серверный скрипт):
+**Staging и ручная выкатка** — тем же workflow:
 
 ```bash
-deploy/manual-deploy.sh            # origin/main
-deploy/manual-deploy.sh <sha>      # конкретный коммит из main; ALLOW_NON_MAIN=1 — обход
+deploy/manual-deploy.sh <ветка|sha> staging   # коммит в origin; ставит obikhod-deploy,
+                                          # запускает «Deploy to staging» и ждёт
+deploy/manual-deploy.sh                   # прод из origin/main тем же путём
+BUILD_ON_SERVER=1 deploy/manual-deploy.sh <sha>   # запасной путь без GitHub: полная сборка на сервере
 ```
 
-Оба пути вызывают на сервере `/usr/local/sbin/obikhod-deploy` (`deploy/server/obikhod-deploy.sh`):
-бэкап → распаковка → `pnpm install` → миграции БД (`pnpm migrate`) → `build` → переключение
-`current` → `pm2 restart` → health-check `/api/health/` (нет 200 за 60 с — откат кода) → чистка релизов. Ручной скрипт перед
-выкаткой ставит на сервер версию `obikhod-deploy` из того же коммита; ключ CI этого не может —
-изменения `deploy/server/` выкатить один раз вручную.
+Все пути вызывают на сервере `/usr/local/sbin/obikhod-deploy` (`deploy/server/obikhod-deploy.sh`):
+бэкап → распаковка → `pnpm install` → миграции БД (`pnpm migrate`) → генерация (или полная сборка;
+с `nice`, чтобы не отнимать CPU у прода) → переключение `current` → `pm2 restart` → health-check
+`/api/health/` (нет 200 за 60 с — откат кода) → чистка релизов. Ручной скрипт перед выкаткой ставит на
+сервер версию `obikhod-deploy` из того же коммита; ключ CI этого не может — изменения
+`deploy/server/` выкатить один раз через `manual-deploy.sh`.
 
 **Миграции БД** — шаг выкатки (с 20.10.2026, план 09 «Дрейф схемы»; ручной psql из ADR-0016 больше
 не нужен). Изменили коллекцию/поле → `pnpm schema:diff` (локально, против свежей копии staging/прода)
