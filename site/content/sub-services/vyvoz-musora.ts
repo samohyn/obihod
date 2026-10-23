@@ -95,7 +95,7 @@ const wasteCalc = (gazelBase: number, title: string): Omit<CalculatorBlock, 'blo
   eyebrow: 'Калькулятор',
   title,
   lead: 'Выберите машину или контейнер и сколько подач. Погрузка и вывоз — уже в цене, вторая подача в тот же день — на 10% дешевле.',
-  ctaLabel: 'Зафиксировать цену',
+  ctaLabel: 'Получить твёрдую смету',
   note: 'Предварительная цена · твёрдая — в смете по фото',
   services: [
     {

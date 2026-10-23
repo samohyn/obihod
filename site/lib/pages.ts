@@ -51,6 +51,31 @@ export const getSubServicePage = cache(
   },
 )
 
+/** Обещание оффера с первого экрана документа (строка под H1) — или null. */
+export function heroPromise(page: PageData | null): string | null {
+  const hero = page?.blocks.find((b) => b.blockType === 'hero-slider')
+  return hero && hero.blockType === 'hero-slider' ? (hero.slides[0]?.promise ?? null) : null
+}
+
+/**
+ * Подуслуга без своего обещания берёт его у направления: оффер стоит на первом экране каждой
+ * услуги (план 09, этап 2), а владелец правит его в одном месте — на странице направления.
+ */
+export function withPromise(page: PageData, promise: string | null): PageData {
+  if (!promise) return page
+  return {
+    ...page,
+    blocks: page.blocks.map((b) =>
+      b.blockType === 'hero-slider'
+        ? {
+            ...b,
+            slides: b.slides.map((sl, i) => (i === 0 && !sl.promise ? { ...sl, promise } : sl)),
+          }
+        : b,
+    ),
+  }
+}
+
 async function loadBlocksDoc(
   collection: 'pages' | 'sub-services',
   where: Record<string, unknown>,

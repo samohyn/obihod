@@ -150,12 +150,12 @@ export function Calculator(block: CalculatorBlock & { tone?: SectionTone | null 
               onClick={() =>
                 window.dispatchEvent(
                   new CustomEvent(CALC_EVENT, {
-                    detail: `Расчёт на сайте: ${svc.label} — ${kind.label}, ${vol.label}, ${zone.label}: ${rub(price)}`,
+                    detail: `Расчёт на сайте: ${svc.label} · ${svc.kindLabel}: ${kind.label} · ${svc.volumeLabel}: ${vol.label} · ${zone.label} — ${rub(price)} (ориентир)`,
                   }),
                 )
               }
             >
-              {block.ctaLabel ?? 'Зафиксировать цену'}
+              {block.ctaLabel ?? 'Получить твёрдую смету'}
               <Icon name="arrow" size={18} />
             </Link>
             {block.note && <small>{block.note}</small>}

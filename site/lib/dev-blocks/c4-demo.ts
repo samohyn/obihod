@@ -12,7 +12,6 @@ const img = (name: string, alt: string, focus?: string): BlockImage => ({
 })
 
 const PHONE_HREF = 'tel:+79851705111'
-const MAX_HREF = 'https://max.ru/'
 
 // Детерминированные точки объектов (без Math.random — одинаковый HTML на сервере и клиенте).
 function demoPoints(count: number): { angle: number; km: number }[] {
@@ -327,7 +326,7 @@ export const C4_DEMO: V3BlockWithTone[] = [
     eyebrow: 'Онлайн-калькулятор',
     title: 'Узнайте цену за минуту',
     lead: 'Выберите услугу, объём и где участок. Погрузка, вывоз и утилизация — уже в результате.',
-    ctaLabel: 'Зафиксировать цену',
+    ctaLabel: 'Получить твёрдую смету',
     note: 'Перезвоним за 10 минут · твёрдая цена — после фото или осмотра',
     services: [
       {
@@ -437,10 +436,14 @@ export const C4_DEMO: V3BlockWithTone[] = [
       {
         time: '00:00',
         title: 'Заявка',
-        text: 'Звонок, форма, фото в MAX или Telegram — круглосуточно',
+        text: 'Звонок или форма с фото — круглосуточно',
       },
       { time: '+10 мин', title: 'Звонок менеджера', text: 'Уточним задачу, доступ, сроки' },
-      { time: '+30 мин', title: 'Цена по фото', text: 'Предварительная — в мессенджер' },
+      {
+        time: '+30 мин',
+        title: 'Цена по фото',
+        text: 'Предварительная — по телефону или на почту',
+      },
       {
         time: 'сегодня–завтра',
         title: 'Осмотр и договор',
@@ -569,10 +572,10 @@ export const C4_DEMO: V3BlockWithTone[] = [
     blockType: 'photo-cta',
     eyebrow: 'Проблемы с участком?',
     title: 'Пришлите фото — цена через 30 минут',
-    text: 'Менеджер посмотрит фото, оценит объём и технику, ответит в мессенджере. Без выезда и обязательств.',
+    text: 'Менеджер посмотрит фото, оценит объём и технику, перезвонит или ответит на почту. Без выезда и обязательств.',
     image: img('phone-order', 'Фото задачи в телефоне'),
-    primary: { label: 'Отправить фото', href: MAX_HREF, icon: 'upload' },
-    secondary: { label: 'MAX', href: MAX_HREF, icon: 'send' },
+    primary: { label: 'Отправить фото', href: '#zayavka', icon: 'upload' },
+    secondary: { label: 'Позвонить', href: PHONE_HREF, icon: 'phone' },
   },
   {
     blockType: 'reviews-v3',
@@ -684,7 +687,7 @@ export const C4_DEMO: V3BlockWithTone[] = [
         'Способ работ и примерная цена',
         'Нужен ли порубочный билет',
       ],
-      cta: { label: 'Отправить фото арбористу', href: MAX_HREF },
+      cta: { label: 'Отправить фото арбористу', href: '#zayavka' },
     },
   },
   {
@@ -807,7 +810,7 @@ export const C4_DEMO: V3BlockWithTone[] = [
       {
         question: 'Как работает смета по фото?',
         answer:
-          'Пришлите 2–3 фото в мессенджер или через форму. Менеджер ответит за 30 минут предварительной ценой; твёрдая — после осмотра.',
+          'Пришлите 2–3 фото через форму на сайте или на почту. Менеджер ответит за 30 минут предварительной ценой; твёрдая — после осмотра.',
       },
       {
         question: 'Выезд оценщика платный?',
@@ -829,7 +832,12 @@ export const C4_DEMO: V3BlockWithTone[] = [
     background: img('crew', 'Бригада Обихода идёт на участок'),
     channels: [
       { icon: 'phone', title: '+7 (985) 170-51-11', text: 'Позвонить', href: PHONE_HREF },
-      { icon: 'send', title: 'MAX и Telegram', text: 'Пришлите фото — посчитаем', href: MAX_HREF },
+      {
+        icon: 'send',
+        title: 'partner@obikhod.ru',
+        text: 'Пришлите фото — посчитаем',
+        href: 'mailto:partner@obikhod.ru',
+      },
     ],
     formTitle: 'Заявка на смету',
     source: 'dev-blocks-c4',

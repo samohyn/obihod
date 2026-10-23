@@ -148,6 +148,8 @@ export type SubServiceSpec = {
   hero: {
     kicker: string
     title: string
+    /** Обещание оффера под H1; у подуслуги пусто — сайт берёт у направления */
+    promise?: string
     lead: string
     image: BlockImage
     badge: { value: string; text: string; note?: string }
@@ -176,6 +178,7 @@ export function subServicePage(spec: SubServiceSpec): SubServiceContent {
         {
           kicker: kicker(spec.hero.kicker),
           title: spec.hero.title,
+          promise: spec.hero.promise ?? null,
           lead: spec.hero.lead,
           primary: { label: 'Рассчитать по фото', href: '#zayavka', icon: 'camera' },
           secondary: { label: 'Цены', href: '#ceny' },

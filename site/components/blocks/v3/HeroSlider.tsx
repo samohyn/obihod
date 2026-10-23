@@ -65,6 +65,7 @@ export function HeroSlider(block: HeroSliderBlock) {
             </p>
           )}
           <h1 className={s.title}>{slide.title}</h1>
+          {slide.promise && <p className={s.promise}>{slide.promise}</p>}
           {slide.lead && <p className={s.lead}>{slide.lead}</p>}
           <div className={s.ctas}>
             <ButtonLink
