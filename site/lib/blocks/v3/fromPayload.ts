@@ -158,6 +158,7 @@ export async function fromPayloadBlocks(
             return {
               kicker: str(s.kicker),
               title,
+              promise: str(s.promise),
               lead: str(s.lead),
               primary: {
                 ...primary,

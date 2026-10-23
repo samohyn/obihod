@@ -53,6 +53,15 @@ export const HeroSliderV3: Block = {
           admin: { description: 'Например «Сезон · октябрь · спил до заморозков»' },
         },
         { name: 'title', type: 'text', label: 'Заголовок (H1)', required: true },
+        {
+          name: 'promise',
+          type: 'text',
+          label: 'Обещание под заголовком',
+          admin: {
+            description:
+              'Главное обещание оффера для этой услуги: «Спилим и вывезем — по твёрдой смете, оплата после приёмки». Пусто у подуслуги — берётся из направления.',
+          },
+        },
         { name: 'lead', type: 'textarea', label: 'Подзаголовок' },
         cta('primary', 'Главная кнопка', true, true),
         cta('secondary', 'Вторая кнопка', false),
@@ -386,7 +395,7 @@ export const CalculatorV3: Block = {
           name: 'ctaLabel',
           type: 'text',
           label: 'Текст кнопки',
-          defaultValue: 'Зафиксировать цену',
+          defaultValue: 'Получить твёрдую смету',
           admin: { width: '50%' },
         },
         { name: 'note', type: 'text', label: 'Сноска под кнопкой', admin: { width: '50%' } },

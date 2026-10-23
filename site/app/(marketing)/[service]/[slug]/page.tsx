@@ -7,7 +7,13 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 
-import { getPage, getSubServicePage, getSubServicePageParams } from '@/lib/pages'
+import {
+  getPage,
+  getSubServicePage,
+  getSubServicePageParams,
+  heroPromise,
+  withPromise,
+} from '@/lib/pages'
 import {
   buildServiceDistrictBlocks,
   type DistrictLike,
@@ -110,9 +116,18 @@ export default async function ServiceSlugPage({
 
   const blocksPage = await getSubServicePage(serviceSlug, slug)
   if (blocksPage) {
-    const service = await getServiceBySlug(serviceSlug)
+    const [service, pillar] = await Promise.all([
+      getServiceBySlug(serviceSlug),
+      getPage(serviceSlug),
+    ])
     if (!service) notFound()
-    return <SubServiceBlocksView service={service as never} slug={slug} page={blocksPage} />
+    return (
+      <SubServiceBlocksView
+        service={service as never}
+        slug={slug}
+        page={withPromise(blocksPage, heroPromise(pillar))}
+      />
+    )
   }
 
   const sdBundle = await getServiceDistrictBundle(serviceSlug, slug)

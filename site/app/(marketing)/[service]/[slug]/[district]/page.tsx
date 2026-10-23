@@ -7,7 +7,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 
-import { getSubServicePage } from '@/lib/pages'
+import { getPage, getSubServicePage, heroPromise, withPromise } from '@/lib/pages'
 import {
   buildSubServiceDistrictBlocks,
   type DistrictLike,
@@ -35,11 +35,12 @@ export async function generateStaticParams() {
 
 async function load(params: Params) {
   const { service: serviceSlug, slug, district: districtSlug } = await params
-  const [bundle, sub] = await Promise.all([
+  const [bundle, sub, pillar] = await Promise.all([
     getSubServiceDistrictBundle(serviceSlug, slug, districtSlug),
     getSubServicePage(serviceSlug, slug),
+    getPage(serviceSlug),
   ])
-  return bundle && sub ? { ...bundle, sub, slug } : null
+  return bundle && sub ? { ...bundle, sub: withPromise(sub, heroPromise(pillar)), slug } : null
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {

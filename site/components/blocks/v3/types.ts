@@ -38,6 +38,8 @@ export interface IconItem {
 export interface HeroSlide {
   kicker?: string | null
   title: string
+  /** Обещание оффера строкой под H1 (страницы услуг) */
+  promise?: string | null
   lead?: string | null
   primary: BlockLink & { icon?: IconName | null }
   secondary?: BlockLink | null
