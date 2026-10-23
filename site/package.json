@@ -39,7 +39,8 @@
     "db:up": "docker compose up -d postgres",
     "db:down": "docker compose down",
     "db:logs": "docker compose logs -f postgres",
-    "type-check": "tsc --noEmit",
+    "type-check": "node node_modules/typescript-7/bin/tsc --noEmit -p tsconfig.json",
+    "type-check:ts6": "node node_modules/typescript/bin/tsc --noEmit -p tsconfig.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -77,14 +78,15 @@
     "@types/qrcode": "^1.5.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9.39.4",
+    "eslint": "^10.13.0",
     "eslint-config-next": "^16.4.2",
     "eslint-config-prettier": "^10.1.8",
-    "prettier": "^3.8.3",
-    "prettier-plugin-tailwindcss": "^0.7.2",
+    "prettier": "^3.9.10",
+    "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
-    "typescript": "^5"
+    "typescript": "^6.0.3",
+    "typescript-7": "npm:typescript@7.0.2"
   },
   "engines": {
     "node": ">=22.0.0"

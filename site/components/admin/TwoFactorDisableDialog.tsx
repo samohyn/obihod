@@ -31,9 +31,7 @@ export default function TwoFactorDisableDialog({ onClose, onSuccess }: Props) {
         body: JSON.stringify({ password, otpOrRecovery }),
       })
       const json = (await res.json().catch(() => null)) as
-        | { data?: { ok: boolean } }
-        | { error?: { message?: string } }
-        | null
+        { data?: { ok: boolean } } | { error?: { message?: string } } | null
       if (!res.ok || !json || 'error' in json) {
         const msg = (json && 'error' in json && json.error?.message) || 'Не удалось отключить 2FA.'
         setError(msg)

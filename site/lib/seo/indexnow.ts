@@ -1,8 +1,7 @@
 const INDEXNOW_ENDPOINT = 'https://yandex.com/indexnow'
 
 type PushResult =
-  | { ok: true; status: number; submitted: number }
-  | { ok: false; status: number; error: string }
+  { ok: true; status: number; submitted: number } | { ok: false; status: number; error: string }
 
 export async function pushToIndexNow(urls: string[]): Promise<PushResult> {
   const key = process.env.INDEXNOW_KEY

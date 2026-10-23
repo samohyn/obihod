@@ -16,6 +16,11 @@ updates:
     ignore:
       - dependency-name: '@types/node'
         update-types: ['version-update:semver-major']
+      # `typescript` — 6.0.x: typescript-eslint и next build работают через JS API, которого нет в
+      # TypeScript 7 (peer typescript-eslint — <6.1). TypeScript 7 стоит отдельно как `typescript-7`
+      # и проверяет типы в CI. Снять, когда typescript-eslint поддержит 7.
+      - dependency-name: 'typescript'
+        versions: ['>=6.1.0']
     groups:
       # Next.js + Payload апдейтим одной пачкой — у них связанные версии
       next-payload:

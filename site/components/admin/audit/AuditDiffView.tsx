@@ -18,9 +18,7 @@ import AuditDiffPanel from './AuditDiffPanel'
 export default function AuditDiffView(props: AdminViewServerProps) {
   const { initPageResult } = props
   const user = initPageResult.req.user as
-    | { id: string | number; email: string; role?: string }
-    | null
-    | undefined
+    { id: string | number; email: string; role?: string } | null | undefined
 
   if (!user) {
     redirect('/admin/login')

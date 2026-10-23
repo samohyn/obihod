@@ -59,8 +59,13 @@ jobs:
       - name: Install deps
         run: pnpm install --frozen-lockfile
 
-      - name: Type-check
+      - name: Type-check (TypeScript 7)
         run: pnpm run type-check
+
+      # TypeScript 6 — та же версия, что у next build и typescript-eslint (им нужен JS API,
+      # которого нет в TypeScript 7); основная проверка выше — компилятором TypeScript 7.
+      - name: Type-check (TypeScript 6)
+        run: pnpm run type-check:ts6
 
       - name: Lint
         run: pnpm run lint

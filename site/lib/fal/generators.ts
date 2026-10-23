@@ -28,12 +28,7 @@ const MODEL_DEFAULT_T2I = 'fal-ai/flux/schnell'
 const MODEL_DEFAULT_I2I = 'fal-ai/flux/dev/image-to-image'
 
 type ImageSize =
-  | 'square_hd'
-  | 'square'
-  | 'portrait_4_3'
-  | 'portrait_16_9'
-  | 'landscape_4_3'
-  | 'landscape_16_9'
+  'square_hd' | 'square' | 'portrait_4_3' | 'portrait_16_9' | 'landscape_4_3' | 'landscape_16_9'
 
 type BaseOpts = {
   model?: string

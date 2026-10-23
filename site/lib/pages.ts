@@ -25,9 +25,8 @@ export type PageData = {
  * null — страницы нет или она не опубликована: страница отвечает 404. Сбой базы — ошибка, а не
  * запасной текст: сайт продолжит показывать последнюю удачную версию страницы из кеша (ISR).
  */
-export const getPage = cache(
-  async (slug: string): Promise<PageData | null> =>
-    loadBlocksDoc('pages', { slug: { equals: slug } }),
+export const getPage = cache(async (slug: string): Promise<PageData | null> =>
+  loadBlocksDoc('pages', { slug: { equals: slug } }),
 )
 
 /**
@@ -152,8 +151,7 @@ export const getPillarSummaryBlock = cache(
   async (serviceSlug: string, title: string): Promise<V3BlockWithTone | null> => {
     const page = await getPage(serviceSlug)
     const prices = page?.blocks.find((b) => b.blockType === 'price-tabs') as
-      | PriceTabsBlock
-      | undefined
+      PriceTabsBlock | undefined
     if (!prices || !prices.tabs?.length) return null
     return {
       ...prices,
@@ -195,8 +193,7 @@ export const getCasesListBlock = cache(async (match?: RegExp): Promise<V3BlockWi
       if (!image && service?.slug) {
         const pillar = await getPage(service.slug)
         const hero = pillar?.blocks.find((b) => b.blockType === 'hero-slider') as
-          | HeroSliderBlock
-          | undefined
+          HeroSliderBlock | undefined
         image = hero?.slides?.[0]?.image ?? null
       }
       return {

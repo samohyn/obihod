@@ -80,9 +80,7 @@ export default function TwoFactorSetupDialog({ onClose, onSuccess }: Props) {
         body: JSON.stringify({ tempSecretToken: token, otp }),
       })
       const json = (await res.json().catch(() => null)) as
-        | { data?: { recoveryCodes: string[] } }
-        | { error?: { message?: string } }
-        | null
+        { data?: { recoveryCodes: string[] } } | { error?: { message?: string } } | null
       if (!res.ok || !json || 'error' in json) {
         const msg = (json && 'error' in json && json.error?.message) || 'Неверный код.'
         setVerifyError(msg)
