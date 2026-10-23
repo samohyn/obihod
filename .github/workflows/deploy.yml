@@ -1,14 +1,21 @@
-name: Deploy to prod
+name: Deploy
 
-# План 09, этап 1: выкатка на VPS 89.111.141.79 после мержа в main.
+# План 09: выкатка на VPS 89.111.141.79. Тяжёлая часть сборки — здесь, а не на сервере, где
+# работает прод (2 CPU, 4 ГБ): `next build --experimental-build-mode=compile` без базы, затем
+# архив исходников вместе с `.next` (без кеша) уходит на сервер. Там /usr/local/sbin/obikhod-deploy
+# (deploy/server/obikhod-deploy.sh): бэкап → pnpm install → миграции → только генерация страниц
+# (`--experimental-build-mode=generate`: пререндер из базы прода) → переключение, health-check
+# с откатом. Базу прода GitHub не видит.
 #
-# Вся серверная логика — /usr/local/sbin/obikhod-deploy (deploy/server/obikhod-deploy.sh): бэкап,
-# сборка, переключение, health-check с откатом, чистка релизов. Ключ DEPLOY_SSH_KEY в
-# /root/.ssh/authorized_keys ограничен forced command — он умеет только «deploy <sha>».
-# Обновился deploy/server/obikhod-deploy.sh — один раз выкатить вручную (deploy/manual-deploy.sh
-# ставит скрипт на сервер), ключ CI ставить его не может.
+# Прод — после мержа в main (изменения в site/**) или вручную; staging — вручную по ветке:
+#   gh workflow run deploy.yml --ref <ветка> -f target=staging   (так делает deploy/manual-deploy.sh)
 #
-# Миграции БД сюда не входят: применить psql ДО мержа PR (ADR-0016).
+# NEXT_PUBLIC_SITE_URL вшивается при компиляции — своё значение у каждой цели; сервер сверяет его
+# со своим .env и при расхождении собирает целиком сам.
+#
+# Ключ DEPLOY_SSH_KEY в /root/.ssh/authorized_keys ограничен forced command — он умеет только
+# «deploy <sha> [prod|staging]». Обновился deploy/server/obikhod-deploy.sh — поставить его на сервер
+# (deploy/manual-deploy.sh делает это сам), ключ CI ставить его не может.
 
 on:
   push:
@@ -17,9 +24,15 @@ on:
       - 'site/**'
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
+    inputs:
+      target:
+        description: 'Куда выкатить'
+        type: choice
+        options: [prod, staging]
+        default: prod
 
 concurrency:
-  group: deploy-prod
+  group: deploy-${{ inputs.target || 'prod' }}
   cancel-in-progress: false
 
 permissions:
@@ -29,13 +42,57 @@ env:
   HOST: 89.111.141.79
   # публичный ключ сервера (ssh-keyscan -t ed25519), не секрет — закреплён от подмены
   HOST_KEY: '89.111.141.79 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF/PwpJIXiUp6BNluOBsFfp7kpLUOhyET+bp0MH7DlWN'
+  TARGET: ${{ inputs.target || 'prod' }}
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
+      - name: Только main на прод
+        if: ${{ (inputs.target || 'prod') == 'prod' && github.ref != 'refs/heads/main' }}
+        run: |
+          echo "::error::на прод выкатывается только main (сейчас ${{ github.ref }})"
+          exit 1
+
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+        with:
+          package_json_file: site/package.json
+          run_install: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          cache-dependency-path: site/pnpm-lock.yaml
+
+      - name: Install deps
+        working-directory: site
+        run: pnpm install --frozen-lockfile
+
+      # Компиляция без базы: пререндер страниц — на сервере. DATABASE_URI и PAYLOAD_SECRET здесь
+      # заглушки: compile-режим к базе не подключается (проверено на Next 16.4).
+      - name: Compile
+        working-directory: site
+        env:
+          NODE_ENV: production
+          NEXT_TELEMETRY_DISABLED: '1'
+          NEXT_PUBLIC_SITE_URL: ${{ env.TARGET == 'staging' && 'https://staging.obikhod.ru' || 'https://obikhod.ru' }}
+          DATABASE_URI: postgres://compile:only@127.0.0.1:1/none
+          PAYLOAD_SECRET: compile-only-not-a-secret
+        run: |
+          pnpm exec next build --experimental-build-mode=compile
+          printf '{"sha":"%s","siteUrl":"%s"}\n' "$GITHUB_SHA" "$NEXT_PUBLIC_SITE_URL" > .next/obikhod-prebuilt.json
+          du -sh .next --exclude=cache
+
+      - name: Package
+        run: |
+          git archive --format=tar "$GITHUB_SHA" site > release.tar
+          tar --append -f release.tar --exclude='site/.next/cache' site/.next
+          gzip -1 release.tar
+          ls -lh release.tar.gz
 
       - name: SSH key
         env:
@@ -49,12 +106,13 @@ jobs:
 
       - name: Deploy
         run: |
-          git archive --format=tar.gz "$GITHUB_SHA" site | ssh -i ~/.ssh/deploy_key \
+          ssh -i ~/.ssh/deploy_key \
             -o StrictHostKeyChecking=yes -o ConnectTimeout=20 \
             -o ServerAliveInterval=15 -o ServerAliveCountMax=4 \
-            "root@$HOST" "deploy $GITHUB_SHA"
+            "root@$HOST" "deploy $GITHUB_SHA $TARGET" < release.tar.gz
 
       - name: Smoke
+        if: ${{ env.TARGET == 'prod' }}
         run: |
           fail=0
           for p in / /arboristika/ /kalkulyator/foto-smeta/ /admin/login/ /api/health/; do

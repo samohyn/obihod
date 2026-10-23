@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 # Выкатка релиза на сервере — единая логика для ручного деплоя и GitHub Actions (план 09, этап 1).
 #
-#   git archive --format=tar.gz <sha> site | ssh root@<host> obikhod-deploy <sha> [prod|staging]
+#   <архив site/ с .next или без> | ssh root@<host> obikhod-deploy <sha> [prod|staging]
+#
+# Обычно архив собирает GitHub Actions (.github/workflows/deploy.yml): исходники + `.next` после
+# `next build --experimental-build-mode=compile` и .next/obikhod-prebuilt.json (sha, siteUrl). Тогда
+# здесь только генерация страниц из базы (`--experimental-build-mode=generate`) — тяжёлая компиляция
+# не отнимает CPU и память у прода. Нет готовой компиляции (git archive из deploy/manual-deploy.sh
+# с BUILD_ON_SERVER=1) или она для другого адреса сайта — полная сборка здесь, как раньше.
 #
 # Из GitHub Actions — ключом с forced command в /root/.ssh/authorized_keys:
 #   command="/usr/local/sbin/obikhod-deploy --from-ssh",restrict ssh-ed25519 AAAA… github-actions-deploy
@@ -11,7 +17,8 @@
 # obikhod-staging на :3001, без бэкапа перед выкаткой.
 #
 # Шаги: бэкап (obikhod-backup --tag pre-deploy-<sha7>) → распаковка в releases/<ts>-<sha7> →
-# симлинки .env, media и lead-photos → pnpm install → миграции БД (pnpm migrate) → build →
+# симлинки .env, media и lead-photos → pnpm install → миграции БД (pnpm migrate) → генерация
+# страниц (или полная сборка) с пониженным приоритетом →
 # переключение current → pm2 restart → health-check (не 200 за 60 с — откат кода на предыдущий
 # релиз) → чистка, остаётся KEEP_RELEASES.
 #
@@ -70,7 +77,7 @@ log "install"
 sudo -u deploy bash -c '
   set -eo pipefail
   export COREPACK_ENABLE_DOWNLOAD_PROMPT=0
-  env -u NODE_ENV pnpm install --frozen-lockfile 2>&1 | tail -3
+  env -u NODE_ENV nice -n 10 pnpm install --frozen-lockfile 2>&1 | tail -3
 ' </dev/null
 
 # Миграции — до сборки: next build пререндерит страницы из БД, и новый код может читать
@@ -92,13 +99,29 @@ if grep -q '"migrate":' package.json; then
   MIGRATED=$(printf '%s\n' "$out" | sed -n 's/^MIGRATIONS_APPLIED=//p' | tail -1)
 fi
 
-log "build"
+# Готовая компиляция из GitHub Actions подходит, только если вшитый адрес сайта = адрес этой цели
+MODE=full
+if [ -f .next/BUILD_ID ] && [ -f .next/obikhod-prebuilt.json ]; then
+  WANT=$(sed -n 's/.*"siteUrl":"\([^"]*\)".*/\1/p' .next/obikhod-prebuilt.json)
+  HAVE=$(sudo -u deploy bash -c 'set -a; . ./.env; set +a; printf %s "${NEXT_PUBLIC_SITE_URL:-}"' </dev/null)
+  if [ -n "$WANT" ] && [ "$WANT" = "$HAVE" ]; then
+    MODE=generate
+  else
+    echo "⚠ компиляция собрана для «$WANT», у цели «$HAVE» — собираю целиком здесь"
+  fi
+fi
+
+log "build ($MODE)"
 if ! sudo -u deploy bash -c '
   set -eo pipefail
   set -a; . ./.env; set +a
-  export NODE_OPTIONS=--max-old-space-size=3072
-  pnpm build 2>&1 | tail -5
-' </dev/null; then
+  if [ "$1" = generate ]; then
+    nice -n 10 pnpm exec next build --experimental-build-mode=generate 2>&1 | tail -5
+  else
+    export NODE_OPTIONS=--max-old-space-size=3072
+    nice -n 10 pnpm build 2>&1 | tail -5
+  fi
+' _ "$MODE" </dev/null; then
   echo "✗ сборка упала — релиз не переключён." >&2
   [ "${MIGRATED:-0}" != 0 ] && echo "⚠ миграции этого релиза ($MIGRATED) уже в БД; старый код с ними совместим." >&2
   exit 1
