@@ -14,8 +14,7 @@ export default async function NotFound() {
     getPageTemplates(),
   ])
   const tiles = uslugi?.blocks.find((b) => b.blockType === 'services-tiles') as
-    | ServicesTilesBlock
-    | undefined
+    ServicesTilesBlock | undefined
   const form = uslugi?.blocks.find((b) => b.blockType === 'final-form')
   const blocks: V3BlockWithTone[] = []
   if (tiles) blocks.push({ ...tiles, eyebrow: 'Услуги', title: t.notFoundTilesTitle })

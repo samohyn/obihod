@@ -20,9 +20,7 @@ import SecurityPanel from './SecurityPanel'
 export default function SecurityView(props: AdminViewServerProps) {
   const { initPageResult } = props
   const user = initPageResult.req.user as
-    | { id: string | number; email: string; totpEnabled?: boolean }
-    | null
-    | undefined
+    { id: string | number; email: string; totpEnabled?: boolean } | null | undefined
 
   if (!user) {
     redirect('/admin/login')

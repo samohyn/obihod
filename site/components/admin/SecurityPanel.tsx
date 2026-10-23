@@ -185,9 +185,7 @@ function TwoFactorRegenerateDialog({
         body: JSON.stringify({ otp }),
       })
       const json = (await res.json().catch(() => null)) as
-        | { data?: { recoveryCodes: string[] } }
-        | { error?: { message?: string } }
-        | null
+        { data?: { recoveryCodes: string[] } } | { error?: { message?: string } } | null
       if (!res.ok || !json || 'error' in json) {
         const msg =
           (json && 'error' in json && json.error?.message) || 'Не удалось перегенерировать коды.'
