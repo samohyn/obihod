@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Golos_Text, JetBrains_Mono } from 'next/font/google'
+import localFont from 'next/font/local'
 import '../globals.css'
 import '../homepage-classic.css'
 
@@ -13,17 +13,20 @@ import { getSiteChrome } from '@/lib/chrome'
 import { localBusinessSchema, organizationSchema, websiteSchema } from '@/lib/seo/jsonld'
 import { getSeoSettings } from '@/lib/seo/queries'
 
-const golosText = Golos_Text({
+// Шрифты локально (план 09, раздел 5): сборка не ходит в Google Fonts — раньше сбой их сервера
+// ронял сборку. Файлы — app/fonts/: вариативные Golos Text и JetBrains Mono, латиница + кириллица,
+// лицензия SIL OFL (app/fonts/OFL-*.txt).
+const golosText = localFont({
+  src: '../fonts/GolosText-Variable.woff2',
   variable: '--font-golos-text',
-  subsets: ['cyrillic', 'cyrillic-ext', 'latin'],
-  weight: ['400', '500', '600', '700', '900'],
+  weight: '400 900',
   display: 'swap',
 })
 
-const jetbrainsMono = JetBrains_Mono({
+const jetbrainsMono = localFont({
+  src: '../fonts/JetBrainsMono-Variable.woff2',
   variable: '--font-jetbrains-mono',
-  subsets: ['cyrillic', 'latin'],
-  weight: ['400', '500'],
+  weight: '400 500',
   display: 'swap',
 })
 

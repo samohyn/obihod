@@ -17,10 +17,23 @@
  */
 
 /* Golos Text + JetBrains Mono — единый фирменный шрифт для admin (как на сайте).
- * Payload (payload)/layout.tsx авто-генерируется и не использует next/font, поэтому
- * подгружаем через Google Fonts CSS. Admin — внутренний инструмент, FOUC приемлем
- * (fallback Inter → system). */
-@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+ * Payload (payload)/layout.tsx авто-генерируется и не использует next/font, поэтому — свои
+ * @font-face из тех же локальных файлов, что у сайта (app/fonts/, план 09, раздел 5):
+ * админка не ходит в Google Fonts. Admin — внутренний инструмент, FOUC приемлем. */
+@font-face {
+  font-family: 'Golos Text';
+  src: url('../fonts/GolosText-Variable.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-Variable.woff2') format('woff2');
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   /* ───── Brand palette (зеркало design-system/tokens/colors.json) ───── */
