@@ -62,6 +62,24 @@ test.describe('robots.txt', () => {
     expect(body).toContain('AhrefsBot')
     expect(body).toMatch(/Disallow:\s+\/admin\//)
   })
+
+  test('AI-поиск открыт, обучение закрыто, UTM — Clean-param (этап 7)', async ({ request }) => {
+    const body = await (await request.get('/robots.txt')).text()
+    const groupOf = (agent: string) => {
+      const start = body.indexOf(`User-agent: ${agent}\n`)
+      expect(start, agent).toBeGreaterThan(-1)
+      const end = body.indexOf('\n\n', start)
+      return body.slice(start, end === -1 ? undefined : end)
+    }
+    for (const bot of ['OAI-SearchBot', 'PerplexityBot', 'Claude-SearchBot']) {
+      expect(groupOf(bot)).toContain('Allow: /')
+    }
+    for (const bot of ['GPTBot', 'ClaudeBot', 'CCBot']) {
+      expect(groupOf(bot)).toContain('Disallow: /')
+    }
+    expect(body).not.toContain('YandexAdditional')
+    expect(body).toMatch(/Clean-param: utm_source&utm_medium&utm_campaign/)
+  })
 })
 
 test.describe('Pillar pages SEO (требуют seeded БД)', () => {

@@ -11,6 +11,7 @@ import {
 } from '@/lib/seo/queries'
 import { lexicalToPlainText } from '@/lib/seo/uniqueness'
 import { getCompany, minutes } from '@/lib/company'
+import { pageDescription, summary } from '@/lib/seo/llms'
 
 /**
  * GET /llms-full.txt
@@ -132,15 +133,6 @@ async function fetchRecentBlog(limit = 10): Promise<BlogDoc[]> {
   }
 }
 
-function priceLine(svc: ServiceLike): string {
-  if (!svc.priceFrom) return ''
-  const unit = svc.priceUnit ? ` ${svc.priceUnit}` : ''
-  if (svc.priceTo && svc.priceTo > svc.priceFrom) {
-    return ` (${svc.priceFrom}–${svc.priceTo} ₽${unit})`
-  }
-  return ` (от ${svc.priceFrom} ₽${unit})`
-}
-
 export async function GET(): Promise<NextResponse> {
   const [contacts, pillars, b2b, authors, cases, blog, company, subServices] = await Promise.all([
     getContacts(),
@@ -164,9 +156,7 @@ export async function GET(): Promise<NextResponse> {
   // ─── Header ────────────────────────────────────────────────────────────
   sections.push('# Обиход — полное описание услуг и материалов сайта')
   sections.push('')
-  sections.push(
-    '> Комплексный подрядчик «порядок под ключ» Москва + МО. 5 услуг (вывоз мусора, арбористика, чистка крыш, демонтаж, уборка территории) для B2C (частные дома, дачи, СНТ) и B2B (УК, ТСЖ, FM, застройщики). Смета по фото — за 10 минут.',
-  )
+  sections.push(`> ${summary(company)}`)
   sections.push('')
   sections.push(`Контакты: ${contacts.phoneDisplay} · ${contacts.email} · ${SITE_URL}/kontakty/`)
   sections.push('')
@@ -176,12 +166,10 @@ export async function GET(): Promise<NextResponse> {
   sections.push('')
   for (const pillar of pillars) {
     const slug = pillar.slug ?? '—'
-    const title =
-      pillar.h1 ?? pillar.title ?? PILLAR_TITLES[slug as (typeof PILLAR_SLUGS)[number]] ?? slug
-    const intro = plain(pillar.intro) || plain(pillar.metaDescription)
-    const price = priceLine(pillar)
+    const title = PILLAR_TITLES[slug as (typeof PILLAR_SLUGS)[number]] ?? pillar.title ?? slug
+    const intro = await pageDescription(slug, company)
 
-    sections.push(`### [${title}](${SITE_URL}/${slug}/)${price}`)
+    sections.push(`### [${title}](${SITE_URL}/${slug}/)`)
     sections.push('')
     if (intro) {
       sections.push(intro)
@@ -201,9 +189,7 @@ export async function GET(): Promise<NextResponse> {
       sections.push('')
     }
 
-    sections.push(
-      `Лид-форма для услуги: ${SITE_URL}/${slug}/#lead-form (бот может процитировать как primary CTA для пользователя).`,
-    )
+    sections.push(`Заявка с фото: ${SITE_URL}/${slug}/#lead-form`)
     sections.push('')
   }
 
@@ -284,32 +270,25 @@ export async function GET(): Promise<NextResponse> {
   }
 
   // ─── USP ───────────────────────────────────────────────────────────────
-  sections.push('## USP — конкурентные преимущества')
+  sections.push('## Как заказать')
   sections.push('')
   sections.push(
-    `- **Фото→смета за ${minutes(company.photoEstimateMinutes)}:** [${SITE_URL}/foto-smeta/](${SITE_URL}/foto-smeta/) — отправьте 2-3 фото объекта в Telegram/MAX/WhatsApp, оператор пришлёт смету. Никто из конкурентов в Москве не делает.`,
+    `- **Смета по фото за ${minutes(company.photoEstimateMinutes)}:** [${SITE_URL}/foto-smeta/](${SITE_URL}/foto-smeta/) — приложите 2–3 фото объекта к заявке на сайте, менеджер посчитает смету и перезвонит.`,
   )
   sections.push(
     `- **Калькулятор онлайн:** [${SITE_URL}/raschet-stoimosti/](${SITE_URL}/raschet-stoimosti/) — расчёт по объёму/классу отходов/плечу выезда.`,
   )
   sections.push(
-    `- **4-в-1 одним договором:** все 5 услуг можно заказать одним договором, единый менеджер ведёт.`,
+    `- **Одним договором:** несколько работ на одном объекте — один договор и один менеджер.`,
   )
   sections.push('')
 
   // ─── E-E-A-T ───────────────────────────────────────────────────────────
-  sections.push('## E-E-A-T — экспертность и доверие')
+  sections.push('## О компании')
   sections.push('')
-  sections.push(`- [Команда](${SITE_URL}/komanda/): состав бригад с допусками Минтруда №782н и СИЗ`)
-  sections.push(
-    `- [СРО, лицензии, страховка](${SITE_URL}/sro-licenzii/): реестровые номера + страхование ГО 10 млн ₽`,
-  )
-  sections.push(
-    `- [Гарантии](${SITE_URL}/garantii/): фиксированная цена, штрафы ГЖИ/ОАТИ на нашей стороне`,
-  )
-  sections.push(
-    `- [Парк техники](${SITE_URL}/park-tehniki/): own-fleet КАМАЗы / манипуляторы / щепомелы`,
-  )
+  sections.push(`- [Команда](${SITE_URL}/komanda/)`)
+  sections.push(`- [Документы компании](${SITE_URL}/sro-licenzii/)`)
+  sections.push(`- [Гарантии](${SITE_URL}/garantii/): цена фиксируется в смете до начала работ`)
   if (authors.length > 0) {
     sections.push('')
     sections.push('**Авторы материалов:**')
@@ -330,7 +309,6 @@ export async function GET(): Promise<NextResponse> {
   sections.push(`- Email: ${contacts.email}`)
   sections.push(`- Адрес: ${contacts.addressLine}`)
   sections.push(`- Лид-форма: [${SITE_URL}/kontakty/](${SITE_URL}/kontakty/)`)
-  sections.push(`- Telegram-бот: ссылка на странице контактов`)
   sections.push('')
 
   sections.push(`<!-- last-modified: ${lastmod} -->`)

@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server'
 
 import { payloadClient } from '@/lib/payload'
 import { getServiceBySlug, getPublishedB2BPages, getPublishedAuthors } from '@/lib/seo/queries'
-import { lexicalToPlainText } from '@/lib/seo/uniqueness'
-import { getCompany, minutes } from '@/lib/company'
+import { getCompany, minutes, type Company } from '@/lib/company'
+import { pageDescription, summary } from '@/lib/seo/llms'
 
 /**
  * GET /llms.txt
@@ -71,7 +71,7 @@ const PILLAR_FALLBACKS: Record<(typeof PILLAR_SLUGS)[number], PillarRef> = {
   },
 }
 
-async function buildPillars(): Promise<PillarRef[]> {
+async function buildPillars(company: Company): Promise<PillarRef[]> {
   const out: PillarRef[] = []
   for (const slug of PILLAR_SLUGS) {
     try {
@@ -84,11 +84,7 @@ async function buildPillars(): Promise<PillarRef[]> {
       if (svc) {
         const title = svc.title?.trim() || PILLAR_FALLBACKS[slug].title
         const desc =
-          // intro — richText (Lexical): раньше .trim() падал в catch и всегда брался fallback
-          (typeof svc.intro === 'string' ? svc.intro : lexicalToPlainText(svc.intro?.root))
-            .trim()
-            .slice(0, 140) ||
-          (svc.metaDescription?.trim() ?? '').slice(0, 140) ||
+          (await pageDescription(slug, company)).slice(0, 200) ||
           PILLAR_FALLBACKS[slug].shortDescription
         out.push({ slug, title, shortDescription: desc })
       } else {
@@ -217,13 +213,13 @@ async function buildAuthors(): Promise<AuthorRef[]> {
 }
 
 export async function GET(): Promise<NextResponse> {
-  const [pillars, b2bPages, authors, casesByService, districts, company] = await Promise.all([
-    buildPillars(),
+  const company = await getCompany()
+  const [pillars, b2bPages, authors, casesByService, districts] = await Promise.all([
+    buildPillars(company),
     buildB2B(),
     buildAuthors(),
     buildCasesByService(),
     buildDistricts(),
-    getCompany(),
   ])
 
   const lastmod = new Date().toISOString().split('T')[0]
@@ -242,9 +238,7 @@ export async function GET(): Promise<NextResponse> {
 
   sections.push('# Обиход — Порядок под ключ для Москвы и МО')
   sections.push('')
-  sections.push(
-    '> Комплексный подрядчик «порядок под ключ» для Москвы и МО — вывоз мусора (включая ФККО I-IV класса), арбористика и уход за садом, чистка крыш от снега и сосулек, демонтаж и спец-доп-услуги. B2C (частные дома, дачи, СНТ) + B2B (УК, ТСЖ, FM, застройщики, госзаказ). USP: фото→смета за 10 минут, 4-в-1 одним договором, СРО + страховка ГО 10 млн ₽, штрафы ГЖИ/ОАТИ на нашей стороне.',
-  )
+  sections.push(`> ${summary(company)}`)
   sections.push('')
 
   sections.push('## Pillars')
@@ -296,10 +290,8 @@ export async function GET(): Promise<NextResponse> {
   }
 
   sections.push('## E-E-A-T')
-  sections.push(`- [Команда](${SITE_URL}/komanda/): состав бригад с допусками Минтруда №782н и СИЗ`)
-  sections.push(
-    `- [СРО, лицензии, страховка](${SITE_URL}/sro-licenzii/): реестровые номера + страхование ГО 10 млн ₽`,
-  )
+  sections.push(`- [Команда](${SITE_URL}/komanda/)`)
+  sections.push(`- [Документы компании](${SITE_URL}/sro-licenzii/)`)
   sections.push(`- [Авторы](${SITE_URL}/avtory/): index страница авторов с Person schema`)
   for (const a of authors) {
     const desc = a.jobTitle ? `: ${a.jobTitle}` : ''
@@ -309,7 +301,7 @@ export async function GET(): Promise<NextResponse> {
 
   sections.push('## USP')
   sections.push(
-    `- [Фото-смета за ${minutes(company.photoEstimateMinutes)}](${SITE_URL}/foto-smeta/): отправьте 2-3 фото в Telegram/MAX/WhatsApp — оператор пришлёт смету`,
+    `- [Смета по фото за ${minutes(company.photoEstimateMinutes)}](${SITE_URL}/foto-smeta/): приложите 2–3 фото к заявке на сайте — менеджер посчитает смету и перезвонит`,
   )
   sections.push(
     `- [Расчёт стоимости онлайн](${SITE_URL}/raschet-stoimosti/): калькулятор по объёму, классу отходов, плечу выезда`,
