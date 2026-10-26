@@ -17,6 +17,7 @@
     "sync:latest-versions": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/sync-latest-versions.ts",
     "fix:offer-logic": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/fix-offer-logic.ts",
     "stage2:offer": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/stage2-offer.ts",
+    "stage6:hub-tiles": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/stage6-hub-tiles.ts",
     "seed:geo-sub": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/seed-geo-sub.ts",
     "fix:sub-district-texts": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/fix-sub-district-texts.ts",
     "offer:tokens": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/offer-tokens.ts",

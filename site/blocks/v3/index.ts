@@ -117,7 +117,8 @@ export const ServicesTilesV3: Block = {
       type: 'array',
       label: 'Плитки',
       labels: { singular: 'Плитка', plural: 'Плитки' },
-      maxRows: 12,
+      // 16: на хабах уже по 12 подуслуг, новые страницы этапа 6 тоже должны вести с хаба
+      maxRows: 16,
       fields: [
         {
           name: 'service',
