@@ -2,11 +2,11 @@ import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { trail } from '@/lib/breadcrumbs'
-import { getContacts, getSiteChrome } from '@/lib/chrome'
+import { getContacts } from '@/lib/chrome'
 import { buildDistrictBlocks, localizeTiles, type DistrictLike } from '@/lib/geo-pages'
 import type { PageData } from '@/lib/pages'
-import { faqPageSchema, localBusinessSchema } from '@/lib/seo/jsonld'
-import { getAllServiceDistrictParams, getSeoSettings } from '@/lib/seo/queries'
+import { faqPageSchema } from '@/lib/seo/jsonld'
+import { getAllServiceDistrictParams } from '@/lib/seo/queries'
 import { getCompany } from '@/lib/company'
 import { getPageTemplates } from '@/lib/page-templates-server'
 
@@ -18,9 +18,7 @@ export async function DistrictBlocksView({
   district: DistrictLike
   uslugi: PageData
 }) {
-  const [chrome, seo, contacts, params, company, templates] = await Promise.all([
-    getSiteChrome(),
-    getSeoSettings(),
+  const [contacts, params, company, templates] = await Promise.all([
     getContacts(),
     getAllServiceDistrictParams(),
     getCompany(),
@@ -41,12 +39,8 @@ export async function DistrictBlocksView({
   const faqs = blocks.flatMap((b) => (b.blockType === 'faq-v3' ? b.items : []))
   return (
     <>
-      <JsonLd
-        schema={[
-          localBusinessSchema(chrome, seo, district as never),
-          ...(faqs.length ? [faqPageSchema(faqs)] : []),
-        ]}
-      />
+      {/* Organization и LocalBusiness — в макете сайта, второй LocalBusiness на район не нужен (этап 7) */}
+      {faqs.length > 0 && <JsonLd schema={[faqPageSchema(faqs)]} />}
       <Breadcrumbs items={crumbs} />
       <V3BlockRenderer blocks={blocks} phoneDisplay={contacts.phoneDisplay} />
     </>

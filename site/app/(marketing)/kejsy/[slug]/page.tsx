@@ -6,7 +6,7 @@ import { unstable_cache } from 'next/cache'
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { shortTitle, trail } from '@/lib/breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
-import { breadcrumbListSchema } from '@/lib/seo/jsonld'
+import { breadcrumbListSchema, caseArticleSchema } from '@/lib/seo/jsonld'
 import { payloadClient } from '@/lib/payload'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { PageHeader } from '@/components/blocks/v3/PageHeader'
@@ -148,6 +148,12 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
   // Фон чередуется: шапка бежевая → блоки с кремового → описание → услуги и заявка
   const lastTone = blocks.length % 2 === 1 ? 'default' : 'alt'
   const descTone = lastTone === 'default' ? 'alt' : 'default'
+  const dates = c as unknown as {
+    photosAfter?: { image?: { url?: string } | null }[]
+    dateCompleted?: string | null
+    createdAt?: string | null
+    updatedAt?: string | null
+  }
   const hasDesc = Boolean((c as any).description)
   return (
     <>
@@ -192,6 +198,14 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
       />
       <JsonLd
         schema={[
+          caseArticleSchema({
+            slug: c.slug,
+            title: c.title,
+            description: c.metaDescription,
+            image: dates.photosAfter?.[0]?.image?.url ?? null,
+            datePublished: dates.dateCompleted ?? dates.createdAt ?? null,
+            dateModified: dates.updatedAt ?? null,
+          }),
           breadcrumbListSchema(
             breadcrumbs.map((b) => ({ name: b.name, url: `${SITE_URL}${b.href}` })),
           ),

@@ -1,41 +1,33 @@
 /**
- * JSON-LD composer для T1/T2/T3/T4 шаблонов раздела `/uslugi/` (US-4).
+ * JSON-LD страниц услуг: T1 хаб, T2 направление, T3 подуслуга, T4 услуга или подуслуга в районе.
  *
- * Вместо дублирования сборки массива schema на каждой странице — один
- * switch на `template`. Контракт schema-coverage:
- *   T1_HUB    → 4 узла (Org, WebSite, ItemList, Breadcrumb)
- *   T2_PILLAR → 5 узлов (Org, Service+Rating, FAQ, Breadcrumb, +1 опц.)
- *   T3_SUB    → 4 узла (Org, Service, FAQ, Breadcrumb)
- *   T4_SD     → 6 узлов (Org, LocalBusiness, Service, FAQ, Breadcrumb, Person); с `sub` —
- *               подуслуга в районе
+ * Organization, WebSite и LocalBusiness выводит макет сайта (app/(marketing)/layout.tsx) — один
+ * раз на странице, с постоянными @id; здесь только узлы самой страницы со ссылкой на них
+ * (`provider: { '@id': ORG_ID }`). Раньше они выводились второй раз (план 09, этап 7, пробел 1).
+ *   T1_HUB    → ItemList, Breadcrumb
+ *   T2_PILLAR → Service (+ рейтинг только если передан), FAQ, Breadcrumb
+ *   T3_SUB    → Service подуслуги — её адрес, название и цена (пробел 2), FAQ, Breadcrumb
+ *   T4_SD     → Service с areaServed района, FAQ, Breadcrumb, Person
  *
  * caller передаёт уже собранные данные — composer pure (без I/O).
  */
 
-import type { SiteChrome } from '@/lib/chrome'
-
 import {
   breadcrumbListSchema,
   faqPageSchema,
-  localBusinessSchema,
-  organizationSchema,
   personSchema,
   serviceSchema,
   serviceWithRatingSchema,
   t1HubItemListSchema,
-  websiteSchema,
   type Author,
   type District,
   type Service,
   type ServiceLite,
-  type SeoSettingsLike,
 } from './jsonld'
 
 export type TemplateKind = 'T1_HUB' | 'T2_PILLAR' | 'T3_SUB' | 'T4_SD'
 
 export interface TemplateContext {
-  chrome: SiteChrome | null
-  seo?: SeoSettingsLike | null
   pillars?: ServiceLite[]
   service?: Service
   sub?: Service
@@ -44,12 +36,6 @@ export interface TemplateContext {
   breadcrumbs?: { name: string; url: string }[]
   author?: Author
   rating?: { value: number; count: number; bestRating?: number }
-  /**
-   * Если true — composer не повторяет Organization/WebSite/LocalBusiness
-   * (они уже отрендерены на marketing layout). Default false (контракт AC),
-   * но page-level вызовы передают `true` чтобы не дублировать.
-   */
-  skipChrome?: boolean
 }
 
 /**
@@ -66,52 +52,32 @@ export function buildJsonLdForTemplate(
   const breadcrumbs = ctx.breadcrumbs ?? []
   const faqs = ctx.faqs ?? []
 
+  const tail = [
+    ...(faqs.length > 0 ? [faqPageSchema(faqs)] : []),
+    breadcrumbListSchema(breadcrumbs),
+  ]
+
   switch (template) {
     case 'T1_HUB':
-      return [
-        organizationSchema(ctx.chrome ?? null, ctx.seo ?? null),
-        websiteSchema(),
-        t1HubItemListSchema(ctx.pillars ?? []),
-        breadcrumbListSchema(breadcrumbs),
-      ]
+      return [t1HubItemListSchema(ctx.pillars ?? []), breadcrumbListSchema(breadcrumbs)]
 
     case 'T2_PILLAR':
-      if (!ctx.service) return [organizationSchema(ctx.chrome ?? null, ctx.seo ?? null)]
-      return [
-        organizationSchema(ctx.chrome ?? null, ctx.seo ?? null),
-        websiteSchema(),
-        serviceWithRatingSchema(ctx.service, undefined, ctx.rating),
-        ...(faqs.length > 0 ? [faqPageSchema(faqs)] : []),
-        breadcrumbListSchema(breadcrumbs),
-      ]
+      if (!ctx.service) return tail
+      return [serviceWithRatingSchema(ctx.service, undefined, ctx.rating), ...tail]
 
     case 'T3_SUB':
-      if (!ctx.service || !ctx.sub) return [organizationSchema(ctx.chrome ?? null, ctx.seo ?? null)]
-      return [
-        organizationSchema(ctx.chrome ?? null, ctx.seo ?? null),
-        // Service schema scoped на sub-name: parent priceFrom + sub.title
-        {
-          ...serviceSchema(ctx.service),
-          serviceType: ctx.sub.title,
-          name: ctx.sub.h1 ?? ctx.sub.title,
-        },
-        ...(faqs.length > 0 ? [faqPageSchema(faqs)] : []),
-        breadcrumbListSchema(breadcrumbs),
-      ]
+      if (!ctx.service || !ctx.sub) return tail
+      return [serviceSchema({ ...ctx.sub, slug: `${ctx.service.slug}/${ctx.sub.slug}` }), ...tail]
 
     case 'T4_SD': {
-      if (!ctx.service || !ctx.district)
-        return [organizationSchema(ctx.chrome ?? null, ctx.seo ?? null)]
+      if (!ctx.service || !ctx.district) return tail
       const nodes: Record<string, unknown>[] = [
-        organizationSchema(ctx.chrome ?? null, ctx.seo ?? null),
-        localBusinessSchema(ctx.chrome ?? null, ctx.seo ?? null, ctx.district),
         // подуслуга в районе — Service подуслуги: её адрес, название и цена
         serviceSchema(
           ctx.sub ? { ...ctx.sub, slug: `${ctx.service.slug}/${ctx.sub.slug}` } : ctx.service,
           ctx.district,
         ),
-        ...(faqs.length > 0 ? [faqPageSchema(faqs)] : []),
-        breadcrumbListSchema(breadcrumbs),
+        ...tail,
       ]
       if (ctx.author) nodes.push(personSchema(ctx.author))
       return nodes

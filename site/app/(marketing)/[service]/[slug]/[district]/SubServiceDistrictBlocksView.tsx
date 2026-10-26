@@ -2,7 +2,7 @@ import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { crumbsToSchema, trail } from '@/lib/breadcrumbs'
-import { getContacts, getSiteChrome } from '@/lib/chrome'
+import { getContacts } from '@/lib/chrome'
 import type { DistrictLike, ServiceDistrictLike } from '@/lib/geo-pages'
 import { buildSubServiceDistrictBlocks } from '@/lib/geo-pages'
 import type { PageData } from '@/lib/pages'
@@ -12,7 +12,7 @@ import { getLocalGeoPages } from '@/lib/seo/queries'
 import { getCompany } from '@/lib/company'
 import { getPageTemplates } from '@/lib/page-templates-server'
 
-import { priceFromBadge } from '../SubServiceBlocksView'
+import { priceFromBadge } from '@/lib/seo/price'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -34,8 +34,7 @@ export async function SubServiceDistrictBlocksView({
   subSlug: string
   sub: PageData
 }) {
-  const [chrome, contacts, localPages, company, templates] = await Promise.all([
-    getSiteChrome(),
+  const [contacts, localPages, company, templates] = await Promise.all([
     getContacts(),
     getLocalGeoPages(),
     getCompany(),
@@ -60,8 +59,6 @@ export async function SubServiceDistrictBlocksView({
   const faqs = blocks.flatMap((b) => (b.blockType === 'faq-v3' ? b.items : []))
   const priceFrom = priceFromBadge(sub.blocks) ?? service.priceFrom
   const schema = buildJsonLdForTemplate('T4_SD', {
-    chrome,
-    skipChrome: true,
     service,
     sub: {
       ...service,
