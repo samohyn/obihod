@@ -7,6 +7,8 @@ import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { shortTitle, trail } from '@/lib/breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema, caseArticleSchema } from '@/lib/seo/jsonld'
+import { truncateMeta } from '@/lib/seo/text'
+import { lexicalToPlainText } from '@/lib/seo/uniqueness'
 import { payloadClient } from '@/lib/payload'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { PageHeader } from '@/components/blocks/v3/PageHeader'
@@ -60,16 +62,22 @@ export async function generateMetadata({
   const { slug } = await params
   const c = await getCaseBySlug(slug)
   if (!c) return {}
+  // пустое описание кейса — из его текста, обрезка по слову (план 09, этап 7, пробел 7)
+  const body = (c as unknown as { description?: { root?: unknown } | null }).description
+  const description =
+    c.metaDescription?.trim() ||
+    truncateMeta(lexicalToPlainText(body?.root) || c.title, 158) ||
+    undefined
   return {
     title: { absolute: c.metaTitle ?? c.title },
-    description: c.metaDescription,
+    description,
     alternates: { canonical: `/kejsy/${c.slug}/` },
     openGraph: {
       type: 'article',
       locale: 'ru_RU',
       url: `/kejsy/${c.slug}/`,
       title: c.title,
-      description: c.metaDescription ?? undefined,
+      description,
     },
     robots: { index: true, follow: true },
   }
