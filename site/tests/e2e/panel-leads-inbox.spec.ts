@@ -1,164 +1,132 @@
 import { expect, test, type Page } from '@playwright/test'
 
+import { adminToken, getLead, uniqueIp, uniquePhone } from './_helpers/leads'
+
 /**
- * PANEL-LEADS-INBOX — e2e smoke согласно AC-X.4.
+ * Панель заявок (план 09, этап 5.2, вариант 1 «Очередь и карточка»).
  *
- * 4 сценария:
- *   (a) login → /admin/collections/leads → видим quick-filter chips + status pills
- *   (b) click status pill → dropdown → change → toast (per-row inline-update)
- *   (c) click «⋯» row-action → archive flow
- *   (d) click chip «Все» → URL params → list refresh
+ *   (a) экран «Заявки»: четыре вкладки с числами, поиск и фильтры
+ *   (b) заявка с сайта → срок «ответить до» ставит сервер → строка в очереди → карточка по ?lead=
+ *   (c) «Связались» останавливает таймер, кнопка статуса меняет статус
+ *   (d) телефон 360: карточка поверх очереди, «Позвонить» закреплена внизу, «← К очереди»
  *
- * CI graceful skip — следуем pattern admin-empty-list-wiring.spec.ts:
- * если auth/seed недоступны или коллекция пуста — skip с понятной причиной.
- *
- * Screenshots → screen/leads-inbox-<scenario>.png (memory feedback_screen_folder).
+ * Вход — ADMIN_EMAIL / ADMIN_PASSWORD (в CI админа создаёт scripts/seed-admin.ts); без них — skip.
  */
 
-const ADMIN_LOGIN = '/admin/login/'
-const LEADS_LIST = '/admin/collections/leads'
-
-const TEST_EMAIL = process.env.TEST_USER_EMAIL || 'test@obikhod.local'
-const TEST_PASSWORD = process.env.TEST_USER_PASSWORD || 'obikhod_dev_test'
+const LEADS = '/admin/collections/leads'
 
 async function login(page: Page): Promise<boolean> {
-  const resp = await page.goto(ADMIN_LOGIN, { waitUntil: 'domcontentloaded' })
-  if (!resp || resp.status() >= 500) return false
-
-  const emailInput = page.locator('input[type="email"], input[name="email"], #field-email').first()
-  const passwordInput = page
-    .locator('input[type="password"], input[name="password"], #field-password')
-    .first()
-
-  if (!(await emailInput.isVisible().catch(() => false))) return false
-
-  await emailInput.fill(TEST_EMAIL)
-  await passwordInput.fill(TEST_PASSWORD)
+  const email = process.env.ADMIN_EMAIL
+  const password = process.env.ADMIN_PASSWORD
+  if (!email || !password) return false
+  await page.goto('/admin/login/', { waitUntil: 'domcontentloaded' })
+  await page.locator('#field-email').waitFor({ state: 'visible', timeout: 30000 })
+  await page.locator('#field-email').fill(email)
+  await page.locator('#field-password').fill(password)
   await page.locator('button[type="submit"]').first().click()
-
   try {
-    await page.waitForURL(/\/admin(?!\/(login|forgot|create-first-user))/, { timeout: 5000 })
+    await page.waitForURL(/\/admin(?!\/(login|forgot|create-first-user))/, { timeout: 30000 })
     return true
   } catch {
     return false
   }
 }
 
-test.describe('PANEL-LEADS-INBOX — list-view UX', () => {
-  test('(a) Quick-filter chips видны в header list-view', async ({ page }) => {
-    const ok = await login(page)
-    if (!ok) test.skip(true, 'Admin auth недоступен — пропуск')
+async function createLead(page: Page, name: string): Promise<{ id: number; phone: string }> {
+  const phone = uniquePhone()
+  const res = await page.request.post('/api/leads/', {
+    headers: { 'x-real-ip': uniqueIp() },
+    data: {
+      phone,
+      consent: true,
+      name,
+      message: 'Проверка панели заявок',
+      sourcePage: '/kontakty/',
+    },
+  })
+  expect(res.status()).toBe(201)
+  return { id: ((await res.json()) as { id: number }).id, phone }
+}
 
-    const resp = await page.goto(LEADS_LIST, { waitUntil: 'domcontentloaded' })
-    if (!resp || resp.status() >= 400) {
-      test.skip(true, `Leads list status=${resp?.status()} — пропуск`)
-    }
-
-    const chips = page.locator('nav.lead-quick-filters[role="tablist"]').first()
-    await expect(chips).toBeVisible({ timeout: 10000 })
-
-    // 8 chips: Все + 7 статусов.
-    const tabs = chips.locator('button[role="tab"]')
-    await expect(tabs).toHaveCount(8)
-
-    // По default «Все» активен.
-    const active = chips.locator('button[role="tab"][aria-selected="true"]')
-    await expect(active).toHaveCount(1)
-
-    await page.screenshot({ path: 'screen/leads-inbox-chips.png', fullPage: true })
+test.describe('Панель заявок — очередь и карточка', () => {
+  test.beforeEach(async ({ page }) => {
+    test.skip(!(await login(page)), 'нет входа админа — пропуск')
   })
 
-  test('(b) Status pill — click открывает dropdown с 7 опциями', async ({ page }) => {
-    const ok = await login(page)
-    if (!ok) test.skip(true, 'Admin auth недоступен — пропуск')
-
-    const resp = await page.goto(LEADS_LIST, { waitUntil: 'domcontentloaded' })
-    if (!resp || resp.status() >= 400) {
-      test.skip(true, `Leads list status=${resp?.status()} — пропуск`)
+  test('(a) вкладки, поиск и фильтры', async ({ page }) => {
+    await page.goto(LEADS, { waitUntil: 'domcontentloaded' })
+    await expect(page.getByRole('heading', { name: 'Заявки', level: 1 })).toBeVisible()
+    const tabs = page.getByRole('navigation', { name: 'Вкладки очереди' }).getByRole('link')
+    await expect(tabs).toHaveCount(4)
+    for (const label of ['Срочно', 'Новые', 'В работе', 'Все']) {
+      await expect(tabs.filter({ hasText: label })).toHaveCount(1)
     }
-
-    const firstRow = page.locator('table tbody tr').first()
-    if (!(await firstRow.isVisible().catch(() => false))) {
-      test.skip(true, 'Leads пуст — нет row для inline-update теста')
-    }
-
-    const pill = firstRow.locator('button.lead-status-badge').first()
-    if (!(await pill.isVisible().catch(() => false))) {
-      test.skip(true, 'StatusPillCell не найден — пропуск')
-    }
-
-    await pill.click()
-    const dropdown = page.locator('ul.lead-status-dropdown[role="listbox"]').first()
-    await expect(dropdown).toBeVisible({ timeout: 3000 })
-
-    // 7 status options + 1 archive = 8 buttons (последний — archive).
-    const items = dropdown.locator('button.lead-status-dropdown__item')
-    await expect(items).toHaveCount(8)
-
-    await page.screenshot({ path: 'screen/leads-inbox-status-dropdown.png', fullPage: true })
-
-    // Esc закрывает dropdown.
-    await page.keyboard.press('Escape')
-    await expect(dropdown).toBeHidden({ timeout: 2000 })
+    await expect(page.getByRole('search').getByRole('searchbox')).toBeVisible()
+    await expect(page.locator('.leads-inbox__select select')).toHaveCount(3)
   })
 
-  test('(c) Row-action «⋯» menu рендерится в каждой строке', async ({ page }) => {
-    const ok = await login(page)
-    if (!ok) test.skip(true, 'Admin auth недоступен — пропуск')
-
-    const resp = await page.goto(LEADS_LIST, { waitUntil: 'domcontentloaded' })
-    if (!resp || resp.status() >= 400) {
-      test.skip(true, `Leads list status=${resp?.status()} — пропуск`)
+  test('(b) заявка с сайта получает срок и открывается по ссылке ?lead=', async ({ page }) => {
+    const { id, phone } = await createLead(page, 'Тест очереди')
+    const token = await adminToken(page.request)
+    if (token) {
+      const lead = await getLead(page.request, token, id)
+      expect(typeof lead.replyDueAt).toBe('string')
     }
 
-    const firstRow = page.locator('table tbody tr').first()
-    if (!(await firstRow.isVisible().catch(() => false))) {
-      test.skip(true, 'Leads пуст — нет row')
-    }
+    await page.goto(`${LEADS}?tab=all&q=${encodeURIComponent(phone)}`, {
+      waitUntil: 'domcontentloaded',
+    })
+    const row = page.locator('.lead-row', { hasText: phone })
+    await expect(row).toBeVisible()
+    await row.click()
+    await expect(page).toHaveURL(new RegExp(`[?&]lead=${id}`))
 
-    const trigger = firstRow.locator('button.lead-row-actions__trigger').first()
-    await expect(trigger).toBeVisible({ timeout: 5000 })
-    await expect(trigger).toHaveAttribute('aria-label', /Действия с заявкой/)
-
-    await trigger.click()
-    const menu = page.locator('ul.lead-row-actions__menu[role="menu"]').first()
-    await expect(menu).toBeVisible({ timeout: 3000 })
-
-    // 7 status + archive + open-link = 9 menuitems.
-    const items = menu.locator('[role="menuitem"]')
-    await expect(items).toHaveCount(9)
-
-    await page.screenshot({ path: 'screen/leads-inbox-row-actions.png', fullPage: true })
-  })
-
-  test('(d) Chip click → URL params + list reload', async ({ page }) => {
-    const ok = await login(page)
-    if (!ok) test.skip(true, 'Admin auth недоступен — пропуск')
-
-    const resp = await page.goto(LEADS_LIST, { waitUntil: 'domcontentloaded' })
-    if (!resp || resp.status() >= 400) {
-      test.skip(true, `Leads list status=${resp?.status()} — пропуск`)
-    }
-
-    const newChip = page
-      .locator('nav.lead-quick-filters button[role="tab"]')
-      .filter({ hasText: /^Новая/ })
-      .first()
-    if (!(await newChip.isVisible().catch(() => false))) {
-      test.skip(true, 'Chip «Новая» не найден — пропуск')
-    }
-
-    await newChip.click()
-
-    // URL должен содержать where[status][equals]=new
-    await page.waitForFunction(
-      () =>
-        window.location.search.includes('where%5Bstatus%5D%5Bequals%5D=new') ||
-        window.location.search.includes('where[status][equals]=new'),
-      { timeout: 3000 },
+    const card = page.locator('.lead-card')
+    await expect(card.getByRole('heading', { name: 'Тест очереди' })).toBeVisible()
+    await expect(card.locator('a.lead-card__call-btn').first()).toHaveAttribute(
+      'href',
+      /^tel:\+7900\d{7}$/,
     )
+    await expect(card.locator('.lead-sla').first()).toContainText(/Ответить до|Скоро|Просрочено/)
+  })
 
-    await expect(newChip).toHaveAttribute('aria-selected', 'true')
-    await page.screenshot({ path: 'screen/leads-inbox-chip-active.png', fullPage: true })
+  test('(c) «Связались» останавливает таймер, статус меняется кнопкой', async ({ page }) => {
+    const { id } = await createLead(page, 'Тест итога звонка')
+    await page.goto(`${LEADS}?tab=all&lead=${id}`, { waitUntil: 'domcontentloaded' })
+    const card = page.locator('.lead-card')
+    await expect(card.locator('.lead-sla')).toHaveCount(1)
+
+    await card.getByRole('button', { name: 'Связались' }).click()
+    await expect(card.getByRole('button', { name: 'Связались' })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    )
+    await expect(card.locator('.lead-sla')).toHaveCount(0)
+    await expect(card.getByText(/Итог первого звонка отмечен/)).toBeVisible()
+
+    await card.getByRole('button', { name: 'Смета', exact: true }).click()
+    await expect(card.locator('.lead-card__head .lead-status-badge')).toHaveText('Смета')
+
+    const token = await adminToken(page.request)
+    if (token) {
+      const lead = await getLead(page.request, token, id)
+      expect(lead).toMatchObject({ contactResult: 'reached', status: 'smeta' })
+      expect(typeof lead.firstContactAt).toBe('string')
+    }
+  })
+
+  test('(d) телефон: карточка поверх очереди, «Позвонить» внизу', async ({ page }) => {
+    const { id } = await createLead(page, 'Тест телефона')
+    await page.setViewportSize({ width: 360, height: 780 })
+    await page.goto(`${LEADS}?tab=all&lead=${id}`, { waitUntil: 'domcontentloaded' })
+    await expect(page.locator('.leads-inbox__queue')).toBeHidden()
+    const sticky = page.locator('.lead-card__sticky .lead-card__call-btn')
+    await expect(sticky).toBeVisible()
+    const box = await sticky.boundingBox()
+    expect(box && box.y + box.height).toBeGreaterThan(700)
+    expect(box!.height).toBeGreaterThanOrEqual(44)
+    await page.getByRole('link', { name: '← К очереди' }).click()
+    await expect(page.locator('.leads-inbox__queue')).toBeVisible()
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
   })
 })

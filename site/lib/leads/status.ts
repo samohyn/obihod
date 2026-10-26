@@ -33,6 +33,17 @@ export const LEAD_STATUS_LABELS: Record<LeadStatus, string> = {
   spam: 'Спам',
 }
 
+/** Смысл статуса — подсказка в панели заявок (план 09, этап 5.2). */
+export const LEAD_STATUS_HINTS: Record<LeadStatus, string> = {
+  new: 'Заявка пришла, ещё не звонили',
+  contacted: 'Связались, уточняем задачу',
+  smeta: 'Считаем или согласуем смету',
+  brigade: 'Бригада назначена или на объекте',
+  done: 'Работы выполнены, заявка закрыта',
+  cancelled: 'Клиент отказался — заявка закрыта',
+  spam: 'Не заявка: реклама, ошибка, тест',
+}
+
 /**
  * Опции для Payload `select` field. Импортируется в Leads.ts.
  * Stable order = brand-guide §32 (#lead-status).

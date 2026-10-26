@@ -25,10 +25,10 @@ export const Leads: CollectionConfig = {
     group: '01 · Заявки',
     description: 'Входящие лиды с сайта — телефон, канал связи, черновик сметы.',
     components: {
-      // PANEL-LEADS-INBOX § B.2 — quick-filter chips в header list-view.
+      // План 09, этап 5.2: очередь и карточка заявки вместо штатной таблицы.
       views: {
         list: {
-          actions: ['@/components/admin/leads/LeadsQuickFilters#LeadsQuickFilters'],
+          Component: '@/components/admin/leads/inbox/LeadsInboxView#LeadsInboxView',
         },
       },
     },
@@ -80,6 +80,7 @@ export const Leads: CollectionConfig = {
               .catch(() => null)
             data.replyDueAt = replyDueAt(now, slaRuleFrom(company)).toISOString()
           }
+          if (data.contactResult && !data.firstContactAt) data.firstContactAt = now.toISOString()
           if (isClosedStatus(data.status)) data.closedAt = now.toISOString()
           return data
         }
@@ -160,6 +161,7 @@ export const Leads: CollectionConfig = {
             {
               name: 'phone',
               type: 'text',
+              label: 'Телефон',
               required: true,
               index: true,
               admin: { description: 'Главный канал связи — звоним сюда первым делом.' },
@@ -167,16 +169,19 @@ export const Leads: CollectionConfig = {
             {
               name: 'name',
               type: 'text',
+              label: 'Имя',
               admin: { description: 'Как обращаться к клиенту. Если пусто — узнаешь при звонке.' },
             },
             {
               name: 'email',
               type: 'email',
+              label: 'Почта',
               admin: { description: 'Для отправки сметы и подтверждений. Опционально.' },
             },
             {
               name: 'preferredChannel',
               type: 'select',
+              label: 'Удобный канал',
               options: [
                 { label: 'Telegram', value: 'telegram' },
                 { label: 'MAX', value: 'max' },
@@ -196,6 +201,7 @@ export const Leads: CollectionConfig = {
             {
               name: 'service',
               type: 'relationship',
+              label: 'Услуга',
               relationTo: 'services',
               admin: {
                 description: 'Услуга из заявки — нужна для роутинга бригаде и расчёта.',
@@ -204,6 +210,7 @@ export const Leads: CollectionConfig = {
             {
               name: 'district',
               type: 'relationship',
+              label: 'Район',
               relationTo: 'districts',
               admin: {
                 description: 'Район объекта — определяет логистику и стоимость выезда.',
@@ -256,6 +263,7 @@ export const Leads: CollectionConfig = {
             {
               name: 'estimateDraftJson',
               type: 'json',
+              label: 'Черновик сметы',
               admin: {
                 description: 'AI-черновик сметы по фото. Финальную утверждает оператор.',
               },
@@ -269,21 +277,25 @@ export const Leads: CollectionConfig = {
             {
               name: 'sourcePage',
               type: 'text',
+              label: 'Страница заявки',
               admin: { description: 'URL страницы, с которой пришла заявка.' },
             },
             {
               name: 'utmSource',
               type: 'text',
+              label: 'Рекламный канал (utm_source)',
               admin: { description: 'UTM source — рекламный канал (yandex, google, vk).' },
             },
             {
               name: 'utmMedium',
               type: 'text',
+              label: 'Тип трафика (utm_medium)',
               admin: { description: 'UTM medium — тип трафика (cpc, cpm, organic).' },
             },
             {
               name: 'utmCampaign',
               type: 'text',
+              label: 'Кампания (utm_campaign)',
               admin: { description: 'UTM campaign — название рекламной кампании.' },
             },
             {
@@ -325,6 +337,7 @@ export const Leads: CollectionConfig = {
             {
               name: 'callTrackingId',
               type: 'text',
+              label: 'ID звонка',
               admin: { description: 'ID звонка из Calltouch/CoMagic — связь с записью разговора.' },
             },
           ],
@@ -403,6 +416,7 @@ export const Leads: CollectionConfig = {
               // Cell renderer: pill + inline-update dropdown (per ADR-0012 Plan A).
               name: 'status',
               type: 'select',
+              label: 'Статус',
               defaultValue: 'new',
               options: LEAD_STATUS_OPTIONS,
               admin: {
@@ -417,6 +431,7 @@ export const Leads: CollectionConfig = {
               // Hook beforeChange (выше) — единственный writer; admin readOnly.
               name: 'statusHistory',
               type: 'json',
+              label: 'История статусов',
               defaultValue: [],
               admin: {
                 readOnly: true,
@@ -430,6 +445,7 @@ export const Leads: CollectionConfig = {
               // § C.3 — soft-delete. Default-фильтр list-view скрывает archived.
               name: 'archivedAt',
               type: 'date',
+              label: 'В архиве с',
               admin: {
                 description:
                   'Если заполнено — заявка в архиве. Снять для возврата в активный inbox.',
@@ -441,11 +457,13 @@ export const Leads: CollectionConfig = {
             {
               name: 'amoCrmId',
               type: 'text',
+              label: 'ID сделки в amoCRM',
               admin: { description: 'ID сделки в amoCRM — для двусторонней синхронизации.' },
             },
             {
               name: 'syncedAt',
               type: 'date',
+              label: 'Синхронизировано с amoCRM',
               admin: { description: 'Когда последний раз синхронизировалось с amoCRM.' },
             },
           ],
