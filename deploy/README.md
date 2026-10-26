@@ -123,6 +123,26 @@ tar -xzf /var/backups/obikhod/daily/media-<ts>-daily.tgz -C /home/deploy/obikhod
 sudo -u deploy pm2 start obikhod
 ```
 
+## Таймеры панели заявок
+
+План 09, этап 5.4 — [deploy/leads/](leads/). Только прод: на staging нет почты.
+
+| Таймер | Когда | Что делает |
+|---|---|---|
+| `obikhod-leads-overdue` | раз в минуту | письмо «Просрочена заявка» на `LEAD_NOTIFY_EMAIL`: срок вышел, итог звонка не отмечен; одно письмо на заявку (`overdueNotifiedAt`), просрочки старше 6 часов не поднимает |
+| `obikhod-leads-purge` | 05:00, после бэкапа | удаляет фото заявок, закрытых раньше срока «Фото закрытых заявок хранить, дней» («Компания и контакты» → «Заявки», не больше 30 — 152-ФЗ, ст. 21), ставит в заявке «Фото удалены» |
+
+Оба дёргают `POST /api/internal/leads/{overdue,purge-photos}` с заголовком `x-obikhod-cron` = `LEADS_CRON_SECRET`
+из `shared/.env`; без секрета адрес отвечает 403. Установка (после выкатки релиза с этими адресами):
+
+```bash
+tar -C deploy/leads -cz . | ssh root@89.111.141.79 \
+  'rm -rf /tmp/obikhod-leads-src && mkdir /tmp/obikhod-leads-src && tar -xz -C /tmp/obikhod-leads-src && bash /tmp/obikhod-leads-src/install.sh'
+```
+
+Проверить: `systemctl list-timers 'obikhod-leads-*'`, журнал — `journalctl -u obikhod-leads-overdue -n 20`.
+Запустить вручную: `obikhod-leads-run overdue` или `obikhod-leads-run purge-photos`.
+
 ## Операции на сервере
 
 ```bash

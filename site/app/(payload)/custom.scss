@@ -1186,6 +1186,50 @@ a.nav__link.nav__link--home::before {
   font-size: 14px;
   color: var(--brand-obihod-primary);
 }
+.leads-inbox__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px 16px;
+}
+.leads-inbox__export {
+  position: relative;
+  font-size: 14px;
+}
+.leads-inbox__export summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--brand-obihod-primary);
+  cursor: pointer;
+}
+.leads-inbox__export-menu {
+  position: absolute;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  min-width: 260px;
+  padding: 6px;
+  border: 1px solid var(--brand-obihod-line);
+  border-radius: var(--brand-obihod-radius-sm);
+  background: var(--brand-obihod-card);
+  box-shadow: 0 4px 16px rgba(28, 28, 28, 0.12);
+}
+.leads-inbox__export-menu a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 10px;
+  color: var(--brand-obihod-ink);
+  text-decoration: none;
+}
+.leads-inbox__export-menu a:hover,
+.leads-inbox__export-menu a:focus-visible {
+  outline: none;
+  background: var(--brand-obihod-paper);
+}
 .leads-inbox__tabs {
   display: flex;
   flex-wrap: wrap;

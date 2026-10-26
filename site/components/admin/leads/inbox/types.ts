@@ -53,6 +53,7 @@ export interface InboxLead extends InboxLeadRow {
   managerComment: string | null
   consentAt: string | null
   consentVersion: string | null
+  photosDeletedAt: string | null
   photos: InboxPhoto[]
 }
 

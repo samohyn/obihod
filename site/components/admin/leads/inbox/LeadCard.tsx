@@ -234,6 +234,12 @@ export function LeadCard({
           )}
         </dl>
         <PhotoViewer photos={lead.photos} />
+        {lead.photosDeletedAt && (
+          <p className="lead-card__hint">
+            Фото удалены {dateTime(lead.photosDeletedAt)} — срок хранения после закрытия заявки
+            (152-ФЗ).
+          </p>
+        )}
       </section>
 
       <section className="lead-card__group" aria-labelledby="lead-comment-label">

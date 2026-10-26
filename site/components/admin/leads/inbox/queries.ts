@@ -114,6 +114,7 @@ function toLead(d: Doc, titles: Parameters<typeof toRow>[1]): InboxLead {
     managerComment: str(d.managerComment),
     consentAt: str(d.consentAt),
     consentVersion: str(d.consentVersion),
+    photosDeletedAt: str(d.photosDeletedAt),
     photos,
   }
 }

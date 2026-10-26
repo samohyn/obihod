@@ -1,5 +1,6 @@
 import type { Payload } from 'payload'
 
+import { formatClockMsk, formatDuration } from '@/lib/leads/sla'
 import { sendEmail } from '@/lib/messengers/email'
 
 /**
@@ -26,7 +27,13 @@ export interface LeadEmailDoc {
   utmSource?: string | null
   utmMedium?: string | null
   utmCampaign?: string | null
+  replyDueAt?: string | null
 }
+
+const siteUrl = () => process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
+/** Ссылка сразу на карточку в панели заявок (план 09, этап 5.4). */
+export const leadCardUrl = (id: string | number) =>
+  `${siteUrl()}/admin/collections/leads?tab=all&lead=${id}`
 
 async function relationLabel(
   payload: Payload,
@@ -62,9 +69,10 @@ export async function emailManagerAboutLead(doc: LeadEmailDoc, payload: Payload)
     relationLabel(payload, 'services', doc.service),
     relationLabel(payload, 'districts', doc.district),
   ])
-  const site = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
   const utm = [doc.utmSource, doc.utmMedium, doc.utmCampaign].filter(Boolean).join(' / ')
+  const due = doc.replyDueAt ? formatClockMsk(new Date(doc.replyDueAt)) : null
   const details = [
+    due && `Ответить до ${due} (МСК)`,
     doc.phone && `Телефон: ${doc.phone}`,
     doc.name && `Имя: ${doc.name}`,
     doc.email && `Email: ${doc.email}`,
@@ -79,11 +87,52 @@ export async function emailManagerAboutLead(doc: LeadEmailDoc, payload: Payload)
     utm && `Реклама (UTM): ${utm}`,
     `Время: ${new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })} (МСК)`,
   ].filter(Boolean)
-  const link = doc.id ? `\n\nОткрыть в админке: ${site}/admin/collections/leads/${doc.id}` : ''
+  const link = doc.id ? `\n\nОткрыть заявку: ${leadCardUrl(doc.id)}` : ''
 
   await sendEmail({
     to,
-    subject: `Новая заявка${doc.id ? ` № ${doc.id}` : ''}${service ? ` — ${service}` : ''}`,
+    subject: `Новая заявка${doc.id ? ` № ${doc.id}` : ''}${service ? ` — ${service}` : ''}${due ? ` · ответить до ${due}` : ''}`,
     text: details.join('\n') + link,
+  })
+}
+
+export interface OverdueLead {
+  id: number
+  phone?: string | null
+  name?: string | null
+  service?: LeadEmailDoc['service']
+  replyDueAt: string
+}
+
+/** Письмо «Просрочена заявка» — одно на запуск таймера, со всеми новыми просрочками. */
+export async function emailManagerAboutOverdue(
+  leads: OverdueLead[],
+  payload: Payload,
+  now = new Date(),
+): Promise<void> {
+  const to = process.env.LEAD_NOTIFY_EMAIL
+  if (!to || !process.env.SMTP_HOST) {
+    console.warn('[lead-overdue-notify] skipped: SMTP_HOST / LEAD_NOTIFY_EMAIL not configured')
+    return
+  }
+  const lines = await Promise.all(
+    leads.map(async (l) => {
+      const service = await relationLabel(payload, 'services', l.service)
+      const late = formatDuration(now.getTime() - new Date(l.replyDueAt).getTime())
+      return [
+        `№ ${l.id} · ${l.name || 'Без имени'} · ${l.phone ?? ''}${service ? ` · ${service}` : ''}`,
+        `Срок был ${formatClockMsk(new Date(l.replyDueAt))} — просрочено на ${late}`,
+        `Открыть: ${leadCardUrl(l.id)}`,
+      ].join('\n')
+    }),
+  )
+  const first = leads[0]
+  await sendEmail({
+    to,
+    subject:
+      leads.length === 1
+        ? `Просрочена заявка № ${first.id} — ${first.phone ?? ''}`
+        : `Просрочено заявок: ${leads.length}`,
+    text: `Срок ответа вышел, итог звонка не отмечен.\n\n${lines.join('\n\n')}`,
   })
 }

@@ -22,6 +22,8 @@ export interface Company {
   nightCallbackTime: string
   /** Панель заявок: срок ответа ночью переносится на утро (план 09, этап 5.1). */
   replyByWorkingHours: boolean
+  /** Сколько дней хранить фото закрытой заявки (152-ФЗ, ст. 21: не больше 30). */
+  leadPhotoRetentionDays: number
   callbackMinutes: number
   callbackLateDiscountRub: number
   photoEstimateMinutes: number
@@ -50,6 +52,7 @@ export const DEFAULT_COMPANY: Company = {
   leadsAllDay: true,
   nightCallbackTime: '08:15',
   replyByWorkingHours: true,
+  leadPhotoRetentionDays: 30,
   callbackMinutes: 10,
   callbackLateDiscountRub: 500,
   photoEstimateMinutes: 30,

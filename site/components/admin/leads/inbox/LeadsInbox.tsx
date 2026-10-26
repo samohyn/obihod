@@ -72,9 +72,22 @@ export function LeadsInbox({ data }: { data: InboxData }) {
         <section className="leads-inbox__queue" aria-label="Очередь заявок">
           <div className="leads-inbox__top">
             <h1 className="leads-inbox__title">Заявки</h1>
-            <Link className="leads-inbox__add" href="/admin/collections/leads/create">
-              Добавить вручную
-            </Link>
+            <div className="leads-inbox__links">
+              <Link className="leads-inbox__add" href="/admin/collections/leads/create">
+                Добавить вручную
+              </Link>
+              <details className="leads-inbox__export">
+                <summary>Выгрузить CSV</summary>
+                <div className="leads-inbox__export-menu">
+                  <a href="/api/admin/leads/export" download>
+                    Без персональных данных
+                  </a>
+                  <a href="/api/admin/leads/export?pd=1" download>
+                    С именем, телефоном и адресом
+                  </a>
+                </div>
+              </details>
+            </div>
           </div>
 
           <nav className="leads-inbox__tabs" aria-label="Вкладки очереди">
