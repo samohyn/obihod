@@ -6,7 +6,7 @@ import '../homepage-classic.css'
 import { SiteFooter } from '@/components/chrome/SiteFooter'
 import { SiteHeader } from '@/components/chrome/SiteHeader'
 import { PreviewBanner } from '@/components/chrome/PreviewBanner'
-import { YandexMetrika } from '@/components/analytics/YandexMetrika'
+import { AnalyticsConsent } from '@/components/analytics/AnalyticsConsent'
 import { RumProvider } from '@/components/analytics/RumProvider'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { getSiteChrome } from '@/lib/chrome'
@@ -27,7 +27,7 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 })
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'),
   title: {
     default: 'Обиход — порядок под ключ. Арбо, снег, мусор, демонтаж по Москве и МО',
@@ -73,6 +73,35 @@ export const metadata: Metadata = {
   manifest: '/site.webmanifest',
 }
 
+/**
+ * Коды подтверждения прав из «Настроек SEO» → <meta name="yandex-verification"> и др.: нужны
+ * Яндекс Вебмастеру и Search Console при запуске (план 09, этапы 7–8).
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = (await getSeoSettings()) as {
+    verification?: {
+      yandexWebmaster?: string | null
+      googleSearchConsole?: string | null
+      mailRu?: string | null
+    } | null
+  } | null
+  const v = seo?.verification
+  return {
+    ...baseMetadata,
+    verification: {
+      yandex: v?.yandexWebmaster?.trim() || undefined,
+      google: v?.googleSearchConsole?.trim() || undefined,
+      other: v?.mailRu?.trim() ? { 'mailru-domain': v.mailRu.trim() } : undefined,
+    },
+  }
+}
+
+/** Номер счётчика Метрики из «Настроек SEO»; нет — ни Метрики, ни баннера о cookie. */
+function metrikaId(seo: unknown): number | null {
+  const v = (seo as { metrikaId?: string | null } | null)?.metrikaId
+  return v && /^\d{5,12}$/.test(v) ? Number(v) : null
+}
+
 export default async function MarketingLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -90,7 +119,7 @@ export default async function MarketingLayout({
             localBusinessSchema(chrome, seo),
           ]}
         />
-        <YandexMetrika />
+        <AnalyticsConsent counterId={metrikaId(seo)} />
         <RumProvider />
         <PreviewBanner />
         <SiteHeader />

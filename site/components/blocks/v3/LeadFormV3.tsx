@@ -8,6 +8,7 @@
 // Пять состояний: ожидание, ошибка поля, отправка с процентом загрузки, успех, ошибка сервера
 // (введённое сохраняется, можно отправить ещё раз).
 
+import { goal } from '@/lib/analytics/goal'
 import Link from 'next/link'
 import { useEffect, useId, useRef, useState, type ChangeEvent, type FormEvent } from 'react'
 
@@ -185,6 +186,7 @@ export function LeadFormV3({
           deadline: callbackDeadline(new Date(), callback),
           photos: good.length,
         })
+        goal('lead_sent')
         setStatus('sent')
         return
       }
@@ -244,8 +246,15 @@ export function LeadFormV3({
     errors.consent ||
     (Object.values(errors).some(Boolean) ? 'Проверьте отмеченные поля' : '')
 
+  // ym-hide-content — Вебвизор Метрики не показывает в записях, что вводит посетитель
   return (
-    <form ref={formRef} className={s.card} onSubmit={onSubmit} noValidate aria-busy={sending}>
+    <form
+      ref={formRef}
+      className={`${s.card} ym-hide-content`}
+      onSubmit={onSubmit}
+      noValidate
+      aria-busy={sending}
+    >
       <div className={s.cardHead}>
         <b>{title}</b>
         <span>ответ за {callback.callbackMinutes} мин</span>

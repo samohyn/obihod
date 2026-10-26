@@ -16,7 +16,7 @@
  *   - UA truncated к 256 символам;
  *   - НЕ шлём cookies, localStorage, sessionId.
  *
- * Размещение — в `app/(marketing)/layout.tsx` рядом с `<YandexMetrika />`.
+ * Размещение — в `app/(marketing)/layout.tsx` рядом с `<AnalyticsConsent />`.
  */
 import { useReportWebVitals } from 'next/web-vitals'
 
