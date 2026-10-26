@@ -95,12 +95,11 @@ export async function generateMetadata({
     })
     const hero = blocks.find((b) => b.blockType === 'hero-slider')
     const slide = hero && hero.blockType === 'hero-slider' ? hero.slides[0] : null
-    // свои title и description записи «Услуги × районы» важнее шаблона (план 09, этап 7, пробел 6)
-    const sd = sdBundle.sd as { seoTitle?: string | null; seoDescription?: string | null }
-    const title =
-      sd.seoTitle?.trim() ||
-      fillTemplate(templates.geoMetaTitle, { заголовок: slide?.title ?? pillar.title })
-    const description = sd.seoDescription?.trim() || truncateMeta(slide?.lead ?? '', 158)
+    // Только шаблон: в старых записях «Услуги × районы» поля seoTitle / seoDescription — прежние
+    // заготовки под другую услугу и старый оффер («Вырубка ёлок…» на «Спиле в Раменском»,
+    // «выезд послезавтра»), их выводить нельзя (26.10.2026). Описание — по слову, не посреди слова.
+    const title = fillTemplate(templates.geoMetaTitle, { заголовок: slide?.title ?? pillar.title })
+    const description = truncateMeta(slide?.lead ?? '', 158)
     return {
       ...legacy,
       title: { absolute: title },
