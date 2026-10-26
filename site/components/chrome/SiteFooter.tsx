@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { ButtonLink, Wrap } from '@/components/blocks/v3/shared'
 import { getChromeView, getContacts } from '@/lib/chrome'
 import { CONSENT_URL, PRIVACY_URL } from '@/lib/legal'
+import { getSeoSettings } from '@/lib/seo/queries'
+import { CookieSettingsLink } from '@/components/analytics/AnalyticsConsent'
 
 import { Logo } from './Logo'
 import s from './chrome.module.css'
@@ -12,7 +14,13 @@ import s from './chrome.module.css'
  * реквизиты и документы. На телефоне — закреплённая снизу панель «Позвонить» + главная кнопка.
  */
 export async function SiteFooter() {
-  const [view, contacts] = await Promise.all([getChromeView(), getContacts()])
+  const [view, contacts, seo] = await Promise.all([
+    getChromeView(),
+    getContacts(),
+    getSeoSettings(),
+  ])
+  // «Настройки cookie» — только когда есть Метрика (баннер о cookie)
+  const hasMetrika = Boolean((seo as { metrikaId?: string | null } | null)?.metrikaId)
   const phoneHref = `tel:${contacts.phoneE164}`
   const address = [contacts.addressLocality, contacts.streetAddress].filter(Boolean).join(', ')
   const legal = [
@@ -75,6 +83,12 @@ export async function SiteFooter() {
               <Link href={CONSENT_URL}>Согласие на обработку данных</Link>
               <span aria-hidden> · </span>
               <Link href="/karta-sajta/">Карта сайта</Link>
+              {hasMetrika && (
+                <>
+                  <span aria-hidden> · </span>
+                  <CookieSettingsLink />
+                </>
+              )}
             </span>
           </div>
         </Wrap>

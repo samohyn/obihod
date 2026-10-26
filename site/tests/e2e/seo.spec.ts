@@ -140,3 +140,16 @@ test.describe('OG image generator (REQ-5.11)', () => {
     expect(res.headers()['content-type']).toContain('image/png')
   })
 })
+
+test.describe('Яндекс Метрика только по согласию (этап 7)', () => {
+  test('без номера счётчика — ни баннера, ни запросов к Метрике', async ({ page }) => {
+    const metrika: string[] = []
+    page.on('request', (r) => {
+      if (r.url().includes('mc.yandex.ru')) metrika.push(r.url())
+    })
+    await page.goto('/kontakty/', { waitUntil: 'load' })
+    await page.waitForTimeout(800)
+    await expect(page.getByRole('region', { name: 'Cookie и статистика' })).toHaveCount(0)
+    expect(metrika).toEqual([])
+  })
+})

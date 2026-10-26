@@ -3,6 +3,7 @@
 // Калькулятор (LiWood, MMusor): услуга → вид работ → объём → зона. Цена — ориентир,
 // твёрдая фиксируется после фото или осмотра. Уборка и вывоз — строками «включено».
 
+import { goal } from '@/lib/analytics/goal'
 import Link from 'next/link'
 import { useId, useState } from 'react'
 
@@ -147,13 +148,14 @@ export function Calculator(block: CalculatorBlock & { tone?: SectionTone | null 
             <Link
               href="#zayavka"
               className={s.cta}
-              onClick={() =>
+              onClick={() => {
+                goal('calc_lead')
                 window.dispatchEvent(
                   new CustomEvent(CALC_EVENT, {
                     detail: `Расчёт на сайте: ${svc.label} · ${svc.kindLabel}: ${kind.label} · ${svc.volumeLabel}: ${vol.label} · ${zone.label} — ${rub(price)} (ориентир)`,
                   }),
                 )
-              }
+              }}
             >
               {block.ctaLabel ?? 'Получить твёрдую смету'}
               <Icon name="arrow" size={18} />

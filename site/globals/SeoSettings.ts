@@ -68,13 +68,28 @@ export const SeoSettings: GlobalConfig = {
       ],
     },
     {
+      name: 'metrikaId',
+      type: 'text',
+      label: 'Яндекс Метрика — номер счётчика',
+      validate: (v: unknown) =>
+        !v || /^\d{5,12}$/.test(String(v)) ? true : 'Только цифры номера счётчика',
+      admin: {
+        description:
+          'Пусто — Метрики и баннера о cookie на сайте нет. Задан — посетитель видит баннер; счётчик включается только после «Принять аналитику». Цели: lead_sent (заявка отправлена), phone_click, email_click, calc_lead (заявка из калькулятора).',
+      },
+    },
+    {
       name: 'verification',
       type: 'group',
-      label: 'Verification codes',
+      label: 'Коды подтверждения прав на сайт',
+      admin: {
+        description:
+          'Только значение content из мета-тега, который выдаёт сервис. Сайт сам выведет <meta> в каждой странице.',
+      },
       fields: [
-        { name: 'yandexWebmaster', type: 'text' },
-        { name: 'googleSearchConsole', type: 'text' },
-        { name: 'mailRu', type: 'text' },
+        { name: 'yandexWebmaster', type: 'text', label: 'Яндекс Вебмастер' },
+        { name: 'googleSearchConsole', type: 'text', label: 'Google Search Console' },
+        { name: 'mailRu', type: 'text', label: 'Mail.ru (mailru-domain)' },
       ],
     },
     { name: 'defaultOgImage', type: 'upload', relationTo: 'media' },
