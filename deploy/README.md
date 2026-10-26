@@ -132,7 +132,7 @@ sudo -u deploy pm2 start obikhod
 | `obikhod-leads-overdue` | раз в минуту | письмо «Просрочена заявка» на `LEAD_NOTIFY_EMAIL`: срок вышел, итог звонка не отмечен; одно письмо на заявку (`overdueNotifiedAt`), просрочки старше 6 часов не поднимает |
 | `obikhod-leads-purge` | 05:00, после бэкапа | удаляет фото заявок, закрытых раньше срока «Фото закрытых заявок хранить, дней» («Компания и контакты» → «Заявки», не больше 30 — 152-ФЗ, ст. 21), ставит в заявке «Фото удалены» |
 
-Оба дёргают `POST /api/internal/leads/{overdue,purge-photos}` с заголовком `x-obikhod-cron` = `LEADS_CRON_SECRET`
+Оба дёргают `POST /api/internal/leads/{overdue,purge-photos}/` (со слэшем: без него сайт отвечает редиректом 308) с заголовком `x-obikhod-cron` = `LEADS_CRON_SECRET`
 из `shared/.env`; без секрета адрес отвечает 403. Установка (после выкатки релиза с этими адресами):
 
 ```bash

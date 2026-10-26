@@ -11,5 +11,5 @@ PORT=${OBIKHOD_PORT:-3000}
 SECRET=$(grep -E '^LEADS_CRON_SECRET=' "$ENV_FILE" | tail -1 | cut -d= -f2- | tr -d "\"'")
 [ -n "$SECRET" ] || { echo "✗ нет LEADS_CRON_SECRET в $ENV_FILE" >&2; exit 1; }
 curl -fsS --max-time 120 -X POST -H "x-obikhod-cron: $SECRET" \
-  "http://127.0.0.1:$PORT/api/internal/leads/$JOB"
+  "http://127.0.0.1:$PORT/api/internal/leads/$JOB/"
 echo

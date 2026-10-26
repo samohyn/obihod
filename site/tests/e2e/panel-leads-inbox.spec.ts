@@ -154,7 +154,7 @@ test.describe('Панель заявок — очередь и карточка'
 
 test('служебные адреса таймеров без секрета закрыты', async ({ request }) => {
   for (const job of ['overdue', 'purge-photos']) {
-    const res = await request.post(`/api/internal/leads/${job}`)
+    const res = await request.post(`/api/internal/leads/${job}/`)
     expect(res.status()).toBe(403)
   }
   expect((await request.get('/api/admin/leads/export')).status()).toBe(403)
