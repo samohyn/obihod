@@ -20,6 +20,8 @@ export interface Company {
   closes: string
   leadsAllDay: boolean
   nightCallbackTime: string
+  /** Панель заявок: срок ответа ночью переносится на утро (план 09, этап 5.1). */
+  replyByWorkingHours: boolean
   callbackMinutes: number
   callbackLateDiscountRub: number
   photoEstimateMinutes: number
@@ -47,6 +49,7 @@ export const DEFAULT_COMPANY: Company = {
   closes: '22:00',
   leadsAllDay: true,
   nightCallbackTime: '08:15',
+  replyByWorkingHours: true,
   callbackMinutes: 10,
   callbackLateDiscountRub: 500,
   photoEstimateMinutes: 30,

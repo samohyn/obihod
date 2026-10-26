@@ -45,3 +45,18 @@ export const LEAD_STATUS_OPTIONS = LEAD_STATUSES.map((value) => ({
 export function isLeadStatus(value: unknown): value is LeadStatus {
   return typeof value === 'string' && (LEAD_STATUSES as readonly string[]).includes(value)
 }
+
+/** Итог первого звонка — только он останавливает таймер «ответить до» (план 09, этап 5.1). */
+export const CONTACT_RESULT_OPTIONS = [
+  { label: 'Связались', value: 'reached' },
+  { label: 'Не ответил', value: 'no_answer' },
+] as const
+
+export type ContactResult = (typeof CONTACT_RESULT_OPTIONS)[number]['value']
+
+/** Заявка закрыта: срока ответа у неё нет, в очереди «Новые» и «В работе» её нет. */
+export const CLOSED_STATUSES: readonly LeadStatus[] = ['done', 'cancelled', 'spam']
+
+export function isClosedStatus(value: unknown): boolean {
+  return isLeadStatus(value) && CLOSED_STATUSES.includes(value)
+}
