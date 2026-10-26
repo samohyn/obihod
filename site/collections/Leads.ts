@@ -1,7 +1,13 @@
 import type { CollectionConfig } from 'payload'
 
 import { isAdmin } from '@/lib/auth/access'
-import { LEAD_STATUS_OPTIONS, isLeadStatus } from '@/lib/leads/status'
+import { replyDueAt, slaRuleFrom } from '@/lib/leads/sla'
+import {
+  CONTACT_RESULT_OPTIONS,
+  LEAD_STATUS_OPTIONS,
+  isClosedStatus,
+  isLeadStatus,
+} from '@/lib/leads/status'
 import {
   buildAfterChangeAuditHook,
   buildAfterDeleteAuditHook,
@@ -60,6 +66,32 @@ export const Leads: CollectionConfig = {
         // Cap at 50 entries (per ADR-0012 § Negative consequences) — truncate oldest.
         const merged = [...existing, entry]
         data.statusHistory = merged.length > 50 ? merged.slice(merged.length - 50) : merged
+        return data
+      },
+      // План 09, этап 5.1: срок ответа ставит сервер при создании; итог первого звонка и закрытие
+      // заявки фиксируют время. Только итог звонка останавливает таймер.
+      async ({ data, originalDoc, req, operation }) => {
+        if (!data) return data
+        const now = new Date()
+        if (operation === 'create') {
+          if (!data.replyDueAt && !isClosedStatus(data.status)) {
+            const company = await req.payload
+              .findGlobal({ slug: 'company', depth: 0, req })
+              .catch(() => null)
+            data.replyDueAt = replyDueAt(now, slaRuleFrom(company)).toISOString()
+          }
+          if (isClosedStatus(data.status)) data.closedAt = now.toISOString()
+          return data
+        }
+        if (data.contactResult && !originalDoc?.firstContactAt && !data.firstContactAt) {
+          data.firstContactAt = now.toISOString()
+        }
+        const status = data.status ?? originalDoc?.status
+        if (isClosedStatus(status)) {
+          if (!originalDoc?.closedAt && !data.closedAt) data.closedAt = now.toISOString()
+        } else if (originalDoc?.closedAt) {
+          data.closedAt = null
+        }
         return data
       },
     ],
@@ -301,6 +333,70 @@ export const Leads: CollectionConfig = {
           label: 'Статус',
           description: 'Воронка обработки заявки и связь с amoCRM.',
           fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'replyDueAt',
+                  type: 'date',
+                  label: 'Ответить до',
+                  index: true,
+                  admin: {
+                    readOnly: true,
+                    width: '50%',
+                    date: { pickerAppearance: 'dayAndTime' },
+                    description:
+                      'Ставится автоматически: время заявки плюс «Перезвоним за» из «Компания и контакты».',
+                  },
+                },
+                {
+                  name: 'firstContactAt',
+                  type: 'date',
+                  label: 'Итог первого звонка',
+                  admin: {
+                    readOnly: true,
+                    width: '50%',
+                    date: { pickerAppearance: 'dayAndTime' },
+                    description: 'Когда менеджер отметил «Связались» или «Не ответил».',
+                  },
+                },
+              ],
+            },
+            {
+              name: 'contactResult',
+              type: 'radio',
+              label: 'Первый звонок',
+              options: [...CONTACT_RESULT_OPTIONS],
+              admin: {
+                layout: 'horizontal',
+                description: 'Только итог звонка останавливает таймер «Ответить до».',
+              },
+            },
+            {
+              name: 'nextActionAt',
+              type: 'date',
+              label: 'Напомнить',
+              admin: {
+                date: { pickerAppearance: 'dayAndTime' },
+                description: 'Например, «перезвонить завтра в 16:00». Срок ответа не меняет.',
+              },
+            },
+            {
+              name: 'managerComment',
+              type: 'textarea',
+              label: 'Комментарий менеджера',
+              admin: { description: 'Что договорились, что уточнить. Клиент не видит.' },
+            },
+            {
+              name: 'closedAt',
+              type: 'date',
+              label: 'Заявка закрыта',
+              admin: {
+                readOnly: true,
+                date: { pickerAppearance: 'dayAndTime' },
+                description: 'Ставится при статусе «Завершена», «Отменена» или «Спам».',
+              },
+            },
             {
               // PANEL-LEADS-INBOX § A.1 — canonical 7-status enum (brand-guide §32 #lead-status).
               // Old → new mapping выполнен миграцией 20260501_140000.
