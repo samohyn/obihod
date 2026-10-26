@@ -300,7 +300,9 @@ export function serviceSchema(service: Service, district?: District) {
   return {
     '@type': 'Service',
     '@id': id,
+    name: service.h1 || service.title,
     serviceType: service.title,
+    url: id.replace(/#service$/, ''),
     provider: { '@id': ORG_ID },
     areaServed,
     offers: {
@@ -309,7 +311,8 @@ export function serviceSchema(service: Service, district?: District) {
       priceSpecification: {
         '@type': 'PriceSpecification',
         minPrice: service.priceFrom,
-        maxPrice: service.priceTo,
+        // верхняя граница — только если она есть и выше «от»
+        maxPrice: service.priceTo > service.priceFrom ? service.priceTo : undefined,
         priceCurrency: 'RUB',
         unitText: PRICE_UNIT_LABELS[service.priceUnit] ?? service.priceUnit,
       },
@@ -390,6 +393,30 @@ export function articleSchema(post: BlogPost) {
     },
     publisher: { '@id': ORG_ID },
     mainEntityOfPage: `${SITE_URL}/blog/${post.slug}/`,
+  }
+}
+
+/** Кейс — Article от имени компании (план 09, этап 7: пробел 4 из 11_page_templates.md). */
+export function caseArticleSchema(c: {
+  slug: string
+  title: string
+  description?: string | null
+  image?: string | null
+  datePublished?: string | null
+  dateModified?: string | null
+}): Record<string, unknown> {
+  const url = `${SITE_URL}/kejsy/${c.slug}/`
+  return {
+    '@type': 'Article',
+    '@id': `${url}#article`,
+    headline: c.title,
+    description: c.description || undefined,
+    image: c.image || undefined,
+    datePublished: c.datePublished || undefined,
+    dateModified: c.dateModified || undefined,
+    author: { '@id': ORG_ID },
+    publisher: { '@id': ORG_ID },
+    mainEntityOfPage: url,
   }
 }
 

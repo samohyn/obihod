@@ -2,7 +2,7 @@ import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { crumbsToSchema, trail } from '@/lib/breadcrumbs'
-import { getContacts, getSiteChrome } from '@/lib/chrome'
+import { getContacts } from '@/lib/chrome'
 import type { DistrictLike, ServiceDistrictLike } from '@/lib/geo-pages'
 import { buildServiceDistrictBlocks, localizeTiles } from '@/lib/geo-pages'
 import { getPage, type PageData } from '@/lib/pages'
@@ -29,8 +29,7 @@ export async function ServiceDistrictBlocksView({
   sd: ServiceDistrictLike
   pillar: PageData
 }) {
-  const [chrome, contacts, uslugi, local, company, templates] = await Promise.all([
-    getSiteChrome(),
+  const [contacts, uslugi, local, company, templates] = await Promise.all([
     getContacts(),
     getPage('uslugi'),
     getLocalGeoPages(),
@@ -54,8 +53,6 @@ export async function ServiceDistrictBlocksView({
   )
   const faqs = blocks.flatMap((b) => (b.blockType === 'faq-v3' ? b.items : []))
   const schema = buildJsonLdForTemplate('T4_SD', {
-    chrome,
-    skipChrome: true,
     service,
     district,
     faqs,

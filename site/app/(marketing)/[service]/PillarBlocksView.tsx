@@ -2,10 +2,11 @@ import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { CALCULATOR_SLUGS, crumbsToSchema, trail } from '@/lib/breadcrumbs'
-import { getContacts, getSiteChrome } from '@/lib/chrome'
+import { getContacts } from '@/lib/chrome'
 import type { PageData } from '@/lib/pages'
 import { buildJsonLdForTemplate } from '@/lib/seo/composer'
 import type { Service } from '@/lib/seo/jsonld'
+import { priceFromBadge } from '@/lib/seo/price'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -25,14 +26,14 @@ export async function PillarBlocksView({
   const breadcrumbs = CALCULATOR_SLUGS.includes(service.slug)
     ? trail(null, leaf)
     : trail('uslugi', leaf)
-  const [chrome, contacts] = await Promise.all([getSiteChrome(), getContacts()])
+  const contacts = await getContacts()
   const faqs = page.blocks.flatMap((b) =>
     b.blockType === 'faq-v3' && b.enabled !== false ? b.items : [],
   )
+  // цена «от» — из первого экрана страницы (её видит посетитель), а не прежнее поле «Услуг»
+  const priceFrom = priceFromBadge(page.blocks) ?? service.priceFrom
   const schema = buildJsonLdForTemplate('T2_PILLAR', {
-    chrome,
-    skipChrome: true,
-    service,
+    service: { ...service, h1: page.title || service.title, priceFrom, priceTo: priceFrom },
     faqs,
     breadcrumbs: crumbsToSchema(breadcrumbs, SITE_URL),
   })
