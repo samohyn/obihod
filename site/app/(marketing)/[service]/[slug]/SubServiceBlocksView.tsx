@@ -3,6 +3,8 @@ import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { crumbsToSchema, trail } from '@/lib/breadcrumbs'
 import { getContacts } from '@/lib/chrome'
+import { serviceArticlesBlock, serviceGeoBlock } from '@/lib/geo-links'
+import { beforeForm } from '@/lib/geo-pages'
 import type { PageData } from '@/lib/pages'
 import { priceFromBadge } from '@/lib/seo/price'
 import { buildJsonLdForTemplate } from '@/lib/seo/composer'
@@ -29,7 +31,12 @@ export async function SubServiceBlocksView({
     { name: service.title, href: `/${service.slug}/` },
     { name: page.title, href: url },
   )
-  const contacts = await getContacts()
+  const [contacts, geo, articles] = await Promise.all([
+    getContacts(),
+    serviceGeoBlock(service.slug),
+    serviceArticlesBlock((service as { id?: number }).id, page.blocks),
+  ])
+  const blocks = beforeForm(page.blocks, [geo, articles])
   const faqs = page.blocks.flatMap((b) =>
     b.blockType === 'faq-v3' && b.enabled !== false ? b.items : [],
   )
@@ -52,7 +59,7 @@ export async function SubServiceBlocksView({
     <>
       <JsonLd schema={schema} />
       <Breadcrumbs items={breadcrumbs} schema={false} />
-      <V3BlockRenderer blocks={page.blocks} phoneDisplay={contacts.phoneDisplay} />
+      <V3BlockRenderer blocks={blocks} phoneDisplay={contacts.phoneDisplay} />
     </>
   )
 }

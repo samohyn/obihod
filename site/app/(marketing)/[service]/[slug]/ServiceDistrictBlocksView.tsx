@@ -5,6 +5,7 @@ import { crumbsToSchema, trail } from '@/lib/breadcrumbs'
 import { getContacts } from '@/lib/chrome'
 import type { DistrictLike, ServiceDistrictLike } from '@/lib/geo-pages'
 import { buildServiceDistrictBlocks, localizeTiles } from '@/lib/geo-pages'
+import { nearbyDistricts } from '@/lib/geo-links'
 import { getPage, type PageData } from '@/lib/pages'
 import { buildJsonLdForTemplate } from '@/lib/seo/composer'
 import type { District, Service } from '@/lib/seo/jsonld'
@@ -36,7 +37,9 @@ export async function ServiceDistrictBlocksView({
     getCompany(),
     getPageTemplates(),
   ])
+  const nearby = await nearbyDistricts(district.slug, service.slug)
   const { blocks } = buildServiceDistrictBlocks({
+    nearby,
     pillar,
     district,
     sd,

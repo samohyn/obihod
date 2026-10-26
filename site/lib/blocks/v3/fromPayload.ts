@@ -141,6 +141,38 @@ async function fetchLatestPosts(payload: Payload, limit: number) {
   return res.docs as unknown as Doc[]
 }
 
+/**
+ * «Статьи по теме» на страницах услуг (план 09, этап 7: «услуги → блог»): последние опубликованные
+ * статьи с этой услугой в «Услугах статьи». Нет таких статей — блока нет.
+ */
+export async function relatedArticlesBlock(
+  payload: Payload,
+  serviceId: number | string,
+  limit = 3,
+): Promise<V3BlockWithTone | null> {
+  const res = await payload.find({
+    collection: 'blog',
+    where: {
+      and: [{ _status: { equals: 'published' } }, { tagsServices: { in: [serviceId] } }],
+    },
+    sort: '-publishedAt',
+    limit,
+    depth: 1,
+  })
+  const items = (res.docs as unknown as Doc[])
+    .map(articleItem)
+    .filter((x): x is NonNullable<ReturnType<typeof articleItem>> => x !== null)
+  if (!items.length) return null
+  return {
+    blockType: 'articles',
+    eyebrow: 'Статьи',
+    title: 'Полезное по теме',
+    link: { label: 'Все статьи', href: '/blog/' },
+    anchor: 'stati',
+    items,
+  }
+}
+
 export async function fromPayloadBlocks(
   layout: unknown,
   payload: Payload,
