@@ -10,7 +10,7 @@ export const Services: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'priceFrom', 'priceTo'],
-    group: '02 · Контент',
+    group: 'Страницы и услуги',
     description: 'Четыре направления Обихода: арбористика, крыши, мусор, демонтаж.',
   },
   versions: { drafts: { autosave: { interval: 2000 } } },

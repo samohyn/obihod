@@ -162,29 +162,27 @@ export default buildConfig({
   // порядок групп в sidebar — Payload рендерит группы в порядке первой
   // коллекции с этим admin.group. Цель — 01 → 02 → 03 → 04 → 09 per
   // brand-guide §12.2 mockup (lines 2993-3011 brand-guide.html).
+  // Порядок задаёт меню админки: группы идут по первой коллекции группы, глобалы — после
+  // коллекций (план 09, этап 5.5: Заявки · Страницы и услуги · География · Кейсы и отзывы ·
+  // Блог · Настройки сайта).
   collections: [
-    // 01 · Заявки
     Leads,
     LeadPhotos,
-    // 02 · Контент (порядок per brand-guide §12.2 mockup)
     Pages,
     Services,
     SubServices,
+    Media,
     Districts,
     ServiceDistricts,
     Cases,
+    Reviews,
     Blog,
     Authors,
-    Reviews,
-    // 03 · Медиа
-    Media,
-    // 04 · SEO
     Redirects,
     RumMetrics,
-    // 09 · Система
     Users,
   ],
-  globals: [SeoSettings, SiteChrome, Company, PageTemplates],
+  globals: [Company, SiteChrome, SeoSettings, PageTemplates],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },

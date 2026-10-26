@@ -1,6 +1,8 @@
 import type { CSSProperties, FC } from 'react'
 import Link from 'next/link'
 
+import { replyStats, type ReplyStats } from '@/lib/leads/sla'
+import { CLOSED_STATUSES } from '@/lib/leads/status'
 import { payloadClient } from '@/lib/payload'
 import { DashboardTile } from './DashboardTile'
 import {
@@ -46,69 +48,77 @@ const COLLECTIONS_TO_SHOW: Array<{
   { slug: 'districts', label: 'Район', titleField: 'nameNominative' },
 ]
 
-interface DashboardStats {
-  newLeads: number | string
-  uniqsWeek: number | string
-  publishedPages: number | string
-  ciErrors: number | string
+interface LeadStats {
+  overdue: number
+  fresh: number
+  inWork: number
+  week: ReplyStats
+  month: ReplyStats
 }
 
-async function loadStats(): Promise<DashboardStats> {
-  // brand-guide §12.3: 4 stat-cards. Реальные значения берём из БД где можем,
-  // остальные — placeholder «—» (нет интеграций Я.Метрика / Sentry / GH API).
-  let newLeads: number | string = '—'
-  let publishedPages: number | string = '—'
+/** Заявки на главной панели (план 09, этап 5.5) — только реальные цифры, без заглушек. */
+async function loadLeadStats(): Promise<LeadStats | null> {
   try {
     const payload = await payloadClient()
-    // Новые заявки — leads без обработки. Если коллекция пустая или нет
-    // status-фильтра — total leads count.
-    try {
-      const leadsRes = await payload.find({
+    const now = new Date()
+    const notArchived = { archivedAt: { exists: false } } as const
+    const monthAgo = new Date(now.getTime() - 30 * 86_400_000)
+    const [overdue, fresh, inWork, recent] = await Promise.all([
+      payload.count({
         collection: 'leads',
-        limit: 0,
+        overrideAccess: true,
+        where: {
+          and: [
+            notArchived,
+            { status: { not_in: [...CLOSED_STATUSES] } },
+            { firstContactAt: { exists: false } },
+            { replyDueAt: { less_than: now.toISOString() } },
+          ],
+        },
+      }),
+      payload.count({
+        collection: 'leads',
+        overrideAccess: true,
+        where: { and: [notArchived, { status: { equals: 'new' } }] },
+      }),
+      payload.count({
+        collection: 'leads',
+        overrideAccess: true,
+        where: { and: [notArchived, { status: { in: ['contacted', 'smeta', 'brigade'] } }] },
+      }),
+      payload.find({
+        collection: 'leads',
+        overrideAccess: true,
+        depth: 0,
         pagination: false,
-      })
-      newLeads = leadsRes.totalDocs ?? 0
-    } catch {
-      newLeads = 0
+        limit: 5000,
+        where: { createdAt: { greater_than_equal: monthAgo.toISOString() } },
+        select: {
+          status: true,
+          createdAt: true,
+          replyDueAt: true,
+          firstContactAt: true,
+          closedAt: true,
+        },
+      }),
+    ])
+    const docs = recent.docs as Parameters<typeof replyStats>[0]
+    return {
+      overdue: overdue.totalDocs,
+      fresh: fresh.totalDocs,
+      inWork: inWork.totalDocs,
+      week: replyStats(docs, new Date(now.getTime() - 7 * 86_400_000), now),
+      month: replyStats(docs, monthAgo, now),
     }
-
-    // Опубликованные страницы — суммарный счёт по коллекциям с _status=published.
-    const pageCollections = [
-      'pages',
-      'sub-services',
-      'services',
-      'service-districts',
-      'cases',
-      'blog',
-      'authors',
-      'districts',
-    ] as const
-    let total = 0
-    for (const slug of pageCollections) {
-      try {
-        const r = await payload.find({
-          collection: slug,
-          where: { _status: { equals: 'published' } },
-          limit: 0,
-          pagination: false,
-        })
-        total += r.totalDocs ?? 0
-      } catch {
-        // skip
-      }
-    }
-    publishedPages = total
   } catch {
-    // payloadClient init failed — все «—».
-  }
-  return {
-    newLeads,
-    uniqsWeek: '—', // TODO: Я.Метрика API integration
-    publishedPages,
-    ciErrors: '—', // TODO: Sentry / GH Actions API integration
+    return null
   }
 }
+
+const share = (r: ReplyStats) =>
+  r.total ? `${Math.round((r.inTime / r.total) * 100)} %` : 'нет данных'
+const shareNote = (r: ReplyStats) =>
+  r.total ? `${r.inTime} из ${r.total} в срок` : 'заявок с итогом ещё нет'
 
 async function loadRecentEdits(limit = 5): Promise<RecentEdit[]> {
   try {
@@ -211,7 +221,7 @@ const eyebrowStyle: CSSProperties = {
 
 const statsGridStyle: CSSProperties = {
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
   gap: 12,
   maxWidth: 1080,
 }
@@ -234,6 +244,25 @@ const statNumStyle: CSSProperties = {
 const statNumWarnStyle: CSSProperties = {
   ...statNumStyle,
   color: 'var(--brand-obihod-accent-ink, #c18724)',
+}
+
+const statLinkStyle: CSSProperties = {
+  ...statCardStyle,
+  display: 'block',
+  minHeight: 44,
+  color: 'inherit',
+  textDecoration: 'none',
+}
+
+const statNumDangerStyle: CSSProperties = {
+  ...statNumStyle,
+  color: 'var(--brand-obihod-danger, #b54828)',
+}
+
+const statNoteStyle: CSSProperties = {
+  fontSize: 12,
+  color: 'var(--brand-obihod-muted, #6b6256)',
+  marginTop: 4,
 }
 
 const statLabelStyle: CSSProperties = {
@@ -294,13 +323,11 @@ async function loadHomeHref(): Promise<string> {
 }
 
 export const BeforeDashboardStartHere: FC = async () => {
-  const [recent, stats, homeHref] = await Promise.all([
+  const [recent, leads, homeHref] = await Promise.all([
     loadRecentEdits(5),
-    loadStats(),
+    loadLeadStats(),
     loadHomeHref(),
   ])
-  const newLeadsNum = typeof stats.newLeads === 'number' ? stats.newLeads : 0
-  const newLeadsHasValue = typeof stats.newLeads === 'number' && newLeadsNum > 0
 
   return (
     <div style={wrapStyle}>
@@ -323,30 +350,49 @@ export const BeforeDashboardStartHere: FC = async () => {
         </p>
       </section>
 
-      {/* §12.3 4 stat-cards: новые заявки / уник 7д / публ страниц / ошибки CI */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-        <p style={eyebrowStyle}>Сегодня в обиходе</p>
-        <div style={statsGridStyle}>
-          <div style={statCardStyle}>
-            <div style={newLeadsHasValue ? statNumWarnStyle : statNumStyle}>
-              {String(stats.newLeads)}
+      {/* План 09, этап 5.5: заявки сверху — просрочка, новые, в работе, доля ответов в срок */}
+      {leads && (
+        <section style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <p style={eyebrowStyle}>Заявки</p>
+          <div style={statsGridStyle}>
+            <Link href="/admin/collections/leads?tab=urgent" style={statLinkStyle}>
+              <div style={leads.overdue > 0 ? statNumDangerStyle : statNumStyle}>
+                {leads.overdue}
+              </div>
+              <div style={statLabelStyle}>Просрочено</div>
+            </Link>
+            <Link href="/admin/collections/leads?tab=new" style={statLinkStyle}>
+              <div style={leads.fresh > 0 ? statNumWarnStyle : statNumStyle}>{leads.fresh}</div>
+              <div style={statLabelStyle}>Новые</div>
+            </Link>
+            <Link href="/admin/collections/leads?tab=work" style={statLinkStyle}>
+              <div style={statNumStyle}>{leads.inWork}</div>
+              <div style={statLabelStyle}>В работе</div>
+            </Link>
+            <div style={statCardStyle}>
+              <div style={statNumStyle}>{share(leads.week)}</div>
+              <div style={statLabelStyle}>В срок за 7 дней</div>
+              <div style={statNoteStyle}>{shareNote(leads.week)}</div>
             </div>
-            <div style={statLabelStyle}>Новые заявки</div>
+            <div style={statCardStyle}>
+              <div style={statNumStyle}>{share(leads.month)}</div>
+              <div style={statLabelStyle}>В срок за 30 дней</div>
+              <div style={statNoteStyle}>{shareNote(leads.month)}</div>
+            </div>
           </div>
-          <div style={statCardStyle}>
-            <div style={statNumStyle}>{String(stats.uniqsWeek)}</div>
-            <div style={statLabelStyle}>Уник. за 7д</div>
-          </div>
-          <div style={statCardStyle}>
-            <div style={statNumStyle}>{String(stats.publishedPages)}</div>
-            <div style={statLabelStyle}>Публ. страниц</div>
-          </div>
-          <div style={statCardStyle}>
-            <div style={statNumStyle}>{String(stats.ciErrors)}</div>
-            <div style={statLabelStyle}>Ошибок CI</div>
-          </div>
-        </div>
-      </section>
+          <p style={{ margin: 0, fontSize: 14 }}>
+            <Link
+              href="/admin/collections/leads"
+              style={{ color: 'var(--brand-obihod-primary, #2d5a3d)' }}
+            >
+              Открыть очередь заявок →
+            </Link>{' '}
+            <span style={{ color: 'var(--brand-obihod-muted, #6b6256)' }}>
+              Срок ответа считается от «Перезвоним за» в «Компания и контакты».
+            </span>
+          </p>
+        </section>
+      )}
 
       <section style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
         <p style={eyebrowStyle}>С чего начать</p>

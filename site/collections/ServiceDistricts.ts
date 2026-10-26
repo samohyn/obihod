@@ -153,7 +153,7 @@ export const ServiceDistricts: CollectionConfig = {
   admin: {
     useAsTitle: 'computedTitle',
     defaultColumns: ['computedTitle', 'publishStatus', 'uniquenessScore'],
-    group: '02 · Контент',
+    group: 'География',
     description: 'Programmatic-посадочные услуга × район. Без кейса — noindex.',
   },
   versions: { drafts: true },

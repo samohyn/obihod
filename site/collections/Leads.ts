@@ -22,7 +22,7 @@ export const Leads: CollectionConfig = {
     useAsTitle: 'phone',
     defaultColumns: ['phone', 'name', 'service', 'district', 'status', '_actions', 'createdAt'],
     listSearchableFields: ['phone', 'name', 'utmSource', 'utmCampaign'],
-    group: '01 · Заявки',
+    group: 'Заявки',
     description: 'Входящие лиды с сайта — телефон, канал связи, черновик сметы.',
     components: {
       // План 09, этап 5.2: очередь и карточка заявки вместо штатной таблицы.

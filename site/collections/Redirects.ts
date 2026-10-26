@@ -11,7 +11,7 @@ export const Redirects: CollectionConfig = {
   labels: { singular: 'Редирект', plural: 'Редиректы' },
   admin: {
     useAsTitle: 'from',
-    group: '04 · SEO',
+    group: 'Настройки сайта',
     description: 'Редиректы 301/302/410 — переезды URL, устаревшие посадочные.',
   },
   access: {

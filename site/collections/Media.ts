@@ -72,7 +72,7 @@ export const Media: CollectionConfig = {
   slug: 'media',
   labels: { singular: 'Медиа', plural: 'Медиа' },
   admin: {
-    group: '03 · Медиа',
+    group: 'Страницы и услуги',
     description: 'Фото объектов, OG-картинки, сканы документов.',
     // PANEL-MEDIA-LIBRARY · sa-panel.md AC1: переопределяем native list-view
     // на grid-вид с thumbnails + filters + orphan detection + bulk cleanup.

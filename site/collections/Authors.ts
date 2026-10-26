@@ -28,7 +28,7 @@ export const Authors: CollectionConfig = {
   admin: {
     useAsTitle: 'fullName',
     defaultColumns: ['fullName', 'jobTitle', 'slug'],
-    group: '02 · Контент',
+    group: 'Блог',
     description:
       'Авторы статей, эксперты услуг и команда (арбористы, бригадиры, промальпинисты). Person schema на /avtory/<slug>/ — основа E-E-A-T.',
   },

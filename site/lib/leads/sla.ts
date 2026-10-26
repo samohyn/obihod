@@ -142,3 +142,37 @@ export function compareQueue<T extends LeadSlaFields & { createdAt?: string | Da
     return (asDate(b.createdAt)?.getTime() ?? 0) - (asDate(a.createdAt)?.getTime() ?? 0)
   }
 }
+
+export interface ReplyStats {
+  /** Заявок со сроком, по которым уже известен итог: ответили или срок вышел. */
+  total: number
+  inTime: number
+  late: number
+}
+
+/**
+ * Доля заявок, отвеченных в срок (план 09, этап 5.5), — за период по дате заявки.
+ * В срок — итог первого звонка (или закрытие без звонка) не позже срока. Не в срок — позже или
+ * срок вышел, а итога нет. Заявки с ещё идущим сроком и «Спам» не считаются.
+ */
+export function replyStats(
+  leads: (LeadSlaFields & { createdAt?: string | Date | null })[],
+  from: Date,
+  now: Date,
+): ReplyStats {
+  let inTime = 0
+  let late = 0
+  for (const l of leads) {
+    const due = asDate(l.replyDueAt)
+    const created = asDate(l.createdAt)
+    if (!due || !created || created < from || l.status === 'spam') continue
+    const answered = asDate(l.firstContactAt) ?? asDate(l.closedAt)
+    if (answered) {
+      if (answered <= due) inTime += 1
+      else late += 1
+    } else if (due < now) {
+      late += 1
+    }
+  }
+  return { total: inTime + late, inTime, late }
+}

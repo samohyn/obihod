@@ -69,7 +69,7 @@ export const Company: GlobalConfig = {
   admin: {
     description:
       'Телефон, почта, адрес, реквизиты, часы и цифры оффера — в одном месте. Меняете здесь — сайт, формы и разметка для поисковиков подхватывают сами.',
-    group: '05 · Рамка сайта',
+    group: 'Настройки сайта',
   },
   access: { read: () => true, update: isAdmin },
   hooks: { afterChange: [revalidateGlobalAfterChange] },
