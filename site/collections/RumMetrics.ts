@@ -25,7 +25,9 @@ export const RumMetrics: CollectionConfig = {
     useAsTitle: 'name',
     defaultColumns: ['name', 'value', 'rating', 'pageUrl', 'viewportWidth', 'createdAt'],
     listSearchableFields: ['name', 'pageUrl'],
-    group: '04 · SEO',
+    group: 'Настройки сайта',
+    // техническое (замеры скорости сайта) — в меню не показываем, план 09, этап 5.5
+    hidden: true,
     description:
       'Real User Monitoring сэмплы Core Web Vitals (LCP / CLS / INP / FID / TTFB / FCP) ' +
       'с реальных посетителей. PII не хранится. См. OVT-3 / EPIC-LIWOOD-OVERTAKE.',

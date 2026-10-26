@@ -9,6 +9,8 @@ import { adminToken, getLead, uniqueIp, uniquePhone } from './_helpers/leads'
  *   (b) заявка с сайта → срок «ответить до» ставит сервер → строка в очереди → карточка по ?lead=
  *   (c) «Связались» останавливает таймер, кнопка статуса меняет статус
  *   (d) телефон 360: карточка поверх очереди, «Позвонить» закреплена внизу, «← К очереди»
+ *   (e) выгрузка CSV: без персональных данных по умолчанию, с ними — только по ?pd=1 (этап 5.4)
+ *   служебные адреса таймеров без секрета закрыты (этап 5.4)
  *
  * Вход — ADMIN_EMAIL / ADMIN_PASSWORD (в CI админа создаёт scripts/seed-admin.ts); без них — skip.
  */
@@ -129,4 +131,31 @@ test.describe('Панель заявок — очередь и карточка'
     await expect(page.locator('.leads-inbox__queue')).toBeVisible()
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
   })
+
+  test('(e) выгрузка CSV — персональные данные только по выбору', async ({ page }) => {
+    const { phone } = await createLead(page, 'Тест выгрузки')
+    await page.goto(LEADS, { waitUntil: 'domcontentloaded' })
+    // запрос из браузера — с куками входа, как ссылка «Выгрузить CSV»
+    const get = (url: string) =>
+      page.evaluate(async (u) => {
+        const r = await fetch(u)
+        return { status: r.status, type: r.headers.get('content-type') ?? '', text: await r.text() }
+      }, url)
+    const plain = await get('/api/admin/leads/export')
+    expect(plain.status).toBe(200)
+    expect(plain.type).toContain('text/csv')
+    expect(plain.text.split('\r\n')[0]).toContain('Ответили в срок')
+    expect(plain.text).not.toContain(phone)
+    const pd = await get('/api/admin/leads/export?pd=1')
+    expect(pd.text.split('\r\n')[0]).toContain('Телефон')
+    expect(pd.text).toContain(phone)
+  })
+})
+
+test('служебные адреса таймеров без секрета закрыты', async ({ request }) => {
+  for (const job of ['overdue', 'purge-photos']) {
+    const res = await request.post(`/api/internal/leads/${job}/`)
+    expect(res.status()).toBe(403)
+  }
+  expect((await request.get('/api/admin/leads/export')).status()).toBe(403)
 })

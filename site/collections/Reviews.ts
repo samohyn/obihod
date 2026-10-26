@@ -27,7 +27,7 @@ export const Reviews: CollectionConfig = {
   admin: {
     useAsTitle: 'authorName',
     defaultColumns: ['authorName', 'rating', 'service', 'datePublished'],
-    group: '02 · Контент',
+    group: 'Кейсы и отзывы',
     description:
       'Отзывы клиентов для /otzyvy/ + Review schema. Sustained homepage_reviews (Globals.Homepage) останется до dba data-migration.',
   },

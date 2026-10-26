@@ -26,8 +26,8 @@ import { StrikethroughFeatureClient as StrikethroughFeatureClient_e70f5e05f09f93
 import { UnderlineFeatureClient as UnderlineFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { default as default_e4dbeb0edaceac949adaabe10b3c4864 } from '@/components/admin/CollectionListWithEmpty'
 import { default as default_9b12155b20b9c2b1aaa48f6181ff9b3d } from '@/components/admin/media/MediaListView'
+import { default as default_e4dbeb0edaceac949adaabe10b3c4864 } from '@/components/admin/CollectionListWithEmpty'
 import { default as default_e954268a077ecb721d2d8ed736c62a6f } from '@/components/admin/ThemeToggleStub'
 import { default as default_d9087a380941d12f95aff168665b00b4 } from '@/components/admin/BrandIcon'
 import { default as default_f610fb1109491aea0aa06f52d764b80b } from '@/components/admin/GlobalSearchTrigger'
@@ -77,8 +77,8 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#UnderlineFeatureClient": UnderlineFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#BoldFeatureClient": BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@/components/admin/CollectionListWithEmpty#default": default_e4dbeb0edaceac949adaabe10b3c4864,
   "@/components/admin/media/MediaListView#default": default_9b12155b20b9c2b1aaa48f6181ff9b3d,
+  "@/components/admin/CollectionListWithEmpty#default": default_e4dbeb0edaceac949adaabe10b3c4864,
   "@/components/admin/ThemeToggleStub#default": default_e954268a077ecb721d2d8ed736c62a6f,
   "@/components/admin/BrandIcon#default": default_d9087a380941d12f95aff168665b00b4,
   "@/components/admin/GlobalSearchTrigger#default": default_f610fb1109491aea0aa06f52d764b80b,

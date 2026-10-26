@@ -16,7 +16,7 @@ export const LeadPhotos: CollectionConfig = {
   slug: 'lead-photos',
   labels: { singular: 'Фото заявки', plural: 'Фото заявок' },
   admin: {
-    group: '01 · Заявки',
+    group: 'Заявки',
     useAsTitle: 'filename',
     defaultColumns: ['filename', 'lead', 'createdAt'],
     description:

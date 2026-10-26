@@ -45,7 +45,7 @@ export const Districts: CollectionConfig = {
   admin: {
     useAsTitle: 'nameNominative',
     defaultColumns: ['nameNominative', 'priority', 'distanceFromMkad'],
-    group: '02 · Контент',
+    group: 'География',
     description: 'Районы Москвы и МО. Падежи заполняем для programmatic-страниц.',
   },
   versions: { drafts: true },

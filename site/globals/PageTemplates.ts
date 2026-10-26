@@ -28,7 +28,7 @@ export const PageTemplates: GlobalConfig = {
   label: 'Шаблоны страниц',
   admin: {
     description: `Тексты страниц, которые сайт собирает сам: район, «услуга в районе», статья, кейс, авторы, 404. Подстановки: ${TEMPLATE_VARS.map((v) => `${v.token} — ${v.hint}`).join('; ')}. Цифры оффера — метками {перезвон}, {смета по фото}… (список — в «Компания и контакты» → «Оффер»).`,
-    group: '05 · Рамка сайта',
+    group: 'Страницы и услуги',
   },
   access: { read: () => true, update: isAdmin },
   hooks: { beforeValidate: [validateTokens], afterChange: [revalidateGlobalAfterChange] },

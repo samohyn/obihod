@@ -11,7 +11,7 @@ export const Cases: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'service', 'district', 'dateCompleted'],
-    group: '02 · Контент',
+    group: 'Кейсы и отзывы',
     description: 'Реальные объекты Обихода: фото до/после, бригада, район.',
     // PANEL-EMPTY-LIST-WIRING (sa-panel.md AC2): custom list-view wrapper
     // подменяет native пустой Payload-table на §12.6 EmptyState с CTA при

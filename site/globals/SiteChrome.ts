@@ -82,7 +82,7 @@ export const SiteChrome: GlobalConfig = {
   label: 'Шапка и подвал',
   admin: {
     description: 'Шапка, подвал и соцсети. Контакты, реквизиты и часы — в «Компания и контакты».',
-    group: '05 · Рамка сайта',
+    group: 'Настройки сайта',
   },
   access: {
     read: () => true,

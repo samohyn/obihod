@@ -11,6 +11,7 @@ import {
 
 export const Users: CollectionConfig = {
   slug: 'users',
+  labels: { singular: 'Пользователь', plural: 'Пользователи' },
   // План 09, этап 1: один администратор, API-ключи выключены (никто ими не пользуется;
   // колонки enable_a_p_i_key / api_key / api_key_index остаются пустыми в БД — уберём
   // в задаче дрейфа схемы, чтобы откат релиза не требовал миграции).
@@ -36,7 +37,7 @@ export const Users: CollectionConfig = {
   admin: {
     useAsTitle: 'email',
     defaultColumns: ['email', 'name', 'role'],
-    group: '09 · Система',
+    group: 'Настройки сайта',
   },
   // PANEL-AUDIT-LOG (ADR-0014): security-event capture.
   // - afterChange: detect role transition → captureRbacChange + general

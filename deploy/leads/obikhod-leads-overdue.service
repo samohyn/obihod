@@ -1,0 +1,8 @@
+[Unit]
+Description=Обиход: письмо о просроченных заявках
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/obikhod-leads-run overdue
+TimeoutStartSec=2min

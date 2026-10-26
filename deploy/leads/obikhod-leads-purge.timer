@@ -1,0 +1,9 @@
+[Unit]
+Description=Обиход: удаление фото закрытых заявок в 05:00, после ночного бэкапа
+
+[Timer]
+OnCalendar=*-*-* 05:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

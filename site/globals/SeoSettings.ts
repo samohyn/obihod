@@ -20,10 +20,10 @@ import { revalidateGlobalAfterChange } from '@/lib/admin/revalidateSite'
  */
 export const SeoSettings: GlobalConfig = {
   slug: 'seo-settings',
-  label: 'SEO Settings',
+  label: 'Настройки SEO',
   admin: {
     description: 'Глобальные SEO-настройки Обихода (verification, credentials, OG)',
-    group: '04 · SEO',
+    group: 'Настройки сайта',
   },
   access: { read: () => true, update: isAdmin },
   hooks: { afterChange: [revalidateGlobalAfterChange] },

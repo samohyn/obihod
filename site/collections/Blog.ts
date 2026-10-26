@@ -11,7 +11,7 @@ export const Blog: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'category', 'publishedAt', 'modifiedAt'],
-    group: '02 · Контент',
+    group: 'Блог',
     description: 'Статьи и гайды по четырём направлениям + B2B/регуляторика.',
     // PANEL-EMPTY-LIST-WIRING (sa-panel.md AC2): custom list-view wrapper
     // подменяет native пустой Payload-table на §12.6 EmptyState с CTA при

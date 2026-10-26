@@ -18,7 +18,7 @@ export const Pages: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'updatedAt'],
-    group: '02 · Контент',
+    group: 'Страницы и услуги',
     description:
       'Страницы из блоков. «home» — главная сайта: соберите блоки, сохраните черновик, проверьте предпросмотр и опубликуйте.',
   },

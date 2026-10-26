@@ -1,0 +1,8 @@
+[Unit]
+Description=Обиход: удаление фото закрытых заявок по сроку (152-ФЗ)
+After=network-online.target obikhod-backup.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/obikhod-leads-run purge-photos
+TimeoutStartSec=10min

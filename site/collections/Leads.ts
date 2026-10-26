@@ -22,7 +22,7 @@ export const Leads: CollectionConfig = {
     useAsTitle: 'phone',
     defaultColumns: ['phone', 'name', 'service', 'district', 'status', '_actions', 'createdAt'],
     listSearchableFields: ['phone', 'name', 'utmSource', 'utmCampaign'],
-    group: '01 · Заявки',
+    group: 'Заявки',
     description: 'Входящие лиды с сайта — телефон, канал связи, черновик сметы.',
     components: {
       // План 09, этап 5.2: очередь и карточка заявки вместо штатной таблицы.
@@ -240,27 +240,6 @@ export const Leads: CollectionConfig = {
               },
             },
             {
-              name: 'photos',
-              type: 'array',
-              admin: {
-                // прежнее поле под S3 — не заполнялось; удалить вторым релизом (expand → contract)
-                hidden: true,
-                description: 'Фото объекта от клиента — основа для AI-черновика сметы.',
-              },
-              fields: [
-                {
-                  name: 's3Key',
-                  type: 'text',
-                  admin: { description: 'Ключ объекта в S3 — внутреннее, не редактировать.' },
-                },
-                {
-                  name: 'url',
-                  type: 'text',
-                  admin: { description: 'Публичный URL фото — для предпросмотра.' },
-                },
-              ],
-            },
-            {
               name: 'estimateDraftJson',
               type: 'json',
               label: 'Черновик сметы',
@@ -409,6 +388,34 @@ export const Leads: CollectionConfig = {
                 date: { pickerAppearance: 'dayAndTime' },
                 description: 'Ставится при статусе «Завершена», «Отменена» или «Спам».',
               },
+            },
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'overdueNotifiedAt',
+                  type: 'date',
+                  label: 'Письмо о просрочке',
+                  admin: {
+                    readOnly: true,
+                    width: '50%',
+                    date: { pickerAppearance: 'dayAndTime' },
+                    description: 'Когда менеджеру ушло письмо «Просрочена заявка». Одно на заявку.',
+                  },
+                },
+                {
+                  name: 'photosDeletedAt',
+                  type: 'date',
+                  label: 'Фото удалены',
+                  admin: {
+                    readOnly: true,
+                    width: '50%',
+                    date: { pickerAppearance: 'dayAndTime' },
+                    description:
+                      'Фото закрытой заявки удаляются по сроку из «Компания и контакты» (152-ФЗ, ст. 21).',
+                  },
+                },
+              ],
             },
             {
               // PANEL-LEADS-INBOX § A.1 — canonical 7-status enum (brand-guide §32 #lead-status).

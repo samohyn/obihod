@@ -56,7 +56,7 @@ export const SubServices: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'service', 'slug', 'updatedAt'],
-    group: '02 · Контент',
+    group: 'Страницы и услуги',
     description:
       'Страницы подуслуг из блоков: /направление/адрес/. Пока страница не опубликована, на сайте — прежняя версия.',
   },

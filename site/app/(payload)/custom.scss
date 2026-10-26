@@ -654,6 +654,24 @@ a.nav__link[href*='/admin/globals/seo-settings'] {
   --brand-obihod-nav-icon: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='6'/><path d='M5 11 L17 11'/><path d='M11 5 C 8 8, 8 14, 11 17'/><path d='M11 5 C 14 8, 14 14, 11 17'/><path d='M15.5 15.5 L20 20'/></svg>");
 }
 
+a.nav__link[href*='/admin/collections/lead-photos'] {
+  --brand-obihod-nav-icon: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='6' width='18' height='14' rx='1.2'/><path d='M8 6 L9.5 4 L14.5 4 L16 6'/><circle cx='12' cy='13' r='3.5'/></svg>");
+}
+a.nav__link[href*='/admin/collections/pages'] {
+  --brand-obihod-nav-icon: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M6 3 L14 3 L19 8 L19 21 L6 21 Z'/><path d='M14 3 L14 8 L19 8'/><path d='M9 13 L16 13'/><path d='M9 17 L14 17'/></svg>");
+}
+a.nav__link[href*='/admin/collections/sub-services'] {
+  --brand-obihod-nav-icon: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='3' width='8' height='8' rx='1.2'/><path d='M7 11 L7 17 L13 17'/><rect x='13' y='13' width='8' height='8' rx='1.2'/></svg>");
+}
+a.nav__link[href*='/admin/collections/reviews'] {
+  --brand-obihod-nav-icon: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M4 5 L20 5 L20 16 L11 16 L7 20 L7 16 L4 16 Z'/><path d='M8 9 L16 9'/><path d='M8 12 L13 12'/></svg>");
+}
+a.nav__link[href*='/admin/globals/company'] {
+  --brand-obihod-nav-icon: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M4 21 L4 7 L12 3 L20 7 L20 21'/><path d='M3 21 L21 21'/><path d='M9 21 L9 15 L15 15 L15 21'/><path d='M9 10 L9 10.5'/><path d='M15 10 L15 10.5'/></svg>");
+}
+a.nav__link[href*='/admin/globals/page-templates'] {
+  --brand-obihod-nav-icon: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='3' width='18' height='18' rx='1.2'/><path d='M3 9 L21 9'/><path d='M9 9 L9 21'/></svg>");
+}
 a.nav__link[href*='/admin/globals/site-chrome'] {
   --brand-obihod-nav-icon: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='16' rx='1.2'/><path d='M3 8 L21 8'/><circle cx='6' cy='6' r='0.6' fill='%23000'/><circle cx='8' cy='6' r='0.6' fill='%23000'/><path d='M6 12 L18 12' stroke-dasharray='2 1.5'/><path d='M6 16 L14 16' stroke-dasharray='2 1.5'/></svg>");
 }
@@ -823,7 +841,9 @@ a.nav__link[href*='/admin/globals/site-chrome'] {
  * SVG-домик уже inline в JSX — ::before не нужен, гасим.
  * !important — reason: W8 `a.nav__link::before` имеет равную специфичность,
  * cascade order может зависеть от build порядка SCSS. */
-a.nav__link.nav__link--home::before {
+a.nav__link.nav__link--home::before,
+a.nav__link.nav__link--audit::before,
+a.nav__link.nav__link--help::before {
   display: none !important;
   content: none !important;
 }
@@ -1185,6 +1205,50 @@ a.nav__link.nav__link--home::before {
 .leads-inbox__add {
   font-size: 14px;
   color: var(--brand-obihod-primary);
+}
+.leads-inbox__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px 16px;
+}
+.leads-inbox__export {
+  position: relative;
+  font-size: 14px;
+}
+.leads-inbox__export summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--brand-obihod-primary);
+  cursor: pointer;
+}
+.leads-inbox__export-menu {
+  position: absolute;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  min-width: 260px;
+  padding: 6px;
+  border: 1px solid var(--brand-obihod-line);
+  border-radius: var(--brand-obihod-radius-sm);
+  background: var(--brand-obihod-card);
+  box-shadow: 0 4px 16px rgba(28, 28, 28, 0.12);
+}
+.leads-inbox__export-menu a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 10px;
+  color: var(--brand-obihod-ink);
+  text-decoration: none;
+}
+.leads-inbox__export-menu a:hover,
+.leads-inbox__export-menu a:focus-visible {
+  outline: none;
+  background: var(--brand-obihod-paper);
 }
 .leads-inbox__tabs {
   display: flex;

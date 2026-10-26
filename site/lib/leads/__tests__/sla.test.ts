@@ -8,6 +8,7 @@ import {
   formatClockMsk,
   formatDuration,
   replyDueAt,
+  replyStats,
   slaLabel,
   slaRuleFrom,
   slaState,
@@ -88,4 +89,30 @@ test('очередь: просроченные выше, затем ближай
     leads.sort(compareQueue(now)).map((l) => l.id),
     ['overdue', 'soon', 'later', 'closed-new', 'closed-old'],
   )
+})
+
+test('доля ответов в срок: итог звонка или закрытие до срока, идущий срок и спам не считаются', () => {
+  const now = msk(15, 0)
+  const from = msk(0, 0)
+  const due = msk(12, 10).toISOString()
+  const created = msk(12, 0).toISOString()
+  const stats = replyStats(
+    [
+      { createdAt: created, replyDueAt: due, firstContactAt: msk(12, 5).toISOString() },
+      { createdAt: created, replyDueAt: due, firstContactAt: msk(12, 30).toISOString() },
+      { createdAt: created, replyDueAt: due, status: 'new' },
+      {
+        createdAt: created,
+        replyDueAt: due,
+        status: 'cancelled',
+        closedAt: msk(12, 8).toISOString(),
+      },
+      { createdAt: created, replyDueAt: msk(15, 5).toISOString(), status: 'new' },
+      { createdAt: created, replyDueAt: due, status: 'spam' },
+      { createdAt: msk(9, 0, 19).toISOString(), replyDueAt: due, firstContactAt: due },
+    ],
+    from,
+    now,
+  )
+  assert.deepEqual(stats, { total: 4, inTime: 2, late: 2 })
 })
