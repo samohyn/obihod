@@ -32,6 +32,7 @@ import { ServiceDistrictBlocksView } from './ServiceDistrictBlocksView'
 import { getCompany } from '@/lib/company'
 import { getPageTemplates } from '@/lib/page-templates-server'
 import { fillTemplate } from '@/lib/page-templates'
+import { truncateMeta } from '@/lib/seo/text'
 
 export const revalidate = 43200
 export const dynamicParams = true
@@ -94,8 +95,12 @@ export async function generateMetadata({
     })
     const hero = blocks.find((b) => b.blockType === 'hero-slider')
     const slide = hero && hero.blockType === 'hero-slider' ? hero.slides[0] : null
-    const title = fillTemplate(templates.geoMetaTitle, { заголовок: slide?.title ?? pillar.title })
-    const description = (slide?.lead ?? '').slice(0, 158)
+    // свои title и description записи «Услуги × районы» важнее шаблона (план 09, этап 7, пробел 6)
+    const sd = sdBundle.sd as { seoTitle?: string | null; seoDescription?: string | null }
+    const title =
+      sd.seoTitle?.trim() ||
+      fillTemplate(templates.geoMetaTitle, { заголовок: slide?.title ?? pillar.title })
+    const description = sd.seoDescription?.trim() || truncateMeta(slide?.lead ?? '', 158)
     return {
       ...legacy,
       title: { absolute: title },

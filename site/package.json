@@ -29,6 +29,7 @@
     "tov:check": "tsx scripts/tov-checker.ts",
     "lint:schema": "tsx scripts/lint-schema.ts",
     "check:links": "tsx scripts/check-links.ts",
+    "check:meta": "tsx scripts/check-meta.ts",
     "snapshot:pages": "tsx scripts/snapshot-pages.ts snap",
     "snapshot:diff": "tsx scripts/snapshot-pages.ts diff",
     "lint:slug": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file=.env.local scripts/lint-slug.ts",

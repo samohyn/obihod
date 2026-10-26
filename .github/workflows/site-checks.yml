@@ -106,6 +106,9 @@ jobs:
         if: ${{ !cancelled() }}
         run: pnpm run check:links "$SITE_CHECK_URL"
 
+      - name: Title и description — пустые, дубли, длина
+        if: ${{ !cancelled() }}
+        run: pnpm run check:meta "$SITE_CHECK_URL"
       - name: JSON-LD по sitemap
         if: ${{ !cancelled() }}
         run: pnpm run lint:schema --url "$SITE_CHECK_URL" --sample 40
