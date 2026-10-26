@@ -1,6 +1,7 @@
 import { ICON_NAMES } from '@/components/blocks/v3/iconNames'
 import type { IconName } from '@/components/blocks/v3/shared'
 import type {
+  DistrictLinkItem,
   BlockImage,
   DocumentItem,
   FaqV3Block,
@@ -145,6 +146,95 @@ const form = (
 
 type PlaceVars = ReturnType<typeof placeVars>
 
+export type GeoDistrict = {
+  slug: string
+  nameNominative: string
+  distanceFromMkad?: number | null
+  /** [долгота, широта] центра */
+  centerGeo?: unknown
+}
+
+const lonLat = (v: unknown): [number, number] | null =>
+  Array.isArray(v) && v.length === 2 && v.every((x) => typeof x === 'number')
+    ? (v as [number, number])
+    : null
+
+/** Расстояние между центрами районов, км (гаверсинус). */
+function kmBetween(a: [number, number], b: [number, number]): number {
+  const rad = Math.PI / 180
+  const dLat = (b[1] - a[1]) * rad
+  const dLon = (b[0] - a[0]) * rad
+  const h =
+    Math.sin(dLat / 2) ** 2 + Math.cos(a[1] * rad) * Math.cos(b[1] * rad) * Math.sin(dLon / 2) ** 2
+  return 2 * 6371 * Math.asin(Math.sqrt(h))
+}
+
+/**
+ * Ближайшие районы по координатам центров (план 09, этап 7: «гео → соседние районы»). Без
+ * координат у района — пусто: ссылки «рядом» по ошибочным данным хуже, чем никаких.
+ */
+export function nearestDistricts(all: GeoDistrict[], slug: string, n = 4): GeoDistrict[] {
+  const here = lonLat(all.find((d) => d.slug === slug)?.centerGeo)
+  if (!here) return []
+  return all
+    .filter((d) => d.slug !== slug && lonLat(d.centerGeo))
+    .map((d) => ({ d, km: kmBetween(here, lonLat(d.centerGeo)!) }))
+    .sort((a, b) => a.km - b.km)
+    .slice(0, n)
+    .map((x) => x.d)
+}
+
+/** Карточки районов: ведут на страницу услуги в районе, если она есть, иначе — на страницу района. */
+export function districtItems(
+  districts: GeoDistrict[],
+  serviceSlug: string | null,
+  localPages: Set<string>,
+): DistrictLinkItem[] {
+  return districts.map((d) => ({
+    slug: d.slug,
+    name: d.nameNominative,
+    km: d.distanceFromMkad ?? null,
+    href:
+      serviceSlug && localPages.has(`${serviceSlug}/${d.slug}`)
+        ? `/${serviceSlug}/${d.slug}/`
+        : `/raiony/${d.slug}/`,
+  }))
+}
+
+/** Блок «Районы рядом» / «Где работаем» — карточки-ссылки на районы. */
+export function districtLinksBlock(
+  title: string,
+  eyebrow: string,
+  items: DistrictLinkItem[],
+  anchor: string,
+): V3BlockWithTone | null {
+  return items.length ? { blockType: 'district-links', title, eyebrow, items, anchor } : null
+}
+
+/**
+ * Вставка перед финальной формой (форма — последний блок страницы). Фон вставленных блоков
+ * чередуется от блока над ними — остальные блоки страницы (в том числе из админки) не трогаем.
+ */
+export function beforeForm(
+  blocks: V3BlockWithTone[],
+  extra: (V3BlockWithTone | null)[],
+): V3BlockWithTone[] {
+  const add = extra.filter((b): b is V3BlockWithTone => b !== null)
+  if (!add.length) return blocks
+  const found = blocks.findLastIndex((b) => b.blockType === 'final-form')
+  const at = found < 0 ? blocks.length : found
+  const above = blocks
+    .slice(0, at)
+    .findLast((b) => !['hero-slider', 'photo-cta', 'final-form', 'b2b-plan'].includes(b.blockType))
+  let alt = above?.tone !== 'alt'
+  const toned = add.map((b) => {
+    const tone = alt ? 'alt' : 'default'
+    alt = !alt
+    return { ...b, tone } as V3BlockWithTone
+  })
+  return [...blocks.slice(0, at), ...toned, ...blocks.slice(at)]
+}
+
 /** Ссылка на местную страницу района, если она есть: /arboristika/ → /arboristika/istra/. */
 export function localHref(href: string, districtSlug: string, localPages: Set<string>): string {
   const path = href.replace(/^\/|\/$/g, '')
@@ -281,6 +371,8 @@ export function buildServiceDistrictBlocks(args: {
   source: string
   company: Company
   templates: PageTemplates
+  /** ближайшие районы — ссылки на эту же услугу там (этап 7) */
+  nearby?: DistrictLinkItem[]
 }): { title: string; blocks: V3BlockWithTone[] } {
   const { pillar, district, sd, company, templates: t } = args
   const vars = placeVars(district, { направление: pillar.title })
@@ -306,6 +398,13 @@ export function buildServiceDistrictBlocks(args: {
       items: args.otherServices,
     })
   }
+  const near = districtLinksBlock(
+    `${pillar.title} в соседних районах`,
+    'Рядом',
+    args.nearby ?? [],
+    'ryadom',
+  )
+  if (near) blocks.push(near)
   const pillarForm = pick(pillar.blocks, 'final-form')
   blocks.push(form(t, fillTemplate(t.geoFormTitle, vars), args.source, pillarForm?.background))
   return { title, blocks: retone(blocks) }
@@ -351,6 +450,8 @@ export function buildDistrictBlocks(args: {
   services: ServiceTile[]
   company: Company
   templates: PageTemplates
+  /** ближайшие районы (этап 7) */
+  nearby?: DistrictLinkItem[]
 }): { title: string; blocks: V3BlockWithTone[] } {
   const { uslugi, district, company, templates: t } = args
   const vars = placeVars(district)
@@ -398,6 +499,8 @@ export function buildDistrictBlocks(args: {
   }
   const faq = pick(uslugi.blocks, 'faq-v3')
   if (faq) blocks.push({ ...faq, title: fillTemplate(t.districtFaqTitle, vars) })
+  const near = districtLinksBlock('Соседние районы', 'Рядом', args.nearby ?? [], 'ryadom')
+  if (near) blocks.push(near)
   blocks.push(form(t, fillTemplate(t.districtFormTitle, vars), `raion-${district.slug}`))
   return { title, blocks: retone(blocks) }
 }

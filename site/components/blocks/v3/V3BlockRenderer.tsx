@@ -5,6 +5,7 @@ import { AboutStats } from './AboutStats'
 import { Articles } from './Articles'
 import { B2bPlan } from './B2bPlan'
 import { Calculator } from './Calculator'
+import { DistrictGrid } from './DistrictGrid'
 import { Documents } from './Documents'
 import { Equipment } from './Equipment'
 import { FaqV3 } from './FaqV3'
@@ -80,6 +81,17 @@ function renderBlock(block: V3BlockWithTone, key: string, company: Company, phon
       return <FinalForm key={key} {...block} phoneDisplay={phoneDisplay} />
     case 'legal-doc':
       return <LegalDoc key={key} {...block} tone={tone} />
+    case 'district-links':
+      return (
+        <DistrictGrid
+          key={key}
+          eyebrow={block.eyebrow}
+          title={block.title}
+          items={block.items}
+          tone={tone}
+          anchor={block.anchor ?? null}
+        />
+      )
     default:
       return null
   }

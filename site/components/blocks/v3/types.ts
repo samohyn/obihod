@@ -320,6 +320,20 @@ export interface LegalDocBlock extends BlockBase {
   body: unknown
 }
 
+// 23 · районы ссылками — собирается кодом (соседние районы, «где работаем»), в админке не правится
+export interface DistrictLinkItem {
+  slug: string
+  name: string
+  km?: number | null
+  /** куда ведёт карточка; по умолчанию — страница района /raiony/<slug>/ */
+  href?: string | null
+}
+export interface DistrictLinksBlock extends BlockBase {
+  blockType: 'district-links'
+  title: string
+  items: DistrictLinkItem[]
+}
+
 export type V3Block =
   | HeroSliderBlock
   | ServicesTilesBlock
@@ -343,6 +357,7 @@ export type V3Block =
   | FaqV3Block
   | FinalFormBlock
   | LegalDocBlock
+  | DistrictLinksBlock
 
 /** Блок + тон фона секции (чередование задаёт страница). */
 export type V3BlockWithTone = V3Block & { tone?: SectionTone | null }

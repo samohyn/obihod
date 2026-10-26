@@ -4,6 +4,7 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { trail } from '@/lib/breadcrumbs'
 import { getContacts } from '@/lib/chrome'
 import { buildDistrictBlocks, localizeTiles, type DistrictLike } from '@/lib/geo-pages'
+import { nearbyDistricts } from '@/lib/geo-links'
 import type { PageData } from '@/lib/pages'
 import { faqPageSchema } from '@/lib/seo/jsonld'
 import { getAllServiceDistrictParams } from '@/lib/seo/queries'
@@ -25,7 +26,9 @@ export async function DistrictBlocksView({
     getPageTemplates(),
   ])
   const local = new Set(params.map((p) => `${p.service}/${p.slug}`))
+  const nearby = await nearbyDistricts(district.slug, null)
   const { blocks } = buildDistrictBlocks({
+    nearby,
     uslugi,
     district,
     services: localizeTiles(uslugi, district.slug, local),
