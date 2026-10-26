@@ -8,6 +8,9 @@
  * Запуск:  pnpm check:meta [baseUrl]      (по умолчанию http://localhost:3000)
  * Staging — с паролем: SITE_AUTH="логин:пароль" (site-checks.yml).
  */
+// модуль, а не глобальный скрипт: иначе имена BASE/AUTH сталкиваются с check-links.ts
+export {}
+
 const BASE = (process.argv[2] || 'http://localhost:3000').replace(/\/$/, '')
 const AUTH: Record<string, string> = process.env.SITE_AUTH
   ? { Authorization: `Basic ${Buffer.from(process.env.SITE_AUTH).toString('base64')}` }
