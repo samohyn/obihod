@@ -5,7 +5,7 @@ import { faqPageSchema } from '@/lib/seo/jsonld'
  * JSON-LD главной сверх layout: только FAQPage — из тех же вопросов, что рендерит секция FAQ
  * (разметка обязана совпадать с видимым текстом).
  *
- * Organization / LocalBusiness / WebSite рендерит (marketing)/layout.tsx из SiteChrome — здесь их
+ * Organization / WebSite рендерит (marketing)/layout.tsx из SiteChrome — здесь их
  * больше нет: раньше был хардкод с фейковым телефоном, адресом в Раменском и рейтингом
  * 4.87/201 (план 09, этап 1 — быстрые SEO-фиксы).
  */

@@ -10,7 +10,7 @@ import { AnalyticsConsent } from '@/components/analytics/AnalyticsConsent'
 import { RumProvider } from '@/components/analytics/RumProvider'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { getSiteChrome } from '@/lib/chrome'
-import { localBusinessSchema, organizationSchema, websiteSchema } from '@/lib/seo/jsonld'
+import { organizationSchema, websiteSchema } from '@/lib/seo/jsonld'
 import { getSeoSettings } from '@/lib/seo/queries'
 
 // Шрифты локально (план 09, раздел 5): сборка не ходит в Google Fonts — раньше сбой их сервера
@@ -115,13 +115,7 @@ export default async function MarketingLayout({
       className={`${golosText.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <JsonLd
-          schema={[
-            organizationSchema(chrome, seo),
-            websiteSchema(),
-            localBusinessSchema(chrome, seo),
-          ]}
-        />
+        <JsonLd schema={[organizationSchema(chrome, seo), websiteSchema()]} />
         <AnalyticsConsent counterId={metrikaId(seo)} />
         <RumProvider />
         <PreviewBanner />

@@ -42,7 +42,7 @@ export async function DistrictBlocksView({
   const faqs = blocks.flatMap((b) => (b.blockType === 'faq-v3' ? b.items : []))
   return (
     <>
-      {/* Organization и LocalBusiness — в макете сайта, второй LocalBusiness на район не нужен (этап 7) */}
+      {/* Organization и WebSite — в макете сайта; LocalBusiness не выводим (клиентов по адресу не принимаем) */}
       {faqs.length > 0 && <JsonLd schema={[faqPageSchema(faqs)]} />}
       <Breadcrumbs items={crumbs} />
       <V3BlockRenderer blocks={blocks} phoneDisplay={contacts.phoneDisplay} />
