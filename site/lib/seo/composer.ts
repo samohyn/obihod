@@ -1,7 +1,7 @@
 /**
  * JSON-LD страниц услуг: T1 хаб, T2 направление, T3 подуслуга, T4 услуга или подуслуга в районе.
  *
- * Organization, WebSite и LocalBusiness выводит макет сайта (app/(marketing)/layout.tsx) — один
+ * Organization и WebSite выводит макет сайта (app/(marketing)/layout.tsx) — один
  * раз на странице, с постоянными @id; здесь только узлы самой страницы со ссылкой на них
  * (`provider: { '@id': ORG_ID }`). Раньше они выводились второй раз (план 09, этап 7, пробел 1).
  *   T1_HUB    → ItemList, Breadcrumb

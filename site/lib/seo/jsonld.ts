@@ -8,14 +8,13 @@
  *   - Organization.legalName / taxID / vatID / address.*  ← SiteChrome.requisites.*
  *   - Organization.name       ← SeoSettings.organization.name (fallback "Обиход")
  *   - Organization.hasCredential ← SeoSettings.credentials[]
- *   - LocalBusiness.telephone / address ← SiteChrome.contacts / requisites
+ *   - LocalBusiness не выводим: клиентов по юридическому адресу не принимаем (только выезд)
  *
  * Функции остаются pure: Payload-чтение делает caller (layout / generateMetadata
  * / page.tsx server component), сюда передаются уже собранные `chrome` и `seo`.
  */
 
 import type { SiteChrome } from '@/lib/chrome'
-import { DEFAULT_COMPANY } from '@/lib/offer'
 
 // ---------- SEO settings subset (зеркалит site/globals/SeoSettings.ts) ----------
 // TODO(be3): заменить на `import type { SeoSettings } from '@/payload-types'`,
@@ -40,10 +39,6 @@ export type SeoSettingsLike = {
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 const ORG_ID = `${SITE_URL}/#org`
 const SITE_ID = `${SITE_URL}/#site`
-const LB_ID = `${SITE_URL}/#lb`
-
-const MOSCOW_LAT = 55.7558
-const MOSCOW_LON = 37.6173
 
 /** Рекурсивно удаляет undefined-значения (но сохраняет пустые строки только если явно переданы). */
 function stripUndefined<T>(value: T): T {
@@ -75,7 +70,7 @@ function realRequisite(s: string | null | undefined): string | undefined {
   return v && !/^1+$/.test(v) ? v : undefined
 }
 
-/** Фактический адрес компании из SiteChrome.requisites — один для Organization и LocalBusiness. */
+/** Фактический адрес компании из SiteChrome.requisites — только для Organization: LocalBusiness с адресом не выводим — клиентов по адресу не принимаем (решение владельца 27.10.2026). */
 function postalAddress(req: SiteChrome['requisites'] | null | undefined) {
   const addressRegion = nonEmpty(req?.addressRegion)
   const addressLocality = nonEmpty(req?.addressLocality)
@@ -203,76 +198,6 @@ export function websiteSchema() {
     inLanguage: 'ru-RU',
     publisher: { '@id': ORG_ID },
   }
-}
-
-/**
- * LocalBusiness schema. Телефон, почта, адрес и часы — из «Компания и контакты»
- * (getSiteChrome / getSeoSettings подставляют их), `priceRange` — из SeoSettings.
- *
- * `district` опциональный: при его наличии строится районный вариант
- * (`/raiony/<slug>/#lb`) с geo-координатами и radius из Districts.
- */
-export function localBusinessSchema(
-  chrome: SiteChrome | null,
-  seo: SeoSettingsLike | null = null,
-  district?: District,
-): Record<string, unknown> {
-  const id = district ? `${SITE_URL}/raiony/${district.slug}/#lb` : LB_ID
-  const name = district ? `Обиход — ${district.nameNominative}` : 'Обиход'
-  const url = district ? `${SITE_URL}/raiony/${district.slug}/` : SITE_URL
-
-  const contacts = chrome?.contacts ?? null
-  const lb = seo?.localBusiness ?? null
-  const geoRadiusKm = lb?.geoRadiusKm ?? 150
-  const opens = nonEmpty(lb?.openingHours?.opens) ?? DEFAULT_COMPANY.opens
-  const closes = nonEmpty(lb?.openingHours?.closes) ?? DEFAULT_COMPANY.closes
-  const priceRange = nonEmpty(lb?.priceRange) ?? '₽₽'
-
-  const areaServed = district
-    ? {
-        '@type': 'GeoShape',
-        name: district.nameNominative,
-        geoRadius: `${(district.coverageRadius ?? 20) * 1000}`,
-      }
-    : {
-        '@type': 'GeoCircle',
-        geoMidpoint: {
-          '@type': 'GeoCoordinates',
-          latitude: MOSCOW_LAT,
-          longitude: MOSCOW_LON,
-        },
-        geoRadius: `${geoRadiusKm * 1000}`,
-      }
-
-  return stripUndefined({
-    '@type': 'HomeAndConstructionBusiness',
-    '@id': id,
-    name,
-    url,
-    parentOrganization: { '@id': ORG_ID },
-    image: `${SITE_URL}/og.jpg`,
-    telephone: nonEmpty(contacts?.phoneE164),
-    email: nonEmpty(contacts?.email),
-    address: postalAddress(chrome?.requisites),
-    priceRange,
-    openingHoursSpecification: [
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-        opens,
-        closes,
-      },
-    ],
-    areaServed,
-    geo:
-      district && district.centerGeo
-        ? {
-            '@type': 'GeoCoordinates',
-            latitude: district.centerGeo[1],
-            longitude: district.centerGeo[0],
-          }
-        : undefined,
-  })
 }
 
 export function serviceSchema(service: Service, district?: District) {

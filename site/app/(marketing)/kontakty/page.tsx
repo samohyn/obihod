@@ -39,7 +39,8 @@ export default async function KontaktyPage() {
     checklist: [
       `Телефон: ${contacts.phoneDisplay}`,
       `Почта: ${contacts.email}`,
-      `Адрес: ${contacts.addressLine}`,
+      `Юридический адрес: ${contacts.addressLine}`,
+      'Клиентов по этому адресу не принимаем — бригада и оценщик приезжают к вам',
       t.contactsPhoto,
     ],
     stats: [
