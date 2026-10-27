@@ -157,7 +157,7 @@ const TILE_RULES: { title: RegExp; from: RegExp; to: string }[] = [
 ]
 
 function tiles(doc: R, log: Log) {
-  for (const b of blocks(doc, 'services-tiles'))
+  for (const b of [...blocks(doc, 'services-tiles'), ...blocks(doc, 'equipment')])
     for (const it of (b.items as R[]) ?? []) {
       if (typeof it.price !== 'string') continue
       for (const r of TILE_RULES)
@@ -603,6 +603,51 @@ async function main() {
         }),
       )
     }
+  }
+
+  // «Услуга × район»: местная заметка о цене (черновики гео-страниц) — точечные замены
+  const NOTES: [RegExp, string][] = [
+    [
+      loose('700 ₽ ствол до 20 см, 4 200 ₽ до 60 см'),
+      `${rub(2500)} ствол до 20 см, ${rub(6500)} до 60 см`,
+    ],
+    [
+      loose('700 ₽ ствол до 20 см, 8 400 ₽ свыше 60 см'),
+      `${rub(2500)} ствол до 20 см, ${rub(8500)} свыше 60 см`,
+    ],
+    [
+      loose('600 ₽/м² плоская, 1 000 ₽/м² скатная'),
+      `от ${rub(150)}/м² плоская, ${rub(1000)}/м² скатная (частный дом)`,
+    ],
+    [
+      loose('1 000 ₽/м² скатная, 600 ₽/м² плоская'),
+      `${rub(1000)}/м² скатная (частный дом), от ${rub(150)}/м² плоская`,
+    ],
+  ]
+  const districts = await payload.find({
+    collection: 'service-districts',
+    limit: 1000,
+    pagination: false,
+    depth: 0,
+    draft: true,
+    context: RAW,
+  })
+  for (const d of districts.docs as unknown as R[]) {
+    const note = typeof d.localPriceNote === 'string' ? d.localPriceNote : ''
+    const rule = NOTES.find(([from]) => from.test(note))
+    if (!rule) continue
+    const next = note.replace(rule[0], rule[1])
+    summary.push(`\n== service-districts/${d.id} (${d._status})\n  «${note}» → «${next}»`)
+    writes.push(() =>
+      payload.update({
+        collection: 'service-districts',
+        id: d.id as number,
+        data: { localPriceNote: next } as never,
+        draft: d._status === 'draft',
+        depth: 0,
+        context: RAW,
+      }),
+    )
   }
 
   console.error(summary.join('\n'))
