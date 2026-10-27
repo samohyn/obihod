@@ -25,7 +25,7 @@ export const PILLAR: Record<string, ServiceTile> = {
   arboristika: {
     title: 'Спил и уход за деревьями',
     text: 'Спил, обрезка, пни, аварийно',
-    price: 'от 700 ₽',
+    price: 'от 2 500 ₽',
     href: '/arboristika/',
     image: img('arb-climb', 'Арборист на дереве у дома'),
   },
@@ -39,7 +39,7 @@ export const PILLAR: Record<string, ServiceTile> = {
   krysha: {
     title: 'Крыши и снег',
     text: 'Кровли, сосульки, дворы',
-    price: 'от 1 000 ₽/м²',
+    price: 'от 150 ₽/м²',
     href: '/chistka-krysh/',
     image: img('zima-krysha-lenta', 'Чистка крыши от снега'),
   },

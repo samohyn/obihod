@@ -123,10 +123,10 @@ export const PRICES: PageContent[] = [
     kicker: 'прайс 2026 · Москва и область',
     lead: 'Цены «от» по всем направлениям — по ссылке у каждого раздела подробный прайс. Твёрдая цена — в договоре, оплата после приёмки.',
     image: img('crew', 'Бригада идёт на участок с инструментом'),
-    badge: { value: 'от 700 ₽', text: 'спил дерева до 20 см', note: 'Смета по фото — бесплатно' },
+    badge: { value: 'от 2 500 ₽', text: 'спил дерева до 20 см', note: 'Смета по фото — бесплатно' },
   }),
   pillarPrices('arboristika', 'Спил и уход за деревьями', img('arb-climb', 'Арборист на дереве'), {
-    value: 'от 700 ₽',
+    value: 'от 2 500 ₽',
     text: 'спил дерева до 20 см',
   }),
   pillarPrices('vyvoz-musora', 'Вывоз мусора', img('vyvoz-gazel', 'Грузчики загружают Газель'), {
@@ -138,8 +138,8 @@ export const PRICES: PageContent[] = [
     'Чистка крыш и уборка снега',
     img('zima-krysha-lenta', 'Чистка крыши от снега'),
     {
-      value: 'от 1 000 ₽',
-      text: 'за м² скатной кровли',
+      value: 'от 150 ₽',
+      text: 'за м² плоской или большой кровли',
     },
   ),
   pillarPrices('demontazh', 'Демонтаж и снос', img('demo-dacha', 'Снос старой дачи'), {
@@ -176,7 +176,7 @@ export const PRICES: PageContent[] = [
     text: 'смета по фото',
   }),
   pillarPrices('raschet-stoimosti', 'Расчёт стоимости', img('phone-order', 'Расчёт стоимости'), {
-    value: 'от 700 ₽',
+    value: 'от 2 500 ₽',
     text: 'спил дерева до 20 см',
   }),
 ]
