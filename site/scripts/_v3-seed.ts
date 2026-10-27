@@ -97,6 +97,8 @@ export async function toLayout(
             b.slides.map(async (s) => ({
               kicker: s.kicker,
               title: s.title,
+              // обещание под H1 (этап 2); пусто — сайт берёт обещание направления
+              promise: s.promise ?? null,
               lead: s.lead,
               primary: { label: s.primary.label, href: s.primary.href, icon: s.primary.icon },
               secondary: s.secondary,

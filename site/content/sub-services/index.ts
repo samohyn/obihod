@@ -8,6 +8,7 @@ import {
 import {
   izmelchenieVetok,
   kabling,
+  obrezkaPlodovyh,
   spilAlpinistami,
   spilSAvtovyshki,
   valkaDerevev,
@@ -44,6 +45,7 @@ import {
   gazel,
   kontejner,
   krupnogabarit,
+  sDachiSnt,
   starayaMebel,
   uborkaUchastka,
   vyvozPorubochnyh,
@@ -64,6 +66,7 @@ const ARBORISTIKA: Record<string, SubServiceContent> = {
   'izmelchenie-vetok': izmelchenieVetok,
   kabling,
   'vyrubka-elok': vyrubkaElok,
+  'obrezka-plodovyh': obrezkaPlodovyh,
 }
 
 const VYVOZ_MUSORA: Record<string, SubServiceContent> = {
@@ -76,6 +79,7 @@ const VYVOZ_MUSORA: Record<string, SubServiceContent> = {
   'uborka-uchastka': uborkaUchastka,
   'vyvoz-porubochnyh': vyvozPorubochnyh,
   'dlya-uk-tszh': dlyaUkTszh,
+  's-dachi-snt': sDachiSnt,
 }
 
 const CHISTKA_KRYSH: Record<string, SubServiceContent> = {
@@ -129,4 +133,6 @@ export const SUB_SERVICE_BATCHES: Record<string, string[]> = {
   demontazh: Object.keys(DEMONTAZH),
   'dizain-landshafta': Object.keys(DIZAIN_LANDSHAFTA),
   'arenda-tehniki': Object.keys(ARENDA_TEHNIKI),
+  /** План 09, этап 6, волна A, партия A1 (26.10.2026) */
+  'volna-a1': ['obrezka-plodovyh', 's-dachi-snt'],
 }
