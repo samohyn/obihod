@@ -1,0 +1,9 @@
+[Unit]
+Description=Обиход: уведомления о заявках в Telegram через ретранслятор GitHub
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=deploy
+ExecStart=/usr/local/sbin/obikhod-tg-relay
+TimeoutStartSec=2min

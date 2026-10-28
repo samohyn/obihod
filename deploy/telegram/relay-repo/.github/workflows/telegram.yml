@@ -1,0 +1,45 @@
+# Ретранслятор уведомлений о заявках obikhod.ru (копия — deploy/telegram/relay-repo в репо сайта).
+# Сервер в РФ коммитит сообщения в queue/, здесь они уходят в Telegram: с VPS api.telegram.org
+# недоступен. В сообщениях нет телефона, имени и текста задачи (152-ФЗ) — только номер заявки,
+# услуга, район и ссылка в админку.
+name: Telegram
+
+on:
+  push:
+    branches: [main]
+    paths: ['queue/**']
+
+permissions:
+  contents: read
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Отправить новые сообщения
+        env:
+          TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          if git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            files=$(git diff --name-only --diff-filter=A "$BEFORE" HEAD -- 'queue/*.json')
+          else
+            files=$(git ls-files 'queue/*.json')
+          fi
+          fail=0
+          for f in $files; do
+            body=$(jq -c --arg chat "$CHAT" '{chat_id: $chat, text: .text, disable_web_page_preview: true}' "$f")
+            res=$(curl -s --max-time 20 -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
+              -H 'content-type: application/json' -d "$body")
+            ok=$(echo "$res" | jq -r '.ok')
+            echo "$f → $ok $(echo "$res" | jq -r '.description // ""')"
+            [ "$ok" = true ] || fail=1
+          done
+          exit $fail
