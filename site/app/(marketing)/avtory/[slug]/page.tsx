@@ -5,6 +5,7 @@ import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { trail } from '@/lib/breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema, personSchema, type Author as AuthorSchema } from '@/lib/seo/jsonld'
+import { ogCard, OG_SITE_NAME } from '@/lib/seo/og'
 import { canonicalFor } from '@/lib/seo/canonical'
 import { getAllAuthorSlugs, getAuthorBySlug, getPublishedBlogPosts } from '@/lib/seo/queries'
 import { truncateMeta } from '@/lib/seo/text'
@@ -81,8 +82,10 @@ export async function generateMetadata({
       type: 'profile',
       locale: 'ru_RU',
       url: `/avtory/${author.slug}/`,
+      siteName: OG_SITE_NAME,
       title: fullName,
       description: author.bio ? truncateMeta(author.bio, 200) : undefined,
+      images: [ogCard(fullName, author.jobTitle ?? 'Эксперт Обихода')],
     },
     robots: { index: true, follow: true },
   }

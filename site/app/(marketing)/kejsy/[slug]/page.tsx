@@ -7,6 +7,7 @@ import { Breadcrumbs } from '@/components/seo/Breadcrumbs'
 import { shortTitle, trail } from '@/lib/breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbListSchema, caseArticleSchema } from '@/lib/seo/jsonld'
+import { ogCard, OG_SITE_NAME } from '@/lib/seo/og'
 import { truncateMeta } from '@/lib/seo/text'
 import { lexicalToPlainText } from '@/lib/seo/uniqueness'
 import { payloadClient } from '@/lib/payload'
@@ -76,8 +77,10 @@ export async function generateMetadata({
       type: 'article',
       locale: 'ru_RU',
       url: `/kejsy/${c.slug}/`,
+      siteName: OG_SITE_NAME,
       title: c.title,
       description,
+      images: [ogCard(c.title, 'Кейс')],
     },
     robots: { index: true, follow: true },
   }

@@ -25,6 +25,7 @@ import {
   type BlogPost as BlogPostSchema,
 } from '@/lib/seo/jsonld'
 import { canonicalFor } from '@/lib/seo/canonical'
+import { ogCard, OG_SITE_NAME } from '@/lib/seo/og'
 import { getAllBlogSlugs, getBlogPostBySlug } from '@/lib/seo/queries'
 import { truncateMeta } from '@/lib/seo/text'
 import { getPageTemplates } from '@/lib/page-templates-server'
@@ -87,6 +88,7 @@ export async function generateMetadata({
       type: 'article',
       locale: 'ru_RU',
       url: `/blog/${post.slug}/`,
+      siteName: OG_SITE_NAME,
       title: post.title,
       description: truncateMeta(post.intro, 200),
       publishedTime: post.publishedAt,
@@ -95,7 +97,7 @@ export async function generateMetadata({
         post.author?._status === 'published'
           ? [`${SITE_URL}/avtory/${post.author.slug}/`]
           : undefined,
-      images: post.heroImage?.url ? [post.heroImage.url] : undefined,
+      images: post.heroImage?.url ? [post.heroImage.url] : [ogCard(post.title, 'Блог')],
     },
     robots: { index: true, follow: true },
   }

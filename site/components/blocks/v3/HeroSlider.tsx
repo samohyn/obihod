@@ -49,6 +49,8 @@ export function HeroSlider(block: HeroSliderBlock) {
           key={i}
           image={{ ...sl.image, illustration: false }}
           sizes="100vw"
+          // фон под тёмной подложкой — 60 вместо 75 незаметно глазу и легче для LCP
+          quality={60}
           eager={i === 0}
           className={[s.bg, i === index ? s.bgOn : ''].join(' ')}
         />

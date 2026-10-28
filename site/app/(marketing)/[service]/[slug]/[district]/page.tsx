@@ -14,6 +14,7 @@ import {
   type ServiceDistrictLike,
 } from '@/lib/geo-pages'
 import { canonicalFor } from '@/lib/seo/canonical'
+import { ogCard } from '@/lib/seo/og'
 import { getAllSubServiceDistrictParams, getSubServiceDistrictBundle } from '@/lib/seo/queries'
 import { isServiceDistrictIndexable, metadataBase } from '@/lib/seo/metadata'
 import { truncateMeta } from '@/lib/seo/text'
@@ -81,7 +82,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       siteName: 'Обиход',
       title,
       description,
-      images: page.sub.ogImage ? [page.sub.ogImage.url] : undefined,
+      images: page.sub.ogImage ? [page.sub.ogImage.url] : [ogCard(title)],
     },
     robots: isServiceDistrictIndexable(sd)
       ? { index: true, follow: true, 'max-snippet': -1, 'max-image-preview': 'large' }
