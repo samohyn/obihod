@@ -19,7 +19,8 @@ export async function pushToIndexNow(urls: string[]): Promise<PushResult> {
 
   const origin = new URL(siteUrl).origin
   const host = new URL(origin).host
-  const keyLocation = `${origin}/indexnow/${key}.txt`
+  // файл ключа — в корне (next.config rewrites): ключ из подкаталога подтверждает только его адреса
+  const keyLocation = `${origin}/${key}.txt`
   const urlList = urls.map((u) =>
     u.startsWith('http') ? u : `${origin}${u.startsWith('/') ? u : `/${u}`}`,
   )

@@ -1,15 +1,12 @@
 /**
- * /robots.txt — правила на время ПОСЛЕ запуска (план 09, этап 7; сверено с Perplexity 26.10.2026).
+ * /robots.txt — сайт открыт для всех роботов (план 09, этап 8: команда владельца 28.10.2026
+ * «открой к индексации сайт полностью для всех»). Закрыты только служебные адреса.
  *
- * Пока индексация закрыта, этот ответ до посетителя не доходит: nginx сам отдаёт
- * `Disallow: /` и `X-Robots-Tag: noindex` (deploy/README.md). Открывает индексацию только
- * владелец отдельной командой (этап 8).
- *
- * - Поиск и AI-поиск открыты: YandexBot и прочие роботы Яндекса (YandexAdditional — ответы
- *   Алисы и Нейро — не запрещаем), OAI-SearchBot / ChatGPT-User, PerplexityBot,
- *   Claude-SearchBot / Claude-User, Googlebot, Bingbot.
- * - Боты для обучения моделей закрыты, пока владелец не решит иначе (журнал плана 09, 22.10):
- *   GPTBot, ClaudeBot, Google-Extended, Applebot-Extended, CCBot. На поиск это не влияет.
+ * - Поиск и AI-поиск: YandexBot и прочие роботы Яндекса (YandexAdditional — ответы Алисы и
+ *   Нейро — не запрещаем), OAI-SearchBot / ChatGPT-User, PerplexityBot, Claude-SearchBot /
+ *   Claude-User, Googlebot, Bingbot.
+ * - Боты для обучения моделей (GPTBot, ClaudeBot, Google-Extended, Applebot-Extended, CCBot) и
+ *   SEO-парсеры больше не закрыты — «для всех» (до 28.10 были под Disallow).
  * - UTM и метки рекламы — Clean-param для Яндекса вместо запрета: страница с метками та же.
  */
 
@@ -26,10 +23,6 @@ const SEARCH_BOTS = [
   'Googlebot',
   'Bingbot',
 ]
-
-const TRAINING_BOTS = ['GPTBot', 'ClaudeBot', 'Google-Extended', 'Applebot-Extended', 'CCBot']
-
-const SEO_PARSERS = ['AhrefsBot', 'SemrushBot', 'MJ12bot', 'DotBot']
 
 const CLEAN_PARAMS = [
   'utm_source',
@@ -51,8 +44,6 @@ function robotsTxt(siteUrl = SITE_URL): string {
     group(['*'], ['Allow: /', ...privateRules]),
     group(['Yandex'], ['Allow: /', ...privateRules, `Clean-param: ${CLEAN_PARAMS.join('&')}`]),
     group(SEARCH_BOTS, ['Allow: /', ...privateRules]),
-    group(TRAINING_BOTS, ['Disallow: /']),
-    group(SEO_PARSERS, ['Disallow: /']),
     `Sitemap: ${siteUrl}/sitemap.xml`,
     '',
   ].join('\n\n')

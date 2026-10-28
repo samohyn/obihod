@@ -5,7 +5,7 @@ import { expect, test } from '@playwright/test'
  *
  * Покрывает:
  *  - sitemap.xml содержит pillar URL с правильным priority
- *  - robots.txt отдаёт корректные директивы (sitemap link, Yandex allow, AhrefsBot block)
+ *  - robots.txt отдаёт корректные директивы (sitemap link, Yandex allow, открыт для всех)
  *  - canonical link на pillar pages
  *  - Breadcrumbs JSON-LD на programmatic / pillar
  *  - Schema.org Organization + WebSite + LocalBusiness на главной
@@ -53,17 +53,16 @@ test.describe('Sitemap.xml — структура (data-independent)', () => {
 })
 
 test.describe('robots.txt', () => {
-  test('содержит sitemap, Yandex allow, AhrefsBot disallow', async ({ request }) => {
+  test('содержит sitemap, Yandex allow, служебное закрыто', async ({ request }) => {
     const res = await request.get('/robots.txt')
     expect(res.status()).toBe(200)
     const body = await res.text()
     expect(body).toMatch(/Sitemap:\s+https?:\/\/[^\s]+\/sitemap\.xml/)
     expect(body).toMatch(/User-Agent:\s+Yandex/i)
-    expect(body).toContain('AhrefsBot')
     expect(body).toMatch(/Disallow:\s+\/admin\//)
   })
 
-  test('AI-поиск открыт, обучение закрыто, UTM — Clean-param (этап 7)', async ({ request }) => {
+  test('открыт для всех роботов, UTM — Clean-param (этап 8)', async ({ request }) => {
     const body = await (await request.get('/robots.txt')).text()
     const groupOf = (agent: string) => {
       const start = body.indexOf(`User-agent: ${agent}\n`)
@@ -74,8 +73,10 @@ test.describe('robots.txt', () => {
     for (const bot of ['OAI-SearchBot', 'PerplexityBot', 'Claude-SearchBot']) {
       expect(groupOf(bot)).toContain('Allow: /')
     }
-    for (const bot of ['GPTBot', 'ClaudeBot', 'CCBot']) {
-      expect(groupOf(bot)).toContain('Disallow: /')
+    // боты обучения и SEO-парсеры не закрыты: «Disallow: /» в robots.txt нет ни для кого
+    expect(body).not.toMatch(/^Disallow:\s*\/\s*$/m)
+    for (const bot of ['GPTBot', 'ClaudeBot', 'CCBot', 'AhrefsBot']) {
+      expect(body).not.toContain(`User-agent: ${bot}`)
     }
     expect(body).not.toContain('YandexAdditional')
     expect(body).toMatch(/Clean-param: utm_source&utm_medium&utm_campaign/)

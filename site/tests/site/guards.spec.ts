@@ -1,9 +1,9 @@
 /**
  * Сторожа живого сайта.
  *
- * 1. Индексация закрыта до запуска (правило 3 плана 09): X-Robots-Tag noindex и
- *    robots.txt «Disallow: /». Открывается только командой владельца — тогда в
- *    site-checks.yml ставится SITE_EXPECT_NOINDEX=0 и сторож проверяет обратное.
+ * 1. Индексация: прод открыт командой владельца 28.10.2026 (SITE_EXPECT_NOINDEX=0 —
+ *    нет noindex и «Disallow: /»), staging закрыт всегда (X-Robots-Tag noindex и
+ *    robots.txt «Disallow: /»).
  * 2. Тестовая заявка (только staging, SITE_ALLOW_WRITES=1): форма контактов
  *    принимает заявку и показывает «принято». На staging писем нет, заявки обезличены.
  */

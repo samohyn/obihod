@@ -70,6 +70,12 @@ const nextConfig: NextConfig = {
       },
     ]
   },
+  // IndexNow: файл ключа должен лежать в корне сайта — ключ из /indexnow/ подтверждает
+  // только адреса внутри /indexnow/ (протокол IndexNow; Яндекс отвечал 422 на весь sitemap).
+  // Ключ — 32 hex-символа, с /robots.txt и /llms*.txt шаблон не пересекается.
+  async rewrites() {
+    return [{ source: '/:key([0-9a-f]{32}).txt', destination: '/indexnow/:key.txt' }]
+  },
   async headers() {
     const isProd = process.env.NODE_ENV === 'production'
     const baseHeaders = [
