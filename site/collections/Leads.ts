@@ -104,15 +104,14 @@ export const Leads: CollectionConfig = {
         const phone = typeof doc?.phone === 'string' ? doc.phone : null
         return phone ? `Заявка ${phone.slice(-4)}` : null
       }),
-      // US-8 hot-fix (PAN-9): Telegram уведомление оператору о новом лиде.
-      // Sustained fire-and-forget pattern (incident 2026-05-01 sync await
-      // → pg pool starvation deadlock в audit_log hook). 5s timeout — щадящий,
-      // оператор получит сообщение или log-warn если Telegram недоступен.
-      ({ doc, operation }) => {
+      // Telegram менеджеру о новой заявке (lib/telegram/sendMessage.ts; на проде — через очередь
+      // и ретранслятор, deploy/telegram/). Fire-and-forget (инцидент 2026-05-01: sync await →
+      // pg pool starvation в audit_log hook); сбой Telegram заявку не теряет.
+      ({ doc, operation, req }) => {
         if (operation !== 'create') return doc
         setImmediate(() => {
           Promise.race([
-            notifyOperatorAboutLead(doc as LeadDocLike),
+            notifyOperatorAboutLead(doc as LeadDocLike, req.payload),
             new Promise<never>((_, reject) =>
               setTimeout(() => reject(new Error('5s timeout')), 5000),
             ),

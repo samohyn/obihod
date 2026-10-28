@@ -1,0 +1,9 @@
+[Unit]
+Description=Обиход: новый файл в очереди уведомлений Telegram
+
+[Path]
+PathChanged=/home/deploy/obikhod/shared/tg-outbox
+Unit=obikhod-tg-relay.service
+
+[Install]
+WantedBy=multi-user.target

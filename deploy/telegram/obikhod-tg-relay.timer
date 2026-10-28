@@ -1,0 +1,10 @@
+[Unit]
+Description=Обиход: повтор отправки уведомлений Telegram, если GitHub был недоступен
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=2min
+Unit=obikhod-tg-relay.service
+
+[Install]
+WantedBy=timers.target

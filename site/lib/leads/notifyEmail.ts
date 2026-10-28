@@ -35,7 +35,7 @@ const siteUrl = () => process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 export const leadCardUrl = (id: string | number) =>
   `${siteUrl()}/admin/collections/leads?tab=all&lead=${id}`
 
-async function relationLabel(
+export async function relationLabel(
   payload: Payload,
   collection: 'services' | 'districts',
   value: LeadEmailDoc['service'] | LeadEmailDoc['district'],

@@ -49,7 +49,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test:unit": "tsx --test lib/leads/__tests__/callbackDeadline.test.ts lib/leads/__tests__/sla.test.ts lib/seo/__tests__/price.test.ts components/blocks/v3/__tests__/iconNames.test.ts lib/blocks/v3/__tests__/fromPayload.test.ts lib/__tests__/breadcrumbs.test.ts lib/admin/__tests__/revalidateSite.test.ts lib/__tests__/offer.test.ts lib/leads/__tests__/form.test.ts",
+    "test:unit": "tsx --test lib/leads/__tests__/callbackDeadline.test.ts lib/leads/__tests__/sla.test.ts lib/seo/__tests__/price.test.ts components/blocks/v3/__tests__/iconNames.test.ts lib/blocks/v3/__tests__/fromPayload.test.ts lib/__tests__/breadcrumbs.test.ts lib/admin/__tests__/revalidateSite.test.ts lib/__tests__/offer.test.ts lib/leads/__tests__/form.test.ts lib/telegram/__tests__/formatLeadMessage.test.ts",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:report": "playwright show-report"
