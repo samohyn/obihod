@@ -153,7 +153,9 @@ df -h / && du -sh /home/deploy/obikhod/releases /var/backups/obikhod
 ```
 
 nginx: `/etc/nginx/sites-available/obikhod.ru` (вне репо: `client_max_body_size 25m`,
-`proxy_redirect`, www → apex, noindex до команды владельца).
+`proxy_redirect`, www → apex). Индексация открыта 28.10.2026 командой владельца: блок noindex и
+подменный `location = /robots.txt` удалены (копия прежнего конфига — `/root/nginx-obikhod.ru.bak-20261028-noindex`),
+`INDEXNOW_KEY` в `shared/.env` включён. Staging закрыт всегда.
 
 ### Кеш страниц
 
