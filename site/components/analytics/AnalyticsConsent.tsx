@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useEffect, useState, useSyncExternalStore } from 'react'
 
 import { COOKIE_SETTINGS_EVENT, CONSENT_COOKIE, goal } from '@/lib/analytics/goal'
@@ -35,6 +36,8 @@ const subscribe = (cb: () => void) => {
 }
 
 let loaded = false
+/** Адрес последнего учтённого просмотра — чтобы не отправить один переход дважды. */
+let lastUrl: string | null = null
 
 function loadMetrika(id: number) {
   if (loaded) return
@@ -56,12 +59,33 @@ function loadMetrika(id: number) {
   script.async = true
   script.src = `https://mc.yandex.ru/metrika/tag.js?id=${id}`
   document.head.appendChild(script)
-  // Вебвизор — только после согласия; содержимое полей форм не записывается
+  // параметры — как в коде счётчика из кабинета Метрики; Вебвизор — только после согласия,
+  // содержимое полей форм не записывается
+  lastUrl = location.href
   w.ym(id, 'init', {
+    ssr: true,
     webvisor: true,
     clickmap: true,
-    trackLinks: true,
+    ecommerce: 'dataLayer',
+    referrer: document.referrer,
+    url: location.href,
     accurateTrackBounce: true,
+    trackLinks: true,
+  })
+}
+
+/**
+ * Переход внутри сайта (Next меняет адрес без перезагрузки) — Метрика сама его не видит
+ * (проверено на проде 28.10.2026), поэтому просмотр отправляем вручную, один раз на переход.
+ */
+function hit(id: number) {
+  const url = location.href
+  if (!loaded || url === lastUrl) return
+  const referer = lastUrl ?? document.referrer
+  lastUrl = url
+  ;(window as Window & { ym?: (...args: unknown[]) => void }).ym?.(id, 'hit', url, {
+    referer,
+    title: document.title,
   })
 }
 
@@ -81,11 +105,16 @@ export function AnalyticsConsent({ counterId }: { counterId: number | null }) {
     () => 'pending',
   )
   const [settings, setSettings] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     if (!counterId) return
     if (choice === 'analytics') loadMetrika(counterId)
   }, [counterId, choice])
+
+  useEffect(() => {
+    if (counterId && choice === 'analytics') hit(counterId)
+  }, [counterId, choice, pathname])
 
   useEffect(() => {
     if (!counterId) return
