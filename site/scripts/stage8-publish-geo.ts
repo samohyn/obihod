@@ -45,7 +45,11 @@ async function main() {
       await payload.update({
         collection: 'service-districts',
         id: d.id as number,
-        data: { _status: 'published', publishStatus: 'published', noindexUntilCase: false } as never,
+        data: {
+          _status: 'published',
+          publishStatus: 'published',
+          noindexUntilCase: false,
+        } as never,
         draft: false,
         depth: 0,
         context: RAW,
