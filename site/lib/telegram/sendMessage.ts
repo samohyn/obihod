@@ -7,9 +7,11 @@
  * отправляет в Telegram. Без `TELEGRAM_OUTBOX_DIR` — прямой запрос к Bot API (локально и там,
  * где Telegram доступен).
  *
- * 152-ФЗ: серверы Telegram и GitHub за рубежом, поэтому телефон, имя, почту и текст задачи в
- * сообщение НЕ кладём — иначе это трансграничная передача ПДн (ст. 12, уведомление РКН).
- * Менеджер открывает заявку в админке по ссылке. Политика на сайте обещает, что передачи за рубеж нет.
+ * Имя и телефон клиента в сообщении — решение владельца 28.10.2026: это трансграничная передача ПДн
+ * (ст. 12 152-ФЗ; Telegram — ОАЭ, GitHub — США), она описана в политике и согласии на сайте, уведомление
+ * РКН — за владельцем. В репозиторий-ретранслятор сообщение попадает только зашифрованным
+ * (deploy/telegram/). Почту, адрес, описание задачи и фото в сообщение НЕ кладём — их нет в согласии
+ * на передачу за рубеж; менеджер видит их в карточке по ссылке.
  *
  * ENV: TELEGRAM_OUTBOX_DIR — очередь (прод); иначе TELEGRAM_BOT_TOKEN + TELEGRAM_OPERATOR_CHAT_ID.
  */
@@ -64,6 +66,8 @@ export async function sendMessage(opts: SendMessageOptions): Promise<{ ok: true 
 /** Поля заявки, которые нужны уведомлению. Связи — id или объект (afterChange до populate). */
 export interface LeadDocLike {
   id?: string | number
+  name?: string | null
+  phone?: string | null
   service?: number | string | { title?: string | null } | null
   district?: number | string | { nameNominative?: string | null } | null
   sourcePage?: string | null
@@ -76,9 +80,11 @@ export interface LeadLabels {
   district?: string | null
 }
 
-/** Текст уведомления — без телефона, имени, почты и описания задачи (152-ФЗ, см. шапку). */
+/** Текст уведомления: имя и телефон — да, почта, адрес и описание задачи — нет (см. шапку). */
 export function formatLeadMessage(doc: LeadDocLike, labels: LeadLabels = {}): string {
   const lines = [doc.id ? `Новая заявка № ${doc.id}` : 'Новая заявка']
+  if (doc.name?.trim()) lines.push(`Имя: ${doc.name.trim()}`)
+  if (doc.phone?.trim()) lines.push(`Телефон: ${doc.phone.trim()}`)
   if (doc.replyDueAt) lines.push(`Ответить до ${formatClockMsk(new Date(doc.replyDueAt))} (МСК)`)
   if (labels.service) lines.push(`Услуга: ${labels.service}`)
   if (labels.district) lines.push(`Район: ${labels.district}`)

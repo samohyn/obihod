@@ -31,6 +31,13 @@ if ! as_deploy git ls-remote "$REMOTE" >/dev/null 2>&1; then
   exit 2
 fi
 
+log "ключ шифрования"
+# RELAY_KEY: этот файл и секрет репозитория-ретранслятора — одно значение. Создаётся не здесь:
+# printf %s "$K" | gh secret set RELAY_KEY -R samohyn/obihod-tg-relay и тот же $K — в этот файл.
+if [ ! -s /home/deploy/.config/obikhod-tg-relay.key ]; then
+  echo "Нет /home/deploy/.config/obikhod-tg-relay.key — без него сообщения не уходят (README)"
+fi
+
 log "репозиторий"
 if [ ! -d "$REPO/.git" ]; then
   as_deploy git clone -q "$REMOTE" "$REPO"

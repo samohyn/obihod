@@ -1,7 +1,8 @@
 # Ретранслятор уведомлений о заявках obikhod.ru (копия — deploy/telegram/relay-repo в репо сайта).
 # Сервер в РФ коммитит сообщения в queue/, здесь они уходят в Telegram: с VPS api.telegram.org
-# недоступен. В сообщениях нет телефона, имени и текста задачи (152-ФЗ) — только номер заявки,
-# услуга, район и ссылка в админку.
+# недоступен. В сообщении имя и телефон клиента (решение владельца 28.10.2026, трансграничная
+# передача — в политике и согласии), поэтому в репозиторий они попадают только зашифрованными
+# (`*.json.enc`, AES-256, ключ — секрет RELAY_KEY) и расшифровываются здесь перед отправкой.
 name: Telegram
 
 on:
@@ -25,17 +26,22 @@ jobs:
         env:
           TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+          RELAY_KEY: ${{ secrets.RELAY_KEY }}
           BEFORE: ${{ github.event.before }}
         run: |
           set -euo pipefail
           if git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
-            files=$(git diff --name-only --diff-filter=A "$BEFORE" HEAD -- 'queue/*.json')
+            files=$(git diff --name-only --diff-filter=A "$BEFORE" HEAD -- 'queue/*.json' 'queue/*.json.enc')
           else
-            files=$(git ls-files 'queue/*.json')
+            files=$(git ls-files 'queue/*.json' 'queue/*.json.enc')
           fi
           fail=0
           for f in $files; do
-            body=$(jq -c --arg chat "$CHAT" '{chat_id: $chat, text: .text, disable_web_page_preview: true}' "$f")
+            case "$f" in
+              *.enc) msg=$(openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -a -A -pass env:RELAY_KEY -in "$f") ;;
+              *) msg=$(cat "$f") ;;
+            esac
+            body=$(echo "$msg" | jq -c --arg chat "$CHAT" '{chat_id: $chat, text: .text, disable_web_page_preview: true}')
             res=$(curl -s --max-time 20 -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
               -H 'content-type: application/json' -d "$body")
             ok=$(echo "$res" | jq -r '.ok')
