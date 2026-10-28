@@ -18,6 +18,7 @@
     "fix:offer-logic": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/fix-offer-logic.ts",
     "stage2:offer": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/stage2-offer.ts",
     "stage6:prices": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/stage6-prices.ts",
+    "stage8:legal-telegram": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/stage8-legal-telegram.ts",
     "stage8:publish-geo": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/stage8-publish-geo.ts",
     "stage6:hub-tiles": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/stage6-hub-tiles.ts",
     "seed:geo-sub": "tsx --require=./scripts/_payload-cjs-shim.cjs --env-file-if-exists=.env.local scripts/seed-geo-sub.ts",

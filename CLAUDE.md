@@ -88,7 +88,7 @@ obikhod/
   - Next.js 16 (App Router, RSC), React 19, Payload 3 (встроен в Next), PostgreSQL 16;
   - Tailwind 4 + CSS блоков;
   - Node 22, pnpm 10.
-- **Заявки:** `/api/leads` → коллекция Leads + письмо менеджеру на partner@obikhod.ru (SMTP Beget) + Telegram-бот @OBIHODLEADBOT. С VPS Telegram недоступен — сообщение идёт через ретранслятор (очередь → закрытый репозиторий `samohyn/obihod-tg-relay` → GitHub Actions), без телефона и имени (152-ФЗ) — [deploy/telegram/README.md](deploy/telegram/README.md).
+- **Заявки:** `/api/leads` → коллекция Leads + письмо менеджеру на partner@obikhod.ru (SMTP Beget) + Telegram-бот @OBIHODLEADBOT. С VPS Telegram недоступен — сообщение идёт через ретранслятор (очередь → закрытый репозиторий `samohyn/obihod-tg-relay`, зашифровано → GitHub Actions). С 28.10 в сообщении имя и телефон (решение владельца; трансграничная передача — в политике и согласии, уведомление РКН — за владельцем); почты, адреса и описания задачи нет — [deploy/telegram/README.md](deploy/telegram/README.md).
 - **Фото:** fal.ai (`site/lib/fal`, правила — `design-system/fal-ai-prompts.md`).
 - **Аналитика:** Я.Метрика по согласию (счётчик 108715562, номер — «Настройки SEO»); Я.Вебмастер и Я.Бизнес — за владельцем.
 - **Проверки:** `pnpm type-check`, `pnpm lint`, `pnpm format:check`, `pnpm test:e2e` (Playwright).
