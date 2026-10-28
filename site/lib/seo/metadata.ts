@@ -7,6 +7,7 @@ import type { Metadata } from 'next'
 import type { PageData } from '@/lib/pages'
 
 import { canonicalFor } from './canonical'
+import { ogCard, OG_SITE_NAME } from './og'
 import type { District } from './jsonld'
 import { truncateMeta } from './text'
 
@@ -61,9 +62,10 @@ export function buildServiceDistrictMetadata(args: {
       type: 'website',
       locale: 'ru_RU',
       url: `/${s.slug}/${d.slug}/`,
-      siteName: 'Обиход',
+      siteName: OG_SITE_NAME,
       title,
       description: truncateMeta(description, 200),
+      images: [ogCard(`${s.title} ${d.namePrepositional}`)],
     },
     twitter: {
       card: 'summary_large_image',
@@ -99,9 +101,10 @@ export function buildDistrictHubMetadata(d: District): Metadata {
       type: 'website',
       locale: 'ru_RU',
       url: `/raiony/${d.slug}/`,
-      siteName: 'Обиход',
+      siteName: OG_SITE_NAME,
       title,
       description,
+      images: [ogCard(`Обиход ${d.namePrepositional}`, 'Все услуги в районе')],
     },
     robots: { index: true, follow: true },
   }
@@ -119,9 +122,10 @@ export function buildBlocksPageMetadata(page: PageData, url: string): Metadata {
       type: 'website',
       locale: 'ru_RU',
       url,
+      siteName: OG_SITE_NAME,
       title,
       description,
-      images: page.ogImage ? [page.ogImage.url] : undefined,
+      images: page.ogImage ? [page.ogImage.url] : [ogCard(page.title)],
     },
     robots: { index: true, follow: true },
   }

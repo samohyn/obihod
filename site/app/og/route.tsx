@@ -136,6 +136,7 @@ function labelByType(type: string): string {
     case 'b2b':
       return 'Для бизнеса'
     default:
-      return 'Фикс-цена · 10 мин'
+      // оффер (contex/10_offer.md): твёрдая смета, а не «фикс-цена»
+      return 'Твёрдая смета · оплата после приёмки'
   }
 }

@@ -16,6 +16,8 @@
 
 import type { SiteChrome } from '@/lib/chrome'
 
+import { ogCard } from './og'
+
 // ---------- SEO settings subset (зеркалит site/globals/SeoSettings.ts) ----------
 // TODO(be3): заменить на `import type { SeoSettings } from '@/payload-types'`,
 // когда `pnpm generate:types` начнёт собираться (см. lib/chrome.ts TODO).
@@ -307,7 +309,7 @@ export function articleSchema(post: BlogPost) {
   return {
     '@type': 'BlogPosting',
     headline: post.h1,
-    image: post.heroImageUrl,
+    image: post.heroImageUrl ?? ogCard(post.h1, 'Блог').url,
     datePublished: post.publishedAt,
     dateModified: post.modifiedAt,
     author: {
@@ -336,7 +338,7 @@ export function caseArticleSchema(c: {
     '@id': `${url}#article`,
     headline: c.title,
     description: c.description || undefined,
-    image: c.image || undefined,
+    image: c.image || ogCard(c.title, 'Кейс').url,
     datePublished: c.datePublished || undefined,
     dateModified: c.dateModified || undefined,
     author: { '@id': ORG_ID },

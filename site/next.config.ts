@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   images: {
     formats: ['image/avif', 'image/webp'],
+    // 60 — фон первого экрана под подложкой (HeroSlider), 75 — остальное (по умолчанию Next 16)
+    qualities: [60, 75],
     deviceSizes: [360, 640, 768, 1024, 1280, 1536],
     imageSizes: [16, 32, 64, 96, 128, 256],
     minimumCacheTTL: 31536000,

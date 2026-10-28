@@ -20,6 +20,7 @@ import {
   type ServiceDistrictLike,
 } from '@/lib/geo-pages'
 import { canonicalFor } from '@/lib/seo/canonical'
+import { ogCard, OG_SITE_NAME } from '@/lib/seo/og'
 import {
   getAllServiceDistrictParams,
   getServiceBySlug,
@@ -62,9 +63,10 @@ export async function generateMetadata({
         type: 'website',
         locale: 'ru_RU',
         url,
+        siteName: OG_SITE_NAME,
         title,
         description: blocksPage.metaDescription ?? undefined,
-        images: blocksPage.ogImage ? [blocksPage.ogImage.url] : undefined,
+        images: blocksPage.ogImage ? [blocksPage.ogImage.url] : [ogCard(blocksPage.title)],
       },
       robots: { index: true, follow: true },
     }

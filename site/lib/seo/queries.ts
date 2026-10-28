@@ -218,7 +218,12 @@ export const getSubServiceDistrictBundle = cache(
   },
 )
 
-type IndexableServiceDistrict = { service: string; district: string; sub: string | null }
+type IndexableServiceDistrict = {
+  service: string
+  district: string
+  sub: string | null
+  updatedAt: string | null
+}
 
 /**
  * Индексируемые записи «Услуга × район» — тот же предикат, что robots у страницы
@@ -245,6 +250,7 @@ const getIndexableServiceDistricts = cache(async (): Promise<IndexableServiceDis
         service?: { slug?: string } | string | null
         district?: { slug?: string } | string | null
         subServiceSlug?: string | null
+        updatedAt?: string | null
       }
       const service =
         typeof sdRaw.service === 'object' && sdRaw.service !== null
@@ -254,7 +260,13 @@ const getIndexableServiceDistricts = cache(async (): Promise<IndexableServiceDis
         typeof sdRaw.district === 'object' && sdRaw.district !== null
           ? (sdRaw.district.slug ?? '')
           : ''
-      if (service && district) out.push({ service, district, sub: sdRaw.subServiceSlug || null })
+      if (service && district)
+        out.push({
+          service,
+          district,
+          sub: sdRaw.subServiceSlug || null,
+          updatedAt: sdRaw.updatedAt ?? null,
+        })
     }
     return out
   } catch (e) {
@@ -292,6 +304,28 @@ export const getAllSubServiceDistrictParams = cache(
         ? [{ service: p.service, sub: p.sub, district: p.district }]
         : [],
     )
+  },
+)
+
+/**
+ * Гео-страницы для sitemap: адрес без слэшей, адрес родителя (направление или подуслуга — большая
+ * часть текста гео-страницы из него) и дата изменения записи. Тот же отбор, что у страниц выше.
+ */
+export const getGeoSitemapEntries = cache(
+  async (): Promise<Array<{ path: string; parent: string; updatedAt: string | null }>> => {
+    const [sds, subs] = await Promise.all([
+      getIndexableServiceDistricts(),
+      getAllSubServiceParams(),
+    ])
+    const published = new Set(subs.map((s) => `${s.service}/${s.sub}`))
+    return sds.flatMap((p) => {
+      if (!p.sub)
+        return [{ path: `${p.service}/${p.district}`, parent: p.service, updatedAt: p.updatedAt }]
+      const parent = `${p.service}/${p.sub}`
+      return published.has(parent)
+        ? [{ path: `${parent}/${p.district}`, parent, updatedAt: p.updatedAt }]
+        : []
+    })
   },
 )
 
@@ -346,6 +380,7 @@ export type PublishedSubService = {
   slug: string
   title: string
   metaDescription: string | null
+  updatedAt: string | null
 }
 
 /** Опубликованные «Подуслуги» с направлением — для карты сайта и llms-full.txt. */
@@ -358,7 +393,7 @@ export const getPublishedSubServices = cache(async (): Promise<PublishedSubServi
     pagination: false,
     depth: 1,
     sort: 'createdAt',
-    select: { slug: true, title: true, metaDescription: true, service: true },
+    select: { slug: true, title: true, metaDescription: true, service: true, updatedAt: true },
   })
   return (
     r.docs as unknown as {
@@ -366,6 +401,7 @@ export const getPublishedSubServices = cache(async (): Promise<PublishedSubServi
       title?: string
       metaDescription?: string | null
       service?: { slug?: string } | null
+      updatedAt?: string | null
     }[]
   )
     .filter((d) => d.slug && d.title && d.service?.slug)
@@ -374,6 +410,7 @@ export const getPublishedSubServices = cache(async (): Promise<PublishedSubServi
       slug: String(d.slug),
       title: String(d.title),
       metaDescription: d.metaDescription ?? null,
+      updatedAt: d.updatedAt ?? null,
     }))
 })
 

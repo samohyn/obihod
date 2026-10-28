@@ -161,9 +161,12 @@ export function Picture({
   eager = false,
   className,
   tagPosition = 'br',
+  quality,
 }: {
   image: BlockImage | null | undefined
   sizes: string
+  /** Качество сжатия (из images.qualities в next.config); по умолчанию 75. */
+  quality?: 60 | 75
   /** Картинка первого экрана (LCP): грузится сразу и с высоким приоритетом. */
   eager?: boolean
   className?: string
@@ -177,8 +180,10 @@ export function Picture({
         alt={image.alt ?? ''}
         fill
         sizes={sizes}
-        loading={eager ? 'eager' : 'lazy'}
-        fetchPriority={eager ? 'high' : 'auto'}
+        // LCP: preload — <link rel="preload"> в <head>, картинка не ждёт разбора тела (Next 16;
+        // вместе с loading/fetchPriority не задаётся). SEO-аудит 28.10: задержка загрузки 2,5 с.
+        {...(eager ? { preload: true } : { loading: 'lazy' as const })}
+        quality={quality}
         style={{ objectFit: 'cover', objectPosition: image.focus ?? 'center' }}
       />
       {image.illustration && (

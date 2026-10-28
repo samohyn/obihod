@@ -2,11 +2,10 @@ import type { MetadataRoute } from 'next'
 
 import { payloadClient } from '@/lib/payload'
 import {
-  getAllServiceDistrictParams,
-  getAllSubServiceDistrictParams,
-  getAllSubServiceParams,
+  getGeoSitemapEntries,
   getPublishedB2BPages,
-  type SubServiceDistrictParam,
+  getPublishedSubServices,
+  type PublishedSubService,
 } from '@/lib/seo/queries'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
@@ -55,66 +54,75 @@ type SlugDoc = { slug?: string; updatedAt?: string | Date }
  * Sitemap.xml для obikhod.ru. Генерируется на каждый запрос (dynamic),
  * но кешируется Next 16 ISR на 1 час. Инвалидируется тегом 'sitemap'
  * через ServiceDistricts.afterChange (см. revalidateTag('sitemap', 'max')).
+ *
+ * lastmod — настоящая дата изменения документа (SEO-аудит 28.10.2026: было «сейчас» у ~300 адресов,
+ * и при каждой сборке sitemap сообщал роботам, что изменилось всё). Страницы из «Страниц» — по их
+ * документу; гео-страница — по более поздней из дат: своя запись или родитель (из него большая часть
+ * её текста). Нет документа — без lastmod.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date()
+  const [services, districts, cases, blogPosts, b2bPages, authors, subServices, geo, pageDates] =
+    await Promise.all([
+      fetchServices(),
+      fetchDistricts(),
+      fetchCases(),
+      fetchPublishedBlog(),
+      fetchPublishedB2B(),
+      fetchPublishedAuthors(),
+      getPublishedSubServices().catch(() => [] as PublishedSubService[]),
+      getGeoSitemapEntries().catch(() => [] as GeoEntry[]),
+      fetchPageDates(),
+    ])
+
+  /** Дата документа «Страниц» по адресу без слэшей ('' — главная). */
+  const pageDate = (path: string) => pageDates.get(path || 'home')
+  const subDates = new Map(subServices.map((s) => [`${s.service}/${s.slug}`, toDate(s.updatedAt)]))
+  const page = (
+    path: string,
+    changeFrequency: Entry['changeFrequency'],
+    priority: number,
+  ): Entry => ({
+    url: `${SITE_URL}/${path ? `${path}/` : ''}`,
+    lastModified: pageDate(path),
+    changeFrequency,
+    priority,
+  })
 
   const staticEntries: Entry[] = [
-    { url: `${SITE_URL}/`, lastModified: now, changeFrequency: 'daily', priority: 1.0 },
-    { url: `${SITE_URL}/uslugi/`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${SITE_URL}/raiony/`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
-    { url: `${SITE_URL}/kejsy/`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
+    page('', 'daily', 1.0),
+    page('uslugi', 'weekly', 0.9),
+    page('raiony', 'weekly', 0.7),
+    page('kejsy', 'weekly', 0.7),
     // US-6 wave 2A: разблокированные list-страницы трёх коллекций.
-    { url: `${SITE_URL}/blog/`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${SITE_URL}/b2b/`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${SITE_URL}/avtory/`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
+    page('blog', 'weekly', 0.8),
+    page('b2b', 'weekly', 0.8),
+    page('avtory', 'monthly', 0.5),
     // Trust-страницы wave 1.
-    {
-      url: `${SITE_URL}/o-kompanii/`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    { url: `${SITE_URL}/garantii/`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
-    {
-      url: `${SITE_URL}/kak-my-rabotaem/`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
+    page('o-kompanii', 'monthly', 0.6),
+    page('garantii', 'monthly', 0.6),
+    page('kak-my-rabotaem', 'monthly', 0.6),
   ]
 
-  // Прямой Payload-вызов (без unstable_cache wrapper) — чтобы избежать
-  // проблем с serialization payloadClient внутри cached scope.
-  // Кеширование sitemap делает сам Next 16 через revalidate=3600.
-  const [
-    services,
-    districts,
-    cases,
-    blogPosts,
-    b2bPages,
-    authors,
-    subServices,
-    sdParams,
-    subSdParams,
-  ] = await Promise.all([
-    fetchServices(),
-    fetchDistricts(),
-    fetchCases(),
-    fetchPublishedBlog(),
-    fetchPublishedB2B(),
-    fetchPublishedAuthors(),
-    getAllSubServiceParams().catch(() => [] as Array<{ service: string; sub: string }>),
-    getAllServiceDistrictParams().catch(() => [] as Array<{ service: string; slug: string }>),
-    getAllSubServiceDistrictParams().catch(() => [] as SubServiceDistrictParam[]),
-  ])
-
-  const serviceEntries: Entry[] = services.map((slug) => ({
-    url: `${SITE_URL}/${slug}/`,
-    lastModified: now,
+  // Индексируемые страницы, которых в sitemap не было (аудит 28.10): только если документ опубликован.
+  const trustEntries: Entry[] = [
+    ['komanda', 0.5],
+    ['sro-licenzii', 0.5],
+    ['park-tehniki', 0.5],
+    ['politika-konfidentsialnosti', 0.2],
+    ['soglasie-na-obrabotku-personalnyh-dannyh', 0.2],
+  ]
+    .filter(([slug]) => pageDate(slug as string))
+    .map(([slug, priority]) => page(slug as string, 'yearly', priority as number))
+  // Карта сайта собирается кодом, документа у неё нет
+  const htmlSitemapEntry: Entry = {
+    url: `${SITE_URL}/karta-sajta/`,
     changeFrequency: 'weekly',
-    priority: PILLAR_PRIORITY[slug] ?? DEFAULT_SERVICE_PRIORITY,
-  }))
+    priority: 0.3,
+  }
+
+  const serviceEntries: Entry[] = services.map((slug) =>
+    page(slug, 'weekly', PILLAR_PRIORITY[slug] ?? DEFAULT_SERVICE_PRIORITY),
+  )
 
   const districtEntries: Entry[] = districts
     .filter((d): d is SlugDoc & { slug: string } => typeof d.slug === 'string')
@@ -162,73 +170,38 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
 
   const subServiceEntries: Entry[] = subServices.map((s) => ({
-    url: `${SITE_URL}/${s.service}/${s.sub}/`,
-    lastModified: now,
+    url: `${SITE_URL}/${s.service}/${s.slug}/`,
+    lastModified: subDates.get(`${s.service}/${s.slug}`),
     changeFrequency: 'weekly' as const,
     priority: 0.85,
   }))
 
-  // EPIC-SEO-USLUGI US-7: T4 pillar × city SD pages (/{service}/{district}/).
-  // Priority 0.75 — mid-funnel local-intent, выше /raiony/ (0.6) но ниже T2 pillar.
-  const sdEntries: Entry[] = sdParams.map((s) => ({
-    url: `${SITE_URL}/${s.service}/${s.slug}/`,
-    lastModified: now,
+  // Услуга в районе (/{service}/{district}/, priority 0.75 — выше /raiony/, ниже направления) и
+  // подуслуга в районе (/{service}/{sub}/{district}/, 0.7); правило индексации — у записи.
+  const geoEntries: Entry[] = geo.map((g) => ({
+    url: `${SITE_URL}/${g.path}/`,
+    lastModified: latest(toDate(g.updatedAt), pageDate(g.parent) ?? subDates.get(g.parent)),
     changeFrequency: 'weekly' as const,
-    priority: 0.75,
-  }))
-
-  // Подуслуга в районе (/{service}/{sub}/{district}/) — то же правило индексации, что у T4.
-  const subSdEntries: Entry[] = subSdParams.map((s) => ({
-    url: `${SITE_URL}/${s.service}/${s.sub}/${s.district}/`,
-    lastModified: now,
-    changeFrequency: 'weekly' as const,
-    priority: 0.7,
+    priority: g.path.split('/').length === 2 ? 0.75 : 0.7,
   }))
 
   // EPIC-SEO-COMPETE-3 US-4 — mega-pricing хаб /uslugi/tseny/ + per-pillar.
   // Priority 0.8 per ADR-0018 (justified pricing-intent против pillar lead-intent).
   const pricingHubEntries: Entry[] = [
-    {
-      url: `${SITE_URL}/uslugi/tseny/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    ...services.map((slug) => ({
-      url: `${SITE_URL}/uslugi/tseny/${slug}/`,
-      lastModified: now,
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    })),
+    page('uslugi/tseny', 'weekly', 0.8),
+    ...services.map((slug) => page(`uslugi/tseny/${slug}`, 'weekly', 0.8)),
   ]
 
   // EPIC-SEO-COMPETE-3 US-8 — lead-инфраструктура (NAP + USP).
   // Priority 0.6: статичные страницы, не основной трафик-канал, но важны
   // для конверсии (cross-link target из всех pillar/sub/blog/B2B).
   const leadInfraEntries: Entry[] = [
-    {
-      url: `${SITE_URL}/kontakty/`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.6,
-    },
-    {
-      url: `${SITE_URL}/kalkulyator/foto-smeta/`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.6,
-    },
+    page('kontakty', 'yearly', 0.6),
+    page('kalkulyator/foto-smeta', 'yearly', 0.6),
   ]
 
-  // EPIC-SEO-COMPETE-3 US-9 — отзывы + AggregateRating.
-  // Priority 0.6 weekly: trust-сигнал, контент обновляется регулярно
-  // через afterChange Reviews collection.
-  const otzyvyEntry: Entry = {
-    url: `${SITE_URL}/otzyvy/`,
-    lastModified: now,
-    changeFrequency: 'weekly',
-    priority: 0.6,
-  }
+  // EPIC-SEO-COMPETE-3 US-9 — отзывы. Priority 0.6 weekly: trust-сигнал.
+  const otzyvyEntry: Entry = page('otzyvy', 'weekly', 0.6)
 
   return [
     ...staticEntries,
@@ -239,12 +212,45 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...b2bEntries,
     ...authorEntries,
     ...subServiceEntries,
-    ...sdEntries,
-    ...subSdEntries,
+    ...geoEntries,
     ...pricingHubEntries,
     ...leadInfraEntries,
     otzyvyEntry,
+    ...trustEntries,
+    htmlSitemapEntry,
   ]
+}
+
+type GeoEntry = { path: string; parent: string; updatedAt: string | null }
+
+const toDate = (v: string | Date | null | undefined) => (v ? new Date(v) : undefined)
+
+/** Более поздняя из дат (undefined — пропуск). */
+function latest(...dates: (Date | undefined)[]): Date | undefined {
+  const ds = dates.filter((d): d is Date => Boolean(d) && !Number.isNaN(d!.getTime()))
+  return ds.length ? new Date(Math.max(...ds.map((d) => d.getTime()))) : undefined
+}
+
+/** Даты опубликованных документов «Страниц»: адрес (slug) → дата изменения. */
+async function fetchPageDates(): Promise<Map<string, Date>> {
+  try {
+    const payload = await payloadClient()
+    const r = await payload.find({
+      collection: 'pages',
+      where: { _status: { equals: 'published' } },
+      limit: 1000,
+      pagination: false,
+      select: { slug: true, updatedAt: true },
+    })
+    return new Map(
+      (r.docs as unknown as SlugDoc[])
+        .filter((d) => d.slug && d.updatedAt)
+        .map((d) => [String(d.slug), new Date(d.updatedAt!)]),
+    )
+  } catch (e) {
+    console.error('[sitemap] fetchPageDates failed:', e)
+    return new Map()
+  }
 }
 
 async function fetchServices(): Promise<string[]> {

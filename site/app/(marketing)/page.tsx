@@ -5,17 +5,14 @@ import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
 import { getContacts } from '@/lib/chrome'
 import { getPage } from '@/lib/pages'
 import { canonicalFor } from '@/lib/seo/canonical'
+import { ogCard } from '@/lib/seo/og'
 import { JsonLdGraph } from '@/components/marketing/_shared/JsonLdGraph'
 
 export const revalidate = 600
 
-/** Картинка для соцсетей, пока у документа главной не задана своя. */
-const OG_IMAGE = {
-  url: '/img-generated/hero-arborist-v1.jpg',
-  width: 1200,
-  height: 630,
-  alt: 'Бригада Обихода спиливает аварийную берёзу с автовышки',
-}
+/** Картинка для соцсетей, пока у документа главной не задана своя: фирменная карточка, а не
+ * сгенерированное фото — в превью мессенджеров нет подписи «Иллюстрация». */
+const OG_IMAGE = ogCard('Порядок под ключ на участке')
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPage('home')
