@@ -26,6 +26,8 @@ UPDATE leads SET phone = '+7000000' || lpad((id % 10000)::text, 4, '0'),
                  name = 'Тестовый клиент ' || id,
                  email = NULL;
 TRUNCATE audit_log;
+-- счётчик Метрики прода: визиты на staging не должны попадать в статистику сайта
+UPDATE seo_settings SET metrika_id = NULL;
 SQL
 sudo -u postgres psql -tAc "select 'заявок: ' || count(*) || ', с реальным телефоном: ' || count(*) filter (where phone not like '+7000000%') from leads" "$DB"
 
