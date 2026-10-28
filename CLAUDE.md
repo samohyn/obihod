@@ -90,7 +90,7 @@ obikhod/
   - Node 22, pnpm 10.
 - **Заявки:** `/api/leads` → коллекция Leads + письмо менеджеру на partner@obikhod.ru (SMTP Beget). Telegram с VPS недоступен; мессенджеры — по плану 09, этап 5.
 - **Фото:** fal.ai (`site/lib/fal`, правила — `design-system/fal-ai-prompts.md`).
-- **Аналитика (план):** Я.Метрика по согласию, Я.Вебмастер, Я.Бизнес.
+- **Аналитика:** Я.Метрика по согласию (счётчик 108715562, номер — «Настройки SEO»); Я.Вебмастер и Я.Бизнес — за владельцем.
 - **Проверки:** `pnpm type-check`, `pnpm lint`, `pnpm format:check`, `pnpm test:e2e` (Playwright).
 
 **Что не предлагаем:** Tilda, WordPress, Bitrix, Astro, Vercel, Strapi/Directus — обоснование в
