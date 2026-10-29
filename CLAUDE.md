@@ -90,7 +90,7 @@ obikhod/
   - Node 22, pnpm 10.
 - **Заявки:** `/api/leads` → коллекция Leads + письмо менеджеру на partner@obikhod.ru (SMTP Beget) + Telegram-бот @OBIHODLEADBOT. С VPS Telegram недоступен — сообщение идёт через ретранслятор (очередь → закрытый репозиторий `samohyn/obihod-tg-relay`, зашифровано → GitHub Actions). С 28.10 в сообщении имя и телефон (решение владельца; трансграничная передача — в политике и согласии, уведомление РКН — за владельцем); почты, адреса и описания задачи нет — [deploy/telegram/README.md](deploy/telegram/README.md).
 - **Фото:** fal.ai (`site/lib/fal`, правила — `design-system/fal-ai-prompts.md`).
-- **Аналитика:** Я.Метрика по согласию (счётчик 108715562, номер — «Настройки SEO»); Я.Вебмастер и Я.Бизнес — за владельцем.
+- **Аналитика:** Я.Метрика по согласию (счётчик 108715562, номер — «Настройки SEO»); Я.Вебмастер — сайт подтверждён записью TXT в DNS (`yandex-verification`, поэтому мета-тега на страницах нет), кабинет — у владельца; Я.Бизнес — за владельцем.
 - **Проверки:** `pnpm type-check`, `pnpm lint`, `pnpm format:check`, `pnpm test:e2e` (Playwright).
 
 **Что не предлагаем:** Tilda, WordPress, Bitrix, Astro, Vercel, Strapi/Directus — обоснование в
