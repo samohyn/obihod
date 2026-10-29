@@ -195,20 +195,20 @@ server {
         error_page 502 503 504 =503 /_errors/503.html;
     }
 
-    # Страница «сайт не отвечает» и её шрифт — из релиза (site/public/_errors/), с диска,
-    # без приложения. Сам HTML снаружи не открывается (internal), только через error_page.
+    # Страница «сайт не отвечает» и её шрифт — копия site/public/_errors/, которую obikhod-deploy
+    # кладёт в /var/www/obikhod/_errors. Сам HTML снаружи не открывается (internal).
     location = /_errors/503.html {
         internal;
-        root /home/deploy/obikhod/current/public;
+        root /var/www/obikhod;
         add_header Retry-After 60 always;
         add_header Cache-Control "no-store" always;
         try_files $uri @maintenance;
     }
     location ^~ /_errors/ {
-        root /home/deploy/obikhod/current/public;
+        root /var/www/obikhod;
         access_log off;
     }
-    # Пока нет ни одного релиза (первый запуск сервера)
+    # Пока obikhod-deploy не положил страницу (первый запуск сервера)
     location @maintenance {
         default_type text/html;
         add_header Retry-After 60 always;

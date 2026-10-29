@@ -44,14 +44,14 @@ server {
 
     location = /_errors/503.html {
         internal;
-        root /home/deploy/obikhod-staging/current/public;
+        root /var/www/obikhod-staging;
         add_header X-Robots-Tag "noindex, nofollow, noarchive" always;
         add_header Retry-After 60 always;
         add_header Cache-Control "no-store" always;
     }
     location ^~ /_errors/ {
         auth_basic off;
-        root /home/deploy/obikhod-staging/current/public;
+        root /var/www/obikhod-staging;
         access_log off;
     }
 }
