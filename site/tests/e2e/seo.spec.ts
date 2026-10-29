@@ -154,3 +154,21 @@ test.describe('Яндекс Метрика только по согласию (�
     expect(metrika).toEqual([])
   })
 })
+
+test.describe('Страница 404 (brand-guide §11.5)', () => {
+  test('своя 404 и на глубоком адресе: код 404, свой title, один robots noindex', async ({
+    page,
+  }) => {
+    for (const url of ['/stranitsa-kotoroy-net/', '/a/b/c/d/']) {
+      const res = await page.goto(url)
+      expect(res?.status(), url).toBe(404)
+      await expect(page).toHaveTitle('Страница не найдена — Обиход')
+      await expect(page.locator('main h1')).toHaveCount(1)
+      await expect(page.getByRole('link', { name: 'Все услуги' }).first()).toBeVisible()
+      const robots = await page
+        .locator('meta[name="robots"]')
+        .evaluateAll((els) => els.map((e) => e.getAttribute('content')))
+      expect(robots, url).toEqual(['noindex'])
+    }
+  })
+})

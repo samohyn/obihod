@@ -26,7 +26,7 @@ import {
   getServiceBySlug,
   getServiceDistrictBundle,
 } from '@/lib/seo/queries'
-import { buildServiceDistrictMetadata } from '@/lib/seo/metadata'
+import { buildServiceDistrictMetadata, NOT_FOUND_METADATA } from '@/lib/seo/metadata'
 
 import { SubServiceBlocksView } from './SubServiceBlocksView'
 import { ServiceDistrictBlocksView } from './ServiceDistrictBlocksView'
@@ -83,7 +83,7 @@ export async function generateMetadata({
     // Заголовок и описание — по шаблону из хаба; robots и canonical — из записи
     // (индексацию гео-страниц решает владелец)
     const pillar = await getPage(serviceSlug)
-    if (!pillar) return {}
+    if (!pillar) return NOT_FOUND_METADATA
     const templates = await getPageTemplates()
     const { blocks } = buildServiceDistrictBlocks({
       pillar,
@@ -110,7 +110,7 @@ export async function generateMetadata({
     }
   }
 
-  return {}
+  return NOT_FOUND_METADATA
 }
 
 export default async function ServiceSlugPage({

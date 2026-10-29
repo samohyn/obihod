@@ -5,11 +5,12 @@ import '../homepage-classic.css'
 
 import { SiteFooter } from '@/components/chrome/SiteFooter'
 import { SiteHeader } from '@/components/chrome/SiteHeader'
+import { PhoneProvider } from '@/components/chrome/PhoneContext'
 import { PreviewBanner } from '@/components/chrome/PreviewBanner'
 import { AnalyticsConsent } from '@/components/analytics/AnalyticsConsent'
 import { RumProvider } from '@/components/analytics/RumProvider'
 import { JsonLd } from '@/components/seo/JsonLd'
-import { getSiteChrome } from '@/lib/chrome'
+import { getContacts, getSiteChrome } from '@/lib/chrome'
 import { organizationSchema, websiteSchema } from '@/lib/seo/jsonld'
 import { getSeoSettings } from '@/lib/seo/queries'
 
@@ -108,7 +109,11 @@ function metrikaId(seo: unknown): number | null {
 export default async function MarketingLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const [chrome, seo] = await Promise.all([getSiteChrome(), getSeoSettings()])
+  const [chrome, seo, contacts] = await Promise.all([
+    getSiteChrome(),
+    getSeoSettings(),
+    getContacts(),
+  ])
   return (
     <html
       lang="ru"
@@ -120,7 +125,13 @@ export default async function MarketingLayout({
         <RumProvider />
         <PreviewBanner />
         <SiteHeader />
-        <main className="min-h-[60vh] flex-1">{children}</main>
+        <main className="min-h-[60vh] flex-1">
+          <PhoneProvider
+            value={{ phoneDisplay: contacts.phoneDisplay, phoneE164: contacts.phoneE164 }}
+          >
+            {children}
+          </PhoneProvider>
+        </main>
         <SiteFooter />
       </body>
     </html>

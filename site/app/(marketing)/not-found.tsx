@@ -1,4 +1,6 @@
-import { PageHeader } from '@/components/blocks/v3/PageHeader'
+import type { Metadata } from 'next'
+
+import { ErrorState } from '@/components/blocks/v3/ErrorState'
 import type { ServicesTilesBlock, V3BlockWithTone } from '@/components/blocks/v3/types'
 import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
 import { retone } from '@/lib/blocks/v3/retone'
@@ -6,7 +8,13 @@ import { getContacts } from '@/lib/chrome'
 import { getPage } from '@/lib/pages'
 import { getPageTemplates } from '@/lib/page-templates-server'
 
-/** 404 по дизайну v3: куда пойти дальше — направления из «Услуг» и заявка. */
+// Код 404 и <meta robots noindex> ставит сам Next; здесь — свой title и сброс «index, follow» из layout.
+export const metadata: Metadata = {
+  title: { absolute: 'Страница не найдена — Обиход' },
+  robots: null,
+}
+
+/** 404 по brand-guide §11.5 (тексты — «Шаблоны страниц»), ниже — направления из «Услуг» и заявка. */
 export default async function NotFound() {
   const [contacts, uslugi, t] = await Promise.all([
     getContacts(),
@@ -21,8 +29,24 @@ export default async function NotFound() {
   if (form) blocks.push(form)
   return (
     <>
-      <PageHeader eyebrow={t.notFoundEyebrow} title={t.notFoundTitle} lead={t.notFoundLead} />
-      <V3BlockRenderer blocks={retone(blocks)} phoneDisplay={contacts.phoneDisplay} />
+      <ErrorState
+        illustration="compass"
+        code={t.notFoundEyebrow}
+        title={t.notFoundTitle}
+        text={t.notFoundLead}
+        actions={[
+          { label: 'На главную', href: '/' },
+          { label: 'Все услуги', href: '/uslugi/', variant: 'ghost' },
+        ]}
+        fallback={
+          <>
+            Пришли по ссылке с нашего сайта или из закладок? Позвоните{' '}
+            <a href={`tel:${contacts.phoneE164}`}>{contacts.phoneDisplay}</a> — подскажем, где
+            нужная страница.
+          </>
+        }
+      />
+      <V3BlockRenderer blocks={retone(blocks, true)} phoneDisplay={contacts.phoneDisplay} />
     </>
   )
 }

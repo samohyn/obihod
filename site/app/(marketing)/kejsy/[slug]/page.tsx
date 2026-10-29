@@ -24,6 +24,7 @@ import { getContacts } from '@/lib/chrome'
 import { getPage } from '@/lib/pages'
 import { isDraftPreview } from '@/lib/preview'
 import { getPageTemplates } from '@/lib/page-templates-server'
+import { NOT_FOUND_METADATA } from '@/lib/seo/metadata'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -62,7 +63,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params
   const c = await getCaseBySlug(slug)
-  if (!c) return {}
+  if (!c) return NOT_FOUND_METADATA
   // пустое описание кейса — из его текста, обрезка по слову (план 09, этап 7, пробел 7)
   const body = (c as unknown as { description?: { root?: unknown } | null }).description
   const description =

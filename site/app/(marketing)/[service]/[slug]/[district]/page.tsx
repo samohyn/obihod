@@ -16,7 +16,7 @@ import {
 import { canonicalFor } from '@/lib/seo/canonical'
 import { ogCard } from '@/lib/seo/og'
 import { getAllSubServiceDistrictParams, getSubServiceDistrictBundle } from '@/lib/seo/queries'
-import { isServiceDistrictIndexable, metadataBase } from '@/lib/seo/metadata'
+import { isServiceDistrictIndexable, metadataBase, NOT_FOUND_METADATA } from '@/lib/seo/metadata'
 import { truncateMeta } from '@/lib/seo/text'
 import { getCompany } from '@/lib/company'
 import { getPageTemplates } from '@/lib/page-templates-server'
@@ -46,7 +46,7 @@ async function load(params: Params) {
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const page = await load(params)
-  if (!page) return {}
+  if (!page) return NOT_FOUND_METADATA
   const district = page.district as unknown as DistrictLike
   const sd = page.sd as unknown as ServiceDistrictLike & {
     seoDescription?: string | null

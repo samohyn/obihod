@@ -130,3 +130,14 @@ export function buildBlocksPageMetadata(page: PageData, url: string): Metadata {
     robots: { index: true, follow: true },
   }
 }
+
+/**
+ * Метаданные «нет такой страницы»: generateMetadata отдаёт их, когда документа нет и страница
+ * вызовет notFound(). Только metadata из not-found.tsx мало — после загрузки Next на клиенте
+ * собирает метаданные маршрута заново и показывал title главной и «index, follow» из layout.
+ * robots: null — остаётся один noindex, который ставит сам Next.
+ */
+export const NOT_FOUND_METADATA: Metadata = {
+  title: { absolute: 'Страница не найдена — Обиход' },
+  robots: null,
+}

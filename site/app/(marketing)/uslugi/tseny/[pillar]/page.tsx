@@ -5,7 +5,7 @@ import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
 import { retone } from '@/lib/blocks/v3/retone'
 import { trail } from '@/lib/breadcrumbs'
 import { getPage, getPillarPriceBlocks, getPillarSummaryBlock } from '@/lib/pages'
-import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+import { buildBlocksPageMetadata, NOT_FOUND_METADATA } from '@/lib/seo/metadata'
 import { getAllPillarsForPricing, getServiceBySlug } from '@/lib/seo/queries'
 
 export const revalidate = 86400
@@ -23,7 +23,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { pillar: pillarSlug } = await params
   const page = await getPage(`uslugi/tseny/${pillarSlug}`)
-  return page ? buildBlocksPageMetadata(page, `/uslugi/tseny/${pillarSlug}/`) : {}
+  return page ? buildBlocksPageMetadata(page, `/uslugi/tseny/${pillarSlug}/`) : NOT_FOUND_METADATA
 }
 
 /**
