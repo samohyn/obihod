@@ -5,14 +5,14 @@ import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
 import { retone } from '@/lib/blocks/v3/retone'
 import { trail } from '@/lib/breadcrumbs'
 import { getPage, getPillarSummaryBlock } from '@/lib/pages'
-import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+import { buildBlocksPageMetadata, NOT_FOUND_METADATA } from '@/lib/seo/metadata'
 import { getAllPillarsForPricing } from '@/lib/seo/queries'
 
 export const revalidate = 86400
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPage('uslugi/tseny')
-  return page ? buildBlocksPageMetadata(page, '/uslugi/tseny/') : {}
+  return page ? buildBlocksPageMetadata(page, '/uslugi/tseny/') : NOT_FOUND_METADATA
 }
 
 /** Порядок разделов в сводном прайсе: направления по карте 08, калькуляторы — без своего прайса. */

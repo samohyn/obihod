@@ -29,6 +29,7 @@ import { ogCard, OG_SITE_NAME } from '@/lib/seo/og'
 import { getAllBlogSlugs, getBlogPostBySlug } from '@/lib/seo/queries'
 import { truncateMeta } from '@/lib/seo/text'
 import { getPageTemplates } from '@/lib/page-templates-server'
+import { NOT_FOUND_METADATA } from '@/lib/seo/metadata'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -77,7 +78,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params
   const post = (await getBlogPostBySlug(slug)) as unknown as BlogPostDoc | null
-  if (!post) return {}
+  if (!post) return NOT_FOUND_METADATA
   return {
     title: { absolute: post.metaTitle ?? post.title },
     description: post.metaDescription ?? truncateMeta(post.intro, 155),

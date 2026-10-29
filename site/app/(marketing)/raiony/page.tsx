@@ -9,7 +9,7 @@ import { V3BlockRenderer } from '@/components/blocks/v3/V3BlockRenderer'
 import { retone } from '@/lib/blocks/v3/retone'
 import { getContacts } from '@/lib/chrome'
 import { faqPageSchema } from '@/lib/seo/jsonld'
-import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+import { buildBlocksPageMetadata, NOT_FOUND_METADATA } from '@/lib/seo/metadata'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { getPage } from '@/lib/pages'
 
@@ -17,7 +17,7 @@ export const revalidate = 86400
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPage('raiony')
-  return page ? buildBlocksPageMetadata(page, '/raiony/') : {}
+  return page ? buildBlocksPageMetadata(page, '/raiony/') : NOT_FOUND_METADATA
 }
 
 /** Районы — документ «Страницы» raiony, список районов — под первым экраном; нет документа — 404. */

@@ -11,7 +11,7 @@ import { toImage } from '@/lib/blocks/v3/fromPayload'
 import { BLOG_CATEGORY, blogTopic } from '@/lib/blog-topics'
 import { getContacts } from '@/lib/chrome'
 import { getPage } from '@/lib/pages'
-import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+import { buildBlocksPageMetadata, NOT_FOUND_METADATA } from '@/lib/seo/metadata'
 
 export const revalidate = 86400
 
@@ -34,7 +34,7 @@ function formatDate(iso: string): string {
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPage('blog')
-  return page ? buildBlocksPageMetadata(page, '/blog/') : {}
+  return page ? buildBlocksPageMetadata(page, '/blog/') : NOT_FOUND_METADATA
 }
 
 /** Блог — документ «Страницы» blog, статьи из коллекции «Блог» — под первым экраном; нет документа — 404. */

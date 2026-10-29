@@ -4,13 +4,13 @@ import { notFound } from 'next/navigation'
 import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
 import { trail } from '@/lib/breadcrumbs'
 import { getPage } from '@/lib/pages'
-import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+import { buildBlocksPageMetadata, NOT_FOUND_METADATA } from '@/lib/seo/metadata'
 
 export const revalidate = 86400
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPage('garantii')
-  return page ? buildBlocksPageMetadata(page, '/garantii/') : {}
+  return page ? buildBlocksPageMetadata(page, '/garantii/') : NOT_FOUND_METADATA
 }
 
 /** «Гарантии» — документ «Страницы» garantii; нет опубликованного — 404. */

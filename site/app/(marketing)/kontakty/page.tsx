@@ -7,7 +7,7 @@ import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
 import type { V3BlockWithTone } from '@/components/blocks/v3/types'
 import { retone } from '@/lib/blocks/v3/retone'
 import { getPage } from '@/lib/pages'
-import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+import { buildBlocksPageMetadata, NOT_FOUND_METADATA } from '@/lib/seo/metadata'
 import { getCompany, hoursLine } from '@/lib/company'
 import { getPageTemplates } from '@/lib/page-templates-server'
 
@@ -15,7 +15,7 @@ export const revalidate = 86400
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPage('kontakty')
-  return page ? buildBlocksPageMetadata(page, '/kontakty/') : {}
+  return page ? buildBlocksPageMetadata(page, '/kontakty/') : NOT_FOUND_METADATA
 }
 
 /**

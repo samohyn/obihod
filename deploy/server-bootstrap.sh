@@ -179,7 +179,6 @@ server {
         try_files $uri =404;
     }
 
-    # Пока deploy не прошёл — вместо 502 отдаём временную страницу
     location / {
         proxy_pass http://127.0.0.1:3000;
         proxy_http_version 1.1;
@@ -192,13 +191,28 @@ server {
         proxy_read_timeout 60s;
         proxy_connect_timeout 5s;
 
-        # Пока upstream пустой — показываем placeholder, а не 502
-        error_page 502 503 504 = @maintenance;
+        # Next не отвечает (выкатка, сбой) — страница brand-guide §11.5, код 503 + Retry-After
+        error_page 502 503 504 =503 /_errors/503.html;
     }
 
+    # Страница «сайт не отвечает» и её шрифт — копия site/public/_errors/, которую obikhod-deploy
+    # кладёт в /var/www/obikhod/_errors. Сам HTML снаружи не открывается (internal).
+    location = /_errors/503.html {
+        internal;
+        root /var/www/obikhod;
+        add_header Retry-After 60 always;
+        add_header Cache-Control "no-store" always;
+        try_files $uri @maintenance;
+    }
+    location ^~ /_errors/ {
+        root /var/www/obikhod;
+        access_log off;
+    }
+    # Пока obikhod-deploy не положил страницу (первый запуск сервера)
     location @maintenance {
         default_type text/html;
-        return 503 '<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Обиход — скоро</title></head><body style="font-family:sans-serif;text-align:center;padding:10vh 2rem"><h1>Обиход</h1><p>Сайт готовится к запуску.</p></body></html>';
+        add_header Retry-After 60 always;
+        return 503 '<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Сайт ненадолго недоступен — Обиход</title></head><body style="font-family:system-ui,sans-serif;padding:10vh 2rem;max-width:40rem"><h1>Сервер не отозвался</h1><p>Обновите страницу через минуту. Заявку примем по телефону +7 (985) 170-51-11.</p></body></html>';
     }
 
     gzip on;

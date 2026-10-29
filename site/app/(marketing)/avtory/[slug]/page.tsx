@@ -20,6 +20,7 @@ import { getContacts } from '@/lib/chrome'
 
 import s from '../avtory.module.css'
 import { getPageTemplates } from '@/lib/page-templates-server'
+import { NOT_FOUND_METADATA } from '@/lib/seo/metadata'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://obikhod.ru'
 
@@ -69,7 +70,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params
   const author = (await getAuthorBySlug(slug)) as unknown as AuthorDoc | null
-  if (!author) return {}
+  if (!author) return NOT_FOUND_METADATA
   const fullName = author.fullName ?? `${author.firstName} ${author.lastName}`
   return {
     title: { absolute: author.metaTitle ?? `${fullName} — эксперт Обихода` },

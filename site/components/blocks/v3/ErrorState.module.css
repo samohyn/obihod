@@ -1,0 +1,46 @@
+/* Страница ошибки — brand-guide §11.5. Заголовок и пояснение — классы PageHeader. */
+.section {
+  padding-top: 48px;
+  padding-bottom: 64px;
+}
+@media (min-width: 1200px) {
+  .section {
+    padding-top: 72px;
+    padding-bottom: 96px;
+  }
+}
+.illu {
+  display: block;
+  width: 96px;
+  height: 96px;
+  margin-bottom: 24px;
+  color: var(--c-primary);
+  opacity: 0.85;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+.fallback {
+  margin: 32px 0 0;
+  padding-top: 16px;
+  max-width: 720px;
+  border-top: 1px dashed var(--c-line);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--c-muted-text);
+}
+.fallback a {
+  color: var(--c-primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+@media (max-width: 479px) {
+  .actions > * {
+    flex: 1 1 100%;
+  }
+}

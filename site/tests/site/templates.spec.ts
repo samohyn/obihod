@@ -27,6 +27,7 @@ const TEMPLATES: { type: string; url: string; status?: number }[] = [
   { type: 'контакты', url: '/kontakty/' },
   { type: 'калькулятор', url: '/kalkulyator/foto-smeta/' },
   { type: '404', url: '/stranitsa-kotoroy-net/', status: 404 },
+  { type: '404 на глубоком адресе', url: '/a/b/c/d/', status: 404 },
 ]
 const WIDTHS = [360, 768, 1280, 1440]
 const SUMMARY = process.env.SITE_SUMMARY_FILE

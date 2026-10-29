@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 
-import { buildDistrictHubMetadata } from '@/lib/seo/metadata'
+import { buildDistrictHubMetadata, NOT_FOUND_METADATA } from '@/lib/seo/metadata'
 import { getAllDistricts, getDistrictBySlug } from '@/lib/seo/queries'
 import { getPage } from '@/lib/pages'
 import { getPageTemplates } from '@/lib/page-templates-server'
@@ -24,7 +24,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { district: districtSlug } = await params
   const [d, uslugi] = await Promise.all([getDistrictBySlug(districtSlug), getPage('uslugi')])
-  if (!d || !uslugi) return {}
+  if (!d || !uslugi) return NOT_FOUND_METADATA
   // Заголовок и описание — по шаблону; robots и canonical — из записи района
   const base = buildDistrictHubMetadata(d as any)
   const t = await getPageTemplates()

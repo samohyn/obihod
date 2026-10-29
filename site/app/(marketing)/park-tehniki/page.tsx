@@ -4,13 +4,13 @@ import { notFound } from 'next/navigation'
 import { PageBlocksView } from '@/components/blocks/v3/PageBlocksView'
 import { trail } from '@/lib/breadcrumbs'
 import { getPage } from '@/lib/pages'
-import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+import { buildBlocksPageMetadata, NOT_FOUND_METADATA } from '@/lib/seo/metadata'
 
 export const revalidate = 86400
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPage('park-tehniki')
-  return page ? buildBlocksPageMetadata(page, '/park-tehniki/') : {}
+  return page ? buildBlocksPageMetadata(page, '/park-tehniki/') : NOT_FOUND_METADATA
 }
 
 /** «Парк техники» — документ «Страницы» park-tehniki; нет опубликованного — 404. */

@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 
 import { getAllServiceSlugs, getServiceBySlug } from '@/lib/seo/queries'
 import { getPage } from '@/lib/pages'
-import { buildBlocksPageMetadata } from '@/lib/seo/metadata'
+import { buildBlocksPageMetadata, NOT_FOUND_METADATA } from '@/lib/seo/metadata'
 
 import { PillarBlocksView } from './PillarBlocksView'
 
@@ -23,7 +23,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { service } = await params
   const page = await getPage(service)
-  return page ? buildBlocksPageMetadata(page, `/${service}/`) : {}
+  return page ? buildBlocksPageMetadata(page, `/${service}/`) : NOT_FOUND_METADATA
 }
 
 /**

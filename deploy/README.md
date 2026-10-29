@@ -157,6 +157,22 @@ nginx: `/etc/nginx/sites-available/obikhod.ru` (вне репо: `client_max_bod
 подменный `location = /robots.txt` удалены (копия прежнего конфига — `/root/nginx-obikhod.ru.bak-20261028-noindex`),
 `INDEXNOW_KEY` в `shared/.env` включён. Staging закрыт всегда.
 
+### Страницы ошибок (brand-guide §11.5)
+
+| Код | Что видит посетитель | Где |
+|---|---|---|
+| 404 | своя страница с шапкой, кнопками и услугами; title «Страница не найдена — Обиход», один `noindex` | `site/app/(marketing)/not-found.tsx`; адреса глубже трёх уровней ловит `[...rest]`; метаданные — `NOT_FOUND_METADATA` (`lib/seo/metadata.ts`) |
+| 500 | «Сбой на нашей стороне» внутри шапки и подвала, кнопка «Обновить страницу» | `site/app/(marketing)/error.tsx`; сбой самого layout — `site/app/global-error.tsx` |
+| 503 | «Сервер не отозвался» — пока Next не отвечает (выкатка, сбой), страница сама обновляется через 30 с | статика `site/public/_errors/503.html`; `obikhod-deploy` после выкатки копирует её в `/var/www/<приложение>/_errors/` (nginx не читает `/home/deploy` — там `.env`), отдаёт nginx: код 503 + `Retry-After: 60` |
+
+nginx (то же в `server-bootstrap.sh`): в `location /` — `error_page 502 503 504 =503 /_errors/503.html;`,
+`location = /_errors/503.html` — `internal`, `root /var/www/obikhod`, `Retry-After`,
+`try_files $uri @maintenance`; `location ^~ /_errors/` — шрифт страницы. Телефон и почта на 503 и в
+`global-error.tsx` записаны в коде (админка в этот момент недоступна) — при смене контактов поправить и там.
+Проверить: `curl -sI https://obikhod.ru/_errors/503.html` → 404 (снаружи не открывается); саму страницу —
+на сервере `curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1/_errors/golos.woff2 -H "Host: obikhod.ru"` → 200;
+обновили `obikhod-deploy.sh` — поставить на сервер (`deploy/manual-deploy.sh` делает это сам).
+
 ### Кеш страниц
 
 Страницы кешируются (ISR, до 24 ч). Кеш всего сайта сбрасывается сам:

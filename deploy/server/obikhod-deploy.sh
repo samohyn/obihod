@@ -157,6 +157,12 @@ if [ "$code" != 200 ]; then
   exit 1
 fi
 echo "$REL" > .last-rel
+# Страница «сайт не отвечает» (brand-guide §11.5) — nginx отдаёт её, когда Next лежит, и читать
+# /home/deploy не может (750, там .env): копия в /var/www/$APP/_errors (deploy/README.md).
+if [ -d "$BASE/current/public/_errors" ]; then
+  install -d -m 755 "/var/www/$APP/_errors"
+  cp "$BASE/current/public/_errors/"* "/var/www/$APP/_errors/" && chmod 644 "/var/www/$APP/_errors/"*
+fi
 echo "✓ $TARGET: current → releases/$REL (prev: ${PREV:-—})"
 
 # старые релизы: оставляем KEEP_RELEASES последних, предыдущий — всегда
