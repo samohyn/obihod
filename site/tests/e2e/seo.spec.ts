@@ -156,10 +156,10 @@ test.describe('Яндекс Метрика только по согласию (�
 })
 
 test.describe('Страница 404 (brand-guide §11.5)', () => {
-  test('своя 404 и на глубоком адресе: код 404, свой title, один robots noindex', async ({
+  test('своя 404 на любом адресе, и на служебном /404/: код 404, свой title, один noindex', async ({
     page,
   }) => {
-    for (const url of ['/stranitsa-kotoroy-net/', '/a/b/c/d/']) {
+    for (const url of ['/stranitsa-kotoroy-net/', '/a/b/c/d/', '/404/']) {
       const res = await page.goto(url)
       expect(res?.status(), url).toBe(404)
       await expect(page).toHaveTitle('Страница не найдена — Обиход')

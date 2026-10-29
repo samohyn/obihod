@@ -161,7 +161,7 @@ nginx: `/etc/nginx/sites-available/obikhod.ru` (вне репо: `client_max_bod
 
 | Код | Что видит посетитель | Где |
 |---|---|---|
-| 404 | своя страница с шапкой, кнопками и услугами; title «Страница не найдена — Обиход», один `noindex` | `site/app/(marketing)/not-found.tsx`; адреса глубже трёх уровней ловит `[...rest]`; метаданные — `NOT_FOUND_METADATA` (`lib/seo/metadata.ts`) |
+| 404 | своя страница с шапкой, кнопками и услугами; title «Страница не найдена — Обиход», один `noindex` | `site/app/(marketing)/not-found.tsx`; адреса глубже трёх уровней ловит `[...rest]`, служебные `/404/`, `/500/`, `/_not-found/` — `app/global-not-found.tsx` (`experimental.globalNotFound`); метаданные — `NOT_FOUND_METADATA` (`lib/seo/metadata.ts`) |
 | 500 | «Сбой на нашей стороне» внутри шапки и подвала, кнопка «Обновить страницу» | `site/app/(marketing)/error.tsx`; сбой самого layout — `site/app/global-error.tsx` |
 | 503 | «Сервер не отозвался» — пока Next не отвечает (выкатка, сбой), страница сама обновляется через 30 с | статика `site/public/_errors/503.html`; `obikhod-deploy` после выкатки копирует её в `/var/www/<приложение>/_errors/` (nginx не читает `/home/deploy` — там `.env`), отдаёт nginx: код 503 + `Retry-After: 60` |
 
