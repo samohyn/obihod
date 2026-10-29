@@ -3,6 +3,9 @@ import { withPayload } from '@payloadcms/next/withPayload'
 
 const nextConfig: NextConfig = {
   trailingSlash: true,
+  // app/global-not-found.tsx: /404/, /500/, /_not-found/ Next перехватывает до маршрутов и рисовал
+  // свою английскую заглушку; у сайта два корневых layout ((marketing), (payload)) — общей 404 нет.
+  experimental: { globalNotFound: true },
   images: {
     formats: ['image/avif', 'image/webp'],
     // 60 — фон первого экрана под подложкой (HeroSlider), 75 — остальное (по умолчанию Next 16)
